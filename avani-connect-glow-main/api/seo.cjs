@@ -1,7 +1,6 @@
 // This function will be deployed on Vercel as a Serverless Function
 const fs = require('fs');
 const path = require('path');
-const axios = require('axios');
 
 module.exports = async (req, res) => {
   try {
@@ -14,15 +13,20 @@ module.exports = async (req, res) => {
     let seo = null;
     try {
       console.log(`📡 Fetching SEO from: ${backendUrl}/seo?page=${pagePath}`);
-      const response = await axios.get(`${backendUrl}/seo`, { 
-        params: { page: pagePath },
-        timeout: 30000 // Increased to 30s for Render cold starts
+      const response = await fetch(`${backendUrl}/seo?page=${encodeURIComponent(pagePath)}`, { 
+        signal: AbortSignal.timeout(30000) // 30s timeout for Render cold starts
       });
-      seo = response.data.data;
-      console.log(`✅ SEO data received for ${pagePath}`);
+      
+      if (response.ok) {
+        const data = await response.json();
+        seo = data.data;
+        console.log(`✅ SEO data received for ${pagePath}`);
+      } else {
+        console.warn(`⚠️ Backend returned ${response.status} for ${pagePath}`);
+      }
     } catch (e) {
-      console.warn(`⚠️ Failed to fetch SEO for ${pagePath}:`, e.code === 'ECONNABORTED' ? 'Timeout' : e.message);
-      if (e.code === 'ECONNABORTED') {
+      console.warn(`⚠️ Failed to fetch SEO for ${pagePath}:`, e.name === 'TimeoutError' ? 'Timeout' : e.message);
+      if (e.name === 'TimeoutError') {
         console.log("💡 Tip: Render's free tier might be sleeping. This is normal for the first request.");
       }
     }
