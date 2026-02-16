@@ -4,16 +4,8 @@
  * - In development: uses localhost
  */
 export const getApiBaseUrl = (): string => {
-  // Check if we're in production (deployed website)
-  const isProduction = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
-  
-  if (isProduction) {
-    // Production backend URL on Render
-    return "https://avani-enterprises-backend-1.onrender.com";
-  }
-  
-  // Development - use localhost
-  return "http://localhost:5000";
+  // Use VITE_API_URL if provided, otherwise fallback for local development
+  return import.meta.env.VITE_API_URL || "http://localhost:5000";
 };
 
 export const API_BASE_URL = getApiBaseUrl();

@@ -72,8 +72,8 @@ const corsOptions = {
 
     // Production origins
     const allowedOrigins = [
-      'https://avani-enterprises-admin-frontend.vercel.app',
-      'https://avani-connect-glow.vercel.app',
+      'https://avani-enterprises-bcjw.vercel.app',
+      'https://avani-enterprises-psi.vercel.app',
     ];
 
     if (allowedOrigins.includes(origin)) {
