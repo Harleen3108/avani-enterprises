@@ -1,7 +1,8 @@
 {
   "functions": {
     "api/seo.cjs": {
-      "includeFiles": "dist/template.html"
+      "includeFiles": "dist/template.html",
+      "maxDuration": 10
     }
   },
   "rewrites": [

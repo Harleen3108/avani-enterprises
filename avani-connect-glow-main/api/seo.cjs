@@ -16,12 +16,15 @@ module.exports = async (req, res) => {
       console.log(`📡 Fetching SEO from: ${backendUrl}/seo?page=${pagePath}`);
       const response = await axios.get(`${backendUrl}/seo`, { 
         params: { page: pagePath },
-        timeout: 5000 
+        timeout: 30000 // Increased to 30s for Render cold starts
       });
       seo = response.data.data;
       console.log(`✅ SEO data received for ${pagePath}`);
     } catch (e) {
-      console.warn(`⚠️ Failed to fetch SEO for ${pagePath}:`, e.message);
+      console.warn(`⚠️ Failed to fetch SEO for ${pagePath}:`, e.code === 'ECONNABORTED' ? 'Timeout' : e.message);
+      if (e.code === 'ECONNABORTED') {
+        console.log("💡 Tip: Render's free tier might be sleeping. This is normal for the first request.");
+      }
     }
 
     let html;
