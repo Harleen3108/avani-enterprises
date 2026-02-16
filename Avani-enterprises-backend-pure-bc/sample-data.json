@@ -1,0 +1,218 @@
+{
+  "sampleJob": {
+    "title": "Senior Frontend Developer",
+    "department": "Engineering",
+    "location": "Bangalore, India",
+    "type": "Full-time",
+    "experience": "3-5 years",
+    "description": "We are looking for an experienced Frontend Developer to join our dynamic team. You will be responsible for building and maintaining high-quality web applications using modern technologies.",
+    "responsibilities": [
+      "Develop user-facing features using React and TypeScript",
+      "Build reusable components and front-end libraries",
+      "Optimize applications for maximum speed and scalability",
+      "Collaborate with backend developers and designers",
+      "Ensure technical feasibility of UI/UX designs",
+      "Write clean, maintainable, and well-documented code"
+    ],
+    "qualifications": [
+      "Bachelor's degree in Computer Science or related field",
+      "3+ years of professional experience with React",
+      "Strong proficiency in JavaScript and TypeScript",
+      "Experience with state management (Redux, Context API)",
+      "Familiarity with RESTful APIs and GraphQL",
+      "Understanding of responsive design and cross-browser compatibility"
+    ],
+    "skills": [
+      "React",
+      "TypeScript",
+      "JavaScript",
+      "HTML5",
+      "CSS3",
+      "Redux",
+      "Git",
+      "Webpack"
+    ],
+    "benefits": [
+      "Competitive salary package",
+      "Health insurance for you and family",
+      "Remote work flexibility",
+      "Learning and development budget",
+      "Flexible working hours",
+      "Annual performance bonuses"
+    ],
+    "status": "Active",
+    "isActive": true
+  },
+  "sampleApplication": {
+    "jobId": "REPLACE_WITH_ACTUAL_JOB_ID",
+    "fullName": "Priya Sharma",
+    "email": "priya.sharma@example.com",
+    "phone": "+91-9876543210",
+    "experience": "4 years",
+    "currentCompany": "Tech Solutions Pvt Ltd",
+    "currentCTC": "12 LPA",
+    "expectedCTC": "18 LPA",
+    "noticePeriod": "30 days",
+    "resumeUrl": "https://example.com/resumes/priya-sharma.pdf",
+    "coverLetterUrl": "https://example.com/cover-letters/priya-sharma.pdf"
+  },
+  "moreJobs": [
+    {
+      "title": "Backend Developer",
+      "department": "Engineering",
+      "location": "Mumbai, India",
+      "type": "Full-time",
+      "experience": "2-4 years",
+      "description": "Join our backend team to build scalable and robust server-side applications.",
+      "responsibilities": [
+        "Design and develop RESTful APIs",
+        "Work with databases (MongoDB, PostgreSQL)",
+        "Implement authentication and authorization",
+        "Write unit and integration tests",
+        "Optimize application performance"
+      ],
+      "qualifications": [
+        "2+ years of Node.js experience",
+        "Strong understanding of databases",
+        "Experience with Express.js or similar frameworks",
+        "Knowledge of microservices architecture"
+      ],
+      "skills": ["Node.js", "Express", "MongoDB", "PostgreSQL", "Docker", "AWS"],
+      "benefits": ["Health Insurance", "Remote Work", "Learning Budget"],
+      "status": "Active",
+      "isActive": true
+    },
+    {
+      "title": "UI/UX Designer",
+      "department": "Design",
+      "location": "Remote",
+      "type": "Full-time",
+      "experience": "3-6 years",
+      "description": "Create beautiful and intuitive user experiences for our products.",
+      "responsibilities": [
+        "Design user interfaces for web and mobile applications",
+        "Create wireframes, prototypes, and mockups",
+        "Conduct user research and usability testing",
+        "Collaborate with developers and product managers",
+        "Maintain design system and style guides"
+      ],
+      "qualifications": [
+        "3+ years of UI/UX design experience",
+        "Proficiency in Figma, Sketch, or Adobe XD",
+        "Strong portfolio demonstrating design skills",
+        "Understanding of design principles and best practices"
+      ],
+      "skills": ["Figma", "Sketch", "Adobe XD", "Prototyping", "User Research"],
+      "benefits": ["Remote Work", "Flexible Hours", "Design Tools Budget"],
+      "status": "Active",
+      "isActive": true
+    },
+    {
+      "title": "DevOps Engineer",
+      "department": "Infrastructure",
+      "location": "Pune, India",
+      "type": "Full-time",
+      "experience": "4-7 years",
+      "description": "Manage and optimize our cloud infrastructure and deployment pipelines.",
+      "responsibilities": [
+        "Manage AWS/Azure cloud infrastructure",
+        "Build and maintain CI/CD pipelines",
+        "Monitor system performance and reliability",
+        "Implement security best practices",
+        "Automate deployment processes"
+      ],
+      "qualifications": [
+        "4+ years of DevOps experience",
+        "Strong knowledge of AWS or Azure",
+        "Experience with Docker and Kubernetes",
+        "Proficiency in scripting (Bash, Python)"
+      ],
+      "skills": ["AWS", "Docker", "Kubernetes", "Jenkins", "Terraform", "Python"],
+      "benefits": ["Health Insurance", "Certification Support", "Remote Work"],
+      "status": "Active",
+      "isActive": true
+    },
+    {
+      "title": "Product Manager",
+      "department": "Product",
+      "location": "Bangalore, India",
+      "type": "Full-time",
+      "experience": "5-8 years",
+      "description": "Lead product strategy and execution for our flagship products.",
+      "responsibilities": [
+        "Define product vision and roadmap",
+        "Gather and prioritize product requirements",
+        "Work with engineering and design teams",
+        "Analyze market trends and competition",
+        "Track product metrics and KPIs"
+      ],
+      "qualifications": [
+        "5+ years of product management experience",
+        "Strong analytical and problem-solving skills",
+        "Experience with agile methodologies",
+        "Excellent communication skills"
+      ],
+      "skills": ["Product Strategy", "Agile", "Analytics", "User Research", "Roadmapping"],
+      "benefits": ["Competitive Salary", "Stock Options", "Flexible Hours"],
+      "status": "Active",
+      "isActive": true
+    },
+    {
+      "title": "Marketing Manager",
+      "department": "Marketing",
+      "location": "Delhi, India",
+      "type": "Full-time",
+      "experience": "4-6 years",
+      "description": "Drive marketing strategy and campaigns to grow our brand.",
+      "responsibilities": [
+        "Develop and execute marketing campaigns",
+        "Manage social media presence",
+        "Analyze campaign performance",
+        "Collaborate with sales and product teams",
+        "Manage marketing budget"
+      ],
+      "qualifications": [
+        "4+ years of marketing experience",
+        "Experience with digital marketing tools",
+        "Strong understanding of SEO and SEM",
+        "Excellent writing and communication skills"
+      ],
+      "skills": ["Digital Marketing", "SEO", "Content Marketing", "Analytics", "Social Media"],
+      "benefits": ["Health Insurance", "Performance Bonuses", "Remote Work"],
+      "status": "Active",
+      "isActive": true
+    }
+  ],
+  "statusUpdateExamples": {
+    "screening": {
+      "status": "Screening",
+      "adminNotes": "Resume looks good. Checking references.",
+      "rating": 3,
+      "sendEmail": false
+    },
+    "shortlisted": {
+      "status": "Shortlisted",
+      "adminNotes": "Strong technical background. Schedule technical interview.",
+      "rating": 4,
+      "sendEmail": true
+    },
+    "interview": {
+      "status": "Interview",
+      "adminNotes": "Interview scheduled for next Monday at 10 AM.",
+      "rating": 4,
+      "sendEmail": true
+    },
+    "hired": {
+      "status": "Hired",
+      "adminNotes": "Excellent candidate! Offer letter sent.",
+      "rating": 5,
+      "sendEmail": true
+    },
+    "rejected": {
+      "status": "Rejected",
+      "adminNotes": "Not a good fit for current requirements.",
+      "rating": 2,
+      "sendEmail": true
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "functions": {
+    "api/seo.js": {
+      "includeFiles": "dist/index.html"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/assets/:path*",
+      "destination": "/assets/:path*"
+    },
+    {
+      "source": "/((?!api|assets|favicon.ico|logo.png|.*\\..*).*)",
+      "destination": "/api/seo?path=/$1"
+    }
+  ]
+}

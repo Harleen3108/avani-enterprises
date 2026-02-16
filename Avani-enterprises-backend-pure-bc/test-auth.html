@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Authentication - Avani Backend</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 2px solid #4F46E5;
+            padding-bottom: 10px;
+        }
+        .section {
+            margin: 20px 0;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 5px;
+        }
+        input, button {
+            padding: 10px;
+            margin: 5px 0;
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background: #4F46E5;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background: #4338CA;
+        }
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .output {
+            background: #1e1e1e;
+            color: #00ff00;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .success {
+            color: #00ff00;
+        }
+        .error {
+            color: #ff4444;
+        }
+        .info {
+            color: #00bfff;
+        }
+        .token-display {
+            background: #fff3cd;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            word-break: break-all;
+            font-size: 11px;
+        }
+        .status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+        }
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔐 Avani Backend - Authentication Tester</h1>
+        
+        <!-- Login Section -->
+        <div class="section">
+            <h2>1. Login</h2>
+            <input type="email" id="email" placeholder="Email" value="shivaanshtk@gmail.com">
+            <input type="password" id="password" placeholder="Password">
+            <button onclick="login()">Login</button>
+            <div id="loginOutput" class="output"></div>
+        </div>
+
+        <!-- Token Display -->
+        <div class="section">
+            <h2>2. Current Token</h2>
+            <div id="tokenDisplay" class="token-display">No token yet. Please login first.</div>
+            <button onclick="clearToken()">Clear Token</button>
+        </div>
+
+        <!-- Test /leads Endpoint -->
+        <div class="section">
+            <h2>3. Test /leads Endpoint</h2>
+            <button onclick="getLeads()" id="leadsBtn" disabled>Get Leads</button>
+            <div id="leadsOutput" class="output"></div>
+        </div>
+
+        <!-- Test /jobs Endpoint (Public) -->
+        <div class="section">
+            <h2>4. Test /jobs Endpoint (Public - No Auth)</h2>
+            <button onclick="getJobs()">Get Jobs</button>
+            <div id="jobsOutput" class="output"></div>
+        </div>
+
+        <!-- Test /admin/jobs Endpoint -->
+        <div class="section">
+            <h2>5. Test /admin/jobs Endpoint</h2>
+            <button onclick="getAdminJobs()" id="adminJobsBtn" disabled>Get Admin Jobs</button>
+            <div id="adminJobsOutput" class="output"></div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:5000';
+        let currentToken = localStorage.getItem('token');
+
+        // Update UI on load
+        updateTokenDisplay();
+
+        function log(elementId, message, type = 'info') {
+            const element = document.getElementById(elementId);
+            const timestamp = new Date().toLocaleTimeString();
+            const color = type === 'success' ? 'success' : type === 'error' ? 'error' : 'info';
+            element.innerHTML += `<span class="${color}">[${timestamp}] ${message}</span>\n`;
+            element.scrollTop = element.scrollHeight;
+        }
+
+        function clearLog(elementId) {
+            document.getElementById(elementId).innerHTML = '';
+        }
+
+        function updateTokenDisplay() {
+            const tokenDisplay = document.getElementById('tokenDisplay');
+            const leadsBtn = document.getElementById('leadsBtn');
+            const adminJobsBtn = document.getElementById('adminJobsBtn');
+            
+            if (currentToken) {
+                tokenDisplay.innerHTML = `<strong>Token:</strong> ${currentToken.substring(0, 50)}...`;
+                leadsBtn.disabled = false;
+                adminJobsBtn.disabled = false;
+            } else {
+                tokenDisplay.innerHTML = 'No token yet. Please login first.';
+                leadsBtn.disabled = true;
+                adminJobsBtn.disabled = true;
+            }
+        }
+
+        async function login() {
+            clearLog('loginOutput');
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            if (!email || !password) {
+                log('loginOutput', '❌ Please enter email and password', 'error');
+                return;
+            }
+
+            log('loginOutput', '🔄 Logging in...', 'info');
+
+            try {
+                const response = await fetch(`${API_BASE}/auth/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    log('loginOutput', `❌ Login failed: ${data.message}`, 'error');
+                    return;
+                }
+
+                currentToken = data.token;
+                localStorage.setItem('token', currentToken);
+                
+                log('loginOutput', '✅ Login successful!', 'success');
+                log('loginOutput', `User: ${data.user.name} (${data.user.email})`, 'success');
+                log('loginOutput', `Token: ${currentToken.substring(0, 50)}...`, 'info');
+                
+                updateTokenDisplay();
+            } catch (error) {
+                log('loginOutput', `❌ Network error: ${error.message}`, 'error');
+            }
+        }
+
+        function clearToken() {
+            currentToken = null;
+            localStorage.removeItem('token');
+            updateTokenDisplay();
+            alert('Token cleared! Please login again.');
+        }
+
+        async function getLeads() {
+            clearLog('leadsOutput');
+            
+            if (!currentToken) {
+                log('leadsOutput', '❌ No token found. Please login first.', 'error');
+                return;
+            }
+
+            log('leadsOutput', '🔄 Fetching leads...', 'info');
+            log('leadsOutput', `Using token: ${currentToken.substring(0, 30)}...`, 'info');
+
+            try {
+                const response = await fetch(`${API_BASE}/leads`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${currentToken}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                log('leadsOutput', `Response status: ${response.status} ${response.statusText}`, 'info');
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    log('leadsOutput', `❌ Error: ${data.message}`, 'error');
+                    if (data.hint) {
+                        log('leadsOutput', `💡 Hint: ${data.hint}`, 'info');
+                    }
+                    if (data.error) {
+                        log('leadsOutput', `Details: ${data.error}`, 'error');
+                    }
+                    
+                    if (response.status === 401 || response.status === 400) {
+                        log('leadsOutput', '⚠️ Token might be expired. Try logging in again.', 'error');
+                    }
+                    return;
+                }
+
+                log('leadsOutput', `✅ Success! Found ${data.length} leads`, 'success');
+                log('leadsOutput', JSON.stringify(data, null, 2), 'success');
+            } catch (error) {
+                log('leadsOutput', `❌ Network error: ${error.message}`, 'error');
+            }
+        }
+
+        async function getJobs() {
+            clearLog('jobsOutput');
+            log('jobsOutput', '🔄 Fetching public jobs (no auth required)...', 'info');
+
+            try {
+                const response = await fetch(`${API_BASE}/jobs`, {
+                    method: 'GET',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+
+                log('jobsOutput', `Response status: ${response.status} ${response.statusText}`, 'info');
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    log('jobsOutput', `❌ Error: ${data.message}`, 'error');
+                    return;
+                }
+
+                log('jobsOutput', `✅ Success! Found ${data.count} jobs`, 'success');
+                log('jobsOutput', JSON.stringify(data, null, 2), 'success');
+            } catch (error) {
+                log('jobsOutput', `❌ Network error: ${error.message}`, 'error');
+            }
+        }
+
+        async function getAdminJobs() {
+            clearLog('adminJobsOutput');
+            
+            if (!currentToken) {
+                log('adminJobsOutput', '❌ No token found. Please login first.', 'error');
+                return;
+            }
+
+            log('adminJobsOutput', '🔄 Fetching admin jobs...', 'info');
+
+            try {
+                const response = await fetch(`${API_BASE}/admin/jobs`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${currentToken}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                log('adminJobsOutput', `Response status: ${response.status} ${response.statusText}`, 'info');
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    log('adminJobsOutput', `❌ Error: ${data.message}`, 'error');
+                    if (data.hint) {
+                        log('adminJobsOutput', `💡 Hint: ${data.hint}`, 'info');
+                    }
+                    return;
+                }
+
+                log('adminJobsOutput', `✅ Success! Found ${data.count} jobs`, 'success');
+                log('adminJobsOutput', JSON.stringify(data, null, 2), 'success');
+            } catch (error) {
+                log('adminJobsOutput', `❌ Network error: ${error.message}`, 'error');
+            }
+        }
+    </script>
+</body>
+</html>
