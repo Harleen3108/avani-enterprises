@@ -1,9 +1,13 @@
 // This function will be deployed on Vercel as a Serverless Function
-const fs = require('fs');
-const path = require('path');
-const axios = require('axios');
+import fs from 'fs';
+import path from 'path';
+import axios from 'axios';
+import { fileURLToPath } from 'url';
 
-module.exports = async (req, res) => {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export default async (req, res) => {
   try {
     const pagePath = req.query.path || "/";
     const backendUrl = process.env.VITE_API_URL || "https://avani-enterprises.onrender.com";
