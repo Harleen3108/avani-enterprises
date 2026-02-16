@@ -1,7 +1,7 @@
 {
   "functions": {
     "api/seo.js": {
-      "includeFiles": "dist/index.html"
+      "includeFiles": "dist/template.html"
     }
   },
   "rewrites": [

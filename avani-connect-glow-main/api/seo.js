@@ -26,16 +26,16 @@ module.exports = async (req, res) => {
 
     let html;
 
-    // 2. Read the built index.html from Vite's output
-    const indexPath = path.join(process.cwd(), 'dist', 'index.html');
+    // 2. Read the built template.html from Vite's output
+    const indexPath = path.join(process.cwd(), 'dist', 'template.html');
     if (!fs.existsSync(indexPath)) {
-      console.error("❌ index.html not found at:", indexPath);
-      // Fallback to root (though unlikely to be what we want in prod)
-      const rootPath = path.join(process.cwd(), 'index.html');
-      if (fs.existsSync(rootPath)) {
-        html = fs.readFileSync(rootPath, 'utf8');
+      console.error("❌ template.html not found at:", indexPath);
+      // Fallback to searching in parent (some Vercel setups)
+      const altPath = path.join(process.cwd(), 'template.html');
+      if (fs.existsSync(altPath)) {
+        html = fs.readFileSync(altPath, 'utf8');
       } else {
-        return res.status(404).send("index.html not found. Ensure the build command is successful.");
+        return res.status(404).send("template.html not found. Ensure the build command is successful.");
       }
     } else {
       html = fs.readFileSync(indexPath, 'utf8');
