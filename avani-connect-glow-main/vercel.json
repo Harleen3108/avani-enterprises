@@ -1,6 +1,6 @@
 {
   "functions": {
-    "api/seo.js": {
+    "api/seo.cjs": {
       "includeFiles": "dist/template.html"
     }
   },

@@ -1,13 +1,9 @@
 // This function will be deployed on Vercel as a Serverless Function
-import fs from 'fs';
-import path from 'path';
-import axios from 'axios';
-import { fileURLToPath } from 'url';
+const fs = require('fs');
+const path = require('path');
+const axios = require('axios');
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-export default async (req, res) => {
+module.exports = async (req, res) => {
   try {
     const pagePath = req.query.path || "/";
     const backendUrl = process.env.VITE_API_URL || "https://avani-enterprises.onrender.com";
@@ -20,7 +16,7 @@ export default async (req, res) => {
       console.log(`📡 Fetching SEO from: ${backendUrl}/seo?page=${pagePath}`);
       const response = await axios.get(`${backendUrl}/seo`, { 
         params: { page: pagePath },
-        timeout: 5000 // 5 second timeout to prevent Vercel function kill
+        timeout: 5000 
       });
       seo = response.data.data;
       console.log(`✅ SEO data received for ${pagePath}`);
@@ -31,7 +27,6 @@ export default async (req, res) => {
     let html;
 
     // 2. Read the built template.html from Vite's output
-    // Try multiple possible locations on Vercel
     const pathsToTry = [
       path.join(process.cwd(), 'dist', 'template.html'),
       path.join(process.cwd(), 'template.html'),
@@ -48,8 +43,7 @@ export default async (req, res) => {
     }
 
     if (!html) {
-      console.error("❌ template.html NOT found in any known locations:", pathsToTry);
-      return res.status(500).send(`SEO Error: template.html not found. Locations tried: ${pathsToTry.join(', ')}`);
+      return res.status(500).send(`SEO Error: template.html not found.`);
     }
 
     // 3. Inject SEO data
