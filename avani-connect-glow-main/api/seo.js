@@ -6,7 +6,7 @@ const axios = require('axios');
 module.exports = async (req, res) => {
   try {
     const pagePath = req.query.path || "/";
-    const backendUrl = "https://avani-enterprises-backend-1.onrender.com";
+    const backendUrl = process.env.VITE_API_URL || "https://avani-enterprises.onrender.com";
 
     console.log(`🔍 Vercel SEO request for: ${pagePath}`);
 

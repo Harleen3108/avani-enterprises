@@ -89,6 +89,7 @@ const Signup = () => {
                                 <input
                                     type={field.type}
                                     required
+                                    autoComplete={field.type === "password" ? "new-password" : (field.type === "email" ? "email" : "name")}
                                     className="w-full px-4 py-2 rounded-lg border border-gray-200 
                                         bg-white/80 focus:ring-2 focus:ring-indigo-400
                                         focus:border-transparent outline-none transition-all text-sm"

@@ -166,6 +166,7 @@ const ForgotPassword = () => {
                             <input
                                 type="password"
                                 required
+                                autoComplete="new-password"
                                 className="w-full px-4 py-2.5 rounded-lg border border-gray-200 
                                     bg-white/80
                                     focus:ring-2 focus:ring-indigo-400
