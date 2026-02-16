@@ -1691,6 +1691,15 @@ app.get(/.*/, async (req, res, next) => {
 // 2. Serve static files from the frontend build
 app.use(express.static(frontendPath));
 
+// 3. Fallback route for the root "/" (if SEO injection and static serving both skip)
+app.get("/", (req, res) => {
+  res.json({
+    message: "Avani Backend API is running",
+    status: "online",
+    documentation: "/api/info"
+  });
+});
+
 app.listen(5000, () =>
   console.log("Server running on http://localhost:5000")
 );
