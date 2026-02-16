@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && mv dist/index.html dist/template.html",
+    "build": "vite build && node -e \"const fs = require('fs'); if (fs.existsSync('dist/index.html')) fs.renameSync('dist/index.html', 'dist/template.html')\"",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview"

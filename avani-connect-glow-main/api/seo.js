@@ -27,18 +27,25 @@ module.exports = async (req, res) => {
     let html;
 
     // 2. Read the built template.html from Vite's output
-    const indexPath = path.join(process.cwd(), 'dist', 'template.html');
-    if (!fs.existsSync(indexPath)) {
-      console.error("❌ template.html not found at:", indexPath);
-      // Fallback to searching in parent (some Vercel setups)
-      const altPath = path.join(process.cwd(), 'template.html');
-      if (fs.existsSync(altPath)) {
-        html = fs.readFileSync(altPath, 'utf8');
-      } else {
-        return res.status(404).send("template.html not found. Ensure the build command is successful.");
+    // Try multiple possible locations on Vercel
+    const pathsToTry = [
+      path.join(process.cwd(), 'dist', 'template.html'),
+      path.join(process.cwd(), 'template.html'),
+      path.resolve(__dirname, '../dist/template.html'),
+      path.resolve(__dirname, 'template.html')
+    ];
+
+    for (const p of pathsToTry) {
+      if (fs.existsSync(p)) {
+        console.log(`✅ template.html found at: ${p}`);
+        html = fs.readFileSync(p, 'utf8');
+        break;
       }
-    } else {
-      html = fs.readFileSync(indexPath, 'utf8');
+    }
+
+    if (!html) {
+      console.error("❌ template.html NOT found in any known locations:", pathsToTry);
+      return res.status(500).send(`SEO Error: template.html not found. Locations tried: ${pathsToTry.join(', ')}`);
     }
 
     // 3. Inject SEO data
