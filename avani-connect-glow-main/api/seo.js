@@ -1,8 +1,11 @@
-// This function will be deployed on Vercel as a Serverless Function
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-module.exports = async (req, res) => {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export default async function handler(req, res) {
   try {
     const pagePath = req.query.path || "/";
     const backendUrl = process.env.VITE_API_URL || "https://avani-enterprises.onrender.com";
@@ -13,9 +16,14 @@ module.exports = async (req, res) => {
     let seo = null;
     try {
       console.log(`📡 Fetching SEO from: ${backendUrl}/seo?page=${pagePath}`);
+      
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 60000); // 60s timeout for cold starts
+      
       const response = await fetch(`${backendUrl}/seo?page=${encodeURIComponent(pagePath)}`, { 
-        signal: AbortSignal.timeout(30000) // 30s timeout for Render cold starts
+        signal: controller.signal
       });
+      clearTimeout(timeoutId);
       
       if (response.ok) {
         const data = await response.json();
@@ -25,15 +33,12 @@ module.exports = async (req, res) => {
         console.warn(`⚠️ Backend returned ${response.status} for ${pagePath}`);
       }
     } catch (e) {
-      console.warn(`⚠️ Failed to fetch SEO for ${pagePath}:`, e.name === 'TimeoutError' ? 'Timeout' : e.message);
-      if (e.name === 'TimeoutError') {
-        console.log("💡 Tip: Render's free tier might be sleeping. This is normal for the first request.");
-      }
+      console.warn(`⚠️ Failed to fetch SEO for ${pagePath}:`, e.name === 'AbortError' ? 'Timeout' : e.message);
     }
 
     let html;
 
-    // 2. Read the built template.html from Vite's output
+    // 2. Read the built template.html
     const pathsToTry = [
       path.join(process.cwd(), 'dist', 'template.html'),
       path.join(process.cwd(), 'template.html'),
@@ -50,10 +55,11 @@ module.exports = async (req, res) => {
     }
 
     if (!html) {
-      return res.status(500).send(`SEO Error: template.html not found.`);
+      return res.status(500).send(`SEO Error: template.html not found. Check build status.`);
     }
 
     // 3. Inject SEO data
+    // DANGER: Only use simple global replacements to avoid mangling HTML
     const title = seo?.title || "Avani Enterprises | Digital Marketing & Web Development Services";
     const description = seo?.metaDescription || "Transform your brand with Avani Enterprises.";
     const keywords = seo?.metaKeywords || "digital marketing, web development, SEO";
@@ -69,4 +75,4 @@ module.exports = async (req, res) => {
     console.error("❌ Vercel SEO Error:", err);
     res.status(500).send("Internal Server Error");
   }
-};
+}

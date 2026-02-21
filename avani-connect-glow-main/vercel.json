@@ -1,10 +1,17 @@
 {
   "functions": {
-    "api/seo.cjs": {
+    "api/seo.js": {
       "includeFiles": "dist/template.html",
       "maxDuration": 10
     }
   },
+  "redirects": [
+    {
+      "source": "/news-sitemap.xml",
+      "destination": "/sitemap.xml",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/assets/:path*",
