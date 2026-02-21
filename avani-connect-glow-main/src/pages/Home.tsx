@@ -474,8 +474,8 @@ const Home = () => {
                 </div>
               </div>
 
-              {/* Stats Row - Updated for Single Line Mobile View */}
-              <div className="flex flex-nowrap items-center gap-6 sm:gap-10 md:gap-16 overflow-x-visible">
+              {/* Stats Row - Updated for Responsive Wrapping and Single Line Mobile View */}
+              <div className="flex flex-wrap items-center gap-6 sm:gap-10 md:gap-16">
                 <div className="group cursor-default flex-shrink-0">
                   <AnimatedCounter
                     target={150}
