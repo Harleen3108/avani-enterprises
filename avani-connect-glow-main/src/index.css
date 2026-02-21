@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   --bg-dark: #0f172a;
   --bg-card: rgba(30, 41, 59, 0.7);
@@ -20,7 +24,6 @@
 body {
   background-color: var(--bg-dark);
   color: var(--text-main);
-  overflow: hidden;
 }
 
 #root {
