@@ -13,17 +13,41 @@ export default async function handler(req, res) {
     // FORCE the production URL to ensure consistency
     const backendUrl = "https://avani-enterprises-backend-1.onrender.com";
 
-    let html;
-    // 2. Read template.html
-    const p = path.join(process.cwd(), 'dist', 'template.html');
-    if (fs.existsSync(p)) {
-      html = fs.readFileSync(p, 'utf8');
-    } else {
-      const p2 = path.join(process.cwd(), 'template.html');
-      if (fs.existsSync(p2)) html = fs.readFileSync(p2, 'utf8');
+    // 1. Fetch SEO from Render Backend
+    let seo = null;
+    try {
+      const fetchUrl = `${backendUrl}/seo?page=${encodeURIComponent(normalizedPath)}`;
+      const response = await fetch(fetchUrl);
+      if (response.ok) {
+        const data = await response.json();
+        seo = data.data;
+      }
+    } catch (e) {
+      console.error(`❌ Failed to fetch SEO for ${normalizedPath}:`, e.message);
     }
 
-    if (!html) return res.status(500).send("Error: template.html not found");
+    let html;
+    // 2. Read template.html using very robust paths
+    const pathsToTry = [
+      path.join(process.cwd(), 'dist', 'template.html'),
+      path.join(process.cwd(), 'template.html'),
+      path.join(__dirname, '../dist/template.html'),
+      path.join(__dirname, 'template.html'),
+      path.join(__dirname, 'dist/template.html')
+    ];
+
+    for (const p of pathsToTry) {
+      if (fs.existsSync(p)) {
+        html = fs.readFileSync(p, 'utf8');
+        break;
+      }
+    }
+
+    if (!html) {
+      // Fallback: try to find ANYTHING that looks like index.html or template.html
+      console.error("Critical: template.html not found in searched paths.");
+      return res.status(500).send("Error: template.html not found. Please redeploy.");
+    }
 
     // 3. Inject SEO data
     const title = seo?.title || "Avani Enterprises | Digital Marketing & Web Development Services";
