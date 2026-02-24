@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 
 import { Checkbox } from "@/components/ui/checkbox"; // unused but kept as-is
 import { useToast } from "@/hooks/use-toast";
+import { getBackendUrl } from "@/lib/api";
 import { Check, Send, User, Mail, Phone, Briefcase, ChevronDown, FileText, MapPin } from "lucide-react";
 import {
   Command,
@@ -1340,7 +1341,8 @@ export default function RegistrationForm({ uniqueConsentId, source }: Registrati
       };
       console.log("🚀 Submitting Form Payload:", payload);
 
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/submit-form`, {
+      const API_BASE = getBackendUrl();
+      const response = await fetch(`${API_BASE}/submit-form`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload), // Send source

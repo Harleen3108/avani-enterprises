@@ -74,9 +74,10 @@ const corsOptions = {
     const allowedOrigins = [
       'https://avani-enterprises-bcjw.vercel.app',
       'https://avani-enterprises-psi.vercel.app',
+      'https://avani-enterprises.vercel.app',
     ];
 
-    if (allowedOrigins.includes(origin)) {
+    if (allowedOrigins.includes(origin) || (origin && origin.endsWith('.vercel.app'))) {
       callback(null, true);
     } else {
       console.log('CORS blocked origin:', origin);
@@ -1671,12 +1672,8 @@ app.get(/.*/, async (req, res, next) => {
     console.log(`✅ Injecting for ${pagePath}: Title="${title}"`);
 
     // Use a more robust replacement that handles potential variations in formatting
-    html = html.replace(/<title>.*?<\/title>/, `<title>${title}</title>`);
-    html = html.replace(/content="__SEO_DESCRIPTION__"/g, `content="${description}"`);
-    html = html.replace(/content="__SEO_KEYWORDS__"/g, `content="${keywords}"`);
-    
-    // Also replace the remaining raw placeholders just in case
     html = html
+      .replace(/<title>.*?<\/title>/, `<title>${title}</title>`)
       .replace(/__SEO_TITLE__/g, title)
       .replace(/__SEO_DESCRIPTION__/g, description)
       .replace(/__SEO_KEYWORDS__/g, keywords);

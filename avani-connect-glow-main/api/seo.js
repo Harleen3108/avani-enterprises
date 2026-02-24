@@ -8,7 +8,7 @@ const __dirname = path.dirname(__filename);
 export default async function handler(req, res) {
   try {
     const pagePath = req.query.path || "/";
-    const backendUrl = process.env.VITE_API_URL || "https://avani-enterprises.onrender.com";
+    const backendUrl = process.env.VITE_API_URL || "https://avani-enterprises-backend-1.onrender.com";
 
     console.log(`🔍 Vercel SEO request for: ${pagePath}`);
 
@@ -18,7 +18,7 @@ export default async function handler(req, res) {
       console.log(`📡 Fetching SEO from: ${backendUrl}/seo?page=${pagePath}`);
       
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 60000); // 60s timeout for cold starts
+      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10s timeout
       
       const response = await fetch(`${backendUrl}/seo?page=${encodeURIComponent(pagePath)}`, { 
         signal: controller.signal
@@ -28,17 +28,18 @@ export default async function handler(req, res) {
       if (response.ok) {
         const data = await response.json();
         seo = data.data;
-        console.log(`✅ SEO data received for ${pagePath}`);
+        console.log(`✅ SEO data received for ${pagePath}:`, JSON.stringify(seo));
       } else {
-        console.warn(`⚠️ Backend returned ${response.status} for ${pagePath}`);
+        const errText = await response.text();
+        console.warn(`⚠️ Backend returned ${response.status} for ${pagePath}: ${errText}`);
       }
     } catch (e) {
-      console.warn(`⚠️ Failed to fetch SEO for ${pagePath}:`, e.name === 'AbortError' ? 'Timeout' : e.message);
+      console.error(`❌ Failed to fetch SEO for ${pagePath}:`, e);
     }
 
     let html;
 
-    // 2. Read the built template.html
+    // 2. Read the built template.html (post-build.cjs renames index.html to template.html)
     const pathsToTry = [
       path.join(process.cwd(), 'dist', 'template.html'),
       path.join(process.cwd(), 'template.html'),
@@ -59,12 +60,14 @@ export default async function handler(req, res) {
     }
 
     // 3. Inject SEO data
-    // DANGER: Only use simple global replacements to avoid mangling HTML
     const title = seo?.title || "Avani Enterprises | Digital Marketing & Web Development Services";
     const description = seo?.metaDescription || "Transform your brand with Avani Enterprises.";
     const keywords = seo?.metaKeywords || "digital marketing, web development, SEO";
 
+    console.log(`💉 Injecting SEO for ${pagePath}: Title="${title}"`);
+
     html = html
+      .replace(/<title>.*?<\/title>/gi, `<title>${title}</title>`)
       .replace(/__SEO_TITLE__/g, title)
       .replace(/__SEO_DESCRIPTION__/g, description)
       .replace(/__SEO_KEYWORDS__/g, keywords);

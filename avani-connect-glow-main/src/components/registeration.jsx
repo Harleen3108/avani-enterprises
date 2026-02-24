@@ -1,5 +1,6 @@
 // src/components/RegistrationForm.tsx
 import { useEffect, useRef, useState } from "react";
+import { getBackendUrl } from '../lib/api';
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
@@ -273,18 +274,14 @@ const formSchema = z.object({
   consent: z.boolean().refine((val) => val === true, "You must agree to continue"),
 });
 
-type FormData = z.infer<typeof formSchema>;
-interface RegistrationFormProps {
-  uniqueConsentId: string;
-}
 
-export default function RegistrationForm({ uniqueConsentId }: RegistrationFormProps) {
+export default function RegistrationForm({ uniqueConsentId }) {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
-  const [apiError, setApiError] = useState<string | null>(null);
+  const [apiError, setApiError] = useState(null);
 
-  const [formData, setFormData] = useState<Partial<FormData>>({
+  const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
@@ -293,18 +290,18 @@ export default function RegistrationForm({ uniqueConsentId }: RegistrationFormPr
     consent: false,
   });
 
-  const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({});
+  const [errors, setErrors] = useState({});
   const [isServicesOpen, setIsServicesOpen] = useState(true); // mobile ke liye services toggle state
 
   // input refs
-  const nameRef = useRef<HTMLInputElement | null>(null);
-  const emailRef = useRef<HTMLInputElement | null>(null);
-  const phoneRef = useRef<HTMLInputElement | null>(null);
-  const notesRef = useRef<HTMLTextAreaElement | null>(null);
+  const nameRef = useRef(null);
+  const emailRef = useRef(null);
+  const phoneRef = useRef(null);
+  const notesRef = useRef(null);
 
-  const validateField = (field: keyof FormData, value: unknown) => {
+  const validateField = (field, value) => {
     try {
-      const fieldSchema = (formSchema as any).shape[field];
+      const fieldSchema = formSchema.shape[field];
       fieldSchema.parse(value);
       setErrors((prev) => ({ ...prev, [field]: undefined }));
       return true;
@@ -316,7 +313,7 @@ export default function RegistrationForm({ uniqueConsentId }: RegistrationFormPr
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     setApiError(null);
@@ -331,7 +328,8 @@ export default function RegistrationForm({ uniqueConsentId }: RegistrationFormPr
         consent: formData.consent,
       });
 
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/submit-form`, {
+      const API_BASE = getBackendUrl();
+      const response = await fetch(`${API_BASE}/submit-form`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(validatedData),
@@ -359,9 +357,9 @@ export default function RegistrationForm({ uniqueConsentId }: RegistrationFormPr
       });
     } catch (error) {
       if (error instanceof z.ZodError) {
-        const newErrors: Partial<Record<keyof FormData, string>> = {};
+        const newErrors = {};
         error.errors.forEach((err) => {
-          const field = err.path[0] as keyof FormData;
+          const field = err.path[0];
           newErrors[field] = err.message;
         });
         setErrors(newErrors);
@@ -384,11 +382,11 @@ export default function RegistrationForm({ uniqueConsentId }: RegistrationFormPr
     }
   };
 
-  const toggleService = (serviceName: string, force?: boolean) => {
-    const current = (formData.service as string[]) ?? [];
+  const toggleService = (serviceName, force) => {
+    const current = formData.service ?? [];
     const includes = current.includes(serviceName);
 
-    let next: string[];
+    let next;
     if (typeof force === "boolean") {
       next = force ? (includes ? current : [...current, serviceName]) : current.filter((s) => s !== serviceName);
     } else {
@@ -566,7 +564,7 @@ export default function RegistrationForm({ uniqueConsentId }: RegistrationFormPr
       }`}
     >
       {services.map((svc) => {
-        const checked = ((formData.service as string[]) ?? []).includes(svc);
+        const checked = (formData.service ?? []).includes(svc);
 
         return (
           <div
@@ -586,7 +584,7 @@ export default function RegistrationForm({ uniqueConsentId }: RegistrationFormPr
             <div onClick={(e) => e.stopPropagation()}>
               <Checkbox
                 checked={checked}
-                onCheckedChange={(val) => toggleService(svc, Boolean(val))}
+                onCheckedChange={(val) => toggleService(svc, !!val)}
               />
             </div>
 
@@ -632,7 +630,7 @@ export default function RegistrationForm({ uniqueConsentId }: RegistrationFormPr
     id={uniqueConsentId}
     checked={formData.consent}
     onCheckedChange={(checked) => {
-      setFormData({ ...formData, consent: checked as boolean });
+      setFormData({ ...formData, consent: !!checked });
       validateField("consent", checked);
     }}
     className="mt-0.5 sm:mt-1 border-border data-[state=checked]:bg-accent data-[state=checked]:border-accent flex-shrink-0"

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { getBackendUrl } from '../lib/api';
 import { useParams, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { ArrowLeft, Share2, Calendar, FileText, CheckCircle2 } from 'lucide-react';
@@ -16,7 +17,7 @@ const BlogDetail = () => {
 
     const fetchPostData = async () => {
       try {
-        const API_BASE = import.meta.env.VITE_BACKEND_URL;
+        const API_BASE = getBackendUrl();
         const [blogRes, allBlogsRes] = await Promise.all([
           fetch(`${API_BASE}/blogs/${slug}`),
           fetch(`${API_BASE}/blogs`)

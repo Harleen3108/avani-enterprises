@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { getBackendUrl } from '../lib/api';
 import { Link } from 'react-router-dom';
 import {
   Mail,
@@ -45,7 +46,7 @@ const GetConsultation = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const API_BASE = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
+    const API_BASE = getBackendUrl();
 
     setIsLoading(true);
 
