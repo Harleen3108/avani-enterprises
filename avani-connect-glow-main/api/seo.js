@@ -31,9 +31,11 @@ export default async function handler(req, res) {
     const pathsToTry = [
       path.join(process.cwd(), 'dist', 'template.html'),
       path.join(process.cwd(), 'template.html'),
-      path.join(__dirname, '../dist/template.html'),
+      path.resolve(__dirname, '..', 'dist', 'template.html'),
+      path.resolve(__dirname, '..', 'template.html'),
       path.join(__dirname, 'template.html'),
-      path.join(__dirname, 'dist/template.html')
+      '/var/task/dist/template.html',
+      '/var/task/template.html'
     ];
 
     for (const p of pathsToTry) {
@@ -44,9 +46,19 @@ export default async function handler(req, res) {
     }
 
     if (!html) {
-      // Fallback: try to find ANYTHING that looks like index.html or template.html
-      console.error("Critical: template.html not found in searched paths.");
-      return res.status(500).send("Error: template.html not found. Please redeploy.");
+      // DEBUG: List files to find where template.html is
+      let debugStr = `template.html not found. paths tried: ${pathsToTry.join(', ')}\n`;
+      try {
+        const cwdFiles = fs.readdirSync(process.cwd());
+        debugStr += `CWD (${process.cwd()}) files: ${cwdFiles.join(', ')}\n`;
+        const dirFiles = fs.readdirSync(__dirname);
+        debugStr += `__dirname (${__dirname}) files: ${dirFiles.join(', ')}\n`;
+        const rootFiles = fs.readdirSync('/var/task');
+        debugStr += `Root (/var/task) files: ${rootFiles.join(', ')}\n`;
+      } catch (e) {
+        debugStr += `List error: ${e.message}`;
+      }
+      return res.status(500).send(`Error: ${debugStr}`);
     }
 
     // 3. Inject SEO data
