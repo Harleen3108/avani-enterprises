@@ -1602,13 +1602,32 @@ app.get("/admin/seo", authMiddleware, async (req, res) => {
 // Public: fetch SEO by page and optional section
 app.get("/seo", async (req, res) => {
   try {
-    const { page, section = "" } = req.query;
+    let { page, section = "" } = req.query;
     if (!page) return res.status(400).json({ message: "page query param required" });
 
-    // Exact match on page + section, fallback to page-only if not found
-    let entry = await Seo.findOne({ page, section });
-    if (!entry && section) {
-      entry = await Seo.findOne({ page, section: "" });
+    // Normalize page path: trim and ensure leading slash
+    page = page.trim();
+    if (!page.startsWith('/')) page = '/' + page;
+
+    let entry = null;
+
+    // 1. If section is provided, try exact match first
+    if (section && section.trim() !== "") {
+      entry = await Seo.findOne({ page, section }).sort({ updatedAt: -1 });
+    }
+    
+    // 2. If no entry found yet (or no section provided), 
+    // find the LATEST record for this page that HAS a title
+    if (!entry) {
+      entry = await Seo.findOne({ 
+        page, 
+        title: { $ne: "", $ne: null, $exists: true } 
+      }).sort({ updatedAt: -1 });
+    }
+
+    // 3. Fallback to just the first/latest record for this page if nothing found with title
+    if (!entry) {
+      entry = await Seo.findOne({ page }).sort({ updatedAt: -1 });
     }
 
     if (!entry) return res.status(404).json({ message: "SEO not found" });
@@ -1672,11 +1691,26 @@ app.get(/.*/, async (req, res, next) => {
     console.log(`✅ Injecting for ${pagePath}: Title="${title}"`);
 
     // Use a more robust replacement that handles potential variations in formatting
+    const replaceMeta = (html, identifier, content) => {
+      const regex = new RegExp(`(<meta\\s+[^>]*?(?:name|property)=["']${identifier}["'][^>]*?\\s+content=)["'].*?["']`, 'gi');
+      if (regex.test(html)) {
+        return html.replace(regex, `$1"${content}"`);
+      }
+      return html;
+    };
+
     html = html
-      .replace(/<title>.*?<\/title>/, `<title>${title}</title>`)
+      .replace(/<title>.*?<\/title>/gi, `<title>${title}</title>`)
       .replace(/__SEO_TITLE__/g, title)
       .replace(/__SEO_DESCRIPTION__/g, description)
       .replace(/__SEO_KEYWORDS__/g, keywords);
+
+    html = replaceMeta(html, 'description', description);
+    html = replaceMeta(html, 'og:description', description);
+    html = replaceMeta(html, 'twitter:description', description);
+    html = replaceMeta(html, 'keywords', keywords);
+    html = replaceMeta(html, 'og:title', title);
+    html = replaceMeta(html, 'twitter:title', title);
 
     res.send(html);
   } catch (err) {

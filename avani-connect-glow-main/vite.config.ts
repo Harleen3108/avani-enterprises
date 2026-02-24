@@ -6,23 +6,25 @@ import { componentTagger } from "lovable-tagger";
 // Custom SEO Plugin for Local Development
 const seoPlugin = () => ({
   name: 'seo-plugin',
-  transformIndexHtml: async (html, ctx) => {
+  transformIndexHtml: async (html: string, ctx: any) => {
     const pagePath = ctx.path || "/";
+    const normalizedPath = pagePath.startsWith('/') ? pagePath : `/${pagePath}`;
+
     // Target local backend first, fallback to production
     const backendUrls = [
       "http://localhost:5000",
       "https://avani-enterprises-backend-1.onrender.com"
     ];
     
-    let seo = null;
+    let seo: any = null;
     for (const url of backendUrls) {
       try {
-        console.log(`[SEO-Plugin] Fetching for ${pagePath} from ${url}`);
-        const response = await fetch(`${url}/seo?page=${encodeURIComponent(pagePath)}`);
+        console.log(`[SEO-Plugin] Fetching for ${normalizedPath} from ${url}`);
+        const response = await fetch(`${url}/seo?page=${encodeURIComponent(normalizedPath)}`);
         if (response.ok) {
-          const data = await response.json();
+          const data = await response.json() as any;
           seo = data.data;
-          console.log(`[SEO-Plugin] ✅ SEO data received for ${pagePath}`);
+          console.log(`[SEO-Plugin] ✅ SEO data received for ${normalizedPath}`);
           break;
         }
       } catch (e) {
@@ -34,11 +36,27 @@ const seoPlugin = () => ({
     const description = seo?.metaDescription || "Transform your brand with Avani Enterprises.";
     const keywords = seo?.metaKeywords || "digital marketing, web development, SEO";
 
-    return html
+    let transformed = html
       .replace(/<title>.*?<\/title>/gi, `<title>${title}</title>`)
       .replace(/__SEO_TITLE__/g, title)
       .replace(/__SEO_DESCRIPTION__/g, description)
       .replace(/__SEO_KEYWORDS__/g, keywords);
+
+    const metas = [
+      { id: 'description', val: description },
+      { id: 'og:description', val: description },
+      { id: 'twitter:description', val: description },
+      { id: 'keywords', val: keywords },
+      { id: 'og:title', val: title },
+      { id: 'twitter:title', val: title }
+    ];
+
+    metas.forEach(({ id, val }) => {
+      const regex = new RegExp(`(<meta\\s+[^>]*?(?:name|property)=["']${id}["'][^>]*?\\s+content=)["'].*?["']`, 'gi');
+      transformed = transformed.replace(regex, `$1"${val}"`);
+    });
+
+    return transformed;
   }
 });
 
