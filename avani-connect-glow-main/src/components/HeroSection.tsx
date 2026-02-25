@@ -114,11 +114,11 @@ export default function HeroSection({ source }: HeroSectionProps) {
               {/* Animated Glow Border */}
               <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/20 via-amber-500/20 to-purple-500/20 rounded-[2.5rem] blur-2xl opacity-50 group-hover:opacity-100 transition duration-1000 group-hover:duration-200" />
 
-              <div className="relative bg-white/[0.03] backdrop-blur-2xl rounded-[2.5rem] border border-white/10 shadow-3xl overflow-hidden font-sans">
-                <div className="p-1 sm:p-2">
-                  <RegistrationForm uniqueConsentId={"registrationForm1"} source={source} />
-                </div>
+            <div className="relative bg-white/40 backdrop-blur-xl rounded-[2.5rem] border border-slate-200 shadow-2xl overflow-hidden font-sans">
+              <div className="p-0 sm:p-1">
+                <RegistrationForm uniqueConsentId={"registrationForm1"} source={source} isEmbedded={true} />
               </div>
+            </div>
 
               {/* Utility Action */}
               <div className="mt-6 text-center">

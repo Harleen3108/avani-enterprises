@@ -1235,9 +1235,10 @@ const fieldSchemas = formSchema.shape;
 interface RegistrationFormProps {
   uniqueConsentId: string;
   source?: string;
+  isEmbedded?: boolean;
 }
 
-export default function RegistrationForm({ uniqueConsentId, source }: RegistrationFormProps) {
+export default function RegistrationForm({ uniqueConsentId, source, isEmbedded = false }: RegistrationFormProps) {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
@@ -1415,6 +1416,379 @@ export default function RegistrationForm({ uniqueConsentId, source }: Registrati
     validateField("service", next);
   };
 
+  const formContent = (
+    <div className={cn("max-w-2xl mx-auto", isEmbedded && "max-w-full")}>
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="relative rounded-2xl overflow-hidden"
+      >
+        <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-primary/60 via-primary/30 to-primary/60 p-[2px]">
+          <div className={cn("w-full h-full rounded-2xl", isEmbedded ? "bg-white" : "bg-background")} />
+        </div>
+
+        <div className="relative">
+          {/* Helper variables for conditional styling based on environment */}
+          {(() => {
+            const textMain = isEmbedded ? "text-slate-900" : "text-foreground";
+            const textMuted = isEmbedded ? "text-slate-600" : "text-muted-foreground";
+            const iconColor = isEmbedded ? "text-slate-500" : "text-muted-foreground";
+            const placeholderColor = isEmbedded ? "placeholder:text-slate-500/70" : "placeholder:text-muted-foreground/70";
+            const inputColor = isEmbedded ? "text-slate-900" : "text-foreground";
+            const checkboxLabelColor = isEmbedded ? "text-slate-800" : "text-foreground/80";
+
+            return (
+              <>
+          <div className={cn("p-4 sm:p-6 pb-1 sm:pb-2 text-center", isEmbedded ? "bg-slate-50/50" : "bg-gradient-to-b from-card to-background")}>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className={cn("font-display text-base sm:text-lg md:text-2xl font-bold mb-1", textMain)}
+            >
+              Get Your Free Consultation
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              className={cn("text-xs sm:text-sm md:text-base font-semibold", textMuted)}
+            >
+              Transform your business with our expert digital solutions
+            </motion.p>
+          </div>
+
+          {/* Form Container */}
+          <div className={cn("px-3 py-2 sm:p-6", isEmbedded ? "bg-white/80 backdrop-blur-md" : "bg-card/50 backdrop-blur-sm")}>
+            <form onSubmit={handleSubmit} className="space-y-2 sm:space-y-3">
+              {/* Name */}
+              <div className="relative w-full">
+                <div className={cn("absolute left-3 top-1/2 -translate-y-1/2", iconColor)}>
+                  <User className="w-4 h-4 sm:w-5 sm:h-5" />
+                </div>
+                <Input
+                  ref={nameRef}
+                  placeholder="Enter name"
+                  value={formData.name}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    setFormData((prev) => ({ ...prev, name: val }));
+                    validateField("name", val);
+                  }}
+                  className={cn("pl-10 sm:pl-12 border-border/60 focus:border-primary py-2 sm:py-2.5 text-sm sm:text-base w-full", isEmbedded ? "bg-white" : "bg-background/80", inputColor, placeholderColor)}
+                  aria-label="Full name"
+                  inputMode="text"
+                  autoComplete="name"
+                />
+                {errors.name && (
+                  <p className="text-destructive text-xs sm:text-sm mt-1">{errors.name}</p>
+                )}
+              </div>
+
+              {/* Email */}
+              <div className="relative w-full">
+                <div className={cn("absolute left-3 top-1/2 -translate-y-1/2", iconColor)}>
+                  <Mail className="w-4 h-4 sm:w-5 sm:h-5" />
+                </div>
+                <Input
+                  ref={emailRef}
+                  type="email"
+                  placeholder="Enter email address"
+                  value={formData.email}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    setFormData((prev) => ({ ...prev, email: val }));
+                    validateField("email", val);
+                  }}
+                  className={cn("pl-10 sm:pl-12 border-border/60 focus:border-primary py-2 sm:py-2.5 text-sm sm:text-base w-full", isEmbedded ? "bg-white" : "bg-background/80", inputColor, placeholderColor)}
+                  aria-label="Email address"
+                  autoComplete="email"
+                />
+                {errors.email && (
+                  <p className="text-destructive text-xs sm:text-sm mt-1">{errors.email}</p>
+                )}
+              </div>
+
+              {/* City & State */}
+              <div className="relative w-full">
+                <div className={cn("absolute left-3 top-1/2 -translate-y-1/2", iconColor)}>
+                  <MapPin className="w-4 h-4 sm:w-5 sm:h-5" />
+                </div>
+                <Input
+                  ref={cityStateRef}
+                  placeholder="Enter City & State"
+                  value={formData.cityState}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    setFormData((prev) => ({ ...prev, cityState: val }));
+                    validateField("cityState", val);
+                  }}
+                  className={cn("pl-10 sm:pl-12 border-border/60 focus:border-primary py-2 sm:py-2.5 text-sm sm:text-base w-full", isEmbedded ? "bg-white" : "bg-background/80", inputColor, placeholderColor)}
+                  aria-label="City and State"
+                  inputMode="text"
+                  autoComplete="address-level2"
+                />
+                {errors.cityState && (
+                  <p className="text-destructive text-xs sm:text-sm mt-1">{errors.cityState}</p>
+                )}
+              </div>
+
+              {/* Phone */}
+              <div className="flex flex-row gap-2 w-full">
+                <div className="w-auto sm:flex-shrink-0">
+                  <Popover open={openCountryCode} onOpenChange={setOpenCountryCode}>
+                    <PopoverTrigger asChild>
+                      <Button
+                        variant="outline"
+                        role="combobox"
+                        aria-expanded={openCountryCode}
+                        className={cn("border-border/60 py-2 sm:py-2.5 text-sm sm:text-base w-auto justify-between", isEmbedded ? "bg-white" : "bg-background/80", inputColor)}
+                      >
+                        <span className={inputColor}>
+                          {selectedCountryCode
+                            ? countryCodes.find(
+                              (code) => code.value === selectedCountryCode
+                            )?.value
+                            : "+91"}
+                        </span>
+                        <ChevronDown className={cn("ml-2 h-4 w-4 shrink-0 opacity-50", iconColor)} />
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className={cn("w-[280px] p-0 border-border", isEmbedded ? "bg-white" : "bg-popover")} align="start">
+                      <Command className={isEmbedded ? "bg-white" : ""}>
+                        <CommandInput placeholder="Search country..." />
+                        <CommandList>
+                          <CommandEmpty>No country found.</CommandEmpty>
+                          <CommandGroup>
+                            {countryCodes.map((code) => (
+                              <CommandItem
+                                key={code.value}
+                                value={code.label}
+                                onSelect={(currentValue) => {
+                                  setSelectedCountryCode(code.value);
+                                  setOpenCountryCode(false);
+                                }}
+                              >
+                                <Check
+                                  className={cn(
+                                    "mr-2 h-4 w-4",
+                                    selectedCountryCode === code.value
+                                      ? "opacity-100"
+                                      : "opacity-0"
+                                  )}
+                                />
+                                {code.label}
+                              </CommandItem>
+                            ))}
+                          </CommandGroup>
+                        </CommandList>
+                      </Command>
+                    </PopoverContent>
+                  </Popover>
+                </div>
+
+                <div className="flex-1 relative w-full">
+                  <div className={cn("absolute left-3 top-1/2 -translate-y-1/2", iconColor)}>
+                    <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
+                  </div>
+                  <Input
+                    ref={phoneRef}
+                    type="tel"
+                    placeholder="Mobile no."
+                    value={formData.phone}
+                    onChange={(e) => {
+                      const val = e.target.value.replace(/[^0-9]/g, "");
+                      if (val.length <= 15) {
+                        setFormData((prev) => ({ ...prev, phone: val }));
+                        validateField("phone", val);
+                      }
+                    }}
+                    className={cn("pl-10 sm:pl-12 border-border/60 focus:border-primary py-2 sm:py-2.5 text-sm sm:text-base w-full", isEmbedded ? "bg-white" : "bg-background/80", inputColor, placeholderColor)}
+                    aria-label="Phone number"
+                    autoComplete="tel-national"
+                  />
+                </div>
+              </div>
+              {errors.phone && (
+                <p className="text-destructive text-xs sm:text-sm mt-1">{errors.phone}</p>
+              )}
+
+              {/* Service Selection */}
+              <div className="relative w-full">
+                <Button
+                  type="button"
+                  variant="outline"
+                  className={cn(
+                    "w-full justify-between pl-3 text-left font-normal border-border/60 py-2 sm:py-2.5 text-sm sm:text-base h-auto hover:bg-background/90",
+                    isEmbedded ? "bg-white" : "bg-background/80",
+                    inputColor,
+                    !formData.service?.length && iconColor
+                  )}
+                  onClick={() => setIsServicesOpen(!isServicesOpen)}
+                >
+                  <span className={cn("flex items-center gap-2 truncate font-medium", inputColor)}>
+                    <Briefcase className={cn("w-4 h-4 sm:w-5 sm:h-5", iconColor)} />
+                    {formData.service?.length
+                      ? formData.service.join(", ")
+                      : "Select Service(s) of Interest *"}
+                  </span>
+                  <ChevronDown
+                    className={cn(
+                      "h-4 w-4 opacity-50 transition-transform duration-200",
+                      iconColor,
+                      isServicesOpen && "rotate-180"
+                    )}
+                  />
+                </Button>
+
+                {isServicesOpen && (
+                  <div className={cn("absolute z-20 w-full mt-1 backdrop-blur-md border border-border shadow-xl rounded-lg py-1 animate-in fade-in zoom-in-95 duration-200", isEmbedded ? "bg-white/95" : "bg-background/95")}>
+                    {services.map((service) => (
+                      <div
+                        key={service}
+                        className="flex items-center px-3 py-2 hover:bg-primary/10 cursor-pointer transition-colors"
+                        onClick={() => toggleService(service)}
+                      >
+                        <div
+                          className={cn(
+                            "w-4 h-4 border rounded mr-2 flex items-center justify-center transition-colors",
+                            formData.service?.includes(service)
+                              ? "bg-primary border-primary"
+                              : "border-muted-foreground/30"
+                          )}
+                        >
+                          {formData.service?.includes(service) && (
+                            <Check className="w-3 h-3 text-primary-foreground" />
+                          )}
+                        </div>
+                        <span className={cn("text-sm sm:text-base select-none", inputColor)}>{service}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                {errors.service && (
+                  <p className="text-destructive text-xs sm:text-sm mt-1">{errors.service}</p>
+                )}
+              </div>
+
+              <div className="relative w-full">
+                <Button
+                  type="button"
+                  variant="outline"
+                  className={cn("w-full justify-between pl-3 text-left font-normal border-border/60 py-2 sm:py-2.5 text-sm sm:text-base h-auto hover:bg-background/90", isEmbedded ? "bg-white" : "bg-background/80", inputColor)}
+                  onClick={() => setIsBusinessOpen(!isBusinessOpen)}
+                >
+                  <span className={cn("flex items-center gap-2 truncate font-medium", inputColor)}>
+                    <FileText className={cn("w-4 h-4 sm:w-5 sm:h-5", iconColor)} />
+                    {"Business Category / Notes (optional)"}
+                  </span>
+                  <ChevronDown
+                    className={cn(
+                      "h-4 w-4 opacity-50 transition-transform duration-200",
+                      iconColor,
+                      isBusinessOpen && "rotate-180"
+                    )}
+                  />
+                </Button>
+
+                {isBusinessOpen && (
+                  <div className="mt-2 animate-in slide-in-from-top-2 duration-200">
+                    <textarea
+                      ref={notesRef}
+                      placeholder="Describe your business or add any notes (optional)"
+                      value={formData.businessCategory}
+                      onChange={(e) => {
+                        const val = e.target.value;
+                        setFormData((prev) => ({ ...prev, businessCategory: val }));
+                        validateField("businessCategory", val);
+                      }}
+                      className={cn("w-full min-h-[100px] sm:min-h-[120px] resize-none p-3 rounded-md border border-border/60 focus:border-primary text-sm md:text-base outline-none", isEmbedded ? "bg-white" : "bg-background/80", inputColor, placeholderColor)}
+                      aria-label="Business category or notes"
+                    />
+                  </div>
+                )}
+              </div>
+
+              {/* Consent */}
+              <div
+                className="flex items-start gap-2 sm:gap-3 w-full cursor-pointer select-none pt-2"
+                onClick={() => {
+                  const boolVal = !Boolean(formData.consent);
+                  setFormData((prev) => ({ ...prev, consent: boolVal }));
+                  validateField("consent", boolVal);
+                }}
+              >
+                <input
+                  id={uniqueConsentId}
+                  type="checkbox"
+                  className="mt-0.5 sm:mt-1 h-4 w-4 rounded border border-border/60 flex-shrink-0 cursor-pointer accent-primary"
+                  checked={Boolean(formData.consent)}
+                  onChange={() => {
+                    const boolVal = !Boolean(formData.consent);
+                    setFormData((prev) => ({ ...prev, consent: boolVal }));
+                    validateField("consent", boolVal);
+                  }}
+                  aria-describedby="consent-desc"
+                />
+
+                <span className={cn("text-xs sm:text-sm leading-relaxed cursor-pointer font-medium", checkboxLabelColor)}>
+                  I agree to receive information regarding my submitted application and updates
+                  from Avani Enterprises *
+                </span>
+              </div>
+              {errors.consent && (
+                <p className="text-destructive text-xs sm:text-sm">
+                  {errors.consent}
+                </p>
+              )}
+
+
+              {/* API ERROR */}
+              {apiError && (
+                <p className="text-destructive text-sm text-center mt-2 font-semibold">{apiError}</p>
+              )}
+
+              {/* Submit Button */}
+              <div className="flex justify-center pt-2">
+                <Button
+                  type="submit"
+                  variant="hero"
+                  size="lg"
+                  className="w-full sm:w-[300px] font-bold shadow-lg"
+                  disabled={isLoading}
+                  aria-label="Submit registration form"
+                >
+                  {isLoading ? (
+                    <span className="flex items-center gap-2 text-white">
+                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      Submitting...
+                    </span>
+                  ) : (
+                    <span className="flex items-center gap-2 justify-center text-white">
+                      Submit
+                      <Send className="w-5 h-5" />
+                    </span>
+                  )}
+                </Button>
+              </div>
+            </form>
+          </div>
+              </>
+            );
+          })()}
+        </div>
+      </motion.div>
+    </div>
+  );
+
+  if (isEmbedded) {
+    return formContent;
+  }
+
   return (
     <section id="contact" className="py-6 sm:py-10 relative text-sm md:text-base">
       {/* decorative background */}
@@ -1423,361 +1797,7 @@ export default function RegistrationForm({ uniqueConsentId, source }: Registrati
       </div>
 
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
-        <div className="max-w-2xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="relative rounded-2xl overflow-hidden"
-          >
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-primary/60 via-primary/30 to-primary/60 p-[2px]">
-              <div className="w-full h-full rounded-2xl bg-background" />
-            </div>
-
-            <div className="relative">
-              <div className="bg-gradient-to-b from-card to-background p-4 sm:p-6 pb-1 sm:pb-2 text-center">
-                <motion.h2
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.2 }}
-                  className="font-display text-base sm:text-lg md:text-2xl font-bold text-foreground mb-1"
-                >
-                  Get Your Free Consultation
-                </motion.h2>
-                <motion.p
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.3 }}
-                  className="text-muted-foreground text-xs sm:text-sm md:text-base"
-                >
-                  Transform your business with our expert digital solutions
-                </motion.p>
-              </div>
-
-              {/* Form Container */}
-              <div className="bg-card/50 backdrop-blur-sm px-3 py-2 sm:p-6">
-                <form onSubmit={handleSubmit} className="space-y-2 sm:space-y-3">
-                  {/* Name */}
-                  <div className="relative w-full">
-                    <div className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">
-                      <User className="w-4 h-4 sm:w-5 sm:h-5" />
-                    </div>
-                    <Input
-                      ref={nameRef}
-                      placeholder="Enter name"
-                      value={formData.name}
-                      onChange={(e) => {
-                        const val = e.target.value;
-                        setFormData((prev) => ({ ...prev, name: val }));
-                        validateField("name", val);
-                      }}
-                      className="pl-10 sm:pl-12 bg-background/80 border-border/60 focus:border-primary py-2 sm:py-2.5 text-sm sm:text-base w-full"
-                      aria-label="Full name"
-                      inputMode="text"
-                      autoComplete="name"
-                    />
-                    {errors.name && (
-                      <p className="text-destructive text-xs sm:text-sm mt-1">{errors.name}</p>
-                    )}
-                  </div>
-
-                  {/* Email */}
-                  <div className="relative w-full">
-                    <div className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">
-                      <Mail className="w-4 h-4 sm:w-5 sm:h-5" />
-                    </div>
-                    <Input
-                      ref={emailRef}
-                      type="email"
-                      placeholder="Enter email address"
-                      value={formData.email}
-                      onChange={(e) => {
-                        const val = e.target.value;
-                        setFormData((prev) => ({ ...prev, email: val }));
-                        validateField("email", val);
-                      }}
-                      className="pl-10 sm:pl-12 bg-background/80 border-border/60 focus:border-primary py-2 sm:py-2.5 text-sm sm:text-base w-full"
-                      aria-label="Email address"
-                      autoComplete="email"
-                    />
-                    {errors.email && (
-                      <p className="text-destructive text-xs sm:text-sm mt-1">{errors.email}</p>
-                    )}
-                  </div>
-
-                  {/* City & State */}
-                  <div className="relative w-full">
-                    <div className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">
-                      <MapPin className="w-4 h-4 sm:w-5 sm:h-5" />
-                    </div>
-                    <Input
-                      ref={cityStateRef}
-                      placeholder="Enter City & State"
-                      value={formData.cityState}
-                      onChange={(e) => {
-                        const val = e.target.value;
-                        setFormData((prev) => ({ ...prev, cityState: val }));
-                        validateField("cityState", val);
-                      }}
-                      className="pl-10 sm:pl-12 bg-background/80 border-border/60 focus:border-primary py-2 sm:py-2.5 text-sm sm:text-base w-full"
-                      aria-label="City and State"
-                      inputMode="text"
-                      autoComplete="address-level2"
-                    />
-                    {errors.cityState && (
-                      <p className="text-destructive text-xs sm:text-sm mt-1">{errors.cityState}</p>
-                    )}
-                  </div>
-
-                  {/* Phone */}
-                  <div className="flex flex-row gap-2 w-full">
-                    <div className="w-auto sm:flex-shrink-0">
-                      <Popover open={openCountryCode} onOpenChange={setOpenCountryCode}>
-                        <PopoverTrigger asChild>
-                          <Button
-                            variant="outline"
-                            role="combobox"
-                            aria-expanded={openCountryCode}
-                            className="bg-background/80 border-border/60 py-2 sm:py-2.5 text-sm sm:text-base w-auto justify-between"
-                          >
-                            <span>
-                              {selectedCountryCode
-                                ? countryCodes.find(
-                                  (code) => code.value === selectedCountryCode
-                                )?.value
-                                : "+91"}
-                            </span>
-                            <ChevronDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                          </Button>
-                        </PopoverTrigger>
-                        <PopoverContent className="w-[280px] p-0" align="start">
-                          <Command>
-                            <CommandInput placeholder="Search country..." />
-                            <CommandList>
-                              <CommandEmpty>No country found.</CommandEmpty>
-                              <CommandGroup>
-                                {countryCodes.map((code) => (
-                                  <CommandItem
-                                    key={code.value}
-                                    value={code.label}
-                                    onSelect={(currentValue) => {
-                                      // We want the value code (+91) not the label
-                                      // But we can find it from the original array since we are mapping
-                                      setSelectedCountryCode(code.value);
-                                      setOpenCountryCode(false);
-                                    }}
-                                  >
-                                    <Check
-                                      className={cn(
-                                        "mr-2 h-4 w-4",
-                                        selectedCountryCode === code.value
-                                          ? "opacity-100"
-                                          : "opacity-0"
-                                      )}
-                                    />
-                                    {code.label}
-                                  </CommandItem>
-                                ))}
-                              </CommandGroup>
-                            </CommandList>
-                          </Command>
-                        </PopoverContent>
-                      </Popover>
-                    </div>
-
-                    <div className="flex-1 relative w-full">
-                      <div className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">
-                        <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
-                      </div>
-                      <Input
-                        ref={phoneRef}
-                        type="tel"
-                        placeholder="Mobile no."
-                        value={formData.phone}
-                        onChange={(e) => {
-                          const val = e.target.value;
-                          setFormData((prev) => ({ ...prev, phone: val }));
-                          validateField("phone", val);
-                        }}
-                        className="pl-10 sm:pl-12 bg-background/80 border-border/60 focus:border-primary py-2 sm:py-2.5 text-sm sm:text-base w-full"
-                        aria-label="Phone number"
-                        inputMode="tel"
-                        maxLength={(() => {
-                          const country = countryCodes.find((c) => c.value === selectedCountryCode);
-                          const d = country?.digits;
-                          if (Array.isArray(d)) return Math.max(...d);
-                          return typeof d === "number" ? d : 15;
-                        })()}
-                      />
-                    </div>
-                  </div>
-                  {errors.phone && (
-                    <p className="text-destructive text-xs sm:text-sm -mt-2">{errors.phone}</p>
-                  )}
-
-                  {/* Services */}
-                  <div className="w-full">
-                    <div className="relative w-full">
-                      <div className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground z-10 pointer-events-none">
-                        <Briefcase className="w-4 h-4 sm:w-5 sm:h-5" />
-                      </div>
-                      <button
-                        type="button"
-                        onClick={() => setIsServicesOpen((prev) => !prev)}
-                        className="relative flex w-full items-center justify-between rounded-md bg-background/80 border border-border/60 focus:border-primary pl-10 pr-3 py-2 sm:pl-12 sm:pr-4 sm:py-2.5 hover:bg-background/80"
-                      >
-                        <span className="text-sm sm:text-base text-muted-foreground">
-                          Select Service(s) of Interest *
-                        </span>
-
-                        <ChevronDown
-                          className={`w-4 h-4 text-muted-foreground transition-transform ${isServicesOpen ? "rotate-180" : ""
-                            }`}
-                        />
-                      </button>
-                    </div>
-
-                    {isServicesOpen && (
-                      <div className="mt-2 grid grid-cols-1 sm:grid-cols-2 gap-2">
-                        {services.map((svc) => {
-                          const checked = ((formData.service as string[]) ?? []).includes(svc);
-
-                          return (
-                            <label
-                              key={svc}
-                              className="flex items-center gap-2 sm:gap-3 cursor-pointer select-none rounded-md p-2.5 sm:p-3 hover:bg-background/60 w-full"
-                            >
-                              <input
-                                type="checkbox"
-                                className="h-4 w-4 rounded border border-border/60"
-                                checked={checked}
-                                onChange={() => toggleService(svc)}
-                              />
-                              <span className="text-sm sm:text-base">{svc}</span>
-                            </label>
-                          );
-                        })}
-                      </div>
-                    )}
-
-                    {errors.service && (
-                      <p className="text-destructive text-xs sm:text-sm mt-1">
-                        {errors.service}
-                      </p>
-                    )}
-                  </div>
-
-                  {/* Business Category */}
-                  <div className="relative w-full">
-                    <div className="relative w-full">
-                      <div className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground z-10 pointer-events-none">
-                        <FileText className="w-4 h-4 sm:w-5 sm:h-5" />
-                      </div>
-                      <button
-                        type="button"
-                        onClick={() => setIsBusinessOpen((prev) => !prev)}
-                        className="flex w-full items-center justify-between rounded-md bg-background/80 border border-border/60 pl-10 pr-3 py-2 sm:pl-12 sm:pr-4 sm:py-2.5 hover:bg-background/80"
-                      >
-                        <span className="text-sm sm:text-base text-muted-foreground">
-                          Business Category / Notes (optional)
-                        </span>
-
-                        <ChevronDown
-                          className={`w-4 h-4 text-muted-foreground transition-transform ${isBusinessOpen ? "rotate-180" : ""
-                            }`}
-                        />
-                      </button>
-                    </div>
-
-                    {isBusinessOpen && (
-                      <div className="mt-2">
-                        <textarea
-                          ref={notesRef}
-                          placeholder="Describe your business or add any notes (optional)"
-                          value={formData.businessCategory}
-                          onChange={(e) => {
-                            const val = e.target.value;
-                            setFormData((prev) => ({ ...prev, businessCategory: val }));
-                            validateField("businessCategory", val);
-                          }}
-                          className="w-full min-h-[100px] sm:min-h-[120px] resize-none p-3 rounded-md bg-background/80 border border-border/60 focus:border-primary text-sm md:text-base"
-                          aria-label="Business category or notes"
-                        />
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Consent */}
-                  {/* Consent */}
-                  <div
-                    className="flex items-start gap-2 sm:gap-3 w-full cursor-pointer select-none"
-                    onClick={() => {
-                      const boolVal = !Boolean(formData.consent);
-                      setFormData((prev) => ({ ...prev, consent: boolVal }));
-                      validateField("consent", boolVal);
-                    }}
-                  >
-                    <input
-                      id={uniqueConsentId}
-                      type="checkbox"
-                      className="mt-0.5 sm:mt-1 h-4 w-4 rounded border border-border/60 flex-shrink-0 cursor-pointer"
-                      checked={Boolean(formData.consent)}
-                      onChange={() => {
-                        const boolVal = !Boolean(formData.consent);
-                        setFormData((prev) => ({ ...prev, consent: boolVal }));
-                        validateField("consent", boolVal);
-                      }}
-                      aria-describedby="consent-desc"
-                    />
-
-                    <span className="text-xs sm:text-sm text-muted-foreground leading-relaxed cursor-pointer">
-                      I agree to receive information regarding my submitted application and updates
-                      from Avani Enterprises *
-                    </span>
-                  </div>
-                  {errors.consent && (
-                    <p className="text-destructive text-xs sm:text-sm -mt-3">
-                      {errors.consent}
-                    </p>
-                  )}
-
-
-                  {/* API ERROR */}
-                  {apiError && (
-                    <p className="text-destructive text-sm text-center mt-2">{apiError}</p>
-                  )}
-
-                  {/* Submit Button */}
-                  <div className="flex justify-center pt-2">
-                    <Button
-                      type="submit"
-                      variant="hero"
-                      size="lg"
-                      className="w-full sm:w-[300px]"
-                      disabled={isLoading}
-                      aria-label="Submit registration form"
-                    >
-                      {isLoading ? (
-                        <span className="flex items-center gap-2">
-                          <div className="w-5 h-5 border-2 border-accent-foreground/30 border-t-accent-foreground rounded-full animate-spin" />
-                          Submitting...
-                        </span>
-                      ) : (
-                        <span className="flex items-center gap-2 justify-center">
-                          Submit
-                          <Send className="w-5 h-5" />
-                        </span>
-                      )}
-                    </Button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </motion.div>
-        </div>
+        {formContent}
       </div>
     </section>
   );
