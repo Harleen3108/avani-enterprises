@@ -24,7 +24,7 @@ const Footer = () => {
               and data-driven growth strategies that deliver measurable ROI.
             </p>
             <div className="flex space-x-4">
-              <a href="https://www.linkedin.com/company/avani-enterprises-india/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
+              <a href="https://www.linkedin.com/in/avani-enterprises-137448390?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
                 <Linkedin size={20} />
               </a>
               <a href="https://www.instagram.com/avanienterprises.branding/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">

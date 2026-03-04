@@ -9,7 +9,7 @@
 **Address:** Tower B, 3rd Floor, Unitech Cyber Park, Sector 39, Gurugram, Haryana 122002  
 
 ## Social Media Links
-- **LinkedIn:** https://www.linkedin.com/company/avani-enterprises-india/
+- **LinkedIn:** https://www.linkedin.com/in/avani-enterprises-137448390?utm_source=share_via&utm_content=profile&utm_medium=member_android
 - **Instagram:** https://www.instagram.com/avanienterprises.branding/
 - **Twitter:** https://twitter.com/avanienterprises
 - **Facebook:** https://www.facebook.com/share/1DKFWQiBe4/
