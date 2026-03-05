@@ -21,6 +21,7 @@ import {
   Globe,
   MessageSquare,
   ExternalLink,
+  Trash2,
 } from "lucide-react";
 import clsx from "clsx";
 
@@ -159,6 +160,27 @@ const ApplicationManagement = () => {
     );
   };
 
+  const getFullUrl = (url) => {
+    if (!url) return "";
+    if (url.startsWith("http")) return url;
+    // Resolve relative path using API URL (strip /api if present)
+    const baseUrl = import.meta.env.VITE_API_URL.replace(/\/api$/, "");
+    return `${baseUrl}${url}`;
+  };
+
+  const handleDelete = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this application?")) return;
+    try {
+      await axios.delete(`${import.meta.env.VITE_API_URL}/admin/applications/${id}`, {
+        headers: { Authorization: `Bearer ${import.meta.env.VITE_TOKEN || localStorage.getItem("token") || ""}` },
+      });
+      setApplications((prev) => prev.filter((app) => app._id !== id));
+    } catch (err) {
+      console.error("Failed to delete application", err);
+      alert("Failed to delete application. Please try again.");
+    }
+  };
+
   return (
     <>
       <div className="max-w-7xl mx-auto space-y-6 pt-8 md:pt-4">
@@ -245,6 +267,7 @@ const ApplicationManagement = () => {
                       <th className="px-6 py-3.5">Applied Date</th>
                       <th className="px-6 py-3.5">Status</th>
                       <th className="px-6 py-3.5">Actions</th>
+                      <th className="px-6 py-3.5"></th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-100 text-sm">
@@ -321,7 +344,7 @@ const ApplicationManagement = () => {
                               {app.resumeUrl && (
                                 <>
                                   <a
-                                    href={app.resumeUrl}
+                                    href={getFullUrl(app.resumeUrl)}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="p-2 rounded-lg hover:bg-blue-100 text-blue-600 transition-colors"
@@ -330,7 +353,7 @@ const ApplicationManagement = () => {
                                     <FileText size={16} />
                                   </a>
                                   <a
-                                    href={app.resumeUrl}
+                                    href={getFullUrl(app.resumeUrl)}
                                     download
                                     className="p-2 rounded-lg hover:bg-emerald-100 text-emerald-600 transition-colors"
                                     title="Download CV"
@@ -340,6 +363,15 @@ const ApplicationManagement = () => {
                                 </>
                               )}
                             </div>
+                          </td>
+                          <td className="px-6 py-4 text-right">
+                            <button
+                              onClick={() => handleDelete(app._id)}
+                              className="p-2 rounded-lg hover:bg-red-100 text-red-600 transition-colors"
+                              title="Delete Application"
+                            >
+                              <Trash2 size={16} />
+                            </button>
                           </td>
                         </tr>
                       ))
@@ -528,7 +560,7 @@ const ApplicationManagement = () => {
                 <div className="flex flex-wrap gap-3">
                   {viewingApp.resumeUrl && (
                     <a
-                      href={viewingApp.resumeUrl}
+                      href={getFullUrl(viewingApp.resumeUrl)}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center gap-2 px-4 py-2 bg-indigo-50 text-indigo-700 rounded-lg hover:bg-indigo-100 transition-colors"
@@ -540,7 +572,7 @@ const ApplicationManagement = () => {
                   )}
                   {viewingApp.coverLetterUrl && (
                     <a
-                      href={viewingApp.coverLetterUrl}
+                      href={getFullUrl(viewingApp.coverLetterUrl)}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center gap-2 px-4 py-2 bg-emerald-50 text-emerald-700 rounded-lg hover:bg-emerald-100 transition-colors"
@@ -550,6 +582,16 @@ const ApplicationManagement = () => {
                       <Download size={14} />
                     </a>
                   )}
+                  <button
+                    onClick={() => {
+                      handleDelete(viewingApp._id);
+                      setViewingApp(null);
+                    }}
+                    className="flex items-center gap-2 px-4 py-2 bg-red-50 text-red-700 rounded-lg hover:bg-red-100 transition-colors ml-auto"
+                  >
+                    <Trash2 size={18} />
+                    <span className="text-sm font-medium">Delete Application</span>
+                  </button>
                 </div>
                 {viewingApp.coverLetterText && (
                   <div className="mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200">

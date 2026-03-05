@@ -91,6 +91,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(express.json());
+app.set("trust proxy", 1);
 
 // Serve uploaded files statically
 app.use("/uploads", express.static(uploadsDir));
@@ -452,6 +453,18 @@ app.patch("/leads/:id", authMiddleware, async (req, res) => {
   }
 });
 
+// DELETE lead (Admin)
+app.delete("/leads/:id", authMiddleware, async (req, res) => {
+  try {
+    const lead = await Lead.findByIdAndDelete(req.params.id);
+    if (!lead) return res.status(404).json({ message: "Lead not found" });
+    res.json({ success: true, message: "Lead deleted successfully" });
+  } catch (err) {
+    console.error("Error deleting lead:", err);
+    res.status(500).json({ message: "Server error", error: err.message });
+  }
+});
+
 // Submit Form (Public)
 app.post("/submit-form", async (req, res) => {
   try {
@@ -702,6 +715,29 @@ app.patch("/avani-form/:id", async (req, res) => {
     res.status(500).json({
       success: false,
       message: "Server Error. Could not update notes.",
+    });
+  }
+});
+
+// DELETE avani-form (Admin)
+app.delete("/avani-form/:id", authMiddleware, async (req, res) => {
+  try {
+    const deletedForm = await AvaniForm.findByIdAndDelete(req.params.id);
+    if (!deletedForm) {
+      return res.status(404).json({
+        success: false,
+        message: "Form not found",
+      });
+    }
+    res.status(200).json({
+      success: true,
+      message: "Form submission deleted successfully",
+    });
+  } catch (error) {
+    console.error("Error deleting form:", error);
+    res.status(500).json({
+      success: false,
+      message: "Server Error. Could not delete form submission.",
     });
   }
 });
@@ -1170,13 +1206,13 @@ app.post("/applications", upload.fields([
       }
     }
 
-    // Get file URLs
+    // Get file URLs - use relative paths for database storage
     const resumeUrl = req.files?.resume
-      ? `${req.protocol}://${req.get("host")}/uploads/${req.files.resume[0].filename}`
+      ? `/uploads/${req.files.resume[0].filename}`
       : null;
 
     const coverLetterUrl = req.files?.coverLetter
-      ? `${req.protocol}://${req.get("host")}/uploads/${req.files.coverLetter[0].filename}`
+      ? `/uploads/${req.files.coverLetter[0].filename}`
       : null;
 
     if (!resumeUrl) {

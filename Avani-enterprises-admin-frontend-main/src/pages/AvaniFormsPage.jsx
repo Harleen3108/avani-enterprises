@@ -117,6 +117,19 @@ const AvaniFormsPage = () => {
     if (success) setEditingNote(null);
   };
 
+  const handleDeleteForm = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this submission?")) return;
+    try {
+      await axios.delete(`${API_BASE}/avani-form/${id}`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token") || ""}` },
+      });
+      setForms((prev) => prev.filter((f) => f._id !== id));
+    } catch (err) {
+      console.error("Failed to delete form submission", err);
+      alert("Failed to delete submission. Please try again.");
+    }
+  };
+
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen">
@@ -197,6 +210,7 @@ const AvaniFormsPage = () => {
                 <th className="px-6 py-3.5">Notes</th>
                 <th className="px-6 py-3.5">Date</th>
                 <th className="px-6 py-3.5">Action</th>
+                <th className="px-6 py-3.5"></th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100 text-sm">
@@ -287,12 +301,21 @@ const AvaniFormsPage = () => {
                           View
                         </button>
                       </td>
+                      <td className="px-6 py-4">
+                        <button
+                          onClick={() => handleDeleteForm(form._id)}
+                          className="p-1.5 rounded-lg hover:bg-red-50 text-red-600 transition-colors"
+                          title="Delete"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </td>
                     </tr>
 
                     {/* Expanded Notes Panel */}
                     {expandedRow === form._id && (
                       <tr>
-                        <td colSpan={7} className="px-0">
+                        <td colSpan={8} className="px-0">
                           <div className="bg-indigo-50/30 p-4 border-b border-indigo-100 shadow-inner animate-in slide-in-from-top-2 duration-200">
                             <div className="max-w-3xl mx-auto">
                               <div className="flex justify-between items-center mb-3">
@@ -536,13 +559,20 @@ const AvaniFormsPage = () => {
                 )}
               </div>
 
-              <div className="pt-2">
+              <div className="pt-2 flex gap-2">
                 <button
                   onClick={() => openModal(form)}
-                  className="w-full inline-flex items-center justify-center px-4 py-2 bg-indigo-50 text-indigo-600 text-sm font-medium rounded-lg hover:bg-indigo-100 transition-colors"
+                  className="flex-1 inline-flex items-center justify-center px-4 py-2 bg-indigo-50 text-indigo-600 text-sm font-medium rounded-lg hover:bg-indigo-100 transition-colors"
                 >
                   <Eye className="w-4 h-4 mr-2" />
                   View Details
+                </button>
+                <button
+                  onClick={() => handleDeleteForm(form._id)}
+                  className="inline-flex items-center justify-center px-4 py-2 bg-red-50 text-red-600 text-sm font-medium rounded-lg hover:bg-red-100 transition-colors"
+                  title="Delete"
+                >
+                  <Trash2 className="w-4 h-4" />
                 </button>
               </div>
             </div>
