@@ -102,6 +102,7 @@ import Navbar1 from "./components/ui/navbar1";
 import Footer from "./components/Footer";
 import Footer1 from "./components/Footer1";
 import ScrollToTop from "./components/ScrollToTop";
+import AnnouncementBar from "./components/AnnouncementBar";
 import SeoHead from "./components/SeoHead";
 
 // Router hook for conditional rendering
@@ -170,9 +171,10 @@ const AppLayout = () => {
 
   return (
     <div className="min-h-screen">
+      <AnnouncementBar />
       <SeoHead />
       {!hideNavbar && (useNavbar1 ? <Navbar1 /> : <Navbar />)}
-      <main>
+      <main className="pt-[var(--announcement-bar-height)]">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />

@@ -115,3 +115,34 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.2);
 }
+
+@layer components {
+  .marquee-container {
+    @apply flex overflow-hidden select-none;
+    gap: var(--gap, 2rem);
+    width: 100%;
+  }
+
+  .marquee-content {
+    @apply flex shrink-0 justify-around min-w-full;
+    gap: var(--gap, 2rem);
+    animation: marquee var(--duration, 30s) linear infinite;
+  }
+
+  .marquee-content:hover {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - var(--gap, 2rem)));
+  }
+}
+
+:root {
+  --announcement-bar-height: 40px;
+}
