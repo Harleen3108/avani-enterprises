@@ -75,10 +75,10 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed left-0 right-0 z-50 transition-all duration-500 ease-in-out font-sans
+      className={`fixed left-0 right-0 z-50 transition-all duration-500 ease-in-out font-sans top-[var(--announcement-bar-height)]
         ${isScrolled
-          ? "bg-white/95 backdrop-blur-xl shadow-sm py-2 top-0"
-          : "bg-transparent py-4 top-[var(--announcement-bar-height)]"
+          ? "bg-white/95 backdrop-blur-xl shadow-sm py-2"
+          : "bg-transparent py-4"
         }
       `}
     >
@@ -255,7 +255,7 @@ const Navbar = () => {
 
         {/* MOBILE OVERLAY */}
         {isOpen && (
-          <div className="lg:hidden fixed inset-x-0 top-[70px] mx-4 bg-white shadow-2xl rounded-3xl border border-slate-100 overflow-hidden animate-fadeInDown max-h-[80vh] overflow-y-auto">
+          <div className="lg:hidden fixed inset-x-0 top-[calc(var(--announcement-bar-height)+70px)] mx-4 bg-white shadow-2xl rounded-3xl border border-slate-100 overflow-hidden animate-fadeInDown max-h-[80vh] overflow-y-auto">
             <div className="p-5 space-y-1">
               {navItems.map((item) => {
                 // Projects (Always expanded on mobile)
