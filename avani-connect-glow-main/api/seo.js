@@ -15,15 +15,24 @@ export default async function handler(req, res) {
 
     // 1. Fetch SEO from Render Backend
     let seo = null;
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 8000); // 8 second timeout
+
     try {
       const fetchUrl = `${backendUrl}/seo?page=${encodeURIComponent(normalizedPath)}`;
-      const response = await fetch(fetchUrl);
+      const response = await fetch(fetchUrl, { signal: controller.signal });
+      clearTimeout(timeoutId);
       if (response.ok) {
         const data = await response.json();
         seo = data.data;
       }
     } catch (e) {
-      console.error(`❌ Failed to fetch SEO for ${normalizedPath}:`, e.message);
+      clearTimeout(timeoutId);
+      if (e.name === 'AbortError') {
+        console.error(`❌ SEO fetch timed out for ${normalizedPath}`);
+      } else {
+        console.error(`❌ Failed to fetch SEO for ${normalizedPath}:`, e.message);
+      }
     }
 
     let html;
