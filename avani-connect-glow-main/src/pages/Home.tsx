@@ -442,6 +442,15 @@ const Home = () => {
                 We're more than just a digital agency. We have stories to tell, and passions to share, and results to deliver that are more exciting than the competition.
               </p>
 
+              {/* Global Expansion Text */}
+              <div className="flex items-center gap-2 mb-10 text-amber-600 font-bold text-sm sm:text-base">
+                <span className="relative flex h-3 w-3">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-amber-500"></span>
+                </span>
+                <span>Expanding Globally: Now proudly serving from our Mumbai and Australia offices.</span>
+              </div>
+
               <div className="flex flex-col gap-8 mb-16">
                 <div className="flex flex-row items-center gap-3 sm:gap-6">
                   <Link

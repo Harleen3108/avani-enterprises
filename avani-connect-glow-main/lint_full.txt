@@ -1,0 +1,79 @@
+﻿
+> vite_react_shadcn_ts@0.0.0 lint
+> eslint .
+
+
+E:\avani-enterprises\avani-connect-glow-main\src\components\AnimatedSection.tsx
+  30:32  warning  The ref value 'ref.current' will likely have changed by the time this effect cleanup function runs. If this ref points to a node rendered by React, copy 'ref.current' to a variable inside the effect, and use that variable in the cleanup function  react-hooks/exhaustive-deps
+
+E:\avani-enterprises\avani-connect-glow-main\src\components\Navbar.tsx
+   68:39  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  134:52  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  182:54  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  278:50  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  320:54  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\avani-enterprises\avani-connect-glow-main\src\components\RegistrationForm.tsx
+  1720:36  error  Redundant Boolean call  no-extra-boolean-cast
+  1731:38  error  Redundant Boolean call  no-extra-boolean-cast
+
+E:\avani-enterprises\avani-connect-glow-main\src\components\SeoHead.tsx
+  9:34  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\avani-enterprises\avani-connect-glow-main\src\components\ui\badge.tsx
+  29:17  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+E:\avani-enterprises\avani-connect-glow-main\src\components\ui\button.tsx
+  51:18  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+E:\avani-enterprises\avani-connect-glow-main\src\components\ui\command.tsx
+  24:11  error  An interface declaring no members is equivalent to its supertype  @typescript-eslint/no-empty-object-type
+
+E:\avani-enterprises\avani-connect-glow-main\src\components\ui\form.tsx
+  129:10  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+E:\avani-enterprises\avani-connect-glow-main\src\components\ui\navigation-menu.tsx
+  111:3  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+E:\avani-enterprises\avani-connect-glow-main\src\components\ui\sidebar.tsx
+  636:3  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+E:\avani-enterprises\avani-connect-glow-main\src\components\ui\sonner.tsx
+  27:19  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+E:\avani-enterprises\avani-connect-glow-main\src\components\ui\textarea.tsx
+  5:18  error  An interface declaring no members is equivalent to its supertype  @typescript-eslint/no-empty-object-type
+
+E:\avani-enterprises\avani-connect-glow-main\src\components\ui\toggle.tsx
+  37:18  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+E:\avani-enterprises\avani-connect-glow-main\src\pages\CareerDetail.tsx
+   23:34  error    Unexpected any. Specify a different type                                                                     @typescript-eslint/no-explicit-any
+   53:6   warning  React Hook useEffect has a missing dependency: 'fetchJob'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  136:19  error    Unexpected any. Specify a different type                                                                     @typescript-eslint/no-explicit-any
+
+E:\avani-enterprises\avani-connect-glow-main\src\pages\CaseStudies.tsx
+   44:36  warning  The ref value 'cardRef.current' will likely have changed by the time this effect cleanup function runs. If this ref points to a node rendered by React, copy 'cardRef.current' to a variable inside the effect, and use that variable in the cleanup function  react-hooks/exhaustive-deps
+  544:21  error    'cardClass' is never reassigned. Use 'const' instead                                                                                                                                                                                                           prefer-const
+
+E:\avani-enterprises\avani-connect-glow-main\src\pages\Courses.tsx
+   45:36  warning  The ref value 'cardRef.current' will likely have changed by the time this effect cleanup function runs. If this ref points to a node rendered by React, copy 'cardRef.current' to a variable inside the effect, and use that variable in the cleanup function  react-hooks/exhaustive-deps
+  796:29  error    Unexpected any. Specify a different type                                                                                                                                                                                                                       @typescript-eslint/no-explicit-any
+
+E:\avani-enterprises\avani-connect-glow-main\src\pages\Home.tsx
+   79:6   warning  React Hook useEffect has a missing dependency: 'testimonials.length'. Either include it or remove the dependency array                                                                               react-hooks/exhaustive-deps
+  123:6   warning  React Hook useEffect has missing dependencies: 'targetCounts.clients', 'targetCounts.growth', 'targetCounts.projects', and 'targetCounts.years'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+  228:6   warning  React Hook useEffect has a missing dependency: 'heroSlides.length'. Either include it or remove the dependency array                                                                                 react-hooks/exhaustive-deps
+  886:21  error    'cardClass' is never reassigned. Use 'const' instead                                                                                                                                                 prefer-const
+
+E:\avani-enterprises\avani-connect-glow-main\src\pages\Services.tsx
+  1082:21  error  'cardClass' is never reassigned. Use 'const' instead  prefer-const
+
+E:\avani-enterprises\avani-connect-glow-main\vite.config.ts
+   9:49  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  19:14  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  25:49  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+Γ£û 33 problems (19 errors, 14 warnings)
+  5 errors and 0 warnings potentially fixable with the `--fix` option.
+
