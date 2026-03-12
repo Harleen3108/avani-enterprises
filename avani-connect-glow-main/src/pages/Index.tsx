@@ -45,10 +45,10 @@ const Index = () => {
   return (
     <>
       <Helmet>
-        <title>Avani Enterprises | Digital Marketing & Web Development Services</title>
+        <title>Avani Enterprises | Web Development & Digital Marketing Agency</title>
         <meta 
           name="description" 
-          content="Transform your brand with Avani Enterprises. We offer web development, SEO, social media marketing, AI solutions, and digital consulting services. Get your free consultation today." 
+          content="Avani Enterprises provides web development, SEO, and digital marketing services to help businesses grow online." 
         />
         <meta name="keywords" content="digital marketing, web development, SEO, social media marketing, AI solutions, brand transformation, India" />
         <link rel="canonical" href="https://avani-enterprises.vercel.app" />
