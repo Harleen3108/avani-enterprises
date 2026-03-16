@@ -381,9 +381,9 @@ const Home = () => {
   ];
 
   return (
-    <div className="pt-14 sm:pt-20">
+    <div>
       {/* Hero Section - Full Page Height */}
-      <section className="relative min-h-screen flex items-center pt-4 sm:pt-20 overflow-hidden bg-[#fefaf6]">
+      <section className="relative min-h-screen flex items-start pt-24 sm:pt-32 pb-12 overflow-hidden bg-[#fefaf6]">
         {/* Curved Background Split */}
         <div className="absolute top-0 right-0 w-[55%] h-full pointer-events-none hidden lg:block">
           <div className="absolute inset-0 bg-gradient-to-br from-amber-100/40 via-orange-50/30 to-transparent rounded-l-[20rem] transform scale-x-110 translate-x-20" />
@@ -397,7 +397,7 @@ const Home = () => {
               initial={{ opacity: 0, x: -40 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className="mt-2 sm:mt-0"
+              className="sm:mt-0"
             >
               <span className="text-amber-600 font-extrabold text-lg tracking-wide mb-2 block">
                 One stop solution for business and start-ups Since 2016!
