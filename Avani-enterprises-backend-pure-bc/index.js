@@ -153,6 +153,7 @@ mongoose
           { page: "/projects/sanjeevni-hospital", title: "Sanjeevni Hospital", seoHeading: "Sanjeevni Hospital", metaDescription: "Sanjeevni Hospital project details.", metaKeywords: "sanjeevni" },
           { page: "/projects/rohtak-shoe", title: "Rohtak Shoe", seoHeading: "Rohtak Shoe", metaDescription: "Rohtak Shoe project details.", metaKeywords: "rohtak shoe" },
           { page: "/careers", title: "Careers at Avani", seoHeading: "Careers", metaDescription: "Open positions and careers at Avani.", metaKeywords: "careers, jobs" },
+          { page: "/newsletters", title: "Newsletters | Avani Enterprises", seoHeading: "Our Newsletters", metaDescription: "Stay updated with Avani Enterprises newsletters.", metaKeywords: "newsletters, updates" },
         ];
 
         for (const entry of defaultEntries) {
@@ -1763,7 +1764,18 @@ app.get("/seo", async (req, res) => {
       entry = await Seo.findOne({ page }).sort({ updatedAt: -1 });
     }
 
-    if (!entry) return res.status(404).json({ message: "SEO not found" });
+    if (!entry) {
+      // Return 200 with defaults instead of 404 to keep console clean
+      return res.json({ 
+        success: true, 
+        isDefault: true,
+        data: {
+          title: "Avani Enterprises | Digital Excellence",
+          metaDescription: "Professional digital services by Avani Enterprises.",
+          metaKeywords: "digital, services, avani"
+        } 
+      });
+    }
     res.json({ success: true, data: entry });
   } catch (err) {
     console.error("Error fetching SEO:", err);
