@@ -4,24 +4,24 @@
  */
 
 export const getBackendUrl = (): string => {
-  // 1. Try VITE_BACKEND_URL (primary environment variable)
-  let baseUrl = import.meta.env.VITE_BACKEND_URL;
-
-  // 2. Try VITE_API_URL (secondary environment variable)
-  if (!baseUrl) {
-    baseUrl = import.meta.env.VITE_API_URL;
+  // 1. Robust production fallback based on hostname
+  if (typeof window !== 'undefined') {
+    const isLocal = window.location.hostname === 'localhost' || 
+                   window.location.hostname === '127.0.0.1' || 
+                   window.location.hostname.startsWith('192.168.');
+    
+    if (!isLocal) {
+      return "https://avani-enterprises-backend-1.onrender.com";
+    }
   }
 
-  // 3. Fallback to production URL if in production mode
-  if (!baseUrl && import.meta.env.PROD) {
-    baseUrl = 'https://avani-enterprises-backend-1.onrender.com';
-  }
+  // 2. Try environment variables
+  let baseUrl = import.meta.env.VITE_BACKEND_URL || import.meta.env.VITE_API_URL;
 
-  // 4. Final fallback to localhost for development
+  // 3. Final fallback to localhost
   if (!baseUrl) {
     baseUrl = 'http://localhost:5000';
   }
 
-  // Clean trailing slashes
   return baseUrl.replace(/\/$/, '');
 };

@@ -4,16 +4,22 @@
  * - In development: uses localhost
  */
 export const getApiBaseUrl = (): string => {
-  // Use VITE_API_URL if provided
-  const envUrl = import.meta.env.VITE_API_URL || import.meta.env.VITE_BACKEND_URL;
-  if (envUrl) return envUrl;
-
-  // Fallback for production
-  if (import.meta.env.PROD) {
-    return "https://avani-enterprises-backend-1.onrender.com";
+  // 1. Check if we are in development (localhost)
+  if (typeof window !== 'undefined') {
+    const isLocal = window.location.hostname === 'localhost' || 
+                   window.location.hostname === '127.0.0.1' || 
+                   window.location.hostname.startsWith('192.168.');
+    
+    if (!isLocal) {
+      return "https://avani-enterprises-backend-1.onrender.com";
+    }
   }
 
-  // Fallback for local development
+  // 2. Try VITE environment variables if they exist
+  const envUrl = import.meta.env.VITE_API_URL || import.meta.env.VITE_BACKEND_URL;
+  if (envUrl) return envUrl.replace(/\/$/, '');
+
+  // 3. Final default for local development
   return "http://localhost:5000";
 };
 

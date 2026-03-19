@@ -1357,7 +1357,7 @@ const Home = () => {
                                 <div className="h-48 rounded-[2rem] overflow-hidden mb-6 relative">
                                     <Link to={`/newsletters/${n.slug}`}>
                                         <img 
-                                            src={n.imageUrl ? `${API_BASE_URL.replace('/admin', '')}${n.imageUrl}` : "https://placehold.co/600x400?text=Newsletter"} 
+                                            src={n.imageUrl ? `${API_BASE_URL}${n.imageUrl.startsWith('/') ? '' : '/'}${n.imageUrl}` : "https://placehold.co/600x400?text=Newsletter"} 
                                             alt={n.title}
                                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                             onError={(e: any) => e.target.src = "https://placehold.co/600x400?text=Newsletter"}
