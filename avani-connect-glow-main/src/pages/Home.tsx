@@ -42,7 +42,9 @@ const Home = () => {
     years: 0
   });
   const [blogs, setBlogs] = useState([]);
+  const [newsletters, setNewsletters] = useState([]);
   const [loadingBlogs, setLoadingBlogs] = useState(true);
+  const [loadingNewsletters, setLoadingNewsletters] = useState(true);
   const [currentBlog, setCurrentBlog] = useState(0);
 
   const targetCounts = {
@@ -54,7 +56,22 @@ const Home = () => {
 
   useEffect(() => {
     fetchBlogs();
+    fetchNewsletters();
   }, []);
+
+  const fetchNewsletters = async () => {
+    try {
+      setLoadingNewsletters(true);
+      const response = await axios.get(`${API_BASE_URL}/newsletters`);
+      if (response.data.success) {
+        setNewsletters(response.data.data || []);
+      }
+    } catch (error) {
+      console.error("Error fetching newsletters:", error);
+    } finally {
+      setLoadingNewsletters(false);
+    }
+  };
 
   const fetchBlogs = async () => {
     try {
@@ -1300,6 +1317,75 @@ const Home = () => {
             </>
           )}
         </div>
+      </section>
+
+      {/* Newsletter Section */}
+      <section className="py-24 bg-white overflow-hidden relative">
+          <div className="absolute top-0 right-0 w-1/3 h-full bg-amber-50/30 -skew-x-12 translate-x-20" />
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+              <div className="flex flex-col items-center justify-center text-center mb-16 gap-6">
+                  <div className="max-w-3xl">
+                    {/* <div className="inline-flex items-center gap-2 px-3 py-1 bg-white rounded-full border border-amber-100 mb-4 shadow-sm mx-auto">
+                        <Sparkles className="w-4 h-4 text-amber-500" />
+                        <span className="text-slate-400 font-black text-[10px] uppercase tracking-widest">Stay Updated</span>
+                    </div> */}
+                    <h2 className="text-4xl md:text-6xl font-black text-slate-900 tracking-tight leading-tight whitespace-nowrap">
+                        Our Latest <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-600">Newsletters</span>
+                    </h2>
+                  </div>
+                  {/* <Link 
+                    to="/newsletters" 
+                    className="group flex items-center gap-3 bg-white border-2 border-slate-100 hover:border-amber-500 px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest transition-all shadow-sm"
+                  >
+                    Explore More <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </Link> */}
+              </div>
+
+              {loadingNewsletters ? (
+                <div className="flex justify-center py-20">
+                    <div className="w-10 h-10 border-4 border-amber-500 border-t-transparent rounded-full animate-spin" />
+                </div>
+              ) : newsletters.length === 0 ? (
+                <div className="text-center py-20 bg-white rounded-[3rem] border-2 border-dashed border-slate-200">
+                    <p className="text-slate-400 font-bold italic">Latest updates are coming soon...</p>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {newsletters.slice(0, 3).map((n: any, i: number) => (
+                        <AnimatedSection key={n._id} delay={i * 0.1}>
+                            <article className="group bg-slate-50/50 rounded-[1.5rem] p-6 shadow-xl shadow-slate-200/50 border border-slate-100 transition-all hover:border-amber-400 hover:-translate-y-2 hover:shadow-2xl hover:shadow-amber-100">
+                                <div className="h-48 rounded-[2rem] overflow-hidden mb-6 relative">
+                                    <Link to={`/newsletters/${n.slug}`}>
+                                        <img 
+                                            src={n.imageUrl ? `${API_BASE_URL.replace('/admin', '')}${n.imageUrl}` : "https://via.placeholder.com/600x400?text=Newsletter"} 
+                                            alt={n.title}
+                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                            onError={(e: any) => e.target.src = "https://via.placeholder.com/600x400?text=Newsletter"}
+                                        />
+                                    </Link>
+                                    <div className="absolute top-4 left-4">
+                                        <div className="bg-slate-900 px-3 py-1 rounded-lg text-[10px] font-black uppercase text-amber-500 shadow-sm border border-slate-800 transition-colors">
+                                            {new Date(n.publishedAt || n.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                                        </div>
+                                    </div>
+                                </div>
+                                <h3 className="text-xl font-bold text-slate-900 mb-4 line-clamp-2 leading-snug group-hover:text-amber-600 transition-colors">
+                                    {n.title}
+                                </h3>
+                                <div className="flex items-center justify-between pt-6 border-t border-slate-200">
+                                    <Link 
+                                        to={`/newsletters/${n.slug}`} 
+                                        className="text-slate-900 hover:text-amber-600 font-black text-[10px] uppercase tracking-widest flex items-center gap-2 transition-colors"
+                                    >
+                                        Read More <ChevronRight size={14} className="text-amber-500" />
+                                    </Link>
+                                </div>
+                            </article>
+                        </AnimatedSection>
+                    ))}
+                </div>
+              )}
+          </div>
       </section>
 
       {/* CTA Section */}

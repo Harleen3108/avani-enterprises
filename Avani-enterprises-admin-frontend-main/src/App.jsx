@@ -15,6 +15,7 @@ import JobAnalytics from "./pages/JobAnalytics";
 import JobsDashboard from "./pages/JobsDashboard";
 import SeoManager from "./pages/SeoManager";
 import BlogManagement from "./pages/BlogManagement";
+import NewsletterManagement from "./pages/NewsletterManagement";
 import SevenDayLaunch from "./pages/SevenDayLaunch";
 import AdminLayout from "./AdminLayout";
 import { Loader2 } from "lucide-react";
@@ -99,6 +100,7 @@ function App() {
             <Route path="consultations" element={<Consultations />} />
             <Route path="seo" element={<SeoManager />} />
             <Route path="blogs" element={<BlogManagement />} />
+            <Route path="newsletters" element={<NewsletterManagement />} />
             <Route path="jobs-dashboard" element={<JobsDashboard />} />
             <Route path="jobs" element={<JobManagement />} />
             <Route path="applications" element={<ApplicationManagement />} />

@@ -142,6 +142,8 @@ import Chatbot from "./components/Chatbot";
 import Careers from "./pages/Careers";
 import CareerDetail from "./pages/CareerDetail";
 import OurProducts from "./pages/OurProducts";
+import Newsletters from "./pages/Newsletters";
+import NewsletterDetail from "./pages/NewsletterDetail";
 
 const queryClient = new QueryClient();
 
@@ -185,6 +187,8 @@ const AppLayout = () => {
           <Route path="/contact" element={<Contact />} />
           <Route path="/blog" element={<Blog />} />
           {/* <Route path="/blog" element={<Blog />} /> */}
+          <Route path="/newsletters" element={<Newsletters />} />
+          <Route path="/newsletters/:slug" element={<NewsletterDetail />} />
           <Route path="/courses" element={<Courses />} />
           <Route path="/courses/:id" element={<CourseDetail />} />
           <Route path="/get-consultation" element={<GetConsultation />} />

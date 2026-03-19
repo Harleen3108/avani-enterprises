@@ -15,6 +15,7 @@ const Job = require("./models/Job");
 const Application = require("./models/Application");
 const Seo = require("./models/Seo");
 const Blog = require("./models/Blog");
+const Newsletter = require("./models/Newsletter");
 require("dotenv").config();
 
 const app = express();
@@ -37,15 +38,16 @@ const storage = multer.diskStorage({
 });
 
 const fileFilter = (req, file, cb) => {
-  // Accept only PDF, DOC, DOCX files
-  const allowedTypes = /pdf|doc|docx/;
+  // Accept PDF, DOC, DOCX for applications
+  // Accept JPG, JPEG, PNG, WEBP for newsletters/blogs
+  const allowedTypes = /pdf|doc|docx|jpg|jpeg|png|webp/;
   const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
   const mimetype = allowedTypes.test(file.mimetype);
 
   if (extname && mimetype) {
     cb(null, true);
   } else {
-    cb(new Error("Only PDF, DOC, and DOCX files are allowed!"));
+    cb(new Error("File type not allowed!"));
   }
 };
 
@@ -53,6 +55,19 @@ const upload = multer({
   storage: storage,
   limits: { fileSize: 5 * 1024 * 1024 }, // 5MB limit
   fileFilter: fileFilter,
+});
+
+// A more permissive upload for images only
+const imageUpload = multer({
+  storage: storage,
+  limits: { fileSize: 5 * 1024 * 1024 },
+  fileFilter: (req, file, cb) => {
+    const allowedTypes = /jpg|jpeg|png|webp/;
+    const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
+    const mimetype = allowedTypes.test(file.mimetype);
+    if (extname && mimetype) cb(null, true);
+    else cb(new Error("Only images (JPG, PNG, WEBP) are allowed!"));
+  }
 });
 
 // CORS configuration - allow frontend to connect
@@ -1158,6 +1173,88 @@ app.delete("/admin/blogs/:id", authMiddleware, async (req, res) => {
     res.json({ success: true, message: "Blog deleted" });
   } catch (err) {
     console.error("Error deleting blog:", err);
+    res.status(500).json({ message: "Server error", error: err.message });
+  }
+});
+
+// --- NEWSLETTER ROUTES ---
+
+// Image upload for newsletters
+app.post("/admin/upload-image", authMiddleware, imageUpload.single("image"), (req, res) => {
+  if (!req.file) return res.status(400).json({ message: "No file uploaded" });
+  const imageUrl = `/uploads/${req.file.filename}`;
+  res.json({ success: true, imageUrl });
+});
+
+// Public: Get all published newsletters
+app.get("/newsletters", async (req, res) => {
+  try {
+    const newsletters = await Newsletter.find({ isPublished: true }).sort({ publishedAt: -1, createdAt: -1 });
+    res.json({ success: true, data: newsletters });
+  } catch (err) {
+    res.status(500).json({ message: "Server error", error: err.message });
+  }
+});
+
+// Public: Get single newsletter by slug
+app.get("/newsletters/:slug", async (req, res) => {
+  try {
+    const newsletter = await Newsletter.findOne({ slug: req.params.slug, isPublished: true });
+    if (!newsletter) return res.status(404).json({ message: "Newsletter not found" });
+    res.json({ success: true, data: newsletter });
+  } catch (err) {
+    res.status(500).json({ message: "Server error", error: err.message });
+  }
+});
+
+// Admin: Get all newsletters
+app.get("/admin/newsletters", authMiddleware, async (req, res) => {
+  try {
+    const newsletters = await Newsletter.find().sort({ createdAt: -1 });
+    res.json({ success: true, data: newsletters });
+  } catch (err) {
+    res.status(500).json({ message: "Server error", error: err.message });
+  }
+});
+
+// Admin: Create newsletter
+app.post("/admin/newsletters", authMiddleware, async (req, res) => {
+  try {
+    const { title, slug, content, imageUrl, isPublished } = req.body;
+    const newsletter = await Newsletter.create({
+      title,
+      slug,
+      content,
+      imageUrl,
+      isPublished,
+      publishedAt: isPublished ? new Date() : null
+    });
+    res.status(201).json({ success: true, data: newsletter });
+  } catch (err) {
+    res.status(500).json({ message: "Server error", error: err.message });
+  }
+});
+
+// Admin: Update newsletter
+app.put("/admin/newsletters/:id", authMiddleware, async (req, res) => {
+  try {
+    const updates = req.body;
+    if (updates.isPublished && !updates.publishedAt) updates.publishedAt = new Date();
+    const updated = await Newsletter.findByIdAndUpdate(req.params.id, updates, { new: true });
+    if (!updated) return res.status(404).json({ message: "Newsletter not found" });
+    res.json({ success: true, data: updated });
+  } catch (err) {
+    res.status(500).json({ message: "Server error", error: err.message });
+  }
+});
+
+// Admin: Delete newsletter
+app.delete("/admin/newsletters/:id", authMiddleware, async (req, res) => {
+  try {
+    const deleted = await Newsletter.findByIdAndDelete(req.params.id);
+    if (!deleted) return res.status(404).json({ message: "Newsletter not found" });
+    res.json({ success: true, message: "Newsletter deleted" });
+  } catch (err) {
     res.status(500).json({ message: "Server error", error: err.message });
   }
 });

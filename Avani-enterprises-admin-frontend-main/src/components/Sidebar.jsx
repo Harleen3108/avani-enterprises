@@ -75,6 +75,7 @@ const Sidebar = () => {
                         <div className="mb-4">
                             <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-4">Content</p>
                             <NavItem to="/blogs" icon={FileText} label="Blog Management" />
+                            <NavItem to="/newsletters" icon={MessageSquare} label="Newsletter Management" />
                             <NavItem to="/seo" icon={FileText} label="SEO Manager" />
                         </div>
 
