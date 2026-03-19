@@ -203,7 +203,7 @@ const BlogManagement = () => {
                         src={b.featuredImage || "/placeholder-blog.png"}
                         alt=""
                         className="w-full h-full object-cover"
-                        onError={(e) => e.target.src = "https://via.placeholder.com/150?text=No+Image"}
+                        onError={(e) => e.target.src = "https://placehold.co/150x150?text=No+Image"}
                       />
                     </div>
                   </td>
