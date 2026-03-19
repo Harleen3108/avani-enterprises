@@ -111,6 +111,28 @@ app.set("trust proxy", 1);
 // Serve uploaded files statically
 app.use("/uploads", express.static(uploadsDir));
 
+// --- CRITICAL: PUBLIC API ROUTES (Top Priority) ---
+// Public: Get all published newsletters
+app.get("/newsletters", async (req, res) => {
+  try {
+    const newsletters = await Newsletter.find({ isPublished: true }).sort({ publishedAt: -1, createdAt: -1 });
+    res.json({ success: true, data: newsletters });
+  } catch (err) {
+    res.status(500).json({ message: "Server error", error: err.message });
+  }
+});
+
+// Public: Get single newsletter by slug
+app.get("/newsletters/:slug", async (req, res) => {
+  try {
+    const newsletter = await Newsletter.findOne({ slug: req.params.slug, isPublished: true });
+    if (!newsletter) return res.status(404).json({ message: "Newsletter not found" });
+    res.json({ success: true, data: newsletter });
+  } catch (err) {
+    res.status(500).json({ message: "Server error", error: err.message });
+  }
+});
+
 // Backend Info route
 app.get("/api/info", (req, res) => {
   res.json({
@@ -1187,26 +1209,7 @@ app.post("/admin/upload-image", authMiddleware, imageUpload.single("image"), (re
   res.json({ success: true, imageUrl });
 });
 
-// Public: Get all published newsletters
-app.get("/newsletters", async (req, res) => {
-  try {
-    const newsletters = await Newsletter.find({ isPublished: true }).sort({ publishedAt: -1, createdAt: -1 });
-    res.json({ success: true, data: newsletters });
-  } catch (err) {
-    res.status(500).json({ message: "Server error", error: err.message });
-  }
-});
-
-// Public: Get single newsletter by slug
-app.get("/newsletters/:slug", async (req, res) => {
-  try {
-    const newsletter = await Newsletter.findOne({ slug: req.params.slug, isPublished: true });
-    if (!newsletter) return res.status(404).json({ message: "Newsletter not found" });
-    res.json({ success: true, data: newsletter });
-  } catch (err) {
-    res.status(500).json({ message: "Server error", error: err.message });
-  }
-});
+// Newsletter public routes moved to top
 
 // Admin: Get all newsletters
 app.get("/admin/newsletters", authMiddleware, async (req, res) => {
@@ -1793,7 +1796,12 @@ app.get(/.*/, async (req, res, next) => {
     
     // CRITICAL: Skip SEO for ALL API-like routes immediately
     if (pagePath.startsWith("/newsletters") || pagePath.startsWith("/blogs") || pagePath.startsWith("/seo")) {
-      return next();
+      // If it reached here, it means it didn't match the specific route above.
+      // We MUST NOT return HTML. Return a JSON 404 instead.
+      return res.status(404).json({ 
+        success: false, 
+        message: `API Route ${pagePath} not found. Please check your backend deployment.` 
+      });
     }
     
     // Skip SEO injection for:
