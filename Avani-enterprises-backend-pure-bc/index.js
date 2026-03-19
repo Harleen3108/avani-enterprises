@@ -1776,6 +1776,7 @@ const frontendPath = path.resolve(__dirname, "../avani-connect-glow-main/dist");
 
 // 1. Catch-all route for SEO injection (MUST be above express.static)
 app.get(/.*/, async (req, res, next) => {
+  try {
     const pagePath = req.path || "/";
     
     // CRITICAL: Skip SEO for ALL API-like routes immediately
