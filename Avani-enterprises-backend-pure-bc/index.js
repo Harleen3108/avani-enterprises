@@ -1795,6 +1795,7 @@ app.get(/.*/, async (req, res, next) => {
       pagePath.startsWith("/submit-form") ||
       pagePath.startsWith("/avani-form") ||
       pagePath.startsWith("/seo") ||
+      pagePath.startsWith("/newsletters") ||
       req.headers.accept?.includes("application/json")
     ) {
       return next();

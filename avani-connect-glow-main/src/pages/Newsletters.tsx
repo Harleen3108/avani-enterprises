@@ -24,7 +24,11 @@ const Newsletters = () => {
       setLoading(true);
       try {
         const API_BASE = getBackendUrl();
-        const res = await fetch(`${API_BASE}/newsletters`);
+        const res = await fetch(`${API_BASE}/newsletters`, {
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
         const json = await res.json();
         if (json?.success) setNewsletters(json.data || []);
         else setError(json?.message || "Failed to load newsletters");
