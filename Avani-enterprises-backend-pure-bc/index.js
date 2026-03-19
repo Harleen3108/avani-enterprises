@@ -111,6 +111,9 @@ app.set("trust proxy", 1);
 // Serve uploaded files statically
 app.use("/uploads", express.static(uploadsDir));
 
+// Diagnostic route
+app.get("/api/test-v4", (req, res) => res.json({ success: true, version: "v4-robust-priority", timestamp: new Date() }));
+
 // --- CRITICAL: PUBLIC API ROUTES (Top Priority) ---
 // Public: Get all published newsletters
 app.get("/newsletters", async (req, res) => {
