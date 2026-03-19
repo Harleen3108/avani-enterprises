@@ -11,7 +11,7 @@ export const getBackendUrl = (): string => {
                    window.location.hostname.startsWith('192.168.');
     
     if (!isLocal) {
-      return "";
+      return "https://avani-enterprises-backend-1.onrender.com";
     }
   }
 
