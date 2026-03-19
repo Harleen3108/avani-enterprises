@@ -1333,12 +1333,12 @@ const Home = () => {
                         Our Latest <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-600">Newsletters</span>
                     </h2>
                   </div>
-                  {/* <Link 
+                  <Link 
                     to="/newsletters" 
-                    className="group flex items-center gap-3 bg-white border-2 border-slate-100 hover:border-amber-500 px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest transition-all shadow-sm"
+                    className="group flex items-center gap-3 bg-white border-2 border-slate-100 hover:border-amber-500 px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest transition-all shadow-sm text-slate-900"
                   >
                     Explore More <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </Link> */}
+                  </Link>
               </div>
 
               {loadingNewsletters ? (
@@ -1357,10 +1357,10 @@ const Home = () => {
                                 <div className="h-48 rounded-[2rem] overflow-hidden mb-6 relative">
                                     <Link to={`/newsletters/${n.slug}`}>
                                         <img 
-                                            src={n.imageUrl ? `${API_BASE_URL.replace('/admin', '')}${n.imageUrl}` : "https://via.placeholder.com/600x400?text=Newsletter"} 
+                                            src={n.imageUrl ? `${API_BASE_URL.replace('/admin', '')}${n.imageUrl}` : "https://placehold.co/600x400?text=Newsletter"} 
                                             alt={n.title}
                                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                                            onError={(e: any) => e.target.src = "https://via.placeholder.com/600x400?text=Newsletter"}
+                                            onError={(e: any) => e.target.src = "https://placehold.co/600x400?text=Newsletter"}
                                         />
                                     </Link>
                                     <div className="absolute top-4 left-4">

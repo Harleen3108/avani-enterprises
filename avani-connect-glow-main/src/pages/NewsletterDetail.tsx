@@ -240,7 +240,7 @@ const NewsletterDetail = () => {
                       {otherNewsletters.map((n: any) => (
                         <Link key={n.slug} to={`/newsletters/${n.slug}`} className="group flex gap-5 items-center">
                           <div className="w-20 h-20 rounded-2xl overflow-hidden shrink-0 shadow-sm border border-slate-100">
-                            <img src={n.imageUrl ? `${getBackendUrl().replace('/admin', '')}${n.imageUrl}` : "https://via.placeholder.com/400x225?text=Newsletter"} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                            <img src={n.imageUrl ? `${getBackendUrl().replace('/admin', '')}${n.imageUrl}` : "https://placehold.co/400x225?text=Newsletter"} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onError={(e: any) => e.target.src = "https://placehold.co/400x225?text=Newsletter"} />
                           </div>
                           <div>
                             <h4 className="font-bold text-slate-900 leading-tight group-hover:text-amber-600 transition-colors line-clamp-2 text-sm mb-1">

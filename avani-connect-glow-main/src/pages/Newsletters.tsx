@@ -126,10 +126,10 @@ const Newsletters = () => {
                     <div className="relative overflow-hidden h-64">
                       <Link to={`/newsletters/${n.slug}`}>
                         <img
-                          src={n.imageUrl ? `${getBackendUrl().replace('/admin', '')}${n.imageUrl}` : "https://via.placeholder.com/800x450?text=Newsletter"}
+                          src={n.imageUrl ? `${getBackendUrl().replace('/admin', '')}${n.imageUrl}` : "https://placehold.co/800x450?text=Newsletter"}
                           alt={n.title}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                          onError={(e: any) => e.target.src = "https://via.placeholder.com/800x450?text=Newsletter"}
+                          onError={(e: any) => e.target.src = "https://placehold.co/800x450?text=Newsletter"}
                         />
                       </Link>
                       <div className="absolute top-4 left-4">
