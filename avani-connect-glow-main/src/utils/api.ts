@@ -11,8 +11,8 @@ export const getApiBaseUrl = (): string => {
                    window.location.hostname.startsWith('192.168.');
     
     if (!isLocal) {
-      const url = "https://avani-enterprises-backend-1.onrender.com";
-      console.log("[API] Production mode detected, using backend:", url);
+      const url = "https://avani-enterprises.onrender.com";
+      console.log("[API] Production mode, using backend:", url);
       return url;
     }
   }

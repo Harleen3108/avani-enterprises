@@ -13,7 +13,7 @@ const seoPlugin = () => ({
     // Target local backend first, fallback to production
     const backendUrls = [
       "http://localhost:5000",
-      "https://avani-enterprises-backend-1.onrender.com"
+      "https://avani-enterprises.onrender.com"
     ];
     
     let seo: any = null;
