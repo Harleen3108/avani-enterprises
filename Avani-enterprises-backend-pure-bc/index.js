@@ -1816,7 +1816,10 @@ app.get(/.*/, async (req, res, next) => {
 
     const indexPath = path.join(frontendPath, "index.html");
     if (!fs.existsSync(indexPath)) {
-      console.error("❌ index.html not found at:", indexPath);
+      // Only log if it's a request that SHOULD be an HTML page (not an API-like path)
+      if (!pagePath.includes('.') && !pagePath.startsWith('/api')) {
+        console.log("ℹ️ index.html not found, skipping SEO injection.");
+      }
       return next();
     }
 
@@ -1870,6 +1873,7 @@ app.get("/", (req, res) => {
   });
 });
 
-app.listen(5000, () =>
-  console.log("Server running on http://localhost:5000")
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, "0.0.0.0", () =>
+  console.log(`Server running on port ${PORT}`)
 );
