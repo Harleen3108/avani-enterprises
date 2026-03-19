@@ -10,8 +10,9 @@ export const getApiBaseUrl = (): string => {
                    window.location.hostname === '127.0.0.1' || 
                    window.location.hostname.startsWith('192.168.');
     
+    // In production (live site), use relative paths to hit the same monolithic service
     if (!isLocal) {
-      return "https://avani-enterprises-backend-1.onrender.com";
+      return ""; 
     }
   }
 
