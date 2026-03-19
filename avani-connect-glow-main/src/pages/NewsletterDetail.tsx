@@ -31,10 +31,10 @@ const NewsletterDetail = () => {
       try {
         const API_BASE = getBackendUrl();
         const [res, allRes] = await Promise.all([
-            fetch(`${API_BASE}/newsletters/${slug}`, {
+            fetch(`${API_BASE}/api/newsletters/${slug}`, {
               headers: { 'Accept': 'application/json' }
             }),
-            fetch(`${API_BASE}/newsletters`, {
+            fetch(`${API_BASE}/api/newsletters`, {
               headers: { 'Accept': 'application/json' }
             })
         ]);

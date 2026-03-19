@@ -116,7 +116,7 @@ app.get("/api/test-v4", (req, res) => res.json({ success: true, version: "v4-rob
 
 // --- CRITICAL: PUBLIC API ROUTES (Top Priority) ---
 // Public: Get all published newsletters
-app.get("/newsletters", async (req, res) => {
+app.get("/api/newsletters", async (req, res) => {
   try {
     const newsletters = await Newsletter.find({ isPublished: true }).sort({ publishedAt: -1, createdAt: -1 });
     res.json({ success: true, data: newsletters });
@@ -126,7 +126,7 @@ app.get("/newsletters", async (req, res) => {
 });
 
 // Public: Get single newsletter by slug
-app.get("/newsletters/:slug", async (req, res) => {
+app.get("/api/newsletters/:slug", async (req, res) => {
   try {
     const newsletter = await Newsletter.findOne({ slug: req.params.slug, isPublished: true });
     if (!newsletter) return res.status(404).json({ message: "Newsletter not found" });

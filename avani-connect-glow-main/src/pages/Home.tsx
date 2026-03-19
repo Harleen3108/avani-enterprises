@@ -62,9 +62,16 @@ const Home = () => {
   const fetchNewsletters = async () => {
     try {
       setLoadingNewsletters(true);
-      const response = await axios.get(`${API_BASE_URL}/newsletters`);
-      if (response.data.success) {
-        setNewsletters(response.data.data || []);
+      const response = await fetch(`${API_BASE_URL}/api/newsletters`, {
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+      const json = await response.json();
+      if (json.success) {
+        setNewsletters(json.data || []);
+      } else {
+        console.error("API call for newsletters was not successful:", json);
       }
     } catch (error) {
       console.error("Error fetching newsletters:", error);

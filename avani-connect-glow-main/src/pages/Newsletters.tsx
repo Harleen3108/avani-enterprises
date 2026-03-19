@@ -24,7 +24,7 @@ const Newsletters = () => {
       setLoading(true);
       try {
         const API_BASE = getBackendUrl();
-        const res = await fetch(`${API_BASE}/newsletters`, {
+        const res = await fetch(`${API_BASE}/api/newsletters`, {
           headers: {
             'Accept': 'application/json'
           }
