@@ -30,6 +30,7 @@ import StatsSection from './StatsSection';
 import { fadeInUp, viewportSettings, scaleOnHover } from '../utils/animations';
 import RotatingText from '../components/RotatingText';
 import LogoMarquee from '../components/LogoMarquee';
+import GlobalPresenceSection from '../components/GlobalPresenceSection';
 import axios from 'axios';
 import { API_BASE_URL } from '../utils/api';
 
@@ -536,90 +537,120 @@ const Home = () => {
               </div>
             </motion.div>
 
-            {/* Right Column: Visuals with Indian Professionals & Data Graphs */}
+            {/* Right Column: Newsletter Widget (Chart extracted to HeroDashboard.tsx) */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, delay: 0.2 }}
               className="relative hidden lg:block h-[600px]"
             >
-              {/* NEW: Background Design for Right Side */}
+              {/* Background Design */}
               <div className="absolute inset-0 z-0">
                 <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-amber-200/20 rounded-full blur-[80px] animate-pulse-slow" />
                 <div className="absolute bottom-1/4 right-0 w-[300px] h-[300px] bg-sky-200/20 rounded-full blur-[80px] animate-pulse-slow delay-700" />
-                {/* Geometric Rings */}
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] border border-amber-500/5 rounded-full" />
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] border border-amber-500/5 rounded-full" />
               </div>
 
-              {/* Main Dashboard UI */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[95%] h-[75%] bg-white/90 backdrop-blur-md rounded-[2.5rem] shadow-[0_40px_100px_rgba(0,0,0,0.06)] border border-white overflow-hidden z-10">
-                <div className="p-8 h-full flex flex-col">
-                  {/* Top Header Mockup */}
-                  <div className="flex items-center justify-between mb-8">
-                    <div className="flex items-center gap-4">
-                      <div className="w-10 h-10 bg-amber-500 rounded-xl" />
-                      <div>
-                        <div className="w-32 h-3 bg-slate-100 rounded-full mb-2" />
-                        <div className="w-20 h-2 bg-slate-50 rounded-full" />
-                      </div>
-                    </div>
-                    <div className="flex gap-2">
-                      <div className="w-8 h-8 rounded-lg bg-slate-50" />
-                      <div className="w-8 h-8 rounded-full overflow-hidden border border-slate-100">
-                        <img src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=200&auto=format&fit=crop" alt="User" className="w-full h-full object-cover" />
-                      </div>
-                    </div>
-                  </div>
+              {/* OLD: Dashboard Chart — extracted to <HeroDashboard /> in src/components/HeroDashboard.tsx */}
+              {/* To revert: uncomment <HeroDashboard /> and remove the newsletter widget below */}
+              {/* <HeroDashboard /> */}
 
-                  {/* Graph Data Section - SQUARE & MULTI-COLOR */}
-                  <div className="flex-1 grid grid-cols-12 gap-6">
-                    <div className="col-span-8 bg-slate-50/50 rounded-3xl p-6 border border-slate-50">
-                      <div className="flex items-center justify-between mb-6">
-                        <span className="text-xs font-black text-slate-400 uppercase tracking-widest">Revenue Growth</span>
-                        <span className="text-xs font-bold text-emerald-500">+24.5%</span>
-                      </div>
-
-                      {/* Bar Graph UI - Square & Colorful */}
-                      <div className="flex items-end justify-between h-32 gap-3 px-2">
-                        {[
-                          { h: 40, c: "bg-amber-500" },
-                          { h: 70, c: "bg-amber-500" },
-                          { h: 55, c: "bg-orange-500" },
-                          { h: 90, c: "bg-emerald-500" },
-                          { h: 65, c: "bg-orange-500" },
-                          { h: 80, c: "bg-indigo-500" },
-                          { h: 100, c: "bg-rose-500" }
-                        ].map((bar, i) => (
-                          <motion.div
-                            key={i}
-                            initial={{ height: 0 }}
-                            animate={{ height: `${bar.h}%` }}
-                            transition={{ duration: 1, delay: 0.5 + (i * 0.1) }}
-                            className={`flex-1 ${bar.c} rounded-none shadow-sm opacity-90 hover:opacity-100 transition-opacity`}
-                          />
-                        ))}
-                      </div>
-                    </div>
-                    <div className="col-span-4 flex flex-col gap-4">
-                      <div className="flex-1 bg-amber-50/50 rounded-3xl p-5 border border-amber-100/50 text-center flex flex-col justify-center">
-                        <div className="text-[10px] font-black text-amber-600 uppercase mb-2">Projects</div>
-                        <div className="text-2xl font-black text-slate-800">300+</div>
-                      </div>
-                      <div className="flex-1 bg-sky-50/50 rounded-3xl p-5 border border-sky-100/50 text-center flex flex-col justify-center">
-                        <div className="text-[10px] font-black text-sky-600 uppercase mb-2">Clients</div>
-                        <div className="text-2xl font-black text-slate-800">150+</div>
-                      </div>
-                    </div>
+              {/* NEW: Newsletter Widget */}
+              <div className="absolute top-[28%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[92%] bg-white/95 backdrop-blur-md rounded-[2.5rem] shadow-[0_40px_100px_rgba(0,0,0,0.08)] border border-white overflow-hidden z-10">
+                {/* Widget Header */}
+                <div className="flex items-center justify-between px-7 pt-7 pb-5 border-b border-slate-100">
+                  <h3 className="text-lg font-black text-slate-900 tracking-tight uppercase">News & Updates</h3>
+                  <div className="w-9 h-9 bg-amber-50 rounded-xl flex items-center justify-center border border-amber-100">
+                    <Mail className="w-4 h-4 text-amber-500" />
                   </div>
                 </div>
+
+                {/* Newsletter Items */}
+                <div className="divide-y divide-slate-50">
+                  {loadingNewsletters ? (
+                    <div className="flex justify-center py-12">
+                      <div className="w-8 h-8 border-3 border-amber-500 border-t-transparent rounded-full animate-spin" />
+                    </div>
+                  ) : newsletters.length === 0 ? (
+                    <div className="text-center py-12 px-6">
+                      <p className="text-slate-400 font-medium text-sm italic">Updates coming soon...</p>
+                    </div>
+                  ) : (
+                    newsletters.slice(0, 4).map((n: any) => {
+                      const date = new Date(n.publishedAt || n.createdAt);
+                      const month = date.toLocaleDateString('en-US', { month: 'short' }).toUpperCase();
+                      const day = date.getDate().toString().padStart(2, '0');
+                      const isRecent = (Date.now() - date.getTime()) < 7 * 24 * 60 * 60 * 1000;
+
+                      return (
+                        <Link
+                          key={n._id}
+                          to={`/newsletters/${n.slug}`}
+                          className="group flex items-center gap-4 px-7 py-4 hover:bg-amber-50/40 transition-colors duration-200"
+                        >
+                          {/* Image or Date Badge */}
+                          <div className="shrink-0">
+                            {n.imageUrl ? (
+                              <div className="w-14 h-14 rounded-xl overflow-hidden border-2 border-slate-100 group-hover:border-amber-300 transition-colors shadow-sm">
+                                <img
+                                  src={n.imageUrl.startsWith('http') ? n.imageUrl : `${API_BASE_URL}${n.imageUrl.startsWith('/') ? '' : '/'}${n.imageUrl}`}
+                                  alt={n.title}
+                                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                  onError={(e: any) => e.target.src = "https://placehold.co/56x56?text=News"}
+                                />
+                              </div>
+                            ) : (
+                              <div className="w-14 h-14 rounded-xl bg-slate-50 border-2 border-slate-100 group-hover:border-amber-300 transition-colors flex flex-col items-center justify-center">
+                                <span className="text-[9px] font-black text-amber-500 uppercase leading-none tracking-wider">{month}</span>
+                                <span className="text-lg font-black text-slate-900 leading-tight">{day}</span>
+                              </div>
+                            )}
+                          </div>
+
+                          {/* Title + Meta */}
+                          <div className="flex-1 min-w-0">
+                            <h4 className="text-sm font-bold text-slate-900 group-hover:text-amber-600 transition-colors line-clamp-1 leading-snug mb-0.5">
+                              {n.title}
+                            </h4>
+                            <div className="flex items-center gap-2">
+                              <span className="text-[11px] text-slate-400 font-medium">
+                                {date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                              </span>
+                              {isRecent && (
+                                <span className="text-[9px] font-black text-amber-500 uppercase tracking-wider bg-amber-50 px-1.5 py-0.5 rounded-full border border-amber-100">
+                                  New
+                                </span>
+                              )}
+                            </div>
+                          </div>
+
+                          {/* Arrow */}
+                          <ChevronRight className="w-4 h-4 text-slate-300 group-hover:text-amber-500 transition-colors shrink-0" />
+                        </Link>
+                      );
+                    })
+                  )}
+                </div>
+
+                {/* View All */}
+                {!loadingNewsletters && newsletters.length > 0 && (
+                  <div className="px-7 py-4 border-t border-slate-100 bg-slate-50/30">
+                    <Link
+                      to="/newsletters"
+                      className="group flex items-center justify-center gap-2 w-full py-2.5 bg-white border border-slate-200 hover:border-amber-400 text-slate-700 hover:text-amber-600 rounded-xl font-black text-[10px] uppercase tracking-widest transition-all shadow-sm hover:shadow-md"
+                    >
+                      View All <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                  </div>
+                )}
               </div>
 
               {/* Floating Indian Avatars */}
               <motion.div
                 animate={{ y: [0, -20, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute top-[15%] right-[5%] w-24 h-24 rounded-full border-8 border-white shadow-2xl overflow-hidden z-20"
+                className="absolute top-[2%] right-[2%] w-24 h-24 rounded-full border-8 border-white shadow-2xl overflow-hidden z-20"
               >
                 <img src="https://images.unsplash.com/photo-1589386417686-0d34b5903d23?q=80&w=800&auto=format&fit=crop" alt="Indian Businessman" className="w-full h-full object-cover" />
               </motion.div>
@@ -632,21 +663,6 @@ const Home = () => {
                 <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800&auto=format&fit=crop" alt="Indian Businesswoman" className="w-full h-full object-cover" />
               </motion.div>
 
-              {/* ROI Badge (Moved Lower) */}
-              <motion.div
-                initial={{ x: 30, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.5 }}
-                className="absolute bottom-[7%] right-[0%] bg-white p-5 rounded-2xl shadow-xl border border-slate-50 flex items-center gap-4 z-30"
-              >
-                <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center">
-                  <TrendingUp className="w-5 h-5 text-emerald-600" />
-                </div>
-                <div>
-                  <div className="text-xs font-black text-slate-900 line-clamp-1">Client Growth</div>
-                  <div className="text-[10px] font-bold text-emerald-500">+85% Avg. ROI</div>
-                </div>
-              </motion.div>
 
             </motion.div>
           </div>
@@ -1095,6 +1111,9 @@ const Home = () => {
         </div>
       </section>
 
+
+
+
       {/* Project Showcase - Video Cards with Overlapping Scroll */}
       <section id="project-showcase" className="py-20 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -1326,74 +1345,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Newsletter Section */}
-      <section className="py-24 bg-white overflow-hidden relative">
-          <div className="absolute top-0 right-0 w-1/3 h-full bg-amber-50/30 -skew-x-12 translate-x-20" />
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-              <div className="flex flex-col items-center justify-center text-center mb-16 gap-6">
-                  <div className="max-w-3xl">
-                    {/* <div className="inline-flex items-center gap-2 px-3 py-1 bg-white rounded-full border border-amber-100 mb-4 shadow-sm mx-auto">
-                        <Sparkles className="w-4 h-4 text-amber-500" />
-                        <span className="text-slate-400 font-black text-[10px] uppercase tracking-widest">Stay Updated</span>
-                    </div> */}
-                    <h2 className="text-4xl md:text-6xl font-black text-slate-900 tracking-tight leading-tight whitespace-nowrap">
-                        Our Latest <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-600">Newsletters</span>
-                    </h2>
-                  </div>
-                  <Link 
-                    to="/newsletters" 
-                    className="group flex items-center gap-3 bg-white border-2 border-slate-100 hover:border-amber-500 px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest transition-all shadow-sm text-slate-900"
-                  >
-                    Explore More <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </Link>
-              </div>
-
-              {loadingNewsletters ? (
-                <div className="flex justify-center py-20">
-                    <div className="w-10 h-10 border-4 border-amber-500 border-t-transparent rounded-full animate-spin" />
-                </div>
-              ) : newsletters.length === 0 ? (
-                <div className="text-center py-20 bg-white rounded-[3rem] border-2 border-dashed border-slate-200">
-                    <p className="text-slate-400 font-bold italic">Latest updates are coming soon...</p>
-                </div>
-              ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {newsletters.slice(0, 3).map((n: any, i: number) => (
-                        <AnimatedSection key={n._id} delay={i * 0.1}>
-                            <article className="group bg-slate-50/50 rounded-[1.5rem] p-6 shadow-xl shadow-slate-200/50 border border-slate-100 transition-all hover:border-amber-400 hover:-translate-y-2 hover:shadow-2xl hover:shadow-amber-100">
-                                <div className="h-48 rounded-[2rem] overflow-hidden mb-6 relative">
-                                    <Link to={`/newsletters/${n.slug}`}>
-                                        <img 
-                                            src={n.imageUrl ? `${API_BASE_URL}${n.imageUrl.startsWith('/') ? '' : '/'}${n.imageUrl}` : "https://placehold.co/600x400?text=Newsletter"} 
-                                            alt={n.title}
-                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                                            onError={(e: any) => e.target.src = "https://placehold.co/600x400?text=Newsletter"}
-                                        />
-                                    </Link>
-                                    <div className="absolute top-4 left-4">
-                                        <div className="bg-slate-900 px-3 py-1 rounded-lg text-[10px] font-black uppercase text-amber-500 shadow-sm border border-slate-800 transition-colors">
-                                            {new Date(n.publishedAt || n.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
-                                        </div>
-                                    </div>
-                                </div>
-                                <h3 className="text-xl font-bold text-slate-900 mb-4 line-clamp-2 leading-snug group-hover:text-amber-600 transition-colors">
-                                    {n.title}
-                                </h3>
-                                <div className="flex items-center justify-between pt-6 border-t border-slate-200">
-                                    <Link 
-                                        to={`/newsletters/${n.slug}`} 
-                                        className="text-slate-900 hover:text-amber-600 font-black text-[10px] uppercase tracking-widest flex items-center gap-2 transition-colors"
-                                    >
-                                        Read More <ChevronRight size={14} className="text-amber-500" />
-                                    </Link>
-                                </div>
-                            </article>
-                        </AnimatedSection>
-                    ))}
-                </div>
-              )}
-          </div>
-      </section>
 
       {/* CTA Section */}
       {/* CTA Section - Custom Design */}

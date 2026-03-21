@@ -8,6 +8,8 @@ const jwt = require("jsonwebtoken");
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
+const cloudinary = require("cloudinary").v2;
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const Form = require("./models/Form");
 const User = require("./models/User");
 const AvaniForm = require("./models/AvaniForm");
@@ -57,17 +59,26 @@ const upload = multer({
   fileFilter: fileFilter,
 });
 
-// A more permissive upload for images only
+// Cloudinary configuration for persistent image storage
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+const cloudinaryStorage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "avani-newsletters",
+    allowed_formats: ["jpg", "jpeg", "png", "webp"],
+    transformation: [{ width: 1200, crop: "limit", quality: "auto" }],
+  },
+});
+
+// Image upload using Cloudinary (persistent cloud storage)
 const imageUpload = multer({
-  storage: storage,
+  storage: cloudinaryStorage,
   limits: { fileSize: 5 * 1024 * 1024 },
-  fileFilter: (req, file, cb) => {
-    const allowedTypes = /jpg|jpeg|png|webp/;
-    const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
-    const mimetype = allowedTypes.test(file.mimetype);
-    if (extname && mimetype) cb(null, true);
-    else cb(new Error("Only images (JPG, PNG, WEBP) are allowed!"));
-  }
 });
 
 // CORS configuration - allow frontend to connect
@@ -1205,10 +1216,11 @@ app.delete("/admin/blogs/:id", authMiddleware, async (req, res) => {
 
 // --- NEWSLETTER ROUTES ---
 
-// Image upload for newsletters
+// Image upload for newsletters (uses Cloudinary for persistent storage)
 app.post("/admin/upload-image", authMiddleware, imageUpload.single("image"), (req, res) => {
   if (!req.file) return res.status(400).json({ message: "No file uploaded" });
-  const imageUrl = `/uploads/${req.file.filename}`;
+  // Return the full Cloudinary URL for persistent access
+  const imageUrl = req.file.path || req.file.secure_url || req.file.url;
   res.json({ success: true, imageUrl });
 });
 

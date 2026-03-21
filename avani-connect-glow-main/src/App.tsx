@@ -144,6 +144,7 @@ import CareerDetail from "./pages/CareerDetail";
 import OurProducts from "./pages/OurProducts";
 import Newsletters from "./pages/Newsletters";
 import NewsletterDetail from "./pages/NewsletterDetail";
+import GlobalPresence from "./pages/GlobalPresence";
 
 const queryClient = new QueryClient();
 
@@ -189,6 +190,7 @@ const AppLayout = () => {
           {/* <Route path="/blog" element={<Blog />} /> */}
           <Route path="/newsletters" element={<Newsletters />} />
           <Route path="/newsletters/:slug" element={<NewsletterDetail />} />
+          <Route path="/global-presence" element={<GlobalPresence />} />
           <Route path="/courses" element={<Courses />} />
           <Route path="/courses/:id" element={<CourseDetail />} />
           <Route path="/get-consultation" element={<GetConsultation />} />

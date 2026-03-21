@@ -227,7 +227,7 @@ const NewsletterManagement = () => {
                   <td className="px-6 py-5">
                     <div className="w-16 h-12 rounded-lg bg-slate-100 overflow-hidden border border-slate-200">
                       <img
-                        src={n.imageUrl ? `${import.meta.env.VITE_API_URL}${n.imageUrl}` : "https://placehold.co/150x150?text=No+Image"}
+                        src={n.imageUrl ? (n.imageUrl.startsWith('http') ? n.imageUrl : `${import.meta.env.VITE_API_URL}${n.imageUrl}`) : "https://placehold.co/150x150?text=No+Image"}
                         alt=""
                         className="w-full h-full object-cover"
                         onError={(e) => e.target.src = "https://placehold.co/150x150?text=Error"}
@@ -322,7 +322,7 @@ const NewsletterManagement = () => {
                             <div className="aspect-video rounded-xl border-2 border-dashed border-slate-200 bg-slate-50 flex flex-col items-center justify-center p-4 relative overflow-hidden group">
                                 {form.imageUrl ? (
                                     <>
-                                        <img src={`${import.meta.env.VITE_API_URL}${form.imageUrl}`} className="absolute inset-0 w-full h-full object-cover" />
+                                        <img src={form.imageUrl.startsWith('http') ? form.imageUrl : `${import.meta.env.VITE_API_URL}${form.imageUrl}`} className="absolute inset-0 w-full h-full object-cover" />
                                         <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                                             <label className="cursor-pointer bg-white text-black px-4 py-2 rounded-lg font-bold text-xs">Change Image</label>
                                         </div>

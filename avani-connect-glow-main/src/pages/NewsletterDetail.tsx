@@ -167,7 +167,7 @@ const NewsletterDetail = () => {
             <AnimatedSection animation="fadeInUp" delay={0.3}>
                 <div className="relative aspect-[16/9] md:aspect-[21/9] rounded-[3rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.15)] border-[12px] border-white group">
                 <img
-                    src={`${getBackendUrl()}${newsletter.imageUrl.startsWith('/') ? '' : '/'}${newsletter.imageUrl}`}
+                    src={newsletter.imageUrl.startsWith('http') ? newsletter.imageUrl : `${getBackendUrl()}${newsletter.imageUrl.startsWith('/') ? '' : '/'}${newsletter.imageUrl}`}
                     alt={newsletter.title}
                     className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                 />
@@ -244,7 +244,7 @@ const NewsletterDetail = () => {
                       {otherNewsletters.map((n: any) => (
                         <Link key={n.slug} to={`/newsletters/${n.slug}`} className="group flex gap-5 items-center">
                           <div className="w-20 h-20 rounded-2xl overflow-hidden shrink-0 shadow-sm border border-slate-100">
-                            <img src={n.imageUrl ? `${getBackendUrl()}${n.imageUrl.startsWith('/') ? '' : '/'}${n.imageUrl}` : "https://placehold.co/400x225?text=Newsletter"} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onError={(e: any) => e.target.src = "https://placehold.co/400x225?text=Newsletter"} />
+                            <img src={n.imageUrl ? (n.imageUrl.startsWith('http') ? n.imageUrl : `${getBackendUrl()}${n.imageUrl.startsWith('/') ? '' : '/'}${n.imageUrl}`) : "https://placehold.co/400x225?text=Newsletter"} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onError={(e: any) => e.target.src = "https://placehold.co/400x225?text=Newsletter"} />
                           </div>
                           <div>
                             <h4 className="font-bold text-slate-900 leading-tight group-hover:text-amber-600 transition-colors line-clamp-2 text-sm mb-1">
