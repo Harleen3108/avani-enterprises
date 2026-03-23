@@ -6,7 +6,7 @@ const Navbar = () => {
             initial={{ y: -100 }}
             animate={{ y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="fixed top-[var(--announcement-bar-height)] left-0 right-0 z-50 bg-[#05050A] border-b border-white/10"
+            className="fixed top-0 left-0 right-0 z-50 bg-[#05050A] border-b border-white/10"
         >
             <div className="container mx-auto px-4 py-4">
                 <div className="flex justify-center items-center">

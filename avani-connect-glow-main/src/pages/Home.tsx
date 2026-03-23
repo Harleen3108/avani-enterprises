@@ -1188,7 +1188,7 @@ const Home = () => {
       <GlobalPresenceSection compact={true} />
 
       {/* Blog Section */}
-      <section className="relative pt-24 pb-6 md:pb-12 bg-white overflow-hidden">
+      <section className="relative pt-16 pb-4 md:pb-8 bg-white overflow-hidden">
         {/* Geometric Background Elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           {/* Hexagon Pattern */}
@@ -1348,6 +1348,89 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Announcement Section - Highly Animated & Premium */}
+      <section className="relative py-12 md:py-24 bg-[#FBF9F4] overflow-hidden border-y border-amber-100/50">
+        {/* Animated Background Orbs (CSS for better performance) */}
+        <div className="absolute inset-0 z-0 pointer-events-none opacity-40 overflow-hidden">
+          <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[300px] h-[300px] md:w-[400px] md:h-[400px] bg-amber-400/30 blur-[60px] rounded-full animate-pulse" />
+          <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-orange-500/20 blur-[60px] rounded-full animate-[pulse_6s_ease-in-out_infinite]" />
+        </div>
+        
+        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, y: 30 }}
+            whileInView={{ opacity: 1, scale: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, type: "spring", stiffness: 100 }}
+            className="relative group w-full"
+          >
+            {/* Animated Outer Glow / Border (Optimized for performance) */}
+            <div className="absolute -inset-1 bg-gradient-to-r from-amber-500 via-orange-500 to-amber-500 rounded-[2.5rem] blur-lg opacity-30 group-hover:opacity-70 transition-opacity duration-500 pointer-events-none" />
+            
+            {/* Dark Premium Card */}
+            <div className="relative flex flex-col md:flex-row bg-slate-900 rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl">
+              
+              {/* Shimmer sweep effect on hover */}
+              <div className="absolute inset-0 overflow-hidden rounded-[2rem] z-20 pointer-events-none">
+                <div className="absolute inset-0 -translate-x-[150%] group-hover:translate-x-[150%] bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12 transition-transform duration-1000 ease-in-out" />
+              </div>
+
+              {/* Fixed Left Label */}
+              <div className="relative shrink-0 bg-gradient-to-br from-amber-500 to-orange-600 p-6 md:p-8 md:w-72 flex flex-col justify-center items-center md:items-start text-center md:text-left z-30 overflow-hidden shadow-[10px_0_30px_rgba(0,0,0,0.5)] border-b md:border-b-0 md:border-r border-orange-400/50">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-white/20 blur-3xl rounded-full" />
+                <span className="flex items-center gap-2 text-[10px] md:text-xs font-black text-amber-50 uppercase tracking-widest mb-1.5 md:mb-2 drop-shadow-md">
+                  <span className="relative flex h-2 w-2 md:h-2.5 md:w-2.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-full w-full bg-white shadow-[0_0_10px_white]"></span>
+                  </span>
+                  Live Update
+                </span>
+                <h3 className="text-2xl md:text-3xl font-black text-white uppercase tracking-tight leading-none drop-shadow-xl">
+                  Important <br className="hidden md:block"/> Announcement
+                </h3>
+              </div>
+
+              {/* Animated Ticker Content Area */}
+              <div className="flex-1 relative overflow-hidden bg-slate-900 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-slate-800/50 via-slate-900 to-black flex items-center min-h-[140px] md:min-h-0 py-6 md:py-0">
+                <div className="absolute inset-y-0 left-0 w-16 md:w-32 bg-gradient-to-r from-slate-900 to-transparent z-10 pointer-events-none" />
+                <div className="absolute inset-y-0 right-0 w-16 md:w-32 bg-gradient-to-l from-slate-900 to-transparent z-10 pointer-events-none" />
+                
+                <motion.div 
+                  animate={{ x: ["0%", "-50%"] }}
+                  transition={{ ease: "linear", duration: 15, repeat: Infinity }}
+                  className="flex items-center whitespace-nowrap w-max"
+                  // Pause animation on hover
+                  whileHover={{ animationPlayState: "paused" }}
+                >
+                  {[...Array(6)].map((_, i) => (
+                    <div key={i} className="flex items-center gap-6 md:gap-10 px-6 md:px-10">
+                      <div className="flex items-center gap-3 bg-white/5 backdrop-blur-md px-4 py-2 rounded-2xl border border-white/10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)] shrink-0">
+                         <div className="p-1 bg-gradient-to-br from-amber-400 to-orange-500 rounded-xl shadow-md shrink-0">
+                           <img src="/logo0.jpg" alt="Avani" className="h-8 w-8 md:h-10 md:w-10 rounded-lg object-contain bg-white shrink-0" />
+                         </div>
+                         <span className="text-white/40 font-black text-lg md:text-xl shrink-0">×</span>
+                         <div className="p-1 bg-white rounded-xl shadow-md shrink-0">
+                           <img src="/hilogo.png" alt="IHE" className="h-8 w-8 md:h-10 md:w-10 object-contain shrink-0" />
+                         </div>
+                      </div>
+                      
+                      <div className="flex flex-col justify-center shrink-0">
+                        <span className="text-sm md:text-lg font-medium text-slate-400 tracking-wide mb-[-2px]">
+                          Proud technology partners of
+                        </span>
+                        <span className="text-lg md:text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-yellow-400 to-orange-500 uppercase tracking-tight drop-shadow-sm">
+                          Institute of Home Economics, DU
+                        </span>
+                      </div>
+                      <div className="w-2 h-2 rounded-full bg-amber-500/50 shadow-[0_0_15px_rgba(245,158,11,0.8)] opacity-50 shrink-0" />
+                    </div>
+                  ))}
+                </motion.div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
 
       {/* CTA Section */}
       {/* CTA Section - Custom Design */}

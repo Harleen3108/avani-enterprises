@@ -77,7 +77,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed left-0 right-0 z-50 transition-all duration-500 ease-in-out font-sans top-[var(--announcement-bar-height)]
+      className={`fixed left-0 right-0 z-50 transition-all duration-500 ease-in-out font-sans top-0
         ${isScrolled
           ? "bg-white/95 backdrop-blur-xl shadow-sm py-2"
           : "bg-[#0b1220] py-2 sm:py-3"
