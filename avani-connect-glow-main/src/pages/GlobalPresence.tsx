@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { MapPin, Mail, Phone, Globe, ArrowUpRight, Zap, Target } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import GlobalPresenceSection from '../components/GlobalPresenceSection';
+
 
 const officeDetails = [
   {
@@ -24,7 +24,7 @@ const officeDetails = [
     country: 'India',
     label: 'Strategic NCR Hub',
     description: 'Located in the steel-and-glass heart of Cyber City, our Gurgaon office bridges the gap between digital vision and enterprise reality.',
-    image: 'https://images.unsplash.com/photo-1582407947092-a0aef4e50cf3?q=80&w=1200&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=1200&auto=format&fit=crop',
     tagline: 'Enterprise Connectivity',
     contact: {
        address: 'DLF Cyber City, Gurgaon, Haryana 122002',
@@ -61,6 +61,8 @@ const officeDetails = [
 ];
 
 const GlobalPresence = () => {
+
+
   return (
     <div className="bg-white min-h-screen font-sans">
       <Helmet>
@@ -118,8 +120,26 @@ const GlobalPresence = () => {
         </div>
       </section>
 
-      {/* Main Map Component (Updated Premium Version) */}
-      <GlobalPresenceSection compact={false} />
+      {/* Global Network Video */}
+      <section className="py-16 md:py-24 bg-[#FCFAFA] relative border-b border-slate-100">
+        <motion.div
+           initial={{ opacity: 0, y: 40, scale: 0.98 }}
+           whileInView={{ opacity: 1, y: 0, scale: 1 }}
+           viewport={{ once: true, margin: "-100px" }}
+           transition={{ duration: 0.8, ease: "easeOut" }}
+           className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8"
+        >
+          <div className="relative w-full aspect-square md:aspect-video lg:h-[75vh] 2xl:h-[80vh] rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl shadow-indigo-900/10 border border-slate-200/50 bg-slate-900 group">
+            <img 
+              src="/global2.png"
+              alt="Global Network"
+              className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-1000 group-hover:scale-110"
+            />
+            {/* Subtle inner premium gradient over image */}
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/30 via-transparent to-transparent pointer-events-none" />
+          </div>
+        </motion.div>
+      </section>
 
       {/* Featured Office Collection - Premium Detailed Listing */}
       <section className="py-40 bg-white relative">

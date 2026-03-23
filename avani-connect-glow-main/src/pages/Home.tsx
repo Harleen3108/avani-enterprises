@@ -1184,6 +1184,9 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Global Presence Section */}
+      <GlobalPresenceSection compact={true} />
+
       {/* Blog Section */}
       <section className="relative pt-24 pb-6 md:pb-12 bg-white overflow-hidden">
         {/* Geometric Background Elements */}

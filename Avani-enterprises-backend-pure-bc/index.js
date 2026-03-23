@@ -302,8 +302,16 @@ app.post("/auth/signup", async (req, res) => {
       html: `<h3>Your OTP is: <span style="color:#4F46E5; font-size: 20px;">${otp}</span></h3><p>Valid for 10 minutes.</p>`,
     };
 
-    if (process.env.FROM_EMAIL) await sgMail.send(msg);
-    else console.log(`OTP for ${email}: ${otp}`);
+    if (process.env.FROM_EMAIL) {
+      try {
+        await sgMail.send(msg);
+      } catch (err) {
+        console.error("SendGrid Error:", err.message);
+        console.log(`Fallback OTP for ${email}: ${otp}`);
+      }
+    } else {
+      console.log(`OTP for ${email}: ${otp}`);
+    }
 
     res.status(200).json({ message: "OTP sent to email. Please verify." });
   } catch (err) {
@@ -401,8 +409,16 @@ app.post("/auth/forgot-password", async (req, res) => {
       html: `<h3>Your Password Reset OTP is: <span style="color:#4F46E5; font-size: 20px;">${otp}</span></h3><p>Valid for 10 minutes.</p>`,
     };
 
-    if (process.env.FROM_EMAIL) await sgMail.send(msg);
-    else console.log(`Reset OTP for ${email}: ${otp}`);
+    if (process.env.FROM_EMAIL) {
+      try {
+        await sgMail.send(msg);
+      } catch (err) {
+        console.error("SendGrid Error:", err.message);
+        console.log(`Fallback Reset OTP for ${email}: ${otp}`);
+      }
+    } else {
+      console.log(`Reset OTP for ${email}: ${otp}`);
+    }
 
     res.status(200).json({ message: "OTP sent to email." });
   } catch (err) {

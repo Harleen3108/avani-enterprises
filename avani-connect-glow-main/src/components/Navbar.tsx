@@ -63,6 +63,7 @@ const Navbar = () => {
       ],
     },
     { name: "Careers", path: "/careers" },
+    { name: "Global Presence", path: "/global-presence" },
     { name: "Contact", path: "/contact" },
   ];
 
@@ -84,10 +85,10 @@ const Navbar = () => {
       `}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-14">
+        <div className="flex items-center justify-between h-14 gap-2 lg:gap-4 xl:gap-8">
 
           {/* LEFT: Logo Section */}
-          <div className="flex-1 flex items-center justify-start min-w-0">
+          <div className="flex items-center justify-start flex-shrink-0 min-w-0">
             <Link to="/" className="flex items-center space-x-3 group min-w-0">
               <div className="relative flex-shrink-0">
                 <img
@@ -97,15 +98,15 @@ const Navbar = () => {
                 />
                 <div className="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-amber-500 rounded-full border-2 border-white shadow-sm" />
               </div>
-              <span className="text-[22px] font-black tracking-tight truncate transition-colors duration-300 text-amber-500">
+              <span className="text-[14px] lg:text-[16px] xl:text-[20px] font-black tracking-tight truncate transition-colors duration-300 text-amber-500">
                 Avani Enterprises
               </span>
             </Link>
           </div>
 
           {/* CENTER: Navigation Links with Dropdowns */}
-          <div className="hidden lg:flex items-center justify-center flex-shrink-0" ref={dropdownRef}>
-            <div className="flex items-center gap-1 xl:gap-2">
+          <div className="hidden lg:flex flex-1 items-center justify-center min-w-0" ref={dropdownRef}>
+            <div className="flex items-center gap-0 xl:gap-2">
               {navItems.map((item) => {
                 // Special Case: Projects (Integrated Mega-style Sub-menu)
                 if (item.subItems) {
@@ -114,7 +115,7 @@ const Navbar = () => {
                     <div key={item.name} className="relative group/mega">
                       <Link
                         to={item.path}
-                        className={`relative px-2 xl:px-4 py-2 group whitespace-nowrap flex items-center gap-1 text-[13px] font-bold tracking-wide transition-all duration-300 ${isActive ? "text-amber-600" : "text-amber-500 hover:text-amber-600"}`}
+                        className={`relative px-1 xl:px-3 py-2 group whitespace-nowrap flex items-center gap-1 text-[11px] xl:text-[13px] font-bold tracking-wide transition-all duration-300 ${isActive ? "text-amber-600" : "text-amber-500 hover:text-amber-600"}`}
                       >
                         {item.name}
                         <motion.div
@@ -162,7 +163,7 @@ const Navbar = () => {
                     <div key={item.name} className="relative">
                       <button
                         onClick={() => toggleDropdown(item.name)}
-                        className={`relative px-2 xl:px-4 py-2 group whitespace-nowrap flex items-center gap-1 text-[13px] font-bold tracking-wide transition-all duration-300 ${isActive || openDropdown === item.name ? "text-amber-600" : "text-amber-500 hover:text-amber-600"}`}
+                        className={`relative px-1 xl:px-3 py-2 group whitespace-nowrap flex items-center gap-1 text-[11px] xl:text-[13px] font-bold tracking-wide transition-all duration-300 ${isActive || openDropdown === item.name ? "text-amber-600" : "text-amber-500 hover:text-amber-600"}`}
                       >
                         {item.name}
                         <ChevronDown size={16} className={`transition-transform duration-300 ${openDropdown === item.name ? "rotate-180" : ""}`} />
@@ -198,7 +199,7 @@ const Navbar = () => {
                   <Link
                     key={item.name}
                     to={item.path}
-                    className={`relative px-2 xl:px-4 py-2 group whitespace-nowrap text-[13px] font-bold tracking-wide transition-all duration-300 ${isActive ? "text-amber-600" : "text-amber-500 hover:text-amber-600"}`}
+                    className={`relative px-1 xl:px-3 py-2 group whitespace-nowrap text-[11px] xl:text-[13px] font-bold tracking-wide transition-all duration-300 ${isActive ? "text-amber-600" : "text-amber-500 hover:text-amber-600"}`}
                   >
                     {item.name}
                     <motion.div
@@ -213,7 +214,7 @@ const Navbar = () => {
           </div>
 
           {/* RIGHT: Actions Section */}
-          <div className="hidden lg:flex flex-1 items-center justify-end space-x-6 min-w-0">
+          <div className="hidden lg:flex items-center justify-end gap-2 xl:gap-4 flex-shrink-0">
 
             <motion.a
               href="tel:+919253625099"
@@ -234,7 +235,7 @@ const Navbar = () => {
               <Link
                 to="/get-consultation"
                 className="bg-gradient-to-r from-amber-400 to-orange-500 
-                text-white px-7 py-2.5 rounded-full text-sm font-semibold whitespace-nowrap
+                text-white px-4 xl:px-6 py-2.5 rounded-full text-[11px] xl:text-sm font-semibold whitespace-nowrap
                 shadow-[0_4px_12px_rgba(245,158,11,0.15)] hover:shadow-[0_8px_20px_rgba(245,158,11,0.3)]
                 transition-all duration-300 inline-block"
               >
