@@ -802,15 +802,19 @@ app.post("/growth-plan-leads", async (req, res) => {
 
 app.patch("/growth-plan-leads/:id/status", async (req, res) => {
   try {
-    const { status } = req.body;
+    const { status, notes } = req.body;
+    const updateData = {};
+    if (status) updateData.paymentStatus = status;
+    if (notes !== undefined) updateData.notes = notes;
+
     const lead = await GrowthPlanLead.findByIdAndUpdate(
       req.params.id,
-      { paymentStatus: status },
+      updateData,
       { new: true }
     );
     res.status(200).json(lead);
   } catch (err) {
-    res.status(400).json({ message: "Failed to update status", error: err.message });
+    res.status(400).json({ message: "Failed to update lead", error: err.message });
   }
 });
 

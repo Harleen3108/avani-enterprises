@@ -9,6 +9,7 @@ const growthPlanLeadSchema = new mongoose.Schema(
     company: { type: String },
     service: { type: String },
     goals: { type: String },
+    notes: { type: String, default: "" }, // Added notes field
     paymentStatus: {
       type: String,
       enum: ["Pending", "Success", "Failed"],
