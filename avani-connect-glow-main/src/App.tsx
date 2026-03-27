@@ -136,6 +136,7 @@ import SevenDayLaunch from "./pages/SevenDayLaunch";
 
 // नई लाइन: ThankYou page import
 import ThankYou from "./pages/ThankYou";
+import LandingPage from "./pages/LandingPage";
 import BlogDetail from "./pages/BlogDetail";
 import Chatbot from "./components/Chatbot";
 import Careers from "./pages/Careers";
@@ -160,7 +161,7 @@ const AppLayout = () => {
   const pathname = location.pathname;
 
   // Pages where Navbar should be hidden completely
-  const hideNavbar = pathname === "/thank-you";
+  const hideNavbar = pathname === "/thank-you" || pathname === "/landingPage";
 
   // Pages where Navbar1 should be used instead of default Navbar
   const useNavbar1 = pathname === "/web-dev" || pathname === "/7-day-launch";
@@ -195,6 +196,7 @@ const AppLayout = () => {
 
           {/* ये नया route जोड़ा है */}
           <Route path="/thank-you" element={<ThankYou />} />
+          <Route path="/landingPage" element={<LandingPage />} />
 
           <Route path="/not-found" element={<NotFound />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />

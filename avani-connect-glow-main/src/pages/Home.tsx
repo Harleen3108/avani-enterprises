@@ -1355,7 +1355,7 @@ const Home = () => {
           <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[300px] h-[300px] md:w-[400px] md:h-[400px] bg-amber-400/30 blur-[60px] rounded-full animate-pulse" />
           <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-orange-500/20 blur-[60px] rounded-full animate-[pulse_6s_ease-in-out_infinite]" />
         </div>
-        
+
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, scale: 0.95, y: 30 }}
@@ -1366,10 +1366,10 @@ const Home = () => {
           >
             {/* Animated Outer Glow / Border (Optimized for performance) */}
             <div className="absolute -inset-1 bg-gradient-to-r from-amber-500 via-orange-500 to-amber-500 rounded-[2.5rem] blur-lg opacity-30 group-hover:opacity-70 transition-opacity duration-500 pointer-events-none" />
-            
+
             {/* Dark Premium Card */}
             <div className="relative flex flex-col md:flex-row bg-slate-900 rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl">
-              
+
               {/* Shimmer sweep effect on hover */}
               <div className="absolute inset-0 overflow-hidden rounded-[2rem] z-20 pointer-events-none">
                 <div className="absolute inset-0 -translate-x-[150%] group-hover:translate-x-[150%] bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12 transition-transform duration-1000 ease-in-out" />
@@ -1386,7 +1386,7 @@ const Home = () => {
                   Live Update
                 </span>
                 <h3 className="text-2xl md:text-3xl font-black text-white uppercase tracking-tight leading-none drop-shadow-xl">
-                  Important <br className="hidden md:block"/> Announcement
+                  Important <br className="hidden md:block" /> Announcement
                 </h3>
               </div>
 
@@ -1394,8 +1394,8 @@ const Home = () => {
               <div className="flex-1 relative overflow-hidden bg-slate-900 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-slate-800/50 via-slate-900 to-black flex items-center min-h-[140px] md:min-h-0 py-6 md:py-0">
                 <div className="absolute inset-y-0 left-0 w-16 md:w-32 bg-gradient-to-r from-slate-900 to-transparent z-10 pointer-events-none" />
                 <div className="absolute inset-y-0 right-0 w-16 md:w-32 bg-gradient-to-l from-slate-900 to-transparent z-10 pointer-events-none" />
-                
-                <motion.div 
+
+                <motion.div
                   animate={{ x: ["0%", "-50%"] }}
                   transition={{ ease: "linear", duration: 15, repeat: Infinity }}
                   className="flex items-center whitespace-nowrap w-max"
@@ -1405,15 +1405,15 @@ const Home = () => {
                   {[...Array(6)].map((_, i) => (
                     <div key={i} className="flex items-center gap-6 md:gap-10 px-6 md:px-10">
                       <div className="flex items-center gap-3 bg-white/5 backdrop-blur-md px-4 py-2 rounded-2xl border border-white/10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)] shrink-0">
-                         <div className="p-1 bg-gradient-to-br from-amber-400 to-orange-500 rounded-xl shadow-md shrink-0">
-                           <img src="/logo0.jpg" alt="Avani" className="h-8 w-8 md:h-10 md:w-10 rounded-lg object-contain bg-white shrink-0" />
-                         </div>
-                         <span className="text-white/40 font-black text-lg md:text-xl shrink-0">×</span>
-                         <div className="p-1 bg-white rounded-xl shadow-md shrink-0">
-                           <img src="/hilogo.png" alt="IHE" className="h-8 w-8 md:h-10 md:w-10 object-contain shrink-0" />
-                         </div>
+                        <div className="p-1 bg-gradient-to-br from-amber-400 to-orange-500 rounded-xl shadow-md shrink-0">
+                          <img src="/logo0.jpg" alt="Avani" className="h-8 w-8 md:h-10 md:w-10 rounded-lg object-contain bg-white shrink-0" />
+                        </div>
+                        <span className="text-white/40 font-black text-lg md:text-xl shrink-0">×</span>
+                        <div className="p-1 bg-white rounded-xl shadow-md shrink-0">
+                          <img src="/hilogo.png" alt="IHE" className="h-8 w-8 md:h-10 md:w-10 object-contain shrink-0" />
+                        </div>
                       </div>
-                      
+
                       <div className="flex flex-col justify-center shrink-0">
                         <span className="text-sm md:text-lg font-medium text-slate-400 tracking-wide mb-[-2px]">
                           Proud technology partners of
