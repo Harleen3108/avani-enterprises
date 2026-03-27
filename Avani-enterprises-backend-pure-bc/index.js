@@ -12,12 +12,14 @@ const cloudinary = require("cloudinary").v2;
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const Form = require("./models/Form");
 const User = require("./models/User");
+const Lead = require("./models/Lead");
 const AvaniForm = require("./models/AvaniForm");
 const Job = require("./models/Job");
 const Application = require("./models/Application");
 const Seo = require("./models/Seo");
 const Blog = require("./models/Blog");
 const Newsletter = require("./models/Newsletter");
+const GrowthPlanLead = require("./models/GrowthPlanLead");
 require("dotenv").config();
 
 const app = express();
@@ -784,6 +786,78 @@ app.patch("/avani-form/:id", async (req, res) => {
       success: false,
       message: "Server Error. Could not update notes.",
     });
+  }
+});
+
+// --- GROWTH PLAN LEADS ---
+app.post("/growth-plan-leads", async (req, res) => {
+  try {
+    const lead = new GrowthPlanLead(req.body);
+    await lead.save();
+    res.status(201).json(lead);
+  } catch (err) {
+    res.status(400).json({ message: "Failed to create lead", error: err.message });
+  }
+});
+
+app.patch("/growth-plan-leads/:id/status", async (req, res) => {
+  try {
+    const { status } = req.body;
+    const lead = await GrowthPlanLead.findByIdAndUpdate(
+      req.params.id,
+      { paymentStatus: status },
+      { new: true }
+    );
+    res.status(200).json(lead);
+  } catch (err) {
+    res.status(400).json({ message: "Failed to update status", error: err.message });
+  }
+});
+
+app.get("/growth-plan-leads", async (req, res) => {
+  try {
+    const leads = await GrowthPlanLead.find().sort({ createdAt: -1 });
+    res.status(200).json(leads);
+  } catch (err) {
+    res.status(500).json({ message: "Failed to fetch leads", error: err.message });
+  }
+});
+
+// --- GENERAL LEADS ---
+app.get("/leads", async (req, res) => {
+  try {
+    const leads = await Lead.find().sort({ createdAt: -1 });
+    res.status(200).json(leads);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching leads" });
+  }
+});
+
+app.post("/leads", async (req, res) => {
+  try {
+    const newLead = new Lead(req.body);
+    await newLead.save();
+    res.status(201).json(newLead);
+  } catch (error) {
+    res.status(400).json({ message: "Error creating lead" });
+  }
+});
+
+app.patch("/leads/:id", async (req, res) => {
+  try {
+    const updatedLead = await Lead.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    res.status(200).json(updatedLead);
+  } catch (error) {
+    res.status(400).json({ message: "Error updating lead" });
+  }
+});
+
+app.delete("/leads/:id", async (req, res) => {
+  try {
+    await Lead.findByIdAndDelete(req.params.id);
+    res.status(200).json({ message: "Lead deleted" });
+  } catch (error) {
+    res.status(500).json({ message: "Error deleting lead" });
   }
 });
 

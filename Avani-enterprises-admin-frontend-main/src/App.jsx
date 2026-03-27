@@ -17,6 +17,7 @@ import SeoManager from "./pages/SeoManager";
 import BlogManagement from "./pages/BlogManagement";
 import NewsletterManagement from "./pages/NewsletterManagement";
 import SevenDayLaunch from "./pages/SevenDayLaunch";
+import GrowthPlanLeads from "./pages/GrowthPlanLeads";
 import AdminLayout from "./AdminLayout";
 import { Loader2 } from "lucide-react";
 
@@ -95,6 +96,7 @@ function App() {
             <Route path="7-day-launch" element={<SevenDayLaunch />} />
             <Route path="contacted-leads" element={<ContactedLeads />} />
             <Route path="analytics" element={<AnalyticsDashboard />} />
+            <Route path="growth-plan-leads" element={<GrowthPlanLeads />} />
             <Route path="avani-forms/:id" element={<AvaniFormDetail />} />
             <Route path="avani-forms" element={<AvaniFormsPage />} />
             <Route path="consultations" element={<Consultations />} />

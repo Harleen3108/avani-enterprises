@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Zap, ArrowRight, CheckCircle, BarChart3, Globe, Megaphone,
   Shield, Target, Cpu, Layers, Phone, Mail, MapPin,
@@ -58,6 +59,7 @@ const FONT = `
 `;
 
 export default function AvaniEnterprises() {
+  const navigate = useNavigate();
   const [scrolled, setScrolled] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -136,30 +138,85 @@ export default function AvaniEnterprises() {
     { name: "Vikram Nair", role: "Business Owner", text: "Finally, a agency that talks numbers, not just aesthetics. The step-by-step lead gen plan is exactly what I needed to scale.", stars: 5 },
   ];
 
-  const handleFormSubmit = async (e) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const res = await fetch(`${API_BASE}/leads`, {
+      // 1. Submit lead data to backend immediately (captures lead even if payment is cancelled)
+      const res = await fetch(`${API_BASE}/growth-plan-leads`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData)
       });
       const lead = await res.json();
-      setCurrentLeadId(lead.id);
-      setPaymentState("processing");
+      setCurrentLeadId(lead._id);
       setShowModal(false);
-    } catch (err) { alert("Failed to submit request. Please try again."); }
+
+      // 2. Initialize Razorpay Checkout
+      const options = {
+        key: import.meta.env.VITE_RAZORPAY_KEY_ID || "rzp_test_wP9SAvAW48CSjE", // Dynamic key from .env
+        amount: 49900, // Amount in paise (₹499)
+        currency: "INR",
+        name: "Avani Enterprises",
+        description: "Growth Plan Strategy Session",
+        image: "/avani-logo.jpg",
+        handler: function (response: any) {
+          // 3. Update status to Success on payment completion
+          updatePaymentStatus("Success");
+        },
+        prefill: {
+          name: `${formData.firstName} ${formData.lastName}`,
+          email: formData.email,
+          contact: formData.phone
+        },
+        theme: {
+          color: C.accent
+        },
+        modal: {
+          ondismiss: function () {
+            // Payment cancelled, status remains 'Pending'
+            setPaymentState("fail");
+          }
+        }
+      };
+
+      const rzp1 = new (window as any).Razorpay(options);
+      rzp1.on('payment.failed', function (response: any) {
+        updatePaymentStatus("Failed");
+      });
+      rzp1.open();
+      setPaymentState("processing");
+
+    } catch (err) {
+      alert("Failed to submit request. Please try again.");
+    }
   };
 
-  const updatePaymentStatus = async (status) => {
+  const updatePaymentStatus = async (status: string) => {
     try {
-      await fetch(`${API_BASE}/leads/${currentLeadId}/status`, {
+      if (!currentLeadId) return;
+      await fetch(`${API_BASE}/growth-plan-leads/${currentLeadId}/status`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status })
       });
-      setPaymentState(status === "Success" ? "success" : "fail");
-    } catch (err) { console.error("Failed to update status"); }
+      
+      if (status === "Success") {
+        setPaymentState("success");
+        // Redirect to thank you page after a brief delay to show success icon
+        setTimeout(() => {
+          navigate("/thank-you", { 
+            state: { 
+              name: formData.firstName, 
+              service: "Growth Plan Strategy Session" 
+            } 
+          });
+        }, 1500);
+      } else {
+        setPaymentState("fail");
+      }
+    } catch (err) {
+      console.error("Failed to update status", err);
+    }
   };
 
   return (
@@ -805,30 +862,18 @@ export default function AvaniEnterprises() {
         <div style={{ position: "fixed", inset: 0, zIndex: 10000, background: "rgba(0,0,0,0.98)", display: "flex", alignItems: "center", justifyContent: "center", padding: "20px", backdropFilter: "blur(15px)" }}>
           <div style={{ background: "#0A0A0A", width: "100%", maxWidth: "420px", border: `1px solid ${C.border}`, padding: "50px 40px", textAlign: "center" }}>
             {paymentState === "processing" && (
-              <div style={{ textAlign: "left" }}>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "30px", borderBottom: `1px solid ${C.border}`, paddingBottom: "20px" }}>
-                  <img src="/avani-logo.jpg" alt="Logo" style={{ width: "32px", height: "32px" }} />
-                  <div style={{ textAlign: "right" }}>
-                    <div style={{ fontSize: "10px", color: C.muted, letterSpacing: "1px" }}>AMOUNT TO PAY</div>
-                    <div style={{ fontSize: "20px", fontWeight: 800, color: C.accent }}>₹499.00</div>
-                  </div>
-                </div>
-                
-                <h3 style={{ fontSize: "16px", marginBottom: "8px", fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Plan Fee</h3>
-                <p style={{ color: C.muted, fontSize: "12px", marginBottom: "30px" }}>Secure payment for expert audit & strategy session.</p>
-                
-                <div style={{ background: "rgba(255,255,255,0.02)", padding: "20px", border: `1px solid ${C.border}`, marginBottom: "30px" }}>
-                  <div style={{ fontSize: "10px", color: C.muted, marginBottom: "15px", letterSpacing: "1px" }}>SELECT PAYMENT METHOD (SIMULATION)</div>
-                  <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-                    <button onClick={() => updatePaymentStatus("Success")} className="cta-btn" style={{ background: "#00C853", fontSize: "11px", padding: "12px" }}>PAY VIA UPI / CARD (SUCCESS)</button>
-                    <button onClick={() => updatePaymentStatus("Failed")} className="cta-btn" style={{ background: "#D50000", fontSize: "11px", padding: "12px" }}>PAY VIA NETBANKING (FAILURE)</button>
-                  </div>
-                </div>
-
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "8px", opacity: 0.5 }}>
-                  <ShieldCheck size={14} />
-                  <span style={{ fontSize: "10px", letterSpacing: "1px" }}>SECURED BY RAZORPAY</span>
-                </div>
+              <div style={{ textAlign: "center", padding: "40px 0" }}>
+                <div style={{ 
+                  width: "50px", 
+                  height: "50px", 
+                  border: `3px solid ${C.border}`, 
+                  borderTop: `3px solid ${C.accent}`, 
+                  borderRadius: "50%", 
+                  animation: "shimmer 1s linear infinite",
+                  margin: "0 auto 20px" 
+                }} />
+                <h3 style={{ fontSize: "18px", marginBottom: "10px", color: C.text }}>Processing Payment</h3>
+                <p style={{ color: C.muted, fontSize: "14px" }}>Please wait while we connect to Razorpay...</p>
               </div>
             )}
 
