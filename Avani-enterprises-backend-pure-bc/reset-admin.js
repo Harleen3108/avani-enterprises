@@ -9,7 +9,7 @@ async function resetAdmin() {
         console.log("Connected to MongoDB");
 
         const email = process.env.ADMIN_EMAIL || "aanchal2115@gmail.com";
-        const password = process.env.ADMIN_SECRET_CODE || "31082004";
+        const password = process.env.ADMIN_PASSWORD || "Rskban@123";
         const adminCode = process.env.ADMIN_SECRET_CODE || "31082004";
 
         const salt = await bcrypt.genSalt(10);

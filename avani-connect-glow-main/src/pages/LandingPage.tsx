@@ -153,15 +153,15 @@ export default function AvaniEnterprises() {
 
       // 2. Initialize Razorpay Checkout
       const options = {
-        key: import.meta.env.VITE_RAZORPAY_KEY_ID || "rzp_test_wP9SAvAW48CSjE", // Dynamic key from .env
+        key: import.meta.env.VITE_RAZORPAY_KEY_ID || "rzp_test_SGgUxNXJPhFnL7", // Dynamic key from .env
         amount: 49900, // Amount in paise (₹499)
         currency: "INR",
         name: "Avani Enterprises",
         description: "Growth Plan Strategy Session",
         image: "/avani-logo.jpg",
         handler: function (response: any) {
-          // 3. Update status to Success on payment completion
-          updatePaymentStatus("Success");
+          // 3. Update status to Completed on payment completion
+          updatePaymentStatusById(lead._id, "Completed");
         },
         prefill: {
           name: `${formData.firstName} ${formData.lastName}`,
@@ -181,7 +181,7 @@ export default function AvaniEnterprises() {
 
       const rzp1 = new (window as any).Razorpay(options);
       rzp1.on('payment.failed', function (response: any) {
-        updatePaymentStatus("Failed");
+        updatePaymentStatusById(lead._id, "Failed");
       });
       rzp1.open();
       setPaymentState("processing");
@@ -191,16 +191,16 @@ export default function AvaniEnterprises() {
     }
   };
 
-  const updatePaymentStatus = async (status: string) => {
+  const updatePaymentStatusById = async (id: string, status: string) => {
     try {
-      if (!currentLeadId) return;
-      await fetch(`${API_BASE}/growth-plan-leads/${currentLeadId}/status`, {
+      if (!id) return;
+      await fetch(`${API_BASE}/growth-plan-leads/${id}/status`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status })
       });
       
-      if (status === "Success") {
+      if (status === "Completed") {
         setPaymentState("success");
         // Redirect to thank you page after a brief delay to show success icon
         setTimeout(() => {

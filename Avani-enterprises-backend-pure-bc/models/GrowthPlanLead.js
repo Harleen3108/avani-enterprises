@@ -12,7 +12,7 @@ const growthPlanLeadSchema = new mongoose.Schema(
     notes: { type: String, default: "" }, // Added notes field
     paymentStatus: {
       type: String,
-      enum: ["Pending", "Success", "Failed"],
+      enum: ["Pending", "Success", "Failed", "Completed"],
       default: "Pending",
     },
   },

@@ -117,7 +117,8 @@ const GrowthPlanLeads = () => {
   const getStatusBadge = (status) => {
     switch (status?.toLowerCase()) {
       case "success":
-        return <span className="px-2.5 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full flex items-center gap-1"><CheckCircle size={12}/> SUCCESS</span>;
+      case "completed":
+        return <span className="px-2.5 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full flex items-center gap-1"><CheckCircle size={12}/> COMPLETED</span>;
       case "failed":
         return <span className="px-2.5 py-1 bg-red-100 text-red-700 text-xs font-bold rounded-full flex items-center gap-1"><AlertCircle size={12}/> FAILED</span>;
       default:
