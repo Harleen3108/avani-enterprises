@@ -472,13 +472,13 @@ export default function AvaniEnterprises() {
                   <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "10px", fontWeight: 700, letterSpacing: "2.5px", color: "#00E676" }}>ACTIVELY ONBOARDING CLIENTS</span>
                 </div>
                 <div style={{ width: "1px", height: "14px", background: C.border }} className="mobile-hide" />
-                <span className="mobile-hide" style={{ fontSize: "10px", letterSpacing: "2px", color: C.muted, fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 600 }}>MUMBAI, INDIA · EST. 2019</span>
+                <span className="mobile-hide" style={{ fontSize: "10px", letterSpacing: "2px", color: C.muted, fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 600 }}>GURGAON · MUMBAI · ROHTAK · AUSTRALIA</span>
               </div>
 
-              <h1 className="display-font" style={{ fontSize: "clamp(3.5rem, 8vw, 7rem)", lineHeight: 0.95, letterSpacing: "-1px", marginBottom: "10px" }}>
+              <h1 className="display-font" style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)", lineHeight: 0.95, letterSpacing: "-1px", marginBottom: "10px" }}>
                 <Typewriter text="GET YOUR WEBSITE" delay={50} />
               </h1>
-              <h1 className="display-font shimmer-text" style={{ fontSize: "clamp(3.5rem, 8vw, 7rem)", lineHeight: 0.95, letterSpacing: "-1px", marginBottom: "30px" }}>
+              <h1 className="display-font shimmer-text" style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)", lineHeight: 0.95, letterSpacing: "-1px", marginBottom: "30px" }}>
                 <Typewriter text="GROWTH PLAN IN JUST ₹499" delay={70} startDelay={1000} />
               </h1>
 

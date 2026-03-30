@@ -270,12 +270,29 @@ const Contact = () => {
                             <div className="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center text-amber-500 group-hover/item:bg-gradient-to-r from-amber-400 to-orange-500 group-hover/item:text-slate-900 transition-all">
                               <MapPin className="w-5 h-5" />
                             </div>
-                            <div>
-                              <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Office</p>
-                              <p className="text-white font-bold leading-tight text-xs">
-                                Tower B, 3rd Floor, Unitech Cyber Park, <br />
-                                Sector 39, Gurugram, Haryana 122002
-                              </p>
+                            <div className="space-y-4">
+                              <div>
+                                <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1">Gurgaon Office</p>
+                                <p className="text-white font-bold leading-tight text-[11px]">
+                                  Tower B, 3rd Floor, Unitech Cyber Park, Sector 39, Gurugram, Haryana 122002
+                                </p>
+                              </div>
+                              <div>
+                                <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1">Mumbai Office</p>
+                                <p className="text-white font-bold leading-tight text-[11px]">
+                                  Third Floor, Vasudev Chamber, 4RFX+QJ3, Teli Galli Cross Rd, Mogra Village, Mogra Pada, Natwar Nagar, Andheri East, Mumbai, Maharashtra 400069
+                                </p>
+                              </div>
+                              <div>
+                                <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1">Rohtak Office</p>
+                                <p className="text-white font-bold leading-tight text-[11px]">
+                                  106, First Floor, Agro Mall, Rohtak
+                                </p>
+                              </div>
+                              <div>
+                                <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1">Australia</p>
+                                <p className="text-white font-bold leading-tight text-[11px]">Australia</p>
+                              </div>
                             </div>
                           </a>
                         </div>

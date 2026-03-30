@@ -14,9 +14,9 @@ const officeDetails = [
     image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop',
     tagline: 'The Heart of Innovation',
     contact: {
-       address: 'Main HQ, Rohtak, Haryana 124001',
-       email: 'info@avanienterprises.com',
-       phone: '+91 98XXX XXXXX'
+       address: '106, First Floor, Agro Mall, Rohtak',
+       email: 'kp@avanienterprises.in',
+       phone: '+91 9253625099'
     }
   },
   {
@@ -27,9 +27,9 @@ const officeDetails = [
     image: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=1200&auto=format&fit=crop',
     tagline: 'Enterprise Connectivity',
     contact: {
-       address: 'DLF Cyber City, Gurgaon, Haryana 122002',
-       email: 'gurgaon@avanienterprises.com',
-       phone: '+91 98XXX XXXXX'
+       address: 'Tower B, 3rd Floor, Unitech Cyber Park, Sector 39, Gurugram, 122002',
+       email: 'kp@avanienterprises.in',
+       phone: '+91 9253625099'
     }
   },
   {
@@ -40,9 +40,9 @@ const officeDetails = [
     image: 'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?q=80&w=1200&auto=format&fit=crop',
     tagline: 'Scale & Growth Center',
     contact: {
-       address: 'Bandra Kurla Complex, Mumbai, MH 400051',
-       email: 'mumbai@avanienterprises.com',
-       phone: '+91 98XXX XXXXX'
+       address: 'Third Floor, Vasudev Chamber, 4RFX+QJ3, Teli Galli Cross Rd, Mogra Village, Mogra Pada, Natwar Nagar, Andheri East, Mumbai, Maharashtra 400069',
+       email: 'kp@avanienterprises.in',
+       phone: '+91 9253625099'
     }
   },
   {
@@ -53,9 +53,9 @@ const officeDetails = [
     image: 'https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?q=80&w=1200&auto=format&fit=crop',
     tagline: 'Global Outreach',
     contact: {
-       address: 'Sydney CBD, NSW, Australia',
-       email: 'apac@avanienterprises.com',
-       phone: '+61 X XXXX XXXX'
+       address: 'Australia',
+       email: 'kp@avanienterprises.in',
+       phone: '+91 9253625099'
     }
   },
 ];
@@ -204,18 +204,28 @@ const GlobalPresence = () => {
                            {office.description}
                         </p>
 
-                        <div className="grid grid-cols-2 gap-8 border-t border-slate-50 pt-10">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 border-t border-slate-100 pt-10">
                            <div className="space-y-4">
-                              <div className="text-[8px] font-black text-slate-400 uppercase tracking-[0.3em] mb-2">Location</div>
+                              <div className="text-[10px] font-black text-amber-600 uppercase tracking-[0.2em] mb-2 flex items-center gap-2">
+                                 <div className="w-1.5 h-1.5 rounded-full bg-amber-500" /> Location
+                              </div>
                               <div className="flex items-start gap-3">
-                                 <span className="text-xs font-bold text-slate-700 leading-snug">{office.contact.address}</span>
+                                 <span className="text-xs font-bold text-slate-900 leading-relaxed bg-slate-50/50 p-3 rounded-xl border border-slate-100 w-full">{office.contact.address}</span>
                               </div>
                            </div>
                            <div className="space-y-4">
-                              <div className="text-[8px] font-black text-slate-400 uppercase tracking-[0.3em] mb-2">Contact Detail</div>
-                              <div className="flex flex-col gap-2">
-                                 <span className="text-xs font-bold text-slate-700">{office.contact.email}</span>
-                                 <span className="text-xs font-bold text-amber-600">{office.contact.phone}</span>
+                              <div className="text-[10px] font-black text-amber-600 uppercase tracking-[0.2em] mb-2 flex items-center gap-2">
+                                 <div className="w-1.5 h-1.5 rounded-full bg-amber-500" /> Contact Details
+                              </div>
+                              <div className="flex flex-col gap-3 bg-slate-50/50 p-3 rounded-xl border border-slate-100">
+                                 <div className="flex items-center gap-2">
+                                    <Mail className="w-3 h-3 text-slate-400" />
+                                    <span className="text-xs font-bold text-slate-900">{office.contact.email}</span>
+                                 </div>
+                                 <div className="flex items-center gap-2">
+                                    <Phone className="w-3 h-3 text-slate-400" />
+                                    <span className="text-xs font-bold text-slate-900">{office.contact.phone}</span>
+                                 </div>
                               </div>
                            </div>
                         </div>

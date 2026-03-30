@@ -98,7 +98,7 @@ const Navbar = () => {
                 />
                 <div className="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-amber-500 rounded-full border-2 border-white shadow-sm" />
               </div>
-              <span className="text-[14px] lg:text-[16px] xl:text-[20px] font-black tracking-tight truncate transition-colors duration-300 text-amber-500">
+              <span className="text-[18px] sm:text-[20px] lg:text-[16px] xl:text-[20px] font-black tracking-tight truncate transition-colors duration-300 text-amber-500">
                 Avani Enterprises
               </span>
             </Link>
@@ -202,11 +202,13 @@ const Navbar = () => {
                     className={`relative px-1 xl:px-3 py-2 group whitespace-nowrap text-[11px] xl:text-[13px] font-bold tracking-wide transition-all duration-300 ${isActive ? "text-amber-600" : "text-amber-500 hover:text-amber-600"}`}
                   >
                     {item.name}
-                    <motion.div
-                      className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 h-0.5 bg-amber-600 rounded-full"
-                      initial={{ width: isActive ? "4px" : 0 }}
-                      whileHover={{ width: "100%" }}
-                    />
+                    {item.name !== "Home" && (
+                      <motion.div
+                        className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 h-0.5 bg-amber-600 rounded-full"
+                        initial={{ width: isActive ? "4px" : 0 }}
+                        whileHover={{ width: "100%" }}
+                      />
+                    )}
                   </Link>
                 );
               })}

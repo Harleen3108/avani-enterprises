@@ -70,7 +70,10 @@ const Home = () => {
       });
       const json = await response.json();
       if (json.success) {
-        setNewsletters(json.data || []);
+        const filteredNews = (json.data || []).filter((n: any) => 
+          n.title.toLowerCase() !== 'test something'
+        );
+        setNewsletters(filteredNews);
       } else {
         console.error("API call for newsletters was not successful:", json);
       }
@@ -473,7 +476,7 @@ const Home = () => {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-3 w-3 bg-amber-500"></span>
                 </span>
-                <span>Expanding Globally: Now proudly serving from our Mumbai and Australia offices.</span>
+                <span>Expanding Globally: Now proudly serving from Gurgaon, Mumbai, Rohtak, and Australia.</span>
               </div>
 
               <div className="flex flex-col gap-8 mb-16">

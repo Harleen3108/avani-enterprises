@@ -156,11 +156,47 @@ const Footer = () => {
                 className="flex items-start space-x-3 group"
               >
                 <MapPin size={20} className="text-blue-400 mt-1 flex-shrink-0 group-hover:scale-110 transition-transform" />
-                <div>
-                  <p className="text-gray-300 group-hover:text-white transition-colors">
-                    Tower B, 3rd Floor, Unitech Cyber Park, Sector 39, Gurugram, Haryana 122002
-                  </p>
-                </div>
+                  <div className="grid grid-cols-2 gap-x-8 gap-y-6">
+                    <div className="group/loc">
+                      <div className="flex items-center gap-2 mb-1.5 focus:outline-none">
+                        <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.8)]" />
+                        <span className="text-[10px] font-black text-blue-400 uppercase tracking-widest">Gurgaon</span>
+                      </div>
+                      <p className="text-gray-400 group-hover/loc:text-white transition-colors text-[11px] leading-relaxed pl-3.5 border-l border-white/10">
+                        Tower B, 3rd Floor, Unitech Cyber Park, Sector 39, 122002
+                      </p>
+                    </div>
+                    
+                    <div className="group/loc">
+                      <div className="flex items-center gap-2 mb-1.5">
+                        <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.8)]" />
+                        <span className="text-[10px] font-black text-blue-400 uppercase tracking-widest">Mumbai</span>
+                      </div>
+                      <p className="text-gray-400 group-hover/loc:text-white transition-colors text-[11px] leading-relaxed pl-3.5 border-l border-white/10">
+                        Third Floor, Vasudev Chamber, Teli Galli Cross Rd, Andheri East, 400069
+                      </p>
+                    </div>
+                    
+                    <div className="group/loc">
+                      <div className="flex items-center gap-2 mb-1.5">
+                        <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.8)]" />
+                        <span className="text-[10px] font-black text-blue-400 uppercase tracking-widest">Rohtak</span>
+                      </div>
+                      <p className="text-gray-400 group-hover/loc:text-white transition-colors text-[11px] leading-relaxed pl-3.5 border-l border-white/10">
+                        106, First Floor, Agro Mall, Rohtak
+                      </p>
+                    </div>
+                    
+                    <div className="group/loc">
+                      <div className="flex items-center gap-2 mb-1.5">
+                        <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.8)]" />
+                        <span className="text-[10px] font-black text-blue-400 uppercase tracking-widest">Australia</span>
+                      </div>
+                      <p className="text-gray-400 group-hover/loc:text-white transition-colors text-[11px] leading-relaxed pl-3.5 border-l border-white/10">
+                        Australia
+                      </p>
+                    </div>
+                  </div>
               </a>
               <div className="flex items-center space-x-3">
                 <Phone size={20} className="text-blue-400 flex-shrink-0" />
