@@ -70,7 +70,7 @@ const Home = () => {
       });
       const json = await response.json();
       if (json.success) {
-        const filteredNews = (json.data || []).filter((n: any) => 
+        const filteredNews = (json.data || []).filter((n: any) =>
           n.title.toLowerCase() !== 'test something'
         );
         setNewsletters(filteredNews);

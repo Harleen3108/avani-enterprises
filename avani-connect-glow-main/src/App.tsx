@@ -161,16 +161,17 @@ const AppLayout = () => {
   const pathname = location.pathname;
 
   // Pages where Navbar should be hidden completely
-  const hideNavbar = pathname === "/thank-you" || pathname === "/landingPage";
+  const pathForCheck = pathname.toLowerCase();
+  const hideNavbar = pathForCheck === "/thank-you" || pathForCheck === "/landingpage";
 
   // Pages where Navbar1 should be used instead of default Navbar
-  const useNavbar1 = pathname === "/web-dev" || pathname === "/7-day-launch";
+  const useNavbar1 = pathForCheck === "/web-dev" || pathForCheck === "/7-day-launch";
 
   // Pages where Footer should be hidden completely
-  const hideFooter = pathname === "/thank-you";
+  const hideFooter = pathForCheck === "/thank-you" || pathForCheck === "/landingpage";
 
   // Pages where Footer1 should be used instead of default Footer
-  const useFooter1 = pathname === "/web-dev" || pathname === "/7-day-launch";
+  const useFooter1 = pathForCheck === "/web-dev" || pathForCheck === "/7-day-launch";
 
   return (
     <div className="min-h-screen">
@@ -224,7 +225,7 @@ const AppLayout = () => {
         </Routes>
       </main>
       {!hideFooter && (useFooter1 ? <Footer1 /> : <Footer />)}
-      <Chatbot />
+      {!hideNavbar && <Chatbot />}
     </div>
   );
 };

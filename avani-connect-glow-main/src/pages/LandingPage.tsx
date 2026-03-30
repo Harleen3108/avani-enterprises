@@ -78,7 +78,7 @@ export default function AvaniEnterprises() {
   const [currentLeadId, setCurrentLeadId] = useState(null);
   const [paymentState, setPaymentState] = useState("none"); // none, processing, success, fail
 
-  const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5001/api";
+  const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5001";
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
@@ -140,20 +140,30 @@ export default function AvaniEnterprises() {
 
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    let leadId = null;
+
     try {
-      // 1. Submit lead data to backend immediately (captures lead even if payment is cancelled)
+      // 1. Attempt to submit lead data to backend immediately
       const res = await fetch(`${API_BASE}/growth-plan-leads`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData)
       });
-      const lead = await res.json();
-      setCurrentLeadId(lead._id);
+      if (res.ok) {
+        const lead = await res.json();
+        leadId = lead._id;
+        setCurrentLeadId(leadId);
+      }
+    } catch (err) {
+      console.warn("Backend not available. Proceeding with payment anyway...", err);
+    }
+
+    try {
       setShowModal(false);
 
       // 2. Initialize Razorpay Checkout
       const options = {
-        key: import.meta.env.VITE_RAZORPAY_KEY_ID || "rzp_test_SGgUxNXJPhFnL7", // Dynamic key from .env
+        key: import.meta.env.VITE_RAZORPAY_KEY_ID || "rzp_live_SXJqe5vU40sXGz", // Dynamic key from .env
         amount: 49900, // Amount in paise (₹499)
         currency: "INR",
         name: "Avani Enterprises",
@@ -161,7 +171,7 @@ export default function AvaniEnterprises() {
         image: "/avani-logo.jpg",
         handler: function (response: any) {
           // 3. Update status to Completed on payment completion
-          updatePaymentStatusById(lead._id, "Completed");
+          updatePaymentStatusById(leadId, "Completed");
         },
         prefill: {
           name: `${formData.firstName} ${formData.lastName}`,
@@ -181,7 +191,7 @@ export default function AvaniEnterprises() {
 
       const rzp1 = new (window as any).Razorpay(options);
       rzp1.on('payment.failed', function (response: any) {
-        updatePaymentStatusById(lead._id, "Failed");
+        updatePaymentStatusById(leadId, "Failed");
       });
       rzp1.open();
       setPaymentState("processing");

@@ -33,11 +33,11 @@ const PaymentModal = ({ isOpen, onClose, course, onSuccess }) => {
   };
 
   const loadRazorpayScript = () => {
-    return new Promise((resolve) => {
+    return new Promise<boolean>((resolve) => {
       const script = document.createElement('script');
       script.src = 'https://checkout.razorpay.com/v1/checkout.js';
-      script.onload = () => resolve();
-      script.onerror = () => resolve();
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
       document.body.appendChild(script);
     });
   };
@@ -89,15 +89,15 @@ const PaymentModal = ({ isOpen, onClose, course, onSuccess }) => {
       await loadRazorpayScript();
 
       // In a real application, you would get the order ID from your backend
-      const orderId = `order_${Date.now()}`;
+      // const orderId = `order_${Date.now()}`;
       
       const options = {
-        key: 'rzp_test_YOUR_RAZORPAY_KEY', // Replace with your actual Razorpay key
+        key: import.meta.env.VITE_RAZORPAY_KEY_ID || 'rzp_live_SXJqe5vU40sXGz', // Live key from .env or fallback
         amount: parseInt(formData.amount.replace('₹', '').replace(',', '')) * 100, // Amount in paise
         currency: 'INR',
         name: 'Avani Enterprises',
         description: `Course Enrollment - ${course.title}`,
-        order_id: orderId,
+        // order_id: orderId, // Removed fake orderId because Razorpay will reject it
         handler: async function (response) {
           try {
             // Payment successful
@@ -136,7 +136,7 @@ const PaymentModal = ({ isOpen, onClose, course, onSuccess }) => {
         }
       };
 
-      const razorpay = new window.Razorpay(options);
+      const razorpay = new (window as any).Razorpay(options);
       razorpay.open();
       
     } catch (error) {

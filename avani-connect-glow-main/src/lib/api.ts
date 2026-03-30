@@ -20,7 +20,7 @@ export const getBackendUrl = (): string => {
 
   // 3. Final fallback to localhost
   if (!baseUrl) {
-    baseUrl = 'http://localhost:5000';
+    baseUrl = 'http://localhost:5001';
   }
 
   return baseUrl.replace(/\/$/, '');
