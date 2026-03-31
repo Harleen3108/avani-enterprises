@@ -89,7 +89,7 @@ const GlobalPresence = () => {
                 <span className="text-slate-900 text-[10px] md:text-xs font-black uppercase tracking-[0.2em] md:tracking-[0.3em]">Worldwide Operations</span>
             </div>
             
-            <h1 className="text-[12vw] sm:text-7xl md:text-8xl lg:text-9xl font-black text-slate-900 tracking-tighter mb-8 md:mb-10 leading-[1] md:leading-[0.85] uppercase w-full max-w-full break-words break-all sm:break-normal">
+            <h1 className="text-[clamp(2.5rem,10vw,4rem)] sm:text-6xl md:text-8xl lg:text-9xl font-black text-slate-900 tracking-[-0.04em] mb-8 md:mb-10 leading-none md:leading-[0.85] uppercase w-full">
               Global <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600">
                 Connectivity
