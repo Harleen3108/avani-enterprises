@@ -168,7 +168,7 @@ const AppLayout = () => {
   const useNavbar1 = pathForCheck === "/web-dev" || pathForCheck === "/7-day-launch";
 
   // Pages where Footer should be hidden completely
-  const hideFooter = pathForCheck === "/thank-you" || pathForCheck === "/landingpage";
+  const hideFooter = pathForCheck === "/thank-you";
 
   // Pages where Footer1 should be used instead of default Footer
   const useFooter1 = pathForCheck === "/web-dev" || pathForCheck === "/7-day-launch";
