@@ -10,17 +10,20 @@ import {
 } from "lucide-react";
 
 const C = {
-  accent: "#E1AD01",
-  accentLight: "#FFD700",
-  accentDim: "rgba(225,173,1,0.12)",
-  dark: "#030303",
-  card: "#0A0A0A",
-  cardHover: "#0F0F0F",
-  border: "rgba(255,255,255,0.06)",
-  borderHover: "rgba(225,173,1,0.4)",
-  text: "#F0EDE8",
-  muted: "#888888",
-  subtle: "#1A1A1A",
+  accent: "#D4A017",
+  accentLight: "#E8B830",
+  accentDim: "rgba(212,160,23,0.10)",
+  accentGlow: "rgba(212,160,23,0.18)",
+  dark: "#FAFAF8",
+  card: "#FFFFFF",
+  cardHover: "#F5F5F0",
+  border: "rgba(0,0,0,0.08)",
+  borderHover: "rgba(212,160,23,0.45)",
+  text: "#1A1A2E",
+  muted: "#5F6368",
+  subtle: "#F0F0EC",
+  success: "#16A34A",
+  danger: "#DC2626",
 };
 
 // Typewriter Component
@@ -117,11 +120,11 @@ export default function AvaniEnterprises() {
   ];
 
   const projects = [
-    { tag: "ERP / WEB APP", title: "School Management", desc: "A full-featured web application designed to modernize school operations and administration. It automates core tasks, including digital attendance tracking, seamless timetable generation, and secure online fee management. The system features dedicated, role-based access for Admin, Teacher, and Parent users. This setup allows for real-time data analytics to significantly boost institutional efficiency and stakeholder communication.", metric: "100+ Schools", img: "/school.jpg", color: "#1a2a1a" },
-    { tag: "E-COMMERCE", title: "Shoe E-Commerce", desc: "Developed a feature-rich footwear e-commerce platform optimized for a modern shopping experience. Key functionalities include stunning 3D product previews and a smooth, secure cart-to-checkout process. The system also features smart inventory management and admin/delivery dashboards. It allows for advanced features like order rescheduling, refund tracking, and analytics-driven business insights.", metric: "3D Integration", img: "/shoe.jpg", color: "#1a1a2a" },
-    { tag: "SAAS / ERP", title: "HR Portal", desc: "A comprehensive HR management system built to streamline and automate workforce operations. It includes robust features for attendance tracking, efficient leave management, and automated payroll processing. The platform provides employee performance analytics, secure document handling, and internal communication tools. All functions are governed by dedicated role-based access dashboards.", metric: "Automated Payroll", img: "/hrportal.png", color: "#1a2218" },
-    { tag: "HEALTHCARE", title: "Hospital Website", desc: "Developed a comprehensive web platform for Holy Heart Hospital, specializing in advanced cardiac care. The system integrates an AI Chatbot ('HealthBot') for instant support and efficient appointment booking. Features include secure online OPD booking, integrated with Razorpay. It provides a robust Admin analytics dashboard and patient portals for managing orders and downloading invoices.", metric: "Razorpay + AI", img: "/hospital.jpg", color: "#22181a" },
-    { tag: "REAL ESTATE", title: "Hi-tech Property", desc: "A professional, full-service property management portal designed to centralize real estate operations. The platform features an extensive listing module for showcasing available properties with high-quality media. It includes robust lead capture tools to streamline client inquiries and follow-ups effectively. Dedicated admin tools are provided to ensure efficient management of listings, client data, and workflows.", metric: "Lead Capture", img: "/hitechproperty.jpg", color: "#1a1f2a" },
+    { tag: "ERP / WEB APP", title: "School Management", desc: "A full-featured web application designed to modernize school operations and administration. It automates core tasks, including digital attendance tracking, seamless timetable generation, and secure online fee management. The system features dedicated, role-based access for Admin, Teacher, and Parent users. This setup allows for real-time data analytics to significantly boost institutional efficiency and stakeholder communication.", metric: "100+ Schools", img: "/school.jpg", color: "#F0F5F0" },
+    { tag: "E-COMMERCE", title: "Shoe E-Commerce", desc: "Developed a feature-rich footwear e-commerce platform optimized for a modern shopping experience. Key functionalities include stunning 3D product previews and a smooth, secure cart-to-checkout process. The system also features smart inventory management and admin/delivery dashboards. It allows for advanced features like order rescheduling, refund tracking, and analytics-driven business insights.", metric: "3D Integration", img: "/shoe.jpg", color: "#F0F0F5" },
+    { tag: "SAAS / ERP", title: "HR Portal", desc: "A comprehensive HR management system built to streamline and automate workforce operations. It includes robust features for attendance tracking, efficient leave management, and automated payroll processing. The platform provides employee performance analytics, secure document handling, and internal communication tools. All functions are governed by dedicated role-based access dashboards.", metric: "Automated Payroll", img: "/hrportal.png", color: "#F0F5F0" },
+    { tag: "HEALTHCARE", title: "Hospital Website", desc: "Developed a comprehensive web platform for Holy Heart Hospital, specializing in advanced cardiac care. The system integrates an AI Chatbot ('HealthBot') for instant support and efficient appointment booking. Features include secure online OPD booking, integrated with Razorpay. It provides a robust Admin analytics dashboard and patient portals for managing orders and downloading invoices.", metric: "Razorpay + AI", img: "/hospital.jpg", color: "#F5F0F0" },
+    { tag: "REAL ESTATE", title: "Hi-tech Property", desc: "A professional, full-service property management portal designed to centralize real estate operations. The platform features an extensive listing module for showcasing available properties with high-quality media. It includes robust lead capture tools to streamline client inquiries and follow-ups effectively. Dedicated admin tools are provided to ensure efficient management of listings, client data, and workflows.", metric: "Lead Capture", img: "/hitechproperty.jpg", color: "#F0F2F5" },
   ];
 
   const faqs = [
@@ -137,6 +140,44 @@ export default function AvaniEnterprises() {
     { name: "Priya Sharma", role: "CMO, TextileBridge", text: "The strategy session alone was worth 10X the price. They identified 3 major leaks in our homepage that were costing us lakhs.", stars: 5 },
     { name: "Vikram Nair", role: "Business Owner", text: "Finally, a agency that talks numbers, not just aesthetics. The step-by-step lead gen plan is exactly what I needed to scale.", stars: 5 },
   ];
+  // Plan payment handler for pricing table
+  const handlePlanPayment = (planName: string, amount: number) => {
+    try {
+      const options = {
+        key: import.meta.env.VITE_RAZORPAY_KEY_ID || "rzp_live_SXJqe5vU40sXGz",
+        amount: amount * 100, // Convert to paise
+        currency: "INR",
+        name: "Avani Enterprises",
+        description: `${planName} - Business Consultation`,
+        image: "/avani-logo.jpg",
+        handler: function (response: any) {
+          setPaymentState("success");
+          setTimeout(() => {
+            navigate("/thank-you", {
+              state: {
+                name: "Valued Client",
+                service: `${planName} - Business Consultation`
+              }
+            });
+          }, 1500);
+        },
+        theme: { color: C.accent },
+        modal: {
+          ondismiss: function () {
+            setPaymentState("fail");
+          }
+        }
+      };
+      const rzp1 = new (window as any).Razorpay(options);
+      rzp1.on('payment.failed', function () {
+        setPaymentState("fail");
+      });
+      rzp1.open();
+      setPaymentState("processing");
+    } catch (err) {
+      alert("Payment initialization failed. Please try again.");
+    }
+  };
 
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -253,7 +294,7 @@ export default function AvaniEnterprises() {
         .body-font { font-family: 'Plus Jakarta Sans', sans-serif; }
 
         .nav-link {
-          color: rgba(240,237,232,0.6); text-decoration: none; font-size: 12px;
+          color: rgba(26,26,46,0.55); text-decoration: none; font-size: 12px;
           font-weight: 500; letter-spacing: 1px; transition: color 0.2s;
           font-family: 'Plus Jakarta Sans', sans-serif;
         }
@@ -263,13 +304,13 @@ export default function AvaniEnterprises() {
         .service-tab.active { border-bottom-color: ${C.accent}; }
         .service-tab:hover .tab-title { color: ${C.text}; }
 
-        .project-card { position: relative; overflow: hidden; border-radius: 8px; cursor: pointer; aspect-ratio: 16/9; background: #0A0A0A; border: 1px solid rgba(255,255,255,0.06); transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+        .project-card { position: relative; overflow: hidden; border-radius: 8px; cursor: pointer; aspect-ratio: 16/9; background: #F5F5F0; border: 1px solid ${C.border}; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
         .project-card img { width: 100%; height: 100%; object-fit: cover; object-position: top center; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); filter: brightness(0.8) saturate(0.9); }
-        .project-card:hover { border-color: rgba(225,173,1,0.3); box-shadow: 0 10px 40px rgba(225,173,1,0.12); transform: translateY(-4px); z-index: 10; }
+        .project-card:hover { border-color: ${C.accent}60; box-shadow: 0 10px 40px rgba(212,160,23,0.15); transform: translateY(-4px); z-index: 10; }
         .project-card:hover img { transform: scale(1.05); filter: brightness(0.4) saturate(0.8); }
-        .project-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: space-between; opacity: 0; transition: opacity 0.4s ease; background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, transparent 60%); }
+        .project-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: space-between; opacity: 0; transition: opacity 0.4s ease; background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, transparent 60%); }
         .project-card:hover .project-overlay { opacity: 1; }
-        .project-tag-glass { position: absolute; top: 24px; left: 24px; background: rgba(0,0,0,0.5); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.15); padding: 8px 18px; border-radius: 30px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 2px; color: ${C.accent}; transition: all 0.5s ease; z-index: 2; transform: translateY(-15px); }
+        .project-tag-glass { position: absolute; top: 24px; left: 24px; background: rgba(255,255,255,0.85); backdrop-filter: blur(8px); border: 1px solid rgba(0,0,0,0.08); padding: 8px 18px; border-radius: 30px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 2px; color: ${C.accent}; transition: all 0.5s ease; z-index: 2; transform: translateY(-15px); }
         .project-card:hover .project-tag-glass { transform: translateY(0); background: ${C.accent}; color: #000; border-color: ${C.accent}; box-shadow: 0 4px 15px rgba(225,173,1,0.3); }
         .project-info-glass { margin-top: auto; padding: 60px 40px 40px; display: flex; flex-direction: column; justify-content: flex-end; transform: translateY(20px); transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
         .project-card:hover .project-info-glass { transform: translateY(0); }
@@ -287,7 +328,7 @@ export default function AvaniEnterprises() {
         }
         .service-card:hover {
           border-color: ${C.accent}40;
-          box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+          box-shadow: 0 10px 30px rgba(0,0,0,0.08);
           transform: translateY(-5px);
         }
         .service-icon-wrapper {
@@ -350,24 +391,24 @@ export default function AvaniEnterprises() {
         .faq-item { border-bottom: 1px solid ${C.border}; transition: border-color 0.3s; }
         .faq-item.active { border-bottom-color: ${C.accent}; }
 
-        .cta-btn { background: ${C.accent}; color: #000; border: none; padding: 16px 32px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 1.5px; cursor: pointer; transition: all 0.3s; border-radius: 1px; text-transform: uppercase; }
-        .cta-btn:hover { background: ${C.accentLight}; transform: translateY(-1px); box-shadow: 0 12px 40px rgba(225,173,1,0.3); }
+        .cta-btn { background: ${C.accent}; color: #fff; border: none; padding: 16px 32px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 1.5px; cursor: pointer; transition: all 0.3s; border-radius: 4px; text-transform: uppercase; }
+        .cta-btn:hover { background: ${C.accentLight}; transform: translateY(-2px); box-shadow: 0 12px 40px ${C.accentGlow}; }
 
         .ghost-btn { background: transparent; color: ${C.text}; border: 1px solid ${C.border}; padding: 16px 32px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 1.5px; cursor: pointer; transition: all 0.3s; border-radius: 1px; }
         .ghost-btn:hover { border-color: ${C.text}; }
 
         .stat-card { background: ${C.card}; border: 1px solid ${C.border}; padding: 40px 35px; transition: all 0.4s; }
-        .stat-card:hover { border-color: ${C.accent}; background: rgba(225,173,1,0.04); }
+        .stat-card:hover { border-color: ${C.accent}; background: rgba(212,160,23,0.04); }
 
         .marquee-wrap { display: flex; overflow: hidden; border-top: 1px solid ${C.border}; border-bottom: 1px solid ${C.border}; padding: 20px 0; }
         .marquee-track { display: flex; gap: 0; animation: marquee 25s linear infinite; white-space: nowrap; }
         .marquee-item { display: flex; align-items: center; gap: 25px; padding: 0 40px; }
         .marquee-dot { width: 5px; height: 5px; background: ${C.accent}; border-radius: 50%; flex-shrink: 0; }
 
-        input, select, textarea { background: #0D0D0D !important; border: 1px solid ${C.border} !important; border-radius: 1px; color: ${C.text} !important; padding: 14px 16px !important; outline: none !important; width: 100%; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; transition: border-color 0.2s; }
+        input, select, textarea { background: #F5F5F0 !important; border: 1px solid ${C.border} !important; border-radius: 4px; color: ${C.text} !important; padding: 14px 16px !important; outline: none !important; width: 100%; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; transition: border-color 0.2s; }
         input:focus, select:focus, textarea:focus { border-color: ${C.accent} !important; }
         input::placeholder, textarea::placeholder { color: ${C.muted} !important; }
-        select option { background: #111; }
+        select option { background: #fff; }
 
         .hero-line { animation: fadeUp 0.8s ease forwards; opacity: 0; }
         .hero-line:nth-child(1) { animation-delay: 0.1s; }
@@ -376,13 +417,13 @@ export default function AvaniEnterprises() {
         .hero-line:nth-child(4) { animation-delay: 0.55s; }
 
         .shimmer-text {
-          background: linear-gradient(90deg, ${C.text} 0%, rgba(240,237,232,0.4) 40%, ${C.text} 60%, rgba(240,237,232,0.4) 100%);
+          background: linear-gradient(90deg, ${C.text} 0%, rgba(26,26,46,0.35) 40%, ${C.text} 60%, rgba(26,26,46,0.35) 100%);
           background-size: 200% auto;
           -webkit-background-clip: text; -webkit-text-fill-color: transparent;
           animation: shimmer 4s linear infinite;
         }
 
-        ::-webkit-scrollbar { width: 4px; } ::-webkit-scrollbar-track { background: ${C.dark}; } ::-webkit-scrollbar-thumb { background: ${C.accent}; border-radius: 2px; }
+        ::-webkit-scrollbar { width: 4px; } ::-webkit-scrollbar-track { background: #F0F0EC; } ::-webkit-scrollbar-thumb { background: ${C.accent}; border-radius: 2px; }
 
         @keyframes pulseAlert { 0%, 100% { box-shadow: 0 0 0 0 rgba(255, 51, 51, 0.4); } 50% { box-shadow: 0 0 0 10px rgba(255, 51, 51, 0); } }
 
@@ -392,9 +433,9 @@ export default function AvaniEnterprises() {
           .hero-text-content { align-items: center !important; }
           .hero-badge { margin: 0 auto 20px auto !important; justify-content: center !important; }
           .hero-desc { margin: 0 auto 30px auto !important; font-size: 1rem !important; }
-          .hero-img-col { display: none !important; }
+          .hero-img-col { display: block !important; margin-top: 20px !important; }
           .cta-container { width: 100% !important; align-items: center !important; }
-          .hero-cta { width: 100% !important; font-size: 18px !important; padding: 22px !important; box-shadow: 0 0 30px rgba(225,173,1,0.5) !important; border: 2px solid ${C.accentLight} !important; }
+          .hero-cta { width: 100% !important; font-size: 18px !important; padding: 22px !important; box-shadow: 0 4px 20px rgba(212,160,23,0.3) !important; border: 2px solid ${C.accent} !important; }
           .urgency-badge { font-size: 11px !important; padding: 6px 14px !important; animation: pulseAlert 2s infinite !important; }
           .hero-section { min-height: 100vh !important; justify-content: center !important; padding-top: 60px !important; }
           .hero-inner { margin-top: 0 !important; }
@@ -415,11 +456,11 @@ export default function AvaniEnterprises() {
           .cta-band { flex-direction: column !important; align-items: flex-start !important; gap: 24px !important; }
           .cta-band-btns { width: 100%; flex-direction: column !important; gap: 12px !important; display: flex !important; margin-top: 10px !important; }
           .cta-band-btns button, .cta-band-btns a { width: 100%; justify-content: center; margin: 0 !important; }
-          .stat-card { padding: 30px 15px !important; border-left: none !important; border-right: 1px solid ${C.border} !important; border-bottom: 1px solid ${C.border} !important; }
+          .stat-card { padding: 30px 15px !important; border-left: none !important; border-right: 1px solid ${C.border} !important; border-bottom: 1px solid ${C.border} !important; background: ${C.card} !important; }
           .stat-card:nth-child(2n) { border-right: none !important; }
           .project-card { height: auto !important; aspect-ratio: 16/9 !important; border-radius: 6px !important; margin-bottom: 0 !important; border: 1px solid rgba(255,255,255,0.1) !important; transform: none !important; }
-          .project-card:hover { transform: none !important; border-color: rgba(255,255,255,0.1) !important; box-shadow: none !important; }
-          .project-overlay { background: linear-gradient(to top, rgba(0,0,0,0.98) 0%, rgba(0,0,0,0.6) 80%, transparent 100%) !important; }
+          .project-card:hover { transform: none !important; border-color: ${C.border} !important; box-shadow: none !important; }
+          .project-overlay { background: linear-gradient(to top, rgba(0,0,0,0.90) 0%, rgba(0,0,0,0.5) 80%, transparent 100%) !important; }
           .project-tag-glass { top: 12px !important; left: 12px !important; font-size: 8px !important; padding: 5px 12px !important; }
           .project-info-glass { padding: 30px 16px 16px !important; }
           .project-card h3 { font-size: 1.4rem !important; margin-bottom: 0 !important; }
@@ -435,6 +476,12 @@ export default function AvaniEnterprises() {
           .service-icon-wrapper { width: 50px !important; height: 50px !important; }
           .section-header-mobile { margin-bottom: 40px !important; }
           .footer-bottom { flex-direction: column !important; text-align: left !important; gap: 15px !important; align-items: flex-start !important; }
+
+          /* Pricing Table Mobile */
+          .pricing-grid { grid-template-columns: 1fr !important; gap: 24px !important; max-width: 400px !important; margin: 0 auto !important; }
+          .pricing-card { padding: 32px 24px !important; }
+          .pricing-card.popular { transform: none !important; }
+          .pricing-features-row { font-size: 13px !important; padding: 12px 16px !important; }
         }
       `}</style>
 
@@ -442,7 +489,7 @@ export default function AvaniEnterprises() {
         position: "absolute", top: 0, left: 0, right: 0, zIndex: 1000, height: "70px",
         display: "flex", alignItems: "center", justifyContent: "space-between",
         padding: "0 6%",
-        background: scrolled ? "rgba(3,3,3,0.92)" : "transparent",
+        background: scrolled ? "rgba(250,250,248,0.95)" : "transparent",
         backdropFilter: scrolled ? "blur(20px)" : "none",
         borderBottom: scrolled ? `1px solid ${C.border}` : "none",
         transition: "all 0.4s ease",
@@ -459,7 +506,7 @@ export default function AvaniEnterprises() {
             ))}
           </div>
           <button onClick={() => setShowModal(true)} className="cta-btn" style={{ padding: "10px 22px", fontSize: "11px" }}>
-            BOOK PLAN
+            START YOUR BUSINESS JOURNEY NOW
           </button>
         </div>
       </nav>
@@ -467,9 +514,9 @@ export default function AvaniEnterprises() {
       {/* ── HERO ── */}
       <section className="hero-section" style={{ minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", padding: "0 6%", position: "relative", overflow: "hidden" }}>
         {/* Background grid */}
-        <div style={{ position: "absolute", inset: 0, backgroundImage: `linear-gradient(${C.border} 1px, transparent 1px), linear-gradient(90deg, ${C.border} 1px, transparent 1px)`, backgroundSize: "80px 80px", opacity: 0.4 }} />
-        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 80% 60% at 50% 100%, transparent 0%, #030303 70%)" }} />
-        <div style={{ position: "absolute", top: "20%", right: "5%", width: "600px", height: "600px", background: `radial-gradient(circle, rgba(225,173,1,0.06) 0%, transparent 70%)`, pointerEvents: "none" }} />
+        <div style={{ position: "absolute", inset: 0, backgroundImage: `linear-gradient(${C.border} 1px, transparent 1px), linear-gradient(90deg, ${C.border} 1px, transparent 1px)`, backgroundSize: "80px 80px", opacity: 0.25 }} />
+        <div style={{ position: "absolute", inset: 0, background: `radial-gradient(ellipse 80% 60% at 50% 100%, transparent 0%, ${C.dark} 70%)` }} />
+        <div style={{ position: "absolute", top: "20%", right: "5%", width: "600px", height: "600px", background: `radial-gradient(circle, ${C.accentGlow} 0%, transparent 70%)`, pointerEvents: "none" }} />
 
         <div className="hero-inner" style={{ position: "relative", zIndex: 1, maxWidth: "1400px", width: "100%", marginTop: "100px" }}>
           <div className="hero-grid" style={{ display: "grid", gridTemplateColumns: "1.2fr 1fr", gap: "80px", alignItems: "center" }}>
@@ -478,18 +525,18 @@ export default function AvaniEnterprises() {
             <div className="hero-line hero-text-content" style={{ display: "flex", flexDirection: "column" }}>
               <div className="hero-badge" style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "30px" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                  <div style={{ width: "7px", height: "7px", borderRadius: "50%", background: "#00E676", boxShadow: "0 0 8px #00E676", animation: "pulse 2s ease infinite" }} />
-                  <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "10px", fontWeight: 700, letterSpacing: "2.5px", color: "#00E676" }}>ACTIVELY ONBOARDING CLIENTS</span>
+                  <div style={{ width: "7px", height: "7px", borderRadius: "50%", background: "#16A34A", boxShadow: "0 0 8px #16A34A", animation: "pulse 2s ease infinite" }} />
+                  <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "10px", fontWeight: 700, letterSpacing: "2.5px", color: "#16A34A" }}>ACTIVELY ONBOARDING CLIENTS</span>
                 </div>
                 <div style={{ width: "1px", height: "14px", background: C.border }} className="mobile-hide" />
-                <span className="mobile-hide" style={{ fontSize: "10px", letterSpacing: "2px", color: C.muted, fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 600 }}>GURGAON · MUMBAI · ROHTAK · AUSTRALIA</span>
+                <span className="mobile-hide" style={{ fontSize: "10px", letterSpacing: "2px", color: C.muted, fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 600 }}>GURUGRAM · BOMBAY · AUSTRALIA</span>
               </div>
 
               <h1 className="display-font" style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)", lineHeight: 0.95, letterSpacing: "-1px", marginBottom: "10px" }}>
-                <Typewriter text="GET YOUR WEBSITE" delay={50} />
+                <Typewriter text="DIRECT PRICING PAYMENT" delay={50} />
               </h1>
               <h1 className="display-font shimmer-text" style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)", lineHeight: 0.95, letterSpacing: "-1px", marginBottom: "30px" }}>
-                <Typewriter text="GROWTH PLAN IN JUST ₹499" delay={70} startDelay={1000} />
+                <Typewriter text="START YOUR BUSINESS JOURNEY NOW" delay={70} startDelay={1000} />
               </h1>
 
               <p className="hero-desc" style={{ fontSize: "1.1rem", color: C.text, lineHeight: 1.75, fontWeight: 300, maxWidth: "480px", marginBottom: "40px" }}>
@@ -502,15 +549,24 @@ export default function AvaniEnterprises() {
                   <span style={{ color: "#FF3333", fontSize: "11px", fontWeight: 800, letterSpacing: "1px", fontFamily: "'Plus Jakarta Sans', sans-serif" }}>LAST 3 PLANS LEFT</span>
                 </div>
                 <button onClick={() => setShowModal(true)} className="cta-btn hero-cta" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", padding: "18px 40px" }}>
-                  BOOK PLAN NOW <ArrowRight size={16} />
+                  START YOUR BUSINESS JOURNEY NOW <ArrowRight size={16} />
                 </button>
               </div>
             </div>
 
-            {/* Right Column: Image */}
+            {/* Right Column: Video */}
             <div className="hero-line hero-img-col" style={{ position: "relative" }}>
-              <div style={{ position: "absolute", inset: "-20px", border: `1px solid ${C.accent}20`, borderRadius: "10px", zIndex: -1 }} />
-              <img src="/kp1.png" alt="kp1" style={{ width: "100%", height: "auto", borderRadius: "1px", filter: "contrast(1.1)" }} />
+              <div style={{ position: "absolute", inset: "-12px", border: `1px solid ${C.accent}25`, borderRadius: "16px", zIndex: -1 }} />
+              <video 
+                src="/avanivideo.mp4" 
+                autoPlay 
+                loop 
+                muted 
+                playsInline
+                preload="auto"
+                poster="/avani-logo.jpg"
+                style={{ width: "100%", height: "auto", borderRadius: "12px", objectFit: "cover", boxShadow: "0 8px 40px rgba(0,0,0,0.12)", pointerEvents: "none" }} 
+              />
             </div>
 
           </div>
@@ -533,8 +589,238 @@ export default function AvaniEnterprises() {
         </div>
       </section>
 
+      {/* ── PRICING TABLE ── */}
+      <section id="pricing" className="mobile-section" style={{ padding: "120px 6%", background: `linear-gradient(180deg, ${C.dark} 0%, #F0F0EC 50%, ${C.dark} 100%)`, position: "relative", overflow: "hidden" }}>
+        {/* Background decorative elements */}
+        <div style={{ position: "absolute", top: "10%", left: "50%", transform: "translateX(-50%)", width: "800px", height: "800px", background: `radial-gradient(circle, ${C.accentGlow} 0%, transparent 70%)`, pointerEvents: "none", opacity: 0.15 }} />
+
+        <div style={{ maxWidth: "1200px", margin: "0 auto", position: "relative", zIndex: 1 }}>
+          {/* Section Header */}
+          <div style={{ textAlign: "center", marginBottom: "80px" }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "12px", marginBottom: "20px" }}>
+              <div style={{ width: "40px", height: "1px", background: `linear-gradient(90deg, transparent, ${C.accent})` }} />
+              <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "11px", fontWeight: 700, letterSpacing: "3px", color: C.accent }}>CHOOSE YOUR PLAN</span>
+              <div style={{ width: "40px", height: "1px", background: `linear-gradient(90deg, ${C.accent}, transparent)` }} />
+            </div>
+            <h2 className="display-font" style={{ fontSize: "clamp(2.5rem, 5vw, 4.5rem)", marginBottom: "20px", lineHeight: 0.95 }}>TRANSPARENT PRICING.</h2>
+            <p style={{ color: C.muted, fontSize: "15px", lineHeight: 1.8, maxWidth: "550px", margin: "0 auto", fontWeight: 300 }}>
+              Simple, fair consultation plans. Pick what suits your business scale — upgrade anytime.
+            </p>
+          </div>
+
+          {/* Pricing Cards */}
+          <div className="pricing-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px", alignItems: "stretch" }}>
+            {[
+              {
+                name: "Basic Plan",
+                price: 149,
+                range: "₹1 – ₹9,999",
+                desc: "Ideal for micro-businesses and early-stage startups exploring their first package.",
+                popular: false,
+                features: [
+                  { name: "1-on-1 Consultation Call", included: true },
+                  { name: "Business Assessment Report", included: true },
+                  { name: "Basic Market Overview", included: true },
+                  { name: "Competitor Benchmarking", included: false },
+                  { name: "Custom Growth Roadmap", included: false },
+                  { name: "Implementation Support", included: false },
+                  { name: "Priority Support (24/7)", included: false },
+                ]
+              },
+              {
+                name: "Standard Plan",
+                price: 199,
+                range: "₹1 – ₹99,999",
+                desc: "Perfect for small to mid-size businesses looking to scale their operations.",
+                popular: true,
+                features: [
+                  { name: "1-on-1 Consultation Call", included: true },
+                  { name: "Business Assessment Report", included: true },
+                  { name: "Basic Market Overview", included: true },
+                  { name: "Competitor Benchmarking", included: true },
+                  { name: "Custom Growth Roadmap", included: true },
+                  { name: "Implementation Support", included: false },
+                  { name: "Priority Support (24/7)", included: false },
+                ]
+              },
+              {
+                name: "Premium Plan",
+                price: 499,
+                range: "₹1 – ₹9,99,999",
+                desc: "End-to-end advisory for established businesses with full implementation backing.",
+                popular: false,
+                features: [
+                  { name: "1-on-1 Consultation Call", included: true },
+                  { name: "Business Assessment Report", included: true },
+                  { name: "Basic Market Overview", included: true },
+                  { name: "Competitor Benchmarking", included: true },
+                  { name: "Custom Growth Roadmap", included: true },
+                  { name: "Implementation Support", included: true },
+                  { name: "Priority Support (24/7)", included: true },
+                ]
+              }
+            ].map((plan, i) => (
+              <div
+                key={i}
+                className={`pricing-card${plan.popular ? ' popular' : ''}`}
+                style={{
+                  background: plan.popular ? `linear-gradient(165deg, #FFFFFF 0%, rgba(212,160,23,0.06) 100%)` : C.card,
+                  border: `1px solid ${plan.popular ? C.accent + '60' : C.border}`,
+                  borderRadius: "12px",
+                  padding: "40px 32px",
+                  display: "flex",
+                  flexDirection: "column" as const,
+                  position: "relative" as const,
+                  overflow: "hidden",
+                  transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+                  transform: plan.popular ? "scale(1.03)" : "none",
+                  boxShadow: plan.popular ? `0 20px 60px ${C.accentGlow}, 0 0 0 1px ${C.accent}30` : "none",
+                }}
+                onMouseEnter={e => {
+                  e.currentTarget.style.transform = plan.popular ? "scale(1.05)" : "translateY(-6px)";
+                  e.currentTarget.style.borderColor = C.accent;
+                  e.currentTarget.style.boxShadow = `0 20px 60px ${C.accentGlow}`;
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.transform = plan.popular ? "scale(1.03)" : "none";
+                  e.currentTarget.style.borderColor = plan.popular ? C.accent + '60' : C.border;
+                  e.currentTarget.style.boxShadow = plan.popular ? `0 20px 60px ${C.accentGlow}, 0 0 0 1px ${C.accent}30` : "none";
+                }}
+              >
+                {/* Popular Badge */}
+                {plan.popular && (
+                  <div style={{
+                    position: "absolute",
+                    top: "16px",
+                    right: "16px",
+                    background: C.accent,
+                    color: "#000",
+                    fontSize: "9px",
+                    fontWeight: 800,
+                    letterSpacing: "2px",
+                    padding: "6px 14px",
+                    borderRadius: "20px",
+                    fontFamily: "'Plus Jakarta Sans', sans-serif"
+                  }}>
+                    MOST POPULAR
+                  </div>
+                )}
+
+                {/* Plan Name */}
+                <div style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "3px", color: plan.popular ? C.accent : C.muted, marginBottom: "16px", fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                  {plan.name.toUpperCase()}
+                </div>
+
+                {/* Price */}
+                <div style={{ marginBottom: "8px", display: "flex", alignItems: "baseline", gap: "4px" }}>
+                  <span className="display-font" style={{ fontSize: "3.5rem", lineHeight: 1, color: C.text }}>₹{plan.price}</span>
+                  <span style={{ fontSize: "13px", color: C.muted, fontWeight: 400 }}>/session</span>
+                </div>
+
+                {/* Package Range */}
+                <div style={{ fontSize: "12px", color: C.accent, fontWeight: 600, letterSpacing: "0.5px", marginBottom: "8px", fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                  Package Range: {plan.range}
+                </div>
+
+                {/* Description */}
+                <p style={{ fontSize: "13px", color: C.muted, lineHeight: 1.7, marginBottom: "32px", fontWeight: 300 }}>
+                  {plan.desc}
+                </p>
+
+                {/* Divider */}
+                <div style={{ height: "1px", background: `linear-gradient(90deg, transparent, ${C.border}, transparent)`, marginBottom: "28px" }} />
+
+                {/* Features List */}
+                <div style={{ display: "flex", flexDirection: "column", gap: "0", marginBottom: "36px", flexGrow: 1 }}>
+                  {plan.features.map((feat, fi) => (
+                    <div
+                      key={fi}
+                      className="pricing-features-row"
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "12px",
+                        padding: "14px 16px",
+                        fontSize: "14px",
+                        fontFamily: "'Plus Jakarta Sans', sans-serif",
+                        fontWeight: 500,
+                        color: feat.included ? C.text : "rgba(255,255,255,0.3)",
+                        borderBottom: fi < plan.features.length - 1 ? `1px solid ${C.border}` : "none",
+                        transition: "background 0.2s",
+                      }}
+                      onMouseEnter={e => e.currentTarget.style.background = "rgba(255,255,255,0.02)"}
+                      onMouseLeave={e => e.currentTarget.style.background = "transparent"}
+                    >
+                      <span style={{
+                        width: "22px",
+                        height: "22px",
+                        borderRadius: "50%",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        fontSize: "12px",
+                        flexShrink: 0,
+                        background: feat.included ? "rgba(34,197,94,0.12)" : "rgba(239,68,68,0.08)",
+                        color: feat.included ? C.success : C.danger,
+                        fontWeight: 700,
+                      }}>
+                        {feat.included ? "✔" : "✖"}
+                      </span>
+                      <span style={{ textDecoration: feat.included ? "none" : "line-through", opacity: feat.included ? 1 : 0.5 }}>
+                        {feat.name}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* CTA Button */}
+                <button
+                  onClick={() => handlePlanPayment(plan.name, plan.price)}
+                  className="cta-btn"
+                  style={{
+                    width: "100%",
+                    padding: "18px",
+                    fontSize: "13px",
+                    letterSpacing: "1.5px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: "10px",
+                    background: plan.popular ? C.accent : "transparent",
+                    color: plan.popular ? "#000" : C.text,
+                    border: plan.popular ? "none" : `1px solid ${C.border}`,
+                    borderRadius: "6px",
+                  }}
+                  onMouseEnter={e => {
+                    if (!plan.popular) {
+                      e.currentTarget.style.background = C.accent;
+                      e.currentTarget.style.color = "#000";
+                      e.currentTarget.style.borderColor = C.accent;
+                    }
+                  }}
+                  onMouseLeave={e => {
+                    if (!plan.popular) {
+                      e.currentTarget.style.background = "transparent";
+                      e.currentTarget.style.color = C.text;
+                      e.currentTarget.style.borderColor = C.border;
+                    }
+                  }}
+                >
+                  PROCEED TO PAYMENT <ArrowRight size={16} />
+                </button>
+              </div>
+            ))}
+          </div>
+
+          {/* Bottom note */}
+          <p style={{ textAlign: "center", marginTop: "40px", color: C.muted, fontSize: "12px", letterSpacing: "0.5px", fontWeight: 400 }}>
+            All plans include GST. Secure payment via Razorpay. Instant confirmation.
+          </p>
+        </div>
+      </section>
+
       {/* ── WHAT YOU GET SECTION ── */}
-      <section className="mobile-section" style={{ padding: "80px 6%", background: "#0A0A0A", borderTop: `1px solid ${C.border}`, borderBottom: `1px solid ${C.border}`, textAlign: "center" }}>
+      <section className="mobile-section" style={{ padding: "80px 6%", background: C.subtle, borderTop: `1px solid ${C.border}`, borderBottom: `1px solid ${C.border}`, textAlign: "center" }}>
         <div style={{ maxWidth: "800px", margin: "0 auto" }}>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "12px", marginBottom: "20px" }}>
             <div style={{ width: "30px", height: "1px", background: C.accent }} />
@@ -616,7 +902,7 @@ export default function AvaniEnterprises() {
       </section>
 
       {/* ── PROJECTS ── */}
-      <section id="projects" className="mobile-section" style={{ padding: "140px 6%", background: "#050505" }}>
+      <section id="projects" className="mobile-section" style={{ padding: "140px 6%", background: "#F5F5F2" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           <div className="section-header-mobile flex-col-mob" style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "60px" }}>
             <div>
@@ -634,7 +920,7 @@ export default function AvaniEnterprises() {
           </div>
 
           {/* Featured project */}
-          <div className="project-card" style={{ marginBottom: "30px", background: projects[0].color || "#0A0A0A" }}>
+          <div className="project-card" style={{ marginBottom: "30px", background: projects[0].color || "#F5F5F0" }}>
             <img src={projects[0].img} alt={projects[0].title} />
             <div className="project-overlay">
               <div className="project-tag-glass">{projects[0].tag}</div>
@@ -653,7 +939,7 @@ export default function AvaniEnterprises() {
           {/* Grid of 4 */}
           <div className="projects-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "30px" }}>
             {projects.slice(1).map((p, i) => (
-              <div key={i} className="project-card" style={{ background: p.color || "#0A0A0A" }}>
+              <div key={i} className="project-card" style={{ background: p.color || "#F5F5F0" }}>
                 <img src={p.img} alt={p.title} />
                 <div className="project-overlay">
                   <div className="project-tag-glass" style={{ fontSize: "9px", padding: "6px 14px", top: "20px", left: "20px" }}>{p.tag}</div>
@@ -693,7 +979,7 @@ export default function AvaniEnterprises() {
               <div key={i} style={{ background: C.card, border: `1px solid ${C.border}`, padding: "50px 36px", borderLeft: i > 0 ? "none" : `1px solid ${C.border}`, transition: "border-color 0.3s" }}
                 onMouseEnter={e => e.currentTarget.style.borderColor = C.accent}
                 onMouseLeave={e => e.currentTarget.style.borderColor = C.border}>
-                <div className="display-font" style={{ fontSize: "5rem", color: "rgba(225,173,1,0.12)", lineHeight: 1, marginBottom: "24px" }}>{p.step}</div>
+                <div className="display-font" style={{ fontSize: "5rem", color: "rgba(212,160,23,0.18)", lineHeight: 1, marginBottom: "24px" }}>{p.step}</div>
                 <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "20px", marginBottom: "16px" }}>{p.title}</h3>
                 <p style={{ color: C.muted, fontSize: "13px", lineHeight: 1.8, fontWeight: 300 }}>{p.desc}</p>
               </div>
@@ -703,7 +989,7 @@ export default function AvaniEnterprises() {
       </section>
 
       {/* ── TESTIMONIALS ── */}
-      <section className="mobile-section" style={{ padding: "120px 6%", background: "#050505" }}>
+      <section className="mobile-section" style={{ padding: "120px 6%", background: C.subtle }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "60px" }}>
             <div style={{ width: "30px", height: "1px", background: C.accent }} />
@@ -754,17 +1040,17 @@ export default function AvaniEnterprises() {
 
       {/* ── CTA BAND ── */}
       <section className="mobile-section cta-band-section" style={{ padding: "120px 6%", background: C.accent, position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", inset: 0, backgroundImage: `linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)`, backgroundSize: "60px 60px" }} />
+        <div style={{ position: "absolute", inset: 0, backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`, backgroundSize: "60px 60px" }} />
         <div className="cta-band" style={{ position: "relative", zIndex: 1, display: "flex", justifyContent: "space-between", alignItems: "center", maxWidth: "1200px", margin: "0 auto", gap: "40px", flexWrap: "wrap" }}>
           <div>
-            <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "10px", fontWeight: 700, letterSpacing: "3px", color: "rgba(255,255,255,0.6)", marginBottom: "16px" }}>READY TO SCALE?</div>
+            <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "10px", fontWeight: 700, letterSpacing: "3px", color: "rgba(255,255,255,0.7)", marginBottom: "16px" }}>READY TO SCALE?</div>
             <h2 className="display-font" style={{ fontSize: "clamp(2.5rem, 5vw, 4.5rem)", color: "white", lineHeight: 0.95 }}>
               LET'S BUILD YOUR<br />NEXT CHAPTER.
             </h2>
           </div>
           <div className="cta-band-btns" style={{ display: "flex", gap: "16px" }}>
-            <button onClick={() => setShowModal(true)} style={{ background: "white", color: "#030303", border: "none", padding: "18px 36px", fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "13px", letterSpacing: "1.5px", cursor: "pointer", transition: "all 0.3s", borderRadius: "1px", display: "flex", alignItems: "center", gap: "10px" }}>
-              BOOK PLAN <ArrowRight size={16} />
+            <button onClick={() => setShowModal(true)} style={{ background: "white", color: "#1A1A2E", border: "none", padding: "18px 36px", fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "13px", letterSpacing: "1.5px", cursor: "pointer", transition: "all 0.3s", borderRadius: "4px", display: "flex", alignItems: "center", gap: "10px" }}>
+              START YOUR BUSINESS JOURNEY NOW <ArrowRight size={16} />
             </button>
             <a href="tel:+919311967319" style={{ background: "transparent", color: "white", border: "1px solid rgba(255,255,255,0.4)", padding: "18px 36px", fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: "13px", letterSpacing: "1.5px", cursor: "pointer", display: "flex", alignItems: "center", gap: "10px", textDecoration: "none" }}>
               CALL NOW <Phone size={16} />
@@ -777,10 +1063,10 @@ export default function AvaniEnterprises() {
 
       {/* ── MODAL ── */}
       {showModal && (
-        <div style={{ position: "fixed", inset: 0, zIndex: 9999, background: "rgba(0,0,0,0.95)", display: "flex", alignItems: "center", justifyContent: "center", padding: "20px", backdropFilter: "blur(10px)" }}>
-          <div style={{ background: "#0A0A0A", width: "100%", maxWidth: "520px", border: `1px solid ${C.border}`, position: "relative", maxHeight: "90vh", overflowY: "auto" }}>
+        <div style={{ position: "fixed", inset: 0, zIndex: 9999, background: "rgba(0,0,0,0.5)", display: "flex", alignItems: "center", justifyContent: "center", padding: "20px", backdropFilter: "blur(10px)" }}>
+          <div style={{ background: "#FFFFFF", width: "100%", maxWidth: "520px", border: `1px solid ${C.border}`, position: "relative", maxHeight: "90vh", overflowY: "auto", borderRadius: "12px", boxShadow: "0 20px 60px rgba(0,0,0,0.15)" }}>
             <div style={{ background: C.accent, padding: "30px 40px" }}>
-              <button onClick={() => setShowModal(false)} style={{ position: "absolute", top: "20px", right: "20px", background: "rgba(0,0,0,0.3)", border: "none", color: "white", cursor: "pointer", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <button onClick={() => setShowModal(false)} style={{ position: "absolute", top: "20px", right: "20px", background: "rgba(255,255,255,0.3)", border: "none", color: "white", cursor: "pointer", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "50%" }}>
                 <X size={16} />
               </button>
               <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "9px", fontWeight: 700, letterSpacing: "3px", color: "rgba(0,0,0,0.5)", marginBottom: "8px" }}>₹499 SPECIAL OFFER</div>
@@ -823,9 +1109,9 @@ export default function AvaniEnterprises() {
 
       {/* ── PLAN DETAILS MODAL ── */}
       {showPlanDetailsModal && (
-        <div style={{ position: "fixed", inset: 0, zIndex: 9999, background: "rgba(0,0,0,0.95)", display: "flex", alignItems: "center", justifyContent: "center", padding: "20px", backdropFilter: "blur(10px)" }}>
-          <div style={{ background: "#0A0A0A", width: "100%", maxWidth: "900px", border: `1px solid ${C.border}`, position: "relative", maxHeight: "90vh", overflowY: "auto", borderRadius: "8px" }}>
-            <div style={{ background: "#030303", padding: "30px 40px", borderBottom: `1px solid ${C.border}`, position: "sticky", top: 0, zIndex: 10 }}>
+        <div style={{ position: "fixed", inset: 0, zIndex: 9999, background: "rgba(0,0,0,0.5)", display: "flex", alignItems: "center", justifyContent: "center", padding: "20px", backdropFilter: "blur(10px)" }}>
+          <div style={{ background: "#FFFFFF", width: "100%", maxWidth: "900px", border: `1px solid ${C.border}`, position: "relative", maxHeight: "90vh", overflowY: "auto", borderRadius: "12px", boxShadow: "0 20px 60px rgba(0,0,0,0.15)" }}>
+            <div style={{ background: "#FAFAF8", padding: "30px 40px", borderBottom: `1px solid ${C.border}`, position: "sticky", top: 0, zIndex: 10, borderRadius: "12px 12px 0 0" }}>
               <button onClick={() => { setShowPlanDetailsModal(false); setActivePlanDetail(null); }} style={{ position: "absolute", top: "24px", right: "24px", background: "rgba(255,255,255,0.05)", border: `1px solid ${C.border}`, color: "white", cursor: "pointer", width: "36px", height: "36px", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "4px" }}>
                 <X size={16} />
               </button>
@@ -869,8 +1155,8 @@ export default function AvaniEnterprises() {
 
       {/* ── PAYMENT MODAL ── */}
       {paymentState !== "none" && (
-        <div style={{ position: "fixed", inset: 0, zIndex: 10000, background: "rgba(0,0,0,0.98)", display: "flex", alignItems: "center", justifyContent: "center", padding: "20px", backdropFilter: "blur(15px)" }}>
-          <div style={{ background: "#0A0A0A", width: "100%", maxWidth: "420px", border: `1px solid ${C.border}`, padding: "50px 40px", textAlign: "center" }}>
+        <div style={{ position: "fixed", inset: 0, zIndex: 10000, background: "rgba(0,0,0,0.5)", display: "flex", alignItems: "center", justifyContent: "center", padding: "20px", backdropFilter: "blur(15px)" }}>
+          <div style={{ background: "#FFFFFF", width: "100%", maxWidth: "420px", border: `1px solid ${C.border}`, padding: "50px 40px", textAlign: "center", borderRadius: "12px", boxShadow: "0 20px 60px rgba(0,0,0,0.15)" }}>
             {paymentState === "processing" && (
               <div style={{ textAlign: "center", padding: "40px 0" }}>
                 <div style={{ 
@@ -889,7 +1175,7 @@ export default function AvaniEnterprises() {
 
             {paymentState === "success" && (
               <>
-                <div style={{ color: "#00C853", marginBottom: "24px", display: "flex", justifyContent: "center" }}><CheckCircle size={64} /></div>
+                <div style={{ color: "#16A34A", marginBottom: "24px", display: "flex", justifyContent: "center" }}><CheckCircle size={64} /></div>
                 <h2 className="display-font" style={{ fontSize: "2rem", marginBottom: "16px" }}>PAYMENT SUCCESS</h2>
                 <p style={{ color: C.muted, fontSize: "14px", marginBottom: "32px" }}>Your request has been prioritized. Our team will contact you within 12 hours.</p>
                 <button onClick={() => setPaymentState("none")} className="ghost-btn" style={{ width: "100%" }}>CLOSE</button>
@@ -911,7 +1197,7 @@ export default function AvaniEnterprises() {
       {/* ── FLOATING BOOK NOW BUTTON ── */}
       <div className="mobile-fab" style={{ position: "fixed", bottom: "30px", right: "30px", zIndex: 9000 }}>
         <button onClick={() => setShowModal(true)} className="cta-btn" style={{ 
-          boxShadow: "0 10px 40px rgba(225,173,1,0.6), 0 0 20px rgba(225,173,1,0.2)", 
+          boxShadow: "0 10px 40px rgba(212,160,23,0.5), 0 0 20px rgba(212,160,23,0.15)", 
           padding: "18px 32px", 
           borderRadius: "4px", 
           display: "flex", 
@@ -923,10 +1209,10 @@ export default function AvaniEnterprises() {
           animation: "fadeUp 0.8s ease forwards", 
           animationDelay: "1s", 
           opacity: 0,
-          border: "2px solid #000"
+          border: "none"
         }}>
           <Zap size={18} fill="currentColor" />
-          BOOK PLAN NOW
+          BOOK NOW
         </button>
       </div>
 

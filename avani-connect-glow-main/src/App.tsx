@@ -162,7 +162,7 @@ const AppLayout = () => {
 
   // Pages where Navbar should be hidden completely
   const pathForCheck = pathname.toLowerCase();
-  const hideNavbar = pathForCheck === "/thank-you" || pathForCheck === "/landingpage";
+  const hideNavbar = pathForCheck === "/thank-you" || pathForCheck === "/business-setup";
 
   // Pages where Navbar1 should be used instead of default Navbar
   const useNavbar1 = pathForCheck === "/web-dev" || pathForCheck === "/7-day-launch";
@@ -197,7 +197,7 @@ const AppLayout = () => {
 
           {/* ये नया route जोड़ा है */}
           <Route path="/thank-you" element={<ThankYou />} />
-          <Route path="/landingPage" element={<LandingPage />} />
+          <Route path="/business-setup" element={<LandingPage />} />
 
           <Route path="/not-found" element={<NotFound />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
