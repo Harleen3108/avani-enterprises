@@ -8,7 +8,7 @@ import {
   TrendingUp, Code2, Users, Award, Play, ChevronRight,
   Linkedin, Twitter, Instagram, ExternalLink, Menu, Volume2, VolumeX
 } from "lucide-react";
-import { motion, useInView, useSpring, useTransform } from "framer-motion";
+import { motion, useInView, useSpring, useTransform, AnimatePresence } from "framer-motion";
 
 const C = {
   accent: "#D4A017",
@@ -481,92 +481,157 @@ export default function AvaniEnterprises() {
           animation: shimmer 4s linear infinite;
         }
 
-        ::-webkit-scrollbar { width: 4px; } ::-webkit-scrollbar-track { background: #F0F0EC; } ::-webkit-scrollbar-thumb { background: ${C.accent}; border-radius: 2px; }
+        ::-webkit-scrollbar { width: 4px; } ::-webkit-scrollbar-track { background: #F0F0EC; } ::-webkit-scrollbar-thumb { background: ${C.accent}; border-radi        @keyframes pulseAlert { 0%, 100% { box-shadow: 0 0 0 0 rgba(255, 51, 51, 0.4); } 50% { box-shadow: 0 0 0 10px rgba(255, 51, 51, 0); } }
 
-        @keyframes pulseAlert { 0%, 100% { box-shadow: 0 0 0 0 rgba(255, 51, 51, 0.4); } 50% { box-shadow: 0 0 0 10px rgba(255, 51, 51, 0); } }
-
-        @media (max-width: 768px) {
-          .nav-links { display: none !important; }
-          .hero-grid { grid-template-columns: 1fr !important; gap: 20px !important; text-align: center; }
+        @media (max-width: 1024px) {
+          .nav-links, .nav-desktop-cta { display: none !important; }
+          .nav-mobile-toggle { display: block !important; }
+          
+          .hero-grid { grid-template-columns: 1fr !important; gap: 40px !important; text-align: center; }
           .hero-text-content { align-items: center !important; }
-          .hero-badge { margin: 0 auto 20px auto !important; justify-content: center !important; }
-          .hero-desc { margin: 0 auto 30px auto !important; font-size: 1rem !important; }
-          .hero-img-col { display: block !important; margin-top: 20px !important; }
+          .hero-badge { margin: 0 auto 16px auto !important; justify-content: center !important; transform: scale(0.85) !important; width: 100%; }
+          .hero-desc { margin: 0 auto 24px auto !important; font-size: 0.95rem !important; line-height: 1.6 !important; }
+          .hero-img-col { display: block !important; margin-top: 15px !important; width: 100% !important; }
           .cta-container { width: 100% !important; align-items: center !important; }
-          .hero-cta { width: 100% !important; font-size: 18px !important; padding: 22px !important; box-shadow: 0 4px 20px rgba(212,160,23,0.3) !important; border: 2px solid ${C.accent} !important; }
-          .urgency-badge { font-size: 11px !important; padding: 6px 14px !important; animation: pulseAlert 2s infinite !important; }
-          .hero-section { min-height: 100vh !important; justify-content: center !important; padding-top: 60px !important; }
-          .hero-inner { margin-top: 0 !important; }
-          .display-font { font-size: clamp(3rem, 14vw, 5rem) !important; }
+          .hero-cta { width: 100% !important; font-size: 15px !important; padding: 18px !important; }
+          .urgency-badge { font-size: 10px !important; padding: 4px 12px !important; }
+          .hero-section { min-height: 100vh !important; justify-content: center !important; padding: 100px 6% 60px 6% !important; }
+          .hero-inner { margin-top: 0 !important; width: 100% !important; }
+          .display-font { font-size: clamp(2rem, 9vw, 3.2rem) !important; }
           .mobile-hide { display: none !important; }
           
-          /* Full Page Mobile Optimization */
-          .mobile-section { padding: 60px 6% !important; }
-          .flex-col-mob { flex-direction: column !important; align-items: flex-start !important; gap: 16px !important; margin-bottom: 40px !important; }
-          .mobile-desc-margin { margin-top: 10px !important; text-align: left !important; }
-          .stats-grid { grid-template-columns: 1fr 1fr !important; gap: 2px !important; margin: 0 -6% !important; }
-          .projects-grid, .process-grid, .testimonials-grid { grid-template-columns: 1fr !important; gap: 20px !important; }
-          .footer-top { grid-template-columns: 1fr !important; gap: 40px !important; }
-          .footer-section { margin-bottom: 20px !important; }
-          .mobile-fab { bottom: 20px !important; right: 20px !important; }
-          .mobile-fab button { padding: 14px 20px !important; font-size: 11px !important; border-radius: 4px !important; }
-          .footer-grid { grid-template-columns: 1fr !important; gap: 30px !important; text-align: left; }
-          .cta-band { flex-direction: column !important; align-items: flex-start !important; gap: 24px !important; }
-          .cta-band-btns { width: 100%; flex-direction: column !important; gap: 12px !important; display: flex !important; margin-top: 10px !important; }
-          .cta-band-btns button, .cta-band-btns a { width: 100%; justify-content: center; margin: 0 !important; }
-          .stat-card { padding: 30px 15px !important; border-left: none !important; border-right: 1px solid ${C.border} !important; border-bottom: 1px solid ${C.border} !important; background: ${C.card} !important; }
-          .stat-card:nth-child(2n) { border-right: none !important; }
-          .project-card { height: auto !important; aspect-ratio: 16/9 !important; border-radius: 6px !important; margin-bottom: 0 !important; border: 1px solid rgba(255,255,255,0.1) !important; transform: none !important; }
-          .project-card:hover { transform: none !important; border-color: ${C.border} !important; box-shadow: none !important; }
-          .project-overlay { background: linear-gradient(to top, rgba(0,0,0,0.90) 0%, rgba(0,0,0,0.5) 80%, transparent 100%) !important; }
-          .project-tag-glass { top: 12px !important; left: 12px !important; font-size: 8px !important; padding: 5px 12px !important; }
-          .project-info-glass { padding: 30px 16px 16px !important; }
-          .project-card h3 { font-size: 1.4rem !important; margin-bottom: 0 !important; }
-          .project-details { margin-top: 10px !important; }
-          .project-details p { font-size: 11px !important; line-height: 1.5 !important; margin-bottom: 12px !important; color: rgba(240,237,232,0.85) !important; }
-          .faq-item { border-bottom: 1px solid ${C.border}; transition: border-color 0.3s; }
-          .desktop-services-layout { display: none !important; }
-          .mobile-services-layout { display: flex !important; flex-direction: column; gap: 24px; animation: fadeUp 0.6s ease forwards; }
-          .service-detail-panel { position: static !important; padding: 30px 20px !important; minHeight: auto !important; }
-          .services-grid { grid-template-columns: 1fr !important; gap: 30px !important; }
-          .service-card { padding: 30px 24px !important; }
-          .service-title { font-size: 20px !important; }
-          .service-icon-wrapper { width: 50px !important; height: 50px !important; }
-          .section-header-mobile { margin-bottom: 40px !important; }
-          .footer-bottom { flex-direction: column !important; text-align: left !important; gap: 15px !important; align-items: flex-start !important; }
+          /* Force Grid Stacking below 1024px - EACH CARD IN ITS OWN ROW */
+          div.stats-grid, div.services-grid, div.projects-grid, div.process-grid, div.testimonials-grid, div.pricing-grid { 
+            display: flex !important; 
+            flex-direction: column !important; 
+            grid-template-columns: 1fr !important; 
+            gap: 24px !important; 
+            width: 100% !important;
+            margin: 0 !important;
+          }
+          
+          div.stat-card, div.service-card, div.pricing-card, div.testimonial-card {
+            width: 100% !important;
+            max-width: 100% !important;
+            margin-bottom: 0 !important;
+          }
 
-          /* Pricing Table Mobile */
-          .pricing-grid { grid-template-columns: 1fr !important; gap: 24px !important; max-width: 400px !important; margin: 0 auto !important; }
-          .pricing-card { padding: 32px 24px !important; }
-          .pricing-card.popular { transform: none !important; }
-          .pricing-features-row { font-size: 13px !important; padding: 12px 16px !important; }
+          .mobile-section { padding: 40px 6% !important; }
+          .flex-col-mob { flex-direction: column !important; align-items: flex-start !important; gap: 12px !important; margin-bottom: 30px !important; }
+          
+          /* Cards Compact */
+          .pricing-grid .popular { transform: scale(1) !important; margin: 15px 0 !important; }
+          .stat-card { padding: 20px 10px !important; }
+          .stat-card .display-font { font-size: 1.6rem !important; }
+          .service-card { padding: 24px !important; }
+          .pricing-card { padding: 32px 20px !important; width: 100% !important; }
+          
+          /* Footer */
+          .footer-top { grid-template-columns: 1fr !important; gap: 30px !important; }
+          .footer-grid { grid-template-columns: 1fr !important; gap: 20px !important; }
+          .cta-band { flex-direction: column !important; align-items: flex-start !important; padding: 40px 6% !important; }
         }
+
+        @media (max-width: 480px) {
+          .display-font { font-size: clamp(1.8rem, 11vw, 2.5rem) !important; }
+          .hero-cta { font-size: 13px !important; padding: 16px !important; }
+          .stat-card .display-font { font-size: 1.4rem !important; }
+          .project-card-container { width: 260px !important; }
+        }
+
       `}</style>
 
       <nav style={{
-        position: "absolute", top: 0, left: 0, right: 0, zIndex: 1000, height: "70px",
+        position: "fixed", top: 0, left: 0, right: 0, zIndex: 1000, height: "70px",
         display: "flex", alignItems: "center", justifyContent: "space-between",
         padding: "0 6%",
-        background: scrolled ? "rgba(250,250,248,0.95)" : "transparent",
-        backdropFilter: scrolled ? "blur(20px)" : "none",
-        borderBottom: scrolled ? `1px solid ${C.border}` : "none",
+        background: scrolled ? "rgba(250,250,248,0.98)" : "rgba(250,250,248,0.4)",
+        backdropFilter: "blur(20px)",
+        borderBottom: `1px solid ${C.border}`,
         transition: "all 0.4s ease",
       }}>
         <a href="#" style={{ display: "flex", alignItems: "center", gap: "12px", textDecoration: "none" }}>
-          <img src="/avani-logo.jpg" alt="Avani Enterprises Logo" style={{ width: "40px", height: "40px", objectFit: "contain", borderRadius: "2px" }} />
-          <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "15px", letterSpacing: "3px", color: C.text }}>AVANI ENTERPRISES</span>
+          <img src="/avani-logo.jpg" alt="Avani Enterprises Logo" style={{ width: "36px", height: "36px", objectFit: "contain", borderRadius: "2px" }} />
+          <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "14px", letterSpacing: "2px", color: C.text }}>AVANI ENTERPRISES</span>
         </a>
 
-        <div style={{ display: "flex", gap: "40px", alignItems: "center" }}>
-          <div className="nav-links" style={{ display: "flex", gap: "40px", alignItems: "center" }}>
-            {["Solutions", "Projects", "About", "FAQ"].map(l => (
-              <a key={l} href={`#${l.toLowerCase()}`} className="nav-link">{l.toUpperCase()}</a>
-            ))}
-          </div>
-          <button onClick={() => setShowModal(true)} className="cta-btn" style={{ padding: "10px 22px", fontSize: "11px" }}>
-            START YOUR BUSINESS JOURNEY NOW
+        {/* Desktop Links */}
+        <div className="nav-links" style={{ display: "flex", gap: "30px", alignItems: "center" }}>
+          {["Solutions", "Projects", "About", "FAQ"].map(l => (
+            <a key={l} href={`#${l.toLowerCase()}`} className="nav-link">{l.toUpperCase()}</a>
+          ))}
+          <button onClick={() => setShowModal(true)} className="cta-btn nav-desktop-cta" style={{ padding: "10px 22px", fontSize: "11px", marginLeft: "10px" }}>
+            START YOUR JOURNEY
           </button>
         </div>
+
+        {/* Mobile Toggle */}
+        <button 
+          className="nav-mobile-toggle"
+          onClick={() => setMenuOpen(!menuOpen)}
+          style={{ 
+            display: "none", 
+            border: "none", 
+            background: "none", 
+            color: C.text, 
+            cursor: "pointer",
+            padding: "10px"
+          }}
+        >
+          {menuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+
+        {/* Mobile Menu Overlay */}
+        <AnimatePresence>
+          {menuOpen && (
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              style={{
+                position: "fixed",
+                top: "70px",
+                right: 0,
+                bottom: 0,
+                width: "100%",
+                background: "#FFFFFF",
+                zIndex: 999,
+                padding: "40px 6%",
+                display: "flex",
+                flexDirection: "column",
+                gap: "20px",
+                borderTop: `1px solid ${C.border}`
+              }}
+            >
+              {["Solutions", "Projects", "About", "FAQ"].map(l => (
+                <a 
+                  key={l} 
+                  href={`#${l.toLowerCase()}`} 
+                  onClick={() => setMenuOpen(false)}
+                  style={{ 
+                    fontSize: "24px", 
+                    fontWeight: 800, 
+                    color: C.text, 
+                    textDecoration: "none",
+                    fontFamily: "'Plus Jakarta Sans', sans-serif"
+                  }}
+                >
+                  {l.toUpperCase()}
+                </a>
+              ))}
+              <div style={{ marginTop: "auto", paddingBottom: "60px" }}>
+                <button 
+                  onClick={() => { setShowModal(true); setMenuOpen(false); }}
+                  className="cta-btn" 
+                  style={{ width: "100%", padding: "20px", fontSize: "14px" }}
+                >
+                  START YOUR JOURNEY NOW
+                </button>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
 
       {/* ── HERO ── */}
@@ -584,13 +649,13 @@ export default function AvaniEnterprises() {
               <div className="hero-badge" style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "30px" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                   <div style={{ width: "7px", height: "7px", borderRadius: "50%", background: "#16A34A", boxShadow: "0 0 8px #16A34A", animation: "pulse 2s ease infinite" }} />
-                  <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "10px", fontWeight: 700, letterSpacing: "2.5px", color: "#16A34A" }}>ACTIVELY ONBOARDING CLIENTS</span>
+                  <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "10px", fontWeight: 700, letterSpacing: "2.5px", color: "#16A34A" }}>CLIENTS ONBOARDING</span>
                 </div>
                 <div style={{ width: "1px", height: "14px", background: C.border }} className="mobile-hide" />
-                <span className="mobile-hide" style={{ fontSize: "10px", letterSpacing: "2px", color: C.muted, fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 600 }}>Melbourne (Australia)  - Bombay - Gurugram</span>
+                <span className="mobile-hide" style={{ fontSize: "10px", letterSpacing: "2px", color: C.muted, fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 600 }}>Australia - Bombay - Gurugram</span>
               </div>
 
-              <h1 className="display-font shimmer-text" style={{ fontSize: "clamp(3rem, 7vw, 5.5rem)", lineHeight: 1.1, letterSpacing: "-1px", marginBottom: "30px", minHeight: "2.4em" }}>
+              <h1 className="display-font shimmer-text" style={{ fontSize: "clamp(2rem, 7vw, 4.8rem)", lineHeight: 1.1, letterSpacing: "-1px", marginBottom: "30px", minHeight: "2.5em", overflow: "hidden" }}>
                 <RotatingHooks />
               </h1>
 
@@ -993,7 +1058,7 @@ export default function AvaniEnterprises() {
           <div style={{ overflow: "hidden", margin: "40px -6% 30px -6%", padding: "20px 0" }}>
             <div className="marquee-row" style={{ display: "flex", width: "max-content", animation: "marquee 50s linear infinite", gap: "30px" }}>
               {[...projects, ...projects].map((p, i) => (
-                <div key={i} style={{ width: "450px", flexShrink: 0 }}>
+                <div key={i} className="project-card-container" style={{ width: "450px", flexShrink: 0 }}>
                   <div className="project-card" style={{ width: "100%", background: p.color || "#F5F5F0" }}>
                     <img src={p.img} alt={p.title} />
                     <div className="project-overlay">
@@ -1008,7 +1073,7 @@ export default function AvaniEnterprises() {
                     </div>
                   </div>
                   <div style={{ marginTop: "15px", textAlign: "center" }}>
-                    <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "16px", color: C.text, letterSpacing: "1px" }}>{p.title.toUpperCase()}</div>
+                    <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "16px", color: C.text, letterSpacing: "1px" }} className="project-card-title-bottom">{p.title.toUpperCase()}</div>
                     <div style={{ fontSize: "11px", color: C.accent, fontWeight: 700, marginTop: "4px", letterSpacing: "2px" }}>{p.tag}</div>
                   </div>
                 </div>
@@ -1020,7 +1085,7 @@ export default function AvaniEnterprises() {
           <div style={{ overflow: "hidden", margin: "0 -6% 40px -6%", padding: "20px 0" }}>
             <div className="marquee-row" style={{ display: "flex", width: "max-content", animation: "marquee-reverse 50s linear infinite", gap: "30px" }}>
               {[...projects.slice().reverse(), ...projects.slice().reverse()].map((p, i) => (
-                <div key={i} style={{ width: "450px", flexShrink: 0 }}>
+                <div key={i} className="project-card-container" style={{ width: "450px", flexShrink: 0 }}>
                   <div className="project-card" style={{ width: "100%", background: p.color || "#F5F5F0" }}>
                     <img src={p.img} alt={p.title} />
                     <div className="project-overlay">
@@ -1035,7 +1100,7 @@ export default function AvaniEnterprises() {
                     </div>
                   </div>
                   <div style={{ marginTop: "15px", textAlign: "center" }}>
-                    <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "16px", color: C.text, letterSpacing: "1px" }}>{p.title.toUpperCase()}</div>
+                    <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "16px", color: C.text, letterSpacing: "1px" }} className="project-card-title-bottom">{p.title.toUpperCase()}</div>
                     <div style={{ fontSize: "11px", color: C.accent, fontWeight: 700, marginTop: "4px", letterSpacing: "2px" }}>{p.tag}</div>
                   </div>
                 </div>
@@ -1117,7 +1182,7 @@ export default function AvaniEnterprises() {
                     </div>
                     
                     {/* Step Number Label */}
-                    <div style={{ 
+                    <div className="process-step-num" style={{ 
                       position: "absolute", 
                       top: "0", 
                       right: "0", 
@@ -1139,8 +1204,8 @@ export default function AvaniEnterprises() {
                     </div>
                   </div>
 
-                  <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "18px", marginBottom: "12px", color: C.text }}>{p.title}</h3>
-                  <p style={{ color: C.muted, fontSize: "12px", lineHeight: 1.6, fontWeight: 300, maxWidth: "180px" }}>{p.desc}</p>
+                  <h3 className="process-card-title" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "18px", marginBottom: "12px", color: C.text }}>{p.title}</h3>
+                  <p className="process-card-desc" style={{ color: C.muted, fontSize: "12px", lineHeight: 1.6, fontWeight: 300, maxWidth: "180px" }}>{p.desc}</p>
                 </div>
               ))}
             </div>
