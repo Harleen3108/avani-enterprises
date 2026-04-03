@@ -284,6 +284,26 @@ export default function AvaniEnterprises() {
         @keyframes mesh { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
         @keyframes lineGrow { from { width: 0; } to { width: 100%; } }
         @keyframes blink { from, to { border-color: transparent } 50% { border-color: ${C.accent} } }
+        @keyframes mobileOrbFloat { 0%,100% { transform: translate(-50%, -50%) scale(1); } 50% { transform: translate(-50%, -50%) scale(1.15); } }
+        @keyframes mobileGlowPulse { 0%,100% { opacity: 0.12; } 50% { opacity: 0.25; } }
+        @keyframes mobileFadeSlideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes mobileCountUp { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+
+        /* ── HERO ENHANCEMENT ELEMENTS ── */
+        .mobile-hero-only { display: block; }
+        .mobile-hero-orb { display: none; }
+        .mobile-hero-glow-bar { display: none; }
+
+        /* Desktop hero enhancements */
+        .mobile-hero-sub-hook {
+          animation: fadeUp 0.8s ease 0.5s both;
+        }
+        .mobile-hero-trust-row {
+          animation: fadeUp 0.8s ease 0.7s both;
+        }
+        .mobile-hero-value-pills {
+          animation: fadeUp 0.8s ease 0.9s both;
+        }
 
         .desktop-panel { display: block; }
         .mobile-panel { display: none; }
@@ -468,18 +488,80 @@ export default function AvaniEnterprises() {
           /* ── Hero Mobile ── */
           .hero-grid { grid-template-columns: 1fr !important; gap: 0 !important; text-align: center; }
           .hero-text-content { align-items: center !important; }
-          .hero-badge { margin: 0 auto 16px auto !important; justify-content: center !important; transform: scale(0.9) !important; width: 100%; }
-          .hero-desc { margin: 0 auto 24px auto !important; font-size: 0.95rem !important; line-height: 1.6 !important; }
+          .hero-badge { margin: 0 auto 12px auto !important; justify-content: center !important; transform: scale(0.9) !important; width: 100%; }
+          .hero-desc { margin: 0 auto 20px auto !important; font-size: 0.92rem !important; line-height: 1.65 !important; max-width: 380px !important; }
           .hero-img-col { display: none !important; }
           .cta-container { width: 100% !important; align-items: center !important; }
-          .hero-cta { width: 100% !important; font-size: 14px !important; padding: 18px !important; }
-          .urgency-badge { font-size: 10px !important; padding: 6px 14px !important; margin: 0 auto !important; }
-          .hero-section { min-height: 100svh !important; justify-content: center !important; padding: 90px 5% 40px 5% !important; }
+          .hero-cta {
+            width: 100% !important;
+            font-size: 14px !important;
+            padding: 18px !important;
+            border-radius: 12px !important;
+            background: linear-gradient(135deg, ${C.accent} 0%, #C4920E 100%) !important;
+            box-shadow: 0 8px 32px rgba(212,160,23,0.35), 0 2px 8px rgba(0,0,0,0.1) !important;
+            position: relative !important;
+            overflow: hidden !important;
+          }
+          .hero-cta::after {
+            content: '' !important;
+            position: absolute !important;
+            top: 0 !important; left: -100% !important;
+            width: 100% !important; height: 100% !important;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent) !important;
+            animation: ctaShine 3s ease-in-out infinite !important;
+          }
+          @keyframes ctaShine { 0% { left: -100%; } 50%,100% { left: 100%; } }
+          .urgency-badge { font-size: 10px !important; padding: 6px 14px !important; margin: 0 auto !important; border-radius: 8px !important; }
+          .hero-section { min-height: 100svh !important; justify-content: center !important; padding: 90px 5% 30px 5% !important; }
           .hero-inner { margin-top: 0 !important; width: 100% !important; }
           .display-font { font-size: clamp(1.8rem, 8vw, 3rem) !important; }
           .mobile-hide { display: none !important; }
-          .marquee-wrap { margin-top: 40px !important; }
+          .marquee-wrap { margin-top: 32px !important; }
           .marquee-item { padding: 0 20px !important; }
+
+          /* ── Mobile Hero Exclusive Elements ── */
+          .mobile-hero-only { display: block !important; }
+          .mobile-hero-orb {
+            display: block !important;
+            position: absolute !important;
+            top: 30% !important;
+            left: 50% !important;
+            width: 320px !important;
+            height: 320px !important;
+            border-radius: 50% !important;
+            background: radial-gradient(circle, rgba(212,160,23,0.18) 0%, rgba(212,160,23,0.04) 50%, transparent 70%) !important;
+            transform: translate(-50%, -50%) !important;
+            animation: mobileOrbFloat 6s ease-in-out infinite !important;
+            pointer-events: none !important;
+            z-index: 0 !important;
+          }
+          .mobile-hero-glow-bar {
+            display: block !important;
+            position: absolute !important;
+            bottom: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            height: 120px !important;
+            background: linear-gradient(180deg, transparent, rgba(212,160,23,0.06)) !important;
+            pointer-events: none !important;
+          }
+
+          .mobile-hero-sub-hook {
+            animation: mobileFadeSlideUp 0.8s ease 0.6s both !important;
+            max-width: 100% !important;
+          }
+          .mobile-hero-sub-hook > div {
+            text-align: center !important;
+          }
+          .mobile-hero-trust-row {
+            animation: mobileFadeSlideUp 0.8s ease 0.9s both !important;
+            justify-content: center !important;
+            max-width: 100% !important;
+          }
+          .mobile-hero-value-pills {
+            animation: mobileFadeSlideUp 0.8s ease 1.1s both !important;
+            justify-content: center !important;
+          }
 
           /* ── Pricing Mobile Redesign ── */
           div.pricing-grid {
@@ -689,11 +771,20 @@ export default function AvaniEnterprises() {
 
         @media (max-width: 480px) {
           .display-font { font-size: clamp(1.5rem, 9vw, 2.2rem) !important; }
-          .hero-cta { font-size: 13px !important; padding: 16px !important; }
-          .hero-section { padding: 80px 5% 30px 5% !important; }
+          .hero-cta { font-size: 13px !important; padding: 16px !important; border-radius: 12px !important; }
+          .hero-section { padding: 80px 5% 24px 5% !important; }
           .stat-card .display-font { font-size: clamp(1.4rem, 5vw, 1.8rem) !important; }
           .project-card-container { width: 260px !important; }
           .shimmer-text { font-size: clamp(1.4rem, 7vw, 2rem) !important; min-height: 3.5em !important; }
+          .mobile-hero-orb {
+            width: 250px !important;
+            height: 250px !important;
+            top: 25% !important;
+          }
+          .mobile-hero-trust-chip {
+            font-size: 10px !important;
+            padding: 5px 10px !important;
+          }
 
           /* Testimonials: full-width cards on small phones */
           div.testimonials-grid > div {
@@ -712,6 +803,10 @@ export default function AvaniEnterprises() {
           .process-step-mobile .process-circle {
             width: 52px !important;
             height: 52px !important;
+          }
+          .mobile-hero-value-pill-item {
+            padding: 6px 10px !important;
+            font-size: 10px !important;
           }
         }
 
@@ -912,6 +1007,10 @@ export default function AvaniEnterprises() {
         <div style={{ position: "absolute", inset: 0, background: `radial-gradient(ellipse 80% 60% at 50% 100%, transparent 0%, ${C.dark} 70%)` }} />
         <div style={{ position: "absolute", top: "20%", right: "5%", width: "600px", height: "600px", background: `radial-gradient(circle, ${C.accentGlow} 0%, transparent 70%)`, pointerEvents: "none" }} />
 
+        {/* Mobile-only decorative orb */}
+        <div className="mobile-hero-orb" />
+        <div className="mobile-hero-glow-bar" />
+
         <div className="hero-inner" style={{ position: "relative", zIndex: 1, maxWidth: "1400px", width: "100%", marginTop: "100px" }}>
           <div className="hero-grid" style={{ display: "grid", gridTemplateColumns: "1.2fr 1fr", gap: "80px", alignItems: "center" }}>
             
@@ -934,6 +1033,52 @@ export default function AvaniEnterprises() {
                 We show you how to generate leads in 30 minutes. Transform your digital presence into a high-converting sales system with a proven roadmap.
               </p>
 
+              {/* Sub-hook with value proposition */}
+              <div className="mobile-hero-only mobile-hero-sub-hook" style={{ marginBottom: "20px", width: "100%", maxWidth: "480px" }}>
+                <div style={{
+                  background: `linear-gradient(135deg, rgba(212,160,23,0.06) 0%, rgba(212,160,23,0.02) 100%)`,
+                  border: `1px solid rgba(212,160,23,0.15)`,
+                  borderRadius: "12px",
+                  padding: "14px 20px",
+                }}>
+                  <p style={{ fontSize: "13px", fontWeight: 600, color: C.text, lineHeight: 1.6, fontFamily: "'Plus Jakarta Sans', sans-serif", margin: 0 }}>
+                    🚀 Join <span style={{ color: C.accent, fontWeight: 800 }}>200+</span> businesses that scaled their revenue with our <span style={{ color: C.accent, fontWeight: 800 }}>proven growth system</span>
+                  </p>
+                </div>
+              </div>
+
+              {/* Trust chips */}
+              <div className="mobile-hero-only mobile-hero-trust-row" style={{ display: "flex", flexWrap: "wrap", gap: "8px", marginBottom: "20px", width: "100%", maxWidth: "480px" }}>
+                {[
+                  { icon: "⚡", label: "30-Min Strategy" },
+                  { icon: "📈", label: "4x-10x ROAS" },
+                  { icon: "🎯", label: "Proven Frameworks" },
+                ].map((chip, i) => (
+                  <div key={i} className="mobile-hero-trust-chip" style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "6px",
+                    background: C.card,
+                    border: `1px solid ${C.border}`,
+                    borderRadius: "100px",
+                    padding: "7px 16px",
+                    fontSize: "12px",
+                    fontWeight: 700,
+                    color: C.text,
+                    fontFamily: "'Plus Jakarta Sans', sans-serif",
+                    boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
+                    letterSpacing: "0.2px",
+                    transition: "all 0.3s ease",
+                  }}
+                  onMouseEnter={e => { e.currentTarget.style.borderColor = C.accent + '60'; e.currentTarget.style.boxShadow = `0 4px 16px ${C.accentGlow}`; }}
+                  onMouseLeave={e => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.04)'; }}
+                  >
+                    <span>{chip.icon}</span>
+                    <span>{chip.label}</span>
+                  </div>
+                ))}
+              </div>
+
               <div className="cta-container" style={{ display: "flex", flexDirection: "column", gap: "16px", alignItems: "flex-start" }}>
                 <div className="urgency-badge" style={{ background: "rgba(255, 50, 50, 0.1)", border: "1px solid rgba(255, 50, 50, 0.3)", padding: "8px 16px", borderRadius: "2px", display: "inline-flex", alignItems: "center", gap: "8px" }}>
                   <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#FF3333", animation: "pulse 1.5s infinite" }} />
@@ -942,6 +1087,29 @@ export default function AvaniEnterprises() {
                 <button onClick={() => openModal()} className="cta-btn hero-cta" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", padding: "18px 40px" }}>
                   START YOUR BUSINESS JOURNEY NOW <ArrowRight size={16} />
                 </button>
+
+                {/* Value pills below CTA */}
+                <div className="mobile-hero-only mobile-hero-value-pills" style={{ display: "flex", flexWrap: "wrap", gap: "16px", width: "100%", marginTop: "8px" }}>
+                  {[
+                    { icon: <CheckCircle size={13} />, text: "No Long-Term Lock-in" },
+                    { icon: <Star size={13} />, text: "Rated 4.9/5" },
+                    { icon: <Clock size={13} />, text: "Results in 24hrs" },
+                  ].map((pill, i) => (
+                    <div key={i} className="mobile-hero-value-pill-item" style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "5px",
+                      fontSize: "12px",
+                      fontWeight: 600,
+                      color: C.muted,
+                      fontFamily: "'Plus Jakarta Sans', sans-serif",
+                      padding: "4px 0",
+                    }}>
+                      <span style={{ color: C.accent, display: "flex", alignItems: "center" }}>{pill.icon}</span>
+                      <span>{pill.text}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
 
