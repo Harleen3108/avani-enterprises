@@ -751,67 +751,159 @@ export default function AvaniEnterprises() {
             background: "none", 
             color: C.text, 
             cursor: "pointer",
-            padding: "10px"
+            padding: "10px",
+            zIndex: 10001,
+            position: "relative",
           }}
         >
           {menuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
+      </nav>
 
-        {/* Mobile Menu Overlay */}
-        <AnimatePresence>
-          {menuOpen && (
+      {/* ── MOBILE MENU OVERLAY (outside nav to avoid clipping) ── */}
+      <AnimatePresence>
+        {menuOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={() => setMenuOpen(false)}
+              style={{
+                position: "fixed",
+                inset: 0,
+                background: "rgba(0,0,0,0.3)",
+                zIndex: 9997,
+                backdropFilter: "blur(4px)",
+              }}
+            />
+            {/* Slide-in Panel */}
             <motion.div
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              transition={{ type: "spring", damping: 28, stiffness: 280 }}
               style={{
                 position: "fixed",
-                top: "70px",
-                left: 0,
+                top: 0,
                 right: 0,
                 bottom: 0,
-                width: "100%",
+                width: "85%",
+                maxWidth: "380px",
                 background: "#FFFFFF",
                 zIndex: 9998,
-                padding: "40px 6%",
                 display: "flex",
                 flexDirection: "column",
-                gap: "20px",
-                borderTop: `1px solid ${C.border}`,
+                boxShadow: "-8px 0 40px rgba(0,0,0,0.12)",
                 overflowY: "auto",
-                boxShadow: "0 10px 40px rgba(0,0,0,0.1)",
               }}
             >
-              {["Solutions", "Projects", "About", "FAQ"].map(l => (
-                <a 
-                  key={l} 
-                  href={`#${l.toLowerCase()}`} 
+              {/* Header with close button */}
+              <div style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                padding: "24px 28px",
+                borderBottom: `1px solid ${C.border}`,
+              }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                  <img src="/avani-logo.jpg" alt="Avani" style={{ width: "32px", height: "32px", borderRadius: "4px", objectFit: "contain" }} />
+                  <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "13px", letterSpacing: "2px", color: C.text }}>AVANI</span>
+                </div>
+                <button 
                   onClick={() => setMenuOpen(false)}
-                  style={{ 
-                    fontSize: "24px", 
-                    fontWeight: 800, 
-                    color: C.text, 
-                    textDecoration: "none",
-                    fontFamily: "'Plus Jakarta Sans', sans-serif"
+                  style={{
+                    border: "none",
+                    background: C.subtle,
+                    color: C.text,
+                    cursor: "pointer",
+                    width: "40px",
+                    height: "40px",
+                    borderRadius: "50%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
                   }}
                 >
-                  {l.toUpperCase()}
-                </a>
-              ))}
-              <div style={{ marginTop: "auto", paddingBottom: "60px" }}>
-                <button 
+                  <X size={20} />
+                </button>
+              </div>
+
+              {/* Navigation Links */}
+              <div style={{ padding: "16px 0", flex: 1 }}>
+                {[
+                  { label: "Solutions", href: "#solutions", icon: <Layers size={20} /> },
+                  { label: "Projects", href: "#projects", icon: <Briefcase size={20} /> },
+                  { label: "Pricing", href: "#pricing", icon: <BarChart3 size={20} /> },
+                  { label: "About", href: "#about", icon: <Users size={20} /> },
+                  { label: "FAQ", href: "#faq", icon: <MessageSquare size={20} /> },
+                ].map((item, idx) => (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    onClick={() => setMenuOpen(false)}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "16px",
+                      padding: "18px 28px",
+                      fontSize: "16px",
+                      fontWeight: 700,
+                      color: C.text,
+                      textDecoration: "none",
+                      fontFamily: "'Plus Jakarta Sans', sans-serif",
+                      letterSpacing: "0.5px",
+                      borderBottom: `1px solid ${C.border}`,
+                      transition: "background 0.2s",
+                    }}
+                    onMouseEnter={e => e.currentTarget.style.background = C.subtle}
+                    onMouseLeave={e => e.currentTarget.style.background = "transparent"}
+                  >
+                    <span style={{ color: C.accent, display: "flex", alignItems: "center" }}>{item.icon}</span>
+                    {item.label.toUpperCase()}
+                    <ChevronRight size={16} color={C.muted} style={{ marginLeft: "auto" }} />
+                  </a>
+                ))}
+              </div>
+
+              {/* Contact info */}
+              <div style={{ padding: "20px 28px", borderTop: `1px solid ${C.border}`, background: C.subtle }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "12px" }}>
+                  <Phone size={15} color={C.accent} />
+                  <a href="tel:+919311967319" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "13px", fontWeight: 600, color: C.text, textDecoration: "none" }}>+91 93119 67319</a>
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "20px" }}>
+                  <Mail size={15} color={C.accent} />
+                  <a href="mailto:info@avanienterprises.in" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "13px", fontWeight: 600, color: C.text, textDecoration: "none" }}>info@avanienterprises.in</a>
+                </div>
+              </div>
+
+              {/* CTA Button */}
+              <div style={{ padding: "20px 28px 40px" }}>
+                <button
                   onClick={() => { openModal(); setMenuOpen(false); }}
-                  className="cta-btn" 
-                  style={{ width: "100%", padding: "20px", fontSize: "14px" }}
+                  className="cta-btn"
+                  style={{
+                    width: "100%",
+                    padding: "18px",
+                    fontSize: "13px",
+                    letterSpacing: "1.5px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: "10px",
+                    borderRadius: "8px",
+                  }}
                 >
-                  START YOUR JOURNEY NOW
+                  START YOUR JOURNEY <ArrowRight size={16} />
                 </button>
               </div>
             </motion.div>
-          )}
-        </AnimatePresence>
-      </nav>
+          </>
+        )}
+      </AnimatePresence>
 
       {/* ── HERO ── */}
       <section className="hero-section" style={{ minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", padding: "0 6%", position: "relative", overflow: "hidden" }}>
