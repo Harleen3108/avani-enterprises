@@ -718,7 +718,7 @@ export default function AvaniEnterprises() {
       `}</style>
 
       <nav style={{
-        position: "fixed", top: 0, left: 0, right: 0, zIndex: 1000, height: "70px",
+        position: "fixed", top: 0, left: 0, right: 0, zIndex: 9999, height: "70px",
         display: "flex", alignItems: "center", justifyContent: "space-between",
         padding: "0 6%",
         background: scrolled ? "rgba(250,250,248,0.98)" : "rgba(250,250,248,0.4)",
@@ -768,16 +768,19 @@ export default function AvaniEnterprises() {
               style={{
                 position: "fixed",
                 top: "70px",
+                left: 0,
                 right: 0,
                 bottom: 0,
                 width: "100%",
                 background: "#FFFFFF",
-                zIndex: 999,
+                zIndex: 9998,
                 padding: "40px 6%",
                 display: "flex",
                 flexDirection: "column",
                 gap: "20px",
-                borderTop: `1px solid ${C.border}`
+                borderTop: `1px solid ${C.border}`,
+                overflowY: "auto",
+                boxShadow: "0 10px 40px rgba(0,0,0,0.1)",
               }}
             >
               {["Solutions", "Projects", "About", "FAQ"].map(l => (
