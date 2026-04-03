@@ -6,8 +6,9 @@ import {
   Clock, Star, X, Calendar, Search, Briefcase, ShieldCheck,
   ChevronDown, MessageSquare, Activity, ShieldAlert, ArrowUpRight,
   TrendingUp, Code2, Users, Award, Play, ChevronRight,
-  Linkedin, Twitter, Instagram, ExternalLink, Menu
+  Linkedin, Twitter, Instagram, ExternalLink, Menu, Volume2, VolumeX
 } from "lucide-react";
+import { motion, useInView, useSpring, useTransform } from "framer-motion";
 
 const C = {
   accent: "#D4A017",
@@ -27,10 +28,11 @@ const C = {
 };
 
 // Typewriter Component
-const Typewriter = ({ text, delay = 100, startDelay = 0, onComplete }: any) => {
-  const [currentText, setCurrentText] = React.useState("");
+const Typewriter = ({ segments, delay = 100, startDelay = 0, onComplete }: any) => {
   const [currentIndex, setCurrentIndex] = React.useState(0);
   const [started, setStarted] = React.useState(false);
+
+  const totalLength = segments.reduce((acc: number, s: any) => acc + s.text.length, 0);
 
   React.useEffect(() => {
     const timer = setTimeout(() => setStarted(true), startDelay);
@@ -38,24 +40,102 @@ const Typewriter = ({ text, delay = 100, startDelay = 0, onComplete }: any) => {
   }, [startDelay]);
 
   React.useEffect(() => {
-    if (started && currentIndex < text.length) {
+    if (started && currentIndex < totalLength) {
       const timeout = setTimeout(() => {
-        setCurrentText(prev => prev + text[currentIndex]);
         setCurrentIndex(prev => prev + 1);
       }, delay);
       return () => clearTimeout(timeout);
-    } else if (started && currentIndex === text.length && onComplete) {
+    } else if (started && currentIndex === totalLength && onComplete) {
       onComplete();
     }
-  }, [currentIndex, delay, text, started, onComplete]);
+  }, [currentIndex, delay, totalLength, started, onComplete]);
 
+  let charCount = 0;
   return (
     <span>
-      {currentText}
-      {started && currentIndex < text.length && <span style={{ borderRight: "4px solid " + C.accent, marginLeft: "4px", animation: "blink 1s step-end infinite" }}>&nbsp;</span>}
+      {segments.map((s: any, i: number) => {
+        const start = charCount;
+        const end = Math.min(currentIndex, charCount + s.text.length);
+        charCount += s.text.length;
+        if (currentIndex < start) return null;
+        return (
+          <span key={i} style={{ color: s.color || "inherit" }}>
+            {s.text.slice(0, end - start)}
+          </span>
+        );
+      })}
+      {started && currentIndex < totalLength && <span style={{ borderRight: "4px solid " + C.accent, marginLeft: "4px", animation: "blink 1s step-end infinite" }}>&nbsp;</span>}
     </span>
   );
 };
+
+// RotatingHooks Component
+const RotatingHooks = () => {
+  const hooks = [
+    [
+      { text: "Build Your ", color: "#FFFFFF" },
+      { text: "Online Presence. ", color: C.accent },
+      { text: "Grow Business ", color: "#FFFFFF" },
+      { text: "Faster.", color: C.muted }
+    ],
+    [
+      { text: "We Turn ", color: "#FFFFFF" },
+      { text: "Ideas ", color: C.accent },
+      { text: "Into ", color: "#FFFFFF" },
+      { text: "High-Performing ", color: C.muted },
+      { text: "Websites.", color: C.accent }
+    ],
+    [
+      { text: "From ", color: "#FFFFFF" },
+      { text: "Clicks ", color: C.accent },
+      { text: "to ", color: "#FFFFFF" },
+      { text: "Customers ", color: C.muted },
+      { text: "— We Make It ", color: "#FFFFFF" },
+      { text: "Happen.", color: C.accent }
+    ]
+  ];
+  const [index, setIndex] = React.useState(0);
+  const [key, setKey] = React.useState(0); // For forcing re-render of typewriter
+
+  return (
+    <Typewriter 
+      key={key}
+      segments={hooks[index]} 
+      delay={60} 
+      onComplete={() => {
+        setTimeout(() => {
+          setIndex((prev) => (prev + 1) % hooks.length);
+          setKey(prev => prev + 1);
+        }, 3000); // 3 second pause between hooks
+      }} 
+    />
+  );
+};
+
+
+// Animated Number Component
+const AnimatedNumber = ({ value, duration = 1.5 }: { value: number; duration?: number }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: false, amount: 0.5 });
+  
+  const springValue = useSpring(1, {
+    stiffness: 100,
+    damping: 15,
+  });
+
+  useEffect(() => {
+    if (isInView) {
+      springValue.set(value);
+    } else {
+      springValue.set(1);
+    }
+  }, [isInView, springValue, value]);
+
+  const rounded = useTransform(springValue, (latest) => Math.floor(latest));
+
+  return <motion.span ref={ref}>{rounded}</motion.span>;
+};
+
 
 const FONT = `
   @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
@@ -67,11 +147,8 @@ export default function AvaniEnterprises() {
   const [showModal, setShowModal] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeFaq, setActiveFaq] = useState(null);
-  const [showPlanDetailsModal, setShowPlanDetailsModal] = useState(false);
-  const [activePlanDetail, setActivePlanDetail] = useState(null);
-  const [counter, setCounter] = useState({ clients: 0, projects: 0, growth: 0, years: 0 });
-  const counterRef = useRef(null);
-  const [counted, setCounted] = useState(false);
+  const sectionRef = useRef(null);
+  const [isMuted, setIsMuted] = useState(true);
 
   // Form & Payment State
   const [formData, setFormData] = useState({
@@ -89,26 +166,6 @@ export default function AvaniEnterprises() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting && !counted) {
-        setCounted(true);
-        const targets = { clients: 85, projects: 300, growth: 187, years: 6 };
-        Object.keys(targets).forEach(key => {
-          let start = 0;
-          const end = targets[key];
-          const step = end / 60;
-          const timer = setInterval(() => {
-            start += step;
-            if (start >= end) { clearInterval(timer); start = end; }
-            setCounter(prev => ({ ...prev, [key]: Math.floor(start) }));
-          }, 25);
-        });
-      }
-    }, { threshold: 0.3 });
-    if (counterRef.current) observer.observe(counterRef.current);
-    return () => observer.disconnect();
-  }, [counted]);
 
   const services = [
     { icon: <Code2 />, title: "Web Engineering", tag: "MERN / NEXT.JS", desc: "We architect full-stack platforms that handle millions of requests. From fintech dashboards to e-commerce ecosystems, our engineering teams build for scale, performance, and conversion.", features: ["Custom MERN Stack Apps", "E-commerce Platforms", "SaaS Products", "API Architecture"] },
@@ -128,7 +185,6 @@ export default function AvaniEnterprises() {
   ];
 
   const faqs = [
-    { q: "What exactly do I get in the ₹499 Growth Plan?", a: "You get a 30-minute 1-on-1 strategy call, a comprehensive website audit, a competitor analysis report, a custom lead generation roadmap, and a bonus Homepage performance audit." },
     { q: "Is this for new or existing businesses?", a: "Both. If you're new, we help you launch with trust. If you're existing, we show you how to optimize and scale your current lead flow." },
     { q: "Why is the price so low?", a: "We believe in building trust first. This low-ticket entry allows us to demonstrate our expertise. If you like the plan, you can choose to work with us for implementation." },
     { q: "What happens after I pay?", a: "You'll receive an instant confirmation. Our team will reach out via WhatsApp/Email within 24 hours to schedule your session at your convenience." },
@@ -136,9 +192,9 @@ export default function AvaniEnterprises() {
   ];
 
   const testimonials = [
-    { name: "Rahul Mehta", role: "E-commerce Founder", text: "Initially skeptical about the ₹499 audit, but the growth roadmap was a game-changer. We went from 0 to 42 leads/month in just 3 months.", stars: 5 },
-    { name: "Priya Sharma", role: "CMO, TextileBridge", text: "The strategy session alone was worth 10X the price. They identified 3 major leaks in our homepage that were costing us lakhs.", stars: 5 },
-    { name: "Vikram Nair", role: "Business Owner", text: "Finally, a agency that talks numbers, not just aesthetics. The step-by-step lead gen plan is exactly what I needed to scale.", stars: 5 },
+    { name: "Rahul Mehta", role: "E-commerce Founder", text: "Initially skeptical about the ₹499 audit, but the growth roadmap was a game-changer. We went from 0 to 42 leads/month in just 3 months.", stars: 5, image: "/review_person1.png" },
+    { name: "Priya Sharma", role: "CMO, TextileBridge", text: "The strategy session alone was worth 10X the price. They identified 3 major leaks in our homepage that were costing us lakhs.", stars: 5, image: "/review_person2.png" },
+    { name: "Vikram Nair", role: "Business Owner", text: "Finally, a agency that talks numbers, not just aesthetics. The step-by-step lead gen plan is exactly what I needed to scale.", stars: 5, image: "/review_person3.png" },
   ];
   // Plan payment handler for pricing table
   const handlePlanPayment = (planName: string, amount: number) => {
@@ -279,6 +335,8 @@ export default function AvaniEnterprises() {
         
         @keyframes fadeUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        @keyframes marquee-reverse { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
+        .marquee-row:hover { animation-play-state: paused !important; }
         @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
         @keyframes shimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
         @keyframes mesh { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
@@ -304,9 +362,9 @@ export default function AvaniEnterprises() {
         .service-tab.active { border-bottom-color: ${C.accent}; }
         .service-tab:hover .tab-title { color: ${C.text}; }
 
-        .project-card { position: relative; overflow: hidden; border-radius: 8px; cursor: pointer; aspect-ratio: 16/9; background: #F5F5F0; border: 1px solid ${C.border}; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+        .project-card { position: relative; overflow: hidden; border-radius: 8px; cursor: pointer; aspect-ratio: 16/9; background: #F5F5F0; border: 1px solid ${C.border}; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 10px 30px ${C.accentGlow}; }
         .project-card img { width: 100%; height: 100%; object-fit: cover; object-position: top center; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); filter: brightness(0.8) saturate(0.9); }
-        .project-card:hover { border-color: ${C.accent}60; box-shadow: 0 10px 40px rgba(212,160,23,0.15); transform: translateY(-4px); z-index: 10; }
+        .project-card:hover { border-color: ${C.accent}60; box-shadow: 0 20px 60px ${C.accentGlow}, 0 0 20px ${C.accent}15; transform: translateY(-4px); z-index: 10; }
         .project-card:hover img { transform: scale(1.05); filter: brightness(0.4) saturate(0.8); }
         .project-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: space-between; opacity: 0; transition: opacity 0.4s ease; background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, transparent 60%); }
         .project-card:hover .project-overlay { opacity: 1; }
@@ -529,14 +587,11 @@ export default function AvaniEnterprises() {
                   <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "10px", fontWeight: 700, letterSpacing: "2.5px", color: "#16A34A" }}>ACTIVELY ONBOARDING CLIENTS</span>
                 </div>
                 <div style={{ width: "1px", height: "14px", background: C.border }} className="mobile-hide" />
-                <span className="mobile-hide" style={{ fontSize: "10px", letterSpacing: "2px", color: C.muted, fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 600 }}>GURUGRAM · BOMBAY · AUSTRALIA</span>
+                <span className="mobile-hide" style={{ fontSize: "10px", letterSpacing: "2px", color: C.muted, fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 600 }}>Melbourne (Australia)  - Bombay - Gurugram</span>
               </div>
 
-              <h1 className="display-font" style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)", lineHeight: 0.95, letterSpacing: "-1px", marginBottom: "10px" }}>
-                <Typewriter text="DIRECT PRICING PAYMENT" delay={50} />
-              </h1>
-              <h1 className="display-font shimmer-text" style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)", lineHeight: 0.95, letterSpacing: "-1px", marginBottom: "30px" }}>
-                <Typewriter text="START YOUR BUSINESS JOURNEY NOW" delay={70} startDelay={1000} />
+              <h1 className="display-font shimmer-text" style={{ fontSize: "clamp(3rem, 7vw, 5.5rem)", lineHeight: 1.1, letterSpacing: "-1px", marginBottom: "30px", minHeight: "2.4em" }}>
+                <RotatingHooks />
               </h1>
 
               <p className="hero-desc" style={{ fontSize: "1.1rem", color: C.text, lineHeight: 1.75, fontWeight: 300, maxWidth: "480px", marginBottom: "40px" }}>
@@ -557,16 +612,50 @@ export default function AvaniEnterprises() {
             {/* Right Column: Video */}
             <div className="hero-line hero-img-col" style={{ position: "relative" }}>
               <div style={{ position: "absolute", inset: "-12px", border: `1px solid ${C.accent}25`, borderRadius: "16px", zIndex: -1 }} />
-              <video 
-                src="/avanivideo.mp4" 
-                autoPlay 
-                loop 
-                muted 
-                playsInline
-                preload="auto"
-                poster="/avani-logo.jpg"
-                style={{ width: "100%", height: "auto", borderRadius: "12px", objectFit: "cover", boxShadow: "0 8px 40px rgba(0,0,0,0.12)", pointerEvents: "none" }} 
-              />
+              <div style={{ position: "relative", borderRadius: "12px", overflow: "hidden", boxShadow: "0 8px 40px rgba(0,0,0,0.12)" }}>
+                <video 
+                  src="/landing.mp4" 
+                  autoPlay 
+                  loop 
+                  muted={isMuted}
+                  playsInline
+                  preload="auto"
+                  style={{ width: "100%", height: "auto", display: "block", objectFit: "cover" }} 
+                />
+                
+                {/* Mute/Unmute Toggle */}
+                <button 
+                  onClick={() => setIsMuted(!isMuted)}
+                  style={{
+                    position: "absolute",
+                    bottom: "20px",
+                    right: "20px",
+                    width: "44px",
+                    height: "44px",
+                    borderRadius: "50%",
+                    background: "rgba(0, 0, 0, 0.4)",
+                    backdropFilter: "blur(8px)",
+                    border: "1px solid rgba(255, 255, 255, 0.2)",
+                    color: "white",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    cursor: "pointer",
+                    transition: "all 0.3s ease",
+                    zIndex: 10
+                  }}
+                  onMouseEnter={e => {
+                    e.currentTarget.style.background = "rgba(0, 0, 0, 0.6)";
+                    e.currentTarget.style.transform = "scale(1.1)";
+                  }}
+                  onMouseLeave={e => {
+                    e.currentTarget.style.background = "rgba(0, 0, 0, 0.4)";
+                    e.currentTarget.style.transform = "scale(1)";
+                  }}
+                >
+                  {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
+                </button>
+              </div>
             </div>
 
           </div>
@@ -590,7 +679,7 @@ export default function AvaniEnterprises() {
       </section>
 
       {/* ── PRICING TABLE ── */}
-      <section id="pricing" className="mobile-section" style={{ padding: "120px 6%", background: `linear-gradient(180deg, ${C.dark} 0%, #F0F0EC 50%, ${C.dark} 100%)`, position: "relative", overflow: "hidden" }}>
+      <section id="pricing" className="mobile-section" style={{ padding: "80px 6%", background: `linear-gradient(180deg, ${C.dark} 0%, #F0F0EC 50%, ${C.dark} 100%)`, position: "relative", overflow: "hidden" }}>
         {/* Background decorative elements */}
         <div style={{ position: "absolute", top: "10%", left: "50%", transform: "translateX(-50%)", width: "800px", height: "800px", background: `radial-gradient(circle, ${C.accentGlow} 0%, transparent 70%)`, pointerEvents: "none", opacity: 0.15 }} />
 
@@ -819,36 +908,20 @@ export default function AvaniEnterprises() {
         </div>
       </section>
 
-      {/* ── WHAT YOU GET SECTION ── */}
-      <section className="mobile-section" style={{ padding: "80px 6%", background: C.subtle, borderTop: `1px solid ${C.border}`, borderBottom: `1px solid ${C.border}`, textAlign: "center" }}>
-        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "12px", marginBottom: "20px" }}>
-            <div style={{ width: "30px", height: "1px", background: C.accent }} />
-            <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "10px", fontWeight: 700, letterSpacing: "3px", color: C.accent }}>TRANSPARENT VALUE</span>
-            <div style={{ width: "30px", height: "1px", background: C.accent }} />
-          </div>
-          <h2 className="display-font" style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", marginBottom: "30px" }}>WHAT YOU GET IN ₹499</h2>
-          <p style={{ color: C.muted, fontSize: "15px", lineHeight: 1.8, marginBottom: "40px", fontWeight: 300 }}>
-            No fluff. No generic advice. Just actionable data and a deterministic plan to grow your revenue.
-          </p>
-          <button onClick={() => setShowPlanDetailsModal(true)} className="ghost-btn" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", gap: "10px", padding: "18px 40px", borderColor: C.accent, color: C.accent }}>
-            VIEW FULL DELIVERABLES <ArrowUpRight size={16} />
-          </button>
-        </div>
-      </section>
 
       {/* ── STATS COUNTER ── */}
-      <section id="about" ref={counterRef} className="mobile-section" style={{ padding: "80px 6%", borderBottom: `1px solid ${C.border}` }}>
+      <section id="about" ref={sectionRef} className="mobile-section" style={{ padding: "80px 6%", borderBottom: `1px solid ${C.border}` }}>
         <div className="stats-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "2px" }}>
           {[
-            { num: counter.clients, suffix: "+", label: "Enterprise Clients", sub: "Across 8 Industries" },
-            { num: counter.projects, suffix: "+", label: "Projects Deployed", sub: "Since 2019" },
-            { num: counter.growth, suffix: "%", label: "Avg Revenue Growth", sub: "Year 1 Client Avg" },
-            { num: counter.years, suffix: "Yrs", label: "Of Execution", sub: "No Excuses" },
+            { num: 5, suffix: "+", label: "Enterprise Clients", sub: "Across 8 Industries" },
+            { num: 300, suffix: "+", label: "Projects Deployed", sub: "Since 2019" },
+            { num: 187, suffix: "%", label: "Avg Revenue Growth", sub: "Year 1 Client Avg" },
+            { num: 6, suffix: "Yrs", label: "Of Execution", sub: "No Excuses" },
           ].map((s, i) => (
             <div key={i} className="stat-card" style={{ borderLeft: i === 0 ? `1px solid ${C.border}` : "none", borderRight: `1px solid ${C.border}` }}>
               <div className="display-font" style={{ fontSize: "clamp(3rem, 5vw, 4.5rem)", color: C.text, lineHeight: 1 }}>
-                {s.num}<span style={{ color: C.accent }}>{s.suffix}</span>
+                <AnimatedNumber value={s.num} />
+                <span style={{ color: C.accent }}>{s.suffix}</span>
               </div>
               <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: "13px", marginTop: "14px", letterSpacing: "0.5px" }}>{s.label}</div>
               <div style={{ fontSize: "11px", color: C.muted, marginTop: "4px", letterSpacing: "1px" }}>{s.sub}</div>
@@ -858,7 +931,7 @@ export default function AvaniEnterprises() {
       </section>
 
       {/* ── SERVICES ── */}
-      <section id="solutions" className="mobile-section" style={{ padding: "140px 6%" }}>
+      <section id="solutions" className="mobile-section" style={{ padding: "80px 6%" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           <div className="section-header-mobile flex-col-mob" style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "80px" }}>
             <div>
@@ -892,9 +965,6 @@ export default function AvaniEnterprises() {
                     </div>
                   ))}
                 </div>
-                <button onClick={() => setShowModal(true)} className="cta-btn" style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", fontSize: "12px", padding: "16px" }}>
-                  GET THIS FOR ₹499 <ArrowRight size={14} />
-                </button>
               </div>
             ))}
           </div>
@@ -902,7 +972,7 @@ export default function AvaniEnterprises() {
       </section>
 
       {/* ── PROJECTS ── */}
-      <section id="projects" className="mobile-section" style={{ padding: "140px 6%", background: "#F5F5F2" }}>
+      <section id="projects" className="mobile-section" style={{ padding: "80px 6%", background: "#F5F5F2" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           <div className="section-header-mobile flex-col-mob" style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "60px" }}>
             <div>
@@ -919,81 +989,171 @@ export default function AvaniEnterprises() {
             </p>
           </div>
 
-          {/* Featured project */}
-          <div className="project-card" style={{ marginBottom: "30px", background: projects[0].color || "#F5F5F0" }}>
-            <img src={projects[0].img} alt={projects[0].title} />
-            <div className="project-overlay">
-              <div className="project-tag-glass">{projects[0].tag}</div>
-              <div className="project-info-glass">
-                <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "clamp(2rem, 3.5vw, 3.5rem)", margin: 0 }}>{projects[0].title}</h3>
-                <div className="project-details">
-                  <p style={{ color: "rgba(240,237,232,0.75)", fontSize: "16px", lineHeight: 1.7, marginBottom: "24px", maxWidth: "800px" }}>{projects[0].desc}</p>
-                  <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-                    <span style={{ background: C.accentDim, border: `1px solid ${C.accent}50`, color: C.accent, padding: "8px 18px", fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "11px", fontWeight: 700, letterSpacing: "2px", borderRadius: "1px" }}>{projects[0].metric}</span>
+          {/* Row 1: Left to Right */}
+          <div style={{ overflow: "hidden", margin: "40px -6% 30px -6%", padding: "20px 0" }}>
+            <div className="marquee-row" style={{ display: "flex", width: "max-content", animation: "marquee 50s linear infinite", gap: "30px" }}>
+              {[...projects, ...projects].map((p, i) => (
+                <div key={i} style={{ width: "450px", flexShrink: 0 }}>
+                  <div className="project-card" style={{ width: "100%", background: p.color || "#F5F5F0" }}>
+                    <img src={p.img} alt={p.title} />
+                    <div className="project-overlay">
+                      <div className="project-tag-glass">{p.tag}</div>
+                      <div className="project-info-glass">
+                        <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "1.8rem", margin: 0 }}>{p.title}</h3>
+                        <div className="project-details">
+                          <p style={{ color: "rgba(240,237,232,0.65)", fontSize: "14px", lineHeight: 1.6, marginBottom: "20px" }}>{p.desc}</p>
+                          <span style={{ background: C.accentDim, border: `1px solid ${C.accent}40`, color: C.accent, padding: "6px 14px", fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "10px", fontWeight: 700, letterSpacing: "1.5px", borderRadius: "1px" }}>{p.metric}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div style={{ marginTop: "15px", textAlign: "center" }}>
+                    <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "16px", color: C.text, letterSpacing: "1px" }}>{p.title.toUpperCase()}</div>
+                    <div style={{ fontSize: "11px", color: C.accent, fontWeight: 700, marginTop: "4px", letterSpacing: "2px" }}>{p.tag}</div>
                   </div>
                 </div>
-              </div>
+              ))}
             </div>
           </div>
 
-          {/* Grid of 4 */}
-          <div className="projects-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "30px" }}>
-            {projects.slice(1).map((p, i) => (
-              <div key={i} className="project-card" style={{ background: p.color || "#F5F5F0" }}>
-                <img src={p.img} alt={p.title} />
-                <div className="project-overlay">
-                  <div className="project-tag-glass" style={{ fontSize: "9px", padding: "6px 14px", top: "20px", left: "20px" }}>{p.tag}</div>
-                  <div className="project-info-glass" style={{ padding: "50px 30px 30px" }}>
-                    <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "1.8rem", margin: 0 }}>{p.title}</h3>
-                    <div className="project-details">
-                      <p style={{ color: "rgba(240,237,232,0.65)", fontSize: "14px", lineHeight: 1.6, marginBottom: "20px" }}>{p.desc}</p>
-                      <span style={{ background: C.accentDim, border: `1px solid ${C.accent}40`, color: C.accent, padding: "6px 14px", fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "10px", fontWeight: 700, letterSpacing: "1.5px", borderRadius: "1px" }}>{p.metric}</span>
+          {/* Row 2: Right to Left */}
+          <div style={{ overflow: "hidden", margin: "0 -6% 40px -6%", padding: "20px 0" }}>
+            <div className="marquee-row" style={{ display: "flex", width: "max-content", animation: "marquee-reverse 50s linear infinite", gap: "30px" }}>
+              {[...projects.slice().reverse(), ...projects.slice().reverse()].map((p, i) => (
+                <div key={i} style={{ width: "450px", flexShrink: 0 }}>
+                  <div className="project-card" style={{ width: "100%", background: p.color || "#F5F5F0" }}>
+                    <img src={p.img} alt={p.title} />
+                    <div className="project-overlay">
+                      <div className="project-tag-glass">{p.tag}</div>
+                      <div className="project-info-glass">
+                        <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "1.8rem", margin: 0 }}>{p.title}</h3>
+                        <div className="project-details">
+                          <p style={{ color: "rgba(240,237,232,0.65)", fontSize: "14px", lineHeight: 1.6, marginBottom: "20px" }}>{p.desc}</p>
+                          <span style={{ background: C.accentDim, border: `1px solid ${C.accent}40`, color: C.accent, padding: "6px 14px", fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "10px", fontWeight: 700, letterSpacing: "1.5px", borderRadius: "1px" }}>{p.metric}</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
+                  <div style={{ marginTop: "15px", textAlign: "center" }}>
+                    <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "16px", color: C.text, letterSpacing: "1px" }}>{p.title.toUpperCase()}</div>
+                    <div style={{ fontSize: "11px", color: C.accent, fontWeight: 700, marginTop: "4px", letterSpacing: "2px" }}>{p.tag}</div>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* ── PROCESS ── */}
-      <section className="mobile-section" style={{ padding: "140px 6%", borderTop: `1px solid ${C.border}` }}>
+      <section className="mobile-section" style={{ padding: "80px 6%", borderTop: `1px solid ${C.border}` }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: "80px" }}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "12px", marginBottom: "20px" }}>
-              <div style={{ width: "30px", height: "1px", background: C.accent }} />
-              <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "10px", fontWeight: 700, letterSpacing: "3px", color: C.accent }}>HOW WE WORK</span>
-              <div style={{ width: "30px", height: "1px", background: C.accent }} />
+              <div style={{ width: "40px", height: "1px", background: `linear-gradient(90deg, transparent, ${C.accent})` }} />
+              <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "11px", fontWeight: 700, letterSpacing: "3px", color: C.accent }}>OUR PROVEN WORK PROCESS</span>
+              <div style={{ width: "40px", height: "1px", background: `linear-gradient(90deg, ${C.accent}, transparent)` }} />
             </div>
-            <h2 className="display-font" style={{ fontSize: "clamp(3rem, 6vw, 5rem)" }}>OUR PROCESS.</h2>
+            <h2 className="display-font" style={{ fontSize: "clamp(3rem, 6vw, 5rem)", lineHeight: 0.95 }}>HOW WE DELIVER.</h2>
           </div>
 
-          <div className="process-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "2px" }}>
-            {[
-              { step: "01", title: "Discovery", desc: "Deep-dive audit of your business, market, and competition. We map opportunities before writing a single line of code or running a single ad." },
-              { step: "02", title: "Strategy", desc: "A custom 90-day roadmap with clear KPIs, resource allocation, and risk-adjusted milestones. No generic playbooks." },
-              { step: "03", title: "Execution", desc: "Cross-functional teams deploy in two-week sprints. Engineering, marketing, and advisory work in parallel — not sequence." },
-              { step: "04", title: "Scale", desc: "Monthly reviews, A/B testing, and compounding optimization cycles. We don't stop when we hit targets — we raise them." },
-            ].map((p, i) => (
-              <div key={i} style={{ background: C.card, border: `1px solid ${C.border}`, padding: "50px 36px", borderLeft: i > 0 ? "none" : `1px solid ${C.border}`, transition: "border-color 0.3s" }}
-                onMouseEnter={e => e.currentTarget.style.borderColor = C.accent}
-                onMouseLeave={e => e.currentTarget.style.borderColor = C.border}>
-                <div className="display-font" style={{ fontSize: "5rem", color: "rgba(212,160,23,0.18)", lineHeight: 1, marginBottom: "24px" }}>{p.step}</div>
-                <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "20px", marginBottom: "16px" }}>{p.title}</h3>
-                <p style={{ color: C.muted, fontSize: "13px", lineHeight: 1.8, fontWeight: 300 }}>{p.desc}</p>
-              </div>
-            ))}
+          <div style={{ position: "relative", marginTop: "60px" }}>
+            {/* Connecting Dashed Line */}
+            <div style={{ 
+              position: "absolute", 
+              top: "60px", 
+              left: "10%", 
+              right: "10%", 
+              height: "2px", 
+              borderTop: `2px dashed ${C.border}`, 
+              zIndex: 0 
+            }} className="mobile-hide" />
+
+            <div className="process-steps-container" style={{ 
+              display: "grid", 
+              gridTemplateColumns: "repeat(6, 1fr)", 
+              gap: "20px", 
+              position: "relative", 
+              zIndex: 1,
+              overflowX: "auto",
+              paddingBottom: "40px"
+            }}>
+              {[
+                { step: "01", title: "Discovery", icon: <Search />, desc: "Deep-dive audit of your business, market, and competition. We map opportunities first." },
+                { step: "02", title: "Strategy", icon: <Target />, desc: "A custom 90-day roadmap with clear KPIs, resource allocation, and risk milestones." },
+                { step: "03", title: "Design", icon: <Layers />, desc: "Beautiful, user-centered designs that align with your brand and convert visitors." },
+                { step: "04", title: "Execution", icon: <Cpu />, desc: "Cross-functional teams deploy in two-week sprints. Engineering & marketing in sync." },
+                { step: "05", title: "Test", icon: <ShieldCheck />, desc: "Rigorous testing across devices and browsers to ensure a flawless experience." },
+                { step: "06", title: "Scale", icon: <TrendingUp />, desc: "Monthly reviews, A/B testing, and compounding optimization cycles. Unlimited growth." },
+              ].map((p, i) => (
+                <div key={i} style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", minWidth: "160px" }}>
+                  {/* Circle Bubble */}
+                  <div style={{ position: "relative", marginBottom: "32px" }}>
+                    <div className="process-circle" style={{ 
+                      width: "120px", 
+                      height: "120px", 
+                      borderRadius: "50%", 
+                      background: "#FFFFFF", 
+                      display: "flex", 
+                      alignItems: "center", 
+                      justifyContent: "center",
+                      boxShadow: "0 10px 40px rgba(0,0,0,0.08)",
+                      transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+                      cursor: "pointer",
+                      border: `2px solid ${C.accent}`
+                    }}
+                    onMouseEnter={e => {
+                      e.currentTarget.style.transform = "translateY(-10px) scale(1.05)";
+                      e.currentTarget.style.borderColor = C.accent;
+                      e.currentTarget.style.boxShadow = `0 20px 40px ${C.accentGlow}`;
+                    }}
+                    onMouseLeave={e => {
+                      e.currentTarget.style.transform = "none";
+                      e.currentTarget.style.borderColor = C.accent;
+                      e.currentTarget.style.boxShadow = "0 10px 40px rgba(0,0,0,0.08)";
+                    }}
+                    >
+                      {React.cloneElement(p.icon as React.ReactElement, { size: 36, strokeWidth: 1.5, color: C.accent })}
+                    </div>
+                    
+                    {/* Step Number Label */}
+                    <div style={{ 
+                      position: "absolute", 
+                      top: "0", 
+                      right: "0", 
+                      background: "white", 
+                      color: "black", 
+                      width: "32px", 
+                      height: "32px", 
+                      borderRadius: "50%", 
+                      display: "flex", 
+                      alignItems: "center", 
+                      justifyContent: "center",
+                      fontSize: "12px",
+                      fontWeight: 800,
+                      boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
+                      border: `1px solid ${C.border}`,
+                      zIndex: 2
+                    }}>
+                      {p.step}
+                    </div>
+                  </div>
+
+                  <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "18px", marginBottom: "12px", color: C.text }}>{p.title}</h3>
+                  <p style={{ color: C.muted, fontSize: "12px", lineHeight: 1.6, fontWeight: 300, maxWidth: "180px" }}>{p.desc}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* ── TESTIMONIALS ── */}
-      <section className="mobile-section" style={{ padding: "120px 6%", background: C.subtle }}>
+      <section className="mobile-section" style={{ padding: "80px 6%", background: C.subtle }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "60px" }}>
-            <div style={{ width: "30px", height: "1px", background: C.accent }} />
-            <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "10px", fontWeight: 700, letterSpacing: "3px", color: C.accent }}>CLIENT VOICE</span>
+          <div style={{ display: "flex", alignItems: "center", gap: "15px", marginBottom: "60px" }}>
+            <div style={{ width: "60px", height: "2px", background: C.accent }} />
+            <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "15px", fontWeight: 800, letterSpacing: "4px", color: C.accent }}>CLIENT VOICE</span>
           </div>
           <div className="testimonials-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "2px" }}>
             {testimonials.map((t, i) => (
@@ -1002,9 +1162,12 @@ export default function AvaniEnterprises() {
                   {[...Array(t.stars)].map((_, j) => <Star key={j} size={13} fill={C.accent} color={C.accent} />)}
                 </div>
                 <p style={{ color: C.muted, fontSize: "14px", lineHeight: 1.8, fontWeight: 300, marginBottom: "28px", fontStyle: "italic" }}>"{t.text}"</p>
-                <div style={{ borderTop: `1px solid ${C.border}`, paddingTop: "20px" }}>
-                  <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: "14px" }}>{t.name}</div>
-                  <div style={{ fontSize: "11px", color: C.accent, letterSpacing: "1px", marginTop: "3px", fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{t.role}</div>
+                <div style={{ borderTop: `1px solid ${C.border}`, paddingTop: "20px", display: "flex", alignItems: "center", gap: "15px" }}>
+                  <img src={t.image} alt={t.name} style={{ width: "48px", height: "48px", borderRadius: "50%", objectFit: "cover", border: `2px solid ${C.accent}20` }} />
+                  <div>
+                    <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: "15px" }}>{t.name}</div>
+                    <div style={{ fontSize: "11px", color: C.accent, letterSpacing: "1px", marginTop: "3px", fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 600 }}>{t.role}</div>
+                  </div>
                 </div>
               </div>
             ))}
@@ -1013,7 +1176,7 @@ export default function AvaniEnterprises() {
       </section>
 
       {/* ── FAQ ── */}
-      <section id="faq" className="mobile-section" style={{ padding: "140px 6%" }}>
+      <section id="faq" className="mobile-section" style={{ padding: "80px 6%" }}>
         <div style={{ maxWidth: "900px", margin: "0 auto" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "20px" }}>
             <div style={{ width: "30px", height: "1px", background: C.accent }} />
@@ -1039,7 +1202,7 @@ export default function AvaniEnterprises() {
       </section>
 
       {/* ── CTA BAND ── */}
-      <section className="mobile-section cta-band-section" style={{ padding: "120px 6%", background: C.accent, position: "relative", overflow: "hidden" }}>
+      <section className="mobile-section cta-band-section" style={{ padding: "80px 6%", background: C.accent, position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", inset: 0, backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`, backgroundSize: "60px 60px" }} />
         <div className="cta-band" style={{ position: "relative", zIndex: 1, display: "flex", justifyContent: "space-between", alignItems: "center", maxWidth: "1200px", margin: "0 auto", gap: "40px", flexWrap: "wrap" }}>
           <div>
@@ -1107,51 +1270,6 @@ export default function AvaniEnterprises() {
         </div>
       )}
 
-      {/* ── PLAN DETAILS MODAL ── */}
-      {showPlanDetailsModal && (
-        <div style={{ position: "fixed", inset: 0, zIndex: 9999, background: "rgba(0,0,0,0.5)", display: "flex", alignItems: "center", justifyContent: "center", padding: "20px", backdropFilter: "blur(10px)" }}>
-          <div style={{ background: "#FFFFFF", width: "100%", maxWidth: "900px", border: `1px solid ${C.border}`, position: "relative", maxHeight: "90vh", overflowY: "auto", borderRadius: "12px", boxShadow: "0 20px 60px rgba(0,0,0,0.15)" }}>
-            <div style={{ background: "#FAFAF8", padding: "30px 40px", borderBottom: `1px solid ${C.border}`, position: "sticky", top: 0, zIndex: 10, borderRadius: "12px 12px 0 0" }}>
-              <button onClick={() => { setShowPlanDetailsModal(false); setActivePlanDetail(null); }} style={{ position: "absolute", top: "24px", right: "24px", background: "rgba(255,255,255,0.05)", border: `1px solid ${C.border}`, color: "white", cursor: "pointer", width: "36px", height: "36px", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "4px" }}>
-                <X size={16} />
-              </button>
-              <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "10px", fontWeight: 700, letterSpacing: "3px", color: C.accent, marginBottom: "8px" }}>PREMIUM DELIVERABLES</div>
-              <h2 className="display-font" style={{ fontSize: "2.5rem", color: "#FFF", lineHeight: 1, margin: 0 }}>THE ₹499 GROWTH AUDIT</h2>
-            </div>
-
-            <div style={{ padding: "40px" }}>
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "20px" }}>
-                {[
-                  { title: "Website Audit", icon: <Activity size={24} />, summary: "Deep dive into your current UI/UX and performance.", desc: "We perform a comprehensive 30-point inspection of your website covering speed, UX, conversion bottlenecks, and mobile responsiveness. You'll receive a detailed PDF report highlighting exactly what's costing you leads." },
-                  { title: "Growth Strategy", icon: <TrendingUp size={24} />, summary: "Custom 90-day roadmap for scaling revenue.", desc: "A tailored, step-by-step action plan designed specifically for your business model. We map out exactly which channels to prioritize, what budget to allocate, and the expected ROI over the next 3 months." },
-                  { title: "Competitor Analysis", icon: <Target size={24} />, summary: "Uncover exactly what your competitors are doing.", desc: "We reverse-engineer the top 3 competitors in your niche. We analyze their ad copy, landing pages, SEO strategy, and sales funnels to find gaps you can exploit immediately." },
-                  { title: "Lead Generation Plan", icon: <Users size={24} />, summary: "Predictable system to acquire high-value clients.", desc: "Stop relying on referrals. We design a deterministic lead generation funnel tailored to your target audience. This includes ad strategy, lead magnet ideas, and automated follow-up sequences." },
-                ].map((item, idx) => (
-                  <div key={idx} onClick={() => setActivePlanDetail(activePlanDetail === idx ? null : idx)} style={{ background: activePlanDetail === idx ? "rgba(225,173,1,0.05)" : "rgba(255,255,255,0.02)", border: `1px solid ${activePlanDetail === idx ? C.accent : C.border}`, padding: "30px", borderRadius: "6px", cursor: "pointer", transition: "all 0.3s" }}>
-                    <div style={{ color: activePlanDetail === idx ? C.accent : C.muted, marginBottom: "20px", transition: "color 0.3s" }}>
-                      {item.icon}
-                    </div>
-                    <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "18px", marginBottom: "12px", color: activePlanDetail === idx ? C.accent : "white" }}>{item.title}</h3>
-                    <p style={{ color: C.muted, fontSize: "13px", lineHeight: 1.6 }}>{item.summary}</p>
-                    
-                    {/* Expandable Content */}
-                    <div style={{ maxHeight: activePlanDetail === idx ? "200px" : "0", opacity: activePlanDetail === idx ? 1 : 0, overflow: "hidden", transition: "all 0.4s ease", marginTop: activePlanDetail === idx ? "20px" : "0", paddingTop: activePlanDetail === idx ? "20px" : "0", borderTop: activePlanDetail === idx ? `1px solid ${C.border}` : "none" }}>
-                      <p style={{ color: "rgba(240,237,232,0.8)", fontSize: "13px", lineHeight: 1.7 }}>
-                        {item.desc}
-                      </p>
-                    </div>
-                    
-                    <div style={{ marginTop: "20px", display: "flex", alignItems: "center", gap: "8px", color: activePlanDetail === idx ? C.accent : C.muted, fontSize: "11px", fontWeight: 700, letterSpacing: "1px", transition: "color 0.3s" }}>
-                      {activePlanDetail === idx ? "HIDE DETAILS" : "VIEW DETAILS"} 
-                      <ChevronDown size={14} style={{ transform: activePlanDetail === idx ? "rotate(180deg)" : "none", transition: "transform 0.3s" }} />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* ── PAYMENT MODAL ── */}
       {paymentState !== "none" && (
