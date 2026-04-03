@@ -69,45 +69,16 @@ const Typewriter = ({ segments, delay = 100, startDelay = 0, onComplete }: any) 
   );
 };
 
-// RotatingHooks Component
-const RotatingHooks = () => {
-  const hooks = [
-    [
-      { text: "Build Your ", color: "#FFFFFF" },
-      { text: "Online Presence. ", color: C.accent },
-      { text: "Grow Business ", color: "#FFFFFF" },
-      { text: "Faster.", color: C.muted }
-    ],
-    [
-      { text: "We Turn ", color: "#FFFFFF" },
-      { text: "Ideas ", color: C.accent },
-      { text: "Into ", color: "#FFFFFF" },
-      { text: "High-Performing ", color: C.muted },
-      { text: "Websites.", color: C.accent }
-    ],
-    [
-      { text: "From ", color: "#FFFFFF" },
-      { text: "Clicks ", color: C.accent },
-      { text: "to ", color: "#FFFFFF" },
-      { text: "Customers ", color: C.muted },
-      { text: "— We Make It ", color: "#FFFFFF" },
-      { text: "Happen.", color: C.accent }
-    ]
-  ];
-  const [index, setIndex] = React.useState(0);
-  const [key, setKey] = React.useState(0); // For forcing re-render of typewriter
-
+// StaticHook Component — single punchy line
+const StaticHook = () => {
   return (
-    <Typewriter 
-      key={key}
-      segments={hooks[index]} 
-      delay={60} 
-      onComplete={() => {
-        setTimeout(() => {
-          setIndex((prev) => (prev + 1) % hooks.length);
-          setKey(prev => prev + 1);
-        }, 3000); // 3 second pause between hooks
-      }} 
+    <Typewriter
+      segments={[
+        { text: "Right now, you're losing clients ", color: C.text },
+        { text: "without knowing why", color: C.accent },
+        { text: " — fix it in 30 minutes.", color: C.text }
+      ]}
+      delay={45}
     />
   );
 };
@@ -150,15 +121,28 @@ export default function AvaniEnterprises() {
   const sectionRef = useRef(null);
   const [isMuted, setIsMuted] = useState(true);
 
+  // Plan pricing map
+  const PLAN_PRICES: Record<string, number> = {
+    "Basic Plan": 149,
+    "Standard Plan": 199,
+    "Premium Plan": 499,
+  };
+
   // Form & Payment State
   const [formData, setFormData] = useState({
     firstName: "", lastName: "", email: "", phone: "",
-    company: "", service: "Web Engineering", goals: ""
+    company: "", plan: "Standard Plan", goals: ""
   });
   const [currentLeadId, setCurrentLeadId] = useState(null);
-  const [paymentState, setPaymentState] = useState("none"); // none, processing, success, fail
+  const [paymentState, setPaymentState] = useState("none");
 
   const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5001";
+
+  // Open modal — optionally pre-select a specific plan (default: Standard)
+  const openModal = (plan = "Standard Plan") => {
+    setFormData(prev => ({ ...prev, plan }));
+    setShowModal(true);
+  };
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
@@ -188,7 +172,7 @@ export default function AvaniEnterprises() {
     { q: "Is this for new or existing businesses?", a: "Both. If you're new, we help you launch with trust. If you're existing, we show you how to optimize and scale your current lead flow." },
     { q: "Why is the price so low?", a: "We believe in building trust first. This low-ticket entry allows us to demonstrate our expertise. If you like the plan, you can choose to work with us for implementation." },
     { q: "What happens after I pay?", a: "You'll receive an instant confirmation. Our team will reach out via WhatsApp/Email within 24 hours to schedule your session at your convenience." },
-    { q: "Do you offer a refund if I'm not satisfied?", a: "We are so confident in our growth plan that if you feel the 30-minute session didn't provide at least 10X the value, we'll refund your ₹499 immediately." },
+    { q: "How soon can I expect results after the strategy session?", a: "Most clients begin seeing directional improvements within the first 2–4 weeks of implementing the roadmap. The strategy session gives you a clear 90-day action plan, and many clients report measurable lead flow improvements within the first month." },
   ];
 
   const testimonials = [
@@ -197,54 +181,20 @@ export default function AvaniEnterprises() {
     { name: "Vikram Nair", role: "Business Owner", text: "Finally, a agency that talks numbers, not just aesthetics. The step-by-step lead gen plan is exactly what I needed to scale.", stars: 5, image: "/review_person3.png" },
   ];
   // Plan payment handler for pricing table
-  const handlePlanPayment = (planName: string, amount: number) => {
-    try {
-      const options = {
-        key: import.meta.env.VITE_RAZORPAY_KEY_ID || "rzp_live_SXJqe5vU40sXGz",
-        amount: amount * 100, // Convert to paise
-        currency: "INR",
-        name: "Avani Enterprises",
-        description: `${planName} - Business Consultation`,
-        image: "/avani-logo.jpg",
-        handler: function (response: any) {
-          setPaymentState("success");
-          setTimeout(() => {
-            navigate("/thank-you", {
-              state: {
-                name: "Valued Client",
-                service: `${planName} - Business Consultation`
-              }
-            });
-          }, 1500);
-        },
-        theme: { color: C.accent },
-        modal: {
-          ondismiss: function () {
-            setPaymentState("fail");
-          }
-        }
-      };
-      const rzp1 = new (window as any).Razorpay(options);
-      rzp1.on('payment.failed', function () {
-        setPaymentState("fail");
-      });
-      rzp1.open();
-      setPaymentState("processing");
-    } catch (err) {
-      alert("Payment initialization failed. Please try again.");
-    }
-  };
+
 
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     let leadId = null;
 
+    const selectedPlan = formData.plan || "Standard Plan";
+    const selectedAmount = PLAN_PRICES[selectedPlan] ?? 199;
+
     try {
-      // 1. Attempt to submit lead data to backend immediately
       const res = await fetch(`${API_BASE}/growth-plan-leads`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({ ...formData, plan: selectedPlan, amount: selectedAmount })
       });
       if (res.ok) {
         const lead = await res.json();
@@ -257,17 +207,14 @@ export default function AvaniEnterprises() {
 
     try {
       setShowModal(false);
-
-      // 2. Initialize Razorpay Checkout
       const options = {
-        key: import.meta.env.VITE_RAZORPAY_KEY_ID || "rzp_live_SXJqe5vU40sXGz", // Dynamic key from .env
-        amount: 49900, // Amount in paise (₹499)
+        key: import.meta.env.VITE_RAZORPAY_KEY_ID || "rzp_live_SXJqe5vU40sXGz",
+        amount: selectedAmount * 100, // paise
         currency: "INR",
         name: "Avani Enterprises",
-        description: "Growth Plan Strategy Session",
+        description: `${selectedPlan} — Business Consultation`,
         image: "/avani-logo.jpg",
         handler: function (response: any) {
-          // 3. Update status to Completed on payment completion
           updatePaymentStatusById(leadId, "Completed");
         },
         prefill: {
@@ -275,24 +222,19 @@ export default function AvaniEnterprises() {
           email: formData.email,
           contact: formData.phone
         },
-        theme: {
-          color: C.accent
-        },
+        theme: { color: C.accent },
         modal: {
           ondismiss: function () {
-            // Payment cancelled, status remains 'Pending'
             setPaymentState("fail");
           }
         }
       };
-
       const rzp1 = new (window as any).Razorpay(options);
       rzp1.on('payment.failed', function (response: any) {
         updatePaymentStatusById(leadId, "Failed");
       });
       rzp1.open();
       setPaymentState("processing");
-
     } catch (err) {
       alert("Failed to submit request. Please try again.");
     }
@@ -481,62 +423,296 @@ export default function AvaniEnterprises() {
           animation: shimmer 4s linear infinite;
         }
 
-        ::-webkit-scrollbar { width: 4px; } ::-webkit-scrollbar-track { background: #F0F0EC; } ::-webkit-scrollbar-thumb { background: ${C.accent}; border-radi        @keyframes pulseAlert { 0%, 100% { box-shadow: 0 0 0 0 rgba(255, 51, 51, 0.4); } 50% { box-shadow: 0 0 0 10px rgba(255, 51, 51, 0); } }
+        ::-webkit-scrollbar { width: 4px; } ::-webkit-scrollbar-track { background: #F0F0EC; } ::-webkit-scrollbar-thumb { background: ${C.accent}; border-radius: 4px; }
+        @keyframes pulseAlert { 0%, 100% { box-shadow: 0 0 0 0 rgba(255, 51, 51, 0.4); } 50% { box-shadow: 0 0 0 10px rgba(255, 51, 51, 0); } }
+
+        /* ── AI Section Animations ── */
+        @keyframes aiGlow { 0%, 100% { box-shadow: 0 0 30px rgba(99,102,241,0.15), 0 0 60px rgba(212,160,23,0.08); } 50% { box-shadow: 0 0 50px rgba(99,102,241,0.25), 0 0 100px rgba(212,160,23,0.15); } }
+        @keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        @keyframes floatUp { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+        @keyframes borderGlow { 0%, 100% { border-color: rgba(99,102,241,0.3); } 50% { border-color: rgba(99,102,241,0.6); } }
+
+        .ai-hero-card {
+          background: rgba(255,255,255,0.04);
+          border: 1px solid rgba(255,255,255,0.08);
+          border-radius: 20px;
+          padding: 36px 28px;
+          transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+          position: relative;
+          overflow: hidden;
+        }
+        .ai-hero-card::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          border-radius: 20px;
+          padding: 1px;
+          background: linear-gradient(135deg, rgba(99,102,241,0.4), rgba(212,160,23,0.4), rgba(99,102,241,0.1));
+          -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          -webkit-mask-composite: xor;
+          mask-composite: exclude;
+          opacity: 0;
+          transition: opacity 0.5s;
+        }
+        .ai-hero-card:hover::before { opacity: 1; }
+        .ai-hero-card:hover {
+          background: rgba(255,255,255,0.07);
+          transform: translateY(-6px);
+          box-shadow: 0 20px 60px rgba(99,102,241,0.15);
+        }
 
         @media (max-width: 1024px) {
           .nav-links, .nav-desktop-cta { display: none !important; }
           .nav-mobile-toggle { display: block !important; }
-          
-          .hero-grid { grid-template-columns: 1fr !important; gap: 40px !important; text-align: center; }
+
+          /* ── Hero Mobile ── */
+          .hero-grid { grid-template-columns: 1fr !important; gap: 0 !important; text-align: center; }
           .hero-text-content { align-items: center !important; }
-          .hero-badge { margin: 0 auto 16px auto !important; justify-content: center !important; transform: scale(0.85) !important; width: 100%; }
+          .hero-badge { margin: 0 auto 16px auto !important; justify-content: center !important; transform: scale(0.9) !important; width: 100%; }
           .hero-desc { margin: 0 auto 24px auto !important; font-size: 0.95rem !important; line-height: 1.6 !important; }
-          .hero-img-col { display: block !important; margin-top: 15px !important; width: 100% !important; }
+          .hero-img-col { display: none !important; }
           .cta-container { width: 100% !important; align-items: center !important; }
-          .hero-cta { width: 100% !important; font-size: 15px !important; padding: 18px !important; }
-          .urgency-badge { font-size: 10px !important; padding: 4px 12px !important; }
-          .hero-section { min-height: 100vh !important; justify-content: center !important; padding: 100px 6% 60px 6% !important; }
+          .hero-cta { width: 100% !important; font-size: 14px !important; padding: 18px !important; }
+          .urgency-badge { font-size: 10px !important; padding: 6px 14px !important; margin: 0 auto !important; }
+          .hero-section { min-height: 100svh !important; justify-content: center !important; padding: 90px 5% 40px 5% !important; }
           .hero-inner { margin-top: 0 !important; width: 100% !important; }
-          .display-font { font-size: clamp(2rem, 9vw, 3.2rem) !important; }
+          .display-font { font-size: clamp(1.8rem, 8vw, 3rem) !important; }
           .mobile-hide { display: none !important; }
-          
-          /* Force Grid Stacking below 1024px - EACH CARD IN ITS OWN ROW */
-          div.stats-grid, div.services-grid, div.projects-grid, div.process-grid, div.testimonials-grid, div.pricing-grid { 
-            display: flex !important; 
-            flex-direction: column !important; 
-            grid-template-columns: 1fr !important; 
-            gap: 24px !important; 
+          .marquee-wrap { margin-top: 40px !important; }
+          .marquee-item { padding: 0 20px !important; }
+
+          /* ── Pricing Mobile Redesign ── */
+          div.pricing-grid {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 16px !important;
             width: 100% !important;
             margin: 0 !important;
           }
-          
-          div.stat-card, div.service-card, div.pricing-card, div.testimonial-card {
+          div.pricing-card {
             width: 100% !important;
             max-width: 100% !important;
-            margin-bottom: 0 !important;
+            margin: 0 !important;
+            transform: none !important;
+            border-radius: 20px !important;
+            padding: 28px 22px !important;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06) !important;
+          }
+          div.pricing-card.popular {
+            transform: none !important;
+            border-width: 2px !important;
+            box-shadow: 0 8px 40px rgba(212,160,23,0.18), 0 0 0 1px rgba(212,160,23,0.2) !important;
+            order: -1 !important;
+          }
+          .pricing-features-row {
+            padding: 10px 6px !important;
+            font-size: 13px !important;
           }
 
-          .mobile-section { padding: 40px 6% !important; }
-          .flex-col-mob { flex-direction: column !important; align-items: flex-start !important; gap: 12px !important; margin-bottom: 30px !important; }
-          
-          /* Cards Compact */
-          .pricing-grid .popular { transform: scale(1) !important; margin: 15px 0 !important; }
-          .stat-card { padding: 20px 10px !important; }
-          .stat-card .display-font { font-size: 1.6rem !important; }
-          .service-card { padding: 24px !important; }
-          .pricing-card { padding: 32px 20px !important; width: 100% !important; }
-          
-          /* Footer */
+          /* ── Stats: 2x2 Grid ── */
+          div.stats-grid {
+            display: grid !important;
+            grid-template-columns: 1fr 1fr !important;
+            gap: 0 !important;
+            width: 100% !important;
+            margin: 0 !important;
+          }
+          .stat-card {
+            padding: 24px 16px !important;
+            text-align: center !important;
+            border-left: 1px solid ${C.border} !important;
+            border-right: 1px solid ${C.border} !important;
+            border-bottom: 1px solid ${C.border} !important;
+          }
+          .stat-card .display-font { font-size: clamp(1.8rem, 6vw, 2.4rem) !important; }
+
+          /* ── Services: Stack ── */
+          div.services-grid {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 16px !important;
+            width: 100% !important;
+          }
+          .service-card {
+            padding: 28px 22px !important;
+            border-radius: 16px !important;
+          }
+          .service-icon-wrapper {
+            width: 50px !important;
+            height: 50px !important;
+            margin-bottom: 18px !important;
+          }
+          .service-title { font-size: 20px !important; margin-bottom: 14px !important; }
+          .service-desc { font-size: 13px !important; margin-bottom: 20px !important; }
+          .service-features { padding: 16px !important; margin-bottom: 0 !important; }
+
+          /* ── Projects Carousel ── */
+          div.projects-grid {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 16px !important;
+            width: 100% !important;
+          }
+          .project-card-container { width: 300px !important; }
+
+          /* ── Process: Vertical Timeline ── */
+          .process-steps-container {
+            display: flex !important;
+            flex-direction: column !important;
+            grid-template-columns: 1fr !important;
+            gap: 0 !important;
+            overflow-x: visible !important;
+            padding-bottom: 0 !important;
+          }
+          .process-step-mobile {
+            display: flex !important;
+            flex-direction: row !important;
+            align-items: flex-start !important;
+            text-align: left !important;
+            gap: 20px !important;
+            padding: 24px 0 !important;
+            border-bottom: 1px solid ${C.border} !important;
+            min-width: unset !important;
+          }
+          .process-step-mobile:last-child { border-bottom: none !important; }
+          .process-step-mobile .process-circle {
+            width: 64px !important;
+            height: 64px !important;
+            flex-shrink: 0 !important;
+          }
+          .process-step-mobile .process-step-num {
+            width: 24px !important;
+            height: 24px !important;
+            font-size: 10px !important;
+            top: -2px !important;
+            right: -2px !important;
+          }
+          .process-step-mobile .process-card-title { font-size: 16px !important; margin-bottom: 6px !important; }
+          .process-step-mobile .process-card-desc { max-width: 100% !important; font-size: 12px !important; }
+
+          /* ── Testimonials: Horizontal Snap Scroll ── */
+          div.testimonials-grid {
+            display: flex !important;
+            flex-direction: row !important;
+            overflow-x: auto !important;
+            scroll-snap-type: x mandatory !important;
+            -webkit-overflow-scrolling: touch !important;
+            gap: 16px !important;
+            padding-bottom: 16px !important;
+            margin: 0 -6% !important;
+            padding-left: 6% !important;
+            padding-right: 6% !important;
+          }
+          div.testimonials-grid > div {
+            flex: 0 0 85% !important;
+            scroll-snap-align: start !important;
+            border-radius: 16px !important;
+            padding: 28px 24px !important;
+            border: 1px solid ${C.border} !important;
+          }
+          div.testimonials-grid::-webkit-scrollbar { display: none; }
+
+          /* ── Section Spacing ── */
+          .mobile-section { padding: 50px 5% !important; }
+          .flex-col-mob {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 12px !important;
+            margin-bottom: 30px !important;
+          }
+
+          /* ── FAQ Mobile ── */
+          .faq-item > div:first-child { padding: 22px 0 !important; }
+          .faq-item span { font-size: 15px !important; }
+
+          /* ── CTA Band ── */
+          .cta-band {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            padding: 40px 5% !important;
+            text-align: center !important;
+          }
+          .cta-band > div:first-child { width: 100% !important; text-align: center !important; }
+          .cta-band-btns {
+            flex-direction: column !important;
+            width: 100% !important;
+          }
+          .cta-band-btns button, .cta-band-btns a {
+            width: 100% !important;
+            justify-content: center !important;
+            text-align: center !important;
+          }
+
+          /* ── AI Section Mobile ── */
+          .ai-section-dark { padding: 60px 5% !important; }
+          .ai-pills-grid { grid-template-columns: 1fr !important; gap: 14px !important; }
+          .ai-hero-card { padding: 28px 22px !important; }
+          .ai-cta-row {
+            flex-direction: column !important;
+            gap: 12px !important;
+          }
+          .ai-cta-row button, .ai-cta-row a {
+            width: 100% !important;
+            justify-content: center !important;
+          }
+          .ai-manifesto-text { font-size: 15px !important; }
+          .ai-comparison-grid {
+            grid-template-columns: 1fr !important;
+            gap: 12px !important;
+          }
+
+          /* ── Footer ── */
           .footer-top { grid-template-columns: 1fr !important; gap: 30px !important; }
           .footer-grid { grid-template-columns: 1fr !important; gap: 20px !important; }
-          .cta-band { flex-direction: column !important; align-items: flex-start !important; padding: 40px 6% !important; }
+
+          /* ── Floating FAB Mobile ── */
+          .mobile-fab {
+            bottom: 20px !important;
+            right: 50% !important;
+            transform: translateX(50%) !important;
+          }
+          .mobile-fab button {
+            padding: 14px 28px !important;
+            font-size: 12px !important;
+            border-radius: 50px !important;
+            box-shadow: 0 8px 30px rgba(212,160,23,0.5) !important;
+          }
+
+          /* ── Modal Full Screen Mobile ── */
+          div[style*="position: fixed"][style*="zIndex: 9999"] > div {
+            max-width: 100% !important;
+            max-height: 100% !important;
+            border-radius: 0 !important;
+            height: 100% !important;
+          }
         }
 
         @media (max-width: 480px) {
-          .display-font { font-size: clamp(1.8rem, 11vw, 2.5rem) !important; }
+          .display-font { font-size: clamp(1.5rem, 9vw, 2.2rem) !important; }
           .hero-cta { font-size: 13px !important; padding: 16px !important; }
-          .stat-card .display-font { font-size: 1.4rem !important; }
+          .hero-section { padding: 80px 5% 30px 5% !important; }
+          .stat-card .display-font { font-size: clamp(1.4rem, 5vw, 1.8rem) !important; }
           .project-card-container { width: 260px !important; }
+          .shimmer-text { font-size: clamp(1.4rem, 7vw, 2rem) !important; min-height: 3.5em !important; }
+
+          /* Testimonials: full-width cards on small phones */
+          div.testimonials-grid > div {
+            flex: 0 0 90% !important;
+          }
+
+          /* Pricing section header */
+          #pricing .display-font { font-size: clamp(1.6rem, 8vw, 2.5rem) !important; }
+          #pricing p { font-size: 13px !important; }
+
+          /* Process section compact */
+          .process-step-mobile {
+            gap: 16px !important;
+            padding: 20px 0 !important;
+          }
+          .process-step-mobile .process-circle {
+            width: 52px !important;
+            height: 52px !important;
+          }
         }
 
       `}</style>
@@ -560,7 +736,7 @@ export default function AvaniEnterprises() {
           {["Solutions", "Projects", "About", "FAQ"].map(l => (
             <a key={l} href={`#${l.toLowerCase()}`} className="nav-link">{l.toUpperCase()}</a>
           ))}
-          <button onClick={() => setShowModal(true)} className="cta-btn nav-desktop-cta" style={{ padding: "10px 22px", fontSize: "11px", marginLeft: "10px" }}>
+          <button onClick={() => openModal()} className="cta-btn nav-desktop-cta" style={{ padding: "10px 22px", fontSize: "11px", marginLeft: "10px" }}>
             START YOUR JOURNEY
           </button>
         </div>
@@ -622,7 +798,7 @@ export default function AvaniEnterprises() {
               ))}
               <div style={{ marginTop: "auto", paddingBottom: "60px" }}>
                 <button 
-                  onClick={() => { setShowModal(true); setMenuOpen(false); }}
+                  onClick={() => { openModal(); setMenuOpen(false); }}
                   className="cta-btn" 
                   style={{ width: "100%", padding: "20px", fontSize: "14px" }}
                 >
@@ -652,11 +828,11 @@ export default function AvaniEnterprises() {
                   <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "10px", fontWeight: 700, letterSpacing: "2.5px", color: "#16A34A" }}>CLIENTS ONBOARDING</span>
                 </div>
                 <div style={{ width: "1px", height: "14px", background: C.border }} className="mobile-hide" />
-                <span className="mobile-hide" style={{ fontSize: "10px", letterSpacing: "2px", color: C.muted, fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 600 }}>Australia - Bombay - Gurugram</span>
+                <span className="mobile-hide" style={{ fontSize: "10px", letterSpacing: "2px", color: C.muted, fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 600 }}>Melbourne (Australia) · Bombay · Gurugram</span>
               </div>
 
               <h1 className="display-font shimmer-text" style={{ fontSize: "clamp(2rem, 7vw, 4.8rem)", lineHeight: 1.1, letterSpacing: "-1px", marginBottom: "30px", minHeight: "2.5em", overflow: "hidden" }}>
-                <RotatingHooks />
+                <StaticHook />
               </h1>
 
               <p className="hero-desc" style={{ fontSize: "1.1rem", color: C.text, lineHeight: 1.75, fontWeight: 300, maxWidth: "480px", marginBottom: "40px" }}>
@@ -668,7 +844,7 @@ export default function AvaniEnterprises() {
                   <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#FF3333", animation: "pulse 1.5s infinite" }} />
                   <span style={{ color: "#FF3333", fontSize: "11px", fontWeight: 800, letterSpacing: "1px", fontFamily: "'Plus Jakarta Sans', sans-serif" }}>LAST 3 PLANS LEFT</span>
                 </div>
-                <button onClick={() => setShowModal(true)} className="cta-btn hero-cta" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", padding: "18px 40px" }}>
+                <button onClick={() => openModal()} className="cta-btn hero-cta" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", padding: "18px 40px" }}>
                   START YOUR BUSINESS JOURNEY NOW <ArrowRight size={16} />
                 </button>
               </div>
@@ -679,14 +855,15 @@ export default function AvaniEnterprises() {
               <div style={{ position: "absolute", inset: "-12px", border: `1px solid ${C.accent}25`, borderRadius: "16px", zIndex: -1 }} />
               <div style={{ position: "relative", borderRadius: "12px", overflow: "hidden", boxShadow: "0 8px 40px rgba(0,0,0,0.12)" }}>
                 <video 
-                  src="/landing.mp4" 
                   autoPlay 
                   loop 
                   muted={isMuted}
                   playsInline
-                  preload="auto"
+                  preload="metadata"
                   style={{ width: "100%", height: "auto", display: "block", objectFit: "cover" }} 
-                />
+                >
+                  <source src="/avanivideo.mp4" type="video/mp4" />
+                </video>
                 
                 {/* Mute/Unmute Toggle */}
                 <button 
@@ -731,7 +908,7 @@ export default function AvaniEnterprises() {
           <div className="marquee-track">
             {[...Array(3)].map((_, i) => (
               <React.Fragment key={i}>
-                {["WEB ENGINEERING", "PERFORMANCE ADS", "SEO & CONTENT", "SOCIAL MEDIA", "BUSINESS ADVISORY", "LOANS & INSURANCE", "FINTECH", "E-COMMERCE", "SAAS PRODUCTS"].map((item, j) => (
+                {["WEB ENGINEERING", "PERFORMANCE ADS", "SEO & CONTENT", "AI-POWERED SOLUTIONS", "AGENTIC AI", "SOCIAL MEDIA", "BUSINESS ADVISORY", "LOANS & INSURANCE", "FINTECH", "E-COMMERCE", "SAAS PRODUCTS"].map((item, j) => (
                   <div key={j} className="marquee-item">
                     <div className="marquee-dot" />
                     <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "11px", fontWeight: 700, letterSpacing: "3px", color: C.muted }}>{item}</span>
@@ -764,56 +941,68 @@ export default function AvaniEnterprises() {
 
           {/* Pricing Cards */}
           <div className="pricing-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px", alignItems: "stretch" }}>
-            {[
+            {([
               {
                 name: "Basic Plan",
                 price: 149,
-                range: "₹1 – ₹9,999",
-                desc: "Ideal for micro-businesses and early-stage startups exploring their first package.",
+                desc: "Ideal for early-stage businesses and first-time founders exploring viability.",
                 popular: false,
                 features: [
-                  { name: "1-on-1 Consultation Call", included: true },
-                  { name: "Business Assessment Report", included: true },
-                  { name: "Basic Market Overview", included: true },
-                  { name: "Competitor Benchmarking", included: false },
-                  { name: "Custom Growth Roadmap", included: false },
-                  { name: "Implementation Support", included: false },
-                  { name: "Priority Support (24/7)", included: false },
+                  { name: "Feasibility Study", status: "✔" },
+                  { name: "Website Development", status: "✖" },
+                  { name: "AI Integration", status: "✖" },
+                  { name: "App Development", status: "✖" },
+                  { name: "Digital Marketing", status: "✖" },
+                  { name: "Office Space", status: "✖" },
+                  { name: "Employee Hirings", status: "✖" },
+                  { name: "Pamphlets & Letterheads", status: "✖" },
+                  { name: "Sales Support", status: "✖" },
+                  { name: "Bank Accounts", status: "✖" },
+                  { name: "Government Contracts", status: "✖" },
                 ]
               },
               {
                 name: "Standard Plan",
                 price: 199,
-                range: "₹1 – ₹99,999",
-                desc: "Perfect for small to mid-size businesses looking to scale their operations.",
+                desc: "Perfect for growing businesses ready to build their digital presence and scale.",
                 popular: true,
                 features: [
-                  { name: "1-on-1 Consultation Call", included: true },
-                  { name: "Business Assessment Report", included: true },
-                  { name: "Basic Market Overview", included: true },
-                  { name: "Competitor Benchmarking", included: true },
-                  { name: "Custom Growth Roadmap", included: true },
-                  { name: "Implementation Support", included: false },
-                  { name: "Priority Support (24/7)", included: false },
+                  { name: "Feasibility Study", status: "✔" },
+                  { name: "Website Development", status: "1 year" },
+                  { name: "AI Integration", status: "AI videos included" },
+                  { name: "App Development", status: "✖" },
+                  { name: "Digital Marketing", status: "3 months" },
+                  { name: "Office Space", status: "✖" },
+                  { name: "Employee Hirings", status: "✖" },
+                  { name: "Pamphlets & Letterheads", status: "✖" },
+                  { name: "Sales Support", status: "✖" },
+                  { name: "Bank Accounts", status: "✔" },
+                  { name: "Government Contracts", status: "✖" },
                 ]
               },
               {
                 name: "Premium Plan",
                 price: 499,
-                range: "₹1 – ₹9,99,999",
-                desc: "End-to-end advisory for established businesses with full implementation backing.",
+                desc: "End-to-end business setup with full operations, AI, hiring, and sales support.",
                 popular: false,
                 features: [
-                  { name: "1-on-1 Consultation Call", included: true },
-                  { name: "Business Assessment Report", included: true },
-                  { name: "Basic Market Overview", included: true },
-                  { name: "Competitor Benchmarking", included: true },
-                  { name: "Custom Growth Roadmap", included: true },
-                  { name: "Implementation Support", included: true },
-                  { name: "Priority Support (24/7)", included: true },
+                  { name: "Feasibility Study", status: "✔" },
+                  { name: "Website Development", status: "1 year" },
+                  { name: "AI Integration", status: "Agentic AI + AI videos" },
+                  { name: "App Development", status: "✔" },
+                  { name: "Digital Marketing", status: "1 year" },
+                  { name: "Office Space", status: "3 months" },
+                  { name: "Employee Hirings", status: "Up to 20 hirings" },
+                  { name: "Pamphlets & Letterheads", status: "✔" },
+                  { name: "Sales Support", status: "Till break-even" },
+                  { name: "Bank Accounts", status: "Premium account" },
+                  { name: "Government Contracts", status: "If applicable" },
                 ]
               }
-            ].map((plan, i) => (
+            ] as const).map((plan, i) => {
+              const isIncluded = (s: string) => s !== "✖";
+              const isCheck = (s: string) => s === "✔";
+              return (
               <div
                 key={i}
                 className={`pricing-card${plan.popular ? ' popular' : ''}`}
@@ -865,15 +1054,9 @@ export default function AvaniEnterprises() {
                   {plan.name.toUpperCase()}
                 </div>
 
-                {/* Price */}
-                <div style={{ marginBottom: "8px", display: "flex", alignItems: "baseline", gap: "4px" }}>
+                {/* Price — no /session, no range */}
+                <div style={{ marginBottom: "16px", display: "flex", alignItems: "baseline", gap: "4px" }}>
                   <span className="display-font" style={{ fontSize: "3.5rem", lineHeight: 1, color: C.text }}>₹{plan.price}</span>
-                  <span style={{ fontSize: "13px", color: C.muted, fontWeight: 400 }}>/session</span>
-                </div>
-
-                {/* Package Range */}
-                <div style={{ fontSize: "12px", color: C.accent, fontWeight: 600, letterSpacing: "0.5px", marginBottom: "8px", fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-                  Package Range: {plan.range}
                 </div>
 
                 {/* Description */}
@@ -886,23 +1069,28 @@ export default function AvaniEnterprises() {
 
                 {/* Features List */}
                 <div style={{ display: "flex", flexDirection: "column", gap: "0", marginBottom: "36px", flexGrow: 1 }}>
-                  {plan.features.map((feat, fi) => (
+                  {plan.features.map((feat, fi) => {
+                    const included = isIncluded(feat.status);
+                    const check = isCheck(feat.status);
+                    const hasDetail = included && !check;
+                    return (
                     <div
                       key={fi}
                       className="pricing-features-row"
                       style={{
                         display: "flex",
-                        alignItems: "center",
+                        alignItems: "flex-start",
                         gap: "12px",
-                        padding: "14px 16px",
-                        fontSize: "14px",
+                        padding: "12px 10px",
+                        fontSize: "13px",
                         fontFamily: "'Plus Jakarta Sans', sans-serif",
                         fontWeight: 500,
-                        color: feat.included ? C.text : "rgba(255,255,255,0.3)",
+                        color: included ? C.text : C.muted,
                         borderBottom: fi < plan.features.length - 1 ? `1px solid ${C.border}` : "none",
                         transition: "background 0.2s",
+                        opacity: included ? 1 : 0.45,
                       }}
-                      onMouseEnter={e => e.currentTarget.style.background = "rgba(255,255,255,0.02)"}
+                      onMouseEnter={e => e.currentTarget.style.background = "rgba(212,160,23,0.03)"}
                       onMouseLeave={e => e.currentTarget.style.background = "transparent"}
                     >
                       <span style={{
@@ -912,24 +1100,33 @@ export default function AvaniEnterprises() {
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
-                        fontSize: "12px",
+                        fontSize: "11px",
                         flexShrink: 0,
-                        background: feat.included ? "rgba(34,197,94,0.12)" : "rgba(239,68,68,0.08)",
-                        color: feat.included ? C.success : C.danger,
+                        marginTop: "1px",
+                        background: included ? "rgba(34,197,94,0.12)" : "rgba(239,68,68,0.08)",
+                        color: included ? C.success : C.danger,
                         fontWeight: 700,
                       }}>
-                        {feat.included ? "✔" : "✖"}
+                        {included ? "✔" : "✖"}
                       </span>
-                      <span style={{ textDecoration: feat.included ? "none" : "line-through", opacity: feat.included ? 1 : 0.5 }}>
-                        {feat.name}
-                      </span>
+                      <div style={{ display: "flex", flexDirection: "column" }}>
+                        <span style={{ textDecoration: included ? "none" : "line-through" }}>
+                          {feat.name}
+                        </span>
+                        {hasDetail && (
+                          <span style={{ fontSize: "11px", color: C.accent, fontWeight: 600, marginTop: "2px", letterSpacing: "0.3px" }}>
+                            {feat.status}
+                          </span>
+                        )}
+                      </div>
                     </div>
-                  ))}
+                    );
+                  })}
                 </div>
 
                 {/* CTA Button */}
                 <button
-                  onClick={() => handlePlanPayment(plan.name, plan.price)}
+                  onClick={() => openModal(plan.name)}
                   className="cta-btn"
                   style={{
                     width: "100%",
@@ -960,10 +1157,11 @@ export default function AvaniEnterprises() {
                     }
                   }}
                 >
-                  PROCEED TO PAYMENT <ArrowRight size={16} />
+                  BOOK NOW <ArrowRight size={16} />
                 </button>
               </div>
-            ))}
+              );
+            })}
           </div>
 
           {/* Bottom note */}
@@ -992,6 +1190,183 @@ export default function AvaniEnterprises() {
               <div style={{ fontSize: "11px", color: C.muted, marginTop: "4px", letterSpacing: "1px" }}>{s.sub}</div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* ── AI ADVANTAGE SECTION — DARK IMMERSIVE ── */}
+      <section className="ai-section-dark mobile-section" style={{
+        padding: "120px 6%",
+        position: "relative",
+        overflow: "hidden",
+        background: "linear-gradient(165deg, #0A0A1A 0%, #111128 40%, #0D0D20 100%)",
+      }}>
+        {/* Animated mesh background */}
+        <div style={{ position: "absolute", inset: 0, backgroundImage: `linear-gradient(rgba(99,102,241,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(99,102,241,0.05) 1px, transparent 1px)`, backgroundSize: "60px 60px" }} />
+        {/* Glow orbs */}
+        <div style={{ position: "absolute", top: "10%", left: "20%", width: "500px", height: "500px", background: "radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 60%)", pointerEvents: "none", animation: "floatUp 8s ease-in-out infinite" }} />
+        <div style={{ position: "absolute", bottom: "10%", right: "15%", width: "400px", height: "400px", background: "radial-gradient(circle, rgba(212,160,23,0.08) 0%, transparent 60%)", pointerEvents: "none", animation: "floatUp 10s ease-in-out infinite 2s" }} />
+
+        <div style={{ maxWidth: "1100px", margin: "0 auto", position: "relative", zIndex: 1 }}>
+
+          {/* Badge */}
+          <div style={{ display: "flex", justifyContent: "center", marginBottom: "32px" }}>
+            <div style={{
+              display: "inline-flex", alignItems: "center", gap: "10px",
+              background: "rgba(99,102,241,0.1)",
+              border: "1px solid rgba(99,102,241,0.3)",
+              padding: "10px 24px", borderRadius: "100px",
+              animation: "borderGlow 3s ease infinite",
+            }}>
+              <Cpu size={15} color="#818CF8" strokeWidth={2.5} />
+              <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "10px", fontWeight: 800, letterSpacing: "2.5px", color: "#818CF8" }}>THE AI ADVANTAGE</span>
+            </div>
+          </div>
+
+          {/* Main Headline */}
+          <h2 className="display-font" style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)", lineHeight: 1, textAlign: "center", marginBottom: "12px", color: "#FFFFFF" }}>
+            WE WORK{" "}
+            <span style={{
+              background: "linear-gradient(135deg, #818CF8, #D4A017, #818CF8)",
+              backgroundSize: "200% 200%",
+              animation: "gradientShift 4s ease infinite",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+            }}>WITH AI.</span>
+          </h2>
+          <h2 className="display-font" style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)", lineHeight: 1, textAlign: "center", marginBottom: "32px", color: "rgba(255,255,255,0.3)" }}>
+            NOT AGAINST IT.
+          </h2>
+
+          {/* Manifesto Text */}
+          <p className="ai-manifesto-text" style={{
+            textAlign: "center",
+            color: "rgba(255,255,255,0.6)",
+            fontSize: "18px",
+            lineHeight: 1.8,
+            maxWidth: "680px",
+            margin: "0 auto 60px",
+            fontWeight: 300,
+          }}>
+            While your competitors are still <strong style={{ color: "rgba(255,255,255,0.9)" }}>debating</strong> whether to use AI,
+            our clients are already <strong style={{ color: "#818CF8" }}>deploying it</strong>.
+            We don't bolt AI on as an afterthought — we build it into the foundation.
+          </p>
+
+          {/* Comparison Grid — Others vs Us */}
+          <div className="ai-comparison-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px", maxWidth: "800px", margin: "0 auto 60px" }}>
+            {/* Others Column */}
+            <div style={{
+              background: "rgba(255,255,255,0.03)",
+              border: "1px solid rgba(255,255,255,0.06)",
+              borderRadius: "20px",
+              padding: "32px 28px",
+            }}>
+              <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "10px", fontWeight: 700, letterSpacing: "3px", color: "rgba(255,255,255,0.3)", marginBottom: "24px" }}>OTHER AGENCIES</div>
+              {[
+                "Templates & cookie-cutter websites",
+                "Manual data entry & reporting",
+                "Static marketing campaigns",
+                "React to problems after they happen",
+              ].map((item, idx) => (
+                <div key={idx} style={{ display: "flex", alignItems: "center", gap: "12px", padding: "10px 0", borderBottom: idx < 3 ? "1px solid rgba(255,255,255,0.04)" : "none" }}>
+                  <X size={14} color="#EF4444" style={{ flexShrink: 0 }} />
+                  <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "13px", color: "rgba(255,255,255,0.4)", fontWeight: 400 }}>{item}</span>
+                </div>
+              ))}
+            </div>
+            {/* Us Column */}
+            <div style={{
+              background: "linear-gradient(165deg, rgba(99,102,241,0.08) 0%, rgba(212,160,23,0.05) 100%)",
+              border: "1px solid rgba(99,102,241,0.25)",
+              borderRadius: "20px",
+              padding: "32px 28px",
+              animation: "aiGlow 4s ease infinite",
+            }}>
+              <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "10px", fontWeight: 700, letterSpacing: "3px", color: "#818CF8", marginBottom: "24px" }}>AVANI ENTERPRISES</div>
+              {[
+                "AI-architected, custom-built systems",
+                "Agentic AI automating your workflows",
+                "Self-optimizing campaigns & funnels",
+                "Predict & prevent before issues arise",
+              ].map((item, idx) => (
+                <div key={idx} style={{ display: "flex", alignItems: "center", gap: "12px", padding: "10px 0", borderBottom: idx < 3 ? "1px solid rgba(99,102,241,0.1)" : "none" }}>
+                  <CheckCircle size={14} color="#818CF8" style={{ flexShrink: 0 }} />
+                  <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "13px", color: "rgba(255,255,255,0.85)", fontWeight: 500 }}>{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Feature Cards Grid */}
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "18px", maxWidth: "960px", margin: "0 auto 60px" }} className="ai-pills-grid">
+            {[
+              { icon: <Cpu size={24} />, label: "Agentic AI", stat: "10x", statLabel: "Faster Execution", desc: "Self-executing AI agents that handle tasks, make decisions, and learn from outcomes — autonomously." },
+              { icon: <Activity size={24} />, label: "Predictive Intelligence", stat: "24/7", statLabel: "Real-time Monitoring", desc: "AI-powered analytics that don't just report what happened — they predict what's coming next." },
+              { icon: <Zap size={24} />, label: "Smart Automation", stat: "85%", statLabel: "Tasks Automated", desc: "From lead capture to follow-ups to invoicing — AI handles the boring stuff so your team can focus on growth." },
+            ].map((item, idx) => (
+              <div key={idx} className="ai-hero-card">
+                <div style={{
+                  width: "52px", height: "52px", borderRadius: "16px",
+                  background: "linear-gradient(135deg, rgba(99,102,241,0.15), rgba(212,160,23,0.1))",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  marginBottom: "20px", color: "#818CF8",
+                }}>
+                  {item.icon}
+                </div>
+                <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "15px", marginBottom: "6px", color: "#FFFFFF", letterSpacing: "0.3px" }}>{item.label}</div>
+                <div style={{ display: "flex", alignItems: "baseline", gap: "6px", marginBottom: "14px" }}>
+                  <span className="display-font" style={{ fontSize: "2rem", color: "#818CF8", lineHeight: 1 }}>{item.stat}</span>
+                  <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "10px", fontWeight: 600, letterSpacing: "1.5px", color: "rgba(255,255,255,0.4)" }}>{item.statLabel}</span>
+                </div>
+                <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.5)", lineHeight: 1.7, fontWeight: 300 }}>{item.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Bold CTA */}
+          <div style={{ textAlign: "center" }}>
+            <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "13px", fontWeight: 600, letterSpacing: "1px", color: "rgba(255,255,255,0.35)", marginBottom: "24px" }}>
+              YOUR COMPETITORS ARE ALREADY USING AI. ARE YOU?
+            </p>
+            <div className="ai-cta-row" style={{ display: "flex", justifyContent: "center", gap: "16px" }}>
+              <button onClick={() => openModal()} className="cta-btn" style={{
+                padding: "18px 40px",
+                fontSize: "13px",
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+                background: "linear-gradient(135deg, #6366F1, #4F46E5)",
+                border: "none",
+                borderRadius: "6px",
+                color: "#FFFFFF",
+                boxShadow: "0 8px 30px rgba(99,102,241,0.4)",
+              }}>
+                GET AI-POWERED GROWTH <ArrowRight size={16} />
+              </button>
+              <a href="tel:+919311967319" style={{
+                padding: "18px 32px",
+                fontSize: "13px",
+                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontWeight: 700,
+                letterSpacing: "1.5px",
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+                color: "rgba(255,255,255,0.7)",
+                border: "1px solid rgba(255,255,255,0.15)",
+                borderRadius: "6px",
+                textDecoration: "none",
+                cursor: "pointer",
+                transition: "all 0.3s",
+              }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.4)"; e.currentTarget.style.color = "#fff"; }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.15)"; e.currentTarget.style.color = "rgba(255,255,255,0.7)"; }}
+              >
+                TALK TO US <Phone size={16} />
+              </a>
+            </div>
+          </div>
+
         </div>
       </section>
 
@@ -1151,7 +1526,7 @@ export default function AvaniEnterprises() {
                 { step: "05", title: "Test", icon: <ShieldCheck />, desc: "Rigorous testing across devices and browsers to ensure a flawless experience." },
                 { step: "06", title: "Scale", icon: <TrendingUp />, desc: "Monthly reviews, A/B testing, and compounding optimization cycles. Unlimited growth." },
               ].map((p, i) => (
-                <div key={i} style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", minWidth: "160px" }}>
+                <div key={i} className="process-step-mobile" style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", minWidth: "160px" }}>
                   {/* Circle Bubble */}
                   <div style={{ position: "relative", marginBottom: "32px" }}>
                     <div className="process-circle" style={{ 
@@ -1277,7 +1652,7 @@ export default function AvaniEnterprises() {
             </h2>
           </div>
           <div className="cta-band-btns" style={{ display: "flex", gap: "16px" }}>
-            <button onClick={() => setShowModal(true)} style={{ background: "white", color: "#1A1A2E", border: "none", padding: "18px 36px", fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "13px", letterSpacing: "1.5px", cursor: "pointer", transition: "all 0.3s", borderRadius: "4px", display: "flex", alignItems: "center", gap: "10px" }}>
+            <button onClick={() => openModal()} style={{ background: "white", color: "#1A1A2E", border: "none", padding: "18px 36px", fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "13px", letterSpacing: "1.5px", cursor: "pointer", transition: "all 0.3s", borderRadius: "4px", display: "flex", alignItems: "center", gap: "10px" }}>
               START YOUR BUSINESS JOURNEY NOW <ArrowRight size={16} />
             </button>
             <a href="tel:+919311967319" style={{ background: "transparent", color: "white", border: "1px solid rgba(255,255,255,0.4)", padding: "18px 36px", fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: "13px", letterSpacing: "1.5px", cursor: "pointer", display: "flex", alignItems: "center", gap: "10px", textDecoration: "none" }}>
@@ -1297,14 +1672,44 @@ export default function AvaniEnterprises() {
               <button onClick={() => setShowModal(false)} style={{ position: "absolute", top: "20px", right: "20px", background: "rgba(255,255,255,0.3)", border: "none", color: "white", cursor: "pointer", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "50%" }}>
                 <X size={16} />
               </button>
-              <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "9px", fontWeight: 700, letterSpacing: "3px", color: "rgba(0,0,0,0.5)", marginBottom: "8px" }}>₹499 SPECIAL OFFER</div>
-              <h2 className="display-font" style={{ fontSize: "2.2rem", color: "#000", lineHeight: 1 }}>GET YOUR GROWTH PLAN</h2>
+              <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "9px", fontWeight: 700, letterSpacing: "3px", color: "rgba(0,0,0,0.5)", marginBottom: "8px" }}>BUSINESS SETUP SESSION</div>
+              <h2 className="display-font" style={{ fontSize: "2.2rem", color: "#000", lineHeight: 1 }}>BOOK YOUR STRATEGY SESSION</h2>
             </div>
 
             <div style={{ padding: "40px" }}>
               <p style={{ color: C.muted, fontSize: "13px", lineHeight: 1.7, marginBottom: "32px" }}>
-                Complete the form below to secure your 30-minute Strategy Session. Includes Audit, Roadmap & <strong>Bonus Homepage Audit</strong>.
+                Complete the form below to secure your 30-minute Strategy Session. Includes Website Audit, Growth Roadmap & <strong>Competitor Analysis</strong>.
               </p>
+
+              {/* Plan Selector */}
+              <div style={{ marginBottom: "20px" }}>
+                <div style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "2px", color: C.muted, marginBottom: "12px", fontFamily: "'Plus Jakarta Sans', sans-serif" }}>SELECT YOUR PLAN</div>
+                <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" as const }}>
+                  {(["Basic Plan", "Standard Plan", "Premium Plan"] as const).map((p) => (
+                    <button
+                      key={p}
+                      type="button"
+                      onClick={() => setFormData(prev => ({ ...prev, plan: p }))}
+                      style={{
+                        flex: 1,
+                        minWidth: "140px",
+                        padding: "14px 10px",
+                        border: `2px solid ${formData.plan === p ? C.accent : C.border}`,
+                        borderRadius: "8px",
+                        background: formData.plan === p ? C.accentDim : "transparent",
+                        cursor: "pointer",
+                        fontFamily: "'Plus Jakarta Sans', sans-serif",
+                        transition: "all 0.2s",
+                        textAlign: "center" as const,
+                      }}
+                    >
+                      <div style={{ fontWeight: 800, fontSize: "13px", color: formData.plan === p ? C.accent : C.text }}>{p}</div>
+                      <div style={{ fontSize: "18px", fontWeight: 800, color: formData.plan === p ? C.accent : C.text, marginTop: "4px" }}>₹{PLAN_PRICES[p]}</div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
               <form style={{ display: "flex", flexDirection: "column", gap: "14px" }} onSubmit={handleFormSubmit}>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "14px" }}>
                   <input type="text" placeholder="First Name" required value={formData.firstName} onChange={e => setFormData({ ...formData, firstName: e.target.value })} />
@@ -1313,21 +1718,12 @@ export default function AvaniEnterprises() {
                 <input type="email" placeholder="Business Email" required value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })} />
                 <input type="tel" placeholder="WhatsApp / Phone" required value={formData.phone} onChange={e => setFormData({ ...formData, phone: e.target.value })} />
                 <input type="text" placeholder="Company / Business Name" required value={formData.company} onChange={e => setFormData({ ...formData, company: e.target.value })} />
-                <select value={formData.service} onChange={e => setFormData({ ...formData, service: e.target.value })}>
-                  <option>Web Engineering</option>
-                  <option>Performance Marketing</option>
-                  <option>SEO & Content</option>
-                  <option>Social Media</option>
-                  <option>Business Advisory</option>
-                  <option>Loans & Insurance</option>
-                  <option>Full Package</option>
-                </select>
-                <textarea placeholder="Briefly describe your goals and current challenges..." rows={4} value={formData.goals} onChange={e => setFormData({ ...formData, goals: e.target.value })} />
+                <textarea placeholder="Briefly describe your goals and current challenges..." rows={3} value={formData.goals} onChange={e => setFormData({ ...formData, goals: e.target.value })} />
                 <button type="submit" className="cta-btn" style={{ width: "100%", padding: "18px", fontSize: "13px", letterSpacing: "2px", marginTop: "8px", display: "flex", alignItems: "center", justifyContent: "center", gap: "10px" }}>
-                  SECURE SLOT FOR ₹499 <ArrowRight size={16} />
+                  SECURE SLOT — ₹{PLAN_PRICES[formData.plan] ?? 199} <ArrowRight size={16} />
                 </button>
                 <p style={{ textAlign: "center", color: C.muted, fontSize: "10px", letterSpacing: "0.5px", marginTop: "8px" }}>
-                  Limited slots available this week. Only serious inquiries.
+                  Secure payment via Razorpay. Instant confirmation.
                 </p>
               </form>
             </div>
@@ -1379,7 +1775,7 @@ export default function AvaniEnterprises() {
 
       {/* ── FLOATING BOOK NOW BUTTON ── */}
       <div className="mobile-fab" style={{ position: "fixed", bottom: "30px", right: "30px", zIndex: 9000 }}>
-        <button onClick={() => setShowModal(true)} className="cta-btn" style={{ 
+        <button onClick={() => openModal()} className="cta-btn" style={{ 
           boxShadow: "0 10px 40px rgba(212,160,23,0.5), 0 0 20px rgba(212,160,23,0.15)", 
           padding: "18px 32px", 
           borderRadius: "4px", 
