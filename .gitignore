@@ -7,3 +7,4 @@ build/
 .vscode/
 .DS_Store
 *.mp4
+!avani-connect-glow-main/public/avanivideo.mp4
