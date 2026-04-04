@@ -121,11 +121,11 @@ export default function AvaniEnterprises() {
   const sectionRef = useRef(null);
   const [isMuted, setIsMuted] = useState(true);
 
-  // Plan pricing map
+  // Plan pricing map (Booking fees charged via Razorpay)
   const PLAN_PRICES: Record<string, number> = {
     "Basic Plan": 149,
-    "Standard Plan": 199,
-    "Premium Plan": 499,
+    "Standard Plan": 149,
+    "Premium Plan": 249,
   };
 
   // Form & Payment State
@@ -142,6 +142,14 @@ export default function AvaniEnterprises() {
   const openModal = (plan = "Standard Plan") => {
     setFormData(prev => ({ ...prev, plan }));
     setShowModal(true);
+  };
+
+  const scrollToPricing = () => {
+    const section = document.getElementById("pricing");
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    setMenuOpen(false); // Close mobile menu if it's open
   };
 
   useEffect(() => {
@@ -831,7 +839,7 @@ export default function AvaniEnterprises() {
           {["Solutions", "Projects", "About", "FAQ"].map(l => (
             <a key={l} href={`#${l.toLowerCase()}`} className="nav-link">{l.toUpperCase()}</a>
           ))}
-          <button onClick={() => openModal()} className="cta-btn nav-desktop-cta" style={{ padding: "10px 22px", fontSize: "11px", marginLeft: "10px" }}>
+          <button onClick={() => scrollToPricing()} className="cta-btn nav-desktop-cta" style={{ padding: "10px 22px", fontSize: "11px", marginLeft: "10px" }}>
             START YOUR JOURNEY
           </button>
         </div>
@@ -978,7 +986,7 @@ export default function AvaniEnterprises() {
               {/* CTA Button */}
               <div style={{ padding: "20px 28px 40px" }}>
                 <button
-                  onClick={() => { openModal(); setMenuOpen(false); }}
+                  onClick={() => { scrollToPricing(); setMenuOpen(false); }}
                   className="cta-btn"
                   style={{
                     width: "100%",
@@ -1029,62 +1037,10 @@ export default function AvaniEnterprises() {
                 <StaticHook />
               </h1>
 
-              <p className="hero-desc" style={{ fontSize: "1.1rem", color: C.text, lineHeight: 1.75, fontWeight: 300, maxWidth: "480px", marginBottom: "40px" }}>
-                We show you how to generate leads in 30 minutes. Transform your digital presence into a high-converting sales system with a proven roadmap.
-              </p>
-
-              {/* Sub-hook with value proposition */}
-              <div className="mobile-hero-only mobile-hero-sub-hook" style={{ marginBottom: "20px", width: "100%", maxWidth: "480px" }}>
-                <div style={{
-                  background: `linear-gradient(135deg, rgba(212,160,23,0.06) 0%, rgba(212,160,23,0.02) 100%)`,
-                  border: `1px solid rgba(212,160,23,0.15)`,
-                  borderRadius: "12px",
-                  padding: "14px 20px",
-                }}>
-                  <p style={{ fontSize: "13px", fontWeight: 600, color: C.text, lineHeight: 1.6, fontFamily: "'Plus Jakarta Sans', sans-serif", margin: 0 }}>
-                    🚀 Join <span style={{ color: C.accent, fontWeight: 800 }}>200+</span> businesses that scaled their revenue with our <span style={{ color: C.accent, fontWeight: 800 }}>proven growth system</span>
-                  </p>
-                </div>
-              </div>
-
-              {/* Trust chips */}
-              <div className="mobile-hero-only mobile-hero-trust-row" style={{ display: "flex", flexWrap: "wrap", gap: "8px", marginBottom: "20px", width: "100%", maxWidth: "480px" }}>
-                {[
-                  { icon: "⚡", label: "30-Min Strategy" },
-                  { icon: "📈", label: "4x-10x ROAS" },
-                  { icon: "🎯", label: "Proven Frameworks" },
-                ].map((chip, i) => (
-                  <div key={i} className="mobile-hero-trust-chip" style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: "6px",
-                    background: C.card,
-                    border: `1px solid ${C.border}`,
-                    borderRadius: "100px",
-                    padding: "7px 16px",
-                    fontSize: "12px",
-                    fontWeight: 700,
-                    color: C.text,
-                    fontFamily: "'Plus Jakarta Sans', sans-serif",
-                    boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
-                    letterSpacing: "0.2px",
-                    transition: "all 0.3s ease",
-                  }}
-                  onMouseEnter={e => { e.currentTarget.style.borderColor = C.accent + '60'; e.currentTarget.style.boxShadow = `0 4px 16px ${C.accentGlow}`; }}
-                  onMouseLeave={e => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.04)'; }}
-                  >
-                    <span>{chip.icon}</span>
-                    <span>{chip.label}</span>
-                  </div>
-                ))}
-              </div>
-
               <div className="cta-container" style={{ display: "flex", flexDirection: "column", gap: "16px", alignItems: "flex-start" }}>
-                <div className="urgency-badge" style={{ background: "rgba(255, 50, 50, 0.1)", border: "1px solid rgba(255, 50, 50, 0.3)", padding: "8px 16px", borderRadius: "2px", display: "inline-flex", alignItems: "center", gap: "8px" }}>
-                  <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#FF3333", animation: "pulse 1.5s infinite" }} />
-                  <span style={{ color: "#FF3333", fontSize: "11px", fontWeight: 800, letterSpacing: "1px", fontFamily: "'Plus Jakarta Sans', sans-serif" }}>LAST 3 PLANS LEFT</span>
-                </div>
-                <button onClick={() => openModal()} className="cta-btn hero-cta" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", padding: "18px 40px" }}>
+
+
+                <button onClick={() => scrollToPricing()} className="cta-btn hero-cta" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", padding: "18px 40px" }}>
                   START YOUR BUSINESS JOURNEY NOW <ArrowRight size={16} />
                 </button>
 
@@ -1166,21 +1122,7 @@ export default function AvaniEnterprises() {
           </div>
         </div>
 
-        {/* Horizontal ticker */}
-        <div style={{ marginTop: "80px", position: "relative", zIndex: 1 }} className="marquee-wrap">
-          <div className="marquee-track">
-            {[...Array(3)].map((_, i) => (
-              <React.Fragment key={i}>
-                {["WEB ENGINEERING", "PERFORMANCE ADS", "SEO & CONTENT", "AI-POWERED SOLUTIONS", "AGENTIC AI", "SOCIAL MEDIA", "BUSINESS ADVISORY", "LOANS & INSURANCE", "FINTECH", "E-COMMERCE", "SAAS PRODUCTS"].map((item, j) => (
-                  <div key={j} className="marquee-item">
-                    <div className="marquee-dot" />
-                    <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "11px", fontWeight: 700, letterSpacing: "3px", color: C.muted }}>{item}</span>
-                  </div>
-                ))}
-              </React.Fragment>
-            ))}
-          </div>
-        </div>
+
       </section>
 
       {/* ── PRICING TABLE ── */}
@@ -1193,246 +1135,145 @@ export default function AvaniEnterprises() {
           <div style={{ textAlign: "center", marginBottom: "80px" }}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "12px", marginBottom: "20px" }}>
               <div style={{ width: "40px", height: "1px", background: `linear-gradient(90deg, transparent, ${C.accent})` }} />
-              <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "11px", fontWeight: 700, letterSpacing: "3px", color: C.accent }}>CHOOSE YOUR PLAN</span>
+              <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "14px", fontWeight: 800, letterSpacing: "3px", color: C.accent }}>CHOOSE YOUR PLAN</span>
               <div style={{ width: "40px", height: "1px", background: `linear-gradient(90deg, ${C.accent}, transparent)` }} />
             </div>
-            <h2 className="display-font" style={{ fontSize: "clamp(2.5rem, 5vw, 4.5rem)", marginBottom: "20px", lineHeight: 0.95 }}>TRANSPARENT PRICING.</h2>
+            <h2 className="display-font" style={{ fontSize: "clamp(2.5rem, 5vw, 4.5rem)", marginBottom: "20px", lineHeight: 0.95, fontWeight: 800 }}>CHOOSE YOUR PLAN</h2>
             <p style={{ color: C.muted, fontSize: "15px", lineHeight: 1.8, maxWidth: "550px", margin: "0 auto", fontWeight: 300 }}>
               Simple, fair consultation plans. Pick what suits your business scale — upgrade anytime.
             </p>
           </div>
 
           {/* Pricing Cards */}
-          <div className="pricing-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px", alignItems: "stretch" }}>
-            {([
-              {
-                name: "Basic Plan",
-                price: 149,
-                planPricing: "9,999",
-                desc: "Ideal for early-stage businesses and first-time founders exploring viability.",
-                popular: false,
-                features: [
-                  { name: "Feasibility Study", status: "✔" },
-                  { name: "Website Development", status: "✖" },
-                  { name: "AI Integration", status: "✖" },
-                  { name: "App Development", status: "✖" },
-                  { name: "Digital Marketing", status: "✖" },
-                  { name: "Office Space", status: "✖" },
-                  { name: "Employee Hirings", status: "✖" },
-                  { name: "Pamphlets & Letterheads", status: "✖" },
-                  { name: "Sales Support", status: "✖" },
-                  { name: "Bank Accounts", status: "✖" },
-                  { name: "Government Contracts", status: "✖" },
-                ]
-              },
-              {
-                name: "Standard Plan",
-                price: 199,
-                planPricing: "99,999",
-                desc: "Perfect for growing businesses ready to build their digital presence and scale.",
-                popular: true,
-                features: [
-                  { name: "Feasibility Study", status: "✔" },
-                  { name: "Website Development", status: "1 year" },
-                  { name: "AI Integration", status: "AI videos included" },
-                  { name: "App Development", status: "✖" },
-                  { name: "Digital Marketing", status: "3 months" },
-                  { name: "Office Space", status: "✖" },
-                  { name: "Employee Hirings", status: "✖" },
-                  { name: "Pamphlets & Letterheads", status: "✖" },
-                  { name: "Sales Support", status: "✖" },
-                  { name: "Bank Accounts", status: "✔" },
-                  { name: "Government Contracts", status: "✖" },
-                ]
-              },
-              {
-                name: "Premium Plan",
-                price: 499,
-                planPricing: "9,99,999",
-                desc: "End-to-end business setup with full operations, AI, hiring, and sales support.",
-                popular: false,
-                features: [
-                  { name: "Feasibility Study", status: "✔" },
-                  { name: "Website Development", status: "1 year" },
-                  { name: "AI Integration", status: "Agentic AI + AI videos" },
-                  { name: "App Development", status: "✔" },
-                  { name: "Digital Marketing", status: "1 year" },
-                  { name: "Office Space", status: "3 months" },
-                  { name: "Employee Hirings", status: "Up to 20 hirings" },
-                  { name: "Pamphlets & Letterheads", status: "✔" },
-                  { name: "Sales Support", status: "Till break-even" },
-                  { name: "Bank Accounts", status: "Premium account" },
-                  { name: "Government Contracts", status: "If applicable" },
-                ]
-              }
-            ] as const).map((plan, i) => {
-              const isIncluded = (s: string) => s !== "✖";
-              const isCheck = (s: string) => s === "✔";
-              return (
-              <div
-                key={i}
-                className={`pricing-card${plan.popular ? ' popular' : ''}`}
-                style={{
-                  background: plan.popular ? `linear-gradient(165deg, #FFFFFF 0%, rgba(212,160,23,0.06) 100%)` : C.card,
-                  border: `1px solid ${plan.popular ? C.accent + '60' : C.border}`,
-                  borderRadius: "12px",
-                  padding: "40px 32px",
-                  display: "flex",
-                  flexDirection: "column" as const,
-                  position: "relative" as const,
-                  overflow: "hidden",
-                  transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
-                  transform: plan.popular ? "scale(1.03)" : "none",
-                  boxShadow: plan.popular ? `0 20px 60px ${C.accentGlow}, 0 0 0 1px ${C.accent}30` : "none",
-                }}
-                onMouseEnter={e => {
-                  e.currentTarget.style.transform = plan.popular ? "scale(1.05)" : "translateY(-6px)";
-                  e.currentTarget.style.borderColor = C.accent;
-                  e.currentTarget.style.boxShadow = `0 20px 60px ${C.accentGlow}`;
-                }}
-                onMouseLeave={e => {
-                  e.currentTarget.style.transform = plan.popular ? "scale(1.03)" : "none";
-                  e.currentTarget.style.borderColor = plan.popular ? C.accent + '60' : C.border;
-                  e.currentTarget.style.boxShadow = plan.popular ? `0 20px 60px ${C.accentGlow}, 0 0 0 1px ${C.accent}30` : "none";
-                }}
-              >
-                {/* Popular Badge */}
-                {plan.popular && (
-                  <div style={{
-                    position: "absolute",
-                    top: "16px",
-                    right: "16px",
-                    background: C.accent,
-                    color: "#000",
-                    fontSize: "9px",
-                    fontWeight: 800,
-                    letterSpacing: "2px",
-                    padding: "6px 14px",
-                    borderRadius: "20px",
-                    fontFamily: "'Plus Jakarta Sans', sans-serif"
-                  }}>
-                    MOST POPULAR
-                  </div>
-                )}
-
-                {/* Plan Name */}
-                <div style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "3px", color: plan.popular ? C.accent : C.muted, marginBottom: "16px", fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-                  {plan.name.toUpperCase()}
-                </div>
-
-                {/* Price — no /session, no range */}
-                <div style={{ marginBottom: "16px", display: "flex", alignItems: "baseline", gap: "4px" }}>
-                  <span className="display-font" style={{ fontSize: "3.5rem", lineHeight: 1, color: C.text }}>₹{plan.price}</span>
-                </div>
-
-                {/* Description */}
-                <p style={{ fontSize: "13px", color: C.muted, lineHeight: 1.7, marginBottom: "12px", fontWeight: 300 }}>
-                  {plan.desc}
-                </p>
-
-                {/* Plan Pricing */}
-                <div style={{ marginBottom: "32px", display: "flex", alignItems: "baseline", gap: "6px" }}>
-                  <span style={{ fontSize: "14px", fontWeight: 700, color: C.accent, fontFamily: "'Plus Jakarta Sans', sans-serif", letterSpacing: "0.3px" }}>Plan Pricing = ₹{plan.planPricing}</span>
-                </div>
-
-                {/* Divider */}
-                <div style={{ height: "1px", background: `linear-gradient(90deg, transparent, ${C.border}, transparent)`, marginBottom: "28px" }} />
-
-                {/* Features List */}
-                <div style={{ display: "flex", flexDirection: "column", gap: "0", marginBottom: "36px", flexGrow: 1 }}>
-                  {plan.features.map((feat, fi) => {
-                    const included = isIncluded(feat.status);
-                    const check = isCheck(feat.status);
-                    const hasDetail = included && !check;
-                    return (
-                    <div
-                      key={fi}
-                      className="pricing-features-row"
-                      style={{
-                        display: "flex",
-                        alignItems: "flex-start",
-                        gap: "12px",
-                        padding: "12px 10px",
-                        fontSize: "13px",
-                        fontFamily: "'Plus Jakarta Sans', sans-serif",
-                        fontWeight: 500,
-                        color: included ? C.text : C.muted,
-                        borderBottom: fi < plan.features.length - 1 ? `1px solid ${C.border}` : "none",
-                        transition: "background 0.2s",
-                        opacity: included ? 1 : 0.45,
-                      }}
-                      onMouseEnter={e => e.currentTarget.style.background = "rgba(212,160,23,0.03)"}
-                      onMouseLeave={e => e.currentTarget.style.background = "transparent"}
-                    >
-                      <span style={{
-                        width: "22px",
-                        height: "22px",
-                        borderRadius: "50%",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        fontSize: "11px",
-                        flexShrink: 0,
-                        marginTop: "1px",
-                        background: included ? "rgba(34,197,94,0.12)" : "rgba(239,68,68,0.08)",
-                        color: included ? C.success : C.danger,
-                        fontWeight: 700,
-                      }}>
-                        {included ? "✔" : "✖"}
-                      </span>
-                      <div style={{ display: "flex", flexDirection: "column" }}>
-                        <span style={{ textDecoration: included ? "none" : "line-through" }}>
-                          {feat.name}
-                        </span>
-                        {hasDetail && (
-                          <span style={{ fontSize: "11px", color: C.accent, fontWeight: 600, marginTop: "2px", letterSpacing: "0.3px" }}>
-                            {feat.status}
-                          </span>
-                        )}
+          {/* Pricing Comparison Table */}
+          <div className="pricing-table-container" style={{ 
+            overflowX: "auto", 
+            background: "#FFFFFF", 
+            borderRadius: "24px", 
+            boxShadow: "0 20px 80px rgba(0,0,0,0.06)",
+            border: `1px solid ${C.border}`,
+            position: "relative",
+            zIndex: 2
+          }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", minWidth: "800px", tableLayout: "fixed" }}>
+              <thead>
+                <tr>
+                  <th style={{ padding: "24px 20px", textAlign: "left", width: "220px", borderBottom: `1px solid ${C.border}` }}>
+                    <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "10px", fontWeight: 800, letterSpacing: "2px", color: C.muted, marginBottom: "4px" }}>COMPARE PLANS</div>
+                    <div className="display-font" style={{ fontSize: "20px", color: C.text }}>THE RIGHT FIT.</div>
+                  </th>
+                  {[
+                    { name: "Basic Plan", price: "9,999", book: "149", popular: false },
+                    { name: "Standard Plan", price: "99,999", book: "149", popular: true },
+                    { name: "Premium Plan", price: "9,99,999", book: "249", popular: false }
+                  ].map((p, i) => (
+                    <th key={i} style={{ 
+                      padding: "24px 15px", 
+                      textAlign: "center", 
+                      background: p.popular ? "rgba(99,102,241,0.03)" : "transparent",
+                      borderLeft: `1px solid ${C.border}`,
+                      borderBottom: `1px solid ${C.border}`,
+                      position: "relative"
+                    }}>
+                      {p.popular && (
+                        <div style={{ 
+                          position: "absolute", top: "0", left: "0", right: "0", height: "4px", background: C.accent 
+                        }} />
+                      )}
+                      <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "9px", fontWeight: 800, letterSpacing: "2.5px", color: p.popular ? C.accent : C.muted, marginBottom: "8px" }}>{p.name.toUpperCase()}</div>
+                      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "2px" }}>
+                        <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "13px", color: C.muted, fontWeight: 400 }}>Plan Pricing: ₹{p.price}</div>
+                        <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "10px", color: C.accent, fontWeight: 700, background: C.accentDim, padding: "2px 6px", borderRadius: "4px" }}>Book now at ₹{p.book}</div>
                       </div>
-                    </div>
-                    );
-                  })}
-                </div>
-
-                {/* CTA Button */}
-                <button
-                  onClick={() => openModal(plan.name)}
-                  className="cta-btn"
-                  style={{
-                    width: "100%",
-                    padding: "18px",
-                    fontSize: "13px",
-                    letterSpacing: "1.5px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    gap: "10px",
-                    background: plan.popular ? C.accent : "transparent",
-                    color: plan.popular ? "#000" : C.text,
-                    border: plan.popular ? "none" : `1px solid ${C.border}`,
-                    borderRadius: "6px",
-                  }}
-                  onMouseEnter={e => {
-                    if (!plan.popular) {
-                      e.currentTarget.style.background = C.accent;
-                      e.currentTarget.style.color = "#000";
-                      e.currentTarget.style.borderColor = C.accent;
-                    }
-                  }}
-                  onMouseLeave={e => {
-                    if (!plan.popular) {
-                      e.currentTarget.style.background = "transparent";
-                      e.currentTarget.style.color = C.text;
-                      e.currentTarget.style.borderColor = C.border;
-                    }
-                  }}
-                >
-                  BOOK NOW <ArrowRight size={16} />
-                </button>
-              </div>
-              );
-            })}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  { name: "Feasibility Study", basic: "✔", standard: "✔", premium: "✔" },
+                  { name: "Website Development", basic: "✖", standard: "1 Year", premium: "1 Year" },
+                  { name: "AI Integration", basic: "✖", standard: "AI Videos", premium: "Agentic AI + Videos" },
+                  { name: "App Development", basic: "✖", standard: "✖", premium: "✔" },
+                  { name: "Digital Marketing", basic: "✖", standard: "3 Months", premium: "1 Year" },
+                  { name: "Office Space Setup", basic: "✖", standard: "✖", premium: "3 Months" },
+                  { name: "Employee Hirings", basic: "✖", standard: "✖", premium: "Up to 20" },
+                  { name: "Pamphlets & Letterheads", basic: "✖", standard: "✖", premium: "✔" },
+                  { name: "Sales Support", basic: "✖", standard: "✖", premium: "Till Break-even" },
+                  { name: "Bank Account Opening", basic: "✖", standard: "✔", premium: "Premium Account" },
+                  { name: "Government Contracts", basic: "✖", standard: "✖", premium: "If Applicable" },
+                ].map((row, ri) => (
+                  <tr key={ri} style={{ borderBottom: ri < 10 ? `1px solid ${C.border}` : "none" }}>
+                    <td style={{ padding: "16px 20px", fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "13px", fontWeight: 600, color: C.text }}>{row.name}</td>
+                    {[row.basic, row.standard, row.premium].map((cell, ci) => {
+                      const isIncluded = cell !== "✖";
+                      const isCheck = cell === "✔";
+                      return (
+                        <td key={ci} style={{ 
+                          padding: "16px 15px", 
+                          textAlign: "center", 
+                          background: ci === 1 ? "rgba(99,102,241,0.03)" : "transparent",
+                          borderLeft: `1px solid ${C.border}`,
+                        }}>
+                          {isIncluded ? (
+                            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "4px" }}>
+                              <div style={{ 
+                                width: "20px", height: "20px", borderRadius: "50%", background: "rgba(16,185,129,0.1)", 
+                                color: "#10B981", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "10px", fontWeight: 900
+                              }}>✔</div>
+                              {!isCheck && (
+                                <span style={{ fontSize: "10px", color: C.muted, fontWeight: 500, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{cell}</span>
+                              )}
+                            </div>
+                          ) : (
+                            <span style={{ color: "rgba(0,0,0,0.1)", fontSize: "12px" }}>✖</span>
+                          )}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                ))}
+                {/* Footer Row for CTA */}
+                <tr>
+                  <td style={{ padding: "24px 20px", background: C.subtle, borderTop: `1px solid ${C.border}` }}></td>
+                  {[
+                    { name: "Basic Plan", popular: false },
+                    { name: "Standard Plan", popular: true },
+                    { name: "Premium Plan", popular: false }
+                  ].map((p, i) => (
+                    <td key={i} style={{ 
+                      padding: "24px 15px", 
+                      textAlign: "center", 
+                      background: p.popular ? "rgba(99,102,241,0.06)" : C.subtle,
+                      borderLeft: `1px solid ${C.border}`,
+                      borderTop: `1px solid ${C.border}`
+                    }}>
+                      <button
+                        onClick={() => openModal(p.name)}
+                        className="cta-btn"
+                        style={{
+                          width: "100%",
+                          padding: "14px 10px",
+                          fontSize: "11px",
+                          letterSpacing: "1px",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          gap: "8px",
+                          background: C.accent,
+                          color: "#000",
+                          border: "none",
+                          borderRadius: "4px",
+                          fontWeight: 700
+                        }}
+                      >
+                        BOOK NOW <ArrowRight size={14} />
+                      </button>
+                    </td>
+                  ))}
+                </tr>
+              </tbody>
+            </table>
           </div>
 
           {/* Bottom note */}
@@ -1442,8 +1283,209 @@ export default function AvaniEnterprises() {
         </div>
       </section>
 
+      {/* ── PROCESS ── */}
+      <section id="process" className="mobile-section" style={{ padding: "80px 6%", background: "#FFFFFF" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+          <div style={{ textAlign: "center", marginBottom: "80px" }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "12px", marginBottom: "20px" }}>
+              <div style={{ width: "40px", height: "1px", background: `linear-gradient(90deg, transparent, ${C.accent})` }} />
+              <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "11px", fontWeight: 700, letterSpacing: "3px", color: C.accent }}>OUR PROVEN WORK PROCESS</span>
+              <div style={{ width: "40px", height: "1px", background: `linear-gradient(90deg, ${C.accent}, transparent)` }} />
+            </div>
+            <h2 className="display-font" style={{ fontSize: "clamp(3rem, 6vw, 5rem)", lineHeight: 0.95 }}>HOW WE DELIVER.</h2>
+          </div>
 
-      {/* ── STATS COUNTER ── */}
+          <div style={{ position: "relative", marginTop: "60px" }}>
+            {/* Connecting Dashed Line */}
+            <div style={{ 
+              position: "absolute", 
+              top: "60px", 
+              left: "10%", 
+              right: "10%", 
+              height: "2px", 
+              borderTop: `2px dashed ${C.border}`, 
+              zIndex: 0 
+            }} className="mobile-hide" />
+
+            <div className="process-steps-container" style={{ 
+              display: "grid", 
+              gridTemplateColumns: "repeat(6, 1fr)", 
+              gap: "20px", 
+              position: "relative", 
+              zIndex: 1,
+              overflowX: "auto",
+              paddingBottom: "40px"
+            }}>
+              {[
+                { step: "01", title: "Discovery", icon: <Search />, desc: "Deep-dive audit of your business, market, and competition. We map opportunities first." },
+                { step: "02", title: "Strategy", icon: <Target />, desc: "A custom 90-day roadmap with clear KPIs, resource allocation, and risk milestones." },
+                { step: "03", title: "Design", icon: <Layers />, desc: "Beautiful, user-centered designs that align with your brand and convert visitors." },
+                { step: "04", title: "Execution", icon: <Cpu />, desc: "Cross-functional teams deploy in two-week sprints. Engineering & marketing in sync." },
+                { step: "05", title: "Test", icon: <ShieldCheck />, desc: "Rigorous testing across devices and browsers to ensure a flawless experience." },
+                { step: "06", title: "Scale", icon: <TrendingUp />, desc: "Monthly reviews, A/B testing, and compounding optimization cycles. Unlimited growth." },
+              ].map((p, i) => (
+                <div key={i} className="process-step-mobile" style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", minWidth: "160px" }}>
+                  {/* Circle Bubble */}
+                  <div style={{ position: "relative", marginBottom: "32px" }}>
+                    <div className="process-circle" style={{ 
+                      width: "120px", 
+                      height: "120px", 
+                      borderRadius: "50%", 
+                      background: "#FFFFFF", 
+                      display: "flex", 
+                      alignItems: "center", 
+                      justifyContent: "center",
+                      boxShadow: "0 10px 40px rgba(0,0,0,0.08)",
+                      transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+                      cursor: "pointer",
+                      border: `2px solid ${C.accent}`
+                    }}
+                    onMouseEnter={e => {
+                      e.currentTarget.style.transform = "translateY(-10px) scale(1.05)";
+                      e.currentTarget.style.borderColor = C.accent;
+                      e.currentTarget.style.boxShadow = `0 20px 40px ${C.accentGlow}`;
+                    }}
+                    onMouseLeave={e => {
+                      e.currentTarget.style.transform = "none";
+                      e.currentTarget.style.borderColor = C.accent;
+                      e.currentTarget.style.boxShadow = "0 10px 40px rgba(0,0,0,0.08)";
+                    }}
+                    >
+                      {React.cloneElement(p.icon as React.ReactElement, { size: 36, strokeWidth: 1.5, color: C.accent })}
+                    </div>
+                    
+                    {/* Step Number Label */}
+                    <div className="process-step-num" style={{ 
+                      position: "absolute", 
+                      top: "0", 
+                      right: "0", 
+                      background: "white", 
+                      color: "black", 
+                      width: "32px", 
+                      height: "32px", 
+                      borderRadius: "50%", 
+                      display: "flex", 
+                      alignItems: "center", 
+                      justifyContent: "center",
+                      fontSize: "12px",
+                      fontWeight: 800,
+                      boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
+                      border: `1px solid ${C.border}`,
+                      zIndex: 2
+                    }}>
+                      {p.step}
+                    </div>
+                  </div>
+
+                  <h3 className="process-card-title" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "18px", marginBottom: "12px", color: C.text }}>{p.title}</h3>
+                  <p className="process-card-desc" style={{ color: C.muted, fontSize: "12px", lineHeight: 1.6, fontWeight: 300, maxWidth: "180px" }}>{p.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── TESTIMONIALS ── */}
+      <section id="testimonials" className="mobile-section" style={{ padding: "80px 6%", background: C.subtle }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "15px", marginBottom: "60px" }}>
+            <div style={{ width: "60px", height: "2px", background: C.accent }} />
+            <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "15px", fontWeight: 800, letterSpacing: "4px", color: C.accent }}>CLIENT VOICE</span>
+          </div>
+          <div className="testimonials-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "2px" }}>
+            {testimonials.map((t, i) => (
+              <div key={i} style={{ background: C.card, border: `1px solid ${C.border}`, padding: "44px 38px", borderLeft: i > 0 ? "none" : `1px solid ${C.border}` }}>
+                <div style={{ display: "flex", gap: "3px", marginBottom: "24px" }}>
+                  {[...Array(t.stars)].map((_, j) => <Star key={j} size={13} fill={C.accent} color={C.accent} />)}
+                </div>
+                <p style={{ color: C.muted, fontSize: "14px", lineHeight: 1.8, fontWeight: 300, marginBottom: "28px", fontStyle: "italic" }}>"{t.text}"</p>
+                <div style={{ borderTop: `1px solid ${C.border}`, paddingTop: "20px", display: "flex", alignItems: "center", gap: "15px" }}>
+                  <img src={t.image} alt={t.name} style={{ width: "48px", height: "48px", borderRadius: "50%", objectFit: "cover", border: `2px solid ${C.accent}20` }} />
+                  <div>
+                    <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: "15px" }}>{t.name}</div>
+                    <div style={{ fontSize: "11px", color: C.accent, letterSpacing: "1px", marginTop: "3px", fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 600 }}>{t.role}</div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── PROJECTS ── */}
+      <section id="projects" className="mobile-section" style={{ padding: "80px 6%", background: "#F5F5F2" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+          <div className="section-header-mobile flex-col-mob" style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "60px" }}>
+            <div>
+              <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "20px" }}>
+                <div style={{ width: "30px", height: "1px", background: C.accent }} />
+                <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "10px", fontWeight: 700, letterSpacing: "3px", color: C.accent }}>SUCCESS STORIES</span>
+              </div>
+              <h2 className="display-font" style={{ fontSize: "clamp(3rem, 6vw, 5rem)", lineHeight: 0.95 }}>
+                CASE STUDIES.
+              </h2>
+            </div>
+            <p className="mobile-desc-margin" style={{ maxWidth: "300px", color: C.muted, fontSize: "13px", lineHeight: 1.8, textAlign: "right" }}>
+              From 0 to 40+ leads/month. Real results for serious business owners.
+            </p>
+          </div>
+
+          {/* Row 1: Left to Right */}
+          <div style={{ overflow: "hidden", margin: "40px -6% 30px -6%", padding: "20px 0" }}>
+            <div className="marquee-row" style={{ display: "flex", width: "max-content", animation: "marquee 50s linear infinite", gap: "30px" }}>
+              {[...projects, ...projects].map((p, i) => (
+                <div key={i} className="project-card-container" style={{ width: "450px", flexShrink: 0 }}>
+                  <div className="project-card" style={{ width: "100%", background: p.color || "#F5F5F0" }}>
+                    <img src={p.img} alt={p.title} />
+                    <div className="project-overlay">
+                      <div className="project-tag-glass">{p.tag}</div>
+                      <div className="project-info-glass">
+                        <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "1.8rem", margin: 0 }}>{p.title}</h3>
+                        <div className="project-details">
+                          <p style={{ color: "rgba(240,237,232,0.65)", fontSize: "14px", lineHeight: 1.6, marginBottom: "20px" }}>{p.desc}</p>
+                          <span style={{ background: C.accentDim, border: `1px solid ${C.accent}40`, color: C.accent, padding: "6px 14px", fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "10px", fontWeight: 700, letterSpacing: "1.5px", borderRadius: "1px" }}>{p.metric}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div style={{ marginTop: "15px", textAlign: "center" }}>
+                    <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "16px", color: C.text, letterSpacing: "1px" }} className="project-card-title-bottom">{p.title.toUpperCase()}</div>
+                    <div style={{ fontSize: "11px", color: C.accent, fontWeight: 700, marginTop: "4px", letterSpacing: "2px" }}>{p.tag}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Row 2: Right to Left */}
+          <div style={{ overflow: "hidden", margin: "0 -6% 40px -6%", padding: "20px 0" }}>
+            <div className="marquee-row" style={{ display: "flex", width: "max-content", animation: "marquee-reverse 50s linear infinite", gap: "30px" }}>
+              {[...projects.slice().reverse(), ...projects.slice().reverse()].map((p, i) => (
+                <div key={i} className="project-card-container" style={{ width: "450px", flexShrink: 0 }}>
+                  <div className="project-card" style={{ width: "100%", background: p.color || "#F5F5F0" }}>
+                    <img src={p.img} alt={p.title} />
+                    <div className="project-overlay">
+                      <div className="project-tag-glass">{p.tag}</div>
+                      <div className="project-info-glass">
+                        <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "1.8rem", margin: 0 }}>{p.title}</h3>
+                        <div className="project-details">
+                          <p style={{ color: "rgba(240,237,232,0.65)", fontSize: "14px", lineHeight: 1.6, marginBottom: "20px" }}>{p.desc}</p>
+                          <span style={{ background: C.accentDim, border: `1px solid ${C.accent}40`, color: C.accent, padding: "6px 14px", fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "10px", fontWeight: 700, letterSpacing: "1.5px", borderRadius: "1px" }}>{p.metric}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div style={{ marginTop: "15px", textAlign: "center" }}>
+                    <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "16px", color: C.text, letterSpacing: "1px" }} className="project-card-title-bottom">{p.title.toUpperCase()}</div>
+                    <div style={{ fontSize: "11px", color: C.accent, fontWeight: 700, marginTop: "4px", letterSpacing: "2px" }}>{p.tag}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
       <section id="about" ref={sectionRef} className="mobile-section" style={{ padding: "80px 6%", borderBottom: `1px solid ${C.border}` }}>
         <div className="stats-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "2px" }}>
           {[
@@ -1682,209 +1724,9 @@ export default function AvaniEnterprises() {
         </div>
       </section>
 
-      {/* ── PROJECTS ── */}
-      <section id="projects" className="mobile-section" style={{ padding: "80px 6%", background: "#F5F5F2" }}>
-        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <div className="section-header-mobile flex-col-mob" style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "60px" }}>
-            <div>
-              <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "20px" }}>
-                <div style={{ width: "30px", height: "1px", background: C.accent }} />
-                <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "10px", fontWeight: 700, letterSpacing: "3px", color: C.accent }}>SUCCESS STORIES</span>
-              </div>
-              <h2 className="display-font" style={{ fontSize: "clamp(3rem, 6vw, 5rem)", lineHeight: 0.95 }}>
-                CASE STUDIES.
-              </h2>
-            </div>
-            <p className="mobile-desc-margin" style={{ maxWidth: "300px", color: C.muted, fontSize: "13px", lineHeight: 1.8, textAlign: "right" }}>
-              From 0 to 40+ leads/month. Real results for serious business owners.
-            </p>
-          </div>
 
-          {/* Row 1: Left to Right */}
-          <div style={{ overflow: "hidden", margin: "40px -6% 30px -6%", padding: "20px 0" }}>
-            <div className="marquee-row" style={{ display: "flex", width: "max-content", animation: "marquee 50s linear infinite", gap: "30px" }}>
-              {[...projects, ...projects].map((p, i) => (
-                <div key={i} className="project-card-container" style={{ width: "450px", flexShrink: 0 }}>
-                  <div className="project-card" style={{ width: "100%", background: p.color || "#F5F5F0" }}>
-                    <img src={p.img} alt={p.title} />
-                    <div className="project-overlay">
-                      <div className="project-tag-glass">{p.tag}</div>
-                      <div className="project-info-glass">
-                        <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "1.8rem", margin: 0 }}>{p.title}</h3>
-                        <div className="project-details">
-                          <p style={{ color: "rgba(240,237,232,0.65)", fontSize: "14px", lineHeight: 1.6, marginBottom: "20px" }}>{p.desc}</p>
-                          <span style={{ background: C.accentDim, border: `1px solid ${C.accent}40`, color: C.accent, padding: "6px 14px", fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "10px", fontWeight: 700, letterSpacing: "1.5px", borderRadius: "1px" }}>{p.metric}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div style={{ marginTop: "15px", textAlign: "center" }}>
-                    <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "16px", color: C.text, letterSpacing: "1px" }} className="project-card-title-bottom">{p.title.toUpperCase()}</div>
-                    <div style={{ fontSize: "11px", color: C.accent, fontWeight: 700, marginTop: "4px", letterSpacing: "2px" }}>{p.tag}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
 
-          {/* Row 2: Right to Left */}
-          <div style={{ overflow: "hidden", margin: "0 -6% 40px -6%", padding: "20px 0" }}>
-            <div className="marquee-row" style={{ display: "flex", width: "max-content", animation: "marquee-reverse 50s linear infinite", gap: "30px" }}>
-              {[...projects.slice().reverse(), ...projects.slice().reverse()].map((p, i) => (
-                <div key={i} className="project-card-container" style={{ width: "450px", flexShrink: 0 }}>
-                  <div className="project-card" style={{ width: "100%", background: p.color || "#F5F5F0" }}>
-                    <img src={p.img} alt={p.title} />
-                    <div className="project-overlay">
-                      <div className="project-tag-glass">{p.tag}</div>
-                      <div className="project-info-glass">
-                        <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "1.8rem", margin: 0 }}>{p.title}</h3>
-                        <div className="project-details">
-                          <p style={{ color: "rgba(240,237,232,0.65)", fontSize: "14px", lineHeight: 1.6, marginBottom: "20px" }}>{p.desc}</p>
-                          <span style={{ background: C.accentDim, border: `1px solid ${C.accent}40`, color: C.accent, padding: "6px 14px", fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "10px", fontWeight: 700, letterSpacing: "1.5px", borderRadius: "1px" }}>{p.metric}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div style={{ marginTop: "15px", textAlign: "center" }}>
-                    <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "16px", color: C.text, letterSpacing: "1px" }} className="project-card-title-bottom">{p.title.toUpperCase()}</div>
-                    <div style={{ fontSize: "11px", color: C.accent, fontWeight: 700, marginTop: "4px", letterSpacing: "2px" }}>{p.tag}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* ── PROCESS ── */}
-      <section className="mobile-section" style={{ padding: "80px 6%", borderTop: `1px solid ${C.border}` }}>
-        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <div style={{ textAlign: "center", marginBottom: "80px" }}>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "12px", marginBottom: "20px" }}>
-              <div style={{ width: "40px", height: "1px", background: `linear-gradient(90deg, transparent, ${C.accent})` }} />
-              <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "11px", fontWeight: 700, letterSpacing: "3px", color: C.accent }}>OUR PROVEN WORK PROCESS</span>
-              <div style={{ width: "40px", height: "1px", background: `linear-gradient(90deg, ${C.accent}, transparent)` }} />
-            </div>
-            <h2 className="display-font" style={{ fontSize: "clamp(3rem, 6vw, 5rem)", lineHeight: 0.95 }}>HOW WE DELIVER.</h2>
-          </div>
-
-          <div style={{ position: "relative", marginTop: "60px" }}>
-            {/* Connecting Dashed Line */}
-            <div style={{ 
-              position: "absolute", 
-              top: "60px", 
-              left: "10%", 
-              right: "10%", 
-              height: "2px", 
-              borderTop: `2px dashed ${C.border}`, 
-              zIndex: 0 
-            }} className="mobile-hide" />
-
-            <div className="process-steps-container" style={{ 
-              display: "grid", 
-              gridTemplateColumns: "repeat(6, 1fr)", 
-              gap: "20px", 
-              position: "relative", 
-              zIndex: 1,
-              overflowX: "auto",
-              paddingBottom: "40px"
-            }}>
-              {[
-                { step: "01", title: "Discovery", icon: <Search />, desc: "Deep-dive audit of your business, market, and competition. We map opportunities first." },
-                { step: "02", title: "Strategy", icon: <Target />, desc: "A custom 90-day roadmap with clear KPIs, resource allocation, and risk milestones." },
-                { step: "03", title: "Design", icon: <Layers />, desc: "Beautiful, user-centered designs that align with your brand and convert visitors." },
-                { step: "04", title: "Execution", icon: <Cpu />, desc: "Cross-functional teams deploy in two-week sprints. Engineering & marketing in sync." },
-                { step: "05", title: "Test", icon: <ShieldCheck />, desc: "Rigorous testing across devices and browsers to ensure a flawless experience." },
-                { step: "06", title: "Scale", icon: <TrendingUp />, desc: "Monthly reviews, A/B testing, and compounding optimization cycles. Unlimited growth." },
-              ].map((p, i) => (
-                <div key={i} className="process-step-mobile" style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", minWidth: "160px" }}>
-                  {/* Circle Bubble */}
-                  <div style={{ position: "relative", marginBottom: "32px" }}>
-                    <div className="process-circle" style={{ 
-                      width: "120px", 
-                      height: "120px", 
-                      borderRadius: "50%", 
-                      background: "#FFFFFF", 
-                      display: "flex", 
-                      alignItems: "center", 
-                      justifyContent: "center",
-                      boxShadow: "0 10px 40px rgba(0,0,0,0.08)",
-                      transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
-                      cursor: "pointer",
-                      border: `2px solid ${C.accent}`
-                    }}
-                    onMouseEnter={e => {
-                      e.currentTarget.style.transform = "translateY(-10px) scale(1.05)";
-                      e.currentTarget.style.borderColor = C.accent;
-                      e.currentTarget.style.boxShadow = `0 20px 40px ${C.accentGlow}`;
-                    }}
-                    onMouseLeave={e => {
-                      e.currentTarget.style.transform = "none";
-                      e.currentTarget.style.borderColor = C.accent;
-                      e.currentTarget.style.boxShadow = "0 10px 40px rgba(0,0,0,0.08)";
-                    }}
-                    >
-                      {React.cloneElement(p.icon as React.ReactElement, { size: 36, strokeWidth: 1.5, color: C.accent })}
-                    </div>
-                    
-                    {/* Step Number Label */}
-                    <div className="process-step-num" style={{ 
-                      position: "absolute", 
-                      top: "0", 
-                      right: "0", 
-                      background: "white", 
-                      color: "black", 
-                      width: "32px", 
-                      height: "32px", 
-                      borderRadius: "50%", 
-                      display: "flex", 
-                      alignItems: "center", 
-                      justifyContent: "center",
-                      fontSize: "12px",
-                      fontWeight: 800,
-                      boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
-                      border: `1px solid ${C.border}`,
-                      zIndex: 2
-                    }}>
-                      {p.step}
-                    </div>
-                  </div>
-
-                  <h3 className="process-card-title" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "18px", marginBottom: "12px", color: C.text }}>{p.title}</h3>
-                  <p className="process-card-desc" style={{ color: C.muted, fontSize: "12px", lineHeight: 1.6, fontWeight: 300, maxWidth: "180px" }}>{p.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── TESTIMONIALS ── */}
-      <section className="mobile-section" style={{ padding: "80px 6%", background: C.subtle }}>
-        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "15px", marginBottom: "60px" }}>
-            <div style={{ width: "60px", height: "2px", background: C.accent }} />
-            <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "15px", fontWeight: 800, letterSpacing: "4px", color: C.accent }}>CLIENT VOICE</span>
-          </div>
-          <div className="testimonials-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "2px" }}>
-            {testimonials.map((t, i) => (
-              <div key={i} style={{ background: C.card, border: `1px solid ${C.border}`, padding: "44px 38px", borderLeft: i > 0 ? "none" : `1px solid ${C.border}` }}>
-                <div style={{ display: "flex", gap: "3px", marginBottom: "24px" }}>
-                  {[...Array(t.stars)].map((_, j) => <Star key={j} size={13} fill={C.accent} color={C.accent} />)}
-                </div>
-                <p style={{ color: C.muted, fontSize: "14px", lineHeight: 1.8, fontWeight: 300, marginBottom: "28px", fontStyle: "italic" }}>"{t.text}"</p>
-                <div style={{ borderTop: `1px solid ${C.border}`, paddingTop: "20px", display: "flex", alignItems: "center", gap: "15px" }}>
-                  <img src={t.image} alt={t.name} style={{ width: "48px", height: "48px", borderRadius: "50%", objectFit: "cover", border: `2px solid ${C.accent}20` }} />
-                  <div>
-                    <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: "15px" }}>{t.name}</div>
-                    <div style={{ fontSize: "11px", color: C.accent, letterSpacing: "1px", marginTop: "3px", fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 600 }}>{t.role}</div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* ── FAQ ── */}
       <section id="faq" className="mobile-section" style={{ padding: "80px 6%" }}>
@@ -1923,7 +1765,7 @@ export default function AvaniEnterprises() {
             </h2>
           </div>
           <div className="cta-band-btns" style={{ display: "flex", gap: "16px" }}>
-            <button onClick={() => openModal()} style={{ background: "white", color: "#1A1A2E", border: "none", padding: "18px 36px", fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "13px", letterSpacing: "1.5px", cursor: "pointer", transition: "all 0.3s", borderRadius: "4px", display: "flex", alignItems: "center", gap: "10px" }}>
+            <button onClick={() => scrollToPricing()} style={{ background: "white", color: "#1A1A2E", border: "none", padding: "18px 36px", fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "13px", letterSpacing: "1.5px", cursor: "pointer", transition: "all 0.3s", borderRadius: "4px", display: "flex", alignItems: "center", gap: "10px" }}>
               START YOUR BUSINESS JOURNEY NOW <ArrowRight size={16} />
             </button>
             <a href="tel:+919311967319" style={{ background: "transparent", color: "white", border: "1px solid rgba(255,255,255,0.4)", padding: "18px 36px", fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: "13px", letterSpacing: "1.5px", cursor: "pointer", display: "flex", alignItems: "center", gap: "10px", textDecoration: "none" }}>
@@ -1948,45 +1790,16 @@ export default function AvaniEnterprises() {
             </div>
 
             <div style={{ padding: "40px" }}>
-              <p style={{ color: C.muted, fontSize: "13px", lineHeight: 1.7, marginBottom: "32px" }}>
-                Complete the form below to secure your 30-minute Strategy Session. Includes Website Audit, Growth Roadmap & <strong>Competitor Analysis</strong>.
-              </p>
-
-              {/* Plan Selector */}
-              <div style={{ marginBottom: "20px" }}>
-                <div style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "2px", color: C.muted, marginBottom: "12px", fontFamily: "'Plus Jakarta Sans', sans-serif" }}>SELECT YOUR PLAN</div>
-                <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" as const }}>
-                  {(["Basic Plan", "Standard Plan", "Premium Plan"] as const).map((p) => (
-                    <button
-                      key={p}
-                      type="button"
-                      onClick={() => setFormData(prev => ({ ...prev, plan: p }))}
-                      style={{
-                        flex: 1,
-                        minWidth: "140px",
-                        padding: "14px 10px",
-                        border: `2px solid ${formData.plan === p ? C.accent : C.border}`,
-                        borderRadius: "8px",
-                        background: formData.plan === p ? C.accentDim : "transparent",
-                        cursor: "pointer",
-                        fontFamily: "'Plus Jakarta Sans', sans-serif",
-                        transition: "all 0.2s",
-                        textAlign: "center" as const,
-                      }}
-                    >
-                      <div style={{ fontWeight: 800, fontSize: "13px", color: formData.plan === p ? C.accent : C.text }}>{p}</div>
-                      <div style={{ fontSize: "18px", fontWeight: 800, color: formData.plan === p ? C.accent : C.text, marginTop: "4px" }}>₹{PLAN_PRICES[p]}</div>
-                    </button>
-                  ))}
-                </div>
-              </div>
+              {/* <p style={{ color: C.muted, fontSize: "13px", lineHeight: 1.7, marginBottom: "32px" }}>
+                You are securing a slot for the <strong>{formData.plan}</strong>. Complete the form below to book your session at the special rate of <strong>₹{PLAN_PRICES[formData.plan]}</strong>.
+              </p> */}
 
               <form style={{ display: "flex", flexDirection: "column", gap: "14px" }} onSubmit={handleFormSubmit}>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "14px" }}>
                   <input type="text" placeholder="First Name" required value={formData.firstName} onChange={e => setFormData({ ...formData, firstName: e.target.value })} />
                   <input type="text" placeholder="Last Name" required value={formData.lastName} onChange={e => setFormData({ ...formData, lastName: e.target.value })} />
                 </div>
-                <input type="email" placeholder="Business Email" required value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })} />
+                <input type="email" placeholder="Email" required value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })} />
                 <input type="tel" placeholder="WhatsApp / Phone" required value={formData.phone} onChange={e => setFormData({ ...formData, phone: e.target.value })} />
                 <input type="text" placeholder="Company / Business Name" required value={formData.company} onChange={e => setFormData({ ...formData, company: e.target.value })} />
                 <textarea placeholder="Briefly describe your goals and current challenges..." rows={3} value={formData.goals} onChange={e => setFormData({ ...formData, goals: e.target.value })} />
@@ -2044,9 +1857,8 @@ export default function AvaniEnterprises() {
         </div>
       )}
 
-      {/* ── FLOATING BOOK NOW BUTTON ── */}
       <div className="mobile-fab" style={{ position: "fixed", bottom: "30px", right: "30px", zIndex: 9000 }}>
-        <button onClick={() => openModal()} className="cta-btn" style={{ 
+        <button onClick={() => scrollToPricing()} className="cta-btn" style={{ 
           boxShadow: "0 10px 40px rgba(212,160,23,0.5), 0 0 20px rgba(212,160,23,0.15)", 
           padding: "18px 32px", 
           borderRadius: "4px", 
