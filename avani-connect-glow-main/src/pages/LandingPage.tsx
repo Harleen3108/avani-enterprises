@@ -71,16 +71,33 @@ const Typewriter = ({ segments, delay = 100, startDelay = 0, onComplete }: any) 
 
 // StaticHook Component — single punchy line
 const StaticHook = () => {
-  return (
-    <Typewriter
-      segments={[
-        { text: "Right now, you're losing clients ", color: C.text },
-        { text: "without knowing why", color: C.accent },
-        { text: " — fix it in 30 minutes.", color: C.text }
-      ]}
-      delay={45}
-    />
-  );
+  const [isMobile, setIsMobile] = React.useState(typeof window !== "undefined" ? window.innerWidth <= 768 : false);
+  
+  React.useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const segments = [
+    { text: "Right now, you're losing clients ", color: C.text },
+    { text: "without knowing why", color: C.accent },
+    { text: " — fix it in 30 minutes.", color: C.text }
+  ];
+
+  if (isMobile) {
+    return (
+      <span style={{ fontWeight: 800, textAlign: "left", display: "inline-block", width: "100%" }}>
+        {segments.map((s, i) => (
+          <span key={i} style={{ color: s.color }}>
+            {s.text}
+          </span>
+        ))}
+      </span>
+    );
+  }
+
+  return <Typewriter segments={segments} delay={45} />;
 };
 
 
@@ -800,11 +817,24 @@ export default function AvaniEnterprises() {
         }
 
         @media (max-width: 480px) {
-          .display-font { font-size: clamp(1.5rem, 9vw, 2.2rem) !important; }
+          .display-font { 
+            font-size: clamp(1.2rem, 6vw, 1.6rem) !important; 
+            font-weight: 800 !important; 
+            text-align: left !important; 
+            display: block !important;
+            width: 100% !important;
+            margin-left: 0 !important;
+            padding-left: 0 !important;
+          }
           .hero-cta { font-size: 13px !important; padding: 16px !important; border-radius: 12px !important; }
-          .hero-section { padding: 80px 5% 24px 5% !important; align-items: flex-start !important; }
-          .hero-text-content, .hero-text-content * { text-align: left !important; }
-          .hero-text-content { align-items: flex-start !important; }
+          .hero-section { padding: 40px 5% 24px 5% !important; align-items: flex-start !important; }
+          .hero-text-content { 
+            text-align: left !important; 
+            align-items: flex-start !important; 
+            justify-content: flex-start !important;
+            width: 100% !important;
+          }
+          .hero-text-content * { text-align: left !important; }
           .hero-badge, .mobile-hero-value-pills { justify-content: flex-start !important; width: 100% !important; }
           .cta-container { align-items: flex-start !important; width: 100% !important; }
           .shimmer-text, .hero-line { animation: none !important; transform: none !important; opacity: 1 !important; }
