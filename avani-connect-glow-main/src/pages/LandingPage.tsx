@@ -1011,8 +1011,8 @@ export default function AvaniEnterprises() {
         <div className="mobile-hero-orb" />
         <div className="mobile-hero-glow-bar" />
 
-        <div className="hero-inner" style={{ position: "relative", zIndex: 1, maxWidth: "1400px", width: "100%", marginTop: "100px" }}>
-          <div className="hero-grid" style={{ display: "grid", gridTemplateColumns: "1.2fr 1fr", gap: "80px", alignItems: "center" }}>
+        <div className="hero-inner" style={{ position: "relative", zIndex: 1, maxWidth: "1400px", width: "100%", marginTop: "80px" }}>
+          <div className="hero-grid" style={{ display: "grid", gridTemplateColumns: "1.2fr 1fr", gap: "80px", alignItems: "start" }}>
             
             {/* Left Column: Text Content */}
             <div className="hero-line hero-text-content" style={{ display: "flex", flexDirection: "column" }}>
@@ -1114,16 +1114,16 @@ export default function AvaniEnterprises() {
             </div>
 
             {/* Right Column: Video */}
-            <div className="hero-line hero-img-col" style={{ position: "relative" }}>
+            <div className="hero-line hero-img-col" style={{ position: "relative", display: "flex", alignItems: "center", maxHeight: "calc(100vh - 160px)" }}>
               <div style={{ position: "absolute", inset: "-12px", border: `1px solid ${C.accent}25`, borderRadius: "16px", zIndex: -1 }} />
-              <div style={{ position: "relative", borderRadius: "12px", overflow: "hidden", boxShadow: "0 8px 40px rgba(0,0,0,0.12)" }}>
+              <div style={{ position: "relative", borderRadius: "12px", overflow: "hidden", boxShadow: "0 8px 40px rgba(0,0,0,0.12)", width: "100%", maxHeight: "calc(100vh - 160px)" }}>
                 <video 
                   autoPlay 
                   loop 
                   muted={isMuted}
                   playsInline
                   preload="metadata"
-                  style={{ width: "100%", height: "auto", display: "block", objectFit: "cover" }} 
+                  style={{ width: "100%", height: "100%", maxHeight: "calc(100vh - 160px)", display: "block", objectFit: "cover", objectPosition: "center top" }} 
                 >
                   <source src="/avanivideo.mp4" type="video/mp4" />
                 </video>
@@ -1208,6 +1208,7 @@ export default function AvaniEnterprises() {
               {
                 name: "Basic Plan",
                 price: 149,
+                planPricing: "9,999",
                 desc: "Ideal for early-stage businesses and first-time founders exploring viability.",
                 popular: false,
                 features: [
@@ -1227,6 +1228,7 @@ export default function AvaniEnterprises() {
               {
                 name: "Standard Plan",
                 price: 199,
+                planPricing: "99,999",
                 desc: "Perfect for growing businesses ready to build their digital presence and scale.",
                 popular: true,
                 features: [
@@ -1246,6 +1248,7 @@ export default function AvaniEnterprises() {
               {
                 name: "Premium Plan",
                 price: 499,
+                planPricing: "9,99,999",
                 desc: "End-to-end business setup with full operations, AI, hiring, and sales support.",
                 popular: false,
                 features: [
@@ -1323,9 +1326,14 @@ export default function AvaniEnterprises() {
                 </div>
 
                 {/* Description */}
-                <p style={{ fontSize: "13px", color: C.muted, lineHeight: 1.7, marginBottom: "32px", fontWeight: 300 }}>
+                <p style={{ fontSize: "13px", color: C.muted, lineHeight: 1.7, marginBottom: "12px", fontWeight: 300 }}>
                   {plan.desc}
                 </p>
+
+                {/* Plan Pricing */}
+                <div style={{ marginBottom: "32px", display: "flex", alignItems: "baseline", gap: "6px" }}>
+                  <span style={{ fontSize: "14px", fontWeight: 700, color: C.accent, fontFamily: "'Plus Jakarta Sans', sans-serif", letterSpacing: "0.3px" }}>Plan Pricing = ₹{plan.planPricing}</span>
+                </div>
 
                 {/* Divider */}
                 <div style={{ height: "1px", background: `linear-gradient(90deg, transparent, ${C.border}, transparent)`, marginBottom: "28px" }} />
@@ -1592,7 +1600,7 @@ export default function AvaniEnterprises() {
               YOUR COMPETITORS ARE ALREADY USING AI. ARE YOU?
             </p>
             <div className="ai-cta-row" style={{ display: "flex", justifyContent: "center", gap: "16px" }}>
-              <button onClick={() => openModal()} className="cta-btn" style={{
+              <button onClick={() => openModal("Premium Plan")} className="cta-btn" style={{
                 padding: "18px 40px",
                 fontSize: "13px",
                 display: "flex",
