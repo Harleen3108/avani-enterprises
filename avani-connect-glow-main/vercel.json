@@ -10,6 +10,11 @@
       "source": "/news-sitemap.xml",
       "destination": "/sitemap.xml",
       "permanent": true
+    },
+    {
+      "source": "/admin",
+      "destination": "https://avani-enterprises-admin-frontend.vercel.app/login",
+      "permanent": false
     }
   ],
   "rewrites": [
