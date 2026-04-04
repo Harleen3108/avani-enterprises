@@ -191,9 +191,8 @@ const GrowthPlanLeads = () => {
                   <th className="px-6 py-4">Contact</th>
                   <th className="px-6 py-4">Company</th>
                   <th className="px-6 py-4">Notes</th>
-                  <th className="px-6 py-4">Payment</th>
+                  <th className="px-6 py-4">Plan & Payment</th>
                   <th className="px-6 py-4">Date</th>
-                  <th className="px-6 py-4">Details</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100 uppercase text-xs font-bold">
@@ -223,20 +222,13 @@ const GrowthPlanLeads = () => {
                         </button>
                       </td>
                       <td className="px-6 py-4">
+                        <div className="font-bold text-indigo-700 mb-1 leading-tight">{lead.plan || "Standard Plan"}</div>
+                        <div className="text-[10px] text-gray-500 mb-2">₹{lead.amount || "N/A"}</div>
                         {getStatusBadge(lead.paymentStatus)}
                       </td>
                       <td className="px-6 py-4 text-xs text-gray-500">
                         {new Date(lead.createdAt).toLocaleDateString()}<br/>
                         {new Date(lead.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                      </td>
-                      <td className="px-6 py-4">
-                        <button 
-                          onClick={() => alert(`Goals: ${lead.goals || 'No goals specified'}`)}
-                          className="p-2 text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors"
-                          title="View Goals"
-                        >
-                          <Users size={18} />
-                        </button>
                       </td>
                     </tr>
                     
@@ -249,10 +241,17 @@ const GrowthPlanLeads = () => {
                               <div className="flex justify-between items-center mb-3">
                                 <h4 className="text-sm font-semibold text-indigo-900 flex items-center">
                                   <StickyNote size={16} className="mr-2" />
-                                  Notes & History
+                                  Notes, History & Goals
                                 </h4>
                                 <button onClick={() => setExpandedRow(null)} className="text-gray-400 hover:text-gray-700"><X size={16}/></button>
                               </div>
+
+                              {lead.goals && (
+                                <div className="bg-white rounded-xl border border-indigo-100 p-4 mb-3 shadow-sm">
+                                  <h5 className="text-xs font-bold text-indigo-500 uppercase tracking-wider mb-2">Client Goals</h5>
+                                  <p className="text-sm text-gray-700 whitespace-pre-wrap">{lead.goals}</p>
+                                </div>
+                              )}
 
                               <div className="bg-white rounded-xl border border-indigo-100 p-4 mb-3 max-h-60 overflow-y-auto space-y-3 shadow-sm">
                                 {lead.notes ? lead.notes.split("\n\n").map((noteBlock, nIdx) => (

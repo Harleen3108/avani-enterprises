@@ -74,9 +74,9 @@ const StaticHook = () => {
   return (
     <Typewriter
       segments={[
-        { text: "Right now, you're losing clients ", color: C.text },
-        { text: "without knowing why", color: C.accent },
-        { text: " — fix it in 30 minutes.", color: C.text }
+        { text: "Right now, you're losing clients ", color: "#ffffff" },
+        { text: "without knowing why", color: C.accentLight },
+        { text: " — fix it in 30 minutes.", color: "#ffffff" }
       ]}
       delay={45}
     />
@@ -112,7 +112,7 @@ const FONT = `
   @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 `;
 
-export default function AvaniEnterprises() {
+export default function AvaniEnterprises1() {
   const navigate = useNavigate();
   const [scrolled, setScrolled] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -802,12 +802,17 @@ export default function AvaniEnterprises() {
         @media (max-width: 480px) {
           .display-font { font-size: clamp(1.5rem, 9vw, 2.2rem) !important; }
           .hero-cta { font-size: 13px !important; padding: 16px !important; border-radius: 12px !important; }
-          .hero-section { padding: 80px 5% 24px 5% !important; align-items: flex-start !important; }
-          .hero-text-content, .hero-text-content * { text-align: left !important; }
-          .hero-text-content { align-items: flex-start !important; }
+          .hero-section { align-items: flex-start !important; padding: 0 !important; }
+          .hero-text-content { 
+            text-align: left !important; 
+            align-items: flex-start !important; 
+            padding: 80px 20px 20px 20px !important; 
+          }
+          .hero-text-content * { text-align: left !important; }
           .hero-badge, .mobile-hero-value-pills { justify-content: flex-start !important; width: 100% !important; }
           .cta-container { align-items: flex-start !important; width: 100% !important; }
           .shimmer-text, .hero-line { animation: none !important; transform: none !important; opacity: 1 !important; }
+
           
           .stat-card .display-font { font-size: clamp(1.4rem, 5vw, 1.8rem) !important; }
           .project-card-container { width: 260px !important; }
@@ -1037,120 +1042,108 @@ export default function AvaniEnterprises() {
       </AnimatePresence>
 
       {/* ── HERO ── */}
-      <section className="hero-section" style={{ minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", padding: "0 6%", position: "relative", overflow: "hidden" }}>
-        {/* Background grid */}
-        <div style={{ position: "absolute", inset: 0, backgroundImage: `linear-gradient(${C.border} 1px, transparent 1px), linear-gradient(90deg, ${C.border} 1px, transparent 1px)`, backgroundSize: "80px 80px", opacity: 0.25 }} />
-        <div style={{ position: "absolute", inset: 0, background: `radial-gradient(ellipse 80% 60% at 50% 100%, transparent 0%, ${C.dark} 70%)` }} />
-        <div style={{ position: "absolute", top: "20%", right: "5%", width: "600px", height: "600px", background: `radial-gradient(circle, ${C.accentGlow} 0%, transparent 70%)`, pointerEvents: "none" }} />
+      {/* ── HERO ── */}
+      <section className="hero-section" style={{ height: "100vh", minHeight: "100vh", width: "100%", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", position: "relative", overflow: "hidden" }}>
+        
+        {/* Full Background Video */}
+        <video 
+          autoPlay 
+          loop 
+          muted={isMuted}
+          playsInline
+          style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover", zIndex: 0 }} 
+        >
+          <source src="/herosection.mp4" type="video/mp4" />
+        </video>
+        
+        {/* Subtle Overlay to ensure text doesn't vanish entirely */}
+        <div style={{ position: "absolute", inset: 0, background: "rgba(0, 0, 0, 0.15)", zIndex: 1 }} />
+        
+        {/* Global Mute/Unmute Toggle */}
+        <button 
+          onClick={() => setIsMuted(!isMuted)}
+          style={{
+            position: "absolute",
+            bottom: "30px",
+            right: "30px",
+            width: "50px",
+            height: "50px",
+            borderRadius: "50%",
+            background: "rgba(0, 0, 0, 0.5)",
+            backdropFilter: "blur(12px)",
+            border: "1px solid rgba(255, 255, 255, 0.2)",
+            color: "white",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            cursor: "pointer",
+            transition: "all 0.3s ease",
+            zIndex: 10,
+            boxShadow: "0 4px 20px rgba(0,0,0,0.3)"
+          }}
+          onMouseEnter={e => {
+            e.currentTarget.style.background = "rgba(0, 0, 0, 0.7)";
+            e.currentTarget.style.transform = "scale(1.05)";
+          }}
+          onMouseLeave={e => {
+            e.currentTarget.style.background = "rgba(0, 0, 0, 0.5)";
+            e.currentTarget.style.transform = "scale(1)";
+          }}
+        >
+          {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
+        </button>
 
-        {/* Mobile-only decorative orb */}
-        <div className="mobile-hero-orb" />
-        <div className="mobile-hero-glow-bar" />
-
-        <div className="hero-inner" style={{ position: "relative", zIndex: 1, maxWidth: "1400px", width: "100%", marginTop: "80px" }}>
-          <div className="hero-grid" style={{ display: "grid", gridTemplateColumns: "1.2fr 1fr", gap: "80px", alignItems: "start" }}>
-            
-            {/* Left Column: Text Content */}
-            <div className="hero-line hero-text-content" style={{ display: "flex", flexDirection: "column" }}>
-              <div className="hero-badge" style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "30px" }}>
-                <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                  <div style={{ width: "7px", height: "7px", borderRadius: "50%", background: "#16A34A", boxShadow: "0 0 8px #16A34A", animation: "pulse 2s ease infinite" }} />
-                  <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "10px", fontWeight: 700, letterSpacing: "2.5px", color: "#16A34A" }}>CLIENTS ONBOARDING</span>
-                </div>
-                <div style={{ width: "1px", height: "14px", background: C.border }} className="mobile-hide" />
-                <span className="mobile-hide" style={{ fontSize: "10px", letterSpacing: "2px", color: C.muted, fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 600 }}>Melbourne (Australia) · Bombay · Gurugram</span>
-              </div>
-
-              <h1 className="display-font shimmer-text" style={{ fontSize: "clamp(2rem, 7vw, 4.8rem)", lineHeight: 1.1, letterSpacing: "-1px", marginBottom: "30px", minHeight: "2.5em", overflow: "hidden" }}>
-                <StaticHook />
-              </h1>
-
-              <div className="cta-container" style={{ display: "flex", flexDirection: "column", gap: "16px", alignItems: "flex-start" }}>
-
-
-                <button onClick={() => scrollToPricing()} className="cta-btn hero-cta" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", padding: "18px 40px" }}>
-                  START YOUR BUSINESS JOURNEY NOW <ArrowRight size={16} />
-                </button>
-
-                {/* Value pills below CTA */}
-                <div className="mobile-hero-only mobile-hero-value-pills" style={{ display: "flex", flexWrap: "wrap", gap: "16px", width: "100%", marginTop: "16px", justifyContent: "center" }}>
-                  {[
-                    { icon: <CheckCircle size={13} />, text: "No Long-Term Lock-in" },
-                    { icon: <Star size={13} />, text: "Rated 4.9/5" },
-                    { icon: <Clock size={13} />, text: "Results in 24hrs" },
-                  ].map((pill, i) => (
-                    <div key={i} className="mobile-hero-value-pill-item" style={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: "5px",
-                      fontSize: "13px",
-                      fontWeight: 600,
-                      color: C.muted,
-                      fontFamily: "'Plus Jakarta Sans', sans-serif",
-                      padding: "4px 0",
-                    }}>
-                      <span style={{ color: C.accent, display: "flex", alignItems: "center" }}>{pill.icon}</span>
-                      <span>{pill.text}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
+        {/* Text Content Centered */}
+        <div className="hero-inner hero-text-content" style={{ position: "relative", zIndex: 2, maxWidth: "900px", width: "100%", padding: "0 6%", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", marginTop: "40px" }}>
+          
+          <div className="hero-badge" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "12px", marginBottom: "30px" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <div style={{ width: "7px", height: "7px", borderRadius: "50%", background: "#16A34A", boxShadow: "0 0 8px #16A34A", animation: "pulse 2s ease infinite" }} />
+              <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "11px", fontWeight: 800, letterSpacing: "2.5px", color: "#16A34A", background: "rgba(255,255,255,0.9)", padding: "4px 8px", borderRadius: "4px" }}>CLIENTS ONBOARDING</span>
             </div>
-
-            {/* Right Column: Video */}
-            <div className="hero-line hero-img-col" style={{ position: "relative", display: "flex", alignItems: "center", maxHeight: "calc(100vh - 160px)" }}>
-              <div style={{ position: "absolute", inset: "-12px", border: `1px solid ${C.accent}25`, borderRadius: "16px", zIndex: -1 }} />
-              <div style={{ position: "relative", borderRadius: "12px", overflow: "hidden", boxShadow: "0 8px 40px rgba(0,0,0,0.12)", width: "100%", maxHeight: "calc(100vh - 160px)" }}>
-                <video 
-                  autoPlay 
-                  loop 
-                  muted={isMuted}
-                  playsInline
-                  preload="metadata"
-                  style={{ width: "100%", height: "100%", maxHeight: "calc(100vh - 160px)", display: "block", objectFit: "cover", objectPosition: "center top" }} 
-                >
-                  <source src="/avanivideo.mp4" type="video/mp4" />
-                </video>
-                
-                {/* Mute/Unmute Toggle */}
-                <button 
-                  onClick={() => setIsMuted(!isMuted)}
-                  style={{
-                    position: "absolute",
-                    bottom: "20px",
-                    right: "20px",
-                    width: "44px",
-                    height: "44px",
-                    borderRadius: "50%",
-                    background: "rgba(0, 0, 0, 0.4)",
-                    backdropFilter: "blur(8px)",
-                    border: "1px solid rgba(255, 255, 255, 0.2)",
-                    color: "white",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    cursor: "pointer",
-                    transition: "all 0.3s ease",
-                    zIndex: 10
-                  }}
-                  onMouseEnter={e => {
-                    e.currentTarget.style.background = "rgba(0, 0, 0, 0.6)";
-                    e.currentTarget.style.transform = "scale(1.1)";
-                  }}
-                  onMouseLeave={e => {
-                    e.currentTarget.style.background = "rgba(0, 0, 0, 0.4)";
-                    e.currentTarget.style.transform = "scale(1)";
-                  }}
-                >
-                  {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
-                </button>
-              </div>
-            </div>
-
+            <div style={{ width: "1px", height: "14px", background: "rgba(255,255,255,0.5)" }} className="mobile-hide" />
+            <span className="mobile-hide" style={{ fontSize: "11px", letterSpacing: "2px", color: "rgba(255,255,255,0.9)", fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, textShadow: "0 2px 4px rgba(0,0,0,0.8)" }}>Melbourne (Australia) · Bombay · Gurugram</span>
           </div>
+
+          <h1 className="display-font" style={{ fontSize: "clamp(2.1rem, 6vw, 4.5rem)", lineHeight: 1.1, letterSpacing: "-1px", marginBottom: "30px", color: "#ffffff", textShadow: "0 4px 16px rgba(0,0,0,0.9), 0 0 40px rgba(0,0,0,0.8)" }}>
+            <StaticHook />
+          </h1>
+
+          <div className="cta-container" style={{ display: "flex", flexDirection: "column", gap: "20px", alignItems: "center", width: "100%", maxWidth: "450px" }}>
+            <button onClick={() => scrollToPricing()} className="cta-btn hero-cta" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", padding: "18px 40px", width: "100%" }}>
+              START YOUR BUSINESS JOURNEY NOW <ArrowRight size={16} />
+            </button>
+
+            {/* Value pills below CTA */}
+            <div className="mobile-hero-value-pills" style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "12px", width: "100%", marginTop: "10px" }}>
+              {[
+                { icon: <CheckCircle size={14} />, text: "No Long-Term Lock-in" },
+                { icon: <Star size={14} />, text: "Rated 4.9/5" },
+                { icon: <Clock size={14} />, text: "Results in 24hrs" },
+              ].map((pill, i) => (
+                <div key={i} className="mobile-hero-value-pill-item" style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "6px",
+                  fontSize: "12px",
+                  fontWeight: 600,
+                  color: "rgba(255,255,255,0.95)",
+                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                  padding: "6px 12px",
+                  background: "rgba(0,0,0,0.5)",
+                  borderRadius: "50px",
+                  border: "1px solid rgba(255,255,255,0.15)",
+                  backdropFilter: "blur(4px)",
+                  textShadow: "0 2px 4px rgba(0,0,0,0.5)"
+                }}>
+                  <span style={{ color: C.accent, display: "flex", alignItems: "center" }}>{pill.icon}</span>
+                  <span>{pill.text}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
         </div>
-
-
       </section>
 
       {/* ── PRICING TABLE ── */}

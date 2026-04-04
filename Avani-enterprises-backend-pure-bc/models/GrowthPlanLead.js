@@ -3,8 +3,8 @@ const mongoose = require("mongoose");
 const growthPlanLeadSchema = new mongoose.Schema(
   {
     firstName: { type: String, required: true },
-    lastName: { type: String, required: true },
-    email: { type: String, required: true },
+    lastName: { type: String },
+    email: { type: String },
     phone: { type: String, required: true },
     company: { type: String },
     service: { type: String }, // kept for backward compat
