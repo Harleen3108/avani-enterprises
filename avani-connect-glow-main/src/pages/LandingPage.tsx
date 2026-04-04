@@ -208,7 +208,7 @@ export default function AvaniEnterprises() {
     try {
       setShowModal(false);
       const options = {
-        key: import.meta.env.VITE_RAZORPAY_KEY_ID || "rzp_live_SXJqe5vU40sXGz",
+        key: import.meta.env.VITE_RAZORPAY_KEY_ID,
         amount: selectedAmount * 100, // paise
         currency: "INR",
         name: "Avani Enterprises",

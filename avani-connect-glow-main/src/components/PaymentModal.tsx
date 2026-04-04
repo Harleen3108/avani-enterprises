@@ -92,7 +92,7 @@ const PaymentModal = ({ isOpen, onClose, course, onSuccess }) => {
       // const orderId = `order_${Date.now()}`;
       
       const options = {
-        key: import.meta.env.VITE_RAZORPAY_KEY_ID || 'rzp_live_SXJqe5vU40sXGz', // Live key from .env or fallback
+        key: import.meta.env.VITE_RAZORPAY_KEY_ID, // Use Razorpay key from .env
         amount: parseInt(formData.amount.replace('₹', '').replace(',', '')) * 100, // Amount in paise
         currency: 'INR',
         name: 'Avani Enterprises',
