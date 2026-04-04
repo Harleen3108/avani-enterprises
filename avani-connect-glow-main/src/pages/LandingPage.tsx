@@ -1215,19 +1215,24 @@ export default function AvaniEnterprises() {
                           background: ci === 1 ? "rgba(99,102,241,0.03)" : "transparent",
                           borderLeft: `1px solid ${C.border}`,
                         }}>
-                          {isIncluded ? (
-                            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "4px" }}>
+                          <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%" }}>
+                            {isIncluded ? (
+                              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "4px" }}>
+                                <div style={{ 
+                                  width: "20px", height: "20px", borderRadius: "50%", background: "rgba(16,185,129,0.1)", 
+                                  color: "#10B981", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "10px", fontWeight: 900
+                                }}>✔</div>
+                                {!isCheck && (
+                                  <span style={{ fontSize: "10px", color: C.muted, fontWeight: 500, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{cell}</span>
+                                )}
+                              </div>
+                            ) : (
                               <div style={{ 
-                                width: "20px", height: "20px", borderRadius: "50%", background: "rgba(16,185,129,0.1)", 
-                                color: "#10B981", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "10px", fontWeight: 900
-                              }}>✔</div>
-                              {!isCheck && (
-                                <span style={{ fontSize: "10px", color: C.muted, fontWeight: 500, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{cell}</span>
-                              )}
-                            </div>
-                          ) : (
-                            <span style={{ color: "rgba(0,0,0,0.1)", fontSize: "12px" }}>✖</span>
-                          )}
+                                width: "20px", height: "20px", borderRadius: "50%", background: "rgba(239,68,68,0.1)", 
+                                color: "#EF4444", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "10px", fontWeight: 900
+                              }}>✖</div>
+                            )}
+                          </div>
                         </td>
                       );
                     })}
