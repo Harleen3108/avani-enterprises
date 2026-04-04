@@ -297,6 +297,15 @@ export default function AvaniEnterprises() {
         @keyframes mobileFadeSlideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes mobileCountUp { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
 
+        /* ── PRICING RESPONSIVE TOGGLE ── */
+        .pricing-table-desktop { display: block; }
+        .pricing-table-mobile { display: none; }
+
+        @media (max-width: 768px) {
+          .pricing-table-desktop { display: none; }
+          .pricing-table-mobile { display: block; }
+        }
+
         /* ── HERO ENHANCEMENT ELEMENTS ── */
         .mobile-hero-only { display: block; }
         .mobile-hero-orb { display: none; }
@@ -1146,7 +1155,8 @@ export default function AvaniEnterprises() {
 
           {/* Pricing Cards */}
           {/* Pricing Comparison Table */}
-          <div className="pricing-table-container" style={{ 
+          {/* Pricing Comparison Table (Desktop) */}
+          <div className="pricing-table-desktop pricing-table-container" style={{ 
             overflowX: "auto", 
             background: "#FFFFFF", 
             borderRadius: "24px", 
@@ -1183,7 +1193,7 @@ export default function AvaniEnterprises() {
                       <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "9px", fontWeight: 800, letterSpacing: "2.5px", color: p.popular ? C.accent : C.muted, marginBottom: "8px" }}>{p.name.toUpperCase()}</div>
                       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "2px" }}>
                         <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "13px", color: C.muted, fontWeight: 400 }}>Plan Pricing: ₹{p.price}</div>
-                        <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "10px", color: C.accent, fontWeight: 700, background: C.accentDim, padding: "2px 6px", borderRadius: "4px" }}>Book now at ₹{p.book}</div>
+                        {/* <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "10px", color: C.accent, fontWeight: 700, background: C.accentDim, padding: "2px 6px", borderRadius: "4px" }}>Book now at ₹{p.book}</div> */}
                       </div>
                     </th>
                   ))}
@@ -1195,7 +1205,7 @@ export default function AvaniEnterprises() {
                   { name: "Website Development", basic: "✖", standard: "1 Year", premium: "1 Year" },
                   { name: "AI Integration", basic: "✖", standard: "AI Videos", premium: "Agentic AI + Videos" },
                   { name: "App Development", basic: "✖", standard: "✖", premium: "✔" },
-                  { name: "Digital Marketing", basic: "✖", standard: "3 Months", premium: "1 Year" },
+                  { name: "Digital Marketing", basic: "3 Months", standard: "3 Months", premium: "1 Year" },
                   { name: "Office Space Setup", basic: "✖", standard: "✖", premium: "3 Months" },
                   { name: "Employee Hirings", basic: "✖", standard: "✖", premium: "Up to 20" },
                   { name: "Pamphlets & Letterheads", basic: "✖", standard: "✖", premium: "✔" },
@@ -1242,9 +1252,9 @@ export default function AvaniEnterprises() {
                 <tr>
                   <td style={{ padding: "24px 20px", background: C.subtle, borderTop: `1px solid ${C.border}` }}></td>
                   {[
-                    { name: "Basic Plan", popular: false },
-                    { name: "Standard Plan", popular: true },
-                    { name: "Premium Plan", popular: false }
+                    { name: "Basic Plan", book: "149", popular: false },
+                    { name: "Standard Plan", book: "149", popular: true },
+                    { name: "Premium Plan", book: "249", popular: false }
                   ].map((p, i) => (
                     <td key={i} style={{ 
                       padding: "24px 15px", 
@@ -1258,21 +1268,112 @@ export default function AvaniEnterprises() {
                         className="cta-btn"
                         style={{
                           width: "100%",
-                          padding: "14px 10px",
-                          fontSize: "11px",
-                          letterSpacing: "1px",
+                          padding: "10px 10px",
                           display: "flex",
+                          flexDirection: "column",
                           alignItems: "center",
                           justifyContent: "center",
-                          gap: "8px",
                           background: C.accent,
                           color: "#000",
                           border: "none",
                           borderRadius: "4px",
-                          fontWeight: 700
                         }}
                       >
-                        BOOK NOW <ArrowRight size={14} />
+                        <span style={{ fontSize: "11px", fontWeight: 800, letterSpacing: "1px" }}>BOOK NOW</span>
+                        <span style={{ fontSize: "9px", fontWeight: 600, opacity: 0.8 }}>Book Slot at ₹{p.book || (i === 2 ? "249" : "149")}</span>
+                      </button>
+                    </td>
+                  ))}
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          {/* Pricing Mobile View (High-Density 'Micro-Table') */}
+          <div className="pricing-table-mobile" style={{ 
+            background: "#FFFFFF", 
+            borderRadius: "16px", 
+            boxShadow: "0 10px 40px rgba(0,0,0,0.06)",
+            border: `1px solid ${C.border}`,
+            overflow: "hidden"
+          }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", tableLayout: "fixed" }}>
+              <thead>
+                <tr style={{ background: C.subtle }}>
+                  <th style={{ padding: "12px 4px", textAlign: "left", width: "30%", fontSize: "8px", fontWeight: 800, color: C.muted, textTransform: "uppercase" }}>Feature</th>
+                  {["Basic", "Std", "Prem"].map((name, i) => (
+                    <th key={i} style={{ 
+                      padding: "12px 2px", 
+                      textAlign: "center", 
+                      fontSize: "9px", 
+                      fontWeight: 800, 
+                      color: i === 1 ? C.accent : C.text,
+                      borderLeft: `1px solid ${C.border}`,
+                      background: i === 1 ? "rgba(99,102,241,0.03)" : "transparent"
+                    }}>{name}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  { name: "Feasibility", b: "✔", s: "✔", p: "✔" },
+                  { name: "Website", b: "✖", s: "1 Year", p: "1 Year" },
+                  { name: "AI", b: "✖", s: "AI Videos", p: "Agentic AI" },
+                  { name: "App Dev", b: "✖", s: "✖", p: "✔" },
+                  { name: "Digital Marketing", b: "3 Months", s: "3 Months", p: "1 Year" },
+                  { name: "Setup", b: "✖", s: "✖", p: "3 Months" },
+                  { name: "Hiring", b: "✖", s: "✖", p: "Up to 20" },
+                  { name: "Print", b: "✖", s: "✖", p: "✔" },
+                  { name: "Sales", b: "✖", s: "✖", p: "🚀" },
+                  { name: "Bank", b: "✖", s: "✔", p: "Prem" },
+                  { name: "Govt", b: "✖", s: "✖", p: "✔" },
+                ].map((row, ri) => (
+                  <tr key={ri} style={{ borderBottom: `1px solid ${C.border}` }}>
+                    <td style={{ padding: "8px 6px", fontSize: "9px", fontWeight: 700, color: C.text }}>{row.name}</td>
+                    {[row.b, row.s, row.p].map((cell, ci) => {
+                      const isCheck = cell === "✔";
+                      const isCross = cell === "✖";
+                      return (
+                        <td key={ci} style={{ padding: "8px 2px", textAlign: "center", borderLeft: `1px solid ${C.border}`, background: ci === 1 ? "rgba(99,102,241,0.02)" : "transparent" }}>
+                          <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", gap: "2px" }}>
+                            {isCross ? (
+                              <div style={{ width: "14px", height: "14px", borderRadius: "50%", background: "rgba(239,68,68,0.1)", color: "#EF4444", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "7px", fontWeight: 900 }}>✖</div>
+                            ) : (
+                              <>
+                                <div style={{ width: "14px", height: "14px", borderRadius: "50%", background: "rgba(16,185,129,0.1)", color: "#10B981", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "7px", fontWeight: 900 }}>✔</div>
+                                {!isCheck && (
+                                  <span style={{ fontSize: "8px", fontWeight: 500, color: C.muted }}>{cell}</span>
+                                )}
+                              </>
+                            )}
+                          </div>
+                        </td>
+                      );
+                    })}
+                  </tr>
+                ))}
+                {/* Footer buttons row */}
+                <tr>
+                  <td style={{ padding: "12px 4px", fontSize: "8px", fontWeight: 800, color: C.muted }}>BOOK NOW</td>
+                  {["Basic Plan", "Standard Plan", "Premium Plan"].map((pName, i) => (
+                    <td key={i} style={{ padding: "12px 2px", textAlign: "center", borderLeft: `1px solid ${C.border}`, background: i === 1 ? "rgba(99,102,241,0.03)" : "transparent" }}>
+                      <button
+                        onClick={() => openModal(pName)}
+                        style={{
+                          width: "100%",
+                          padding: "6px 0",
+                          background: C.accent,
+                          color: "#000",
+                          border: "none",
+                          borderRadius: "4px",
+                          display: "flex",
+                          flexDirection: "column",
+                          alignItems: "center",
+                          cursor: "pointer"
+                        }}
+                      >
+                        <span style={{ fontSize: "8px", fontWeight: 900 }}>BOOK</span>
+                        <span style={{ fontSize: "6.5px", fontWeight: 700, opacity: 0.9 }}>Slot at ₹{i === 2 ? "249" : "149"}</span>
                       </button>
                     </td>
                   ))}
