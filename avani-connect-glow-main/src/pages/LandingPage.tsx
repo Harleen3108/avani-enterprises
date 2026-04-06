@@ -879,7 +879,7 @@ export default function AvaniEnterprises() {
       `}</style>
 
       <nav style={{
-        position: "fixed", top: 0, left: 0, right: 0, zIndex: 9999, height: "70px",
+        position: "fixed", top: 0, left: 0, right: 0, zIndex: 9995, height: "70px",
         display: "flex", alignItems: "center", justifyContent: "space-between",
         padding: "0 6%",
         background: scrolled ? "rgba(250,250,248,0.98)" : "rgba(250,250,248,0.4)",
@@ -889,7 +889,7 @@ export default function AvaniEnterprises() {
       }}>
         <a href="#" style={{ display: "flex", alignItems: "center", gap: "12px", textDecoration: "none" }}>
           <img src="/avani-logo.jpg" alt="Avani Enterprises Logo" style={{ width: "36px", height: "36px", objectFit: "contain", borderRadius: "2px" }} />
-          <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "14px", letterSpacing: "2px", color: C.text }}>AVANI ENTERPRISES</span>
+          <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "14px", letterSpacing: "2px", color: C.text }}>AVANI<span className="mobile-hide"> ENTERPRISES</span></span>
         </a>
 
         {/* Desktop Links */}
@@ -936,7 +936,7 @@ export default function AvaniEnterprises() {
                 position: "fixed",
                 inset: 0,
                 background: "rgba(0,0,0,0.3)",
-                zIndex: 9997,
+                zIndex: 9998,
                 backdropFilter: "blur(4px)",
               }}
             />
@@ -954,7 +954,7 @@ export default function AvaniEnterprises() {
                 width: "85%",
                 maxWidth: "380px",
                 background: "#FFFFFF",
-                zIndex: 9998,
+                zIndex: 9999,
                 display: "flex",
                 flexDirection: "column",
                 boxShadow: "-8px 0 40px rgba(0,0,0,0.12)",

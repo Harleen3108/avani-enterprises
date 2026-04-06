@@ -72,7 +72,7 @@ const Typewriter = ({ segments, delay = 100, startDelay = 0, onComplete }: any) 
 // StaticHook Component — single punchy line
 const StaticHook = () => {
   const [isMobile, setIsMobile] = React.useState(typeof window !== "undefined" ? window.innerWidth <= 480 : false);
-  
+
   React.useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 480);
     window.addEventListener("resize", handleResize);
@@ -105,7 +105,7 @@ const StaticHook = () => {
 const AnimatedNumber = ({ value, duration = 1.5 }: { value: number; duration?: number }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: false, amount: 0.5 });
-  
+
   const springValue = useSpring(1, {
     stiffness: 100,
     damping: 15,
@@ -273,16 +273,16 @@ export default function AvaniEnterprises1() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status })
       });
-      
+
       if (status === "Completed") {
         setPaymentState("success");
         // Redirect to thank you page after a brief delay to show success icon
         setTimeout(() => {
-          navigate("/thank-you", { 
-            state: { 
-              name: formData.firstName, 
-              service: "Growth Plan Strategy Session" 
-            } 
+          navigate("/thank-you", {
+            state: {
+              name: formData.firstName,
+              service: "Growth Plan Strategy Session"
+            }
           });
         }, 1500);
       } else {
@@ -313,6 +313,14 @@ export default function AvaniEnterprises1() {
         @keyframes mobileGlowPulse { 0%,100% { opacity: 0.12; } 50% { opacity: 0.25; } }
         @keyframes mobileFadeSlideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes mobileCountUp { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+        @keyframes heroVideoGlow { 0%, 100% { opacity: 0.6; transform: scale(1); } 50% { opacity: 1; transform: scale(1.03); } }
+        @keyframes heroScrollBounce { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(6px); } }
+
+        /* ── Hero Video Panel ── */
+        .hero-video-panel { animation: fadeUp 1s ease 0.3s both; }
+        .hero-video-container { transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease; }
+        .hero-video-container:hover { transform: translateY(-4px); box-shadow: 0 40px 100px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.08) inset !important; }
+        .hero-scroll-indicator { animation: heroScrollBounce 2s ease-in-out infinite; }
 
         /* ── PRICING RESPONSIVE TOGGLE ── */
         .pricing-table-desktop { display: block; border-radius: 24px; }
@@ -531,11 +539,15 @@ export default function AvaniEnterprises1() {
           .nav-mobile-toggle { display: block !important; }
 
           /* ── Hero Mobile ── */
-          .hero-grid { grid-template-columns: 1fr !important; gap: 0 !important; text-align: center; }
-          .hero-text-content { align-items: center !important; }
-          .hero-badge { margin: 0 auto 12px auto !important; justify-content: center !important; transform: scale(0.9) !important; width: 100%; }
-          .hero-desc { margin: 0 auto 20px auto !important; font-size: 0.92rem !important; line-height: 1.65 !important; max-width: 380px !important; }
-          .hero-img-col { display: none !important; }
+          .hero-content-grid { grid-template-columns: 1fr !important; gap: 0 !important; padding: 0 5% !important; }
+          .hero-video-panel { display: none !important; }
+          .hero-bg-video { opacity: 0.25 !important; }
+          .hero-text-content { align-items: center !important; text-align: center !important; }
+          .hero-text-content * { text-align: center !important; }
+          .hero-badge { margin: 0 auto 16px auto !important; justify-content: center !important; }
+          .hero-title-text { text-align: center !important; }
+          .hero-desc { margin: 0 auto 24px auto !important; font-size: 0.92rem !important; line-height: 1.65 !important; max-width: 380px !important; text-align: center !important; }
+          .hero-scroll-indicator { display: none !important; }
           .cta-container { width: 100% !important; align-items: center !important; }
           .hero-cta {
             width: 100% !important;
@@ -556,10 +568,9 @@ export default function AvaniEnterprises1() {
             animation: ctaShine 3s ease-in-out infinite !important;
           }
           @keyframes ctaShine { 0% { left: -100%; } 50%,100% { left: 100%; } }
-          .urgency-badge { font-size: 10px !important; padding: 6px 14px !important; margin: 0 auto !important; border-radius: 8px !important; }
-          .hero-section { min-height: 100svh !important; justify-content: center !important; padding: 90px 5% 30px 5% !important; }
+          .hero-section { min-height: 100svh !important; justify-content: center !important; padding: 0 !important; }
           .hero-inner { margin-top: 0 !important; width: 100% !important; }
-          .hero-section .display-font { font-size: clamp(3rem, 14vw, 5rem) !important; text-align: center !important; }
+          .hero-section .display-font { font-size: clamp(2.4rem, 10vw, 4rem) !important; text-align: center !important; }
           .display-font { font-size: clamp(2.2rem, 11vw, 4rem) !important; }
           .mobile-hide { display: none !important; }
           .marquee-wrap { margin-top: 32px !important; }
@@ -818,31 +829,26 @@ export default function AvaniEnterprises1() {
 
         @media (max-width: 480px) {
           .display-font { 
-            font-size: clamp(1.4rem, 7vw, 1.9rem) !important; 
+            font-size: clamp(1.6rem, 8vw, 2.2rem) !important; 
             font-weight: 800 !important; 
-            text-align: left !important; 
+            text-align: center !important; 
           }
           .hero-cta { font-size: 13px !important; padding: 16px !important; border-radius: 12px !important; }
-          .hero-section { align-items: flex-start !important; padding: 0 !important; }
+          .hero-section { align-items: center !important; padding: 0 !important; }
           .hero-text-content { 
-            text-align: left !important; 
-            align-items: flex-start !important; 
+            text-align: center !important; 
+            align-items: center !important; 
             padding: 80px 20px 20px 20px !important; 
           }
-          .hero-text-content * { text-align: left !important; }
-          .hero-badge, .mobile-hero-value-pills { justify-content: flex-start !important; width: 100% !important; }
-          .cta-container { align-items: flex-start !important; width: 100% !important; }
+          .hero-text-content * { text-align: center !important; }
+          .hero-badge, .mobile-hero-value-pills { justify-content: center !important; width: 100% !important; }
+          .cta-container { align-items: center !important; width: 100% !important; }
           .shimmer-text, .hero-line { animation: none !important; transform: none !important; opacity: 1 !important; }
+          .hero-desc { font-size: 13px !important; max-width: 340px !important; }
 
-          
           .stat-card .display-font { font-size: clamp(1.4rem, 5vw, 1.8rem) !important; }
           .project-card-container { width: 260px !important; }
           .shimmer-text { font-size: clamp(1.4rem, 7vw, 2rem) !important; min-height: 3.5em !important; }
-          .mobile-hero-orb {
-            width: 250px !important;
-            height: 250px !important;
-            top: 25% !important;
-          }
           .mobile-hero-trust-chip {
             font-size: 10px !important;
             padding: 5px 10px !important;
@@ -867,7 +873,7 @@ export default function AvaniEnterprises1() {
             height: 52px !important;
           }
           .mobile-hero-value-pill-item {
-            padding: 6px 10px !important;
+            padding: 0 !important;
             font-size: 10px !important;
           }
         }
@@ -875,17 +881,17 @@ export default function AvaniEnterprises1() {
       `}</style>
 
       <nav style={{
-        position: "fixed", top: 0, left: 0, right: 0, zIndex: 9999, height: "70px",
+        position: "fixed", top: 0, left: 0, right: 0, zIndex: 9995, height: "70px",
         display: "flex", alignItems: "center", justifyContent: "space-between",
         padding: "0 6%",
-        background: scrolled ? "rgba(250,250,248,0.98)" : "rgba(250,250,248,0.4)",
+        background: scrolled ? "rgba(250,250,248,0.98)" : "rgba(10,10,18,0.3)",
         backdropFilter: "blur(20px)",
-        borderBottom: `1px solid ${C.border}`,
+        borderBottom: scrolled ? `1px solid ${C.border}` : "1px solid rgba(255,255,255,0.06)",
         transition: "all 0.4s ease",
       }}>
         <a href="#" style={{ display: "flex", alignItems: "center", gap: "12px", textDecoration: "none" }}>
           <img src="/avani-logo.jpg" alt="Avani Enterprises Logo" style={{ width: "36px", height: "36px", objectFit: "contain", borderRadius: "2px" }} />
-          <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "14px", letterSpacing: "2px", color: C.text }}>AVANI ENTERPRISES</span>
+          <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "14px", letterSpacing: "2px", color: scrolled ? C.text : "#ffffff", transition: "color 0.4s" }}>AVANI<span className="mobile-hide"> ENTERPRISES</span></span>
         </a>
 
         {/* Desktop Links */}
@@ -899,14 +905,14 @@ export default function AvaniEnterprises1() {
         </div>
 
         {/* Mobile Toggle */}
-        <button 
+        <button
           className="nav-mobile-toggle"
           onClick={() => setMenuOpen(!menuOpen)}
-          style={{ 
-            display: "none", 
-            border: "none", 
-            background: "none", 
-            color: C.text, 
+          style={{
+            display: "none",
+            border: "none",
+            background: "none",
+            color: scrolled ? C.text : "#ffffff",
             cursor: "pointer",
             padding: "10px",
             zIndex: 10001,
@@ -932,7 +938,7 @@ export default function AvaniEnterprises1() {
                 position: "fixed",
                 inset: 0,
                 background: "rgba(0,0,0,0.3)",
-                zIndex: 9997,
+                zIndex: 9998,
                 backdropFilter: "blur(4px)",
               }}
             />
@@ -950,7 +956,7 @@ export default function AvaniEnterprises1() {
                 width: "85%",
                 maxWidth: "380px",
                 background: "#FFFFFF",
-                zIndex: 9998,
+                zIndex: 9999,
                 display: "flex",
                 flexDirection: "column",
                 boxShadow: "-8px 0 40px rgba(0,0,0,0.12)",
@@ -969,7 +975,7 @@ export default function AvaniEnterprises1() {
                   <img src="/avani-logo.jpg" alt="Avani" style={{ width: "32px", height: "32px", borderRadius: "4px", objectFit: "contain" }} />
                   <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "13px", letterSpacing: "2px", color: C.text }}>AVANI</span>
                 </div>
-                <button 
+                <button
                   onClick={() => setMenuOpen(false)}
                   style={{
                     border: "none",
@@ -1063,107 +1069,159 @@ export default function AvaniEnterprises1() {
       </AnimatePresence>
 
       {/* ── HERO ── */}
-      {/* ── HERO ── */}
-      <section className="hero-section" style={{ height: "100vh", minHeight: "100vh", width: "100%", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", position: "relative", overflow: "hidden" }}>
+      <section className="hero-section" style={{ height: "100vh", minHeight: "100vh", width: "100%", display: "flex", alignItems: "center", position: "relative", overflow: "hidden", background: "#0A0A12" }}>
         
-        {/* Full Background Video */}
+        {/* Full Background Video — plays behind everything */}
         <video 
           autoPlay 
           loop 
           muted={isMuted}
           playsInline
-          style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover", zIndex: 0 }} 
+          preload="auto"
+          poster=""
+          className="hero-bg-video"
+          style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover", zIndex: 0, opacity: 0.35 }} 
         >
           <source src="/herosection.mp4" type="video/mp4" />
         </video>
         
-        {/* Subtle Overlay to ensure text doesn't vanish entirely */}
-        <div style={{ position: "absolute", inset: 0, background: "rgba(0, 0, 0, 0.15)", zIndex: 1 }} />
-        
-        {/* Global Mute/Unmute Toggle */}
-        <button 
-          onClick={() => setIsMuted(!isMuted)}
-          style={{
-            position: "absolute",
-            bottom: "30px",
-            right: "30px",
-            width: "50px",
-            height: "50px",
-            borderRadius: "50%",
-            background: "rgba(0, 0, 0, 0.5)",
-            backdropFilter: "blur(12px)",
-            border: "1px solid rgba(255, 255, 255, 0.2)",
-            color: "white",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            cursor: "pointer",
-            transition: "all 0.3s ease",
-            zIndex: 10,
-            boxShadow: "0 4px 20px rgba(0,0,0,0.3)"
-          }}
-          onMouseEnter={e => {
-            e.currentTarget.style.background = "rgba(0, 0, 0, 0.7)";
-            e.currentTarget.style.transform = "scale(1.05)";
-          }}
-          onMouseLeave={e => {
-            e.currentTarget.style.background = "rgba(0, 0, 0, 0.5)";
-            e.currentTarget.style.transform = "scale(1)";
-          }}
-        >
-          {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
-        </button>
+        {/* Multi-layer cinematic overlays */}
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(10,10,18,0.92) 0%, rgba(10,10,18,0.65) 40%, rgba(10,10,18,0.45) 70%, rgba(10,10,18,0.3) 100%)", zIndex: 1 }} />
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(10,10,18,0.8) 0%, transparent 30%, transparent 70%, rgba(10,10,18,0.9) 100%)", zIndex: 1 }} />
+        {/* Accent glow — subtle golden radial */}
+        <div style={{ position: "absolute", top: "20%", left: "15%", width: "500px", height: "500px", background: `radial-gradient(circle, rgba(212,160,23,0.08) 0%, transparent 70%)`, zIndex: 1, pointerEvents: "none" }} />
+        {/* Bottom edge glow */}
+        <div className="hero-bottom-glow" style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "1px", background: `linear-gradient(90deg, transparent, ${C.accent}40, transparent)`, zIndex: 5 }} />
 
-        {/* Text Content Centered */}
-        <div className="hero-inner hero-text-content" style={{ position: "relative", zIndex: 2, maxWidth: "900px", width: "100%", padding: "0 6%", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", marginTop: "40px" }}>
+        {/* ── Main Content Grid ── */}
+        <div className="hero-content-grid" style={{ position: "relative", zIndex: 3, width: "100%", maxWidth: "1400px", margin: "0 auto", padding: "0 6%", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "60px", alignItems: "center", height: "100%" }}>
           
-          <div className="hero-badge" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "12px", marginBottom: "30px" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <div style={{ width: "7px", height: "7px", borderRadius: "50%", background: "#16A34A", boxShadow: "0 0 8px #16A34A", animation: "pulse 2s ease infinite" }} />
-              <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "11px", fontWeight: 800, letterSpacing: "2.5px", color: "#16A34A", background: "rgba(255,255,255,0.9)", padding: "4px 8px", borderRadius: "4px" }}>CLIENTS ONBOARDING</span>
+          {/* ── Left: Text Column ── */}
+          <div className="hero-inner hero-text-content" style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "center", gap: "0" }}>
+            
+            {/* Status Badge */}
+            <div className="hero-badge" style={{ display: "inline-flex", alignItems: "center", gap: "10px", marginBottom: "28px", padding: "8px 18px", background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "50px", backdropFilter: "blur(10px)" }}>
+              <div style={{ width: "7px", height: "7px", borderRadius: "50%", background: "#16A34A", boxShadow: "0 0 10px #16A34A, 0 0 20px rgba(22,163,74,0.3)", animation: "pulse 2s ease infinite" }} />
+              <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "11px", fontWeight: 700, letterSpacing: "2px", color: "#16A34A" }}>CLIENTS ONBOARDING</span>
+              <div style={{ width: "1px", height: "12px", background: "rgba(255,255,255,0.2)" }} className="mobile-hide" />
+              <span className="mobile-hide" style={{ fontSize: "10px", letterSpacing: "1.5px", color: "rgba(255,255,255,0.55)", fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 600 }}>Melbourne · Bombay · Gurugram</span>
             </div>
-            <div style={{ width: "1px", height: "14px", background: "rgba(255,255,255,0.5)" }} className="mobile-hide" />
-            <span className="mobile-hide" style={{ fontSize: "11px", letterSpacing: "2px", color: "rgba(255,255,255,0.9)", fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, textShadow: "0 2px 4px rgba(0,0,0,0.8)" }}>Melbourne (Australia) · Bombay · Gurugram</span>
+
+            {/* Main Heading */}
+            <h1 className="display-font hero-title-text" style={{ fontSize: "clamp(2.2rem, 4.5vw, 4rem)", lineHeight: 1.08, letterSpacing: "-1.5px", marginBottom: "24px", color: "#ffffff" }}>
+              <StaticHook />
+            </h1>
+
+            {/* Subtle Divider */}
+            <div style={{ width: "60px", height: "2px", background: `linear-gradient(90deg, ${C.accent}, transparent)`, marginBottom: "22px", borderRadius: "2px" }} />
+
+            {/* Description line */}
+            <p className="hero-desc" style={{ fontSize: "15px", lineHeight: 1.7, color: "rgba(255,255,255,0.55)", fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 400, marginBottom: "32px", maxWidth: "480px" }}>
+              We build, market, and scale businesses — from web platforms to performance campaigns. Get your personalized growth roadmap today.
+            </p>
+
+            {/* CTA Row */}
+            <div className="cta-container" style={{ display: "flex", flexDirection: "column", gap: "18px", alignItems: "flex-start", width: "100%", maxWidth: "450px" }}>
+              <button onClick={() => scrollToPricing()} className="cta-btn hero-cta" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", padding: "18px 40px", width: "100%", borderRadius: "6px", fontSize: "13px", letterSpacing: "1.5px", position: "relative", overflow: "hidden", boxShadow: `0 8px 32px rgba(212,160,23,0.25), 0 0 60px rgba(212,160,23,0.1)` }}>
+                START YOUR BUSINESS JOURNEY NOW <ArrowRight size={16} />
+              </button>
+
+              {/* Value pills */}
+              <div className="mobile-hero-value-pills" style={{ display: "flex", flexWrap: "wrap", gap: "10px", width: "100%" }}>
+                {[
+                  { icon: <CheckCircle size={13} />, text: "No Long-Term Lock-in" },
+                  { icon: <Star size={13} />, text: "Rated 4.9/5" },
+                  { icon: <Clock size={13} />, text: "Results in 24hrs" },
+                ].map((pill, i) => (
+                  <div key={i} className="mobile-hero-value-pill-item" style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "6px",
+                    fontSize: "11px",
+                    fontWeight: 600,
+                    color: "rgba(255,255,255,0.65)",
+                    fontFamily: "'Plus Jakarta Sans', sans-serif",
+                    padding: "0",
+                  }}>
+                    <span style={{ color: C.accent, display: "flex", alignItems: "center" }}>{pill.icon}</span>
+                    <span>{pill.text}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
 
-          <h1 className="display-font" style={{ fontSize: "clamp(2.1rem, 6vw, 4.5rem)", lineHeight: 1.1, letterSpacing: "-1px", marginBottom: "30px", color: "#ffffff", textShadow: "0 4px 16px rgba(0,0,0,0.9), 0 0 40px rgba(0,0,0,0.8)" }}>
-            <StaticHook />
-          </h1>
-
-          <div className="cta-container" style={{ display: "flex", flexDirection: "column", gap: "20px", alignItems: "center", width: "100%", maxWidth: "450px" }}>
-            <button onClick={() => scrollToPricing()} className="cta-btn hero-cta" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", padding: "18px 40px", width: "100%" }}>
-              START YOUR BUSINESS JOURNEY NOW <ArrowRight size={16} />
-            </button>
-
-            {/* Value pills below CTA */}
-            <div className="mobile-hero-value-pills" style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "12px", width: "100%", marginTop: "10px" }}>
-              {[
-                { icon: <CheckCircle size={14} />, text: "No Long-Term Lock-in" },
-                { icon: <Star size={14} />, text: "Rated 4.9/5" },
-                { icon: <Clock size={14} />, text: "Results in 24hrs" },
-              ].map((pill, i) => (
-                <div key={i} className="mobile-hero-value-pill-item" style={{
-                  display: "inline-flex",
+          {/* ── Right: Video Showcase Panel ── */}
+          <div className="hero-video-panel" style={{ display: "flex", alignItems: "center", justifyContent: "center", position: "relative" }}>
+            {/* Glow behind video */}
+            <div className="hero-video-glow" style={{ position: "absolute", inset: "-30px", background: `radial-gradient(ellipse at center, rgba(212,160,23,0.12) 0%, transparent 70%)`, borderRadius: "30px", zIndex: 0, animation: "heroVideoGlow 4s ease-in-out infinite" }} />
+            
+            {/* Video Container */}
+            <div className="hero-video-container" style={{ 
+              position: "relative", zIndex: 1, width: "100%", aspectRatio: "16/10", borderRadius: "20px", overflow: "hidden",
+              border: "1px solid rgba(255,255,255,0.1)",
+              boxShadow: "0 30px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05) inset",
+            }}>
+              <video 
+                autoPlay 
+                loop 
+                muted={isMuted}
+                playsInline
+                preload="auto"
+                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+              >
+                <source src="/herosection.mp4" type="video/mp4" />
+              </video>
+              
+              {/* Inner video overlay — subtle vignette */}
+              <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at center, transparent 50%, rgba(10,10,18,0.4) 100%)", pointerEvents: "none" }} />
+              
+              {/* Mute toggle on video */}
+              <button 
+                onClick={() => setIsMuted(!isMuted)}
+                className="hero-mute-btn"
+                style={{
+                  position: "absolute",
+                  bottom: "16px",
+                  right: "16px",
+                  width: "42px",
+                  height: "42px",
+                  borderRadius: "50%",
+                  background: "rgba(0, 0, 0, 0.55)",
+                  backdropFilter: "blur(12px)",
+                  border: "1px solid rgba(255, 255, 255, 0.15)",
+                  color: "white",
+                  display: "flex",
                   alignItems: "center",
-                  gap: "6px",
-                  fontSize: "12px",
-                  fontWeight: 600,
-                  color: "rgba(255,255,255,0.95)",
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
-                  padding: "6px 12px",
-                  background: "rgba(0,0,0,0.5)",
-                  borderRadius: "50px",
-                  border: "1px solid rgba(255,255,255,0.15)",
-                  backdropFilter: "blur(4px)",
-                  textShadow: "0 2px 4px rgba(0,0,0,0.5)"
-                }}>
-                  <span style={{ color: C.accent, display: "flex", alignItems: "center" }}>{pill.icon}</span>
-                  <span>{pill.text}</span>
-                </div>
-              ))}
+                  justifyContent: "center",
+                  cursor: "pointer",
+                  transition: "all 0.3s ease",
+                  zIndex: 10,
+                  boxShadow: "0 4px 16px rgba(0,0,0,0.3)"
+                }}
+                onMouseEnter={e => {
+                  e.currentTarget.style.background = "rgba(0, 0, 0, 0.75)";
+                  e.currentTarget.style.transform = "scale(1.08)";
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.background = "rgba(0, 0, 0, 0.55)";
+                  e.currentTarget.style.transform = "scale(1)";
+                }}
+              >
+                {isMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
+              </button>
+
+              {/* Corner accent marks */}
+              <div style={{ position: "absolute", top: "12px", left: "12px", width: "20px", height: "20px", borderTop: `2px solid ${C.accent}80`, borderLeft: `2px solid ${C.accent}80`, borderRadius: "4px 0 0 0", pointerEvents: "none" }} />
+              <div style={{ position: "absolute", bottom: "12px", right: "12px", width: "20px", height: "20px", borderBottom: `2px solid ${C.accent}80`, borderRight: `2px solid ${C.accent}80`, borderRadius: "0 0 4px 0", pointerEvents: "none" }} />
             </div>
           </div>
+        </div>
 
+        {/* Scroll indicator */}
+        <div className="hero-scroll-indicator" style={{ position: "absolute", bottom: "28px", left: "50%", transform: "translateX(-50%)", zIndex: 5, display: "flex", flexDirection: "column", alignItems: "center", gap: "8px", opacity: 0.4 }}>
+          <span style={{ fontSize: "9px", fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 600, letterSpacing: "3px", color: "rgba(255,255,255,0.6)", textTransform: "uppercase" }}>Scroll</span>
+          <div style={{ width: "1px", height: "24px", background: `linear-gradient(180deg, rgba(255,255,255,0.5), transparent)` }} />
         </div>
       </section>
 
@@ -1187,10 +1245,10 @@ export default function AvaniEnterprises1() {
           {/* Pricing Cards */}
           {/* Pricing Comparison Table */}
           {/* Pricing Comparison Table (Desktop) */}
-          <div className="pricing-table-desktop pricing-table-container" style={{ 
-            overflowX: "auto", 
-            background: "#FFFFFF", 
-            borderRadius: "24px", 
+          <div className="pricing-table-desktop pricing-table-container" style={{
+            overflowX: "auto",
+            background: "#FFFFFF",
+            borderRadius: "24px",
             boxShadow: "0 20px 80px rgba(0,0,0,0.06)",
             border: `1px solid ${C.border}`,
             position: "relative",
@@ -1210,9 +1268,9 @@ export default function AvaniEnterprises1() {
                     { name: "Standard Plan", price: "99,999", book: "249", popular: true },
                     { name: "Premium Plan", price: "9,99,999", book: "249", popular: false }
                   ].map((p, i) => (
-                    <th key={i} style={{ 
-                      padding: "16px 15px", 
-                      textAlign: "center", 
+                    <th key={i} style={{
+                      padding: "16px 15px",
+                      textAlign: "center",
                       width: "26%",
                       background: p.popular ? "rgba(99,102,241,0.03)" : "transparent",
                       borderLeft: `1px solid ${C.border}`,
@@ -1220,8 +1278,8 @@ export default function AvaniEnterprises1() {
                       position: "relative"
                     }}>
                       {p.popular && (
-                        <div style={{ 
-                          position: "absolute", top: "0", left: "0", right: "0", height: "4px", background: C.accent 
+                        <div style={{
+                          position: "absolute", top: "0", left: "0", right: "0", height: "4px", background: C.accent
                         }} />
                       )}
                       <div className="table-header-name" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "9px", fontWeight: 800, letterSpacing: "2.5px", color: p.popular ? C.accent : C.muted, marginBottom: "4px" }}>{p.name.toUpperCase()}</div>
@@ -1252,17 +1310,17 @@ export default function AvaniEnterprises1() {
                       const isIncluded = cell !== "✖";
                       const isCheck = cell === "✔";
                       return (
-                        <td key={ci} style={{ 
-                          padding: "12px 10px", 
-                          textAlign: "center", 
+                        <td key={ci} style={{
+                          padding: "12px 10px",
+                          textAlign: "center",
                           background: ci === 1 ? "rgba(99,102,241,0.03)" : "transparent",
                           borderLeft: `1px solid ${C.border}`,
                         }}>
                           <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%" }}>
                             {isIncluded ? (
                               <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "2px" }}>
-                                <div className="table-tick-cross" style={{ 
-                                  width: "20px", height: "20px", borderRadius: "50%", background: "rgba(16,185,129,0.1)", 
+                                <div className="table-tick-cross" style={{
+                                  width: "20px", height: "20px", borderRadius: "50%", background: "rgba(16,185,129,0.1)",
                                   color: "#10B981", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "10px", fontWeight: 900
                                 }}>✔</div>
                                 {!isCheck && (
@@ -1270,8 +1328,8 @@ export default function AvaniEnterprises1() {
                                 )}
                               </div>
                             ) : (
-                              <div className="table-tick-cross" style={{ 
-                                width: "20px", height: "20px", borderRadius: "50%", background: "rgba(239,68,68,0.1)", 
+                              <div className="table-tick-cross" style={{
+                                width: "20px", height: "20px", borderRadius: "50%", background: "rgba(239,68,68,0.1)",
                                 color: "#EF4444", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "10px", fontWeight: 900
                               }}>✖</div>
                             )}
@@ -1289,9 +1347,9 @@ export default function AvaniEnterprises1() {
                     { name: "Standard Plan", book: "249", popular: true },
                     { name: "Premium Plan", book: "249", popular: false }
                   ].map((p, i) => (
-                    <td key={i} style={{ 
-                      padding: "16px 10px", 
-                      textAlign: "center", 
+                    <td key={i} style={{
+                      padding: "16px 10px",
+                      textAlign: "center",
                       background: p.popular ? "rgba(99,102,241,0.06)" : C.subtle,
                       borderLeft: `1px solid ${C.border}`,
                       borderTop: `1px solid ${C.border}`
@@ -1346,21 +1404,21 @@ export default function AvaniEnterprises1() {
 
           <div style={{ position: "relative", marginTop: "60px" }}>
             {/* Connecting Dashed Line */}
-            <div style={{ 
-              position: "absolute", 
-              top: "60px", 
-              left: "10%", 
-              right: "10%", 
-              height: "2px", 
-              borderTop: `2px dashed ${C.border}`, 
-              zIndex: 0 
+            <div style={{
+              position: "absolute",
+              top: "60px",
+              left: "10%",
+              right: "10%",
+              height: "2px",
+              borderTop: `2px dashed ${C.border}`,
+              zIndex: 0
             }} className="mobile-hide" />
 
-            <div className="process-steps-container" style={{ 
-              display: "grid", 
-              gridTemplateColumns: "repeat(6, 1fr)", 
-              gap: "20px", 
-              position: "relative", 
+            <div className="process-steps-container" style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(6, 1fr)",
+              gap: "20px",
+              position: "relative",
               zIndex: 1,
               overflowX: "auto",
               paddingBottom: "40px"
@@ -1376,45 +1434,45 @@ export default function AvaniEnterprises1() {
                 <div key={i} className="process-step-mobile" style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", minWidth: "160px" }}>
                   {/* Circle Bubble */}
                   <div style={{ position: "relative", marginBottom: "32px" }}>
-                    <div className="process-circle" style={{ 
-                      width: "120px", 
-                      height: "120px", 
-                      borderRadius: "50%", 
-                      background: "#FFFFFF", 
-                      display: "flex", 
-                      alignItems: "center", 
+                    <div className="process-circle" style={{
+                      width: "120px",
+                      height: "120px",
+                      borderRadius: "50%",
+                      background: "#FFFFFF",
+                      display: "flex",
+                      alignItems: "center",
                       justifyContent: "center",
                       boxShadow: "0 10px 40px rgba(0,0,0,0.08)",
                       transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
                       cursor: "pointer",
                       border: `2px solid ${C.accent}`
                     }}
-                    onMouseEnter={e => {
-                      e.currentTarget.style.transform = "translateY(-10px) scale(1.05)";
-                      e.currentTarget.style.borderColor = C.accent;
-                      e.currentTarget.style.boxShadow = `0 20px 40px ${C.accentGlow}`;
-                    }}
-                    onMouseLeave={e => {
-                      e.currentTarget.style.transform = "none";
-                      e.currentTarget.style.borderColor = C.accent;
-                      e.currentTarget.style.boxShadow = "0 10px 40px rgba(0,0,0,0.08)";
-                    }}
+                      onMouseEnter={e => {
+                        e.currentTarget.style.transform = "translateY(-10px) scale(1.05)";
+                        e.currentTarget.style.borderColor = C.accent;
+                        e.currentTarget.style.boxShadow = `0 20px 40px ${C.accentGlow}`;
+                      }}
+                      onMouseLeave={e => {
+                        e.currentTarget.style.transform = "none";
+                        e.currentTarget.style.borderColor = C.accent;
+                        e.currentTarget.style.boxShadow = "0 10px 40px rgba(0,0,0,0.08)";
+                      }}
                     >
                       {React.cloneElement(p.icon as React.ReactElement, { size: 36, strokeWidth: 1.5, color: C.accent })}
                     </div>
-                    
+
                     {/* Step Number Label */}
-                    <div className="process-step-num" style={{ 
-                      position: "absolute", 
-                      top: "0", 
-                      right: "0", 
-                      background: "white", 
-                      color: "black", 
-                      width: "32px", 
-                      height: "32px", 
-                      borderRadius: "50%", 
-                      display: "flex", 
-                      alignItems: "center", 
+                    <div className="process-step-num" style={{
+                      position: "absolute",
+                      top: "0",
+                      right: "0",
+                      background: "white",
+                      color: "black",
+                      width: "32px",
+                      height: "32px",
+                      borderRadius: "50%",
+                      display: "flex",
+                      alignItems: "center",
                       justifyContent: "center",
                       fontSize: "12px",
                       fontWeight: 800,
@@ -1721,8 +1779,8 @@ export default function AvaniEnterprises1() {
                 cursor: "pointer",
                 transition: "all 0.3s",
               }}
-              onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.4)"; e.currentTarget.style.color = "#fff"; }}
-              onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.15)"; e.currentTarget.style.color = "rgba(255,255,255,0.7)"; }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.4)"; e.currentTarget.style.color = "#fff"; }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.15)"; e.currentTarget.style.color = "rgba(255,255,255,0.7)"; }}
               >
                 TALK TO US <Phone size={16} />
               </a>
@@ -1871,14 +1929,14 @@ export default function AvaniEnterprises1() {
           <div style={{ background: "#FFFFFF", width: "100%", maxWidth: "420px", border: `1px solid ${C.border}`, padding: "50px 40px", textAlign: "center", borderRadius: "12px", boxShadow: "0 20px 60px rgba(0,0,0,0.15)" }}>
             {paymentState === "processing" && (
               <div style={{ textAlign: "center", padding: "40px 0" }}>
-                <div style={{ 
-                  width: "50px", 
-                  height: "50px", 
-                  border: `3px solid ${C.border}`, 
-                  borderTop: `3px solid ${C.accent}`, 
-                  borderRadius: "50%", 
+                <div style={{
+                  width: "50px",
+                  height: "50px",
+                  border: `3px solid ${C.border}`,
+                  borderTop: `3px solid ${C.accent}`,
+                  borderRadius: "50%",
                   animation: "shimmer 1s linear infinite",
-                  margin: "0 auto 20px" 
+                  margin: "0 auto 20px"
                 }} />
                 <h3 style={{ fontSize: "18px", marginBottom: "10px", color: C.text }}>Processing Payment</h3>
                 <p style={{ color: C.muted, fontSize: "14px" }}>Please wait while we connect to Razorpay...</p>
@@ -1907,18 +1965,18 @@ export default function AvaniEnterprises1() {
       )}
 
       <div className="mobile-fab" style={{ position: "fixed", bottom: "30px", right: "30px", zIndex: 9000 }}>
-        <button onClick={() => scrollToPricing()} className="cta-btn" style={{ 
-          boxShadow: "0 10px 40px rgba(212,160,23,0.5), 0 0 20px rgba(212,160,23,0.15)", 
-          padding: "18px 32px", 
-          borderRadius: "4px", 
-          display: "flex", 
-          alignItems: "center", 
-          gap: "12px", 
-          fontSize: "14px", 
+        <button onClick={() => scrollToPricing()} className="cta-btn" style={{
+          boxShadow: "0 10px 40px rgba(212,160,23,0.5), 0 0 20px rgba(212,160,23,0.15)",
+          padding: "18px 32px",
+          borderRadius: "4px",
+          display: "flex",
+          alignItems: "center",
+          gap: "12px",
+          fontSize: "14px",
           fontWeight: "800",
-          letterSpacing: "1.5px", 
-          animation: "fadeUp 0.8s ease forwards", 
-          animationDelay: "1s", 
+          letterSpacing: "1.5px",
+          animation: "fadeUp 0.8s ease forwards",
+          animationDelay: "1s",
           opacity: 0,
           border: "none"
         }}>
