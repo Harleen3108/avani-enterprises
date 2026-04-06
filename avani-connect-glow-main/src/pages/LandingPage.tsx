@@ -891,7 +891,7 @@ export default function AvaniEnterprises() {
       }}>
         <a href="#" style={{ display: "flex", alignItems: "center", gap: "12px", textDecoration: "none" }}>
           <img src="/avani-logo.jpg" alt="Avani Enterprises Logo" style={{ width: "36px", height: "36px", objectFit: "contain", borderRadius: "2px" }} />
-          <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "14px", letterSpacing: "2px", color: C.text }}>AVANI<span className="mobile-hide"> ENTERPRISES</span></span>
+          <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "14px", letterSpacing: "2px", color: C.text }}>AVANI ENTERPRISES</span>
         </a>
 
         {/* Desktop Links */}
@@ -973,7 +973,7 @@ export default function AvaniEnterprises() {
               }}>
                 <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
                   <img src="/avani-logo.jpg" alt="Avani" style={{ width: "32px", height: "32px", borderRadius: "4px", objectFit: "contain" }} />
-                  <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "13px", letterSpacing: "2px", color: C.text }}>AVANI</span>
+                  <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "13px", letterSpacing: "2px", color: C.text }}>AVANI ENTERPRISES</span>
                 </div>
                 <button 
                   onClick={() => setMenuOpen(false)}
