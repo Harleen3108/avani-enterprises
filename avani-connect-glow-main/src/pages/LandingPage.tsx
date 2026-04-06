@@ -533,9 +533,11 @@ export default function AvaniEnterprises() {
           /* ── Hero Mobile ── */
           .hero-grid { grid-template-columns: 1fr !important; gap: 0 !important; text-align: center; }
           .hero-text-content { align-items: center !important; }
-          .hero-badge { margin: 0 auto 12px auto !important; justify-content: center !important; transform: scale(0.9) !important; width: 100%; }
+          .hero-badge { margin: 0 auto 12px auto !important; justify-content: center !important; transform: scale(0.9) !important; width: 100%; flex-wrap: wrap !important; }
           .hero-desc { margin: 0 auto 20px auto !important; font-size: 0.92rem !important; line-height: 1.65 !important; max-width: 380px !important; }
           .hero-img-col { display: none !important; }
+          .mobile-hero-video { opacity: 0.45 !important; }
+          .hero-overlay.mobile-hero-only { background: rgba(250,250,248, 0.4) !important; }
           .cta-container { width: 100% !important; align-items: center !important; }
           .hero-cta {
             width: 100% !important;
@@ -1072,6 +1074,19 @@ export default function AvaniEnterprises() {
         <div style={{ position: "absolute", inset: 0, backgroundImage: `linear-gradient(${C.border} 1px, transparent 1px), linear-gradient(90deg, ${C.border} 1px, transparent 1px)`, backgroundSize: "80px 80px", opacity: 0.25 }} />
         <div style={{ position: "absolute", inset: 0, background: `radial-gradient(ellipse 80% 60% at 50% 100%, transparent 0%, ${C.dark} 70%)` }} />
         <div style={{ position: "absolute", top: "20%", right: "5%", width: "600px", height: "600px", background: `radial-gradient(circle, ${C.accentGlow} 0%, transparent 70%)`, pointerEvents: "none" }} />
+        
+        {/* Mobile Background Video Overlays */}
+        <video 
+          autoPlay 
+          loop 
+          muted
+          playsInline
+          className="mobile-hero-only mobile-hero-video"
+          style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover", zIndex: 0, opacity: 0.45, objectPosition: "center top", display: "none" }} 
+        >
+          <source src="/avanivideo.mp4" type="video/mp4" />
+        </video>
+        <div className="hero-overlay mobile-hero-only" style={{ position: "absolute", inset: 0, background: "rgba(250,250,248,0.5)", zIndex: 1, display: "none" }} />
 
         {/* Mobile-only decorative orb */}
         <div className="mobile-hero-orb" />
@@ -1087,8 +1102,8 @@ export default function AvaniEnterprises() {
                   <div style={{ width: "7px", height: "7px", borderRadius: "50%", background: "#16A34A", boxShadow: "0 0 8px #16A34A", animation: "pulse 2s ease infinite" }} />
                   <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "10px", fontWeight: 700, letterSpacing: "2.5px", color: "#16A34A" }}>CLIENTS ONBOARDING</span>
                 </div>
-                <div style={{ width: "1px", height: "14px", background: C.border }} className="mobile-hide" />
-                <span className="mobile-hide" style={{ fontSize: "10px", letterSpacing: "2px", color: C.muted, fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 600 }}>Melbourne (Australia) · Bombay · Gurugram</span>
+                <div style={{ width: "1px", height: "14px", background: C.border }} />
+                <span style={{ fontSize: "10px", letterSpacing: "2px", color: C.muted, fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 600 }}>Melbourne (Australia) · Bombay · Gurugram</span>
               </div>
 
               <h1 className="display-font shimmer-text" style={{ fontSize: "clamp(2rem, 7vw, 4.8rem)", lineHeight: 1.1, letterSpacing: "-1px", marginBottom: "30px", minHeight: "2.5em", overflow: "hidden" }}>

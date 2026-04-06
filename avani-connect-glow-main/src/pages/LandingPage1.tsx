@@ -164,7 +164,7 @@ export default function AvaniEnterprises1() {
   const scrollToPricing = () => {
     const section = document.getElementById("pricing");
     if (section) {
-      section.scrollIntoView({ behavior: "smooth", block: "start" });
+      section.scrollIntoView({ behavior: "smooth", block: "center" });
     }
     setMenuOpen(false); // Close mobile menu if it's open
   };
@@ -496,8 +496,31 @@ export default function AvaniEnterprises1() {
           animation: shimmer 4s linear infinite;
         }
 
-        ::-webkit-scrollbar { width: 4px; } ::-webkit-scrollbar-track { background: #F0F0EC; } ::-webkit-scrollbar-thumb { background: ${C.accent}; border-radius: 4px; }
-        @keyframes pulseAlert { 0%, 100% { box-shadow: 0 0 0 0 rgba(255, 51, 51, 0.4); } 50% { box-shadow: 0 0 0 10px rgba(255, 51, 51, 0); } }
+        /* ── Fit Pricing Table on Desktop Screen ── */
+        @media (min-width: 1024px) {
+          #pricing {
+            padding: 25px 6% !important;
+          }
+          #pricing .display-font {
+            font-size: clamp(1.4rem, 4vw, 2.0rem) !important;
+            margin-bottom: 15px !important;
+          }
+          #pricing p {
+            margin-bottom: 25px !important;
+            font-size: 12px !important;
+          }
+          .pricing-table-container table { font-size: 11px !important; }
+          .pricing-table-container th {
+            padding: 8px 10px !important;
+          }
+           .pricing-table-container .table-feature-text { padding: 8px 20px !important; font-size: 11px !important; }
+          .pricing-table-container td {
+            padding: 5px 10px !important;
+          }
+          .pricing-table-container .cta-btn {
+            padding: 8px 6px !important;
+          }
+        }
 
         /* ── AI Section Animations ── */
         @keyframes aiGlow { 0%, 100% { box-shadow: 0 0 30px rgba(99,102,241,0.15), 0 0 60px rgba(212,160,23,0.08); } 50% { box-shadow: 0 0 50px rgba(99,102,241,0.25), 0 0 100px rgba(212,160,23,0.15); } }
@@ -541,10 +564,12 @@ export default function AvaniEnterprises1() {
           /* ── Hero Mobile ── */
           .hero-content-grid { grid-template-columns: 1fr !important; gap: 0 !important; padding: 0 5% !important; }
           .hero-video-panel { display: none !important; }
-          .hero-bg-video { opacity: 0.25 !important; }
+          .hero-bg-video { opacity: 0.6 !important; object-position: center top !important; }
+          .hero-overlay { background: rgba(10,10,18, 0.45) !important; }
+          .hero-overlay-2 { background: linear-gradient(180deg, rgba(10,10,18,0.6) 0%, transparent 40%, transparent 60%, rgba(10,10,18,0.85) 100%) !important; }
           .hero-text-content { align-items: center !important; text-align: center !important; }
           .hero-text-content * { text-align: center !important; }
-          .hero-badge { margin: 0 auto 16px auto !important; justify-content: center !important; }
+          .hero-badge { margin: 0 auto 16px auto !important; justify-content: center !important; flex-wrap: wrap !important; }
           .hero-title-text { text-align: center !important; }
           .hero-desc { margin: 0 auto 24px auto !important; font-size: 0.92rem !important; line-height: 1.65 !important; max-width: 380px !important; text-align: center !important; }
           .hero-scroll-indicator { display: none !important; }
@@ -884,9 +909,9 @@ export default function AvaniEnterprises1() {
         position: "fixed", top: 0, left: 0, right: 0, zIndex: 9995, height: "70px",
         display: "flex", alignItems: "center", justifyContent: "space-between",
         padding: "0 6%",
-        background: scrolled ? "rgba(250,250,248,0.98)" : "rgba(10,10,18,0.3)",
-        backdropFilter: "blur(20px)",
-        borderBottom: scrolled ? `1px solid ${C.border}` : "1px solid rgba(255,255,255,0.06)",
+        background: scrolled ? "rgba(255, 255, 255, 0.95)" : "rgba(0, 0, 0, 0.15)",
+        backdropFilter: "blur(12px)",
+        borderBottom: scrolled ? `1px solid ${C.border}` : "1px solid rgba(255, 255, 255, 0.08)",
         transition: "all 0.4s ease",
       }}>
         <a href="#" style={{ display: "flex", alignItems: "center", gap: "12px", textDecoration: "none" }}>
@@ -897,7 +922,7 @@ export default function AvaniEnterprises1() {
         {/* Desktop Links */}
         <div className="nav-links" style={{ display: "flex", gap: "30px", alignItems: "center" }}>
           {["Solutions", "Projects", "About", "FAQ"].map(l => (
-            <a key={l} href={`#${l.toLowerCase()}`} className="nav-link">{l.toUpperCase()}</a>
+            <a key={l} href={`#${l.toLowerCase()}`} className="nav-link" style={{ color: scrolled ? C.text : "#ffffff" }}>{l.toUpperCase()}</a>
           ))}
           <button onClick={() => scrollToPricing()} className="cta-btn nav-desktop-cta" style={{ padding: "10px 22px", fontSize: "11px", marginLeft: "10px" }}>
             START YOUR JOURNEY
@@ -1080,14 +1105,14 @@ export default function AvaniEnterprises1() {
           preload="auto"
           poster=""
           className="hero-bg-video"
-          style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover", zIndex: 0, opacity: 0.35 }} 
+          style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover", zIndex: 0, opacity: 0.25 }} 
         >
           <source src="/herosection.mp4" type="video/mp4" />
         </video>
         
         {/* Multi-layer cinematic overlays */}
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(10,10,18,0.92) 0%, rgba(10,10,18,0.65) 40%, rgba(10,10,18,0.45) 70%, rgba(10,10,18,0.3) 100%)", zIndex: 1 }} />
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(10,10,18,0.8) 0%, transparent 30%, transparent 70%, rgba(10,10,18,0.9) 100%)", zIndex: 1 }} />
+        <div className="hero-overlay" style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(10,10,18,0.95) 0%, rgba(10,10,18,0.75) 40%, rgba(10,10,18,0.55) 70%, rgba(10,10,18,0.4) 100%)", zIndex: 1 }} />
+        <div className="hero-overlay-2" style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(10,10,18,0.85) 0%, transparent 30%, transparent 70%, rgba(10,10,18,0.95) 100%)", zIndex: 1 }} />
         {/* Accent glow — subtle golden radial */}
         <div style={{ position: "absolute", top: "20%", left: "15%", width: "500px", height: "500px", background: `radial-gradient(circle, rgba(212,160,23,0.08) 0%, transparent 70%)`, zIndex: 1, pointerEvents: "none" }} />
         {/* Bottom edge glow */}
@@ -1103,8 +1128,8 @@ export default function AvaniEnterprises1() {
             <div className="hero-badge" style={{ display: "inline-flex", alignItems: "center", gap: "10px", marginBottom: "28px", padding: "8px 18px", background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "50px", backdropFilter: "blur(10px)" }}>
               <div style={{ width: "7px", height: "7px", borderRadius: "50%", background: "#16A34A", boxShadow: "0 0 10px #16A34A, 0 0 20px rgba(22,163,74,0.3)", animation: "pulse 2s ease infinite" }} />
               <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "11px", fontWeight: 700, letterSpacing: "2px", color: "#16A34A" }}>CLIENTS ONBOARDING</span>
-              <div style={{ width: "1px", height: "12px", background: "rgba(255,255,255,0.2)" }} className="mobile-hide" />
-              <span className="mobile-hide" style={{ fontSize: "10px", letterSpacing: "1.5px", color: "rgba(255,255,255,0.55)", fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 600 }}>Melbourne · Bombay · Gurugram</span>
+              <div style={{ width: "1px", height: "12px", background: "rgba(255,255,255,0.2)" }} />
+              <span style={{ fontSize: "10px", letterSpacing: "1.5px", color: "rgba(255,255,255,0.55)", fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 600 }}>Melbourne · Bombay · Gurugram</span>
             </div>
 
             {/* Main Heading */}
@@ -1165,7 +1190,7 @@ export default function AvaniEnterprises1() {
               <video 
                 autoPlay 
                 loop 
-                muted={isMuted}
+                muted
                 playsInline
                 preload="auto"
                 style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
@@ -1176,41 +1201,6 @@ export default function AvaniEnterprises1() {
               {/* Inner video overlay — subtle vignette */}
               <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at center, transparent 50%, rgba(10,10,18,0.4) 100%)", pointerEvents: "none" }} />
               
-              {/* Mute toggle on video */}
-              <button 
-                onClick={() => setIsMuted(!isMuted)}
-                className="hero-mute-btn"
-                style={{
-                  position: "absolute",
-                  bottom: "16px",
-                  right: "16px",
-                  width: "42px",
-                  height: "42px",
-                  borderRadius: "50%",
-                  background: "rgba(0, 0, 0, 0.55)",
-                  backdropFilter: "blur(12px)",
-                  border: "1px solid rgba(255, 255, 255, 0.15)",
-                  color: "white",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  cursor: "pointer",
-                  transition: "all 0.3s ease",
-                  zIndex: 10,
-                  boxShadow: "0 4px 16px rgba(0,0,0,0.3)"
-                }}
-                onMouseEnter={e => {
-                  e.currentTarget.style.background = "rgba(0, 0, 0, 0.75)";
-                  e.currentTarget.style.transform = "scale(1.08)";
-                }}
-                onMouseLeave={e => {
-                  e.currentTarget.style.background = "rgba(0, 0, 0, 0.55)";
-                  e.currentTarget.style.transform = "scale(1)";
-                }}
-              >
-                {isMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
-              </button>
-
               {/* Corner accent marks */}
               <div style={{ position: "absolute", top: "12px", left: "12px", width: "20px", height: "20px", borderTop: `2px solid ${C.accent}80`, borderLeft: `2px solid ${C.accent}80`, borderRadius: "4px 0 0 0", pointerEvents: "none" }} />
               <div style={{ position: "absolute", bottom: "12px", right: "12px", width: "20px", height: "20px", borderBottom: `2px solid ${C.accent}80`, borderRight: `2px solid ${C.accent}80`, borderRadius: "0 0 4px 0", pointerEvents: "none" }} />
