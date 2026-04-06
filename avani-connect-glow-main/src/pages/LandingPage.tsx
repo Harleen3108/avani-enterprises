@@ -129,6 +129,125 @@ const FONT = `
   @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 `;
 
+// ── Fixed Bottom Bar Component ──
+const FixedBottomBar = ({ scrollToPricing }: { scrollToPricing: () => void }) => {
+  const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 0, seconds: 0 });
+
+  useEffect(() => {
+    const calcTimeLeft = () => {
+      const now = new Date();
+      const midnight = new Date(now);
+      midnight.setHours(24, 0, 0, 0);
+      const diff = midnight.getTime() - now.getTime();
+      return {
+        hours: Math.floor(diff / (1000 * 60 * 60)),
+        minutes: Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)),
+        seconds: Math.floor((diff % (1000 * 60)) / 1000),
+      };
+    };
+    setTimeLeft(calcTimeLeft());
+    const timer = setInterval(() => setTimeLeft(calcTimeLeft()), 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const pad = (n: number) => String(n).padStart(2, "0");
+
+  return (
+    <>
+      <style>{`
+        .bottom-bar {
+          position: fixed; bottom: 0; left: 0; right: 0; z-index: 9000;
+          background: linear-gradient(135deg, #1A1A2E 0%, #0F0F1A 100%);
+          border-top: 1px solid rgba(255,255,255,0.08);
+          box-shadow: 0 -4px 30px rgba(0,0,0,0.3);
+          padding: 0 4%;
+          animation: bottomBarSlideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+          animation-delay: 1s;
+          transform: translateY(100%);
+        }
+        @keyframes bottomBarSlideUp { to { transform: translateY(0); } }
+        .bottom-bar-inner {
+          max-width: 1400px; margin: 0 auto;
+          display: flex; align-items: center; justify-content: space-between;
+          gap: 24px; height: 64px;
+        }
+        .bb-hook { display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+        .bb-hook-label { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.7); letter-spacing: 0.3px; }
+        .bb-price-old { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.3); text-decoration: line-through; }
+        .bb-price-new { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 20px; font-weight: 800; color: #4ADE80; letter-spacing: -0.5px; }
+        .bb-divider { width: 1px; height: 30px; background: rgba(255,255,255,0.1); flex-shrink: 0; }
+        .bb-timer-wrap { display: flex; align-items: center; gap: 10px; white-space: nowrap; }
+        .bb-timer-label { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 1.5px; color: rgba(255,255,255,0.4); text-transform: uppercase; }
+        .bb-timer-digits { display: flex; align-items: center; gap: 4px; }
+        .bb-timer-unit { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; font-weight: 800; color: #ffffff; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); padding: 4px 8px; border-radius: 6px; letter-spacing: 1px; min-width: 32px; text-align: center; }
+        .bb-timer-colon { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; font-weight: 800; color: rgba(255,255,255,0.25); }
+        .bb-book-now {
+          font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; font-weight: 800;
+          letter-spacing: 1.5px; text-transform: uppercase; border: none; cursor: pointer;
+          background: none; white-space: nowrap; color: #ffffff;
+          display: flex; align-items: center; gap: 8px;
+          transition: all 0.3s ease; padding: 8px 0;
+          border-bottom: 2px solid transparent;
+        }
+        .bb-book-now:hover { color: #4ADE80; border-bottom-color: #4ADE80; }
+
+        @media (max-width: 768px) {
+          .bottom-bar { padding: 0 3%; }
+          .bottom-bar-inner { height: auto; padding: 12px 0; flex-wrap: wrap; justify-content: center; gap: 10px; }
+          .bb-hook { gap: 6px; }
+          .bb-hook-label { font-size: 12px; }
+          .bb-price-old { font-size: 12px; }
+          .bb-price-new { font-size: 16px; }
+          .bb-divider { height: 22px; }
+          .bb-timer-wrap { gap: 6px; }
+          .bb-timer-label { font-size: 9px; letter-spacing: 1px; }
+          .bb-timer-unit { font-size: 13px; padding: 3px 6px; min-width: 26px; }
+          .bb-timer-colon { font-size: 13px; }
+          .bb-book-now { font-size: 12px; letter-spacing: 1px; }
+        }
+        @media (max-width: 420px) {
+          .bottom-bar-inner { gap: 8px; }
+          .bb-hook-label { font-size: 11px; }
+          .bb-price-old { font-size: 11px; }
+          .bb-price-new { font-size: 15px; }
+          .bb-timer-label { display: none; }
+          .bb-timer-unit { font-size: 12px; padding: 2px 5px; min-width: 24px; }
+          .bb-book-now { font-size: 11px; gap: 5px; }
+        }
+      `}</style>
+      <div className="bottom-bar">
+        <div className="bottom-bar-inner">
+          {/* Hook */}
+          <div className="bb-hook">
+            <span className="bb-hook-label">Consultation starts from</span>
+            <span className="bb-price-old">₹800</span>
+            <span className="bb-price-new">₹149</span>
+          </div>
+          {/* Divider */}
+          <div className="bb-divider" />
+          {/* Timer */}
+          <div className="bb-timer-wrap">
+            <span className="bb-timer-label">Offer ends in</span>
+            <div className="bb-timer-digits">
+              <span className="bb-timer-unit">{pad(timeLeft.hours)}</span>
+              <span className="bb-timer-colon">:</span>
+              <span className="bb-timer-unit">{pad(timeLeft.minutes)}</span>
+              <span className="bb-timer-colon">:</span>
+              <span className="bb-timer-unit">{pad(timeLeft.seconds)}</span>
+            </div>
+          </div>
+          {/* Divider */}
+          <div className="bb-divider" />
+          {/* Book Now text link */}
+          <span className="bb-book-now" onClick={scrollToPricing}>
+            BOOK NOW <ArrowRight size={16} />
+          </span>
+        </div>
+      </div>
+    </>
+  );
+};
+
 export default function AvaniEnterprises() {
   const navigate = useNavigate();
   const [scrolled, setScrolled] = useState(false);
@@ -796,18 +915,6 @@ export default function AvaniEnterprises() {
           .footer-top { grid-template-columns: 1fr !important; gap: 30px !important; }
           .footer-grid { grid-template-columns: 1fr !important; gap: 20px !important; }
 
-          /* ── Floating FAB Mobile ── */
-          .mobile-fab {
-            bottom: 20px !important;
-            right: 50% !important;
-            transform: translateX(50%) !important;
-          }
-          .mobile-fab button {
-            padding: 14px 28px !important;
-            font-size: 12px !important;
-            border-radius: 50px !important;
-            box-shadow: 0 8px 30px rgba(212,160,23,0.5) !important;
-          }
 
           /* ── Modal Full Screen Mobile ── */
           div[style*="position: fixed"][style*="zIndex: 9999"] > div {
@@ -1937,26 +2044,8 @@ export default function AvaniEnterprises() {
         </div>
       )}
 
-      <div className="mobile-fab" style={{ position: "fixed", bottom: "30px", right: "30px", zIndex: 9000 }}>
-        <button onClick={() => scrollToPricing()} className="cta-btn" style={{ 
-          boxShadow: "0 10px 40px rgba(212,160,23,0.5), 0 0 20px rgba(212,160,23,0.15)", 
-          padding: "18px 32px", 
-          borderRadius: "4px", 
-          display: "flex", 
-          alignItems: "center", 
-          gap: "12px", 
-          fontSize: "14px", 
-          fontWeight: "800",
-          letterSpacing: "1.5px", 
-          animation: "fadeUp 0.8s ease forwards", 
-          animationDelay: "1s", 
-          opacity: 0,
-          border: "none"
-        }}>
-          <Zap size={18} fill="currentColor" />
-          BOOK NOW
-        </button>
-      </div>
+      {/* ── FIXED BOTTOM BAR ── */}
+      <FixedBottomBar scrollToPricing={scrollToPricing} />
 
     </div>
   );
