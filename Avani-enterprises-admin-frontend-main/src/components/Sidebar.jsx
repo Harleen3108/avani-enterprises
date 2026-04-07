@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { LayoutDashboard, LogOut, Menu, X, User, MessageSquare, Briefcase, FileText, BarChart3, Rocket } from "lucide-react";
+import { LayoutDashboard, LogOut, Menu, X, User, MessageSquare, Briefcase, FileText, BarChart3, Rocket, Link as LinkIcon } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import clsx from "clsx";
 
@@ -87,6 +87,11 @@ const Sidebar = () => {
                             <NavItem to="/applications" icon={FileText} label="Applications" />
                         </div>
 
+                        <div className="mb-4">
+                            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-4">Links</p>
+                            <NavItem to="/links" icon={LinkIcon} label="Link Management" />
+                            <NavItem to="/link-analytics" icon={BarChart3} label="Link Analytics" />
+                        </div>
 
                     </nav>
 

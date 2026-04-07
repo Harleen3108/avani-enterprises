@@ -146,6 +146,7 @@ import OurProducts from "./pages/OurProducts";
 import Newsletters from "./pages/Newsletters";
 import NewsletterDetail from "./pages/NewsletterDetail";
 import GlobalPresence from "./pages/GlobalPresence";
+import Links from "./pages/Links";
 
 const queryClient = new QueryClient();
 
@@ -163,13 +164,13 @@ const AppLayout = () => {
 
   // Pages where Navbar should be hidden completely
   const pathForCheck = pathname.toLowerCase();
-  const hideNavbar = pathForCheck === "/thank-you" || pathForCheck === "/business-setup" || pathForCheck === "/businesssetup1";
+  const hideNavbar = pathForCheck === "/thank-you" || pathForCheck === "/business-setup" || pathForCheck === "/businesssetup1" || pathForCheck === "/links";
 
   // Pages where Navbar1 should be used instead of default Navbar
   const useNavbar1 = pathForCheck === "/web-dev" || pathForCheck === "/7-day-launch";
 
   // Pages where Footer should be hidden completely
-  const hideFooter = pathForCheck === "/thank-you";
+  const hideFooter = pathForCheck === "/thank-you" || pathForCheck === "/links";
 
   // Pages where Footer1 should be used instead of default Footer
   const useFooter1 = pathForCheck === "/web-dev" || pathForCheck === "/7-day-launch";
@@ -192,6 +193,7 @@ const AppLayout = () => {
           <Route path="/newsletters" element={<Newsletters />} />
           <Route path="/newsletters/:slug" element={<NewsletterDetail />} />
           <Route path="/global-presence" element={<GlobalPresence />} />
+          <Route path="/links" element={<Links />} />
           <Route path="/courses" element={<Courses />} />
           <Route path="/courses/:id" element={<CourseDetail />} />
           <Route path="/get-consultation" element={<GetConsultation />} />

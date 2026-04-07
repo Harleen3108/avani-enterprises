@@ -1990,6 +1990,10 @@ app.get(/.*/, async (req, res, next) => {
   }
 });
 
+// Link Management Routes
+const linkRoutes = require('./routes/links');
+app.use('/api/links', linkRoutes);
+
 // 2. Serve static files from the frontend build
 app.use(express.static(frontendPath));
 

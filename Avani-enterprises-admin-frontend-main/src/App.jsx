@@ -18,6 +18,8 @@ import BlogManagement from "./pages/BlogManagement";
 import NewsletterManagement from "./pages/NewsletterManagement";
 import SevenDayLaunch from "./pages/SevenDayLaunch";
 import GrowthPlanLeads from "./pages/GrowthPlanLeads";
+import LinkManagement from "./pages/LinkManagement";
+import LinkAnalytics from "./pages/LinkAnalytics";
 import AdminLayout from "./AdminLayout";
 import { Loader2 } from "lucide-react";
 
@@ -107,6 +109,8 @@ function App() {
             <Route path="jobs" element={<JobManagement />} />
             <Route path="applications" element={<ApplicationManagement />} />
             <Route path="job-analytics" element={<JobAnalytics />} />
+            <Route path="links" element={<LinkManagement />} />
+            <Route path="link-analytics" element={<LinkAnalytics />} />
           </Route>
 
           {/* Job Management Routes */}
