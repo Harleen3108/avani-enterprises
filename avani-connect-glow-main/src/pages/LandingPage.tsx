@@ -166,15 +166,20 @@ const FixedBottomBar = ({ scrollToPricing }: { scrollToPricing: () => void }) =>
           transform: translateY(100%);
         }
         @keyframes bottomBarSlideUp { to { transform: translateY(0); } }
+        @keyframes shakeOffer {
+          0%, 100% { transform: translateX(0); }
+          10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
+          20%, 40%, 60%, 80% { transform: translateX(2px); }
+        }
         .bottom-bar-inner {
           max-width: 1400px; margin: 0 auto;
           display: flex; align-items: center; justify-content: space-between;
-          gap: 24px; height: 64px;
+          gap: 20px; height: 64px;
         }
         .bb-hook { display: flex; align-items: center; gap: 8px; white-space: nowrap; }
-        .bb-hook-label { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.7); letter-spacing: 0.3px; }
         .bb-price-old { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.3); text-decoration: line-through; }
         .bb-price-new { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 20px; font-weight: 800; color: #4ADE80; letter-spacing: -0.5px; }
+        .bb-discount { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; font-weight: 800; color: #DC2626; background: rgba(220, 38, 38, 0.1); padding: 2px 6px; border-radius: 4px; letter-spacing: 0.5px; }
         .bb-divider { width: 1px; height: 30px; background: rgba(255,255,255,0.1); flex-shrink: 0; }
         .bb-timer-wrap { display: flex; align-items: center; gap: 10px; white-space: nowrap; }
         .bb-timer-label { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 1.5px; color: rgba(255,255,255,0.4); text-transform: uppercase; }
@@ -182,46 +187,56 @@ const FixedBottomBar = ({ scrollToPricing }: { scrollToPricing: () => void }) =>
         .bb-timer-unit { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; font-weight: 800; color: #ffffff; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); padding: 4px 8px; border-radius: 6px; letter-spacing: 1px; min-width: 32px; text-align: center; }
         .bb-timer-colon { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; font-weight: 800; color: rgba(255,255,255,0.25); }
         .bb-book-now {
-          font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; font-weight: 800;
-          letter-spacing: 1.5px; text-transform: uppercase; border: none; cursor: pointer;
-          background: none; white-space: nowrap; color: #ffffff;
+          font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; font-weight: 800;
+          letter-spacing: 1px; text-transform: uppercase; border: none; cursor: pointer;
+          background: #D4A017; color: #1A1A2E;
           display: flex; align-items: center; gap: 8px;
-          transition: all 0.3s ease; padding: 8px 0;
-          border-bottom: 2px solid transparent;
+          transition: all 0.3s ease; padding: 10px 20px;
+          border-radius: 6px; white-space: nowrap;
+          animation: shakeOffer 4s cubic-bezier(.36,.07,.19,.97) infinite;
+          transform-origin: center;
+          box-shadow: 0 4px 15px rgba(212,160,23,0.3);
         }
-        .bb-book-now:hover { color: #4ADE80; border-bottom-color: #4ADE80; }
+        .bb-book-now:hover { background: #E8B830; box-shadow: 0 6px 20px rgba(212,160,23,0.5); animation-play-state: paused; }
 
+        @media (max-width: 900px) {
+          .bottom-bar-inner { padding: 8px 0; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; flex-wrap: nowrap; }
+          .bottom-bar-inner::-webkit-scrollbar { display: none; }
+        }
         @media (max-width: 768px) {
           .bottom-bar { padding: 0 3%; }
-          .bottom-bar-inner { height: auto; padding: 12px 0; flex-wrap: wrap; justify-content: center; gap: 10px; }
+          .bottom-bar-inner { height: auto; padding: 12px 0; justify-content: space-between; gap: 6px; flex-wrap: nowrap; }
           .bb-hook { gap: 6px; }
-          .bb-hook-label { font-size: 12px; }
           .bb-price-old { font-size: 12px; }
           .bb-price-new { font-size: 16px; }
-          .bb-divider { height: 22px; }
+          .bb-discount { font-size: 11px; padding: 2px 4px; }
+          .bb-divider { height: 22px; margin: 0 4px; }
           .bb-timer-wrap { gap: 6px; }
           .bb-timer-label { font-size: 9px; letter-spacing: 1px; }
-          .bb-timer-unit { font-size: 13px; padding: 3px 6px; min-width: 26px; }
+          .bb-timer-unit { font-size: 13px; padding: 3px 4px; min-width: 24px; }
           .bb-timer-colon { font-size: 13px; }
-          .bb-book-now { font-size: 12px; letter-spacing: 1px; }
+          .bb-book-now { font-size: 11px; padding: 8px 12px; gap: 4px; }
         }
-        @media (max-width: 420px) {
-          .bottom-bar-inner { gap: 8px; }
-          .bb-hook-label { font-size: 11px; }
+        @media (max-width: 480px) {
+          .bottom-bar-inner { gap: 4px; justify-content: center; }
           .bb-price-old { font-size: 11px; }
-          .bb-price-new { font-size: 15px; }
+          .bb-price-new { font-size: 14px; }
+          .bb-discount { font-size: 10px; padding: 2px 4px; }
           .bb-timer-label { display: none; }
-          .bb-timer-unit { font-size: 12px; padding: 2px 5px; min-width: 24px; }
-          .bb-book-now { font-size: 11px; gap: 5px; }
+          .bb-timer-unit { font-size: 11px; padding: 2px 4px; min-width: 20px; }
+          .bb-book-now { font-size: 10px; padding: 6px 8px; gap: 2px; }
+          .bb-hook { gap: 4px; }
+          .bb-timer-wrap { gap: 3px; }
+          .bb-divider { margin: 0 2px; }
         }
       `}</style>
       <div className="bottom-bar">
         <div className="bottom-bar-inner">
           {/* Hook */}
           <div className="bb-hook">
-            <span className="bb-hook-label">Consultation starts from</span>
-            <span className="bb-price-old">₹800</span>
+            <span className="bb-price-old">₹2000</span>
             <span className="bb-price-new">₹149</span>
+            <span className="bb-discount">92% OFF</span>
           </div>
           {/* Divider */}
           <div className="bb-divider" />
@@ -239,9 +254,9 @@ const FixedBottomBar = ({ scrollToPricing }: { scrollToPricing: () => void }) =>
           {/* Divider */}
           <div className="bb-divider" />
           {/* Book Now text link */}
-          <span className="bb-book-now" onClick={scrollToPricing}>
-            BOOK NOW <ArrowRight size={16} />
-          </span>
+          <button className="bb-book-now" onClick={scrollToPricing}>
+            BOOK NOW <ArrowRight size={14} />
+          </button>
         </div>
       </div>
     </>
