@@ -306,7 +306,7 @@ export default function AvaniEnterprises1() {
     if (section) {
       const topY = section.getBoundingClientRect().top + window.scrollY;
       if (window.innerWidth <= 768) {
-        window.scrollTo({ top: topY + 280, behavior: 'smooth' });
+        window.scrollTo({ top: topY + 300, behavior: 'smooth' });
       } else {
         window.scrollTo({ top: topY + 100, behavior: 'smooth' });
       }
@@ -1511,7 +1511,7 @@ export default function AvaniEnterprises1() {
 
           {/* Bottom note */}
           <p style={{ textAlign: "center", marginTop: "40px", color: C.muted, fontSize: "12px", letterSpacing: "0.5px", fontWeight: 400 }}>
-            All plans include GST. Secure payment via Razorpay. Instant confirmation.
+            All plans include GST. Secure payment via Razorpay and instant confirmation of slot booking.
           </p>
         </div>
       </section>
