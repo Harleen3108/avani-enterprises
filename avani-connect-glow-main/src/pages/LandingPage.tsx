@@ -303,7 +303,7 @@ export default function AvaniEnterprises() {
     if (section) {
       const topY = section.getBoundingClientRect().top + window.scrollY;
       if (window.innerWidth <= 768) {
-        window.scrollTo({ top: topY + 240, behavior: 'smooth' });
+        window.scrollTo({ top: topY + 280, behavior: 'smooth' });
       } else {
         window.scrollTo({ top: topY + 100, behavior: 'smooth' });
       }
