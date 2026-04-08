@@ -103,6 +103,8 @@ const corsOptions = {
       'https://avani-enterprises-bcjw.vercel.app',
       'https://avani-enterprises-psi.vercel.app',
       'https://avani-enterprises.vercel.app',
+      'https://www.avanienterprises.in',
+      'https://avanienterprises.in',
     ];
 
     if (allowedOrigins.includes(origin) || (origin && origin.endsWith('.vercel.app'))) {

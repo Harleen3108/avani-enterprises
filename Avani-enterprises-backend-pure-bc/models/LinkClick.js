@@ -31,8 +31,22 @@ const linkClickSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+    clickDate: {
+      type: String,
+      default: () => new Date().toISOString().split('T')[0], // YYYY-MM-DD format
+      index: true,
+    },
+    platform: {
+      type: String,
+      default: "link",
+      enum: ["link", "social"],
+    },
   },
   { timestamps: true }
 );
+
+// Create compound index for efficient day-wise analytics queries
+linkClickSchema.index({ clickDate: 1, linkTitle: 1 });
+linkClickSchema.index({ clickDate: 1 });
 
 module.exports = mongoose.model("LinkClick", linkClickSchema);

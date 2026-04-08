@@ -19,6 +19,7 @@ import { useAuth } from "../context/AuthContext";
 const LinkAnalytics = () => {
   const [clicks, setClicks] = useState([]);
   const [links, setLinks] = useState([]);
+  const [dayWiseData, setDayWiseData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [selectedLink, setSelectedLink] = useState("all");
@@ -35,14 +36,18 @@ const LinkAnalytics = () => {
   const fetchData = async () => {
     try {
       setRefreshing(true);
-      const [clicksRes, linksRes] = await Promise.all([
+      const [clicksRes, linksRes, dayWiseRes] = await Promise.all([
         axios.get(`${import.meta.env.VITE_API_URL}/api/links/clicks/all`, {
           headers: { Authorization: `Bearer ${token}` },
         }),
         axios.get(`${import.meta.env.VITE_API_URL}/api/links`),
+        axios.get(`${import.meta.env.VITE_API_URL}/api/links/analytics/summary/daily`, {
+          headers: { Authorization: `Bearer ${token}` },
+        }).catch(() => ({ data: [] })),
       ]);
       setClicks(clicksRes.data);
       setLinks(linksRes.data);
+      setDayWiseData(dayWiseRes.data);
       setLoading(false);
       setRefreshing(false);
     } catch (err) {
@@ -384,6 +389,94 @@ const LinkAnalytics = () => {
                 <p className="text-gray-500 text-sm">No data available</p>
               )}
             </div>
+          </div>
+
+          {/* 📊 Day-wise Analytics */}
+          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-6">
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center gap-3">
+                <Calendar className="w-5 h-5 text-orange-500" />
+                <h3 className="text-lg font-semibold text-gray-900">Day-Wise Performance</h3>
+              </div>
+              <span className="text-sm text-gray-600 font-medium">Last 30 Days</span>
+            </div>
+            {dayWiseData.length > 0 ? (
+              <div className="overflow-x-auto scrollbar-hide">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="bg-gray-50 border-b border-gray-100">
+                      <th className="px-4 py-3 text-left font-semibold text-gray-900">Date</th>
+                      <th className="px-4 py-3 text-right font-semibold text-gray-900">
+                        <div className="flex items-center justify-end gap-1">
+                          <MousePointerClick className="w-4 h-4" />
+                          Clicks
+                        </div>
+                      </th>
+                      <th className="px-4 py-3 text-right font-semibold text-gray-900">
+                        <div className="flex items-center justify-end gap-1">
+                          <TrendingUp className="w-4 h-4" />
+                          Users
+                        </div>
+                      </th>
+                      <th className="px-4 py-3 text-right font-semibold text-gray-900">Links</th>
+                      <th className="px-4 py-3 text-center font-semibold text-gray-900">Trend</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-100">
+                    {dayWiseData.map((day, idx) => {
+                      const nextDay = dayWiseData[idx + 1];
+                      const trend = nextDay ? nextDay.clicks - day.clicks : 0;
+                      const trendPercent = day.clicks > 0 ? ((trend / day.clicks) * 100).toFixed(0) : 0;
+                      const isUp = trend > 0;
+                      
+                      return (
+                        <tr key={day.date} className="hover:bg-gray-50 transition">
+                          <td className="px-4 py-3 text-gray-900 font-medium">
+                            {new Date(day.date).toLocaleDateString('en-US', { 
+                              weekday: 'short', 
+                              month: 'short', 
+                              day: 'numeric',
+                              year: '2-digit'
+                            })}
+                          </td>
+                          <td className="px-4 py-3 text-right">
+                            <span className="inline-block bg-blue-50 text-blue-700 px-3 py-1 rounded-full font-semibold">
+                              {day.clicks}
+                            </span>
+                          </td>
+                          <td className="px-4 py-3 text-right">
+                            <span className="inline-block bg-green-50 text-green-700 px-3 py-1 rounded-full font-semibold">
+                              {day.uniqueUsers}
+                            </span>
+                          </td>
+                          <td className="px-4 py-3 text-right text-gray-700 font-medium">
+                            {day.totalLinks}
+                          </td>
+                          <td className="px-4 py-3 text-center">
+                            {idx < dayWiseData.length - 1 && (
+                              <span className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-semibold ${
+                                isUp 
+                                  ? 'bg-green-50 text-green-700' 
+                                  : trend < 0
+                                  ? 'bg-red-50 text-red-700'
+                                  : 'bg-gray-50 text-gray-700'
+                              }`}>
+                                {isUp ? '↑' : trend < 0 ? '↓' : '→'} {Math.abs(trendPercent)}%
+                              </span>
+                            )}
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            ) : (
+              <div className="p-8 text-center text-gray-500">
+                <Calendar className="w-12 h-12 mx-auto mb-3 opacity-30" />
+                <p>No day-wise data available</p>
+              </div>
+            )}
           </div>
 
           {/* Recent Clicks Table */}

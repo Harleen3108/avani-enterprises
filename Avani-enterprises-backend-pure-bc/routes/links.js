@@ -220,4 +220,160 @@ router.get("/:id/clicks", async (req, res) => {
   }
 });
 
+// 📊 Day-wise Analytics Endpoints
+
+// Get day-wise click analytics
+router.get("/analytics/day-wise", auth, async (req, res) => {
+  try {
+    const { startDate, endDate } = req.query;
+    const query = {};
+
+    if (startDate) query.clickDate = { $gte: startDate };
+    if (endDate) query.clickDate = { ...query.clickDate, $lte: endDate };
+
+    const analytics = await LinkClick.aggregate([
+      { $match: query },
+      {
+        $group: {
+          _id: "$clickDate",
+          totalClicks: { $sum: 1 },
+          uniqueUsers: { $addToSet: "$ipAddress" },
+          linkBreakdown: {
+            $push: {
+              title: "$linkTitle",
+              country: "$country",
+              platform: "$platform",
+            },
+          },
+        },
+      },
+      { $sort: { _id: 1 } },
+      {
+        $project: {
+          date: "$_id",
+          totalClicks: 1,
+          uniqueUsers: { $size: "$uniqueUsers" },
+          linkBreakdown: 1,
+          _id: 0,
+        },
+      },
+    ]);
+
+    res.json(analytics);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching day-wise analytics", error: error.message });
+  }
+});
+
+// Get day-wise analytics for specific link
+router.get("/analytics/link/:linkId/day-wise", auth, async (req, res) => {
+  try {
+    const { startDate, endDate } = req.query;
+    const query = { linkId: req.params.linkId };
+
+    if (startDate) query.clickDate = { $gte: startDate };
+    if (endDate) query.clickDate = { ...query.clickDate, $lte: endDate };
+
+    const analytics = await LinkClick.aggregate([
+      { $match: query },
+      {
+        $group: {
+          _id: "$clickDate",
+          clicks: { $sum: 1 },
+          uniqueUsers: { $addToSet: "$ipAddress" },
+          topCountries: {
+            $push: "$country",
+          },
+        },
+      },
+      { $sort: { _id: 1 } },
+      {
+        $project: {
+          date: "$_id",
+          clicks: 1,
+          uniqueUsers: { $size: "$uniqueUsers" },
+          topCountries: { $slice: ["$topCountries", 3] },
+          _id: 0,
+        },
+      },
+    ]);
+
+    res.json(analytics);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching link day-wise analytics", error: error.message });
+  }
+});
+
+// Get daily summary for dashboard
+router.get("/analytics/summary/daily", auth, async (req, res) => {
+  try {
+    const last30days = new Date();
+    last30days.setDate(last30days.getDate() - 30);
+    const startDate = last30days.toISOString().split("T")[0];
+
+    const dailySummary = await LinkClick.aggregate([
+      {
+        $match: {
+          clickDate: { $gte: startDate },
+        },
+      },
+      {
+        $group: {
+          _id: "$clickDate",
+          clicks: { $sum: 1 },
+          uniqueUsers: { $addToSet: "$ipAddress" },
+          links: { $addToSet: "$linkTitle" },
+        },
+      },
+      { $sort: { _id: 1 } },
+      {
+        $project: {
+          date: "$_id",
+          clicks: 1,
+          uniqueUsers: { $size: "$uniqueUsers" },
+          totalLinks: { $size: "$links" },
+          _id: 0,
+        },
+      },
+    ]);
+
+    res.json(dailySummary);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching daily summary", error: error.message });
+  }
+});
+
+// Get top performing links by day
+router.get("/analytics/top-links/by-day", auth, async (req, res) => {
+  try {
+    const { date } = req.query;
+    const query = date ? { clickDate: date } : {};
+
+    const topLinks = await LinkClick.aggregate([
+      { $match: query },
+      {
+        $group: {
+          _id: "$linkTitle",
+          clicks: { $sum: 1 },
+          uniqueUsers: { $addToSet: "$ipAddress" },
+        },
+      },
+      { $sort: { clicks: -1 } },
+      { $limit: 10 },
+      {
+        $project: {
+          title: "$_id",
+          clicks: 1,
+          uniqueUsers: { $size: "$uniqueUsers" },
+          _id: 0,
+        },
+      },
+    ]);
+
+    res.json(topLinks);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching top links", error: error.message });
+  }
+});
+
 module.exports = router;
