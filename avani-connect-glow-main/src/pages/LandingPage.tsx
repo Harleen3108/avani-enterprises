@@ -301,7 +301,12 @@ export default function AvaniEnterprises() {
   const scrollToPricing = () => {
     const section = document.getElementById("pricing");
     if (section) {
-      section.scrollIntoView({ behavior: "smooth", block: "start" });
+      const topY = section.getBoundingClientRect().top + window.scrollY;
+      if (window.innerWidth <= 768) {
+        window.scrollTo({ top: topY + 240, behavior: 'smooth' });
+      } else {
+        window.scrollTo({ top: topY + 100, behavior: 'smooth' });
+      }
     }
     setMenuOpen(false); // Close mobile menu if it's open
   };
@@ -465,8 +470,9 @@ export default function AvaniEnterprises() {
           .pricing-table-container .table-header-price { font-size: 10px !important; }
           .pricing-table-container .table-header-top1 { font-size: 8px !important; margin-bottom: 2px !important; }
           .pricing-table-container .table-header-top2 { font-size: 12px !important; }
-          .pricing-table-container .cta-btn span:first-child { font-size: 8px !important; }
-          .pricing-table-container .cta-btn span:last-child { font-size: 6px !important; }
+          .pricing-table-container .cta-btn .btn-book-now { font-size: 8px !important; font-weight: 600 !important; }
+          .pricing-table-container .cta-btn .btn-book { font-size: 11px !important; font-weight: 900 !important; }
+          .pricing-table-container .cta-btn .btn-slot { font-size: 6px !important; }
           .pricing-table-container table { min-width: 100% !important; }
           .pricing-table-container .col-feature { width: 28% !important; }
         }
@@ -1469,8 +1475,10 @@ export default function AvaniEnterprises() {
                           boxShadow: p.popular ? "0 4px 14px rgba(212,160,23,0.3)" : "none"
                         }}
                       >
-                        <span style={{ fontSize: "14px", fontWeight: 800, letterSpacing: "0.5px" }}>BOOK</span>
-                        <span style={{ fontSize: "11px", fontWeight: 600, opacity: 0.9 }}>Slot at ₹{p.book}</span>
+                        <span className="btn-book-now" style={{ fontSize: "14px", fontWeight: 800, letterSpacing: "0.5px" }}>
+                          <span className="btn-book">Book</span> Now
+                        </span>
+                        <span className="btn-slot" style={{ fontSize: "11px", fontWeight: 600, opacity: 0.9 }}>Slot at ₹{p.book}</span>
                       </button>
                     </td>
                   ))}

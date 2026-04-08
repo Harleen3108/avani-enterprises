@@ -304,9 +304,12 @@ export default function AvaniEnterprises1() {
   const scrollToPricing = () => {
     const section = document.getElementById("pricing");
     if (section) {
-      const y = section.getBoundingClientRect().top + window.scrollY;
-      const offset = window.innerWidth <= 768 ? 450 : 100;
-      window.scrollTo({ top: y + offset, behavior: 'smooth' });
+      const topY = section.getBoundingClientRect().top + window.scrollY;
+      if (window.innerWidth <= 768) {
+        window.scrollTo({ top: topY + 240, behavior: 'smooth' });
+      } else {
+        window.scrollTo({ top: topY + 100, behavior: 'smooth' });
+      }
     }
     setMenuOpen(false); // Close mobile menu if it's open
   };
@@ -470,23 +473,19 @@ export default function AvaniEnterprises1() {
 
         @media (max-width: 768px) {
           .pricing-table-desktop { border-radius: 12px; }
-          .pricing-table-container { overflow-x: auto !important; -webkit-overflow-scrolling: touch !important; position: relative; }
-          .pricing-table-container th, .pricing-table-container td { padding: 12px 10px !important; min-width: 140px !important; }
-          .pricing-table-container .table-feature-text { font-size: 12px !important; position: sticky; left: 0; z-index: 10; font-weight: 700 !important; box-shadow: 2px 0 8px rgba(0,0,0,0.05); min-width: 160px !important; }
-          .pricing-table-container .table-tick-cross { width: 22px !important; height: 22px !important; font-size: 12px !important; }
-          .pricing-table-container .table-val-text { font-size: 12px !important; }
-          .pricing-table-container .table-header-name { font-size: 11px !important; letter-spacing: 1.5px !important; }
-          .pricing-table-container .table-header-price { font-size: 14px !important; }
-          .pricing-table-container .table-header-top1 { font-size: 10px !important; margin-bottom: 4px !important; }
-          .pricing-table-container .table-header-top2 { font-size: 16px !important; }
-          .pricing-table-container .cta-btn span:first-child { font-size: 20px !important; font-weight: 900 !important; }
-          .pricing-table-container .cta-btn span:last-child { font-size: 11px !important; }
-          .col-feature { width: auto !important; position: sticky; left: 0; z-index: 20 !important; box-shadow: 2px 0 8px rgba(0,0,0,0.05); }
-        }
-        .pricing-table-container::-webkit-scrollbar { height: 6px; }
-        .pricing-table-container::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 4px; }
-        @media (max-width: 768px) {
-          .pricing-table-container td:first-child, .pricing-table-container th:first-child { background: #fff !important; }
+          .pricing-table-container th, .pricing-table-container td { padding: 8px 4px !important; }
+          .pricing-table-container .table-feature-text { font-size: 8px !important; }
+          .pricing-table-container .table-tick-cross { width: 14px !important; height: 14px !important; font-size: 7px !important; }
+          .pricing-table-container .table-val-text { font-size: 8px !important; }
+          .pricing-table-container .table-header-name { font-size: 8px !important; letter-spacing: 1px !important; }
+          .pricing-table-container .table-header-price { font-size: 10px !important; }
+          .pricing-table-container .table-header-top1 { font-size: 8px !important; margin-bottom: 2px !important; }
+          .pricing-table-container .table-header-top2 { font-size: 12px !important; }
+          .pricing-table-container .cta-btn .btn-book-now { font-size: 8px !important; font-weight: 600 !important; }
+          .pricing-table-container .cta-btn .btn-book { font-size: 11px !important; font-weight: 900 !important; }
+          .pricing-table-container .cta-btn .btn-slot { font-size: 6px !important; }
+          .pricing-table-container table { min-width: 100% !important; }
+          .pricing-table-container .col-feature { width: 28% !important; }
         }
 
         /* ── HERO ENHANCEMENT ELEMENTS ── */
@@ -1496,8 +1495,10 @@ export default function AvaniEnterprises1() {
                           boxShadow: p.popular ? "0 4px 14px rgba(212,160,23,0.3)" : "none"
                         }}
                       >
-                        <span style={{ fontSize: "20px", fontWeight: 900, letterSpacing: "1px", textTransform: "uppercase" }}>BOOK NOW</span>
-                        <span style={{ fontSize: "11px", fontWeight: 600, opacity: 0.9 }}>Slot at ₹{p.book}</span>
+                        <span className="btn-book-now" style={{ fontSize: "14px", fontWeight: 800, letterSpacing: "0.5px" }}>
+                          <span className="btn-book">Book</span> Now
+                        </span>
+                        <span className="btn-slot" style={{ fontSize: "11px", fontWeight: 600, opacity: 0.9 }}>Slot at ₹{p.book}</span>
                       </button>
                     </td>
                   ))}
