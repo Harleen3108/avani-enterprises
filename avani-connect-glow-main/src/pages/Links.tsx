@@ -259,7 +259,7 @@ export default function Links() {
         /* ══ ROOT ══ */
         .blo-root {
           min-height: 100vh;
-          background: linear-gradient(155deg, #fef9f3 0%, #fffbf8 45%, #fff0e6 100%);
+          background: linear-gradient(155deg, #fffafa 0%, #fffcfb 45%, #fff5f0 100%);
           font-family: 'Plus Jakarta Sans', sans-serif;
           color: #111827;
           position: relative;
@@ -384,7 +384,7 @@ export default function Links() {
 
         /* ══ BASE CARD ══ */
         .blo-bento-card {
-          background: rgba(255, 255, 255, 0.92);
+          background: rgba(255, 255, 255, 0.82);
           backdrop-filter: blur(12px);
           -webkit-backdrop-filter: blur(12px);
           border-radius: 20px;
@@ -401,7 +401,7 @@ export default function Links() {
           transition: all 0.32s cubic-bezier(0.4, 0, 0.2, 1);
         }
         @media (min-width: 560px) {
-          .blo-bento-card { padding: 22px; border-radius: 24px; }
+          .blo-bento-card { padding: 22px; border-radius: 24px; background: rgba(255, 255, 255, 0.92); }
         }
         .blo-bento-card:hover {
           border-color: rgba(217, 127, 94, 0.22);
@@ -418,7 +418,7 @@ export default function Links() {
           text-align: center;
           cursor: default;
           padding: 18px 16px;
-          background: linear-gradient(145deg, rgba(255,255,255,0.98) 0%, rgba(255,250,245,0.92) 100%);
+          background: linear-gradient(145deg, rgba(255,255,255,0.85) 0%, rgba(255,250,245,0.80) 100%);
           border: 1.5px solid rgba(217, 127, 94, 0.15);
           box-shadow:
             0 8px 40px rgba(217, 127, 94, 0.08),
@@ -426,7 +426,7 @@ export default function Links() {
             inset 0 1px 0 rgba(255,255,255,1);
         }
         @media (min-width: 560px) {
-          .blo-card-profile { flex-direction: row; text-align: left; align-items: center; gap: 24px; padding: 30px 28px; }
+          .blo-card-profile { flex-direction: row; text-align: left; align-items: center; gap: 24px; padding: 30px 28px; background: linear-gradient(145deg, rgba(255,255,255,0.96) 0%, rgba(255,250,245,0.92) 100%); }
         }
 
         .blo-profile-avatar {
@@ -625,10 +625,20 @@ export default function Links() {
         }
 
         .blo-socials-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
+          display: flex;
           gap: 9px;
           flex: 1;
+          overflow-x: auto;
+          scroll-behavior: smooth;
+          padding-bottom: 6px;
+          -webkit-overflow-scrolling: touch;
+        }
+        @media (min-width: 560px) {
+          .blo-socials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            overflow-x: visible;
+          }
         }
 
         .blo-social-btn {
@@ -642,6 +652,14 @@ export default function Links() {
           transition: all 0.25s cubic-bezier(0.4,0,0.2,1);
           outline: none;
           box-shadow: 0 2px 8px rgba(217, 127, 94, 0.08);
+          min-width: 60px;
+          flex-shrink: 0;
+        }
+        @media (min-width: 560px) {
+          .blo-social-btn {
+            min-width: auto;
+            flex-shrink: 1;
+          }
         }
         .blo-social-btn:hover {
           background: var(--btn-color);
