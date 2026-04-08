@@ -302,11 +302,14 @@ export default function AvaniEnterprises1() {
   };
 
   const scrollToPricing = () => {
-    const section = document.getElementById("pricing");
+    const isMobile = window.innerWidth <= 768;
+    const targetId = isMobile ? "pricing-table-wrapper" : "pricing";
+    const section = document.getElementById(targetId);
     if (section) {
       const topY = section.getBoundingClientRect().top + window.scrollY;
-      if (window.innerWidth <= 768) {
-        window.scrollTo({ top: topY + 300, behavior: 'smooth' });
+      if (isMobile) {
+        // Scroll exactly to the table container, offsetting to leave breathing room below navbar
+        window.scrollTo({ top: topY - 100, behavior: 'smooth' });
       } else {
         window.scrollTo({ top: topY + 100, behavior: 'smooth' });
       }
@@ -1361,7 +1364,7 @@ export default function AvaniEnterprises1() {
               <h2 className="display-font" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "clamp(2rem, 5vw, 3rem)", fontWeight: 800, letterSpacing: "2px", color: C.accent, margin: 0 }}>CHOOSE YOUR PLAN</h2>
               <div style={{ width: "40px", height: "1px", background: `linear-gradient(90deg, ${C.accent}, transparent)` }} />
             </div>
-            <p style={{ color: C.muted, fontSize: "14px", lineHeight: 1.6, maxWidth: "550px", margin: "0 auto", fontWeight: 300 }}>
+            <p id="pricing-desc" style={{ color: C.muted, fontSize: "14px", lineHeight: 1.6, maxWidth: "550px", margin: "0 auto", fontWeight: 300 }}>
               Simple, fair consultation plans. Pick what suits your business scale — upgrade anytime.
             </p>
           </div>
@@ -1369,7 +1372,7 @@ export default function AvaniEnterprises1() {
           {/* Pricing Cards */}
           {/* Pricing Comparison Table */}
           {/* Pricing Comparison Table (Desktop) */}
-          <div className="pricing-table-desktop pricing-table-container" style={{
+          <div id="pricing-table-wrapper" className="pricing-table-desktop pricing-table-container" style={{
             overflowX: "auto",
             background: "#FFFFFF",
             borderRadius: "24px",
