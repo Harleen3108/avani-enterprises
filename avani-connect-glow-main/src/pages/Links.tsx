@@ -162,31 +162,19 @@ export default function Links() {
               <div className="link-card link-resources">
                 <h3>RESOURCES <Download size={16} /></h3>
                 <div className="link-resources-list">
-                  {resources.map((res, idx) => (
-                    <motion.div
+                  {resources.map((res) => (
+                    <a
                       key={res._id}
                       className="link-resource-item"
-                      initial={false}
-                      animate={{ height: expandedResource === res._id ? 'auto' : '56px' }}
-                      transition={{ duration: 0.3 }}
+                      href={res.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => trackAndOpen('link', res._id, res.url)}
                     >
-                      <button
-                        className="link-resource-header"
-                        onClick={() => setExpandedResource(expandedResource === res._id ? null : res._id)}
-                      >
-                        <FileText size={18} />
-                        <div className="link-resource-title">{res.title}</div>
-                        <ChevronRight size={18} className={expandedResource === res._id ? 'rotated' : ''} />
-                      </button>
-                      {expandedResource === res._id && (
-                        <motion.div className="link-resource-content" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-                          <p>{res.description}</p>
-                          <button className="link-resource-download" onClick={() => trackAndOpen('link', res._id, res.url)}>
-                            DOWNLOAD
-                          </button>
-                        </motion.div>
-                      )}
-                    </motion.div>
+                      <FileText size={18} />
+                      <span className="link-resource-title">{res.title}</span>
+                      <ArrowRight size={16} />
+                    </a>
                   ))}
                 </div>
               </div>
@@ -576,30 +564,25 @@ export default function Links() {
         }
 
         .link-resource-item {
-          border: 1px solid rgba(212, 160, 23, 0.2);
-          border-radius: 10px;
-          overflow: hidden;
-          transition: all 0.3s ease;
-        }
-
-        .link-resource-header {
           display: flex;
           align-items: center;
           gap: 10px;
-          width: 100%;
+          border: 1px solid rgba(212, 160, 23, 0.2);
+          border-radius: 10px;
+          padding: 12px 14px;
           background: rgba(212, 160, 23, 0.05);
-          border: none;
-          padding: 10px 14px;
-          cursor: pointer;
+          text-decoration: none;
           color: #D4A017;
-          font-family: inherit;
-          font-weight: 600;
-          font-size: 12px;
+          cursor: pointer;
           transition: all 0.3s ease;
+          font-size: 12px;
+          font-weight: 600;
         }
 
-        .link-resource-header:hover {
-          background: rgba(212, 160, 23, 0.1);
+        .link-resource-item:hover {
+          background: rgba(212, 160, 23, 0.12);
+          border-color: rgba(212, 160, 23, 0.4);
+          transform: translateX(4px);
         }
 
         .link-resource-title {
@@ -608,43 +591,8 @@ export default function Links() {
           color: #f8f9fa;
         }
 
-        .link-resource-header svg {
-          transition: transform 0.3s ease;
-        }
-
-        .link-resource-header svg.rotated {
-          transform: rotate(90deg);
-        }
-
-        .link-resource-content {
-          padding: 12px 14px;
-          border-top: 1px solid rgba(212, 160, 23, 0.2);
-          background: rgba(0, 0, 0, 0.3);
-        }
-
-        .link-resource-content p {
-          font-size: 12px;
-          color: #a0a0a0;
-          margin-bottom: 8px;
-        }
-
-        .link-resource-download {
-          background: transparent;
-          border: 1px solid rgba(212, 160, 23, 0.4);
-          color: #D4A017;
-          padding: 6px 12px;
-          border-radius: 6px;
-          font-size: 10px;
-          font-weight: 700;
-          letter-spacing: 0.5px;
-          cursor: pointer;
-          transition: all 0.3s ease;
-          font-family: inherit;
-        }
-
-        .link-resource-download:hover {
-          background: rgba(212, 160, 23, 0.1);
-          border-color: #D4A017;
+        .link-resource-item svg {
+          flex-shrink: 0;
         }
 
         /* ── Quote ── */
