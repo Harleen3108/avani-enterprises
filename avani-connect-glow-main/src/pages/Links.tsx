@@ -228,14 +228,13 @@ export default function Links() {
           className="space-y-8 lg:space-y-12"
         >
           {/* ────── DESKTOP HERO SECTION ────── */}
-          <section className="hidden lg:flex justify-between items-end">
-            <motion.div className="max-w-2xl" variants={itemVariants}>
+          <section className="hidden lg:flex justify-between items-center">
+            <motion.div className="max-w-4xl" variants={itemVariants}>
                <div className="mb-6 flex items-center">
                   <ThemeToggle />
                </div>
-              <h1 className="text-6xl xl:text-7xl font-black text-slate-900 dark:text-white tracking-tighter leading-[0.9] mb-6">
-                Digital <span className="text-amber-500">Elegance</span><br />
-                Crafted.
+              <h1 className="text-5xl xl:text-7xl font-black text-slate-900 dark:text-white tracking-tighter leading-tight mb-6 transition-all duration-300">
+                Digital <span className="text-amber-500">Elegance</span> Crafted.
               </h1>
               <p className="text-lg text-slate-500 dark:text-slate-400 font-medium max-w-lg mb-8">
                 Avani Enterprises: Architecting digital curate experiences for high-end global brands.
@@ -298,10 +297,42 @@ export default function Links() {
           {/* ────── MAIN GRID CONTENT ────── */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
             
-            {/* 1. Dynamic Links Card (Primary Rows) - order-1 */}
+            {/* 1. Connect Card - Now order-1 */}
             <motion.div 
               variants={itemVariants}
-              className="lg:col-span-12 order-1 lg:order-1 bg-white dark:bg-slate-900 rounded-3xl p-6 lg:p-8 border border-slate-100 dark:border-slate-800 shadow-sm"
+              className="lg:col-span-12 order-1 lg:order-1 bg-gradient-to-br from-white dark:from-slate-900 via-[#FFFDF5] dark:via-slate-900/50 to-[#FFF9E5] dark:to-slate-900 rounded-3xl p-6 lg:p-8 border border-[#F5E6BD]/30 dark:border-slate-800 shadow-sm transition-all"
+            >
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
+                <div>
+                  <h3 className="text-[10px] font-black text-slate-400 tracking-widest uppercase mb-4">CONNECT WITH US</h3>
+                  <div className="flex flex-wrap gap-4">
+                     {socialLinks.map((social) => (
+                       <a 
+                        key={social.label}
+                        href={social.url}
+                        className="p-4 bg-white dark:bg-slate-950 border border-slate-100 dark:border-slate-800 rounded-2xl hover:bg-amber-50 dark:hover:bg-amber-900/10 hover:border-amber-200 group transition-all"
+                       >
+                         <social.icon className="w-6 h-6 text-slate-900 dark:text-slate-100 group-hover:text-amber-500 group-hover:scale-110 transition-all" />
+                       </a>
+                     ))}
+                  </div>
+                </div>
+                <div className="w-full md:w-auto">
+                  <button 
+                    onClick={() => window.open('https://wa.me/919253625099', '_blank')}
+                    className="w-full md:px-10 py-5 bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 rounded-2xl text-xs font-black tracking-widest hover:bg-emerald-600 dark:hover:bg-emerald-500 hover:text-white transition-all flex items-center justify-center gap-3 uppercase shadow-lg shadow-emerald-500/10"
+                  >
+                    <MessageCircle className="w-5 h-5" />
+                    CHAT ON WHATSAPP
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* 2. Dynamic Links Card - order-2 */}
+            <motion.div 
+              variants={itemVariants}
+              className="lg:col-span-12 order-2 lg:order-2 bg-white dark:bg-slate-900 rounded-3xl p-6 lg:p-8 border border-slate-100 dark:border-slate-800 shadow-sm"
             >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {loading ? (
@@ -333,11 +364,11 @@ export default function Links() {
               </div>
             </motion.div>
 
-            {/* 2. Book Consultation Card (Mobile Only) - order-2 */}
+            {/* 3. Book Consultation Card (Mobile) - order-3 */}
             <motion.a
                 variants={itemVariants}
                 href="/get-consultation"
-                className="lg:hidden lg:col-span-12 order-2 bg-gradient-to-br from-amber-400 to-orange-500 p-[1px] rounded-2xl active:scale-95 transition-all mb-4 overflow-hidden group shadow-lg shadow-amber-500/10"
+                className="lg:hidden lg:col-span-12 order-3 bg-gradient-to-br from-amber-400 to-orange-500 p-[1px] rounded-2xl active:scale-95 transition-all mb-4 overflow-hidden group shadow-lg shadow-amber-500/10"
               >
                 <div className="bg-white/10 backdrop-blur-sm p-8 flex flex-col items-center text-white text-center">
                   <div className="mb-3 p-3 bg-white/20 rounded-xl">
@@ -349,10 +380,10 @@ export default function Links() {
                 <div className="absolute top-0 -inset-full h-full w-1/2 z-5 block transform -skew-x-12 bg-gradient-to-r from-transparent to-white/20 opacity-40 group-hover:animate-shine" />
             </motion.a>
 
-            {/* 3. Resources Card - order-3 */}
+            {/* 4. Resources Card - order-4 */}
             <motion.div 
               variants={itemVariants}
-              className="lg:col-span-8 order-3 lg:order-2 bg-white dark:bg-slate-900 rounded-3xl p-8 lg:p-10 border border-slate-100 dark:border-slate-800 shadow-sm h-full"
+              className="lg:col-span-8 order-4 lg:order-3 bg-white dark:bg-slate-900 rounded-3xl p-8 lg:p-10 border border-slate-100 dark:border-slate-800 shadow-sm h-full"
             >
               <div className="flex justify-between items-center mb-8">
                  <h3 className="text-xs font-black text-slate-400 tracking-widest uppercase flex items-center gap-2">
