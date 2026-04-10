@@ -234,18 +234,22 @@ const AppLayout = () => {
   );
 };
 
+import { ThemeProvider } from "./components/theme-provider";
+
 const App = () => {
   return (
     <HelmetProvider>
       <QueryClientProvider client={queryClient}>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <Router>
-            <ScrollToTop />
-            <AppLayout />
-          </Router>
-        </TooltipProvider>
+        <ThemeProvider defaultTheme="light" storageKey="avani-theme" attribute="class">
+          <TooltipProvider>
+            <Toaster />
+            <Sonner />
+            <Router>
+              <ScrollToTop />
+              <AppLayout />
+            </Router>
+          </TooltipProvider>
+        </ThemeProvider>
       </QueryClientProvider>
     </HelmetProvider>
   );
