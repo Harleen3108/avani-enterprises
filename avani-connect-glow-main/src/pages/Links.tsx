@@ -391,11 +391,11 @@ export default function Links() {
                  </h3>
               </div>
               <div className="space-y-4">
-                {defaultResources.map((res, index) => (
+                {defaultResources.map((res) => (
                   <a 
                     key={res.id} 
                     href={res.url} 
-                    className={`${index < 2 ? 'hidden lg:flex' : 'flex'} items-center justify-between p-5 bg-slate-50 dark:bg-slate-950 border border-slate-100 dark:border-slate-800 rounded-2xl hover:border-amber-200 hover:bg-amber-50 dark:hover:bg-amber-900/10 group transition-all`}
+                    className="flex items-center justify-between p-5 bg-slate-50 dark:bg-slate-950 border border-slate-100 dark:border-slate-800 rounded-2xl hover:border-amber-200 hover:bg-amber-50 dark:hover:bg-amber-900/10 group transition-all"
                   >
                     <div className="flex items-center gap-4 text-slate-900 dark:text-slate-100">
                       <FileText className="w-6 h-6 text-amber-500" />
