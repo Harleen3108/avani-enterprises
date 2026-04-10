@@ -10,7 +10,13 @@ import axios from 'axios';
 import { API_BASE_URL } from '../utils/api';
 import { Link as RouterLink } from 'react-router-dom';
 
-/* ─── Interfaces ─── */
+/* ─── Types and Interfaces ─── */
+declare global {
+  interface Window {
+    instgrm: any;
+  }
+}
+
 interface LinkData {
   _id: string;
   title: string;
@@ -20,6 +26,20 @@ interface LinkData {
   isActive: boolean;
 }
 
+/* ─── Animation Variants ─── */
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1, delayChildren: 0.1 }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
+};
+
 /* ─── Default Data ─── */
 const defaultLinks: LinkData[] = [
   { _id: 'def-site', title: 'Visit Our Website', url: 'https://www.avanienterprises.in', description: '', icon: 'globe', isActive: true },
@@ -27,9 +47,9 @@ const defaultLinks: LinkData[] = [
 ];
 
 const defaultResources = [
-  { id: 'res-1', title: '2024 Agency Lookbook', subtitle: 'PDF • 12.4 MB', url: '/Avani Enterprises Services ( Website, SMM and Ads )  (3).pdf' },
-  { id: 'res-2', title: 'Brand Identity Framework', subtitle: 'WORKSHOP VIDEO', url: '/Avani services bundle (2).pdf' },
-  { id: 'res-3', title: 'Marketing ROI Calculator', subtitle: 'TOOL / SHEET', url: '#' },
+  { id: 'res-1', title: 'Avani Enterprises Services', subtitle: 'PDF • 12.4 MB', url: '/Avani Enterprises Services ( Website, SMM and Ads )  (3).pdf' },
+  { id: 'res-2', title: 'Avani Services Bundle', subtitle: 'WORKSHOP VIDEO', url: '/Avani services bundle (2).pdf' },
+  // { id: 'res-3', title: 'Marketing ROI Calculator', subtitle: 'TOOL / SHEET', url: '#' },
 ];
 
 const badges = ["MARKETING", "DEVELOPMENT", "BRANDING"];
@@ -67,7 +87,9 @@ const ReelsMarquee = () => {
       script.async = true;
       document.body.appendChild(script);
     } else {
-      window.instgrm.Embeds.process();
+      if (window.instgrm.Embeds) {
+        window.instgrm.Embeds.process();
+      }
     }
   }, []);
 
@@ -140,20 +162,6 @@ const ReviewsSection = () => {
   );
 }
 
-/* ─── Animation Variants ─── */
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1, delayChildren: 0.1 }
-  }
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
-};
-
 export default function Links() {
   const [links, setLinks] = useState<LinkData[]>([]);
   const [loading, setLoading] = useState(true);
@@ -219,12 +227,8 @@ export default function Links() {
 
           {/* ────── MOBILE HERO SECTION ────── */}
           <section className="lg:hidden flex flex-col items-center text-center pt-8">
-             <motion.div className="mb-6 relative" variants={itemVariants}>
-                <div className="w-24 h-24 p-1 bg-gradient-to-tr from-amber-400 to-orange-500 rounded-2xl shadow-lg shadow-amber-200">
-                   <img src="/logo0.jpg" alt="Logo" className="w-full h-full rounded-[14px] bg-white object-cover" />
-                </div>
-                <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-green-500 border-4 border-[#F8F9FA] rounded-full" />
-             </motion.div>
+             {/* Removed extra logo for mobile */}
+
              <motion.div variants={itemVariants}>
                 <h1 className="text-3xl font-black text-slate-900 tracking-tight mb-2">Avani Enterprises</h1>
                 <p className="text-[10px] font-black text-amber-600 tracking-[0.2em] uppercase mb-6">India's #1 Digital Marketing Agency</p>
@@ -256,26 +260,33 @@ export default function Links() {
           {/* ────── MAIN GRID CONTENT ────── */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
             
-            {/* Visit Website Card (Top Row Left) */}
+            {/* Resources Card (Top Row Left) */}
             <motion.div 
               variants={itemVariants}
-              className="lg:col-span-8 relative h-[300px] lg:h-[400px] rounded-3xl overflow-hidden group shadow-sm border border-slate-100"
+              className="lg:col-span-8 bg-white rounded-3xl p-8 lg:p-10 border border-slate-100 shadow-sm h-full"
             >
-              <img 
-                src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80" 
-                alt="Office" 
-                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent" />
-              
-              <div className="absolute inset-0 p-8 lg:p-12 flex flex-col justify-end text-white">
-                <h3 className="text-3xl lg:text-4xl font-black mb-2">Visit Website</h3>
-                <p className="text-sm lg:text-base font-medium text-white/80 max-w-md mb-8">
-                  Explore our full suite of premium digital solutions and high-end case studies.
-                </p>
-                <button onClick={() => window.open('https://www.avanienterprises.in', '_blank')} className="flex items-center gap-3 text-sm lg:text-base font-black tracking-widest hover:text-amber-400 transition-colors">
-                  LAUNCH EXPERIENCE <ArrowRight className="w-5 h-5" />
-                </button>
+              <div className="flex justify-between items-center mb-8">
+                 <h3 className="text-xs font-black text-slate-400 tracking-widest uppercase flex items-center gap-2">
+                   RESOURCES <Download className="w-4 h-4" />
+                 </h3>
+              </div>
+              <div className="space-y-4">
+                {defaultResources.map((res) => (
+                  <a 
+                    key={res.id} 
+                    href={res.url} 
+                    className="flex items-center justify-between p-5 bg-slate-50 border border-slate-100 rounded-2xl hover:border-amber-200 hover:bg-amber-50 group transition-all"
+                  >
+                    <div className="flex items-center gap-4 text-slate-900">
+                      <FileText className="w-6 h-6 text-amber-500" />
+                      <div>
+                        <h4 className="font-black text-sm">{res.title}</h4>
+                        <p className="text-[10px] font-bold text-slate-400 tracking-wider mt-0.5">{res.subtitle}</p>
+                      </div>
+                    </div>
+                    <ArrowRight className="w-4 h-4 text-slate-300 group-hover:text-amber-500 group-hover:translate-x-1 transition-all" />
+                  </a>
+                ))}
               </div>
             </motion.div>
 
@@ -310,50 +321,40 @@ export default function Links() {
               </div>
             </motion.div>
 
-            {/* Resources Card (Bottom Row Left) */}
-            <motion.div 
-              variants={itemVariants}
-              className="lg:col-span-8 bg-white rounded-3xl p-8 lg:p-10 border border-slate-100 shadow-sm h-full"
-            >
-              <div className="flex justify-between items-center mb-8">
-                 <h3 className="text-xs font-black text-slate-400 tracking-widest uppercase flex items-center gap-2">
-                   RESOURCES <Download className="w-4 h-4" />
-                 </h3>
-              </div>
-              <div className="space-y-4">
-                {defaultResources.map((res) => (
-                  <a 
-                    key={res.id} 
-                    href={res.url} 
-                    className="flex items-center justify-between p-5 bg-slate-50 border border-slate-100 rounded-2xl hover:border-amber-200 hover:bg-amber-50 group transition-all"
-                  >
-                    <div className="flex items-center gap-4 text-slate-900">
-                      <FileText className="w-6 h-6 text-amber-500" />
-                      <div>
-                        <h4 className="font-black text-sm">{res.title}</h4>
-                        <p className="text-[10px] font-bold text-slate-400 tracking-wider mt-0.5">{res.subtitle}</p>
-                      </div>
-                    </div>
-                    <ArrowRight className="w-4 h-4 text-slate-300 group-hover:text-amber-500 group-hover:translate-x-1 transition-all" />
-                  </a>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Quote Section (Bottom Row Right) */}
+            {/* Quote Section (Bottom Row Left/Right depending on col-span) */}
             <motion.div 
               variants={itemVariants}
               className="lg:col-span-4 relative bg-white rounded-3xl p-8 lg:p-10 border border-slate-100 shadow-sm h-full"
             >
               <div className="absolute left-0 top-10 bottom-10 w-1.5 bg-amber-500 rounded-r-full" />
               <div className="pl-6 pt-2">
-                 <div className="text-slate-300 mb-6">
-                    <Zap className="w-10 h-10 fill-current opacity-20" />
-                 </div>
                  <p className="text-xl lg:text-2xl font-medium text-slate-800 italic leading-relaxed mb-10 font-serif">
                   “Design is not just what it looks like and feels like. Design is how it works. We curate digital ecosystems that transcend utility to become legacy.”
                  </p>
                  <p className="text-[10px] font-black text-slate-900 tracking-widest uppercase">AVANI MANAGEMENT TEAM</p>
+              </div>
+            </motion.div>
+
+            {/* Visit Website Card (Bottom Row Right) */}
+            <motion.div 
+              variants={itemVariants}
+              className="lg:col-span-8 relative h-[300px] lg:h-[400px] rounded-3xl overflow-hidden group shadow-sm border border-slate-100"
+            >
+              <img 
+                src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80" 
+                alt="Office" 
+                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent" />
+              
+              <div className="absolute inset-0 p-8 lg:p-12 flex flex-col justify-end text-white">
+                <h3 className="text-3xl lg:text-4xl font-black mb-2">Visit Website</h3>
+                <p className="text-sm lg:text-base font-medium text-white/80 max-w-md mb-8">
+                  Explore our full suite of premium digital solutions and high-end case studies.
+                </p>
+                <button onClick={() => window.open('https://www.avanienterprises.in', '_blank')} className="flex items-center gap-3 text-sm lg:text-base font-black tracking-widest hover:text-amber-400 transition-colors">
+                  LAUNCH EXPERIENCE <ArrowRight className="w-5 h-5" />
+                </button>
               </div>
             </motion.div>
           </div>
