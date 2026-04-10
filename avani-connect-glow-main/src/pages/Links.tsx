@@ -41,6 +41,24 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
 };
 
+const getLinkIcon = (iconName: string) => {
+  switch (iconName.toLowerCase()) {
+    case 'globe': return <Globe className="w-5 h-5 text-amber-500" />;
+    case 'whatsapp': return <MessageCircle className="w-5 h-5 text-emerald-500" />;
+    case 'instagram': return <Instagram className="w-5 h-5 text-pink-500" />;
+    case 'linkedin': return <Linkedin className="w-5 h-5 text-blue-600" />;
+    case 'mail': return <Mail className="w-5 h-5 text-red-500" />;
+    case 'phone': return <Phone className="w-5 h-5 text-slate-400" />;
+    case 'facebook': return <ExternalLink className="w-5 h-5 text-blue-800" />;
+    case 'briefcase': return <Briefcase className="w-5 h-5 text-blue-500" />;
+    case 'layout': return <Layout className="w-5 h-5 text-indigo-500" />;
+    case 'zap': return <Zap className="w-5 h-5 text-amber-400" />;
+    case 'search': return <Search className="w-5 h-5 text-slate-400" />;
+    case 'download': return <Download className="w-5 h-5 text-slate-500" />;
+    default: return <ExternalLink className="w-5 h-5 text-slate-400" />;
+  }
+};
+
 /* ─── Default Data ─── */
 const defaultLinks: LinkData[] = [
   { _id: 'def-site', title: 'Visit Our Website', url: 'https://www.avanienterprises.in', description: '', icon: 'globe', isActive: true },
@@ -212,9 +230,8 @@ export default function Links() {
           {/* ────── DESKTOP HERO SECTION ────── */}
           <section className="hidden lg:flex justify-between items-end">
             <motion.div className="max-w-2xl" variants={itemVariants}>
-               <div className="mb-6 flex items-center gap-4">
+               <div className="mb-6 flex items-center">
                   <ThemeToggle />
-                  <span className="text-[10px] font-black text-slate-400 tracking-[0.3em] uppercase">LINK DIRECTORY</span>
                </div>
               <h1 className="text-6xl xl:text-7xl font-black text-slate-900 dark:text-white tracking-tighter leading-[0.9] mb-6">
                 Digital <span className="text-amber-500">Elegance</span><br />
@@ -240,7 +257,14 @@ export default function Links() {
                  BOOK A CONSULTATION
                </a>
                <div className="mt-4 text-right">
-                  <span className="text-[10px] font-black text-slate-400 tracking-widest uppercase cursor-pointer hover:text-amber-500 transition-colors">VIEW PORTFOLIO</span>
+                  <a 
+                    href="https://www.avanienterprises.in/our-products"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[10px] font-black text-slate-400 tracking-widest uppercase cursor-pointer hover:text-amber-500 transition-colors"
+                   >
+                     VIEW PORTFOLIO
+                   </a>
                </div>
             </motion.div>
           </section>
@@ -249,12 +273,17 @@ export default function Links() {
           <section className="lg:hidden flex flex-col items-center text-center pt-8">
              {/* Removed extra logo for mobile */}
 
-             <motion.div variants={itemVariants}>
-                <div className="mb-6 scale-90">
+             <div className="relative w-full flex justify-between items-center mb-6">
+                <div className="text-left">
+                  <h1 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">Avani Enterprises</h1>
+                  <p className="text-[9px] font-black text-amber-600 tracking-wider uppercase">Link Directory</p>
+                </div>
+                <div className="scale-90">
                    <ThemeToggle />
                 </div>
-                <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight mb-2">Avani Enterprises</h1>
-                <p className="text-[10px] font-black text-amber-600 tracking-[0.2em] uppercase mb-6">India's #1 Digital Marketing Agency</p>
+             </div>
+
+             <motion.div variants={itemVariants} className="w-full">
                 <div className="flex flex-wrap justify-center gap-2 mb-8">
                   {badges.map((badge) => (
                     <span key={badge} className="px-4 py-1.5 bg-slate-100 dark:bg-slate-900 text-[9px] font-black text-slate-900 dark:text-slate-100 rounded-full border border-slate-200 dark:border-slate-800 uppercase">
@@ -264,12 +293,53 @@ export default function Links() {
                 </div>
              </motion.div>
 
-             <motion.a
+          </section>
+
+          {/* ────── MAIN GRID CONTENT ────── */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
+            
+            {/* 1. Dynamic Links Card (Primary Rows) - order-1 */}
+            <motion.div 
+              variants={itemVariants}
+              className="lg:col-span-12 order-1 lg:order-1 bg-white dark:bg-slate-900 rounded-3xl p-6 lg:p-8 border border-slate-100 dark:border-slate-800 shadow-sm"
+            >
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {loading ? (
+                  [...Array(4)].map((_, i) => (
+                    <div key={i} className="h-24 bg-slate-100 dark:bg-slate-800 animate-pulse rounded-2xl" />
+                  ))
+                ) : (
+                  links.map((link) => (
+                    <a 
+                      key={link._id}
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex items-center justify-between p-6 bg-slate-50 dark:bg-slate-950/50 border border-slate-100 dark:border-slate-800 rounded-2xl hover:border-amber-400 dark:hover:border-amber-400/50 transition-all hover:shadow-lg hover:shadow-amber-500/5"
+                    >
+                      <div className="flex items-center gap-5">
+                        <div className="p-3 bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-100 dark:border-slate-800 group-hover:scale-110 transition-transform">
+                          {getLinkIcon(link.icon)}
+                        </div>
+                        <div>
+                          <h4 className="font-black text-slate-900 dark:text-slate-100 text-sm tracking-tight">{link.title}</h4>
+                          <p className="text-[10px] font-medium text-slate-400 tracking-wide mt-0.5">{link.description || "Visit official link"}</p>
+                        </div>
+                      </div>
+                      <ArrowUpRight className="w-4 h-4 text-slate-300 group-hover:text-amber-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                    </a>
+                  ))
+                )}
+              </div>
+            </motion.div>
+
+            {/* 2. Book Consultation Card (Mobile Only) - order-2 */}
+            <motion.a
                 variants={itemVariants}
                 href="/get-consultation"
-                className="w-full bg-gradient-to-br from-amber-400 to-orange-500 p-[1px] rounded-2xl active:scale-95 transition-all mb-8 overflow-hidden group"
+                className="lg:hidden lg:col-span-12 order-2 bg-gradient-to-br from-amber-400 to-orange-500 p-[1px] rounded-2xl active:scale-95 transition-all mb-4 overflow-hidden group shadow-lg shadow-amber-500/10"
               >
-                <div className="bg-white/10 backdrop-blur-sm p-6 flex flex-col items-center text-white text-center">
+                <div className="bg-white/10 backdrop-blur-sm p-8 flex flex-col items-center text-white text-center">
                   <div className="mb-3 p-3 bg-white/20 rounded-xl">
                     <Calendar className="w-6 h-6" />
                   </div>
@@ -277,16 +347,12 @@ export default function Links() {
                   <p className="text-xs font-medium text-white/90">Elevate your brand's digital presence</p>
                 </div>
                 <div className="absolute top-0 -inset-full h-full w-1/2 z-5 block transform -skew-x-12 bg-gradient-to-r from-transparent to-white/20 opacity-40 group-hover:animate-shine" />
-              </motion.a>
-          </section>
+            </motion.a>
 
-          {/* ────── MAIN GRID CONTENT ────── */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
-            
-            {/* Resources Card (Top Row Left) */}
+            {/* 3. Resources Card - order-3 */}
             <motion.div 
               variants={itemVariants}
-              className="lg:col-span-8 bg-white dark:bg-slate-900 rounded-3xl p-8 lg:p-10 border border-slate-100 dark:border-slate-800 shadow-sm h-full"
+              className="lg:col-span-8 order-3 lg:order-2 bg-white dark:bg-slate-900 rounded-3xl p-8 lg:p-10 border border-slate-100 dark:border-slate-800 shadow-sm h-full"
             >
               <div className="flex justify-between items-center mb-8">
                  <h3 className="text-xs font-black text-slate-400 tracking-widest uppercase flex items-center gap-2">
@@ -313,10 +379,10 @@ export default function Links() {
               </div>
             </motion.div>
 
-            {/* Connect Card (Top Row Right) */}
+            {/* 4. Connect Card - order-4 */}
             <motion.div 
               variants={itemVariants}
-              className="lg:col-span-4 bg-gradient-to-br from-white dark:from-slate-900 via-[#FFFDF5] dark:via-slate-900/50 to-[#FFF9E5] dark:to-slate-900 rounded-3xl p-6 lg:p-8 border border-[#F5E6BD]/30 dark:border-slate-800 shadow-sm flex flex-col h-full"
+              className="lg:col-span-4 order-4 lg:order-3 bg-gradient-to-br from-white dark:from-slate-900 via-[#FFFDF5] dark:via-slate-900/50 to-[#FFF9E5] dark:to-slate-900 rounded-3xl p-6 lg:p-8 border border-[#F5E6BD]/30 dark:border-slate-800 shadow-sm flex flex-col h-full"
             >
               <h3 className="text-[10px] font-black text-slate-400 tracking-widest uppercase mb-6">CONNECT WITH US</h3>
               
@@ -344,10 +410,10 @@ export default function Links() {
               </div>
             </motion.div>
 
-            {/* Quote Section (Bottom Row Left/Right depending on col-span) */}
+            {/* 5. Quote Section - order-5 */}
             <motion.div 
               variants={itemVariants}
-              className="lg:col-span-4 relative bg-white dark:bg-slate-900 rounded-3xl p-8 lg:p-10 border border-slate-100 dark:border-slate-800 shadow-sm h-full"
+              className="lg:col-span-4 order-5 lg:order-4 relative bg-white dark:bg-slate-900 rounded-3xl p-8 lg:p-10 border border-slate-100 dark:border-slate-800 shadow-sm h-full"
             >
               <div className="absolute left-0 top-10 bottom-10 w-1.5 bg-amber-500 rounded-r-full" />
               <div className="pl-6 pt-2">
@@ -358,10 +424,10 @@ export default function Links() {
               </div>
             </motion.div>
 
-            {/* Visit Website Card (Bottom Row Right) */}
+            {/* 6. Visit Website Card - order-6 */}
             <motion.div 
               variants={itemVariants}
-              className="lg:col-span-8 relative h-[300px] lg:h-[400px] rounded-3xl overflow-hidden group shadow-sm border border-slate-100"
+              className="lg:col-span-8 order-6 lg:order-5 relative h-[300px] lg:h-[400px] rounded-3xl overflow-hidden group shadow-sm border border-slate-100"
             >
               <img 
                 src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80" 
