@@ -77,6 +77,7 @@ const defaultResources = [
   { id: 'res-2', title: 'Avani Services Bundle', subtitle: 'PDF • COMPLETE PACKAGE', url: '/Avani services bundle (2).pdf' },
   { id: 'res-3', title: 'AI Portfolio', subtitle: 'PDF • AI SOLUTIONS', url: '/AVANI AI PORTFOLIO.pdf' },
   { id: 'res-4', title: 'Web Dev Portfolio', subtitle: 'PDF • WEB DEVELOPMENT', url: '/Avani website portfolio.pdf' },
+  { id: 'res-5', title: 'Digital Marketing Portfolio', subtitle: 'PDF • DIGITAL MARKETING', url: '/avani-digital-marketing-v2.pdf' },
 ];
 
 const badges = ["MARKETING", "DEVELOPMENT", "BRANDING", "AI SOLUTIONS"];
