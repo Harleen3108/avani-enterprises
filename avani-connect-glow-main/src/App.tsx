@@ -164,7 +164,7 @@ const AppLayout = () => {
 
   // Pages where Navbar should be hidden completely
   const pathForCheck = pathname.toLowerCase();
-  const hideNavbar = pathForCheck === "/thank-you" || pathForCheck === "/business-setup" || pathForCheck === "/businesssetup1" || pathForCheck === "/links";
+  const hideNavbar = pathForCheck === "/thank-you" || pathForCheck === "/business-setup" || pathForCheck === "/businesssetup1";
 
   // Pages where Navbar1 should be used instead of default Navbar
   const useNavbar1 = pathForCheck === "/web-dev" || pathForCheck === "/7-day-launch";

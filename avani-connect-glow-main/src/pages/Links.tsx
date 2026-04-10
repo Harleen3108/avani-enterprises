@@ -1,791 +1,423 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import {
-  ExternalLink, Instagram, Linkedin, Twitter, Mail, MessageCircle, ChevronRight,
-  FileText, ArrowRight, Phone, Sun, Moon, Download
+  ExternalLink, Instagram, Linkedin, Twitter, Mail, MessageCircle, 
+  FileText, ArrowRight, Download, Calendar, ArrowUpRight, Globe, 
+  Briefcase, Layout, Zap, Search, Instagram as InstagramIcon, 
+  Linkedin as LinkedinIcon, Twitter as TwitterIcon, Mail as MailIcon
 } from 'lucide-react';
 import axios from 'axios';
 import { API_BASE_URL } from '../utils/api';
+import { Link as RouterLink } from 'react-router-dom';
 
 /* ─── Interfaces ─── */
-interface Link {
+interface LinkData {
   _id: string;
   title: string;
   url: string;
   description: string;
   icon: string;
-  color: string;
   isActive: boolean;
-  clickCount: number;
-  animation?: 'bounce' | 'pulse' | 'shake' | 'tada' | 'wobble' | 'glow';
 }
 
-/* ─── Icon Resolver ─── */
-const resolveIcon = (icon: string, url: string) => {
-  const l = (icon || '').toLowerCase();
-  const u = (url || '').toLowerCase();
-  if (l.includes('instagram') || u.includes('instagram')) return Instagram;
-  if (l.includes('linkedin') || u.includes('linkedin')) return Linkedin;
-  if (l.includes('twitter') || u.includes('twitter') || u.includes('x.com')) return Twitter;
-  if (l.includes('whatsapp') || u.includes('whatsapp') || u.includes('wa.me')) return MessageCircle;
-  if (l.includes('phone') || l.includes('call') || u.includes('tel:')) return Phone;
-  if (l.includes('mail') || l.includes('email') || u.includes('mailto:')) return Mail;
-  if (u.endsWith('.pdf') || l.includes('pdf') || l.includes('file')) return FileText;
-  return ExternalLink;
-};
-
-/* ─── Default Links ─── */
-const defaultLinks: Link[] = [
-  { _id: 'default-website', title: 'Visit Website', url: 'https://www.avanienterprises.in', description: 'Explore our full suite of premium digital solutions', icon: 'globe', color: '#D4A017', isActive: true, clickCount: 0 },
-  { _id: 'default-services', title: 'Our Services', url: 'https://www.avanienterprises.in/services', description: 'Digital Marketing, Development, Branding & more', icon: 'briefcase', color: '#D4A017', isActive: true, clickCount: 0 },
-  { _id: 'default-consultation', title: 'Book a Consultation', url: 'https://www.avanienterprises.in/get-consultation', description: "Discuss your growth strategy", icon: 'phone', color: '#D4A017', isActive: true, clickCount: 0 },
-  { _id: 'default-whatsapp', title: 'Chat on WhatsApp', url: 'https://wa.me/919253625099', description: 'Quick support guaranteed', icon: 'whatsapp', color: '#D4A017', isActive: true, clickCount: 0 },
-  { _id: 'default-pdf-services', title: '2024 Agency Lookbook', url: '/Avani Enterprises Services ( Website, SMM and Ads )  (3).pdf', description: 'PDF / 12.5 MB', icon: 'file', color: '#D4A017', isActive: true, clickCount: 0 },
-  { _id: 'default-pdf-bundle', title: 'Brand Identity Framework', url: '/Avani services bundle (2).pdf', description: 'WORKSHOP VIDEO', icon: 'file', color: '#D4A017', isActive: true, clickCount: 0 },
+/* ─── Default Data ─── */
+const defaultLinks: LinkData[] = [
+  { _id: 'def-site', title: 'Visit Our Website', url: 'https://www.avanienterprises.in', description: '', icon: 'globe', isActive: true },
+  { _id: 'def-wa', title: 'Chat on WhatsApp', url: 'https://wa.me/919253625099', description: '', icon: 'whatsapp', isActive: true },
 ];
 
-/* ─── Component ─── */
-export default function Links() {
-  const [links, setLinks] = useState<Link[]>(defaultLinks);
-  const [loading, setLoading] = useState(true);
-  const [darkMode, setDarkMode] = useState(true);
-  const [expandedResource, setExpandedResource] = useState<string | null>(null);
+const defaultResources = [
+  { id: 'res-1', title: '2024 Agency Lookbook', subtitle: 'PDF • 12.4 MB', url: '/Avani Enterprises Services ( Website, SMM and Ads )  (3).pdf' },
+  { id: 'res-2', title: 'Brand Identity Framework', subtitle: 'WORKSHOP VIDEO', url: '/Avani services bundle (2).pdf' },
+  { id: 'res-3', title: 'Marketing ROI Calculator', subtitle: 'TOOL / SHEET', url: '#' },
+];
 
-  useEffect(() => { fetchLinks(); }, []);
+const badges = ["MARKETING", "DEVELOPMENT", "BRANDING"];
 
-  const fetchLinks = async () => {
-    try {
-      const response = await axios.get(`${API_BASE_URL}/api/links`);
-      const apiLinks = response.data.filter((l: Link) => l.isActive && !l.title.toLowerCase().includes('blog') && !l.title.toLowerCase().includes('case stud') && !l.title.toLowerCase().includes('hiring') && !l.title.toLowerCase().includes('careers'));
-      setLinks(apiLinks.length > 0 ? apiLinks : defaultLinks);
-    } catch {
-      setLinks(defaultLinks);
-    } finally {
-      setLoading(false);
+const socialLinks = [
+  { icon: LinkedinIcon, url: 'https://www.linkedin.com/company/avani-enterprises-india/', label: 'LINKEDIN' },
+  { icon: InstagramIcon, url: 'https://www.instagram.com/avanienterprises.branding/', label: 'INSTAGRAM' },
+  { icon: TwitterIcon, url: 'https://twitter.com', label: 'X/TWITTER' },
+  { icon: MailIcon, url: 'mailto:kp@avanienterprises.in', label: 'EMAIL' },
+];
+
+const reels = [
+  { id: 1, url: 'https://www.instagram.com/reel/DWktMxahybH/', reelId: 'DWktMxahybH' },
+  { id: 2, url: 'https://www.instagram.com/reel/DUSvTB3Ez8f/', reelId: 'DUSvTB3Ez8f' },
+  { id: 3, url: 'https://www.instagram.com/reel/DQD9u5dk8AQ/', reelId: 'DQD9u5dk8AQ' },
+  { id: 4, url: 'https://www.instagram.com/reel/DSuLytME5AY/', reelId: 'DSuLytME5AY' },
+  { id: 5, url: 'https://www.instagram.com/reel/DV0EPK-D85D/', reelId: 'DV0EPK-D85D' },
+];
+
+const reviews = [
+  { id: 1, name: "Prateek Sharma", role: "Business Owner", rating: 5, text: "The digital branding strategies provided by Avani transformed our presence. Highly professional!" },
+  { id: 2, name: "Ananya Iyer", role: "Founder, Luxe Decor", rating: 5, text: "Exceptional service and creative vision. Our social media engagement spiked within months." },
+  { id: 3, name: "Vikram Malhotra", role: "CEO, TechStart", rating: 5, text: "Their website development and SEO approach are top-notch. Truly the best marketing agency." },
+];
+
+const ReelsMarquee = () => {
+  const [playingId, setPlayingId] = useState<number | null>(null);
+  const duplicatedReels = [...reels, ...reels, ...reels];
+
+  useEffect(() => {
+    // Inject Instagram embed script if not already present
+    if (!window.instgrm) {
+      const script = document.createElement('script');
+      script.src = "//www.instagram.com/embed.js";
+      script.async = true;
+      document.body.appendChild(script);
+    } else {
+      window.instgrm.Embeds.process();
     }
-  };
-
-  const trackAndOpen = async (type: 'link' | 'social', idOrPlatform: string, url: string) => {
-    if (type === 'link' && !idOrPlatform.startsWith('default-')) {
-      try { await axios.post(`${API_BASE_URL}/api/links/${idOrPlatform}/click`, { userAgent: navigator.userAgent, referrer: document.referrer }); } catch { }
-    } else if (type === 'social') {
-      try { await axios.post(`${API_BASE_URL}/api/social-clicks`, { platform: idOrPlatform, userAgent: navigator.userAgent, referrer: document.referrer }); } catch { }
-    }
-    window.open(url, '_blank');
-  };
-
-  const resources = links.filter(l => l.url.endsWith('.pdf'));
-  const otherLinks = links.filter(l => !l.url.endsWith('.pdf'));
+  }, []);
 
   return (
-    <div className={`link-root ${darkMode ? '' : 'link-light'}`}>
-      <div className="link-bg" />
-
-      <div className="link-container">
-        {/* ── Navbar ── */}
-        <nav className="link-navbar">
-          <div className="link-logo">
-            <img src="/avani-logo.jpg" alt="Avani" />
-            <span>AVANI</span>
+    <div className="w-full overflow-hidden py-10">
+      <h3 className="text-center text-[10px] font-black text-slate-400 tracking-widest uppercase mb-10">Trending Reels</h3>
+      <motion.div
+        className="flex gap-4 lg:gap-6"
+        animate={{ x: ["-50%", "0%"] }}
+        transition={{
+          x: {
+            repeat: Infinity,
+            repeatType: "loop",
+            duration: 60, // Slower duration for iframes
+            ease: "linear"
+          }
+        }}
+        style={{ width: "max-content" }}
+      >
+        {duplicatedReels.map((reel, index) => (
+          <div
+            key={`${reel.id}-${index}`}
+            className="group relative w-64 h-[400px] lg:w-72 lg:h-[450px] rounded-2xl overflow-hidden border border-slate-200 shadow-md hover:border-amber-400 transition-all flex-shrink-0 bg-white"
+          >
+            <iframe
+              src={`https://www.instagram.com/reel/${reel.reelId}/embed`}
+              className="w-full h-full border-0 rounded-2xl pointer-events-auto"
+              scrolling="no"
+              allowTransparency={true}
+            />
           </div>
-          <button className="link-theme-toggle" onClick={() => setDarkMode(!darkMode)}>
-            {darkMode ? <Sun size={18} /> : <Moon size={18} />}
-          </button>
-        </nav>
+        ))}
+      </motion.div>
+    </div>
+  );
+};
 
-        {/* ── Hero Section ── */}
-        <motion.section className="link-hero" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }}>
-          <h1 className="link-hero-title">
-            <span>Digital</span>
-            <span className="link-accent">Elegance</span>
-            <span>Crafted.</span>
-          </h1>
-          <p className="link-hero-subtitle">Avani Enterprises: Architecting digital curate experiences for high-end global brands.</p>
-
-          <div className="link-hero-bottom">
-            <div className="link-hero-badges">
-              <span>MARKETING</span>
-              <span>DEVELOPMENT</span>
-              <span>BRANDING</span>
+const ReviewsSection = () => {
+  return (
+    <div className="py-16">
+      <h3 className="text-center text-[10px] font-black text-slate-400 tracking-widest uppercase mb-12">What Clients Say</h3>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {reviews.map((rev) => (
+          <motion.div 
+            key={rev.id}
+            variants={itemVariants}
+            className="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow"
+          >
+            <div className="flex gap-1 mb-4 text-amber-400">
+              {[...Array(5)].map((_, i) => (
+                <Zap key={i} className={`w-3 h-3 ${i < rev.rating ? 'fill-current' : 'opacity-20'}`} />
+              ))}
             </div>
-            <div className="link-cta-buttons">
-              <button className="link-cta-primary" onClick={() => trackAndOpen('link', 'default-consultation', 'https://www.avanienterprises.in/get-consultation')}>
-                BOOK A CONSULTATION
-              </button>
-            </div>
-          </div>
-        </motion.section>
-
-        {/* ── Main Content Grid ── */}
-        <div className="link-content-grid">
-          {/* Left Column */}
-          <motion.div className="link-column" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4, duration: 0.6 }}>
-            {/* Website Card */}
-            <div className="link-card link-website-card">
-              <div className="link-website-content">
-                <h3>Visit Website</h3>
-                <p>Explore our full suite of premium digital solutions and high-end case studies.</p>
-                <button className="link-card-btn" onClick={() => trackAndOpen('link', 'default-website', 'https://www.avanienterprises.in')}>
-                  LAUNCH EXPERIENCE <ArrowRight size={16} />
-                </button>
-              </div>
-            </div>
-
-            {/* Social Icons */}
-            <div className="link-card link-socials">
-              <h3>CONNECT WITH US</h3>
-              <div className="link-social-grid">
-                <a href="https://www.linkedin.com/company/avani-enterprises-india/" target="_blank" rel="noopener noreferrer" title="LinkedIn">
-                  <Linkedin size={24} />
-                </a>
-                <a href="https://www.instagram.com/avanienterprises.branding/" target="_blank" rel="noopener noreferrer" title="Instagram">
-                  <Instagram size={24} />
-                </a>
-                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" title="Twitter">
-                  <Twitter size={24} />
-                </a>
-                <a href="mailto:kp@avanienterprises.in" title="Email">
-                  <Mail size={24} />
-                </a>
-              </div>
-              <a href="https://wa.me/919253625099" target="_blank" rel="noopener noreferrer" className="link-whatsapp-btn">
-                <MessageCircle size={18} />
-                CHAT ON WHATSAPP
-              </a>
+            <p className="text-sm font-medium text-slate-600 mb-8 italic leading-relaxed">
+              "{rev.text}"
+            </p>
+            <div className="flex items-center gap-3">
+               <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-[10px] font-black text-slate-400">
+                  {rev.name[0]}
+               </div>
+               <div>
+                  <h4 className="text-[11px] font-black text-slate-900 tracking-tight">{rev.name}</h4>
+                  <p className="text-[9px] font-bold text-slate-400 tracking-widest uppercase">{rev.role}</p>
+               </div>
             </div>
           </motion.div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
-          {/* Right Column */}
-          <motion.div className="link-column" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.5, duration: 0.6 }}>
-            {/* Resources */}
-            {resources.length > 0 && (
-              <div className="link-card link-resources">
-                <h3>RESOURCES <Download size={16} /></h3>
-                <div className="link-resources-list">
-                  {resources.map((res) => (
-                    <a
-                      key={res._id}
-                      className="link-resource-item"
-                      href={res.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => trackAndOpen('link', res._id, res.url)}
-                    >
-                      <FileText size={18} />
-                      <span className="link-resource-title">{res.title}</span>
-                      <ArrowRight size={16} />
-                    </a>
-                  ))}
-                </div>
+/* ─── Animation Variants ─── */
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1, delayChildren: 0.1 }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
+};
+
+export default function Links() {
+  const [links, setLinks] = useState<LinkData[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchLinks = async () => {
+      try {
+        const response = await axios.get(`${API_BASE_URL}/api/links`);
+        const activeLinks = response.data.filter((l: LinkData) => l.isActive);
+        setLinks(activeLinks.length > 0 ? activeLinks : defaultLinks);
+      } catch (err) {
+        setLinks(defaultLinks);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchLinks();
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-[#F8F9FA] font-sans selection:bg-amber-100 selection:text-amber-900 overflow-x-hidden">
+      {/* Header Spacer for standard Navbar */}
+      <div className="h-20 lg:h-24" />
+
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="space-y-8 lg:space-y-12"
+        >
+          {/* ────── DESKTOP HERO SECTION ────── */}
+          <section className="hidden lg:flex justify-between items-end">
+            <motion.div className="max-w-2xl" variants={itemVariants}>
+              <h1 className="text-6xl xl:text-7xl font-black text-slate-900 tracking-tighter leading-[0.9] mb-6">
+                Digital <span className="text-amber-500">Elegance</span><br />
+                Crafted.
+              </h1>
+              <p className="text-lg text-slate-500 font-medium max-w-lg mb-8">
+                Avani Enterprises: Architecting digital curate experiences for high-end global brands.
+              </p>
+              <div className="flex gap-4">
+                {badges.map((badge) => (
+                  <span key={badge} className="px-5 py-2 bg-slate-100 text-[10px] font-black tracking-widest text-slate-900 rounded-full border border-slate-200">
+                    {badge}
+                  </span>
+                ))}
               </div>
-            )}
-
-            {/* Quote Section */}
-            <motion.div className="link-quote" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6, duration: 0.6 }}>
-              <p><i>"Design is not just what it looks like and feels like. Design is how it works. We curate digital ecosystems that transcend utility to become legacy."</i></p>
-              <p className="link-quote-author">AVANI MANAGEMENT TEAM</p>
             </motion.div>
 
-            {/* Reviews & Reels */}
-            <motion.button
-              className="link-reviews-btn"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7, duration: 0.6 }}
-              onClick={() => trackAndOpen('link', 'reviews-reels', 'https://www.instagram.com/avanienterprises.branding/reels/')}
-            >
-              REVIEWS & REELS
-              <ArrowRight size={16} />
-            </motion.button>
-          </motion.div>
-        </div>
+            <motion.div variants={itemVariants}>
+               <a 
+                href="/get-consultation"
+                className="inline-block px-10 py-5 bg-gradient-to-br from-amber-400 to-orange-500 text-white font-black text-xs tracking-widest rounded-xl shadow-xl shadow-amber-200 hover:scale-105 active:scale-95 transition-all"
+               >
+                 BOOK A CONSULTATION
+               </a>
+               <div className="mt-4 text-right">
+                  <span className="text-[10px] font-black text-slate-400 tracking-widest uppercase cursor-pointer hover:text-amber-500 transition-colors">VIEW PORTFOLIO</span>
+               </div>
+            </motion.div>
+          </section>
 
-        {/* ── Footer ── */}
-        <motion.footer className="link-footer" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7, duration: 0.6 }}>
-          <p>AVANI ENTERPRISES © 2024 ALL RIGHTS RESERVED.</p>
-        </motion.footer>
+          {/* ────── MOBILE HERO SECTION ────── */}
+          <section className="lg:hidden flex flex-col items-center text-center pt-8">
+             <motion.div className="mb-6 relative" variants={itemVariants}>
+                <div className="w-24 h-24 p-1 bg-gradient-to-tr from-amber-400 to-orange-500 rounded-2xl shadow-lg shadow-amber-200">
+                   <img src="/logo0.jpg" alt="Logo" className="w-full h-full rounded-[14px] bg-white object-cover" />
+                </div>
+                <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-green-500 border-4 border-[#F8F9FA] rounded-full" />
+             </motion.div>
+             <motion.div variants={itemVariants}>
+                <h1 className="text-3xl font-black text-slate-900 tracking-tight mb-2">Avani Enterprises</h1>
+                <p className="text-[10px] font-black text-amber-600 tracking-[0.2em] uppercase mb-6">India's #1 Digital Marketing Agency</p>
+                <div className="flex flex-wrap justify-center gap-2 mb-8">
+                  {badges.map((badge) => (
+                    <span key={badge} className="px-4 py-1.5 bg-slate-100 text-[9px] font-black text-slate-900 rounded-full border border-slate-200 uppercase">
+                      {badge}
+                    </span>
+                  ))}
+                </div>
+             </motion.div>
+
+             <motion.a
+                variants={itemVariants}
+                href="/get-consultation"
+                className="w-full bg-gradient-to-br from-amber-400 to-orange-500 p-[1px] rounded-2xl shadow-xl shadow-amber-100 active:scale-95 transition-all mb-8 overflow-hidden group"
+              >
+                <div className="bg-white/10 backdrop-blur-sm p-6 flex flex-col items-center text-white text-center">
+                  <div className="mb-3 p-3 bg-white/20 rounded-xl">
+                    <Calendar className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-xl font-black mb-1">Book a Free Consultation</h3>
+                  <p className="text-xs font-medium text-white/90">Elevate your brand's digital presence</p>
+                </div>
+                <div className="absolute top-0 -inset-full h-full w-1/2 z-5 block transform -skew-x-12 bg-gradient-to-r from-transparent to-white/20 opacity-40 group-hover:animate-shine" />
+              </motion.a>
+          </section>
+
+          {/* ────── MAIN GRID CONTENT ────── */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
+            
+            {/* Visit Website Card (Top Row Left) */}
+            <motion.div 
+              variants={itemVariants}
+              className="lg:col-span-8 relative h-[300px] lg:h-[400px] rounded-3xl overflow-hidden group shadow-sm border border-slate-100"
+            >
+              <img 
+                src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80" 
+                alt="Office" 
+                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent" />
+              
+              <div className="absolute inset-0 p-8 lg:p-12 flex flex-col justify-end text-white">
+                <h3 className="text-3xl lg:text-4xl font-black mb-2">Visit Website</h3>
+                <p className="text-sm lg:text-base font-medium text-white/80 max-w-md mb-8">
+                  Explore our full suite of premium digital solutions and high-end case studies.
+                </p>
+                <button onClick={() => window.open('https://www.avanienterprises.in', '_blank')} className="flex items-center gap-3 text-sm lg:text-base font-black tracking-widest hover:text-amber-400 transition-colors">
+                  LAUNCH EXPERIENCE <ArrowRight className="w-5 h-5" />
+                </button>
+              </div>
+            </motion.div>
+
+            {/* Connect Card (Top Row Right) */}
+            <motion.div 
+              variants={itemVariants}
+              className="lg:col-span-4 bg-gradient-to-br from-white via-[#FFFDF5] to-[#FFF9E5] rounded-3xl p-6 lg:p-8 border border-[#F5E6BD]/30 shadow-sm flex flex-col h-full"
+            >
+              <h3 className="text-[10px] font-black text-slate-400 tracking-widest uppercase mb-6">CONNECT WITH US</h3>
+              
+              <div className="grid grid-cols-2 gap-3 mb-6">
+                 {socialLinks.map((social) => (
+                   <a 
+                    key={social.label}
+                    href={social.url}
+                    className="flex flex-col items-center justify-center aspect-square p-2 bg-slate-50 border border-slate-100 rounded-2xl hover:bg-amber-50 hover:border-amber-200 group transition-all"
+                   >
+                     <social.icon className="w-5 h-5 text-slate-900 group-hover:text-amber-500 group-hover:scale-110 transition-all mb-2" />
+                     <span className="text-[8px] font-black text-slate-900 tracking-widest">{social.label}</span>
+                   </a>
+                 ))}
+              </div>
+
+              <div className="mt-auto">
+                <button 
+                  onClick={() => window.open('https://wa.me/919253625099', '_blank')}
+                  className="w-full py-4 bg-slate-50 border border-slate-100 rounded-2xl text-[10px] font-black text-slate-900 tracking-widest hover:bg-emerald-50 hover:border-emerald-200 hover:text-emerald-600 transition-all flex items-center justify-center gap-3 uppercase"
+                >
+                  <MessageCircle className="w-5 h-5 text-emerald-500" />
+                  CHAT ON WHATSAPP
+                </button>
+              </div>
+            </motion.div>
+
+            {/* Resources Card (Bottom Row Left) */}
+            <motion.div 
+              variants={itemVariants}
+              className="lg:col-span-8 bg-white rounded-3xl p-8 lg:p-10 border border-slate-100 shadow-sm h-full"
+            >
+              <div className="flex justify-between items-center mb-8">
+                 <h3 className="text-xs font-black text-slate-400 tracking-widest uppercase flex items-center gap-2">
+                   RESOURCES <Download className="w-4 h-4" />
+                 </h3>
+              </div>
+              <div className="space-y-4">
+                {defaultResources.map((res) => (
+                  <a 
+                    key={res.id} 
+                    href={res.url} 
+                    className="flex items-center justify-between p-5 bg-slate-50 border border-slate-100 rounded-2xl hover:border-amber-200 hover:bg-amber-50 group transition-all"
+                  >
+                    <div className="flex items-center gap-4 text-slate-900">
+                      <FileText className="w-6 h-6 text-amber-500" />
+                      <div>
+                        <h4 className="font-black text-sm">{res.title}</h4>
+                        <p className="text-[10px] font-bold text-slate-400 tracking-wider mt-0.5">{res.subtitle}</p>
+                      </div>
+                    </div>
+                    <ArrowRight className="w-4 h-4 text-slate-300 group-hover:text-amber-500 group-hover:translate-x-1 transition-all" />
+                  </a>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Quote Section (Bottom Row Right) */}
+            <motion.div 
+              variants={itemVariants}
+              className="lg:col-span-4 relative bg-white rounded-3xl p-8 lg:p-10 border border-slate-100 shadow-sm h-full"
+            >
+              <div className="absolute left-0 top-10 bottom-10 w-1.5 bg-amber-500 rounded-r-full" />
+              <div className="pl-6 pt-2">
+                 <div className="text-slate-300 mb-6">
+                    <Zap className="w-10 h-10 fill-current opacity-20" />
+                 </div>
+                 <p className="text-xl lg:text-2xl font-medium text-slate-800 italic leading-relaxed mb-10 font-serif">
+                  “Design is not just what it looks like and feels like. Design is how it works. We curate digital ecosystems that transcend utility to become legacy.”
+                 </p>
+                 <p className="text-[10px] font-black text-slate-900 tracking-widest uppercase">AVANI MANAGEMENT TEAM</p>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* ────── REELS MARQUEE ────── */}
+          <motion.div variants={itemVariants} className="-mx-4 sm:-mx-6 lg:-mx-8">
+            <ReelsMarquee />
+          </motion.div>
+
+          {/* ────── REVIEWS SECTION ────── */}
+          <motion.div variants={itemVariants}>
+            <ReviewsSection />
+          </motion.div>
+
+        </motion.div>
+      </main>
+
+      {/* ────── FOOTER ────── */}
+      <footer className="w-full bg-white border-t border-slate-100 py-12 mt-8">
+        <div className="max-w-7xl mx-auto px-4 text-center">
+          <p className="text-[9px] font-black text-slate-400 tracking-[0.3em] uppercase">
+            AVANI ENTERPRISES © 2026 ALL RIGHTS RESERVED.
+          </p>
+        </div>
+      </footer>
+
+      {/* ────── MOBILE BOTTOM NAV ────── */}
+      <div className="fixed bottom-0 left-0 right-0 z-50 p-4 lg:hidden">
+        <div className="max-w-md mx-auto bg-slate-900/90 backdrop-blur-xl border border-white/10 rounded-3xl p-2 flex items-center justify-between shadow-2xl">
+          <RouterLink to="/services" className="flex flex-col items-center justify-center flex-1 py-1 rounded-2xl hover:bg-white/5 text-amber-400 group">
+             <div className="p-2 bg-amber-400/10 rounded-xl mb-1 group-hover:bg-amber-400 group-hover:text-slate-900 transition-all">
+                <Layout className="w-5 h-5" />
+             </div>
+             <span className="text-[9px] font-black uppercase tracking-wider">Services</span>
+          </RouterLink>
+          <RouterLink to="/get-consultation" className="flex flex-col items-center justify-center flex-1 py-1 rounded-2xl hover:bg-white/5 text-white group">
+             <div className="p-2 bg-white/5 rounded-xl mb-1 group-hover:bg-amber-400 group-hover:text-slate-900 transition-all">
+                <Briefcase className="w-5 h-5" />
+             </div>
+             <span className="text-[9px] font-black uppercase tracking-wider">Consult</span>
+          </RouterLink>
+          <RouterLink to="/newsletters" className="flex flex-col items-center justify-center flex-1 py-1 rounded-2xl hover:bg-white/5 text-white group">
+             <div className="p-2 bg-white/5 rounded-xl mb-1 group-hover:bg-amber-400 group-hover:text-slate-900 transition-all">
+                <Search className="w-5 h-5" />
+             </div>
+             <span className="text-[9px] font-black uppercase tracking-wider">Resources</span>
+          </RouterLink>
+          <button onClick={() => window.open('https://wa.me/919253625099', '_blank')} className="flex flex-col items-center justify-center flex-1 py-1 rounded-2xl hover:bg-white/5 text-white group">
+             <div className="p-2 bg-white/5 rounded-xl mb-1 group-hover:bg-amber-400 group-hover:text-slate-900 transition-all">
+                <Zap className="w-5 h-5" />
+             </div>
+             <span className="text-[9px] font-black uppercase tracking-wider">Chat</span>
+          </button>
+        </div>
       </div>
 
       <style>{`
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-
-        .link-root {
-          height: 100vh;
-          background: linear-gradient(135deg, #0f1419 0%, #1a1f2e 50%, #0d1117 100%);
-          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
-          color: #f8f9fa;
-          position: relative;
-          overflow: hidden;
-          display: flex;
-          flex-direction: column;
+        @keyframes shine {
+          0% { left: -100%; transition-property: left; }
+          100% { left: 100%; transition-property: left; }
         }
-
-        .link-bg {
-          position: fixed;
-          inset: 0;
-          background: 
-            radial-gradient(circle at 20% 50%, rgba(212, 160, 23, 0.1) 0%, transparent 50%),
-            radial-gradient(circle at 80% 100%, rgba(212, 160, 23, 0.05) 0%, transparent 50%);
-          pointer-events: none;
-          z-index: 0;
+        .animate-shine {
+          animation: shine 1.5s infinite;
         }
-
-        .link-container {
-          position: relative;
-          z-index: 1;
-          max-width: 1200px;
-          width: 100%;
-          margin: 0 auto;
-          padding: 16px 20px;
-          display: flex;
-          flex-direction: column;
-          height: 100vh;
-          overflow: hidden;
-        }
-        @media (min-width: 768px) {
-          .link-container { padding: 20px 40px; }
-        }
-
-        /* ── Navbar ── */
-        .link-navbar {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: 16px;
-          padding-bottom: 12px;
-          border-bottom: 1px solid rgba(212, 160, 23, 0.2);
-          flex-shrink: 0;
-        }
-
-        .link-logo {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          font-size: 16px;
-          font-weight: 800;
-          letter-spacing: 2px;
-        }
-
-        .link-logo img {
-          width: 28px;
-          height: 28px;
-          border-radius: 6px;
-        }
-
-        .link-theme-toggle {
-          background: rgba(212, 160, 23, 0.1);
-          border: 1px solid rgba(212, 160, 23, 0.3);
-          color: #D4A017;
-          width: 34px;
-          height: 34px;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-          transition: all 0.3s ease;
-        }
-
-        .link-theme-toggle:hover {
-          background: rgba(212, 160, 23, 0.2);
-          border-color: rgba(212, 160, 23, 0.5);
-        }
-
-        /* ── Hero Section ── */
-        .link-hero {
-          margin-bottom: 12px;
-          text-align: left;
-          flex-shrink: 0;
-        }
-
-        .link-hero-title {
-          font-size: 32px;
-          font-weight: 900;
-          line-height: 1.1;
-          margin-bottom: 8px;
-          letter-spacing: -1.5px;
-        }
-        @media (min-width: 768px) {
-          .link-hero-title { font-size: 48px; margin-bottom: 10px; }
-        }
-
-        .link-hero-title span {
-          display: inline;
-          margin-right: 8px;
-        }
-
-        .link-accent {
-          color: #D4A017;
-        }
-
-        .link-hero-subtitle {
-          font-size: 14px;
-          color: #a0a0a0;
-          line-height: 1.5;
-          max-width: 500px;
-          margin-bottom: 10px;
-        }
-
-        .link-hero-bottom {
-          display: flex;
-          align-items: flex-start;
-          justify-content: space-between;
-          gap: 16px;
-          margin-top: 8px;
-        }
-
-        .link-hero-badges {
-          display: flex;
-          gap: 8px;
-          align-items: center;
-        }
-
-        .link-hero-badges span {
-          background: rgba(212, 160, 23, 0.1);
-          border: 1px solid rgba(212, 160, 23, 0.4);
-          color: #D4A017;
-          padding: 5px 12px;
-          border-radius: 20px;
-          font-size: 10px;
-          font-weight: 700;
-          letter-spacing: 1px;
-        }
-
-        /* ── CTA Buttons ── */
-        .link-cta-buttons {
-          display: flex;
-          flex-direction: column;
-          gap: 8px;
-          align-items: flex-end;
-          flex-shrink: 0;
-        }
-
-        .link-cta-primary, .link-cta-secondary {
-          padding: 10px 24px;
-          border-radius: 8px;
-          font-weight: 700;
-          font-size: 12px;
-          letter-spacing: 1px;
-          cursor: pointer;
-          transition: all 0.3s ease;
-          border: none;
-          font-family: inherit;
-        }
-
-        .link-cta-primary {
-          background: #D4A017;
-          color: #000;
-        }
-
-        .link-cta-primary:hover {
-          background: #E8B830;
-          transform: translateY(-2px);
-          box-shadow: 0 8px 24px rgba(212, 160, 23, 0.3);
-        }
-
-        .link-cta-secondary {
-          background: transparent;
-          color: #D4A017;
-          border: 2px solid #D4A017;
-        }
-
-        .link-cta-secondary:hover {
-          background: rgba(212, 160, 23, 0.1);
-          transform: translateY(-2px);
-        }
-
-        /* ── Content Grid ── */
-        .link-content-grid {
-          display: grid;
-          grid-template-columns: 1fr;
-          gap: 16px;
-          margin-bottom: 16px;
-          flex: 1;
-          min-height: 0;
-          overflow: auto;
-        }
-        @media (min-width: 768px) {
-          .link-content-grid { grid-template-columns: 1fr 1fr; gap: 24px; overflow: hidden; }
-        }
-
-        .link-column {
-          display: flex;
-          flex-direction: column;
-          gap: 12px;
-          justify-content: space-between;
-        }
-
-        /* ── Cards ── */
-        .link-card {
-          background: rgba(26, 31, 46, 0.6);
-          border: 1px solid rgba(212, 160, 23, 0.2);
-          border-radius: 12px;
-          padding: 14px 16px;
-          backdrop-filter: blur(10px);
-        }
-
-        .link-card h3 {
-          font-size: 12px;
-          font-weight: 700;
-          letter-spacing: 1px;
-          margin-bottom: 8px;
-          text-transform: uppercase;
-          color: #D4A017;
-          display: flex;
-          align-items: center;
-          gap: 8px;
-        }
-
-        .link-card p {
-          font-size: 13px;
-          color: #a0a0a0;
-          line-height: 1.5;
-          margin-bottom: 12px;
-        }
-
-        .link-card-btn {
-          background: transparent;
-          border: 1px solid rgba(212, 160, 23, 0.4);
-          color: #D4A017;
-          padding: 8px 14px;
-          border-radius: 6px;
-          font-size: 11px;
-          font-weight: 700;
-          letter-spacing: 0.5px;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          transition: all 0.3s ease;
-          font-family: inherit;
-        }
-
-        .link-card-btn:hover {
-          background: rgba(212, 160, 23, 0.1);
-          border-color: #D4A017;
-          transform: translateX(4px);
-        }
-
-        /* ── Website Card with BG ── */
-        .link-website-card {
-          flex: 1;
-          background-image: url('/hero-bg.jpg');
-          background-size: cover;
-          background-position: center;
-          position: relative;
-          display: flex;
-          align-items: flex-end;
-          padding: 0 !important;
-          overflow: hidden;
-        }
-
-        .link-website-card::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(to bottom, rgba(15, 20, 25, 0.3) 0%, rgba(15, 20, 25, 0.85) 60%, rgba(15, 20, 25, 0.95) 100%);
-          z-index: 0;
-        }
-
-        .link-website-content {
-          position: relative;
-          z-index: 1;
-          padding: 14px 16px;
-          width: 100%;
-        }
-
-        /* ── Socials ── */
-        .link-socials {
-          padding: 12px 16px;
-        }
-
-        .link-socials h3 {
-          margin-bottom: 8px;
-        }
-
-        .link-social-grid {
-          display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          gap: 8px;
-          margin-bottom: 10px;
-        }
-
-        .link-social-grid a {
-          aspect-ratio: auto;
-          padding: 10px;
-          background: rgba(212, 160, 23, 0.1);
-          border: 1px solid rgba(212, 160, 23, 0.3);
-          border-radius: 10px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: #D4A017;
-          text-decoration: none;
-          transition: all 0.3s ease;
-        }
-
-        .link-social-grid a:hover {
-          background: #D4A017;
-          color: #000;
-          transform: translateY(-3px);
-          box-shadow: 0 6px 18px rgba(212, 160, 23, 0.3);
-        }
-
-        .link-whatsapp-btn {
-          background: #25D366;
-          border: none;
-          color: #fff;
-          padding: 9px 16px;
-          border-radius: 6px;
-          font-size: 11px;
-          font-weight: 700;
-          letter-spacing: 0.5px;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          justify-content: center;
-          text-decoration: none;
-          transition: all 0.3s ease;
-          font-family: inherit;
-        }
-
-        .link-whatsapp-btn:hover {
-          background: #1EBE56;
-          transform: translateY(-2px);
-          box-shadow: 0 6px 20px rgba(37, 211, 102, 0.3);
-        }
-
-        /* ── Resources ── */
-        .link-resources .link-resources-list {
-          display: flex;
-          flex-direction: column;
-          gap: 6px;
-        }
-
-        .link-resource-item {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          border: 1px solid rgba(212, 160, 23, 0.2);
-          border-radius: 10px;
-          padding: 12px 14px;
-          background: rgba(212, 160, 23, 0.05);
-          text-decoration: none;
-          color: #D4A017;
-          cursor: pointer;
-          transition: all 0.3s ease;
-          font-size: 12px;
-          font-weight: 600;
-        }
-
-        .link-resource-item:hover {
-          background: rgba(212, 160, 23, 0.12);
-          border-color: rgba(212, 160, 23, 0.4);
-          transform: translateX(4px);
-        }
-
-        .link-resource-title {
-          flex: 1;
-          text-align: left;
-          color: #f8f9fa;
-        }
-
-        .link-resource-item svg {
-          flex-shrink: 0;
-        }
-
-        /* ── Quote ── */
-        .link-quote {
-          background: rgba(26, 31, 46, 0.4);
-          border-left: 4px solid #D4A017;
-          border-radius: 4px;
-          padding: 16px 18px;
-          backdrop-filter: blur(6px);
-        }
-
-        .link-quote p {
-          font-size: 13px;
-          color: #e0e0e0;
-          line-height: 1.6;
-          font-style: italic;
-          margin-bottom: 8px;
-        }
-
-        .link-quote-author {
-          font-size: 11px;
-          color: #D4A017;
-          font-weight: 700;
-          letter-spacing: 1px;
-          text-transform: uppercase;
-          font-style: normal !important;
-        }
-
-        /* ── Reviews & Reels Button ── */
-        .link-reviews-btn {
-          width: 100%;
-          background: linear-gradient(135deg, rgba(212, 160, 23, 0.15) 0%, rgba(212, 160, 23, 0.05) 100%);
-          border: 1px solid rgba(212, 160, 23, 0.4);
-          color: #D4A017;
-          padding: 14px 20px;
-          border-radius: 12px;
-          font-size: 13px;
-          font-weight: 700;
-          letter-spacing: 1px;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 10px;
-          transition: all 0.3s ease;
-          font-family: inherit;
-        }
-
-        .link-reviews-btn:hover {
-          background: #D4A017;
-          color: #000;
-          transform: translateY(-2px);
-          box-shadow: 0 8px 24px rgba(212, 160, 23, 0.3);
-        }
-
-        /* ── Footer ── */
-        .link-footer {
-          border-top: 1px solid rgba(212, 160, 23, 0.2);
-          padding-top: 12px;
-          padding-bottom: 4px;
-          text-align: center;
-          flex-shrink: 0;
-        }
-
-        .link-footer p {
-          font-size: 11px;
-          color: #808080;
-          margin-bottom: 6px;
-        }
-
-        .link-footer-links {
-          display: flex;
-          gap: 20px;
-          justify-content: center;
-        }
-
-        .link-footer-links a {
-          font-size: 11px;
-          color: #D4A017;
-          text-decoration: none;
-          transition: color 0.3s ease;
-        }
-
-        .link-footer-links a:hover {
-          color: #E8B830;
-        }
-
-        /* ══════ LIGHT THEME ══════ */
-        .link-light {
-          background: linear-gradient(135deg, #f5f0e8 0%, #faf7f0 50%, #f0ebe0 100%);
-          color: #1a1a1a;
-        }
-
-        .link-light .link-bg {
-          background:
-            radial-gradient(circle at 20% 50%, rgba(212, 160, 23, 0.08) 0%, transparent 50%),
-            radial-gradient(circle at 80% 100%, rgba(212, 160, 23, 0.04) 0%, transparent 50%);
-        }
-
-        .link-light .link-navbar {
-          border-bottom-color: rgba(212, 160, 23, 0.25);
-        }
-
-        .link-light .link-logo { color: #1a1a1a; }
-
-        .link-light .link-hero-title span { color: #1a1a1a; }
-        .link-light .link-accent { color: #B8860B; }
-        .link-light .link-hero-subtitle { color: #666; }
-
-        .link-light .link-hero-badges span {
-          background: rgba(212, 160, 23, 0.1);
-          border-color: rgba(184, 134, 11, 0.4);
-          color: #8B6914;
-        }
-
-        .link-light .link-cta-primary {
-          background: #B8860B;
-          color: #fff;
-        }
-        .link-light .link-cta-primary:hover {
-          background: #D4A017;
-          box-shadow: 0 8px 24px rgba(184, 134, 11, 0.25);
-        }
-
-        .link-light .link-card {
-          background-color: rgba(255, 255, 255, 0.7);
-          border-color: rgba(212, 160, 23, 0.2);
-          backdrop-filter: blur(10px);
-        }
-        .link-light .link-card h3 { color: #8B6914; }
-        .link-light .link-card p { color: #666; }
-
-        .link-light .link-card-btn {
-          border-color: rgba(184, 134, 11, 0.4);
-          color: #8B6914;
-        }
-        .link-light .link-card-btn:hover {
-          background: rgba(212, 160, 23, 0.1);
-        }
-
-        .link-light .link-website-card {
-          background-color: transparent;
-        }
-
-        .link-light .link-website-card::before {
-          background: linear-gradient(to bottom, rgba(245, 240, 232, 0.05) 0%, rgba(245, 240, 232, 0.5) 50%, rgba(245, 240, 232, 0.88) 100%);
-        }
-
-        .link-light .link-social-grid a {
-          background: rgba(212, 160, 23, 0.08);
-          border-color: rgba(184, 134, 11, 0.3);
-          color: #8B6914;
-        }
-        .link-light .link-social-grid a:hover {
-          background: #B8860B;
-          color: #fff;
-        }
-
-        .link-light .link-whatsapp-btn { color: #fff; }
-
-        .link-light .link-resource-header { color: #8B6914; }
-        .link-light .link-resource-title { color: #1a1a1a; }
-        .link-light .link-resource-item { border-color: rgba(184, 134, 11, 0.2); }
-        .link-light .link-resource-header { background: rgba(212, 160, 23, 0.06); }
-        .link-light .link-resource-content { background: rgba(245, 240, 232, 0.5); }
-        .link-light .link-resource-content p { color: #666; }
-        .link-light .link-resource-download { color: #8B6914; border-color: rgba(184, 134, 11, 0.4); }
-
-        .link-light .link-quote {
-          background: rgba(255, 255, 255, 0.5);
-          border-left-color: #B8860B;
-        }
-        .link-light .link-quote p { color: #444; }
-        .link-light .link-quote-author { color: #8B6914; }
-
-        .link-light .link-reviews-btn {
-          background: linear-gradient(135deg, rgba(184, 134, 11, 0.12) 0%, rgba(184, 134, 11, 0.04) 100%);
-          border-color: rgba(184, 134, 11, 0.4);
-          color: #8B6914;
-        }
-        .link-light .link-reviews-btn:hover {
-          background: #B8860B;
-          color: #fff;
-        }
-
-        .link-light .link-theme-toggle {
-          background: rgba(184, 134, 11, 0.1);
-          border-color: rgba(184, 134, 11, 0.3);
-          color: #8B6914;
-        }
-
-        .link-light .link-footer { border-top-color: rgba(184, 134, 11, 0.2); }
-        .link-light .link-footer p { color: #999; }
       `}</style>
     </div>
   );
