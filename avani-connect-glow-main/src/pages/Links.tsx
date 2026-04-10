@@ -269,7 +269,7 @@ export default function Links() {
   return (
     <div className="min-h-screen bg-[#F8F9FA] dark:bg-slate-950 font-sans selection:bg-amber-100 selection:text-amber-900 overflow-x-hidden transition-colors duration-500">
       {/* Header Spacer for standard Navbar */}
-      <div className="h-20 lg:h-24" />
+      <div className="h-12 lg:h-24" />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
         <motion.div
@@ -320,13 +320,17 @@ export default function Links() {
           </section>
 
           {/* ────── MOBILE HERO SECTION ────── */}
-          <section className="lg:hidden flex flex-col items-center text-center pt-8">
+          <section className="lg:hidden flex flex-col items-center text-center pt-2">
             {/* Removed extra logo for mobile */}
 
-            <div className="relative w-full flex justify-between items-center mb-6">
-              <div className="text-left">
-                <h1 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">Avani Enterprises</h1>
-                <p className="text-[9px] font-black text-amber-600 tracking-wider uppercase">Link Directory</p>
+            <div className="relative w-full flex justify-between items-center mb-4">
+              <div className="text-left max-w-[250px]">
+                <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter leading-tight">
+                  Digital <span className="text-amber-500">Elegance</span> Crafted.
+                </h1>
+                <p className="text-[10px] text-slate-500 dark:text-slate-400 font-medium mt-2 leading-relaxed">
+                  Avani Enterprises: Architecting digital curate experiences for high-end global brands.
+                </p>
               </div>
               <div className="scale-90">
                 <ThemeToggle />
@@ -334,9 +338,9 @@ export default function Links() {
             </div>
 
             <motion.div variants={itemVariants} className="w-full">
-              <div className="flex flex-wrap justify-center gap-2 mb-8">
+              <div className="w-full flex flex-nowrap overflow-x-auto justify-between sm:justify-center gap-1 sm:gap-2 mb-2 pb-1 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
                 {badges.map((badge) => (
-                  <span key={badge} className="px-4 py-1.5 bg-slate-100 dark:bg-slate-900 text-[9px] font-black text-slate-900 dark:text-slate-100 rounded-full border border-slate-200 dark:border-slate-800 uppercase">
+                  <span key={badge} className="px-2 sm:px-4 py-1.5 whitespace-nowrap bg-slate-100 dark:bg-slate-900 text-[8px] sm:text-[9px] font-black text-slate-900 dark:text-slate-100 rounded-full border border-slate-200 dark:border-slate-800 uppercase">
                     {badge}
                   </span>
                 ))}
@@ -348,20 +352,20 @@ export default function Links() {
           {/* ────── MAIN GRID CONTENT ────── */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
 
-            {/* 1. Connect Card - Now order-1 */}
+            {/* 1. Connect Card - Now order-2 (mobile), order-1 (desktop) */}
             <motion.div
               variants={itemVariants}
-              className="lg:col-span-12 order-1 lg:order-1 bg-gradient-to-br from-white dark:from-slate-900 via-[#FFFDF5] dark:via-slate-900/50 to-[#FFF9E5] dark:to-slate-900 rounded-3xl p-6 lg:p-8 border border-[#F5E6BD]/30 dark:border-slate-800 shadow-sm transition-all"
+              className="lg:col-span-12 order-2 lg:order-1 bg-gradient-to-br from-white dark:from-slate-900 via-[#FFFDF5] dark:via-slate-900/50 to-[#FFF9E5] dark:to-slate-900 rounded-3xl p-6 lg:p-8 border border-[#F5E6BD]/30 dark:border-slate-800 shadow-sm transition-all"
             >
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
                 <div>
                   <h3 className="text-[10px] font-black text-slate-400 tracking-widest uppercase mb-4">CONNECT WITH US</h3>
-                  <div className="flex flex-wrap gap-4">
+                  <div className="flex flex-nowrap overflow-x-auto justify-between sm:justify-start gap-2 sm:gap-4 pb-2 w-full [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
                     {socialLinks.map((social) => (
                       <a
                         key={social.label}
                         href={social.url}
-                        className="p-4 bg-white dark:bg-slate-950 border border-slate-100 dark:border-slate-800 rounded-2xl hover:bg-amber-50 dark:hover:bg-amber-900/10 hover:border-amber-200 group transition-all"
+                        className="w-[48px] h-[48px] sm:w-[56px] sm:h-[56px] flex items-center justify-center flex-shrink-0 bg-white dark:bg-slate-950 border border-slate-100 dark:border-slate-800 rounded-2xl hover:bg-amber-50 dark:hover:bg-amber-900/10 hover:border-amber-200 group transition-all"
                       >
                         <social.icon className="w-6 h-6 text-slate-900 dark:text-slate-100 group-hover:text-amber-500 group-hover:scale-110 transition-all" />
                       </a>
@@ -383,7 +387,7 @@ export default function Links() {
             {/* Dynamic Links Card - beside Visit Website */}
             <motion.div
               variants={itemVariants}
-              className="lg:col-span-8 order-3 lg:order-3 bg-white dark:bg-slate-900 rounded-3xl p-6 lg:p-8 border border-slate-100 dark:border-slate-800 shadow-sm"
+              className="lg:col-span-8 order-4 lg:order-3 bg-white dark:bg-slate-900 rounded-3xl p-6 lg:p-8 border border-slate-100 dark:border-slate-800 shadow-sm"
             >
               <div className="grid grid-cols-1 gap-4">
                 {loading ? (
@@ -415,26 +419,26 @@ export default function Links() {
               </div>
             </motion.div>
 
-            {/* 3. Book Consultation Card (Mobile) - order-4 */}
+            {/* Book Consultation Card (Mobile) - order-1 */}
             <motion.a
               variants={itemVariants}
               href="/get-consultation"
-              className="lg:hidden lg:col-span-12 order-4 bg-gradient-to-br from-amber-400 to-orange-500 p-[1px] rounded-2xl active:scale-95 transition-all mb-4 overflow-hidden group shadow-lg shadow-amber-500/10"
+              className="lg:hidden lg:col-span-12 order-1 bg-gradient-to-br from-amber-400 to-orange-500 p-[1px] rounded-2xl active:scale-95 transition-all mb-4 overflow-hidden group shadow-lg shadow-amber-500/10"
             >
-              <div className="bg-white/10 backdrop-blur-sm p-8 flex flex-col items-center text-white text-center">
-                <div className="mb-3 p-3 bg-white/20 rounded-xl">
-                  <Calendar className="w-6 h-6" />
+              <div className="bg-white/10 backdrop-blur-sm p-5 flex flex-col items-center text-white text-center">
+                <div className="mb-2 p-2.5 bg-white/20 rounded-xl">
+                  <Calendar className="w-5 h-5" />
                 </div>
-                <h3 className="text-xl font-black mb-1">Book a Free Consultation</h3>
-                <p className="text-xs font-medium text-white/90">Elevate your brand's digital presence</p>
+                <h3 className="text-lg font-black mb-1">Book a Free Consultation</h3>
+                <p className="text-[10px] font-medium text-white/90">Elevate your brand's digital presence</p>
               </div>
               <div className="absolute top-0 -inset-full h-full w-1/2 z-5 block transform -skew-x-12 bg-gradient-to-r from-transparent to-white/20 opacity-40 group-hover:animate-shine" />
             </motion.a>
 
-            {/* 2. Resources Card - order-2 */}
+            {/* Resources Card - order-3 (mobile), order-2 (desktop) */}
             <motion.div
               variants={itemVariants}
-              className="lg:col-span-8 order-2 lg:order-2 bg-white dark:bg-slate-900 rounded-3xl p-8 lg:p-10 border border-slate-100 dark:border-slate-800 shadow-sm h-full"
+              className="lg:col-span-8 order-3 lg:order-2 bg-white dark:bg-slate-900 rounded-3xl p-8 lg:p-10 border border-slate-100 dark:border-slate-800 shadow-sm h-full"
             >
               <div className="flex justify-between items-center mb-8">
                 <h3 className="text-xs font-black text-slate-400 tracking-widest uppercase flex items-center gap-2">
@@ -466,7 +470,7 @@ export default function Links() {
             {/* Quote Section - beside Resources */}
             <motion.div
               variants={itemVariants}
-              className="lg:col-span-4 order-2 lg:order-2 relative bg-white dark:bg-slate-900 rounded-3xl p-8 lg:p-10 border border-slate-100 dark:border-slate-800 shadow-sm h-full"
+              className="lg:col-span-4 order-5 lg:order-2 relative bg-white dark:bg-slate-900 rounded-3xl p-8 lg:p-10 border border-slate-100 dark:border-slate-800 shadow-sm h-full"
             >
               <div className="absolute left-0 top-10 bottom-10 w-1.5 bg-amber-500 rounded-r-full" />
               <div className="pl-6 pt-2">
@@ -480,7 +484,7 @@ export default function Links() {
             {/* Visit Website Card - beside Links */}
             <motion.div
               variants={itemVariants}
-              className="lg:col-span-4 order-3 lg:order-3 relative h-auto min-h-[300px] rounded-3xl overflow-hidden group shadow-sm border border-slate-100"
+              className="lg:col-span-4 order-6 lg:order-3 relative h-auto min-h-[300px] rounded-3xl overflow-hidden group shadow-sm border border-slate-100"
             >
               <img
                 src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80"
