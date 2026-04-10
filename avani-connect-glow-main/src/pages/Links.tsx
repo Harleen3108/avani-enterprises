@@ -317,7 +317,7 @@ export default function Links() {
                      ))}
                   </div>
                 </div>
-                <div className="w-full md:w-auto">
+                <div className="hidden md:block w-full md:w-auto">
                   <button 
                     onClick={() => window.open('https://wa.me/919253625099', '_blank')}
                     className="w-full md:px-10 py-5 bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 rounded-2xl text-xs font-black tracking-widest hover:bg-emerald-600 dark:hover:bg-emerald-500 hover:text-white transition-all flex items-center justify-center gap-3 uppercase shadow-lg shadow-emerald-500/10"
@@ -391,11 +391,11 @@ export default function Links() {
                  </h3>
               </div>
               <div className="space-y-4">
-                {defaultResources.map((res) => (
+                {defaultResources.map((res, index) => (
                   <a 
                     key={res.id} 
                     href={res.url} 
-                    className="flex items-center justify-between p-5 bg-slate-50 dark:bg-slate-950 border border-slate-100 dark:border-slate-800 rounded-2xl hover:border-amber-200 hover:bg-amber-50 dark:hover:bg-amber-900/10 group transition-all"
+                    className={`${index < 2 ? 'hidden lg:flex' : 'flex'} items-center justify-between p-5 bg-slate-50 dark:bg-slate-950 border border-slate-100 dark:border-slate-800 rounded-2xl hover:border-amber-200 hover:bg-amber-50 dark:hover:bg-amber-900/10 group transition-all`}
                   >
                     <div className="flex items-center gap-4 text-slate-900 dark:text-slate-100">
                       <FileText className="w-6 h-6 text-amber-500" />
@@ -410,36 +410,7 @@ export default function Links() {
               </div>
             </motion.div>
 
-            {/* 4. Connect Card - order-4 */}
-            <motion.div 
-              variants={itemVariants}
-              className="lg:col-span-4 order-4 lg:order-3 bg-gradient-to-br from-white dark:from-slate-900 via-[#FFFDF5] dark:via-slate-900/50 to-[#FFF9E5] dark:to-slate-900 rounded-3xl p-6 lg:p-8 border border-[#F5E6BD]/30 dark:border-slate-800 shadow-sm flex flex-col h-full"
-            >
-              <h3 className="text-[10px] font-black text-slate-400 tracking-widest uppercase mb-6">CONNECT WITH US</h3>
-              
-              <div className="grid grid-cols-2 gap-3 mb-6">
-                 {socialLinks.map((social) => (
-                   <a 
-                    key={social.label}
-                    href={social.url}
-                    className="flex flex-col items-center justify-center aspect-square p-2 bg-slate-50 dark:bg-slate-950 border border-slate-100 dark:border-slate-800 rounded-2xl hover:bg-amber-50 hover:border-amber-200 dark:hover:bg-amber-900/10 group transition-all text-slate-900 dark:text-slate-100"
-                   >
-                     <social.icon className="w-5 h-5 group-hover:text-amber-500 group-hover:scale-110 transition-all mb-2" />
-                     <span className="text-[8px] font-black tracking-widest uppercase">{social.label}</span>
-                   </a>
-                 ))}
-              </div>
 
-              <div className="mt-auto">
-                <button 
-                  onClick={() => window.open('https://wa.me/919253625099', '_blank')}
-                  className="w-full py-4 bg-slate-50 dark:bg-slate-950 border border-slate-100 dark:border-slate-800 rounded-2xl text-[10px] font-black text-slate-900 dark:text-slate-100 tracking-widest hover:bg-emerald-50 hover:border-emerald-200 dark:hover:bg-emerald-900/10 hover:text-emerald-600 transition-all flex items-center justify-center gap-3 uppercase"
-                >
-                  <MessageCircle className="w-5 h-5 text-emerald-500" />
-                  CHAT ON WHATSAPP
-                </button>
-              </div>
-            </motion.div>
 
             {/* 5. Quote Section - order-5 */}
             <motion.div 
