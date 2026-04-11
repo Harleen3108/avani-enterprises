@@ -688,35 +688,6 @@ export default function Links() {
       {/* ────── FOOTER ────── */}
       <Footer />
 
-      {/* ────── MOBILE BOTTOM NAV ────── */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 p-4 lg:hidden">
-        <div className="max-w-md mx-auto bg-slate-900/90 backdrop-blur-xl border border-white/10 rounded-3xl p-2 flex items-center justify-between shadow-2xl">
-          <RouterLink to="/services" className="flex flex-col items-center justify-center flex-1 py-1 rounded-2xl hover:bg-white/5 text-amber-400 group">
-            <div className="p-2 bg-amber-400/10 rounded-xl mb-1 group-hover:bg-amber-400 group-hover:text-slate-900 transition-all">
-              <Layout className="w-5 h-5" />
-            </div>
-            <span className="text-[9px] font-black uppercase tracking-wider">Services</span>
-          </RouterLink>
-          <RouterLink to="/get-consultation" className="flex flex-col items-center justify-center flex-1 py-1 rounded-2xl hover:bg-white/5 text-white group">
-            <div className="p-2 bg-white/5 rounded-xl mb-1 group-hover:bg-amber-400 group-hover:text-slate-900 transition-all">
-              <Briefcase className="w-5 h-5" />
-            </div>
-            <span className="text-[9px] font-black uppercase tracking-wider">Consult</span>
-          </RouterLink>
-          <RouterLink to="/newsletters" className="flex flex-col items-center justify-center flex-1 py-1 rounded-2xl hover:bg-white/5 text-white group">
-            <div className="p-2 bg-white/5 rounded-xl mb-1 group-hover:bg-amber-400 group-hover:text-slate-900 transition-all">
-              <Search className="w-5 h-5" />
-            </div>
-            <span className="text-[9px] font-black uppercase tracking-wider">Resources</span>
-          </RouterLink>
-          <button onClick={() => window.open('https://wa.me/919253625099', '_blank')} className="flex flex-col items-center justify-center flex-1 py-1 rounded-2xl hover:bg-white/5 text-white group">
-            <div className="p-2 bg-white/5 rounded-xl mb-1 group-hover:bg-amber-400 group-hover:text-slate-900 transition-all">
-              <Zap className="w-5 h-5" />
-            </div>
-            <span className="text-[9px] font-black uppercase tracking-wider">Chat</span>
-          </button>
-        </div>
-      </div>
 
       <style>{`
         @keyframes shine {
