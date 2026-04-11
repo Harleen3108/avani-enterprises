@@ -4,12 +4,13 @@ import {
   ExternalLink, Instagram, Linkedin, Mail, MessageCircle,
   FileText, ArrowRight, Download, Calendar, ArrowUpRight, Globe,
   Briefcase, Layout, Zap, Search, Instagram as InstagramIcon,
-  Linkedin as LinkedinIcon, Mail as MailIcon, Phone, Sun, Moon
+  Linkedin as LinkedinIcon, Mail as MailIcon, Phone, Sun, Moon, Facebook, ChevronDown, Star
 } from 'lucide-react';
 import axios from 'axios';
 import { API_BASE_URL } from '../utils/api';
 import { Link as RouterLink } from 'react-router-dom';
 import { useTheme } from 'next-themes';
+import Footer from '../components/Footer';
 
 /* ─── Types and Interfaces ─── */
 declare global {
@@ -75,9 +76,6 @@ const defaultLinks: LinkData[] = [
 const defaultResources = [
   { id: 'res-1', title: 'Avani Enterprises Services', subtitle: 'PDF • 12.4 MB', url: '/Avani Enterprises Services ( Website, SMM and Ads )  (3).pdf' },
   { id: 'res-2', title: 'Avani Services Bundle', subtitle: 'PDF • COMPLETE PACKAGE', url: '/Avani services bundle (2).pdf' },
-  { id: 'res-3', title: 'AI Portfolio', subtitle: 'PDF • AI SOLUTIONS', url: '/AVANI AI PORTFOLIO.pdf' },
-  { id: 'res-4', title: 'Web Dev Portfolio', subtitle: 'PDF • WEB DEVELOPMENT', url: '/Avani website portfolio.pdf' },
-  { id: 'res-5', title: 'Digital Marketing Portfolio', subtitle: 'PDF • DIGITAL MARKETING', url: '/avani-digital-marketing-v2.pdf' },
 ];
 
 const badges = ["MARKETING", "DEVELOPMENT", "BRANDING", "AI SOLUTIONS"];
@@ -85,7 +83,7 @@ const badges = ["MARKETING", "DEVELOPMENT", "BRANDING", "AI SOLUTIONS"];
 const socialLinks = [
   { icon: LinkedinIcon, url: 'https://www.linkedin.com/company/avani-enterprises-india/', label: 'LINKEDIN' },
   { icon: InstagramIcon, url: 'https://www.instagram.com/avanienterprises.branding/', label: 'INSTAGRAM' },
-  { icon: Phone, url: 'tel:+919253625099', label: 'CALL US' },
+  { icon: Facebook, url: 'https://www.facebook.com/share/1DKFWQiBe4/', label: 'FACEBOOK' },
   { icon: MailIcon, url: 'mailto:kp@avanienterprises.in', label: 'EMAIL' },
 ];
 
@@ -97,10 +95,57 @@ const reels = [
   { id: 5, url: 'https://www.instagram.com/reel/DV0EPK-D85D/', reelId: 'DV0EPK-D85D' },
 ];
 
-const reviews = [
-  { id: 1, name: "Prateek Sharma", role: "Business Owner", rating: 5, text: "The digital branding strategies provided by Avani transformed our presence. Highly professional!" },
-  { id: 2, name: "Ananya Iyer", role: "Founder, Luxe Decor", rating: 5, text: "Exceptional service and creative vision. Our social media engagement spiked within months." },
-  { id: 3, name: "Vikram Malhotra", role: "CEO, TechStart", rating: 5, text: "Their website development and SEO approach are top-notch. Truly the best marketing agency." },
+const reviews = [];
+
+const testimonials = [
+  {
+    name: "Director Of Indus School",
+    position: "Principal, Indus Public School",
+    content:
+      "Avani Enterprises delivered an outstanding website that perfectly captures our school's vision and values. The design is modern, intuitive, and makes it easy for parents and students to find information. Their team was professional, responsive, and delivered beyond our expectations.",
+    rating: 5,
+    image: "/indus.jpeg"
+  },
+  {
+    name: "Vikram Sharma",
+    position: "Managing Director, Rohtak Shoe Company",
+    content:
+      "The e-commerce platform developed by Avani Enterprises transformed our business completely. Online sales increased by 250% in just 3 months. The website is fast, user-friendly, and our customers love the shopping experience. Highly recommended!",
+    rating: 5,
+    image: "/shoes.jpeg"
+  },
+  {
+    name: "Sanjay Vats",
+    position: "Co-Founder, Policicue",
+    content:
+      "Working with Avani Enterprises was a game-changer for our startup. They built a sophisticated platform that handles complex policy management with ease. The UI/UX is exceptional, and their technical expertise is top-notch. Our users are impressed!",
+    rating: 5,
+    image: "/policucue.jpeg"
+  },
+  {
+    name: "Amit Kapoor",
+    position: "Founder, FRD Nutrition",
+    content:
+      "The team created a stunning website that perfectly showcases our nutrition products. The e-commerce integration is seamless, and we've seen a 180% increase in online orders. Their attention to detail and customer service is outstanding!",
+    rating: 5,
+    image: "/frd-nutrition-new.png"
+  },
+  {
+    name: "Aman Sharma",
+    position: "CEO, Hi-Tech Luxury Homes",
+    content:
+      "We're thrilled with the elegant website that beautifully represents our luxury properties. The design is sophisticated, the property listings are easy to manage, and our clients love the virtual tour feature. Excellent work!",
+    rating: 5,
+    image: "/hitech.jpeg"
+  },
+  {
+    name: "Dr. Mohit Verma",
+    position: "Director, Sanjeevni Hospital",
+    content:
+      "The hospital management portal developed by Avani Enterprises has streamlined our operations significantly. Patient appointment booking is now effortless, and the admin panel is incredibly user-friendly. A truly professional solution!",
+    rating: 5,
+    image: "/sanjeevni.jpeg"
+  }
 ];
 
 const ReelsMarquee = () => {
@@ -195,44 +240,188 @@ const ReelsMarquee = () => {
   );
 };
 
-const ReviewsSection = () => {
+const TestimonialsSection = ({ currentTestimonial, setCurrentTestimonial }: { currentTestimonial: number; setCurrentTestimonial: (value: number) => void }) => {
   return (
-    <div className="py-16">
-      <h3 className="text-center text-[10px] font-black text-slate-400 tracking-widest uppercase mb-12">What Clients Say</h3>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {reviews.map((rev) => (
-          <motion.div
-            key={rev.id}
-            variants={itemVariants}
-            className="bg-white dark:bg-slate-900 p-8 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow"
+    <section className="relative py-20 bg-white dark:bg-slate-900 transition-colors duration-500">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-5xl font-bold text-slate-900 dark:text-white mb-4 font-sans">
+            What Our Clients Say
+          </h2>
+          <p className="text-lg text-slate-600 dark:text-slate-300 max-w-3xl mx-auto">
+            Real results from real businesses. Here's how we've helped our clients achieve their goals.
+          </p>
+        </div>
+
+        <div className="relative px-4 py-8">
+          {/* Left Arrow */}
+          <button
+            onClick={() => setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length)}
+            className="absolute left-4 md:left-8 lg:left-16 top-1/2 -translate-y-1/2 z-30 w-12 h-12 md:w-14 md:h-14 flex items-center justify-center bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-full shadow-xl transition-all duration-300 hover:scale-110 group border border-slate-200 dark:border-slate-700"
+            aria-label="Previous testimonial"
           >
-            <div className="flex gap-1 mb-4 text-amber-400">
-              {[...Array(5)].map((_, i) => (
-                <Zap key={i} className={`w-3 h-3 ${i < rev.rating ? 'fill-current' : 'opacity-20'}`} />
-              ))}
-            </div>
-            <p className="text-sm font-medium text-slate-600 dark:text-slate-400 mb-8 italic leading-relaxed">
-              "{rev.text}"
-            </p>
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-[10px] font-black text-slate-400 dark:text-slate-500">
-                {rev.name[0]}
-              </div>
-              <div>
-                <h4 className="text-[11px] font-black text-slate-900 dark:text-slate-100 tracking-tight">{rev.name}</h4>
-                <p className="text-[9px] font-bold text-slate-400 tracking-widest uppercase">{rev.role}</p>
-              </div>
-            </div>
-          </motion.div>
-        ))}
+            <ChevronDown className="w-6 h-6 text-slate-900 dark:text-white rotate-90 group-hover:text-amber-600 transition-colors" />
+          </button>
+
+          {/* Right Arrow */}
+          <button
+            onClick={() => setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)}
+            className="absolute right-4 md:right-8 lg:right-16 top-1/2 -translate-y-1/2 z-30 w-12 h-12 md:w-14 md:h-14 flex items-center justify-center bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-full shadow-xl transition-all duration-300 hover:scale-110 group border border-slate-200 dark:border-slate-700"
+            aria-label="Next testimonial"
+          >
+            <ChevronDown className="w-6 h-6 text-gray-900 -rotate-90 group-hover:text-amber-600 transition-colors" />
+          </button>
+
+          {/* Coverflow Container */}
+          <div className="relative h-[500px] md:h-[550px] flex items-center justify-center overflow-visible">
+            {testimonials.map((testimonial, index) => {
+              const isDark = index % 2 !== 0;
+              const headerColor = isDark ? "bg-[#333333]" : "bg-[#FFA500]";
+              const roleColor = isDark ? "text-[#333333]" : "text-[#FFA500]";
+              const gradientColor = isDark ? "from-gray-500 to-gray-700" : "from-orange-500 to-amber-500";
+
+              // Calculate position relative to current testimonial
+              const position = index - currentTestimonial;
+
+              // Determine card styling based on position
+              let cardStyle = {};
+              let cardClass = "absolute transition-all duration-700 ease-out";
+
+              if (position === 0) {
+                // Center card - fully focused
+                cardStyle = {
+                  transform: 'translateX(-50%) scale(1)',
+                  left: '50%',
+                  opacity: 1,
+                  zIndex: 20
+                };
+              } else if (position === -1 || (currentTestimonial === 0 && index === testimonials.length - 1)) {
+                // Left card
+                cardStyle = {
+                  transform: 'translateX(-50%) scale(0.85)',
+                  left: '25%',
+                  opacity: 0.5,
+                  zIndex: 10
+                };
+              } else if (position === 1 || (currentTestimonial === testimonials.length - 1 && index === 0)) {
+                // Right card
+                cardStyle = {
+                  transform: 'translateX(-50%) scale(0.85)',
+                  left: '75%',
+                  opacity: 0.5,
+                  zIndex: 10
+                };
+              } else {
+                // Hidden cards
+                cardStyle = {
+                  transform: 'translateX(-50%) scale(0.7)',
+                  left: position < 0 ? '0%' : '100%',
+                  opacity: 0,
+                  zIndex: 0
+                };
+              }
+
+              return (
+                <div
+                  key={index}
+                  className={cardClass}
+                  style={cardStyle}
+                >
+                  <motion.div
+                    className="relative bg-white rounded-2xl overflow-hidden shadow-2xl w-80 md:w-96 h-full flex flex-col group"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                  >
+                    {/* Gradient Border on Hover */}
+                    <div className={`absolute inset-0 bg-gradient-to-br ${gradientColor} opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10 blur-xl`} />
+
+                    {/* Top Header Section */}
+                    <motion.div
+                      className={`${headerColor} h-32 md:h-36 flex flex-col items-center justify-start pt-6 md:pt-8 relative overflow-hidden`}
+                    >
+                      <div className="text-center z-10 text-white relative">
+                        <span className="block font-serif italic text-lg md:text-xl tracking-wider mb-1 opacity-90">Client</span>
+                        <span className="block text-lg md:text-xl font-bold tracking-[0.2em] uppercase font-sans">TESTIMONIAL</span>
+                      </div>
+                      {/* Animated Background Pattern */}
+                      <motion.div
+                        className="absolute inset-0 opacity-10"
+                        animate={{
+                          backgroundPosition: ["0% 0%", "100% 100%"],
+                        }}
+                        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                        style={{
+                          backgroundImage: `radial-gradient(circle, white 1px, transparent 1px)`,
+                          backgroundSize: "20px 20px"
+                        }}
+                      />
+                    </motion.div>
+
+                    {/* Overlapping Image */}
+                    <div className="relative flex justify-center -mt-10 md:-mt-12 z-20">
+                      <div className="p-1 bg-white rounded-full shadow-lg">
+                        <img
+                          src={testimonial.image}
+                          alt={testimonial.name}
+                          className="w-16 h-16 md:w-20 md:h-20 rounded-full border-4 border-white shadow-sm object-contain bg-white p-1"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Card Body */}
+                    <div className="px-6 pt-4 pb-6 text-center flex-grow flex flex-col items-center">
+                      <h4 className="text-base md:text-lg font-bold text-gray-900 uppercase tracking-widest mb-1">
+                        {testimonial.name}
+                      </h4>
+                      <p className={`${roleColor} text-xs font-bold uppercase tracking-widest mb-3 md:mb-4`}>
+                        {testimonial.position}
+                      </p>
+
+                      <div className="flex justify-center gap-1 mb-4">
+                        {[...Array(testimonial.rating)].map((_, i) => (
+                          <Star key={i} className="w-3 h-3 md:w-4 md:h-4 text-yellow-400 fill-yellow-400" />
+                        ))}
+                      </div>
+
+                      <div className="relative">
+                        <span className="opacity-10 text-4xl md:text-5xl leading-none font-serif absolute -top-3 left-0">"</span>
+                        <p className="text-gray-600 text-sm md:text-base leading-relaxed px-4 italic">
+                          {testimonial.content}
+                        </p>
+                        <span className="opacity-10 text-4xl md:text-5xl leading-none font-serif absolute -bottom-5 right-0">"</span>
+                      </div>
+                    </div>
+                  </motion.div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Indicator dots */}
+          <div className="flex justify-center gap-3 mt-12">
+            {testimonials.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentTestimonial(index)}
+                className={`transition-all duration-300 rounded-full ${currentTestimonial === index
+                  ? 'bg-amber-500 w-3 h-3'
+                  : 'bg-slate-300 dark:bg-slate-600 hover:bg-slate-400 dark:hover:bg-slate-500 w-2 h-2'
+                  }`}
+                aria-label={`Go to testimonial ${index + 1}`}
+              />
+            ))}
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
   );
-}
+};
 
 export default function Links() {
   const [links, setLinks] = useState<LinkData[]>([]);
   const [loading, setLoading] = useState(true);
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const { theme, setTheme } = useTheme();
 
   const ThemeToggle = () => (
@@ -265,6 +454,20 @@ export default function Links() {
       }
     };
     fetchLinks();
+  }, []);
+
+  // Set default theme to dark
+  useEffect(() => {
+    setTheme('dark');
+  }, [setTheme]);
+
+  // Auto-rotate testimonials
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+    }, 5000);
+
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -373,7 +576,7 @@ export default function Links() {
                     ))}
                   </div>
                 </div>
-                <div className="hidden md:block w-full md:w-auto">
+                <div className="w-full md:w-auto">
                   <button
                     onClick={() => window.open('https://wa.me/919253625099', '_blank')}
                     className="w-full md:px-10 py-5 bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 rounded-2xl text-xs font-black tracking-widest hover:bg-emerald-600 dark:hover:bg-emerald-500 hover:text-white transition-all flex items-center justify-center gap-3 uppercase shadow-lg shadow-emerald-500/10"
@@ -382,41 +585,6 @@ export default function Links() {
                     CHAT ON WHATSAPP
                   </button>
                 </div>
-              </div>
-            </motion.div>
-
-            {/* Dynamic Links Card - beside Visit Website */}
-            <motion.div
-              variants={itemVariants}
-              className="lg:col-span-8 order-4 lg:order-3 bg-white dark:bg-slate-900 rounded-3xl p-6 lg:p-8 border border-slate-100 dark:border-slate-800 shadow-sm"
-            >
-              <div className="grid grid-cols-1 gap-4">
-                {loading ? (
-                  [...Array(4)].map((_, i) => (
-                    <div key={i} className="h-24 bg-slate-100 dark:bg-slate-800 animate-pulse rounded-2xl" />
-                  ))
-                ) : (
-                  links.map((link) => (
-                    <a
-                      key={link._id}
-                      href={link.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group flex items-center justify-between p-6 bg-slate-50 dark:bg-slate-950/50 border border-slate-100 dark:border-slate-800 rounded-2xl hover:border-amber-400 dark:hover:border-amber-400/50 transition-all hover:shadow-lg hover:shadow-amber-500/5"
-                    >
-                      <div className="flex items-center gap-5">
-                        <div className="p-3 bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-100 dark:border-slate-800 group-hover:scale-110 transition-transform">
-                          {getLinkIcon(link.icon)}
-                        </div>
-                        <div>
-                          <h4 className="font-black text-slate-900 dark:text-slate-100 text-sm tracking-tight">{stripEmojis(link.title)}</h4>
-                          <p className="text-[10px] font-medium text-slate-400 tracking-wide mt-0.5">{link.description || "Visit official link"}</p>
-                        </div>
-                      </div>
-                      <ArrowUpRight className="w-4 h-4 text-slate-300 group-hover:text-amber-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
-                    </a>
-                  ))
-                )}
               </div>
             </motion.div>
 
@@ -439,7 +607,7 @@ export default function Links() {
             {/* Resources Card - order-3 (mobile), order-2 (desktop) */}
             <motion.div
               variants={itemVariants}
-              className="lg:col-span-8 order-3 lg:order-2 bg-white dark:bg-slate-900 rounded-3xl p-8 lg:p-10 border border-slate-100 dark:border-slate-800 shadow-sm h-full"
+              className="lg:col-span-7 order-3 lg:order-2 bg-white dark:bg-slate-900 rounded-3xl p-8 lg:p-10 border border-slate-100 dark:border-slate-800 shadow-sm"
             >
               <div className="flex justify-between items-center mb-8">
                 <h3 className="text-xs font-black text-slate-400 tracking-widest uppercase flex items-center gap-2">
@@ -466,12 +634,10 @@ export default function Links() {
               </div>
             </motion.div>
 
-
-
             {/* Quote Section - beside Resources */}
             <motion.div
               variants={itemVariants}
-              className="lg:col-span-4 order-5 lg:order-2 relative bg-white dark:bg-slate-900 rounded-3xl p-8 lg:p-10 border border-slate-100 dark:border-slate-800 shadow-sm h-full"
+              className="lg:col-span-5 order-4 lg:order-3 relative bg-white dark:bg-slate-900 rounded-3xl p-8 lg:p-10 border border-slate-100 dark:border-slate-800 shadow-sm h-full"
             >
               <div className="absolute left-0 top-10 bottom-10 w-1.5 bg-amber-500 rounded-r-full" />
               <div className="pl-6 pt-2">
@@ -485,7 +651,7 @@ export default function Links() {
             {/* Visit Website Card - beside Links */}
             <motion.div
               variants={itemVariants}
-              className="lg:col-span-4 order-6 lg:order-3 relative h-auto min-h-[300px] rounded-3xl overflow-hidden group shadow-sm border border-slate-100"
+              className="lg:col-span-12 order-6 lg:order-4 relative h-auto min-h-[300px] rounded-3xl overflow-hidden group shadow-sm border border-slate-100"
             >
               <img
                 src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80"
@@ -511,22 +677,16 @@ export default function Links() {
             <ReelsMarquee />
           </motion.div>
 
-          {/* ────── REVIEWS SECTION ────── */}
+          {/* ────── TESTIMONIALS SECTION ────── */}
           <motion.div variants={itemVariants}>
-            <ReviewsSection />
+            <TestimonialsSection currentTestimonial={currentTestimonial} setCurrentTestimonial={setCurrentTestimonial} />
           </motion.div>
 
         </motion.div>
       </main>
 
       {/* ────── FOOTER ────── */}
-      <footer className="w-full bg-white dark:bg-slate-950 border-t border-slate-100 dark:border-slate-800 py-12 mt-8">
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <p className="text-[9px] font-black text-slate-400 tracking-[0.3em] uppercase">
-            AVANI ENTERPRISES © 2026 ALL RIGHTS RESERVED.
-          </p>
-        </div>
-      </footer>
+      <Footer />
 
       {/* ────── MOBILE BOTTOM NAV ────── */}
       <div className="fixed bottom-0 left-0 right-0 z-50 p-4 lg:hidden">
