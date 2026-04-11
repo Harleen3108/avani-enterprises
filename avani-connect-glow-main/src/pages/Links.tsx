@@ -4,7 +4,7 @@ import {
   ExternalLink, Instagram, Linkedin, Mail, MessageCircle,
   FileText, ArrowRight, Download, Calendar, ArrowUpRight, Globe,
   Briefcase, Layout, Zap, Search, Instagram as InstagramIcon,
-  Linkedin as LinkedinIcon, Mail as MailIcon, Phone, Sun, Moon, Facebook, ChevronDown, Star
+  Linkedin as LinkedinIcon, Mail as MailIcon, Phone, Sun, Moon, ChevronDown, Star
 } from 'lucide-react';
 import axios from 'axios';
 import { API_BASE_URL } from '../utils/api';
@@ -83,7 +83,7 @@ const badges = ["MARKETING", "DEVELOPMENT", "BRANDING", "AI SOLUTIONS"];
 const socialLinks = [
   { icon: LinkedinIcon, url: 'https://www.linkedin.com/company/avani-enterprises-india/', label: 'LINKEDIN' },
   { icon: InstagramIcon, url: 'https://www.instagram.com/avanienterprises.branding/', label: 'INSTAGRAM' },
-  { icon: Facebook, url: 'https://www.facebook.com/share/1DKFWQiBe4/', label: 'FACEBOOK' },
+  { icon: Phone, url: 'tel:+919253625099', label: 'CALL US' },
   { icon: MailIcon, url: 'mailto:kp@avanienterprises.in', label: 'EMAIL' },
 ];
 
@@ -242,7 +242,7 @@ const ReelsMarquee = () => {
 
 const TestimonialsSection = ({ currentTestimonial, setCurrentTestimonial }: { currentTestimonial: number; setCurrentTestimonial: (value: number) => void }) => {
   return (
-    <section className="relative py-20 bg-white dark:bg-slate-900 transition-colors duration-500">
+    <section className="relative py-20 bg-white dark:bg-slate-900 transition-colors duration-500 rounded-3xl mx-4 sm:mx-6 lg:mx-8">
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-bold text-slate-900 dark:text-white mb-4 font-sans">
