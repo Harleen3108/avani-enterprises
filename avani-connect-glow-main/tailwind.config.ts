@@ -18,6 +18,7 @@ export default {
         display: ['Playfair Display', 'serif'],
         body: ['Inter', 'sans-serif'],
         cursive: ['Great Vibes', 'cursive'],
+        heading: ['General Sans', 'Inter', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",

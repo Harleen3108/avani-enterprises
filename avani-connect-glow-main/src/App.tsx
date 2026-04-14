@@ -147,6 +147,7 @@ import Newsletters from "./pages/Newsletters";
 import NewsletterDetail from "./pages/NewsletterDetail";
 import GlobalPresence from "./pages/GlobalPresence";
 import Links from "./pages/Links";
+import DummyHome from "./components/dummy/DummyHome";
 
 const queryClient = new QueryClient();
 
@@ -164,13 +165,13 @@ const AppLayout = () => {
 
   // Pages where Navbar should be hidden completely
   const pathForCheck = pathname.toLowerCase();
-  const hideNavbar = pathForCheck === "/thank-you" || pathForCheck === "/business-setup" || pathForCheck === "/businesssetup1";
+  const hideNavbar = pathForCheck === "/thank-you" || pathForCheck === "/business-setup" || pathForCheck === "/businesssetup1" || pathForCheck === "/dummyhome";
 
   // Pages where Navbar1 should be used instead of default Navbar
   const useNavbar1 = pathForCheck === "/web-dev" || pathForCheck === "/7-day-launch";
 
   // Pages where Footer should be hidden completely
-  const hideFooter = pathForCheck === "/thank-you" || pathForCheck === "/links";
+  const hideFooter = pathForCheck === "/thank-you" || pathForCheck === "/links" || pathForCheck === "/dummyhome";
 
   // Pages where Footer1 should be used instead of default Footer
   const useFooter1 = pathForCheck === "/web-dev" || pathForCheck === "/7-day-launch";
@@ -182,6 +183,7 @@ const AppLayout = () => {
       <main className="pt-0">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/dummyhome" element={<DummyHome />} />
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
           <Route path="/services/:id" element={<ServiceDetail />} />
