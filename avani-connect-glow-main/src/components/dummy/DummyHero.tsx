@@ -117,12 +117,14 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
         <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '2px', background: 'linear-gradient(to right, transparent, var(--accent-primary) 25%, var(--accent-light) 50%, var(--accent-primary) 75%, transparent)', zIndex: 10 }} />
 
         {/* Rotating rings */}
-        <motion.div animate={{ rotate: 360 }} transition={{ duration: 50, repeat: Infinity, ease: 'linear' }}
-          style={{ position: 'absolute', top: '12%', right: '6%', width: '220px', height: '220px', border: '1px solid var(--border-faint)', borderRadius: '50%', zIndex: 2, pointerEvents: 'none' }} />
-        <motion.div animate={{ rotate: -360 }} transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
-          style={{ position: 'absolute', top: '16%', right: '8%', width: '160px', height: '160px', border: '1px solid var(--border-light)', borderRadius: '50%', zIndex: 2, pointerEvents: 'none' }} />
-        <motion.div animate={{ rotate: 360 }} transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-          style={{ position: 'absolute', top: '20%', right: '10%', width: '100px', height: '100px', border: '1px solid var(--border-light)', borderRadius: '50%', zIndex: 2, pointerEvents: 'none' }} />
+        <div className="dummy-hero-rings">
+          <motion.div animate={{ rotate: 360 }} transition={{ duration: 50, repeat: Infinity, ease: 'linear' }}
+            style={{ position: 'absolute', top: '12%', right: '6%', width: '220px', height: '220px', border: '1px solid var(--border-faint)', borderRadius: '50%', zIndex: 2, pointerEvents: 'none' }} />
+          <motion.div animate={{ rotate: -360 }} transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
+            style={{ position: 'absolute', top: '16%', right: '8%', width: '160px', height: '160px', border: '1px solid var(--border-light)', borderRadius: '50%', zIndex: 2, pointerEvents: 'none' }} />
+          <motion.div animate={{ rotate: 360 }} transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+            style={{ position: 'absolute', top: '20%', right: '10%', width: '100px', height: '100px', border: '1px solid var(--border-light)', borderRadius: '50%', zIndex: 2, pointerEvents: 'none' }} />
+        </div>
 
         {/* Content */}
         <motion.div style={{ y: heroY, width: '100%', position: 'relative', zIndex: 5 }}>
@@ -208,9 +210,10 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
 
               {/* Stats row */}
               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9 }}
+                className="dummy-hero-stats"
                 style={{ display: 'flex', borderTop: '1px solid var(--border-faint)', paddingTop: '24px', gap: '0' }}>
                 {[{ target: 150, suffix: '+', label: 'Happy Clients' }, { target: 300, suffix: '+', label: 'Projects Done' }, { target: 85, suffix: '%', label: 'Growth Rate' }, { target: 8, suffix: '+', label: 'Years Active' }].map((s, i) => (
-                  <div key={i} style={{ flex: 1, paddingLeft: i > 0 ? '16px' : 0, paddingRight: i < 3 ? '16px' : 0, borderRight: i < 3 ? '1px solid var(--border-faint)' : 'none' }}>
+                  <div key={i} className={`dummy-hero-stat-item dummy-hero-stat-${i}`} style={{ flex: 1, paddingLeft: i > 0 ? '16px' : 0, paddingRight: i < 3 ? '16px' : 0, borderRight: i < 3 ? '1px solid var(--border-faint)' : 'none' }}>
                     <div style={{ fontFamily: "'Clash Display', sans-serif", fontSize: '32px', color: 'var(--accent-primary)', lineHeight: 1, fontWeight: 700 }}>
                       <DummyAnimatedCounter target={s.target} suffix={s.suffix} />
                     </div>
@@ -333,6 +336,9 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
             .dummy-hero-grid { grid-template-columns: 1fr !important; padding: 100px 24px 40px !important; } 
             .dummy-hero-buttons { flex-direction: column; width: 100%; align-items: stretch; }
             .dummy-hero-buttons > * { width: 100%; justify-content: center; }
+            .dummy-hero-stats { display: grid !important; grid-template-columns: repeat(2, 1fr) !important; gap: 24px 0 !important; }
+            .dummy-hero-stat-item { padding: 0 !important; border-right: none !important; }
+            .dummy-hero-rings { display: none !important; }
           }
         `}</style>
       </section>
