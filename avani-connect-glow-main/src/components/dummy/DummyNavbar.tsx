@@ -30,20 +30,20 @@ const DummyNavbar = () => {
       <nav style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000,
         padding: scrolled ? '10px 0' : '14px 0',
-        background: scrolled ? 'rgba(10,7,5,0.92)' : 'transparent',
+        background: scrolled ? 'var(--nav-scrolled)' : 'transparent',
         backdropFilter: scrolled ? 'blur(20px)' : 'none',
-        borderBottom: scrolled ? '1px solid rgba(196,145,58,0.1)' : '1px solid transparent',
+        borderBottom: scrolled ? '1px solid var(--border-light)' : '1px solid transparent',
         transition: 'all 0.35s ease',
       }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 48px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 48px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }} className="dummy-nav-container">
           {/* Logo */}
           <Link to="/dummyhome" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '10px' }}>
             <div style={{ width: '32px', height: '32px', borderRadius: '8px', overflow: 'hidden', background: '#fff', padding: '2px' }}>
               <img src="/logo0.jpg" alt="Avani" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
             </div>
             <div>
-              <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '18px', letterSpacing: '0.18em', color: '#F5EDD8', lineHeight: 1 }}>AVANI</div>
-              <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: '8px', letterSpacing: '0.2em', color: 'rgba(196,145,58,0.65)', marginTop: '1px' }}>ENTERPRISES</div>
+              <div style={{ fontFamily: "'Clash Display', sans-serif", fontSize: '18px', letterSpacing: '0.14em', color: 'var(--text-primary)', lineHeight: 1, fontWeight: 700 }}>AVANI</div>
+              <div style={{ fontFamily: "'Satoshi', sans-serif", fontSize: '8px', letterSpacing: '0.2em', color: 'var(--accent-primary)', marginTop: '1px', fontWeight: 500 }}>ENTERPRISES</div>
             </div>
           </Link>
 
@@ -54,16 +54,16 @@ const DummyNavbar = () => {
               return (
                 <Link key={link.path} to={link.path}
                   style={{
-                    fontFamily: "'Bebas Neue', sans-serif", fontSize: '13px', letterSpacing: '0.16em',
-                    color: isActive ? '#C4913A' : 'rgba(245,237,216,0.6)',
+                    fontFamily: "'Clash Display', sans-serif", fontSize: '13px', letterSpacing: '0.12em', fontWeight: 600,
+                    color: isActive ? 'var(--accent-primary)' : 'var(--text-secondary)',
                     textDecoration: 'none', position: 'relative', padding: '4px 0',
                     transition: 'color 0.25s',
                   }}
-                  onMouseEnter={e => { if (!isActive) (e.currentTarget as HTMLElement).style.color = '#F5EDD8'; }}
-                  onMouseLeave={e => { if (!isActive) (e.currentTarget as HTMLElement).style.color = 'rgba(245,237,216,0.6)'; }}
+                  onMouseEnter={e => { if (!isActive) (e.currentTarget as HTMLElement).style.color = 'var(--text-primary)'; }}
+                  onMouseLeave={e => { if (!isActive) (e.currentTarget as HTMLElement).style.color = 'var(--text-secondary)'; }}
                 >
                   {link.label}
-                  {isActive && <motion.div layoutId="dummy-nav-indicator" style={{ position: 'absolute', bottom: -2, left: 0, right: 0, height: '2px', background: '#C4913A', borderRadius: '1px' }} transition={{ duration: 0.3 }} />}
+                  {isActive && <motion.div layoutId="dummy-nav-indicator" style={{ position: 'absolute', bottom: -2, left: 0, right: 0, height: '2px', background: 'var(--accent-primary)', borderRadius: '1px' }} transition={{ duration: 0.3 }} />}
                 </Link>
               );
             })}
@@ -73,19 +73,19 @@ const DummyNavbar = () => {
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
             <Link to="/get-consultation" style={{
               display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '8px 20px',
-              background: 'linear-gradient(135deg, #C4913A, #E8B96A)', color: '#0A0705',
-              borderRadius: '5px', textDecoration: 'none', fontFamily: "'Bebas Neue', sans-serif",
-              fontSize: '12px', letterSpacing: '0.15em',
-              boxShadow: '0 4px 16px rgba(196,145,58,0.25)', transition: 'all 0.3s',
+              background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-light))', color: 'var(--bg-primary)',
+              borderRadius: '5px', textDecoration: 'none', fontFamily: "'Clash Display', sans-serif",
+              fontSize: '12px', letterSpacing: '0.12em', fontWeight: 600,
+              boxShadow: '0 4px 16px var(--accent-hover)', transition: 'all 0.3s',
             }} className="dummy-nav-cta"
-              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(-1px)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 6px 24px rgba(196,145,58,0.4)'; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = 'none'; (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 16px rgba(196,145,58,0.25)'; }}
+              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(-1px)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 6px 24px var(--border-light)'; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = 'none'; (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 16px var(--accent-hover)'; }}
             >
               GET STARTED <ArrowRight size={12} />
             </Link>
             <button onClick={() => setMobileOpen(!mobileOpen)}
               className="dummy-nav-burger"
-              style={{ display: 'none', background: 'none', border: '1px solid rgba(196,145,58,0.3)', borderRadius: '6px', padding: '6px', cursor: 'pointer', color: '#F5EDD8' }}>
+              style={{ display: 'none', background: 'none', border: '1px solid var(--border-light)', borderRadius: '6px', padding: '6px', cursor: 'pointer', color: 'var(--text-primary)' }}>
               {mobileOpen ? <X size={18} /> : <Menu size={18} />}
             </button>
           </div>
@@ -100,17 +100,17 @@ const DummyNavbar = () => {
             transition={{ duration: 0.25 }}
             style={{
               position: 'fixed', top: '52px', left: 0, right: 0, bottom: 0, zIndex: 999,
-              background: 'rgba(10,7,5,0.97)', backdropFilter: 'blur(20px)',
+              background: 'var(--nav-scrolled)', backdropFilter: 'blur(20px)',
               padding: '32px 48px', display: 'flex', flexDirection: 'column', gap: '4px',
-            }}
+            }} className="dummy-nav-mobile-container"
           >
             {navLinks.map((link, i) => (
               <motion.div key={link.path} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.05 }}>
                 <Link to={link.path} onClick={() => setMobileOpen(false)}
                   style={{
-                    display: 'block', padding: '14px 0', borderBottom: '1px solid rgba(196,145,58,0.08)',
-                    fontFamily: "'Bebas Neue', sans-serif", fontSize: '20px', letterSpacing: '0.15em',
-                    color: location.pathname === link.path ? '#C4913A' : 'rgba(245,237,216,0.7)',
+                    display: 'block', padding: '14px 0', borderBottom: '1px solid var(--border-faint)',
+                    fontFamily: "'Clash Display', sans-serif", fontSize: '20px', letterSpacing: '0.12em', fontWeight: 600,
+                    color: location.pathname === link.path ? 'var(--accent-primary)' : 'var(--text-secondary)',
                     textDecoration: 'none',
                   }}>
                   {link.label}
@@ -119,9 +119,9 @@ const DummyNavbar = () => {
             ))}
             <Link to="/get-consultation" onClick={() => setMobileOpen(false)} style={{
               display: 'inline-flex', alignItems: 'center', gap: '8px', marginTop: '24px',
-              padding: '12px 28px', background: 'linear-gradient(135deg, #C4913A, #E8B96A)',
-              color: '#0A0705', borderRadius: '6px', textDecoration: 'none',
-              fontFamily: "'Bebas Neue', sans-serif", fontSize: '14px', letterSpacing: '0.15em',
+              padding: '12px 28px', background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-light))',
+              color: 'var(--bg-primary)', borderRadius: '6px', textDecoration: 'none',
+              fontFamily: "'Clash Display', sans-serif", fontSize: '14px', letterSpacing: '0.12em', fontWeight: 600,
               alignSelf: 'flex-start',
             }}>
               GET CONSULTATION <ArrowRight size={14} />
@@ -135,6 +135,10 @@ const DummyNavbar = () => {
           .dummy-nav-links { display: none !important; }
           .dummy-nav-burger { display: flex !important; }
           .dummy-nav-cta { display: none !important; }
+        }
+        @media (max-width: 768px) {
+          .dummy-nav-container { padding: 0 24px !important; }
+          .dummy-nav-mobile-container { padding: 24px !important; }
         }
       `}</style>
     </>

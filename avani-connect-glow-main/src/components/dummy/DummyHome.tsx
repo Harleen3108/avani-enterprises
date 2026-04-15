@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, AnimatePresence, useScroll, useTransform, useSpring } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import axios from 'axios';
+import { Sun, Moon } from 'lucide-react';
 import { API_BASE_URL } from '../../utils/api';
 
 // Dummy isolated components
@@ -18,11 +19,29 @@ import DummyAnnouncement from './DummyAnnouncement';
 import DummyGlobalPresence from './Dummyglobalpresence';
 import DummyCTA from './DummyCTA';
 
+// New Phase 1 components
+import DummyScrollProgress from './DummyScrollProgress';
+
+// New Phase 2 components
+import DummyImpactBar from './DummyImpactBar';
+import DummyCaseStudies from './DummyCaseStudies';
+import DummyIndustries from './DummyIndustries';
+import DummyTeam from './DummyTeam';
+import DummyAwards from './DummyAwards';
+import DummyTimeline from './DummyTimeline';
+import DummyFAQ from './DummyFAQ';
+
 const DummyHome = () => {
+  const [theme, setTheme] = useState<'dark'|'light'>('dark');
   const [blogs, setBlogs] = useState([]);
   const [newsletters, setNewsletters] = useState([]);
   const [loadingBlogs, setLoadingBlogs] = useState(true);
   const [loadingNewsletters, setLoadingNewsletters] = useState(true);
+
+  // Apply theme to body bg to ensure scroll-bounces match
+  useEffect(() => {
+    document.body.style.backgroundColor = theme === 'dark' ? '#0A0705' : '#F0EAD6';
+  }, [theme]);
 
   useEffect(() => {
     fetchBlogs();
@@ -172,19 +191,99 @@ const DummyHome = () => {
   ];
 
   return (
-    <div className="dummy-home" style={{ fontFamily: "'Outfit', sans-serif", background: '#0A0705', color: '#F5EDD8' }}>
+    <div className={theme === 'dark' ? 'dummy-theme-dark' : 'dummy-theme-light'} style={{ fontFamily: "'Satoshi', sans-serif", background: 'var(--bg-primary)', color: 'var(--text-primary)', overflowX: 'hidden', minHeight: '100vh' }}>
+      
+      {/* Theme Toggle Button */}
+      <button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+        style={{
+          position: 'fixed', bottom: '24px', left: '24px', zIndex: 9999,
+          width: '50px', height: '50px', borderRadius: '50%',
+          background: 'var(--glass-bg)', backdropFilter: 'blur(10px)',
+          border: '1px solid var(--border-light)', cursor: 'pointer',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          boxShadow: '0 8px 32px rgba(0,0,0,0.15)',
+          transition: 'all 0.3s ease',
+        }}
+        onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = 'scale(1.1)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent-primary)'; }}
+        onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = 'scale(1)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-light)'; }}
+      >
+        <AnimatePresence mode="wait">
+          {theme === 'dark' ? (
+            <motion.div key="sun" initial={{ opacity: 0, rotate: -90 }} animate={{ opacity: 1, rotate: 0 }} exit={{ opacity: 0, rotate: 90 }} transition={{ duration: 0.2 }}>
+              <Sun size={22} color="var(--accent-primary)" />
+            </motion.div>
+          ) : (
+            <motion.div key="moon" initial={{ opacity: 0, rotate: 90 }} animate={{ opacity: 1, rotate: 0 }} exit={{ opacity: 0, rotate: -90 }} transition={{ duration: 0.2 }}>
+              <Moon size={22} color="var(--accent-primary)" />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </button>
+
+      <DummyScrollProgress />
       <DummyNavbar />
       <DummyHero newsletters={newsletters} loadingNewsletters={loadingNewsletters} clientLogos={clientLogos} />
       <DummyLogoMarquee clientLogos={clientLogos} />
+      <DummyImpactBar />
       <DummyServices services={services} />
       <DummyProcess processSteps={processSteps} />
+      <DummyCaseStudies />
+      <DummyIndustries />
       <DummyGlobalPresence />
       <DummyProjects clientLogos={clientLogos} />
       <DummyTestimonials testimonials={testimonials} />
+      <DummyTeam />
+      <DummyAwards />
+      <DummyTimeline />
       <DummyBlog blogs={blogs} loadingBlogs={loadingBlogs} />
       <DummyAnnouncement />
+      <DummyFAQ />
       <DummyCTA />
       <DummyFooter />
+
+      <style>{`
+        .dummy-theme-dark {
+          --bg-primary: #0A0705;
+          --bg-secondary: #0F0C09;
+          --bg-tertiary: #1A1410;
+          
+          --text-primary: #F5EDD8;
+          --text-secondary: rgba(245,237,216,0.7);
+          --text-tertiary: rgba(245,237,216,0.45);
+          
+          --accent-primary: #C4913A;
+          --accent-light: #E8B96A;
+          --accent-hover: rgba(196,145,58,0.1);
+          
+          --border-light: rgba(196,145,58,0.15);
+          --border-faint: rgba(245,237,216,0.07);
+          
+          --card-bg: rgba(255,255,255,0.02);
+          --glass-bg: rgba(10,7,5,0.75);
+          --nav-scrolled: rgba(10,7,5,0.92);
+        }
+
+        .dummy-theme-light {
+          --bg-primary: #F0EAD6;
+          --bg-secondary: #E3D5C0;
+          --bg-tertiary: #D4C1A5;
+          
+          --text-primary: #382513;
+          --text-secondary: rgba(56,37,19,0.85);
+          --text-tertiary: rgba(56,37,19,0.65);
+          
+          --accent-primary: #6B4423;
+          --accent-light: #8B5E3C;
+          --accent-hover: rgba(107,68,35,0.15);
+          
+          --border-light: rgba(107,68,35,0.25);
+          --border-faint: rgba(56,37,19,0.12);
+          
+          --card-bg: rgba(227,213,192,0.4);
+          --glass-bg: rgba(240,234,214,0.85);
+          --nav-scrolled: rgba(240,234,214,0.98);
+        }
+      `}</style>
     </div>
   );
 };
