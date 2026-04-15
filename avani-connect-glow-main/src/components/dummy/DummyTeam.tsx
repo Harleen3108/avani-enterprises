@@ -4,13 +4,13 @@ import { Linkedin, Twitter } from 'lucide-react';
 
 const team = [
   {
-    name: 'Kuhu Narang',
+    name: 'Vikram Patel',
     role: 'Founder & CEO',
     image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=400&auto=format&fit=crop',
     linkedin: '#',
   },
   {
-    name: 'Harleen Kaur',
+    name: 'Anita Desai',
     role: 'Co-Founder & COO',
     image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=400&auto=format&fit=crop',
     linkedin: '#',
