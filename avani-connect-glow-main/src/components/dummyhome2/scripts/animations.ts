@@ -40,8 +40,8 @@ export function boot(root: HTMLElement): void {
   const tl = gsap.timeline({ delay: 0.1 });
 
   tl.to('#dh2-he', { opacity: 1, y: 0, duration: 1, ease: 'power3.out' })
-    .from('#dh2-ht .ln inner', {
-      y: '115%',
+    .to('#dh2-ht .ln inner', {
+      y: '0%',
       duration: 1.2,
       stagger: 0.13,
       ease: 'power4.out',
