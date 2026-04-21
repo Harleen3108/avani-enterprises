@@ -1992,10 +1992,25 @@ app.get(/.*/, async (req, res, next) => {
     console.log(`🔍 SEO Injection triggered for: ${pagePath}`);
 
     // Fetch SEO data from MongoDB using the same logic as /seo endpoint (case-insensitive)
-    let seo = await Seo.findOne({ 
-      page: { $regex: new RegExp(`^${pagePath}$`, 'i') }, 
-      title: { $ne: "", $ne: null, $exists: true } 
-    }).sort({ updatedAt: -1 });
+    // For the home page (/), we also look for "home" or empty string entries
+    let query = { 
+      page: { $regex: new RegExp(`^${pagePath}$`, 'i') },
+      title: { $ne: "", $ne: null, $exists: true }
+    };
+
+    if (pagePath === "/") {
+      query = {
+        $or: [
+          { page: "/" },
+          { page: "" },
+          { page: "home" },
+          { page: "/home" }
+        ],
+        title: { $ne: "", $ne: null, $exists: true }
+      };
+    }
+
+    let seo = await Seo.findOne(query).sort({ updatedAt: -1 });
 
     if (!seo) {
       seo = await Seo.findOne({ 
