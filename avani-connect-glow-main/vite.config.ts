@@ -32,7 +32,7 @@ const seoPlugin = () => ({
       }
     }
 
-    const title = seo?.title || "Avani Enterprises : No.1 Digital Marketing Agency in India";
+    const title = seo?.title || "Build high-performing Solutions & accelerate Growth.";
     const description = seo?.metaDescription || "No.1 Digital Marketing Agency in India, we deliver result-driven SEO, PPC, social media, and branding solutions.";
     const keywords = seo?.metaKeywords || "digital marketing agency, seo services india, avani enterprises";
 

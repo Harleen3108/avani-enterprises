@@ -450,7 +450,7 @@ const Home = () => {
                   }
                 }}
               >
-                {seo?.seoHeading ? (
+                {(seo?.seoHeading && !seo.seoHeading.includes("No.1 Digital Marketing Agency")) ? (
                   seo.seoHeading
                 ) : (
                   <>
@@ -477,7 +477,7 @@ const Home = () => {
               </motion.h1>
 
               <p className="text-lg md:text-xl text-slate-600 mb-10 leading-relaxed font-medium max-w-xl">
-                We're more than just a digital agency. We have stories to tell, and passions to share, and results to deliver that are more exciting than the competition.
+No.1 Digital Marketing Agency in India we provide best Digital Marketing, Web Development, App Development and AI Solution in india ( Rohtak , Gurgaon, and Mumbai ). We deliver result-driven SEO, PPC, social media, and branding solutions. Our data-focused strategies help businesses generate quality leads and maximize ROI.
               </p>
 
               {/* Global Expansion Text */}

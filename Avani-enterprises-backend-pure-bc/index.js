@@ -1898,7 +1898,8 @@ app.get("/seo", async (req, res) => {
         success: true, 
         isDefault: true,
         data: {
-          title: "Avani Enterprises : No.1 Digital Marketing Agency in India",
+          title: "Build high-performing Solutions & accelerate Growth.",
+          seoHeading: "Build high-performing Solutions & accelerate Growth.",
           metaDescription: "No.1 Digital Marketing Agency in India, we deliver result-driven SEO, PPC, social media, and branding solutions.",
           metaKeywords: "digital marketing agency, seo services india, avani enterprises"
         } 
@@ -2045,7 +2046,8 @@ app.get(/.*/, async (req, res, next) => {
     let html = fs.readFileSync(indexPath, "utf8");
 
     // Default values
-    const title = seo?.title || "Avani Enterprises : No.1 Digital Marketing Agency in India";
+    const title = seo?.title || "Build high-performing Solutions & accelerate Growth.";
+    const seoHeading = seo?.seoHeading || "Build high-performing Solutions & accelerate Growth.";
     const description = seo?.metaDescription || "No.1 Digital Marketing Agency in India, we deliver result-driven SEO, PPC, social media, and branding solutions.";
     const keywords = seo?.metaKeywords || "digital marketing agency, seo services india, avani enterprises";
 
@@ -2080,7 +2082,7 @@ app.get(/.*/, async (req, res, next) => {
     html = replaceMeta(html, 'twitter:title', title);
 
     // Inject SEO data into the window object for hydration
-    const seoDataScript = `<script>window.__SEO_DATA__ = ${JSON.stringify(seo || { title, metaDescription: description, metaKeywords: keywords })};</script>`;
+    const seoDataScript = `<script>window.__SEO_DATA__ = ${JSON.stringify(seo || { title, seoHeading, metaDescription: description, metaKeywords: keywords })};</script>`;
     html = html.replace('</head>', `${seoDataScript}</head>`);
 
     res.send(html);
