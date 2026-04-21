@@ -1898,9 +1898,9 @@ app.get("/seo", async (req, res) => {
         success: true, 
         isDefault: true,
         data: {
-          title: "Avani Enterprises | Digital Excellence",
-          metaDescription: "Professional digital services by Avani Enterprises.",
-          metaKeywords: "digital, services, avani"
+          title: "Avani Enterprises : No.1 Digital Marketing Agency in India",
+          metaDescription: "No.1 Digital Marketing Agency in India, we deliver result-driven SEO, PPC, social media, and branding solutions.",
+          metaKeywords: "digital marketing agency, seo services india, avani enterprises"
         } 
       });
     }
@@ -2045,9 +2045,9 @@ app.get(/.*/, async (req, res, next) => {
     let html = fs.readFileSync(indexPath, "utf8");
 
     // Default values
-    const title = seo?.title || "Avani Enterprises | Digital Marketing & Web Development Agency";
-    const description = seo?.metaDescription || "Avani Enterprises provides web development, SEO, and digital marketing services to help businesses grow online.";
-    const keywords = seo?.metaKeywords || "digital marketing, web development, SEO, digital agency india";
+    const title = seo?.title || "Avani Enterprises : No.1 Digital Marketing Agency in India";
+    const description = seo?.metaDescription || "No.1 Digital Marketing Agency in India, we deliver result-driven SEO, PPC, social media, and branding solutions.";
+    const keywords = seo?.metaKeywords || "digital marketing agency, seo services india, avani enterprises";
 
     console.log(`✅ Injecting for ${pagePath}: Title="${title}"`);
 

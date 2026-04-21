@@ -32,9 +32,9 @@ const seoPlugin = () => ({
       }
     }
 
-    const title = seo?.title || "Avani Enterprises | Digital Marketing & Web Development Services";
-    const description = seo?.metaDescription || "Transform your brand with Avani Enterprises.";
-    const keywords = seo?.metaKeywords || "digital marketing, web development, SEO";
+    const title = seo?.title || "Avani Enterprises : No.1 Digital Marketing Agency in India";
+    const description = seo?.metaDescription || "No.1 Digital Marketing Agency in India, we deliver result-driven SEO, PPC, social media, and branding solutions.";
+    const keywords = seo?.metaKeywords || "digital marketing agency, seo services india, avani enterprises";
 
     let transformed = html
       .replace(/<title>.*?<\/title>/gi, `<title>${title}</title>`)

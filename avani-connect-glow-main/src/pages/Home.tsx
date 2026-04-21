@@ -432,7 +432,7 @@ const Home = () => {
               className="sm:mt-0"
             >
               <span className="text-amber-600 font-extrabold text-lg tracking-wide mb-2 block">
-                One stop solution for business and start-ups Since 2016!
+                No.1 Digital Marketing Agency in India
               </span>
 
               <motion.h1
