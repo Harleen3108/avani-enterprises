@@ -1859,18 +1859,32 @@ app.get("/seo", async (req, res) => {
 
     let entry = null;
 
+    let query = { 
+      page: { $regex: new RegExp(`^${page}$`, 'i') }, 
+      title: { $ne: "", $ne: null, $exists: true } 
+    };
+
+    // Robust Home page matching (handles /, home, or empty page field)
+    if (page === "/" || page.toLowerCase() === "/home") {
+      query = {
+        $or: [
+          { page: "/" },
+          { page: "" },
+          { page: "home" },
+          { page: "/home" }
+        ],
+        title: { $ne: "", $ne: null, $exists: true }
+      };
+    }
+
     // 1. If section is provided, try exact match first
     if (section && section.trim() !== "") {
       entry = await Seo.findOne({ page, section }).sort({ updatedAt: -1 });
     }
     
-    // 2. If no entry found yet (or no section provided), 
-    // find the LATEST record for this page that HAS a title
+    // 2. If no entry found yet (or no section provided), use the robust query
     if (!entry) {
-      entry = await Seo.findOne({ 
-        page, 
-        title: { $ne: "", $ne: null, $exists: true } 
-      }).sort({ updatedAt: -1 });
+      entry = await Seo.findOne(query).sort({ updatedAt: -1 });
     }
 
     // 3. Fallback to just the first/latest record for this page if nothing found with title
