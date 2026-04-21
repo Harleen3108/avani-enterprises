@@ -24,11 +24,22 @@ export const SeoProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Attempt to hydrate from server-injected data first
+    const dehydratedData = (window as any).__SEO_DATA__;
+    const currentPage = location.pathname || "/";
+    
+    if (dehydratedData && (dehydratedData.page === currentPage || (currentPage === "/" && ["", "/", "home", "/home"].includes(dehydratedData.page)))) {
+      setSeo(dehydratedData);
+      setLoading(false);
+      // Clean up to prevent stale data on navigation
+      (window as any).__SEO_DATA__ = null;
+      return;
+    }
+
     const fetchSeo = async () => {
       setLoading(true);
       try {
-        const page = location.pathname || "/";
-        const res = await axios.get(`${API_BASE_URL}/seo`, { params: { page } });
+        const res = await axios.get(`${API_BASE_URL}/seo`, { params: { page: currentPage } });
         setSeo(res.data.data);
       } catch (err) {
         console.error("Failed to fetch SEO data:", err);

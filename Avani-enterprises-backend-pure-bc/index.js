@@ -2065,6 +2065,10 @@ app.get(/.*/, async (req, res, next) => {
     html = replaceMeta(html, 'og:title', title);
     html = replaceMeta(html, 'twitter:title', title);
 
+    // Inject SEO data into the window object for hydration
+    const seoDataScript = `<script>window.__SEO_DATA__ = ${JSON.stringify(seo || { title, metaDescription: description, metaKeywords: keywords })};</script>`;
+    html = html.replace('</head>', `${seoDataScript}</head>`);
+
     res.send(html);
   } catch (err) {
     console.error("❌ SEO Injection Error:", err);
