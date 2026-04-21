@@ -18,6 +18,8 @@ import {
 } from 'lucide-react';
 import AnimatedSection from '../components/AnimatedSection';
 import AnimatedCounter from '../components/AnimatedCounter';
+import Breadcrumbs from '../components/Breadcrumbs';
+
 
 // Animated Counter Component for Case Studies
 const StatCardCaseStudies = ({ end, suffix = '', prefix = '', label }) => {
@@ -248,6 +250,9 @@ const CaseStudies = () => {
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="pt-8">
+            <Breadcrumbs />
+          </div>
           <div className="text-center">
             <motion.h1
               className="text-3xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6"

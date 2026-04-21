@@ -450,11 +450,17 @@ import {
   ShieldCheck
 } from 'lucide-react';
 import AnimatedSection from '../components/AnimatedSection';
+import Breadcrumbs from '../components/Breadcrumbs';
+
 import RotatingText from '../components/RotatingText';
 import { motion } from 'framer-motion';
+import { useSeo } from '../contexts/SeoContext';
+
 
 const Services = () => {
+  const { seo } = useSeo();
   const [activeTab, setActiveTab] = useState('all');
+
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const location = useLocation();
 
@@ -677,6 +683,9 @@ const Services = () => {
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="pt-8">
+            <Breadcrumbs />
+          </div>
           <AnimatedSection animation="fadeInUp" delay={0.2}>
             <div className="text-center">
               <motion.h1
@@ -685,22 +694,28 @@ const Services = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: "easeOut" }}
               >
-                Expert{" "}
-                <RotatingText
-                  words={[
-                    "Web Development",
-                    "SEO & Content Marketing",
-                    "Social Media Marketing",
-                    "AI Solutions",
-                    "Podcast Production",
-                    "Financial Consulting",
-                    "Business Consultation",
-                    "Business Loans",
-                    "Business Insurance"
-                  ]}
-                  interval={2500}
-                  className="text-amber-500"
-                />
+                {seo?.seoHeading ? (
+                  seo.seoHeading
+                ) : (
+                  <>
+                    Expert{" "}
+                    <RotatingText
+                      words={[
+                        "Web Development",
+                        "SEO & Content Marketing",
+                        "Social Media Marketing",
+                        "AI Solutions",
+                        "Podcast Production",
+                        "Financial Consulting",
+                        "Business Consultation",
+                        "Business Loans",
+                        "Business Insurance"
+                      ]}
+                      interval={2500}
+                      className="text-amber-500"
+                    />
+                  </>
+                )}
               </motion.h1>
               <motion.p
                 className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed"

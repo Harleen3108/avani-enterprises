@@ -77,6 +77,8 @@ const Navbar = () => {
 
   return (
     <nav
+      itemScope
+      itemType="http://schema.org/SiteNavigationElement"
       className={`fixed left-0 right-0 z-50 transition-all duration-500 ease-in-out font-sans top-0
         ${isScrolled
           ? "bg-white/95 backdrop-blur-xl shadow-sm py-2"
@@ -199,9 +201,10 @@ const Navbar = () => {
                   <Link
                     key={item.name}
                     to={item.path}
+                    itemProp="url"
                     className={`relative px-1 xl:px-3 py-2 group whitespace-nowrap text-[11px] xl:text-[13px] font-bold tracking-wide transition-all duration-300 ${isActive ? "text-amber-600" : "text-amber-500 hover:text-amber-600"}`}
                   >
-                    {item.name}
+                    <span itemProp="name">{item.name}</span>
                     {item.name !== "Home" && (
                       <motion.div
                         className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 h-0.5 bg-amber-600 rounded-full"

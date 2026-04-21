@@ -15,6 +15,8 @@ import {
   Sparkles
 } from 'lucide-react';
 import AnimatedSection from '../components/AnimatedSection';
+import Breadcrumbs from '../components/Breadcrumbs';
+
 
 const Blog = () => {
   const [activeCategory, setActiveCategory] = useState('all');
@@ -72,6 +74,9 @@ const Blog = () => {
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="pt-8">
+            <Breadcrumbs />
+          </div>
           <AnimatedSection animation="fadeInUp" delay={0.2}>
             <div className="text-center">
               <motion.h1

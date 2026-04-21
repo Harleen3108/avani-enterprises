@@ -13,17 +13,17 @@
     <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,300,400,500,600,700&f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet">
 
     <!-- Primary SEO -->
-    <title>Avani Enterprises | Web Development & Digital Marketing Agency</title>
-    <meta name="description" content="Avani Enterprises provides web development, SEO, and digital marketing services to help businesses grow online." />
+    <title>__SEO_TITLE__</title>
+    <meta name="description" content="__SEO_DESCRIPTION__" />
     <meta name="author" content="Avani Enterprises" />
     <meta name="keywords" content="__SEO_KEYWORDS__" />
     <link rel="canonical" href="https://www.avanienterprises.in/" />
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Avani Enterprises | Web Development & Digital Marketing Agency" />
+    <meta property="og:title" content="__SEO_TITLE__" />
     <meta
       property="og:description"
-      content="Avani Enterprises provides web development, SEO, and digital marketing services to help businesses grow online."
+      content="__SEO_DESCRIPTION__"
     />
     <meta property="og:type" content="website" />
     <meta
@@ -34,8 +34,8 @@
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@AvaniEnterprises" />
-    <meta name="twitter:title" content="Avani Enterprises | Web Development & Digital Marketing Agency" />
-    <meta name="twitter:description" content="Avani Enterprises provides web development, SEO, and digital marketing services to help businesses grow online." />
+    <meta name="twitter:title" content="__SEO_TITLE__" />
+    <meta name="twitter:description" content="__SEO_DESCRIPTION__" />
     <meta
       name="twitter:image"
       content="/logo0.jpg"
@@ -75,11 +75,30 @@
 
     <script type="application/ld+json">
     {
-     "@context": "https://schema.org",
-     "@type": "Organization",
-     "name": "Avani Enterprises",
-     "url": "https://www.avanienterprises.in",
-     "description": "Web development and digital marketing agency"
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Avani Enterprises",
+      "url": "https://www.avanienterprises.in",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://www.avanienterprises.in/blog?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Avani Enterprises",
+      "url": "https://www.avanienterprises.in",
+      "logo": "https://www.avanienterprises.in/logo.png",
+      "sameAs": [
+        "https://www.linkedin.com/company/avani-enterprises-india",
+        "https://www.instagram.com/avani_enterprises_india/",
+        "https://twitter.com/AvaniEnterprises"
+      ],
+      "description": "Avani Enterprises - Best Digital Marketing & Web Development Agency helping businesses scale with AI and strategic marketing."
     }
     </script>
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>

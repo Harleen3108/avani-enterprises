@@ -1897,77 +1897,142 @@ app.get("/seo", async (req, res) => {
   }
 });
 
+// 0. Dynamic Sitemap Route
+app.get("/sitemap.xml", async (req, res) => {
+  try {
+    const baseUrl = "https://www.avanienterprises.in";
+    const date = new Date().toISOString().split("T")[0];
+
+    // Fetch dynamic data
+    const seoPages = await Seo.find({ section: { $in: ["", null] } }).select("page updatedAt");
+    const blogs = await Blog.find({ status: "published" }).select("slug updatedAt");
+    const newsletters = await Newsletter.find().select("slug updatedAt");
+
+    let sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Static & Managed Pages -->`;
+
+    // Process SEO pages
+    seoPages.forEach(item => {
+      const priority = item.page === "/" ? "1.0" : "0.8";
+      const changefreq = "monthly";
+      const lastmod = item.updatedAt ? item.updatedAt.toISOString().split("T")[0] : date;
+      
+      // Prevent double slash if page starts with /
+      const cleanPath = item.page.startsWith('/') ? item.page : `/${item.page}`;
+      
+      sitemap += `
+  <url>
+    <loc>${baseUrl}${cleanPath}</loc>
+    <lastmod>${lastmod}</lastmod>
+    <changefreq>${changefreq}</changefreq>
+    <priority>${priority}</priority>
+  </url>`;
+    });
+
+    // Process Blogs
+    blogs.forEach(blog => {
+      const lastmod = blog.updatedAt ? blog.updatedAt.toISOString().split("T")[0] : date;
+      sitemap += `
+  <url>
+    <loc>${baseUrl}/blog/${blog.slug}</loc>
+    <lastmod>${lastmod}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>`;
+    });
+
+    // Process Newsletters
+    newsletters.forEach(news => {
+      const lastmod = news.updatedAt ? news.updatedAt.toISOString().split("T")[0] : date;
+      sitemap += `
+  <url>
+    <loc>${baseUrl}/newsletters/${news.slug}</loc>
+    <lastmod>${lastmod}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>`;
+    });
+
+    sitemap += `
+</urlset>`;
+
+    res.header("Content-Type", "application/xml");
+    res.send(sitemap);
+  } catch (error) {
+    console.error("Sitemap Generation Error:", error);
+    res.status(500).send("Error generating sitemap");
+  }
+});
+
 // Define frontend path (absolute path for reliability)
 const frontendPath = path.resolve(__dirname, "../avani-connect-glow-main/dist");
 
 // 1. Catch-all route for SEO injection (MUST be above express.static)
 app.get(/.*/, async (req, res, next) => {
   try {
-    const pagePath = req.path || "/";
+    let pagePath = req.path || "/";
     
     // CRITICAL: Skip SEO for ALL API-like routes immediately
-    if (pagePath.startsWith("/newsletters") || pagePath.startsWith("/blogs") || pagePath.startsWith("/seo")) {
-      // If it reached here, it means it didn't match the specific route above.
-      // We MUST NOT return HTML. Return a JSON 404 instead.
-      return res.status(404).json({ 
-        success: false, 
-        message: `API Route ${pagePath} not found. Please check your backend deployment.` 
-      });
+    if (pagePath.startsWith("/newsletters") || pagePath.startsWith("/blogs") || pagePath.startsWith("/seo") || pagePath.startsWith("/api") || pagePath.startsWith("/auth")) {
+      return next();
     }
     
-    // Skip SEO injection for:
-    // 1. Assets (files with extensions)
-    // 2. API/Auth routes
-    // 3. Requests explicitly asking for JSON
-    if (
-      pagePath.includes(".") || 
-      pagePath.startsWith("/api") || 
-      pagePath.startsWith("/auth") || 
-      pagePath.startsWith("/admin") ||
-      pagePath.startsWith("/leads") ||
-      pagePath.startsWith("/jobs") ||
-      pagePath.startsWith("/blogs") ||
-      pagePath.startsWith("/applications") ||
-      pagePath.startsWith("/submit-form") ||
-      pagePath.startsWith("/avani-form") ||
-      pagePath.startsWith("/seo") ||
-      pagePath.startsWith("/newsletters") ||
-      req.headers.accept?.includes("application/json")
-    ) {
+    // Skip SEO injection for assets (files with extensions)
+    if (pagePath.includes(".") && !pagePath.endsWith(".html")) {
       return next();
     }
 
+    // Normalize path for lookup
+    pagePath = pagePath.trim();
+    if (!pagePath.startsWith('/')) pagePath = '/' + pagePath;
+    // Remove trailing slash except for root
+    if (pagePath.length > 1 && pagePath.endsWith('/')) pagePath = pagePath.slice(0, -1);
+
     console.log(`🔍 SEO Injection triggered for: ${pagePath}`);
 
-    // Fetch SEO data from MongoDB
-    let seo = await Seo.findOne({ page: pagePath });
+    // Fetch SEO data from MongoDB using the same logic as /seo endpoint (case-insensitive)
+    let seo = await Seo.findOne({ 
+      page: { $regex: new RegExp(`^${pagePath}$`, 'i') }, 
+      title: { $ne: "", $ne: null, $exists: true } 
+    }).sort({ updatedAt: -1 });
+
+    if (!seo) {
+      seo = await Seo.findOne({ 
+        page: { $regex: new RegExp(`^${pagePath}$`, 'i') } 
+      }).sort({ updatedAt: -1 });
+    }
+
+    // Global Fallback to home if page not found
     if (!seo && pagePath !== "/") {
-      seo = await Seo.findOne({ page: "/" });
+      seo = await Seo.findOne({ page: "/" }).sort({ updatedAt: -1 });
     }
 
     const indexPath = path.join(frontendPath, "index.html");
     if (!fs.existsSync(indexPath)) {
-      // Only log if it's a request that SHOULD be an HTML page (not an API-like path)
-      if (!pagePath.includes('.') && !pagePath.startsWith('/api')) {
-        console.log("ℹ️ index.html not found, skipping SEO injection.");
-      }
       return next();
     }
 
     let html = fs.readFileSync(indexPath, "utf8");
 
-    // Replace placeholders
-    const title = seo?.title || "Avani Enterprises | Digital Marketing & Web Development Services";
-    const description = seo?.metaDescription || "Transform your brand with Avani Enterprises.";
-    const keywords = seo?.metaKeywords || "digital marketing, web development, SEO";
+    // Default values
+    const title = seo?.title || "Avani Enterprises | Digital Marketing & Web Development Agency";
+    const description = seo?.metaDescription || "Avani Enterprises provides web development, SEO, and digital marketing services to help businesses grow online.";
+    const keywords = seo?.metaKeywords || "digital marketing, web development, SEO, digital agency india";
 
     console.log(`✅ Injecting for ${pagePath}: Title="${title}"`);
 
-    // Use a more robust replacement that handles potential variations in formatting
+    // Robust meta tag replacement
     const replaceMeta = (html, identifier, content) => {
+      // Handles both name="..." and property="..."
       const regex = new RegExp(`(<meta\\s+[^>]*?(?:name|property)=["']${identifier}["'][^>]*?\\s+content=)["'].*?["']`, 'gi');
       if (regex.test(html)) {
         return html.replace(regex, `$1"${content}"`);
+      }
+      // Try reverse order (content before name)
+      const reverseRegex = new RegExp(`(<meta\\s+[^>]*?content=)["'].*?["']([^>]*?(?:name|property)=["']${identifier}["'])`, 'gi');
+      if (reverseRegex.test(html)) {
+        return html.replace(reverseRegex, `$1"${content}"$2`);
       }
       return html;
     };

@@ -14,6 +14,8 @@ import {
   CheckCircle2
 } from 'lucide-react';
 import AnimatedSection from '../components/AnimatedSection';
+import Breadcrumbs from '../components/Breadcrumbs';
+
 
 const NewsletterDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -126,6 +128,9 @@ const NewsletterDetail = () => {
           </div>
 
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative text-center">
+            <div className="flex justify-center mb-4">
+              <Breadcrumbs />
+            </div>
             <AnimatedSection animation="fadeInUp" delay={0.1}>
               <Link
                 to="/newsletters"

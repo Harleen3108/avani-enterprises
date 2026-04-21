@@ -148,6 +148,8 @@ import NewsletterDetail from "./pages/NewsletterDetail";
 import GlobalPresence from "./pages/GlobalPresence";
 import Links from "./pages/Links";
 import DummyHome from "./components/dummy/DummyHome";
+import { SeoProvider } from "./contexts/SeoContext";
+
 
 const queryClient = new QueryClient();
 
@@ -247,8 +249,10 @@ const App = () => {
             <Toaster />
             <Sonner />
             <Router>
-              <ScrollToTop />
-              <AppLayout />
+              <SeoProvider>
+                <ScrollToTop />
+                <AppLayout />
+              </SeoProvider>
             </Router>
           </TooltipProvider>
         </ThemeProvider>

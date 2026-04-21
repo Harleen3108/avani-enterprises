@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useSeo } from '../contexts/SeoContext';
+
 import { Link } from 'react-router-dom';
 import {
   ArrowRight,
@@ -35,7 +37,9 @@ import axios from 'axios';
 import { API_BASE_URL } from '../utils/api';
 
 const Home = () => {
+  const { seo } = useSeo();
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
+
   const [counter, setCounter] = useState({
     clients: 0,
     projects: 0,
@@ -446,24 +450,30 @@ const Home = () => {
                   }
                 }}
               >
-                {("Build high-performing ").split("").map((char, index) => (
-                  <motion.span
-                    key={`char-${index}`}
-                    variants={{
-                      hidden: { opacity: 0, y: 10 },
-                      visible: { opacity: 1, y: 0 }
-                    }}
-                  >
-                    {char}
-                  </motion.span>
-                ))}
-                <RotatingText
-                  words={["Websites", "Products", "Solutions", "Experiences"]}
-                  interval={3000}
-                  className="text-amber-500"
-                />
-                {" & accelerate "}
-                <span className="text-amber-500">Growth.</span>
+                {seo?.seoHeading ? (
+                  seo.seoHeading
+                ) : (
+                  <>
+                    {("Build high-performing ").split("").map((char, index) => (
+                      <motion.span
+                        key={`char-${index}`}
+                        variants={{
+                          hidden: { opacity: 0, y: 10 },
+                          visible: { opacity: 1, y: 0 }
+                        }}
+                      >
+                        {char}
+                      </motion.span>
+                    ))}
+                    <RotatingText
+                      words={["Websites", "Products", "Solutions", "Experiences"]}
+                      interval={3000}
+                      className="text-amber-500"
+                    />
+                    {" & accelerate "}
+                    <span className="text-amber-500">Growth.</span>
+                  </>
+                )}
               </motion.h1>
 
               <p className="text-lg md:text-xl text-slate-600 mb-10 leading-relaxed font-medium max-w-xl">

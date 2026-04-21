@@ -4,6 +4,8 @@ import { useParams, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { ArrowLeft, Share2, Calendar, FileText, CheckCircle2 } from 'lucide-react';
 import AnimatedSection from '../components/AnimatedSection';
+import Breadcrumbs from '../components/Breadcrumbs';
+
 
 const BlogDetail = () => {
   const { slug } = useParams();
@@ -113,6 +115,9 @@ const BlogDetail = () => {
           </div>
 
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative text-center">
+            <div className="flex justify-center mb-4">
+              <Breadcrumbs />
+            </div>
             <AnimatedSection animation="fadeInUp" delay={0.1}>
               <Link
                 to="/blog"

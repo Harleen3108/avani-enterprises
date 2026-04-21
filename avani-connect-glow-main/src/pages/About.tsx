@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { useSeo } from '../contexts/SeoContext';
+
 import {
   Target,
   Users,
@@ -17,9 +19,13 @@ import AnimatedSection from '../components/AnimatedSection';
 import AnimatedCounter from '../components/AnimatedCounter';
 import EcosystemMap from '../components/EcosystemMap';
 import RotatingText from '../components/RotatingText';
+import Breadcrumbs from '../components/Breadcrumbs';
+
 
 const About = () => {
+  const { seo } = useSeo();
   const values = [
+
     {
       icon: <Target className="w-8 h-8" />,
       title: "Results-Driven",
@@ -76,6 +82,7 @@ const About = () => {
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Breadcrumbs />
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -83,7 +90,11 @@ const About = () => {
             className="text-center mb-8"
           >
             <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-4">
-              About <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-600">Avani Enterprises</span>
+              {seo?.seoHeading ? (
+                seo.seoHeading
+              ) : (
+                <>About <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-600">Avani Enterprises</span></>
+              )}
             </h1>
             <p className="text-xl text-slate-600 max-w-3xl mx-auto">
               Transforming businesses through strategic digital solutions and innovative technology
