@@ -74,8 +74,7 @@ const defaultLinks: LinkData[] = [
 ];
 
 const defaultResources = [
-  { id: 'res-1', title: 'Avani Enterprises Services', subtitle: 'PDF • 12.4 MB', url: '/Avani Enterprises Services ( Website, SMM and Ads )  (3).pdf' },
-  { id: 'res-2', title: 'Avani Services Bundle', subtitle: 'PDF • COMPLETE PACKAGE', url: '/Avani services bundle (2).pdf' },
+  { id: 'res-1', title: 'Avani Enterprises Resource', subtitle: 'PDF', url: '/resource.pdf' },
 ];
 
 const badges = ["MARKETING", "DEVELOPMENT", "BRANDING", "AI SOLUTIONS"];
