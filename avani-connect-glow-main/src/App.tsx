@@ -150,6 +150,7 @@ import Links from "./pages/Links";
 import DummyHome from "./components/dummy/DummyHome";
 import DummyHome2 from "./pages/DummyHome2";
 import { SeoProvider } from "./contexts/SeoContext";
+import { ThemeProvider } from "./components/theme-provider";
 
 
 const queryClient = new QueryClient();
@@ -240,7 +241,6 @@ const AppLayout = () => {
   );
 };
 
-import { ThemeProvider } from "./components/theme-provider";
 
 const App = () => {
   return (

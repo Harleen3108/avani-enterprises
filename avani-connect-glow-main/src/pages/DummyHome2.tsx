@@ -1,12 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, Fragment } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight, Plus, ArrowUpRight, Play } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import '../components/dummyhome2/DummyHome2.css';
-
-gsap.registerPlugin(ScrollTrigger);
 
 // Data migrated from dummyhome1
 const services = [
@@ -22,6 +18,34 @@ const projects = [
   { name: "HR Portal", tag: "SAAS / ERP", desc: "A comprehensive HR management system built to streamline and automate workforce operations.", img: "/hrportal.png" },
   { name: "Hospital Website", tag: "HEALTHCARE", desc: "Comprehensive web platform for Holy Heart Hospital, specializing in advanced cardiac care.", img: "/hospital.jpg", isLarge: true },
 ];
+
+const ProjectCard = ({ project }: { project: any }) => {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+  
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+
+  return (
+    <div ref={ref} className={`dh2-project-card ${project.isLarge ? 'large' : ''}`}>
+      <motion.img 
+        style={{ y }}
+        src={project.img} 
+        alt={project.name} 
+        className="dh2-project-img" 
+      />
+      <div className="dh2-project-overlay">
+        <span className="dh2-project-tag">{project.tag}</span>
+        <div className="dh2-project-info">
+          <h3 className="dh2-heading dh2-project-title">{project.name}</h3>
+          <p className="dh2-body dh2-project-desc">{project.desc}</p>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const DummyHome2 = () => {
   const [loading, setLoading] = useState(true);
@@ -46,46 +70,32 @@ const DummyHome2 = () => {
     return () => clearInterval(interval);
   }, []);
 
-  useEffect(() => {
-    if (loading) return;
-
-    // GSAP Animations
-    const ctx = gsap.context(() => {
-      // Hero text stagger
-      gsap.to('.dh2-hero-title-text', {
-        y: 0,
+  // Entry animation variants
+  const titleVariants = {
+    hidden: { y: 100, opacity: 0 },
+    visible: (i: number) => ({
+      y: 0,
+      opacity: 1,
+      transition: {
         duration: 1,
-        stagger: 0.2,
-        ease: 'power4.out',
-        delay: 0.2
-      });
+        ease: [0.22, 1, 0.36, 1],
+        delay: 0.2 + (i * 0.1)
+      }
+    })
+  };
 
-      gsap.to(['.dh2-hero-subtitle', '.dh2-hero-ctas'], {
-        y: 0,
-        opacity: 1,
-        duration: 1,
-        stagger: 0.2,
-        ease: 'power3.out',
+  const subtitleVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut",
         delay: 0.8
-      });
-
-      // Parallax on images
-      gsap.utils.toArray<HTMLElement>('.dh2-project-img').forEach(img => {
-        gsap.to(img, {
-          yPercent: 20,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: img.parentElement,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: true
-          }
-        });
-      });
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, [loading]);
+      }
+    }
+  };
 
   return (
     <div className="dh2-root" ref={containerRef}>
@@ -124,29 +134,69 @@ const DummyHome2 = () => {
       {/* Hero */}
       <section className="dh2-hero dh2-container">
         <h1 className="dh2-display dh2-hero-title">
-          <span className="dh2-hero-title-line"><span className="dh2-hero-title-text">WE CRAFT</span></span>
-          <span className="dh2-hero-title-line"><span className="dh2-hero-title-text dh2-hero-stroked">DIGITAL</span></span>
-          <span className="dh2-hero-title-line"><span className="dh2-hero-title-text dh2-hero-accent">EXPERIENCES</span></span>
+          <span className="dh2-hero-title-line">
+            <motion.span 
+              custom={0}
+              initial="hidden"
+              animate={!loading ? "visible" : "hidden"}
+              variants={titleVariants}
+              className="dh2-hero-title-text block"
+            >
+              WE CRAFT
+            </motion.span>
+          </span>
+          <span className="dh2-hero-title-line">
+            <motion.span 
+              custom={1}
+              initial="hidden"
+              animate={!loading ? "visible" : "hidden"}
+              variants={titleVariants}
+              className="dh2-hero-title-text dh2-hero-stroked block"
+            >
+              DIGITAL
+            </motion.span>
+          </span>
+          <span className="dh2-hero-title-line">
+            <motion.span 
+              custom={2}
+              initial="hidden"
+              animate={!loading ? "visible" : "hidden"}
+              variants={titleVariants}
+              className="dh2-hero-title-text dh2-hero-accent block"
+            >
+              EXPERIENCES
+            </motion.span>
+          </span>
         </h1>
-        <p className="dh2-body dh2-hero-subtitle">
+        <motion.p 
+          initial="hidden"
+          animate={!loading ? "visible" : "hidden"}
+          variants={subtitleVariants}
+          className="dh2-body dh2-hero-subtitle"
+        >
           Avani Enterprises is a premium product studio building high-performance websites, platforms, and growth engines for ambitious brands.
-        </p>
-        <div className="dh2-hero-ctas">
+        </motion.p>
+        <motion.div 
+          initial="hidden"
+          animate={!loading ? "visible" : "hidden"}
+          variants={subtitleVariants}
+          className="dh2-hero-ctas"
+        >
           <button className="dh2-btn-primary">View Our Work</button>
           <button className="dh2-btn-secondary">Let's Talk</button>
-        </div>
+        </motion.div>
       </section>
 
       {/* Marquee */}
       <div className="dh2-marquee">
         <div className="dh2-marquee-track">
           {[...Array(3)].map((_, i) => (
-            <React.Fragment key={i}>
+            <Fragment key={i}>
               <div className="dh2-marquee-item">Web Engineering <span className="dh2-marquee-separator">•</span></div>
               <div className="dh2-marquee-item">Performance Marketing <span className="dh2-marquee-separator">•</span></div>
               <div className="dh2-marquee-item">Business Strategy <span className="dh2-marquee-separator">•</span></div>
               <div className="dh2-marquee-item">SEO & Content <span className="dh2-marquee-separator">•</span></div>
-            </React.Fragment>
+            </Fragment>
           ))}
         </div>
       </div>
@@ -197,16 +247,7 @@ const DummyHome2 = () => {
         <h2 className="dh2-display" style={{ fontSize: '3rem', marginBottom: '2rem' }}>FEATURED WORK</h2>
         <div className="dh2-projects-grid">
           {projects.map((p, idx) => (
-            <div key={idx} className={`dh2-project-card ${p.isLarge ? 'large' : ''}`}>
-              <img src={p.img} alt={p.name} className="dh2-project-img" />
-              <div className="dh2-project-overlay">
-                <span className="dh2-project-tag">{p.tag}</span>
-                <div className="dh2-project-info">
-                  <h3 className="dh2-heading dh2-project-title">{p.name}</h3>
-                  <p className="dh2-body dh2-project-desc">{p.desc}</p>
-                </div>
-              </div>
-            </div>
+            <ProjectCard key={idx} project={p} />
           ))}
         </div>
       </section>

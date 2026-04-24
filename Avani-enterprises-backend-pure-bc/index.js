@@ -133,10 +133,13 @@ app.get("/api/test-v4", (req, res) => res.json({ success: true, version: "v4-rob
 // Public: Get all published newsletters
 app.get("/api/newsletters", async (req, res) => {
   try {
+    console.log("Fetching published newsletters...");
     const newsletters = await Newsletter.find({ isPublished: true }).sort({ publishedAt: -1, createdAt: -1 });
+    console.log(`Found ${newsletters.length} newsletters`);
     res.json({ success: true, data: newsletters });
   } catch (err) {
-    res.status(500).json({ message: "Server error", error: err.message });
+    console.error("❌ Newsletter Fetch Error:", err);
+    res.status(500).json({ message: "Server error", error: err.message, stack: process.env.NODE_ENV === "development" ? err.stack : undefined });
   }
 });
 
@@ -168,7 +171,7 @@ app.get("/api/info", (req, res) => {
 mongoose
   .connect(process.env.MONGO_URI)
   .then(async () => {
-    console.log("MongoDB connected");
+    console.log("✅ MongoDB connected successfully to:", process.env.MONGO_URI.split('@')[1] || "hidden");
 
     // Seed default SEO entries for known frontend pages (idempotent)
     const seedSeoEntries = async () => {
@@ -1211,6 +1214,7 @@ app.get("/blogs", async (req, res) => {
     const skip = (page - 1) * limit;
 
     const filter = { isPublished: true };
+    console.log(`Fetching blogs (page: ${page}, limit: ${limit})...`);
 
     const items = await Blog.find(filter)
       .sort({ publishedAt: -1, createdAt: -1 })
@@ -1219,11 +1223,12 @@ app.get("/blogs", async (req, res) => {
       .lean();
 
     const total = await Blog.countDocuments(filter);
+    console.log(`Found ${items.length} blogs out of ${total}`);
 
     res.json({ success: true, count: items.length, pagination: { total, page, perPage: limit }, data: items });
   } catch (err) {
-    console.error("Error fetching blogs:", err);
-    res.status(500).json({ message: "Server error", error: err.message });
+    console.error("❌ Blogs Fetch Error:", err);
+    res.status(500).json({ message: "Server error", error: err.message, stack: process.env.NODE_ENV === "development" ? err.stack : undefined });
   }
 });
 
@@ -1907,8 +1912,12 @@ app.get("/seo", async (req, res) => {
     }
     res.json({ success: true, data: entry });
   } catch (err) {
-    console.error("Error fetching SEO:", err);
-    res.status(500).json({ message: "Server error", error: err.message });
+    console.error("❌ SEO Fetch Error:", err);
+    res.status(500).json({ 
+      message: "Server error fetching SEO", 
+      error: err.message, 
+      stack: process.env.NODE_ENV === "development" ? err.stack : undefined 
+    });
   }
 });
 
@@ -1920,8 +1929,8 @@ app.get("/sitemap.xml", async (req, res) => {
 
     // Fetch dynamic data
     const seoPages = await Seo.find({ section: { $in: ["", null] } }).select("page updatedAt");
-    const blogs = await Blog.find({ status: "published" }).select("slug updatedAt");
-    const newsletters = await Newsletter.find().select("slug updatedAt");
+    const blogs = await Blog.find({ isPublished: true }).select("slug updatedAt");
+    const newsletters = await Newsletter.find({ isPublished: true }).select("slug updatedAt");
 
     let sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -2098,6 +2107,16 @@ app.use('/api/links', linkRoutes);
 
 // 2. Serve static files from the frontend build
 app.use(express.static(frontendPath));
+
+// Global Error Handler
+app.use((err, req, res, next) => {
+  console.error("❌ Global Error:", err);
+  res.status(500).json({
+    message: "Internal Server Error",
+    error: process.env.NODE_ENV === "development" ? err.message : "An unexpected error occurred",
+    stack: process.env.NODE_ENV === "development" ? err.stack : undefined,
+  });
+});
 
 // 3. Fallback route for the root "/" (if SEO injection and static serving both skip)
 app.get("/", (req, res) => {

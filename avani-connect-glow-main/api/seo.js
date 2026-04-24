@@ -71,9 +71,9 @@ export default async function handler(req, res) {
     }
 
     // 3. Inject SEO data
-    const title = seo?.title || "Avani Enterprises | Digital Marketing & Web Development Services";
-    const description = seo?.metaDescription || "Transform your brand with Avani Enterprises.";
-    const keywords = seo?.metaKeywords || "digital marketing, web development, SEO";
+    const title = seo?.title || "Avani Enterprises : No.1 Digital Marketing Agency in India";
+    const description = seo?.metaDescription || "No.1 Digital Marketing Agency in India, we deliver result-driven SEO, PPC, social media, and branding solutions.";
+    const keywords = seo?.metaKeywords || "no.1 digital marketing agency in india, digital marketing agency in india, seo services india, google ads management, social media marketing india, ppc advertising services, content marketing agency, performance marketing company, lead generation services, online branding agency, internet marketing services india";
 
     // Robust replacement strategy - handle newlines in tags
     html = html
