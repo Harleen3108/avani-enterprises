@@ -48,7 +48,7 @@ const SevenDayLaunch = () => {
                     content="Launch your business in Delhi NCR in just 7 days. Complete package including registration, website, and marketing starting @ ₹2,499."
                 />
                 <meta name="keywords" content="7 day business launch, startup india, company registration, website development, digital marketing, business setup delhi ncr" />
-                <link rel="canonical" href="https://avani-enterprises.vercel.app/7-day-launch" />
+                <link rel="canonical" href="https://www.avanienterprises.in/7-day-launch" />
             </Helmet>
 
             <div className="min-h-screen index-page-wrapper">

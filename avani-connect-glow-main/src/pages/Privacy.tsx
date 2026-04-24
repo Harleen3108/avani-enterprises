@@ -7,7 +7,7 @@ const PolicyPage = () => {
   const EFFECTIVE_DATE = "December 2, 2025";
   const COMPANY_NAME = "Avani Enterprises"; 
   const CONTACT_EMAIL = "kp@avanienterprises.in"; // REPLACE THIS
-  const WEBSITE_URL = "https://avani-enterprises.vercel.app/"; 
+  const WEBSITE_URL = "https://www.avanienterprises.in/"; 
   const JURISDICTION = "Gurgaon, India"; // REPLACE THIS (Your State/Country)
 
   // --- Helper Component for Sections ---
