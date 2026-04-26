@@ -424,6 +424,3 @@ const DummyHome2 = () => {
 };
 
 export default DummyHome2;
-};
-
-export default DummyHome2;
