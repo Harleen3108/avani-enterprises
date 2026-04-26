@@ -59,25 +59,25 @@ const FS = `
 
       // Fluid deformation
       vec2 q = vec2(0.);
-      q.x = fbm( displacedSt + 0.1 * u_time);
+      q.x = fbm( displacedSt + 0.15 * u_time);
       q.y = fbm( displacedSt + vec2(1.0));
 
       vec2 r = vec2(0.);
-      r.x = fbm( displacedSt + 1.0*q + vec2(1.7,9.2) + 0.15*u_time );
-      r.y = fbm( displacedSt + 1.0*q + vec2(8.3,2.8) + 0.15*u_time);
+      r.x = fbm( displacedSt + 1.5*q + vec2(1.7,9.2) + 0.15*u_time );
+      r.y = fbm( displacedSt + 1.5*q + vec2(8.3,2.8) + 0.15*u_time);
 
       float f = fbm(displacedSt + r);
 
-      // Base dark colors: deep black to dark grey
-      vec3 color = mix(vec3(0.02, 0.02, 0.02),
-                       vec3(0.25, 0.25, 0.25),
-                       clamp((f*f)*4.0, 0.0, 1.0));
+      // Base dark colors: much higher contrast, lighter greys
+      vec3 color = mix(vec3(0.05, 0.05, 0.05),
+                       vec3(0.45, 0.45, 0.45),
+                       smoothstep(0.1, 0.8, f));
 
-      // Glass-like subtle highlight
-      color += mix(vec3(0.0), vec3(0.15, 0.15, 0.15), smoothstep(0.4, 0.7, f));
+      // Glass-like strong highlight
+      color += mix(vec3(0.0), vec3(0.35, 0.35, 0.35), smoothstep(0.4, 0.9, f));
 
-      // Slight boost around mouse to show the interaction
-      color += vec3(0.06) * push;
+      // Pronounced boost around mouse
+      color += vec3(0.15) * push;
 
       gl_FragColor = vec4(color, 1.0);
   }
