@@ -54,30 +54,30 @@ const FS = `
       float push = exp(-dist * 3.0);
       
       // Smooth, slow ripple effect towards cursor
-      float ripple = sin(dist * 12.0 - u_time * 1.5) * push;
-      vec2 displacedSt = st + dir * ripple * 0.03;
+      float ripple = sin(dist * 12.0 - u_time * 2.0) * push;
+      vec2 displacedSt = st + dir * ripple * 0.08;
 
       // Fluid deformation
       vec2 q = vec2(0.);
-      q.x = fbm( displacedSt + 0.05 * u_time);
+      q.x = fbm( displacedSt + 0.1 * u_time);
       q.y = fbm( displacedSt + vec2(1.0));
 
       vec2 r = vec2(0.);
-      r.x = fbm( displacedSt + 1.0*q + vec2(1.7,9.2) + 0.05*u_time );
-      r.y = fbm( displacedSt + 1.0*q + vec2(8.3,2.8) + 0.05*u_time);
+      r.x = fbm( displacedSt + 1.0*q + vec2(1.7,9.2) + 0.15*u_time );
+      r.y = fbm( displacedSt + 1.0*q + vec2(8.3,2.8) + 0.15*u_time);
 
       float f = fbm(displacedSt + r);
 
       // Base dark colors: deep black to dark grey
-      vec3 color = mix(vec3(0.01, 0.01, 0.01),
-                       vec3(0.1, 0.1, 0.1),
+      vec3 color = mix(vec3(0.02, 0.02, 0.02),
+                       vec3(0.25, 0.25, 0.25),
                        clamp((f*f)*4.0, 0.0, 1.0));
 
       // Glass-like subtle highlight
-      color += mix(vec3(0.0), vec3(0.05, 0.05, 0.05), smoothstep(0.4, 0.7, f));
+      color += mix(vec3(0.0), vec3(0.15, 0.15, 0.15), smoothstep(0.4, 0.7, f));
 
       // Slight boost around mouse to show the interaction
-      color += vec3(0.015) * push;
+      color += vec3(0.06) * push;
 
       gl_FragColor = vec4(color, 1.0);
   }
