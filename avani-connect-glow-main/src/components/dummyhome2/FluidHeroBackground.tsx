@@ -51,33 +51,38 @@ const FS = `
       // Subtly distort coordinates based on mouse distance
       float dist = distance(st, mouse);
       vec2 dir = st - mouse;
-      float push = exp(-dist * 3.0);
+      float push = exp(-dist * 5.0);
       
-      // Smooth, slow ripple effect towards cursor
-      float ripple = sin(dist * 12.0 - u_time * 2.0) * push;
-      vec2 displacedSt = st + dir * ripple * 0.08;
+      // Strong ripple effect towards cursor
+      float ripple = sin(dist * 30.0 - u_time * 5.0) * push;
+      // High magnitude distortion
+      vec2 displacedSt = st + dir * ripple * 0.25;
 
       // Fluid deformation
       vec2 q = vec2(0.);
-      q.x = fbm( displacedSt + 0.15 * u_time);
+      q.x = fbm( displacedSt + 0.2 * u_time);
       q.y = fbm( displacedSt + vec2(1.0));
 
       vec2 r = vec2(0.);
-      r.x = fbm( displacedSt + 1.5*q + vec2(1.7,9.2) + 0.15*u_time );
-      r.y = fbm( displacedSt + 1.5*q + vec2(8.3,2.8) + 0.15*u_time);
+      r.x = fbm( displacedSt + 1.5*q + vec2(1.7,9.2) + 0.25*u_time );
+      r.y = fbm( displacedSt + 1.5*q + vec2(8.3,2.8) + 0.25*u_time);
 
       float f = fbm(displacedSt + r);
 
-      // Base dark colors: deep black to a mid-dark grey, very high contrast curve
-      vec3 color = mix(vec3(0.04, 0.04, 0.04),
+      // Create structured "liquid" contour lines
+      float structure = sin(f * 18.0 + u_time * 0.5) * 0.5 + 0.5;
+      float structure2 = smoothstep(0.2, 0.8, f);
+
+      // Mix colors based on both structures for a solid, thick liquid feel
+      vec3 color = mix(vec3(0.02, 0.02, 0.02),
                        vec3(0.18, 0.18, 0.18),
-                       smoothstep(0.1, 0.8, f));
+                       structure2);
 
-      // Glass-like strong highlight
-      color += mix(vec3(0.0), vec3(0.15, 0.15, 0.15), smoothstep(0.5, 0.9, f));
+      // Add sharp highlights on the contours to make it look like solid liquid
+      color += mix(vec3(0.0), vec3(0.25, 0.25, 0.25), smoothstep(0.8, 1.0, structure));
 
-      // Pronounced boost around mouse
-      color += vec3(0.08) * push;
+      // Pronounced boost around mouse to highlight the ripples
+      color += vec3(0.2) * push * structure;
 
       gl_FragColor = vec4(color, 1.0);
   }
