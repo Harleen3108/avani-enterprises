@@ -51,38 +51,34 @@ const FS = `
       // Subtly distort coordinates based on mouse distance
       float dist = distance(st, mouse);
       vec2 dir = st - mouse;
-      float push = exp(-dist * 5.0);
+      float push = exp(-dist * 4.0);
       
-      // Strong ripple effect towards cursor
-      float ripple = sin(dist * 30.0 - u_time * 5.0) * push;
-      // High magnitude distortion
-      vec2 displacedSt = st + dir * ripple * 0.25;
+      // Subtle but visible ripple effect towards cursor
+      float ripple = sin(dist * 20.0 - u_time * 3.0) * push;
+      // Moderate magnitude distortion
+      vec2 displacedSt = st + dir * ripple * 0.12;
 
-      // Fluid deformation
+      // Fluid deformation - lowered frequency and speed for minimalism
       vec2 q = vec2(0.);
-      q.x = fbm( displacedSt + 0.2 * u_time);
+      q.x = fbm( displacedSt + 0.08 * u_time);
       q.y = fbm( displacedSt + vec2(1.0));
 
       vec2 r = vec2(0.);
-      r.x = fbm( displacedSt + 1.5*q + vec2(1.7,9.2) + 0.25*u_time );
-      r.y = fbm( displacedSt + 1.5*q + vec2(8.3,2.8) + 0.25*u_time);
+      r.x = fbm( displacedSt + 1.2*q + vec2(1.7,9.2) + 0.12*u_time );
+      r.y = fbm( displacedSt + 1.2*q + vec2(8.3,2.8) + 0.12*u_time);
 
       float f = fbm(displacedSt + r);
 
-      // Create structured "liquid" contour lines
-      float structure = sin(f * 18.0 + u_time * 0.5) * 0.5 + 0.5;
-      float structure2 = smoothstep(0.2, 0.8, f);
-
-      // Mix colors based on both structures for a solid, thick liquid feel
-      vec3 color = mix(vec3(0.02, 0.02, 0.02),
+      // Smooth, broad, minimal gradient
+      vec3 color = mix(vec3(0.03, 0.03, 0.03),
                        vec3(0.18, 0.18, 0.18),
-                       structure2);
+                       smoothstep(0.1, 0.9, f));
 
-      // Add sharp highlights on the contours to make it look like solid liquid
-      color += mix(vec3(0.0), vec3(0.25, 0.25, 0.25), smoothstep(0.8, 1.0, structure));
+      // Add soft highlights to make it visible but subtle
+      color += mix(vec3(0.0), vec3(0.15, 0.15, 0.15), smoothstep(0.6, 1.0, f));
 
-      // Pronounced boost around mouse to highlight the ripples
-      color += vec3(0.2) * push * structure;
+      // Soft boost around mouse to highlight the ripples
+      color += vec3(0.1) * push;
 
       gl_FragColor = vec4(color, 1.0);
   }
