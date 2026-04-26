@@ -26,18 +26,35 @@
   box-sizing: border-box;
 }
 
+.dh2-root::after {
+  content: '';
+  position: fixed;
+  inset: -100px; /* Oversize to hide animation seams */
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.03;
+  background-image: radial-gradient(circle, var(--text-main) 1px, transparent 1px);
+  background-size: 32px 32px;
+  animation: dh2Particles 60s linear infinite;
+}
+
+@keyframes dh2Particles {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-32px); }
+}
+
 /* === TYPOGRAPHY === */
 .dh2-display {
   font-family: 'Syne', sans-serif;
-  font-weight: 800;
+  font-weight: 700;
   text-transform: uppercase;
-  line-height: .88;
-  letter-spacing: -.03em;
+  line-height: .92;
+  letter-spacing: -.02em;
 }
 
 .dh2-heading {
   font-family: 'Syne', sans-serif;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: -.01em;
 }
 
@@ -167,6 +184,8 @@
 }
 
 .dh2-hero-title {
+  font-weight: 800;
+  letter-spacing: -.03em;
   font-size: clamp(2rem, 9vw, 11rem);
   margin-bottom: 2rem;
   word-break: keep-all; /* prevent weird breaks, let it shrink */
@@ -250,7 +269,7 @@
   padding: .9rem 2rem;
   border-radius: 4px;
   font-family: 'Syne', sans-serif;
-  font-weight: 700;
+  font-weight: 600;
   font-size: .8rem;
   text-transform: uppercase;
   letter-spacing: .06em;
@@ -274,7 +293,7 @@
   padding: .9rem 2rem;
   border-radius: 4px;
   font-family: 'Syne', sans-serif;
-  font-weight: 700;
+  font-weight: 600;
   font-size: .8rem;
   text-transform: uppercase;
   letter-spacing: .06em;
@@ -347,7 +366,7 @@
 /* === SECTIONS === */
 .dh2-section {
   position: relative;
-  padding: 10rem 0;
+  padding: 12rem 0; /* Increased breathing room */
 }
 
 .dh2-container {
@@ -466,15 +485,26 @@
 }
 
 .dh2-svc-body {
-  overflow: hidden;
-  transition: height .5s var(--ease-out);
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows .5s var(--ease-out);
+}
+
+.dh2-svc-body.active {
+  grid-template-rows: 1fr;
 }
 
 .dh2-svc-inner {
-  padding-top: 1.5rem;
+  padding-top: 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 3rem;
+  overflow: hidden;
+  transition: padding-top .5s var(--ease-out);
+}
+
+.dh2-svc-body.active .dh2-svc-inner {
+  padding-top: 1.5rem;
 }
 
 .dh2-svc-desc {
@@ -507,24 +537,20 @@
 }
 
 /* === CASE STUDIES === */
-.dh2-cases {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-  margin-top: 3rem;
+.dh2-cases-track {
+  align-items: center;
 }
 
 .dh2-case {
   position: relative;
-  border-radius: 12px;
+  border-radius: 16px;
   overflow: hidden;
   background: var(--bg-surface);
-  aspect-ratio: 4/5;
+  /* width and height set inline */
 }
 
 .dh2-case.wide {
-  grid-column: span 2;
-  aspect-ratio: 21/9;
+  /* Used to mark wider cards in the track */
 }
 
 .dh2-case-img {
@@ -645,68 +671,102 @@
 }
 
 /* === GLOBAL PRESENCE === */
-.dh2-globe-grid {
+.dh2-globe-detailed-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
-  margin-top: 3rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
 }
 
-.dh2-globe-card {
-  position: relative;
-  border-radius: 12px;
+.dh2-globe-detailed-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-s);
+  border-radius: 16px;
   overflow: hidden;
-  aspect-ratio: 3/4;
-  cursor: pointer;
+  transition: transform .4s var(--ease-out), border-color .4s;
+}
+
+.dh2-globe-detailed-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-f);
+}
+
+.dh2-globe-img-wrap {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
 }
 
 .dh2-globe-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(.4);
-  transition: transform .6s var(--ease-out), filter .4s;
+  transition: transform .8s var(--ease-out);
 }
 
-.dh2-globe-card:hover .dh2-globe-img {
-  transform: scale(1.08);
-  filter: brightness(.25);
-}
-
-.dh2-globe-info {
-  position: absolute;
-  inset: 0;
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-}
-
-.dh2-globe-city {
-  font-family: 'Syne', sans-serif;
-  font-size: 1.6rem;
-  font-weight: 800;
-  text-transform: uppercase;
-}
-
-.dh2-globe-sub {
-  font-size: .7rem;
-  color: var(--text-muted);
-  margin-top: .2rem;
+.dh2-globe-detailed-card:hover .dh2-globe-img {
+  transform: scale(1.05);
 }
 
 .dh2-globe-tag {
   position: absolute;
-  top: 1rem;
-  left: 1rem;
-  padding: .3rem .7rem;
-  background: var(--accent);
-  color: #000;
+  top: 1.5rem;
+  left: 1.5rem;
+  padding: .4rem .9rem;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(8px);
+  color: #fff;
   border-radius: 100px;
-  font-size: .6rem;
+  font-size: .65rem;
   font-weight: 700;
   letter-spacing: .08em;
   text-transform: uppercase;
+}
+
+.dh2-globe-content {
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.dh2-globe-city-row {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  margin-bottom: 1rem;
+}
+
+.dh2-globe-icon {
+  color: var(--accent);
+}
+
+.dh2-globe-desc {
+  font-size: .95rem;
+  margin-bottom: 2rem;
+  flex-grow: 1;
+}
+
+.dh2-globe-contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-s);
+}
+
+.dh2-globe-contact-item {
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+}
+
+.dh2-globe-contact-val {
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--text-main);
 }
 
 /* === PROCESS === */
@@ -1010,16 +1070,27 @@
 }
 
 .dh2-faq-a {
-  overflow: hidden;
-  transition: height .4s var(--ease-out);
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows .4s var(--ease-out);
+}
+
+.dh2-faq-a.active {
+  grid-template-rows: 1fr;
 }
 
 .dh2-faq-a-inner {
-  padding: 1rem 0 .5rem;
+  padding: 0 0 0;
   font-size: .9rem;
   color: var(--text-muted);
   line-height: 1.7;
   max-width: 700px;
+  overflow: hidden;
+  transition: padding .4s var(--ease-out);
+}
+
+.dh2-faq-a.active .dh2-faq-a-inner {
+  padding: 1rem 0 .5rem;
 }
 
 /* === BLOG === */

@@ -26,10 +26,30 @@ export const industries = [
 ];
 
 export const offices = [
-  { city:'Rohtak', country:'India', tag:'HQ', desc:'Our founding office: 106, First Floor, Agro Mall, Rohtak.', img:'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop' },
-  { city:'Gurgaon', country:'India', tag:'NCR', desc:"Strategic presence in India's corporate capital.", img:'https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=800&auto=format&fit=crop' },
-  { city:'Mumbai', country:'India', tag:'West', desc:'Third Floor, Vasudev Chamber, Andheri East, Mumbai.', img:'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?q=80&w=800&auto=format&fit=crop' },
-  { city:'Australia', country:'APAC', tag:'Global', desc:'Serving clients across the Asia-Pacific region.', img:'https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?q=80&w=800&auto=format&fit=crop' },
+  { 
+    city:'Rohtak', country:'India', tag:'HQ', 
+    desc:'Our founding office: 106, First Floor, Agro Mall, Rohtak.', 
+    img:'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop',
+    contact: { email: 'kp@avanienterprises.in', phone: '+91 9253625099' }
+  },
+  { 
+    city:'Gurgaon', country:'India', tag:'NCR', 
+    desc:"Strategic presence in India's corporate capital.", 
+    img:'https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=800&auto=format&fit=crop',
+    contact: { email: 'kp@avanienterprises.in', phone: '+91 9253625099' }
+  },
+  { 
+    city:'Mumbai', country:'India', tag:'West', 
+    desc:'Third Floor, Vasudev Chamber, Andheri East, Mumbai.', 
+    img:'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?q=80&w=800&auto=format&fit=crop',
+    contact: { email: 'kp@avanienterprises.in', phone: '+91 9253625099' }
+  },
+  { 
+    city:'Australia', country:'APAC', tag:'Global', 
+    desc:'Serving clients across the Asia-Pacific region.', 
+    img:'https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?q=80&w=800&auto=format&fit=crop',
+    contact: { email: 'kp@avanienterprises.in', phone: '+91 9253625099' }
+  },
 ];
 
 export const processSteps = [

@@ -10,6 +10,46 @@ import '../components/dummyhome2/DummyHome2.css';
 
 const words = ['Websites', 'Products', 'Solutions', 'Experiences'];
 
+const HorizontalProjects = () => {
+  const targetRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: targetRef });
+  // Map scroll progress to horizontal translation. 
+  // Adjust the end value to ensure we scroll past all items.
+  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-85%"]);
+
+  return (
+    <section ref={targetRef} className="dh2-section" id="work" style={{ height: "300vh", position: "relative", padding: 0 }}>
+      <div style={{ position: "sticky", top: 0, height: "100vh", display: "flex", alignItems: "center", overflow: "hidden" }}>
+        <motion.div style={{ x, display: "flex", gap: "3rem", padding: "0 3rem" }} className="dh2-cases-track">
+          {/* Intro Slide */}
+          <div style={{ minWidth: "300px", paddingRight: "4rem", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+            <div className="dh2-label" style={{ marginBottom: '.8rem' }}>SUCCESS STORIES</div>
+            <h2 className="dh2-display" style={{ fontSize: 'clamp(2.5rem,5vw,4.5rem)' }}>FEATURED WORK</h2>
+            <p className="dh2-body" style={{ marginTop: "1rem" }}>Scroll to explore our latest digital experiences.</p>
+          </div>
+          
+          {/* Projects */}
+          {caseStudies.map((cs, i) => (
+            <div key={i} className={`dh2-case ${cs.wide ? 'wide' : ''}`} style={{ minWidth: cs.wide ? '65vw' : '40vw', height: '70vh', flexShrink: 0 }}>
+              <img src={cs.img} alt={cs.name} className="dh2-case-img" />
+              <div className="dh2-case-over">
+                <span className="dh2-case-cat">{cs.cat}</span>
+                <div className="dh2-case-info">
+                  <div className="dh2-case-name">{cs.name}</div>
+                  <div className="dh2-case-desc">{cs.desc}</div>
+                  <div className="dh2-case-metrics">
+                    {cs.metrics.map((m, j) => <span key={j} className="dh2-case-metric">{m}</span>)}
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
 const DummyHome2 = () => {
   const [loading, setLoading] = useState(true);
   const [progress, setProgress] = useState(0);
@@ -19,7 +59,20 @@ const DummyHome2 = () => {
   const [testIdx, setTestIdx] = useState(0);
   const [blogs, setBlogs] = useState<any[]>([]);
 
+  const { scrollYProgress } = useScroll();
+  
+  // Transition from Dark (0 to 0.15) to Light (0.3 onwards)
+  const bgDeep = useTransform(scrollYProgress, [0, 0.15, 0.3], ['#030303', '#030303', '#fdfdfd']);
+  const bgBase = useTransform(scrollYProgress, [0, 0.15, 0.3], ['#0a0a0a', '#0a0a0a', '#f5f5f5']);
+  const bgSurface = useTransform(scrollYProgress, [0, 0.15, 0.3], ['#111111', '#111111', '#ffffff']);
+  const textMain = useTransform(scrollYProgress, [0, 0.15, 0.3], ['#f0f0f0', '#f0f0f0', '#0a0a0a']);
+  const textMuted = useTransform(scrollYProgress, [0, 0.15, 0.3], ['#7a7a7a', '#7a7a7a', '#555555']);
+  const textDim = useTransform(scrollYProgress, [0, 0.15, 0.3], ['#3a3a3a', '#3a3a3a', '#999999']);
+  const borderS = useTransform(scrollYProgress, [0, 0.15, 0.3], ['rgba(255,255,255,0.07)', 'rgba(255,255,255,0.07)', 'rgba(0,0,0,0.08)']);
+  const borderF = useTransform(scrollYProgress, [0, 0.15, 0.3], ['rgba(255,255,255,0.15)', 'rgba(255,255,255,0.15)', 'rgba(0,0,0,0.15)']);
+
   useEffect(() => {
+    // Keep body background matching the theme start to prevent flash
     document.body.style.backgroundColor = '#030303';
     return () => { document.body.style.backgroundColor = ''; };
   }, []);
@@ -57,7 +110,19 @@ const DummyHome2 = () => {
   const t = testimonials[testIdx];
 
   return (
-    <div className="dh2-root">
+    <motion.div 
+      className="dh2-root"
+      style={{
+        '--bg-deep': bgDeep,
+        '--bg-base': bgBase,
+        '--bg-surface': bgSurface,
+        '--text-main': textMain,
+        '--text-muted': textMuted,
+        '--text-dim': textDim,
+        '--border-s': borderS,
+        '--border-f': borderF,
+      } as any}
+    >
       {/* LOADER */}
       <AnimatePresence>
         {loading && (
@@ -172,7 +237,7 @@ const DummyHome2 = () => {
               </div>
               <Plus className="dh2-svc-icon" size={28} style={{ transform: activeSvc === i ? 'rotate(45deg)' : 'none' }} />
             </div>
-            <div className="dh2-svc-body" style={{ height: activeSvc === i ? 'auto' : 0 }}>
+            <div className={`dh2-svc-body ${activeSvc === i ? 'active' : ''}`}>
               <div className="dh2-svc-inner">
                 <p className="dh2-body dh2-svc-desc">{svc.desc}</p>
                 <div className="dh2-svc-tags">
@@ -185,29 +250,7 @@ const DummyHome2 = () => {
       </section>
 
       {/* CASE STUDIES */}
-      <section className="dh2-section dh2-container" id="work">
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: .6 }} style={{ marginBottom: '1rem' }}>
-          <div className="dh2-label" style={{ marginBottom: '.8rem' }}>SUCCESS STORIES</div>
-          <h2 className="dh2-display" style={{ fontSize: 'clamp(2rem,5vw,3.5rem)' }}>FEATURED WORK</h2>
-        </motion.div>
-        <div className="dh2-cases">
-          {caseStudies.map((cs, i) => (
-            <motion.div key={i} className={`dh2-case ${cs.wide ? 'wide' : ''}`} initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * .1, duration: .6 }}>
-              <img src={cs.img} alt={cs.name} className="dh2-case-img" />
-              <div className="dh2-case-over">
-                <span className="dh2-case-cat">{cs.cat}</span>
-                <div className="dh2-case-info">
-                  <div className="dh2-case-name">{cs.name}</div>
-                  <div className="dh2-case-desc">{cs.desc}</div>
-                  <div className="dh2-case-metrics">
-                    {cs.metrics.map((m, j) => <span key={j} className="dh2-case-metric">{m}</span>)}
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </section>
+      <HorizontalProjects />
 
       {/* INDUSTRIES */}
       <section className="dh2-section dh2-container">
@@ -227,19 +270,38 @@ const DummyHome2 = () => {
 
       {/* GLOBAL PRESENCE */}
       <section className="dh2-section dh2-container">
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: .6 }} style={{ marginBottom: '1rem' }}>
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: .6 }} style={{ marginBottom: '3rem' }}>
           <div className="dh2-label" style={{ marginBottom: '.8rem' }}>WHERE WE OPERATE</div>
           <h2 className="dh2-display" style={{ fontSize: 'clamp(2rem,5vw,3.5rem)' }}>GLOBAL PRESENCE</h2>
         </motion.div>
-        <div className="dh2-globe-grid">
+        <div className="dh2-globe-detailed-grid">
           {offices.map((o, i) => (
-            <motion.div key={i} className="dh2-globe-card" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * .1, duration: .6 }}>
-              <img src={o.img} alt={o.city} className="dh2-globe-img" />
-              <div className="dh2-globe-info">
-                <div className="dh2-globe-city">{o.city}</div>
-                <div className="dh2-globe-sub">{o.desc}</div>
+            <motion.div key={i} className="dh2-globe-detailed-card" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * .1, duration: .6 }}>
+              <div className="dh2-globe-img-wrap">
+                <img src={o.img} alt={o.city} className="dh2-globe-img" />
+                <span className="dh2-globe-tag">{o.tag}</span>
               </div>
-              <span className="dh2-globe-tag">{o.tag}</span>
+              <div className="dh2-globe-content">
+                <div className="dh2-globe-city-row">
+                  <MapPin size={22} className="dh2-globe-icon" />
+                  <h3 className="dh2-heading">{o.city}, {o.country}</h3>
+                </div>
+                <p className="dh2-body dh2-globe-desc">{o.desc}</p>
+                <div className="dh2-globe-contact">
+                  {o.contact && (
+                    <>
+                      <div className="dh2-globe-contact-item">
+                        <span className="dh2-label" style={{fontSize: '0.6rem'}}>Email</span>
+                        <div className="dh2-globe-contact-val">{o.contact.email}</div>
+                      </div>
+                      <div className="dh2-globe-contact-item">
+                        <span className="dh2-label" style={{fontSize: '0.6rem'}}>Phone</span>
+                        <div className="dh2-globe-contact-val">{o.contact.phone}</div>
+                      </div>
+                    </>
+                  )}
+                </div>
+              </div>
             </motion.div>
           ))}
         </div>
@@ -375,7 +437,7 @@ const DummyHome2 = () => {
               <span>{f.q}</span>
               <Plus className="dh2-faq-icon" size={20} />
             </div>
-            <div className="dh2-faq-a" style={{ height: activeFaq === i ? 'auto' : 0 }}>
+            <div className={`dh2-faq-a ${activeFaq === i ? 'active' : ''}`}>
               <div className="dh2-faq-a-inner">{f.a}</div>
             </div>
           </div>
@@ -419,7 +481,7 @@ const DummyHome2 = () => {
           <span>Expanding Globally · Gurgaon · Mumbai · Rohtak · Australia</span>
         </div>
       </footer>
-    </div>
+    </motion.div>
   );
 };
 
