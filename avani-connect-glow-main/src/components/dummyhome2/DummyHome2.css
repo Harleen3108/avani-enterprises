@@ -167,8 +167,9 @@
 }
 
 .dh2-hero-title {
-  font-size: clamp(3.5rem, 10vw, 11rem);
+  font-size: clamp(2rem, 9vw, 11rem);
   margin-bottom: 2rem;
+  word-break: keep-all; /* prevent weird breaks, let it shrink */
 }
 
 .dh2-hero-line {
@@ -1250,6 +1251,7 @@
 
   .dh2-hero-title {
     line-height: 1;
+    font-size: clamp(1.8rem, 8.5vw, 4rem);
   }
 
   .dh2-hero-ctas {
