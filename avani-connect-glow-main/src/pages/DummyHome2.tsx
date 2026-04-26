@@ -80,12 +80,15 @@ const DummyHome2 = () => {
         <Link to="/get-consultation" className="dh2-nav-cta">Start a Project</Link>
       </nav>
 
-      {/* HERO */}
-      <section className="dh2-hero">
+      {/* HERO BACKGROUND (Full Screen) */}
+      <div className="dh2-hero-bg-wrapper">
         <FluidHeroBackground />
-        
         {/* Grain overlay */}
         <div className="dh2-hero-grain"/>
+      </div>
+
+      {/* HERO */}
+      <section className="dh2-hero">
 
         <h1 className="dh2-display dh2-hero-title" style={{position:'relative',zIndex:2}}>
           <span className="dh2-hero-line">

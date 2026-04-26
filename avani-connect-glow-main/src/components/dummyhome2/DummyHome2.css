@@ -45,7 +45,8 @@
 .dh2-nav-cta:hover{transform:scale(1.05);background:var(--accent);}
 
 /* === HERO === */
-.dh2-hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:8rem 3rem 4rem;position:relative;max-width:1400px;margin:0 auto;overflow:hidden;}
+.dh2-hero-bg-wrapper{position:absolute;top:0;left:0;width:100vw;height:100vh;z-index:0;overflow:hidden;}
+.dh2-hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:8rem 3rem 4rem;position:relative;max-width:1400px;margin:0 auto;}
 .dh2-hero-title{font-size:clamp(3.5rem,10vw,11rem);margin-bottom:2rem;}
 .dh2-hero-line{display:block;overflow:hidden;}
 .dh2-hero-text{display:block;}

@@ -68,16 +68,16 @@ const FS = `
 
       float f = fbm(displacedSt + r);
 
-      // Base dark colors: much higher contrast, lighter greys
-      vec3 color = mix(vec3(0.05, 0.05, 0.05),
-                       vec3(0.45, 0.45, 0.45),
+      // Base dark colors: deep black to a mid-dark grey, very high contrast curve
+      vec3 color = mix(vec3(0.04, 0.04, 0.04),
+                       vec3(0.18, 0.18, 0.18),
                        smoothstep(0.1, 0.8, f));
 
       // Glass-like strong highlight
-      color += mix(vec3(0.0), vec3(0.35, 0.35, 0.35), smoothstep(0.4, 0.9, f));
+      color += mix(vec3(0.0), vec3(0.15, 0.15, 0.15), smoothstep(0.5, 0.9, f));
 
       // Pronounced boost around mouse
-      color += vec3(0.15) * push;
+      color += vec3(0.08) * push;
 
       gl_FragColor = vec4(color, 1.0);
   }
