@@ -53,32 +53,32 @@ const FS = `
       vec2 dir = st - mouse;
       float push = exp(-dist * 4.0);
       
-      // Subtle but visible ripple effect towards cursor
-      float ripple = sin(dist * 20.0 - u_time * 3.0) * push;
-      // Moderate magnitude distortion
-      vec2 displacedSt = st + dir * ripple * 0.12;
+      // Visible, moderately fast ripple effect towards cursor
+      float ripple = sin(dist * 20.0 - u_time * 4.0) * push;
+      // Stronger magnitude distortion
+      vec2 displacedSt = st + dir * ripple * 0.25;
 
-      // Fluid deformation - lowered frequency and speed for minimalism
+      // Fluid deformation - increased speed to prevent static feel
       vec2 q = vec2(0.);
-      q.x = fbm( displacedSt + 0.08 * u_time);
+      q.x = fbm( displacedSt + 0.15 * u_time);
       q.y = fbm( displacedSt + vec2(1.0));
 
       vec2 r = vec2(0.);
-      r.x = fbm( displacedSt + 1.2*q + vec2(1.7,9.2) + 0.12*u_time );
-      r.y = fbm( displacedSt + 1.2*q + vec2(8.3,2.8) + 0.12*u_time);
+      r.x = fbm( displacedSt + 1.2*q + vec2(1.7,9.2) + 0.2 * u_time );
+      r.y = fbm( displacedSt + 1.2*q + vec2(8.3,2.8) + 0.2 * u_time);
 
       float f = fbm(displacedSt + r);
 
-      // Smooth, broad, minimal gradient
+      // Smooth, broad, minimal gradient with tighter contrast for visibility
       vec3 color = mix(vec3(0.03, 0.03, 0.03),
-                       vec3(0.18, 0.18, 0.18),
-                       smoothstep(0.1, 0.9, f));
+                       vec3(0.20, 0.20, 0.20),
+                       smoothstep(0.15, 0.75, f));
 
       // Add soft highlights to make it visible but subtle
-      color += mix(vec3(0.0), vec3(0.15, 0.15, 0.15), smoothstep(0.6, 1.0, f));
+      color += mix(vec3(0.0), vec3(0.18, 0.18, 0.18), smoothstep(0.4, 0.8, f));
 
       // Soft boost around mouse to highlight the ripples
-      color += vec3(0.1) * push;
+      color += vec3(0.15) * push;
 
       gl_FragColor = vec4(color, 1.0);
   }
