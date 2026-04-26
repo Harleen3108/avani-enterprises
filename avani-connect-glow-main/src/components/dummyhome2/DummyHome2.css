@@ -45,7 +45,7 @@
 .dh2-nav-cta:hover{transform:scale(1.05);background:var(--accent);}
 
 /* === HERO === */
-.dh2-hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:8rem 3rem 4rem;position:relative;max-width:1400px;margin:0 auto;}
+.dh2-hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:8rem 3rem 4rem;position:relative;max-width:1400px;margin:0 auto;overflow:hidden;}
 .dh2-hero-title{font-size:clamp(3.5rem,10vw,11rem);margin-bottom:2rem;}
 .dh2-hero-line{display:block;overflow:hidden;}
 .dh2-hero-text{display:block;}
@@ -55,9 +55,14 @@
 .dh2-hero-ctas{display:flex;gap:1rem;flex-wrap:wrap;}
 .dh2-hero-loc{display:flex;align-items:center;gap:.5rem;margin-bottom:2rem;}
 .dh2-hero-loc span{font-size:.7rem;letter-spacing:.08em;color:var(--text-dim);}
-.dh2-scroll-hint{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.4rem;}
+.dh2-scroll-hint{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.4rem;z-index:2;}
 .dh2-scroll-hint span{font-size:.6rem;letter-spacing:.3em;color:var(--text-dim);font-weight:600;text-transform:uppercase;}
 .dh2-scroll-line{width:1px;height:32px;background:linear-gradient(to bottom,var(--accent),transparent);}
+
+/* Hero fluid cursor background */
+.dh2-hero-fluid{position:absolute;inset:0;z-index:0;pointer-events:none;will-change:background;}
+.dh2-hero-orb{position:absolute;border-radius:50%;pointer-events:none;z-index:0;filter:blur(60px);will-change:transform;}
+.dh2-hero-grain{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.04;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px;}
 
 /* === BUTTONS === */
 .dh2-btn-fill{display:inline-flex;align-items:center;gap:.5rem;background:var(--accent);color:#000;padding:.9rem 2rem;border-radius:4px;font-family:'Syne',sans-serif;font-weight:700;font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;border:none;cursor:pointer;text-decoration:none;transition:transform .3s,background .3s;}

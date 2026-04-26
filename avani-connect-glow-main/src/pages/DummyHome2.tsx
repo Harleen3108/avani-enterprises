@@ -17,6 +17,14 @@ const DummyHome2 = () => {
   const [activeFaq, setActiveFaq] = useState<number|null>(null);
   const [testIdx, setTestIdx] = useState(0);
   const [blogs, setBlogs] = useState<any[]>([]);
+  const [mousePos, setMousePos] = useState({x:50,y:50});
+  const heroRef = useRef<HTMLElement>(null);
+
+  const handleHeroMouse = useCallback((e: React.MouseEvent) => {
+    if (!heroRef.current) return;
+    const rect = heroRef.current.getBoundingClientRect();
+    setMousePos({ x: ((e.clientX - rect.left) / rect.width) * 100, y: ((e.clientY - rect.top) / rect.height) * 100 });
+  }, []);
 
   useEffect(() => {
     document.body.style.backgroundColor = '#030303';
@@ -80,8 +88,22 @@ const DummyHome2 = () => {
       </nav>
 
       {/* HERO */}
-      <section className="dh2-hero">
-        <h1 className="dh2-display dh2-hero-title">
+      <section className="dh2-hero" ref={heroRef} onMouseMove={handleHeroMouse}>
+        {/* Cursor-reactive fluid gradient */}
+        <div className="dh2-hero-fluid" style={{
+          background: `radial-gradient(600px circle at ${mousePos.x}% ${mousePos.y}%, rgba(200,255,0,0.07) 0%, transparent 60%),
+                       radial-gradient(800px circle at ${mousePos.x + 20}% ${mousePos.y - 10}%, rgba(120,100,255,0.04) 0%, transparent 50%),
+                       radial-gradient(400px circle at ${100 - mousePos.x}% ${100 - mousePos.y}%, rgba(200,255,0,0.03) 0%, transparent 50%)`,
+          transition: 'background 0.3s ease-out',
+        }}/>
+        {/* Ambient floating orbs */}
+        <motion.div className="dh2-hero-orb" animate={{x:[0,30,-20,0],y:[0,-40,20,0],scale:[1,1.2,0.9,1]}} transition={{duration:20,repeat:Infinity,ease:'linear'}} style={{left:'70%',top:'15%',width:'350px',height:'350px',background:'radial-gradient(circle,rgba(200,255,0,0.05),transparent 70%)'}}/>
+        <motion.div className="dh2-hero-orb" animate={{x:[0,-25,15,0],y:[0,30,-25,0],scale:[1,0.8,1.1,1]}} transition={{duration:25,repeat:Infinity,ease:'linear'}} style={{left:'10%',top:'60%',width:'250px',height:'250px',background:'radial-gradient(circle,rgba(120,100,255,0.04),transparent 70%)'}}/>
+        <motion.div className="dh2-hero-orb" animate={{x:[0,20,-30,0],y:[0,-20,30,0]}} transition={{duration:18,repeat:Infinity,ease:'linear'}} style={{left:'50%',top:'80%',width:'200px',height:'200px',background:'radial-gradient(circle,rgba(200,255,0,0.03),transparent 70%)'}}/>
+        {/* Grain overlay */}
+        <div className="dh2-hero-grain"/>
+
+        <h1 className="dh2-display dh2-hero-title" style={{position:'relative',zIndex:2}}>
           <span className="dh2-hero-line">
             <motion.span custom={0} initial="hidden" animate={!loading?"visible":"hidden"} variants={titleV} className="dh2-hero-text">WE BUILD</motion.span>
           </span>
@@ -96,14 +118,14 @@ const DummyHome2 = () => {
             </AnimatePresence>
           </span>
         </h1>
-        <motion.div initial="hidden" animate={!loading?"visible":"hidden"} variants={fadeV} className="dh2-hero-loc">
+        <motion.div initial="hidden" animate={!loading?"visible":"hidden"} variants={fadeV} className="dh2-hero-loc" style={{position:'relative',zIndex:2}}>
           <MapPin size={11} color="#3a3a3a"/>
           <span>Gurgaon · Mumbai · Rohtak · Australia</span>
         </motion.div>
-        <motion.p initial="hidden" animate={!loading?"visible":"hidden"} variants={fadeV} className="dh2-body dh2-hero-sub">
+        <motion.p initial="hidden" animate={!loading?"visible":"hidden"} variants={fadeV} className="dh2-body dh2-hero-sub" style={{position:'relative',zIndex:2}}>
           We're more than just a digital agency. We build stories, share passions, and deliver results that leave competitors far behind.
         </motion.p>
-        <motion.div initial="hidden" animate={!loading?"visible":"hidden"} variants={fadeV} className="dh2-hero-ctas">
+        <motion.div initial="hidden" animate={!loading?"visible":"hidden"} variants={fadeV} className="dh2-hero-ctas" style={{position:'relative',zIndex:2}}>
           <Link to="/get-consultation" className="dh2-btn-fill">Get Consultation <ArrowRight size={14}/></Link>
           <button className="dh2-btn-ghost"><Play size={14}/> Watch Reel</button>
         </motion.div>
