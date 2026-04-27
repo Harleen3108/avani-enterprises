@@ -18,8 +18,9 @@
   background: var(--bg-deep);
   color: var(--text-main);
   font-family: 'Inter', sans-serif;
-  overflow-x: hidden;
+  overflow-x: clip;
   min-height: 100vh;
+  scroll-behavior: smooth;
 }
 
 .dh2-root * {
@@ -66,11 +67,24 @@
 
 .dh2-label {
   font-family: 'Inter', sans-serif;
-  font-size: .7rem;
+  font-size: .65rem;
   letter-spacing: .2em;
   text-transform: uppercase;
   color: var(--text-dim);
   font-weight: 600;
+}
+
+/* === SECTION HEADER (shared) === */
+.dh2-section-header {
+  margin-bottom: 2rem;
+}
+
+.dh2-section-header .dh2-label {
+  margin-bottom: .6rem;
+}
+
+.dh2-section-title {
+  font-size: clamp(1.5rem, 3.5vw, 2.4rem);
 }
 
 /* === LOADER === */
@@ -370,11 +384,11 @@
 /* === SECTIONS === */
 .dh2-section {
   position: relative;
-  padding: 12rem 0; /* Increased breathing room */
+  padding: 6rem 0;
 }
 
 .dh2-container {
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 3rem;
 }
@@ -395,7 +409,7 @@
 
 .dh2-stat-num {
   font-family: 'Syne', sans-serif;
-  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  font-size: clamp(1.5rem, 2.5vw, 2.2rem);
   font-weight: 700;
   line-height: 1;
   color: var(--accent);
@@ -403,7 +417,7 @@
 }
 
 .dh2-stat-label {
-  font-size: .65rem;
+  font-size: .62rem;
   letter-spacing: .15em;
   text-transform: uppercase;
   color: var(--text-muted);
@@ -411,61 +425,73 @@
 }
 
 .dh2-stat-sub {
-  font-size: .6rem;
+  font-size: .58rem;
   color: var(--text-dim);
   margin-top: .2rem;
 }
 
-/* === PHILOSOPHY === */
-.dh2-philosophy {
-  font-size: clamp(1.8rem, 4.5vw, 4rem);
-  line-height: 1.15;
-  max-width: 1200px;
-  margin: 0 auto;
-  font-family: 'Syne', sans-serif;
-  font-weight: 700;
+/* === WHAT WE DO V3 — Simple Flex Layout === */
+.dh2-wwd2-wrapper {
+  position: relative;
+  height: 300vh;
 }
 
-.dh2-philosophy em {
-  font-style: normal;
-  color: var(--accent);
-}
-
-/* === SERVICES === */
-.dh2-svc-slider {
+.dh2-wwd2-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
   display: flex;
-  gap: 1.5rem;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  padding-bottom: 2rem;
-  padding-right: 3rem;
-  margin-right: -3rem;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+  flex-direction: column;
+  overflow: hidden;
 }
 
-.dh2-svc-slider::-webkit-scrollbar {
-  display: none;
+/* Header — sits at top */
+.dh2-wwd2-top {
+  flex-shrink: 0;
+  padding: 5rem 3rem 0;
 }
 
-.dh2-svc-card {
-  scroll-snap-align: start;
-  flex: 0 0 350px;
+.dh2-wwd2-title {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  margin-top: .5rem;
+}
+
+/* Track area — fills middle */
+.dh2-wwd2-track-area {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.dh2-wwd2-track {
+  display: flex;
+  gap: 2rem;
+  padding: 0 3rem;
+}
+
+/* Cards */
+.dh2-wwd2-card {
+  flex: 0 0 340px;
+  min-height: 400px;
   background: var(--bg-surface);
   border: 1px solid var(--border-s);
-  border-radius: 12px;
+  border-radius: 16px;
   padding: 2.5rem 2rem;
   display: flex;
   flex-direction: column;
-  transition: transform .3s, border-color .3s;
+  transition: transform .4s var(--ease-out), border-color .4s, box-shadow .4s;
+  opacity: 0.4;
 }
 
-.dh2-svc-card:hover {
-  transform: translateY(-5px);
-  border-color: var(--border-f);
+.dh2-wwd2-card--active {
+  opacity: 1;
+  transform: scale(1.04);
+  border-color: var(--accent-mid);
+  box-shadow: 0 8px 40px rgba(200, 255, 0, 0.06);
 }
 
-.dh2-svc-card-num {
+.dh2-wwd2-card-num {
   font-family: 'Syne', sans-serif;
   font-size: .8rem;
   color: var(--accent);
@@ -473,135 +499,168 @@
   margin-bottom: 1.5rem;
 }
 
-.dh2-svc-card-title {
+.dh2-wwd2-card-title {
   font-size: 1.25rem;
-  margin-bottom: 1rem;
+  margin-bottom: .8rem;
 }
 
-.dh2-svc-card-desc {
-  font-size: .85rem;
+.dh2-wwd2-card-desc {
+  font-size: .8rem;
   color: var(--text-muted);
-  line-height: 1.6;
+  line-height: 1.65;
   flex-grow: 1;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
-.dh2-svc-card-tags {
+.dh2-wwd2-card-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: .5rem;
+  gap: .4rem;
 }
 
-.dh2-svc-card-tag {
-  font-size: .65rem;
-  padding: .3rem .7rem;
+.dh2-wwd2-card-tag {
+  font-size: .6rem;
+  padding: .25rem .6rem;
   background: var(--bg-base);
   border: 1px solid var(--border-s);
   border-radius: 100px;
   color: var(--text-main);
 }
 
-/* === PROJECTS MARQUEE === */
-.dh2-projects-marquee {
+/* === VINYL STACK PROJECTS === */
+.dh2-vinyl-wrapper {
   width: 100vw;
-  margin-left: calc(-50vw + 50%);
-  overflow: hidden;
   position: relative;
-  padding: 1rem 0;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  overflow: hidden;
+  padding-top: 4rem; /* room for hover pop */
 }
 
-.dh2-projects-track {
+.dh2-vinyl-track {
   display: flex;
   width: max-content;
-  animation: dh2ProjectsScroll 40s linear infinite;
-  gap: 2rem;
-  padding-left: 2rem;
+  align-items: center;
+  padding-left: 20vw;
 }
 
-.dh2-projects-track:hover {
-  animation-play-state: paused;
+.dh2-vinyl-track:hover {
+  animation-play-state: paused !important; /* Pause scroll when hovering track */
 }
 
-@keyframes dh2ProjectsScroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-.dh2-project-card {
-  position: relative;
-  width: 350px;
-  height: 420px;
-  border-radius: 12px;
-  overflow: hidden;
+.dh2-vinyl-card {
+  width: 320px;
+  height: 320px;
   flex-shrink: 0;
-  background: var(--bg-surface);
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  margin-left: -80px; /* The "stacked" overlap effect */
+  box-shadow: -10px 0 25px rgba(0,0,0,0.4);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), z-index 0s, filter 0.4s;
+  border: 1px solid var(--border-s);
   cursor: pointer;
+  background: var(--bg-surface);
 }
 
-.dh2-project-img {
+.dh2-vinyl-card:first-child {
+  margin-left: 0;
+}
+
+.dh2-vinyl-track:hover .dh2-vinyl-card:not(:hover) {
+  filter: brightness(0.5); /* Dim others */
+}
+
+.dh2-vinyl-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(.6);
-  transition: transform .6s var(--ease-out), filter .4s;
+  transition: transform 0.6s var(--ease-out);
 }
 
-.dh2-project-card:hover .dh2-project-img {
-  transform: scale(1.05);
-  filter: brightness(.35);
+.dh2-vinyl-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 60%, transparent 100%);
+  pointer-events: none;
 }
 
-.dh2-project-over {
+.dh2-vinyl-content {
   position: absolute;
   inset: 0;
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-end;
+  pointer-events: none;
 }
 
-.dh2-project-cat {
-  align-self: flex-start;
-  padding: .3rem .8rem;
-  background: rgba(255, 255, 255, .15);
-  backdrop-filter: blur(4px);
-  border-radius: 100px;
-  font-size: .6rem;
-  letter-spacing: .1em;
+.dh2-vinyl-cat {
+  font-size: 0.6rem;
   text-transform: uppercase;
-  color: #fff;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+  font-weight: 600;
 }
 
-.dh2-project-info {
-  transform: translateY(10px);
-  opacity: 0;
-  transition: all .4s var(--ease-out);
+.dh2-vinyl-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 0.75rem;
+  line-height: 1.1;
 }
 
-.dh2-project-card:hover .dh2-project-info {
-  transform: translateY(0);
+.dh2-vinyl-view {
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+
+.dh2-vinyl-card:hover .dh2-vinyl-view {
   opacity: 1;
+  color: var(--accent);
+}
+
+.dh2-vinyl-card:hover .dh2-vinyl-img {
+  transform: scale(1.05);
 }
 
 .dh2-project-name {
   font-family: 'Syne', sans-serif;
-  font-size: 1.4rem;
+  font-size: 1.1rem;
   font-weight: 700;
-  margin-bottom: .5rem;
-  color: #fff;
+  margin-bottom: .4rem;
+  color: var(--text-main);
+}
+
+.dh2-project-desc {
+  font-size: .78rem;
+  margin-bottom: 1rem;
 }
 
 .dh2-project-metrics {
   display: flex;
-  gap: .6rem;
+  gap: .4rem;
+  flex-wrap: wrap;
 }
 
 .dh2-project-metrics span {
   padding: .2rem .5rem;
   background: var(--accent-soft);
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid var(--border-s);
   border-radius: 4px;
-  font-size: .65rem;
+  font-size: .58rem;
   font-weight: 600;
   color: var(--accent);
 }
@@ -611,14 +670,14 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
-  margin-top: 3rem;
+  margin-top: 2rem;
 }
 
 .dh2-ind {
-  padding: 2rem;
+  padding: 1.5rem;
   border: 1px solid var(--border-s);
   border-radius: 10px;
-  transition: all .3s;
+  transition: all .4s var(--ease-out);
   cursor: default;
 }
 
@@ -675,7 +734,7 @@
 .dh2-globe-img-wrap {
   position: relative;
   width: 100%;
-  height: 300px;
+  aspect-ratio: 16/10;
   overflow: hidden;
 }
 
@@ -706,7 +765,7 @@
 }
 
 .dh2-globe-content {
-  padding: 2.5rem;
+  padding: 1.5rem 2rem 2rem;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -724,8 +783,8 @@
 }
 
 .dh2-globe-desc {
-  font-size: .95rem;
-  margin-bottom: 2rem;
+  font-size: .85rem;
+  margin-bottom: 1.5rem;
   flex-grow: 1;
 }
 
@@ -754,14 +813,14 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
-  margin-top: 3rem;
+  margin-top: 2rem;
 }
 
 .dh2-proc {
-  padding: 2.5rem;
+  padding: 2rem;
   border: 1px solid var(--border-s);
   border-radius: 12px;
-  transition: all .3s;
+  transition: all .4s var(--ease-out);
 }
 
 .dh2-proc:hover {
@@ -771,10 +830,10 @@
 
 .dh2-proc-num {
   font-family: 'Syne', sans-serif;
-  font-size: 2.5rem;
-  font-weight: 800;
+  font-size: 1.8rem;
+  font-weight: 700;
   color: var(--text-dim);
-  margin-bottom: 1rem;
+  margin-bottom: .8rem;
   transition: color .3s;
 }
 
@@ -784,19 +843,19 @@
 
 .dh2-proc-title {
   font-family: 'Syne', sans-serif;
-  font-size: 1.2rem;
+  font-size: 1.05rem;
   font-weight: 700;
-  margin-bottom: .5rem;
+  margin-bottom: .4rem;
 }
 
 .dh2-proc-desc {
-  font-size: .85rem;
+  font-size: .8rem;
   color: var(--text-muted);
 }
 
 /* === TESTIMONIALS === */
 .dh2-test {
-  padding: 8rem 0;
+  padding: 6rem 0;
   background: var(--bg-base);
 }
 
@@ -824,12 +883,12 @@
 
 .dh2-test-quote {
   font-family: 'Syne', sans-serif;
-  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  font-size: clamp(1rem, 1.6vw, 1.3rem);
   font-weight: 600;
   line-height: 1.5;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   position: relative;
-  padding-left: 2rem;
+  padding-left: 1.5rem;
   border-left: 2px solid var(--accent);
 }
 
@@ -1131,7 +1190,7 @@
 /* === CTA === */
 .dh2-cta {
   text-align: center;
-  padding: 10rem 3rem;
+  padding: 6rem 3rem;
   position: relative;
   overflow: hidden;
 }
@@ -1142,7 +1201,7 @@
   left: 50%;
   transform: translateX(-50%);
   font-family: 'Syne', sans-serif;
-  font-size: clamp(6rem, 15vw, 16rem);
+  font-size: clamp(5rem, 12vw, 12rem);
   font-weight: 800;
   color: var(--border-s);
   white-space: nowrap;
@@ -1152,8 +1211,8 @@
 }
 
 .dh2-cta-title {
-  font-size: clamp(2.5rem, 7vw, 7rem);
-  margin-bottom: 2rem;
+  font-size: clamp(2rem, 5vw, 4.5rem);
+  margin-bottom: 1.5rem;
   position: relative;
   z-index: 1;
 }
@@ -1180,10 +1239,10 @@
 
 .dh2-footer-brand {
   font-family: 'Syne', sans-serif;
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   font-weight: 800;
   letter-spacing: .08em;
-  margin-bottom: 1rem;
+  margin-bottom: .8rem;
 }
 
 .dh2-footer-desc {
@@ -1242,26 +1301,25 @@
     padding: 0 2rem;
   }
 
+  .dh2-section {
+    padding: 4rem 0;
+  }
+
   .dh2-stats-row {
     grid-template-columns: repeat(2, 1fr);
-    gap: 3rem;
+    gap: 2rem;
   }
 
-  .dh2-cases {
-    grid-template-columns: 1fr;
-  }
-
-  .dh2-case.wide {
-    grid-column: span 1;
-    aspect-ratio: 4/5;
+  .dh2-projects-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .dh2-ind-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .dh2-globe-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .dh2-globe-detailed-grid {
+    grid-template-columns: 1fr;
   }
 
   .dh2-proc-grid {
@@ -1284,11 +1342,6 @@
   .dh2-footer-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-
-  .dh2-svc-inner {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
 }
 
 @media(max-width:768px) {
@@ -1309,6 +1362,17 @@
     flex-direction: column;
   }
 
+  .dh2-wwd2-card {
+    flex: 0 0 280px;
+    min-height: 380px;
+  }
+  .dh2-wwd2-top {
+    padding: 3rem 1.5rem 0;
+  }
+  .dh2-wwd2-track {
+    padding: 0 1.5rem;
+  }
+
   .dh2-btn-fill,
   .dh2-btn-ghost {
     width: 100%;
@@ -1320,19 +1384,23 @@
   }
 
   .dh2-section {
-    padding: 6rem 0;
+    padding: 3rem 0;
   }
 
   .dh2-stats-row {
-    padding: 4rem 0;
+    padding: 2.5rem 0;
+  }
+
+  .dh2-projects-grid {
+    grid-template-columns: 1fr;
   }
 
   .dh2-ind-grid {
     grid-template-columns: 1fr;
   }
 
-  .dh2-globe-grid {
-    grid-template-columns: 1fr 1fr;
+  .dh2-globe-detailed-grid {
+    grid-template-columns: 1fr;
   }
 
   .dh2-proc-grid {
@@ -1351,15 +1419,11 @@
     grid-template-columns: 1fr;
   }
 
-  .dh2-svc-left {
-    gap: 1rem;
-  }
-
-  .dh2-svc-num {
-    font-size: .8rem;
+  .dh2-test {
+    padding: 3rem 0;
   }
 
   .dh2-cta {
-    padding: 6rem 1.5rem;
+    padding: 4rem 1.5rem;
   }
 }

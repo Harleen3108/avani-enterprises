@@ -10,35 +10,122 @@ import '../components/dummyhome2/DummyHome2.css';
 
 const words = ['Websites', 'Products', 'Solutions', 'Experiences'];
 
-const HorizontalProjects = () => {
+const newProjectData = [
+  { name: 'Indus Group of Institutions', cat: 'Education', img: '/indus_aesthetic_1777270461175.png', link: '/projects/indus' },
+  { name: 'Policicue', cat: 'InsurTech', img: '/policicue_aesthetic_1777270486926.png', link: '/projects/policicue' },
+  { name: 'FRD Nutrition', cat: 'E-Commerce', img: '/frd_aesthetic_1777270509667.png', link: '/projects/frd-nutrition' },
+  { name: 'Hi-tech Homes', cat: 'Real Estate', img: '/hitech_aesthetic_1777270543762.png', link: '/projects/hitech-homes' },
+  { name: 'Sanjeevni Hospital', cat: 'Healthcare', img: '/sanjeevni_aesthetic_1777270573722.png', link: '/projects/sanjeevni-hospital' },
+  { name: 'Rohtak Shoe co.', cat: 'Fashion', img: '/rohtak_aesthetic_1777270648142.png', link: '/projects/rohtak-shoe' },
+];
+
+const StackedVinylProjects = () => {
+  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+  const doubledProjects = [...newProjectData, ...newProjectData, ...newProjectData];
+
   return (
-    <section className="dh2-section" id="work" style={{ overflow: "hidden", padding: "6rem 0" }}>
-      <div className="dh2-container" style={{ marginBottom: '2rem' }}>
-        <div className="dh2-label" style={{ marginBottom: '.8rem' }}>SUCCESS STORIES</div>
-        <h2 className="dh2-display" style={{ fontSize: 'clamp(2rem,5vw,3.5rem)' }}>FEATURED WORK</h2>
+    <section className="dh2-section" id="work" style={{ overflow: 'hidden', paddingBottom: '8rem' }}>
+      <div className="dh2-container">
+        <motion.div className="dh2-section-header" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+          <div>
+            <div className="dh2-label">SUCCESS STORIES</div>
+            <h2 className="dh2-display dh2-section-title">FEATURED WORK</h2>
+          </div>
+          <Link to="/case-studies" className="dh2-btn-ghost" style={{ padding: '0.6rem 1.2rem', fontSize: '0.85rem', height: 'fit-content', textDecoration: 'none' }}>
+            View All Projects <ArrowUpRight size={16} />
+          </Link>
+        </motion.div>
       </div>
       
-      <div className="dh2-projects-marquee">
-        <div className="dh2-projects-track">
-          {[...Array(2)].map((_, loopIdx) => (
-            <Fragment key={loopIdx}>
-              {caseStudies.map((cs, i) => (
-                <div key={`${loopIdx}-${i}`} className="dh2-project-card">
-                  <img src={cs.img} alt={cs.name} className="dh2-project-img" />
-                  <div className="dh2-project-over">
-                    <span className="dh2-project-cat">{cs.cat}</span>
-                    <div className="dh2-project-info">
-                      <div className="dh2-project-name">{cs.name}</div>
-                      <div className="dh2-project-metrics">
-                        {cs.metrics.slice(0, 2).map((m, j) => <span key={j}>{m}</span>)}
-                      </div>
-                    </div>
-                  </div>
+      {/* Vinyl Stack Marquee */}
+      <div className="dh2-vinyl-wrapper">
+        <motion.div 
+          className="dh2-vinyl-track"
+          animate={{ x: ['0%', '-33.333%'] }} 
+          transition={{ duration: 40, ease: 'linear', repeat: Infinity }}
+          style={{ 
+            animationPlayState: hoveredIdx !== null ? 'paused' : 'running' 
+          }}
+        >
+          {doubledProjects.map((cs, i) => (
+            <Link 
+              to={cs.link}
+              key={i} 
+              className="dh2-vinyl-card"
+              onMouseEnter={() => setHoveredIdx(i)}
+              onMouseLeave={() => setHoveredIdx(null)}
+              style={{
+                zIndex: hoveredIdx === i ? 50 : 10,
+                transform: hoveredIdx === i ? 'translateY(-60px) rotate(-2deg) scale(1.05)' : 'none',
+              }}
+            >
+              <img src={cs.img} alt={cs.name} className="dh2-vinyl-img" />
+              <div className="dh2-vinyl-overlay" />
+              <div className="dh2-vinyl-content">
+                <span className="dh2-vinyl-cat">{cs.cat}</span>
+                <h3 className="dh2-vinyl-title">{cs.name}</h3>
+                <div className="dh2-vinyl-view">
+                  VIEW PROJECT <ArrowRight size={14} />
                 </div>
-              ))}
-            </Fragment>
+              </div>
+            </Link>
           ))}
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+const WhatWeDo = () => {
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: wrapperRef, offset: ['start start', 'end end'] });
+  const [activeIdx, setActiveIdx] = useState(0);
+
+  // Horizontal translation: use a callback that returns a NUMBER (pixels)
+  // 6 cards × 340px + 5 gaps × 32px = 2200px total track width
+  // We want to scroll from showing card 1 (x=0) to showing card 6 (x = -(trackWidth - viewport))
+  const trackX = useTransform(scrollYProgress, (p) => {
+    const totalWidth = services.length * 340 + (services.length - 1) * 32;
+    const viewportW = typeof window !== 'undefined' ? window.innerWidth : 1400;
+    const maxScroll = Math.max(0, totalWidth - viewportW + 120); // 120px for padding
+    return -p * maxScroll;
+  });
+
+  // Update active index for visual highlight
+  useEffect(() => {
+    const unsub = scrollYProgress.on('change', (v) => {
+      const idx = Math.min(services.length - 1, Math.floor(v * services.length));
+      setActiveIdx(idx);
+    });
+    return unsub;
+  }, [scrollYProgress]);
+
+  return (
+    <section className="dh2-wwd2-wrapper" ref={wrapperRef} id="services">
+      <div className="dh2-wwd2-sticky">
+
+        {/* Header — normal flow, top of sticky */}
+        <div className="dh2-wwd2-top">
+          <div className="dh2-label">OUR SERVICES</div>
+          <h2 className="dh2-display dh2-wwd2-title">What We Do</h2>
         </div>
+
+        {/* Card track — fills middle area */}
+        <div className="dh2-wwd2-track-area">
+          <motion.div className="dh2-wwd2-track" style={{ x: trackX }}>
+            {services.map((svc, i) => (
+              <div key={i} className={`dh2-wwd2-card ${activeIdx === i ? 'dh2-wwd2-card--active' : ''}`}>
+                <div className="dh2-wwd2-card-num">{svc.idx}</div>
+                <h3 className="dh2-heading dh2-wwd2-card-title">{svc.title}</h3>
+                <p className="dh2-body dh2-wwd2-card-desc">{svc.desc}</p>
+                <div className="dh2-wwd2-card-tags">
+                  {svc.tags.map((t, j) => <span key={j} className="dh2-wwd2-card-tag">{t}</span>)}
+                </div>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+
       </div>
     </section>
   );
@@ -48,23 +135,22 @@ const DummyHome2 = () => {
   const [loading, setLoading] = useState(true);
   const [progress, setProgress] = useState(0);
   const [wordIdx, setWordIdx] = useState(0);
-  const [activeSvc, setActiveSvc] = useState<number | null>(null);
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
   const [testIdx, setTestIdx] = useState(0);
   const [blogs, setBlogs] = useState<any[]>([]);
 
   const { scrollYProgress } = useScroll();
   
-  const scrollPoints = [0, 0.15, 0.2, 0.35, 0.4, 0.85, 0.9, 1];
+  const scrollPoints = [0, 0.4, 0.45, 0.55, 0.6, 1];
   
-  const bgDeep = useTransform(scrollYProgress, scrollPoints, ['#030303', '#030303', '#fdfdfd', '#fdfdfd', '#030303', '#030303', '#fdfdfd', '#fdfdfd']);
-  const bgBase = useTransform(scrollYProgress, scrollPoints, ['#0a0a0a', '#0a0a0a', '#f5f5f5', '#f5f5f5', '#0a0a0a', '#0a0a0a', '#f5f5f5', '#f5f5f5']);
-  const bgSurface = useTransform(scrollYProgress, scrollPoints, ['#111111', '#111111', '#ffffff', '#ffffff', '#111111', '#111111', '#ffffff', '#ffffff']);
-  const textMain = useTransform(scrollYProgress, scrollPoints, ['#f0f0f0', '#f0f0f0', '#0a0a0a', '#0a0a0a', '#f0f0f0', '#f0f0f0', '#0a0a0a', '#0a0a0a']);
-  const textMuted = useTransform(scrollYProgress, scrollPoints, ['#7a7a7a', '#7a7a7a', '#555555', '#555555', '#7a7a7a', '#7a7a7a', '#555555', '#555555']);
-  const textDim = useTransform(scrollYProgress, scrollPoints, ['#3a3a3a', '#3a3a3a', '#999999', '#999999', '#3a3a3a', '#3a3a3a', '#999999', '#999999']);
-  const borderS = useTransform(scrollYProgress, scrollPoints, ['rgba(255,255,255,0.07)', 'rgba(255,255,255,0.07)', 'rgba(0,0,0,0.08)', 'rgba(0,0,0,0.08)', 'rgba(255,255,255,0.07)', 'rgba(255,255,255,0.07)', 'rgba(0,0,0,0.08)', 'rgba(0,0,0,0.08)']);
-  const borderF = useTransform(scrollYProgress, scrollPoints, ['rgba(255,255,255,0.15)', 'rgba(255,255,255,0.15)', 'rgba(0,0,0,0.15)', 'rgba(0,0,0,0.15)', 'rgba(255,255,255,0.15)', 'rgba(255,255,255,0.15)', 'rgba(0,0,0,0.15)', 'rgba(0,0,0,0.15)']);
+  const bgDeep = useTransform(scrollYProgress, scrollPoints, ['#030303', '#030303', '#e8e4db', '#e8e4db', '#030303', '#030303']);
+  const bgBase = useTransform(scrollYProgress, scrollPoints, ['#0a0a0a', '#0a0a0a', '#eeebe4', '#eeebe4', '#0a0a0a', '#0a0a0a']);
+  const bgSurface = useTransform(scrollYProgress, scrollPoints, ['#111111', '#111111', '#f4f2ee', '#f4f2ee', '#111111', '#111111']);
+  const textMain = useTransform(scrollYProgress, scrollPoints, ['#f0f0f0', '#f0f0f0', '#1a1a1a', '#1a1a1a', '#f0f0f0', '#f0f0f0']);
+  const textMuted = useTransform(scrollYProgress, scrollPoints, ['#7a7a7a', '#7a7a7a', '#666666', '#666666', '#7a7a7a', '#7a7a7a']);
+  const textDim = useTransform(scrollYProgress, scrollPoints, ['#3a3a3a', '#3a3a3a', '#999999', '#999999', '#3a3a3a', '#3a3a3a']);
+  const borderS = useTransform(scrollYProgress, scrollPoints, ['rgba(255,255,255,0.07)', 'rgba(255,255,255,0.07)', 'rgba(0,0,0,0.08)', 'rgba(0,0,0,0.08)', 'rgba(255,255,255,0.07)', 'rgba(255,255,255,0.07)']);
+  const borderF = useTransform(scrollYProgress, scrollPoints, ['rgba(255,255,255,0.15)', 'rgba(255,255,255,0.15)', 'rgba(0,0,0,0.15)', 'rgba(0,0,0,0.15)', 'rgba(255,255,255,0.15)', 'rgba(255,255,255,0.15)']);
 
   useEffect(() => {
     // Keep body background matching the theme start to prevent flash
@@ -210,42 +296,18 @@ const DummyHome2 = () => {
         </div>
       </div>
 
-      {/* PHILOSOPHY */}
-      <section className="dh2-section dh2-container" id="about">
-        <motion.h2 className="dh2-philosophy" initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: .8 }}>
-          WE DON'T JUST BUILD WEBSITES. WE <em>ENGINEER GROWTH</em> AND ARCHITECT SOLUTIONS THAT SCALABLY DRIVE REVENUE.
-        </motion.h2>
-      </section>
+      {/* WHAT WE DO — Horizontal Scroll Showcase */}
+      <WhatWeDo />
 
-      {/* SERVICES */}
-      <section className="dh2-section dh2-container" id="services" style={{ paddingRight: 0 }}>
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: .6 }} style={{ marginBottom: '3rem', paddingRight: '3rem' }}>
-          <div className="dh2-label" style={{ marginBottom: '.8rem' }}>WHAT WE DO</div>
-          <h2 className="dh2-display" style={{ fontSize: 'clamp(2rem,5vw,3.5rem)' }}>OUR EXPERTISE</h2>
-        </motion.div>
-        
-        <div className="dh2-svc-slider">
-          {services.map((svc, i) => (
-            <div key={i} className="dh2-svc-card">
-              <div className="dh2-svc-card-num">{svc.idx}</div>
-              <h3 className="dh2-heading dh2-svc-card-title">{svc.title}</h3>
-              <p className="dh2-body dh2-svc-card-desc">{svc.desc}</p>
-              <div className="dh2-svc-card-tags">
-                {svc.tags.map((t, j) => <span key={j} className="dh2-svc-card-tag">{t}</span>)}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
 
       {/* CASE STUDIES */}
-      <HorizontalProjects />
+      <StackedVinylProjects />
 
       {/* INDUSTRIES */}
       <section className="dh2-section dh2-container">
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: .6 }} style={{ marginBottom: '1rem' }}>
-          <div className="dh2-label" style={{ marginBottom: '.8rem' }}>VERTICALS</div>
-          <h2 className="dh2-display" style={{ fontSize: 'clamp(2rem,5vw,3.5rem)' }}>INDUSTRIES WE SERVE</h2>
+        <motion.div className="dh2-section-header" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: .6 }}>
+          <div className="dh2-label">VERTICALS</div>
+          <h2 className="dh2-display dh2-section-title">INDUSTRIES WE SERVE</h2>
         </motion.div>
         <div className="dh2-ind-grid">
           {industries.map((ind, i) => (
@@ -259,9 +321,9 @@ const DummyHome2 = () => {
 
       {/* GLOBAL PRESENCE */}
       <section className="dh2-section dh2-container">
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: .6 }} style={{ marginBottom: '3rem' }}>
-          <div className="dh2-label" style={{ marginBottom: '.8rem' }}>WHERE WE OPERATE</div>
-          <h2 className="dh2-display" style={{ fontSize: 'clamp(2rem,5vw,3.5rem)' }}>GLOBAL PRESENCE</h2>
+        <motion.div className="dh2-section-header" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: .6 }}>
+          <div className="dh2-label">WHERE WE OPERATE</div>
+          <h2 className="dh2-display dh2-section-title">GLOBAL PRESENCE</h2>
         </motion.div>
         <div className="dh2-globe-detailed-grid">
           {offices.map((o, i) => (
@@ -298,9 +360,9 @@ const DummyHome2 = () => {
 
       {/* PROCESS */}
       <section className="dh2-section dh2-container">
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: .6 }} style={{ marginBottom: '1rem' }}>
-          <div className="dh2-label" style={{ marginBottom: '.8rem' }}>HOW WE WORK</div>
-          <h2 className="dh2-display" style={{ fontSize: 'clamp(2rem,5vw,3.5rem)' }}>OUR PROCESS</h2>
+        <motion.div className="dh2-section-header" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: .6 }}>
+          <div className="dh2-label">HOW WE WORK</div>
+          <h2 className="dh2-display dh2-section-title">OUR PROCESS</h2>
         </motion.div>
         <div className="dh2-proc-grid">
           {processSteps.map((p, i) => (
@@ -316,9 +378,9 @@ const DummyHome2 = () => {
       {/* TESTIMONIALS */}
       <section className="dh2-test">
         <div className="dh2-container">
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: .6 }} style={{ marginBottom: '3rem' }}>
-            <div className="dh2-label" style={{ marginBottom: '.8rem' }}>CLIENT VOICES</div>
-            <h2 className="dh2-display" style={{ fontSize: 'clamp(2rem,5vw,3.5rem)' }}>WHAT THEY SAY</h2>
+          <motion.div className="dh2-section-header" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: .6 }}>
+            <div className="dh2-label">CLIENT VOICES</div>
+            <h2 className="dh2-display dh2-section-title">WHAT THEY SAY</h2>
           </motion.div>
           <AnimatePresence mode="wait">
             <motion.div key={testIdx} className="dh2-test-card" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: .5 }}>
@@ -338,9 +400,9 @@ const DummyHome2 = () => {
 
       {/* TEAM */}
       <section className="dh2-section dh2-container">
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: .6 }} style={{ marginBottom: '1rem' }}>
-          <div className="dh2-label" style={{ marginBottom: '.8rem' }}>THE PEOPLE</div>
-          <h2 className="dh2-display" style={{ fontSize: 'clamp(2rem,5vw,3.5rem)' }}>MEET OUR TEAM</h2>
+        <motion.div className="dh2-section-header" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: .6 }}>
+          <div className="dh2-label">THE PEOPLE</div>
+          <h2 className="dh2-display dh2-section-title">MEET OUR TEAM</h2>
         </motion.div>
         <div className="dh2-team-grid">
           {team.map((m, i) => (
@@ -376,9 +438,9 @@ const DummyHome2 = () => {
 
       {/* TIMELINE */}
       <section className="dh2-section dh2-container">
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: .6 }} style={{ textAlign: 'center', marginBottom: '2rem' }}>
-          <div className="dh2-label" style={{ marginBottom: '.8rem' }}>OUR JOURNEY</div>
-          <h2 className="dh2-display" style={{ fontSize: 'clamp(2rem,5vw,3.5rem)' }}>THE AVANI STORY</h2>
+        <motion.div className="dh2-section-header" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: .6 }} style={{ textAlign: 'center' }}>
+          <div className="dh2-label">OUR JOURNEY</div>
+          <h2 className="dh2-display dh2-section-title">THE AVANI STORY</h2>
         </motion.div>
         <div className="dh2-tl">
           {milestones.map((m, i) => (
@@ -395,9 +457,9 @@ const DummyHome2 = () => {
       {/* BLOG */}
       {blogs.length > 0 && (
         <section className="dh2-section dh2-container">
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: .6 }} style={{ marginBottom: '1rem' }}>
-            <div className="dh2-label" style={{ marginBottom: '.8rem' }}>INSIGHTS</div>
-            <h2 className="dh2-display" style={{ fontSize: 'clamp(2rem,5vw,3.5rem)' }}>LATEST FROM BLOG</h2>
+          <motion.div className="dh2-section-header" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: .6 }}>
+            <div className="dh2-label">INSIGHTS</div>
+            <h2 className="dh2-display dh2-section-title">LATEST FROM BLOG</h2>
           </motion.div>
           <div className="dh2-blog-grid">
             {blogs.slice(0, 3).map((b: any, i: number) => (
@@ -416,9 +478,9 @@ const DummyHome2 = () => {
 
       {/* FAQ */}
       <section className="dh2-section dh2-container">
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: .6 }} style={{ marginBottom: '2rem' }}>
-          <div className="dh2-label" style={{ marginBottom: '.8rem' }}>QUESTIONS</div>
-          <h2 className="dh2-display" style={{ fontSize: 'clamp(2rem,5vw,3.5rem)' }}>FAQ</h2>
+        <motion.div className="dh2-section-header" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: .6 }}>
+          <div className="dh2-label">QUESTIONS</div>
+          <h2 className="dh2-display dh2-section-title">FAQ</h2>
         </motion.div>
         {faqs.map((f, i) => (
           <div key={i} className={`dh2-faq ${activeFaq === i ? 'open' : ''}`} onClick={() => setActiveFaq(activeFaq === i ? null : i)}>
