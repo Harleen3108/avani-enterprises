@@ -12,7 +12,9 @@ import {
   FileText,
   ChevronLeft,
   ChevronRight,
-  LogOut
+  LogOut,
+  Upload,
+  Loader2
 } from "lucide-react";
 
 const BlogManagement = () => {
@@ -37,6 +39,7 @@ const BlogManagement = () => {
     metaKeywords: "",
     metaDescription: ""
   });
+  const [uploadingImage, setUploadingImage] = useState(false);
 
   const { loading: authLoading } = useAuth();
 
@@ -86,6 +89,28 @@ const BlogManagement = () => {
       metaDescription: b.metaDescription || ""
     });
     setShowForm(true);
+  };
+
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append("image", file);
+
+    setUploadingImage(true);
+    try {
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/admin/upload-image`, formData, {
+        headers: { "Content-Type": "multipart/form-data" }
+      });
+      if (res.data.success) {
+        setForm(prev => ({ ...prev, featuredImage: res.data.imageUrl }));
+      }
+    } catch (err) {
+      alert("Failed to upload image: " + (err.response?.data?.message || err.message));
+    } finally {
+      setUploadingImage(false);
+    }
   };
 
   const save = async (e) => {
@@ -293,13 +318,67 @@ const BlogManagement = () => {
                     </div>
 
                     <div className="space-y-1.5">
-                      <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Image URL</label>
-                      <input
-                        placeholder="https://example.com/image.jpg"
-                        value={form.featuredImage}
-                        onChange={e => setForm({ ...form, featuredImage: e.target.value })}
-                        className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 outline-none focus:border-indigo-500 font-bold transition-all"
+                      <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Short Description (Excerpt)</label>
+                      <textarea
+                        placeholder="Brief summary of the blog..."
+                        value={form.excerpt}
+                        onChange={e => setForm({ ...form, excerpt: e.target.value })}
+                        className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 outline-none focus:border-indigo-500 font-bold transition-all h-20 resize-none"
                       />
+                    </div>
+
+                    <div className="space-y-1.5">
+                      <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Featured Image</label>
+                      <div className="flex flex-col gap-4">
+                        {form.featuredImage && (
+                          <div className="relative w-full h-48 rounded-xl overflow-hidden border border-slate-200 bg-slate-50">
+                            <img 
+                              src={form.featuredImage} 
+                              alt="Preview" 
+                              className="w-full h-full object-cover"
+                            />
+                            <button
+                              type="button"
+                              onClick={() => setForm({ ...form, featuredImage: "" })}
+                              className="absolute top-2 right-2 p-1.5 bg-rose-500 text-white rounded-full shadow-lg hover:bg-rose-600 transition-colors"
+                            >
+                              <X size={14} />
+                            </button>
+                          </div>
+                        )}
+                        
+                        <div className="flex gap-4">
+                          <div className="flex-1">
+                            <input
+                              placeholder="Or paste image URL here..."
+                              value={form.featuredImage}
+                              onChange={e => setForm({ ...form, featuredImage: e.target.value })}
+                              className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 outline-none focus:border-indigo-500 font-bold transition-all text-sm"
+                            />
+                          </div>
+                          <label className={`flex items-center gap-2 px-4 py-2 rounded-xl border-2 border-dashed transition-all cursor-pointer whitespace-nowrap ${
+                            uploadingImage 
+                              ? 'border-indigo-200 bg-indigo-50 text-indigo-400' 
+                              : 'border-slate-200 hover:border-indigo-500 hover:bg-indigo-50 text-slate-500 hover:text-indigo-600'
+                          }`}>
+                            {uploadingImage ? (
+                              <Loader2 size={18} className="animate-spin" />
+                            ) : (
+                              <Upload size={18} />
+                            )}
+                            <span className="text-xs font-black uppercase tracking-wider">
+                              {uploadingImage ? 'Uploading...' : 'Upload File'}
+                            </span>
+                            <input
+                              type="file"
+                              accept="image/*"
+                              onChange={handleImageUpload}
+                              className="hidden"
+                              disabled={uploadingImage}
+                            />
+                          </label>
+                        </div>
+                      </div>
                     </div>
 
                     <div className="space-y-1.5">

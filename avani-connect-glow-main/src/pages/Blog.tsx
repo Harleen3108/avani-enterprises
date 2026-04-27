@@ -151,7 +151,7 @@ const Blog = () => {
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {featuredPosts.map((post, index) => (
-                <AnimatedSection key={post.id} animation="fadeInUp" delay={index * 0.1}>
+                <AnimatedSection key={post._id || post.id || `featured-${index}`} animation="fadeInUp" delay={index * 0.1}>
                   <article className="group bg-white rounded-[2rem] shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 border border-slate-100">
                     <div className="relative overflow-hidden">
                       <Link to={`/blog/${post.slug}`}>
@@ -206,7 +206,7 @@ const Blog = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {regularPosts.map((post, index) => (
-                <AnimatedSection key={post.id} animation="fadeInUp" delay={index * 0.05}>
+                <AnimatedSection key={post._id || post.id || `regular-${index}`} animation="fadeInUp" delay={index * 0.05}>
                   <article className="group bg-slate-50 rounded-[1.5rem] shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 border border-slate-100 hover:border-amber-500">
                     <div className="relative overflow-hidden">
                       <Link to={`/blog/${post.slug}`}>

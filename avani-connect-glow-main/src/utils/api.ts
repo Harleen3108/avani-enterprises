@@ -22,7 +22,7 @@ export const getApiBaseUrl = (): string => {
   if (envUrl) return envUrl.replace(/\/$/, '');
 
   // 3. Final default for local development
-  return "http://localhost:5000";
+  return "http://localhost:5001";
 };
 
 export const API_BASE_URL = getApiBaseUrl();
