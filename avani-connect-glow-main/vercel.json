@@ -13,7 +13,7 @@
     },
     {
       "source": "/admin",
-      "destination": "https://avani-enterprises-admin-frontend.vercel.app/",
+      "destination": "https://avani-enterprises-psi.vercel.app/",
       "permanent": false
     }
   ],

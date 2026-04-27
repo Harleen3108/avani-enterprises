@@ -35,7 +35,7 @@
 
 // const AdminRedirect = () => {
 //   useEffect(() => {
-//     window.location.href = "https://avani-enterprises-admin-frontend.vercel.app/";
+//     window.location.href = "https://avani-enterprises-psi.vercel.app/";
 //   }, []);
 //   return null;
 // };
@@ -157,7 +157,7 @@ const queryClient = new QueryClient();
 
 const AdminRedirect = () => {
   useEffect(() => {
-    window.location.href = "https://avani-enterprises-admin-frontend.vercel.app/";
+    window.location.href = "https://avani-enterprises-psi.vercel.app/";
   }, []);
   return null;
 };
