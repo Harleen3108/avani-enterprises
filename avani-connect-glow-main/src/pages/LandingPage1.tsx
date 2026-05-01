@@ -503,55 +503,67 @@ export default function AvaniEnterprises1() {
         .pricing-table-mobile { display: none; }
 
         /* ── Mobile-compact pricing table (single table for phone) ── */
+        /* All rules are prefixed with #pricing to override the existing
+           #pricing .display-font and #pricing p mobile rules elsewhere. */
         @media (max-width: 768px) {
-          .pricing-table-desktop { border-radius: 14px !important; margin-top: 50px !important; }
-          .pricing-table-container table { table-layout: fixed !important; width: 100% !important; }
+          #pricing .pricing-table-desktop { border-radius: 14px !important; margin-top: 50px !important; max-width: 100% !important; box-shadow: 0 12px 32px rgba(0,0,0,0.06) !important; }
+          #pricing .pricing-table-container table { table-layout: fixed !important; width: 100% !important; }
 
           /* Header — feature column */
-          .pricing-table-container .col-feature { padding: 26px 10px 14px !important; width: 32% !important; }
-          .pricing-table-container .table-header-top1 { font-size: 8px !important; letter-spacing: 1.5px !important; margin-bottom: 4px !important; }
-          .pricing-table-container .table-header-top2 { font-size: 13px !important; line-height: 1.1 !important; }
-          .pricing-table-container .col-feature p { font-size: 9px !important; line-height: 1.4 !important; margin-top: 6px !important; }
+          #pricing .pricing-table-container .col-feature { padding: 22px 10px 12px !important; width: 32% !important; vertical-align: top !important; }
+          #pricing .pricing-table-container .table-header-top1 { font-size: 8px !important; letter-spacing: 1.5px !important; margin-bottom: 4px !important; }
+          #pricing .pricing-table-container .table-header-top2 { font-size: 13px !important; line-height: 1.1 !important; }
+          #pricing .pricing-table-container .col-feature p { font-size: 9px !important; line-height: 1.4 !important; margin-top: 6px !important; margin-bottom: 0 !important; }
 
           /* Header — plan columns */
-          .pricing-table-container thead th:not(.col-feature) { padding: 30px 4px 14px !important; width: 22.66% !important; vertical-align: top !important; }
-          .pricing-table-container .table-header-name { font-size: 8px !important; letter-spacing: 1.5px !important; margin-bottom: 4px !important; }
-          .pricing-table-container thead .display-font { font-size: 14px !important; margin-bottom: 6px !important; }
-          .pricing-table-container .table-header-price { font-size: 9px !important; }
-          .pricing-table-container .table-header-price span { font-size: 8px !important; }
-          .pricing-table-container .table-header-price-value { font-size: 12px !important; }
-          .pricing-table-container thead th p { font-size: 8px !important; line-height: 1.3 !important; min-height: auto !important; padding: 0 !important; }
+          #pricing .pricing-table-container thead th:not(.col-feature) { padding: 30px 4px 12px !important; width: 22.66% !important; vertical-align: top !important; }
+          #pricing .pricing-table-container .table-header-name { font-size: 8px !important; letter-spacing: 1.5px !important; margin-bottom: 4px !important; }
+          #pricing .pricing-table-container thead .display-font { font-size: 14px !important; margin-bottom: 6px !important; line-height: 1 !important; letter-spacing: 0 !important; }
+          #pricing .pricing-table-container .table-header-price { font-size: 9px !important; }
+          #pricing .pricing-table-container .table-header-price span { font-size: 8px !important; }
+          #pricing .pricing-table-container .table-header-price-value { font-size: 12px !important; letter-spacing: -0.3px !important; }
+          #pricing .pricing-table-container thead th p { font-size: 8px !important; line-height: 1.3 !important; min-height: auto !important; padding: 0 !important; margin-top: 6px !important; margin-bottom: 0 !important; }
 
           /* Body — feature rows */
-          .pricing-table-container tbody td { padding: 10px 6px !important; }
-          .pricing-table-container .table-feature-text { padding: 10px 10px !important; font-size: 10px !important; line-height: 1.25 !important; font-weight: 600 !important; }
-          .pricing-table-container .table-tick-cross { width: 18px !important; height: 18px !important; }
-          .pricing-table-container .table-tick-cross svg { width: 10px !important; height: 10px !important; }
-          .pricing-table-container .table-val-text { font-size: 8px !important; line-height: 1.2 !important; max-width: 100% !important; white-space: normal !important; word-break: break-word !important; text-align: center !important; }
+          #pricing .pricing-table-container tbody td { padding: 10px 4px !important; }
+          #pricing .pricing-table-container .table-feature-text { padding: 10px 8px !important; font-size: 10px !important; line-height: 1.25 !important; font-weight: 600 !important; }
+          #pricing .pricing-table-container .table-tick-cross { width: 18px !important; height: 18px !important; }
+          #pricing .pricing-table-container .table-tick-cross svg { width: 10px !important; height: 10px !important; }
+          #pricing .pricing-table-container .table-val-text { font-size: 8px !important; line-height: 1.2 !important; max-width: 100% !important; white-space: normal !important; word-break: break-word !important; text-align: center !important; padding: 0 2px !important; }
 
           /* Footer CTA row */
-          .pricing-table-container tbody tr:last-child td:first-child { padding: 14px 10px !important; }
-          .pricing-table-container tbody tr:last-child td:first-child div:first-child { font-size: 9px !important; letter-spacing: 1px !important; }
-          .pricing-table-container tbody tr:last-child td:first-child div:last-child { font-size: 9px !important; margin-top: 2px !important; }
-          .pricing-table-container tbody tr:last-child td:not(:first-child) { padding: 12px 4px !important; }
-          .pricing-table-container .pricing-cta-btn { padding: 10px 4px !important; gap: 1px !important; border-radius: 6px !important; }
-          .pricing-table-container .pricing-cta-btn .btn-book-now { font-size: 10px !important; gap: 3px !important; }
-          .pricing-table-container .pricing-cta-btn .btn-book { font-size: 10px !important; }
-          .pricing-table-container .pricing-cta-btn .btn-book-now svg { width: 10px !important; height: 10px !important; }
-          .pricing-table-container .pricing-cta-btn .btn-slot { font-size: 8px !important; }
+          #pricing .pricing-table-container tbody tr:last-child td:first-child { padding: 14px 8px !important; }
+          #pricing .pricing-table-container tbody tr:last-child td:first-child div:first-child { font-size: 9px !important; letter-spacing: 1px !important; }
+          #pricing .pricing-table-container tbody tr:last-child td:first-child div:last-child { font-size: 9px !important; margin-top: 2px !important; }
+          #pricing .pricing-table-container tbody tr:last-child td:not(:first-child) { padding: 12px 4px !important; }
+          #pricing .pricing-table-container .pricing-cta-btn { padding: 10px 4px !important; gap: 1px !important; border-radius: 6px !important; }
+          #pricing .pricing-table-container .pricing-cta-btn .btn-book-now { font-size: 9px !important; gap: 3px !important; letter-spacing: 0.2px !important; }
+          #pricing .pricing-table-container .pricing-cta-btn .btn-book { font-size: 9px !important; }
+          #pricing .pricing-table-container .pricing-cta-btn .btn-book-now svg { width: 10px !important; height: 10px !important; }
+          #pricing .pricing-table-container .pricing-cta-btn .btn-slot { font-size: 7px !important; }
+
+          /* MOST POPULAR badge — keep tight on small screens */
+          #pricing .popular-badge-float { font-size: 7px !important; padding: 5px 10px !important; top: -12px !important; letter-spacing: 1px !important; }
+          #pricing .popular-badge-float svg { width: 8px !important; height: 8px !important; }
         }
 
         @media (max-width: 480px) {
-          .pricing-table-container .col-feature { padding: 20px 8px 10px !important; }
-          .pricing-table-container .table-feature-text { padding: 8px 6px !important; font-size: 9px !important; }
-          .pricing-table-container thead th:not(.col-feature) { padding: 26px 2px 12px !important; }
-          .pricing-table-container thead .display-font { font-size: 12px !important; }
-          .pricing-table-container .table-header-price-value { font-size: 11px !important; }
-          .pricing-table-container .table-tick-cross { width: 16px !important; height: 16px !important; }
-          .pricing-table-container .table-tick-cross svg { width: 9px !important; height: 9px !important; }
-          .pricing-table-container .table-val-text { font-size: 7px !important; }
-          .pricing-table-container .pricing-cta-btn .btn-book, .pricing-table-container .pricing-cta-btn .btn-book-now { font-size: 9px !important; }
-          .pricing-table-container .pricing-cta-btn .btn-slot { font-size: 7px !important; }
+          #pricing .pricing-table-container .col-feature { padding: 18px 6px 8px !important; width: 30% !important; }
+          #pricing .pricing-table-container .table-header-top2 { font-size: 11px !important; }
+          #pricing .pricing-table-container .col-feature p { font-size: 8px !important; }
+          #pricing .pricing-table-container .table-feature-text { padding: 8px 6px !important; font-size: 9px !important; }
+          #pricing .pricing-table-container thead th:not(.col-feature) { padding: 26px 2px 10px !important; width: 23.33% !important; }
+          #pricing .pricing-table-container thead .display-font { font-size: 12px !important; }
+          #pricing .pricing-table-container .table-header-price-value { font-size: 10px !important; }
+          #pricing .pricing-table-container .table-header-price { font-size: 8px !important; }
+          #pricing .pricing-table-container .table-header-price span { font-size: 7px !important; }
+          #pricing .pricing-table-container thead th p { font-size: 7px !important; line-height: 1.25 !important; }
+          #pricing .pricing-table-container .table-tick-cross { width: 16px !important; height: 16px !important; }
+          #pricing .pricing-table-container .table-tick-cross svg { width: 9px !important; height: 9px !important; }
+          #pricing .pricing-table-container .table-val-text { font-size: 7px !important; }
+          #pricing .pricing-table-container .pricing-cta-btn .btn-book, #pricing .pricing-table-container .pricing-cta-btn .btn-book-now { font-size: 8px !important; }
+          #pricing .pricing-table-container .pricing-cta-btn .btn-slot { font-size: 6px !important; }
+          #pricing .pricing-table-container .pricing-cta-btn .btn-book-now svg { width: 8px !important; height: 8px !important; }
         }
 
         /* ── HERO ENHANCEMENT ELEMENTS ── */
