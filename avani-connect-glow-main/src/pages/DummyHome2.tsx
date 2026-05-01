@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState, Fragment, useCallback } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Plus, MapPin, Play, ArrowUpRight } from 'lucide-react';
+import { ArrowRight, Plus, MapPin, Play, ArrowUpRight, ChevronLeft, ChevronRight, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { API_BASE_URL } from '../utils/api';
-import { services, caseStudies, industries, offices, processSteps, testimonials, team, awards, milestones, faqs, clientLogos, footerLinks } from '../components/dummyhome2/data';
+import { services, caseStudies, industries, industryConnections, offices, processSteps, testimonials, team, awards, milestones, faqs, clientLogos, footerLinks } from '../components/dummyhome2/data';
 import { FluidHeroBackground } from '../components/dummyhome2/FluidHeroBackground';
 import '../components/dummyhome2/DummyHome2.css';
 
@@ -24,15 +24,15 @@ const StackedVinylProjects = () => {
   const doubledProjects = [...newProjectData, ...newProjectData, ...newProjectData];
 
   return (
-    <section className="dh2-section" id="work" style={{ overflow: 'hidden', paddingBottom: '8rem' }}>
+    <section className="dh2-section" id="work" style={{ overflow: 'hidden', paddingBottom: '5rem' }}>
       <div className="dh2-container">
-        <motion.div className="dh2-section-header" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+        <motion.div className="dh2-section-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: '2rem', marginBottom: '2rem' }} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
           <div>
             <div className="dh2-label">SUCCESS STORIES</div>
             <h2 className="dh2-display dh2-section-title">FEATURED WORK</h2>
           </div>
-          <Link to="/case-studies" className="dh2-btn-ghost" style={{ padding: '0.6rem 1.2rem', fontSize: '0.85rem', height: 'fit-content', textDecoration: 'none' }}>
-            View All Projects <ArrowUpRight size={16} />
+          <Link to="/case-studies" className="dh2-btn-ghost" style={{ padding: '0.55rem 1.2rem', fontSize: '0.75rem', height: 'fit-content', textDecoration: 'none', whiteSpace: 'nowrap', flexShrink: 0 }}>
+            View All Projects <ArrowUpRight size={14} />
           </Link>
         </motion.div>
       </div>
@@ -137,11 +137,16 @@ const DummyHome2 = () => {
   const [wordIdx, setWordIdx] = useState(0);
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
   const [testIdx, setTestIdx] = useState(0);
+  const [testProgress, setTestProgress] = useState(0);
   const [blogs, setBlogs] = useState<any[]>([]);
+  const [hoveredInd, setHoveredInd] = useState<number | null>(null);
+  const [gpIdx, setGpIdx] = useState(0);
+  const [gpDir, setGpDir] = useState(0);
+  const [activeProc, setActiveProc] = useState(0);
 
   const { scrollYProgress } = useScroll();
   
-  const scrollPoints = [0, 0.4, 0.45, 0.55, 0.6, 1];
+  const scrollPoints = [0, 0.25, 0.28, 0.50, 0.53, 1];
   
   const bgDeep = useTransform(scrollYProgress, scrollPoints, ['#030303', '#030303', '#e8e4db', '#e8e4db', '#030303', '#030303']);
   const bgBase = useTransform(scrollYProgress, scrollPoints, ['#0a0a0a', '#0a0a0a', '#eeebe4', '#eeebe4', '#0a0a0a', '#0a0a0a']);
@@ -172,8 +177,19 @@ const DummyHome2 = () => {
 
   useEffect(() => {
     const iv = setInterval(() => setTestIdx(p => (p + 1) % testimonials.length), 5000);
-    return () => clearInterval(iv);
+    const piv = setInterval(() => setTestProgress(p => p >= 100 ? 0 : p + 2), 100);
+    return () => { clearInterval(iv); clearInterval(piv); };
   }, []);
+
+  useEffect(() => { setTestProgress(0); }, [testIdx]);
+
+  // Global presence auto-advance
+  const gpNav = useCallback((dir: number) => {
+    setGpDir(dir);
+    setGpIdx(p => { const n = p + dir; if (n < 0) return offices.length - 1; if (n >= offices.length) return 0; return n; });
+  }, []);
+
+  useEffect(() => { const t = setInterval(() => gpNav(1), 5000); return () => clearInterval(t); }, [gpNav]);
 
   useEffect(() => {
     axios.get(`${API_BASE_URL}/blogs?limit=3`).then(r => { if (r.data.success) setBlogs(r.data.data || []); }).catch(() => { });
@@ -303,15 +319,16 @@ const DummyHome2 = () => {
       {/* CASE STUDIES */}
       <StackedVinylProjects />
 
-      {/* INDUSTRIES */}
-      <section className="dh2-section dh2-container">
+      {/* INDUSTRIES — CLEAN GRID */}
+      <section className="dh2-section dh2-container" style={{ paddingBottom: '9rem' }}>
         <motion.div className="dh2-section-header" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: .6 }}>
           <div className="dh2-label">VERTICALS</div>
           <h2 className="dh2-display dh2-section-title">INDUSTRIES WE SERVE</h2>
         </motion.div>
         <div className="dh2-ind-grid">
           {industries.map((ind, i) => (
-            <motion.div key={i} className="dh2-ind" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * .05, duration: .5 }}>
+            <motion.div key={i} className="dh2-ind" initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * .04, duration: .5 }}>
+              <div className="dh2-ind-num">{String(i + 1).padStart(2, '0')}</div>
               <div className="dh2-ind-label">{ind.label}</div>
               <div className="dh2-ind-desc">{ind.desc}</div>
             </motion.div>
@@ -319,82 +336,158 @@ const DummyHome2 = () => {
         </div>
       </section>
 
-      {/* GLOBAL PRESENCE */}
-      <section className="dh2-section dh2-container">
-        <motion.div className="dh2-section-header" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: .6 }}>
+      {/* GLOBAL PRESENCE — V2 Map + Carousel */}
+      <section className="dh2-section dh2-container" style={{ paddingTop: '9rem', paddingBottom: '9rem' }}>
+        <motion.div className="dh2-section-header" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: .6 }} style={{ textAlign: 'center' }}>
           <div className="dh2-label">WHERE WE OPERATE</div>
           <h2 className="dh2-display dh2-section-title">GLOBAL PRESENCE</h2>
         </motion.div>
-        <div className="dh2-globe-detailed-grid">
-          {offices.map((o, i) => (
-            <motion.div key={i} className="dh2-globe-detailed-card" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * .1, duration: .6 }}>
-              <div className="dh2-globe-img-wrap">
-                <img src={o.img} alt={o.city} className="dh2-globe-img" />
-                <span className="dh2-globe-tag">{o.tag}</span>
-              </div>
-              <div className="dh2-globe-content">
-                <div className="dh2-globe-city-row">
-                  <MapPin size={22} className="dh2-globe-icon" />
-                  <h3 className="dh2-heading">{o.city}, {o.country}</h3>
+        {(() => {
+          const o = offices[gpIdx];
+          const dotPos = [{ l: '64%', t: '40%' }, { l: '67%', t: '44%' }, { l: '63%', t: '50%' }, { l: '82%', t: '72%' }];
+          return (<>
+            <div className="dh2-gp-main">
+              <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+                <div className="dh2-gp-map">
+                  <div style={{ position: 'absolute', inset: 0, opacity: .04, pointerEvents: 'none', backgroundImage: 'linear-gradient(rgba(255,255,255,.15) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.15) 1px, transparent 1px)', backgroundSize: '35px 35px' }} />
+                  <img src="/global2.png" alt="Global Network" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: .4, mixBlendMode: 'screen', pointerEvents: 'none' }} />
+                  {offices.map((_, i) => (
+                    <div key={i} style={{ position: 'absolute', left: dotPos[i].l, top: dotPos[i].t, transform: 'translate(-50%,-50%)', zIndex: i === gpIdx ? 10 : 5 }}>
+                      {i === gpIdx ? (
+                        <motion.div key={gpIdx} initial={{ scale: .5, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}>
+                          <motion.div animate={{ scale: [1, 2.5], opacity: [.5, 0] }} transition={{ duration: 2, repeat: Infinity }} style={{ position: 'absolute', inset: '-10px', borderRadius: '50%', border: `2px solid ${o.color}` }} />
+                          <div style={{ width: 14, height: 14, borderRadius: '50%', background: o.color, border: '2px solid #fff', boxShadow: `0 0 20px ${o.color}` }} />
+                        </motion.div>
+                      ) : (
+                        <div style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--border-f)' }} />
+                      )}
+                    </div>
+                  ))}
                 </div>
-                <p className="dh2-body dh2-globe-desc">{o.desc}</p>
-                <div className="dh2-globe-contact">
-                  {o.contact && (
-                    <>
-                      <div className="dh2-globe-contact-item">
-                        <span className="dh2-label" style={{fontSize: '0.6rem'}}>Email</span>
-                        <div className="dh2-globe-contact-val">{o.contact.email}</div>
+              </motion.div>
+              <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+                <AnimatePresence mode="wait">
+                  <motion.div key={gpIdx} initial={{ x: gpDir > 0 ? 200 : -200, opacity: 0 }} animate={{ x: 0, opacity: 1 }} exit={{ x: gpDir > 0 ? -200 : 200, opacity: 0 }} transition={{ duration: .35 }} className="dh2-gp-placard">
+                    <div className="dh2-gp-placard-img">
+                      <img src={o.img} alt={o.city} />
+                      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, var(--bg-base) 0%, transparent 60%)' }} />
+                      <div style={{ position: 'absolute', bottom: 14, left: 16 }}>
+                        <h3 className="dh2-heading" style={{ fontSize: '1.6rem' }}>{o.city}</h3>
+                        <span className="dh2-label" style={{ fontSize: '.55rem' }}>{o.country}</span>
                       </div>
-                      <div className="dh2-globe-contact-item">
-                        <span className="dh2-label" style={{fontSize: '0.6rem'}}>Phone</span>
-                        <div className="dh2-globe-contact-val">{o.contact.phone}</div>
+                    </div>
+                    <div className="dh2-gp-placard-body">
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 10 }}>
+                        <MapPin size={14} style={{ color: o.color }} />
+                        <span className="dh2-label" style={{ fontSize: '.55rem' }}>{o.label?.toUpperCase()}</span>
                       </div>
-                    </>
-                  )}
+                      <p className="dh2-body" style={{ fontSize: '.8rem', marginBottom: 12 }}>{o.desc}</p>
+                      <div style={{ height: 3, borderRadius: 2, background: 'var(--border-s)', overflow: 'hidden' }}>
+                        <motion.div key={gpIdx} initial={{ width: '0%' }} animate={{ width: '100%' }} transition={{ duration: 4.5, ease: 'linear' }} style={{ height: '100%', borderRadius: 2, background: o.color }} />
+                      </div>
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 12 }}>
+                  <button className="dh2-test-nav" onClick={() => gpNav(-1)}><ChevronLeft size={14} /></button>
+                  <div style={{ display: 'flex', gap: 6 }}>
+                    {offices.map((oo, i) => <button key={i} onClick={() => { setGpDir(i > gpIdx ? 1 : -1); setGpIdx(i); }} style={{ height: 3, width: i === gpIdx ? 24 : 10, background: i === gpIdx ? oo.color : 'var(--border-s)', border: 'none', borderRadius: 2, cursor: 'pointer', transition: 'all .3s', padding: 0 }} />)}
+                  </div>
+                  <button className="dh2-test-nav" onClick={() => gpNav(1)}><ChevronRight size={14} /></button>
                 </div>
+              </motion.div>
+            </div>
+            <div className="dh2-gp-cards">
+              {offices.map((oo, i) => (
+                <button key={i} className={`dh2-gp-card ${i === gpIdx ? 'active' : ''}`} onClick={() => { setGpDir(i > gpIdx ? 1 : -1); setGpIdx(i); }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 6 }}>
+                    <div style={{ width: 7, height: 7, borderRadius: '50%', background: oo.color, boxShadow: i === gpIdx ? `0 0 10px ${oo.color}` : 'none' }} />
+                    <span className="dh2-label" style={{ fontSize: '.5rem' }}>{oo.label?.toUpperCase()}</span>
+                  </div>
+                  <div className="dh2-heading" style={{ fontSize: '.95rem', color: i === gpIdx ? 'var(--text-main)' : 'var(--text-dim)' }}>{oo.city.toUpperCase()}</div>
+                  <div className="dh2-gp-card-bar" style={{ background: oo.color, width: i === gpIdx ? '100%' : '0%' }} />
+                </button>
+              ))}
+            </div>
+            <div className="dh2-gp-stats">
+              <div style={{ display: 'flex', gap: 32 }}>
+                {[{ v: '04', l: 'Hubs' }, { v: '02', l: 'Continents' }, { v: '∞', l: 'Reach' }].map(s => (
+                  <div key={s.l} style={{ textAlign: 'center' }}>
+                    <div className="dh2-heading" style={{ fontSize: '1.4rem' }}>{s.v}</div>
+                    <div className="dh2-label" style={{ fontSize: '.5rem', color: 'var(--accent)' }}>{s.l.toUpperCase()}</div>
+                  </div>
+                ))}
               </div>
-            </motion.div>
-          ))}
-        </div>
+              <Link to="/global-presence" className="dh2-btn-fill" style={{ padding: '.6rem 1.4rem', fontSize: '.7rem' }}>Explore Network <ArrowRight size={12} /></Link>
+            </div>
+          </>);
+        })()}
       </section>
 
-      {/* PROCESS */}
-      <section className="dh2-section dh2-container">
+      {/* PROCESS — PIPELINE */}
+      <section className="dh2-section dh2-container" style={{ paddingTop: '9rem' }}>
         <motion.div className="dh2-section-header" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: .6 }}>
           <div className="dh2-label">HOW WE WORK</div>
           <h2 className="dh2-display dh2-section-title">OUR PROCESS</h2>
         </motion.div>
-        <div className="dh2-proc-grid">
+        <div className="dh2-proc-pipeline">
           {processSteps.map((p, i) => (
-            <motion.div key={i} className="dh2-proc" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * .08, duration: .5 }}>
-              <div className="dh2-proc-num">{p.step}</div>
-              <div className="dh2-proc-title">{p.title}</div>
-              <div className="dh2-body dh2-proc-desc">{p.desc}</div>
-            </motion.div>
+            <Fragment key={i}>
+              <motion.div className={`dh2-proc-step ${activeProc === i ? 'active' : ''}`} onClick={() => setActiveProc(i)} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * .08 }}>
+                <div className="dh2-proc-circle">{p.step}</div>
+                <div className="dh2-proc-step-label">{p.title}</div>
+              </motion.div>
+              {i < processSteps.length - 1 && (
+                <div className="dh2-proc-connector"><div className="dh2-proc-connector-dot" /></div>
+              )}
+            </Fragment>
           ))}
         </div>
+        <AnimatePresence mode="wait">
+          <motion.div key={activeProc} className="dh2-proc-detail" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: .35 }}>
+            <div className="dh2-proc-detail-title">{processSteps[activeProc].title}</div>
+            <div className="dh2-proc-detail-desc">{processSteps[activeProc].desc}</div>
+          </motion.div>
+        </AnimatePresence>
       </section>
 
-      {/* TESTIMONIALS */}
+      {/* TESTIMONIALS — COVERFLOW */}
       <section className="dh2-test">
         <div className="dh2-container">
-          <motion.div className="dh2-section-header" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: .6 }}>
+          <motion.div className="dh2-section-header" style={{ textAlign: 'center' }} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: .6 }}>
             <div className="dh2-label">CLIENT VOICES</div>
             <h2 className="dh2-display dh2-section-title">WHAT THEY SAY</h2>
           </motion.div>
-          <AnimatePresence mode="wait">
-            <motion.div key={testIdx} className="dh2-test-card" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: .5 }}>
-              <div className="dh2-test-img-wrap"><img src={t.img} alt={t.name} /></div>
-              <div>
-                <div className="dh2-test-quote">{t.text}</div>
-                <div className="dh2-test-name">{t.name}</div>
-                <div className="dh2-test-role">{t.role}</div>
-                <div className="dh2-test-dots">
-                  {testimonials.map((_, i) => <div key={i} className={`dh2-test-dot ${i === testIdx ? 'active' : ''}`} onClick={() => setTestIdx(i)} />)}
+          <div className="dh2-test-cover">
+            <button className="dh2-test-nav dh2-test-nav--left" onClick={() => setTestIdx(p => (p - 1 + testimonials.length) % testimonials.length)}><ChevronLeft size={16} /></button>
+            <button className="dh2-test-nav dh2-test-nav--right" onClick={() => setTestIdx(p => (p + 1) % testimonials.length)}><ChevronRight size={16} /></button>
+            {testimonials.map((tt, i) => {
+              const isDark = i % 2 !== 0;
+              const pos = i - testIdx;
+              let style: any = { left: '50%', transform: 'translateX(-50%) scale(.7)', opacity: 0, zIndex: 0 };
+              if (pos === 0) style = { left: '50%', transform: 'translateX(-50%) scale(1)', opacity: 1, zIndex: 20 };
+              else if (pos === -1 || (testIdx === 0 && i === testimonials.length - 1)) style = { left: '25%', transform: 'translateX(-50%) scale(.85)', opacity: .5, zIndex: 10 };
+              else if (pos === 1 || (testIdx === testimonials.length - 1 && i === 0)) style = { left: '75%', transform: 'translateX(-50%) scale(.85)', opacity: .5, zIndex: 10 };
+              else style = { left: pos < 0 ? '0%' : '100%', transform: 'translateX(-50%) scale(.7)', opacity: 0, zIndex: 0 };
+              return (
+                <div key={i} className="dh2-test-card" style={style}>
+                  <div className={`dh2-test-card-header ${isDark ? 'dh2-test-card-header--dark' : 'dh2-test-card-header--accent'}`}>
+                    <div className="dh2-test-card-header-text"><span>Client</span><span>TESTIMONIAL</span></div>
+                  </div>
+                  <div className="dh2-test-card-avatar"><img src={tt.img} alt={tt.name} /></div>
+                  <div className="dh2-test-card-body">
+                    <div className="dh2-test-card-name">{tt.name}</div>
+                    <div className={`dh2-test-card-role ${isDark ? 'dh2-test-card-role--dark' : 'dh2-test-card-role--accent'}`}>{tt.role}</div>
+                    <div className="dh2-test-card-stars">{[...Array(5)].map((_, si) => <Star key={si} size={14} />)}</div>
+                    <div className="dh2-test-card-quote">{tt.text}</div>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          </AnimatePresence>
+              );
+            })}
+          </div>
+          <div className="dh2-test-dots">
+            {testimonials.map((_, i) => <button key={i} className={`dh2-test-dot ${i === testIdx ? 'active' : ''}`} onClick={() => setTestIdx(i)} />)}
+          </div>
         </div>
       </section>
 
@@ -436,7 +529,7 @@ const DummyHome2 = () => {
         </div>
       </div>
 
-      {/* TIMELINE */}
+      {/* TIMELINE — CONSTELLATION */}
       <section className="dh2-section dh2-container">
         <motion.div className="dh2-section-header" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: .6 }} style={{ textAlign: 'center' }}>
           <div className="dh2-label">OUR JOURNEY</div>
@@ -444,11 +537,14 @@ const DummyHome2 = () => {
         </motion.div>
         <div className="dh2-tl">
           {milestones.map((m, i) => (
-            <motion.div key={i} className="dh2-tl-item" initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * .08, duration: .5 }}>
-              <div className="dh2-tl-dot" />
-              <div className="dh2-tl-year">{m.year}</div>
-              <div className="dh2-tl-title">{m.title}</div>
-              <div className="dh2-body dh2-tl-desc">{m.desc}</div>
+            <motion.div key={i} className="dh2-tl-node" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * .08, duration: .5 }}>
+              <div className="dh2-tl-marker" style={{ background: `linear-gradient(135deg, var(--accent), ${['#f59e0b','#ef4444','#8b5cf6','#06b6d4','#10b981'][i % 5]})`, color: '#000', borderColor: 'transparent' }}>{m.year.slice(-2)}</div>
+              <div className="dh2-tl-connector" />
+              <div className="dh2-tl-card">
+                <div className="dh2-tl-year">{m.year}</div>
+                <div className="dh2-tl-title">{m.title}</div>
+                <div className="dh2-body dh2-tl-desc">{m.desc}</div>
+              </div>
             </motion.div>
           ))}
         </div>
@@ -476,23 +572,26 @@ const DummyHome2 = () => {
         </section>
       )}
 
-      {/* FAQ */}
+      {/* FAQ — CARD GRID */}
       <section className="dh2-section dh2-container">
         <motion.div className="dh2-section-header" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: .6 }}>
           <div className="dh2-label">QUESTIONS</div>
           <h2 className="dh2-display dh2-section-title">FAQ</h2>
         </motion.div>
-        {faqs.map((f, i) => (
-          <div key={i} className={`dh2-faq ${activeFaq === i ? 'open' : ''}`} onClick={() => setActiveFaq(activeFaq === i ? null : i)}>
-            <div className="dh2-faq-q">
-              <span>{f.q}</span>
-              <Plus className="dh2-faq-icon" size={20} />
+        <div className="dh2-faq-grid">
+          {faqs.map((f, i) => (
+            <div key={i} className={`dh2-faq ${activeFaq === i ? 'open' : ''} ${activeFaq !== null && activeFaq !== i ? 'dimmed' : ''}`} onClick={() => setActiveFaq(activeFaq === i ? null : i)}>
+              <div className="dh2-faq-q">
+                <div className="dh2-faq-num">{String(i + 1).padStart(2, '0')}</div>
+                <span>{f.q}</span>
+                <Plus className="dh2-faq-icon" size={16} />
+              </div>
+              <div className={`dh2-faq-a ${activeFaq === i ? 'active' : ''}`}>
+                <div className="dh2-faq-a-inner">{f.a}</div>
+              </div>
             </div>
-            <div className={`dh2-faq-a ${activeFaq === i ? 'active' : ''}`}>
-              <div className="dh2-faq-a-inner">{f.a}</div>
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </section>
 
       {/* CTA */}

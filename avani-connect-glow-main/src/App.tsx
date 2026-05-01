@@ -149,6 +149,19 @@ import GlobalPresence from "./pages/GlobalPresence";
 import Links from "./pages/Links";
 import DummyHome from "./components/dummy/DummyHome";
 import DummyHome2 from "./pages/DummyHome2";
+import DH2Layout from "./components/dummyhome2/DH2Layout";
+import DH2About from "./pages/dummyhome2/DH2About";
+import DH2Services from "./pages/dummyhome2/DH2Services";
+import DH2Contact from "./pages/dummyhome2/DH2Contact";
+import DH2Consultation from "./pages/dummyhome2/DH2Consultation";
+import DH2CaseStudies from "./pages/dummyhome2/DH2CaseStudies";
+import DH2Blog from "./pages/dummyhome2/DH2Blog";
+import DH2Products from "./pages/dummyhome2/DH2Products";
+import DH2GlobalPresence from "./pages/dummyhome2/DH2GlobalPresence";
+import DH2Careers from "./pages/dummyhome2/DH2Careers";
+import DH2Newsletters from "./pages/dummyhome2/DH2Newsletters";
+import DH2Privacy from "./pages/dummyhome2/DH2Privacy";
+import DH2Terms from "./pages/dummyhome2/DH2Terms";
 import { SeoProvider } from "./contexts/SeoContext";
 import { ThemeProvider } from "./components/theme-provider";
 
@@ -162,6 +175,14 @@ const AdminRedirect = () => {
   return null;
 };
 
+// Placeholder page for DH2 routes being built incrementally
+const DH2PlaceholderPage = ({ title }: { title: string }) => (
+  <div style={{ minHeight: '60vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '4rem 2rem', background: '#0a0a0a', color: '#f0f0f0', fontFamily: "'Inter', sans-serif" }}>
+    <h1 style={{ fontFamily: "'Syne', sans-serif", fontSize: 'clamp(2rem, 4vw, 3.5rem)', fontWeight: 800, letterSpacing: '-.03em', marginBottom: '1rem' }}>{title}</h1>
+    <p style={{ color: '#7a7a7a', fontSize: '.85rem' }}>This page is being built. Check back soon.</p>
+  </div>
+);
+
 // Layout wrapper component for conditional Navbar/Footer rendering
 const AppLayout = () => {
   const location = useLocation();
@@ -169,13 +190,14 @@ const AppLayout = () => {
 
   // Pages where Navbar should be hidden completely
   const pathForCheck = pathname.toLowerCase();
-  const hideNavbar = pathForCheck === "/thank-you" || pathForCheck === "/business-setup" || pathForCheck === "/businesssetup1" || pathForCheck === "/dummyhome" || pathForCheck === "/dummyhome2";
+  const isDH2 = pathForCheck.startsWith('/dummyhome2');
+  const hideNavbar = pathForCheck === "/thank-you" || pathForCheck === "/business-setup" || pathForCheck === "/businesssetup1" || pathForCheck === "/dummyhome" || isDH2;
 
   // Pages where Navbar1 should be used instead of default Navbar
   const useNavbar1 = pathForCheck === "/web-dev" || pathForCheck === "/7-day-launch";
 
   // Pages where Footer should be hidden completely
-  const hideFooter = pathForCheck === "/thank-you" || pathForCheck === "/links" || pathForCheck === "/dummyhome" || pathForCheck === "/dummyhome2";
+  const hideFooter = pathForCheck === "/thank-you" || pathForCheck === "/links" || pathForCheck === "/dummyhome" || isDH2;
 
   // Pages where Footer1 should be used instead of default Footer
   const useFooter1 = pathForCheck === "/web-dev" || pathForCheck === "/7-day-launch";
@@ -189,6 +211,25 @@ const AppLayout = () => {
           <Route path="/" element={<Home />} />
           <Route path="/dummyhome" element={<DummyHome />} />
           <Route path="/dummyhome2" element={<DummyHome2 />} />
+          {/* DH2 Sub-pages with shared layout */}
+          <Route path="/dummyhome2" element={<DH2Layout />}>
+            <Route path="about" element={<DH2About />} />
+            <Route path="services" element={<DH2Services />} />
+            <Route path="services/:id" element={<DH2PlaceholderPage title="Service Detail" />} />
+            <Route path="our-products" element={<DH2Products />} />
+            <Route path="case-studies" element={<DH2CaseStudies />} />
+            <Route path="contact" element={<DH2Contact />} />
+            <Route path="blog" element={<DH2Blog />} />
+            <Route path="blog/:slug" element={<DH2PlaceholderPage title="Blog Detail" />} />
+            <Route path="get-consultation" element={<DH2Consultation />} />
+            <Route path="global-presence" element={<DH2GlobalPresence />} />
+            <Route path="careers" element={<DH2Careers />} />
+            <Route path="careers/:id" element={<DH2PlaceholderPage title="Career Detail" />} />
+            <Route path="newsletters" element={<DH2Newsletters />} />
+            <Route path="newsletters/:slug" element={<DH2PlaceholderPage title="Newsletter Detail" />} />
+            <Route path="privacy-policy" element={<DH2Privacy />} />
+            <Route path="terms-and-conditions" element={<DH2Terms />} />
+          </Route>
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
           <Route path="/services/:id" element={<ServiceDetail />} />

@@ -25,27 +25,41 @@ export const industries = [
   { label:'Legal', desc:'Law firms & compliance platforms' },
 ];
 
+// Connection pairs between industry indices — used to draw SVG lines in the network graph
+export const industryConnections: [number, number][] = [
+  [0, 6], // Education ↔ Technology
+  [1, 6], // Healthcare ↔ Technology
+  [2, 5], // E-Commerce ↔ Food & Nutrition
+  [2, 6], // E-Commerce ↔ Technology
+  [3, 4], // Real Estate ↔ Finance
+  [4, 8], // Finance ↔ Legal
+  [5, 7], // Food & Nutrition ↔ Hospitality
+  [7, 3], // Hospitality ↔ Real Estate
+  [0, 4], // Education ↔ Finance
+  [1, 5], // Healthcare ↔ Food & Nutrition
+];
+
 export const offices = [
   { 
-    city:'Rohtak', country:'India', tag:'HQ', 
+    city:'Rohtak', country:'India', tag:'HQ', label:'Headquarters', tagline:'Where it all began', color:'#f59e0b',
     desc:'Our founding office: 106, First Floor, Agro Mall, Rohtak.', 
     img:'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop',
     contact: { email: 'kp@avanienterprises.in', phone: '+91 9253625099' }
   },
   { 
-    city:'Gurgaon', country:'India', tag:'NCR', 
+    city:'Gurgaon', country:'India', tag:'NCR', label:'NCR Office', tagline:'Corporate powerhouse', color:'#fb923c',
     desc:"Strategic presence in India's corporate capital.", 
     img:'https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=800&auto=format&fit=crop',
     contact: { email: 'kp@avanienterprises.in', phone: '+91 9253625099' }
   },
   { 
-    city:'Mumbai', country:'India', tag:'West', 
+    city:'Mumbai', country:'India', tag:'West', label:'West India Office', tagline:'Financial nerve center', color:'#C4913A',
     desc:'Third Floor, Vasudev Chamber, Andheri East, Mumbai.', 
     img:'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?q=80&w=800&auto=format&fit=crop',
     contact: { email: 'kp@avanienterprises.in', phone: '+91 9253625099' }
   },
   { 
-    city:'Australia', country:'APAC', tag:'Global', 
+    city:'Australia', country:'APAC', tag:'Global', label:'APAC Office', tagline:'Crossing oceans', color:'#E8B96A',
     desc:'Serving clients across the Asia-Pacific region.', 
     img:'https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?q=80&w=800&auto=format&fit=crop',
     contact: { email: 'kp@avanienterprises.in', phone: '+91 9253625099' }
