@@ -262,7 +262,7 @@ const FixedBottomBar = ({ scrollToPricing }: { scrollToPricing: () => void }) =>
           <div className="bb-divider" />
           {/* Book Now text link */}
           <button className="bb-book-now" onClick={scrollToPricing}>
-            Start your business in 7 days With Avani Enterprises <ArrowRight size={14} />
+            Book Now <ArrowRight size={14} />
           </button>
         </div>
       </div>
@@ -304,16 +304,14 @@ export default function AvaniEnterprises1() {
 
   const scrollToPricing = () => {
     // Scroll directly to the Book Now CTA row inside the pricing table so the
-    // user lands on the actionable buttons (₹149 / ₹249) instead of the top of
-    // the comparison table.
+    // user lands on the actionable buttons (₹149 / ₹249) — works for both
+    // desktop and mobile since we now use a single responsive table.
     const ctaRow = document.getElementById("pricing-cta-row");
     if (ctaRow) {
       const rect = ctaRow.getBoundingClientRect();
       const elementBottom = rect.bottom + window.scrollY;
       const isMobile = window.innerWidth <= 768;
-      // Position the CTA row near the bottom of the viewport with a small buffer
-      // below it (so users see the buttons + some space, table visible above).
-      const bufferBelow = isMobile ? 140 : 120;
+      const bufferBelow = isMobile ? 140 : 120; // extra buffer on mobile for fixed bottom bar
       const targetY = elementBottom - window.innerHeight + bufferBelow;
       window.scrollTo({ top: Math.max(0, targetY), behavior: "smooth" });
     } else {
@@ -504,21 +502,56 @@ export default function AvaniEnterprises1() {
         .pricing-table-desktop { display: block; border-radius: 24px; }
         .pricing-table-mobile { display: none; }
 
+        /* ── Mobile-compact pricing table (single table for phone) ── */
         @media (max-width: 768px) {
-          .pricing-table-desktop { border-radius: 12px; }
-          .pricing-table-container th, .pricing-table-container td { padding: 8px 4px !important; }
-          .pricing-table-container .table-feature-text { font-size: 8px !important; }
-          .pricing-table-container .table-tick-cross { width: 14px !important; height: 14px !important; font-size: 7px !important; }
-          .pricing-table-container .table-val-text { font-size: 8px !important; }
-          .pricing-table-container .table-header-name { font-size: 8px !important; letter-spacing: 1px !important; }
-          .pricing-table-container .table-header-price { font-size: 10px !important; }
-          .pricing-table-container .table-header-top1 { font-size: 8px !important; margin-bottom: 2px !important; }
-          .pricing-table-container .table-header-top2 { font-size: 12px !important; }
-          .pricing-table-container .cta-btn .btn-book-now { font-size: 8px !important; font-weight: 600 !important; }
-          .pricing-table-container .cta-btn .btn-book { font-size: 11px !important; font-weight: 900 !important; }
-          .pricing-table-container .cta-btn .btn-slot { font-size: 6px !important; }
-          .pricing-table-container table { min-width: 100% !important; }
-          .pricing-table-container .col-feature { width: 28% !important; }
+          .pricing-table-desktop { border-radius: 14px !important; margin-top: 50px !important; }
+          .pricing-table-container table { table-layout: fixed !important; width: 100% !important; }
+
+          /* Header — feature column */
+          .pricing-table-container .col-feature { padding: 26px 10px 14px !important; width: 32% !important; }
+          .pricing-table-container .table-header-top1 { font-size: 8px !important; letter-spacing: 1.5px !important; margin-bottom: 4px !important; }
+          .pricing-table-container .table-header-top2 { font-size: 13px !important; line-height: 1.1 !important; }
+          .pricing-table-container .col-feature p { font-size: 9px !important; line-height: 1.4 !important; margin-top: 6px !important; }
+
+          /* Header — plan columns */
+          .pricing-table-container thead th:not(.col-feature) { padding: 30px 4px 14px !important; width: 22.66% !important; vertical-align: top !important; }
+          .pricing-table-container .table-header-name { font-size: 8px !important; letter-spacing: 1.5px !important; margin-bottom: 4px !important; }
+          .pricing-table-container thead .display-font { font-size: 14px !important; margin-bottom: 6px !important; }
+          .pricing-table-container .table-header-price { font-size: 9px !important; }
+          .pricing-table-container .table-header-price span { font-size: 8px !important; }
+          .pricing-table-container .table-header-price-value { font-size: 12px !important; }
+          .pricing-table-container thead th p { font-size: 8px !important; line-height: 1.3 !important; min-height: auto !important; padding: 0 !important; }
+
+          /* Body — feature rows */
+          .pricing-table-container tbody td { padding: 10px 6px !important; }
+          .pricing-table-container .table-feature-text { padding: 10px 10px !important; font-size: 10px !important; line-height: 1.25 !important; font-weight: 600 !important; }
+          .pricing-table-container .table-tick-cross { width: 18px !important; height: 18px !important; }
+          .pricing-table-container .table-tick-cross svg { width: 10px !important; height: 10px !important; }
+          .pricing-table-container .table-val-text { font-size: 8px !important; line-height: 1.2 !important; max-width: 100% !important; white-space: normal !important; word-break: break-word !important; text-align: center !important; }
+
+          /* Footer CTA row */
+          .pricing-table-container tbody tr:last-child td:first-child { padding: 14px 10px !important; }
+          .pricing-table-container tbody tr:last-child td:first-child div:first-child { font-size: 9px !important; letter-spacing: 1px !important; }
+          .pricing-table-container tbody tr:last-child td:first-child div:last-child { font-size: 9px !important; margin-top: 2px !important; }
+          .pricing-table-container tbody tr:last-child td:not(:first-child) { padding: 12px 4px !important; }
+          .pricing-table-container .pricing-cta-btn { padding: 10px 4px !important; gap: 1px !important; border-radius: 6px !important; }
+          .pricing-table-container .pricing-cta-btn .btn-book-now { font-size: 10px !important; gap: 3px !important; }
+          .pricing-table-container .pricing-cta-btn .btn-book { font-size: 10px !important; }
+          .pricing-table-container .pricing-cta-btn .btn-book-now svg { width: 10px !important; height: 10px !important; }
+          .pricing-table-container .pricing-cta-btn .btn-slot { font-size: 8px !important; }
+        }
+
+        @media (max-width: 480px) {
+          .pricing-table-container .col-feature { padding: 20px 8px 10px !important; }
+          .pricing-table-container .table-feature-text { padding: 8px 6px !important; font-size: 9px !important; }
+          .pricing-table-container thead th:not(.col-feature) { padding: 26px 2px 12px !important; }
+          .pricing-table-container thead .display-font { font-size: 12px !important; }
+          .pricing-table-container .table-header-price-value { font-size: 11px !important; }
+          .pricing-table-container .table-tick-cross { width: 16px !important; height: 16px !important; }
+          .pricing-table-container .table-tick-cross svg { width: 9px !important; height: 9px !important; }
+          .pricing-table-container .table-val-text { font-size: 7px !important; }
+          .pricing-table-container .pricing-cta-btn .btn-book, .pricing-table-container .pricing-cta-btn .btn-book-now { font-size: 9px !important; }
+          .pricing-table-container .pricing-cta-btn .btn-slot { font-size: 7px !important; }
         }
 
         /* ── HERO ENHANCEMENT ELEMENTS ── */
@@ -1092,7 +1125,7 @@ export default function AvaniEnterprises1() {
             <a key={l} href={`#${l.toLowerCase()}`} className="nav-link" style={{ color: scrolled ? C.text : "#ffffff" }}>{l.toUpperCase()}</a>
           ))}
           <button onClick={() => scrollToPricing()} className="cta-btn nav-desktop-cta" style={{ padding: "10px 22px", fontSize: "11px", marginLeft: "10px" }}>
-            Start your business in 7 days With Avani Enterprises
+            Start your business journey now
           </button>
         </div>
 
@@ -1252,7 +1285,7 @@ export default function AvaniEnterprises1() {
                     borderRadius: "8px",
                   }}
                 >
-                  Start your business in 7 days With Avani Enterprises <ArrowRight size={16} />
+                  Start your business journey now <ArrowRight size={16} />
                 </button>
               </div>
             </motion.div>
@@ -1315,7 +1348,7 @@ export default function AvaniEnterprises1() {
             {/* CTA Row */}
             <div className="cta-container" style={{ display: "flex", flexDirection: "column", gap: "18px", alignItems: "flex-start", width: "100%", maxWidth: "450px" }}>
               <button onClick={() => scrollToPricing()} className="cta-btn hero-cta" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", padding: "18px 40px", width: "100%", borderRadius: "6px", fontSize: "13px", letterSpacing: "1.5px", position: "relative", overflow: "hidden", boxShadow: `0 8px 32px rgba(212,160,23,0.25), 0 0 60px rgba(212,160,23,0.1)` }}>
-                Start your business in 7 days With Avani Enterprises <ArrowRight size={16} />
+                Start your business journey now <ArrowRight size={16} />
               </button>
 
               {/* Value pills */}
@@ -1460,7 +1493,7 @@ export default function AvaniEnterprises1() {
                           <div className="table-header-price" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "13px", color: C.muted, fontWeight: 500 }}>
                             <span style={{ fontSize: "11px", opacity: 0.7 }}>Plan value</span>
                           </div>
-                          <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "22px", color: C.text, fontWeight: 800, letterSpacing: "-0.5px" }}>₹{p.price}</div>
+                          <div className="table-header-price-value" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "22px", color: C.text, fontWeight: 800, letterSpacing: "-0.5px" }}>₹{p.price}</div>
                         </div>
                         <p style={{ fontSize: "10px", color: C.muted, lineHeight: 1.5, fontWeight: 400, minHeight: "30px", padding: "0 4px" }}>{p.desc}</p>
                       </th>
@@ -1574,8 +1607,6 @@ export default function AvaniEnterprises1() {
               </table>
             </div>
           </div>
-
-
 
           {/* Bottom note */}
           <p style={{ textAlign: "center", marginTop: "40px", color: C.muted, fontSize: "12px", letterSpacing: "0.5px", fontWeight: 400 }}>
