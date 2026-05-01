@@ -258,7 +258,7 @@ const FixedBottomBar = ({ scrollToPricing }: { scrollToPricing: () => void }) =>
           <div className="bb-divider" />
           {/* Book Now text link */}
           <button className="bb-book-now" onClick={scrollToPricing}>
-            BOOK NOW <ArrowRight size={14} />
+            Start your business in 7 days With Avani Enterprises <ArrowRight size={14} />
           </button>
         </div>
       </div>
@@ -1034,7 +1034,7 @@ export default function AvaniEnterprises() {
             <a key={l} href={`#${l.toLowerCase()}`} className="nav-link">{l.toUpperCase()}</a>
           ))}
           <button onClick={() => scrollToPricing()} className="cta-btn nav-desktop-cta" style={{ padding: "10px 22px", fontSize: "11px", marginLeft: "10px" }}>
-            START YOUR JOURNEY
+            Start your business in 7 days With Avani Enterprises
           </button>
         </div>
 
@@ -1248,7 +1248,7 @@ export default function AvaniEnterprises() {
 
 
                 <button onClick={() => scrollToPricing()} className="cta-btn hero-cta" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", padding: "18px 40px" }}>
-                  START YOUR BUSINESS JOURNEY NOW <ArrowRight size={16} />
+                Start your business in 7 days With Avani Enterprises <ArrowRight size={16} />
                 </button>
 
                 {/* Value pills below CTA */}

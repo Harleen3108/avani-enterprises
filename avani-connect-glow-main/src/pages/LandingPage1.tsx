@@ -6,7 +6,8 @@ import {
   Clock, Star, X, Calendar, Search, Briefcase, ShieldCheck,
   ChevronDown, MessageSquare, Activity, ShieldAlert, ArrowUpRight,
   TrendingUp, Code2, Users, Award, Play, ChevronRight,
-  Linkedin, Twitter, Instagram, ExternalLink, Menu, Volume2, VolumeX
+  Linkedin, Twitter, Instagram, ExternalLink, Menu, Volume2, VolumeX,
+  Check, Crown, Sparkles, Minus
 } from "lucide-react";
 import { motion, useInView, useSpring, useTransform, AnimatePresence } from "framer-motion";
 
@@ -80,9 +81,9 @@ const StaticHook = () => {
   }, []);
 
   const segments = [
-    { text: "Right now, you're losing clients ", color: "#ffffff" },
-    { text: "without knowing why", color: C.accentLight },
-    { text: " — fix it in 30 minutes.", color: "#ffffff" }
+    { text: "Start your business in ", color: "#ffffff" },
+    { text: "7 days", color: C.accentLight },
+    { text: " With Avani Enterprises", color: "#ffffff" }
   ];
 
   if (isMobile) {
@@ -261,7 +262,7 @@ const FixedBottomBar = ({ scrollToPricing }: { scrollToPricing: () => void }) =>
           <div className="bb-divider" />
           {/* Book Now text link */}
           <button className="bb-book-now" onClick={scrollToPricing}>
-            BOOK NOW <ArrowRight size={14} />
+            Start your business in 7 days With Avani Enterprises <ArrowRight size={14} />
           </button>
         </div>
       </div>
@@ -302,16 +303,25 @@ export default function AvaniEnterprises1() {
   };
 
   const scrollToPricing = () => {
-    const isMobile = window.innerWidth <= 768;
-    const targetId = isMobile ? "pricing-table-wrapper" : "pricing";
-    const section = document.getElementById(targetId);
-    if (section) {
-      const topY = section.getBoundingClientRect().top + window.scrollY;
-      if (isMobile) {
-        // Scroll exactly to the table container, offsetting to leave breathing room below navbar
-        window.scrollTo({ top: topY - 100, behavior: 'smooth' });
-      } else {
-        window.scrollTo({ top: topY + 100, behavior: 'smooth' });
+    // Scroll directly to the Book Now CTA row inside the pricing table so the
+    // user lands on the actionable buttons (₹149 / ₹249) instead of the top of
+    // the comparison table.
+    const ctaRow = document.getElementById("pricing-cta-row");
+    if (ctaRow) {
+      const rect = ctaRow.getBoundingClientRect();
+      const elementBottom = rect.bottom + window.scrollY;
+      const isMobile = window.innerWidth <= 768;
+      // Position the CTA row near the bottom of the viewport with a small buffer
+      // below it (so users see the buttons + some space, table visible above).
+      const bufferBelow = isMobile ? 140 : 120;
+      const targetY = elementBottom - window.innerHeight + bufferBelow;
+      window.scrollTo({ top: Math.max(0, targetY), behavior: "smooth" });
+    } else {
+      // Fallback — scroll to the pricing section top
+      const section = document.getElementById("pricing");
+      if (section) {
+        const topY = section.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({ top: topY - 80, behavior: "smooth" });
       }
     }
     setMenuOpen(false); // Close mobile menu if it's open
@@ -337,8 +347,8 @@ export default function AvaniEnterprises1() {
     { tag: "ERP / WEB APP", title: "School Management", desc: "A full-featured web application designed to modernize school operations and administration. It automates core tasks, including digital attendance tracking, seamless timetable generation, and secure online fee management. The system features dedicated, role-based access for Admin, Teacher, and Parent users. This setup allows for real-time data analytics to significantly boost institutional efficiency and stakeholder communication.", metric: "100+ Schools", img: "/school.jpg", color: "#F0F5F0" },
     { tag: "E-COMMERCE", title: "Shoe E-Commerce", desc: "Developed a feature-rich footwear e-commerce platform optimized for a modern shopping experience. Key functionalities include stunning 3D product previews and a smooth, secure cart-to-checkout process. The system also features smart inventory management and admin/delivery dashboards. It allows for advanced features like order rescheduling, refund tracking, and analytics-driven business insights.", metric: "3D Integration", img: "/shoe.jpg", color: "#F0F0F5" },
     { tag: "SAAS / ERP", title: "HR Portal", desc: "A comprehensive HR management system built to streamline and automate workforce operations. It includes robust features for attendance tracking, efficient leave management, and automated payroll processing. The platform provides employee performance analytics, secure document handling, and internal communication tools. All functions are governed by dedicated role-based access dashboards.", metric: "Automated Payroll", img: "/hrportal.png", color: "#F0F5F0" },
-    { tag: "HEALTHCARE", title: "Hospital Website", desc: "Developed a comprehensive web platform for Holy Heart Hospital, specializing in advanced cardiac care. The system integrates an AI Chatbot ('HealthBot') for instant support and efficient appointment booking. Features include secure online OPD booking, integrated with Razorpay. It provides a robust Admin analytics dashboard and patient portals for managing orders and downloading invoices.", metric: "Razorpay + AI", img: "/hospital.jpg", color: "#F5F0F0" },
-    { tag: "REAL ESTATE", title: "Hi-tech Property", desc: "A professional, full-service property management portal designed to centralize real estate operations. The platform features an extensive listing module for showcasing available properties with high-quality media. It includes robust lead capture tools to streamline client inquiries and follow-ups effectively. Dedicated admin tools are provided to ensure efficient management of listings, client data, and workflows.", metric: "Lead Capture", img: "/hitechproperty.jpg", color: "#F0F2F5" },
+    { tag: "HEALTHCARE", title: "Hospital Management System", desc: "Developed a comprehensive web platform for Holy Heart Hospital, specializing in advanced cardiac care. The system integrates an AI Chatbot ('HealthBot') for instant support and efficient appointment booking. Features include secure online OPD booking, integrated with Razorpay. It provides a robust Admin analytics dashboard and patient portals for managing orders and downloading invoices.", metric: "Razorpay + AI", img: "/hospital.jpg", color: "#F5F0F0" },
+    { tag: "REAL ESTATE", title: "Millionaire Club", desc: "A professional, full-service property management portal designed to centralize real estate operations. The platform features an extensive listing module for showcasing available properties with high-quality media. It includes robust lead capture tools to streamline client inquiries and follow-ups effectively. Dedicated admin tools are provided to ensure efficient management of listings, client data, and workflows.", metric: "Lead Capture", img: "/hitechproperty.jpg", color: "#F0F2F5" },
   ];
 
   const faqs = [
@@ -349,9 +359,12 @@ export default function AvaniEnterprises1() {
   ];
 
   const testimonials = [
-    { name: "Rahul Mehta", role: "E-commerce Founder", text: "Initially skeptical about the ₹499 audit, but the growth roadmap was a game-changer. We went from 0 to 42 leads/month in just 3 months.", stars: 5, image: "/review_person1.png" },
-    { name: "Priya Sharma", role: "CMO, TextileBridge", text: "The strategy session alone was worth 10X the price. They identified 3 major leaks in our homepage that were costing us lakhs.", stars: 5, image: "/review_person2.png" },
-    { name: "Vikram Nair", role: "Business Owner", text: "Finally, a agency that talks numbers, not just aesthetics. The step-by-step lead gen plan is exactly what I needed to scale.", stars: 5, image: "/review_person3.png" },
+    { name: "Manish Verma", role: "Founder, FRD Nutrition", text: "Avani delivered our nutrition brand website in under 3 weeks — fast, clean, and built to convert. Online inquiries have nearly tripled since launch and the team's responsiveness has been top-class throughout.", stars: 5, image: "/review_person1.png" },
+    { name: "Rajat Kapoor", role: "Director, Paragon", text: "Their AI video pipeline completely transformed how we produce content. What used to take our team two weeks now takes a few hours, and the output quality has genuinely impressed our clients. A real growth partner.", stars: 5, image: "/review_person2.png" },
+    { name: "Aman Sharma", role: "Owner, Hi-tech Properties", text: "I needed a website that projects trust at the high-ticket end of real estate. Avani delivered exactly that — a clean, professional platform that turns property inquiries into closed deals. Highly recommended.", stars: 5, image: "/review_person3.png" },
+    { name: "Karan Bhatia", role: "Founder, Rohtak Shoe Co.", text: "We needed an e-commerce platform that did justice to our footwear range. The 3D product previews, smart inventory and clean checkout Avani built have driven a real lift in conversions and average order value.", stars: 5, image: "/review1.png" },
+    { name: "Dr. Neha Singh", role: "Director, Sanjeevni Hospital", text: "Running OPD bookings, online payments and patient records across departments was draining our staff. Avani streamlined everything end-to-end — the AI chatbot alone now handles a large chunk of patient queries without human intervention.", stars: 5, image: "/review2.png" },
+    { name: "Dr. Suresh Khanna", role: "Principal, Indus Public School", text: "From digital attendance to fee management, the school platform Avani built runs our daily operations without friction. Parents, teachers and admin all have what they need in one clean dashboard. Our team highly endorses them.", stars: 5, image: "/review3.png" },
   ];
   // Plan payment handler for pricing table
 
@@ -469,6 +482,23 @@ export default function AvaniEnterprises1() {
         .hero-video-container { transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease; }
         .hero-video-container:hover { transform: translateY(-4px); box-shadow: 0 40px 100px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.08) inset !important; }
         .hero-scroll-indicator { animation: heroScrollBounce 2s ease-in-out infinite; }
+
+        /* ── Testimonials horizontal scroll (desktop + mobile) ── */
+        .testimonials-grid { scrollbar-width: none; -ms-overflow-style: none; }
+        .testimonials-grid::-webkit-scrollbar { display: none; }
+        .testimonials-grid > div { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .testimonials-grid > div:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.08); }
+
+        /* ── Pricing Table Polish ── */
+        .pricing-row { transition: background 0.2s ease; }
+        .pricing-row:hover { background: rgba(212,160,23,0.04) !important; }
+        .pricing-cta-btn { position: relative; overflow: hidden; }
+        .pricing-cta-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 28px ${C.accentGlow}, 0 0 0 1px ${C.accent} !important; }
+        .pricing-cta-btn:active { transform: translateY(0); }
+        @media (max-width: 768px) {
+          .popular-badge-float { font-size: 8px !important; padding: 6px 14px !important; top: -14px !important; letter-spacing: 1.5px !important; }
+          .popular-badge-float svg { width: 9px !important; height: 9px !important; }
+        }
 
         /* ── PRICING RESPONSIVE TOGGLE ── */
         .pricing-table-desktop { display: block; border-radius: 24px; }
@@ -1062,7 +1092,7 @@ export default function AvaniEnterprises1() {
             <a key={l} href={`#${l.toLowerCase()}`} className="nav-link" style={{ color: scrolled ? C.text : "#ffffff" }}>{l.toUpperCase()}</a>
           ))}
           <button onClick={() => scrollToPricing()} className="cta-btn nav-desktop-cta" style={{ padding: "10px 22px", fontSize: "11px", marginLeft: "10px" }}>
-            START YOUR JOURNEY
+            Start your business in 7 days With Avani Enterprises
           </button>
         </div>
 
@@ -1222,7 +1252,7 @@ export default function AvaniEnterprises1() {
                     borderRadius: "8px",
                   }}
                 >
-                  START YOUR JOURNEY <ArrowRight size={16} />
+                  Start your business in 7 days With Avani Enterprises <ArrowRight size={16} />
                 </button>
               </div>
             </motion.div>
@@ -1285,7 +1315,7 @@ export default function AvaniEnterprises1() {
             {/* CTA Row */}
             <div className="cta-container" style={{ display: "flex", flexDirection: "column", gap: "18px", alignItems: "flex-start", width: "100%", maxWidth: "450px" }}>
               <button onClick={() => scrollToPricing()} className="cta-btn hero-cta" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", padding: "18px 40px", width: "100%", borderRadius: "6px", fontSize: "13px", letterSpacing: "1.5px", position: "relative", overflow: "hidden", boxShadow: `0 8px 32px rgba(212,160,23,0.25), 0 0 60px rgba(212,160,23,0.1)` }}>
-                START YOUR BUSINESS JOURNEY NOW <ArrowRight size={16} />
+                Start your business in 7 days With Avani Enterprises <ArrowRight size={16} />
               </button>
 
               {/* Value pills */}
@@ -1345,11 +1375,6 @@ export default function AvaniEnterprises1() {
           </div>
         </div>
 
-        {/* Scroll indicator */}
-        <div className="hero-scroll-indicator" style={{ position: "absolute", bottom: "28px", left: "50%", transform: "translateX(-50%)", zIndex: 5, display: "flex", flexDirection: "column", alignItems: "center", gap: "8px", opacity: 0.4 }}>
-          <span style={{ fontSize: "9px", fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 600, letterSpacing: "3px", color: "rgba(255,255,255,0.6)", textTransform: "uppercase" }}>Scroll</span>
-          <div style={{ width: "1px", height: "24px", background: `linear-gradient(180deg, rgba(255,255,255,0.5), transparent)` }} />
-        </div>
       </section>
 
       {/* ── PRICING TABLE ── */}
@@ -1361,153 +1386,193 @@ export default function AvaniEnterprises1() {
           <div style={{ textAlign: "center", marginBottom: "50px" }}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "12px", marginBottom: "20px" }}>
               <div style={{ width: "40px", height: "1px", background: `linear-gradient(90deg, transparent, ${C.accent})` }} />
-              <h2 className="display-font" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "clamp(2rem, 5vw, 3rem)", fontWeight: 800, letterSpacing: "2px", color: C.accent, margin: 0 }}>CHOOSE YOUR PLAN</h2>
+              <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "11px", fontWeight: 700, letterSpacing: "3px", color: C.accent }}>PRICING & PLANS</span>
               <div style={{ width: "40px", height: "1px", background: `linear-gradient(90deg, ${C.accent}, transparent)` }} />
             </div>
-            <p id="pricing-desc" style={{ color: C.muted, fontSize: "14px", lineHeight: 1.6, maxWidth: "550px", margin: "0 auto", fontWeight: 300 }}>
-              Simple, fair consultation plans. Pick what suits your business scale — upgrade anytime.
+            <h2 className="display-font" style={{ fontSize: "clamp(2.5rem, 5.5vw, 4.5rem)", lineHeight: 0.95, color: C.text, margin: "0 0 20px", fontWeight: 800 }}>CHOOSE YOUR PLAN.</h2>
+            <p id="pricing-desc" style={{ color: C.muted, fontSize: "14px", lineHeight: 1.7, maxWidth: "560px", margin: "0 auto", fontWeight: 400 }}>
+              Three transparent tiers — pay a small booking fee today and lock in your slot. Upgrade anytime as your business scales.
             </p>
           </div>
 
-          {/* Pricing Cards */}
-          {/* Pricing Comparison Table */}
-          {/* Pricing Comparison Table (Desktop) */}
+          {/* Pricing Comparison Table — Professional Redesign */}
           <div id="pricing-table-wrapper" className="pricing-table-desktop pricing-table-container" style={{
-            overflowX: "auto",
             background: "#FFFFFF",
-            borderRadius: "24px",
-            boxShadow: "0 20px 80px rgba(0,0,0,0.06)",
-            border: `1px solid ${C.border}`,
+            borderRadius: "20px",
+            boxShadow: "0 30px 80px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04)",
             position: "relative",
             zIndex: 2,
-            margin: "0 auto",
-            maxWidth: "100%"
+            margin: "70px auto 0",
+            maxWidth: "1140px",
+            overflow: "visible"
           }}>
-            <table style={{ width: "100%", borderCollapse: "collapse", minWidth: "100%", tableLayout: "fixed" }}>
-              <thead>
-                <tr>
-                  <th className="col-feature" style={{ padding: "16px 20px", textAlign: "left", width: "22%", borderBottom: `1px solid ${C.border}` }}>
-                    <div className="table-header-top1" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "10px", fontWeight: 800, letterSpacing: "2px", color: C.muted, marginBottom: "4px" }}>COMPARE</div>
-                    <div className="display-font table-header-top2" style={{ fontSize: "16px", color: C.text }}>THE FIT.</div>
-                  </th>
-                  {[
-                    { name: "Basic Plan", price: "9,999", book: "149", popular: false },
-                    { name: "Standard Plan", price: "99,999", book: "249", popular: true },
-                    { name: "Premium Plan", price: "9,99,999", book: "249", popular: false }
-                  ].map((p, i) => (
-                    <th key={i} style={{
-                      padding: "16px 15px",
-                      textAlign: "center",
-                      width: "26%",
-                      background: p.popular ? "rgba(99,102,241,0.03)" : "transparent",
-                      borderLeft: `1px solid ${C.border}`,
-                      borderBottom: `1px solid ${C.border}`,
-                      position: "relative"
-                    }}>
-                      {p.popular && (
-                        <div style={{
-                          position: "absolute", top: "0", left: "0", right: "0", height: "4px", background: C.accent
-                        }} />
-                      )}
-                      <div className="table-header-name" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "9px", fontWeight: 800, letterSpacing: "2.5px", color: p.popular ? C.accent : C.muted, marginBottom: "4px" }}>{p.name.toUpperCase()}</div>
-                      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "2px" }}>
-                        <div className="table-header-price" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "12px", color: C.muted, fontWeight: 400 }}>₹{p.price}</div>
-                      </div>
+            {/* MOST POPULAR floating badge — centered above Standard column */}
+            <div className="popular-badge-float" style={{
+              position: "absolute",
+              top: "-22px",
+              left: "calc(26% + 74% / 2)",
+              transform: "translateX(-50%)",
+              background: `linear-gradient(135deg, ${C.accent} 0%, ${C.accentLight} 100%)`,
+              color: "#1A1A2E",
+              padding: "8px 22px",
+              borderRadius: "100px",
+              fontSize: "10px",
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontWeight: 900,
+              letterSpacing: "2.5px",
+              boxShadow: `0 8px 24px ${C.accentGlow}, 0 0 0 4px #FFFFFF`,
+              display: "flex",
+              alignItems: "center",
+              gap: "6px",
+              whiteSpace: "nowrap",
+              zIndex: 5
+            }}>
+              <Crown size={12} fill="#1A1A2E" /> MOST POPULAR
+            </div>
+
+            <div style={{ overflow: "hidden", borderRadius: "20px" }}>
+              <table style={{ width: "100%", borderCollapse: "collapse", tableLayout: "fixed" }}>
+                <thead>
+                  <tr>
+                    <th className="col-feature" style={{ padding: "60px 32px 32px", textAlign: "left", width: "26%", verticalAlign: "bottom", background: "linear-gradient(180deg, #FAFAF8 0%, #FFFFFF 100%)", borderBottom: `2px solid ${C.border}` }}>
+                      <div className="table-header-top1" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "10px", fontWeight: 800, letterSpacing: "3px", color: C.accent, marginBottom: "10px" }}>WHAT YOU GET</div>
+                      <div className="display-font table-header-top2" style={{ fontSize: "22px", color: C.text, fontWeight: 800, lineHeight: 1.15 }}>Compare<br/>plans.</div>
+                      <p style={{ fontSize: "11px", color: C.muted, marginTop: "12px", lineHeight: 1.6, fontWeight: 400 }}>Every plan includes the consultation, audit and 90-day roadmap.</p>
                     </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {[
-                  { name: "Feasibility Study", basic: "✔", standard: "✔", premium: "✔" },
-                  { name: "Website Development", basic: "✖", standard: "1 Year", premium: "1 Year" },
-                  { name: "AI Integration", basic: "✖", standard: "AI Videos", premium: "Agentic AI + Videos" },
-                  { name: "App Development", basic: "✖", standard: "✖", premium: "✔" },
-                  { name: "Digital Marketing", basic: "3 Months", standard: "3 Months", premium: "1 Year" },
-                  { name: "Office Space Setup", basic: "✖", standard: "✖", premium: "3 Months" },
-                  { name: "Employee Hirings", basic: "✖", standard: "✖", premium: "Up to 20" },
-                  { name: "Pamphlets & Letterheads", basic: "✖", standard: "✖", premium: "✔" },
-                  { name: "Sales Support", basic: "✖", standard: "✖", premium: "Till Break-even" },
-                  { name: "Bank Account Opening", basic: "✖", standard: "✔", premium: "Premium Account" },
-                  { name: "Government Contracts", basic: "✖", standard: "✖", premium: "If Applicable" },
-                ].map((row, ri) => (
-                  <tr key={ri} style={{ borderBottom: ri < 10 ? `1px solid ${C.border}` : "none" }}>
-                    <td className="table-feature-text" style={{ padding: "12px 20px", fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "12px", fontWeight: 600, color: C.text }}>{row.name}</td>
-                    {[row.basic, row.standard, row.premium].map((cell, ci) => {
-                      const isIncluded = cell !== "✖";
-                      const isCheck = cell === "✔";
-                      return (
-                        <td key={ci} style={{
-                          padding: "12px 10px",
-                          textAlign: "center",
-                          background: ci === 1 ? "rgba(99,102,241,0.03)" : "transparent",
-                          borderLeft: `1px solid ${C.border}`,
-                        }}>
-                          <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%" }}>
-                            {isIncluded ? (
-                              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "2px" }}>
-                                <div className="table-tick-cross" style={{
-                                  width: "20px", height: "20px", borderRadius: "50%", background: "rgba(16,185,129,0.1)",
-                                  color: "#10B981", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "10px", fontWeight: 900
-                                }}>✔</div>
-                                {!isCheck && (
-                                  <span className="table-val-text" style={{ fontSize: "10px", color: C.muted, fontWeight: 500, fontFamily: "'Plus Jakarta Sans', sans-serif", whiteSpace: "nowrap" }}>{cell}</span>
-                                )}
-                              </div>
-                            ) : (
-                              <div className="table-tick-cross" style={{
-                                width: "20px", height: "20px", borderRadius: "50%", background: "rgba(239,68,68,0.1)",
-                                color: "#EF4444", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "10px", fontWeight: 900
-                              }}>✖</div>
-                            )}
+                    {[
+                      { name: "Basic", tag: "STARTER", price: "9,999", book: "149", popular: false, desc: "Solo founders testing the idea" },
+                      { name: "Standard", tag: "GROWTH", price: "99,999", book: "249", popular: true, desc: "Most chosen by serious businesses" },
+                      { name: "Premium", tag: "ENTERPRISE", price: "9,99,999", book: "249", popular: false, desc: "End-to-end launch & scale" }
+                    ].map((p, i) => (
+                      <th key={i} style={{
+                        padding: p.popular ? "70px 20px 32px" : "60px 20px 32px",
+                        textAlign: "center",
+                        width: "24.66%",
+                        background: p.popular ? `linear-gradient(180deg, ${C.accentDim} 0%, rgba(212,160,23,0.04) 100%)` : "linear-gradient(180deg, #FAFAF8 0%, #FFFFFF 100%)",
+                        borderLeft: `1px solid ${C.border}`,
+                        borderBottom: p.popular ? `2px solid ${C.accent}` : `2px solid ${C.border}`,
+                        position: "relative",
+                        verticalAlign: "bottom"
+                      }}>
+                        <div className="table-header-name" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "10px", fontWeight: 800, letterSpacing: "3px", color: p.popular ? C.accent : C.muted, marginBottom: "8px" }}>{p.tag}</div>
+                        <div className="display-font" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "26px", fontWeight: 800, color: C.text, lineHeight: 1.1, marginBottom: "10px" }}>{p.name}</div>
+                        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "2px", marginBottom: "10px" }}>
+                          <div className="table-header-price" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "13px", color: C.muted, fontWeight: 500 }}>
+                            <span style={{ fontSize: "11px", opacity: 0.7 }}>Plan value</span>
                           </div>
-                        </td>
-                      );
-                    })}
+                          <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "22px", color: C.text, fontWeight: 800, letterSpacing: "-0.5px" }}>₹{p.price}</div>
+                        </div>
+                        <p style={{ fontSize: "10px", color: C.muted, lineHeight: 1.5, fontWeight: 400, minHeight: "30px", padding: "0 4px" }}>{p.desc}</p>
+                      </th>
+                    ))}
                   </tr>
-                ))}
-                {/* Footer Row for CTA */}
-                <tr>
-                  <td style={{ padding: "16px 20px", background: C.subtle, borderTop: `1px solid ${C.border}` }}></td>
+                </thead>
+                <tbody>
                   {[
-                    { name: "Basic Plan", book: "149", popular: false },
-                    { name: "Standard Plan", book: "249", popular: true },
-                    { name: "Premium Plan", book: "249", popular: false }
-                  ].map((p, i) => (
-                    <td key={i} style={{
-                      padding: "16px 10px",
-                      textAlign: "center",
-                      background: p.popular ? "rgba(99,102,241,0.06)" : C.subtle,
-                      borderLeft: `1px solid ${C.border}`,
-                      borderTop: `1px solid ${C.border}`
-                    }}>
-                      <button
-                        onClick={() => openModal(p.name)}
-                        className="cta-btn"
-                        style={{
-                          width: "100%",
-                          padding: "16px 8px",
-                          display: "flex",
-                          flexDirection: "column",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          background: C.accent,
-                          color: "#000",
-                          border: "none",
-                          borderRadius: "6px",
-                          boxShadow: p.popular ? "0 4px 14px rgba(212,160,23,0.3)" : "none"
-                        }}
-                      >
-                        <span className="btn-book-now" style={{ fontSize: "14px", fontWeight: 800, letterSpacing: "0.5px" }}>
-                          <span className="btn-book">Book</span> Now
-                        </span>
-                        <span className="btn-slot" style={{ fontSize: "11px", fontWeight: 600, opacity: 0.9 }}>Slot at ₹{p.book}</span>
-                      </button>
-                    </td>
+                    { name: "Feasibility Study", basic: "✔", standard: "✔", premium: "✔" },
+                    { name: "Website Development", basic: "✖", standard: "1 Year", premium: "1 Year" },
+                    { name: "AI Integration", basic: "✖", standard: "AI Videos", premium: "Agentic AI + Videos" },
+                    { name: "App Development", basic: "✖", standard: "✖", premium: "✔" },
+                    { name: "Digital Marketing", basic: "3 Months", standard: "3 Months", premium: "1 Year" },
+                    { name: "Office Space Setup", basic: "✖", standard: "✖", premium: "3 Months" },
+                    { name: "Employee Hirings", basic: "✖", standard: "✖", premium: "Up to 20" },
+                    { name: "Pamphlets & Letterheads", basic: "✖", standard: "✖", premium: "✔" },
+                    { name: "Sales Support", basic: "✖", standard: "✖", premium: "Till Break-even" },
+                    { name: "Bank Account Opening", basic: "✖", standard: "✔", premium: "Premium Account" },
+                    { name: "Government Contracts", basic: "✖", standard: "✖", premium: "If Applicable" },
+                  ].map((row, ri) => (
+                    <tr key={ri} className="pricing-row" style={{ borderBottom: `1px solid ${C.border}`, background: ri % 2 === 0 ? "#FFFFFF" : "#FAFAF8" }}>
+                      <td className="table-feature-text" style={{ padding: "18px 32px", fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "13px", fontWeight: 600, color: C.text, letterSpacing: "0.2px" }}>{row.name}</td>
+                      {[row.basic, row.standard, row.premium].map((cell, ci) => {
+                        const isExcluded = cell === "✖";
+                        const isCheck = cell === "✔";
+                        const isPopular = ci === 1;
+                        return (
+                          <td key={ci} style={{
+                            padding: "18px 14px",
+                            textAlign: "center",
+                            background: isPopular ? (ri % 2 === 0 ? "rgba(212,160,23,0.05)" : "rgba(212,160,23,0.08)") : "transparent",
+                            borderLeft: `1px solid ${C.border}`,
+                            verticalAlign: "middle"
+                          }}>
+                            <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", width: "100%", minHeight: "32px", gap: "4px" }}>
+                              {isExcluded ? (
+                                <div className="table-tick-cross" style={{
+                                  width: "26px", height: "26px", borderRadius: "50%", background: "rgba(0,0,0,0.04)",
+                                  color: "#9CA3AF", display: "flex", alignItems: "center", justifyContent: "center"
+                                }}>
+                                  <Minus size={14} strokeWidth={2.5} />
+                                </div>
+                              ) : (
+                                <>
+                                  <div className="table-tick-cross" style={{
+                                    width: "26px", height: "26px", borderRadius: "50%", background: isPopular ? `linear-gradient(135deg, ${C.accent} 0%, ${C.accentLight} 100%)` : "rgba(16,185,129,0.12)",
+                                    color: isPopular ? "#FFFFFF" : "#10B981", display: "flex", alignItems: "center", justifyContent: "center",
+                                    boxShadow: isPopular ? `0 4px 12px ${C.accentGlow}` : "none"
+                                  }}>
+                                    <Check size={14} strokeWidth={3} />
+                                  </div>
+                                  {!isCheck && (
+                                    <span className="table-val-text" style={{ fontSize: "11px", color: C.text, fontWeight: 600, fontFamily: "'Plus Jakarta Sans', sans-serif", whiteSpace: "nowrap", letterSpacing: "0.2px" }}>{cell}</span>
+                                  )}
+                                </>
+                              )}
+                            </div>
+                          </td>
+                        );
+                      })}
+                    </tr>
                   ))}
-                </tr>
-              </tbody>
-            </table>
+                  {/* Footer CTA Row */}
+                  <tr id="pricing-cta-row">
+                    <td style={{ padding: "28px 32px", background: "#FAFAF8", borderTop: `2px solid ${C.border}` }}>
+                      <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "11px", fontWeight: 700, color: C.muted, letterSpacing: "1.5px" }}>BOOK YOUR SLOT</div>
+                      <div style={{ fontSize: "11px", color: C.muted, marginTop: "4px", fontWeight: 400 }}>Pay only the booking fee today</div>
+                    </td>
+                    {[
+                      { name: "Basic Plan", book: "149", popular: false },
+                      { name: "Standard Plan", book: "249", popular: true },
+                      { name: "Premium Plan", book: "249", popular: false }
+                    ].map((p, i) => (
+                      <td key={i} style={{
+                        padding: "20px 14px",
+                        textAlign: "center",
+                        background: p.popular ? `linear-gradient(180deg, rgba(212,160,23,0.08) 0%, rgba(212,160,23,0.04) 100%)` : "#FAFAF8",
+                        borderLeft: `1px solid ${C.border}`,
+                        borderTop: `2px solid ${p.popular ? C.accent : C.border}`
+                      }}>
+                        <button
+                          onClick={() => openModal(p.name)}
+                          className="cta-btn pricing-cta-btn"
+                          style={{
+                            width: "100%",
+                            padding: p.popular ? "16px 10px" : "14px 10px",
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            gap: "3px",
+                            background: p.popular ? `linear-gradient(135deg, ${C.accent} 0%, ${C.accentLight} 100%)` : "#1A1A2E",
+                            color: p.popular ? "#1A1A2E" : "#FFFFFF",
+                            border: "none",
+                            borderRadius: "10px",
+                            boxShadow: p.popular ? `0 8px 24px ${C.accentGlow}, 0 0 0 1px ${C.accent}` : "0 4px 12px rgba(0,0,0,0.08)",
+                            cursor: "pointer",
+                            transition: "all 0.3s ease"
+                          }}
+                        >
+                          <span className="btn-book-now" style={{ fontSize: "13px", fontWeight: 800, letterSpacing: "0.5px", display: "flex", alignItems: "center", gap: "6px" }}>
+                            <span className="btn-book">Book Now</span>
+                            <ArrowRight size={14} />
+                          </span>
+                          <span className="btn-slot" style={{ fontSize: "10px", fontWeight: 600, opacity: 0.85, letterSpacing: "0.3px" }}>Slot at ₹{p.book}</span>
+                        </button>
+                      </td>
+                    ))}
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
 
 
@@ -1629,9 +1694,9 @@ export default function AvaniEnterprises1() {
             <div style={{ width: "60px", height: "2px", background: C.accent }} />
             <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "15px", fontWeight: 800, letterSpacing: "4px", color: C.accent }}>CLIENT VOICE</span>
           </div>
-          <div className="testimonials-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "2px" }}>
+          <div className="testimonials-grid" style={{ display: "flex", flexDirection: "row", overflowX: "auto", gap: "20px", scrollSnapType: "x mandatory", WebkitOverflowScrolling: "touch", paddingBottom: "16px", margin: "0 -6%", paddingLeft: "6%", paddingRight: "6%" }}>
             {testimonials.map((t, i) => (
-              <div key={i} style={{ background: C.card, border: `1px solid ${C.border}`, padding: "44px 38px", borderLeft: i > 0 ? "none" : `1px solid ${C.border}` }}>
+              <div key={i} style={{ background: C.card, border: `1px solid ${C.border}`, padding: "44px 38px", flex: "0 0 460px", scrollSnapAlign: "start", borderRadius: "8px" }}>
                 <div style={{ display: "flex", gap: "3px", marginBottom: "24px" }}>
                   {[...Array(t.stars)].map((_, j) => <Star key={j} size={13} fill={C.accent} color={C.accent} />)}
                 </div>
@@ -1646,6 +1711,7 @@ export default function AvaniEnterprises1() {
               </div>
             ))}
           </div>
+          <div style={{ textAlign: "center", marginTop: "16px", fontSize: "11px", color: C.muted, letterSpacing: "2px", fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 600 }}>← SWIPE TO SEE MORE →</div>
         </div>
       </section>
 
@@ -2002,7 +2068,7 @@ export default function AvaniEnterprises1() {
           </div>
           <div className="cta-band-btns" style={{ display: "flex", gap: "16px" }}>
             <button onClick={() => scrollToPricing()} style={{ background: "white", color: "#1A1A2E", border: "none", padding: "18px 36px", fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "13px", letterSpacing: "1.5px", cursor: "pointer", transition: "all 0.3s", borderRadius: "4px", display: "flex", alignItems: "center", gap: "10px" }}>
-              START YOUR BUSINESS JOURNEY NOW <ArrowRight size={16} />
+              Start your business in 7 days With Avani Enterprises <ArrowRight size={16} />
             </button>
             <a href="tel:+919311967319" style={{ background: "transparent", color: "white", border: "1px solid rgba(255,255,255,0.4)", padding: "18px 36px", fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: "13px", letterSpacing: "1.5px", cursor: "pointer", display: "flex", alignItems: "center", gap: "10px", textDecoration: "none" }}>
               CALL NOW <Phone size={16} />
