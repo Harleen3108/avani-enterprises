@@ -7,12 +7,12 @@ import '../../components/dummyhome2/DummyHome2.css';
 const fadeIn = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } };
 
 const projects = [
-  { title: 'Policicue', tag: 'Insurance Platform', desc: 'Sophisticated platform for complex policy management with exceptional UI/UX.', img: '/policucue.jpeg', link: '/projects/policicue' },
-  { title: 'Indus School', tag: 'Education', desc: 'Modern website capturing the school vision, intuitive for parents and students.', img: '/indus.jpeg', link: '/projects/indus' },
-  { title: 'FRD Nutrition', tag: 'E-Commerce', desc: 'Stunning product showcase with seamless e-commerce — 180% increase in orders.', img: '/frd-nutrition-new.png', link: '/projects/frd-nutrition' },
-  { title: 'Hi-Tech Homes', tag: 'Real Estate', desc: 'Elegant website for luxury properties with virtual tour features.', img: '/hitech.jpeg', link: '/projects/hitech-homes' },
-  { title: 'Sanjeevni Hospital', tag: 'Healthcare', desc: 'Hospital management portal streamlining operations and patient booking.', img: '/sanjeevni.jpeg', link: '/projects/sanjeevni-hospital' },
-  { title: 'Rohtak Shoe Co.', tag: 'E-Commerce', desc: 'E-commerce platform — 250% increase in online sales in 3 months.', img: '/shoes.jpeg', link: '/projects/rohtak-shoe' },
+  { title: 'Policicue', tag: 'Insurance Platform', desc: 'Sophisticated platform for complex policy management with exceptional UI/UX.', img: '/policucue.jpeg', link: '/dummyhome2/our-products/policicue' },
+  { title: 'Indus School', tag: 'Education', desc: 'Modern website capturing the school vision, intuitive for parents and students.', img: '/indus.jpeg', link: '/dummyhome2/our-products/indus' },
+  { title: 'FRD Nutrition', tag: 'E-Commerce', desc: 'Stunning product showcase with seamless e-commerce — 180% increase in orders.', img: '/frd-nutrition-new.png', link: '/dummyhome2/our-products/frd-nutrition' },
+  { title: 'Hi-Tech Homes', tag: 'Real Estate', desc: 'Elegant website for luxury properties with virtual tour features.', img: '/hitech.jpeg', link: '/dummyhome2/our-products/hitech-homes' },
+  { title: 'Sanjeevni Hospital', tag: 'Healthcare', desc: 'Hospital management portal streamlining operations and patient booking.', img: '/sanjeevni.jpeg', link: '/dummyhome2/our-products/sanjeevni' },
+  { title: 'Rohtak Shoe Co.', tag: 'E-Commerce', desc: 'E-commerce platform — 250% increase in online sales in 3 months.', img: '/shoes.jpeg', link: '/dummyhome2/our-products/rohtak-shoe' },
 ];
 
 const DH2CaseStudies = () => (

@@ -85,11 +85,11 @@ const DH2Contact = () => {
                   ))}
                 </div>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '.5rem', fontSize: '.6rem', color: 'var(--text-dim)' }}>
-                  <div><strong style={{ color: 'var(--text-muted)' }}>Gurgaon:</strong> Unitech Cyber Park, Sector 39</div>
-                  <div><strong style={{ color: 'var(--text-muted)' }}>Mumbai:</strong> Vasudev Chamber, Andheri East</div>
-                  <div><strong style={{ color: 'var(--text-muted)' }}>Rohtak:</strong> 106, Agro Mall</div>
-                  <div><strong style={{ color: 'var(--text-muted)' }}>Australia</strong></div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', fontSize: '.6rem', color: 'var(--text-dim)' }}>
+                  <div><strong style={{ color: 'var(--text-muted)', display: 'block', marginBottom: 2 }}>Gurgaon Office:</strong> Tower B, 3rd Floor, Unitech Cyber Park, Sector 39, Gurugram, Haryana 122002</div>
+                  <div><strong style={{ color: 'var(--text-muted)', display: 'block', marginBottom: 2 }}>Mumbai Office:</strong> Third Floor, Vasudev Chamber, 4RFX+QJ3, Teli Galli Cross Rd, Mogra Village, Mogra Pada, Natwar Nagar, Andheri East, Mumbai, Maharashtra 400069</div>
+                  <div><strong style={{ color: 'var(--text-muted)', display: 'block', marginBottom: 2 }}>Rohtak Office:</strong> 106, First Floor, Agro Mall, Rohtak</div>
+                  <div><strong style={{ color: 'var(--text-muted)', display: 'block', marginBottom: 2 }}>Australia:</strong> Australia</div>
                 </div>
 
                 <div style={{ display: 'flex', gap: '.5rem', marginTop: '2rem' }}>

@@ -50,7 +50,7 @@ const DH2Navbar = () => {
       dropdown: [
         { name: 'Blog', path: '/dummyhome2/blog' },
         { name: 'Newsletters', path: '/dummyhome2/newsletters' },
-        { name: 'Courses', path: '/courses' },
+        { name: 'Courses', path: '/dummyhome2/courses' },
         { name: 'Case Studies', path: '/dummyhome2/case-studies' },
       ]
     },
@@ -61,9 +61,10 @@ const DH2Navbar = () => {
 
   const isActive = (path: string) => location.pathname === path;
   const isDropdownActive = (items: { path: string }[]) => items.some(i => location.pathname === i.path);
+  const isHomePage = location.pathname === '/dummyhome2' || location.pathname === '/dummyhome2/';
 
   return (
-    <nav className={`dh2-nav ${scrolled ? 'dh2-nav--scrolled' : ''}`}>
+    <nav className={`dh2-nav ${scrolled ? 'dh2-nav--scrolled' : ''} ${!scrolled && isHomePage ? 'dh2-nav--transparent' : ''}`}>
       <Link to="/dummyhome2" className="dh2-logo">AVANI.</Link>
 
       {/* Desktop Links */}

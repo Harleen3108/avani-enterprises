@@ -162,6 +162,23 @@ import DH2Careers from "./pages/dummyhome2/DH2Careers";
 import DH2Newsletters from "./pages/dummyhome2/DH2Newsletters";
 import DH2Privacy from "./pages/dummyhome2/DH2Privacy";
 import DH2Terms from "./pages/dummyhome2/DH2Terms";
+import DH2ServiceDetail from "./pages/dummyhome2/DH2ServiceDetail";
+import DH2BlogDetail from "./pages/dummyhome2/DH2BlogDetail";
+import DH2NewsletterDetail from "./pages/dummyhome2/DH2NewsletterDetail";
+import DH2CareerDetail from "./pages/dummyhome2/DH2CareerDetail";
+import DH2Courses from "./pages/dummyhome2/DH2Courses";
+import DH2CourseDetail from "./pages/dummyhome2/DH2CourseDetail";
+
+import DH2PolicicueProject from './pages/dummyhome2/DH2PolicicueProject';
+import DH2IndusProject from './pages/dummyhome2/DH2IndusProject';
+import DH2FrdNutritionProject from './pages/dummyhome2/DH2FrdNutritionProject';
+import DH2HiTechHomesProject from './pages/dummyhome2/DH2HiTechHomesProject';
+import DH2SanjeevniHospitalProject from './pages/dummyhome2/DH2SanjeevniHospitalProject';
+import DH2RohtakShoeProject from './pages/dummyhome2/DH2RohtakShoeProject';
+import DH2LeadManagementProject from './pages/dummyhome2/DH2LeadManagementProject';
+import DH2WhatsAppAutomationProject from './pages/dummyhome2/DH2WhatsAppAutomationProject';
+import DH2BusinessProcessOptimizationProject from './pages/dummyhome2/DH2BusinessProcessOptimizationProject';
+
 import { SeoProvider } from "./contexts/SeoContext";
 import { ThemeProvider } from "./components/theme-provider";
 
@@ -215,29 +232,43 @@ const AppLayout = () => {
           <Route path="/dummyhome2" element={<DH2Layout />}>
             <Route path="about" element={<DH2About />} />
             <Route path="services" element={<DH2Services />} />
-            <Route path="services/:id" element={<DH2PlaceholderPage title="Service Detail" />} />
+            <Route path="services/:id" element={<DH2ServiceDetail />} />
             <Route path="our-products" element={<DH2Products />} />
             <Route path="case-studies" element={<DH2CaseStudies />} />
             <Route path="contact" element={<DH2Contact />} />
             <Route path="blog" element={<DH2Blog />} />
-            <Route path="blog/:slug" element={<DH2PlaceholderPage title="Blog Detail" />} />
+            <Route path="blog/:slug" element={<DH2BlogDetail />} />
+            <Route path="courses" element={<DH2Courses />} />
+            <Route path="courses/:id" element={<DH2CourseDetail />} />
             <Route path="get-consultation" element={<DH2Consultation />} />
             <Route path="global-presence" element={<DH2GlobalPresence />} />
             <Route path="careers" element={<DH2Careers />} />
-            <Route path="careers/:id" element={<DH2PlaceholderPage title="Career Detail" />} />
+            <Route path="careers/:id" element={<DH2CareerDetail />} />
             <Route path="newsletters" element={<DH2Newsletters />} />
-            <Route path="newsletters/:slug" element={<DH2PlaceholderPage title="Newsletter Detail" />} />
+            <Route path="newsletters/:slug" element={<DH2NewsletterDetail />} />
             <Route path="privacy-policy" element={<DH2Privacy />} />
             <Route path="terms-and-conditions" element={<DH2Terms />} />
+
+            {/* DummyHome2 Project Routes */}
+            <Route path="our-products/policicue" element={<DH2PolicicueProject />} />
+            <Route path="our-products/indus" element={<DH2IndusProject />} />
+            <Route path="our-products/frd-nutrition" element={<DH2FrdNutritionProject />} />
+            <Route path="our-products/hitech-homes" element={<DH2HiTechHomesProject />} />
+            <Route path="our-products/sanjeevni" element={<DH2SanjeevniHospitalProject />} />
+            <Route path="our-products/rohtak-shoe" element={<DH2RohtakShoeProject />} />
+
+            <Route path="services/lead-management" element={<DH2LeadManagementProject />} />
+            <Route path="services/whatsapp-automation" element={<DH2WhatsAppAutomationProject />} />
+            <Route path="services/process-optimization" element={<DH2BusinessProcessOptimizationProject />} />
           </Route>
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
           <Route path="/services/:id" element={<ServiceDetail />} />
+
           <Route path="/our-products" element={<OurProducts />} />
           <Route path="/case-studies" element={<CaseStudies />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/blog" element={<Blog />} />
-          {/* <Route path="/blog" element={<Blog />} /> */}
           <Route path="/newsletters" element={<Newsletters />} />
           <Route path="/newsletters/:slug" element={<NewsletterDetail />} />
           <Route path="/global-presence" element={<GlobalPresence />} />

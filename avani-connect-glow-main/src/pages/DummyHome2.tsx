@@ -6,6 +6,8 @@ import axios from 'axios';
 import { API_BASE_URL } from '../utils/api';
 import { services, caseStudies, industries, industryConnections, offices, processSteps, testimonials, team, awards, milestones, faqs, clientLogos, footerLinks } from '../components/dummyhome2/data';
 import { FluidHeroBackground } from '../components/dummyhome2/FluidHeroBackground';
+import DH2Navbar from '../components/dummyhome2/DH2Navbar';
+import Chatbot from '../components/Chatbot';
 import '../components/dummyhome2/DummyHome2.css';
 
 const words = ['Websites', 'Products', 'Solutions', 'Experiences'];
@@ -231,16 +233,7 @@ const DummyHome2 = () => {
       </AnimatePresence>
 
       {/* NAV */}
-      <nav className="dh2-nav">
-        <Link to="/" className="dh2-logo">AVANI.</Link>
-        <div className="dh2-nav-links">
-          <a href="#work" className="dh2-nav-link">Work</a>
-          <a href="#services" className="dh2-nav-link">Services</a>
-          <a href="#about" className="dh2-nav-link">About</a>
-          <a href="#contact" className="dh2-nav-link">Contact</a>
-        </div>
-        <Link to="/get-consultation" className="dh2-nav-cta">Start a Project</Link>
-      </nav>
+      <DH2Navbar />
 
       {/* HERO BACKGROUND (Full Screen) */}
       <div className="dh2-hero-bg-wrapper">
@@ -559,7 +552,7 @@ const DummyHome2 = () => {
           </motion.div>
           <div className="dh2-blog-grid">
             {blogs.slice(0, 3).map((b: any, i: number) => (
-              <Link key={i} to={`/blog/${b.slug}`} className="dh2-blog-card" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <Link key={i} to={`/dummyhome2/blog/${b.slug}`} className="dh2-blog-card" style={{ textDecoration: 'none', color: 'inherit' }}>
                 {b.image && <img src={b.image.startsWith('http') ? b.image : `${API_BASE_URL}${b.image}`} alt={b.title} />}
                 <div className="dh2-blog-body">
                   <div className="dh2-blog-date">{new Date(b.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</div>
@@ -601,8 +594,8 @@ const DummyHome2 = () => {
           LET'S BUILD<br /><span>TOGETHER</span>
         </motion.h2>
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: .2, duration: .6 }} style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', position: 'relative', zIndex: 1 }}>
-          <Link to="/get-consultation" className="dh2-btn-fill">Start a Project <ArrowRight size={14} /></Link>
-          <Link to="/contact" className="dh2-btn-ghost">Let's Talk <ArrowRight size={14} /></Link>
+          <Link to="/dummyhome2/get-consultation" className="dh2-btn-fill">Start a Project <ArrowRight size={14} /></Link>
+          <Link to="/dummyhome2/contact" className="dh2-btn-ghost">Let's Talk <ArrowRight size={14} /></Link>
         </motion.div>
       </section>
 
@@ -631,6 +624,7 @@ const DummyHome2 = () => {
           <span>Expanding Globally · Gurgaon · Mumbai · Rohtak · Australia</span>
         </div>
       </footer>
+      <Chatbot />
     </motion.div>
   );
 };

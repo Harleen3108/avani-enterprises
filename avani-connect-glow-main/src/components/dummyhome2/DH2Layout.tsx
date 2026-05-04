@@ -2,6 +2,7 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import DH2Navbar from './DH2Navbar';
 import { Link } from 'react-router-dom';
+import Chatbot from '../Chatbot';
 import '../../components/dummyhome2/DummyHome2.css';
 
 const footerLinks = {
@@ -60,6 +61,7 @@ const DH2Layout = () => {
         <Outlet />
       </main>
       <DH2Footer />
+      <Chatbot />
     </div>
   );
 };

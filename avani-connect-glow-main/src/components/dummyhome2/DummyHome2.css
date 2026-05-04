@@ -47,21 +47,18 @@
 /* === TYPOGRAPHY === */
 .dh2-display {
   font-family: 'Syne', sans-serif;
-  font-weight: 800;
-  text-transform: uppercase;
-  line-height: .92;
-  letter-spacing: -.02em;
+  font-weight: 600;
+  line-height: 1.1;
 }
 
 .dh2-heading {
   font-family: 'Syne', sans-serif;
   font-weight: 600;
-  letter-spacing: -.01em;
 }
 
 .dh2-body {
   font-family: 'Inter', sans-serif;
-  line-height: 1.75;
+  line-height: 1.8;
   color: var(--text-muted);
   font-weight: 400;
 }
@@ -130,21 +127,25 @@
   top: 0;
   left: 0;
   right: 0;
-  padding: .9rem 2.5rem;
+  padding: 1.5rem 2.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   z-index: 1000;
-  background: rgba(3, 3, 3, .65);
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background: var(--bg-deep);
   border-bottom: 1px solid rgba(255,255,255,.05);
   transition: background .3s, padding .3s;
 }
 
 .dh2-nav--scrolled {
-  background: rgba(3, 3, 3, .88);
-  padding: .7rem 2.5rem;
+  background: var(--bg-deep);
+  padding: 1rem 2.5rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+
+.dh2-nav--transparent {
+  background: transparent !important;
+  border-bottom-color: transparent !important;
 }
 
 .dh2-logo {
@@ -160,17 +161,17 @@
 .dh2-nav-links {
   display: flex;
   align-items: center;
-  gap: .2rem;
+  gap: 1.5rem;
 }
 
 .dh2-nav-link {
-  font-size: .6rem;
+  font-size: .65rem;
   text-transform: uppercase;
   letter-spacing: .1em;
-  color: rgba(255,255,255,.65);
+  color: rgba(255,255,255,.75);
   text-decoration: none;
-  font-weight: 600;
-  padding: .5rem .6rem;
+  font-weight: 700;
+  padding: .5rem .8rem;
   transition: color .3s;
   white-space: nowrap;
   background: none;
@@ -927,53 +928,42 @@
   color: var(--accent);
 }
 
-/* === INDUSTRIES — BOLD REVEAL === */
+/* === INDUSTRIES — MINIMAL SEAMLESS === */
 .dh2-ind-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 0;
-  margin-top: 1.5rem;
-  border: 1px solid var(--border-s);
-  border-radius: 14px;
-  overflow: hidden;
+  gap: 2rem;
+  margin-top: 2rem;
 }
 
 .dh2-ind {
-  padding: 1.8rem 1.6rem;
+  padding: 1rem 0;
   transition: all .4s var(--ease-out);
   cursor: default;
   position: relative;
-  border-right: 1px solid var(--border-s);
-  border-bottom: 1px solid var(--border-s);
+  border-top: 1px solid var(--border-s);
 }
-
-.dh2-ind:nth-child(3n) { border-right: none; }
-.dh2-ind:nth-last-child(-n+3) { border-bottom: none; }
 
 .dh2-ind::before {
   content: '';
   position: absolute;
-  left: 0; top: 0;
-  width: 3px; height: 0;
+  left: 0; top: -1px;
+  width: 0; height: 1px;
   background: var(--accent);
-  transition: height .4s var(--ease-out);
-}
-
-.dh2-ind:hover {
-  background: var(--accent-soft);
+  transition: width .5s var(--ease-out);
 }
 
 .dh2-ind:hover::before {
-  height: 100%;
+  width: 100%;
 }
 
 .dh2-ind-num {
   font-family: 'Syne', sans-serif;
-  font-size: .5rem;
+  font-size: .65rem;
   font-weight: 700;
   color: var(--text-dim);
-  margin-bottom: .5rem;
-  letter-spacing: .15em;
+  margin-bottom: .8rem;
+  letter-spacing: .1em;
   transition: color .3s;
 }
 
@@ -981,22 +971,21 @@
 
 .dh2-ind-label {
   font-family: 'Syne', sans-serif;
-  font-weight: 700;
-  font-size: 1rem;
-  margin-bottom: .3rem;
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: .5rem;
   color: var(--text-main);
-  transition: all .3s;
-  letter-spacing: -.01em;
+  transition: color .3s;
 }
 
 .dh2-ind:hover .dh2-ind-label {
   color: #fff;
-  transform: translateX(6px);
 }
 
 .dh2-ind-desc {
-  font-size: .72rem;
-  color: var(--text-dim);
+  font-size: .8rem;
+  color: var(--text-muted);
+  line-height: 1.6;
   line-height: 1.6;
   font-weight: 400;
 }
