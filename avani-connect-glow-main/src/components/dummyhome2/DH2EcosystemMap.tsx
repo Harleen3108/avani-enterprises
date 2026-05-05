@@ -1,16 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import {
-    Globe,
-    Search,
-    Share2,
-    Brain,
-    Mic,
-    Calculator,
-    ArrowRight,
-    Sparkles
-} from 'lucide-react';
+import { Globe, Search, Share2, Brain, Mic, Calculator, ArrowRight, Sparkles } from 'lucide-react';
 
 interface EcosystemItem {
     id: string;
@@ -26,12 +17,12 @@ const DH2EcosystemMap = () => {
     const [hoveredId, setHoveredId] = useState<string | null>(null);
 
     const services: EcosystemItem[] = [
-        { id: 's1', name: 'Web Development', icon: <Globe className="w-6 h-6" />, link: '/services', type: 'service', description: 'Custom websites & apps' },
-        { id: 's2', name: 'SEO & Content', icon: <Search className="w-6 h-6" />, link: '/services', type: 'service', description: 'Rank higher, grow faster' },
-        { id: 's3', name: 'Social Media', icon: <Share2 className="w-6 h-6" />, link: '/services', type: 'service', description: 'Engage & convert' },
-        { id: 's4', name: 'AI Solutions', icon: <Brain className="w-6 h-6" />, link: '/services', type: 'service', description: 'Intelligent automation' },
-        { id: 's5', name: 'Podcast Production', icon: <Mic className="w-6 h-6" />, link: '/services', type: 'service', description: 'Professional audio content' },
-        { id: 's6', name: 'Consulting', icon: <Calculator className="w-6 h-6" />, link: '/services', type: 'service', description: 'Strategic guidance' },
+        { id: 's1', name: 'Web Development', icon: <Globe className="w-5 h-5" />, link: '/services', type: 'service', description: 'Custom websites & apps' },
+        { id: 's2', name: 'SEO & Content', icon: <Search className="w-5 h-5" />, link: '/services', type: 'service', description: 'Rank higher, grow faster' },
+        { id: 's3', name: 'Social Media', icon: <Share2 className="w-5 h-5" />, link: '/services', type: 'service', description: 'Engage & convert' },
+        { id: 's4', name: 'AI Solutions', icon: <Brain className="w-5 h-5" />, link: '/services', type: 'service', description: 'Intelligent automation' },
+        { id: 's5', name: 'Podcast Production', icon: <Mic className="w-5 h-5" />, link: '/services', type: 'service', description: 'Professional audio content' },
+        { id: 's6', name: 'Consulting', icon: <Calculator className="w-5 h-5" />, link: '/services', type: 'service', description: 'Strategic guidance' },
     ];
 
     const projects: EcosystemItem[] = [
@@ -61,19 +52,6 @@ const DH2EcosystemMap = () => {
         { from: 's6', to: 'p6' }, { from: 'p6', to: 'c6' },
     ];
 
-    const getCardColor = (type: string) => {
-        switch (type) {
-            case 'service':
-                return 'from-blue-500/20 to-blue-600/20 border-blue-300/50';
-            case 'project':
-                return 'from-purple-500/20 to-purple-600/20 border-purple-300/50';
-            case 'casestudy':
-                return 'from-amber-500/20 to-amber-600/20 border-amber-300/50';
-            default:
-                return 'from-gray-500/20 to-gray-600/20 border-gray-300/50';
-        }
-    };
-
     const isConnected = (itemId: string) => {
         if (!hoveredId) return false;
         return connections.some(
@@ -84,62 +62,56 @@ const DH2EcosystemMap = () => {
     };
 
     return (
-        <div className="relative py-6 md:py-12">
+        <div className="relative py-4 md:py-8">
             {/* Header */}
-            <div className="text-center mb-8 md:mb-12 px-4">
+            <div className="text-center mb-10 px-4">
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 15 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    className="inline-flex items-center gap-2 bg-gradient-to-r rgba(200,255,0,.05) border border-amber-300/30 px-3 py-1.5 md:px-6 md:py-2 rounded-full mb-3 md:mb-4"
+                    transition={{ duration: 0.5 }}
+                    className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-4"
+                    style={{ border: '1px solid var(--border-s)', background: 'var(--bg-base)' }}
                 >
-                    <Sparkles className="w-3 h-3 md:w-4 md:h-4 var(--accent)" />
-                    <span className="text-xs md:text-sm font-bold var(--accent) uppercase tracking-wider">Our Digital Ecosystem</span>
+                    <Sparkles size={14} style={{ color: 'var(--accent)' }} />
+                    <span style={{ fontSize: '.7rem', fontWeight: 700, color: 'var(--text-main)', textTransform: 'uppercase', letterSpacing: '.1em' }}>Digital Ecosystem</span>
                 </motion.div>
                 <motion.h2
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 15 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.1 }}
-                    className="text-2xl md:text-3xl lg:text-4xl font-black #fff mb-2 md:mb-3"
+                    transition={{ duration: 0.5, delay: 0.1 }}
+                    style={{ fontFamily: "'Syne', sans-serif", fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', fontWeight: 700, color: 'var(--text-main)', marginBottom: '.8rem' }}
                 >
-                    How Everything Connects
+                    HOW EVERYTHING CONNECTS
                 </motion.h2>
                 <motion.p
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 15 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.2 }}
-                    className="text-sm md:text-base var(--text-muted) max-w-2xl mx-auto"
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    style={{ fontSize: '.9rem', color: 'var(--text-muted)', maxWidth: 600, margin: '0 auto' }}
                 >
-                    Explore our services, projects, and success stories - hover to see connections
+                    Explore our services, projects, and success stories. Hover over an element to reveal its strategic connections.
                 </motion.p>
             </div>
 
             {/* Grid Layout */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 max-w-6xl mx-auto px-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto px-4">
                 {/* Services Column */}
-                <div className="space-y-4">
-                    <h3 className="text-xs font-black text-blue-600 uppercase tracking-widest mb-4 text-center">Services</h3>
+                <div className="space-y-3">
+                    <h3 style={{ fontSize: '.65rem', fontWeight: 800, color: 'var(--text-dim)', textTransform: 'uppercase', letterSpacing: '.15em', textAlign: 'center', marginBottom: '1.5rem' }}>Core Services</h3>
                     {services.map((item, index) => (
-                        <motion.div
-                            key={item.id}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.4, delay: 0.3 + index * 0.05 }}
-                        >
+                        <motion.div key={item.id} initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.2 + index * 0.05 }}>
                             <Link
                                 to={item.link}
                                 onMouseEnter={() => setHoveredId(item.id)}
                                 onMouseLeave={() => setHoveredId(null)}
-                                className={`block p-3 md:p-4 rounded-xl md:rounded-2xl border-2 bg-gradient-to-br ${getCardColor(item.type)} backdrop-blur-sm transition-all duration-300 ${isConnected(item.id) ? 'scale-105 shadow-lg shadow-blue-200' : 'hover:scale-105'
-                                    } ${hoveredId && !isConnected(item.id) ? 'opacity-40' : 'opacity-100'}`}
+                                className={`block p-4 rounded-xl border transition-all duration-300 ${isConnected(item.id) ? 'border-[var(--accent)]' : 'border-[var(--border-s)] hover:border-[var(--border-f)]'}`}
+                                style={{ background: 'var(--bg-surface)', opacity: hoveredId && !isConnected(item.id) ? 0.4 : 1, transform: isConnected(item.id) ? 'translateX(4px)' : 'translateX(0)' }}
                             >
-                                <div className="flex items-center gap-2 md:gap-3">
-                                    <div className="p-2 rgba(255,255,255,.05) rounded-lg text-blue-600">
-                                        {item.icon}
-                                    </div>
+                                <div className="flex items-center gap-3">
+                                    <div style={{ color: 'var(--text-dim)' }}>{item.icon}</div>
                                     <div className="flex-1 min-w-0">
-                                        <h4 className="font-bold #fff text-sm truncate">{item.name}</h4>
-                                        <p className="text-xs var(--text-muted) truncate">{item.description}</p>
+                                        <h4 style={{ fontWeight: 600, color: 'var(--text-main)', fontSize: '.9rem' }} className="truncate">{item.name}</h4>
+                                        <p style={{ fontSize: '.75rem', color: 'var(--text-muted)' }} className="truncate">{item.description}</p>
                                     </div>
                                 </div>
                             </Link>
@@ -148,31 +120,26 @@ const DH2EcosystemMap = () => {
                 </div>
 
                 {/* Projects Column */}
-                <div className="space-y-4">
-                    <h3 className="text-xs font-black text-purple-600 uppercase tracking-widest mb-4 text-center">Projects</h3>
+                <div className="space-y-3">
+                    <h3 style={{ fontSize: '.65rem', fontWeight: 800, color: 'var(--text-dim)', textTransform: 'uppercase', letterSpacing: '.15em', textAlign: 'center', marginBottom: '1.5rem' }}>Active Projects</h3>
                     {projects.map((item, index) => (
-                        <motion.div
-                            key={item.id}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.4, delay: 0.4 + index * 0.05 }}
-                        >
+                        <motion.div key={item.id} initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.3 + index * 0.05 }}>
                             <Link
                                 to={item.link}
                                 onMouseEnter={() => setHoveredId(item.id)}
                                 onMouseLeave={() => setHoveredId(null)}
-                                className={`block p-3 rounded-2xl border-2 bg-gradient-to-br ${getCardColor(item.type)} backdrop-blur-sm transition-all duration-300 ${isConnected(item.id) ? 'scale-105 shadow-lg shadow-purple-200' : 'hover:scale-105'
-                                    } ${hoveredId && !isConnected(item.id) ? 'opacity-40' : 'opacity-100'}`}
+                                className={`block p-3 rounded-xl border transition-all duration-300 ${isConnected(item.id) ? 'border-[var(--text-main)]' : 'border-[var(--border-s)] hover:border-[var(--border-f)]'}`}
+                                style={{ background: 'var(--bg-surface)', opacity: hoveredId && !isConnected(item.id) ? 0.4 : 1, transform: isConnected(item.id) ? 'translateX(4px)' : 'translateX(0)' }}
                             >
                                 <div className="flex items-center gap-3">
                                     {item.image && (
-                                        <img src={item.image} alt={item.name} className="w-10 h-10 rounded-lg object-cover bg-white" />
+                                        <img src={item.image} alt={item.name} className="w-10 h-10 rounded object-cover filter grayscale" style={{ filter: isConnected(item.id) ? 'grayscale(0)' : 'grayscale(100%)', transition: 'filter .4s' }} />
                                     )}
                                     <div className="flex-1 min-w-0">
-                                        <h4 className="font-bold #fff text-sm truncate">{item.name}</h4>
-                                        <div className="flex items-center gap-1 text-xs text-purple-600">
-                                            <span>View Project</span>
-                                            <ArrowRight className="w-3 h-3" />
+                                        <h4 style={{ fontWeight: 600, color: 'var(--text-main)', fontSize: '.9rem' }} className="truncate">{item.name}</h4>
+                                        <div className="flex items-center gap-1 mt-1" style={{ fontSize: '.7rem', color: 'var(--text-dim)' }}>
+                                            <span>View Build</span>
+                                            <ArrowRight size={10} />
                                         </div>
                                     </div>
                                 </div>
@@ -182,50 +149,25 @@ const DH2EcosystemMap = () => {
                 </div>
 
                 {/* Case Studies Column */}
-                <div className="space-y-4">
-                    <h3 className="text-xs font-black var(--accent) uppercase tracking-widest mb-4 text-center">Success Stories</h3>
+                <div className="space-y-3">
+                    <h3 style={{ fontSize: '.65rem', fontWeight: 800, color: 'var(--text-dim)', textTransform: 'uppercase', letterSpacing: '.15em', textAlign: 'center', marginBottom: '1.5rem' }}>Success Stories</h3>
                     {caseStudies.map((item, index) => (
-                        <motion.div
-                            key={item.id}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.4, delay: 0.5 + index * 0.05 }}
-                        >
+                        <motion.div key={item.id} initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.4 + index * 0.05 }}>
                             <Link
                                 to={item.link}
                                 onMouseEnter={() => setHoveredId(item.id)}
                                 onMouseLeave={() => setHoveredId(null)}
-                                className={`block p-4 rounded-2xl border-2 bg-gradient-to-br ${getCardColor(item.type)} backdrop-blur-sm transition-all duration-300 ${isConnected(item.id) ? 'scale-105 shadow-lg shadow-amber-200' : 'hover:scale-105'
-                                    } ${hoveredId && !isConnected(item.id) ? 'opacity-40' : 'opacity-100'}`}
+                                className={`block p-4 rounded-xl border transition-all duration-300 ${isConnected(item.id) ? 'border-[var(--accent)]' : 'border-[var(--border-s)] hover:border-[var(--border-f)]'}`}
+                                style={{ background: 'var(--bg-surface)', opacity: hoveredId && !isConnected(item.id) ? 0.4 : 1, transform: isConnected(item.id) ? 'translateX(-4px)' : 'translateX(0)' }}
                             >
-                                <h4 className="font-bold #fff text-sm mb-1">{item.name}</h4>
-                                <p className="text-xs text-amber-700 font-semibold">{item.description}</p>
+                                <h4 style={{ fontWeight: 600, color: 'var(--text-main)', fontSize: '.9rem', marginBottom: '.2rem' }}>{item.name}</h4>
+                                <p style={{ fontSize: '.75rem', color: 'var(--text-muted)' }}>{item.description}</p>
                             </Link>
                         </motion.div>
                     ))}
                 </div>
             </div>
 
-            {/* Legend */}
-            <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 1 }}
-                className="flex flex-wrap justify-center gap-6 mt-12 text-xs"
-            >
-                <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 rounded-full bg-blue-500"></div>
-                    <span className="var(--text-muted) font-medium">Services</span>
-                </div>
-                <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 rounded-full bg-purple-500"></div>
-                    <span className="var(--text-muted) font-medium">Projects</span>
-                </div>
-                <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 rounded-full bg-amber-500"></div>
-                    <span className="var(--text-muted) font-medium">Case Studies</span>
-                </div>
-            </motion.div>
         </div>
     );
 };

@@ -35,13 +35,14 @@ const DH2About = () => {
       {/* 1. HERO SECTION */}
       <section className="dh2-section" style={{ paddingTop: '8rem', paddingBottom: '6rem' }}>
         <div className="dh2-container">
-          <motion.div initial="hidden" animate="visible" variants={fadeIn} transition={{ duration: .6 }} style={{ textAlign: 'center', maxWidth: 800, margin: '0 auto' }}>
+          <motion.div initial="hidden" animate="visible" variants={fadeIn} transition={{ duration: .6 }} style={{ textAlign: 'center', maxWidth: 900, margin: '0 auto' }}>
             <div className="dh2-label">WHO WE ARE</div>
-            <h1 className="dh2-display" style={{ marginBottom: '1.5rem', fontWeight: 600 }}>
-              TRANSFORMING BUSINESSES THROUGH <span style={{ color: 'var(--accent)' }}>STRATEGY</span> & <span style={{ color: 'var(--accent)' }}>TECHNOLOGY</span>.
+            <h1 className="dh2-display" style={{ marginBottom: '1.5rem', fontWeight: 700, fontSize: 'clamp(2.5rem, 6vw, 4.5rem)' }}>
+              WE DON'T JUST BUILD SOFTWARE. <br />
+              WE ARCHITECT <span style={{ color: 'var(--accent)' }}>COMPETITIVE ADVANTAGE</span>.
             </h1>
-            <p className="dh2-body" style={{ fontSize: '1rem', color: 'var(--text-muted)' }}>
-              Since 2016, we have been delivering high-end digital solutions that drive growth, enhance presence, and set new industry standards.
+            <p className="dh2-body" style={{ fontSize: '1.1rem', color: 'var(--text-muted)', lineHeight: 1.8, maxWidth: 700, margin: '0 auto' }}>
+              Since 2016, Avani Enterprises has been engineering high-end digital ecosystems. We combine deep strategic foresight with cutting-edge technology to drive explosive growth, elevate brand presence, and set bold new industry standards.
             </p>
           </motion.div>
 
@@ -75,45 +76,45 @@ const DH2About = () => {
       </section>
 
       {/* 3. CEO LEADERSHIP (SPLIT LAYOUT) */}
-      <section className="dh2-section" style={{ padding: '7rem 0' }}>
+      <section className="dh2-section" style={{ padding: '8rem 0', background: 'var(--bg-base)' }}>
         <div className="dh2-container">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '5rem', alignItems: 'center' }}>
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '6rem', alignItems: 'center' }}>
             
             <div style={{ position: 'relative' }}>
-              <div style={{ position: 'absolute', top: -20, left: -20, right: 20, bottom: 20, border: '1px solid var(--border-f)', borderRadius: 16, zIndex: 0 }} />
-              <img src="/kapil_khandelwal.jpg" alt="Kapil Khandelwal" style={{ width: '100%', borderRadius: 16, objectFit: 'cover', minHeight: 450, position: 'relative', zIndex: 1, filter: 'grayscale(100%) contrast(1.1)', transition: 'filter .5s' }} onMouseEnter={(e) => e.currentTarget.style.filter = 'grayscale(0%)'} onMouseLeave={(e) => e.currentTarget.style.filter = 'grayscale(100%) contrast(1.1)'} />
+              <div style={{ position: 'absolute', top: -30, left: -30, right: 30, bottom: 30, border: '1px solid var(--border-f)', borderRadius: 20, zIndex: 0 }} />
+              <img src="/kapil_khandelwal.jpg" alt="Kapil Khandelwal" style={{ width: '100%', borderRadius: 20, objectFit: 'cover', minHeight: 600, position: 'relative', zIndex: 1, filter: 'grayscale(100%) contrast(1.1)', transition: 'filter .5s' }} onMouseEnter={(e) => e.currentTarget.style.filter = 'grayscale(0%)'} onMouseLeave={(e) => e.currentTarget.style.filter = 'grayscale(100%) contrast(1.1)'} />
             </div>
 
             <div>
               <div className="dh2-label">LEADERSHIP</div>
-              <h2 className="dh2-display" style={{ fontSize: '2rem', marginBottom: '.5rem', fontWeight: 600 }}>KAPIL KHANDELWAL</h2>
-              <p style={{ fontSize: '.7rem', color: 'var(--accent)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.1em', marginBottom: '2rem' }}>CEO – Avani Enterprises</p>
+              <h2 className="dh2-display" style={{ fontSize: '3rem', marginBottom: '.5rem', fontWeight: 700 }}>KAPIL KHANDELWAL</h2>
+              <p style={{ fontSize: '.8rem', color: 'var(--accent)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.15em', marginBottom: '2.5rem' }}>CEO & Founder – Avani Enterprises</p>
               
-              <p className="dh2-body" style={{ fontSize: '.85rem', marginBottom: '2rem' }}>
-                A distinguished consultant with over a decade of experience in transforming businesses. Kapil leads our team of professionals dedicated to delivering innovative solutions and strategic growth.
+              <p className="dh2-body" style={{ fontSize: '1rem', marginBottom: '2.5rem', lineHeight: 1.8 }}>
+                A distinguished strategist and consultant with over a decade of experience in transforming businesses. Kapil leads our elite team of professionals, dedicating his expertise to architecting innovative, highly scalable solutions that drive strategic growth across multiple industries.
               </p>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', marginBottom: '3rem' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginBottom: '3.5rem' }}>
                 {[
                   { title: 'Business Consultant', desc: 'Expert guidance in scaling operations and market expansion.' },
                   { title: 'Active Investor', desc: 'Strategic investments in promising startups to contribute to growth.' },
                   { title: 'Author & Leader', desc: 'Writer of "The Startup Summary Book", sharing insights for success.' }
                 ].map((item, i) => (
-                  <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '.8rem' }}>
-                    <CheckCircle size={14} style={{ color: 'var(--accent)', marginTop: 3, flexShrink: 0 }} /> 
+                  <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}>
+                    <CheckCircle size={18} style={{ color: 'var(--accent)', marginTop: 2, flexShrink: 0 }} /> 
                     <div>
-                      <strong style={{ color: 'var(--text-main)', fontSize: '.85rem', fontWeight: 600 }}>{item.title}</strong>
-                      <div style={{ color: 'var(--text-dim)', fontSize: '.75rem' }}>{item.desc}</div>
+                      <strong style={{ color: 'var(--text-main)', fontSize: '1rem', fontWeight: 600 }}>{item.title}</strong>
+                      <div style={{ color: 'var(--text-dim)', fontSize: '.85rem', marginTop: '.2rem' }}>{item.desc}</div>
                     </div>
                   </div>
                 ))}
               </div>
 
-              <div style={{ display: 'flex', gap: '2rem' }}>
+              <div style={{ display: 'flex', gap: '3rem', borderTop: '1px solid var(--border-s)', paddingTop: '2rem' }}>
                 {[{ v: '10+', l: 'Years Exp' }, { v: '50+', l: 'Businesses' }, { v: '3', l: 'Investments' }].map((s, i) => (
                   <div key={i}>
-                    <div style={{ fontFamily: "'Syne'", fontWeight: 700, fontSize: '1.4rem', color: 'var(--text-main)' }}>{s.v}</div>
-                    <div style={{ fontSize: '.6rem', color: 'var(--text-dim)', textTransform: 'uppercase', letterSpacing: '.1em' }}>{s.l}</div>
+                    <div style={{ fontFamily: "'Syne'", fontWeight: 800, fontSize: '1.8rem', color: 'var(--text-main)' }}>{s.v}</div>
+                    <div style={{ fontSize: '.65rem', color: 'var(--text-dim)', textTransform: 'uppercase', letterSpacing: '.15em', fontWeight: 600, marginTop: '.3rem' }}>{s.l}</div>
                   </div>
                 ))}
               </div>
@@ -124,20 +125,20 @@ const DH2About = () => {
       </section>
 
       {/* 4. MISSION & VISION (CLEAN BLOCKS) */}
-      <section className="dh2-section" style={{ background: 'var(--bg-base)', padding: '6rem 0', borderTop: '1px solid var(--border-s)', borderBottom: '1px solid var(--border-s)' }}>
+      <section className="dh2-section" style={{ padding: '8rem 0', borderTop: '1px solid var(--border-s)', borderBottom: '1px solid var(--border-s)' }}>
         <div className="dh2-container">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '3rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '4rem' }}>
             {[
-              { title: 'OUR MISSION', accent: 'var(--accent)', text: 'To empower businesses with cutting-edge digital solutions that drive growth, enhance brand presence, and deliver measurable ROI. We build innovation through trust and results.', icon: <Target size={20} /> },
-              { title: 'OUR VISION', accent: '#fff', text: 'To be the leading digital transformation partner for businesses across India, known for our innovative solutions, exceptional service, and data-driven success.', icon: <Globe size={20} /> },
+              { title: 'OUR MISSION', accent: 'var(--accent)', text: <>To empower businesses with <strong style={{ color: 'var(--text-main)' }}>cutting-edge digital solutions</strong> that drive explosive growth, enhance brand presence, and deliver measurable ROI. We build innovation through trust and relentless focus on results.</>, icon: <Target size={24} /> },
+              { title: 'OUR VISION', accent: '#fff', text: <>To be the definitive <strong style={{ color: 'var(--text-main)' }}>digital transformation partner</strong> for businesses worldwide—renowned for our architectural innovation, elite service standards, and data-driven success models.</>, icon: <Globe size={24} /> },
             ].map((item, i) => (
               <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} transition={{ delay: i * .15 }}
-                style={{ borderLeft: `2px solid ${item.accent}`, paddingLeft: '2rem' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '.8rem', marginBottom: '1rem', color: item.accent }}>
+                style={{ borderLeft: `3px solid ${item.accent}`, paddingLeft: '2.5rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem', color: item.accent }}>
                   {item.icon}
-                  <h3 style={{ fontFamily: "'Inter'", fontWeight: 700, fontSize: '.7rem', letterSpacing: '.1em', textTransform: 'uppercase' }}>{item.title}</h3>
+                  <h3 style={{ fontFamily: "'Syne'", fontWeight: 800, fontSize: '1.5rem', letterSpacing: '.1em', textTransform: 'uppercase', color: 'var(--text-main)' }}>{item.title}</h3>
                 </div>
-                <p className="dh2-body" style={{ fontSize: '1rem', color: 'var(--text-main)', lineHeight: 1.6 }}>{item.text}</p>
+                <p className="dh2-body" style={{ fontSize: '1.1rem', color: 'var(--text-dim)', lineHeight: 1.8 }}>{item.text}</p>
               </motion.div>
             ))}
           </div>
