@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState, Fragment, useCallback } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Plus, MapPin, Play, ArrowUpRight, ChevronLeft, ChevronRight, Star } from 'lucide-react';
+import { ArrowRight, Plus, MapPin, Play, ArrowUpRight, ChevronLeft, ChevronRight, Star, MonitorSmartphone, Search, Share2, Brain, Mic, Landmark } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { API_BASE_URL } from '../utils/api';
