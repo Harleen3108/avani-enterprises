@@ -108,8 +108,8 @@ const DH2GlobalPresence = () => {
         </div>
       </section>
 
-      {/* Global Network Video */}
-      <section className="dh2-section" style={{ paddingTop: '2rem', paddingBottom: '4rem' }}>
+      {/* MAP */}
+      <section className="dh2-section theme-light" style={{ paddingTop: '2rem', paddingBottom: '4rem' }}>
         <div className="dh2-container">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
             <div style={{ borderRadius: '24px', overflow: 'hidden', border: '1px solid var(--border-s)', position: 'relative', height: '60vh' }}>
@@ -120,8 +120,8 @@ const DH2GlobalPresence = () => {
         </div>
       </section>
 
-      {/* Featured Office Collection */}
-      <section className="dh2-section" style={{ paddingTop: '4rem', paddingBottom: '6rem' }}>
+      {/* OFFICES */}
+      <section className="dh2-section theme-light" style={{ paddingTop: '4rem', paddingBottom: '6rem' }}>
         <div className="dh2-container">
            <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
               <h2 className="dh2-heading" style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>Office Collection</h2>

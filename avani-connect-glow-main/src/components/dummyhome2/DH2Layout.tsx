@@ -55,7 +55,7 @@ const DH2Footer = () => (
 
 const DH2Layout = () => {
   return (
-    <div className="dh2-root" style={{ '--bg-deep': '#030303', '--bg-base': '#0a0a0a', '--bg-surface': '#111111', '--text-main': '#f0f0f0', '--text-muted': '#7a7a7a', '--text-dim': '#3a3a3a', '--border-s': 'rgba(255,255,255,0.07)', '--border-f': 'rgba(255,255,255,0.15)' } as any}>
+    <div className="dh2-root dh2-page">
       <DH2Navbar />
       <main style={{ paddingTop: '60px' }}>
         <Outlet />

@@ -58,7 +58,7 @@ const DH2About = () => {
       </section>
 
       {/* 2. DIGITAL ECOSYSTEM */}
-      <section className="dh2-section" style={{ background: 'var(--bg-surface)', padding: '6rem 0' }}>
+      <section className="dh2-section theme-light" style={{ padding: '6rem 0' }}>
         <div className="dh2-container">
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '4rem', alignItems: 'center' }}>
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
@@ -125,7 +125,7 @@ const DH2About = () => {
       </section>
 
       {/* 4. MISSION & VISION (CLEAN BLOCKS) */}
-      <section className="dh2-section" style={{ padding: '8rem 0', borderTop: '1px solid var(--border-s)', borderBottom: '1px solid var(--border-s)' }}>
+      <section className="dh2-section theme-light" style={{ padding: '8rem 0', borderTop: '1px solid var(--border-s)', borderBottom: '1px solid var(--border-s)' }}>
         <div className="dh2-container">
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '4rem' }}>
             {[
@@ -191,7 +191,7 @@ const DH2About = () => {
       </section>
 
       {/* CTA */}
-      <section className="dh2-section" style={{ background: 'var(--bg-surface)', padding: '6rem 0', textAlign: 'center', borderTop: '1px solid var(--border-s)' }}>
+      <section className="dh2-section theme-light" style={{ padding: '6rem 0', textAlign: 'center', borderTop: '1px solid var(--border-s)' }}>
         <div className="dh2-container">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
             <h2 className="dh2-display" style={{ fontSize: '2.5rem', marginBottom: '2rem', fontWeight: 600 }}>

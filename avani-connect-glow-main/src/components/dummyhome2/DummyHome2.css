@@ -23,6 +23,30 @@
   scroll-behavior: smooth;
 }
 
+.theme-light {
+  --bg-deep: #f7f5f2;
+  --bg-base: #fcfbf9;
+  --bg-surface: #ffffff;
+  --bg-elevated: #f0edea;
+  --text-main: #111111;
+  --text-muted: #555555;
+  --text-dim: #888888;
+  --border-s: rgba(0, 0, 0, 0.08);
+  --border-f: rgba(0, 0, 0, 0.15);
+  background: var(--bg-base);
+  color: var(--text-main);
+  transition: background 0.4s var(--ease-out), color 0.4s var(--ease-out);
+}
+
+/* Base section backgrounds */
+.dh2-section.theme-light {
+  background: var(--bg-base);
+  color: var(--text-main);
+}
+.dh2-section {
+  transition: background 0.4s var(--ease-out);
+}
+
 .dh2-root * {
   box-sizing: border-box;
 }

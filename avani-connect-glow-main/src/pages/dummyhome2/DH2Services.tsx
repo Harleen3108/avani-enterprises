@@ -67,7 +67,7 @@ const DH2Services = () => {
         </div>
       </section>
 
-      <section className="dh2-section" style={{ paddingTop: '2rem' }}>
+      <section className="dh2-section theme-light" style={{ paddingTop: '4rem', paddingBottom: '6rem' }}>
         <div className="dh2-container">
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1.5rem', maxWidth: 1000, margin: '0 auto' }}>
             {servicesList.map((s, i) => (
@@ -151,7 +151,7 @@ const DH2Services = () => {
       </section>
 
       {/* CTA */}
-      <section className="dh2-cta">
+      <section className="dh2-cta theme-light">
         <div className="dh2-cta-watermark">AVANI</div>
         <motion.h2 className="dh2-display dh2-cta-title" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
           READY TO<br /><span>START?</span>
