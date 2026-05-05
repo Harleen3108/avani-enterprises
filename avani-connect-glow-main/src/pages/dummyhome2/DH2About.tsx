@@ -134,11 +134,11 @@ const DH2About = () => {
             ].map((item, i) => (
               <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} transition={{ delay: i * .15 }}
                 style={{ borderLeft: `3px solid ${item.accent}`, paddingLeft: '2.5rem' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem', color: item.accent }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem', color: item.accent }}>
                   {item.icon}
-                  <h3 style={{ fontFamily: "'Syne'", fontWeight: 800, fontSize: '1.5rem', letterSpacing: '.1em', textTransform: 'uppercase', color: 'var(--text-main)' }}>{item.title}</h3>
+                  <h3 style={{ fontFamily: "'Inter', sans-serif", fontWeight: 600, fontSize: '1.25rem', letterSpacing: '.12em', textTransform: 'uppercase', color: 'var(--text-main)' }}>{item.title}</h3>
                 </div>
-                <p className="dh2-body" style={{ fontSize: '1.1rem', color: 'var(--text-dim)', lineHeight: 1.8 }}>{item.text}</p>
+                <p className="dh2-body" style={{ fontSize: '1.05rem', color: 'var(--text-dim)', lineHeight: 1.9 }}>{item.text}</p>
               </motion.div>
             ))}
           </div>
