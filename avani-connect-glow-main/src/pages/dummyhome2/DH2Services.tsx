@@ -76,7 +76,7 @@ const DH2Services = () => {
                   <div style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-s)', borderRadius: 16, padding: '2.5rem 2rem', height: '100%', transition: 'border-color .3s, transform .3s', cursor: 'pointer', display: 'flex', flexDirection: 'column' }}
                     onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.borderColor = 'rgba(200,255,0,.2)'; (e.currentTarget as HTMLDivElement).style.transform = 'translateY(-4px)'; }}
                     onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.borderColor = 'var(--border-s)'; (e.currentTarget as HTMLDivElement).style.transform = 'none'; }}>
-                    
+
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.5rem' }}>
                       <div style={{ width: 48, height: 48, borderRadius: 12, background: 'linear-gradient(135deg, var(--accent), #f59e0b)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#000' }}>
                         {s.icon}
@@ -89,7 +89,7 @@ const DH2Services = () => {
 
                     <h3 style={{ fontFamily: "'Syne'", fontWeight: 800, fontSize: '1.2rem', marginBottom: '.5rem' }}>{s.title}</h3>
                     <p className="dh2-body" style={{ fontSize: '.78rem', lineHeight: 1.6, marginBottom: '1.5rem', flexGrow: 1 }}>{s.desc}</p>
-                    
+
                     <div style={{ display: 'flex', gap: '1rem', marginBottom: '1.5rem', borderBottom: '1px solid var(--border-s)', paddingBottom: '1.5rem' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '.4rem', fontSize: '.65rem', color: 'var(--text-muted)' }}>
                         <Clock size={12} /> {s.duration}

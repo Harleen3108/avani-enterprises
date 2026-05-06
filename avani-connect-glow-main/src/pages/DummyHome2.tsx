@@ -79,91 +79,55 @@ const StackedVinylProjects = () => {
 };
 
 const WhatWeDo = () => {
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: wrapperRef, offset: ['start start', 'end end'] });
   const [activeIdx, setActiveIdx] = useState(0);
 
-  const icons = [<MonitorSmartphone size={18} />, <Search size={18} />, <Share2 size={18} />, <Brain size={18} />, <Mic size={18} />, <Landmark size={18} />];
+  // Horizontal translation: use a callback that returns a NUMBER (pixels)
+  // 6 cards × 340px + 5 gaps × 32px = 2200px total track width
+  // We want to scroll from showing card 1 (x=0) to showing card 6 (x = -(trackWidth - viewport))
+  const trackX = useTransform(scrollYProgress, (p) => {
+    const totalWidth = services.length * 340 + (services.length - 1) * 32;
+    const viewportW = typeof window !== 'undefined' ? window.innerWidth : 1400;
+    const maxScroll = Math.max(0, totalWidth - viewportW + 120); // 120px for padding
+    return -p * maxScroll;
+  });
 
+  // Update active index for visual highlight
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = document.querySelectorAll('.dh2-wwd-panel');
-      let current = 0;
-      sections.forEach((sec, i) => {
-        const rect = sec.getBoundingClientRect();
-        if (rect.top <= window.innerHeight * 0.4 && rect.bottom >= window.innerHeight * 0.4) {
-          current = i;
-        }
-      });
-      setActiveIdx(current);
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const scrollToPanel = (idx: number) => {
-    const panel = document.getElementById(`dh2-svc-${idx}`);
-    if (panel) {
-      const yOffset = -120; 
-      const y = panel.getBoundingClientRect().top + window.scrollY + yOffset;
-      window.scrollTo({ top: y, behavior: 'smooth' });
-    }
-  };
+    const unsub = scrollYProgress.on('change', (v) => {
+      const idx = Math.min(services.length - 1, Math.floor(v * services.length));
+      setActiveIdx(idx);
+    });
+    return unsub;
+  }, [scrollYProgress]);
 
   return (
-    <section id="services" style={{ position: 'relative' }}>
-      
-      {/* STICKY NAV */}
-      <div className="dh2-wwd-nav">
-        <div className="dh2-container">
-          <div className="dh2-wwd-tabs">
-            {services.map((svc, i) => (
-              <button key={i} className={`dh2-wwd-tab ${activeIdx === i ? 'active' : ''}`} onClick={() => scrollToPanel(i)}>
-                {icons[i] || <Star size={18} />}
-                <span>{svc.title}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
+    <section className="dh2-wwd2-wrapper" ref={wrapperRef} id="services">
+      <div className="dh2-wwd2-sticky">
 
-      {/* PANELS */}
-      <div className="dh2-wwd-panels">
-        {services.map((svc, i) => {
-          const isEven = i % 2 === 0;
-          return (
-            <div key={i} id={`dh2-svc-${i}`} className={`dh2-wwd-panel ${isEven ? 'theme-light' : ''}`}>
-              <div className="dh2-container">
-                <div className="dh2-wwd-grid">
-                  <motion.div className="dh2-wwd-content" initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: '-20%' }} transition={{ duration: .6 }}>
-                    <div className="dh2-label" style={{ marginBottom: '1.5rem', color: isEven ? 'var(--text-dim)' : 'var(--accent)' }}>SERVICE {svc.idx}</div>
-                    <h2 className="dh2-display" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', marginBottom: '1.5rem', fontWeight: 600 }}>{svc.title}</h2>
-                    <p className="dh2-body" style={{ fontSize: '1.05rem', lineHeight: 1.8, marginBottom: '2.5rem' }}>{svc.desc}</p>
-                    <div className="dh2-wwd-tags">
-                      {svc.tags.map((t, j) => <span key={j} className="dh2-wwd-tag">{t}</span>)}
-                    </div>
-                  </motion.div>
-                  <motion.div className="dh2-wwd-visual" initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true, margin: '-20%' }} transition={{ duration: .6 }}>
-                    {isEven ? (
-                      <div className="dh2-wwd-placard dh2-wwd-placard-dark">
-                        <div className="dh2-wwd-placard-icon" style={{ color: 'var(--accent)' }}>{icons[i]}</div>
-                        <h3 style={{ fontFamily: "'Syne'", fontSize: '1.8rem', color: '#fff', marginBottom: '1rem', fontWeight: 700 }}>High-Impact <br /> Execution</h3>
-                        <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '.9rem', lineHeight: 1.6 }}>We deploy elite strategies to guarantee measurable, scalable outcomes tailored precisely for {svc.title.toLowerCase()}.</p>
-                      </div>
-                    ) : (
-                      <div className="dh2-wwd-placard dh2-wwd-placard-light">
-                        <div className="dh2-wwd-placard-bg" style={{ backgroundImage: 'url(/global2.png)' }} />
-                        <div style={{ position: 'relative', zIndex: 1 }}>
-                           <div className="dh2-wwd-placard-icon" style={{ color: '#000' }}>{icons[i]}</div>
-                           <h3 style={{ fontFamily: "'Syne'", fontSize: '1.8rem', color: '#111', marginBottom: '1rem', fontWeight: 700 }}>Seamless <br /> Integration</h3>
-                           <p style={{ color: '#444', fontSize: '.9rem', lineHeight: 1.6 }}>Seamlessly bridging the gap between innovative concepts and robust, enterprise-grade deployment.</p>
-                        </div>
-                      </div>
-                    )}
-                  </motion.div>
+        {/* Header — normal flow, top of sticky */}
+        <div className="dh2-wwd2-top">
+          <div className="dh2-label">OUR SERVICES</div>
+          <h2 className="dh2-display dh2-wwd2-title">What We Do</h2>
+        </div>
+
+        {/* Card track — fills middle area */}
+        <div className="dh2-wwd2-track-area">
+          <motion.div className="dh2-wwd2-track" style={{ x: trackX }}>
+            {services.map((svc, i) => (
+              <div key={i} className={`dh2-wwd2-card ${activeIdx === i ? 'dh2-wwd2-card--active' : ''}`}>
+                <div className="dh2-wwd2-card-num">{svc.idx}</div>
+                <h3 className="dh2-heading dh2-wwd2-card-title">{svc.title}</h3>
+                <p className="dh2-body dh2-wwd2-card-desc">{svc.desc}</p>
+                <div className="dh2-wwd2-card-tags">
+                  {svc.tags.map((t, j) => <span key={j} className="dh2-wwd2-card-tag">{t}</span>)}
                 </div>
               </div>
-            </div>
-          );
-        })}
+            ))}
+          </motion.div>
+        </div>
+
       </div>
     </section>
   );

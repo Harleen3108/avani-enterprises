@@ -80,7 +80,7 @@ const DummyServices = ({ services }: any) => {
             <motion.div key={i} initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.04, duration: 0.5 }}>
               <Link to={`/services/${svc.slug}`} style={{ textDecoration: 'none' }}
                 onMouseEnter={() => setHovered(i)} onMouseLeave={() => setHovered(null)}>
-                  <div style={{
+                <div style={{
                   display: 'flex', alignItems: 'center', gap: '20px',
                   padding: '18px 0', borderBottom: '1px solid var(--border-faint)',
                   transition: 'all 0.3s', cursor: 'pointer',

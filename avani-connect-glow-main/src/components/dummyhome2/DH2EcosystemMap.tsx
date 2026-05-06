@@ -52,6 +52,11 @@ const DH2EcosystemMap = () => {
         { from: 's6', to: 'p6' }, { from: 'p6', to: 'c6' },
     ];
 
+    const getCardColor = (type: string) => {
+        // Return minimal subtle borders instead of loud gradients
+        return 'border border-slate-800 bg-black/40 hover:border-lime-400/50';
+    };
+
     const isConnected = (itemId: string) => {
         if (!hoveredId) return false;
         return connections.some(
@@ -62,56 +67,62 @@ const DH2EcosystemMap = () => {
     };
 
     return (
-        <div className="relative py-4 md:py-8">
+        <div className="relative py-6 md:py-12">
             {/* Header */}
-            <div className="text-center mb-10 px-4">
+            <div className="text-center mb-8 md:mb-12 px-4">
                 <motion.div
-                    initial={{ opacity: 0, y: 15 }}
+                    initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
-                    className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-4"
-                    style={{ border: '1px solid var(--border-s)', background: 'var(--bg-base)' }}
+                    transition={{ duration: 0.6 }}
+                    className="inline-flex items-center gap-2 border border-slate-800 px-3 py-1.5 md:px-6 md:py-2 rounded-full mb-3 md:mb-4 bg-black/50"
                 >
-                    <Sparkles size={14} style={{ color: 'var(--accent)' }} />
-                    <span style={{ fontSize: '.7rem', fontWeight: 700, color: 'var(--text-main)', textTransform: 'uppercase', letterSpacing: '.1em' }}>Digital Ecosystem</span>
+                    <Sparkles className="w-3 h-3 md:w-4 md:h-4 text-lime-400" />
+                    <span className="text-xs md:text-sm font-bold text-lime-400 uppercase tracking-wider">Our Digital Ecosystem</span>
                 </motion.div>
                 <motion.h2
-                    initial={{ opacity: 0, y: 15 }}
+                    initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.1 }}
-                    style={{ fontFamily: "'Syne', sans-serif", fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', fontWeight: 700, color: 'var(--text-main)', marginBottom: '.8rem' }}
+                    transition={{ duration: 0.6, delay: 0.1 }}
+                    className="text-2xl md:text-3xl lg:text-4xl font-semibold text-white mb-2 md:mb-3 tracking-tight"
                 >
-                    HOW EVERYTHING CONNECTS
+                    How Everything Connects
                 </motion.h2>
                 <motion.p
-                    initial={{ opacity: 0, y: 15 }}
+                    initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.2 }}
-                    style={{ fontSize: '.9rem', color: 'var(--text-muted)', maxWidth: 600, margin: '0 auto' }}
+                    transition={{ duration: 0.6, delay: 0.2 }}
+                    className="text-sm md:text-base text-gray-400 max-w-2xl mx-auto"
                 >
-                    Explore our services, projects, and success stories. Hover over an element to reveal its strategic connections.
+                    Explore our services, projects, and success stories - hover to see connections
                 </motion.p>
             </div>
 
             {/* Grid Layout */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto px-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto px-4">
                 {/* Services Column */}
                 <div className="space-y-3">
-                    <h3 style={{ fontSize: '.65rem', fontWeight: 800, color: 'var(--text-dim)', textTransform: 'uppercase', letterSpacing: '.15em', textAlign: 'center', marginBottom: '1.5rem' }}>Core Services</h3>
+                    <h3 className="text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em] mb-4 text-center">Services</h3>
                     {services.map((item, index) => (
-                        <motion.div key={item.id} initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.2 + index * 0.05 }}>
+                        <motion.div
+                            key={item.id}
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.3, delay: 0.1 + index * 0.05 }}
+                        >
                             <Link
                                 to={item.link}
                                 onMouseEnter={() => setHoveredId(item.id)}
                                 onMouseLeave={() => setHoveredId(null)}
-                                className={`block p-4 rounded-xl border transition-all duration-300 ${isConnected(item.id) ? 'border-[var(--accent)]' : 'border-[var(--border-s)] hover:border-[var(--border-f)]'}`}
-                                style={{ background: 'var(--bg-surface)', opacity: hoveredId && !isConnected(item.id) ? 0.4 : 1, transform: isConnected(item.id) ? 'translateX(4px)' : 'translateX(0)' }}
+                                className={`block p-3 md:p-4 rounded-xl ${getCardColor(item.type)} transition-all duration-300 ${isConnected(item.id) ? 'border-lime-400' : ''
+                                    } ${hoveredId && !isConnected(item.id) ? 'opacity-30' : 'opacity-100'}`}
                             >
                                 <div className="flex items-center gap-3">
-                                    <div style={{ color: 'var(--text-dim)' }}>{item.icon}</div>
+                                    <div className="text-gray-400">
+                                        {item.icon}
+                                    </div>
                                     <div className="flex-1 min-w-0">
-                                        <h4 style={{ fontWeight: 600, color: 'var(--text-main)', fontSize: '.9rem' }} className="truncate">{item.name}</h4>
-                                        <p style={{ fontSize: '.75rem', color: 'var(--text-muted)' }} className="truncate">{item.description}</p>
+                                        <h4 className="font-semibold text-gray-200 text-sm truncate tracking-wide">{item.name}</h4>
+                                        <p className="text-xs text-gray-500 truncate mt-0.5">{item.description}</p>
                                     </div>
                                 </div>
                             </Link>
@@ -121,25 +132,30 @@ const DH2EcosystemMap = () => {
 
                 {/* Projects Column */}
                 <div className="space-y-3">
-                    <h3 style={{ fontSize: '.65rem', fontWeight: 800, color: 'var(--text-dim)', textTransform: 'uppercase', letterSpacing: '.15em', textAlign: 'center', marginBottom: '1.5rem' }}>Active Projects</h3>
+                    <h3 className="text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em] mb-4 text-center">Projects</h3>
                     {projects.map((item, index) => (
-                        <motion.div key={item.id} initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.3 + index * 0.05 }}>
+                        <motion.div
+                            key={item.id}
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.3, delay: 0.2 + index * 0.05 }}
+                        >
                             <Link
                                 to={item.link}
                                 onMouseEnter={() => setHoveredId(item.id)}
                                 onMouseLeave={() => setHoveredId(null)}
-                                className={`block p-3 rounded-xl border transition-all duration-300 ${isConnected(item.id) ? 'border-[var(--text-main)]' : 'border-[var(--border-s)] hover:border-[var(--border-f)]'}`}
-                                style={{ background: 'var(--bg-surface)', opacity: hoveredId && !isConnected(item.id) ? 0.4 : 1, transform: isConnected(item.id) ? 'translateX(4px)' : 'translateX(0)' }}
+                                className={`block p-3 rounded-xl ${getCardColor(item.type)} transition-all duration-300 ${isConnected(item.id) ? 'border-lime-400' : ''
+                                    } ${hoveredId && !isConnected(item.id) ? 'opacity-30' : 'opacity-100'}`}
                             >
                                 <div className="flex items-center gap-3">
                                     {item.image && (
-                                        <img src={item.image} alt={item.name} className="w-10 h-10 rounded object-cover filter grayscale" style={{ filter: isConnected(item.id) ? 'grayscale(0)' : 'grayscale(100%)', transition: 'filter .4s' }} />
+                                        <img src={item.image} alt={item.name} className="w-10 h-10 rounded object-cover grayscale opacity-80" />
                                     )}
                                     <div className="flex-1 min-w-0">
-                                        <h4 style={{ fontWeight: 600, color: 'var(--text-main)', fontSize: '.9rem' }} className="truncate">{item.name}</h4>
-                                        <div className="flex items-center gap-1 mt-1" style={{ fontSize: '.7rem', color: 'var(--text-dim)' }}>
-                                            <span>View Build</span>
-                                            <ArrowRight size={10} />
+                                        <h4 className="font-semibold text-gray-200 text-sm truncate tracking-wide">{item.name}</h4>
+                                        <div className="flex items-center gap-1 text-[10px] text-gray-500 uppercase tracking-wider mt-1">
+                                            <span>View Project</span>
+                                            <ArrowRight className="w-3 h-3" />
                                         </div>
                                     </div>
                                 </div>
@@ -150,24 +166,28 @@ const DH2EcosystemMap = () => {
 
                 {/* Case Studies Column */}
                 <div className="space-y-3">
-                    <h3 style={{ fontSize: '.65rem', fontWeight: 800, color: 'var(--text-dim)', textTransform: 'uppercase', letterSpacing: '.15em', textAlign: 'center', marginBottom: '1.5rem' }}>Success Stories</h3>
+                    <h3 className="text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em] mb-4 text-center">Success Stories</h3>
                     {caseStudies.map((item, index) => (
-                        <motion.div key={item.id} initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.4 + index * 0.05 }}>
+                        <motion.div
+                            key={item.id}
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.3, delay: 0.3 + index * 0.05 }}
+                        >
                             <Link
                                 to={item.link}
                                 onMouseEnter={() => setHoveredId(item.id)}
                                 onMouseLeave={() => setHoveredId(null)}
-                                className={`block p-4 rounded-xl border transition-all duration-300 ${isConnected(item.id) ? 'border-[var(--accent)]' : 'border-[var(--border-s)] hover:border-[var(--border-f)]'}`}
-                                style={{ background: 'var(--bg-surface)', opacity: hoveredId && !isConnected(item.id) ? 0.4 : 1, transform: isConnected(item.id) ? 'translateX(-4px)' : 'translateX(0)' }}
+                                className={`block p-4 rounded-xl ${getCardColor(item.type)} transition-all duration-300 ${isConnected(item.id) ? 'border-lime-400' : ''
+                                    } ${hoveredId && !isConnected(item.id) ? 'opacity-30' : 'opacity-100'}`}
                             >
-                                <h4 style={{ fontWeight: 600, color: 'var(--text-main)', fontSize: '.9rem', marginBottom: '.2rem' }}>{item.name}</h4>
-                                <p style={{ fontSize: '.75rem', color: 'var(--text-muted)' }}>{item.description}</p>
+                                <h4 className="font-semibold text-gray-200 text-sm mb-1 tracking-wide">{item.name}</h4>
+                                <p className="text-xs text-lime-400/80 tracking-wide">{item.description}</p>
                             </Link>
                         </motion.div>
                     ))}
                 </div>
             </div>
-
         </div>
     );
 };

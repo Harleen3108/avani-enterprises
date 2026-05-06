@@ -695,6 +695,7 @@
   line-height: 1;
   background: linear-gradient(135deg, var(--accent) 0%, var(--text-main) 60%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: 0.5rem;
   letter-spacing: -0.02em;
@@ -716,149 +717,103 @@
   font-weight: 400;
 }
 
-/* === WHAT WE DO (STICKY NAV) === */
-.dh2-wwd-nav {
+/* === WHAT WE DO V3 — Simple Flex Layout === */
+.dh2-wwd2-wrapper {
+  position: relative;
+  height: 300vh;
+}
+
+.dh2-wwd2-sticky {
   position: sticky;
-  top: 60px; /* Below navbar */
-  z-index: 100;
-  background: rgba(10, 10, 10, 0.85);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border-s);
-  padding: 1rem 0;
-}
-
-.dh2-wwd-tabs {
+  top: 0;
+  height: 100vh;
   display: flex;
-  gap: 1.5rem;
-  overflow-x: auto;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
-}
-.dh2-wwd-tabs::-webkit-scrollbar { display: none; }
-
-.dh2-wwd-tab {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  background: transparent;
-  border: none;
-  color: var(--text-muted);
-  font-family: 'Inter', sans-serif;
-  font-size: 0.9rem;
-  font-weight: 500;
-  padding: 0.5rem 0.2rem;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: color 0.3s, border-color 0.3s;
-  position: relative;
+  flex-direction: column;
+  overflow: hidden;
 }
 
-.dh2-wwd-tab::after {
-  content: '';
-  position: absolute;
-  bottom: -1rem;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: var(--accent);
-  transform: scaleX(0);
-  transition: transform 0.3s var(--ease-out);
-  transform-origin: left;
+/* Header — sits at top */
+.dh2-wwd2-top {
+  flex-shrink: 0;
+  padding: 5rem 3rem 0;
 }
 
-.dh2-wwd-tab:hover {
-  color: var(--text-main);
+.dh2-wwd2-title {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  margin-top: .5rem;
 }
 
-.dh2-wwd-tab.active {
-  color: var(--text-main);
-}
-
-.dh2-wwd-tab.active::after {
-  transform: scaleX(1);
-}
-
-.dh2-wwd-panels {
-  position: relative;
-}
-
-.dh2-wwd-panel {
-  padding: 8rem 0;
-  min-height: 80vh;
+/* Track area — fills middle */
+.dh2-wwd2-track-area {
+  flex: 1;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid var(--border-s);
+  overflow: hidden;
 }
 
-.dh2-wwd-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 6rem;
-  align-items: center;
+.dh2-wwd2-track {
+  display: flex;
+  gap: 2rem;
+  padding: 0 3rem;
 }
 
-.dh2-wwd-tags {
+/* Cards */
+.dh2-wwd2-card {
+  flex: 0 0 340px;
+  min-height: 400px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-s);
+  border-radius: 16px;
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  transition: transform .4s var(--ease-out), border-color .4s, box-shadow .4s;
+  opacity: 0.4;
+}
+
+.dh2-wwd2-card--active {
+  opacity: 1;
+  transform: scale(1.04);
+  border-color: var(--accent);
+}
+
+.dh2-wwd2-card-num {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 2rem;
+  font-family: 'Syne', sans-serif;
+}
+
+.dh2-wwd2-card-title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.dh2-wwd2-card-desc {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  flex: 1;
+}
+
+.dh2-wwd2-card-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.8rem;
+  gap: 0.5rem;
 }
 
-.dh2-wwd-tag {
-  padding: 0.5rem 1rem;
-  border: 1px solid var(--border-s);
-  border-radius: 40px;
-  font-size: 0.75rem;
-  color: var(--text-dim);
+.dh2-wwd2-card-tag {
+  font-size: 0.65rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
-/* Placards */
-.dh2-wwd-placard {
-  position: relative;
-  padding: 4rem 3rem;
-  border-radius: 24px;
-  overflow: hidden;
-  height: 100%;
-  min-height: 400px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-}
-
-.dh2-wwd-placard-dark {
-  background: var(--bg-surface);
-  border: 1px solid var(--border-f);
-}
-
-.dh2-wwd-placard-light {
-  background: #f0f0f0;
-}
-
-.dh2-wwd-placard-bg {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  opacity: 0.1;
-  pointer-events: none;
-}
-
-.dh2-wwd-placard-icon {
-  position: absolute;
-  top: 3rem;
-  right: 3rem;
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.05);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.dh2-wwd-placard-light .dh2-wwd-placard-icon {
-  background: rgba(0,0,0,0.05);
-}
 
 /* === VINYL STACK PROJECTS === */
 .dh2-vinyl-wrapper {
@@ -2031,6 +1986,24 @@
   font-family: 'Inter', sans-serif;
 }
 
+/* Explicit Grid definitions */
+.dh2-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+.dh2-ecosystem-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 4rem;
+  align-items: center;
+}
+.dh2-split-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+}
+
 /* Sub-page responsive overrides */
 @media(max-width: 1024px) {
   .dh2-page [style*="grid-template-columns: repeat(4"] {
@@ -2077,6 +2050,37 @@
   .dh2-container {
     padding: 0 1.5rem !important;
   }
+  
+  /* Services Horizontal Slider adjustments for mobile */
+  .dh2-wwd2-top {
+    padding: 2rem 1.5rem 0;
+  }
+  .dh2-wwd2-card {
+    flex: 0 0 280px;
+    padding: 1.5rem;
+    min-height: 350px;
+  }
+  .dh2-wwd2-track {
+    padding: 0 1.5rem;
+    gap: 1rem;
+  }
+
+  /* Specific Mobile Grids */
+  .dh2-stats-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1.5rem !important;
+  }
+  .dh2-ecosystem-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 3rem !important;
+  }
+  .dh2-split-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 3rem !important;
+  }
 }
 
 @media(max-width: 480px) {
@@ -2090,4 +2094,26 @@
   .dh2-container {
     padding: 0 1rem !important;
   }
+}
+/* === DH2 Services Redesign Custom CSS === */
+.dh2-sv-glass-panel {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+}
+.dh2-sv-grain-bg {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.04;
+    pointer-events: none;
+}
+.dh2-sv-grid-texture {
+    background-size: 40px 40px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+}
+.dh2-sv-text-gradient {
+    background: linear-gradient(135deg, #4f46e5, #ec4899);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }

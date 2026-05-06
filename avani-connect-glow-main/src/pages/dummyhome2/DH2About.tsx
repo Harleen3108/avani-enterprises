@@ -37,16 +37,18 @@ const DH2About = () => {
         <div className="dh2-container">
           <motion.div initial="hidden" animate="visible" variants={fadeIn} transition={{ duration: .6 }} style={{ textAlign: 'center', maxWidth: 900, margin: '0 auto' }}>
             <div className="dh2-label">WHO WE ARE</div>
-            <h1 className="dh2-display" style={{ marginBottom: '1.5rem', fontWeight: 700, fontSize: 'clamp(2.5rem, 6vw, 4.5rem)' }}>
-              WE DON'T JUST BUILD SOFTWARE. <br />
-              WE ARCHITECT <span style={{ color: 'var(--accent)' }}>COMPETITIVE ADVANTAGE</span>.
+            <h1 className="dh2-display" style={{ marginBottom: '1.5rem', fontWeight: 600 }}>
+              TRANSFORMING BUSINESSES THROUGH <span style={{ color: 'var(--accent)' }}>STRATEGY</span> & <span style={{ color: 'var(--accent)' }}>TECHNOLOGY</span>.
             </h1>
-            <p className="dh2-body" style={{ fontSize: '1.1rem', color: 'var(--text-muted)', lineHeight: 1.8, maxWidth: 700, margin: '0 auto' }}>
-              Since 2016, Avani Enterprises has been engineering high-end digital ecosystems. We combine deep strategic foresight with cutting-edge technology to drive explosive growth, elevate brand presence, and set bold new industry standards.
+            <p className="dh2-body" style={{ fontSize: '1.1rem', color: 'var(--text-main)', fontWeight: 600, marginBottom: '1rem', lineHeight: 1.6 }}>
+              We engineer digital excellence. From brand identity to scalable platforms, we are your strategic growth partners.
+            </p>
+            <p className="dh2-body" style={{ fontSize: '.95rem', color: 'var(--text-muted)' }}>
+              Since 2016, we have been delivering <strong style={{ color: 'var(--text-main)' }}>high-end digital solutions</strong> that drive sustainable growth, enhance brand presence, and set <strong style={{ color: 'var(--text-main)' }}>new industry standards</strong>. We don't just build websites; we build complete digital ecosystems tailored for your long-term success.
             </p>
           </motion.div>
 
-          <motion.div initial="hidden" animate="visible" variants={staggerContainer} style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '2rem', borderTop: '1px solid var(--border-s)', paddingTop: '3rem', marginTop: '4rem' }}>
+          <motion.div className="dh2-stats-grid" initial="hidden" animate="visible" variants={staggerContainer} style={{ borderTop: '1px solid var(--border-s)', paddingTop: '3rem', marginTop: '4rem' }}>
             {stats.map((s, i) => (
               <motion.div key={i} variants={fadeIn} style={{ textAlign: 'center', position: 'relative' }}>
                 <div style={{ fontSize: '2.5rem', fontFamily: "'Syne', sans-serif", fontWeight: 700, color: 'var(--text-main)', marginBottom: '.2rem' }}>{s.value}</div>
@@ -60,7 +62,7 @@ const DH2About = () => {
       {/* 2. DIGITAL ECOSYSTEM */}
       <section className="dh2-section theme-light" style={{ padding: '6rem 0' }}>
         <div className="dh2-container">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '4rem', alignItems: 'center' }}>
+          <div className="dh2-ecosystem-grid">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
               <div className="dh2-label">OUR APPROACH</div>
               <h2 className="dh2-display" style={{ fontSize: '2rem', marginBottom: '1rem', fontWeight: 600 }}>THE DIGITAL ECOSYSTEM</h2>
@@ -76,22 +78,22 @@ const DH2About = () => {
       </section>
 
       {/* 3. CEO LEADERSHIP (SPLIT LAYOUT) */}
-      <section className="dh2-section" style={{ padding: '8rem 0', background: 'var(--bg-base)' }}>
+      <section className="dh2-section" style={{ padding: '8rem 0' }}>
         <div className="dh2-container">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '6rem', alignItems: 'center' }}>
+          <motion.div className="dh2-split-grid" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} style={{ alignItems: 'center' }}>
             
             <div style={{ position: 'relative' }}>
-              <div style={{ position: 'absolute', top: -30, left: -30, right: 30, bottom: 30, border: '1px solid var(--border-f)', borderRadius: 20, zIndex: 0 }} />
-              <img src="/kapil_khandelwal.jpg" alt="Kapil Khandelwal" style={{ width: '100%', borderRadius: 20, objectFit: 'cover', minHeight: 600, position: 'relative', zIndex: 1, filter: 'grayscale(100%) contrast(1.1)', transition: 'filter .5s' }} onMouseEnter={(e) => e.currentTarget.style.filter = 'grayscale(0%)'} onMouseLeave={(e) => e.currentTarget.style.filter = 'grayscale(100%) contrast(1.1)'} />
+              <div style={{ position: 'absolute', top: -20, left: -20, right: 20, bottom: 20, border: '1px solid var(--border-f)', borderRadius: 16, zIndex: 0 }} />
+              <img src="/kapil_khandelwal.jpg" alt="Kapil Khandelwal" style={{ width: '100%', borderRadius: 16, objectFit: 'cover', minHeight: 550, position: 'relative', zIndex: 1, filter: 'grayscale(100%) contrast(1.1)', transition: 'filter .5s' }} onMouseEnter={(e) => e.currentTarget.style.filter = 'grayscale(0%)'} onMouseLeave={(e) => e.currentTarget.style.filter = 'grayscale(100%) contrast(1.1)'} />
             </div>
 
             <div>
               <div className="dh2-label">LEADERSHIP</div>
-              <h2 className="dh2-display" style={{ fontSize: '3rem', marginBottom: '.5rem', fontWeight: 700 }}>KAPIL KHANDELWAL</h2>
-              <p style={{ fontSize: '.8rem', color: 'var(--accent)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.15em', marginBottom: '2.5rem' }}>CEO & Founder – Avani Enterprises</p>
+              <h2 className="dh2-display" style={{ fontSize: '2.5rem', marginBottom: '.5rem', fontWeight: 600 }}>KAPIL KHANDELWAL</h2>
+              <p style={{ fontSize: '.75rem', color: 'var(--accent)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.1em', marginBottom: '2.5rem' }}>CEO – Avani Enterprises</p>
               
-              <p className="dh2-body" style={{ fontSize: '1rem', marginBottom: '2.5rem', lineHeight: 1.8 }}>
-                A distinguished strategist and consultant with over a decade of experience in transforming businesses. Kapil leads our elite team of professionals, dedicating his expertise to architecting innovative, highly scalable solutions that drive strategic growth across multiple industries.
+              <p className="dh2-body" style={{ fontSize: '.9rem', marginBottom: '2.5rem', lineHeight: 1.7 }}>
+                A distinguished consultant with over a decade of experience in transforming businesses. Kapil leads our team of professionals dedicated to delivering innovative solutions and strategic growth.
               </p>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginBottom: '3.5rem' }}>
@@ -127,18 +129,18 @@ const DH2About = () => {
       {/* 4. MISSION & VISION (CLEAN BLOCKS) */}
       <section className="dh2-section theme-light" style={{ padding: '8rem 0', borderTop: '1px solid var(--border-s)', borderBottom: '1px solid var(--border-s)' }}>
         <div className="dh2-container">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '4rem' }}>
+          <div className="dh2-split-grid" style={{ gap: '4rem' }}>
             {[
-              { title: 'OUR MISSION', accent: 'var(--accent)', text: <>To empower businesses with <strong style={{ color: 'var(--text-main)' }}>cutting-edge digital solutions</strong> that drive explosive growth, enhance brand presence, and deliver measurable ROI. We build innovation through trust and relentless focus on results.</>, icon: <Target size={24} /> },
-              { title: 'OUR VISION', accent: '#fff', text: <>To be the definitive <strong style={{ color: 'var(--text-main)' }}>digital transformation partner</strong> for businesses worldwide—renowned for our architectural innovation, elite service standards, and data-driven success models.</>, icon: <Globe size={24} /> },
+              { title: 'OUR MISSION', accent: 'var(--accent)', text: <><strong style={{ color: '#fff', fontWeight: 600 }}>To empower businesses with cutting-edge digital solutions</strong> that drive growth, enhance brand presence, and deliver measurable ROI. We build innovation through trust and results.</>, icon: <Target size={28} /> },
+              { title: 'OUR VISION', accent: '#fff', text: <><strong style={{ color: '#fff', fontWeight: 600 }}>To be the leading digital transformation partner</strong> for businesses across India, known for our innovative solutions, exceptional service, and data-driven success.</>, icon: <Globe size={28} /> },
             ].map((item, i) => (
               <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} transition={{ delay: i * .15 }}
-                style={{ borderLeft: `3px solid ${item.accent}`, paddingLeft: '2.5rem' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem', color: item.accent }}>
+                style={{ borderLeft: `2px solid ${item.accent}`, paddingLeft: '2.5rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.2rem', color: item.accent }}>
                   {item.icon}
-                  <h3 style={{ fontFamily: "'Inter', sans-serif", fontWeight: 600, fontSize: '1.25rem', letterSpacing: '.12em', textTransform: 'uppercase', color: 'var(--text-main)' }}>{item.title}</h3>
+                  <h3 className="dh2-display" style={{ fontWeight: 700, fontSize: '1.5rem', letterSpacing: '.05em', textTransform: 'uppercase' }}>{item.title}</h3>
                 </div>
-                <p className="dh2-body" style={{ fontSize: '1.05rem', color: 'var(--text-dim)', lineHeight: 1.9 }}>{item.text}</p>
+                <p className="dh2-body" style={{ fontSize: '1.05rem', color: 'var(--text-muted)', lineHeight: 1.7 }}>{item.text}</p>
               </motion.div>
             ))}
           </div>
@@ -148,7 +150,7 @@ const DH2About = () => {
       {/* 5. CORE VALUES & WHY US (STRUCTURED LISTS) */}
       <section className="dh2-section" style={{ padding: '7rem 0' }}>
         <div className="dh2-container">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6rem' }}>
+          <div className="dh2-split-grid" style={{ gap: '6rem' }}>
             
             {/* Core Values */}
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
