@@ -4,22 +4,22 @@ import { ArrowRight, Mail, Phone, MapPin } from 'lucide-react';
 
 const footerLinks = {
   company: [
-    { label: 'About Us', path: '/about' },
-    { label: 'Careers', path: '/careers' },
-    { label: 'Case Studies', path: '/case-studies' },
-    { label: 'Blog', path: '/blog' },
-    { label: 'Contact', path: '/contact' },
+    { label: 'About Us', path: '/dummyhome/about' },
+    { label: 'Our Team', path: '/dummyhome/team' },
+    { label: 'Careers', path: '/dummyhome/careers' },
+    { label: 'Case Studies', path: '/dummyhome/projects' },
+    { label: 'Blog', path: '/dummyhome/blog' },
   ],
   services: [
-    { label: 'Web Development', path: '/services/web-development' },
-    { label: 'SEO & Content', path: '/services/seo-content' },
-    { label: 'Social Media', path: '/services/social-media' },
-    { label: 'AI Solutions', path: '/services/ai-solutions' },
-    { label: 'Business Consulting', path: '/services/business-consultation' },
+    { label: 'Ready Products', path: '/dummyhome/our-products' },
+    { label: 'Expertise', path: '/dummyhome/services' },
+    { label: 'Newsletters', path: '/dummyhome/newsletters' },
+    { label: 'Global Network', path: '/dummyhome/global-presence' },
+    { label: 'Contact', path: '/dummyhome/contact' },
   ],
   legal: [
-    { label: 'Privacy Policy', path: '/privacy-policy' },
-    { label: 'Terms & Conditions', path: '/terms-and-conditions' },
+    { label: 'Privacy Policy', path: '/dummyhome/privacy-policy' },
+    { label: 'Terms & Conditions', path: '/dummyhome/terms-and-conditions' },
   ],
 };
 

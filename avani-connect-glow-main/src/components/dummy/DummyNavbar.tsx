@@ -5,11 +5,12 @@ import { Menu, X, ArrowRight } from 'lucide-react';
 
 const navLinks = [
   { label: 'HOME', path: '/dummyhome' },
-  { label: 'ABOUT', path: '/about' },
-  { label: 'SERVICES', path: '/services' },
-  { label: 'CASE STUDIES', path: '/case-studies' },
-  { label: 'BLOG', path: '/blog' },
-  { label: 'CONTACT', path: '/contact' },
+  { label: 'ABOUT', path: '/dummyhome/about' },
+  { label: 'SERVICES', path: '/dummyhome/services' },
+  { label: 'OUR PRODUCTS', path: '/dummyhome/our-products' },
+  { label: 'PROJECTS', path: '/dummyhome/projects' },
+  { label: 'BLOG', path: '/dummyhome/blog' },
+  { label: 'CONTACT', path: '/dummyhome/contact' },
 ];
 
 const DummyNavbar = () => {

@@ -155,6 +155,7 @@ import DH2Services from "./pages/dummyhome2/DH2Services";
 import DH2Contact from "./pages/dummyhome2/DH2Contact";
 import DH2Consultation from "./pages/dummyhome2/DH2Consultation";
 import DH2CaseStudies from "./pages/dummyhome2/DH2CaseStudies";
+import DH2Team from "./pages/dummyhome2/DH2Team";
 import DH2Blog from "./pages/dummyhome2/DH2Blog";
 import DH2Products from "./pages/dummyhome2/DH2Products";
 import DH2GlobalPresence from "./pages/dummyhome2/DH2GlobalPresence";
@@ -168,6 +169,19 @@ import DH2NewsletterDetail from "./pages/dummyhome2/DH2NewsletterDetail";
 import DH2CareerDetail from "./pages/dummyhome2/DH2CareerDetail";
 import DH2Courses from "./pages/dummyhome2/DH2Courses";
 import DH2CourseDetail from "./pages/dummyhome2/DH2CourseDetail";
+
+// DummyHome Heritage Imports
+import DHLayout from "./pages/dummyhome/DHLayout";
+import DHAbout from "./pages/dummyhome/DHAbout";
+import DHServices from "./pages/dummyhome/DHServices";
+import DHContact from "./pages/dummyhome/DHContact";
+import DHProjects from "./pages/dummyhome/DHProjects";
+import DHTeam from "./pages/dummyhome/DHTeam";
+import DHBlog from "./pages/dummyhome/DHBlog";
+import DHProducts from "./pages/dummyhome/DHProducts";
+import DHGlobalPresence from "./pages/dummyhome/DHGlobalPresence";
+import DHCareers from "./pages/dummyhome/DHCareers";
+import DHNewsletters from "./pages/dummyhome/DHNewsletters";
 
 import DH2PolicicueProject from './pages/dummyhome2/DH2PolicicueProject';
 import DH2IndusProject from './pages/dummyhome2/DH2IndusProject';
@@ -227,10 +241,26 @@ const AppLayout = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/dummyhome" element={<DummyHome />} />
+          
+          {/* DH Heritage Sub-pages with shared layout */}
+          <Route path="/dummyhome" element={<DHLayout />}>
+            <Route path="about" element={<DHAbout />} />
+            <Route path="team" element={<DHTeam />} />
+            <Route path="services" element={<DHServices />} />
+            <Route path="our-products" element={<DHProducts />} />
+            <Route path="projects" element={<DHProjects />} />
+            <Route path="contact" element={<DHContact />} />
+            <Route path="blog" element={<DHBlog />} />
+            <Route path="global-presence" element={<DHGlobalPresence />} />
+            <Route path="careers" element={<DHCareers />} />
+            <Route path="newsletters" element={<DHNewsletters />} />
+          </Route>
+
           <Route path="/dummyhome2" element={<DummyHome2 />} />
           {/* DH2 Sub-pages with shared layout */}
           <Route path="/dummyhome2" element={<DH2Layout />}>
             <Route path="about" element={<DH2About />} />
+            <Route path="team" element={<DH2Team />} />
             <Route path="services" element={<DH2Services />} />
             <Route path="services/:id" element={<DH2ServiceDetail />} />
             <Route path="our-products" element={<DH2Products />} />
