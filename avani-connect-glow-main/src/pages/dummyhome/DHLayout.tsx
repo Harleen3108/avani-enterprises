@@ -21,10 +21,14 @@ const DHLayout = () => {
     <div className={theme === 'dark' ? 'dummy-theme-dark' : 'dummy-theme-light'}>
       <div className="dh-root" style={{ background: 'var(--bg-primary)', color: 'var(--text-primary)', minHeight: '100vh', transition: 'background 0.5s ease' }}>
         <DummyScrollProgress />
-        <DummyNavbar />
         
-        {/* Background Grain */}
-        <div className="dh-grain" />
+        {/* Navbar should be above everything */}
+        <div style={{ position: 'relative', zIndex: 1000 }}>
+          <DummyNavbar />
+        </div>
+        
+        {/* Background Grain - below interactive elements */}
+        <div className="dh-grain" style={{ zIndex: 5, pointerEvents: 'none' }} />
 
         <main style={{ position: 'relative', zIndex: 1 }}>
           <Outlet context={{ theme }} />

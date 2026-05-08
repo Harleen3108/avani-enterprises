@@ -13,12 +13,12 @@ import '../components/dummyhome2/DummyHome2.css';
 const words = ['Websites', 'Products', 'Solutions', 'Experiences'];
 
 const newProjectData = [
-  { name: 'Indus Group of Institutions', cat: 'Education', img: '/indus_aesthetic_1777270461175.png', link: '/projects/indus' },
-  { name: 'Policicue', cat: 'InsurTech', img: '/policicue_aesthetic_1777270486926.png', link: '/projects/policicue' },
-  { name: 'FRD Nutrition', cat: 'E-Commerce', img: '/frd_aesthetic_1777270509667.png', link: '/projects/frd-nutrition' },
-  { name: 'Hi-tech Homes', cat: 'Real Estate', img: '/hitech_aesthetic_1777270543762.png', link: '/projects/hitech-homes' },
-  { name: 'Sanjeevni Hospital', cat: 'Healthcare', img: '/sanjeevni_aesthetic_1777270573722.png', link: '/projects/sanjeevni-hospital' },
-  { name: 'Rohtak Shoe co.', cat: 'Fashion', img: '/rohtak_aesthetic_1777270648142.png', link: '/projects/rohtak-shoe' },
+  { name: 'Indus Group of Institutions', cat: 'Education', img: '/indus_aesthetic_1777270461175.png', link: '/dummyhome2/our-products/indus' },
+  { name: 'Policicue', cat: 'InsurTech', img: '/policicue_aesthetic_1777270486926.png', link: '/dummyhome2/our-products/policicue' },
+  { name: 'FRD Nutrition', cat: 'E-Commerce', img: '/frd_aesthetic_1777270509667.png', link: '/dummyhome2/our-products/frd-nutrition' },
+  { name: 'Hi-tech Homes', cat: 'Real Estate', img: '/hitech_aesthetic_1777270543762.png', link: '/dummyhome2/our-products/hitech-homes' },
+  { name: 'Sanjeevni Hospital', cat: 'Healthcare', img: '/sanjeevni_aesthetic_1777270573722.png', link: '/dummyhome2/our-products/sanjeevni' },
+  { name: 'Rohtak Shoe co.', cat: 'Fashion', img: '/rohtak_aesthetic_1777270648142.png', link: '/dummyhome2/our-products/rohtak-shoe' },
 ];
 
 const StackedVinylProjects = () => {
@@ -33,7 +33,7 @@ const StackedVinylProjects = () => {
             <div className="dh2-label">SUCCESS STORIES</div>
             <h2 className="dh2-display dh2-section-title">FEATURED WORK</h2>
           </div>
-          <Link to="/case-studies" className="dh2-btn-ghost" style={{ padding: '0.55rem 1.2rem', fontSize: '0.75rem', height: 'fit-content', textDecoration: 'none', whiteSpace: 'nowrap', flexShrink: 0 }}>
+          <Link to="/dummyhome2/case-studies" className="dh2-btn-ghost" style={{ padding: '0.55rem 1.2rem', fontSize: '0.75rem', height: 'fit-content', textDecoration: 'none', whiteSpace: 'nowrap', flexShrink: 0 }}>
             View All Projects <ArrowUpRight size={14} />
           </Link>
         </motion.div>
@@ -146,19 +146,6 @@ const DummyHome2 = () => {
   const [gpDir, setGpDir] = useState(0);
   const [activeProc, setActiveProc] = useState(0);
 
-  const { scrollYProgress } = useScroll();
-  
-  const scrollPoints = [0, 0.25, 0.28, 0.50, 0.53, 1];
-  
-  const bgDeep = useTransform(scrollYProgress, scrollPoints, ['#030303', '#030303', '#e8e4db', '#e8e4db', '#030303', '#030303']);
-  const bgBase = useTransform(scrollYProgress, scrollPoints, ['#0a0a0a', '#0a0a0a', '#eeebe4', '#eeebe4', '#0a0a0a', '#0a0a0a']);
-  const bgSurface = useTransform(scrollYProgress, scrollPoints, ['#111111', '#111111', '#f4f2ee', '#f4f2ee', '#111111', '#111111']);
-  const textMain = useTransform(scrollYProgress, scrollPoints, ['#f0f0f0', '#f0f0f0', '#1a1a1a', '#1a1a1a', '#f0f0f0', '#f0f0f0']);
-  const textMuted = useTransform(scrollYProgress, scrollPoints, ['#7a7a7a', '#7a7a7a', '#666666', '#666666', '#7a7a7a', '#7a7a7a']);
-  const textDim = useTransform(scrollYProgress, scrollPoints, ['#3a3a3a', '#3a3a3a', '#999999', '#999999', '#3a3a3a', '#3a3a3a']);
-  const borderS = useTransform(scrollYProgress, scrollPoints, ['rgba(255,255,255,0.07)', 'rgba(255,255,255,0.07)', 'rgba(0,0,0,0.08)', 'rgba(0,0,0,0.08)', 'rgba(255,255,255,0.07)', 'rgba(255,255,255,0.07)']);
-  const borderF = useTransform(scrollYProgress, scrollPoints, ['rgba(255,255,255,0.15)', 'rgba(255,255,255,0.15)', 'rgba(0,0,0,0.15)', 'rgba(0,0,0,0.15)', 'rgba(255,255,255,0.15)', 'rgba(255,255,255,0.15)']);
-
   useEffect(() => {
     // Keep body background matching the theme start to prevent flash
     document.body.style.backgroundColor = '#030303';
@@ -209,19 +196,7 @@ const DummyHome2 = () => {
   const t = testimonials[testIdx];
 
   return (
-    <motion.div 
-      className="dh2-root"
-      style={{
-        '--bg-deep': bgDeep,
-        '--bg-base': bgBase,
-        '--bg-surface': bgSurface,
-        '--text-main': textMain,
-        '--text-muted': textMuted,
-        '--text-dim': textDim,
-        '--border-s': borderS,
-        '--border-f': borderF,
-      } as any}
-    >
+    <div style={{ position: 'relative' }}>
       {/* LOADER */}
       <AnimatePresence>
         {loading && (
@@ -231,15 +206,6 @@ const DummyHome2 = () => {
           </motion.div>
         )}
       </AnimatePresence>
-
-      {/* NAV */}
-      <DH2Navbar />
-
-      {/* HERO BACKGROUND (Full Screen) */}
-      <div className="dh2-hero-bg-wrapper">
-        <FluidHeroBackground />
-        <div className="dh2-hero-grain"/>
-      </div>
 
       {/* HERO */}
       <section className="dh2-hero">
@@ -266,7 +232,7 @@ const DummyHome2 = () => {
           We're more than just a digital agency. We build stories, share passions, and deliver results that leave competitors far behind.
         </motion.p>
         <motion.div initial="hidden" animate={!loading ? "visible" : "hidden"} variants={fadeV} className="dh2-hero-ctas">
-          <Link to="/get-consultation" className="dh2-btn-fill">Get Consultation <ArrowRight size={14} /></Link>
+          <Link to="/dummyhome2/get-consultation" className="dh2-btn-fill">Get Consultation <ArrowRight size={14} /></Link>
           <button className="dh2-btn-ghost"><Play size={14} /> Watch Reel</button>
         </motion.div>
         <div className="dh2-scroll-hint">
@@ -411,7 +377,7 @@ const DummyHome2 = () => {
                   </div>
                 ))}
               </div>
-              <Link to="/global-presence" className="dh2-btn-fill" style={{ padding: '.6rem 1.4rem', fontSize: '.7rem' }}>Explore Network <ArrowRight size={12} /></Link>
+              <Link to="/dummyhome2/global-presence" className="dh2-btn-fill" style={{ padding: '.6rem 1.4rem', fontSize: '.7rem' }}>Explore Network <ArrowRight size={12} /></Link>
             </div>
           </>);
         })()}
@@ -604,33 +570,7 @@ const DummyHome2 = () => {
         </motion.div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="dh2-footer">
-        <div className="dh2-footer-grid">
-          <div>
-            <div className="dh2-footer-brand">AVANI.</div>
-            <p className="dh2-footer-desc">One stop solution for business. We build stories, share passions, and deliver results that leave competitors far behind.</p>
-          </div>
-          <div>
-            <div className="dh2-footer-heading">Company</div>
-            {footerLinks.company.map((l, i) => <Link key={i} to={l.path} className="dh2-footer-link">{l.label}</Link>)}
-          </div>
-          <div>
-            <div className="dh2-footer-heading">Services</div>
-            {footerLinks.services.map((l, i) => <Link key={i} to={l.path} className="dh2-footer-link">{l.label}</Link>)}
-          </div>
-          <div>
-            <div className="dh2-footer-heading">Legal</div>
-            {footerLinks.legal.map((l, i) => <Link key={i} to={l.path} className="dh2-footer-link">{l.label}</Link>)}
-          </div>
-        </div>
-        <div className="dh2-footer-bottom">
-          <span>© 2016–2025 Avani Enterprises. All rights reserved.</span>
-          <span>Expanding Globally · Gurgaon · Mumbai · Rohtak · Australia</span>
-        </div>
-      </footer>
-      <Chatbot />
-    </motion.div>
+    </div>
   );
 };
 

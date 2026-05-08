@@ -221,14 +221,15 @@ const AppLayout = () => {
 
   // Pages where Navbar should be hidden completely
   const pathForCheck = pathname.toLowerCase();
+  const isDH1 = pathForCheck.startsWith('/dummyhome') && !pathForCheck.startsWith('/dummyhome2');
   const isDH2 = pathForCheck.startsWith('/dummyhome2');
-  const hideNavbar = pathForCheck === "/thank-you" || pathForCheck === "/business-setup" || pathForCheck === "/businesssetup1" || pathForCheck === "/dummyhome" || isDH2;
+  const hideNavbar = pathForCheck === "/thank-you" || pathForCheck === "/business-setup" || pathForCheck === "/businesssetup1" || isDH1 || isDH2;
 
   // Pages where Navbar1 should be used instead of default Navbar
   const useNavbar1 = pathForCheck === "/web-dev" || pathForCheck === "/7-day-launch";
 
   // Pages where Footer should be hidden completely
-  const hideFooter = pathForCheck === "/thank-you" || pathForCheck === "/links" || pathForCheck === "/dummyhome" || isDH2;
+  const hideFooter = pathForCheck === "/thank-you" || pathForCheck === "/links" || isDH1 || isDH2;
 
   // Pages where Footer1 should be used instead of default Footer
   const useFooter1 = pathForCheck === "/web-dev" || pathForCheck === "/7-day-launch";
@@ -240,10 +241,10 @@ const AppLayout = () => {
       <main className="pt-0">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/dummyhome" element={<DummyHome />} />
           
           {/* DH Heritage Sub-pages with shared layout */}
           <Route path="/dummyhome" element={<DHLayout />}>
+            <Route index element={<DummyHome />} />
             <Route path="about" element={<DHAbout />} />
             <Route path="team" element={<DHTeam />} />
             <Route path="services" element={<DHServices />} />
@@ -256,9 +257,9 @@ const AppLayout = () => {
             <Route path="newsletters" element={<DHNewsletters />} />
           </Route>
 
-          <Route path="/dummyhome2" element={<DummyHome2 />} />
           {/* DH2 Sub-pages with shared layout */}
           <Route path="/dummyhome2" element={<DH2Layout />}>
+            <Route index element={<DummyHome2 />} />
             <Route path="about" element={<DH2About />} />
             <Route path="team" element={<DH2Team />} />
             <Route path="services" element={<DH2Services />} />

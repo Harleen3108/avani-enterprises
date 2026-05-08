@@ -23,9 +23,19 @@ const DH2Newsletters = () => {
   useEffect(() => {
     (async () => {
       try {
-        const res = await axios.get(`${API_BASE_URL}/api/newsletters`);
-        setNewsletters(res.data);
-      } catch {} finally { setLoading(false); }
+        const res = await axios.get(`${API_BASE_URL}/api/newsletters`, {
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.data.success) {
+          setNewsletters(res.data.data || []);
+        } else {
+          setNewsletters(Array.isArray(res.data) ? res.data : []);
+        }
+      } catch {
+        setNewsletters([]);
+      } finally { 
+        setLoading(false); 
+      }
     })();
   }, []);
 

@@ -44,15 +44,15 @@ const DummyFooter = () => (
             Your one-stop solution for digital growth. Building high-performing websites, products, and AI solutions since 2016.
           </p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-            <a href="mailto:info@avanienterprises.com" style={{ display: 'flex', alignItems: 'center', gap: '8px', fontFamily: "'Satoshi', sans-serif", fontSize: '12px', color: 'var(--text-secondary)', textDecoration: 'none', transition: 'color 0.2s' }}
+            <a href="mailto:kp@avanienterprises.in" style={{ display: 'flex', alignItems: 'center', gap: '8px', fontFamily: "'Satoshi', sans-serif", fontSize: '12px', color: 'var(--text-secondary)', textDecoration: 'none', transition: 'color 0.2s' }}
               onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = 'var(--accent-primary)'}
               onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'var(--text-secondary)'}>
-              <Mail size={12} color="var(--accent-primary)" /> info@avanienterprises.com
+              <Mail size={12} color="var(--accent-primary)" /> kp@avanienterprises.in
             </a>
-            <a href="tel:+919876543210" style={{ display: 'flex', alignItems: 'center', gap: '8px', fontFamily: "'Satoshi', sans-serif", fontSize: '12px', color: 'var(--text-secondary)', textDecoration: 'none', transition: 'color 0.2s' }}
+            <a href="tel:+919253625099" style={{ display: 'flex', alignItems: 'center', gap: '8px', fontFamily: "'Satoshi', sans-serif", fontSize: '12px', color: 'var(--text-secondary)', textDecoration: 'none', transition: 'color 0.2s' }}
               onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = 'var(--accent-primary)'}
               onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'var(--text-secondary)'}>
-              <Phone size={12} color="var(--accent-primary)" /> +91 98765 43210
+              <Phone size={12} color="var(--accent-primary)" /> +91 92536 25099
             </a>
             <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', fontFamily: "'Satoshi', sans-serif", fontSize: '12px', color: 'var(--text-secondary)' }}>
               <MapPin size={12} color="var(--accent-primary)" style={{ marginTop: '2px', flexShrink: 0 }} /> Gurgaon · Mumbai · Rohtak · Australia
@@ -94,7 +94,7 @@ const DummyFooter = () => (
           <p style={{ fontFamily: "'Satoshi', sans-serif", fontSize: '12px', color: 'var(--text-tertiary)', lineHeight: 1.6, marginBottom: '14px', fontWeight: 400 }}>
             Get the latest insights and updates delivered to your inbox.
           </p>
-          <Link to="/newsletters" style={{
+          <Link to="/dummyhome/newsletters" style={{
             display: 'inline-flex', alignItems: 'center', gap: '6px',
             padding: '8px 18px', border: '1px solid var(--border-light)',
             borderRadius: '6px', color: 'var(--accent-primary)', textDecoration: 'none',

@@ -2157,3 +2157,91 @@
         gap: 0.5rem !important;
     }
 }
+
+/* --- Mobile Sub-page Refinements --- */
+@media(max-width: 768px) {
+  .dh2-page [style*="padding: 6rem"] {
+    padding: 2.5rem 1.5rem !important;
+  }
+  .dh2-page [style*="padding: 4rem"] {
+    padding: 2rem 1.5rem !important;
+  }
+  .dh2-page [style*="gap: 8rem"] {
+    gap: 3rem !important;
+  }
+  .dh2-page [style*="gap: 6rem"] {
+    gap: 2.5rem !important;
+  }
+  .dh2-page h1.dh2-display {
+    font-size: 3rem !important;
+  }
+  .dh2-page .dh2-display {
+    font-size: 2.2rem !important;
+  }
+  .dh2-hero {
+    padding: 7rem 1.5rem 3rem !important;
+    min-height: auto !important;
+  }
+  .dh2-hero-title {
+    font-size: 3.2rem !important;
+    line-height: 1.1 !important;
+    margin-bottom: 1.5rem !important;
+  }
+  .dh2-hero-line {
+    height: auto !important;
+    overflow: visible !important;
+  }
+  .dh2-bento-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1.5rem !important;
+  }
+  .dh2-bento-card {
+    grid-column: span 1 !important;
+    grid-row: span 1 !important;
+  }
+}
+
+/* --- Layout Utilities --- */
+.dh2-responsive-grid {
+  display: grid;
+}
+
+@media(max-width: 768px) {
+  .dh2-responsive-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+  
+  .dh2-filter-row {
+    justify-content: flex-start !important;
+    margin-top: 1rem;
+  }
+  
+  .dh2-newsletter-form {
+    flex-direction: column !important;
+  }
+  
+  .dh2-newsletter-form button {
+    width: 100% !important;
+  }
+  
+  .dh2-perks-grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .dh2-cta-title {
+    font-size: 2.5rem !important;
+  }
+  
+  /* Prevent horizontal scroll on small screens */
+  .dh2-page {
+    overflow-x: hidden;
+  }
+  
+  .dh2-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden;
+  }
+}

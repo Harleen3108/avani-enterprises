@@ -1,0 +1,23 @@
+vite v5.4.21 building for production...
+transforming...
+
+warn - The class `duration-[2000ms]` is ambiguous and matches multiple utilities.
+warn - If this is content and not a class, replace it with `duration-&lsqb;2000ms&rsqb;` to silence this warning.
+
+warn - The class `duration-[2000ms]` is ambiguous and matches multiple utilities.
+warn - If this is content and not a class, replace it with `duration-&lsqb;2000ms&rsqb;` to silence this warning.
+✓ 2314 modules transformed.
+rendering chunks...
+[SEO-Plugin] Fetching for /index.html from http://localhost:5001
+[SEO-Plugin] Fetching for /index.html from https://avani-enterprises.onrender.com
+[SEO-Plugin] ✅ SEO data received for /index.html
+computing gzip size...
+dist/index.html                     5.08 kB │ gzip:   1.91 kB
+dist/assets/index-CV4EtkZo.css    226.55 kB │ gzip:  34.75 kB
+dist/assets/index-D5_yWqmx.js   2,058.33 kB │ gzip: 503.44 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 5.13s

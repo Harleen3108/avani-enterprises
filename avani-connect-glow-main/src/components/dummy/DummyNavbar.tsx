@@ -36,7 +36,7 @@ const DummyNavbar = () => {
         borderBottom: scrolled ? '1px solid var(--border-light)' : '1px solid transparent',
         transition: 'all 0.35s ease',
       }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 48px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }} className="dummy-nav-container">
+        <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 48px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }} className="dummy-nav-container">
           {/* Logo */}
           <Link to="/dummyhome" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '10px' }}>
             <div style={{ width: '32px', height: '32px', borderRadius: '8px', overflow: 'hidden', background: '#fff', padding: '2px' }}>
@@ -72,7 +72,7 @@ const DummyNavbar = () => {
 
           {/* CTA + Mobile toggle */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-            <Link to="/get-consultation" style={{
+            <Link to="/dummyhome/get-consultation" style={{
               display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '8px 20px',
               background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-light))', color: 'var(--bg-primary)',
               borderRadius: '5px', textDecoration: 'none', fontFamily: "'Clash Display', sans-serif",
@@ -118,7 +118,7 @@ const DummyNavbar = () => {
                 </Link>
               </motion.div>
             ))}
-            <Link to="/get-consultation" onClick={() => setMobileOpen(false)} style={{
+            <Link to="/dummyhome/get-consultation" onClick={() => setMobileOpen(false)} style={{
               display: 'inline-flex', alignItems: 'center', gap: '8px', marginTop: '24px',
               padding: '12px 28px', background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-light))',
               color: 'var(--bg-primary)', borderRadius: '6px', textDecoration: 'none',

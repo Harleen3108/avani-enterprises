@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Code, Search, Share2, Zap, Radio, PieChart, ArrowRight, CheckCircle } from 'lucide-react';
+import { Code, Search, Share2, Zap, Radio, PieChart, ArrowRight, CheckCircle, Lightbulb, Shield, Target, MessageSquare, TrendingUp } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import RotatingText from '../../components/RotatingText';
 import '../../components/dummy/DummyHome.css';
 
 const titleV = {
@@ -23,6 +25,10 @@ const services = [
 ];
 
 const DHServices = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="dh-services-page">
       
@@ -51,7 +57,7 @@ const DHServices = () => {
         </div>
       </section>
 
-      {/* 2. METHODOLOGY BENTO */}
+      {/* 2. SERVICES GRID */}
       <section className="dh-section" style={{ paddingTop: 0 }}>
         <div className="dh-container">
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2rem' }} className="dh-responsive-grid">
@@ -85,15 +91,44 @@ const DHServices = () => {
         </div>
       </section>
 
-      {/* 3. PROCESS WORKFLOW */}
+      {/* 3. METHODOLOGY (HOW WE THINK) */}
       <section className="dh-section" style={{ background: 'var(--bg-secondary)' }}>
+        <div className="dh-container">
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8rem', alignItems: 'center' }} className="dh-responsive-grid">
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
+              <div className="dh-label">OUR PHILOSOPHY</div>
+              <h2 className="dh-display" style={{ fontSize: '4rem', marginBottom: '2.5rem' }}>HOW WE <br/><span style={{ color: 'var(--accent-primary)' }}>THINK.</span></h2>
+              <p className="dh-body" style={{ fontSize: '1.15rem', lineHeight: 1.8 }}>
+                Our methodology is rooted in architectural design principles—prioritizing structure, clarity, and intent above all else. We don't just deliver; we architect for long-term scalability.
+              </p>
+            </motion.div>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }} className="dh-responsive-grid">
+              {[
+                { icon: <Search size={28} />, title: 'Discovery', desc: 'Deep immersion into the business ecosystem.' },
+                { icon: <Zap size={28} />, title: 'Synthesis', desc: 'Engineered prototyping for technical function.' },
+                { icon: <Code size={28} />, title: 'Execution', desc: 'Rigorous deployment with focus on fidelity.' },
+                { icon: <TrendingUp size={28} />, title: 'Evolution', desc: 'Algorithmic refinement for peak performance.' }
+              ].map((item, i) => (
+                <div key={i} className="dh-card" style={{ padding: '2.5rem', background: 'var(--bg-primary)' }}>
+                  <div style={{ color: 'var(--accent-primary)', marginBottom: '1.5rem' }}>{item.icon}</div>
+                  <h4 className="dh-heading" style={{ fontSize: '1.2rem', marginBottom: '0.8rem' }}>{item.title}</h4>
+                  <p className="dh-body" style={{ fontSize: '0.85rem' }}>{item.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. PROCESS WORKFLOW (Steps) */}
+      <section className="dh-section">
         <div className="dh-container">
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6rem', alignItems: 'center' }} className="dh-responsive-grid">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
               <div className="dh-label">OUR WORKFLOW</div>
               <h2 className="dh-display" style={{ fontSize: '4rem', marginBottom: '2.5rem' }}>BATTLE-TESTED <br/><span style={{ color: 'var(--accent-primary)' }}>PROCESS.</span></h2>
               <p className="dh-body" style={{ fontSize: '1.1rem', marginBottom: '3rem' }}>
-                We don't just deliver; we architect. Our agile methodology ensures quality and scalability at every milestone.
+                A systematic approach to digital success. We ensure transparency and quality at every stage of the lifecycle.
               </p>
               <button className="dh-btn-fill">DOWNLOAD METHODOLOGY</button>
             </motion.div>
@@ -121,6 +156,34 @@ const DHServices = () => {
                 </motion.div>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. CTA SECTION */}
+      <section className="dh-section" style={{ background: 'var(--bg-secondary)', borderTop: '1px solid var(--border-faint)' }}>
+        <div className="dh-container">
+          <div className="dh-card" style={{ padding: '8rem 4rem', textAlign: 'center', background: 'var(--bg-primary)' }}>
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
+              <h2 className="dh-display" style={{ fontSize: 'clamp(2rem, 5vw, 4rem)', marginBottom: '2rem', lineHeight: 1.1 }}>
+                READY TO SCALE YOUR <br/>
+                <span style={{ color: 'var(--accent-primary)' }}>
+                  <RotatingText 
+                    words={["DIGITAL ASSETS", "COMMERCE HUB", "TECH STACK", "MARKET SHARE"]} 
+                    interval={3000}
+                    className="dh-display"
+                  />
+                </span> <br/>
+                INTO THE FUTURE?
+              </h2>
+              <p className="dh-body" style={{ maxWidth: '600px', margin: '0 auto 4rem', fontSize: '1.2rem' }}>
+                Join 150+ global clients who trust Avani Enterprises for their technical and strategic oversight.
+              </p>
+              <div style={{ display: 'flex', gap: '2rem', justifyContent: 'center' }} className="dh-responsive-grid">
+                <Link to="/dummyhome/get-consultation" className="dh-btn-fill">INITIATE PROJECT <ArrowRight size={18} /></Link>
+                <Link to="/dummyhome/contact" className="dh-btn-ghost">VIEW PORTFOLIO</Link>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>

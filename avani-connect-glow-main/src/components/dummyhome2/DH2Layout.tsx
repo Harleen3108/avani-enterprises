@@ -90,12 +90,12 @@ const DH2Layout = () => {
       <DH2Navbar />
       
       {/* Background elements */}
-      <div className="dh2-hero-bg-wrapper" style={{ position: 'fixed', opacity: 0.4 }}>
+      <div className="dh2-hero-bg-wrapper" style={{ position: 'fixed', opacity: 0.4, zIndex: 0 }}>
         <FluidHeroBackground />
         <div className="dh2-hero-grain"/>
       </div>
 
-      <main style={{ position: 'relative', zIndex: 1, minHeight: '100vh' }}>
+      <main className="dh2-page" style={{ position: 'relative', zIndex: 1, minHeight: '100vh' }}>
         <Outlet />
       </main>
 

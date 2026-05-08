@@ -23,9 +23,20 @@ const DH2Blog = () => {
   useEffect(() => {
     (async () => {
       try {
-        const res = await axios.get(`${API_BASE_URL}/blogs`);
-        setBlogs(res.data);
-      } catch { console.error('Error fetching blogs'); } finally { setLoading(false); }
+        const res = await axios.get(`${API_BASE_URL}/blogs`, {
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.data.success) {
+          setBlogs(res.data.data || []);
+        } else {
+          setBlogs(Array.isArray(res.data) ? res.data : []);
+        }
+      } catch { 
+        console.error('Error fetching blogs'); 
+        setBlogs([]);
+      } finally { 
+        setLoading(false); 
+      }
     })();
   }, []);
 

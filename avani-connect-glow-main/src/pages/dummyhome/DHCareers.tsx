@@ -23,7 +23,7 @@ const DHCareers = () => {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const response = await axios.get(`${API_BASE_URL}/careers`);
+        const response = await axios.get(`${API_BASE_URL}/jobs`);
         if (response.data.success) setJobs(response.data.data || []);
       } catch (error) { console.error('Error fetching jobs:', error); }
       finally { setIsLoading(false); }
@@ -116,7 +116,7 @@ const DHCareers = () => {
                   transition={{ delay: i * 0.1 }}
                 >
                   <Link to={`/dummyhome/careers/${job._id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                    <div className="dh-card" style={{ padding: '2.5rem 4rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} className="dh-responsive-grid">
+                    <div className="dh-card dh-responsive-grid" style={{ padding: '2.5rem 4rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                       <div style={{ display: 'flex', gap: '3rem', alignItems: 'center' }}>
                         <div style={{ width: '64px', height: '64px', borderRadius: '16px', background: 'var(--accent-hover)', color: 'var(--accent-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                           <Briefcase size={28} />

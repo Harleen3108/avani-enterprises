@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { MapPin, ArrowRight, Briefcase, Search, Clock, CheckCircle, Zap, Users, Sparkles } from 'lucide-react';
+import { MapPin, ArrowRight, Briefcase, Search, Clock, CheckCircle, Zap, Users, Sparkles, Globe } from 'lucide-react';
 import axios from 'axios';
 import { API_BASE_URL } from '../../utils/api';
 import '../../components/dummyhome2/DummyHome2.css';

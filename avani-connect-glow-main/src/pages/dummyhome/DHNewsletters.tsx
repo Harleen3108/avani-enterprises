@@ -25,7 +25,9 @@ const DHNewsletters = () => {
   useEffect(() => {
     const fetchNewsletters = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}/api/newsletters`);
+        const response = await fetch(`${API_BASE_URL}/api/newsletters`, {
+          headers: { 'Accept': 'application/json' }
+        });
         const json = await response.json();
         if (json.success) setNewsletters(json.data || []);
       } catch (error) { console.error('Error fetching newsletters:', error); }
@@ -115,7 +117,7 @@ const DHNewsletters = () => {
                   variants={fadeUp} 
                   transition={{ delay: i * 0.1 }}
                 >
-                  <div className="dh-card" style={{ padding: '2.5rem 4rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} className="dh-responsive-grid">
+                  <div className="dh-card dh-responsive-grid" style={{ padding: '2.5rem 4rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <div style={{ display: 'flex', gap: '3rem', alignItems: 'center' }}>
                       <div style={{ width: '56px', height: '56px', borderRadius: '50%', background: 'var(--bg-tertiary)', color: 'var(--accent-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <Mail size={24} />

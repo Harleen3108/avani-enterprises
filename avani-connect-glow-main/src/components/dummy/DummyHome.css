@@ -103,11 +103,19 @@
 
 /* Cinematic Hero */
 .dh-hero {
-    min-height: 80vh;
+    min-height: 90vh;
     display: flex;
     align-items: center;
-    padding-top: 10rem;
+    padding-top: 120px; /* Consistent with DummyHome hero */
     position: relative;
+    overflow: hidden;
+}
+
+@media (max-width: 768px) {
+    .dh-hero {
+        padding-top: 100px;
+        min-height: 70vh;
+    }
 }
 
 .dh-hero-title {
@@ -220,6 +228,16 @@
     border: 1px solid var(--border-light);
 }
 
+.dh-circle-btn {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s var(--ease-out);
+}
+
 .dh-grain {
     position: fixed;
     top: 0;
@@ -230,4 +248,52 @@
     z-index: 9999;
     opacity: 0.05;
     background-image: url('https://grainy-gradients.vercel.app/noise.svg');
+}
+
+/* === MOBILE REFINEMENTS === */
+@media (max-width: 768px) {
+    .dh-hero-title {
+        font-size: clamp(2.5rem, 12vw, 4rem);
+        line-height: 1.1;
+    }
+
+    .dh-display {
+        font-size: 2.5rem !important;
+        line-height: 1.1 !important;
+    }
+
+    .dh-section {
+        padding: 4rem 0;
+    }
+
+    .dh-card {
+        padding: 2rem;
+    }
+
+    .dh-btn-fill, .dh-btn-ghost {
+        padding: 1rem 2rem;
+        font-size: 0.8rem;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .dh-responsive-grid {
+        gap: 1.5rem !important;
+    }
+
+    /* Fix for specific flex layouts that aren't grid */
+    .dh-responsive-grid[style*="display: flex"] {
+        flex-direction: column !important;
+        gap: 3rem !important;
+    }
+
+    .dh-responsive-grid div[style*="flex: 0 0 200px"] {
+        flex: none !important;
+        font-size: 3rem !important;
+    }
+
+    .dh-circle-btn {
+        width: 48px;
+        height: 48px;
+    }
 }
