@@ -2052,17 +2052,28 @@
   }
   
   /* Services Horizontal Slider adjustments for mobile */
-  .dh2-wwd2-top {
-    padding: 2rem 1.5rem 0;
+  .dh2-wwd2-wrapper {
+    height: auto !important;
   }
-  .dh2-wwd2-card {
-    flex: 0 0 280px;
-    padding: 1.5rem;
-    min-height: 350px;
+  .dh2-wwd2-sticky {
+    position: relative !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+  .dh2-wwd2-track-area {
+    overflow: visible !important;
   }
   .dh2-wwd2-track {
-    padding: 0 1.5rem;
-    gap: 1rem;
+    flex-direction: column !important;
+    transform: none !important;
+    padding: 2rem 1.5rem !important;
+    gap: 1.5rem !important;
+  }
+  .dh2-wwd2-card {
+    flex: none !important;
+    width: 100% !important;
+    min-height: auto !important;
+    padding: 2rem !important;
   }
 
   /* Specific Mobile Grids */
@@ -2244,4 +2255,65 @@
     max-width: 100% !important;
     overflow-x: hidden;
   }
+}
+
+/* Force solid navbar background on mobile for readability */
+@media (max-width: 768px) {
+    .dh2-nav--transparent {
+        background: var(--bg-deep, #0a0a0a) !important;
+        border-bottom-color: rgba(255,255,255,.05) !important;
+    }
+
+    /* Transform Featured Work marquee into a vertical grid on mobile */
+    .dh2-section-header[style*="display: flex"] {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 1rem !important;
+    }
+
+    .dh2-vinyl-wrapper {
+        width: 100% !important;
+        left: auto !important;
+        right: auto !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding: 0 1.5rem !important;
+        overflow: visible !important;
+    }
+
+    .dh2-vinyl-track {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 2rem !important;
+        transform: none !important;
+        animation: none !important;
+        width: 100% !important;
+        padding-left: 0 !important;
+    }
+    
+    .dh2-vinyl-card {
+        width: 100% !important;
+        height: auto !important;
+        aspect-ratio: 16/10 !important;
+        margin-left: 0 !important;
+        border-radius: 16px !important;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
+    }
+
+    /* Hide duplicated items in the marquee on mobile */
+    .dh2-vinyl-card:nth-child(n+7) {
+        display: none !important;
+    }
+
+    /* Optimize Team Grid for mobile */
+    .dh2-team-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 1rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .dh2-team-grid {
+        grid-template-columns: 1fr !important;
+    }
 }

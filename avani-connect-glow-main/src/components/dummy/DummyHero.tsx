@@ -141,20 +141,20 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
 
               {/* Headline */}
               <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25, duration: 1, ease: [0.22, 1, 0.36, 1] }}>
-                <h1 style={{ fontFamily: "'Clash Display', Impact, sans-serif", fontSize: 'clamp(36px, 10vw, 88px)', fontWeight: 700, lineHeight: 0.92, color: 'var(--text-primary)', letterSpacing: '-0.01em', margin: 0 }}>
+                <h1 style={{ fontFamily: "'Clash Display', Impact, sans-serif", fontSize: 'clamp(24px, 8vw, 88px)', fontWeight: 700, lineHeight: 0.92, color: 'var(--text-primary)', letterSpacing: '-0.01em', margin: 0 }}>
                   BUILD<br />
-                  <span style={{ color: 'var(--accent-primary)' }}>HIGH‑</span>PERFORMING
+                  <span style={{ color: 'var(--accent-primary)' }}>HIGH-</span>PERFORMING
                 </h1>
 
                 {/* Animated outline word */}
-                <div style={{ overflow: 'hidden', height: 'clamp(36px, 10vw, 82px)', margin: '2px 0' }}>
+                <div style={{ overflow: 'hidden', height: 'clamp(24px, 8vw, 82px)', margin: '2px 0' }}>
                   <motion.div key={wordIndex} initial={{ y: '110%' }} animate={{ y: '0%' }} transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-                    style={{ fontFamily: "'Clash Display', Impact, sans-serif", fontSize: 'clamp(36px, 10vw, 88px)', fontWeight: 700, lineHeight: 0.92, color: 'transparent', WebkitTextStroke: '2px var(--accent-primary)', letterSpacing: '-0.01em', display: 'block' }}>
+                    style={{ fontFamily: "'Clash Display', Impact, sans-serif", fontSize: 'clamp(24px, 8vw, 88px)', fontWeight: 700, lineHeight: 0.92, color: 'transparent', WebkitTextStroke: '2px var(--accent-primary)', letterSpacing: '-0.01em', display: 'block' }}>
                     {words[wordIndex]}
                   </motion.div>
                 </div>
 
-                <h1 style={{ fontFamily: "'Clash Display', Impact, sans-serif", fontSize: 'clamp(36px, 10vw, 88px)', fontWeight: 700, lineHeight: 0.92, color: 'var(--text-primary)', letterSpacing: '-0.01em', marginBottom: '24px' }}>
+                <h1 style={{ fontFamily: "'Clash Display', Impact, sans-serif", fontSize: 'clamp(24px, 8vw, 88px)', fontWeight: 700, lineHeight: 0.92, color: 'var(--text-primary)', letterSpacing: '-0.01em', marginBottom: '24px' }}>
                   & ACCELERATE <span style={{ color: 'var(--accent-primary)' }}>GROWTH</span>
                 </h1>
               </motion.div>

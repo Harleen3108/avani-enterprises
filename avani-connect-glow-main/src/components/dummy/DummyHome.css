@@ -296,4 +296,23 @@
         width: 48px;
         height: 48px;
     }
+
+    /* DHAbout Timeline Mobile Fixes */
+    .dh-about-page .dh-section div[style*="left: 50%"] {
+        left: 20px !important;
+        transform: none !important;
+    }
+
+    .dh-about-page .dh-responsive-grid[style*="width: 50%"] {
+        width: 100% !important;
+        margin-left: 0 !important;
+        padding: 2rem 2rem 2rem 40px !important;
+        justify-content: flex-start !important;
+    }
+
+    .dh-about-page .dh-responsive-grid[style*="width: 50%"] div[style*="position: absolute"] {
+        left: 20px !important;
+        right: auto !important;
+        transform: translate(-50%, -50%) !important;
+    }
 }
