@@ -28,7 +28,7 @@ const DummyRotatingText: React.FC<DummyRotatingTextProps> = ({ words, interval =
           style={{
             display: 'inline-block',
             fontFamily: "'Cormorant Garamond', Georgia, serif",
-            fontSize: 'clamp(52px, 6vw, 88px)',
+            fontSize: 'clamp(39px, 4.5vw, 66px)',
             fontWeight: 700,
             lineHeight: 1.05,
             letterSpacing: '-0.02em',

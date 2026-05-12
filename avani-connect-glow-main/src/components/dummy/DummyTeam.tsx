@@ -39,7 +39,7 @@ const DummyTeam = () => {
   const [hovered, setHovered] = useState<number | null>(null);
 
   return (
-    <section style={{ padding: '80px 0', background: 'var(--bg-primary)', position: 'relative', overflow: 'hidden' }}>
+    <section className="theme-brown" style={{ padding: '80px 0', background: 'var(--bg-primary)', position: 'relative', overflow: 'hidden' }}>
       <div style={{ position: 'absolute', inset: 0, opacity: 0.025, backgroundImage: `linear-gradient(var(--accent-primary) 1px, transparent 1px), linear-gradient(90deg, var(--accent-primary) 1px, transparent 1px)`, backgroundSize: '60px 60px', pointerEvents: 'none' }} />
 
       <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 48px', position: 'relative', zIndex: 5 }} className="dummy-team-container">
@@ -53,13 +53,13 @@ const DummyTeam = () => {
         >
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '12px', marginBottom: '14px' }}>
             <div style={{ width: '28px', height: '2px', background: 'var(--accent-primary)' }} />
-            <span style={{ fontFamily: "'Clash Display', sans-serif", fontSize: '11px', letterSpacing: '0.28em', color: 'var(--accent-primary)', fontWeight: 600 }}>THE PEOPLE</span>
+            <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: '11px', letterSpacing: '0.28em', color: 'var(--accent-primary)', fontWeight: 600 }}>THE PEOPLE</span>
             <div style={{ width: '28px', height: '2px', background: 'var(--accent-primary)' }} />
           </div>
-          <h2 style={{ fontFamily: "'Clash Display', Impact, sans-serif", fontSize: 'clamp(36px, 8vw, 64px)', fontWeight: 700, color: 'var(--text-primary)', lineHeight: 0.92, letterSpacing: '-0.01em' }}>
+          <h2 style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(27px, 6.0vw, 48px)', fontWeight: 700, color: 'var(--text-primary)', lineHeight: 0.92, letterSpacing: '-0.01em' }}>
             MEET OUR <span style={{ color: 'transparent', WebkitTextStroke: '1.5px var(--accent-primary)' }}>TEAM</span>
           </h2>
-          <p style={{ fontFamily: "'Satoshi', sans-serif", fontSize: '14px', color: 'var(--text-secondary)', maxWidth: '440px', margin: '16px auto 0', fontWeight: 400, lineHeight: 1.6 }}>
+          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '14px', color: 'var(--text-secondary)', maxWidth: '440px', margin: '16px auto 0', fontWeight: 400, lineHeight: 1.6 }}>
             The minds behind your digital transformation — passionate, experienced, and relentlessly creative.
           </p>
         </motion.div>
@@ -121,14 +121,14 @@ const DummyTeam = () => {
                 {/* Info */}
                 <div style={{ padding: '16px', textAlign: 'center' }}>
                   <div style={{
-                    fontFamily: "'Clash Display', sans-serif",
+                    fontFamily: "'Outfit', sans-serif",
                     fontSize: '15px', fontWeight: 600, color: 'var(--text-primary)',
                     letterSpacing: '0.04em', marginBottom: '3px',
                   }}>
                     {member.name}
                   </div>
                   <div style={{
-                    fontFamily: "'Satoshi', sans-serif",
+                    fontFamily: "'Inter', sans-serif",
                     fontSize: '11px', color: 'var(--accent-primary)', fontWeight: 500,
                     letterSpacing: '0.06em',
                   }}>

@@ -182,6 +182,9 @@ import DHProducts from "./pages/dummyhome/DHProducts";
 import DHGlobalPresence from "./pages/dummyhome/DHGlobalPresence";
 import DHCareers from "./pages/dummyhome/DHCareers";
 import DHNewsletters from "./pages/dummyhome/DHNewsletters";
+import DHCourses from "./pages/dummyhome/DHCourses";
+import DHCaseStudies from "./pages/dummyhome/DHCaseStudies";
+import DHCareerDetail from "./pages/dummyhome/DHCareerDetail";
 
 import DH2PolicicueProject from './pages/dummyhome2/DH2PolicicueProject';
 import DH2IndusProject from './pages/dummyhome2/DH2IndusProject';
@@ -248,13 +251,15 @@ const AppLayout = () => {
             <Route path="about" element={<DHAbout />} />
             <Route path="team" element={<DHTeam />} />
             <Route path="services" element={<DHServices />} />
-            <Route path="our-products" element={<DHProducts />} />
             <Route path="projects" element={<DHProjects />} />
             <Route path="contact" element={<DHContact />} />
             <Route path="blog" element={<DHBlog />} />
             <Route path="global-presence" element={<DHGlobalPresence />} />
             <Route path="careers" element={<DHCareers />} />
+            <Route path="careers/:id" element={<DHCareerDetail />} />
             <Route path="newsletters" element={<DHNewsletters />} />
+            <Route path="courses" element={<DHCourses />} />
+            <Route path="case-studies" element={<DHCaseStudies />} />
           </Route>
 
           {/* DH2 Sub-pages with shared layout */}

@@ -13,7 +13,7 @@ const DummyTestimonials = ({ testimonials }: any) => {
   const t = testimonials[cur];
 
   return (
-    <section style={{ position: 'relative', overflow: 'hidden', minHeight: '480px', display: 'flex', alignItems: 'center' }}>
+    <section className="theme-brown" style={{ position: 'relative', overflow: 'hidden', minHeight: '480px', display: 'flex', alignItems: 'center' }}>
       {/* BG Image */}
       <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
         <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=2070&auto=format&fit=crop" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
@@ -28,9 +28,9 @@ const DummyTestimonials = ({ testimonials }: any) => {
         <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ marginBottom: '40px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '14px' }}>
             <div style={{ width: '28px', height: '2px', background: 'var(--accent-primary)' }} />
-            <span style={{ fontFamily: "'Clash Display', sans-serif", fontSize: '11px', letterSpacing: '0.28em', color: 'var(--accent-primary)', fontWeight: 600 }}>CLIENT STORIES</span>
+            <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: '11px', letterSpacing: '0.28em', color: 'var(--accent-primary)', fontWeight: 600 }}>CLIENT STORIES</span>
           </div>
-          <h2 style={{ fontFamily: "'Clash Display', Impact, sans-serif", fontSize: 'clamp(36px, 8vw, 64px)', fontWeight: 700, color: 'var(--text-primary)', lineHeight: 0.92, letterSpacing: '-0.01em' }}>
+          <h2 style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(27px, 6.0vw, 48px)', fontWeight: 700, color: 'var(--text-primary)', lineHeight: 0.92, letterSpacing: '-0.01em' }}>
             WHAT OUR<br /><span style={{ color: 'transparent', WebkitTextStroke: '1.5px var(--accent-primary)' }}>CLIENTS SAY</span>
           </h2>
         </motion.div>
@@ -42,8 +42,8 @@ const DummyTestimonials = ({ testimonials }: any) => {
               <div style={{ display: 'flex', gap: '3px', marginBottom: '18px' }}>
                 {[...Array(t.rating)].map((_: any, i: number) => <Star key={i} size={14} fill="var(--accent-primary)" color="var(--accent-primary)" />)}
               </div>
-              <div style={{ fontFamily: "'Clash Display', serif", fontSize: '72px', lineHeight: 0.7, color: 'var(--accent-hover)', marginBottom: '4px', userSelect: 'none', fontWeight: 300 }}>"</div>
-              <p style={{ fontFamily: "'Satoshi', sans-serif", fontSize: 'clamp(14px, 1.6vw, 18px)', lineHeight: 1.65, color: 'var(--text-secondary)', fontWeight: 400, fontStyle: 'italic', marginBottom: '28px' }}>
+              <div style={{ fontFamily: "'Clash Display', serif", fontSize: '54px', lineHeight: 0.7, color: 'var(--accent-hover)', marginBottom: '4px', userSelect: 'none', fontWeight: 300 }}>"</div>
+              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 'clamp(11px, 1.2vw, 14px)', lineHeight: 1.65, color: 'var(--text-secondary)', fontWeight: 400, fontStyle: 'italic', marginBottom: '28px' }}>
                 {t.content}
               </p>
               <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
@@ -51,8 +51,8 @@ const DummyTestimonials = ({ testimonials }: any) => {
                   <img src={t.image} alt={t.name} style={{ width: '100%', height: '100%', objectFit: 'contain', padding: '3px' }} />
                 </div>
                 <div>
-                  <div style={{ fontFamily: "'Clash Display', sans-serif", fontSize: '15px', color: 'var(--text-primary)', letterSpacing: '0.06em', fontWeight: 600 }}>{t.name}</div>
-                  <div style={{ fontFamily: "'Satoshi', sans-serif", fontSize: '11px', color: 'var(--accent-primary)', marginTop: '1px', fontWeight: 500 }}>{t.position}</div>
+                  <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: '15px', color: 'var(--text-primary)', letterSpacing: '0.06em', fontWeight: 600 }}>{t.name}</div>
+                  <div style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', color: 'var(--accent-primary)', marginTop: '1px', fontWeight: 500 }}>{t.position}</div>
                 </div>
               </div>
             </motion.div>
@@ -68,8 +68,8 @@ const DummyTestimonials = ({ testimonials }: any) => {
                   <img src={item.image} alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'contain', padding: '2px' }} />
                 </div>
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ fontFamily: "'Clash Display', sans-serif", fontSize: '12px', color: cur === i ? 'var(--text-primary)' : 'var(--text-tertiary)', letterSpacing: '0.06em', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', fontWeight: 600 }}>{item.name}</div>
-                  <div style={{ fontFamily: "'Satoshi', sans-serif", fontSize: '10px', color: 'var(--text-tertiary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.position}</div>
+                  <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: '12px', color: cur === i ? 'var(--text-primary)' : 'var(--text-tertiary)', letterSpacing: '0.06em', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', fontWeight: 600 }}>{item.name}</div>
+                  <div style={{ fontFamily: "'Inter', sans-serif", fontSize: '10px', color: 'var(--text-tertiary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.position}</div>
                 </div>
                 {cur === i && <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: 'var(--accent-primary)', flexShrink: 0 }} />}
               </motion.div>

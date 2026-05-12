@@ -11,7 +11,7 @@ const stats = [
 
 const DummyImpactBar = () => {
   return (
-    <section style={{ padding: '80px 0', background: 'var(--bg-primary)', position: 'relative', overflow: 'hidden' }}>
+    <section className="theme-beige" style={{ padding: '80px 0', background: 'var(--bg-primary)', position: 'relative', overflow: 'hidden' }}>
       {/* Ambient glow */}
       <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: '800px', height: '300px', background: 'radial-gradient(ellipse, var(--accent-hover) 0%, transparent 70%)', pointerEvents: 'none' }} />
 
@@ -27,7 +27,7 @@ const DummyImpactBar = () => {
           transition={{ duration: 0.8 }}
           style={{ textAlign: 'center', marginBottom: '14px' }}
         >
-          <span style={{ fontFamily: "'Clash Display', sans-serif", fontSize: '11px', letterSpacing: '0.3em', color: 'var(--accent-primary)', fontWeight: 600 }}>OUR IMPACT IN NUMBERS</span>
+          <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: '11px', letterSpacing: '0.3em', color: 'var(--accent-primary)', fontWeight: 600 }}>OUR IMPACT IN NUMBERS</span>
         </motion.div>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0' }} className="dummy-impact-grid">
@@ -49,8 +49,8 @@ const DummyImpactBar = () => {
               <div style={{ position: 'absolute', top: '30%', left: '50%', transform: 'translate(-50%,-50%)', width: '120px', height: '80px', background: 'radial-gradient(ellipse, var(--accent-hover) 0%, transparent 70%)', pointerEvents: 'none' }} />
 
               <div style={{
-                fontFamily: "'Clash Display', Impact, sans-serif",
-                fontSize: 'clamp(36px, 8vw, 80px)',
+                fontFamily: "'Outfit', sans-serif",
+                fontSize: 'clamp(27px, 6.0vw, 60px)',
                 fontWeight: 700,
                 color: 'var(--accent-primary)',
                 lineHeight: 1,
@@ -59,7 +59,7 @@ const DummyImpactBar = () => {
                 <DummyAnimatedCounter target={s.target} suffix={s.suffix} />
               </div>
               <div style={{
-                fontFamily: "'Clash Display', sans-serif",
+                fontFamily: "'Outfit', sans-serif",
                 fontSize: '14px',
                 fontWeight: 600,
                 color: 'var(--text-primary)',
@@ -70,7 +70,7 @@ const DummyImpactBar = () => {
                 {s.label}
               </div>
               <div style={{
-                fontFamily: "'Satoshi', sans-serif",
+                fontFamily: "'Inter', sans-serif",
                 fontSize: '12px',
                 color: 'var(--text-tertiary)',
                 marginTop: '4px',

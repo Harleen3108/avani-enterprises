@@ -58,7 +58,7 @@ const DummyGlobalPresence = () => {
   };
 
   return (
-    <section style={{ padding: '72px 0', background: 'var(--bg-primary)', position: 'relative', overflow: 'hidden' }}>
+    <section className="theme-brown" style={{ padding: '72px 0', background: 'var(--bg-primary)', position: 'relative', overflow: 'hidden' }}>
       <div style={{ position: 'absolute', inset: 0, opacity: 0.03, backgroundImage: `linear-gradient(var(--accent-primary) 1px, transparent 1px), linear-gradient(90deg, var(--accent-primary) 1px, transparent 1px)`, backgroundSize: '50px 50px', pointerEvents: 'none' }} />
       <div style={{ position: 'absolute', top: '-10%', left: '10%', width: '400px', height: '400px', background: 'radial-gradient(circle, var(--accent-hover) 0%, transparent 70%)', borderRadius: '50%', pointerEvents: 'none' }} />
       <div style={{ position: 'absolute', bottom: '-10%', right: '10%', width: '300px', height: '300px', background: 'radial-gradient(circle, var(--accent-hover) 0%, transparent 70%)', borderRadius: '50%', pointerEvents: 'none' }} />
@@ -67,12 +67,12 @@ const DummyGlobalPresence = () => {
         <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} style={{ textAlign: 'center', marginBottom: '48px' }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', padding: '6px 18px', background: 'var(--accent-hover)', border: '1px solid var(--border-light)', borderRadius: '100px', marginBottom: '20px' }}>
             <div style={{ width: '7px', height: '7px', background: 'var(--accent-primary)', borderRadius: '50%', boxShadow: '0 0 10px var(--accent-primary)', animation: 'dummy-pulse 2s ease-in-out infinite' }} />
-            <span style={{ fontFamily: "'Clash Display', sans-serif", fontSize: '11px', letterSpacing: '0.25em', color: 'var(--accent-primary)', fontWeight: 600 }}>OUR GLOBAL FOOTPRINT</span>
+            <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: '11px', letterSpacing: '0.25em', color: 'var(--accent-primary)', fontWeight: 600 }}>OUR GLOBAL FOOTPRINT</span>
           </div>
-          <h2 style={{ fontFamily: "'Clash Display', Impact, sans-serif", fontSize: 'clamp(32px, 8vw, 64px)', fontWeight: 700, color: 'var(--text-primary)', lineHeight: 0.92, letterSpacing: '-0.01em', marginBottom: '10px' }}>
+          <h2 style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(24px, 6.0vw, 48px)', fontWeight: 700, color: 'var(--text-primary)', lineHeight: 0.92, letterSpacing: '-0.01em', marginBottom: '10px' }}>
             FROM ROOTS <span style={{ color: 'transparent', WebkitTextStroke: '1.5px var(--accent-primary)' }}>TO REACH</span>
           </h2>
-          <p style={{ fontFamily: "'Satoshi', sans-serif", fontSize: '13px', color: 'var(--text-secondary)', maxWidth: '480px', margin: '0 auto', fontWeight: 400, lineHeight: 1.6 }}>
+          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', color: 'var(--text-secondary)', maxWidth: '480px', margin: '0 auto', fontWeight: 400, lineHeight: 1.6 }}>
             Explore our journey across continents — tap or swipe to discover each location
           </p>
         </motion.div>
@@ -114,17 +114,17 @@ const DummyGlobalPresence = () => {
                     <div style={{ position: 'absolute', top: '14px', left: '16px' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'var(--glass-bg)', backdropFilter: 'blur(10px)', padding: '5px 12px', borderRadius: '100px', border: '1px solid var(--border-light)' }}>
                         <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: activeOffice.color, boxShadow: `0 0 8px ${activeOffice.color}` }} />
-                        <span style={{ fontFamily: "'Clash Display', sans-serif", fontSize: '9px', color: 'var(--text-secondary)', letterSpacing: '0.2em', fontWeight: 600 }}>{activeOffice.tagline.toUpperCase()}</span>
+                        <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: '9px', color: 'var(--text-secondary)', letterSpacing: '0.2em', fontWeight: 600 }}>{activeOffice.tagline.toUpperCase()}</span>
                       </div>
                     </div>
                     <div style={{ position: 'absolute', top: '14px', right: '16px' }}>
-                      <span style={{ fontFamily: "'Clash Display', sans-serif", fontSize: '12px', color: 'var(--text-tertiary)', letterSpacing: '0.1em', fontWeight: 600 }}>
+                      <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: '12px', color: 'var(--text-tertiary)', letterSpacing: '0.1em', fontWeight: 600 }}>
                         {String(activeIndex + 1).padStart(2, '0')}/{String(offices.length).padStart(2, '0')}
                       </span>
                     </div>
                     <div style={{ position: 'absolute', bottom: '14px', left: '16px' }}>
-                      <h3 style={{ fontFamily: "'Clash Display', Impact, sans-serif", fontSize: '32px', color: 'var(--text-primary)', letterSpacing: '0.02em', lineHeight: 1, marginBottom: '2px', fontWeight: 700 }}>{activeOffice.city}</h3>
-                      <span style={{ fontFamily: "'Satoshi', sans-serif", fontSize: '10px', color: 'var(--text-secondary)', letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: 500 }}>{activeOffice.country}</span>
+                      <h3 style={{ fontFamily: "'Outfit', sans-serif", fontSize: '24px', color: 'var(--text-primary)', letterSpacing: '0.02em', lineHeight: 1, marginBottom: '2px', fontWeight: 700 }}>{activeOffice.city}</h3>
+                      <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '10px', color: 'var(--text-secondary)', letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: 500 }}>{activeOffice.country}</span>
                     </div>
                   </div>
                   <div style={{ padding: '20px', background: 'var(--bg-secondary)' }}>
@@ -132,9 +132,9 @@ const DummyGlobalPresence = () => {
                       <div style={{ width: '28px', height: '28px', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: `${activeOffice.color}15` }}>
                         <MapPin size={14} style={{ color: activeOffice.color }} />
                       </div>
-                      <span style={{ fontFamily: "'Clash Display', sans-serif", fontSize: '10px', color: 'var(--text-secondary)', letterSpacing: '0.2em', fontWeight: 600 }}>{activeOffice.label.toUpperCase()}</span>
+                      <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: '10px', color: 'var(--text-secondary)', letterSpacing: '0.2em', fontWeight: 600 }}>{activeOffice.label.toUpperCase()}</span>
                     </div>
-                    <p style={{ fontFamily: "'Satoshi', sans-serif", fontSize: '13px', lineHeight: 1.65, color: 'var(--text-tertiary)', fontWeight: 400, marginBottom: '16px' }}>{activeOffice.description}</p>
+                    <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', lineHeight: 1.65, color: 'var(--text-tertiary)', fontWeight: 400, marginBottom: '16px' }}>{activeOffice.description}</p>
                     <div style={{ height: '3px', borderRadius: '2px', background: 'var(--border-light)', overflow: 'hidden' }}>
                       <motion.div key={activeIndex} initial={{ width: '0%' }} animate={{ width: '100%' }} transition={{ duration: 4.5, ease: 'linear' }} style={{ height: '100%', borderRadius: '2px', background: activeOffice.color }} />
                     </div>
@@ -173,10 +173,10 @@ const DummyGlobalPresence = () => {
                 style={{ textAlign: 'left', padding: '16px', borderRadius: '12px', cursor: 'pointer', position: 'relative', overflow: 'hidden', transition: 'all 0.3s', background: isActive ? 'var(--accent-hover)' : 'var(--card-bg)', border: `1px solid ${isActive ? 'var(--accent-primary)' : 'var(--border-faint)'}`, transform: isActive ? 'translateY(-2px)' : 'none', boxShadow: isActive ? '0 8px 24px rgba(0,0,0,0.3)' : 'none' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '8px' }}>
                   <div style={{ width: '7px', height: '7px', borderRadius: '50%', background: office.color, boxShadow: isActive ? `0 0 10px ${office.color}` : 'none', transition: 'all 0.3s' }} />
-                  <span style={{ fontFamily: "'Clash Display', sans-serif", fontSize: '9px', color: isActive ? 'var(--text-secondary)' : 'var(--text-tertiary)', letterSpacing: '0.2em', fontWeight: 600 }}>{office.label.toUpperCase()}</span>
+                  <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: '9px', color: isActive ? 'var(--text-secondary)' : 'var(--text-tertiary)', letterSpacing: '0.2em', fontWeight: 600 }}>{office.label.toUpperCase()}</span>
                 </div>
-                <div style={{ fontFamily: "'Clash Display', Impact, sans-serif", fontSize: '18px', color: isActive ? 'var(--text-primary)' : 'var(--text-tertiary)', letterSpacing: '0.04em', transition: 'color 0.3s', fontWeight: 700 }}>{office.city.toUpperCase()}</div>
-                <div style={{ fontFamily: "'Satoshi', sans-serif", fontSize: '10px', color: isActive ? 'var(--accent-primary)' : 'var(--text-tertiary)', marginTop: '2px', fontWeight: 500, transition: 'color 0.3s' }}>{office.tagline}</div>
+                <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18px', color: isActive ? 'var(--text-primary)' : 'var(--text-tertiary)', letterSpacing: '0.04em', transition: 'color 0.3s', fontWeight: 700 }}>{office.city.toUpperCase()}</div>
+                <div style={{ fontFamily: "'Inter', sans-serif", fontSize: '10px', color: isActive ? 'var(--accent-primary)' : 'var(--text-tertiary)', marginTop: '2px', fontWeight: 500, transition: 'color 0.3s' }}>{office.tagline}</div>
                 <div style={{ position: 'absolute', bottom: 0, left: 0, height: '2px', background: office.color, width: isActive ? '100%' : '0%', transition: 'width 0.5s ease' }} />
               </button>
             );
@@ -189,15 +189,15 @@ const DummyGlobalPresence = () => {
           <div style={{ display: 'flex', alignItems: 'center', gap: '32px' }}>
             {[{ value: '04', label: 'Hubs' }, { value: '02', label: 'Continents' }, { value: '∞', label: 'Reach' }].map((s) => (
               <div key={s.label} style={{ textAlign: 'center' }}>
-                <div style={{ fontFamily: "'Clash Display', Impact, sans-serif", fontSize: '26px', color: 'var(--text-primary)', lineHeight: 1, fontWeight: 700 }}>{s.value}</div>
-                <div style={{ fontFamily: "'Clash Display', sans-serif", fontSize: '9px', color: 'var(--accent-primary)', letterSpacing: '0.2em', marginTop: '2px', fontWeight: 600 }}>{s.label.toUpperCase()}</div>
+                <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: '20px', color: 'var(--text-primary)', lineHeight: 1, fontWeight: 700 }}>{s.value}</div>
+                <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: '9px', color: 'var(--accent-primary)', letterSpacing: '0.2em', marginTop: '2px', fontWeight: 600 }}>{s.label.toUpperCase()}</div>
               </div>
             ))}
           </div>
           <Link to="/global-presence" style={{
             display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '10px 24px',
             background: 'var(--accent-primary)', color: 'var(--bg-primary)',
-            borderRadius: '100px', textDecoration: 'none', fontFamily: "'Clash Display', sans-serif",
+            borderRadius: '100px', textDecoration: 'none', fontFamily: "'Outfit', sans-serif",
             fontSize: '11px', letterSpacing: '0.12em', fontWeight: 600, boxShadow: '0 4px 16px var(--accent-hover)', transition: 'all 0.3s',
           }}
             onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(-1px)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 6px 24px var(--accent-hover)'; }}

@@ -15,7 +15,7 @@ const DummyAwards = () => {
   const tripled = [...awards, ...awards, ...awards];
 
   return (
-    <section style={{ padding: '60px 0', background: 'var(--bg-secondary)', position: 'relative', overflow: 'hidden' }}>
+    <section className="theme-beige" style={{ padding: '60px 0', background: 'var(--bg-secondary)', position: 'relative', overflow: 'hidden' }}>
       <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '1px', background: 'linear-gradient(to right, transparent, var(--border-light) 30%, var(--border-light) 70%, transparent)' }} />
       <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '1px', background: 'linear-gradient(to right, transparent, var(--border-light) 30%, var(--border-light) 70%, transparent)' }} />
 
@@ -29,10 +29,10 @@ const DummyAwards = () => {
         >
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '12px', marginBottom: '10px' }}>
             <div style={{ width: '28px', height: '2px', background: 'var(--accent-primary)' }} />
-            <span style={{ fontFamily: "'Clash Display', sans-serif", fontSize: '11px', letterSpacing: '0.28em', color: 'var(--accent-primary)', fontWeight: 600 }}>RECOGNITION</span>
+            <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: '11px', letterSpacing: '0.28em', color: 'var(--accent-primary)', fontWeight: 600 }}>RECOGNITION</span>
             <div style={{ width: '28px', height: '2px', background: 'var(--accent-primary)' }} />
           </div>
-          <h2 style={{ fontFamily: "'Clash Display', Impact, sans-serif", fontSize: 'clamp(32px, 4vw, 48px)', fontWeight: 700, color: 'var(--text-primary)', lineHeight: 0.92 }}>
+          <h2 style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(24px, 3.0vw, 36px)', fontWeight: 700, color: 'var(--text-primary)', lineHeight: 0.92 }}>
             AWARDS & <span style={{ color: 'transparent', WebkitTextStroke: '1.5px var(--accent-primary)' }}>CERTIFICATIONS</span>
           </h2>
         </motion.div>
@@ -77,14 +77,14 @@ const DummyAwards = () => {
                 </div>
                 <div>
                   <div style={{
-                    fontFamily: "'Clash Display', sans-serif",
+                    fontFamily: "'Outfit', sans-serif",
                     fontSize: '14px', fontWeight: 600, color: 'var(--text-primary)',
                     letterSpacing: '0.04em', whiteSpace: 'nowrap',
                   }}>
                     {award.label}
                   </div>
                   <div style={{
-                    fontFamily: "'Satoshi', sans-serif",
+                    fontFamily: "'Inter', sans-serif",
                     fontSize: '11px', color: 'var(--text-secondary)',
                     whiteSpace: 'nowrap', marginTop: '1px',
                   }}>

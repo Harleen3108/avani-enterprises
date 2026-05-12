@@ -2,14 +2,14 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const DummyAnnouncement = () => (
-  <section style={{ padding: '44px 0', background: 'var(--bg-primary)', position: 'relative', overflow: 'hidden' }}>
+  <section className="theme-brown" style={{ padding: '44px 0', background: 'var(--bg-primary)', position: 'relative', overflow: 'hidden' }}>
     <div style={{ position: 'absolute', top: '50%', left: '40%', transform: 'translate(-50%,-50%)', width: '400px', height: '150px', background: 'radial-gradient(ellipse, var(--accent-hover) 0%, transparent 70%)', pointerEvents: 'none' }} />
     <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 48px', position: 'relative', zIndex: 5 }}>
       <div style={{ display: 'flex', borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--border-light)' }}>
         {/* Label */}
         <div style={{ background: 'var(--accent-primary)', padding: '18px 28px', flexShrink: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', minWidth: '160px' }}>
-          <span style={{ fontFamily: "'Clash Display', sans-serif", fontSize: '9px', letterSpacing: '0.28em', color: 'var(--bg-primary)', marginBottom: '4px', fontWeight: 600 }}>LIVE UPDATE</span>
-          <h3 style={{ fontFamily: "'Clash Display', Impact, sans-serif", fontSize: '17px', color: 'var(--bg-primary)', lineHeight: 1.1, letterSpacing: '0.06em', fontWeight: 700 }}>IMPORTANT<br />ANNOUNCEMENT</h3>
+          <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: '9px', letterSpacing: '0.28em', color: 'var(--bg-primary)', marginBottom: '4px', fontWeight: 600 }}>LIVE UPDATE</span>
+          <h3 style={{ fontFamily: "'Outfit', sans-serif", fontSize: '17px', color: 'var(--bg-primary)', lineHeight: 1.1, letterSpacing: '0.06em', fontWeight: 700 }}>IMPORTANT<br />ANNOUNCEMENT</h3>
         </div>
         {/* Ticker */}
         <div style={{ flex: 1, overflow: 'hidden', position: 'relative', background: 'var(--card-bg)', display: 'flex', alignItems: 'center' }}>
@@ -29,8 +29,8 @@ const DummyAnnouncement = () => (
                   </div>
                 </div>
                 <div>
-                  <div style={{ fontFamily: "'Satoshi', sans-serif", fontSize: '11px', color: 'var(--text-tertiary)', marginBottom: '1px', fontWeight: 400 }}>Proud technology partners of</div>
-                  <div style={{ fontFamily: "'Clash Display', Impact, sans-serif", fontSize: '15px', color: 'var(--accent-primary)', letterSpacing: '0.04em', fontWeight: 600 }}>Institute of Home Economics, DU</div>
+                  <div style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', color: 'var(--text-tertiary)', marginBottom: '1px', fontWeight: 400 }}>Proud technology partners of</div>
+                  <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: '15px', color: 'var(--accent-primary)', letterSpacing: '0.04em', fontWeight: 600 }}>Institute of Home Economics, DU</div>
                 </div>
                 <div style={{ width: '3px', height: '3px', borderRadius: '50%', background: 'var(--accent-hover)' }} />
               </div>

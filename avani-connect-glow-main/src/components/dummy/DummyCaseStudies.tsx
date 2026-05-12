@@ -52,7 +52,7 @@ const DummyCaseStudies = () => {
   const [hovered, setHovered] = useState<number | null>(null);
 
   return (
-    <section style={{ padding: '80px 0', background: 'var(--bg-secondary)', position: 'relative', overflow: 'hidden' }}>
+    <section className="theme-beige" style={{ padding: '80px 0', background: 'var(--bg-secondary)', position: 'relative', overflow: 'hidden' }}>
       {/* Dot pattern */}
       <div style={{ position: 'absolute', inset: 0, opacity: 0.03, backgroundImage: `radial-gradient(circle, var(--text-tertiary) 1px, transparent 0)`, backgroundSize: '40px 40px', pointerEvents: 'none' }} />
 
@@ -68,15 +68,15 @@ const DummyCaseStudies = () => {
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '14px' }}>
               <div style={{ width: '28px', height: '2px', background: 'var(--accent-primary)' }} />
-              <span style={{ fontFamily: "'Clash Display', sans-serif", fontSize: '11px', letterSpacing: '0.28em', color: 'var(--accent-primary)', fontWeight: 600 }}>SUCCESS STORIES</span>
+              <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: '11px', letterSpacing: '0.28em', color: 'var(--accent-primary)', fontWeight: 600 }}>SUCCESS STORIES</span>
             </div>
-            <h2 style={{ fontFamily: "'Clash Display', Impact, sans-serif", fontSize: 'clamp(36px, 8vw, 64px)', fontWeight: 700, color: 'var(--text-primary)', lineHeight: 0.92, letterSpacing: '-0.01em' }}>
+            <h2 style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(27px, 6.0vw, 48px)', fontWeight: 700, color: 'var(--text-primary)', lineHeight: 0.92, letterSpacing: '-0.01em' }}>
               REAL RESULTS<br /><span style={{ color: 'transparent', WebkitTextStroke: '1.5px var(--accent-primary)' }}>REAL GROWTH</span>
             </h2>
           </div>
           <Link to="/case-studies" style={{
             display: 'inline-flex', alignItems: 'center', gap: '6px',
-            fontFamily: "'Clash Display', sans-serif", fontSize: '12px', letterSpacing: '0.15em', fontWeight: 600,
+            fontFamily: "'Outfit', sans-serif", fontSize: '12px', letterSpacing: '0.15em', fontWeight: 600,
             color: 'var(--accent-primary)', textDecoration: 'none', paddingBottom: '6px',
             borderBottom: '1px solid var(--border-light)', transition: 'all 0.3s',
           }}
@@ -122,7 +122,7 @@ const DummyCaseStudies = () => {
                     {/* Category badge */}
                     <div style={{ position: 'absolute', top: '14px', left: '14px', display: 'flex', alignItems: 'center', gap: '6px', padding: '4px 12px', background: 'var(--glass-bg)', backdropFilter: 'blur(10px)', borderRadius: '100px', border: `1px solid ${cs.color}33` }}>
                       <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: cs.color }} />
-                      <span style={{ fontFamily: "'Clash Display', sans-serif", fontSize: '9px', color: 'var(--text-secondary)', letterSpacing: '0.18em', fontWeight: 600 }}>{cs.category.toUpperCase()}</span>
+                      <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: '9px', color: 'var(--text-secondary)', letterSpacing: '0.18em', fontWeight: 600 }}>{cs.category.toUpperCase()}</span>
                     </div>
 
                     {/* Logo */}
@@ -134,14 +134,14 @@ const DummyCaseStudies = () => {
                   {/* Content */}
                   <div style={{ padding: '20px' }}>
                     <h3 style={{
-                      fontFamily: "'Clash Display', Impact, sans-serif",
+                      fontFamily: "'Outfit', sans-serif",
                       fontSize: '20px', fontWeight: 700, color: 'var(--text-primary)',
                       letterSpacing: '0.02em', marginBottom: '8px', lineHeight: 1.2,
                     }}>
                       {cs.name.toUpperCase()}
                     </h3>
                     <p style={{
-                      fontFamily: "'Satoshi', sans-serif",
+                      fontFamily: "'Inter', sans-serif",
                       fontSize: '13px', color: 'var(--text-secondary)',
                       lineHeight: 1.6, fontWeight: 400, marginBottom: '18px',
                     }}>
@@ -158,8 +158,8 @@ const DummyCaseStudies = () => {
                           display: 'flex', alignItems: 'center', gap: '5px',
                         }}>
                           <TrendingUp size={10} color="var(--accent-primary)" />
-                          <span style={{ fontFamily: "'Clash Display', sans-serif", fontSize: '12px', fontWeight: 700, color: 'var(--accent-primary)' }}>{m.value}</span>
-                          <span style={{ fontFamily: "'Satoshi', sans-serif", fontSize: '10px', color: 'var(--text-tertiary)' }}>{m.label}</span>
+                          <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: '12px', fontWeight: 700, color: 'var(--accent-primary)' }}>{m.value}</span>
+                          <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '10px', color: 'var(--text-tertiary)' }}>{m.label}</span>
                         </div>
                       ))}
                     </div>
@@ -167,7 +167,7 @@ const DummyCaseStudies = () => {
                     {/* CTA */}
                     <div style={{
                       display: 'flex', alignItems: 'center', gap: '6px',
-                      fontFamily: "'Clash Display', sans-serif", fontSize: '11px', fontWeight: 600,
+                      fontFamily: "'Outfit', sans-serif", fontSize: '11px', fontWeight: 600,
                       color: 'var(--accent-primary)', letterSpacing: '0.14em',
                       opacity: hovered === i ? 1 : 0.6,
                       transition: 'opacity 0.3s',

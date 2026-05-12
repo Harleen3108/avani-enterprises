@@ -38,21 +38,21 @@ const StackedVinylProjects = () => {
           </Link>
         </motion.div>
       </div>
-      
+
       {/* Vinyl Stack Marquee */}
       <div className="dh2-vinyl-wrapper">
-        <motion.div 
+        <motion.div
           className="dh2-vinyl-track"
-          animate={{ x: ['0%', '-33.333%'] }} 
+          animate={{ x: ['0%', '-33.333%'] }}
           transition={{ duration: 40, ease: 'linear', repeat: Infinity }}
-          style={{ 
-            animationPlayState: hoveredIdx !== null ? 'paused' : 'running' 
+          style={{
+            animationPlayState: hoveredIdx !== null ? 'paused' : 'running'
           }}
         >
           {doubledProjects.map((cs, i) => (
-            <Link 
+            <Link
               to={cs.link}
-              key={i} 
+              key={i}
               className="dh2-vinyl-card"
               onMouseEnter={() => setHoveredIdx(i)}
               onMouseLeave={() => setHoveredIdx(null)}
@@ -196,7 +196,7 @@ const DummyHome2 = () => {
   const t = testimonials[testIdx];
 
   return (
-    <div style={{ position: 'relative' }}>
+    <div className="dh2-root" style={{ position: 'relative' }}>
       {/* LOADER */}
       <AnimatePresence>
         {loading && (
@@ -209,6 +209,7 @@ const DummyHome2 = () => {
 
       {/* HERO */}
       <section className="dh2-hero">
+        <FluidHeroBackground />
         <h1 className="dh2-display dh2-hero-title">
           <span className="dh2-hero-line">
             <motion.span custom={0} initial="hidden" animate={!loading ? "visible" : "hidden"} variants={titleV} className="dh2-hero-text">WE BUILD</motion.span>
@@ -495,7 +496,7 @@ const DummyHome2 = () => {
             <div className="dh2-label" style={{ color: 'var(--text-dim)' }}>OUR JOURNEY</div>
             <h2 className="dh2-display dh2-section-title" style={{ color: 'var(--text-main)' }}>THE AVANI STORY</h2>
           </motion.div>
-          
+
           <div className="dh2-story-flowchart">
             <div className="dh2-story-line" />
             {milestones.map((m, i) => (

@@ -185,7 +185,7 @@ const DummyHome = () => {
   ];
 
   return (
-    <div style={{ fontFamily: "'Satoshi', sans-serif" }}>
+    <div style={{ fontFamily: "'Inter', sans-serif" }}>
       <DummyHero newsletters={newsletters} loadingNewsletters={loadingNewsletters} clientLogos={clientLogos} />
       <DummyLogoMarquee clientLogos={clientLogos} />
       <DummyImpactBar />

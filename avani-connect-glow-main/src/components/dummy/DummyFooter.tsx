@@ -36,25 +36,25 @@ const DummyFooter = () => (
               <img src="/logo0.jpg" alt="Avani" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
             </div>
             <div>
-              <div style={{ fontFamily: "'Clash Display', sans-serif", fontSize: '18px', letterSpacing: '0.14em', color: 'var(--text-primary)', lineHeight: 1, fontWeight: 700 }}>AVANI</div>
-              <div style={{ fontFamily: "'Satoshi', sans-serif", fontSize: '8px', letterSpacing: '0.2em', color: 'var(--accent-primary)', marginTop: '1px', fontWeight: 500 }}>ENTERPRISES</div>
+              <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18px', letterSpacing: '0.14em', color: 'var(--text-primary)', lineHeight: 1, fontWeight: 700 }}>AVANI</div>
+              <div style={{ fontFamily: "'Inter', sans-serif", fontSize: '8px', letterSpacing: '0.2em', color: 'var(--accent-primary)', marginTop: '1px', fontWeight: 500 }}>ENTERPRISES</div>
             </div>
           </Link>
-          <p style={{ fontFamily: "'Satoshi', sans-serif", fontSize: '13px', lineHeight: 1.7, color: 'var(--text-tertiary)', maxWidth: '280px', marginBottom: '20px', fontWeight: 400 }}>
+          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', lineHeight: 1.7, color: 'var(--text-tertiary)', maxWidth: '280px', marginBottom: '20px', fontWeight: 400 }}>
             Your one-stop solution for digital growth. Building high-performing websites, products, and AI solutions since 2016.
           </p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-            <a href="mailto:kp@avanienterprises.in" style={{ display: 'flex', alignItems: 'center', gap: '8px', fontFamily: "'Satoshi', sans-serif", fontSize: '12px', color: 'var(--text-secondary)', textDecoration: 'none', transition: 'color 0.2s' }}
+            <a href="mailto:kp@avanienterprises.in" style={{ display: 'flex', alignItems: 'center', gap: '8px', fontFamily: "'Inter', sans-serif", fontSize: '12px', color: 'var(--text-secondary)', textDecoration: 'none', transition: 'color 0.2s' }}
               onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = 'var(--accent-primary)'}
               onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'var(--text-secondary)'}>
               <Mail size={12} color="var(--accent-primary)" /> kp@avanienterprises.in
             </a>
-            <a href="tel:+919253625099" style={{ display: 'flex', alignItems: 'center', gap: '8px', fontFamily: "'Satoshi', sans-serif", fontSize: '12px', color: 'var(--text-secondary)', textDecoration: 'none', transition: 'color 0.2s' }}
+            <a href="tel:+919253625099" style={{ display: 'flex', alignItems: 'center', gap: '8px', fontFamily: "'Inter', sans-serif", fontSize: '12px', color: 'var(--text-secondary)', textDecoration: 'none', transition: 'color 0.2s' }}
               onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = 'var(--accent-primary)'}
               onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'var(--text-secondary)'}>
               <Phone size={12} color="var(--accent-primary)" /> +91 92536 25099
             </a>
-            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', fontFamily: "'Satoshi', sans-serif", fontSize: '12px', color: 'var(--text-secondary)' }}>
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', fontFamily: "'Inter', sans-serif", fontSize: '12px', color: 'var(--text-secondary)' }}>
               <MapPin size={12} color="var(--accent-primary)" style={{ marginTop: '2px', flexShrink: 0 }} /> Gurgaon · Mumbai · Rohtak · Australia
             </div>
           </div>
@@ -62,10 +62,10 @@ const DummyFooter = () => (
 
         {/* Company */}
         <div>
-          <h4 style={{ fontFamily: "'Clash Display', sans-serif", fontSize: '13px', letterSpacing: '0.18em', color: 'var(--accent-primary)', marginBottom: '18px', fontWeight: 600 }}>COMPANY</h4>
+          <h4 style={{ fontFamily: "'Outfit', sans-serif", fontSize: '13px', letterSpacing: '0.18em', color: 'var(--accent-primary)', marginBottom: '18px', fontWeight: 600 }}>COMPANY</h4>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
             {footerLinks.company.map(l => (
-              <Link key={l.path} to={l.path} style={{ fontFamily: "'Satoshi', sans-serif", fontSize: '13px', color: 'var(--text-secondary)', textDecoration: 'none', transition: 'color 0.2s' }}
+              <Link key={l.path} to={l.path} style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', color: 'var(--text-secondary)', textDecoration: 'none', transition: 'color 0.2s' }}
                 onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = 'var(--text-primary)'}
                 onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'var(--text-secondary)'}>
                 {l.label}
@@ -76,10 +76,10 @@ const DummyFooter = () => (
 
         {/* Services */}
         <div>
-          <h4 style={{ fontFamily: "'Clash Display', sans-serif", fontSize: '13px', letterSpacing: '0.18em', color: 'var(--accent-primary)', marginBottom: '18px', fontWeight: 600 }}>SERVICES</h4>
+          <h4 style={{ fontFamily: "'Outfit', sans-serif", fontSize: '13px', letterSpacing: '0.18em', color: 'var(--accent-primary)', marginBottom: '18px', fontWeight: 600 }}>SERVICES</h4>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
             {footerLinks.services.map(l => (
-              <Link key={l.path} to={l.path} style={{ fontFamily: "'Satoshi', sans-serif", fontSize: '13px', color: 'var(--text-secondary)', textDecoration: 'none', transition: 'color 0.2s' }}
+              <Link key={l.path} to={l.path} style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', color: 'var(--text-secondary)', textDecoration: 'none', transition: 'color 0.2s' }}
                 onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = 'var(--text-primary)'}
                 onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'var(--text-secondary)'}>
                 {l.label}
@@ -90,15 +90,15 @@ const DummyFooter = () => (
 
         {/* Newsletter CTA */}
         <div>
-          <h4 style={{ fontFamily: "'Clash Display', sans-serif", fontSize: '13px', letterSpacing: '0.18em', color: 'var(--accent-primary)', marginBottom: '18px', fontWeight: 600 }}>STAY UPDATED</h4>
-          <p style={{ fontFamily: "'Satoshi', sans-serif", fontSize: '12px', color: 'var(--text-tertiary)', lineHeight: 1.6, marginBottom: '14px', fontWeight: 400 }}>
+          <h4 style={{ fontFamily: "'Outfit', sans-serif", fontSize: '13px', letterSpacing: '0.18em', color: 'var(--accent-primary)', marginBottom: '18px', fontWeight: 600 }}>STAY UPDATED</h4>
+          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '12px', color: 'var(--text-tertiary)', lineHeight: 1.6, marginBottom: '14px', fontWeight: 400 }}>
             Get the latest insights and updates delivered to your inbox.
           </p>
           <Link to="/dummyhome/newsletters" style={{
             display: 'inline-flex', alignItems: 'center', gap: '6px',
             padding: '8px 18px', border: '1px solid var(--border-light)',
             borderRadius: '6px', color: 'var(--accent-primary)', textDecoration: 'none',
-            fontFamily: "'Clash Display', sans-serif", fontSize: '11px', letterSpacing: '0.12em', fontWeight: 600,
+            fontFamily: "'Outfit', sans-serif", fontSize: '11px', letterSpacing: '0.12em', fontWeight: 600,
             transition: 'all 0.25s',
           }}
             onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'var(--accent-hover)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent-primary)'; }}
@@ -108,7 +108,7 @@ const DummyFooter = () => (
 
           <div style={{ marginTop: '20px' }}>
             {footerLinks.legal.map(l => (
-              <Link key={l.path} to={l.path} style={{ display: 'block', fontFamily: "'Satoshi', sans-serif", fontSize: '11px', color: 'var(--text-tertiary)', textDecoration: 'none', marginBottom: '6px', transition: 'color 0.2s' }}
+              <Link key={l.path} to={l.path} style={{ display: 'block', fontFamily: "'Inter', sans-serif", fontSize: '11px', color: 'var(--text-tertiary)', textDecoration: 'none', marginBottom: '6px', transition: 'color 0.2s' }}
                 onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = 'var(--text-secondary)'}
                 onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'var(--text-tertiary)'}>
                 {l.label}
@@ -120,10 +120,10 @@ const DummyFooter = () => (
 
       {/* Bottom bar */}
       <div style={{ borderTop: '1px solid var(--border-faint)', paddingTop: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
-        <span style={{ fontFamily: "'Satoshi', sans-serif", fontSize: '11px', color: 'var(--text-tertiary)' }}>
+        <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', color: 'var(--text-tertiary)' }}>
           © {new Date().getFullYear()} Avani Enterprises. All rights reserved.
         </span>
-        <span style={{ fontFamily: "'Satoshi', sans-serif", fontSize: '11px', color: 'var(--text-tertiary)' }}>
+        <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', color: 'var(--text-tertiary)' }}>
           Crafted with precision · Since 2016
         </span>
       </div>

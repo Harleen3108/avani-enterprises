@@ -82,7 +82,7 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
 
   return (
     <>
-      <section
+      <section className="theme-brown"
         ref={heroRef}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
@@ -113,6 +113,8 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
         {/* Grain */}
         <div style={{ position: 'absolute', inset: 0, zIndex: 1, opacity: 0.055, pointerEvents: 'none', backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`, backgroundSize: '200px' }} />
 
+
+
         {/* Gold top line */}
         <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '2px', background: 'linear-gradient(to right, transparent, var(--accent-primary) 25%, var(--accent-light) 50%, var(--accent-primary) 75%, transparent)', zIndex: 10 }} />
 
@@ -136,38 +138,34 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
               <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15, duration: 0.8 }}
                 style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '6px 16px', border: '1px solid var(--border-light)', borderRadius: '100px', background: 'var(--accent-hover)', backdropFilter: 'blur(10px)', marginBottom: '24px' }}>
                 <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--accent-primary)', boxShadow: '0 0 8px var(--accent-primary), 0 0 16px var(--border-light)' }} />
-                <span style={{ fontFamily: "'Clash Display', sans-serif", fontSize: '11px', letterSpacing: '0.25em', color: 'var(--accent-light)', fontWeight: 600 }}>ONE STOP SOLUTION FOR BUSINESS · EST. 2016</span>
+                <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: '11px', letterSpacing: '0.25em', color: 'var(--accent-light)', fontWeight: 600 }}>ONE STOP SOLUTION FOR BUSINESS · EST. 2016</span>
               </motion.div>
 
               {/* Headline */}
               <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25, duration: 1, ease: [0.22, 1, 0.36, 1] }}>
-                <h1 style={{ fontFamily: "'Clash Display', Impact, sans-serif", fontSize: 'clamp(24px, 8vw, 88px)', fontWeight: 700, lineHeight: 0.92, color: 'var(--text-primary)', letterSpacing: '-0.01em', margin: 0 }}>
-                  BUILD<br />
-                  <span style={{ color: 'var(--accent-primary)' }}>HIGH-</span>PERFORMING
+                <h1 style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(40px, 8vw, 110px)', fontWeight: 800, lineHeight: 0.95, color: 'var(--text-primary)', letterSpacing: '-0.02em', margin: 0, textTransform: 'uppercase' }}>
+                  WE BUILD<br />
+                  <span style={{ color: 'transparent', WebkitTextStroke: '2px var(--text-primary)' }}>HIGH-PERFORMING</span>
                 </h1>
 
                 {/* Animated outline word */}
-                <div style={{ overflow: 'hidden', height: 'clamp(24px, 8vw, 82px)', margin: '2px 0' }}>
+                <div style={{ overflow: 'hidden', height: 'clamp(40px, 8vw, 110px)', margin: '4px 0' }}>
                   <motion.div key={wordIndex} initial={{ y: '110%' }} animate={{ y: '0%' }} transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-                    style={{ fontFamily: "'Clash Display', Impact, sans-serif", fontSize: 'clamp(24px, 8vw, 88px)', fontWeight: 700, lineHeight: 0.92, color: 'transparent', WebkitTextStroke: '2px var(--accent-primary)', letterSpacing: '-0.01em', display: 'block' }}>
+                    style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(40px, 8vw, 110px)', fontWeight: 800, lineHeight: 0.95, color: 'var(--accent-primary)', letterSpacing: '-0.02em', display: 'block', textTransform: 'uppercase' }}>
                     {words[wordIndex]}
                   </motion.div>
                 </div>
-
-                <h1 style={{ fontFamily: "'Clash Display', Impact, sans-serif", fontSize: 'clamp(24px, 8vw, 88px)', fontWeight: 700, lineHeight: 0.92, color: 'var(--text-primary)', letterSpacing: '-0.01em', marginBottom: '24px' }}>
-                  & ACCELERATE <span style={{ color: 'var(--accent-primary)' }}>GROWTH</span>
-                </h1>
               </motion.div>
 
               <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.55, duration: 0.8 }}
-                style={{ fontFamily: "'Satoshi', sans-serif", fontSize: '15px', lineHeight: 1.7, color: 'var(--text-secondary)', maxWidth: '440px', marginBottom: '16px', fontWeight: 400 }}>
+                style={{ fontFamily: "'Inter', sans-serif", fontSize: '15px', lineHeight: 1.7, color: 'var(--text-secondary)', maxWidth: '440px', marginBottom: '16px', fontWeight: 400 }}>
                 We're more than just a digital agency. We build stories, share passions, and deliver results that leave competitors far behind.
               </motion.p>
 
               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.65 }}
                 style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '28px' }}>
                 <MapPin size={11} color="var(--accent-primary)" />
-                <span style={{ fontFamily: "'Satoshi', sans-serif", fontSize: '11px', color: 'var(--accent-light)', letterSpacing: '0.04em', fontWeight: 500 }}>
+                <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', color: 'var(--accent-light)', letterSpacing: '0.04em', fontWeight: 500 }}>
                   Expanding Globally · Gurgaon · Mumbai · Rohtak · Australia
                 </span>
               </motion.div>
@@ -178,7 +176,7 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
                 <Link to="/get-consultation" style={{
                   display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '12px 28px',
                   background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-light))', color: 'var(--bg-primary)', borderRadius: '5px',
-                  textDecoration: 'none', fontFamily: "'Clash Display', sans-serif", fontSize: '14px', letterSpacing: '0.12em', fontWeight: 600,
+                  textDecoration: 'none', fontFamily: "'Outfit', sans-serif", fontSize: '14px', letterSpacing: '0.12em', fontWeight: 600,
                   boxShadow: '0 6px 24px var(--border-light)', transition: 'all 0.3s',
                 }}
                   onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 10px 36px var(--border-light)'; }}
@@ -191,7 +189,7 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
                 <button onClick={() => setShowReel(true)} style={{
                   display: 'inline-flex', alignItems: 'center', gap: '10px', padding: '12px 24px',
                   background: 'var(--card-bg)', color: 'var(--text-primary)', border: '1px solid var(--border-faint)',
-                  borderRadius: '5px', cursor: 'pointer', fontFamily: "'Clash Display', sans-serif", fontSize: '14px',
+                  borderRadius: '5px', cursor: 'pointer', fontFamily: "'Outfit', sans-serif", fontSize: '14px',
                   letterSpacing: '0.12em', backdropFilter: 'blur(10px)', transition: 'all 0.3s', fontWeight: 600,
                 }}
                   onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent-primary)'; (e.currentTarget as HTMLElement).style.color = 'var(--accent-primary)'; }}
@@ -214,10 +212,10 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
                 style={{ display: 'flex', borderTop: '1px solid var(--border-faint)', paddingTop: '24px', gap: '0' }}>
                 {[{ target: 150, suffix: '+', label: 'Happy Clients' }, { target: 300, suffix: '+', label: 'Projects Done' }, { target: 85, suffix: '%', label: 'Growth Rate' }, { target: 8, suffix: '+', label: 'Years Active' }].map((s, i) => (
                   <div key={i} className={`dummy-hero-stat-item dummy-hero-stat-${i}`} style={{ flex: 1, paddingLeft: i > 0 ? '16px' : 0, paddingRight: i < 3 ? '16px' : 0, borderRight: i < 3 ? '1px solid var(--border-faint)' : 'none' }}>
-                    <div style={{ fontFamily: "'Clash Display', sans-serif", fontSize: '32px', color: 'var(--accent-primary)', lineHeight: 1, fontWeight: 700 }}>
+                    <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: '24px', color: 'var(--accent-primary)', lineHeight: 1, fontWeight: 700 }}>
                       <DummyAnimatedCounter target={s.target} suffix={s.suffix} />
                     </div>
-                    <div style={{ fontFamily: "'Satoshi', sans-serif", fontSize: '9px', color: 'var(--text-tertiary)', letterSpacing: '0.18em', textTransform: 'uppercase', marginTop: '4px', fontWeight: 500 }}>{s.label}</div>
+                    <div style={{ fontFamily: "'Inter', sans-serif", fontSize: '9px', color: 'var(--text-tertiary)', letterSpacing: '0.18em', textTransform: 'uppercase', marginTop: '4px', fontWeight: 500 }}>{s.label}</div>
                   </div>
                 ))}
               </motion.div>
@@ -236,8 +234,8 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
                   ))}
                 </div>
                 <div>
-                  <div style={{ fontFamily: "'Clash Display', sans-serif", fontSize: '11px', color: 'var(--accent-light)', letterSpacing: '0.1em', fontWeight: 600 }}>150+ TRUSTED</div>
-                  <div style={{ fontFamily: "'Satoshi', sans-serif", fontSize: '8px', color: 'var(--text-tertiary)', letterSpacing: '0.08em', fontWeight: 500 }}>Companies Worldwide</div>
+                  <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: '11px', color: 'var(--accent-light)', letterSpacing: '0.1em', fontWeight: 600 }}>150+ TRUSTED</div>
+                  <div style={{ fontFamily: "'Inter', sans-serif", fontSize: '8px', color: 'var(--text-tertiary)', letterSpacing: '0.08em', fontWeight: 500 }}>Companies Worldwide</div>
                 </div>
               </motion.div>
 
@@ -245,7 +243,7 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
               <motion.div animate={{ y: [0, -8, 0] }} transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1.5 }}
                 style={{ position: 'absolute', bottom: '-12px', left: '-12px', padding: '8px 14px', background: 'var(--glass-bg)', backdropFilter: 'blur(20px)', border: '1px solid var(--border-light)', borderRadius: '10px', zIndex: 20, display: 'flex', alignItems: 'center', gap: '6px' }}>
                 <div style={{ display: 'flex', gap: '2px' }}>{[...Array(5)].map((_, i) => <Star key={i} size={9} fill="var(--accent-primary)" color="var(--accent-primary)" />)}</div>
-                <span style={{ fontFamily: "'Satoshi', sans-serif", fontSize: '10px', color: 'var(--text-secondary)', fontWeight: 500 }}>5.0 · 300+ Projects</span>
+                <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '10px', color: 'var(--text-secondary)', fontWeight: 500 }}>5.0 · 300+ Projects</span>
               </motion.div>
 
               {/* Avatar */}
@@ -258,8 +256,8 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
               <div style={{ background: 'var(--glass-bg)', backdropFilter: 'blur(28px)', border: '1px solid var(--border-light)', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 32px 64px rgba(0,0,0,0.1)' }}>
                 <div style={{ padding: '16px 20px 12px', borderBottom: '1px solid var(--border-light)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <div>
-                    <div style={{ fontFamily: "'Clash Display', sans-serif", fontSize: '16px', letterSpacing: '0.12em', color: 'var(--text-primary)', fontWeight: 600 }}>NEWS & UPDATES</div>
-                    <div style={{ fontFamily: "'Satoshi', sans-serif", fontSize: '9px', color: 'var(--accent-primary)', letterSpacing: '0.1em', textTransform: 'uppercase', marginTop: '1px', fontWeight: 500 }}>Latest from Avani</div>
+                    <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: '16px', letterSpacing: '0.12em', color: 'var(--text-primary)', fontWeight: 600 }}>NEWS & UPDATES</div>
+                    <div style={{ fontFamily: "'Inter', sans-serif", fontSize: '9px', color: 'var(--accent-primary)', letterSpacing: '0.1em', textTransform: 'uppercase', marginTop: '1px', fontWeight: 500 }}>Latest from Avani</div>
                   </div>
                   <div style={{ width: '30px', height: '30px', borderRadius: '8px', background: 'var(--accent-hover)', border: '1px solid var(--border-light)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <Mail size={13} color="var(--accent-primary)" />
@@ -271,7 +269,7 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
                       <div style={{ width: '22px', height: '22px', border: '2px solid var(--border-light)', borderTopColor: 'var(--accent-primary)', borderRadius: '50%', animation: 'dummy-spin 0.8s linear infinite' }} />
                     </div>
                   ) : newsletters.length === 0 ? (
-                    <p style={{ padding: '18px 20px', fontFamily: "'Satoshi', sans-serif", color: 'var(--text-tertiary)', fontSize: '12px' }}>Updates coming soon…</p>
+                    <p style={{ padding: '18px 20px', fontFamily: "'Inter', sans-serif", color: 'var(--text-tertiary)', fontSize: '12px' }}>Updates coming soon…</p>
                   ) : newsletters.slice(0, 3).map((n: any) => {
                     const date = new Date(n.publishedAt || n.createdAt);
                     const isRecent = (Date.now() - date.getTime()) < 7 * 24 * 60 * 60 * 1000;
@@ -290,16 +288,16 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
                             </div>
                           ) : (
                             <div style={{ width: '36px', height: '36px', borderRadius: '8px', background: 'var(--accent-hover)', border: '1px solid var(--border-light)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-                              <span style={{ fontFamily: "'Clash Display', sans-serif", fontSize: '7px', color: 'var(--accent-primary)', letterSpacing: '0.1em', fontWeight: 600 }}>{month}</span>
-                              <span style={{ fontFamily: "'Clash Display', sans-serif", fontSize: '16px', color: 'var(--text-primary)', lineHeight: 1, fontWeight: 700 }}>{day}</span>
+                              <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: '7px', color: 'var(--accent-primary)', letterSpacing: '0.1em', fontWeight: 600 }}>{month}</span>
+                              <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: '16px', color: 'var(--text-primary)', lineHeight: 1, fontWeight: 700 }}>{day}</span>
                             </div>
                           )}
                         </div>
                         <div style={{ flex: 1, minWidth: 0 }}>
-                          <div style={{ fontFamily: "'Satoshi', sans-serif", fontSize: '12px', fontWeight: 500, color: 'var(--text-primary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', marginBottom: '2px' }}>{n.title}</div>
+                          <div style={{ fontFamily: "'Inter', sans-serif", fontSize: '12px', fontWeight: 500, color: 'var(--text-primary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', marginBottom: '2px' }}>{n.title}</div>
                           <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
-                            <span style={{ fontFamily: "'Satoshi', sans-serif", fontSize: '10px', color: 'var(--text-tertiary)' }}>{date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
-                            {isRecent && <span style={{ fontFamily: "'Clash Display', sans-serif", fontSize: '8px', color: 'var(--accent-primary)', background: 'var(--accent-hover)', padding: '1px 6px', borderRadius: '100px', border: '1px solid var(--border-light)', letterSpacing: '0.08em', fontWeight: 600 }}>NEW</span>}
+                            <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '10px', color: 'var(--text-tertiary)' }}>{date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+                            {isRecent && <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: '8px', color: 'var(--accent-primary)', background: 'var(--accent-hover)', padding: '1px 6px', borderRadius: '100px', border: '1px solid var(--border-light)', letterSpacing: '0.08em', fontWeight: 600 }}>NEW</span>}
                           </div>
                         </div>
                         <ChevronRight size={11} color="var(--accent-primary)" />
@@ -309,7 +307,7 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
                 </div>
                 {!loadingNewsletters && newsletters.length > 0 && (
                   <div style={{ padding: '10px 20px', borderTop: '1px solid var(--border-light)' }}>
-                    <Link to="/newsletters" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', padding: '8px', border: '1px solid var(--border-light)', borderRadius: '8px', color: 'var(--accent-light)', textDecoration: 'none', fontFamily: "'Clash Display', sans-serif", fontSize: '10px', letterSpacing: '0.2em', transition: 'all 0.25s', fontWeight: 600 }}
+                    <Link to="/newsletters" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', padding: '8px', border: '1px solid var(--border-light)', borderRadius: '8px', color: 'var(--accent-light)', textDecoration: 'none', fontFamily: "'Outfit', sans-serif", fontSize: '10px', letterSpacing: '0.2em', transition: 'all 0.25s', fontWeight: 600 }}
                       onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent-primary)'; (e.currentTarget as HTMLElement).style.color = 'var(--accent-primary)'; (e.currentTarget as HTMLElement).style.background = 'var(--accent-hover)'; }}
                       onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-light)'; (e.currentTarget as HTMLElement).style.color = 'var(--accent-light)'; (e.currentTarget as HTMLElement).style.background = 'transparent'; }}
                     >
@@ -325,7 +323,7 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
         {/* Scroll indicator */}
         <motion.div animate={{ y: [0, 6, 0] }} transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
           style={{ position: 'absolute', bottom: '20px', left: '50%', transform: 'translateX(-50%)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', zIndex: 10 }}>
-          <span style={{ fontFamily: "'Clash Display', sans-serif", fontSize: '9px', letterSpacing: '0.3em', color: 'var(--text-tertiary)', fontWeight: 600 }}>SCROLL</span>
+          <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: '9px', letterSpacing: '0.3em', color: 'var(--text-tertiary)', fontWeight: 600 }}>SCROLL</span>
           <div style={{ width: '1px', height: '28px', background: 'linear-gradient(to bottom, var(--accent-light), transparent)' }} />
         </motion.div>
 
@@ -394,8 +392,8 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
                 >
                   <Play size={28} fill="var(--accent-primary)" color="var(--accent-primary)" />
                 </motion.div>
-                <div style={{ fontFamily: "'Clash Display', sans-serif", fontSize: '28px', color: 'var(--text-primary)', marginBottom: '8px', letterSpacing: '0.04em', fontWeight: 600 }}>Avani Showreel</div>
-                <div style={{ fontFamily: "'Satoshi', sans-serif", fontSize: '13px', color: 'var(--text-tertiary)' }}>Coming soon — our best work, one reel.</div>
+                <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: '21px', color: 'var(--text-primary)', marginBottom: '8px', letterSpacing: '0.04em', fontWeight: 600 }}>Avani Showreel</div>
+                <div style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', color: 'var(--text-tertiary)' }}>Coming soon — our best work, one reel.</div>
               </div>
             </motion.div>
           </motion.div>

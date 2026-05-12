@@ -71,27 +71,29 @@
 
 /* Typography */
 .dh-display {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: -0.04em;
     line-height: 1;
+    color: var(--text-primary);
 }
 
 .dh-heading {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-weight: 700;
     letter-spacing: -0.02em;
+    color: var(--text-primary);
 }
 
 .dh-body {
-    font-family: 'Satoshi', sans-serif;
+    font-family: 'Inter', sans-serif;
     line-height: 1.6;
     color: var(--text-secondary);
 }
 
 .dh-label {
-    font-family: 'Satoshi', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 800;
     font-size: 0.75rem;
     text-transform: uppercase;
@@ -119,7 +121,7 @@
 }
 
 .dh-hero-title {
-    font-size: clamp(3.5rem, 10vw, 9rem);
+    font-size: clamp(2.6rem, 7.5vw, 6.8rem);
     margin-bottom: 2.5rem;
 }
 
@@ -218,6 +220,7 @@
     .dh-responsive-grid {
         grid-template-columns: 1fr !important;
         gap: 2rem !important;
+        direction: ltr !important;
     }
 }
 
@@ -253,7 +256,7 @@
 /* === MOBILE REFINEMENTS === */
 @media (max-width: 768px) {
     .dh-hero-title {
-        font-size: clamp(2.5rem, 12vw, 4rem);
+        font-size: clamp(1.9rem, 9.0vw, 3.0rem);
         line-height: 1.1;
     }
 
@@ -315,4 +318,42 @@
         right: auto !important;
         transform: translate(-50%, -50%) !important;
     }
+}
+
+.theme-beige {
+  --bg-primary: #F0EAD6;
+  --bg-secondary: #E6DFCB;
+  --bg-tertiary: #DCD4C0;
+  
+  --text-primary: #2c1e16;
+  --text-secondary: rgba(44, 30, 22, 0.8);
+  --text-tertiary: rgba(44, 30, 22, 0.6);
+  
+  --accent-primary: #a16b1e;
+  --accent-light: #C4913A;
+  --accent-hover: rgba(161, 107, 30, 0.1);
+  
+  --border-light: rgba(44, 30, 22, 0.2);
+  --border-faint: rgba(44, 30, 22, 0.08);
+  
+  --card-bg: rgba(255, 255, 255, 0.3);
+}
+
+.theme-brown {
+  --bg-primary: #0A0705;
+  --bg-secondary: #0F0C09;
+  --bg-tertiary: #1A1410;
+  
+  --text-primary: #F5EDD8;
+  --text-secondary: rgba(245,237,216,0.7);
+  --text-tertiary: rgba(245,237,216,0.45);
+  
+  --accent-primary: #C4913A;
+  --accent-light: #E8B96A;
+  --accent-hover: rgba(196,145,58,0.1);
+  
+  --border-light: rgba(196,145,58,0.15);
+  --border-faint: rgba(245,237,216,0.07);
+  
+  --card-bg: rgba(255,255,255,0.02);
 }

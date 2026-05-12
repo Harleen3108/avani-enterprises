@@ -37,7 +37,7 @@ const DummyFAQ = () => {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section style={{ padding: '80px 0', background: 'var(--bg-secondary)', position: 'relative', overflow: 'hidden' }}>
+    <section className="theme-beige" style={{ padding: '80px 0', background: 'var(--bg-secondary)', position: 'relative', overflow: 'hidden' }}>
       <div style={{ position: 'absolute', top: '30%', right: '10%', width: '400px', height: '400px', background: 'radial-gradient(circle, var(--accent-hover) 0%, transparent 70%)', pointerEvents: 'none', borderRadius: '50%' }} />
 
       <div style={{ maxWidth: '800px', margin: '0 auto', padding: '0 48px', position: 'relative', zIndex: 5 }} className="dummy-faq-container">
@@ -51,10 +51,10 @@ const DummyFAQ = () => {
         >
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '12px', marginBottom: '14px' }}>
             <div style={{ width: '28px', height: '2px', background: 'var(--accent-primary)' }} />
-            <span style={{ fontFamily: "'Clash Display', sans-serif", fontSize: '11px', letterSpacing: '0.28em', color: 'var(--accent-primary)', fontWeight: 600 }}>QUESTIONS</span>
+            <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: '11px', letterSpacing: '0.28em', color: 'var(--accent-primary)', fontWeight: 600 }}>QUESTIONS</span>
             <div style={{ width: '28px', height: '2px', background: 'var(--accent-primary)' }} />
           </div>
-          <h2 style={{ fontFamily: "'Clash Display', Impact, sans-serif", fontSize: 'clamp(36px, 8vw, 64px)', fontWeight: 700, color: 'var(--text-primary)', lineHeight: 0.92, letterSpacing: '-0.01em' }}>
+          <h2 style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(27px, 6.0vw, 48px)', fontWeight: 700, color: 'var(--text-primary)', lineHeight: 0.92, letterSpacing: '-0.01em' }}>
             FREQUENTLY <span style={{ color: 'transparent', WebkitTextStroke: '1.5px var(--accent-primary)' }}>ASKED</span>
           </h2>
         </motion.div>
@@ -83,7 +83,7 @@ const DummyFAQ = () => {
                   }}
                 >
                   <span style={{
-                    fontFamily: "'Clash Display', sans-serif",
+                    fontFamily: "'Outfit', sans-serif",
                     fontSize: '15px', fontWeight: 600, color: isOpen ? 'var(--text-primary)' : 'var(--text-secondary)',
                     letterSpacing: '0.02em', transition: 'color 0.3s', lineHeight: 1.3,
                   }}>
@@ -117,7 +117,7 @@ const DummyFAQ = () => {
                         borderRadius: '0 0 14px 14px',
                       }}>
                         <p style={{
-                          fontFamily: "'Satoshi', sans-serif",
+                          fontFamily: "'Inter', sans-serif",
                           fontSize: '14px', color: 'var(--text-secondary)',
                           lineHeight: 1.7, fontWeight: 400,
                         }}>
