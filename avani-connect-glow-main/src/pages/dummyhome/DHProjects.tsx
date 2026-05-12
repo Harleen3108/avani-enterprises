@@ -145,23 +145,25 @@ const DHProjects = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -16 }}
               transition={{ duration: 0.35 }}
-              style={{ display: 'flex', flexDirection: 'column', gap: '6rem' }} 
+              style={{ display: 'flex', flexDirection: 'column', gap: '4rem' }} 
             >
               {filteredProjects.map((project, i) => (
-                <motion.div 
-                  key={project.name} 
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.08, duration: 0.4 }}
-                  style={{
-                    display: 'grid',
-                    gridTemplateColumns: '1fr 1fr',
-                    gap: '4rem',
-                    alignItems: 'center',
-                    direction: i % 2 === 1 ? 'rtl' : 'ltr',
-                  }}
-                  className="dh-responsive-grid"
-                >
+                <React.Fragment key={project.name}>
+                  <motion.div 
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: i * 0.08, duration: 0.4 }}
+                    style={{
+                      display: 'grid',
+                      gridTemplateColumns: '1fr 1fr',
+                      gap: '4rem',
+                      alignItems: 'center',
+                      direction: i % 2 === 1 ? 'rtl' : 'ltr',
+                      paddingBottom: '4rem',
+                      borderBottom: i < filteredProjects.length - 1 ? '1.5px solid rgba(0,0,0,0.15)' : 'none',
+                    }}
+                    className="dh-responsive-grid"
+                  >
                   {/* Image Side */}
                   <div style={{ position: 'relative', direction: 'ltr' }}>
                     <div style={{
@@ -212,6 +214,7 @@ const DHProjects = () => {
                     </div>
                   </div>
                 </motion.div>
+                </React.Fragment>
               ))}
             </motion.div>
           </AnimatePresence>

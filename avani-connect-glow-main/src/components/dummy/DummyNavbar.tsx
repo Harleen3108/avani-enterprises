@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ArrowRight, ChevronDown } from 'lucide-react';
+import { Menu, X, ArrowRight, ChevronDown, Phone } from 'lucide-react';
 
 const navLinks = [
   { label: 'HOME', path: '/dummyhome' },
@@ -99,9 +99,9 @@ const DummyNavbar = () => {
                           transition={{ duration: 0.2 }}
                           style={{
                             position: 'absolute', top: '100%', left: '50%', transform: 'translateX(-50%)',
-                            background: 'var(--card-bg)', backdropFilter: 'blur(20px)',
-                            border: '1px solid var(--border-light)', borderRadius: '12px',
-                            boxShadow: '0 10px 30px rgba(0,0,0,0.1)',
+                            background: '#1A1512', backdropFilter: 'blur(20px)',
+                            border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px',
+                            boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
                             padding: '12px 0', minWidth: '180px', zIndex: 100,
                             marginTop: '8px'
                           }}
@@ -111,11 +111,11 @@ const DummyNavbar = () => {
                               style={{
                                 display: 'block', padding: '8px 20px',
                                 fontFamily: "'Outfit', sans-serif", fontSize: '12px', letterSpacing: '0.1em', fontWeight: 600,
-                                color: location.pathname === sub.path ? 'var(--accent-primary)' : 'var(--text-secondary)',
+                                color: location.pathname === sub.path ? 'var(--accent-primary)' : 'rgba(255,255,255,0.7)',
                                 textDecoration: 'none', transition: 'all 0.2s',
                               }}
-                              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'var(--accent-hover)'; (e.currentTarget as HTMLElement).style.color = 'var(--text-primary)'; }}
-                              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'none'; (e.currentTarget as HTMLElement).style.color = location.pathname === sub.path ? 'var(--accent-primary)' : 'var(--text-secondary)'; }}
+                              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.05)'; (e.currentTarget as HTMLElement).style.color = '#fff'; }}
+                              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'none'; (e.currentTarget as HTMLElement).style.color = location.pathname === sub.path ? 'var(--accent-primary)' : 'rgba(255,255,255,0.7)'; }}
                             >
                               {sub.label}
                             </Link>
@@ -147,8 +147,20 @@ const DummyNavbar = () => {
           </div>
 
           {/* CTA + Mobile toggle */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-            <Link to="/dummyhome/get-consultation" style={{
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <a href="tel:+919253625099" style={{
+              display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '8px 16px',
+              background: 'none', border: '1px solid var(--border-light)', color: 'var(--text-primary)',
+              borderRadius: '5px', textDecoration: 'none', fontFamily: "'Outfit', sans-serif",
+              fontSize: '12px', letterSpacing: '0.12em', fontWeight: 600,
+              transition: 'all 0.3s',
+            }}
+              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'var(--accent-hover)'; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'none'; }}
+            >
+              <Phone size={12} style={{ color: 'var(--accent-primary)' }} /> CALL NOW
+            </a>
+             <a href="/dummyhome/contact" style={{
               display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '8px 20px',
               background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-light))', color: 'var(--bg-primary)',
               borderRadius: '5px', textDecoration: 'none', fontFamily: "'Outfit', sans-serif",
@@ -159,7 +171,7 @@ const DummyNavbar = () => {
               onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = 'none'; (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 16px var(--accent-hover)'; }}
             >
               GET STARTED <ArrowRight size={12} />
-            </Link>
+            </a>
             <button onClick={() => setMobileOpen(!mobileOpen)}
               className="dummy-nav-burger"
               style={{ display: 'none', background: 'none', border: '1px solid var(--border-light)', borderRadius: '6px', padding: '6px', cursor: 'pointer', color: 'var(--text-primary)' }}>
@@ -241,7 +253,7 @@ const DummyNavbar = () => {
                 </motion.div>
               );
             })}
-            <Link to="/dummyhome/get-consultation" onClick={() => setMobileOpen(false)} style={{
+            <a href="/dummyhome/contact" onClick={() => setMobileOpen(false)} style={{
               display: 'inline-flex', alignItems: 'center', gap: '8px', marginTop: '24px',
               padding: '12px 28px', background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-light))',
               color: 'var(--bg-primary)', borderRadius: '6px', textDecoration: 'none',
@@ -249,7 +261,7 @@ const DummyNavbar = () => {
               alignSelf: 'flex-start',
             }}>
               GET CONSULTATION <ArrowRight size={14} />
-            </Link>
+            </a>
           </motion.div>
         )}
       </AnimatePresence>

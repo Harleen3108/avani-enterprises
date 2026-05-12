@@ -99,7 +99,7 @@ const DHCourses = () => {
   );
 
   return (
-    <div className="dh-courses-page">
+    <div className="dh-courses-page" style={{ background: 'var(--bg-primary)', color: 'var(--text-primary)', minHeight: '100vh' }}>
 
       {/* 1. HERO */}
       <section className="theme-brown" style={{ minHeight: '60vh', display: 'flex', alignItems: 'center', background: 'var(--bg-primary)', overflow: 'hidden', position: 'relative', paddingTop: '80px' }}>
@@ -112,11 +112,8 @@ const DHCourses = () => {
             <motion.div variants={fadeUp} className="dh-label">MASTER IN-DEMAND SKILLS</motion.div>
             <h1 className="dh-display" style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)', marginBottom: '1.5rem' }}>
               <span className="dh-hero-line"><motion.span custom={0} variants={titleV}>MASTER YOUR</motion.span></span>
-              <span className="dh-hero-line">
-                <motion.span custom={1} variants={titleV} style={{ color: 'var(--accent-primary)' }}>
-                  <RotatingText words={['FUTURE', 'CAREER', 'SKILLS', 'CRAFT']} interval={2500} className="dh-display" />
-                </motion.span>
-              </span>
+              <span className="dh-hero-line"><motion.span custom={1} variants={titleV} className="dh-hero-stroked">FUTURE</motion.span></span>
+              <span className="dh-hero-line"><motion.span custom={2} variants={titleV} className="dh-hero-accent">SKILLS.</motion.span></span>
             </h1>
             <motion.p variants={fadeUp} className="dh-body" style={{ maxWidth: '600px', margin: '0 auto', fontSize: '1rem' }}>
               Comprehensive training programs with guaranteed job placement and industry-recognized certifications.

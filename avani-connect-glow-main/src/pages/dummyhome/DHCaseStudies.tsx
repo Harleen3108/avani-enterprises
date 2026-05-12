@@ -61,7 +61,7 @@ const DHCaseStudies = () => {
   useEffect(() => { window.scrollTo(0, 0); }, []);
 
   return (
-    <div className="dh-casestudies-page">
+    <div className="dh-casestudies-page" style={{ background: 'var(--bg-primary)', color: 'var(--text-primary)', minHeight: '100vh' }}>
 
       {/* 1. HERO */}
       <section className="theme-brown" style={{ minHeight: '60vh', display: 'flex', alignItems: 'center', background: 'var(--bg-primary)', overflow: 'hidden', position: 'relative', paddingTop: '80px' }}>
@@ -74,11 +74,8 @@ const DHCaseStudies = () => {
             <motion.div variants={fadeUp} className="dh-label">REAL-WORLD IMPACT</motion.div>
             <h1 className="dh-display" style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)', marginBottom: '1.5rem' }}>
               <span className="dh-hero-line"><motion.span custom={0} variants={titleV}>OUR SUCCESS</motion.span></span>
-              <span className="dh-hero-line">
-                <motion.span custom={1} variants={titleV} style={{ color: 'var(--accent-primary)' }}>
-                  <RotatingText words={['STORIES', 'IMPACT', 'RESULTS', 'CASES']} interval={2500} className="dh-display" />
-                </motion.span>
-              </span>
+              <span className="dh-hero-line"><motion.span custom={1} variants={titleV} className="dh-hero-stroked">IMPACT</motion.span></span>
+              <span className="dh-hero-line"><motion.span custom={2} variants={titleV} className="dh-hero-accent">STORIES.</motion.span></span>
             </h1>
             <motion.p variants={fadeUp} className="dh-body" style={{ maxWidth: '600px', margin: '0 auto', fontSize: '1rem' }}>
               In-depth analysis of how we deliver measurable results for our partners across industries.

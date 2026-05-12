@@ -16,12 +16,12 @@ const fadeUp = {
 };
 
 const services = [
-  { icon: <Code size={32} />, title: 'Web & App Development', desc: 'Crafting high-performance digital architectures with precision and scale.', features: ['Custom React Frameworks', 'Mobile App Ecosystems', 'Enterprise Solutions'] },
-  { icon: <Search size={32} />, title: 'SEO & Content Marketing', desc: 'Dominating search landscapes through strategic authority and visibility.', features: ['Semantic SEO', 'Authority Building', 'Content Strategy'] },
-  { icon: <Share2 size={32} />, title: 'Social Media Marketing', desc: 'Building meaningful brand narratives that resonate globally.', features: ['Narrative Design', 'Viral Mechanics', 'Community Growth'] },
-  { icon: <Zap size={32} />, title: 'AI Solutions', desc: 'Harnessing the power of automation to drive operational intelligence.', features: ['LLM Integration', 'Process Automation', 'Intelligent Chatbots'] },
-  { icon: <Radio size={32} />, title: 'Podcast Production', desc: 'Amplifying your brand voice through cinematic audio experiences.', features: ['Audio Engineering', 'Global Distribution', 'Narrative Production'] },
-  { icon: <PieChart size={32} />, title: 'Financial Consulting', desc: 'Navigating market complexities with data-driven strategic oversight.', features: ['Growth Capital', 'Risk Management', 'Strategic Scaling'] },
+  { icon: <Code size={32} />, title: 'Web & App Development', slug: 'web-app-development', desc: 'Crafting high-performance digital architectures with precision and scale.', features: ['Custom React Frameworks', 'Mobile App Ecosystems', 'Enterprise Solutions'] },
+  { icon: <Search size={32} />, title: 'SEO & Content Marketing', slug: 'seo-content-marketing', desc: 'Dominating search landscapes through strategic authority and visibility.', features: ['Semantic SEO', 'Authority Building', 'Content Strategy'] },
+  { icon: <Share2 size={32} />, title: 'Social Media Marketing', slug: 'social-media-marketing', desc: 'Building meaningful brand narratives that resonate globally.', features: ['Narrative Design', 'Viral Mechanics', 'Community Growth'] },
+  { icon: <Zap size={32} />, title: 'AI Solutions', slug: 'ai-solutions', desc: 'Harnessing the power of automation to drive operational intelligence.', features: ['LLM Integration', 'Process Automation', 'Intelligent Chatbots'] },
+  { icon: <Radio size={32} />, title: 'Podcast Production', slug: 'podcast-production', desc: 'Amplifying your brand voice through cinematic audio experiences.', features: ['Audio Engineering', 'Global Distribution', 'Narrative Production'] },
+  { icon: <PieChart size={32} />, title: 'Financial Consulting', slug: 'financial-consulting', desc: 'Navigating market complexities with data-driven strategic oversight.', features: ['Growth Capital', 'Risk Management', 'Strategic Scaling'] },
 ];
 
 
@@ -237,9 +237,9 @@ const DHServices = () => {
                     </li>
                   ))}
                 </ul>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--accent-primary)', fontSize: '0.8rem', fontWeight: 800, letterSpacing: '0.1em', marginTop: 'auto' }}>
+                <Link to={`/dummyhome/services/${service.slug}`} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--accent-primary)', fontSize: '0.8rem', fontWeight: 800, letterSpacing: '0.1em', marginTop: 'auto', textDecoration: 'none' }}>
                   EXPLORE SERVICE <ArrowRight size={14} />
-                </div>
+                </Link>
               </motion.div>
             ))}
           </div>

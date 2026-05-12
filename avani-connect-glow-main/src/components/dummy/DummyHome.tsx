@@ -119,6 +119,27 @@ const DummyHome = () => {
       slug: 'financial-consulting',
       index: '06',
     },
+    {
+      icon: '▣',
+      title: 'Business Consultation',
+      description: "Unlock your business's full potential with expert strategic guidance. We analyze your operations, identify growth opportunities, and provide actionable insights to optimize performance and achieve sustainable success.",
+      slug: 'business-consultation',
+      index: '07',
+    },
+    {
+      icon: '▤',
+      title: 'Business Loans',
+      description: 'Fuel your growth with flexible financing solutions. Access term loans, working capital, equipment financing, and more with competitive rates and terms designed to support your business expansion.',
+      slug: 'business-loans',
+      index: '08',
+    },
+    {
+      icon: '▥',
+      title: 'Business Insurance',
+      description: "Protect what you've built with comprehensive insurance coverage. Safeguard your assets, mitigate risks, and ensure business continuity with tailored insurance plans that give you peace of mind.",
+      slug: 'business-insurance',
+      index: '09',
+    },
   ];
 
   const processSteps = [

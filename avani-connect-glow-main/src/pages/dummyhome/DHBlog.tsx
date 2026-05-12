@@ -103,30 +103,59 @@ const DHBlog = () => {
             </div>
           ) : (
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2.5rem' }} className="dh-responsive-grid">
-              {blogs.map((blog, i) => (
-                <motion.div key={blog._id} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: i * 0.1 }}>
-                  <Link to={`/dummyhome/blog/${blog.slug}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                    <div style={{ padding: 0, overflow: 'hidden', height: '100%', display: 'flex', flexDirection: 'column', background: 'var(--card-bg)', borderRadius: '16px', border: '1px solid var(--border-faint)', backdropFilter: 'blur(10px)', transition: 'all 0.4s ease' }}
-                      onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.borderColor = 'var(--accent-primary)'; e.currentTarget.style.boxShadow = '0 16px 40px rgba(0,0,0,0.06)'; }}
-                      onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.borderColor = 'var(--border-faint)'; e.currentTarget.style.boxShadow = 'none'; }}
-                    >
-                      <div style={{ aspectRatio: '16/10', overflow: 'hidden' }}>
-                        <img src={blog.coverImage || 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=800&auto=format&fit=crop'} alt={blog.title} style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(100%) brightness(0.8)', transition: 'all 0.5s ease' }} onMouseEnter={e => { e.currentTarget.style.filter = 'grayscale(0%) brightness(1)'; e.currentTarget.style.transform = 'scale(1.05)'; }} onMouseLeave={e => { e.currentTarget.style.filter = 'grayscale(100%) brightness(0.8)'; e.currentTarget.style.transform = 'scale(1)'; }} />
-                      </div>
-                      <div style={{ padding: '2rem', display: 'flex', flexDirection: 'column', flex: 1 }}>
-                        <div style={{ display: 'flex', gap: '1.5rem', marginBottom: '1rem' }}>
-                          <span style={{ fontSize: '0.65rem', fontWeight: 800, color: 'var(--accent-primary)', display: 'flex', alignItems: 'center', gap: '0.4rem' }}><Calendar size={12} /> {new Date(blog.createdAt).toLocaleDateString()}</span>
-                          <span style={{ fontSize: '0.65rem', fontWeight: 800, color: 'var(--text-tertiary)', display: 'flex', alignItems: 'center', gap: '0.4rem' }}><User size={12} /> {blog.author || 'Avani Intel'}</span>
+              {blogs.map((blog, i) => {
+                const fallbacks = [
+                  'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=800&auto=format&fit=crop',
+                  'https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=800&auto=format&fit=crop',
+                  'https://images.unsplash.com/photo-1510511459019-5dda7724fd87?q=80&w=800&auto=format&fit=crop',
+                  'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&auto=format&fit=crop',
+                  'https://images.unsplash.com/photo-1504384308090-c564bd248273?q=80&w=800&auto=format&fit=crop',
+                  'https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=800&auto=format&fit=crop',
+                  'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop',
+                  'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=800&auto=format&fit=crop',
+                  'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=800&auto=format&fit=crop',
+                  'https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=800&auto=format&fit=crop'
+                ];
+                return (
+                  <motion.div key={blog._id} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: i * 0.1 }}>
+                    <Link to={`/dummyhome/blog/${blog.slug}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                      <div style={{ padding: 0, overflow: 'hidden', height: '100%', display: 'flex', flexDirection: 'column', background: 'var(--card-bg)', borderRadius: '16px', border: '1px solid var(--border-faint)', backdropFilter: 'blur(10px)', transition: 'all 0.4s ease' }}
+                        onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.borderColor = 'var(--accent-primary)'; e.currentTarget.style.boxShadow = '0 16px 40px rgba(0,0,0,0.06)'; }}
+                        onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.borderColor = 'var(--border-faint)'; e.currentTarget.style.boxShadow = 'none'; }}
+                      >
+                        <div style={{ aspectRatio: '16/10', overflow: 'hidden' }}>
+                          {(() => {
+                            let imgSrc = blog.coverImage || blog.featuredImage || fallbacks[i % fallbacks.length];
+                            if (blog.title.toLowerCase().includes('scalable')) {
+                              imgSrc = 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=500&fit=crop';
+                            }
+                            return (
+                              <img 
+                                src={imgSrc} 
+                                alt={blog.title} 
+                                style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'all 0.5s ease' }} 
+                                onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.05)'; }} 
+                                onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; }}
+                                onError={e => { (e.currentTarget as HTMLImageElement).src = fallbacks[i % fallbacks.length]; }}
+                              />
+                            );
+                          })()}
                         </div>
-                        <h3 className="dh-heading" style={{ fontSize: '1.3rem', marginBottom: '1.5rem', lineHeight: 1.3, flex: 1 }}>{blog.title}</h3>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--accent-primary)', fontSize: '0.75rem', fontWeight: 800, letterSpacing: '0.1em' }}>
-                          READ ARTICLE <ArrowRight size={14} />
+                        <div style={{ padding: '2rem', display: 'flex', flexDirection: 'column', flex: 1 }}>
+                          <div style={{ display: 'flex', gap: '1.5rem', marginBottom: '1rem' }}>
+                            <span style={{ fontSize: '0.65rem', fontWeight: 800, color: 'var(--accent-primary)', display: 'flex', alignItems: 'center', gap: '0.4rem' }}><Calendar size={12} /> {new Date(blog.createdAt).toLocaleDateString()}</span>
+                            <span style={{ fontSize: '0.65rem', fontWeight: 800, color: 'var(--text-tertiary)', display: 'flex', alignItems: 'center', gap: '0.4rem' }}><User size={12} /> {blog.author || 'Avani Intel'}</span>
+                          </div>
+                          <h3 className="dh-heading" style={{ fontSize: '1.3rem', marginBottom: '1.5rem', lineHeight: 1.3, flex: 1 }}>{blog.title}</h3>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--accent-primary)', fontSize: '0.75rem', fontWeight: 800, letterSpacing: '0.1em' }}>
+                            READ ARTICLE <ArrowRight size={14} />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </Link>
-                </motion.div>
-              ))}
+                    </Link>
+                  </motion.div>
+                );
+              })}
             </div>
           )}
         </div>

@@ -29,7 +29,12 @@ const BlogDetail = () => {
         const allBlogsJson = await allBlogsRes.json();
 
         if (blogJson?.success) {
-          setPost(blogJson.data);
+          const data = blogJson.data;
+          // Force a valid image for the "Scalable" article if it's broken or missing
+          if (data && (data.title.toLowerCase().includes('scalable') || !data.featuredImage)) {
+            data.featuredImage = 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=600&fit=crop';
+          }
+          setPost(data);
         }
 
         if (allBlogsJson?.success) {
@@ -159,9 +164,10 @@ const BlogDetail = () => {
           <AnimatedSection animation="fadeInUp" delay={0.3}>
             <div className="relative aspect-[16/9] md:aspect-[21/9] rounded-[3rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.15)] border-[12px] border-white group">
               <img
-                src={post.featuredImage}
+                src={post.featuredImage || 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=2069'}
                 alt={post.title}
                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                onError={e => { (e.currentTarget as HTMLImageElement).src = 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=2069'; }}
               />
             </div>
           </AnimatedSection>

@@ -5,6 +5,7 @@ import { Sun, Moon } from 'lucide-react';
 import DummyNavbar from '../../components/dummy/DummyNavbar';
 import DummyFooter from '../../components/dummy/DummyFooter';
 import DummyScrollProgress from '../../components/dummy/DummyScrollProgress';
+import Chatbot from '../../components/Chatbot';
 import '../../components/dummy/DummyHome.css';
 
 const DHLayout = () => {
@@ -35,31 +36,7 @@ const DHLayout = () => {
         </main>
 
         <DummyFooter />
-
-        {/* Theme Toggle Button */}
-        <button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-          style={{
-            position: 'fixed', bottom: '24px', left: '24px', zIndex: 9999,
-            width: '50px', height: '50px', borderRadius: '50%',
-            background: 'var(--glass-bg)', backdropFilter: 'blur(10px)',
-            border: '1px solid var(--border-light)', cursor: 'pointer',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            boxShadow: '0 8px 32px rgba(0,0,0,0.15)',
-            transition: 'all 0.3s ease',
-          }}
-        >
-          <AnimatePresence mode="wait">
-            {theme === 'dark' ? (
-              <motion.div key="sun" initial={{ opacity: 0, rotate: -90 }} animate={{ opacity: 1, rotate: 0 }} exit={{ opacity: 0, rotate: 90 }} transition={{ duration: 0.2 }}>
-                <Sun size={22} color="var(--accent-primary)" />
-              </motion.div>
-            ) : (
-              <motion.div key="moon" initial={{ opacity: 0, rotate: 90 }} animate={{ opacity: 1, rotate: 0 }} exit={{ opacity: 0, rotate: -90 }} transition={{ duration: 0.2 }}>
-                <Moon size={22} color="var(--accent-primary)" />
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </button>
+        <Chatbot />
       </div>
     </div>
   );

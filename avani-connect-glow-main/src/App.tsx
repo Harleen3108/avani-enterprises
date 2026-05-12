@@ -185,6 +185,7 @@ import DHNewsletters from "./pages/dummyhome/DHNewsletters";
 import DHCourses from "./pages/dummyhome/DHCourses";
 import DHCaseStudies from "./pages/dummyhome/DHCaseStudies";
 import DHCareerDetail from "./pages/dummyhome/DHCareerDetail";
+import DHServiceDetail from "./pages/dummyhome/DHServiceDetail";
 
 import DH2PolicicueProject from './pages/dummyhome2/DH2PolicicueProject';
 import DH2IndusProject from './pages/dummyhome2/DH2IndusProject';
@@ -260,6 +261,8 @@ const AppLayout = () => {
             <Route path="newsletters" element={<DHNewsletters />} />
             <Route path="courses" element={<DHCourses />} />
             <Route path="case-studies" element={<DHCaseStudies />} />
+            <Route path="get-consultation" element={<GetConsultation />} />
+            <Route path="services/:slug" element={<DHServiceDetail />} />
           </Route>
 
           {/* DH2 Sub-pages with shared layout */}

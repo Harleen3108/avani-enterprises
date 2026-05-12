@@ -75,7 +75,7 @@ const DHGlobalPresence = () => {
               <Globe size={14} style={{ color: 'var(--accent-primary)' }} />
               <span style={{ fontSize: '0.6rem', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '0.2em' }}>WORLDWIDE OPERATIONS</span>
             </motion.div>
-            <h1 className="dh-display" style={{ fontSize: 'clamp(3rem, 8vw, 7rem)', marginBottom: '1.5rem' }}>
+            <h1 className="dh-display" style={{ fontSize: 'clamp(3rem, 7vw, 5.5rem)', marginBottom: '1.5rem' }}>
               <span className="dh-hero-line"><motion.span custom={0} variants={titleV} className="dh-hero-stroked">GLOBAL</motion.span></span>
               <span className="dh-hero-line"><motion.span custom={1} variants={titleV} className="dh-hero-accent">CONNECTIVITY.</motion.span></span>
             </h1>
@@ -110,7 +110,7 @@ const DHGlobalPresence = () => {
             <div style={{ flex: 1, height: '1px', background: 'var(--border-faint)' }} />
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '3rem' }} className="dh-responsive-grid">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '3rem', maxWidth: '1000px', margin: '0 auto' }} className="dh-responsive-grid">
             {officeDetails.map((office, i) => (
               <motion.div key={office.city} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: i * 0.1 }}
                 style={{ display: 'flex', flexDirection: 'column' }}>

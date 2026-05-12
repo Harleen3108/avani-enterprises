@@ -307,7 +307,7 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
                 </div>
                 {!loadingNewsletters && newsletters.length > 0 && (
                   <div style={{ padding: '10px 20px', borderTop: '1px solid var(--border-light)' }}>
-                    <Link to="/newsletters" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', padding: '8px', border: '1px solid var(--border-light)', borderRadius: '8px', color: 'var(--accent-light)', textDecoration: 'none', fontFamily: "'Outfit', sans-serif", fontSize: '10px', letterSpacing: '0.2em', transition: 'all 0.25s', fontWeight: 600 }}
+                    <Link to="/dummyhome/newsletters" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', padding: '8px', border: '1px solid var(--border-light)', borderRadius: '8px', color: 'var(--accent-light)', textDecoration: 'none', fontFamily: "'Outfit', sans-serif", fontSize: '10px', letterSpacing: '0.2em', transition: 'all 0.25s', fontWeight: 600 }}
                       onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent-primary)'; (e.currentTarget as HTMLElement).style.color = 'var(--accent-primary)'; (e.currentTarget as HTMLElement).style.background = 'var(--accent-hover)'; }}
                       onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-light)'; (e.currentTarget as HTMLElement).style.color = 'var(--accent-light)'; (e.currentTarget as HTMLElement).style.background = 'transparent'; }}
                     >

@@ -47,18 +47,41 @@ const departments = [
   { id: 'design', name: 'Design', icon: <Palette size={16} /> },
   { id: 'marketing', name: 'Marketing', icon: <TrendingUp size={16} /> },
   { id: 'business', name: 'Business', icon: <Building2 size={16} /> },
-  { id: 'analytics', name: 'Analytics', icon: <Target size={16} /> },
 ];
 
-const getJobImage = (department: string) => {
-  const images: Record<string, string> = {
-    development: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&h=300&fit=crop',
-    design: 'https://images.unsplash.com/photo-1626785774573-4b799315345d?w=400&h=300&fit=crop',
-    marketing: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop',
-    business: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=300&fit=crop',
-    analytics: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop',
+const getJobImage = (department: string, index: number) => {
+  const images: Record<string, string[]> = {
+    development: [
+      'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=300&fit=crop',
+    ],
+    design: [
+      'https://images.unsplash.com/photo-1626785774573-4b799315345d?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1541462608143-67571c6738dd?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1558655143-df239ec2c75f?w=400&h=300&fit=crop',
+    ],
+    marketing: [
+      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1533750516457-a7f992034fec?w=400&h=300&fit=crop',
+    ],
+    business: [
+      'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1556761175-59730532277c?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=300&fit=crop',
+    ],
+    analytics: [
+      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1543286386-2e659306cd6c?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1551434678-e076c223a692?w=400&h=300&fit=crop',
+    ],
   };
-  return images[department.toLowerCase()] || 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=400&h=300&fit=crop';
+  const deptImages = images[department.toLowerCase()] || [
+    'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=400&h=300&fit=crop',
+    'https://images.unsplash.com/photo-1504384308090-c564bd248273?w=400&h=300&fit=crop',
+  ];
+  return deptImages[index % deptImages.length];
 };
 
 const DHCareers = () => {
@@ -127,10 +150,9 @@ const DHCareers = () => {
           <motion.div initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.1 } } }}>
             <motion.div variants={fadeUp} className="dh-label">JOIN OUR TEAM</motion.div>
             <h1 className="dh-display" style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)', marginBottom: '1.5rem' }}>
-              JOIN OUR TEAM OF <br />
-              <span style={{ color: 'var(--accent-primary)' }}>
-                <RotatingText words={['DEVELOPERS', 'DESIGNERS', 'MARKETERS', 'ANALYSTS', 'INNOVATORS', 'LEADERS']} interval={2500} className="dh-display" />
-              </span>
+              <span className="dh-hero-line"><motion.span custom={0} variants={titleV}>JOIN OUR</motion.span></span>
+              <span className="dh-hero-line"><motion.span custom={1} variants={titleV} className="dh-hero-stroked">GLOBAL</motion.span></span>
+              <span className="dh-hero-line"><motion.span custom={2} variants={titleV} className="dh-hero-accent">TEAM.</motion.span></span>
             </h1>
             <motion.p variants={fadeUp} className="dh-body" style={{ maxWidth: '600px', margin: '0 auto', fontSize: '1rem' }}>
               Discover exciting career opportunities and be part of a team that's shaping the future of technology and innovation.
@@ -223,7 +245,7 @@ const DHCareers = () => {
                   >
                     {/* Thumbnail */}
                     <div style={{ position: 'relative', height: '160px', overflow: 'hidden' }}>
-                      <img src={job.image || getJobImage(job.department)} alt={job.title}
+                      <img src={job.image || getJobImage(job.department, i)} alt={job.title}
                         style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.6s ease' }}
                         onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.05)'; }}
                         onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; }}
