@@ -112,8 +112,11 @@ const DHCourses = () => {
             <motion.div variants={fadeUp} className="dh-label">MASTER IN-DEMAND SKILLS</motion.div>
             <h1 className="dh-display" style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)', marginBottom: '1.5rem' }}>
               <span className="dh-hero-line"><motion.span custom={0} variants={titleV}>MASTER YOUR</motion.span></span>
-              <span className="dh-hero-line"><motion.span custom={1} variants={titleV} className="dh-hero-stroked">FUTURE</motion.span></span>
-              <span className="dh-hero-line"><motion.span custom={2} variants={titleV} className="dh-hero-accent">SKILLS.</motion.span></span>
+              <span className="dh-hero-line">
+                <motion.span custom={1} variants={titleV} style={{ color: 'var(--accent-primary)' }}>
+                  <RotatingText words={['FUTURE', 'CAREER', 'SKILLS', 'CRAFT']} interval={2500} className="dh-display" />
+                </motion.span>
+              </span>
             </h1>
             <motion.p variants={fadeUp} className="dh-body" style={{ maxWidth: '600px', margin: '0 auto', fontSize: '1rem' }}>
               Comprehensive training programs with guaranteed job placement and industry-recognized certifications.
@@ -163,11 +166,11 @@ const DHCourses = () => {
                       <Star size={10} style={{ color: 'var(--accent-primary)', fill: 'var(--accent-primary)' }} /> {course.rating}
                     </div>
                   </div>
-                  
+
                   <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', flex: 1 }}>
                     <h3 className="dh-heading" style={{ fontSize: '1.2rem', marginBottom: '0.5rem' }}>{course.title}</h3>
                     <p className="dh-body" style={{ fontSize: '0.8rem', marginBottom: '1rem', flex: 1 }}>{course.description}</p>
-                    
+
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', marginBottom: '1rem' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '4px', padding: '6px', background: 'var(--bg-primary)', borderRadius: '8px', border: '1px solid var(--border-faint)' }}>
                         <Clock size={12} style={{ color: 'var(--accent-primary)' }} />

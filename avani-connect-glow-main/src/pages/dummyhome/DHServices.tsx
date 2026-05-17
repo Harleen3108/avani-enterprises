@@ -207,6 +207,7 @@ const DHServices = () => {
                   transition: 'all 0.5s cubic-bezier(0.22, 1, 0.36, 1)',
                   boxShadow: '0 4px 20px rgba(0,0,0,0.02)',
                   backdropFilter: 'blur(10px)',
+                  cursor: 'pointer',
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = 'translateY(-6px)';
@@ -219,26 +220,28 @@ const DHServices = () => {
                   e.currentTarget.style.boxShadow = '0 4px 20px rgba(0,0,0,0.02)';
                 }}
               >
-                {/* Corner accent */}
-                <div style={{
-                  position: 'absolute', top: 0, right: 0,
-                  width: 60, height: 60,
-                  background: 'linear-gradient(135deg, transparent 50%, var(--accent-primary) 50%)',
-                  opacity: 0.06, borderRadius: '0 16px 0 0',
-                }} />
+                <Link to={`/dummyhome/services/${service.slug}`} style={{ display: 'flex', flexDirection: 'column', height: '100%', width: '100%', textDecoration: 'none', color: 'inherit' }}>
+                  {/* Corner accent */}
+                  <div style={{
+                    position: 'absolute', top: 0, right: 0,
+                    width: 60, height: 60,
+                    background: 'linear-gradient(135deg, transparent 50%, var(--accent-primary) 50%)',
+                    opacity: 0.06, borderRadius: '0 16px 0 0',
+                  }} />
 
-                <div style={{ color: 'var(--accent-primary)', marginBottom: '1rem' }}>{service.icon}</div>
-                <h3 className="dh-heading" style={{ fontSize: '1.4rem', marginBottom: '0.5rem' }}>{service.title}</h3>
-                <p className="dh-body" style={{ marginBottom: '1rem', flex: 1, fontSize: '0.9rem', lineHeight: 1.5 }}>{service.desc}</p>
-                <ul style={{ listStyle: 'none', padding: 0, marginBottom: '1.5rem' }}>
-                  {service.features.map((f, j) => (
-                    <li key={j} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
-                      <CheckCircle size={12} style={{ color: 'var(--accent-primary)' }} /> {f}
-                    </li>
-                  ))}
-                </ul>
-                <Link to={`/dummyhome/services/${service.slug}`} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--accent-primary)', fontSize: '0.8rem', fontWeight: 800, letterSpacing: '0.1em', marginTop: 'auto', textDecoration: 'none' }}>
-                  EXPLORE SERVICE <ArrowRight size={14} />
+                  <div style={{ color: 'var(--accent-primary)', marginBottom: '1rem' }}>{service.icon}</div>
+                  <h3 className="dh-heading" style={{ fontSize: '1.4rem', marginBottom: '0.5rem' }}>{service.title}</h3>
+                  <p className="dh-body" style={{ marginBottom: '1rem', flex: 1, fontSize: '0.9rem', lineHeight: 1.5 }}>{service.desc}</p>
+                  <ul style={{ listStyle: 'none', padding: 0, marginBottom: '1.5rem' }}>
+                    {service.features.map((f, j) => (
+                      <li key={j} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+                        <CheckCircle size={12} style={{ color: 'var(--accent-primary)' }} /> {f}
+                      </li>
+                    ))}
+                  </ul>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--accent-primary)', fontSize: '0.8rem', fontWeight: 800, letterSpacing: '0.1em', marginTop: 'auto' }}>
+                    EXPLORE SERVICE <ArrowRight size={14} />
+                  </div>
                 </Link>
               </motion.div>
             ))}

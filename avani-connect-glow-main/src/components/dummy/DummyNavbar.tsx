@@ -2,20 +2,40 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ArrowRight, ChevronDown, Phone } from 'lucide-react';
+import { projectsData } from '../../data/dummyProjectsData';
 
 const navLinks = [
   { label: 'HOME', path: '/dummyhome' },
   { label: 'ABOUT', path: '/dummyhome/about' },
-  { label: 'SERVICES', path: '/dummyhome/services' },
-  { label: 'PROJECTS', path: '/dummyhome/projects' },
   { 
-    label: 'RESOURCES', 
+    label: 'SERVICES', 
+    path: '/dummyhome/services',
+    dropdown: [
+      { label: 'ALL SERVICES', path: '/dummyhome/services' },
+      { label: 'WEB & APP DEVELOPMENT', path: '/dummyhome/services/web-app-development' },
+      { label: 'SEO & CONTENT MARKETING', path: '/dummyhome/services/seo-content-marketing' },
+      { label: 'SOCIAL MEDIA MARKETING', path: '/dummyhome/services/social-media-marketing' },
+      { label: 'AI SOLUTIONS', path: '/dummyhome/services/ai-solutions' },
+      { label: 'PODCAST PRODUCTION', path: '/dummyhome/services/podcast-production' },
+      { label: 'FINANCIAL CONSULTING', path: '/dummyhome/services/financial-consulting' }
+    ]
+  },
+  { 
+    label: 'PROJECTS', 
+    path: '/dummyhome/projects',
+    dropdown: [
+      { label: 'ALL PROJECTS', path: '/dummyhome/projects' },
+      ...projectsData.map(p => ({ label: p.title.toUpperCase(), path: `/dummyhome/projects/${p.slug}` }))
+    ]
+  },
+  {
+    label: 'RESOURCES',
     dropdown: [
       { label: 'BLOG', path: '/dummyhome/blog' },
       { label: 'NEWSLETTERS', path: '/dummyhome/newsletters' },
       { label: 'COURSES', path: '/dummyhome/courses' },
       { label: 'CASE STUDIES', path: '/dummyhome/case-studies' },
-    ] 
+    ]
   },
   { label: 'JOIN US', path: '/dummyhome/careers' },
   { label: 'GLOBAL PRESENCE', path: '/dummyhome/global-presence' },
@@ -34,8 +54,8 @@ const DummyNavbar = () => {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  useEffect(() => { 
-    setMobileOpen(false); 
+  useEffect(() => {
+    setMobileOpen(false);
     setOpenDropdown(null);
   }, [location.pathname]);
 
@@ -89,7 +109,7 @@ const DummyNavbar = () => {
                       <ChevronDown size={14} style={{ transform: openDropdown === link.label ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
                       {isActive && <div style={{ position: 'absolute', bottom: -2, left: 0, right: 0, height: '2px', background: 'var(--accent-primary)', borderRadius: '1px' }} />}
                     </button>
-                    
+
                     <AnimatePresence>
                       {openDropdown === link.label && (
                         <motion.div
@@ -160,7 +180,7 @@ const DummyNavbar = () => {
             >
               <Phone size={12} style={{ color: 'var(--accent-primary)' }} /> CALL NOW
             </a>
-             <a href="/dummyhome/contact" style={{
+            <Link to="/dummyhome/get-consultation" style={{
               display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '8px 20px',
               background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-light))', color: 'var(--bg-primary)',
               borderRadius: '5px', textDecoration: 'none', fontFamily: "'Outfit', sans-serif",
@@ -171,7 +191,7 @@ const DummyNavbar = () => {
               onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = 'none'; (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 16px var(--accent-hover)'; }}
             >
               GET STARTED <ArrowRight size={12} />
-            </a>
+            </Link>
             <button onClick={() => setMobileOpen(!mobileOpen)}
               className="dummy-nav-burger"
               style={{ display: 'none', background: 'none', border: '1px solid var(--border-light)', borderRadius: '6px', padding: '6px', cursor: 'pointer', color: 'var(--text-primary)' }}>
@@ -253,7 +273,7 @@ const DummyNavbar = () => {
                 </motion.div>
               );
             })}
-            <a href="/dummyhome/contact" onClick={() => setMobileOpen(false)} style={{
+            <Link to="/dummyhome/get-consultation" onClick={() => setMobileOpen(false)} style={{
               display: 'inline-flex', alignItems: 'center', gap: '8px', marginTop: '24px',
               padding: '12px 28px', background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-light))',
               color: 'var(--bg-primary)', borderRadius: '6px', textDecoration: 'none',
@@ -261,7 +281,7 @@ const DummyNavbar = () => {
               alignSelf: 'flex-start',
             }}>
               GET CONSULTATION <ArrowRight size={14} />
-            </a>
+            </Link>
           </motion.div>
         )}
       </AnimatePresence>

@@ -48,7 +48,7 @@ const DHBlog = () => {
 
   return (
     <div className="dh-blog-page">
-      
+
       {/* 1. CINEMATIC HERO */}
       <section className="theme-brown" style={{ minHeight: '70vh', display: 'flex', alignItems: 'center', background: 'var(--bg-primary)', overflow: 'hidden', position: 'relative', paddingTop: '80px' }}>
         <Grain />
@@ -124,22 +124,14 @@ const DHBlog = () => {
                         onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.borderColor = 'var(--border-faint)'; e.currentTarget.style.boxShadow = 'none'; }}
                       >
                         <div style={{ aspectRatio: '16/10', overflow: 'hidden' }}>
-                          {(() => {
-                            let imgSrc = blog.coverImage || blog.featuredImage || fallbacks[i % fallbacks.length];
-                            if (blog.title.toLowerCase().includes('scalable')) {
-                              imgSrc = 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=500&fit=crop';
-                            }
-                            return (
-                              <img 
-                                src={imgSrc} 
-                                alt={blog.title} 
-                                style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'all 0.5s ease' }} 
-                                onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.05)'; }} 
-                                onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; }}
-                                onError={e => { (e.currentTarget as HTMLImageElement).src = fallbacks[i % fallbacks.length]; }}
-                              />
-                            );
-                          })()}
+                          <img
+                            src={blog.coverImage || fallbacks[i % fallbacks.length]}
+                            alt={blog.title}
+                            style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'all 0.5s ease' }}
+                            onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.05)'; }}
+                            onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; }}
+                            onError={e => { (e.currentTarget as HTMLImageElement).src = fallbacks[i % fallbacks.length]; }}
+                          />
                         </div>
                         <div style={{ padding: '2rem', display: 'flex', flexDirection: 'column', flex: 1 }}>
                           <div style={{ display: 'flex', gap: '1.5rem', marginBottom: '1rem' }}>

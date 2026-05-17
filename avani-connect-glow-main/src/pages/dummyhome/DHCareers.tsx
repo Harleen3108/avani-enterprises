@@ -150,9 +150,12 @@ const DHCareers = () => {
           <motion.div initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.1 } } }}>
             <motion.div variants={fadeUp} className="dh-label">JOIN OUR TEAM</motion.div>
             <h1 className="dh-display" style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)', marginBottom: '1.5rem' }}>
-              <span className="dh-hero-line"><motion.span custom={0} variants={titleV}>JOIN OUR</motion.span></span>
-              <span className="dh-hero-line"><motion.span custom={1} variants={titleV} className="dh-hero-stroked">GLOBAL</motion.span></span>
-              <span className="dh-hero-line"><motion.span custom={2} variants={titleV} className="dh-hero-accent">TEAM.</motion.span></span>
+              <span className="dh-hero-line"><motion.span custom={0} variants={titleV}>JOIN OUR TEAM OF</motion.span></span>
+              <span className="dh-hero-line">
+                <motion.span custom={1} variants={titleV} style={{ color: 'var(--accent-primary)' }}>
+                  <RotatingText words={['DEVELOPERS', 'DESIGNERS', 'MARKETERS', 'ANALYSTS', 'INNOVATORS', 'LEADERS']} interval={2500} className="dh-display" />
+                </motion.span>
+              </span>
             </h1>
             <motion.p variants={fadeUp} className="dh-body" style={{ maxWidth: '600px', margin: '0 auto', fontSize: '1rem' }}>
               Discover exciting career opportunities and be part of a team that's shaping the future of technology and innovation.

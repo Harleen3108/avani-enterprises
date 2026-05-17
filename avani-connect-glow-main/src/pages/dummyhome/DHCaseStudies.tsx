@@ -74,8 +74,11 @@ const DHCaseStudies = () => {
             <motion.div variants={fadeUp} className="dh-label">REAL-WORLD IMPACT</motion.div>
             <h1 className="dh-display" style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)', marginBottom: '1.5rem' }}>
               <span className="dh-hero-line"><motion.span custom={0} variants={titleV}>OUR SUCCESS</motion.span></span>
-              <span className="dh-hero-line"><motion.span custom={1} variants={titleV} className="dh-hero-stroked">IMPACT</motion.span></span>
-              <span className="dh-hero-line"><motion.span custom={2} variants={titleV} className="dh-hero-accent">STORIES.</motion.span></span>
+              <span className="dh-hero-line">
+                <motion.span custom={1} variants={titleV} style={{ color: 'var(--accent-primary)' }}>
+                  <RotatingText words={['STORIES', 'IMPACT', 'RESULTS', 'CASES']} interval={2500} className="dh-display" />
+                </motion.span>
+              </span>
             </h1>
             <motion.p variants={fadeUp} className="dh-body" style={{ maxWidth: '600px', margin: '0 auto', fontSize: '1rem' }}>
               In-depth analysis of how we deliver measurable results for our partners across industries.
@@ -110,12 +113,12 @@ const DHCaseStudies = () => {
                       </span>
                     </div>
                   </div>
-                  
+
                   <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', flex: 1 }}>
                     <div style={{ fontSize: '0.65rem', fontWeight: 800, color: 'var(--accent-primary)', letterSpacing: '0.1em', marginBottom: '0.5rem' }}>CLIENT: {study.client.toUpperCase()}</div>
                     <h3 className="dh-heading" style={{ fontSize: '1.2rem', marginBottom: '0.5rem' }}>{study.title}</h3>
                     <p className="dh-body" style={{ fontSize: '0.8rem', marginBottom: '1.5rem', flex: 1 }}>{study.description}</p>
-                    
+
                     <div style={{ padding: '10px', background: 'var(--accent-hover)', borderRadius: '8px', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
                       <BarChart3 size={14} style={{ color: 'var(--accent-primary)' }} />
                       <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--accent-primary)' }}>IMPACT: {study.impact}</span>
