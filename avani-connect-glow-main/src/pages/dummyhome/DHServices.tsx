@@ -16,12 +16,15 @@ const fadeUp = {
 };
 
 const services = [
-  { icon: <Code size={32} />, title: 'Web & App Development', slug: 'web-app-development', desc: 'Crafting high-performance digital architectures with precision and scale.', features: ['Custom React Frameworks', 'Mobile App Ecosystems', 'Enterprise Solutions'] },
-  { icon: <Search size={32} />, title: 'SEO & Content Marketing', slug: 'seo-content-marketing', desc: 'Dominating search landscapes through strategic authority and visibility.', features: ['Semantic SEO', 'Authority Building', 'Content Strategy'] },
-  { icon: <Share2 size={32} />, title: 'Social Media Marketing', slug: 'social-media-marketing', desc: 'Building meaningful brand narratives that resonate globally.', features: ['Narrative Design', 'Viral Mechanics', 'Community Growth'] },
-  { icon: <Zap size={32} />, title: 'AI Solutions', slug: 'ai-solutions', desc: 'Harnessing the power of automation to drive operational intelligence.', features: ['LLM Integration', 'Process Automation', 'Intelligent Chatbots'] },
-  { icon: <Radio size={32} />, title: 'Podcast Production', slug: 'podcast-production', desc: 'Amplifying your brand voice through cinematic audio experiences.', features: ['Audio Engineering', 'Global Distribution', 'Narrative Production'] },
-  { icon: <PieChart size={32} />, title: 'Financial Consulting', slug: 'financial-consulting', desc: 'Navigating market complexities with data-driven strategic oversight.', features: ['Growth Capital', 'Risk Management', 'Strategic Scaling'] },
+  { img: '/whatwecreate/webdev.png', icon: <Code size={32} />, title: 'Web & App Development', slug: 'web-app-development', desc: 'Crafting high-performance digital architectures with precision and scale.', features: ['Custom React Frameworks', 'Mobile App Ecosystems', 'Enterprise Solutions'] },
+  { img: '/whatwecreate/seoandcontent.jpg', icon: <Search size={32} />, title: 'SEO & Content Marketing', slug: 'seo-content-marketing', desc: 'Dominating search landscapes through strategic authority and visibility.', features: ['Semantic SEO', 'Authority Building', 'Content Strategy'] },
+  { img: '/whatwecreate/socialmedia.png', icon: <Share2 size={32} />, title: 'Social Media Marketing', slug: 'social-media-marketing', desc: 'Building meaningful brand narratives that resonate globally.', features: ['Narrative Design', 'Viral Mechanics', 'Community Growth'] },
+  { img: '/whatwecreate/aisolutions.webp', icon: <Zap size={32} />, title: 'AI Solutions', slug: 'ai-solutions', desc: 'Harnessing the power of automation to drive operational intelligence.', features: ['LLM Integration', 'Process Automation', 'Intelligent Chatbots'] },
+  { img: '/whatwecreate/podcast.webp', icon: <Radio size={32} />, title: 'Podcast Production', slug: 'podcast-production', desc: 'Amplifying your brand voice through cinematic audio experiences.', features: ['Audio Engineering', 'Global Distribution', 'Narrative Production'] },
+  { img: '/whatwecreate/finance.webp', icon: <PieChart size={32} />, title: 'Financial Consulting', slug: 'financial-consulting', desc: 'Navigating market complexities with data-driven strategic oversight.', features: ['Growth Capital', 'Risk Management', 'Strategic Scaling'] },
+  { img: '/whatwecreate/consultation.png', icon: <Lightbulb size={32} />, title: 'Business Consultation', slug: 'business-consultation', desc: 'Analyzing day-to-day operations to find hidden opportunities and streamline workflows.', features: ['Workflow Audits', 'Operational Scaling', 'Opportunity Scouting'] },
+  { img: '/whatwecreate/loans.png', icon: <TrendingUp size={32} />, title: 'Business Loans', slug: 'business-loans', desc: 'Securing flexible working capital and equipment financing at competitive rates.', features: ['Growth Capital', 'Hassle-Free Processing', 'Flexible Terms'] },
+  { img: '/whatwecreate/insurance.png', icon: <Shield size={32} />, title: 'Business Insurance', slug: 'business-insurance', desc: 'Customized insurance plans to safeguard your enterprise assets and operations.', features: ['Asset Safeguarding', 'Liability Protection', 'Absolute Peace of Mind'] },
 ];
 
 
@@ -221,6 +224,37 @@ const DHServices = () => {
                 }}
               >
                 <Link to={`/dummyhome/services/${service.slug}`} style={{ display: 'flex', flexDirection: 'column', height: '100%', width: '100%', textDecoration: 'none', color: 'inherit' }}>
+                  {service.img && (
+                    <div style={{
+                      width: '100%',
+                      height: '160px',
+                      borderRadius: '10px',
+                      overflow: 'hidden',
+                      marginBottom: '20px',
+                      background: 'var(--bg-secondary)',
+                      position: 'relative'
+                    }}>
+                      <img
+                        src={service.img}
+                        alt={service.title}
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'cover',
+                          transition: 'transform 0.5s ease'
+                        }}
+                        onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.05)'; }}
+                        onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; }}
+                      />
+                      <div style={{
+                        position: 'absolute',
+                        top: 0, left: 0, right: 0, bottom: 0,
+                        background: 'linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.15))',
+                        pointerEvents: 'none'
+                      }} />
+                    </div>
+                  )}
+
                   {/* Corner accent */}
                   <div style={{
                     position: 'absolute', top: 0, right: 0,

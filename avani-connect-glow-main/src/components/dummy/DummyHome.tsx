@@ -80,65 +80,84 @@ const DummyHome = () => {
     {
       icon: '◎',
       title: 'Web & App Development',
-      description: 'Transform your vision into reality with custom-built websites and mobile applications. We create scalable, high-performance digital solutions that deliver exceptional user experiences and drive measurable business results.',
-      slug: 'web-development',
+      description: 'We build stunning, lightning-fast websites and mobile apps tailored to your business. From eye-catching designs to seamless functionality, we bring your digital ideas to life and help you scale effortlessly.',
+      slug: 'web-app-development',
       index: '01',
+      image: '/whatwecreate/webdev.png',
+      customPath: '/web-dev',
+      subLinks: [
+        { name: 'Core Tech Stack', path: '/web-dev' },
+        { name: '7-Day Product Launch', path: '/7-day-launch' }
+      ]
     },
     {
       icon: '◈',
       title: 'SEO & Content Marketing',
-      description: 'Dominate search rankings and captivate your audience with data-driven SEO strategies and compelling content. We help you build authority, increase organic traffic, and convert visitors into loyal customers.',
-      slug: 'seo-content',
+      description: 'Get found on Google and turn casual visitors into loyal customers. We write engaging content and optimize your site so you rank higher, attract more traffic, and grow your brand organically.',
+      slug: 'seo-content-marketing',
       index: '02',
-    },
-    {
-      icon: '◇',
-      title: 'Social Media Marketing',
-      description: 'Build a powerful brand presence across social platforms. Our strategic campaigns create meaningful connections with your audience, boost engagement, and turn followers into brand advocates.',
-      slug: 'social-media',
-      index: '03',
+      image: '/whatwecreate/seoandcontent.jpg'
     },
     {
       icon: '◉',
       title: 'AI Solutions',
-      description: 'Harness the power of artificial intelligence to automate processes, gain actionable insights, and make smarter business decisions. We specialize in lead management automation, WhatsApp text automation, intelligent chatbots, and custom AI-powered tools.',
+      description: 'Work smarter, not harder, with cutting-edge AI. From automated lead tracking and smart WhatsApp tools to custom chatbots that handle support 24/7, we automate your busywork so you can focus on growth.',
       slug: 'ai-solutions',
+      index: '03',
+      image: '/whatwecreate/aisolutions.webp',
+      subLinks: [
+        { name: 'Lead Tracker AI', path: '/projects/lead-management-automation' },
+        { name: 'WhatsApp Auto-Agent', path: '/projects/whatsapp-automation' },
+        { name: 'Workflow Optimizer', path: '/projects/business-process-optimization' }
+      ]
+    },
+    {
+      icon: '◇',
+      title: 'Social Media Marketing',
+      description: 'Grow your social presence and connect with your dream audience. We create high-performing campaigns and scroll-stopping posts on Instagram, Facebook, and LinkedIn to build real engagement and drive sales.',
+      slug: 'social-media-marketing',
       index: '04',
+      image: '/whatwecreate/socialmedia.png'
     },
     {
       icon: '◌',
       title: 'Podcast Production',
-      description: 'Amplify your brand voice with professional podcast production. From concept to distribution, we handle everything to help you reach and engage your target audience through compelling audio content.',
+      description: 'Launch a professional podcast and make your voice heard. We handle everything from recording setup and audio editing to global distribution on Spotify and Apple Podcasts, making hosting a breeze.',
       slug: 'podcast-production',
       index: '05',
+      image: '/whatwecreate/podcast.webp'
     },
     {
       icon: '◫',
       title: 'Financial Consulting',
-      description: 'Navigate complex financial decisions with confidence. Our expert consultants provide strategic planning, investment guidance, and financial optimization strategies to accelerate your business growth.',
+      description: 'Take control of your finances and plan for a wealthy future. Our expert consultants help you organize your revenue, optimize investments, and build a solid financial blueprint for long-term growth.',
       slug: 'financial-consulting',
       index: '06',
+      image: '/whatwecreate/finance.webp'
     },
     {
       icon: '▣',
       title: 'Business Consultation',
-      description: "Unlock your business's full potential with expert strategic guidance. We analyze your operations, identify growth opportunities, and provide actionable insights to optimize performance and achieve sustainable success.",
+      description: 'Scale your business with expert guidance and strategy. We analyze your day-to-day operations to find hidden opportunities, streamline workflows, and set you up for long-term, sustainable success.',
       slug: 'business-consultation',
       index: '07',
+      image: '/whatwecreate/consultation.png'
     },
     {
       icon: '▤',
       title: 'Business Loans',
-      description: 'Fuel your growth with flexible financing solutions. Access term loans, working capital, equipment financing, and more with competitive rates and terms designed to support your business expansion.',
+      description: 'Get the funding you need to grow and expand. We connect you with flexible business loans, working capital, and equipment financing at competitive rates, with quick approvals and hassle-free processing.',
       slug: 'business-loans',
       index: '08',
+      image: '/whatwecreate/loans.png'
     },
     {
       icon: '▥',
       title: 'Business Insurance',
-      description: "Protect what you've built with comprehensive insurance coverage. Safeguard your assets, mitigate risks, and ensure business continuity with tailored insurance plans that give you peace of mind.",
+      description: 'Secure your hard work and protect your business from risks. We offer customized insurance plans to safeguard your assets, employees, and operations, giving you absolute peace of mind.',
       slug: 'business-insurance',
       index: '09',
+      image: '/whatwecreate/insurance.png'
     },
   ];
 

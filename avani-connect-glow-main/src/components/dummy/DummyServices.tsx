@@ -57,7 +57,7 @@ const DummyServices = ({ services }: any) => {
         </motion.div>
 
         {/* Premium Book Grid Style */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '32px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '32px' }}>
           {services.map((svc: any, i: number) => (
             <motion.div 
               key={i} 
@@ -68,75 +68,158 @@ const DummyServices = ({ services }: any) => {
               style={{ 
                 background: 'var(--card-bg)',
                 border: '1px solid var(--border-light)',
-                borderRadius: '12px',
-                padding: '40px',
+                borderRadius: '16px',
+                padding: '24px',
                 display: 'flex',
                 flexDirection: 'column',
-                justifyContent: 'space-between',
-                height: '340px',
+                minHeight: '440px',
+                height: 'auto',
+                position: 'relative',
+                overflow: 'hidden',
                 transition: 'all 0.4s cubic-bezier(0.22, 1, 0.36, 1)',
-                boxShadow: '0 4px 20px rgba(0,0,0,0.03)'
+                boxShadow: '0 4px 20px rgba(0,0,0,0.02)'
               }}
               onMouseEnter={(e) => { 
                 e.currentTarget.style.transform = 'translateY(-10px)';
                 e.currentTarget.style.borderColor = 'var(--accent-primary)';
-                e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.08)';
+                e.currentTarget.style.boxShadow = '0 12px 35px rgba(0,0,0,0.08)';
+                const img = e.currentTarget.querySelector('.svc-card-img') as HTMLImageElement;
+                if (img) img.style.transform = 'scale(1.06)';
               }}
               onMouseLeave={(e) => { 
                 e.currentTarget.style.transform = 'translateY(0)';
                 e.currentTarget.style.borderColor = 'var(--border-light)';
-                e.currentTarget.style.boxShadow = '0 4px 20px rgba(0,0,0,0.03)';
+                e.currentTarget.style.boxShadow = '0 4px 20px rgba(0,0,0,0.02)';
+                const img = e.currentTarget.querySelector('.svc-card-img') as HTMLImageElement;
+                if (img) img.style.transform = 'scale(1)';
               }}
             >
-              <div>
-                <span style={{ 
-                  fontFamily: "'Inter', sans-serif", 
-                  fontSize: '12px', 
-                  color: 'var(--accent-primary)', 
-                  letterSpacing: '0.1em', 
-                  fontWeight: 600,
-                  display: 'block',
-                  marginBottom: '16px'
+              {/* Card Image Cover */}
+              {svc.image && (
+                <div style={{ 
+                  width: '100%', 
+                  height: '190px', 
+                  borderRadius: '10px', 
+                  overflow: 'hidden', 
+                  marginBottom: '20px',
+                  background: '#f5f5f3',
+                  position: 'relative'
                 }}>
-                  {svc.index}
-                </span>
-                
+                  <img 
+                    src={svc.image} 
+                    alt={svc.title} 
+                    className="svc-card-img"
+                    style={{ 
+                      width: '100%', 
+                      height: '100%', 
+                      objectFit: 'cover',
+                      transition: 'transform 0.5s ease'
+                    }} 
+                  />
+                  {/* Subtle gradient overlay */}
+                  <div style={{
+                    position: 'absolute',
+                    top: 0, left: 0, right: 0, bottom: 0,
+                    background: 'linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.2))',
+                    pointerEvents: 'none'
+                  }} />
+                  {/* Floating Index Tag */}
+                  <span style={{ 
+                    position: 'absolute',
+                    top: '12px',
+                    left: '12px',
+                    fontFamily: "'Inter', sans-serif", 
+                    fontSize: '10px', 
+                    color: '#fff', 
+                    background: 'var(--accent-primary)',
+                    padding: '4px 10px',
+                    borderRadius: '20px',
+                    fontWeight: 600,
+                    boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
+                    letterSpacing: '0.05em'
+                  }}>
+                    {svc.index || svc.idx}
+                  </span>
+                </div>
+              )}
+
+              <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
                 <h3 style={{ 
                   fontFamily: "'Outfit', sans-serif", 
-                  fontSize: '22px', 
+                  fontSize: '20px', 
                   fontWeight: 700, 
                   color: 'var(--text-primary)', 
-                  marginBottom: '12px',
-                  lineHeight: 1.2
+                  marginBottom: '10px',
+                  lineHeight: 1.3
                 }}>
                   {svc.title}
                 </h3>
                 
                 <p style={{ 
                   fontFamily: "'Inter', sans-serif", 
-                  fontSize: '14px', 
+                  fontSize: '13.5px', 
                   color: 'var(--text-secondary)', 
-                  lineHeight: 1.6, 
-                  fontWeight: 400
+                  lineHeight: 1.5, 
+                  fontWeight: 400,
+                  margin: 0,
+                  display: '-webkit-box',
+                  WebkitLineClamp: 3,
+                  WebkitBoxOrient: 'vertical',
+                  overflow: 'hidden'
                 }}>
                   {svc.description}
                 </p>
+
+                {svc.subLinks && svc.subLinks.length > 0 && (
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '16px' }}>
+                    {svc.subLinks.map((sub: any, subIdx: number) => (
+                      <Link
+                        key={subIdx}
+                        to={sub.path}
+                        style={{
+                          fontSize: '11px',
+                          padding: '4px 10px',
+                          background: 'var(--bg-secondary)',
+                          border: '1px solid var(--border-light)',
+                          borderRadius: '6px',
+                          color: 'var(--text-primary)',
+                          textDecoration: 'none',
+                          fontWeight: 500,
+                          transition: 'all 0.2s ease',
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.background = 'var(--accent-hover)';
+                          e.currentTarget.style.borderColor = 'var(--accent-primary)';
+                          e.currentTarget.style.color = 'var(--accent-primary)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.background = 'var(--bg-secondary)';
+                          e.currentTarget.style.borderColor = 'var(--border-light)';
+                          e.currentTarget.style.color = 'var(--text-primary)';
+                        }}
+                      >
+                        {sub.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
               </div>
 
               <Link 
-                to={`/services/${svc.slug}`} 
+                to={svc.customPath || `/dummyhome/services/${svc.slug}`} 
                 style={{ 
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '6px',
                   fontFamily: "'Inter', sans-serif",
-                  fontSize: '12px',
+                  fontSize: '11px',
                   color: 'var(--accent-primary)',
                   textDecoration: 'none',
                   fontWeight: 600,
                   letterSpacing: '0.05em',
                   textTransform: 'uppercase',
-                  marginTop: 'auto'
+                  marginTop: '16px',
+                  alignSelf: 'flex-start'
                 }}
               >
                 Explore details <ArrowUpRight size={14} />

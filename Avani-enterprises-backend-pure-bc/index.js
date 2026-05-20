@@ -1414,13 +1414,8 @@ app.post("/applications", upload.fields([
 
     // Validate job exists (allow applications for all jobs, not just active)
     let job = null;
-    if (jobId) {
+    if (jobId && mongoose.Types.ObjectId.isValid(jobId)) {
       job = await Job.findOne({ _id: jobId });
-      if (!job) {
-        return res
-          .status(404)
-          .json({ message: "Job not found" });
-      }
     }
 
     // Get file URLs - use relative paths for database storage
@@ -1438,7 +1433,7 @@ app.post("/applications", upload.fields([
 
     // Create application
     const newApplication = await Application.create({
-      jobId: jobId || null,
+      jobId: (jobId && mongoose.Types.ObjectId.isValid(jobId)) ? jobId : null,
       fullName,
       email,
       phone,

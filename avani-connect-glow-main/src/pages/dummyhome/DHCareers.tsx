@@ -84,6 +84,49 @@ const getJobImage = (department: string, index: number) => {
   return deptImages[index % deptImages.length];
 };
 
+export const FALLBACK_JOBS = [
+  {
+    _id: "mern-developer",
+    title: "MERN Stack Developer",
+    department: "development",
+    location: "Gurugram / Remote",
+    type: "Full-Time",
+    experience: "1-3 years",
+    description: "We are looking for a MERN Stack Developer who is passionate about building scalable, high-performance web applications. You will be responsible for creating front-end interfaces using React and building robust backend services with Node.js, Express, and MongoDB. Familiarity with TypeScript and modern cloud hosting is highly preferred.",
+    status: "active"
+  },
+  {
+    _id: "ui-ux-designer",
+    title: "Lead UI/UX Designer",
+    department: "design",
+    location: "Remote",
+    type: "Full-Time",
+    experience: "3-5 years",
+    description: "Join us as a Lead UI/UX Designer and take ownership of our client and product design ecosystems. You will create high-fidelity prototypes, user journey maps, wireframes, and gorgeous visual layouts. Proficiency with Figma, design systems, and a strong eye for clean, minimalist premium aesthetics is required.",
+    status: "active"
+  },
+  {
+    _id: "marketing-specialist",
+    title: "Digital Marketing Specialist",
+    department: "marketing",
+    location: "Delhi NCR",
+    type: "Full-Time",
+    experience: "1-3 years",
+    description: "We are seeking a results-driven Digital Marketing Specialist to lead organic growth and paid acquisition campaigns. You will manage social media handles, design content marketing schedules, run high-ROI search/social ads, and perform detailed analytics tracking to boost conversions and sales pipelines.",
+    status: "active"
+  },
+  {
+    _id: "bd-associate",
+    title: "Business Development Associate",
+    department: "business",
+    location: "Gurugram / Hybrid",
+    type: "Full-Time",
+    experience: "0-2 years",
+    description: "We are looking for an energetic Business Development Associate to drive enterprise sales and client acquisition. You will research potential leads, coordinate product demos, manage CRM records, and assist with proposal writing and sales pitches to build strong, long-lasting client relationships.",
+    status: "active"
+  }
+];
+
 const DHCareers = () => {
   const [jobs, setJobs] = useState<Job[]>([]);
   const [loading, setLoading] = useState(true);
@@ -99,10 +142,11 @@ const DHCareers = () => {
       try {
         setLoading(true);
         const response = await axios.get(`${API_BASE_URL}/jobs`);
-        setJobs(response.data.data || []);
+        const fetched = response.data.data || [];
+        setJobs(fetched.length > 0 ? fetched : FALLBACK_JOBS);
       } catch (error) {
         console.error('Error fetching jobs:', error);
-        setJobs([]);
+        setJobs(FALLBACK_JOBS);
       } finally { setLoading(false); }
     };
     fetchJobs();
@@ -293,7 +337,7 @@ const DHCareers = () => {
                           style={{ flex: 1, padding: '8px', borderRadius: '10px', border: '1px solid var(--accent-primary)', background: 'transparent', color: 'var(--accent-primary)', fontSize: '0.65rem', fontWeight: 800, letterSpacing: '0.1em', cursor: 'pointer', transition: 'all 0.3s' }}>
                           VIEW DETAILS
                         </button>
-                        <button onClick={e => { e.stopPropagation(); navigate(`/dummyhome/careers/${job._id}`); }}
+                        <button onClick={e => { e.stopPropagation(); navigate(`/dummyhome/careers/${job._id}?apply=true`); }}
                           style={{ flex: 1.5, padding: '8px', borderRadius: '10px', border: 'none', background: 'var(--accent-primary)', color: '#000', fontSize: '0.65rem', fontWeight: 800, letterSpacing: '0.1em', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px', transition: 'all 0.3s' }}>
                           APPLY NOW <ArrowRight size={10} />
                         </button>

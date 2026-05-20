@@ -15,14 +15,30 @@ const fadeUp = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
 };
 
-const projects = [
-  { name: 'Policicue', category: 'FinTech Platform', filter: 'FINTECH', image: '/policy1.png', link: '/projects/policicue', impact: '250% Growth' },
-  { name: 'Indus Public School', category: 'EduTech Hub', filter: 'EDUTECH', image: '/indus1.png', link: '/projects/indus', impact: '10k+ Students' },
-  { name: 'FRD Nutrition', category: 'E-commerce', filter: 'ECOMMERCE', image: '/frd-nutrition-new.png', link: '/projects/frd-nutrition', impact: '180% Sales Up' },
-  { name: 'Hi-Tech Homes', category: 'Luxury Real Estate', filter: 'ECOMMERCE', image: '/hitech1.png', link: '/projects/hitech-homes', impact: '3x Leads' },
-  { name: 'Sanjeevni Hospital', category: 'Health Management', filter: 'HEALTHCARE', image: '/sanjeevni1.png', link: '/projects/sanjeevni-hospital', impact: '70% Automation' },
-  { name: 'Rohtak Shoe Co.', category: 'Direct-to-Consumer', filter: 'ECOMMERCE', image: '/shoes1.png', link: '/projects/rohtak-shoe', impact: '2.5Cr Revenue' },
-];
+import { projectsData } from '../../data/dummyProjectsData';
+
+const getProjectFilter = (slug: string) => {
+  if (slug.includes('school') || slug.includes('college') || slug.includes('placement') || slug.includes('lms') || slug.includes('alumni')) {
+    return 'EDUTECH';
+  }
+  if (slug.includes('finance') || slug.includes('pay') || slug.includes('os') || slug.includes('leads') || slug.includes('crm')) {
+    return 'FINTECH';
+  }
+  if (slug.includes('sanjeevni') || slug.includes('hospital') || slug.includes('clinic') || slug.includes('health')) {
+    return 'HEALTHCARE';
+  }
+  return 'ECOMMERCE';
+};
+
+const projects = projectsData.map(p => ({
+  name: p.title,
+  category: p.subtitle,
+  filter: getProjectFilter(p.slug),
+  image: p.image,
+  link: `/dummyhome/projects/${p.slug}`,
+  impact: p.impact?.[0] || 'High Impact',
+  imageStyle: p.imageStyle
+}));
 
 const testimonials = [
   { name: "Dr. Rajesh Kumar", position: "Principal, Indus Public School", content: "Avani Enterprises delivered an outstanding website that perfectly captures our school's vision and values. The design is modern and intuitive.", image: "/indus.jpeg" },
@@ -174,8 +190,20 @@ const DHProjects = () => {
                       boxShadow: hovIdx === i ? '0 12px 32px rgba(0,0,0,0.08)' : 'none',
                     }}
                     onMouseEnter={() => setHovIdx(i)} onMouseLeave={() => setHovIdx(null)}>
-                      <img src={project.image} alt={project.name} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.7s ease', transform: hovIdx === i ? 'scale(1.05)' : 'scale(1)' }} />
-                      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 50%, transparent 100%)' }} />
+                      <img 
+                        src={project.image} 
+                        alt={project.name} 
+                        style={{ 
+                          width: '100%', 
+                          height: '100%', 
+                          objectFit: (project.imageStyle?.objectFit as any) || 'cover', 
+                          background: project.imageStyle?.background || 'transparent',
+                          padding: project.imageStyle?.padding || '0',
+                          transition: 'transform 0.7s ease', 
+                          transform: hovIdx === i ? 'scale(1.05)' : 'scale(1)' 
+                        }} 
+                      />
+                      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 50%, transparent 100%)', pointerEvents: 'none' }} />
                       <div style={{ position: 'absolute', inset: 0, padding: '20px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '4px' }}>
                           <span style={{ fontSize: '0.6rem', fontWeight: 800, color: 'var(--accent-primary)', letterSpacing: '0.12em' }}>{project.category.toUpperCase()}</span>

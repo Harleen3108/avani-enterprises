@@ -33,11 +33,11 @@ const titleV = {
 
 /* Custom title split mapping for premium cinematic aesthetics */
 const getProjectTitleLines = (slug: string, title: string) => {
-  if (slug === 'hr-portal') {
+  if (slug === 'avani-business-os') {
     return {
-      line1: "HR PORTAL",
-      line2: "MANAGEMENT",
-      line3: "SYSTEM"
+      line1: "AVANI",
+      line2: "BUSINESS",
+      line3: "OS"
     };
   }
   if (slug === 'project-leads-management') {
@@ -348,6 +348,65 @@ const DHProjectDetail = () => {
           </div>
         </div>
       </section>
+
+      {/* 3. PLATFORM GALLERY */}
+      {project.galleryImages && project.galleryImages.length > 0 && (
+        <section className="theme-brown" style={{ position: 'relative', padding: '80px 0', background: 'var(--bg-primary)', borderTop: '1px solid var(--border-faint)' }}>
+          <Grain />
+          <div className="dh-container" style={{ position: 'relative', zIndex: 10 }}>
+            <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+              <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', letterSpacing: '0.2em', color: 'var(--accent-primary)', fontWeight: 600, display: 'block', marginBottom: '12px' }}>INTERFACE SHOWCASE</span>
+              <h2 style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 700, color: 'var(--text-primary)', margin: 0 }}>
+                Platform <span style={{ color: 'var(--accent-primary)' }}>Screenshots & Layouts</span>
+              </h2>
+              <p style={{ fontSize: '14px', color: 'var(--text-secondary)', maxWidth: '600px', margin: '16px auto 0', lineHeight: 1.7 }}>
+                Explore the modular UI designed for maximum operational efficiency and elegant user experience.
+              </p>
+            </div>
+
+            <div style={{ 
+              display: 'grid', 
+              gridTemplateColumns: project.galleryImages.length >= 4 ? 'repeat(auto-fit, minmax(240px, 1fr))' : 'repeat(auto-fit, minmax(320px, 1fr))', 
+              gap: '24px' 
+            }}>
+              {project.galleryImages.map((img, i) => (
+                <motion.div 
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1, duration: 0.5 }}
+                  style={{
+                    position: 'relative',
+                    aspectRatio: '16/10',
+                    borderRadius: '16px',
+                    overflow: 'hidden',
+                    border: '1px solid var(--border-faint)',
+                    background: 'var(--card-bg)',
+                    boxShadow: '0 8px 30px rgba(0,0,0,0.03)',
+                    cursor: 'pointer'
+                  }}
+                  whileHover={{ 
+                    scale: 1.02,
+                    borderColor: 'var(--accent-primary)',
+                    boxShadow: '0 12px 40px rgba(0,0,0,0.1)'
+                  }}
+                >
+                  <img 
+                    src={img} 
+                    alt={`${project.title} Interface ${i + 1}`} 
+                    style={{ 
+                      width: '100%', 
+                      height: '100%', 
+                      objectFit: 'cover'
+                    }} 
+                  />
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
     </div>
   );

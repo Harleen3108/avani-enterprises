@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink, Zap, Globe, Sparkles } from 'lucide-react';
+import { ExternalLink, Zap, Globe, Sparkles, ArrowRight } from 'lucide-react';
 import '../../components/dummyhome2/DummyHome2.css';
 
 const titleV = {
@@ -14,7 +14,7 @@ const fadeUp = {
 };
 
 const products = [
-  { title: 'HR Portal', desc: 'Complete HR management solution with employee tracking, attendance, payroll, and performance analytics.', url: 'https://hrportal.avanienterprises.in/', tags: ['Employee Mgmt', 'Payroll', 'Analytics'], accent: '#f59e0b' },
+  { title: 'Avani Business OS', desc: 'Complete business platform designed to centralize and automate enterprise operations.', url: 'https://os.avanienterprises.in', tags: ['Workflow Mgmt', 'Automation', 'Analytics'], accent: '#f59e0b' },
   { title: 'School Management', desc: 'End-to-end school management system with admissions, student tracking, fee management, and parent portals.', url: 'https://indus-school-page.vercel.app/admission', tags: ['Admissions', 'Student Portal', 'Fee Mgmt'], accent: '#c8ff00' },
   { title: 'Project CRM', desc: 'Powerful CRM for project management with team collaboration, lead tracking, and reporting dashboards.', url: 'https://team-lead-gamma.vercel.app/', tags: ['Lead Tracking', 'Team Mgmt', 'Reports'], accent: '#3b82f6' },
   { title: 'Custom E-Commerce', desc: 'Feature-rich e-commerce platform with product management, payment integration, and order tracking.', url: 'https://shoes-ecommerce-iota.vercel.app/', tags: ['Products', 'Payments', 'Orders'], accent: '#ec4899' },

@@ -47,7 +47,7 @@ const Navbar = () => {
       name: "Our Products",
       path: "/our-products",
       subItems: [
-        { name: "HR Portal", path: "/our-products", scrollTo: "hr-portal", external: "https://hrportal.avanienterprises.in/" },
+        { name: "Avani Business OS", path: "/our-products", scrollTo: "avani-business-os", external: "https://os.avanienterprises.in" },
         { name: "School Management", path: "/our-products", scrollTo: "school-management", external: "https://indus-school-page.vercel.app/admission" },
         { name: "Project CRM", path: "/our-products", scrollTo: "crm-portal", external: "https://team-lead-gamma.vercel.app/" },
         { name: "Custom E-commerce", path: "/our-products", scrollTo: "ecommerce-web", external: "https://shoes-ecommerce-iota.vercel.app/" },

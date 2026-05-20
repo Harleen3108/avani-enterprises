@@ -17,11 +17,25 @@ const fadeUp = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
 };
 
-const floatingImages = [
-  { src: '/indus.jpeg', delay: 0 },
-  { src: '/sanjeevni.jpeg', delay: 0.2 },
-  { src: '/hitech.jpeg', delay: 0.4 },
+const row1Logos = [
+  { name: 'Paragon', logo: '/paragon.png' },
+  { name: 'Indus group of institutions', logo: '/indus.jpeg' },
+  { name: 'Policicue', logo: '/policucue.jpeg' },
+  { name: 'Frd Nutrition', logo: '/frd-nutrition-new.png' },
+  { name: 'Rohtak Shoe Co.', logo: '/shoes.jpeg' },
+  { name: 'Gaon se ghar tak', logo: '/gaonsegharatk.png' },
 ];
+
+const row2Logos = [
+  { name: 'Redball Cricket Ground', logo: '/redball.png' },
+  { name: 'The Page', logo: '/thepage.png' },
+  { name: 'King\'s Pet Hospital', logo: '/kingspet.png' },
+  { name: 'Hi-tech Homes', logo: '/hitech.jpeg' },
+  { name: 'Sanjeevni Hospital', logo: '/sanjeevni.jpeg' },
+];
+
+const tripledRow1 = [...row1Logos, ...row1Logos, ...row1Logos];
+const tripledRow2 = [...row2Logos, ...row2Logos, ...row2Logos];
 
 const DHAbout = () => {
   useEffect(() => {
@@ -32,7 +46,7 @@ const DHAbout = () => {
     <div className="dh-about-page" style={{ fontFamily: "'Inter', sans-serif" }}>
 
       {/* 1. CINEMATIC HERO WITH FLOATING PICTURES */}
-      <section className="theme-brown" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', background: 'var(--bg-primary)', overflow: 'hidden', position: 'relative', paddingTop: '80px' }}>
+      <section className="theme-brown" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', background: 'var(--bg-primary)', overflow: 'hidden', position: 'relative', paddingTop: '120px', paddingBottom: '80px' }}>
         {/* Abstract Background Grid */}
         <div style={{ 
           position: 'absolute', 
@@ -43,15 +57,31 @@ const DHAbout = () => {
           pointerEvents: 'none',
           zIndex: 1
         }} />
-        <div className="dh-container" style={{ position: 'relative', zIndex: 10 }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '40px', alignItems: 'center' }}>
+
+        {/* Top Moving Bar */}
+        <div style={{ overflow: 'hidden', marginBottom: '40px', opacity: 0.8, position: 'relative', zIndex: 10 }}>
+          <motion.div animate={{ x: ['0%', '-33.33%'] }} transition={{ duration: 28, ease: 'linear', repeat: Infinity }}
+            style={{ display: 'flex', gap: '16px', width: 'max-content' }}>
+            {tripledRow1.map((l: any, i: number) => (
+              <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 18px', background: 'var(--card-bg)', border: '1px solid var(--border-faint)', borderRadius: '100px', flexShrink: 0 }}>
+                <div style={{ width: '22px', height: '22px', borderRadius: '50%', background: 'rgba(255,255,255,0.9)', overflow: 'hidden' }}>
+                  <img src={l.logo} alt={l.name} style={{ width: '100%', height: '100%', objectFit: 'contain', padding: '2px' }} />
+                </div>
+                <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', fontWeight: 500, color: 'var(--text-secondary)', whiteSpace: 'nowrap' }}>{l.name}</span>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+
+        <div className="dh-container" style={{ position: 'relative', zIndex: 10, marginBottom: '40px' }}>
+          <div className="dh-responsive-grid" style={{ display: 'grid', gridTemplateColumns: '1.10fr 0.90fr', gap: '60px', alignItems: 'center' }}>
 
             <motion.div initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.1 } } }}>
               <motion.div variants={fadeUp} style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', letterSpacing: '0.2em', color: 'var(--accent-primary)', fontWeight: 600, display: 'block', marginBottom: '16px' }}>
                 OUR HERITAGE
               </motion.div>
 
-              <h1 style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(40px, 7vw, 90px)', fontWeight: 800, lineHeight: 0.95, color: 'var(--text-primary)', letterSpacing: '-0.02em', margin: '0 0 24px 0', textTransform: 'uppercase' }}>
+              <h1 style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(36px, 5.5vw, 68px)', fontWeight: 800, lineHeight: 0.95, color: 'var(--text-primary)', letterSpacing: '-0.02em', margin: '0 0 24px 0', textTransform: 'uppercase' }}>
                 <span style={{ display: 'block', overflow: 'hidden' }}>
                   <motion.span custom={0} variants={titleV} style={{ display: 'block' }}>CRAFTING</motion.span>
                 </span>
@@ -63,81 +93,97 @@ const DHAbout = () => {
                 </span>
               </h1>
 
-              <motion.p variants={fadeUp} style={{ fontSize: '15px', color: 'var(--text-secondary)', maxWidth: '500px', lineHeight: 1.6, fontWeight: 400 }}>
+              <motion.p variants={fadeUp} style={{ fontSize: '15px', color: 'var(--text-secondary)', maxWidth: '500px', lineHeight: 1.6, fontWeight: 400, marginBottom: '32px' }}>
                 Since 2016, we have been at the forefront of digital transformation, blending traditional values with future-ready technology to build remarkable brand experiences.
               </motion.p>
+
+              <motion.div variants={fadeUp}>
+                <Link to="/dummyhome/get-consultation" className="dh-btn-fill" style={{ textDecoration: 'none', display: 'inline-flex' }}>
+                  Get Free Consultation
+                </Link>
+              </motion.div>
             </motion.div>
 
-            {/* Structured Offset Grid for Images */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '24px', maxWidth: '400px', width: '100%', margin: '0 auto' }}>
-              {/* Image 1 */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                style={{
-                  height: '190px',
-                  borderRadius: '14px',
-                  overflow: 'hidden',
-                  border: '1px solid var(--border-light)',
-                  boxShadow: '0 10px 30px rgba(0,0,0,0.1)'
-                }}
-              >
-                <img src="/indus.jpeg" alt="Avani" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-              </motion.div>
-
-              {/* Image 2 */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                style={{
-                  height: '180px',
-                  borderRadius: '16px',
-                  overflow: 'hidden',
-                  border: '1px solid var(--border-light)',
-                  marginTop: '30px',
-                  boxShadow: '0 10px 30px rgba(0,0,0,0.1)'
-                }}
-              >
-                <img src="/sanjeevni.jpeg" alt="Avani" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-              </motion.div>
-
-              {/* Image 3 */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                style={{
-                  height: '180px',
-                  borderRadius: '16px',
-                  overflow: 'hidden',
-                  border: '1px solid var(--border-light)',
-                  marginTop: '-30px',
-                  boxShadow: '0 10px 30px rgba(0,0,0,0.1)'
-                }}
-              >
-                <img src="/hitech.jpeg" alt="Avani" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-              </motion.div>
-
-              {/* Image 4 */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.7, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                style={{
-                  height: '220px',
-                  borderRadius: '16px',
-                  overflow: 'hidden',
-                  border: '1px solid var(--border-light)',
-                  boxShadow: '0 10px 30px rgba(0,0,0,0.1)'
-                }}
-              >
-                <img src="/shoes.jpeg" alt="Avani" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-              </motion.div>
+            {/* Symmetrical Aligned Grid for Images */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '16px', width: '100%' }}>
+              {[
+                { src: '/indus.jpeg', title: 'Indus Group' },
+                { src: '/sanjeevni.jpeg', title: 'Sanjeevni Hospital' },
+                { src: '/hitech.jpeg', title: 'Hi-Tech Homes' },
+                { src: '/shoes.jpeg', title: 'Rohtak Shoe' }
+              ].map((imgData, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, scale: 0.95, y: 15 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  transition={{ delay: 0.4 + idx * 0.1, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                  style={{
+                    aspectRatio: '4/3',
+                    borderRadius: '16px',
+                    overflow: 'hidden',
+                    border: '1px solid var(--border-light)',
+                    boxShadow: '0 8px 24px rgba(0,0,0,0.06)',
+                    background: 'var(--card-bg)',
+                    position: 'relative'
+                  }}
+                  onMouseEnter={(e) => {
+                    const img = e.currentTarget.querySelector('img');
+                    if (img) img.style.transform = 'scale(1.05)';
+                  }}
+                  onMouseLeave={(e) => {
+                    const img = e.currentTarget.querySelector('img');
+                    if (img) img.style.transform = 'scale(1)';
+                  }}
+                >
+                  <img
+                    src={imgData.src}
+                    alt={imgData.title}
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      transition: 'transform 0.5s ease'
+                    }}
+                  />
+                  <div style={{
+                    position: 'absolute',
+                    top: 0, left: 0, right: 0, bottom: 0,
+                    background: 'linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.4))',
+                    pointerEvents: 'none'
+                  }} />
+                  <span style={{
+                    position: 'absolute',
+                    bottom: '12px',
+                    left: '12px',
+                    fontSize: '11px',
+                    fontFamily: "'Outfit', sans-serif",
+                    fontWeight: 700,
+                    color: '#ffffff',
+                    letterSpacing: '0.05em',
+                    textTransform: 'uppercase'
+                  }}>
+                    {imgData.title}
+                  </span>
+                </motion.div>
+              ))}
             </div>
 
           </div>
+        </div>
+
+        {/* Bottom Moving Bar */}
+        <div style={{ overflow: 'hidden', marginTop: '20px', opacity: 0.8, position: 'relative', zIndex: 10 }}>
+          <motion.div animate={{ x: ['-33.33%', '0%'] }} transition={{ duration: 35, ease: 'linear', repeat: Infinity }}
+            style={{ display: 'flex', gap: '16px', width: 'max-content' }}>
+            {tripledRow2.map((l: any, i: number) => (
+              <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 18px', background: 'var(--card-bg)', border: '1px solid var(--border-faint)', borderRadius: '100px', flexShrink: 0 }}>
+                <div style={{ width: '22px', height: '22px', borderRadius: '50%', background: 'rgba(255,255,255,0.9)', overflow: 'hidden' }}>
+                  <img src={l.logo} alt={l.name} style={{ width: '100%', height: '100%', objectFit: 'contain', padding: '2px' }} />
+                </div>
+                <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', fontWeight: 500, color: 'var(--text-secondary)', whiteSpace: 'nowrap' }}>{l.name}</span>
+              </div>
+            ))}
+          </motion.div>
         </div>
       </section>
 
@@ -311,9 +357,9 @@ const DHAbout = () => {
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px' }} className="dh-responsive-grid">
             {[
-              { img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBSCKeNThhEDyNHIntrHs92c1NL6a8KClafOaotNkJTIDBC0HTvpIdm71ok3-N3drZjl-WCH96XT1wzlP9iIyvoz8TbRvN052OBW7XYj-rEslXLOOj-wSxVSjOxKQ7bb-M29bsb_8LwPUiKs5wtv8okK4mhur8TSEQIu1yGbmJnhHbHL2JcZTvBHJSq9pqxZ6iwCFKoQ5UwmLfNFbLsRf-MJz3CslOFjJVP-wyHIaIHBZuWLQ7UBNFTXYVlsiwM1UryDuLXib-6Rg', icon: <Shield size={24} />, title: 'Proven Track Record', desc: 'With 8+ years of experience and 300+ successful projects, we have the strategic depth and technical expertise to handle any digital challenge.' },
-              { img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCYG8QSjckm38kdFWXVv3jBC4Xg5t1vSIpIGlsKyb7tCXX4KKywinIe2aSlvQYlk7kwBTOHZ-QT3rx1LV7du35iHAuNDmovHxbvHxAtlWuPJ-CVB7y8SB_DpFt7JPQBjvaxHSb4IvXUzS21Uo5ynyRXkF-b8TuEadJeTkFCHB4Vk688YpIGbbGf0L_lKdnIA7MCvUwVx_Igb2W68M3XDuIagdKvc8IWu_AGmpI9XHPMgouOsxYr2qHNNK9ostH-Olx3kreOEdSOvw', icon: <Zap size={24} />, title: 'Innovation-Driven', desc: 'We stay ahead of industry trends and leverage cutting-edge technologies to deliver innovative solutions that give you a competitive edge.' },
-              { img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuClkiULPzct6d9Z5BkpuGXyVC4RuqMbrvsbmd6sUCoV9QMZ-3AC-BVTKn_N4o_wiz2-s24UM6xyqKe7HWHSu_N8fME3klq6ji99OEWEC72Pm6WzTgE4ltwd2VLj9WXdTJvDrI2H1xB2nnTaURe5WEXvqC8D_VaatZIfGNtB97yW7HdFfJaCIpC725fHNvD6wLtnAQ77wPLwMKTHB9OgR6Dbtk89zBCQsjSsOI9GuNkiJK5_KQiYWDBCmZKw9zsQ8r_LZnxgI6cgfw', icon: <Users size={24} />, title: 'Client-Centric', desc: 'Your success is our priority. We build long-term partnerships based on trust, transparency, and delivering high-impact results.' },
+              { img: '/about_proven_track_record.png', icon: <Shield size={24} />, title: 'Proven Track Record', desc: 'With 8+ years of experience and 300+ successful projects, we have the strategic depth and technical expertise to handle any digital challenge.' },
+              { img: '/about_innovation_driven.png', icon: <Zap size={24} />, title: 'Innovation-Driven', desc: 'We stay ahead of industry trends and leverage cutting-edge technologies to deliver innovative solutions that give you a competitive edge.' },
+              { img: '/about_client_centric.png', icon: <Users size={24} />, title: 'Client-Centric', desc: 'Your success is our priority. We build long-term partnerships based on trust, transparency, and delivering high-impact results.' },
             ].map((card, i) => (
               <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: i * 0.1 }}
                 style={{ background: 'var(--card-bg)', borderRadius: '16px', border: '1px solid var(--border-faint)', overflow: 'hidden', transition: 'all 0.4s ease', backdropFilter: 'blur(10px)' }}

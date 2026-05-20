@@ -6,6 +6,7 @@ import DummyNavbar from '../../components/dummy/DummyNavbar';
 import DummyFooter from '../../components/dummy/DummyFooter';
 import DummyScrollProgress from '../../components/dummy/DummyScrollProgress';
 import Chatbot from '../../components/Chatbot';
+import StickyConsultationButton from '../../components/StickyConsultationButton';
 import '../../components/dummy/DummyHome.css';
 
 const DHLayout = () => {
@@ -37,6 +38,7 @@ const DHLayout = () => {
 
         <DummyFooter />
         <Chatbot />
+        <StickyConsultationButton to="/dummyhome/get-consultation" />
       </div>
     </div>
   );

@@ -26,15 +26,15 @@ const LuxuryLine = () => (
 
 const products = [
   {
-    id: 'hr-portal',
-    title: 'Advanced HR Portal',
-    description: 'A comprehensive workforce management solution designed to streamline HR operations, from attendance tracking to automated payroll processing.',
-    longDescription: 'Our HR Portal is built to handle the complexities of modern team management. It simplifies administrative tasks and empowers employees with self-service features.',
+    id: 'avani-business-os',
+    title: 'Avani Business OS',
+    description: 'A complete business platform designed to centralize and automate enterprise operations.',
+    longDescription: 'Avani Business OS is an all-in-one operating platform built to handle modern team workflows, project pipelines, and real-time operational analytics.',
     icon: <Users size={28} />,
-    link: 'https://hrportal.avanienterprises.in/',
-    features: ['Employee Profile Management', 'Automated Salary Calculation', 'Digital Salary Slips', 'EOD Performance Reports', 'Leave & Attendance Tracking', 'Performance Analytics'],
-    highlights: ['Analytics', 'Salary Calculation', 'Employee Self-Service'],
-    image: '/hr-portal-new.png',
+    link: 'https://os.avanienterprises.in',
+    features: ['Unified Team Workspace', 'Automated Operations', 'Real-Time KPIs & Metrics', 'Custom Invoicing & Payroll', 'Activity Timeline Logging', 'Role-Based Access Control'],
+    highlights: ['Workflow OS', 'Real-time Analytics', 'Automation Portal'],
+    image: '/hrportal.png',
     featured: true,
   },
   {
@@ -173,7 +173,7 @@ const DHProducts = () => {
                   </div>
 
                   {/* Floating analytics card for HR Portal */}
-                  {product.id === 'hr-portal' && (
+                  {product.id === 'avani-business-os' && (
                     <motion.div
                       animate={{ y: [0, -8, 0] }}
                       transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}

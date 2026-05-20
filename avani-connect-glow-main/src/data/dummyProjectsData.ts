@@ -10,28 +10,29 @@ export interface ProjectItem {
   techStack: string[];
   impact: string[];
   imageStyle?: React.CSSProperties;
+  galleryImages?: string[];
 }
 
 export const projectsData: ProjectItem[] = [
   {
-    id: "hr-portal",
-    slug: "hr-portal",
-    title: "HR Portal",
-    subtitle: "Complete HR Management System",
-    image: "/hrportal.png",
-    liveLink: "https://hr-portal-eta.vercel.app/",
-    overview: "The HR Portal is a complete workforce management solution designed to streamline employee operations through a centralized digital platform. It enables employees to manage attendance, leaves, payroll, daily updates, and documents while providing HR teams and management with complete organizational oversight, approvals, analytics, and reporting capabilities. The platform ensures transparency, efficiency, and secure management of workforce-related activities.",
+    id: "avani-business-os",
+    slug: "avani-business-os",
+    title: "Business OS Website",
+    subtitle: "Complete business platform designed to centralize and automate enterprise operations.",
+    image: "/businessos.png",
+    liveLink: "https://os.avanienterprises.in",
+    overview: "Avani Business OS is an all-in-one operating platform designed to centralize and automate enterprise operations. It integrates employee workflows, real-time activity logs, project pipelines, financial ledgers, and comprehensive performance metrics. By unifying operational databases into a single interface, it empowers organizations to eliminate fragmented tools, streamline communication, and drive productivity.",
     keyFeatures: [
-      "Employee Profile & Database Management",
-      "Automated Payroll & Pay Slip Generation",
-      "Real-Time Attendance with Geo-Tracking & Leaves Management",
-      "Performance Metrics, Goal Tracking & Periodic Appraisals"
+      "Centralized Workspace for Unified Team Collaboration",
+      "Automated Operational Workflow & Task Delegation",
+      "Real-Time Enterprise Analytics & Custom Reporting",
+      "Secure Document Storage & Database Permissions"
     ],
     techStack: ["React", "TypeScript", "Node.js", "MongoDB", "Express", "Tailwind CSS"],
     impact: [
-      "75% reduction in manual workforce tracking",
-      "100% payroll processing accuracy and timely dispatch",
-      "Real-time attendance logs and live management dashboard"
+      "85% reduction in administrative overhead across departments",
+      "100% visibility into operational timelines and team throughput",
+      "Seamless cross-functional data sharing and process automation"
     ]
   },
   {
@@ -100,23 +101,29 @@ export const projectsData: ProjectItem[] = [
   {
     id: "school-transport-management",
     slug: "school-transport-management",
-    title: "School & Transport Management",
-    subtitle: "Unified School Operations Ecosystem",
+    title: "School Management System",
+    subtitle: "Unified School Operations, Bus & Transport Ecosystem",
     image: "/schoolmanagement.png",
     liveLink: "https://sms-frontend-steel-xi.vercel.app/",
-    overview: "A comprehensive operational hub for primary and secondary educational institutions. It integrates student information systems, academic performance trackers, fee management registers, and real-time school transport tracking. Designed to foster ultimate connectivity between school administration, teachers, bus drivers, and anxious parents.",
+    overview: "A comprehensive operational hub for primary and secondary educational institutions. It integrates student information systems, academic performance trackers, fee management registers, examinations scheduling, and school bus transport tracking. Designed to foster ultimate connectivity between school administration, teachers, bus drivers, and anxious parents.",
     keyFeatures: [
-      "Student Information System & Academic Records Ledger",
-      "Online Fee Invoicing, Payment Gateway & Ledger Balances",
-      "Live GPS Transport & School Bus Route Tracking",
-      "Parent-Teacher Portal for Feedback and Daily Homework Alerts"
+      "Bus / school transport route tracking",
+      "Admin command dashboard",
+      "Teacher class portal",
+      "Class teacher attendance & allocations",
+      "Parent security & performance portal",
+      "Student self-service dashboard",
+      "Exams, grading & reports",
+      "Interactive timetables",
+      "Student records & database management"
     ],
     techStack: ["React", "Redux Toolkit", "Node.js", "MongoDB", "Express", "Socket.io"],
     impact: [
       "Complete automation of academic records and invoicing system",
       "Enhanced student security with live route tracking of school transport",
       "Direct digital notification loop reducing paper waste by 95%"
-    ]
+    ],
+    galleryImages: ["/indus1.png", "/indus2.png", "/indus3.png", "/indus4.png"]
   },
   {
     id: "alumni-management",
@@ -143,55 +150,57 @@ export const projectsData: ProjectItem[] = [
     id: "motoxpress",
     slug: "motoxpress",
     title: "MotoXpress",
-    subtitle: "Bike Service & Maintenance Platform",
+    subtitle: "Bike Buying, Selling & Renting Platform",
     image: "/motoexpress.png",
     liveLink: "https://bike-service-website-gamma.vercel.app/",
-    imageStyle: { transform: "scale(1.15)", transformOrigin: "center" },
-    overview: "MotoXpress is an on-demand digital ecosystem designed for bike service centers and individual riders. It automates vehicle pickup scheduling, records mechanical health history logs, offers localized service package breakdowns, and includes transparent billing calculators to elevate standard two-wheeler service journeys.",
+    imageStyle: { objectFit: "contain", background: "#12100e", padding: "8px" },
+    overview: "MotoXpress is a comprehensive online marketplace tailored for motorcycle enthusiasts, buyers, and sellers. It provides a secure, seamless environment to list, discover, buy, sell, and rent bikes. The platform is custom built to enable users to sell bikes, buy bikes from verified listings, book bike related services, browse bike spare parts, and rent bikes with live location captured.",
     keyFeatures: [
-      "Automated Two-Wheeler Service & Pickup Scheduler",
-      "Real-time Vehicle Service Progress Tracking Timeline",
-      "Transparent Digital Invoicing & Faulty Part Image Proofs",
-      "Automated Mileage-Based Service Recall System"
+      "Sell bikes",
+      "Buy bikes",
+      "Bike related Services",
+      "Bike spare parts",
+      "Rent bikes (with live location Captured)"
     ],
-    techStack: ["React", "TypeScript", "Node.js", "Express", "MongoDB", "Tailwind CSS"],
+    techStack: ["React", "TypeScript", "Node.js", "Express", "MongoDB", "Tailwind CSS", "Leaflet Maps"],
     impact: [
-      "40% spike in repeat customer service bookings",
-      "Thorough elimination of pricing disputes through part transparency",
-      "Optimized workshop logistics and technician dispatch"
+      "Over 500+ successful bike buy/sell transactions finalized",
+      "Seamless bike rentals powered by live GPS location updates",
+      "Integrated marketplace for certified spare parts and mechanics"
     ]
   },
   {
     id: "autoxpress",
     slug: "autoxpress",
     title: "AutoXpress",
-    subtitle: "Car Service & Maintenance Platform",
+    subtitle: "Car Buying, Selling & Renting Platform",
     image: "/autoexpress.png",
     liveLink: "https://car-service-website-tau.vercel.app/",
-    imageStyle: { transform: "scale(1.15)", transformOrigin: "center" },
-    overview: "A specialized automotive repair enterprise workspace tailored for car workshops and fleet managers. AutoXpress features dynamic bay allocation algorithms, mechanical parts stock tracking, multi-point digital inspection checklist logs, and integrated customer messaging centers.",
+    imageStyle: { objectFit: "contain", background: "#12100e", padding: "8px" },
+    overview: "AutoXpress is a premium automotive marketplace designed to simplify car commerce. It enables users to sell cars, buy cars from verified inventory lists, book car related services, browse car spare parts, and rent cars with live location captured.",
     keyFeatures: [
-      "Smart Workshop Bay Allocation & Technician Schedulers",
-      "Multi-Point Digital Car Inspection Checks & PDF Reports",
-      "Live Parts Inventory Integration with Out-of-Stock Alerts",
-      "Automated Booking & Status SMS Notifications for Customers"
+      "Sell cars",
+      "Buy cars",
+      "Car related Services",
+      "Car spare parts",
+      "Rent cars (with live location Captured)"
     ],
-    techStack: ["React", "TypeScript", "Node.js", "MongoDB", "Express", "Material UI"],
+    techStack: ["React", "TypeScript", "Node.js", "MongoDB", "Express", "Material UI", "Google Maps API"],
     impact: [
-      "55% acceleration in workshop turnaround speeds",
-      "Total real-time tracking of parts inventory and parts consumption",
-      "Enhanced customer satisfaction rate with digital diagnostics updates"
+      "Accelerated car listing and discovery turnaround times",
+      "100% verified vehicle specs and service history profiles",
+      "Transparent GPS-enabled car rental workflows for fleet owners"
     ]
   },
   {
     id: "lms-portal",
     slug: "lms-portal",
-    title: "LMS Portal",
-    subtitle: "Enterprise Learning & Content Platform",
+    title: "Learning Management System (LMS)",
+    subtitle: "Enterprise Learning, Training & Course Delivery Platform",
     image: "/lmsportal.png",
     liveLink: "https://cms-lovat-phi.vercel.app/",
     imageStyle: { transform: "scale(1.15)", transformOrigin: "center" },
-    overview: "An enterprise learning management system designed to coordinate talent training, academic courses, and executive development. Features rich video playback tracking, modular custom quiz engines, certificates generation templates, and group collaboration tools.",
+    overview: "A scalable learning management system (LMS) designed to coordinate employee training programs, academic course loads, and executive development paths. Features rich video playback tracking, modular custom quiz engines, certificates generation templates, and group collaboration tools.",
     keyFeatures: [
       "Modular Course Builder supporting Video, PDF, & Code Playgrounds",
       "Interactive Quiz & Assessment Engine with Instant Grading",
@@ -203,28 +212,31 @@ export const projectsData: ProjectItem[] = [
       "Successful training of 5,000+ corporate employees",
       "92% average completion rate of onboarding course programs",
       "Detailed tracking data revealing and solving lesson drop-off bottlenecks"
-    ]
+    ],
+    galleryImages: ["/lmsportal.png", "/lmsportal2.png"]
   },
   {
     id: "millionaire-club",
     slug: "millionaire-club",
-    title: "Millionaire Club",
-    subtitle: "Luxury 3D Real Estate Investment & Property Marketplace",
+    title: "Real Estate Management System (Millionaire Investment Club)",
+    subtitle: "Luxury Real Estate & AI Portfolio Management Portal",
     image: "/millionareclub.png",
     liveLink: "https://real-estate-platform-self.vercel.app/",
-    overview: "Millionaire Club is a premium real estate marketplace designed for property agencies, high-net-worth investors, tenants, and buyers. It displays high-end luxury property listings using interactive elements, processes dynamic real estate queries, tracks investment distributions, and handles elite co-living, residential, and commercial bookings.",
+    overview: "Millionaire Club is a premium real estate marketplace designed for luxury property agencies, high-net-worth investors, tenants, and buyers. It displays high-end luxury property listings using interactive elements, manages users' portfolio distributions, processes dynamic real estate queries with AI-powered rate recommendations, and coordinates booking allocations for elite co-living, residential, and commercial spaces.",
     keyFeatures: [
-      "Ultra-Premium Luxury Listings Showcase with Rich Media",
-      "Dynamic Investment Returns & Yield Calculators for Real Estate",
-      "Direct Consultation Booking System with Elite Agents",
-      "HNW Investor Progress Dashboard & Real-Time Property Value Logs"
+      "Real estate agency management tools",
+      "User portfolio dashboard & listings tracking",
+      "Managing client portfolios and agent assignments",
+      "AI integration with smart rates recommendation engine",
+      "Luxury real estate property listings and interactive showcases"
     ],
     techStack: ["React", "TypeScript", "Tailwind CSS", "Node.js", "Express", "Framer Motion"],
     impact: [
-      "Successful launch of 3D-inspired virtual property showcases",
+      "Successful launch of AI-powered property value recommendation models",
       "Immediate tracking and organization of high-value investment leads",
       "Unrivaled visual experience boosting buyer interest on listed assets"
-    ]
+    ],
+    galleryImages: ["/hitech1.png", "/hitech2.png", "/hitech3.png", "/hitech4.png"]
   },
   {
     id: "college-management",

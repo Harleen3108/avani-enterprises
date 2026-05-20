@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Code, Search, Share2, Zap, Radio, PieChart, ArrowLeft, CheckCircle, ArrowRight } from 'lucide-react';
+import { Code, Search, Share2, Zap, Radio, PieChart, ArrowLeft, CheckCircle, ArrowRight, Lightbulb, TrendingUp, Shield } from 'lucide-react';
 
 /* Background effects */
 const Grain = () => (
@@ -63,22 +63,22 @@ const serviceData: Record<string, ServiceDetail> = {
     icon: <Code size={48} />,
     title: 'Web & App Development',
     titleLines: { line1: "WEB & APP", line2: "ENGINEERED", line3: "DEVELOPMENT" },
-    image: "/services-web-dev.png",
-    desc: 'Crafting high-performance digital architectures with precision and scale.',
-    hook: 'YOU NEED A HIGH-PERFORMANCE SYSTEM THAT NEVER FAILS. WE ENGINEER IT.',
+    image: "/whatwecreate/webdev.png",
+    desc: 'We design and build custom, ultra-fast websites and mobile apps that work flawlessly. From beautiful designs to secure checkout pages, we bring your digital ideas to life and make sure they scale as your business grows.',
+    hook: 'Your website is your 24/7 digital storefront. We build it to be fast, secure, and beautiful, so you can attract and keep customers effortlessly.',
     ctaHook: 'Ready to engineer a digital platform that converts passive visitors into active buyers? Partner with us today to build your bespoke ecosystem.',
-    longDesc: 'Your digital architecture is either a massive revenue driver or a hidden operational bottleneck. We design elite Web & Mobile ecosystems that scale automatically, load instantly, and turn complex transactions into seamless user journeys. We build scalable, high-performance web and mobile applications tailored to your business needs using next-generation stack components.',
-    features: ['Custom React & Next.js Frameworks', 'Mobile App Ecosystems (iOS & Android)', 'Enterprise-Grade Backend Solutions', 'API Integration & Microservices', 'UI/UX Design & Prototyping'],
-    stats: [['99.9%', 'Uptime'], ['50+', 'Apps'], ['10x', 'Scale']],
+    longDesc: 'A slow or confusing website costs you sales. Our team builds custom, state-of-the-art websites and mobile apps using the latest technology, ensuring your pages load in milliseconds. We take care of all the complicated coding, security, and setup, so you can focus entirely on running your business with peace of mind.',
+    features: ['Tailor-made websites built for speed', 'iOS & Android mobile apps', 'Secure databases & payment checkout', 'Integrates easily with your current tools', 'Beautiful, custom-designed layouts'],
+    stats: [['99.9%', 'Uptime'], ['50+', 'Apps Built'], ['10x', 'Faster Load']],
     workflow: [
-      { title: "SYSTEM BLUEPRINTING", desc: "We architect the full database schema, microservices communication matrix, and wireframe user flows before a single line of code is written." },
-      { title: "FRONTEND FIDELITY", desc: "Our engineering team crafts pixel-perfect interface mockups using modern frameworks (React, Next.js, Framer Motion) for blazing fast load speeds." },
-      { title: "ROBUST INTEGRATION", desc: "We build scalable REST and GraphQL API routes, backed by resilient serverless environments, securing absolute data flow continuity." },
-      { title: "CI/CD AUTOMATION", desc: "Automatic deployment pipelines deploy your code securely across server clusters, backed by automated integration test triggers." }
+      { title: "1. DESIGN THE BLUEPRINT", desc: "We sketch out your pages and map the customer journey, making sure everything is clear and easy to navigate before we start coding." },
+      { title: "2. CRAFT THE VISUALS", desc: "Our designers bring the website to life with smooth animations, high-fidelity layouts, and elegant colors tailored to your brand." },
+      { title: "3. BUILD THE ENGINE", desc: "We write secure, reliable code to power the backend systems, making sure your contact forms, checkout pages, and client portals work perfectly." },
+      { title: "4. LAUNCH & PROTECT", desc: "We host your website on secure global servers, perform extensive testing, and set up continuous security checks so it never goes offline." }
     ],
     layers: [
-      { number: "01", title: "PRESENTATION SYSTEM (UI)", tech: ["React", "Next.js", "Framer Motion", "Tailwind CSS"], purpose: "Creating fluid, responsive client-side routing, high-fidelity micro-interactions, and premium visual components that capture visitor attention instantly.", color: "var(--accent-primary)" },
-      { number: "02", title: "LOGIC INTEGRATION ENGINE (API)", tech: ["Node.js", "GraphQL", "REST APIs", "Serverless"], purpose: "Managing data-fetching pipelines, handling security handshakes, processing payments, and executing real-time communications.", color: "#00f0ff" },
+      { number: "01", title: "VISUAL INTERFACE (FRONTEND)", tech: ["React", "Next.js", "Framer Motion", "Tailwind CSS"], purpose: "Creating fluid, responsive client-side routing, high-fidelity micro-interactions, and premium visual components that capture visitor attention instantly.", color: "var(--accent-primary)" },
+      { number: "02", title: "LOGIC & INTEGRATION ENGINE (API)", tech: ["Node.js", "GraphQL", "REST APIs", "Serverless"], purpose: "Managing data-fetching pipelines, handling security handshakes, processing payments, and executing real-time communications.", color: "#00f0ff" },
       { number: "03", title: "RELIABLE DATA CORE (INFRA)", tech: ["PostgreSQL", "MongoDB", "Redis", "AWS Cloud"], purpose: "Securing database persistence, high-speed RAM caching, scalable storage buckets, and automated global CDN distribution.", color: "#a855f7" }
     ]
   },
@@ -86,18 +86,18 @@ const serviceData: Record<string, ServiceDetail> = {
     icon: <Search size={48} />,
     title: 'SEO & Content Marketing',
     titleLines: { line1: "SEO & CONTENT", line2: "AUTHORITY", line3: "MARKETING" },
-    image: "/services-seo.png",
-    desc: 'Dominating search landscapes through strategic authority and visibility.',
-    hook: 'IF YOU ARE NOT RANKING ON PAGE ONE, YOU DO NOT EXIST. WE DOMINATE.',
+    image: "/whatwecreate/seoandcontent.jpg",
+    desc: 'Get found on Google by active buyers without paying for expensive ads. We write engaging, high-ranking articles and optimize your website so you rank higher, attract more organic traffic, and build authority.',
+    hook: 'If customers can\'t find you on Google, they find your competitors instead. We make sure you show up first when they look for your services.',
     ctaHook: 'Ready to dominate search pages and command absolute organic authority? Start your organic growth engine with us today to scale your traffic.',
     longDesc: 'Relying on paid ads is a dangerous game. We build semantic content engines, backlink authority networks, and technical SEO architectures that place your business in front of high-intent buyers, driving non-stop organic revenue. Establish your brand as an absolute authority and capture maximum search impressions.',
-    features: ['Semantic SEO & Keyword Research', 'Authority Building & Backlink Strategy', 'High-Impact Content Creation', 'Technical SEO Audits', 'Performance Analytics & Reporting'],
-    stats: [['250%', 'Growth'], ['1st', 'Rank'], ['5M+', 'Views']],
+    features: ['High-ranking Google keywords targeting', 'Website health & speed optimization', 'Engaging articles written for humans', 'High-authority link partnerships', 'Clear search traffic progress reports'],
+    stats: [['250%', 'Traffic Growth'], ['1st Page', 'Google Ranking'], ['5M+', 'Organic Views']],
     workflow: [
-      { title: "SEMANTIC RESEARCH", desc: "We scan search volumes, identify user search intent vectors, and target high-converting semantic keyword clusters." },
-      { title: "TECHNICAL RECON", desc: "We solve crawl budget delays, structure XML schemas, optimize site indexing, and minimize Largest Contentful Paint (LCP)." },
-      { title: "AUTHORITY CAMPAIGNS", desc: "Our editors write compelling articles, backed by link acquisition pipelines from high-domain authority sites." },
-      { title: "ANALYTICS OPTIMIZATION", desc: "We track live impressions, search query shifts, and user flow conversions, continually updating our content algorithms." }
+      { title: "1. DISCOVER SEARCH PATTERNS", desc: "We research exactly what phrases and questions your potential customers are typing into Google, targeting high-value opportunities." },
+      { title: "2. OPTIMIZE YOUR WEBSITE HEALTH", desc: "We clean up backend code, fix slow loading pages, and organize your site structure so search engines can read it easily." },
+      { title: "3. WRITE TARGETED CONTENT", desc: "Our writers create interesting, informative articles that answer your customers' questions and keep them on your page longer." },
+      { title: "4. BUILD DOMAIN TRUST", desc: "We establish links with other respected websites in your industry, proving to Google that your brand is a trustworthy authority." }
     ],
     layers: [
       { number: "01", title: "SEMANTIC LANDING ENGINE", tech: ["Optimized HTML5", "JSON-LD Schema", "Next.js SSG"], purpose: "Rendering crawlable content structures, technical metadata, and responsive articles that satisfy search algorithms instantly.", color: "var(--accent-primary)" },
@@ -109,18 +109,18 @@ const serviceData: Record<string, ServiceDetail> = {
     icon: <Share2 size={48} />,
     title: 'Social Media Marketing',
     titleLines: { line1: "SOCIAL MEDIA", line2: "ENGAGEMENT", line3: "MARKETING" },
-    image: "/services-social.png",
-    desc: 'Building meaningful brand narratives that resonate globally.',
-    hook: 'ATTENTION IS THE ULTIMATE CURRENCY. WE CAPTURE AND CONVERT IT.',
+    image: "/whatwecreate/socialmedia.png",
+    desc: 'Grow your audience, build brand loyalty, and drive sales on social media. We create thumb-stopping visual posts, engaging video reels, and manage high-converting ad campaigns tailored to your target market.',
+    hook: 'Social media is where your customers hang out. We make your brand look professional, engaging, and impossible to scroll past.',
     ctaHook: 'Ready to capture absolute customer attention and build a legendary brand voice? Scale your audience reach and conversion loops with us today.',
-    longDesc: 'Generic posting is white noise. We craft cinematic brand narratives, viral trend mechanics, and targeted advertising strategies that capture absolute attention and convert followers into brand evangelists. Amplify your brand voice and engage with your community across all major social networks.',
-    features: ['Narrative Design & Brand Storytelling', 'Viral Mechanics & Trend Jacking', 'Community Growth & Engagement', 'Paid Social Campaigns (Meta, LinkedIn)', 'Influencer Partnerships'],
-    stats: [['500K+', 'Reach'], ['12%', 'Engaged'], ['3x', 'ROI']],
+    longDesc: 'Posting randomly doesn\'t generate sales. We develop a complete social media blueprint to tell your brand\'s unique story. From designing custom graphics and editing short-form video reels (for Instagram, TikTok, LinkedIn) to launching targeted ads, we capture attention and turn passive scrolls into active inquiries.',
+    features: ['Custom brand graphics & visual themes', 'Scroll-stopping short-form video reels', 'Targeted ads on Instagram, Facebook & LinkedIn', 'Active community engagement & replies', 'Data-driven audience growth campaigns'],
+    stats: [['500K+', 'Combined Reach'], ['12%', 'Engagement Rate'], ['3x+', 'Average ROI']],
     workflow: [
-      { title: "NARRATIVE BRANDING", desc: "We establish the tone, custom style guides, and specific digital identity metrics to differentiate your business from the noise." },
-      { title: "CREATIVE FACTORY", desc: "We generate scroll-stopping graphics, dynamic cinematic short-form video reels, and compelling caption hooks daily." },
-      { title: "INTERACTIVE LAUNCH", desc: "We coordinate cross-channel scheduling campaigns (LinkedIn, Instagram, TikTok) alongside real-time community engagement scripts." },
-      { title: "CAMPAIGN CONVERSIONS", desc: "We analyze campaign reach, community actions, and lead conversion rates, optimizing future content budgets." }
+      { title: "1. DEFINE YOUR SOCIAL VOICE", desc: "We establish your brand's style guide, color theme, and specific messaging rules so your social channels look unified and professional." },
+      { title: "2. PRODUCTION & CREATION", desc: "Our creative team shoots videos, designs premium graphics, and drafts caption copywriting tailored to hook viewers." },
+      { title: "3. STRATEGIC PUBLISHING", desc: "We automate publication schedules across all channels at peak traffic hours, and engage directly with your commenters." },
+      { title: "4. ADVERTISING CAMPAIGNS", desc: "We set up highly targeted campaigns to show your best content to people who are most likely to buy your product or service." }
     ],
     layers: [
       { number: "01", title: "NARRATIVE CREATIVE FACTORY", tech: ["Cinematic Video", "Kinetic Graphics", "Premium Copy"], purpose: "Designing attention-grabbing hooks, scroll-stopping graphic assets, and compelling storylines that convert casual viewers into active followers.", color: "var(--accent-primary)" },
@@ -132,18 +132,18 @@ const serviceData: Record<string, ServiceDetail> = {
     icon: <Zap size={48} />,
     title: 'AI Solutions',
     titleLines: { line1: "AI SOLUTIONS", line2: "INTELLIGENT", line3: "AUTOMATION" },
-    image: "/services-ai.png",
-    desc: 'Harnessing the power of automation to drive operational intelligence.',
-    hook: 'AUTOMATE OR BE OUT-COMPETED. WE DEPLOY PRODUCTION-GRADE AI.',
+    image: "/whatwecreate/aisolutions.webp",
+    desc: 'Save hours of busywork by automating your business with smart AI. From automatic lead trackers and WhatsApp chatbots to custom tools that answer customers 24/7, we handle your repetitive tasks so you can focus on growth.',
+    hook: 'Your team shouldn\'t waste hours on repetitive tasks. We build smart AI helpers that handle the busywork for you automatically.',
     ctaHook: 'Ready to deploy production-grade intelligent systems and automate manual bottlenecks 24/7? Join us to implement custom AI agents today.',
-    longDesc: 'AI is not a future trend—it is today\'s unfair advantage. We integrate production-grade LLMs, custom machine learning agents, and intelligent automated workflows that slash labor hours, eliminate errors, and scale your operations 24/7. Leverage AI to optimize complex operational bottlenecks.',
-    features: ['Large Language Model (LLM) Integration', 'Business Process Automation', 'Intelligent AI Chatbots', 'Predictive Analytics & Data Mining', 'Custom AI Tool Development'],
-    stats: [['60%', 'Saved'], ['24/7', 'Active'], ['99%', 'Accuracy']],
+    longDesc: 'Artificial Intelligence isn\'t just for tech giants. We build practical AI solutions customized for your daily operations. Whether you need a smart WhatsApp auto-replier that answers customers immediately or a Lead Management system that tracks inquiries and alerts your sales team, we build tools that work 24/7 with zero downtime.',
+    features: ['Automated Lead Trackers & managers', 'WhatsApp Auto-Agents & customer helper tools', 'Custom 24/7 AI chat helpers for websites', 'Automatic document readers & data entry', 'Integrates AI with your existing tools'],
+    stats: [['60%', 'Hours Saved'], ['24/7', 'Always Active'], ['99%', 'Task Accuracy']],
     workflow: [
-      { title: "DISCOVERY AUDIT", desc: "We review your team's manual operations to identify tasks ripe for automatic processing, LLM handling, and AI assistants." },
-      { title: "PIPELINE INGESTION", desc: "We set up vector database systems, structuring your organization's records into highly organized data indices." },
-      { title: "LLM PROMPTING", desc: "We build and program autonomous AI agents using advanced models, connecting them to secure backend APIs." },
-      { title: "RELIABLE ENGINES", desc: "We test and refine our model outputs with safety guardrails, guaranteeing zero-error, 24/7 autonomous task execution." }
+      { title: "1. LOCATE THE BUSYWORK", desc: "We look at your daily processes and identify repetitive tasks (like data entry, messaging, scheduling) that can be easily automated." },
+      { title: "2. BUILD THE AI HELPER", desc: "We program smart AI models using secure tools, feeding them your specific business guidelines and documents so they know your policies." },
+      { title: "3. SECURE API CONNECTIONS", desc: "We link your new AI assistant directly to your website, CRM, WhatsApp, or email, making data transfer fast and safe." },
+      { title: "4. ZERO-ERROR TESTING", desc: "We test the AI helper against real-world questions, setting up safety boundaries so it always behaves professionally." }
     ],
     layers: [
       { number: "01", title: "INTERACTIVE GLASS INTERFACE", tech: ["WebSockets", "Streaming Panels", "React DOM"], purpose: "Providing seamless, high-fidelity conversational environments, real-time responses, and clean automated feedback prompts.", color: "var(--accent-primary)" },
@@ -155,18 +155,18 @@ const serviceData: Record<string, ServiceDetail> = {
     icon: <Radio size={48} />,
     title: 'Podcast Production',
     titleLines: { line1: "PODCAST", line2: "CINEMATIC", line3: "PRODUCTION" },
-    image: "/services-podcast.png",
-    desc: 'Amplifying your brand voice through cinematic audio experiences.',
-    hook: 'YOUR VOICE IS YOUR MOST POWERFUL ASSET. WE MAKE IT CINEMATIC.',
+    image: "/whatwecreate/podcast.webp",
+    desc: 'Launch a high-fidelity professional podcast without any of the technical headache. We handle everything from script planning and audio editing to publishing your episodes on Spotify, Apple Podcasts, and YouTube.',
+    hook: 'A podcast makes you the voice of your industry. We handle the recording advice, audio editing, and global setup so hosting is a breeze.',
     ctaHook: 'Ready to launch a cinematic brand podcast that positions you as the absolute industry authority? Partner with us to master your audio media today.',
-    longDesc: 'A podcast is the ultimate authority builder for founders and leaders. We provide a complete, high-end production suite: from professional script engineering and cinematic audio mastering to global multi-channel distribution and audience growth campaigns. Launch and scale a professional podcast that captivates listeners globally.',
-    features: ['High-End Audio Engineering & Mixing', 'Global Distribution (Spotify, Apple)', 'Narrative Production & Scripting', 'Guest Sourcing & Management', 'Podcast Monetization Strategies'],
-    stats: [['1M+', 'Audience'], ['Top 10', 'Rank'], ['100+', 'Episodes']],
+    longDesc: 'Starting a podcast sounds fun until you have to edit audio, fix echo, and deal with RSS feeds. We take all the technical stress away. Our audio experts polish your sound, add background music, write episode descriptions, and publish each episode globally, making sure you look and sound like a seasoned pro.',
+    features: ['Professional audio mixing & voice polishing', 'Episode publishing on Spotify, Apple & Google', 'Script ideas & interview outlines', 'Short video clips for social media promotion', 'Complete recording equipment guide & setup support'],
+    stats: [['1M+', 'Audience Reach'], ['Top 10', 'Show Rankings'], ['100+', 'Episodes Done']],
     workflow: [
-      { title: "EPISODE CONCEPTS", desc: "We brainstorm high-impact seasonal topics, design custom cover assets, and write structured interview scripts." },
-      { title: "HIGH-FIDELITY RECORD", desc: "We assist with studio equipment setups, audio captures, and remote multi-mic connection protocols." },
-      { title: "CINEMATIC MASTER", desc: "Our engineers clean background noises, balances voices, add custom intro tracks, and compile clean master tapes." },
-      { title: "GLOBAL DISPATCH", desc: "We launch your show across all main podcast players (Spotify, Apple) alongside social media video snippets." }
+      { title: "1. OUTLINE YOUR SHOW", desc: "We help you select your show name, design custom cover art, structure your episodes, and prepare interview question guides." },
+      { title: "2. EQUIPMENT & RECORDING SUITE", desc: "We recommend easy-to-use microphones and guide you step-by-step through recording clean, echo-free audio." },
+      { title: "3. AUDIO EDITING & MASTERING", desc: "Our engineers cut out pauses, remove background noises, balance volumes, and merge custom music into a master track." },
+      { title: "4. GLOBAL DISTRIBUTION", desc: "We upload your finished episodes to Apple Podcasts, Spotify, and YouTube, alongside SEO-optimized transcripts and descriptions." }
     ],
     layers: [
       { number: "01", title: "MULTI-CHANNEL MEDIA PLAYER", tech: ["Custom Audio API", "Waveform Canvas", "CSS Panels"], purpose: "Offering clean, premium listening hubs directly on your site, complete with chapter navigation and high-fidelity sound.", color: "var(--accent-primary)" },
@@ -178,23 +178,92 @@ const serviceData: Record<string, ServiceDetail> = {
     icon: <PieChart size={48} />,
     title: 'Financial Consulting',
     titleLines: { line1: "FINANCIAL", line2: "STRATEGIC", line3: "CONSULTING" },
-    image: "/services-seo.png", // Reusing capital growth charts as it perfectly fits!
-    desc: 'Navigating market complexities with data-driven strategic oversight.',
-    hook: 'GROWTH WITHOUT FINANCIAL STRATEGY IS CHAOS. WE SECURE YOUR SCALE.',
+    image: "/whatwecreate/finance.webp",
+    desc: 'Make smart, data-backed financial decisions for a prosperous future. We help you audit operational costs, build clear revenue blueprints, and arrange flexible business loans so you can expand safely.',
+    hook: 'Growth without clear numbers is high-risk. We build a clear financial map so you always know your profit margins and expansion budget.',
     ctaHook: 'Ready to optimize operational pipelines, raise strategic capital, and secure risk-mitigated corporate scaling? Join us to blueprint your corporate growth today.',
-    longDesc: 'Scaling a business requires absolute capital precision. We provide strategic growth consulting, cost optimizations, capital fundraising blueprints, and rigorous forecasting models to ensure your expansion is profitable and risk-secured. Navigate market complexities with dedicated strategic financial oversight.',
-    features: ['Growth Capital Acquisition', 'Risk Management & Mitigation', 'Strategic Scaling & M&A', 'Financial Modeling & Forecasting', 'Operational Cost Optimization'],
-    stats: [['$10M+', 'Raised'], ['30%', 'Savings'], ['5x', 'Growth']],
+    longDesc: 'Running a business requires a clear understanding of cash flow. Our financial consultants analyze your day-to-day expenditures, optimize your tax position, and forecast your revenue for the coming years. We make complex spreadsheets easy to understand, helping you budget for expansion and navigate growth smoothly.',
+    features: ['Operational expense audits & savings plan', 'Clear 3-year and 5-year revenue blueprints', 'Venture capital & business loan prep', 'Profit margin & cash flow analysis', 'Risk management & mitigation strategy'],
+    stats: [['$10M+', 'Capital Raised'], ['30%', 'Expense Savings'], ['5x', 'Scale Multiplier']],
     workflow: [
-      { title: "BALANCE DEEPMIVE", desc: "We conduct a complete audit of your financial registers, operational spends, and current debt pipelines." },
-      { title: "EFFICIENCY RECON", desc: "We locate hidden operational leaks, simplify recurring expenses, and optimize department cash flows." },
-      { title: "CAPITAL MATCHING", desc: "We prepare high-fidelity investment summaries and connect your team with banks and venture capital groups." },
-      { title: "SCALE MOCKUPS", desc: "We map out detailed, 5-year growth forecasting reports to ensure every future step is financially sound." }
+      { title: "1. AUDIT REVENUE & EXPENSES", desc: "We analyze your past financial records, identifying exactly where money is coming in and where it might be leaked." },
+      { title: "2. LOCATE EXPENSE CUTS", desc: "We identify recurring subscription leaks, operational bottlenecks, and negotiating tips to immediately improve your profit margins." },
+      { title: "3. BLUEPRINT CAPITAL FUNDING", desc: "We help organize clean investor pitches, credit reports, and business plan files to qualify you for expansion capital." },
+      { title: "4. REVENUE ROADMAP", desc: "We build easy-to-read monthly forecast charts so you can see your projected cash flow and expansion thresholds clearly." }
     ],
     layers: [
       { number: "01", title: "FORECASTING DASHBOARD", tech: ["Chart Canvas", "Excel Modeling", "Burn-rate Hud"], purpose: "Modeling visual capital pathways, displaying monthly burn-rates, and presenting growth projections in interactive executive layouts.", color: "var(--accent-primary)" },
       { number: "02", title: "EFFICIENCY BLUEPRINT CORE", tech: ["Expense Auditing", "Consolidation Logic", "Leasing Core"], purpose: "Calculating cost-saving pathways, structuring debt consolidation plans, and identifying capital opportunities.", color: "#00f0ff" },
       { number: "03", title: "INVESTOR FUNDING MATRIX", tech: ["HNW Pitch Deck", "VC Matching Core", "Credit Registers"], purpose: "Aligning operational structures with target investor metrics, securing investment pitches, and coordinating corporate finances.", color: "#a855f7" }
+    ]
+  },
+  'business-consultation': {
+    icon: <Lightbulb size={48} />,
+    title: 'Business Consultation',
+    titleLines: { line1: "BUSINESS", line2: "STRATEGIC", line3: "CONSULTATION" },
+    image: "/whatwecreate/consultation.png",
+    desc: 'Scale your business with expert guidance and strategy. We analyze your day-to-day operations to find hidden opportunities, streamline workflows, and set you up for long-term, sustainable success.',
+    hook: 'Scale your business with expert guidance. We streamline operations to save costs and locate hidden revenue paths.',
+    ctaHook: 'Ready to optimize your business operations and command your market? Contact us today for a free strategic audit.',
+    longDesc: 'Running an enterprise requires constant adaptation. Our strategic consultants analyze your internal team structures, sales pipelines, and technology systems to eliminate inefficiencies. We help you build solid growth blueprints so you can delegate tasks confidently and scale operations without chaos.',
+    features: ['Operational workflow audits', 'Team structure & role design', 'Sales funnel optimization', 'Market competitive analysis', 'Strategic scaling roadmaps'],
+    stats: [['45%', 'Efficiency Up'], ['100+', 'Audits Done'], ['3x', 'Scale Speed']],
+    workflow: [
+      { title: "1. OPERATIONAL ANALYSIS", desc: "We interview key team members and map out your day-to-day operational flows to find bottlenecks." },
+      { title: "2. STRATEGIC BLUEPRINTING", desc: "We draft a comprehensive recommendation report highlighting immediate efficiency wins and long-term milestones." },
+      { title: "3. TECHNOLOGY INTEGRATION", desc: "We recommend and help configure tools to automate task delegation and progress tracking across teams." },
+      { title: "4. EXECUTION & FEEDBACK", desc: "We monitor implementation outcomes and refine workflows to ensure consistent execution." }
+    ],
+    layers: [
+      { number: "01", title: "WORKFLOW VISUALIZATION", tech: ["Process Mapping", "Lucid Chart", "Operant Hud"], purpose: "Mapping department inter-dependencies and visualizing information handoffs to eliminate team communication delays.", color: "var(--accent-primary)" },
+      { number: "02", title: "STRATEGY ROADMAP CORE", tech: ["Milestone Matrices", "ROI Predictors", "Competitive Maps"], purpose: "Evaluating operational conversion rates and mapping growth pathways to guarantee sustainable business scaling.", color: "#00f0ff" },
+      { number: "03", title: "EXECUTION INTEGRITY METRIC", tech: ["KPI Dashboards", "Output Registers", "Accountability Audits"], purpose: "Creating accountability scorecards and automated dashboard tracking to align employee performance with enterprise milestones.", color: "#a855f7" }
+    ]
+  },
+  'business-loans': {
+    icon: <TrendingUp size={48} />,
+    title: 'Business Loans',
+    titleLines: { line1: "BUSINESS", line2: "GROWTH", line3: "LOANS" },
+    image: "/whatwecreate/loans.png",
+    desc: 'Get the funding you need to grow and expand. We connect you with flexible business loans, working capital, and equipment financing at competitive rates, with quick approvals and hassle-free processing.',
+    hook: 'Secure the capital you need to scale operations. Quick processing, flexible terms, and competitive interest rates.',
+    ctaHook: 'Need capital to fund your next big move? Apply today for quick approvals and customized financing terms.',
+    longDesc: 'Capital bottlenecks shouldn\'t stop your ambition. We partner with top-tier lenders to offer secure business loans, credit lines, and equipment leases tailored to your cash flow. We manage the complex paperwork and application hurdles so you secure critical funds quickly and affordably.',
+    features: ['Flexible working capital lines', 'Equipment leasing & financing', 'Low-interest rates', 'Quick approval timelines', 'Custom repayment structures'],
+    stats: [['$25M+', 'Disbursed'], ['24 Hr', 'Decision Window'], ['98%', 'Approval Rate']],
+    workflow: [
+      { title: "1. CAPITAL REQUIREMENT AUDIT", desc: "We review your cash flow and growth objectives to calculate the exact funding size and type required." },
+      { title: "2. PREPARATION & PACKAGING", desc: "We organize your balance sheets, business plans, and documents into a clean dossier for lending committees." },
+      { title: "3. LENDER MATCHING & BIDDING", desc: "We submit your file to our trusted pool of banking and private lenders to negotiate the lowest rates." },
+      { title: "4. FUND DISBURSEMENT", desc: "We guide you through the terms approval, final contract signing, and direct deposit into your business account." }
+    ],
+    layers: [
+      { number: "01", title: "LENDING PORTAL FRONTEND", tech: ["Secure Forms", "Document Uploaders", "Calculator API"], purpose: "Providing candidates a secure portal to calculate potential loan terms and safely upload sensitive balance sheets.", color: "var(--accent-primary)" },
+      { number: "02", title: "UNDERWRITING ENGINE CORE", tech: ["Credit Check API", "Risk Assessors", "Cash-flow Analyzers"], purpose: "Evaluating enterprise debt-service-coverage ratios and comparing records against targeted lending policies.", color: "#00f0ff" },
+      { number: "03", title: "LENDER BRIDGE ROUTER", tech: ["B2B Loan APIs", "Syndication Ledgers", "Escrow Handlers"], purpose: "Routing pre-qualified dossiers to active lending networks and tracking bids to secure competitive terms.", color: "#a855f7" }
+    ]
+  },
+  'business-insurance': {
+    icon: <Shield size={48} />,
+    title: 'Business Insurance',
+    titleLines: { line1: "BUSINESS", line2: "ENTERPRISE", line3: "INSURANCE" },
+    image: "/whatwecreate/insurance.png",
+    desc: 'Secure your hard work and protect your business from risks. We offer customized insurance plans to safeguard your assets, employees, and operations, giving you absolute peace of mind.',
+    hook: 'Protect your enterprise assets and workforce. Custom risk coverage and quick claims support.',
+    ctaHook: 'Don\'t leave your business vulnerable to unforeseen liability. Protect your assets with custom insurance coverage today.',
+    longDesc: 'Risk is inevitable, but financial loss doesn\'t have to be. We analyze your industry risk profile to design customized insurance portfolios, covering liability, cyber risks, property damage, and employee health. Rest easy knowing your business is fully protected against unexpected events.',
+    features: ['General liability & asset coverage', 'Professional indemnity insurance', 'Cyber risk & data breach protection', 'Group employee health benefits', 'Rapid claims processing support'],
+    stats: [['100%', 'Risk Covered'], ['10k+', 'Employees Protected'], ['24/7', 'Claims Intake']],
+    workflow: [
+      { title: "1. RISK ASSESSMENT PROFILE", desc: "We audit your operations, client contracts, and workspace to identify potential liability vulnerabilities." },
+      { title: "2. CUSTOM COVERAGE BLUEPRINT", desc: "We structure an insurance plan combining exactly the protections you need, preventing double-payments." },
+      { title: "3. UNDERWRITERS NEGOTIATION", desc: "We source terms from top global insurance carriers to secure comprehensive coverage at optimal premiums." },
+      { title: "4. POLICY ISSUANCE & ONBOARDING", desc: "We activate your insurance policies and train your leadership team on claiming protocols." }
+    ],
+    layers: [
+      { number: "01", title: "RISK MODEL DISPLAY INTERFACE", tech: ["Interactive Audits", "Coverage Slider", "PDF Generators"], purpose: "Presenting risk assessment scorecards and explaining liability coverage benefits in plain English.", color: "var(--accent-primary)" },
+      { number: "02", title: "UNDERWRITING COMPARISON HUB", tech: ["Carrier Quote APIs", "Premium Assessors", "Terms Comparators"], purpose: "Querying multiple insurance underwriting APIs to compare coverage limits, deductibles, and premiums.", color: "#00f0ff" },
+      { number: "03", title: "CLAIMS DISPATCH INTERFACE", tech: ["Incident Loggers", "Evidence Uploaders", "CRM Registers"], purpose: "Creating a reliable, secure intake channel for logging operational incidents and routing claim paperwork directly to carriers.", color: "#a855f7" }
     ]
   }
 };
@@ -226,7 +295,7 @@ const DHServiceDetail = () => {
     <div className="dh-service-detail-page" style={{ background: 'var(--bg-primary)', color: 'var(--text-primary)', minHeight: '100vh', overflow: 'hidden' }}>
       
       {/* 1. HERO - Dual Column Premium Layout */}
-      <section className="theme-brown" style={{ minHeight: '65vh', display: 'flex', alignItems: 'center', background: 'var(--bg-primary)', overflow: 'hidden', position: 'relative', paddingTop: '120px', paddingBottom: '80px' }}>
+      <section className="theme-brown" style={{ minHeight: '70vh', display: 'flex', alignItems: 'center', background: 'var(--bg-primary)', overflow: 'hidden', position: 'relative', paddingTop: '120px', paddingBottom: '80px' }}>
         <Grain />
         <GridBg size={50} opacity={0.05} />
         <GlowBlob top="-10%" right="-5%" w={450} h={450} opacity={0.06} blur={130} />
@@ -252,8 +321,9 @@ const DHServiceDetail = () => {
                 </Link>
               </motion.div>
               
-              <motion.div variants={fadeUp} className="dh-label" style={{ color: 'var(--accent-primary)', marginBottom: '1.2rem' }}>
-                SERVICE EXPERTISE
+              {/* Premium Hook Tag */}
+              <motion.div variants={fadeUp} style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(196, 145, 58, 0.08)', border: '1px solid rgba(196, 145, 58, 0.15)', borderRadius: '100px', padding: '6px 16px', marginBottom: '1.5rem' }}>
+                <span style={{ fontSize: '11px', color: 'var(--accent-primary)', fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase' }}>🔥 {service.hook}</span>
               </motion.div>
               
               <h1 className="dh-display" style={{ fontSize: 'clamp(2rem, 5.5vw, 4.2rem)', marginBottom: '1.5rem', lineHeight: 1.05, letterSpacing: '-0.03em' }}>
@@ -265,42 +335,101 @@ const DHServiceDetail = () => {
               <motion.p variants={fadeUp} className="dh-body" style={{ maxWidth: '580px', fontSize: '1.05rem', color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: '2.5rem' }}>
                 {service.desc}
               </motion.p>
+              
+              {/* Symmetrical quick performance highlights */}
+              <motion.div variants={fadeUp} style={{ display: 'flex', gap: '16px', marginTop: '2rem', flexWrap: 'wrap' }}>
+                {service.stats.slice(0, 2).map((s, idx) => (
+                  <div key={idx} style={{ background: 'var(--card-bg)', border: '1px solid var(--border-light)', borderRadius: '12px', padding: '12px 20px', minWidth: '140px', flex: '1 1 140px' }}>
+                    <div style={{ fontSize: '1.6rem', fontFamily: "'Outfit', sans-serif", fontWeight: 800, color: 'var(--accent-primary)', lineHeight: 1 }}>{s[0]}</div>
+                    <div style={{ fontSize: '10px', color: 'var(--text-secondary)', marginTop: '4px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>{s[1]}</div>
+                  </div>
+                ))}
+              </motion.div>
             </motion.div>
 
-            {/* Right Visual Image Column */}
+            {/* Right Visual Image Column with floating luxury badges */}
             <motion.div
               initial={{ opacity: 0, x: 40 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, ease: 'easeOut', delay: 0.2 }}
               style={{ width: '100%', position: 'relative' }}
             >
-              <div style={{ position: 'absolute', inset: '-15px', background: 'radial-gradient(circle, rgba(196, 145, 58, 0.15) 0%, transparent 70%)', filter: 'blur(20px)', zIndex: 1, pointerEvents: 'none' }} />
+              <div style={{ position: 'absolute', inset: '-30px', background: 'radial-gradient(circle, rgba(196, 145, 58, 0.18) 0%, transparent 65%)', filter: 'blur(30px)', zIndex: 1, pointerEvents: 'none' }} />
               
-              <div style={{ 
-                position: 'relative', 
-                zIndex: 2, 
-                width: '100%', 
-                aspectRatio: '16/10', 
-                borderRadius: '16px', 
-                overflow: 'hidden', 
-                border: '1px solid var(--accent-primary)',
-                boxShadow: '0 25px 60px rgba(0, 0, 0, 0.4), 0 0 30px rgba(196, 145, 58, 0.08)'
-              }}>
-                <img 
-                  src={service.image} 
-                  alt={service.title} 
-                  style={{ 
-                    width: '100%', 
-                    height: '100%', 
-                    objectFit: 'cover',
-                  }} 
-                />
-              </div>
+              <motion.div 
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+                style={{ 
+                  position: 'relative', 
+                  zIndex: 2, 
+                  width: '100%', 
+                  aspectRatio: '16/10', 
+                  borderRadius: '20px', 
+                  overflow: 'visible', 
+                  border: '1px solid var(--accent-primary)',
+                  boxShadow: '0 30px 70px rgba(0, 0, 0, 0.5), 0 0 40px rgba(196, 145, 58, 0.12)',
+                  background: 'var(--bg-secondary)'
+                }}
+              >
+                <div style={{ width: '100%', height: '100%', borderRadius: '19px', overflow: 'hidden' }}>
+                  <img 
+                    src={service.image} 
+                    alt={service.title} 
+                    style={{ 
+                      width: '100%', 
+                      height: '100%', 
+                      objectFit: 'cover',
+                      transition: 'transform 0.8s ease'
+                    }} 
+                    onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.04)'}
+                    onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
+                  />
+                </div>
+
+                {/* Floating Glassmorphism Badge 1 */}
+                <div style={{
+                  position: 'absolute',
+                  top: '-20px',
+                  right: '-15px',
+                  background: 'rgba(255, 255, 255, 0.08)',
+                  backdropFilter: 'blur(12px)',
+                  border: '1px solid rgba(255, 255, 255, 0.15)',
+                  padding: '8px 14px',
+                  borderRadius: '12px',
+                  boxShadow: '0 8px 32px rgba(0,0,0,0.3)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  zIndex: 10
+                }}>
+                  <span style={{ fontSize: '12px' }}>✨</span>
+                  <span style={{ fontSize: '9px', fontWeight: 700, color: '#ffffff', letterSpacing: '0.05em', textTransform: 'uppercase' }}>Premium Solution</span>
+                </div>
+
+                {/* Floating Glassmorphism Badge 2 */}
+                <div style={{
+                  position: 'absolute',
+                  bottom: '-15px',
+                  left: '-15px',
+                  background: 'rgba(196, 145, 58, 0.12)',
+                  backdropFilter: 'blur(12px)',
+                  border: '1px solid rgba(196, 145, 58, 0.25)',
+                  padding: '8px 14px',
+                  borderRadius: '12px',
+                  boxShadow: '0 8px 32px rgba(0,0,0,0.3)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  zIndex: 10
+                }}>
+                  <span style={{ fontSize: '12px' }}>🛡️</span>
+                  <span style={{ fontSize: '9px', fontWeight: 700, color: 'var(--accent-primary)', letterSpacing: '0.05em', textTransform: 'uppercase' }}>100% Vetted Quality</span>
+                </div>
+              </motion.div>
             </motion.div>
             
           </div>
-        </div>
-      </section>
+        </div></section>
 
       <LuxuryLine />
 

@@ -39,7 +39,7 @@ const DH2Navbar = () => {
       name: 'Our Products',
       path: '/dummyhome2/our-products',
       subItems: [
-        { name: 'HR Portal', path: '/dummyhome2/our-products', external: 'https://hrportal.avanienterprises.in/' },
+        { name: 'Avani Business OS', path: '/dummyhome2/our-products', external: 'https://os.avanienterprises.in' },
         { name: 'School Management', path: '/dummyhome2/our-products', external: 'https://indus-school-page.vercel.app/admission' },
         { name: 'Project CRM', path: '/dummyhome2/our-products', external: 'https://team-lead-gamma.vercel.app/' },
         { name: 'Custom E-commerce', path: '/dummyhome2/our-products', external: 'https://shoes-ecommerce-iota.vercel.app/' },
