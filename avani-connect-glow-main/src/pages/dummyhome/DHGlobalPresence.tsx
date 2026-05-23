@@ -194,7 +194,7 @@ const DHGlobalPresence = () => {
             </p>
             <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
               <Link to="/dummyhome/contact" className="dh-btn-fill" style={{ textDecoration: 'none' }}>PARTNER WITH US</Link>
-              <Link to="/dummyhome/get-consultation" className="dh-btn-ghost" style={{ textDecoration: 'none' }}>BOOK DEEP-DIVE</Link>
+              <Link to="/dummyhome/contact" className="dh-btn-ghost" style={{ textDecoration: 'none' }}>BOOK DEEP-DIVE</Link>
             </div>
           </motion.div>
         </div>

@@ -300,16 +300,16 @@ const DHProjects = () => {
               
               <AnimatePresence mode="wait">
                 <motion.div key={currTest} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} transition={{ duration: 0.4 }}>
-                  <p className="dh-display" style={{ fontSize: '1.5rem', lineHeight: 1.4, maxWidth: '750px', margin: '0 auto 2rem', textTransform: 'none', letterSpacing: '0' }}>
+                  <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '1.05rem', fontWeight: 300, lineHeight: 1.6, maxWidth: '600px', margin: '0 auto 1.5rem', color: 'var(--text-secondary)', fontStyle: 'italic' }}>
                     "{testimonials[currTest].content}"
                   </p>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem' }}>
-                    <div style={{ width: '48px', height: '48px', borderRadius: '50%', overflow: 'hidden', border: '2px solid var(--accent-primary)' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px' }}>
+                    <div style={{ width: '36px', height: '36px', borderRadius: '50%', overflow: 'hidden', border: '1px solid var(--border-light)' }}>
                       <img src={testimonials[currTest].image} alt={testimonials[currTest].name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                     </div>
                     <div style={{ textAlign: 'left' }}>
-                      <div className="dh-heading" style={{ fontSize: '1rem' }}>{testimonials[currTest].name}</div>
-                      <div className="dh-label" style={{ marginBottom: 0, color: 'var(--text-tertiary)', fontSize: '0.6rem' }}>{testimonials[currTest].position}</div>
+                      <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-primary)' }}>{testimonials[currTest].name}</div>
+                      <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.65rem', fontWeight: 400, color: 'var(--text-tertiary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{testimonials[currTest].position}</div>
                     </div>
                   </div>
                 </motion.div>

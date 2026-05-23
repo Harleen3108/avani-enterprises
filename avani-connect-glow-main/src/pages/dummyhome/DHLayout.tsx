@@ -38,7 +38,7 @@ const DHLayout = () => {
 
         <DummyFooter />
         <Chatbot />
-        <StickyConsultationButton to="/dummyhome/get-consultation" />
+        <StickyConsultationButton to="/dummyhome/contact" />
       </div>
     </div>
   );

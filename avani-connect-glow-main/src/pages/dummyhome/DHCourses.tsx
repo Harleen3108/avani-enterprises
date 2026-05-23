@@ -144,55 +144,69 @@ const DHCourses = () => {
         <Grain />
         <GridBg size={30} opacity={0.03} />
         <div className="dh-container" style={{ position: 'relative', zIndex: 10 }}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2rem' }} className="dh-responsive-grid">
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }} className="dh-course-list">
             {filteredCourses.map((course, i) => (
               <motion.div key={course.id} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: i * 0.1 }}>
                 <div style={{
-                  background: 'var(--card-bg)', borderRadius: '16px', border: '1px solid var(--border-faint)',
-                  overflow: 'hidden', display: 'flex', flexDirection: 'column', height: '100%',
-                  backdropFilter: 'blur(10px)', transition: 'all 0.4s ease',
+                  background: 'linear-gradient(90deg, var(--card-bg) 0%, rgba(240, 235, 225, 0.05) 100%)', 
+                  borderRadius: '16px', border: '1px solid var(--border-faint)',
+                  overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1.5rem',
+                  backdropFilter: 'blur(10px)', transition: 'all 0.3s ease', position: 'relative'
                 }}
-                  onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.borderColor = 'var(--accent-primary)'; }}
-                  onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.borderColor = 'var(--border-faint)'; }}
+                  onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.borderColor = 'var(--accent-primary)'; e.currentTarget.style.boxShadow = '0 10px 40px rgba(0,0,0,0.1)'; }}
+                  onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.borderColor = 'var(--border-faint)'; e.currentTarget.style.boxShadow = 'none'; }}
+                  className="dh-course-item"
                 >
-                  <div style={{ position: 'relative', height: '180px', overflow: 'hidden' }}>
-                    <img src={course.image} alt={course.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                    <div style={{ position: 'absolute', top: 10, left: 10 }}>
-                      <span style={{ background: 'var(--accent-primary)', color: '#000', padding: '3px 10px', borderRadius: '100px', fontSize: '0.55rem', fontWeight: 800, letterSpacing: '0.1em' }}>
-                        {course.category.toUpperCase()}
-                      </span>
+                  {/* Left Side: Image and Title */}
+                  <div style={{ display: 'flex', gap: '2rem', alignItems: 'center', flex: 1 }}>
+                    <div style={{ position: 'relative', width: '200px', height: '140px', borderRadius: '12px', overflow: 'hidden', flexShrink: 0 }} className="dh-course-img-wrap">
+                      <img src={course.image} alt={course.title} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease' }} onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.05)'; }} onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; }} />
+                      <div style={{ position: 'absolute', top: 8, left: 8 }}>
+                        <span style={{ background: 'var(--accent-primary)', color: '#000', padding: '4px 10px', borderRadius: '6px', fontSize: '0.6rem', fontWeight: 800, letterSpacing: '0.1em' }}>
+                          {course.category.toUpperCase()}
+                        </span>
+                      </div>
                     </div>
-                    <div style={{ position: 'absolute', bottom: 10, right: 10, background: 'rgba(0,0,0,0.6)', color: '#fff', padding: '3px 8px', borderRadius: '6px', fontSize: '0.65rem', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '4px' }}>
-                      <Star size={10} style={{ color: 'var(--accent-primary)', fill: 'var(--accent-primary)' }} /> {course.rating}
+
+                    <div style={{ display: 'flex', flexDirection: 'column', paddingRight: '2rem' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '0.5rem' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '4px', background: 'rgba(255,255,255,0.05)', padding: '4px 8px', borderRadius: '6px' }}>
+                          <Star size={12} style={{ color: 'var(--accent-primary)', fill: 'var(--accent-primary)' }} />
+                          <span style={{ fontSize: '0.7rem', fontWeight: 800, color: 'var(--text-primary)' }}>{course.rating}</span>
+                        </div>
+                        <span style={{ fontSize: '0.65rem', fontWeight: 800, color: 'var(--accent-primary)', letterSpacing: '0.05em' }}>INSTRUCTOR: {course.instructor.toUpperCase()}</span>
+                      </div>
+                      
+                      <h3 className="dh-heading" style={{ fontSize: '1.4rem', marginBottom: '0.5rem' }}>{course.title}</h3>
+                      <p className="dh-body" style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '1rem', maxWidth: '600px' }}>{course.description}</p>
+                      
+                      <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                          <Clock size={14} style={{ color: 'var(--text-tertiary)' }} />
+                          <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--text-secondary)' }}>{course.duration}</span>
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                          <Users size={14} style={{ color: 'var(--text-tertiary)' }} />
+                          <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--text-secondary)' }}>{course.students} ENROLLED</span>
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                          <CheckCircle size={14} style={{ color: 'var(--accent-primary)' }} />
+                          <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--text-secondary)' }}>CERTIFICATE INCLUDED</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
 
-                  <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', flex: 1 }}>
-                    <h3 className="dh-heading" style={{ fontSize: '1.2rem', marginBottom: '0.5rem' }}>{course.title}</h3>
-                    <p className="dh-body" style={{ fontSize: '0.8rem', marginBottom: '1rem', flex: 1 }}>{course.description}</p>
-
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', marginBottom: '1rem' }}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '4px', padding: '6px', background: 'var(--bg-primary)', borderRadius: '8px', border: '1px solid var(--border-faint)' }}>
-                        <Clock size={12} style={{ color: 'var(--accent-primary)' }} />
-                        <span style={{ fontSize: '0.65rem', fontWeight: 800, color: 'var(--text-secondary)' }}>{course.duration}</span>
-                      </div>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '4px', padding: '6px', background: 'var(--bg-primary)', borderRadius: '8px', border: '1px solid var(--border-faint)' }}>
-                        <Users size={12} style={{ color: 'var(--accent-primary)' }} />
-                        <span style={{ fontSize: '0.65rem', fontWeight: 800, color: 'var(--text-secondary)' }}>{course.students} LEARNERS</span>
-                      </div>
+                  {/* Right Side: Pricing and Action */}
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', justifyContent: 'center', paddingLeft: '2rem', borderLeft: '1px solid var(--border-faint)', flexShrink: 0 }} className="dh-course-action">
+                    <div style={{ textAlign: 'right', marginBottom: '1.5rem' }}>
+                      <div style={{ fontSize: '0.8rem', color: 'var(--text-tertiary)', textDecoration: 'line-through', marginBottom: '0.2rem' }}>{course.originalPrice}</div>
+                      <div style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--text-primary)', lineHeight: 1 }}>{course.price}</div>
                     </div>
-
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
-                      <div>
-                        <span style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--text-primary)' }}>{course.price}</span>
-                        <span style={{ fontSize: '0.8rem', color: 'var(--text-tertiary)', textDecoration: 'line-through', marginLeft: '6px' }}>{course.originalPrice}</span>
-                      </div>
-                      <span style={{ fontSize: '0.6rem', fontWeight: 800, color: 'var(--accent-primary)', letterSpacing: '0.05em' }}>INSTRUCTOR: {course.instructor.toUpperCase()}</span>
-                    </div>
-
-                    <div style={{ display: 'flex', gap: '0.5rem' }}>
-                      <button className="dh-btn-fill" style={{ flex: 1 }}>ENROLL NOW</button>
-                      <button className="dh-btn-ghost" style={{ padding: '10px' }}><ArrowRight size={14} /></button>
+                    <div style={{ display: 'flex', gap: '0.5rem', width: '100%' }}>
+                      <Link to={`/courses/${course.id}`} style={{ flex: 1, textDecoration: 'none' }}>
+                        <button className="dh-btn-fill" style={{ width: '100%', padding: '12px 24px', fontSize: '0.75rem' }}>ENROLL NOW</button>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -202,6 +216,39 @@ const DHCourses = () => {
         </div>
       </section>
 
+      <style>{`
+        @media (max-width: 900px) {
+          .dh-course-item {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+          }
+          .dh-course-item > div:first-child {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            padding-right: 0 !important;
+          }
+          .dh-course-img-wrap {
+            width: 100% !important;
+            height: 200px !important;
+          }
+          .dh-course-action {
+            width: 100% !important;
+            align-items: flex-start !important;
+            padding-left: 0 !important;
+            border-left: none !important;
+            border-top: 1px solid var(--border-faint) !important;
+            padding-top: 1.5rem !important;
+            margin-top: 1.5rem !important;
+          }
+          .dh-course-action > div:first-child {
+            text-align: left !important;
+          }
+          .dh-responsive-grid {
+            grid-template-columns: 1fr !important;
+            gap: 2rem !important;
+          }
+        }
+      `}</style>
     </div>
   );
 };

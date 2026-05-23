@@ -254,7 +254,7 @@ const DH2About = () => {
             Whether you're a brand seeking growth or a talent seeking innovation, let's explore how we can build the future together.
           </p>
           <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center' }}>
-            <Link to="/dummyhome2/get-consultation" className="dh2-btn-fill">Start Project <ArrowRight size={16} /></Link>
+            <Link to="/dummyhome2/contact" className="dh2-btn-fill">Start Project <ArrowRight size={16} /></Link>
             <Link to="/dummyhome2/careers" className="dh2-btn-ghost">Join the Team</Link>
           </div>
         </motion.div>

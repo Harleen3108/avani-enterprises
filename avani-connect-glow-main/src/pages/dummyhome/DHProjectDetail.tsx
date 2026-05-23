@@ -31,101 +31,6 @@ const titleV = {
   visible: (i: number) => ({ y: 0, opacity: 1, transition: { duration: 1, ease: [.22, 1, .36, 1], delay: .2 + i * 0.12 } })
 };
 
-/* Custom title split mapping for premium cinematic aesthetics */
-const getProjectTitleLines = (slug: string, title: string) => {
-  if (slug === 'avani-business-os') {
-    return {
-      line1: "AVANI",
-      line2: "BUSINESS",
-      line3: "OS"
-    };
-  }
-  if (slug === 'project-leads-management') {
-    return {
-      line1: "LEADS",
-      line2: "MANAGEMENT",
-      line3: "WORKSPACE"
-    };
-  }
-  if (slug === 'sales-edge-crm') {
-    return {
-      line1: "SALES EDGE",
-      line2: "ENTERPRISE",
-      line3: "CRM"
-    };
-  }
-  if (slug === 'placement-management') {
-    return {
-      line1: "PLACEMENT",
-      line2: "CAMPUS",
-      line3: "MANAGEMENT"
-    };
-  }
-  if (slug === 'school-transport-management') {
-    return {
-      line1: "SCHOOL &",
-      line2: "TRANSPORT",
-      line3: "PORTAL"
-    };
-  }
-  if (slug === 'alumni-management') {
-    return {
-      line1: "ALUMNI",
-      line2: "MANAGEMENT",
-      line3: "PORTAL"
-    };
-  }
-  if (slug === 'motoxpress') {
-    return {
-      line1: "MOTO",
-      line2: "XPRESS",
-      line3: "PLATFORM"
-    };
-  }
-  if (slug === 'autoxpress') {
-    return {
-      line1: "AUTO",
-      line2: "XPRESS",
-      line3: "SYSTEM"
-    };
-  }
-  if (slug === 'lms-portal') {
-    return {
-      line1: "LMS",
-      line2: "LEARNING",
-      line3: "PORTAL"
-    };
-  }
-  if (slug === 'millionaire-club') {
-    return {
-      line1: "MILLIONAIRE",
-      line2: "INVESTMENT",
-      line3: "CLUB"
-    };
-  }
-  if (slug === 'college-management') {
-    return {
-      line1: "COLLEGE",
-      line2: "ACADEMIC",
-      line3: "SYSTEM"
-    };
-  }
-  if (slug === 'gaon-se-ghar-tak') {
-    return {
-      line1: "GAON SE",
-      line2: "GHAR TAK",
-      line3: "LOGISTICS"
-    };
-  }
-  
-  const words = title.split(' ');
-  return {
-    line1: words[0]?.toUpperCase() || 'ENTERPRISE',
-    line2: words[1]?.toUpperCase() || 'PORTAL',
-    line3: words.slice(2).join(' ').toUpperCase() || 'SYSTEM'
-  };
-};
-
 const DHProjectDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const project = slug ? projectsData.find(p => p.slug === slug) : null;
@@ -182,10 +87,8 @@ const DHProjectDetail = () => {
                 ENTERPRISE SYSTEM
               </motion.div>
 
-              <h1 className="dh-display" style={{ fontSize: 'clamp(2rem, 5.5vw, 4.2rem)', marginBottom: '1.5rem', lineHeight: 1.05, letterSpacing: '-0.03em' }}>
-                <span className="dh-hero-line"><motion.span custom={0} variants={titleV}>{line1}</motion.span></span>
-                {line2 && <span className="dh-hero-line"><motion.span custom={1} variants={titleV} className="dh-hero-stroked">{line2}</motion.span></span>}
-                <span className="dh-hero-line"><motion.span custom={2} variants={titleV} className="dh-hero-accent">{line3}</motion.span></span>
+              <h1 className="dh-display" style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', marginBottom: '1.5rem', lineHeight: 1.1, letterSpacing: '-0.02em', textTransform: 'capitalize' }}>
+                <span className="dh-hero-line"><motion.span custom={0} variants={titleV}>{project.title}</motion.span></span>
               </h1>
 
               <motion.p variants={fadeUp} className="dh-body" style={{ maxWidth: '580px', fontSize: '1.05rem', color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: '2.5rem' }}>
@@ -339,7 +242,7 @@ const DHProjectDetail = () => {
                 <p className="dh-body" style={{ fontSize: '0.85rem', marginBottom: '2rem', color: 'var(--text-secondary)' }}>
                   Our engineering team specialises in developing high-scale, cinematic custom digital solutions for enterprises.
                 </p>
-                <Link to="/dummyhome/get-consultation" className="dh-btn-fill" style={{ width: '100%', justifyContent: 'center' }}>
+                <Link to="/dummyhome/contact" className="dh-btn-fill" style={{ width: '100%', justifyContent: 'center' }}>
                   TALK TO AN ENGINEER <ArrowRight size={16} />
                 </Link>
               </div>

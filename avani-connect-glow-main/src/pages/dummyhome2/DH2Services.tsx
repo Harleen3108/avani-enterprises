@@ -166,7 +166,7 @@ const DH2Services = () => {
             Let's discuss how our expertise can translate into your success.
           </p>
           <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center' }}>
-            <Link to="/dummyhome2/get-consultation" className="dh2-btn-fill">Start Consultation <ArrowRight size={16} /></Link>
+            <Link to="/dummyhome2/contact" className="dh2-btn-fill">Start Consultation <ArrowRight size={16} /></Link>
             <Link to="/dummyhome2/contact" className="dh2-btn-ghost">Get in Touch</Link>
           </div>
         </motion.div>

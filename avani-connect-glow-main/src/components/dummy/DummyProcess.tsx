@@ -30,7 +30,7 @@ const DummyProcess = ({ processSteps }: any) => {
         </motion.div>
 
         {/* Minimalist Grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
+        <div className="dummy-process-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
           {processSteps.map((s: any, i: number) => (
             <motion.div 
               key={i} 
@@ -108,6 +108,22 @@ const DummyProcess = ({ processSteps }: any) => {
           ))}
         </div>
       </div>
+      <style>{`
+        @media (max-width: 768px) {
+          .dummy-process-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 16px !important;
+          }
+          .dummy-process-grid > div {
+            padding: 16px !important;
+          }
+          .proc-bg-num {
+            font-size: 48px !important;
+            top: 16px !important;
+            right: 16px !important;
+          }
+        }
+      `}</style>
     </section>
   );
 };

@@ -492,7 +492,7 @@ No.1 Digital Marketing Agency in India we provide best Digital Marketing, Web De
               <div className="flex flex-col gap-8 mb-16">
                 <div className="flex flex-row items-center gap-3 sm:gap-6">
                   <Link
-                    to="/get-consultation"
+                    to="/dummyhome/contact"
                     className="flex-1 sm:flex-none px-4 py-3 sm:px-10 sm:py-5 bg-amber-500 hover:bg-amber-600 text-white rounded-xl sm:rounded-2xl font-black text-[11px] sm:text-sm uppercase tracking-widest shadow-lg shadow-amber-500/20 active:scale-95 transition-all duration-300 text-center"
                   >
                     Get Consultation
@@ -1482,7 +1482,7 @@ No.1 Digital Marketing Agency in India we provide best Digital Marketing, Web De
             className="flex flex-row gap-3 md:gap-6 justify-center items-center w-full sm:w-auto"
           >
             <Link
-              to="/get-consultation"
+              to="/dummyhome/contact"
               className="flex-1 sm:flex-none px-4 py-3 md:px-10 md:py-4 bg-gradient-to-b from-orange-400 to-orange-600 hover:from-orange-500 hover:to-orange-700 text-white rounded-lg font-bold uppercase tracking-widest shadow-[0_4px_0_rgb(154,52,18)] active:shadow-none active:translate-y-1 transition-all duration-200 text-[10px] sm:text-xs md:text-sm whitespace-nowrap"
             >
               Get Consultation

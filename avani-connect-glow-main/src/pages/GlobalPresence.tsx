@@ -268,7 +268,7 @@ const GlobalPresence = () => {
                     Partner With Us
                   </Link>
                   <Link
-                    to="/get-consultation"
+                    to="/dummyhome/contact"
                     className="w-full sm:w-auto px-8 md:px-16 py-5 md:py-7 bg-transparent text-white border-2 border-slate-700 rounded-[2rem] font-black text-[10px] md:text-xs uppercase tracking-[0.2em] hover:border-amber-500 hover:text-amber-500 transition-all duration-500 text-center"
                   >
                     Book Deep-Dive

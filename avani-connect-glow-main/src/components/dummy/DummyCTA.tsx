@@ -49,7 +49,7 @@ const DummyCTA = () => {
             </p>
 
             <div style={{ display: 'flex', gap: '10px', marginBottom: '36px', flexWrap: 'wrap' }}>
-              <Link to="/dummyhome/get-consultation" style={{
+              <Link to="/dummyhome/contact" style={{
                 display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '12px 28px',
                 background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-light))', color: 'var(--bg-primary)',
                 borderRadius: '5px', textDecoration: 'none', fontFamily: "'Outfit', sans-serif",

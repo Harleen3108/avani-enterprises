@@ -130,7 +130,7 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
 
         {/* Content */}
         <motion.div style={{ y: heroY, width: '100%', position: 'relative', zIndex: 5 }}>
-          <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '100px 48px 48px', display: 'grid', gridTemplateColumns: '1.15fr 0.85fr', gap: '48px', alignItems: 'center' }} className="dummy-hero-grid">
+          <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '80px 48px 48px', display: 'grid', gridTemplateColumns: '1.15fr 0.85fr', gap: '48px', alignItems: 'center' }} className="dummy-hero-grid">
 
             {/* LEFT */}
             <div>
@@ -138,28 +138,28 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
               <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15, duration: 0.8 }}
                 style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '6px 16px', border: '1px solid var(--border-light)', borderRadius: '100px', background: 'var(--accent-hover)', backdropFilter: 'blur(10px)', marginBottom: '24px' }}>
                 <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--accent-primary)', boxShadow: '0 0 8px var(--accent-primary), 0 0 16px var(--border-light)' }} />
-                <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: '11px', letterSpacing: '0.25em', color: 'var(--accent-light)', fontWeight: 600 }}>ONE STOP SOLUTION FOR BUSINESS · EST. 2016</span>
+                <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: '11px', letterSpacing: '0.25em', color: 'var(--accent-light)', fontWeight: 600 }}>NO.1 DIGITAL MARKETING AGENCY IN INDIA</span>
               </motion.div>
 
               {/* Headline */}
               <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25, duration: 1, ease: [0.22, 1, 0.36, 1] }}>
-                <h1 style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(40px, 8vw, 110px)', fontWeight: 800, lineHeight: 0.95, color: 'var(--text-primary)', letterSpacing: '-0.02em', margin: 0, textTransform: 'uppercase' }}>
+                <h1 style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(52px, 10vw, 110px)', fontWeight: 800, lineHeight: 0.95, color: 'var(--text-primary)', letterSpacing: '-0.02em', margin: 0, textTransform: 'uppercase' }}>
                   WE BUILD<br />
                   <span style={{ color: 'transparent', WebkitTextStroke: '2px var(--text-primary)' }}>HIGH-PERFORMING</span>
                 </h1>
 
                 {/* Animated outline word */}
-                <div style={{ overflow: 'hidden', height: 'clamp(40px, 8vw, 110px)', margin: '4px 0' }}>
+                <div style={{ overflow: 'hidden', height: 'clamp(52px, 10vw, 110px)', margin: '4px 0' }}>
                   <motion.div key={wordIndex} initial={{ y: '110%' }} animate={{ y: '0%' }} transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-                    style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(40px, 8vw, 110px)', fontWeight: 800, lineHeight: 0.95, color: 'var(--accent-primary)', letterSpacing: '-0.02em', display: 'block', textTransform: 'uppercase' }}>
+                    style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(52px, 10vw, 110px)', fontWeight: 800, lineHeight: 0.95, color: 'var(--accent-primary)', letterSpacing: '-0.02em', display: 'block', textTransform: 'uppercase' }}>
                     {words[wordIndex]}
                   </motion.div>
                 </div>
               </motion.div>
 
               <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.55, duration: 0.8 }}
-                style={{ fontFamily: "'Inter', sans-serif", fontSize: '15px', lineHeight: 1.7, color: 'var(--text-secondary)', maxWidth: '440px', marginBottom: '16px', fontWeight: 400 }}>
-                We're more than just a digital agency. We build stories, share passions, and deliver results that leave competitors far behind.
+                style={{ fontFamily: "'Inter', sans-serif", fontSize: '15px', lineHeight: 1.7, color: 'var(--text-secondary)', maxWidth: '560px', marginBottom: '16px', fontWeight: 400 }}>
+                No.1 Digital Marketing Agency in India we provide best Digital Marketing, Web Development, App Development and AI Solution in india ( Rohtak , Gurgaon, and Mumbai ). We deliver result-driven SEO, PPC, social media, and branding solutions. Our data-focused strategies help businesses generate quality leads and maximize ROI.
               </motion.p>
 
               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.65 }}
@@ -172,35 +172,35 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
 
               {/* CTAs */}
               <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.72, duration: 0.8 }}
-                style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', marginBottom: '32px' }} className="dummy-hero-buttons">
-                <Link to="/get-consultation" style={{
-                  display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '12px 28px',
-                  background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-light))', color: 'var(--bg-primary)', borderRadius: '5px',
-                  textDecoration: 'none', fontFamily: "'Outfit', sans-serif", fontSize: '14px', letterSpacing: '0.12em', fontWeight: 600,
+                style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', marginBottom: '32px' }} className="dummy-hero-buttons">
+                <Link to="/dummyhome/contact" style={{
+                  display: 'inline-flex', alignItems: 'center', gap: '10px', padding: '16px 36px',
+                  background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-light))', color: 'var(--bg-primary)', borderRadius: '6px',
+                  textDecoration: 'none', fontFamily: "'Outfit', sans-serif", fontSize: '15px', letterSpacing: '0.12em', fontWeight: 700,
                   boxShadow: '0 6px 24px var(--border-light)', transition: 'all 0.3s',
                 }}
                   onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 10px 36px var(--border-light)'; }}
                   onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = 'none'; (e.currentTarget as HTMLElement).style.boxShadow = '0 6px 24px var(--border-light)'; }}
                 >
-                  GET CONSULTATION <ArrowRight size={13} />
+                  BOOK CONSULTATION <ArrowRight size={14} />
                 </Link>
 
                 {/* Watch Reel button */}
                 <button onClick={() => setShowReel(true)} style={{
-                  display: 'inline-flex', alignItems: 'center', gap: '10px', padding: '12px 24px',
+                  display: 'inline-flex', alignItems: 'center', gap: '10px', padding: '16px 36px',
                   background: 'var(--card-bg)', color: 'var(--text-primary)', border: '1px solid var(--border-faint)',
-                  borderRadius: '5px', cursor: 'pointer', fontFamily: "'Outfit', sans-serif", fontSize: '14px',
-                  letterSpacing: '0.12em', backdropFilter: 'blur(10px)', transition: 'all 0.3s', fontWeight: 600,
+                  borderRadius: '6px', cursor: 'pointer', fontFamily: "'Outfit', sans-serif", fontSize: '15px',
+                  letterSpacing: '0.12em', backdropFilter: 'blur(10px)', transition: 'all 0.3s', fontWeight: 700,
                 }}
                   onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent-primary)'; (e.currentTarget as HTMLElement).style.color = 'var(--accent-primary)'; }}
                   onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-faint)'; (e.currentTarget as HTMLElement).style.color = 'var(--text-primary)'; }}
                 >
                   <div style={{
-                    width: '28px', height: '28px', borderRadius: '50%',
+                    width: '32px', height: '32px', borderRadius: '50%',
                     background: 'var(--accent-hover)', border: '1px solid var(--border-light)',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                   }}>
-                    <Play size={11} fill="var(--accent-primary)" color="var(--accent-primary)" />
+                    <Play size={12} fill="var(--accent-primary)" color="var(--accent-primary)" />
                   </div>
                   WATCH REEL
                 </button>
@@ -331,7 +331,7 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
           @keyframes dummy-spin { to { transform: rotate(360deg); } }
           @media (max-width: 1024px) { .dummy-right-col { display: none !important; } .dummy-cursor-glow { display: none !important; } }
           @media (max-width: 768px) { 
-            .dummy-hero-grid { grid-template-columns: 1fr !important; padding: 100px 24px 40px !important; } 
+            .dummy-hero-grid { grid-template-columns: 1fr !important; padding: 80px 24px 40px !important; } 
             .dummy-hero-buttons { flex-direction: column; width: 100%; align-items: stretch; }
             .dummy-hero-buttons > * { width: 100%; justify-content: center; }
             .dummy-hero-stats { display: grid !important; grid-template-columns: repeat(2, 1fr) !important; gap: 24px 0 !important; }

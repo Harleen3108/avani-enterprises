@@ -59,7 +59,7 @@ const DH2ServiceDetail = () => {
               <div style={{ padding: '3rem', background: 'var(--bg-surface)', borderRadius: '16px', border: '1px solid var(--border-s)', textAlign: 'center' }}>
                 <h3 className="dh2-heading" style={{ fontSize: '1.8rem', marginBottom: '1rem' }}>Ready to Elevate Your Business?</h3>
                 <p className="dh2-body" style={{ marginBottom: '2rem', fontSize: '0.95rem' }}>Let's discuss how we can tailor our services to meet your specific goals.</p>
-                <Link to="/dummyhome2/get-consultation" className="dh2-btn-fill" style={{ display: 'inline-flex' }}>
+                <Link to="/dummyhome2/contact" className="dh2-btn-fill" style={{ display: 'inline-flex' }}>
                   Get a Free Consultation <ArrowRight size={14} />
                 </Link>
               </div>

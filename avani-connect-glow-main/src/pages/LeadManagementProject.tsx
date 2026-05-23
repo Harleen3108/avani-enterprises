@@ -203,7 +203,7 @@ const LeadManagementProject = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
-                to="/get-consultation"
+                to="/dummyhome/contact"
                 className="px-8 py-4 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white rounded-xl font-black uppercase tracking-widest shadow-lg transition-all duration-300"
               >
                 Get Started Today

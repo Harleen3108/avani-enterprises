@@ -268,7 +268,7 @@ const DH2Courses = () => {
           Partner with us to unlock growth opportunities, streamline operations, and achieve your business vision.
         </p>
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} transition={{ delay: .2 }} style={{ display: 'flex', gap: '1rem', justifyContent: 'center', position: 'relative', zIndex: 1 }}>
-          <Link to="/dummyhome2/get-consultation" className="dh2-btn-fill">Get Consultation</Link>
+          <Link to="/dummyhome2/contact" className="dh2-btn-fill">Get Consultation</Link>
           <a href="tel:+919253625099" className="dh2-btn-ghost">Talk to Expert</a>
         </motion.div>
       </section>

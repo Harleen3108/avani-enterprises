@@ -98,14 +98,14 @@ const DHAbout = () => {
               </motion.p>
 
               <motion.div variants={fadeUp}>
-                <Link to="/dummyhome/get-consultation" className="dh-btn-fill" style={{ textDecoration: 'none', display: 'inline-flex' }}>
+                <Link to="/dummyhome/contact" className="dh-btn-fill" style={{ textDecoration: 'none', display: 'inline-flex' }}>
                   Get Free Consultation
                 </Link>
               </motion.div>
             </motion.div>
 
             {/* Symmetrical Aligned Grid for Images */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '16px', width: '100%' }}>
+            <div className="dh-about-hero-images" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '16px', width: '100%' }}>
               {[
                 { src: '/indus.jpeg', title: 'Indus Group' },
                 { src: '/sanjeevni.jpeg', title: 'Sanjeevni Hospital' },
@@ -262,7 +262,7 @@ const DHAbout = () => {
       {/* 4. ACHIEVEMENTS SECTION (Smaller Stats) */}
       <section className="theme-beige" style={{ padding: '60px 0', background: 'var(--bg-primary)', borderTop: '1px solid var(--border-faint)' }}>
         <div className="dh-container">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '24px' }} className="dh-responsive-grid">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '24px' }} className="dh-responsive-grid dh-stats-grid">
             {[
               { val: 150, label: 'Happy Clients' },
               { val: 300, label: 'Projects Done' },
@@ -307,31 +307,31 @@ const DHAbout = () => {
           </div>
 
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '32px', justifyContent: 'center', alignItems: 'center' }}>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', flex: 1, minWidth: '250px' }}>
-              <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} style={{ textAlign: 'right' }}>
-                <Target size={24} style={{ color: 'var(--accent-primary)', marginBottom: '8px', marginLeft: 'auto' }} />
+            <div className="dh-about-core-col-left" style={{ display: 'flex', flexDirection: 'column', gap: '24px', flex: 1, minWidth: '250px' }}>
+              <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="dh-about-core-item" style={{ textAlign: 'right' }}>
+                <Target size={24} className="dh-about-core-icon" style={{ color: 'var(--accent-primary)', marginBottom: '8px', marginLeft: 'auto' }} />
                 <h3 style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18px', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '6px' }}>Results Driven</h3>
                 <p style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>We focus on measurable outcomes.</p>
               </motion.div>
-              <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ delay: 0.1 }} style={{ textAlign: 'right' }}>
-                <Users size={24} style={{ color: 'var(--accent-primary)', marginBottom: '8px', marginLeft: 'auto' }} />
+              <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ delay: 0.1 }} className="dh-about-core-item" style={{ textAlign: 'right' }}>
+                <Users size={24} className="dh-about-core-icon" style={{ color: 'var(--accent-primary)', marginBottom: '8px', marginLeft: 'auto' }} />
                 <h3 style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18px', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '6px' }}>Client-Centric</h3>
                 <p style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>We personalize based on trust.</p>
               </motion.div>
             </div>
 
-            <div style={{ width: '280px', height: '280px', borderRadius: '50%', overflow: 'hidden', border: '4px solid var(--border-light)', flexShrink: 0, background: 'var(--card-bg)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div className="dh-about-core-img" style={{ width: '280px', height: '280px', borderRadius: '50%', overflow: 'hidden', border: '4px solid var(--border-light)', flexShrink: 0, background: 'var(--card-bg)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <img src="/logo0.jpg" alt="Avani Logo" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', flex: 1, minWidth: '250px' }}>
-              <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ delay: 0.2 }} style={{ textAlign: 'left' }}>
-                <Lightbulb size={24} style={{ color: 'var(--accent-primary)', marginBottom: '8px' }} />
+            <div className="dh-about-core-col-right" style={{ display: 'flex', flexDirection: 'column', gap: '24px', flex: 1, minWidth: '250px' }}>
+              <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ delay: 0.2 }} className="dh-about-core-item" style={{ textAlign: 'left' }}>
+                <Lightbulb size={24} className="dh-about-core-icon dh-about-core-icon-left" style={{ color: 'var(--accent-primary)', marginBottom: '8px' }} />
                 <h3 style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18px', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '6px' }}>Innovation First</h3>
                 <p style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>Exploring new future technologies.</p>
               </motion.div>
-              <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ delay: 0.3 }} style={{ textAlign: 'left' }}>
-                <Heart size={24} style={{ color: 'var(--accent-primary)', marginBottom: '8px' }} />
+              <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ delay: 0.3 }} className="dh-about-core-item" style={{ textAlign: 'left' }}>
+                <Heart size={24} className="dh-about-core-icon dh-about-core-icon-left" style={{ color: 'var(--accent-primary)', marginBottom: '8px' }} />
                 <h3 style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18px', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '6px' }}>Passion</h3>
                 <p style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>Setting high standards in everything.</p>
               </motion.div>
@@ -355,29 +355,31 @@ const DHAbout = () => {
             </p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px' }} className="dh-responsive-grid">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '24px' }} className="dh-responsive-grid dh-adv-grid">
             {[
               { img: '/about_proven_track_record.png', icon: <Shield size={24} />, title: 'Proven Track Record', desc: 'With 8+ years of experience and 300+ successful projects, we have the strategic depth and technical expertise to handle any digital challenge.' },
               { img: '/about_innovation_driven.png', icon: <Zap size={24} />, title: 'Innovation-Driven', desc: 'We stay ahead of industry trends and leverage cutting-edge technologies to deliver innovative solutions that give you a competitive edge.' },
               { img: '/about_client_centric.png', icon: <Users size={24} />, title: 'Client-Centric', desc: 'Your success is our priority. We build long-term partnerships based on trust, transparency, and delivering high-impact results.' },
+              { img: '/about_proven_track_record.png', icon: <Target size={24} />, title: 'Tailored Strategies', desc: 'We do not believe in one-size-fits-all. Every strategy is custom-built to align perfectly with your unique business goals and market dynamics.' }
             ].map((card, i) => (
               <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: i * 0.1 }}
+                className="dh-about-adv-card"
                 style={{ background: 'var(--card-bg)', borderRadius: '16px', border: '1px solid var(--border-faint)', overflow: 'hidden', transition: 'all 0.4s ease', backdropFilter: 'blur(10px)' }}
                 onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-5px)'; e.currentTarget.style.borderColor = 'var(--accent-primary)'; e.currentTarget.style.boxShadow = '0 12px 30px rgba(0,0,0,0.06)'; }}
                 onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.borderColor = 'var(--border-faint)'; e.currentTarget.style.boxShadow = 'none'; }}
               >
-                <div style={{ height: '180px', overflow: 'hidden' }}>
+                <div className="dh-about-adv-img" style={{ height: '180px', overflow: 'hidden' }}>
                   <img src={card.img} alt={card.title} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.6s ease' }}
                     onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.05)'; }}
                     onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; }}
                   />
                 </div>
-                <div style={{ padding: '24px' }}>
-                  <div style={{ width: '44px', height: '44px', borderRadius: '12px', background: 'var(--accent-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', marginTop: '-40px', position: 'relative', zIndex: 2, boxShadow: '0 4px 12px rgba(0,0,0,0.1)', marginBottom: '16px' }}>
+                <div className="dh-about-adv-content" style={{ padding: '24px' }}>
+                  <div className="dh-about-adv-icon" style={{ width: '44px', height: '44px', borderRadius: '12px', background: 'var(--accent-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', marginTop: '-40px', position: 'relative', zIndex: 2, boxShadow: '0 4px 12px rgba(0,0,0,0.1)', marginBottom: '16px' }}>
                     {card.icon}
                   </div>
-                  <h3 style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18px', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '10px' }}>{card.title}</h3>
-                  <p style={{ fontSize: '13px', color: 'var(--text-secondary)', lineHeight: 1.6 }}>{card.desc}</p>
+                  <h3 className="dh-about-adv-title" style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18px', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '10px' }}>{card.title}</h3>
+                  <p className="dh-about-adv-desc" style={{ fontSize: '13px', color: 'var(--text-secondary)', lineHeight: 1.6 }}>{card.desc}</p>
                 </div>
               </motion.div>
             ))}
@@ -403,7 +405,7 @@ const DHAbout = () => {
                 Partner with us to unlock growth opportunities and achieve your business vision.
               </p>
               <div style={{ display: 'flex', gap: '16px', justifyContent: 'center' }}>
-                <Link to="/dummyhome/get-consultation" style={{ padding: '12px 24px', background: 'var(--accent-primary)', color: '#fff', borderRadius: '8px', textDecoration: 'none', fontWeight: 600, fontSize: '13px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <Link to="/dummyhome/contact" style={{ padding: '12px 24px', background: 'var(--accent-primary)', color: '#fff', borderRadius: '8px', textDecoration: 'none', fontWeight: 600, fontSize: '13px', display: 'flex', alignItems: 'center', gap: '8px' }}>
                   GET CONSULTATION <ArrowRight size={14} />
                 </Link>
               </div>
@@ -412,6 +414,62 @@ const DHAbout = () => {
         </div>
       </section>
 
+      <style>{`
+        @media (max-width: 768px) {
+          .dh-stats-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 16px !important;
+          }
+          .dh-stats-grid > div {
+            padding: 20px 10px !important;
+          }
+          .dh-about-hero-images {
+            display: none !important;
+          }
+          .dh-about-core-img {
+            width: 180px !important;
+            height: 180px !important;
+            margin: 0 0 32px 0 !important;
+            order: -1 !important; /* Move logo to the top on mobile */
+          }
+          .dh-about-core-item {
+            text-align: center !important;
+          }
+          .dh-about-core-icon {
+            margin: 0 auto 12px auto !important;
+          }
+          .dh-about-adv-img {
+            display: none !important;
+          }
+          .dh-adv-grid {
+            grid-template-columns: 1fr !important; /* Stack why choose cards nicely */
+          }
+          .dh-about-adv-content {
+            padding: 16px !important;
+          }
+          .dh-about-adv-icon {
+            margin-top: 0 !important;
+            width: 32px !important;
+            height: 32px !important;
+            margin-bottom: 12px !important;
+          }
+          .dh-about-adv-icon svg {
+            width: 16px !important;
+            height: 16px !important;
+          }
+          .dh-about-adv-title {
+            font-size: 15px !important;
+            margin-bottom: 6px !important;
+          }
+          .dh-about-adv-desc {
+            font-size: 12px !important;
+            -webkit-line-clamp: 3 !important;
+            display: -webkit-box !important;
+            -webkit-box-orient: vertical !important;
+            overflow: hidden !important;
+          }
+        }
+      `}</style>
     </div>
   );
 };

@@ -264,7 +264,7 @@ const BlogDetail = () => {
                     <h3 className="text-3xl font-black mb-4 uppercase leading-tight italic">Growth Roadmap?</h3>
                     <p className="text-slate-300 mb-10 leading-relaxed font-medium">Book a strategic session today to accelerate your digital transformation.</p>
                     <Link
-                      to="/get-consultation"
+                      to="/dummyhome/contact"
                       className="block w-full py-5 bg-amber-500 text-white rounded-2xl font-black uppercase text-center text-sm tracking-widest hover:bg-amber-600 hover:shadow-xl hover:-translate-y-1 transition-all"
                     >
                       Book Session

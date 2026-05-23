@@ -34,7 +34,19 @@ const DH2Navbar = () => {
   const navItems = [
     { name: 'Home', path: '/dummyhome2' },
     { name: 'About', path: '/dummyhome2/about' },
-    { name: 'Services', path: '/dummyhome2/services' },
+    {
+      name: 'Services',
+      path: '/dummyhome2/services',
+      dropdown: [
+        { name: 'All Services', path: '/dummyhome2/services' },
+        { name: 'Web & App Development', path: '/dummyhome2/services/web-app-development' },
+        { name: 'SEO & Content Marketing', path: '/dummyhome2/services/seo-content-marketing' },
+        { name: 'Social Media Marketing', path: '/dummyhome2/services/social-media-marketing' },
+        { name: 'AI Solutions', path: '/dummyhome2/services/ai-solutions' },
+        { name: 'Podcast Production', path: '/dummyhome2/services/podcast-production' },
+        { name: 'Financial Consulting', path: '/dummyhome2/services/financial-consulting' }
+      ]
+    },
     {
       name: 'Our Products',
       path: '/dummyhome2/our-products',
@@ -97,10 +109,10 @@ const DH2Navbar = () => {
           if ('dropdown' in item && item.dropdown) {
             const active = isDropdownActive(item.dropdown);
             return (
-              <div key={item.name} className="dh2-nav-dropdown-wrap">
+              <div key={item.name} className="dh2-nav-dropdown-wrap" onMouseEnter={() => setOpenDropdown(item.name)} onMouseLeave={() => setOpenDropdown(null)}>
                 <button
-                  className={`dh2-nav-link ${active || openDropdown === item.name ? 'active' : ''}`}
                   onClick={() => setOpenDropdown(openDropdown === item.name ? null : item.name)}
+                  className={`dh2-nav-link ${active || openDropdown === item.name ? 'active' : ''}`}
                 >
                   {item.name} <ChevronDown size={12} style={{ marginLeft: 3, transition: 'transform .3s', transform: openDropdown === item.name ? 'rotate(180deg)' : 'none' }} />
                 </button>
@@ -129,7 +141,7 @@ const DH2Navbar = () => {
       {/* Desktop CTA */}
       <div className="dh2-nav-actions">
         <a href="tel:+919253625099" className="dh2-nav-phone"><Phone size={14} /></a>
-        <Link to="/dummyhome2/get-consultation" className="dh2-nav-cta">Get Started</Link>
+        <Link to="/dummyhome2/contact" className="dh2-nav-cta">Get Started</Link>
       </div>
 
       {/* Mobile Toggle */}
@@ -167,9 +179,14 @@ const DH2Navbar = () => {
               if ('dropdown' in item && item.dropdown) {
                 return (
                   <div key={item.name}>
-                    <button className={`dh2-mobile-link dh2-mobile-link--dd ${openDropdown === item.name ? 'active' : ''}`} onClick={() => setOpenDropdown(openDropdown === item.name ? null : item.name)}>
-                      {item.name} <ChevronDown size={14} style={{ transition: 'transform .3s', transform: openDropdown === item.name ? 'rotate(180deg)' : 'none' }} />
-                    </button>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                      <button onClick={() => setOpenDropdown(openDropdown === item.name ? null : item.name)} className={`dh2-mobile-link dh2-mobile-link--dd ${openDropdown === item.name ? 'active' : ''}`} style={{ flex: 1, textAlign: 'left', borderBottom: 'none', background: 'none', border: 'none' }}>
+                        {item.name}
+                      </button>
+                      <button onClick={() => setOpenDropdown(openDropdown === item.name ? null : item.name)} style={{ background: 'none', border: 'none', color: '#fff', padding: '16px' }}>
+                        <ChevronDown size={14} style={{ transition: 'transform .3s', transform: openDropdown === item.name ? 'rotate(180deg)' : 'none' }} />
+                      </button>
+                    </div>
                     <AnimatePresence>
                       {openDropdown === item.name && (
                         <motion.div className="dh2-mobile-sub" initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }}>
@@ -186,7 +203,7 @@ const DH2Navbar = () => {
             })}
             <div className="dh2-mobile-cta-wrap">
               <a href="tel:+919253625099" className="dh2-mobile-phone"><Phone size={14} /> Talk to Experts</a>
-              <Link to="/dummyhome2/get-consultation" className="dh2-mobile-cta">Get Started</Link>
+              <Link to="/dummyhome2/contact" className="dh2-mobile-cta">Get Started</Link>
             </div>
           </motion.div>
         )}

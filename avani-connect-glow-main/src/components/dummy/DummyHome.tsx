@@ -26,7 +26,6 @@ import DummyScrollProgress from './DummyScrollProgress';
 import DummyImpactBar from './DummyImpactBar';
 import DummyCaseStudies from './DummyCaseStudies';
 import DummyIndustries from './DummyIndustries';
-import DummyTeam from './DummyTeam';
 import DummyAwards from './DummyAwards';
 import DummyTimeline from './DummyTimeline';
 import DummyFAQ from './DummyFAQ';
@@ -236,7 +235,6 @@ const DummyHome = () => {
       <DummyGlobalPresence />
       <DummyProjects clientLogos={clientLogos} />
       <DummyTestimonials testimonials={testimonials} />
-      <DummyTeam />
       <DummyAwards />
       <DummyTimeline />
       <DummyBlog blogs={blogs} loadingBlogs={loadingBlogs} />

@@ -57,7 +57,7 @@ const DummyServices = ({ services }: any) => {
         </motion.div>
 
         {/* Premium Book Grid Style */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '32px' }}>
+        <div className="dummy-services-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '32px' }}>
           {services.map((svc: any, i: number) => (
             <motion.div 
               key={i} 
@@ -96,7 +96,7 @@ const DummyServices = ({ services }: any) => {
             >
               {/* Card Image Cover */}
               {svc.image && (
-                <div style={{ 
+                <div className="svc-card-img-wrapper" style={{ 
                   width: '100%', 
                   height: '190px', 
                   borderRadius: '10px', 
@@ -144,7 +144,7 @@ const DummyServices = ({ services }: any) => {
               )}
 
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-                <h3 style={{ 
+                <h3 className="svc-card-title" style={{ 
                   fontFamily: "'Outfit', sans-serif", 
                   fontSize: '20px', 
                   fontWeight: 700, 
@@ -155,7 +155,7 @@ const DummyServices = ({ services }: any) => {
                   {svc.title}
                 </h3>
                 
-                <p style={{ 
+                <p className="svc-card-desc" style={{ 
                   fontFamily: "'Inter', sans-serif", 
                   fontSize: '13.5px', 
                   color: 'var(--text-secondary)', 
@@ -171,7 +171,7 @@ const DummyServices = ({ services }: any) => {
                 </p>
 
                 {svc.subLinks && svc.subLinks.length > 0 && (
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '16px' }}>
+                  <div className="svc-sublinks" style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '16px' }}>
                     {svc.subLinks.map((sub: any, subIdx: number) => (
                       <Link
                         key={subIdx}
@@ -228,6 +228,51 @@ const DummyServices = ({ services }: any) => {
           ))}
         </div>
       </div>
+      <style>{`
+        @media (max-width: 768px) {
+          .dummy-services-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 12px !important;
+          }
+          .dummy-services-grid > div {
+            min-height: auto !important;
+            padding: 12px !important;
+            border-radius: 12px !important;
+          }
+          .svc-card-img-wrapper {
+            height: 100px !important;
+            border-radius: 8px !important;
+            margin-bottom: 12px !important;
+          }
+          .svc-card-img {
+            height: 100% !important;
+          }
+          .svc-card-title {
+            font-size: 13px !important;
+            margin-bottom: 6px !important;
+            line-height: 1.2 !important;
+          }
+          .svc-card-desc {
+            font-size: 11px !important;
+            -webkit-line-clamp: 2 !important;
+            line-height: 1.4 !important;
+          }
+          .svc-sublinks {
+            display: none !important; /* Hide sublinks on mobile to keep grid compact */
+          }
+        }
+        @media (max-width: 400px) {
+          .dummy-services-grid {
+            gap: 8px !important;
+          }
+          .svc-card-img-wrapper {
+            height: 80px !important;
+          }
+          .svc-card-title {
+            font-size: 12px !important;
+          }
+        }
+      `}</style>
     </section>
   );
 };

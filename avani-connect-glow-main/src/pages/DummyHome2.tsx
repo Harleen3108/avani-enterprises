@@ -233,7 +233,7 @@ const DummyHome2 = () => {
           We're more than just a digital agency. We build stories, share passions, and deliver results that leave competitors far behind.
         </motion.p>
         <motion.div initial="hidden" animate={!loading ? "visible" : "hidden"} variants={fadeV} className="dh2-hero-ctas">
-          <Link to="/dummyhome2/get-consultation" className="dh2-btn-fill">Get Consultation <ArrowRight size={14} /></Link>
+          <Link to="/dummyhome2/contact" className="dh2-btn-fill">Get Consultation <ArrowRight size={14} /></Link>
           <button className="dh2-btn-ghost"><Play size={14} /> Watch Reel</button>
         </motion.div>
         <div className="dh2-scroll-hint">
@@ -451,24 +451,7 @@ const DummyHome2 = () => {
         </div>
       </section>
 
-      {/* TEAM */}
-      <section className="dh2-section dh2-container">
-        <motion.div className="dh2-section-header" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: .6 }}>
-          <div className="dh2-label">THE PEOPLE</div>
-          <h2 className="dh2-display dh2-section-title">MEET OUR TEAM</h2>
-        </motion.div>
-        <div className="dh2-team-grid">
-          {team.map((m, i) => (
-            <motion.div key={i} className="dh2-team" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * .08, duration: .5 }}>
-              <img src={m.img} alt={m.name} />
-              <div className="dh2-team-info">
-                <div className="dh2-team-name">{m.name}</div>
-                <div className="dh2-team-role">{m.role}</div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </section>
+
 
       {/* AWARDS */}
       <div className="dh2-awards">
@@ -566,7 +549,7 @@ const DummyHome2 = () => {
           LET'S BUILD<br /><span>TOGETHER</span>
         </motion.h2>
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: .2, duration: .6 }} style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', position: 'relative', zIndex: 1 }}>
-          <Link to="/dummyhome2/get-consultation" className="dh2-btn-fill">Start a Project <ArrowRight size={14} /></Link>
+          <Link to="/dummyhome2/contact" className="dh2-btn-fill">Start a Project <ArrowRight size={14} /></Link>
           <Link to="/dummyhome2/contact" className="dh2-btn-ghost">Let's Talk <ArrowRight size={14} /></Link>
         </motion.div>
       </section>

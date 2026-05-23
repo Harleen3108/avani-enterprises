@@ -19,6 +19,13 @@ const fadeUp = {
 const DH2Newsletters = () => {
   const [newsletters, setNewsletters] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [email, setEmail] = useState('');
+  const [isSubscribed, setIsSubscribed] = useState(false);
+
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (email) setIsSubscribed(true);
+  };
 
   useEffect(() => {
     (async () => {
@@ -139,10 +146,20 @@ const DH2Newsletters = () => {
           <p className="dh2-body" style={{ maxWidth: '600px', margin: '0 auto 3rem', fontSize: '1.1rem' }}>
             Join 5,000+ industry leaders who receive our weekly briefing. No spam, just pure strategic value.
           </p>
-          <form style={{ display: 'flex', gap: '1rem', justifyContent: 'center', maxWidth: '500px', margin: '0 auto' }} className="dh2-newsletter-form">
-            <input type="email" placeholder="Your executive email" style={{ flex: 1, padding: '1rem 1.5rem', borderRadius: '100px', background: 'var(--bg-surface)', border: '1px solid var(--border-s)', color: '#fff', outline: 'none' }} />
-            <button className="dh2-btn-fill" style={{ padding: '1rem 2rem' }}>JOIN NOW</button>
-          </form>
+          {isSubscribed ? (
+            <div style={{ background: 'var(--accent-soft)', padding: '2rem', borderRadius: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1.5rem', color: 'var(--accent)', border: '1px solid var(--accent)', maxWidth: '600px', margin: '0 auto' }}>
+              <Zap size={32} />
+              <div style={{ textAlign: 'left' }}>
+                <h4 className="dh2-heading" style={{ fontSize: '1.2rem', marginBottom: '0.2rem' }}>WELCOME TO THE INNER CIRCLE</h4>
+                <p style={{ fontSize: '0.9rem', color: 'var(--text-main)' }}>You've been successfully registered for our next transmission.</p>
+              </div>
+            </div>
+          ) : (
+            <form onSubmit={handleSubscribe} style={{ display: 'flex', gap: '1rem', justifyContent: 'center', maxWidth: '500px', margin: '0 auto' }} className="dh2-newsletter-form dh-responsive-grid">
+              <input type="email" placeholder="Your executive email" required value={email} onChange={(e) => setEmail(e.target.value)} style={{ flex: 1, padding: '1rem 1.5rem', borderRadius: '100px', background: 'var(--bg-surface)', border: '1px solid var(--border-s)', color: 'var(--text-main)', outline: 'none' }} />
+              <button type="submit" className="dh2-btn-fill" style={{ padding: '1rem 2rem' }}>JOIN NOW</button>
+            </form>
+          )}
         </motion.div>
       </section>
 

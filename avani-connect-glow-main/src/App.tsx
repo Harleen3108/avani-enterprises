@@ -61,7 +61,7 @@
 //                   <Route path="/blog" element={<Blog />} />
 //                   <Route path="/courses" element={<Courses />} />
 //                   <Route path="/courses/:id" element={<CourseDetail />} />
-//                   <Route path="/get-consultation" element={<GetConsultation />} />
+//                   <Route path="/dummyhome/contact" element={<GetConsultation />} />
 //                   <Route path="/not-found" element={<NotFound />} />
 //                   <Route path="/privacy-policy" element={<PrivacyPolicy />} />
 //                   <Route path="/terms-and-conditions" element={<TermsConditions />} />
@@ -316,7 +316,7 @@ const AppLayout = () => {
           <Route path="/links" element={<Links />} />
           <Route path="/courses" element={<Courses />} />
           <Route path="/courses/:id" element={<CourseDetail />} />
-          <Route path="/get-consultation" element={<GetConsultation />} />
+          <Route path="/dummyhome/contact" element={<GetConsultation />} />
 
           {/* ये नया route जोड़ा है */}
           <Route path="/thank-you" element={<ThankYou />} />

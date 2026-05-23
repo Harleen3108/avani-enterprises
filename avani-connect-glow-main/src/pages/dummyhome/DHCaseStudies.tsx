@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import RotatingText from '../../components/RotatingText';
 import { ArrowRight, BookOpen, BarChart3, Globe } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import '../../components/dummy/DummyHome.css';
 
 const fadeUp = {
@@ -30,31 +31,118 @@ const LuxuryLine = () => (
 const caseStudies = [
   {
     id: 1,
-    title: "E-commerce Platform Scale",
-    client: "Retail Corp",
-    description: "How we helped a leading retail brand scale their online store to handle 10x traffic during peak sales.",
-    impact: "300% Revenue Growth",
-    category: "Development",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop",
+    category: 'web-development',
+    title: "TechStart India - E-commerce Platform",
+    client: "TechStart India",
+    industry: "E-commerce",
+    challenge: "TechStart needed a modern, scalable e-commerce platform to compete with established players in the Indian market.",
+    solution: "Developed a custom e-commerce solution with advanced features including AI-powered recommendations, mobile-first design, and integrated payment gateways.",
+    results: {
+      traffic: "300% increase in website traffic",
+      conversions: "150% improvement in conversion rates",
+      revenue: "₹2.5Cr additional revenue in first year",
+      mobile: "85% of sales from mobile devices"
+    },
+    duration: "6 months",
+    team: "5 developers, 2 designers, 1 PM",
+    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop",
+    technologies: ["React", "Node.js", "MongoDB", "AWS", "Stripe"]
   },
   {
     id: 2,
-    title: "Enterprise CRM Implementation",
-    client: "Global Logistics",
-    description: "Streamlining operations and lead management for a global logistics firm with a custom CRM solution.",
-    impact: "45% Efficiency Increase",
-    category: "Business",
-    image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=400&fit=crop",
+    category: 'seo-content',
+    title: "EcoSolutions - SEO & Content Strategy",
+    client: "EcoSolutions",
+    industry: "Environmental Services",
+    challenge: "EcoSolutions struggled with low organic visibility and needed to establish thought leadership in the sustainability space.",
+    solution: "Implemented comprehensive SEO strategy with content marketing, technical optimization, and local SEO to target environmentally conscious businesses.",
+    results: {
+      rankings: "Ranked #1 for 15 target keywords",
+      traffic: "400% increase in organic traffic",
+      leads: "250% more qualified leads",
+      authority: "Established as industry thought leader"
+    },
+    duration: "8 months",
+    team: "2 SEO specialists, 3 content writers",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop",
+    technologies: ["WordPress", "Yoast SEO", "Google Analytics", "SEMrush"]
   },
   {
     id: 3,
-    title: "AI-Powered Analytics Dashboard",
-    client: "FinTech Innovations",
-    description: "Building a real-time data visualization platform for complex financial metrics and forecasting.",
-    impact: "Real-time Insights",
-    category: "Analytics",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop",
+    category: 'social-media',
+    title: "HealthTech - Social Media Campaign",
+    client: "HealthTech",
+    industry: "Healthcare Technology",
+    challenge: "HealthTech needed to increase brand awareness and generate leads through social media platforms.",
+    solution: "Created targeted social media campaigns across LinkedIn, Instagram, and Facebook with educational content and lead generation strategies.",
+    results: {
+      followers: "200% increase in social media followers",
+      engagement: "150% improvement in engagement rates",
+      leads: "300% more qualified leads",
+      awareness: "Significant brand awareness growth"
+    },
+    duration: "Ongoing",
+    team: "2 social media managers, 1 designer",
+    image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&h=400&fit=crop",
+    technologies: ["LinkedIn Ads", "Facebook Ads", "Instagram", "Hootsuite"]
   },
+  {
+    id: 4,
+    category: 'ai-solutions',
+    title: "FinServe - AI-Powered Customer Service",
+    client: "FinServe",
+    industry: "Financial Services",
+    challenge: "FinServe needed to automate customer service operations while maintaining high service quality.",
+    solution: "Developed AI-powered chatbot, automated response system, lead management automation, and WhatsApp text automation integrated with existing CRM and knowledge base.",
+    results: {
+      automation: "70% of customer queries automated",
+      savings: "₹50L annual cost savings",
+      satisfaction: "95% customer satisfaction rate",
+      efficiency: "3x faster response times"
+    },
+    duration: "4 months",
+    team: "3 AI developers, 1 UX designer",
+    image: "https://images.unsplash.com/photo-1626785774573-4b799315345d?w=400&h=300&fit=crop",
+    technologies: ["Python", "TensorFlow", "NLP", "AWS", "Dialogflow", "WhatsApp API"]
+  },
+  {
+    id: 5,
+    category: 'podcast-production',
+    title: "EduTech - Educational Podcast Series",
+    client: "EduTech",
+    industry: "Education Technology",
+    challenge: "EduTech wanted to establish thought leadership and reach educators through podcast content.",
+    solution: "Created and produced a weekly educational podcast series with industry experts and practical insights.",
+    results: {
+      downloads: "50,000+ monthly downloads",
+      subscribers: "10,000+ podcast subscribers",
+      partnerships: "15+ educational partnerships",
+      authority: "Established as education thought leader"
+    },
+    duration: "Ongoing",
+    team: "1 producer, 1 host, 1 audio engineer",
+    image: "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=600&h=400&fit=crop",
+    technologies: ["Adobe Audition", "Zoom", "Anchor", "Spotify"]
+  },
+  {
+    id: 6,
+    category: 'financial-consulting',
+    title: "RetailPlus - Financial Strategy & Funding",
+    client: "RetailPlus",
+    industry: "Retail",
+    challenge: "RetailPlus needed strategic financial guidance to scale operations and secure funding for expansion.",
+    solution: "Provided comprehensive financial consulting including business model optimization, funding strategy, and investor pitch preparation.",
+    results: {
+      funding: "₹10Cr secured in Series A funding",
+      valuation: "3x increase in company valuation",
+      growth: "200% revenue growth",
+      expansion: "Successfully expanded to 5 new cities"
+    },
+    duration: "6 months",
+    team: "2 financial consultants, 1 strategy expert",
+    image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=400&fit=crop",
+    technologies: ["Financial Modeling", "Pitch Decks", "Valuation Analysis"]
+  }
 ];
 
 const DHCaseStudies = () => {
@@ -94,37 +182,42 @@ const DHCaseStudies = () => {
         <Grain />
         <GridBg size={30} opacity={0.03} />
         <div className="dh-container" style={{ position: 'relative', zIndex: 10 }}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2rem' }} className="dh-responsive-grid">
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
             {caseStudies.map((study, i) => (
               <motion.div key={study.id} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: i * 0.1 }}>
                 <div style={{
-                  background: 'var(--card-bg)', borderRadius: '16px', border: '1px solid var(--border-faint)',
-                  overflow: 'hidden', display: 'flex', flexDirection: 'column', height: '100%',
-                  backdropFilter: 'blur(10px)', transition: 'all 0.4s ease',
+                  background: 'linear-gradient(90deg, var(--card-bg) 0%, rgba(240, 235, 225, 0.05) 100%)', 
+                  borderRadius: '12px', border: '1px solid var(--border-faint)', borderLeft: '4px solid var(--accent-primary)',
+                  overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1.5rem',
+                  backdropFilter: 'blur(10px)', transition: 'all 0.3s ease',
                 }}
-                  onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.borderColor = 'var(--accent-primary)'; }}
-                  onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.borderColor = 'var(--border-faint)'; }}
+                  onMouseEnter={e => { e.currentTarget.style.transform = 'translateX(8px)'; e.currentTarget.style.borderColor = 'var(--accent-primary)'; e.currentTarget.style.background = 'linear-gradient(90deg, rgba(240, 235, 225, 0.08) 0%, rgba(240, 235, 225, 0.15) 100%)'; }}
+                  onMouseLeave={e => { e.currentTarget.style.transform = 'translateX(0)'; e.currentTarget.style.borderColor = 'var(--border-faint)'; e.currentTarget.style.background = 'linear-gradient(90deg, var(--card-bg) 0%, rgba(240, 235, 225, 0.05) 100%)'; }}
+                  className="dh-responsive-flex-bar"
                 >
-                  <div style={{ position: 'relative', height: '200px', overflow: 'hidden' }}>
-                    <img src={study.image} alt={study.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                    <div style={{ position: 'absolute', top: 10, left: 10 }}>
-                      <span style={{ background: 'var(--accent-primary)', color: '#000', padding: '3px 10px', borderRadius: '100px', fontSize: '0.55rem', fontWeight: 800, letterSpacing: '0.1em' }}>
-                        {study.category.toUpperCase()}
-                      </span>
+                  <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
+                    <div style={{ width: '80px', height: '80px', borderRadius: '8px', overflow: 'hidden', flexShrink: 0 }}>
+                      <img src={study.image} alt={study.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    </div>
+                    <div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', marginBottom: '0.3rem' }}>
+                        <span style={{ fontSize: '0.65rem', fontWeight: 800, color: 'var(--accent-primary)', letterSpacing: '0.1em' }}>CLIENT: {study.client.toUpperCase()}</span>
+                        <span style={{ fontSize: '0.65rem', fontWeight: 800, color: 'var(--text-tertiary)', background: 'var(--bg-primary)', padding: '2px 8px', borderRadius: '100px' }}>{study.category.toUpperCase()}</span>
+                      </div>
+                      <h3 className="dh-heading" style={{ fontSize: '1.2rem', marginBottom: '0.3rem' }}>{study.title}</h3>
+                      <p className="dh-body" style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', margin: 0 }}>{study.challenge}</p>
                     </div>
                   </div>
 
-                  <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', flex: 1 }}>
-                    <div style={{ fontSize: '0.65rem', fontWeight: 800, color: 'var(--accent-primary)', letterSpacing: '0.1em', marginBottom: '0.5rem' }}>CLIENT: {study.client.toUpperCase()}</div>
-                    <h3 className="dh-heading" style={{ fontSize: '1.2rem', marginBottom: '0.5rem' }}>{study.title}</h3>
-                    <p className="dh-body" style={{ fontSize: '0.8rem', marginBottom: '1.5rem', flex: 1 }}>{study.description}</p>
-
-                    <div style={{ padding: '10px', background: 'var(--accent-hover)', borderRadius: '8px', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', flexShrink: 0 }}>
+                    <div style={{ padding: '8px 12px', background: 'var(--accent-hover)', borderRadius: '6px', display: 'flex', alignItems: 'center', gap: '6px' }}>
                       <BarChart3 size={14} style={{ color: 'var(--accent-primary)' }} />
-                      <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--accent-primary)' }}>IMPACT: {study.impact}</span>
+                      <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--accent-primary)' }}>{Object.values(study.results)[0]}</span>
                     </div>
 
-                    <button className="dh-btn-fill" style={{ width: '100%' }}>READ CASE STUDY <ArrowRight size={12} style={{ marginLeft: '4px' }} /></button>
+                    <Link to="/case-studies" style={{ textDecoration: 'none' }}>
+                      <button className="dh-btn-ghost" style={{ padding: '8px 16px', fontSize: '0.75rem', borderRadius: '6px', border: '1px solid var(--border-light)' }}>READ <ArrowRight size={12} style={{ marginLeft: '4px' }} /></button>
+                    </Link>
                   </div>
                 </div>
               </motion.div>
@@ -133,6 +226,25 @@ const DHCaseStudies = () => {
         </div>
       </section>
 
+      <style>{`
+        @media (max-width: 768px) {
+          .dh-responsive-flex-bar {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 1.5rem !important;
+          }
+          .dh-responsive-flex-bar > div {
+            width: 100% !important;
+            flex-direction: column !important;
+            align-items: flex-start !important;
+          }
+          .dh-responsive-flex-bar img {
+            width: 100% !important;
+            height: 150px !important;
+            object-fit: cover !important;
+          }
+        }
+      `}</style>
     </div>
   );
 };

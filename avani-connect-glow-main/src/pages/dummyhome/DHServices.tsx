@@ -189,7 +189,7 @@ const DHServices = () => {
             display: 'grid',
             gridTemplateColumns: 'repeat(3, 1fr)',
             gap: '1.5rem',
-          }} className="dh-responsive-grid">
+          }} className="dh-services-grid dh-responsive-grid">
             {services.map((service, i) => (
               <motion.div
                 key={i}
@@ -198,6 +198,7 @@ const DHServices = () => {
                 viewport={{ once: true }}
                 variants={fadeUp}
                 transition={{ delay: i * 0.08 }}
+                className="dh-services-card"
                 style={{
                   display: 'flex',
                   flexDirection: 'column',
@@ -225,7 +226,7 @@ const DHServices = () => {
               >
                 <Link to={`/dummyhome/services/${service.slug}`} style={{ display: 'flex', flexDirection: 'column', height: '100%', width: '100%', textDecoration: 'none', color: 'inherit' }}>
                   {service.img && (
-                    <div style={{
+                    <div className="dh-services-img-wrapper" style={{
                       width: '100%',
                       height: '160px',
                       borderRadius: '10px',
@@ -263,17 +264,17 @@ const DHServices = () => {
                     opacity: 0.06, borderRadius: '0 16px 0 0',
                   }} />
 
-                  <div style={{ color: 'var(--accent-primary)', marginBottom: '1rem' }}>{service.icon}</div>
-                  <h3 className="dh-heading" style={{ fontSize: '1.4rem', marginBottom: '0.5rem' }}>{service.title}</h3>
-                  <p className="dh-body" style={{ marginBottom: '1rem', flex: 1, fontSize: '0.9rem', lineHeight: 1.5 }}>{service.desc}</p>
-                  <ul style={{ listStyle: 'none', padding: 0, marginBottom: '1.5rem' }}>
+                  <div className="dh-services-icon" style={{ color: 'var(--accent-primary)', marginBottom: '1rem' }}>{service.icon}</div>
+                  <h3 className="dh-heading dh-services-title" style={{ fontSize: '1.4rem', marginBottom: '0.5rem' }}>{service.title}</h3>
+                  <p className="dh-body dh-services-desc" style={{ marginBottom: '1rem', flex: 1, fontSize: '0.9rem', lineHeight: 1.5 }}>{service.desc}</p>
+                  <ul className="dh-services-features" style={{ listStyle: 'none', padding: 0, marginBottom: '1.5rem' }}>
                     {service.features.map((f, j) => (
                       <li key={j} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
                         <CheckCircle size={12} style={{ color: 'var(--accent-primary)' }} /> {f}
                       </li>
                     ))}
                   </ul>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--accent-primary)', fontSize: '0.8rem', fontWeight: 800, letterSpacing: '0.1em', marginTop: 'auto' }}>
+                  <div className="dh-services-explore" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--accent-primary)', fontSize: '0.8rem', fontWeight: 800, letterSpacing: '0.1em', marginTop: 'auto' }}>
                     EXPLORE SERVICE <ArrowRight size={14} />
                   </div>
                 </Link>
@@ -442,7 +443,7 @@ const DHServices = () => {
                 Join 150+ global clients who trust Avani Enterprises for their technical and strategic oversight.
               </p>
               <div style={{ display: 'flex', gap: '2rem', justifyContent: 'center' }} className="dh-responsive-grid">
-                <Link to="/dummyhome/get-consultation" className="dh-btn-fill">INITIATE PROJECT <ArrowRight size={18} /></Link>
+                <Link to="/dummyhome/contact" className="dh-btn-fill">INITIATE PROJECT <ArrowRight size={18} /></Link>
                 <Link to="/dummyhome/contact" className="dh-btn-ghost">VIEW PORTFOLIO</Link>
               </div>
             </motion.div>
@@ -450,6 +451,56 @@ const DHServices = () => {
         </div>
       </section>
 
+      <style>{`
+        @media (max-width: 768px) {
+          .dh-services-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 12px !important;
+          }
+          .dh-services-card {
+            padding: 16px !important;
+            border-radius: 12px !important;
+          }
+          .dh-services-img-wrapper {
+            height: 90px !important;
+            margin-bottom: 12px !important;
+            border-radius: 8px !important;
+          }
+          .dh-services-icon {
+            display: none !important;
+          }
+          .dh-services-title {
+            font-size: 14px !important;
+            margin-bottom: 6px !important;
+            line-height: 1.2 !important;
+          }
+          .dh-services-desc {
+            font-size: 11px !important;
+            -webkit-line-clamp: 2 !important;
+            display: -webkit-box !important;
+            -webkit-box-orient: vertical !important;
+            overflow: hidden !important;
+            margin-bottom: 8px !important;
+          }
+          .dh-services-features {
+            display: none !important;
+          }
+          .dh-services-explore {
+            font-size: 10px !important;
+          }
+        }
+        @media (max-width: 400px) {
+          .dh-services-grid {
+            gap: 8px !important;
+          }
+          .dh-services-img-wrapper {
+            height: 70px !important;
+          }
+          .dh-services-title {
+            font-size: 12px !important;
+          }
+        }
+      `}</style>
     </div>
   );
 };

@@ -27,18 +27,45 @@ const fadeUp = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
 };
 
-const newsletters = [
-  { _id: '1', title: 'The Future of AI in Enterprise', excerpt: 'How Large Language Models are transforming business operations.', publishedAt: '2026-05-10T10:00:00.000Z', slug: 'future-ai-enterprise' },
-  { _id: '2', title: 'Scaling Digital Architecture', excerpt: 'Best practices for building high-performance web systems.', publishedAt: '2026-04-15T10:00:00.000Z', slug: 'scaling-digital-architecture' },
-  { _id: '3', title: 'Mastering Semantic SEO', excerpt: 'Dominating search landscapes through strategic authority.', publishedAt: '2026-03-20T10:00:00.000Z', slug: 'mastering-semantic-seo' },
-  { _id: '4', title: 'The Power of Narrative Design', excerpt: 'Building meaningful brand stories that resonate globally.', publishedAt: '2026-02-05T10:00:00.000Z', slug: 'power-narrative-design' }
+import axios from 'axios';
+import { getBackendUrl } from '../../lib/api';
+
+const FALLBACK_NEWSLETTERS = [
+  { _id: '1', title: 'The Future of AI in Enterprise', excerpt: 'How Large Language Models are transforming business operations.', publishedAt: '2026-05-10T10:00:00.000Z', slug: 'future-ai-enterprise', pdfUrl: '/resource.pdf' },
+  { _id: '2', title: 'Scaling Digital Architecture', excerpt: 'Best practices for building high-performance web systems.', publishedAt: '2026-04-15T10:00:00.000Z', slug: 'scaling-digital-architecture', pdfUrl: '/resource.pdf' },
+  { _id: '3', title: 'Mastering Semantic SEO', excerpt: 'Dominating search landscapes through strategic authority.', publishedAt: '2026-03-20T10:00:00.000Z', slug: 'mastering-semantic-seo', pdfUrl: '/resource.pdf' },
+  { _id: '4', title: 'The Power of Narrative Design', excerpt: 'Building meaningful brand stories that resonate globally.', publishedAt: '2026-02-05T10:00:00.000Z', slug: 'power-narrative-design', pdfUrl: '/resource.pdf' }
 ];
 
 const DHNewsletters = () => {
   const [email, setEmail] = useState('');
   const [isSubscribed, setIsSubscribed] = useState(false);
+  const [newsletters, setNewsletters] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  useEffect(() => { window.scrollTo(0, 0); }, []);
+  useEffect(() => { 
+    window.scrollTo(0, 0); 
+    
+    const fetchNewsletters = async () => {
+      try {
+        setLoading(true);
+        const API_BASE = getBackendUrl();
+        const response = await fetch(`${API_BASE}/api/newsletters`);
+        const json = await response.json();
+        if (json?.success) {
+          const fetched = json.data || [];
+          setNewsletters(fetched);
+        }
+      } catch (error) {
+        console.error('Error fetching newsletters:', error);
+        setNewsletters(FALLBACK_NEWSLETTERS);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    fetchNewsletters();
+  }, []);
 
   const handleSubscribe = (e: any) => { 
     e.preventDefault(); 
@@ -103,7 +130,7 @@ const DHNewsletters = () => {
       </section>
 
       {/* 3. ARCHIVE LIST */}
-      <section style={{ padding: '100px 0', background: 'var(--bg-primary)' }}>
+      <section className="theme-beige" style={{ padding: '100px 0', background: 'var(--bg-primary)' }}>
         <div className="dh-container">
           <div style={{ marginBottom: '3rem' }}>
             <div className="dh-label">ARCHIVES</div>
@@ -120,34 +147,46 @@ const DHNewsletters = () => {
                 variants={fadeUp} 
                 transition={{ delay: i * 0.1 }}
               >
-                <div style={{ padding: '2rem 3rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--card-bg)', border: '1px solid var(--border-faint)', borderRadius: '16px', transition: 'all 0.3s ease' }}
-                  onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--accent-primary)'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
-                  onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border-faint)'; e.currentTarget.style.transform = 'translateY(0)'; }}
-                  className="dh-responsive-grid"
+                <div style={{ 
+                  padding: '1.2rem 2rem', 
+                  display: 'flex', 
+                  justifyContent: 'space-between', 
+                  alignItems: 'center', 
+                  background: 'linear-gradient(90deg, var(--card-bg) 0%, rgba(240, 235, 225, 0.05) 100%)', 
+                  border: '1px solid var(--border-faint)', 
+                  borderLeft: '4px solid var(--accent-primary)',
+                  borderRadius: '8px', 
+                  transition: 'all 0.3s ease' 
+                }}
+                  onMouseEnter={e => { e.currentTarget.style.transform = 'translateX(8px)'; e.currentTarget.style.background = 'linear-gradient(90deg, rgba(240, 235, 225, 0.08) 0%, rgba(240, 235, 225, 0.15) 100%)'; e.currentTarget.style.borderColor = 'var(--accent-primary)'; }}
+                  onMouseLeave={e => { e.currentTarget.style.transform = 'translateX(0)'; e.currentTarget.style.background = 'linear-gradient(90deg, var(--card-bg) 0%, rgba(240, 235, 225, 0.05) 100%)'; e.currentTarget.style.borderColor = 'var(--border-faint)'; }}
+                  className="dh-responsive-grid dh-newsletter-bar"
                 >
-                  <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-                    <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'var(--accent-hover)', color: 'var(--accent-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                      <Mail size={20} />
-                    </div>
+                  <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
                     <div>
-                      <h3 className="dh-heading" style={{ fontSize: '1.3rem', marginBottom: '0.3rem' }}>{item.title}</h3>
-                      <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '0.5rem' }}>{item.excerpt}</p>
-                      <p style={{ fontSize: '0.7rem', fontWeight: 800, color: 'var(--text-tertiary)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Transmission Date: {new Date(item.publishedAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '0.3rem' }}>
+                        <span style={{ fontSize: '0.65rem', fontWeight: 800, color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+                          {new Date(item.publishedAt).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })}
+                        </span>
+                        <h3 className="dh-heading" style={{ fontSize: '1.15rem', margin: 0 }}>{item.title}</h3>
+                      </div>
+                      <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', margin: 0 }}>{item.excerpt}</p>
                     </div>
                   </div>
                   <div style={{ display: 'flex', gap: '1rem', flexShrink: 0 }}>
-                    <Link to={`/dummyhome/newsletters/${item.slug}`} style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '12px 24px', borderRadius: '100px', border: '1px solid var(--border-light)', color: 'var(--text-primary)', textDecoration: 'none', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.1em', transition: 'all 0.3s' }}
-                      onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--accent-primary)'; e.currentTarget.style.color = 'var(--accent-primary)'; }}
-                      onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border-light)'; e.currentTarget.style.color = 'var(--text-primary)'; }}
+                    <button onClick={() => window.open(item.pdfUrl || '/resource.pdf', '_blank')} style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '10px 20px', borderRadius: '6px', border: 'none', background: 'var(--accent-primary)', color: '#fff', cursor: 'pointer', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.1em', transition: 'all 0.3s' }}
+                      onMouseEnter={e => { e.currentTarget.style.opacity = '0.9'; }}
+                      onMouseLeave={e => { e.currentTarget.style.opacity = '1'; }}
                     >
-                      <Eye size={14} /> VIEW ONLINE
-                    </Link>
-                    <button style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '12px 24px', borderRadius: '100px', border: '1px solid var(--accent-primary)', background: 'transparent', color: 'var(--accent-primary)', cursor: 'pointer', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.1em', transition: 'all 0.3s' }}
-                      onMouseEnter={e => { e.currentTarget.style.background = 'var(--accent-primary)'; e.currentTarget.style.color = '#000'; }}
-                      onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--accent-primary)'; }}
-                    >
-                      <Download size={14} /> DOWNLOAD PDF
+                      <Download size={14} /> GET PDF
                     </button>
+                    <Link to={`/newsletters/${item.slug}`} style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '10px 20px', borderRadius: '6px', border: '1px solid var(--border-light)', background: 'transparent', color: 'var(--text-primary)', cursor: 'pointer', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.1em', transition: 'all 0.3s', textDecoration: 'none' }}
+                      onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--text-primary)'; }}
+                      onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border-light)'; }}
+                    >
+                      <Eye size={14} /> READ
+                    </Link>
+
                   </div>
                 </div>
               </motion.div>
@@ -156,6 +195,19 @@ const DHNewsletters = () => {
         </div>
       </section>
 
+      <style>{`
+        @media (max-width: 768px) {
+          .dh-responsive-grid {
+            grid-template-columns: 1fr !important;
+            flex-direction: column !important;
+            gap: 1.5rem !important;
+          }
+          .dh-newsletter-bar {
+            padding: 1.5rem !important;
+            align-items: flex-start !important;
+          }
+        }
+      `}</style>
     </div>
   );
 };

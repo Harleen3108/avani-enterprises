@@ -238,7 +238,7 @@ const Navbar = () => {
               transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
             >
               <Link
-                to="/get-consultation"
+                to="/dummyhome/contact"
                 className="bg-gradient-to-r from-amber-400 to-orange-500 
                 text-white px-4 xl:px-6 py-2.5 rounded-full text-[11px] xl:text-sm font-semibold whitespace-nowrap
                 shadow-[0_4px_12px_rgba(245,158,11,0.15)] hover:shadow-[0_8px_20px_rgba(245,158,11,0.3)]
@@ -373,7 +373,7 @@ const Navbar = () => {
                 </a>
 
                 <Link
-                  to="/get-consultation"
+                  to="/dummyhome/contact"
                   onClick={() => setIsOpen(false)}
                   className="block w-full bg-gradient-to-r from-amber-400 to-orange-500 
                   text-white py-4 rounded-2xl font-bold text-center shadow-lg shadow-amber-100"

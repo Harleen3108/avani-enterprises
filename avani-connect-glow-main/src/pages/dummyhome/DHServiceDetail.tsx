@@ -488,7 +488,7 @@ const DHServiceDetail = () => {
                     }}>
                       {service.ctaHook}
                     </p>
-                    <Link to="/dummyhome/get-consultation" className="dh-btn-fill" style={{ 
+                    <Link to="/dummyhome/contact" className="dh-btn-fill" style={{ 
                       display: 'inline-flex', 
                       alignItems: 'center', 
                       gap: '8px', 
@@ -579,7 +579,7 @@ const DHServiceDetail = () => {
                 <p className="dh-body" style={{ fontSize: '0.85rem', marginBottom: '2rem', color: 'var(--text-secondary)' }}>
                   Partner with us to deploy these strategies and unlock exponential operational performance.
                 </p>
-                <Link to="/dummyhome/get-consultation" className="dh-btn-fill" style={{ width: '100%', justifyContent: 'center' }}>
+                <Link to="/dummyhome/contact" className="dh-btn-fill" style={{ width: '100%', justifyContent: 'center' }}>
                   GET STARTED <ArrowRight size={16} />
                 </Link>
               </div>
@@ -685,8 +685,8 @@ const DHServiceDetail = () => {
             </div>
             
             {/* Right Box: Tilted 3D Stack Layer UI */}
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '380px', position: 'relative' }}>
-              <div style={{ 
+            <div className="dh-arch-right-box" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '380px', position: 'relative' }}>
+              <div className="dh-arch-stack" style={{ 
                 position: 'relative', 
                 width: '320px', 
                 height: '280px', 
@@ -700,6 +700,7 @@ const DHServiceDetail = () => {
                   return (
                     <motion.div
                       key={idx}
+                      className="dh-arch-layer"
                       onClick={() => setSelectedLayer(idx)}
                       onMouseEnter={() => setSelectedLayer(idx)}
                       style={{
@@ -830,6 +831,28 @@ const DHServiceDetail = () => {
         </div>
       </section>
 
+      <style>{`
+        @media (max-width: 768px) {
+          .dh-arch-right-box {
+            height: auto !important;
+            margin-top: 2rem !important;
+          }
+          .dh-arch-stack {
+            transform: none !important;
+            width: 100% !important;
+            height: auto !important;
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 16px !important;
+          }
+          .dh-arch-layer {
+            position: relative !important;
+            transform: none !important;
+            height: auto !important;
+            min-height: 100px !important;
+          }
+        }
+      `}</style>
     </div>
   );
 };

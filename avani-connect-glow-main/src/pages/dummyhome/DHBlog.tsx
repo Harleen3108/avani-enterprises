@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, User, ArrowRight, Search, Tag } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
-import { API_BASE_URL } from '../../utils/api';
+import { getBackendUrl } from '../../lib/api';
 import '../../components/dummy/DummyHome.css';
 
 const titleV = {
@@ -38,9 +37,16 @@ const DHBlog = () => {
     window.scrollTo(0, 0);
     const fetchBlogs = async () => {
       try {
-        const response = await axios.get(`${API_BASE_URL}/blogs`);
-        if (response.data.success) setBlogs(response.data.data || []);
-      } catch (error) { console.error('Error fetching blogs:', error); }
+        const API_BASE = getBackendUrl();
+        const res = await fetch(`${API_BASE}/blogs`);
+        const json = await res.json();
+        if (json?.success) {
+          const fetched = json.data || [];
+          setBlogs(fetched.filter((post: any) => post.isPublished));
+        }
+      } catch (error) { 
+        console.error('Error fetching blogs:', error); 
+      }
       finally { setIsLoading(false); }
     };
     fetchBlogs();
@@ -102,52 +108,46 @@ const DHBlog = () => {
               <div className="dh-label">SYNCHRONIZING...</div>
             </div>
           ) : (
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2.5rem' }} className="dh-responsive-grid">
-              {blogs.map((blog, i) => {
-                const fallbacks = [
-                  'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=800&auto=format&fit=crop',
-                  'https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=800&auto=format&fit=crop',
-                  'https://images.unsplash.com/photo-1510511459019-5dda7724fd87?q=80&w=800&auto=format&fit=crop',
-                  'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&auto=format&fit=crop',
-                  'https://images.unsplash.com/photo-1504384308090-c564bd248273?q=80&w=800&auto=format&fit=crop',
-                  'https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=800&auto=format&fit=crop',
-                  'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop',
-                  'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=800&auto=format&fit=crop',
-                  'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=800&auto=format&fit=crop',
-                  'https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=800&auto=format&fit=crop'
-                ];
-                return (
-                  <motion.div key={blog._id} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: i * 0.1 }}>
-                    <Link to={`/dummyhome/blog/${blog.slug}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                      <div style={{ padding: 0, overflow: 'hidden', height: '100%', display: 'flex', flexDirection: 'column', background: 'var(--card-bg)', borderRadius: '16px', border: '1px solid var(--border-faint)', backdropFilter: 'blur(10px)', transition: 'all 0.4s ease' }}
-                        onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.borderColor = 'var(--accent-primary)'; e.currentTarget.style.boxShadow = '0 16px 40px rgba(0,0,0,0.06)'; }}
-                        onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.borderColor = 'var(--border-faint)'; e.currentTarget.style.boxShadow = 'none'; }}
-                      >
-                        <div style={{ aspectRatio: '16/10', overflow: 'hidden' }}>
-                          <img
-                            src={blog.coverImage || fallbacks[i % fallbacks.length]}
-                            alt={blog.title}
-                            style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'all 0.5s ease' }}
-                            onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.05)'; }}
-                            onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; }}
-                            onError={e => { (e.currentTarget as HTMLImageElement).src = fallbacks[i % fallbacks.length]; }}
-                          />
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }} className="dh-blog-list">
+              {blogs.map((blog, i) => (
+                <motion.div key={blog._id} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: i * 0.05 }}>
+                  <Link to={`/blog/${blog.slug}`} style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>
+                    <div style={{
+                      display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '2rem 0',
+                      borderBottom: '1px solid var(--border-faint)', cursor: 'pointer', transition: 'all 0.3s ease',
+                      position: 'relative'
+                    }}
+                      onMouseEnter={e => { e.currentTarget.style.paddingLeft = '1rem'; e.currentTarget.style.paddingRight = '1rem'; e.currentTarget.style.background = 'rgba(255,255,255,0.02)'; }}
+                      onMouseLeave={e => { e.currentTarget.style.paddingLeft = '0'; e.currentTarget.style.paddingRight = '0'; e.currentTarget.style.background = 'transparent'; }}
+                      className="dh-blog-item"
+                    >
+                      {/* Left: Blog Title and Meta */}
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', flex: 1 }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                          <span style={{ fontSize: '0.65rem', fontWeight: 800, color: 'var(--accent-primary)', display: 'flex', alignItems: 'center', gap: '0.4rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+                            <Calendar size={12} /> {new Date(blog.createdAt).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })}
+                          </span>
+                          <span style={{ fontSize: '0.65rem', fontWeight: 800, color: 'var(--text-tertiary)', display: 'flex', alignItems: 'center', gap: '0.4rem', textTransform: 'uppercase', letterSpacing: '0.1em' }} className="dh-hide-mobile">
+                            <User size={12} /> {blog.author || 'Avani Intel'}
+                          </span>
                         </div>
-                        <div style={{ padding: '2rem', display: 'flex', flexDirection: 'column', flex: 1 }}>
-                          <div style={{ display: 'flex', gap: '1.5rem', marginBottom: '1rem' }}>
-                            <span style={{ fontSize: '0.65rem', fontWeight: 800, color: 'var(--accent-primary)', display: 'flex', alignItems: 'center', gap: '0.4rem' }}><Calendar size={12} /> {new Date(blog.createdAt).toLocaleDateString()}</span>
-                            <span style={{ fontSize: '0.65rem', fontWeight: 800, color: 'var(--text-tertiary)', display: 'flex', alignItems: 'center', gap: '0.4rem' }}><User size={12} /> {blog.author || 'Avani Intel'}</span>
-                          </div>
-                          <h3 className="dh-heading" style={{ fontSize: '1.3rem', marginBottom: '1.5rem', lineHeight: 1.3, flex: 1 }}>{blog.title}</h3>
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--accent-primary)', fontSize: '0.75rem', fontWeight: 800, letterSpacing: '0.1em' }}>
-                            READ ARTICLE <ArrowRight size={14} />
-                          </div>
+                        <h3 className="dh-heading" style={{ fontSize: '1.6rem', margin: 0, lineHeight: 1.3 }}>{blog.title}</h3>
+                        <div style={{ display: 'flex', gap: '0.8rem', marginTop: '0.3rem' }} className="dh-hide-mobile">
+                          <span style={{ fontSize: '0.65rem', fontWeight: 800, color: 'var(--text-secondary)', background: 'var(--card-bg)', padding: '4px 10px', borderRadius: '100px', border: '1px solid var(--border-faint)' }}>TECHNOLOGY</span>
+                          <span style={{ fontSize: '0.65rem', fontWeight: 800, color: 'var(--text-secondary)', background: 'var(--card-bg)', padding: '4px 10px', borderRadius: '100px', border: '1px solid var(--border-faint)' }}>INSIGHTS</span>
                         </div>
                       </div>
-                    </Link>
-                  </motion.div>
-                );
-              })}
+
+                      {/* Right: Read Button */}
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', flexShrink: 0 }} className="dh-blog-action">
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--accent-primary)', fontSize: '0.75rem', fontWeight: 800, letterSpacing: '0.1em' }}>
+                          READ ARTICLE <ArrowRight size={14} />
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                </motion.div>
+              ))}
             </div>
           )}
         </div>
@@ -174,6 +174,26 @@ const DHBlog = () => {
         </div>
       </section>
 
+      <style>{`
+        @media (max-width: 768px) {
+          .dh-responsive-grid {
+            flex-direction: column !important;
+            gap: 1.5rem !important;
+          }
+          .dh-blog-item {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 1.5rem !important;
+            padding: 1.5rem 1rem !important;
+          }
+          .dh-hide-mobile {
+            display: none !important;
+          }
+          .dh-hero-title {
+            font-size: clamp(2.5rem, 8vw, 4rem) !important;
+          }
+        }
+      `}</style>
     </div>
   );
 };

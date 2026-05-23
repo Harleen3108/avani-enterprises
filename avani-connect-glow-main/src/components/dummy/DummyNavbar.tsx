@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ArrowRight, ChevronDown, Phone } from 'lucide-react';
@@ -47,11 +47,25 @@ const DummyNavbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const location = useLocation();
+  const navRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Node;
+      const isInsideMobileMenu = target instanceof Element && target.closest('.dummy-nav-mobile-container');
+      if (navRef.current && !navRef.current.contains(target) && !isInsideMobileMenu) {
+        setOpenDropdown(null);
+        setMobileOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
   useEffect(() => {
@@ -65,7 +79,7 @@ const DummyNavbar = () => {
 
   return (
     <>
-      <nav style={{
+      <nav ref={navRef} style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000,
         padding: scrolled ? '10px 0' : '14px 0',
         background: scrolled ? 'var(--nav-scrolled)' : 'transparent',
@@ -96,6 +110,7 @@ const DummyNavbar = () => {
                     onMouseLeave={() => setOpenDropdown(null)}
                   >
                     <button
+                      onClick={() => setOpenDropdown(openDropdown === link.label ? null : link.label)}
                       style={{
                         fontFamily: "'Outfit', sans-serif", fontSize: '13px', letterSpacing: '0.12em', fontWeight: 600,
                         color: isActive || openDropdown === link.label ? 'var(--accent-primary)' : 'var(--text-secondary)',
@@ -180,7 +195,7 @@ const DummyNavbar = () => {
             >
               <Phone size={12} style={{ color: 'var(--accent-primary)' }} /> CALL NOW
             </a>
-            <Link to="/dummyhome/get-consultation" style={{
+            <Link to="/dummyhome/contact" style={{
               display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '8px 20px',
               background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-light))', color: 'var(--bg-primary)',
               borderRadius: '5px', textDecoration: 'none', fontFamily: "'Outfit', sans-serif",
@@ -219,19 +234,21 @@ const DummyNavbar = () => {
                 const isActive = link.dropdown.some(sub => location.pathname === sub.path);
                 return (
                   <div key={link.label}>
-                    <button
-                      onClick={() => toggleDropdown(link.label)}
-                      style={{
-                        display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%',
-                        padding: '14px 0', borderBottom: '1px solid var(--border-faint)',
+                    <div style={{
+                      display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%',
+                      borderBottom: '1px solid var(--border-faint)'
+                    }}>
+                      <button onClick={() => toggleDropdown(link.label)} style={{
+                        flex: 1, textAlign: 'left', padding: '14px 0', background: 'none', border: 'none', cursor: 'pointer',
                         fontFamily: "'Outfit', sans-serif", fontSize: '20px', letterSpacing: '0.12em', fontWeight: 600,
                         color: isActive || openDropdown === link.label ? 'var(--accent-primary)' : 'var(--text-secondary)',
-                        background: 'none', border: 'none', cursor: 'pointer', outline: 'none'
-                      }}
-                    >
-                      <span style={{ flex: 1, textAlign: 'left' }}>{link.label}</span>
-                      <ChevronDown size={18} style={{ transform: openDropdown === link.label ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
-                    </button>
+                      }}>
+                        {link.label}
+                      </button>
+                      <button onClick={() => toggleDropdown(link.label)} style={{ padding: '14px', background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-primary)' }}>
+                        <ChevronDown size={18} style={{ transform: openDropdown === link.label ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
+                      </button>
+                    </div>
                     <AnimatePresence>
                       {openDropdown === link.label && (
                         <motion.div
@@ -273,7 +290,7 @@ const DummyNavbar = () => {
                 </motion.div>
               );
             })}
-            <Link to="/dummyhome/get-consultation" onClick={() => setMobileOpen(false)} style={{
+            <Link to="/dummyhome/contact" onClick={() => setMobileOpen(false)} style={{
               display: 'inline-flex', alignItems: 'center', gap: '8px', marginTop: '24px',
               padding: '12px 28px', background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-light))',
               color: 'var(--bg-primary)', borderRadius: '6px', textDecoration: 'none',

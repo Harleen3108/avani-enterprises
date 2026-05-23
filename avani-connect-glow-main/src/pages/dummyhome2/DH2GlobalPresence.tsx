@@ -211,7 +211,7 @@ const DH2GlobalPresence = () => {
             </p>
             <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center' }}>
                <Link to="/dummyhome2/contact" className="dh2-btn-fill">Partner With Us</Link>
-               <Link to="/dummyhome2/get-consultation" className="dh2-btn-ghost">Book Strategy Session</Link>
+               <Link to="/dummyhome2/contact" className="dh2-btn-ghost">Book Strategy Session</Link>
             </div>
          </motion.div>
       </section>

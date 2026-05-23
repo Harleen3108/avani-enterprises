@@ -388,7 +388,7 @@ const ServiceDetail = () => {
                                     </p>
                                 </div>
                                 <Link
-                                    to="/get-consultation"
+                                    to="/dummyhome/contact"
                                     className="mt-4 inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-500 hover:to-orange-600 text-white rounded-xl font-bold text-sm uppercase tracking-widest transition-all shadow-lg hover:scale-105"
                                 >
                                     Get Consultation <ArrowRight className="w-4 h-4" />
@@ -701,7 +701,7 @@ const ServiceDetail = () => {
                         className="flex flex-row gap-3 md:gap-6 justify-center items-center w-full sm:w-auto"
                     >
                         <Link
-                            to="/get-consultation"
+                            to="/dummyhome/contact"
                             className="flex-1 sm:flex-none px-4 py-3 md:px-10 md:py-4 bg-gradient-to-b from-orange-400 to-orange-600 hover:from-orange-500 hover:to-orange-700 text-white rounded-lg font-bold uppercase tracking-widest shadow-[0_4px_0_rgb(154,52,18)] active:shadow-none active:translate-y-1 transition-all duration-200 text-[10px] sm:text-xs md:text-sm whitespace-nowrap"
                         >
                             Get Consultation

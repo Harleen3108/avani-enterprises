@@ -277,71 +277,54 @@ const DHCareers = () => {
               <div className="dh-label">LOADING OPPORTUNITIES...</div>
             </div>
           ) : (
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2rem' }} className="dh-responsive-grid">
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }} className="dh-career-list">
               {filteredJobs.map((job, i) => (
-                <motion.div key={job._id} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: i * 0.08 }}>
+                <motion.div key={job._id} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: i * 0.05 }}>
                   <div
                     onClick={() => navigate(`/dummyhome/careers/${job._id}`)}
                     style={{
-                      background: 'var(--card-bg)', borderRadius: '16px', border: '1px solid var(--border-faint)',
-                      overflow: 'hidden', cursor: 'pointer', display: 'flex', flexDirection: 'column', height: '100%',
-                      backdropFilter: 'blur(10px)', transition: 'all 0.4s ease',
+                      display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '2rem 0',
+                      borderBottom: '1px solid var(--border-faint)', cursor: 'pointer', transition: 'all 0.3s ease',
+                      position: 'relative'
                     }}
-                    onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.borderColor = 'var(--accent-primary)'; e.currentTarget.style.boxShadow = '0 16px 40px rgba(0,0,0,0.06)'; }}
-                    onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.borderColor = 'var(--border-faint)'; e.currentTarget.style.boxShadow = 'none'; }}
+                    onMouseEnter={e => { e.currentTarget.style.paddingLeft = '1rem'; e.currentTarget.style.paddingRight = '1rem'; e.currentTarget.style.background = 'rgba(255,255,255,0.02)'; }}
+                    onMouseLeave={e => { e.currentTarget.style.paddingLeft = '0'; e.currentTarget.style.paddingRight = '0'; e.currentTarget.style.background = 'transparent'; }}
+                    className="dh-career-item"
                   >
-                    {/* Thumbnail */}
-                    <div style={{ position: 'relative', height: '160px', overflow: 'hidden' }}>
-                      <img src={job.image || getJobImage(job.department, i)} alt={job.title}
-                        style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.6s ease' }}
-                        onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.05)'; }}
-                        onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; }}
-                      />
-                      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.5), transparent)', pointerEvents: 'none' }} />
-                      <div style={{ position: 'absolute', top: 10, left: 10 }}>
-                        <span style={{ background: 'var(--accent-primary)', color: '#000', padding: '3px 10px', borderRadius: '100px', fontSize: '0.55rem', fontWeight: 800, letterSpacing: '0.1em' }}>
+                    {/* Left: Job Title and Meta */}
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', flex: 1 }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
+                        <span style={{ fontSize: '0.6rem', fontWeight: 800, color: 'var(--accent-primary)', letterSpacing: '0.1em', background: 'var(--accent-hover)', padding: '4px 8px', borderRadius: '4px' }}>
                           {job.department.toUpperCase()}
                         </span>
-                      </div>
-                      <div style={{ position: 'absolute', bottom: 10, right: 10 }}>
                         {getStatusBadge(job.status)}
+                      </div>
+                      <h3 className="dh-heading" style={{ fontSize: '1.6rem', margin: 0 }}>{job.title}</h3>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', marginTop: '0.3rem', flexWrap: 'wrap' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                          <MapPin size={12} style={{ color: 'var(--text-tertiary)' }} />
+                          <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-secondary)' }}>{job.location}</span>
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                          <Briefcase size={12} style={{ color: 'var(--text-tertiary)' }} />
+                          <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-secondary)' }}>{job.type}</span>
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }} className="dh-hide-mobile">
+                          <Clock size={12} style={{ color: 'var(--text-tertiary)' }} />
+                          <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-secondary)' }}>Experience: {job.experience}</span>
+                        </div>
                       </div>
                     </div>
 
-                    {/* Content */}
-                    <div style={{ padding: '1.2rem', display: 'flex', flexDirection: 'column', flex: 1 }}>
-                      <h3 className="dh-heading" style={{ fontSize: '1.1rem', marginBottom: '0.5rem', lineHeight: 1.3 }}>{job.title}</h3>
-                      <p className="dh-body" style={{ fontSize: '0.8rem', marginBottom: '1rem', flex: 1, lineHeight: 1.5, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{job.description}</p>
-
-                      {/* Info pills */}
-                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', marginBottom: '0.8rem' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '4px', padding: '6px 8px', background: 'var(--bg-primary)', borderRadius: '8px', border: '1px solid var(--border-faint)' }}>
-                          <MapPin size={10} style={{ color: 'var(--accent-primary)' }} />
-                          <span style={{ fontSize: '0.6rem', fontWeight: 800, color: 'var(--text-secondary)' }}>{job.location.toUpperCase()}</span>
-                        </div>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '4px', padding: '6px 8px', background: 'var(--bg-primary)', borderRadius: '8px', border: '1px solid var(--border-faint)' }}>
-                          <Briefcase size={10} style={{ color: 'var(--accent-primary)' }} />
-                          <span style={{ fontSize: '0.6rem', fontWeight: 800, color: 'var(--text-secondary)' }}>{job.type.toUpperCase()}</span>
-                        </div>
-                      </div>
-
-                      {/* Experience */}
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '8px 10px', background: 'var(--accent-hover)', borderRadius: '10px', marginBottom: '1rem' }}>
-                        <Clock size={12} style={{ color: 'var(--accent-primary)' }} />
-                        <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--accent-primary)' }}>Experience: {job.experience}</span>
-                      </div>
-
-                      {/* Buttons */}
-                      <div style={{ display: 'flex', gap: '0.5rem', marginTop: 'auto' }}>
-                        <button onClick={e => { e.stopPropagation(); navigate(`/dummyhome/careers/${job._id}`); }}
-                          style={{ flex: 1, padding: '8px', borderRadius: '10px', border: '1px solid var(--accent-primary)', background: 'transparent', color: 'var(--accent-primary)', fontSize: '0.65rem', fontWeight: 800, letterSpacing: '0.1em', cursor: 'pointer', transition: 'all 0.3s' }}>
-                          VIEW DETAILS
-                        </button>
-                        <button onClick={e => { e.stopPropagation(); navigate(`/dummyhome/careers/${job._id}?apply=true`); }}
-                          style={{ flex: 1.5, padding: '8px', borderRadius: '10px', border: 'none', background: 'var(--accent-primary)', color: '#000', fontSize: '0.65rem', fontWeight: 800, letterSpacing: '0.1em', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px', transition: 'all 0.3s' }}>
-                          APPLY NOW <ArrowRight size={10} />
-                        </button>
-                      </div>
+                    {/* Right: Apply Button */}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }} className="dh-career-action">
+                      <button onClick={e => { e.stopPropagation(); navigate(`/dummyhome/careers/${job._id}?apply=true`); }}
+                        style={{ padding: '12px 28px', borderRadius: '100px', border: '1px solid var(--accent-primary)', background: 'transparent', color: 'var(--text-primary)', fontSize: '0.75rem', fontWeight: 800, letterSpacing: '0.1em', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.3s' }}
+                        onMouseEnter={e => { e.currentTarget.style.background = 'var(--accent-primary)'; e.currentTarget.style.color = '#000'; }}
+                        onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--text-primary)'; }}
+                      >
+                        APPLY NOW <ArrowRight size={14} />
+                      </button>
                     </div>
                   </div>
                 </motion.div>
@@ -413,13 +396,30 @@ const DHCareers = () => {
               Partner with us to unlock growth opportunities, streamline operations, and achieve your business vision with expert guidance every step of the way.
             </p>
             <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-              <button onClick={() => navigate('/dummyhome/get-consultation')} className="dh-btn-fill">GET CONSULTATION</button>
+              <button onClick={() => navigate('/dummyhome/contact')} className="dh-btn-fill">GET CONSULTATION</button>
               <a href="tel:+919253625099" className="dh-btn-ghost" style={{ textDecoration: 'none' }}>TALK TO EXPERT</a>
             </div>
           </motion.div>
         </div>
       </section>
 
+      <style>{`
+        @media (max-width: 768px) {
+          .dh-responsive-grid {
+            grid-template-columns: 1fr !important;
+            gap: 1.5rem !important;
+          }
+          .dh-career-item {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 1.5rem !important;
+            padding: 1.5rem 1rem !important;
+          }
+          .dh-hide-mobile {
+            display: none !important;
+          }
+        }
+      `}</style>
     </div>
   );
 };

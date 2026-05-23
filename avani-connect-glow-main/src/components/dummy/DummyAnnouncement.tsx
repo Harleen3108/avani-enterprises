@@ -5,7 +5,7 @@ const DummyAnnouncement = () => (
   <section className="theme-brown" style={{ padding: '44px 0', background: 'var(--bg-primary)', position: 'relative', overflow: 'hidden' }}>
     <div style={{ position: 'absolute', top: '50%', left: '40%', transform: 'translate(-50%,-50%)', width: '400px', height: '150px', background: 'radial-gradient(ellipse, var(--accent-hover) 0%, transparent 70%)', pointerEvents: 'none' }} />
     <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 48px', position: 'relative', zIndex: 5 }}>
-      <div style={{ display: 'flex', borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--border-light)' }}>
+      <div className="dummy-announcement-container" style={{ display: 'flex', borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--border-light)' }}>
         {/* Label */}
         <div style={{ background: 'var(--accent-primary)', padding: '18px 28px', flexShrink: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', minWidth: '160px' }}>
           <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: '9px', letterSpacing: '0.28em', color: 'var(--bg-primary)', marginBottom: '4px', fontWeight: 600 }}>LIVE UPDATE</span>
@@ -39,6 +39,19 @@ const DummyAnnouncement = () => (
         </div>
       </div>
     </div>
+    <style>{`
+      @media (max-width: 768px) {
+        .dummy-announcement-container {
+          flex-direction: column !important;
+        }
+        .dummy-announcement-container > div:first-child {
+          padding: 12px 20px !important;
+          min-width: auto !important;
+          align-items: center !important;
+          text-align: center !important;
+        }
+      }
+    `}</style>
   </section>
 );
 
