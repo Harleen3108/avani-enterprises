@@ -95,7 +95,12 @@ const DummyHome = () => {
       description: 'Get found on Google and turn casual visitors into loyal customers. We write engaging content and optimize your site so you rank higher, attract more traffic, and grow your brand organically.',
       slug: 'seo-content-marketing',
       index: '02',
-      image: '/whatwecreate/seoandcontent.jpg'
+      image: '/whatwecreate/seoandcontent.jpg',
+      subLinks: [
+        { name: 'Lead Generation', path: '/dummyhome/services/seo-content-marketing' },
+        { name: 'Search Ranking', path: '/dummyhome/services/seo-content-marketing' },
+        { name: 'Brand Authority', path: '/dummyhome/services/seo-content-marketing' }
+      ]
     },
     {
       icon: '◉',

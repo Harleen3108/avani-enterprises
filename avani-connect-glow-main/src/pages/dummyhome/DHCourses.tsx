@@ -204,7 +204,7 @@ const DHCourses = () => {
                       <div style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--text-primary)', lineHeight: 1 }}>{course.price}</div>
                     </div>
                     <div style={{ display: 'flex', gap: '0.5rem', width: '100%' }}>
-                      <Link to={`/courses/${course.id}`} style={{ flex: 1, textDecoration: 'none' }}>
+                      <Link to={`/dummyhome/courses/${course.id}`} style={{ flex: 1, textDecoration: 'none' }}>
                         <button className="dh-btn-fill" style={{ width: '100%', padding: '12px 24px', fontSize: '0.75rem' }}>ENROLL NOW</button>
                       </Link>
                     </div>

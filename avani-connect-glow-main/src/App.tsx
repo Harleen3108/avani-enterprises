@@ -185,6 +185,7 @@ import DHGlobalPresence from "./pages/dummyhome/DHGlobalPresence";
 import DHCareers from "./pages/dummyhome/DHCareers";
 import DHNewsletters from "./pages/dummyhome/DHNewsletters";
 import DHCourses from "./pages/dummyhome/DHCourses";
+import DHCourseDetail from "./pages/dummyhome/DHCourseDetail";
 import DHCaseStudies from "./pages/dummyhome/DHCaseStudies";
 import DHCareerDetail from "./pages/dummyhome/DHCareerDetail";
 import DHServiceDetail from "./pages/dummyhome/DHServiceDetail";
@@ -265,6 +266,7 @@ const AppLayout = () => {
             <Route path="newsletters" element={<DHNewsletters />} />
             <Route path="newsletters/:slug" element={<DHNewsletterDetail />} />
             <Route path="courses" element={<DHCourses />} />
+            <Route path="courses/:id" element={<DHCourseDetail />} />
             <Route path="case-studies" element={<DHCaseStudies />} />
             <Route path="get-consultation" element={<GetConsultation />} />
             <Route path="services/:slug" element={<DHServiceDetail />} />

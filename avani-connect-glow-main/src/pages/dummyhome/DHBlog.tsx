@@ -108,40 +108,49 @@ const DHBlog = () => {
               <div className="dh-label">SYNCHRONIZING...</div>
             </div>
           ) : (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }} className="dh-blog-list">
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '32px' }} className="dh-blog-grid">
               {blogs.map((blog, i) => (
-                <motion.div key={blog._id} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: i * 0.05 }}>
-                  <Link to={`/dummyhome/blog/${blog.slug}`} style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>
+                <motion.div key={blog._id} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: i * 0.05 }} style={{ display: 'flex' }}>
+                  <Link to={`/dummyhome/blog/${blog.slug}`} style={{ textDecoration: 'none', color: 'inherit', display: 'flex', width: '100%' }}>
                     <div style={{
-                      display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '2rem 0',
-                      borderBottom: '1px solid var(--border-faint)', cursor: 'pointer', transition: 'all 0.3s ease',
-                      position: 'relative'
+                      display: 'flex', flexDirection: 'column',
+                      border: '1px solid var(--border-light)', borderRadius: '16px', background: 'var(--card-bg)', cursor: 'pointer', transition: 'all 0.4s cubic-bezier(0.22, 1, 0.36, 1)',
+                      position: 'relative', overflow: 'hidden', width: '100%',
+                      boxShadow: '0 4px 20px rgba(0,0,0,0.02)'
                     }}
-                      onMouseEnter={e => { e.currentTarget.style.paddingLeft = '1rem'; e.currentTarget.style.paddingRight = '1rem'; e.currentTarget.style.background = 'rgba(255,255,255,0.02)'; }}
-                      onMouseLeave={e => { e.currentTarget.style.paddingLeft = '0'; e.currentTarget.style.paddingRight = '0'; e.currentTarget.style.background = 'transparent'; }}
-                      className="dh-blog-item"
+                      onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-8px)'; e.currentTarget.style.borderColor = 'var(--accent-primary)'; e.currentTarget.style.boxShadow = '0 12px 30px rgba(0,0,0,0.08)'; const img = e.currentTarget.querySelector('.dh-blog-img') as HTMLElement; if (img) img.style.transform = 'scale(1.05)'; }}
+                      onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.borderColor = 'var(--border-light)'; e.currentTarget.style.boxShadow = '0 4px 20px rgba(0,0,0,0.02)'; const img = e.currentTarget.querySelector('.dh-blog-img') as HTMLElement; if (img) img.style.transform = 'scale(1)'; }}
+                      className="dh-blog-card"
                     >
-                      {/* Left: Blog Title and Meta */}
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', flex: 1 }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                      {/* Image */}
+                      {(blog.featuredImage || blog.image) ? (
+                        <div style={{ width: '100%', height: '220px', overflow: 'hidden', borderBottom: '1px solid var(--border-faint)' }}>
+                          <img src={blog.featuredImage || blog.image} alt={blog.title} className="dh-blog-img" style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease' }} />
+                        </div>
+                      ) : (
+                        <div style={{ width: '100%', height: '220px', background: 'var(--border-faint)', display: 'flex', alignItems: 'center', justifyContent: 'center', borderBottom: '1px solid var(--border-faint)' }}>
+                          <span style={{ color: 'var(--text-tertiary)', fontSize: '0.8rem', letterSpacing: '0.1em' }}>NO IMAGE</span>
+                        </div>
+                      )}
+
+                      {/* Content */}
+                      <div style={{ display: 'flex', flexDirection: 'column', padding: '24px', flex: 1 }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '16px' }}>
                           <span style={{ fontSize: '0.65rem', fontWeight: 800, color: 'var(--accent-primary)', display: 'flex', alignItems: 'center', gap: '0.4rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
                             <Calendar size={12} /> {new Date(blog.createdAt).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })}
                           </span>
-                          <span style={{ fontSize: '0.65rem', fontWeight: 800, color: 'var(--text-tertiary)', display: 'flex', alignItems: 'center', gap: '0.4rem', textTransform: 'uppercase', letterSpacing: '0.1em' }} className="dh-hide-mobile">
-                            <User size={12} /> {blog.author || 'Avani Intel'}
-                          </span>
                         </div>
-                        <h3 className="dh-heading" style={{ fontSize: '1.6rem', margin: 0, lineHeight: 1.3 }}>{blog.title}</h3>
-                        <div style={{ display: 'flex', gap: '0.8rem', marginTop: '0.3rem' }} className="dh-hide-mobile">
-                          <span style={{ fontSize: '0.65rem', fontWeight: 800, color: 'var(--text-secondary)', background: 'var(--card-bg)', padding: '4px 10px', borderRadius: '100px', border: '1px solid var(--border-faint)' }}>TECHNOLOGY</span>
-                          <span style={{ fontSize: '0.65rem', fontWeight: 800, color: 'var(--text-secondary)', background: 'var(--card-bg)', padding: '4px 10px', borderRadius: '100px', border: '1px solid var(--border-faint)' }}>INSIGHTS</span>
-                        </div>
-                      </div>
-
-                      {/* Right: Read Button */}
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', flexShrink: 0 }} className="dh-blog-action">
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--accent-primary)', fontSize: '0.75rem', fontWeight: 800, letterSpacing: '0.1em' }}>
-                          READ ARTICLE <ArrowRight size={14} />
+                        <h3 className="dh-heading" style={{ fontSize: '1.4rem', margin: '0 0 16px 0', lineHeight: 1.3 }}>{blog.title}</h3>
+                        
+                        <div style={{ marginTop: 'auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '16px', borderTop: '1px solid var(--border-faint)' }}>
+                          <div style={{ display: 'flex', gap: '0.5rem' }}>
+                            <span style={{ fontSize: '0.65rem', fontWeight: 800, color: 'var(--text-secondary)', background: 'var(--bg-primary)', padding: '4px 10px', borderRadius: '100px', border: '1px solid var(--border-light)' }}>
+                              {typeof blog.category === 'object' && blog.category?.name ? blog.category.name : 'INSIGHTS'}
+                            </span>
+                          </div>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--accent-primary)', fontSize: '0.75rem', fontWeight: 800, letterSpacing: '0.1em' }}>
+                            READ <ArrowRight size={14} />
+                          </div>
                         </div>
                       </div>
                     </div>
