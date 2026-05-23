@@ -83,10 +83,11 @@ const DummyHome = () => {
       slug: 'web-app-development',
       index: '01',
       image: '/whatwecreate/webdev.png',
-      customPath: '/web-dev',
       subLinks: [
-        { name: 'Core Tech Stack', path: '/web-dev' },
-        { name: '7-Day Product Launch', path: '/7-day-launch' }
+        { name: 'Custom Websites', path: '/dummyhome/services/web-app-development' },
+        { name: 'Mobile Apps', path: '/dummyhome/services/web-app-development' },
+        { name: 'E-Commerce', path: '/dummyhome/services/web-app-development' },
+        { name: 'UI/UX Design', path: '/dummyhome/services/web-app-development' }
       ]
     },
     {
@@ -99,7 +100,8 @@ const DummyHome = () => {
       subLinks: [
         { name: 'Lead Generation', path: '/dummyhome/services/seo-content-marketing' },
         { name: 'Search Ranking', path: '/dummyhome/services/seo-content-marketing' },
-        { name: 'Brand Authority', path: '/dummyhome/services/seo-content-marketing' }
+        { name: 'Brand Authority', path: '/dummyhome/services/seo-content-marketing' },
+        { name: 'Content Strategy', path: '/dummyhome/services/seo-content-marketing' }
       ]
     },
     {
@@ -110,9 +112,10 @@ const DummyHome = () => {
       index: '03',
       image: '/whatwecreate/aisolutions.webp',
       subLinks: [
-        { name: 'Lead Tracker AI', path: '/projects/lead-management-automation' },
-        { name: 'WhatsApp Auto-Agent', path: '/projects/whatsapp-automation' },
-        { name: 'Workflow Optimizer', path: '/projects/business-process-optimization' }
+        { name: 'Lead Tracker AI', path: '/dummyhome/services/ai-solutions' },
+        { name: 'WhatsApp Auto-Agent', path: '/dummyhome/services/ai-solutions' },
+        { name: 'Workflow Optimizer', path: '/dummyhome/services/ai-solutions' },
+        { name: 'Custom Chatbots', path: '/dummyhome/services/ai-solutions' }
       ]
     },
     {
@@ -121,7 +124,13 @@ const DummyHome = () => {
       description: 'Grow your social presence and connect with your dream audience. We create high-performing campaigns and scroll-stopping posts on Instagram, Facebook, and LinkedIn to build real engagement and drive sales.',
       slug: 'social-media-marketing',
       index: '04',
-      image: '/whatwecreate/socialmedia.png'
+      image: '/whatwecreate/socialmedia.png',
+      subLinks: [
+        { name: 'Campaign Strategy', path: '/dummyhome/services/social-media-marketing' },
+        { name: 'Audience Growth', path: '/dummyhome/services/social-media-marketing' },
+        { name: 'Ad Management', path: '/dummyhome/services/social-media-marketing' },
+        { name: 'Brand Engagement', path: '/dummyhome/services/social-media-marketing' }
+      ]
     },
     {
       icon: '◌',
@@ -129,7 +138,13 @@ const DummyHome = () => {
       description: 'Launch a professional podcast and make your voice heard. We handle everything from recording setup and audio editing to global distribution on Spotify and Apple Podcasts, making hosting a breeze.',
       slug: 'podcast-production',
       index: '05',
-      image: '/whatwecreate/podcast.webp'
+      image: '/whatwecreate/podcast.webp',
+      subLinks: [
+        { name: 'Audio Editing', path: '/dummyhome/services/podcast-production' },
+        { name: 'Global Distribution', path: '/dummyhome/services/podcast-production' },
+        { name: 'Studio Setup', path: '/dummyhome/services/podcast-production' },
+        { name: 'Content Planning', path: '/dummyhome/services/podcast-production' }
+      ]
     },
     {
       icon: '◫',
@@ -137,7 +152,13 @@ const DummyHome = () => {
       description: 'Take control of your finances and plan for a wealthy future. Our expert consultants help you organize your revenue, optimize investments, and build a solid financial blueprint for long-term growth.',
       slug: 'financial-consulting',
       index: '06',
-      image: '/whatwecreate/finance.webp'
+      image: '/whatwecreate/finance.webp',
+      subLinks: [
+        { name: 'Revenue Optimization', path: '/dummyhome/services/financial-consulting' },
+        { name: 'Investment Strategy', path: '/dummyhome/services/financial-consulting' },
+        { name: 'Risk Management', path: '/dummyhome/services/financial-consulting' },
+        { name: 'Tax Planning', path: '/dummyhome/services/financial-consulting' }
+      ]
     },
     {
       icon: '▣',
@@ -145,7 +166,13 @@ const DummyHome = () => {
       description: 'Scale your business with expert guidance and strategy. We analyze your day-to-day operations to find hidden opportunities, streamline workflows, and set you up for long-term, sustainable success.',
       slug: 'business-consultation',
       index: '07',
-      image: '/whatwecreate/consultation.png'
+      image: '/whatwecreate/consultation.png',
+      subLinks: [
+        { name: 'Growth Strategy', path: '/dummyhome/services/business-consultation' },
+        { name: 'Workflow Analysis', path: '/dummyhome/services/business-consultation' },
+        { name: 'Market Expansion', path: '/dummyhome/services/business-consultation' },
+        { name: 'Operational Efficiency', path: '/dummyhome/services/business-consultation' }
+      ]
     },
     {
       icon: '▤',
@@ -153,7 +180,13 @@ const DummyHome = () => {
       description: 'Get the funding you need to grow and expand. We connect you with flexible business loans, working capital, and equipment financing at competitive rates, with quick approvals and hassle-free processing.',
       slug: 'business-loans',
       index: '08',
-      image: '/whatwecreate/loans.png'
+      image: '/whatwecreate/loans.png',
+      subLinks: [
+        { name: 'Working Capital', path: '/dummyhome/services/business-loans' },
+        { name: 'Equipment Financing', path: '/dummyhome/services/business-loans' },
+        { name: 'Fast Approvals', path: '/dummyhome/services/business-loans' },
+        { name: 'Flexible Terms', path: '/dummyhome/services/business-loans' }
+      ]
     },
     {
       icon: '▥',
@@ -161,7 +194,13 @@ const DummyHome = () => {
       description: 'Secure your hard work and protect your business from risks. We offer customized insurance plans to safeguard your assets, employees, and operations, giving you absolute peace of mind.',
       slug: 'business-insurance',
       index: '09',
-      image: '/whatwecreate/insurance.png'
+      image: '/whatwecreate/insurance.png',
+      subLinks: [
+        { name: 'Asset Protection', path: '/dummyhome/services/business-insurance' },
+        { name: 'Liability Coverage', path: '/dummyhome/services/business-insurance' },
+        { name: 'Employee Benefits', path: '/dummyhome/services/business-insurance' },
+        { name: 'Risk Mitigation', path: '/dummyhome/services/business-insurance' }
+      ]
     },
   ];
 

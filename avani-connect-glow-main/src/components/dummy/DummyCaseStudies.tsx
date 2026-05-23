@@ -98,7 +98,7 @@ const DummyCaseStudies = () => {
               onMouseEnter={() => setHovered(i)}
               onMouseLeave={() => setHovered(null)}
             >
-              <Link to={`/projects/${cs.slug}`} style={{ textDecoration: 'none', display: 'block' }}>
+              <Link to={`/dummyhome/projects/${cs.slug}`} style={{ textDecoration: 'none', display: 'block' }}>
                 <div style={{
                   borderRadius: '16px', overflow: 'hidden',
                   border: `1px solid ${hovered === i ? 'var(--border-light)' : 'var(--border-faint)'}`,
