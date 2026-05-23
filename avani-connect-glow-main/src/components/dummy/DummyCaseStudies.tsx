@@ -74,7 +74,7 @@ const DummyCaseStudies = () => {
               REAL RESULTS<br /><span style={{ color: 'transparent', WebkitTextStroke: '1.5px var(--accent-primary)' }}>REAL GROWTH</span>
             </h2>
           </div>
-          <Link to="/case-studies" style={{
+          <Link to="/dummyhome/case-studies" style={{
             display: 'inline-flex', alignItems: 'center', gap: '6px',
             fontFamily: "'Outfit', sans-serif", fontSize: '12px', letterSpacing: '0.15em', fontWeight: 600,
             color: 'var(--accent-primary)', textDecoration: 'none', paddingBottom: '6px',

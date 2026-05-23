@@ -5,14 +5,19 @@ import { motion } from 'framer-motion';
 
 const StickyConsultationButton = ({ to = "/dummyhome/dummyhome/contact" }: { to?: string }) => {
   const [scrollY, setScrollY] = useState(0);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
+    const handleScroll = () => setScrollY(window.scrollY);
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleResize);
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
   const isAtTop = scrollY < 120;
@@ -55,13 +60,13 @@ const StickyConsultationButton = ({ to = "/dummyhome/dummyhome/contact" }: { to?
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              padding: isAtTop ? '14px 28px' : '10px 20px',
+              padding: isAtTop ? (isMobile ? '12px 20px' : '14px 28px') : (isMobile ? '8px 16px' : '10px 20px'),
               background: 'var(--bg-primary, #0A0705)',
               color: 'var(--text-primary, #F0EAD6)',
               borderRadius: '100px',
               fontFamily: "'Outfit', sans-serif",
               fontWeight: 800,
-              fontSize: isAtTop ? '0.75rem' : '0.65rem',
+              fontSize: isAtTop ? (isMobile ? '0.7rem' : '0.75rem') : (isMobile ? '0.6rem' : '0.65rem'),
               textTransform: 'uppercase',
               letterSpacing: '0.15em',
               border: '2px solid var(--accent-primary, #D4AF37)',
@@ -71,13 +76,13 @@ const StickyConsultationButton = ({ to = "/dummyhome/dummyhome/contact" }: { to?
             }}
           >
             <Calendar 
-              size={isAtTop ? 16 : 13} 
+              size={isAtTop ? (isMobile ? 14 : 16) : (isMobile ? 12 : 13)} 
               style={{ 
                 color: 'var(--accent-primary, #D4AF37)', 
                 marginRight: isAtTop ? '10px' : '6px' 
               }} 
             />
-            <span>{isAtTop ? "GET FREE CONSULTATION" : "CONSULTATION"}</span>
+            <span>{isAtTop ? (isMobile ? "FREE CONSULT" : "GET FREE CONSULTATION") : (isMobile ? "BOOK" : "CONSULTATION")}</span>
             <Sparkles 
               size={12} 
               style={{ 

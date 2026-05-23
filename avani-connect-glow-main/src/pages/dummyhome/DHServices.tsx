@@ -444,7 +444,7 @@ const DHServices = () => {
               </p>
               <div style={{ display: 'flex', gap: '2rem', justifyContent: 'center' }} className="dh-responsive-grid">
                 <Link to="/dummyhome/contact" className="dh-btn-fill">INITIATE PROJECT <ArrowRight size={18} /></Link>
-                <Link to="/dummyhome/contact" className="dh-btn-ghost">VIEW PORTFOLIO</Link>
+                <Link to="/dummyhome/projects" className="dh-btn-ghost">VIEW PORTFOLIO</Link>
               </div>
             </motion.div>
           </div>

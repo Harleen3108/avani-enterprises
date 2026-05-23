@@ -23,7 +23,7 @@ const DummyProjects = ({ clientLogos }: any) => {
               TRANSFORMING<br /><span style={{ color: 'transparent', WebkitTextStroke: '1.5px var(--accent-primary)' }}>BUSINESSES</span>
             </h2>
           </div>
-          <Link to="/case-studies" style={{
+          <Link to="/dummyhome/projects" style={{
             display: 'inline-flex', alignItems: 'center', gap: '6px',
             fontFamily: "'Outfit', sans-serif", fontSize: '12px', letterSpacing: '0.15em', fontWeight: 600,
             color: 'var(--accent-primary)', textDecoration: 'none', paddingBottom: '6px',

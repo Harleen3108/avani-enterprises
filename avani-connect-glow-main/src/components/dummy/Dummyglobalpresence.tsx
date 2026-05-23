@@ -194,7 +194,7 @@ const DummyGlobalPresence = () => {
               </div>
             ))}
           </div>
-          <Link to="/global-presence" style={{
+          <Link to="/dummyhome/global-presence" style={{
             display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '10px 24px',
             background: 'var(--accent-primary)', color: 'var(--bg-primary)',
             borderRadius: '100px', textDecoration: 'none', fontFamily: "'Outfit', sans-serif",

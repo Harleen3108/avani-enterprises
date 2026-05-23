@@ -21,7 +21,7 @@ const DummyBlog = ({ blogs, loadingBlogs }: any) => {
             </h2>
           </div>
           {blogs.length > 3 && (
-            <Link to="/blog" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontFamily: "'Outfit', sans-serif", fontSize: '12px', letterSpacing: '0.15em', fontWeight: 600, color: 'var(--accent-primary)', textDecoration: 'none', paddingBottom: '6px', borderBottom: '1px solid var(--border-light)', transition: 'all 0.3s' }}
+            <Link to="/dummyhome/blog" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontFamily: "'Outfit', sans-serif", fontSize: '12px', letterSpacing: '0.15em', fontWeight: 600, color: 'var(--accent-primary)', textDecoration: 'none', paddingBottom: '6px', borderBottom: '1px solid var(--border-light)', transition: 'all 0.3s' }}
               onMouseEnter={e => (e.currentTarget as HTMLElement).style.borderBottomColor = 'var(--accent-primary)'}
               onMouseLeave={e => (e.currentTarget as HTMLElement).style.borderBottomColor = 'var(--border-light)'}>
               VIEW ALL BLOGS <ArrowUpRight size={12} />
@@ -42,7 +42,7 @@ const DummyBlog = ({ blogs, loadingBlogs }: any) => {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '18px' }} className="dummy-blog-grid">
             {blogs.slice(0, 3).map((blog: any, i: number) => (
               <motion.div key={blog._id} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}>
-                <Link to={`/blog/${blog.slug}`} style={{ textDecoration: 'none', display: 'block' }}>
+                <Link to={`/dummyhome/blog/${blog.slug}`} style={{ textDecoration: 'none', display: 'block' }}>
                   <div
                     style={{ borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--border-faint)', background: 'var(--card-bg)', transition: 'all 0.4s' }}
                     onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent-primary)'; (e.currentTarget as HTMLElement).style.transform = 'translateY(-3px)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 16px 40px rgba(0,0,0,0.4)'; }}

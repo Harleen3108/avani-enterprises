@@ -215,12 +215,12 @@ const DummyHome = () => {
   ];
 
   const clientLogos = [
-    { name: 'Indus group of Institution', logo: '/indus.jpeg', video: '/indus.mp4', image: '/indus1.png', link: '/projects/indus' },
-    { name: 'Policicue', logo: '/policucue.jpeg', video: '/policicue.mp4', image: '/policy1.png', link: '/projects/policicue' },
-    { name: 'Frd Nutrition', logo: '/frd-nutrition-new.png', video: '/FrdNutrition.mp4', image: '/frd-nutrition-new.png', link: '/projects/frd-nutrition' },
-    { name: 'Hi-tech Homes', logo: '/hitech.jpeg', video: '/hitech.mp4', image: '/hitech1.png', link: '/projects/hitech-homes' },
-    { name: 'Sanjeevni Hospital', logo: '/sanjeevni.jpeg', video: '/Sanjeevni.mp4', image: '/sanjeevni1.png', link: '/projects/sanjeevni-hospital' },
-    { name: 'Rohtak Shoe co.', logo: '/shoes.jpeg', video: '/Rohtak Shoe.mp4', image: '/shoes1.png', link: '/projects/rohtak-shoe' },
+    { name: 'Indus group of Institution', logo: '/indus.jpeg', video: '/indus.mp4', image: '/indus1.png', link: '/dummyhome/projects/indus' },
+    { name: 'Policicue', logo: '/policucue.jpeg', video: '/policicue.mp4', image: '/policy1.png', link: '/dummyhome/projects/policicue' },
+    { name: 'Frd Nutrition', logo: '/frd-nutrition-new.png', video: '/FrdNutrition.mp4', image: '/frd-nutrition-new.png', link: '/dummyhome/projects/frd-nutrition' },
+    { name: 'Hi-tech Homes', logo: '/hitech.jpeg', video: '/hitech.mp4', image: '/hitech1.png', link: '/dummyhome/projects/hitech-homes' },
+    { name: 'Sanjeevni Hospital', logo: '/sanjeevni.jpeg', video: '/Sanjeevni.mp4', image: '/sanjeevni1.png', link: '/dummyhome/projects/sanjeevni-hospital' },
+    { name: 'Rohtak Shoe co.', logo: '/shoes.jpeg', video: '/Rohtak Shoe.mp4', image: '/shoes1.png', link: '/dummyhome/projects/rohtak-shoe' },
   ];
 
   return (

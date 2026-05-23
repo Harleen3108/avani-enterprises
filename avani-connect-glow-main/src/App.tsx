@@ -178,6 +178,8 @@ import DHContact from "./pages/dummyhome/DHContact";
 import DHProjects from "./pages/dummyhome/DHProjects";
 import DHTeam from "./pages/dummyhome/DHTeam";
 import DHBlog from "./pages/dummyhome/DHBlog";
+import DHBlogDetail from "./pages/dummyhome/DHBlogDetail";
+import DHNewsletterDetail from "./pages/dummyhome/DHNewsletterDetail";
 import DHProducts from "./pages/dummyhome/DHProducts";
 import DHGlobalPresence from "./pages/dummyhome/DHGlobalPresence";
 import DHCareers from "./pages/dummyhome/DHCareers";
@@ -256,10 +258,12 @@ const AppLayout = () => {
             <Route path="projects" element={<DHProjects />} />
             <Route path="contact" element={<DHContact />} />
             <Route path="blog" element={<DHBlog />} />
+            <Route path="blog/:slug" element={<DHBlogDetail />} />
             <Route path="global-presence" element={<DHGlobalPresence />} />
             <Route path="careers" element={<DHCareers />} />
             <Route path="careers/:id" element={<DHCareerDetail />} />
             <Route path="newsletters" element={<DHNewsletters />} />
+            <Route path="newsletters/:slug" element={<DHNewsletterDetail />} />
             <Route path="courses" element={<DHCourses />} />
             <Route path="case-studies" element={<DHCaseStudies />} />
             <Route path="get-consultation" element={<GetConsultation />} />
@@ -316,7 +320,7 @@ const AppLayout = () => {
           <Route path="/links" element={<Links />} />
           <Route path="/courses" element={<Courses />} />
           <Route path="/courses/:id" element={<CourseDetail />} />
-          <Route path="/dummyhome/contact" element={<GetConsultation />} />
+          <Route path="/get-consultation" element={<GetConsultation />} />
 
           {/* ये नया route जोड़ा है */}
           <Route path="/thank-you" element={<ThankYou />} />

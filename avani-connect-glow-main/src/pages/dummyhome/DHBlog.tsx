@@ -111,7 +111,7 @@ const DHBlog = () => {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }} className="dh-blog-list">
               {blogs.map((blog, i) => (
                 <motion.div key={blog._id} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: i * 0.05 }}>
-                  <Link to={`/blog/${blog.slug}`} style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>
+                  <Link to={`/dummyhome/blog/${blog.slug}`} style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>
                     <div style={{
                       display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '2rem 0',
                       borderBottom: '1px solid var(--border-faint)', cursor: 'pointer', transition: 'all 0.3s ease',

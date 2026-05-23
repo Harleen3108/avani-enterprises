@@ -182,42 +182,80 @@ const DHCaseStudies = () => {
         <Grain />
         <GridBg size={30} opacity={0.03} />
         <div className="dh-container" style={{ position: 'relative', zIndex: 10 }}>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          <div className="dh-case-study-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))', gap: '2rem' }}>
             {caseStudies.map((study, i) => (
               <motion.div key={study.id} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: i * 0.1 }}>
                 <div style={{
-                  background: 'linear-gradient(90deg, var(--card-bg) 0%, rgba(240, 235, 225, 0.05) 100%)', 
-                  borderRadius: '12px', border: '1px solid var(--border-faint)', borderLeft: '4px solid var(--accent-primary)',
-                  overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1.5rem',
+                  background: 'linear-gradient(135deg, var(--card-bg) 0%, rgba(240, 235, 225, 0.05) 100%)', 
+                  borderRadius: '16px', border: '1px solid var(--border-light)',
+                  overflow: 'hidden', display: 'flex', flexDirection: 'column', padding: '0',
                   backdropFilter: 'blur(10px)', transition: 'all 0.3s ease',
+                  boxShadow: '0 10px 30px rgba(0,0,0,0.2)',
                 }}
-                  onMouseEnter={e => { e.currentTarget.style.transform = 'translateX(8px)'; e.currentTarget.style.borderColor = 'var(--accent-primary)'; e.currentTarget.style.background = 'linear-gradient(90deg, rgba(240, 235, 225, 0.08) 0%, rgba(240, 235, 225, 0.15) 100%)'; }}
-                  onMouseLeave={e => { e.currentTarget.style.transform = 'translateX(0)'; e.currentTarget.style.borderColor = 'var(--border-faint)'; e.currentTarget.style.background = 'linear-gradient(90deg, var(--card-bg) 0%, rgba(240, 235, 225, 0.05) 100%)'; }}
-                  className="dh-responsive-flex-bar"
+                  onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-6px)'; e.currentTarget.style.borderColor = 'var(--accent-primary)'; e.currentTarget.style.boxShadow = '0 20px 40px rgba(0,0,0,0.4)'; }}
+                  onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.borderColor = 'var(--border-light)'; e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.2)'; }}
                 >
-                  <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
-                    <div style={{ width: '80px', height: '80px', borderRadius: '8px', overflow: 'hidden', flexShrink: 0 }}>
-                      <img src={study.image} alt={study.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                    </div>
-                    <div>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', marginBottom: '0.3rem' }}>
-                        <span style={{ fontSize: '0.65rem', fontWeight: 800, color: 'var(--accent-primary)', letterSpacing: '0.1em' }}>CLIENT: {study.client.toUpperCase()}</span>
-                        <span style={{ fontSize: '0.65rem', fontWeight: 800, color: 'var(--text-tertiary)', background: 'var(--bg-primary)', padding: '2px 8px', borderRadius: '100px' }}>{study.category.toUpperCase()}</span>
-                      </div>
-                      <h3 className="dh-heading" style={{ fontSize: '1.2rem', marginBottom: '0.3rem' }}>{study.title}</h3>
-                      <p className="dh-body" style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', margin: 0 }}>{study.challenge}</p>
+                  {/* Image Header */}
+                  <div style={{ width: '100%', height: '220px', position: 'relative' }}>
+                    <img src={study.image} alt={study.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, var(--card-bg) 0%, transparent 100%)' }} />
+                    <div style={{ position: 'absolute', bottom: '1rem', left: '1.5rem', padding: '4px 12px', background: 'var(--accent-primary)', color: 'var(--bg-primary)', borderRadius: '100px', fontSize: '0.65rem', fontWeight: 800, letterSpacing: '0.1em' }}>
+                      {study.industry.toUpperCase()}
                     </div>
                   </div>
 
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', flexShrink: 0 }}>
-                    <div style={{ padding: '8px 12px', background: 'var(--accent-hover)', borderRadius: '6px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                      <BarChart3 size={14} style={{ color: 'var(--accent-primary)' }} />
-                      <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--accent-primary)' }}>{Object.values(study.results)[0]}</span>
+                  {/* Content Body */}
+                  <div style={{ padding: '2rem 1.5rem', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
+                    
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', marginBottom: '1rem' }}>
+                      <span style={{ fontSize: '0.65rem', fontWeight: 800, color: 'var(--accent-primary)', letterSpacing: '0.1em' }}>CLIENT: {study.client.toUpperCase()}</span>
+                      <span style={{ fontSize: '0.65rem', fontWeight: 800, color: 'var(--text-tertiary)', background: 'rgba(255,255,255,0.05)', padding: '4px 10px', border: '1px solid var(--border-faint)', borderRadius: '100px' }}>{study.category.toUpperCase().replace('-', ' ')}</span>
                     </div>
 
-                    <Link to="/case-studies" style={{ textDecoration: 'none' }}>
-                      <button className="dh-btn-ghost" style={{ padding: '8px 16px', fontSize: '0.75rem', borderRadius: '6px', border: '1px solid var(--border-light)' }}>READ <ArrowRight size={12} style={{ marginLeft: '4px' }} /></button>
-                    </Link>
+                    <h3 className="dh-heading" style={{ fontSize: '1.4rem', marginBottom: '1rem', lineHeight: 1.3 }}>{study.title}</h3>
+                    
+                    <div style={{ marginBottom: '1.5rem' }}>
+                      <h4 style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Challenge</h4>
+                      <p className="dh-body" style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', margin: 0 }}>{study.challenge}</p>
+                    </div>
+
+                    <div style={{ marginBottom: '2rem' }}>
+                      <h4 style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Solution</h4>
+                      <p className="dh-body" style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', margin: 0 }}>{study.solution}</p>
+                    </div>
+
+                    {/* Results Grid */}
+                    <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid var(--border-faint)', borderRadius: '12px', padding: '1.2rem', marginBottom: '2rem' }}>
+                      <h4 style={{ fontSize: '0.65rem', color: 'var(--accent-light)', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.15em', fontWeight: 800 }}>Metrics of Success</h4>
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                        {Object.entries(study.results).map(([key, value]) => (
+                          <div key={key}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '4px' }}>
+                              <BarChart3 size={10} style={{ color: 'var(--accent-primary)' }} />
+                              <span style={{ fontSize: '0.6rem', color: 'var(--text-tertiary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{key}</span>
+                            </div>
+                            <div style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)' }}>{String(value)}</div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Footer Info */}
+                    <div style={{ marginTop: 'auto', paddingTop: '1.5rem', borderTop: '1px solid var(--border-faint)' }}>
+                      <div style={{ display: 'flex', gap: '1.5rem', marginBottom: '1.5rem', fontSize: '0.75rem', color: 'var(--text-tertiary)', fontWeight: 600 }}>
+                        <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><Globe size={12} style={{ color: 'var(--accent-primary)' }}/> {study.duration}</span>
+                        <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><BarChart3 size={12} style={{ color: 'var(--accent-primary)' }}/> {study.team}</span>
+                      </div>
+                      
+                      {/* Technologies */}
+                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                        {study.technologies.map(tech => (
+                          <span key={tech} style={{ padding: '4px 10px', background: 'rgba(212, 175, 55, 0.1)', color: 'var(--accent-light)', border: '1px solid rgba(212, 175, 55, 0.2)', borderRadius: '4px', fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.05em' }}>
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
                   </div>
                 </div>
               </motion.div>
@@ -228,20 +266,8 @@ const DHCaseStudies = () => {
 
       <style>{`
         @media (max-width: 768px) {
-          .dh-responsive-flex-bar {
-            flex-direction: column !important;
-            align-items: flex-start !important;
-            gap: 1.5rem !important;
-          }
-          .dh-responsive-flex-bar > div {
-            width: 100% !important;
-            flex-direction: column !important;
-            align-items: flex-start !important;
-          }
-          .dh-responsive-flex-bar img {
-            width: 100% !important;
-            height: 150px !important;
-            object-fit: cover !important;
+          .dh-case-study-grid {
+            grid-template-columns: 1fr !important;
           }
         }
       `}</style>

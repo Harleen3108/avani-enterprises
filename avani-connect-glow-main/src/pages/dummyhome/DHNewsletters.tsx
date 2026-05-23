@@ -180,7 +180,7 @@ const DHNewsletters = () => {
                     >
                       <Download size={14} /> GET PDF
                     </button>
-                    <Link to={`/newsletters/${item.slug}`} style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '10px 20px', borderRadius: '6px', border: '1px solid var(--border-light)', background: 'transparent', color: 'var(--text-primary)', cursor: 'pointer', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.1em', transition: 'all 0.3s', textDecoration: 'none' }}
+                    <Link to={`/dummyhome/newsletters/${item.slug}`} style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '10px 20px', borderRadius: '6px', border: '1px solid var(--border-light)', background: 'transparent', color: 'var(--text-primary)', cursor: 'pointer', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.1em', transition: 'all 0.3s', textDecoration: 'none' }}
                       onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--text-primary)'; }}
                       onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border-light)'; }}
                     >

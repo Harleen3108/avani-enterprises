@@ -50,7 +50,7 @@ const DHProjectDetail = () => {
     );
   }
 
-  const { line1, line2, line3 } = getProjectTitleLines(project.slug, project.title);
+
 
   return (
     <div className="dh-project-detail-page" style={{ background: 'var(--bg-primary)', color: 'var(--text-primary)', minHeight: '100vh', overflow: 'hidden' }}>
