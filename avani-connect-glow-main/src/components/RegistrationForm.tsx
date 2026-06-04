@@ -1435,9 +1435,9 @@ export default function RegistrationForm({ uniqueConsentId, source, isEmbedded =
           {(() => {
             const textMain = isEmbedded ? "text-slate-900" : "text-foreground";
             const textMuted = isEmbedded ? "text-slate-600" : "text-muted-foreground";
-            const iconColor = isEmbedded ? "text-slate-500" : "text-muted-foreground";
-            const placeholderColor = isEmbedded ? "placeholder:text-slate-500/70" : "placeholder:text-muted-foreground/70";
-            const inputColor = isEmbedded ? "text-slate-900" : "text-foreground";
+            const iconColor = "text-slate-500";
+            const placeholderColor = "placeholder:text-slate-500/70";
+            const inputColor = "text-slate-900";
             const checkboxLabelColor = isEmbedded ? "text-slate-800" : "text-foreground/80";
 
             return (
@@ -1469,7 +1469,7 @@ export default function RegistrationForm({ uniqueConsentId, source, isEmbedded =
               {/* Name */}
               <div className="relative w-full">
                 <div className={cn("absolute left-3 top-1/2 -translate-y-1/2", iconColor)}>
-                  <User className="w-4 h-4 sm:w-5 sm:h-5" />
+                  <User className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
                 </div>
                 <Input
                   ref={nameRef}
@@ -1480,7 +1480,7 @@ export default function RegistrationForm({ uniqueConsentId, source, isEmbedded =
                     setFormData((prev) => ({ ...prev, name: val }));
                     validateField("name", val);
                   }}
-                  className={cn("pl-10 sm:pl-12 border-border/60 focus:border-primary py-2 sm:py-2.5 text-sm sm:text-base w-full", isEmbedded ? "bg-white" : "bg-background/80", inputColor, placeholderColor)}
+                  className={cn("pl-10 sm:pl-12 border-border/60 focus:border-primary py-2 sm:py-2.5 text-base w-full", "bg-white hover:bg-slate-50 transition-colors", inputColor, placeholderColor)}
                   aria-label="Full name"
                   inputMode="text"
                   autoComplete="name"
@@ -1493,7 +1493,7 @@ export default function RegistrationForm({ uniqueConsentId, source, isEmbedded =
               {/* Email */}
               <div className="relative w-full">
                 <div className={cn("absolute left-3 top-1/2 -translate-y-1/2", iconColor)}>
-                  <Mail className="w-4 h-4 sm:w-5 sm:h-5" />
+                  <Mail className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
                 </div>
                 <Input
                   ref={emailRef}
@@ -1505,7 +1505,7 @@ export default function RegistrationForm({ uniqueConsentId, source, isEmbedded =
                     setFormData((prev) => ({ ...prev, email: val }));
                     validateField("email", val);
                   }}
-                  className={cn("pl-10 sm:pl-12 border-border/60 focus:border-primary py-2 sm:py-2.5 text-sm sm:text-base w-full", isEmbedded ? "bg-white" : "bg-background/80", inputColor, placeholderColor)}
+                  className={cn("pl-10 sm:pl-12 border-border/60 focus:border-primary py-2 sm:py-2.5 text-base w-full", "bg-white hover:bg-slate-50 transition-colors", inputColor, placeholderColor)}
                   aria-label="Email address"
                   autoComplete="email"
                 />
@@ -1517,7 +1517,7 @@ export default function RegistrationForm({ uniqueConsentId, source, isEmbedded =
               {/* City & State */}
               <div className="relative w-full">
                 <div className={cn("absolute left-3 top-1/2 -translate-y-1/2", iconColor)}>
-                  <MapPin className="w-4 h-4 sm:w-5 sm:h-5" />
+                  <MapPin className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
                 </div>
                 <Input
                   ref={cityStateRef}
@@ -1528,7 +1528,7 @@ export default function RegistrationForm({ uniqueConsentId, source, isEmbedded =
                     setFormData((prev) => ({ ...prev, cityState: val }));
                     validateField("cityState", val);
                   }}
-                  className={cn("pl-10 sm:pl-12 border-border/60 focus:border-primary py-2 sm:py-2.5 text-sm sm:text-base w-full", isEmbedded ? "bg-white" : "bg-background/80", inputColor, placeholderColor)}
+                  className={cn("pl-10 sm:pl-12 border-border/60 focus:border-primary py-2 sm:py-2.5 text-base w-full", "bg-white hover:bg-slate-50 transition-colors", inputColor, placeholderColor)}
                   aria-label="City and State"
                   inputMode="text"
                   autoComplete="address-level2"
@@ -1547,7 +1547,7 @@ export default function RegistrationForm({ uniqueConsentId, source, isEmbedded =
                         variant="outline"
                         role="combobox"
                         aria-expanded={openCountryCode}
-                        className={cn("border-border/60 py-2 sm:py-2.5 text-sm sm:text-base w-auto justify-between", isEmbedded ? "bg-white" : "bg-background/80", inputColor)}
+                        className={cn("border-border/60 py-2 sm:py-2.5 text-base w-auto justify-between", "bg-white hover:bg-slate-50 transition-colors", inputColor)}
                       >
                         <span className={inputColor}>
                           {selectedCountryCode
@@ -1594,7 +1594,7 @@ export default function RegistrationForm({ uniqueConsentId, source, isEmbedded =
 
                 <div className="flex-1 relative w-full">
                   <div className={cn("absolute left-3 top-1/2 -translate-y-1/2", iconColor)}>
-                    <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
+                    <Phone className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
                   </div>
                   <Input
                     ref={phoneRef}
@@ -1608,7 +1608,7 @@ export default function RegistrationForm({ uniqueConsentId, source, isEmbedded =
                         validateField("phone", val);
                       }
                     }}
-                    className={cn("pl-10 sm:pl-12 border-border/60 focus:border-primary py-2 sm:py-2.5 text-sm sm:text-base w-full", isEmbedded ? "bg-white" : "bg-background/80", inputColor, placeholderColor)}
+                    className={cn("pl-10 sm:pl-12 border-border/60 focus:border-primary py-2 sm:py-2.5 text-base w-full", "bg-white hover:bg-slate-50 transition-colors", inputColor, placeholderColor)}
                     aria-label="Phone number"
                     autoComplete="tel-national"
                   />
@@ -1624,18 +1624,20 @@ export default function RegistrationForm({ uniqueConsentId, source, isEmbedded =
                   type="button"
                   variant="outline"
                   className={cn(
-                    "w-full justify-between pl-3 text-left font-normal border-border/60 py-2 sm:py-2.5 text-sm sm:text-base h-auto hover:bg-background/90",
-                    isEmbedded ? "bg-white" : "bg-background/80",
+                    "w-full justify-between pl-3 text-left font-normal border-border/60 py-2 sm:py-2.5 text-base h-auto hover:bg-slate-50",
+                    "bg-white hover:bg-slate-50 transition-colors",
                     inputColor,
                     !formData.service?.length && iconColor
                   )}
                   onClick={() => setIsServicesOpen(!isServicesOpen)}
                 >
-                  <span className={cn("flex items-center gap-2 truncate font-medium", inputColor)}>
-                    <Briefcase className={cn("w-4 h-4 sm:w-5 sm:h-5", iconColor)} />
-                    {formData.service?.length
-                      ? formData.service.join(", ")
-                      : "Select Service(s) of Interest *"}
+                  <span className={cn("flex items-center gap-2 font-medium w-full overflow-hidden text-left", inputColor)}>
+                    <Briefcase className={cn("w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0", iconColor)} />
+                    <span className="truncate w-full">
+                      {formData.service?.length
+                        ? formData.service.join(", ")
+                        : "Select Service(s) *"}
+                    </span>
                   </span>
                   <ChevronDown
                     className={cn(
@@ -1666,7 +1668,7 @@ export default function RegistrationForm({ uniqueConsentId, source, isEmbedded =
                             <Check className="w-3 h-3 text-primary-foreground" />
                           )}
                         </div>
-                        <span className={cn("text-sm sm:text-base select-none", inputColor)}>{service}</span>
+                        <span className={cn("text-base select-none", inputColor)}>{service}</span>
                       </div>
                     ))}
                   </div>
@@ -1680,12 +1682,14 @@ export default function RegistrationForm({ uniqueConsentId, source, isEmbedded =
                 <Button
                   type="button"
                   variant="outline"
-                  className={cn("w-full justify-between pl-3 text-left font-normal border-border/60 py-2 sm:py-2.5 text-sm sm:text-base h-auto hover:bg-background/90", isEmbedded ? "bg-white" : "bg-background/80", inputColor)}
+                  className={cn("w-full justify-between pl-3 text-left font-normal border-border/60 py-2 sm:py-2.5 text-base h-auto hover:bg-slate-50", "bg-white hover:bg-slate-50 transition-colors", inputColor)}
                   onClick={() => setIsBusinessOpen(!isBusinessOpen)}
                 >
-                  <span className={cn("flex items-center gap-2 truncate font-medium", inputColor)}>
-                    <FileText className={cn("w-4 h-4 sm:w-5 sm:h-5", iconColor)} />
-                    {"Business Category / Notes (optional)"}
+                  <span className={cn("flex items-center gap-2 font-medium w-full overflow-hidden text-left", inputColor)}>
+                    <FileText className={cn("w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0", iconColor)} />
+                    <span className="truncate w-full">
+                      {"Business Category / Notes (optional)"}
+                    </span>
                   </span>
                   <ChevronDown
                     className={cn(
@@ -1707,7 +1711,7 @@ export default function RegistrationForm({ uniqueConsentId, source, isEmbedded =
                         setFormData((prev) => ({ ...prev, businessCategory: val }));
                         validateField("businessCategory", val);
                       }}
-                      className={cn("w-full min-h-[100px] sm:min-h-[120px] resize-none p-3 rounded-md border border-border/60 focus:border-primary text-sm md:text-base outline-none", isEmbedded ? "bg-white" : "bg-background/80", inputColor, placeholderColor)}
+                      className={cn("w-full min-h-[100px] sm:min-h-[120px] resize-none p-3 rounded-md border border-border/60 focus:border-primary text-sm md:text-base outline-none", "bg-white hover:bg-slate-50 transition-colors", inputColor, placeholderColor)}
                       aria-label="Business category or notes"
                     />
                   </div>
