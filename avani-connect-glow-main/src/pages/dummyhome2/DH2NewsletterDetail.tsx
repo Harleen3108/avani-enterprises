@@ -15,7 +15,9 @@ const DH2NewsletterDetail = () => {
   useEffect(() => {
     const fetchNewsletter = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}/api/newsletters/${slug}`);
+        const response = await fetch(`${API_BASE_URL}/api/newsletters/${slug}`, {
+          headers: { 'Accept': 'application/json' }
+        });
         const data = await response.json();
         if (data.success) setNewsletter(data.data);
       } catch (error) {

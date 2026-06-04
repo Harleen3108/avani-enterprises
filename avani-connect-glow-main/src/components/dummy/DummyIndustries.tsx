@@ -45,13 +45,22 @@ const DummyIndustries = () => {
         </motion.div>
 
         {/* Organic Floating Bubble Cluster */}
-        <div className="dh-industry-cluster" style={{ display: 'grid', gap: '24px', justifyContent: 'center', padding: '40px 0' }}>
+        <div className="dh-industry-cluster" style={{ 
+          display: 'flex', 
+          flexWrap: 'wrap', 
+          justifyContent: 'center', 
+          alignItems: 'center',
+          padding: '60px 0',
+          maxWidth: '800px',
+          margin: '0 auto'
+        }}>
           {industries.map((ind, i) => {
             const Icon = ind.icon;
-            // Create a staggered floating effect by varying duration and delay
             const floatDuration = 4 + (i % 3);
             const floatDelay = i * 0.2;
-            const floatOffset = i % 2 === 0 ? 15 : -15;
+            const floatOffset = i % 2 === 0 ? 12 : -12;
+            // Create a honeycomb vertical offset
+            const isEven = i % 2 === 0;
 
             return (
               <motion.div
@@ -60,20 +69,25 @@ const DummyIndustries = () => {
                 whileInView={{ opacity: 1, scale: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ 
-                  opacity: { delay: i * 0.1, duration: 0.6 },
-                  scale: { delay: i * 0.1, duration: 0.6, ease: [0.22, 1, 0.36, 1] },
-                  y: { delay: i * 0.1, duration: 0.6, ease: "easeOut" }
+                  opacity: { delay: i * 0.05, duration: 0.5 },
+                  scale: { delay: i * 0.05, duration: 0.5, ease: [0.22, 1, 0.36, 1] },
+                  y: { delay: i * 0.05, duration: 0.5, ease: "easeOut" }
                 }}
                 className="dh-industry-bubble-wrapper"
-                style={{ display: 'flex', justifyContent: 'center' }}
+                style={{ 
+                  display: 'flex', 
+                  justifyContent: 'center',
+                  margin: '-10px',
+                  marginTop: isEven ? '30px' : '-30px',
+                  zIndex: 10 - i,
+                }}
               >
                 <motion.div
                   animate={{ y: [0, floatOffset, 0] }}
                   transition={{ duration: floatDuration, delay: floatDelay, repeat: Infinity, ease: "easeInOut" }}
                   style={{
-                    width: '100%',
-                    aspectRatio: '1/1',
-                    maxWidth: '180px',
+                    width: '130px',
+                    height: '130px',
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
@@ -117,18 +131,18 @@ const DummyIndustries = () => {
                   }}
                 >
                   <div className="ind-icon" style={{ display: 'flex', transition: 'all 0.4s cubic-bezier(0.22, 1, 0.36, 1)', color: 'var(--text-secondary)' }}>
-                    <Icon size={32} strokeWidth={1.5} />
+                    <Icon size={24} strokeWidth={1.5} />
                   </div>
                   <div className="ind-text" style={{
                     fontFamily: "'Outfit', sans-serif",
-                    fontSize: '0.85rem', 
+                    fontSize: '0.75rem', 
                     fontWeight: 600, 
                     color: 'var(--text-secondary)',
                     letterSpacing: '0.05em', 
                     transition: 'color 0.4s ease',
                     textTransform: 'uppercase',
                     textAlign: 'center',
-                    lineHeight: 1.2
+                    lineHeight: 1.1
                   }}>
                     {ind.label}
                   </div>
@@ -139,29 +153,30 @@ const DummyIndustries = () => {
         </div>
       </div>
       <style>{`
-        .dh-industry-cluster {
-          grid-template-columns: repeat(4, 1fr);
+        .dh-industry-bubble-wrapper:hover {
+          z-index: 30 !important;
         }
-        @media (max-width: 1024px) {
-          .dh-industry-cluster {
-            grid-template-columns: repeat(3, 1fr);
-          }
+        .dh-industry-bubble-wrapper > div {
+          width: 130px !important;
+          height: 130px !important;
+          padding: 16px !important;
         }
         @media (max-width: 768px) {
           .dh-industry-cluster {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 16px !important;
+            padding: 20px 0 !important;
           }
           .dh-industry-bubble-wrapper > div {
-            max-width: 150px !important;
-            padding: 16px !important;
+            width: 110px !important;
+            height: 110px !important;
+            padding: 12px !important;
+            gap: 8px !important;
           }
           .ind-icon svg {
-            width: 24px !important;
-            height: 24px !important;
+            width: 20px !important;
+            height: 20px !important;
           }
           .ind-text {
-            font-size: 0.75rem !important;
+            font-size: 0.65rem !important;
           }
         }
       `}</style>

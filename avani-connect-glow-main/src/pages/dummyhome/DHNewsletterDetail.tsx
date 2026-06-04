@@ -16,7 +16,9 @@ const DHNewsletterDetail = () => {
     const fetchNewsletter = async () => {
       try {
         const backendUrl = getBackendUrl();
-        const response = await fetch(`${backendUrl}/api/newsletters/${slug}`);
+        const response = await fetch(`${backendUrl}/api/newsletters/${slug}`, {
+          headers: { 'Accept': 'application/json' }
+        });
         const data = await response.json();
         if (data.success) setNewsletter(data.data);
       } catch (error) {

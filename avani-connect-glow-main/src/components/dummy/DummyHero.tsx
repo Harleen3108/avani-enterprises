@@ -53,7 +53,6 @@ const AmbientParticles = () => {
 
 const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
   const [wordIndex, setWordIndex] = useState(0);
-  const [showReel, setShowReel] = useState(false);
   const glowRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollY } = useScroll();
@@ -185,25 +184,7 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
                   BOOK CONSULTATION <ArrowRight size={14} />
                 </Link>
 
-                {/* Watch Reel button */}
-                <button onClick={() => setShowReel(true)} style={{
-                  display: 'inline-flex', alignItems: 'center', gap: '10px', padding: '16px 36px',
-                  background: 'var(--card-bg)', color: 'var(--text-primary)', border: '1px solid var(--border-faint)',
-                  borderRadius: '6px', cursor: 'pointer', fontFamily: "'Outfit', sans-serif", fontSize: '15px',
-                  letterSpacing: '0.12em', backdropFilter: 'blur(10px)', transition: 'all 0.3s', fontWeight: 700,
-                }}
-                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent-primary)'; (e.currentTarget as HTMLElement).style.color = 'var(--accent-primary)'; }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-faint)'; (e.currentTarget as HTMLElement).style.color = 'var(--text-primary)'; }}
-                >
-                  <div style={{
-                    width: '32px', height: '32px', borderRadius: '50%',
-                    background: 'var(--accent-hover)', border: '1px solid var(--border-light)',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  }}>
-                    <Play size={12} fill="var(--accent-primary)" color="var(--accent-primary)" />
-                  </div>
-                  WATCH REEL
-                </button>
+
               </motion.div>
 
               {/* Stats row */}
@@ -341,64 +322,6 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
         `}</style>
       </section>
 
-      {/* Video Reel Modal */}
-      <AnimatePresence>
-        {showReel && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            onClick={() => setShowReel(false)}
-            style={{
-              position: 'fixed', inset: 0, zIndex: 10000,
-              background: 'rgba(0,0,0,0.92)', backdropFilter: 'blur(20px)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              cursor: 'pointer',
-            }}
-          >
-            <motion.div
-              initial={{ scale: 0.85, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.85, opacity: 0 }}
-              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-              onClick={e => e.stopPropagation()}
-              style={{ width: '90%', maxWidth: '900px', aspectRatio: '16/9', borderRadius: '16px', overflow: 'hidden', border: '1px solid var(--border-light)', position: 'relative', background: 'var(--bg-primary)' }}
-            >
-              {/* Close button */}
-              <button onClick={() => setShowReel(false)} style={{
-                position: 'absolute', top: '24px', right: '24px', width: '48px', height: '48px', borderRadius: '50%',
-                background: 'var(--glass-bg)', border: '1px solid var(--border-light)',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                cursor: 'pointer', color: 'var(--text-primary)', backdropFilter: 'blur(10px)', transition: 'all 0.3s',
-              }}
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'var(--accent-hover)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent-primary)'; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'var(--glass-bg)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-light)'; }}
-              >
-                <X size={16} />
-              </button>
-
-              {/* Placeholder video content */}
-              <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, var(--bg-primary) 0%, var(--card-bg) 100%)' }}>
-                <motion.div
-                  animate={{ scale: [1, 1.1, 1] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-                  style={{
-                    width: '80px', height: '80px', borderRadius: '50%',
-                    background: 'var(--accent-hover)', border: '2px solid var(--border-light)',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    marginBottom: '24px', backdropFilter: 'blur(10px)',
-                  }}
-                >
-                  <Play size={28} fill="var(--accent-primary)" color="var(--accent-primary)" />
-                </motion.div>
-                <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: '21px', color: 'var(--text-primary)', marginBottom: '8px', letterSpacing: '0.04em', fontWeight: 600 }}>Avani Showreel</div>
-                <div style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', color: 'var(--text-tertiary)' }}>Coming soon — our best work, one reel.</div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </>
   );
 };

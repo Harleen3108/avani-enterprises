@@ -234,7 +234,6 @@ const DummyHome2 = () => {
         </motion.p>
         <motion.div initial="hidden" animate={!loading ? "visible" : "hidden"} variants={fadeV} className="dh2-hero-ctas">
           <Link to="/dummyhome2/contact" className="dh2-btn-fill">Get Consultation <ArrowRight size={14} /></Link>
-          <button className="dh2-btn-ghost"><Play size={14} /> Watch Reel</button>
         </motion.div>
         <div className="dh2-scroll-hint">
           <span>Scroll</span>

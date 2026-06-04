@@ -86,13 +86,7 @@ const socialLinks = [
   { icon: MailIcon, url: 'mailto:kp@avanienterprises.in', label: 'EMAIL' },
 ];
 
-const reels = [
-  { id: 1, url: 'https://www.instagram.com/reel/DWktMxahybH/', reelId: 'DWktMxahybH' },
-  { id: 2, url: 'https://www.instagram.com/reel/DUSvTB3Ez8f/', reelId: 'DUSvTB3Ez8f' },
-  { id: 3, url: 'https://www.instagram.com/reel/DQD9u5dk8AQ/', reelId: 'DQD9u5dk8AQ' },
-  { id: 4, url: 'https://www.instagram.com/reel/DSuLytME5AY/', reelId: 'DSuLytME5AY' },
-  { id: 5, url: 'https://www.instagram.com/reel/DV0EPK-D85D/', reelId: 'DV0EPK-D85D' },
-];
+
 
 const reviews = [];
 
@@ -147,97 +141,7 @@ const testimonials = [
   }
 ];
 
-const ReelsMarquee = () => {
-  const [isInteracting, setIsInteracting] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
-  const duplicatedReels = [...reels, ...reels, ...reels];
 
-  useEffect(() => {
-    if (!window.instgrm) {
-      const script = document.createElement('script');
-      script.src = "//www.instagram.com/embed.js";
-      script.async = true;
-      document.body.appendChild(script);
-    } else {
-      if (window.instgrm.Embeds) {
-        window.instgrm.Embeds.process();
-      }
-    }
-  }, []);
-
-  // Detect when user clicks inside an iframe (window loses focus to the iframe)
-  useEffect(() => {
-    const handleBlur = () => {
-      setTimeout(() => {
-        if (document.activeElement && document.activeElement.tagName === 'IFRAME') {
-          setIsInteracting(true);
-        }
-      }, 50);
-    };
-    window.addEventListener('blur', handleBlur);
-    return () => window.removeEventListener('blur', handleBlur);
-  }, []);
-
-  // Resume marquee when clicking outside
-  useEffect(() => {
-    if (!isInteracting) return;
-    const handleClickOutside = (e: MouseEvent) => {
-      const container = document.getElementById('reels-marquee-container');
-      if (container && !container.contains(e.target as Node)) {
-        setIsInteracting(false);
-      }
-    };
-    document.addEventListener('click', handleClickOutside);
-    return () => document.removeEventListener('click', handleClickOutside);
-  }, [isInteracting]);
-
-  const isPaused = isInteracting || isHovered;
-
-  return (
-    <div className="w-full overflow-hidden py-10">
-      <h3 className="text-center text-[10px] font-black text-slate-400 tracking-widest uppercase mb-10">Trending Reels</h3>
-      <div
-        id="reels-marquee-container"
-        className="flex gap-4 lg:gap-6"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        style={{
-          width: "max-content",
-          animation: "marqueeScroll 35s linear infinite",
-          animationPlayState: isPaused ? "paused" : "running",
-          willChange: "transform"
-        }}
-      >
-        {duplicatedReels.map((reel, index) => (
-          <div
-            key={`${reel.id}-${index}`}
-            className={`group relative w-64 h-[400px] lg:w-72 lg:h-[450px] rounded-2xl overflow-hidden border shadow-md transition-all flex-shrink-0 bg-white ${isInteracting ? 'border-amber-400' : 'border-slate-200 hover:border-amber-400'}`}
-          >
-            <iframe
-              src={`https://www.instagram.com/reel/${reel.reelId}/embed`}
-              className="w-full h-full border-0 rounded-2xl pointer-events-auto"
-              scrolling="no"
-              allowTransparency={true}
-            />
-            {/* Transparent overlay over Instagram's default link to force redirect to specific reel */}
-            <a
-              href={reel.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="absolute bottom-0 left-0 right-0 h-[50px] z-20 cursor-pointer"
-              title="View Reel on Instagram"
-            />
-          </div>
-        ))}
-      </div>
-      {isInteracting && (
-        <p className="text-center text-[10px] font-bold text-amber-500 tracking-widest uppercase mt-4 animate-pulse cursor-pointer" onClick={() => setIsInteracting(false)}>
-          ▶ CLICK HERE TO RESUME SCROLLING
-        </p>
-      )}
-    </div>
-  );
-};
 
 const TestimonialsSection = ({ currentTestimonial, setCurrentTestimonial }: { currentTestimonial: number; setCurrentTestimonial: (value: number) => void }) => {
   return (
@@ -671,10 +575,7 @@ export default function Links() {
             </motion.div>
           </div>
 
-          {/* ────── REELS MARQUEE ────── */}
-          <motion.div variants={itemVariants} className="-mx-4 sm:-mx-6 lg:-mx-8">
-            <ReelsMarquee />
-          </motion.div>
+
 
           {/* ────── TESTIMONIALS SECTION ────── */}
           <motion.div variants={itemVariants}>

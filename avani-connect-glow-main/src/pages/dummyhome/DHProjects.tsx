@@ -326,25 +326,7 @@ const DHProjects = () => {
 
       <LuxuryLine />
 
-      {/* 6. WATCH REEL */}
-      <section className="theme-brown" style={{ position: 'relative', padding: '70px 0', background: 'var(--bg-primary)', overflow: 'hidden' }}>
-        <Grain />
-        <GlowBlob top="30%" left="40%" w={300} opacity={0.03} blur={120} />
-        <div className="dh-container" style={{ position: 'relative', zIndex: 10 }}>
-          <div style={{ textAlign: 'center', maxWidth: '700px', margin: '0 auto' }}>
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-              <div style={{ width: '80px', height: '80px', borderRadius: '50%', border: '1px solid var(--accent-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent-primary)', margin: '0 auto 2rem', cursor: 'pointer', transition: 'all 0.3s' }}>
-                <Play size={32} fill="var(--accent-primary)" />
-              </div>
-              <h2 className="dh-display" style={{ fontSize: '2.5rem', marginBottom: '1.5rem' }}>WATCH REEL 2025</h2>
-              <p className="dh-body" style={{ fontSize: '1rem', marginBottom: '2.5rem' }}>
-                See how we transform complex business challenges into seamless digital success stories.
-              </p>
-              <button className="dh-btn-ghost"><ExternalLink size={16} /> FULL REEL ON YOUTUBE</button>
-            </motion.div>
-          </div>
-        </div>
-      </section>
+
 
     </div>
   );

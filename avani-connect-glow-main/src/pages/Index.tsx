@@ -54,14 +54,19 @@ const Index = () => {
         <link rel="canonical" href="https://www.avanienterprises.in/web-dev" />
       </Helmet>
 
-      <div className="min-h-screen index-page-wrapper">
+      <div className="min-h-screen index-page-wrapper flex flex-col w-full overflow-x-hidden">
         {/* <PageHeader /> */}
-        <main className="">
+        <main className="flex-1 w-full flex flex-col overflow-x-hidden">
           <HeroSection />
           <ServicesSection />
           <PortfolioSection />
           
-          <RegistrationForm uniqueConsentId={"registrationForm2"}/>
+          <section className="py-16 md:py-24 w-full px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="container mx-auto">
+              <RegistrationForm uniqueConsentId={"registrationForm2"}/>
+            </div>
+          </section>
+          
           <FAQSection/>
         </main>
       </div>

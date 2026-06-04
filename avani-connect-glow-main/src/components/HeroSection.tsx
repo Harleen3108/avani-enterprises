@@ -37,7 +37,7 @@ export default function HeroSection({ source }: HeroSectionProps) {
     <section
       id="home"
       ref={heroRef}
-      className="relative min-h-[85vh] flex items-center pt-4 sm:pt-16 md:pt-12 overflow-hidden bg-white"
+      className="relative min-h-[85vh] flex items-center pt-24 sm:pt-28 md:pt-24 lg:pt-28 overflow-hidden bg-white"
     >
       {/* BACKGROUND: Corporate Geometric Theme */}
       <div className="absolute inset-0 z-0 overflow-hidden">
@@ -87,13 +87,13 @@ export default function HeroSection({ source }: HeroSectionProps) {
             </p>
 
             {/* Stats Bundles */}
-            <div className="mt-4 grid grid-cols-4 gap-2 md:grid-cols-4 md:gap-8 font-sans">
+            <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-4 md:gap-8 font-sans">
               {stats.map((s, i) => (
                 <div key={s.label} className="text-center lg:text-left">
-                  <div className={`text-lg sm:text-3xl lg:text-4xl font-black mb-1 ${["text-sky-500", "text-emerald-500", "text-orange-500", "text-purple-600"][i]}`}>
+                  <div className={`text-2xl sm:text-3xl lg:text-4xl font-black mb-1 ${["text-sky-500", "text-emerald-500", "text-orange-500", "text-purple-600"][i]}`}>
                     {s.value}
                   </div>
-                  <div className="text-[8px] font-black uppercase tracking-tight text-slate-500">{s.label}</div>
+                  <div className="text-[10px] sm:text-[8px] lg:text-[10px] font-black uppercase tracking-tight text-slate-500">{s.label}</div>
                 </div>
               ))}
             </div>

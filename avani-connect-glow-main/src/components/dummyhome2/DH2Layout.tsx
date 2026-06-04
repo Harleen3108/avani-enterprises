@@ -9,7 +9,6 @@ import '../../components/dummyhome2/DummyHome2.css';
 const footerLinks = {
   company: [
     { label: 'About Us', path: '/dummyhome2/about' },
-    { label: 'Our Team', path: '/dummyhome2/team' },
     { label: 'Careers', path: '/dummyhome2/careers' },
     { label: 'Case Studies', path: '/dummyhome2/case-studies' },
     { label: 'Blog', path: '/dummyhome2/blog' },

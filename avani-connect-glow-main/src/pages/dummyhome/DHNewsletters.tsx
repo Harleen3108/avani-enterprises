@@ -50,7 +50,9 @@ const DHNewsletters = () => {
       try {
         setLoading(true);
         const API_BASE = getBackendUrl();
-        const response = await fetch(`${API_BASE}/api/newsletters`);
+        const response = await fetch(`${API_BASE}/api/newsletters`, {
+          headers: { 'Accept': 'application/json' }
+        });
         const json = await response.json();
         if (json?.success) {
           const fetched = json.data || [];

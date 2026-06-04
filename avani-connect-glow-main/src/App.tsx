@@ -155,7 +155,6 @@ import DH2Services from "./pages/dummyhome2/DH2Services";
 import DH2Contact from "./pages/dummyhome2/DH2Contact";
 import DH2Consultation from "./pages/dummyhome2/DH2Consultation";
 import DH2CaseStudies from "./pages/dummyhome2/DH2CaseStudies";
-import DH2Team from "./pages/dummyhome2/DH2Team";
 import DH2Blog from "./pages/dummyhome2/DH2Blog";
 import DH2Products from "./pages/dummyhome2/DH2Products";
 import DH2GlobalPresence from "./pages/dummyhome2/DH2GlobalPresence";
@@ -176,7 +175,6 @@ import DHAbout from "./pages/dummyhome/DHAbout";
 import DHServices from "./pages/dummyhome/DHServices";
 import DHContact from "./pages/dummyhome/DHContact";
 import DHProjects from "./pages/dummyhome/DHProjects";
-import DHTeam from "./pages/dummyhome/DHTeam";
 import DHBlog from "./pages/dummyhome/DHBlog";
 import DHBlogDetail from "./pages/dummyhome/DHBlogDetail";
 import DHNewsletterDetail from "./pages/dummyhome/DHNewsletterDetail";
@@ -190,6 +188,8 @@ import DHCaseStudies from "./pages/dummyhome/DHCaseStudies";
 import DHCareerDetail from "./pages/dummyhome/DHCareerDetail";
 import DHServiceDetail from "./pages/dummyhome/DHServiceDetail";
 import DHProjectDetail from "./pages/dummyhome/DHProjectDetail";
+import DHPrivacy from "./pages/dummyhome/DHPrivacy";
+import DHTerms from "./pages/dummyhome/DHTerms";
 
 import DH2PolicicueProject from './pages/dummyhome2/DH2PolicicueProject';
 import DH2IndusProject from './pages/dummyhome2/DH2IndusProject';
@@ -254,7 +254,6 @@ const AppLayout = () => {
           <Route path="/dummyhome" element={<DHLayout />}>
             <Route index element={<DummyHome />} />
             <Route path="about" element={<DHAbout />} />
-            <Route path="team" element={<DHTeam />} />
             <Route path="services" element={<DHServices />} />
             <Route path="projects" element={<DHProjects />} />
             <Route path="contact" element={<DHContact />} />
@@ -271,13 +270,14 @@ const AppLayout = () => {
             <Route path="get-consultation" element={<GetConsultation />} />
             <Route path="services/:slug" element={<DHServiceDetail />} />
             <Route path="projects/:slug" element={<DHProjectDetail />} />
+            <Route path="privacy-policy" element={<DHPrivacy />} />
+            <Route path="terms-and-conditions" element={<DHTerms />} />
           </Route>
 
           {/* DH2 Sub-pages with shared layout */}
           <Route path="/dummyhome2" element={<DH2Layout />}>
             <Route index element={<DummyHome2 />} />
             <Route path="about" element={<DH2About />} />
-            <Route path="team" element={<DH2Team />} />
             <Route path="services" element={<DH2Services />} />
             <Route path="services/:id" element={<DH2ServiceDetail />} />
             <Route path="our-products" element={<DH2Products />} />

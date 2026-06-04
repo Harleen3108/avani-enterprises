@@ -74,7 +74,7 @@ const DummyCaseStudies = () => {
               REAL RESULTS<br /><span style={{ color: 'transparent', WebkitTextStroke: '1.5px var(--accent-primary)' }}>REAL GROWTH</span>
             </h2>
           </div>
-          <Link to="/dummyhome/case-studies" style={{
+          <Link to="/dummyhome/projects" style={{
             display: 'inline-flex', alignItems: 'center', gap: '6px',
             fontFamily: "'Outfit', sans-serif", fontSize: '12px', letterSpacing: '0.15em', fontWeight: 600,
             color: 'var(--accent-primary)', textDecoration: 'none', paddingBottom: '6px',
@@ -98,7 +98,7 @@ const DummyCaseStudies = () => {
               onMouseEnter={() => setHovered(i)}
               onMouseLeave={() => setHovered(null)}
             >
-              <Link to={`/dummyhome/projects/${cs.slug}`} style={{ textDecoration: 'none', display: 'block' }}>
+              <Link to="/dummyhome/projects" style={{ textDecoration: 'none', display: 'block' }}>
                 <div style={{
                   borderRadius: '16px', overflow: 'hidden',
                   border: `1px solid ${hovered === i ? 'var(--border-light)' : 'var(--border-faint)'}`,

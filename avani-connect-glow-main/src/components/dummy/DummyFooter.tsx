@@ -5,13 +5,12 @@ import { ArrowRight, Mail, Phone, MapPin } from 'lucide-react';
 const footerLinks = {
   company: [
     { label: 'About Us', path: '/dummyhome/about' },
-    { label: 'Our Team', path: '/dummyhome/team' },
     { label: 'Careers', path: '/dummyhome/careers' },
     { label: 'Case Studies', path: '/dummyhome/projects' },
     { label: 'Blog', path: '/dummyhome/blog' },
   ],
   services: [
-    { label: 'Ready Products', path: '/dummyhome/our-products' },
+    { label: 'Ready Products', path: '/dummyhome/projects' },
     { label: 'Expertise', path: '/dummyhome/services' },
     { label: 'Newsletters', path: '/dummyhome/newsletters' },
     { label: 'Global Network', path: '/dummyhome/global-presence' },
