@@ -87,7 +87,7 @@ export default function HeroSection({ source }: HeroSectionProps) {
             </p>
 
             {/* Stats Bundles */}
-            <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-4 md:gap-8 font-sans">
+            <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 md:gap-8 font-sans">
               {stats.map((s, i) => (
                 <div key={s.label} className="text-center lg:text-left">
                   <div className={`text-2xl sm:text-3xl lg:text-4xl font-black mb-1 ${["text-sky-500", "text-emerald-500", "text-orange-500", "text-purple-600"][i]}`}>

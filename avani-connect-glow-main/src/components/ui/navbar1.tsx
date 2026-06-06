@@ -20,7 +20,7 @@ const Navbar = () => {
                                 className="w-12 h-12 rounded-xl object-cover relative z-10"
                             />
                         </div>
-                        <span className="font-display text-2xl font-bold text-white tracking-wide">
+                        <span className="font-display text-lg sm:text-2xl font-bold text-white tracking-wide">
                             Avani Enterprises
                         </span>
                     </a>
