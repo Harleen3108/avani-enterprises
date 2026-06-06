@@ -61,7 +61,7 @@
 //                   <Route path="/blog" element={<Blog />} />
 //                   <Route path="/courses" element={<Courses />} />
 //                   <Route path="/courses/:id" element={<CourseDetail />} />
-//                   <Route path="/dummyhome/contact" element={<GetConsultation />} />
+//                   <Route path="/contact" element={<GetConsultation />} />
 //                   <Route path="/not-found" element={<NotFound />} />
 //                   <Route path="/privacy-policy" element={<PrivacyPolicy />} />
 //                   <Route path="/terms-and-conditions" element={<TermsConditions />} />
@@ -227,10 +227,15 @@ const AppLayout = () => {
   const location = useLocation();
   const pathname = location.pathname;
 
-  // Pages where Navbar should be hidden completely
   const pathForCheck = pathname.toLowerCase();
-  const isDH1 = pathForCheck.startsWith('/dummyhome') && !pathForCheck.startsWith('/dummyhome2');
+  
+  // Define all paths that belong to the new DHLayout
+  const isDHRoot = ["/", "/about", "/services", "/projects", "/contact", "/blog", "/global-presence", "/careers", "/newsletters", "/courses", "/case-studies", "/get-consultation", "/privacy-policy", "/terms-and-conditions"].includes(pathForCheck);
+  const isDHSub = pathForCheck.startsWith("/services/") || pathForCheck.startsWith("/projects/") || pathForCheck.startsWith("/blog/") || pathForCheck.startsWith("/careers/") || pathForCheck.startsWith("/newsletters/") || pathForCheck.startsWith("/courses/");
+  const isDH1 = isDHRoot || isDHSub;
   const isDH2 = pathForCheck.startsWith('/dummyhome2');
+
+  // Pages where Navbar should be hidden completely
   const hideNavbar = pathForCheck === "/thank-you" || pathForCheck === "/business-setup" || pathForCheck === "/businesssetup1" || isDH1 || isDH2;
 
   // Pages where Navbar1 should be used instead of default Navbar
@@ -248,10 +253,8 @@ const AppLayout = () => {
       {!hideNavbar && (useNavbar1 ? <Navbar1 /> : <Navbar />)}
       <main className="pt-0">
         <Routes>
-          <Route path="/" element={<Home />} />
-          
-          {/* DH Heritage Sub-pages with shared layout */}
-          <Route path="/dummyhome" element={<DHLayout />}>
+          {/* New Main Website (formerly dummyhome) */}
+          <Route path="/" element={<DHLayout />}>
             <Route index element={<DummyHome />} />
             <Route path="about" element={<DHAbout />} />
             <Route path="services" element={<DHServices />} />
@@ -267,7 +270,7 @@ const AppLayout = () => {
             <Route path="courses" element={<DHCourses />} />
             <Route path="courses/:id" element={<DHCourseDetail />} />
             <Route path="case-studies" element={<DHCaseStudies />} />
-            <Route path="get-consultation" element={<GetConsultation />} />
+            <Route path="get-consultation" element={<DHContact />} />
             <Route path="services/:slug" element={<DHServiceDetail />} />
             <Route path="projects/:slug" element={<DHProjectDetail />} />
             <Route path="privacy-policy" element={<DHPrivacy />} />
@@ -308,48 +311,21 @@ const AppLayout = () => {
             <Route path="services/whatsapp-automation" element={<DH2WhatsAppAutomationProject />} />
             <Route path="services/process-optimization" element={<DH2BusinessProcessOptimizationProject />} />
           </Route>
-          <Route path="/about" element={<About />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/services/:id" element={<ServiceDetail />} />
 
-          <Route path="/our-products" element={<OurProducts />} />
-          <Route path="/case-studies" element={<CaseStudies />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/newsletters" element={<Newsletters />} />
-          <Route path="/newsletters/:slug" element={<NewsletterDetail />} />
-          <Route path="/global-presence" element={<GlobalPresence />} />
+          {/* Standalone & Legacy Routes */}
           <Route path="/links" element={<Links />} />
-          <Route path="/courses" element={<Courses />} />
-          <Route path="/courses/:id" element={<CourseDetail />} />
-          <Route path="/get-consultation" element={<GetConsultation />} />
-
-          {/* ये नया route जोड़ा है */}
+          
           <Route path="/thank-you" element={<ThankYou />} />
           <Route path="/business-setup" element={<LandingPage />} />
           <Route path="/businesssetup1" element={<LandingPage1 />} />
 
           <Route path="/not-found" element={<NotFound />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/terms-and-conditions" element={<TermsConditions />} />
           <Route path="/web-dev" element={<Index />} />
           <Route path="/7-day-launch" element={<SevenDayLaunch />} />
           <Route path="/policicue" element={<Policicue />} />
-          <Route path="/projects/policicue" element={<PolicicueProject />} />
-          <Route path="/projects/indus" element={<IndusProject />} />
-          <Route path="/projects/frd-nutrition" element={<FrdNutritionProject />} />
-          <Route path="/projects/hitech-homes" element={<HiTechHomesProject />} />
-          <Route path="/projects/sanjeevni-hospital" element={<SanjeevniHospitalProject />} />
-          <Route path="/projects/rohtak-shoe" element={<RohtakShoeProject />} />
-          <Route path="/projects/lead-management-automation" element={<LeadManagementProject />} />
-          <Route path="/projects/whatsapp-automation" element={<WhatsAppAutomationProject />} />
-          <Route path="/projects/business-process-optimization" element={<BusinessProcessOptimizationProject />} />
-          <Route path="/careers" element={<Careers />} />
-          <Route path="/careers/:id" element={<CareerDetail />} />
+          
           <Route path="/admin" element={<AdminRedirect />} />
 
-          {/* Blog detail route */}
-          <Route path="/blog/:slug" element={<BlogDetail />} />
           {/* Catch-all */}
           <Route path="*" element={<Navigate to="/not-found" replace />} />
         </Routes>

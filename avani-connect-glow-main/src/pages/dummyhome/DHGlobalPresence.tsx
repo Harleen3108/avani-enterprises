@@ -130,7 +130,7 @@ const DHGlobalPresence = () => {
                     <span style={{ fontSize: '0.55rem', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '0.12em' }}>{office.tagline.toUpperCase()}</span>
                   </div>
                   <div style={{ position: 'absolute', bottom: 12, right: 12 }}>
-                    <Link to="/dummyhome/contact" style={{ width: 40, height: 40, borderRadius: '50%', background: 'var(--accent-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#000', textDecoration: 'none', transition: 'all 0.3s' }}>
+                    <Link to="/contact" style={{ width: 40, height: 40, borderRadius: '50%', background: 'var(--accent-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#000', textDecoration: 'none', transition: 'all 0.3s' }}>
                       <ArrowUpRight size={18} />
                     </Link>
                   </div>
@@ -193,8 +193,8 @@ const DHGlobalPresence = () => {
               Join forward-thinking enterprises that leverage our global expertise and innovative connectivity solutions to scale new heights.
             </p>
             <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-              <Link to="/dummyhome/contact" className="dh-btn-fill" style={{ textDecoration: 'none' }}>PARTNER WITH US</Link>
-              <Link to="/dummyhome/contact" className="dh-btn-ghost" style={{ textDecoration: 'none' }}>BOOK DEEP-DIVE</Link>
+              <Link to="/contact" className="dh-btn-fill" style={{ textDecoration: 'none' }}>PARTNER WITH US</Link>
+              <Link to="/contact" className="dh-btn-ghost" style={{ textDecoration: 'none' }}>BOOK DEEP-DIVE</Link>
             </div>
           </motion.div>
         </div>

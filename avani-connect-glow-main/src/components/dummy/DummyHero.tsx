@@ -172,7 +172,7 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
               {/* CTAs */}
               <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.72, duration: 0.8 }}
                 style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', marginBottom: '32px' }} className="dummy-hero-buttons">
-                <Link to="/dummyhome/contact" style={{
+                <Link to="/contact" style={{
                   display: 'inline-flex', alignItems: 'center', gap: '10px', padding: '16px 36px',
                   background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-light))', color: 'var(--bg-primary)', borderRadius: '6px',
                   textDecoration: 'none', fontFamily: "'Outfit', sans-serif", fontSize: '15px', letterSpacing: '0.12em', fontWeight: 700,
@@ -288,7 +288,7 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
                 </div>
                 {!loadingNewsletters && newsletters.length > 0 && (
                   <div style={{ padding: '10px 20px', borderTop: '1px solid var(--border-light)' }}>
-                    <Link to="/dummyhome/newsletters" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', padding: '8px', border: '1px solid var(--border-light)', borderRadius: '8px', color: 'var(--accent-light)', textDecoration: 'none', fontFamily: "'Outfit', sans-serif", fontSize: '10px', letterSpacing: '0.2em', transition: 'all 0.25s', fontWeight: 600 }}
+                    <Link to="/newsletters" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', padding: '8px', border: '1px solid var(--border-light)', borderRadius: '8px', color: 'var(--accent-light)', textDecoration: 'none', fontFamily: "'Outfit', sans-serif", fontSize: '10px', letterSpacing: '0.2em', transition: 'all 0.25s', fontWeight: 600 }}
                       onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent-primary)'; (e.currentTarget as HTMLElement).style.color = 'var(--accent-primary)'; (e.currentTarget as HTMLElement).style.background = 'var(--accent-hover)'; }}
                       onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-light)'; (e.currentTarget as HTMLElement).style.color = 'var(--accent-light)'; (e.currentTarget as HTMLElement).style.background = 'transparent'; }}
                     >

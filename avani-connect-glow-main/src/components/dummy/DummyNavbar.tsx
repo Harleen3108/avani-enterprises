@@ -5,41 +5,41 @@ import { Menu, X, ArrowRight, ChevronDown, Phone } from 'lucide-react';
 import { projectsData } from '../../data/dummyProjectsData';
 
 const navLinks = [
-  { label: 'HOME', path: '/dummyhome' },
-  { label: 'ABOUT', path: '/dummyhome/about' },
+  { label: 'HOME', path: '/' },
+  { label: 'ABOUT', path: '/about' },
   { 
     label: 'SERVICES', 
-    path: '/dummyhome/services',
+    path: '/services',
     dropdown: [
-      { label: 'ALL SERVICES', path: '/dummyhome/services' },
-      { label: 'WEB & APP DEVELOPMENT', path: '/dummyhome/services/web-app-development' },
-      { label: 'SEO & CONTENT MARKETING', path: '/dummyhome/services/seo-content-marketing' },
-      { label: 'SOCIAL MEDIA MARKETING', path: '/dummyhome/services/social-media-marketing' },
-      { label: 'AI SOLUTIONS', path: '/dummyhome/services/ai-solutions' },
-      { label: 'PODCAST PRODUCTION', path: '/dummyhome/services/podcast-production' },
-      { label: 'FINANCIAL CONSULTING', path: '/dummyhome/services/financial-consulting' }
+      { label: 'ALL SERVICES', path: '/services' },
+      { label: 'WEB & APP DEVELOPMENT', path: '/services/web-app-development' },
+      { label: 'SEO & CONTENT MARKETING', path: '/services/seo-content-marketing' },
+      { label: 'SOCIAL MEDIA MARKETING', path: '/services/social-media-marketing' },
+      { label: 'AI SOLUTIONS', path: '/services/ai-solutions' },
+      { label: 'PODCAST PRODUCTION', path: '/services/podcast-production' },
+      { label: 'FINANCIAL CONSULTING', path: '/services/financial-consulting' }
     ]
   },
   { 
     label: 'PROJECTS', 
-    path: '/dummyhome/projects',
+    path: '/projects',
     dropdown: [
-      { label: 'ALL PROJECTS', path: '/dummyhome/projects' },
-      ...projectsData.map(p => ({ label: p.title.toUpperCase(), path: `/dummyhome/projects/${p.slug}` }))
+      { label: 'ALL PROJECTS', path: '/projects' },
+      ...projectsData.map(p => ({ label: p.title.toUpperCase(), path: `/projects/${p.slug}` }))
     ]
   },
   {
     label: 'RESOURCES',
     dropdown: [
-      { label: 'BLOG', path: '/dummyhome/blog' },
-      { label: 'NEWSLETTERS', path: '/dummyhome/newsletters' },
-      { label: 'COURSES', path: '/dummyhome/courses' },
-      { label: 'CASE STUDIES', path: '/dummyhome/case-studies' },
+      { label: 'BLOG', path: '/blog' },
+      { label: 'NEWSLETTERS', path: '/newsletters' },
+      { label: 'COURSES', path: '/courses' },
+      { label: 'CASE STUDIES', path: '/case-studies' },
     ]
   },
-  { label: 'JOIN US', path: '/dummyhome/careers' },
-  { label: 'GLOBAL PRESENCE', path: '/dummyhome/global-presence' },
-  { label: 'CONTACT', path: '/dummyhome/contact' },
+  { label: 'JOIN US', path: '/careers' },
+  { label: 'GLOBAL PRESENCE', path: '/global-presence' },
+  { label: 'CONTACT', path: '/contact' },
 ];
 
 const DummyNavbar = () => {
@@ -89,7 +89,7 @@ const DummyNavbar = () => {
       }}>
         <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 48px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }} className="dummy-nav-container">
           {/* Logo */}
-          <Link to="/dummyhome" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '10px' }}>
             <div style={{ width: '32px', height: '32px', borderRadius: '8px', overflow: 'hidden', background: '#fff', padding: '2px' }}>
               <img src="/logo0.jpg" alt="Avani" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
             </div>
@@ -195,7 +195,7 @@ const DummyNavbar = () => {
             >
               <Phone size={12} style={{ color: 'var(--accent-primary)' }} /> CALL NOW
             </a>
-            <Link to="/dummyhome/contact" style={{
+            <Link to="/contact" style={{
               display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '8px 20px',
               background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-light))', color: 'var(--bg-primary)',
               borderRadius: '5px', textDecoration: 'none', fontFamily: "'Outfit', sans-serif",
@@ -290,7 +290,7 @@ const DummyNavbar = () => {
                 </motion.div>
               );
             })}
-            <Link to="/dummyhome/contact" onClick={() => setMobileOpen(false)} style={{
+            <Link to="/contact" onClick={() => setMobileOpen(false)} style={{
               display: 'inline-flex', alignItems: 'center', gap: '8px', marginTop: '24px',
               padding: '12px 28px', background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-light))',
               color: 'var(--bg-primary)', borderRadius: '6px', textDecoration: 'none',

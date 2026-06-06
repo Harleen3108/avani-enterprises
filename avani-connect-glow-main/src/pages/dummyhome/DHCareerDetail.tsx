@@ -195,7 +195,7 @@ const DHCareerDetail = () => {
     return (
       <div style={{ minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--bg-primary)', flexDirection: 'column', gap: '1rem' }}>
         <div className="dh-heading" style={{ fontSize: '1.5rem', margin: 'auto' }}>Job not found.</div>
-        <button onClick={() => navigate('/dummyhome/careers')} className="dh-btn-fill" style={{ margin: 'auto' }}>BACK TO CAREERS</button>
+        <button onClick={() => navigate('/careers')} className="dh-btn-fill" style={{ margin: 'auto' }}>BACK TO CAREERS</button>
       </div>
     );
   }
@@ -231,7 +231,7 @@ const DHCareerDetail = () => {
       <section className="theme-brown" style={{ padding: '120px 0 60px', background: 'var(--bg-primary)', position: 'relative' }}>
         <GridBg size={50} opacity={0.05} />
         <div className="dh-container" style={{ position: 'relative', zIndex: 10 }}>
-          <button onClick={() => navigate('/dummyhome/careers')} style={{ background: 'none', border: 'none', color: 'var(--accent-primary)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '2rem', fontSize: '0.8rem', fontWeight: 800 }}>
+          <button onClick={() => navigate('/careers')} style={{ background: 'none', border: 'none', color: 'var(--accent-primary)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '2rem', fontSize: '0.8rem', fontWeight: 800 }}>
             <ArrowRight size={14} style={{ transform: 'rotate(180deg)' }} /> BACK TO CAREERS
           </button>
           

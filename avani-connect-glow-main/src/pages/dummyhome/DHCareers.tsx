@@ -281,7 +281,7 @@ const DHCareers = () => {
               {filteredJobs.map((job, i) => (
                 <motion.div key={job._id} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: i * 0.05 }}>
                   <div
-                    onClick={() => navigate(`/dummyhome/careers/${job._id}`)}
+                    onClick={() => navigate(`/careers/${job._id}`)}
                     style={{
                       display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '2rem 0',
                       borderBottom: '1px solid var(--border-faint)', cursor: 'pointer', transition: 'all 0.3s ease',
@@ -318,7 +318,7 @@ const DHCareers = () => {
 
                     {/* Right: Apply Button */}
                     <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }} className="dh-career-action">
-                      <button onClick={e => { e.stopPropagation(); navigate(`/dummyhome/careers/${job._id}?apply=true`); }}
+                      <button onClick={e => { e.stopPropagation(); navigate(`/careers/${job._id}?apply=true`); }}
                         style={{ padding: '12px 28px', borderRadius: '100px', border: '1px solid var(--accent-primary)', background: 'transparent', color: 'var(--text-primary)', fontSize: '0.75rem', fontWeight: 800, letterSpacing: '0.1em', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.3s' }}
                         onMouseEnter={e => { e.currentTarget.style.background = 'var(--accent-primary)'; e.currentTarget.style.color = '#000'; }}
                         onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--text-primary)'; }}
@@ -396,7 +396,7 @@ const DHCareers = () => {
               Partner with us to unlock growth opportunities, streamline operations, and achieve your business vision with expert guidance every step of the way.
             </p>
             <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-              <button onClick={() => navigate('/dummyhome/contact')} className="dh-btn-fill">GET CONSULTATION</button>
+              <button onClick={() => navigate('/contact')} className="dh-btn-fill">GET CONSULTATION</button>
               <a href="tel:+919253625099" className="dh-btn-ghost" style={{ textDecoration: 'none' }}>TALK TO EXPERT</a>
             </div>
           </motion.div>

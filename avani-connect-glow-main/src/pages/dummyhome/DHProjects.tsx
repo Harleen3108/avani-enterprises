@@ -35,7 +35,7 @@ const projects = projectsData.map(p => ({
   category: p.subtitle,
   filter: getProjectFilter(p.slug),
   image: p.image,
-  link: `/dummyhome/projects/${p.slug}`,
+  link: `/projects/${p.slug}`,
   impact: p.impact?.[0] || 'High Impact',
   imageStyle: p.imageStyle
 }));

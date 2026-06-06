@@ -98,7 +98,7 @@ const DHAbout = () => {
               </motion.p>
 
               <motion.div variants={fadeUp}>
-                <Link to="/dummyhome/contact" className="dh-btn-fill" style={{ textDecoration: 'none', display: 'inline-flex' }}>
+                <Link to="/contact" className="dh-btn-fill" style={{ textDecoration: 'none', display: 'inline-flex' }}>
                   Get Free Consultation
                 </Link>
               </motion.div>
@@ -405,7 +405,7 @@ const DHAbout = () => {
                 Partner with us to unlock growth opportunities and achieve your business vision.
               </p>
               <div style={{ display: 'flex', gap: '16px', justifyContent: 'center' }}>
-                <Link to="/dummyhome/contact" style={{ padding: '12px 24px', background: 'var(--accent-primary)', color: '#fff', borderRadius: '8px', textDecoration: 'none', fontWeight: 600, fontSize: '13px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <Link to="/contact" style={{ padding: '12px 24px', background: 'var(--accent-primary)', color: '#fff', borderRadius: '8px', textDecoration: 'none', fontWeight: 600, fontSize: '13px', display: 'flex', alignItems: 'center', gap: '8px' }}>
                   GET CONSULTATION <ArrowRight size={14} />
                 </Link>
               </div>

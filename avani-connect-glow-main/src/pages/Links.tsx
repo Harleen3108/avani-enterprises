@@ -408,7 +408,7 @@ export default function Links() {
 
             <motion.div variants={itemVariants}>
               <a
-                href="/dummyhome/contact"
+                href="/contact"
                 className="inline-block px-10 py-5 bg-gradient-to-br from-amber-400 to-orange-500 text-white font-black text-xs tracking-widest rounded-xl hover:scale-105 active:scale-95 transition-all"
               >
                 BOOK A CONSULTATION
@@ -494,7 +494,7 @@ export default function Links() {
             {/* Book Consultation Card (Mobile) - order-1 */}
             <motion.a
               variants={itemVariants}
-              href="/dummyhome/contact"
+              href="/contact"
               className="lg:hidden lg:col-span-12 order-1 bg-gradient-to-br from-amber-400 to-orange-500 p-[1px] rounded-2xl active:scale-95 transition-all mb-4 overflow-hidden group shadow-lg shadow-amber-500/10"
             >
               <div className="bg-white/10 backdrop-blur-sm p-5 flex flex-col items-center text-white text-center">

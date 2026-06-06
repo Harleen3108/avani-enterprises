@@ -425,7 +425,7 @@ const DHCourseDetail = () => {
       <div className="dh-course-detail-page" style={{ background: 'var(--bg-primary)', color: 'var(--text-primary)', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <div style={{ textAlign: 'center' }}>
           <h1 className="dh-display" style={{ fontSize: '3rem', marginBottom: '1rem' }}>COURSE NOT FOUND</h1>
-          <Link to="/dummyhome/courses" className="dh-btn-fill">BACK TO COURSES</Link>
+          <Link to="/courses" className="dh-btn-fill">BACK TO COURSES</Link>
         </div>
       </div>
     );
@@ -445,7 +445,7 @@ const DHCourseDetail = () => {
             {/* Left Content */}
             <motion.div initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.1 } } }}>
               <motion.div variants={fadeUp}>
-                <Link to="/dummyhome/courses" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: 'var(--text-secondary)', textDecoration: 'none', fontSize: '0.8rem', fontWeight: 600, letterSpacing: '0.1em', marginBottom: '2rem' }}>
+                <Link to="/courses" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: 'var(--text-secondary)', textDecoration: 'none', fontSize: '0.8rem', fontWeight: 600, letterSpacing: '0.1em', marginBottom: '2rem' }}>
                   <ArrowLeft size={14} /> BACK TO COURSES
                 </Link>
               </motion.div>

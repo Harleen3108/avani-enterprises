@@ -224,7 +224,7 @@ const DHServices = () => {
                   e.currentTarget.style.boxShadow = '0 4px 20px rgba(0,0,0,0.02)';
                 }}
               >
-                <Link to={`/dummyhome/services/${service.slug}`} style={{ display: 'flex', flexDirection: 'column', height: '100%', width: '100%', textDecoration: 'none', color: 'inherit' }}>
+                <Link to={`/services/${service.slug}`} style={{ display: 'flex', flexDirection: 'column', height: '100%', width: '100%', textDecoration: 'none', color: 'inherit' }}>
                   {service.img && (
                     <div className="dh-services-img-wrapper" style={{
                       width: '100%',
@@ -443,8 +443,8 @@ const DHServices = () => {
                 Join 150+ global clients who trust Avani Enterprises for their technical and strategic oversight.
               </p>
               <div style={{ display: 'flex', gap: '2rem', justifyContent: 'center' }} className="dh-responsive-grid">
-                <Link to="/dummyhome/contact" className="dh-btn-fill">INITIATE PROJECT <ArrowRight size={18} /></Link>
-                <Link to="/dummyhome/projects" className="dh-btn-ghost">VIEW PORTFOLIO</Link>
+                <Link to="/contact" className="dh-btn-fill">INITIATE PROJECT <ArrowRight size={18} /></Link>
+                <Link to="/projects" className="dh-btn-ghost">VIEW PORTFOLIO</Link>
               </div>
             </motion.div>
           </div>

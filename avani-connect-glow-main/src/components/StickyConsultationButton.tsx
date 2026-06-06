@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Calendar, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-const StickyConsultationButton = ({ to = "/dummyhome/dummyhome/contact" }: { to?: string }) => {
+const StickyConsultationButton = ({ to = "/contact" }: { to?: string }) => {
   const [scrollY, setScrollY] = useState(0);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 

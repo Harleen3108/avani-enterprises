@@ -42,7 +42,7 @@ const DHNewsletterDetail = () => {
     return (
       <div className="dh-page" style={{ minHeight: '60vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: 'var(--bg-primary)' }}>
         <h1 className="dh-display">Newsletter Not Found</h1>
-        <Link to="/dummyhome/newsletters" className="dh-btn-ghost" style={{ marginTop: '2rem' }}><ArrowLeft size={14} style={{ marginRight: '8px' }} /> Return to Newsletters</Link>
+        <Link to="/newsletters" className="dh-btn-ghost" style={{ marginTop: '2rem' }}><ArrowLeft size={14} style={{ marginRight: '8px' }} /> Return to Newsletters</Link>
       </div>
     );
   }
@@ -56,7 +56,7 @@ const DHNewsletterDetail = () => {
       <section style={{ paddingTop: '10rem', paddingBottom: '3rem', position: 'relative' }}>
         <div className="dh-container" style={{ maxWidth: '800px', margin: '0 auto', position: 'relative', zIndex: 10 }}>
           <motion.div initial="hidden" animate="visible" variants={fadeIn}>
-            <Link to="/dummyhome/newsletters" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-tertiary)', fontSize: '0.8rem', textDecoration: 'none', fontWeight: 600, marginBottom: '2rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+            <Link to="/newsletters" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-tertiary)', fontSize: '0.8rem', textDecoration: 'none', fontWeight: 600, marginBottom: '2rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
               <ArrowLeft size={14} /> Back to Newsletters
             </Link>
             

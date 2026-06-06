@@ -4,21 +4,21 @@ import { ArrowRight, Mail, Phone, MapPin } from 'lucide-react';
 
 const footerLinks = {
   company: [
-    { label: 'About Us', path: '/dummyhome/about' },
-    { label: 'Careers', path: '/dummyhome/careers' },
-    { label: 'Case Studies', path: '/dummyhome/projects' },
-    { label: 'Blog', path: '/dummyhome/blog' },
+    { label: 'About Us', path: '/about' },
+    { label: 'Careers', path: '/careers' },
+    { label: 'Case Studies', path: '/projects' },
+    { label: 'Blog', path: '/blog' },
   ],
   services: [
-    { label: 'Ready Products', path: '/dummyhome/projects' },
-    { label: 'Expertise', path: '/dummyhome/services' },
-    { label: 'Newsletters', path: '/dummyhome/newsletters' },
-    { label: 'Global Network', path: '/dummyhome/global-presence' },
-    { label: 'Contact', path: '/dummyhome/contact' },
+    { label: 'Ready Products', path: '/projects' },
+    { label: 'Expertise', path: '/services' },
+    { label: 'Newsletters', path: '/newsletters' },
+    { label: 'Global Network', path: '/global-presence' },
+    { label: 'Contact', path: '/contact' },
   ],
   legal: [
-    { label: 'Privacy Policy', path: '/dummyhome/privacy-policy' },
-    { label: 'Terms & Conditions', path: '/dummyhome/terms-and-conditions' },
+    { label: 'Privacy Policy', path: '/privacy-policy' },
+    { label: 'Terms & Conditions', path: '/terms-and-conditions' },
   ],
 };
 
@@ -30,7 +30,7 @@ const DummyFooter = () => (
       <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr 1fr 1fr', gap: '40px', marginBottom: '48px' }} className="dummy-footer-grid">
         {/* Brand */}
         <div>
-          <Link to="/dummyhome" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '18px' }}>
+          <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '18px' }}>
             <div style={{ width: '32px', height: '32px', borderRadius: '8px', overflow: 'hidden', background: '#fff', padding: '2px' }}>
               <img src="/logo0.jpg" alt="Avani" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
             </div>
@@ -93,7 +93,7 @@ const DummyFooter = () => (
           <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '12px', color: 'var(--text-tertiary)', lineHeight: 1.6, marginBottom: '14px', fontWeight: 400 }}>
             Get the latest insights and updates delivered to your inbox.
           </p>
-          <Link to="/dummyhome/newsletters" style={{
+          <Link to="/newsletters" style={{
             display: 'inline-flex', alignItems: 'center', gap: '6px',
             padding: '8px 18px', border: '1px solid var(--border-light)',
             borderRadius: '6px', color: 'var(--accent-primary)', textDecoration: 'none',

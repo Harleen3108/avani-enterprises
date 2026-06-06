@@ -40,7 +40,7 @@ const DHBlogDetail = () => {
     return (
       <div className="dh-page" style={{ minHeight: '60vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: 'var(--bg-primary)' }}>
         <h1 className="dh-display">Article Not Found</h1>
-        <Link to="/dummyhome/blog" className="dh-btn-ghost" style={{ marginTop: '2rem' }}><ArrowLeft size={14} style={{ marginRight: '8px' }} /> Return to Insights</Link>
+        <Link to="/blog" className="dh-btn-ghost" style={{ marginTop: '2rem' }}><ArrowLeft size={14} style={{ marginRight: '8px' }} /> Return to Insights</Link>
       </div>
     );
   }
@@ -54,7 +54,7 @@ const DHBlogDetail = () => {
       <section style={{ paddingTop: '10rem', paddingBottom: '3rem', position: 'relative' }}>
         <div className="dh-container" style={{ maxWidth: '800px', margin: '0 auto', position: 'relative', zIndex: 10 }}>
           <motion.div initial="hidden" animate="visible" variants={fadeIn}>
-            <Link to="/dummyhome/blog" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-tertiary)', fontSize: '0.8rem', textDecoration: 'none', fontWeight: 600, marginBottom: '2rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+            <Link to="/blog" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-tertiary)', fontSize: '0.8rem', textDecoration: 'none', fontWeight: 600, marginBottom: '2rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
               <ArrowLeft size={14} /> Back to Insights
             </Link>
             

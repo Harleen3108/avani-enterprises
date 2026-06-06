@@ -206,7 +206,7 @@ const DummyServices = ({ services }: any) => {
               </div>
 
               <Link 
-                to={svc.customPath || `/dummyhome/services/${svc.slug}`} 
+                to={svc.customPath || `/services/${svc.slug}`} 
                 style={{ 
                   display: 'inline-flex',
                   alignItems: 'center',

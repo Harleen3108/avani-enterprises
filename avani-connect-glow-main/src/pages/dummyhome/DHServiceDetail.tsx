@@ -283,7 +283,7 @@ const DHServiceDetail = () => {
       <div className="dh-service-detail-page" style={{ background: 'var(--bg-primary)', color: 'var(--text-primary)', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <div style={{ textAlign: 'center' }}>
           <h1 className="dh-display" style={{ fontSize: '3rem', marginBottom: '1rem' }}>SERVICE NOT FOUND</h1>
-          <Link to="/dummyhome/services" className="dh-btn-fill">BACK TO SERVICES</Link>
+          <Link to="/services" className="dh-btn-fill">BACK TO SERVICES</Link>
         </div>
       </div>
     );
@@ -313,7 +313,7 @@ const DHServiceDetail = () => {
               style={{ width: '100%', maxWidth: '680px' }}
             >
               <motion.div variants={fadeUp}>
-                <Link to="/dummyhome/services" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: 'var(--text-secondary)', textDecoration: 'none', fontSize: '0.8rem', fontWeight: 600, letterSpacing: '0.1em', marginBottom: '2rem', transition: 'color 0.3s' }}
+                <Link to="/services" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: 'var(--text-secondary)', textDecoration: 'none', fontSize: '0.8rem', fontWeight: 600, letterSpacing: '0.1em', marginBottom: '2rem', transition: 'color 0.3s' }}
                   onMouseEnter={e => (e.currentTarget.style.color = 'var(--accent-primary)')}
                   onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-secondary)')}
                 >
@@ -488,7 +488,7 @@ const DHServiceDetail = () => {
                     }}>
                       {service.ctaHook}
                     </p>
-                    <Link to="/dummyhome/contact" className="dh-btn-fill" style={{ 
+                    <Link to="/contact" className="dh-btn-fill" style={{ 
                       display: 'inline-flex', 
                       alignItems: 'center', 
                       gap: '8px', 
@@ -579,7 +579,7 @@ const DHServiceDetail = () => {
                 <p className="dh-body" style={{ fontSize: '0.85rem', marginBottom: '2rem', color: 'var(--text-secondary)' }}>
                   Partner with us to deploy these strategies and unlock exponential operational performance.
                 </p>
-                <Link to="/dummyhome/contact" className="dh-btn-fill" style={{ width: '100%', justifyContent: 'center' }}>
+                <Link to="/contact" className="dh-btn-fill" style={{ width: '100%', justifyContent: 'center' }}>
                   GET STARTED <ArrowRight size={16} />
                 </Link>
               </div>

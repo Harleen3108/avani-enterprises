@@ -44,7 +44,7 @@ const DHProjectDetail = () => {
       <div className="dh-project-detail-page" style={{ background: 'var(--bg-primary)', color: 'var(--text-primary)', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <div style={{ textAlign: 'center' }}>
           <h1 className="dh-display" style={{ fontSize: '3rem', marginBottom: '1rem' }}>PROJECT NOT FOUND</h1>
-          <Link to="/dummyhome/projects" className="dh-btn-fill">BACK TO PROJECTS</Link>
+          <Link to="/projects" className="dh-btn-fill">BACK TO PROJECTS</Link>
         </div>
       </div>
     );
@@ -75,7 +75,7 @@ const DHProjectDetail = () => {
               style={{ width: '100%', maxWidth: '680px' }}
             >
               <motion.div variants={fadeUp}>
-                <Link to="/dummyhome/projects" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: 'var(--text-secondary)', textDecoration: 'none', fontSize: '0.8rem', fontWeight: 600, letterSpacing: '0.1em', marginBottom: '2rem', transition: 'color 0.3s' }}
+                <Link to="/projects" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: 'var(--text-secondary)', textDecoration: 'none', fontSize: '0.8rem', fontWeight: 600, letterSpacing: '0.1em', marginBottom: '2rem', transition: 'color 0.3s' }}
                   onMouseEnter={e => (e.currentTarget.style.color = 'var(--accent-primary)')}
                   onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-secondary)')}
                 >
@@ -242,7 +242,7 @@ const DHProjectDetail = () => {
                 <p className="dh-body" style={{ fontSize: '0.85rem', marginBottom: '2rem', color: 'var(--text-secondary)' }}>
                   Our engineering team specialises in developing high-scale, cinematic custom digital solutions for enterprises.
                 </p>
-                <Link to="/dummyhome/contact" className="dh-btn-fill" style={{ width: '100%', justifyContent: 'center' }}>
+                <Link to="/contact" className="dh-btn-fill" style={{ width: '100%', justifyContent: 'center' }}>
                   TALK TO AN ENGINEER <ArrowRight size={16} />
                 </Link>
               </div>

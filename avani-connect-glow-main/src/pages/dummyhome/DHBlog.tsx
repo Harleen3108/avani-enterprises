@@ -111,7 +111,7 @@ const DHBlog = () => {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '32px' }} className="dh-blog-grid">
               {blogs.map((blog, i) => (
                 <motion.div key={blog._id} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: i * 0.05 }} style={{ display: 'flex' }}>
-                  <Link to={`/dummyhome/blog/${blog.slug}`} style={{ textDecoration: 'none', color: 'inherit', display: 'flex', width: '100%' }}>
+                  <Link to={`/blog/${blog.slug}`} style={{ textDecoration: 'none', color: 'inherit', display: 'flex', width: '100%' }}>
                     <div style={{
                       display: 'flex', flexDirection: 'column',
                       border: '1px solid var(--border-light)', borderRadius: '16px', background: 'var(--card-bg)', cursor: 'pointer', transition: 'all 0.4s cubic-bezier(0.22, 1, 0.36, 1)',

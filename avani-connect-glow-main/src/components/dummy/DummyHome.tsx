@@ -85,10 +85,10 @@ const DummyHome = () => {
       index: '01',
       image: '/whatwecreate/webdev.png',
       subLinks: [
-        { name: 'Custom Websites', path: '/dummyhome/services/web-app-development' },
-        { name: 'Mobile Apps', path: '/dummyhome/services/web-app-development' },
-        { name: 'E-Commerce', path: '/dummyhome/services/web-app-development' },
-        { name: 'UI/UX Design', path: '/dummyhome/services/web-app-development' }
+        { name: 'Custom Websites', path: '/services/web-app-development' },
+        { name: 'Mobile Apps', path: '/services/web-app-development' },
+        { name: 'E-Commerce', path: '/services/web-app-development' },
+        { name: 'UI/UX Design', path: '/services/web-app-development' }
       ]
     },
     {
@@ -99,10 +99,10 @@ const DummyHome = () => {
       index: '02',
       image: '/whatwecreate/seoandcontent.jpg',
       subLinks: [
-        { name: 'Lead Generation', path: '/dummyhome/services/seo-content-marketing' },
-        { name: 'Search Ranking', path: '/dummyhome/services/seo-content-marketing' },
-        { name: 'Brand Authority', path: '/dummyhome/services/seo-content-marketing' },
-        { name: 'Content Strategy', path: '/dummyhome/services/seo-content-marketing' }
+        { name: 'Lead Generation', path: '/services/seo-content-marketing' },
+        { name: 'Search Ranking', path: '/services/seo-content-marketing' },
+        { name: 'Brand Authority', path: '/services/seo-content-marketing' },
+        { name: 'Content Strategy', path: '/services/seo-content-marketing' }
       ]
     },
     {
@@ -113,10 +113,10 @@ const DummyHome = () => {
       index: '03',
       image: '/whatwecreate/aisolutions.webp',
       subLinks: [
-        { name: 'Lead Tracker AI', path: '/dummyhome/services/ai-solutions' },
-        { name: 'WhatsApp Auto-Agent', path: '/dummyhome/services/ai-solutions' },
-        { name: 'Workflow Optimizer', path: '/dummyhome/services/ai-solutions' },
-        { name: 'Custom Chatbots', path: '/dummyhome/services/ai-solutions' }
+        { name: 'Lead Tracker AI', path: '/services/ai-solutions' },
+        { name: 'WhatsApp Auto-Agent', path: '/services/ai-solutions' },
+        { name: 'Workflow Optimizer', path: '/services/ai-solutions' },
+        { name: 'Custom Chatbots', path: '/services/ai-solutions' }
       ]
     },
     {
@@ -127,10 +127,10 @@ const DummyHome = () => {
       index: '04',
       image: '/whatwecreate/socialmedia.png',
       subLinks: [
-        { name: 'Campaign Strategy', path: '/dummyhome/services/social-media-marketing' },
-        { name: 'Audience Growth', path: '/dummyhome/services/social-media-marketing' },
-        { name: 'Ad Management', path: '/dummyhome/services/social-media-marketing' },
-        { name: 'Brand Engagement', path: '/dummyhome/services/social-media-marketing' }
+        { name: 'Campaign Strategy', path: '/services/social-media-marketing' },
+        { name: 'Audience Growth', path: '/services/social-media-marketing' },
+        { name: 'Ad Management', path: '/services/social-media-marketing' },
+        { name: 'Brand Engagement', path: '/services/social-media-marketing' }
       ]
     },
     {
@@ -141,10 +141,10 @@ const DummyHome = () => {
       index: '05',
       image: '/whatwecreate/podcast.webp',
       subLinks: [
-        { name: 'Audio Editing', path: '/dummyhome/services/podcast-production' },
-        { name: 'Global Distribution', path: '/dummyhome/services/podcast-production' },
-        { name: 'Studio Setup', path: '/dummyhome/services/podcast-production' },
-        { name: 'Content Planning', path: '/dummyhome/services/podcast-production' }
+        { name: 'Audio Editing', path: '/services/podcast-production' },
+        { name: 'Global Distribution', path: '/services/podcast-production' },
+        { name: 'Studio Setup', path: '/services/podcast-production' },
+        { name: 'Content Planning', path: '/services/podcast-production' }
       ]
     },
     {
@@ -155,10 +155,10 @@ const DummyHome = () => {
       index: '06',
       image: '/whatwecreate/finance.webp',
       subLinks: [
-        { name: 'Revenue Optimization', path: '/dummyhome/services/financial-consulting' },
-        { name: 'Investment Strategy', path: '/dummyhome/services/financial-consulting' },
-        { name: 'Risk Management', path: '/dummyhome/services/financial-consulting' },
-        { name: 'Tax Planning', path: '/dummyhome/services/financial-consulting' }
+        { name: 'Revenue Optimization', path: '/services/financial-consulting' },
+        { name: 'Investment Strategy', path: '/services/financial-consulting' },
+        { name: 'Risk Management', path: '/services/financial-consulting' },
+        { name: 'Tax Planning', path: '/services/financial-consulting' }
       ]
     },
     {
@@ -169,10 +169,10 @@ const DummyHome = () => {
       index: '07',
       image: '/whatwecreate/consultation.png',
       subLinks: [
-        { name: 'Growth Strategy', path: '/dummyhome/services/business-consultation' },
-        { name: 'Workflow Analysis', path: '/dummyhome/services/business-consultation' },
-        { name: 'Market Expansion', path: '/dummyhome/services/business-consultation' },
-        { name: 'Operational Efficiency', path: '/dummyhome/services/business-consultation' }
+        { name: 'Growth Strategy', path: '/services/business-consultation' },
+        { name: 'Workflow Analysis', path: '/services/business-consultation' },
+        { name: 'Market Expansion', path: '/services/business-consultation' },
+        { name: 'Operational Efficiency', path: '/services/business-consultation' }
       ]
     },
     {
@@ -183,10 +183,10 @@ const DummyHome = () => {
       index: '08',
       image: '/whatwecreate/loans.png',
       subLinks: [
-        { name: 'Working Capital', path: '/dummyhome/services/business-loans' },
-        { name: 'Equipment Financing', path: '/dummyhome/services/business-loans' },
-        { name: 'Fast Approvals', path: '/dummyhome/services/business-loans' },
-        { name: 'Flexible Terms', path: '/dummyhome/services/business-loans' }
+        { name: 'Working Capital', path: '/services/business-loans' },
+        { name: 'Equipment Financing', path: '/services/business-loans' },
+        { name: 'Fast Approvals', path: '/services/business-loans' },
+        { name: 'Flexible Terms', path: '/services/business-loans' }
       ]
     },
     {
@@ -197,10 +197,10 @@ const DummyHome = () => {
       index: '09',
       image: '/whatwecreate/insurance.png',
       subLinks: [
-        { name: 'Asset Protection', path: '/dummyhome/services/business-insurance' },
-        { name: 'Liability Coverage', path: '/dummyhome/services/business-insurance' },
-        { name: 'Employee Benefits', path: '/dummyhome/services/business-insurance' },
-        { name: 'Risk Mitigation', path: '/dummyhome/services/business-insurance' }
+        { name: 'Asset Protection', path: '/services/business-insurance' },
+        { name: 'Liability Coverage', path: '/services/business-insurance' },
+        { name: 'Employee Benefits', path: '/services/business-insurance' },
+        { name: 'Risk Mitigation', path: '/services/business-insurance' }
       ]
     },
   ];
@@ -264,7 +264,7 @@ const DummyHome = () => {
     logo: p.image,
     video: '',
     image: p.image,
-    link: `/dummyhome/projects/${p.slug}`
+    link: `/projects/${p.slug}`
   }));
 
   return (
