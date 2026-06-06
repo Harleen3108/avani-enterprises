@@ -1,225 +1,507 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { Code, Search, Share2, Zap, Radio, PieChart, ArrowRight, CheckCircle, Lightbulb, Shield, Target, MessageSquare, TrendingUp } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import RotatingText from '../components/RotatingText';
+import '../components/Home.css';
+
+const titleV = {
+  hidden: { y: 100, opacity: 0 },
+  visible: (i: number) => ({ y: 0, opacity: 1, transition: { duration: 1, ease: [.22, 1, .36, 1], delay: .2 + i * .12 } })
+};
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+};
+
+const services = [
+  { img: '/whatwecreate/webdev.png', icon: <Code size={32} />, title: 'Web & App Development', slug: 'web-app-development', desc: 'Crafting high-performance digital architectures with precision and scale.', features: ['Custom React Frameworks', 'Mobile App Ecosystems', 'Enterprise Solutions'] },
+  { img: '/whatwecreate/seoandcontent.jpg', icon: <Search size={32} />, title: 'SEO & Content Marketing', slug: 'seo-content-marketing', desc: 'Dominating search landscapes through strategic authority and visibility.', features: ['Semantic SEO', 'Authority Building', 'Content Strategy'] },
+  { img: '/whatwecreate/socialmedia.png', icon: <Share2 size={32} />, title: 'Social Media Marketing', slug: 'social-media-marketing', desc: 'Building meaningful brand narratives that resonate globally.', features: ['Narrative Design', 'Viral Mechanics', 'Community Growth'] },
+  { img: '/whatwecreate/aisolutions.webp', icon: <Zap size={32} />, title: 'AI Solutions', slug: 'ai-solutions', desc: 'Harnessing the power of automation to drive operational intelligence.', features: ['LLM Integration', 'Process Automation', 'Intelligent Chatbots'] },
+  { img: '/whatwecreate/podcast.webp', icon: <Radio size={32} />, title: 'Podcast Production', slug: 'podcast-production', desc: 'Amplifying your brand voice through cinematic audio experiences.', features: ['Audio Engineering', 'Global Distribution', 'Narrative Production'] },
+  { img: '/whatwecreate/finance.webp', icon: <PieChart size={32} />, title: 'Financial Consulting', slug: 'financial-consulting', desc: 'Navigating market complexities with data-driven strategic oversight.', features: ['Growth Capital', 'Risk Management', 'Strategic Scaling'] },
+  { img: '/whatwecreate/consultation.png', icon: <Lightbulb size={32} />, title: 'Business Consultation', slug: 'business-consultation', desc: 'Analyzing day-to-day operations to find hidden opportunities and streamline workflows.', features: ['Workflow Audits', 'Operational Scaling', 'Opportunity Scouting'] },
+  { img: '/whatwecreate/loans.png', icon: <TrendingUp size={32} />, title: 'Business Loans', slug: 'business-loans', desc: 'Securing flexible working capital and equipment financing at competitive rates.', features: ['Growth Capital', 'Hassle-Free Processing', 'Flexible Terms'] },
+  { img: '/whatwecreate/insurance.png', icon: <Shield size={32} />, title: 'Business Insurance', slug: 'business-insurance', desc: 'Customized insurance plans to safeguard your enterprise assets and operations.', features: ['Asset Safeguarding', 'Liability Protection', 'Absolute Peace of Mind'] },
+];
+
+
+
+/* Floating particles */
+const Particles = ({ count = 12 }: { count?: number }) => {
+  const dots = Array.from({ length: count }, (_, i) => ({
+    id: i,
+    x: Math.random() * 100,
+    y: Math.random() * 100,
+    size: Math.random() * 3 + 1,
+    dur: Math.random() * 12 + 8,
+    delay: Math.random() * 6,
+  }));
+  return (
+    <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', pointerEvents: 'none', zIndex: 2 }}>
+      {dots.map(d => (
+        <motion.div
+          key={d.id}
+          animate={{ y: [0, -80, -160], opacity: [0, 0.4, 0] }}
+          transition={{ duration: d.dur, repeat: Infinity, delay: d.delay, ease: 'linear' }}
+          style={{
+            position: 'absolute', left: `${d.x}%`, top: `${d.y}%`,
+            width: d.size, height: d.size, borderRadius: '50%',
+            background: 'var(--accent-primary)',
+            boxShadow: `0 0 ${d.size * 4}px var(--accent-primary)`,
+          }}
+        />
+      ))}
+    </div>
+  );
+};
+
+/* Grain overlay */
+const Grain = () => (
+  <div style={{
+    position: 'absolute', inset: 0, zIndex: 1, opacity: 0.04, pointerEvents: 'none',
+    backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+    backgroundSize: '200px',
+  }} />
+);
+
+/* Animated grid lines */
+const GridBg = ({ size = 40, opacity = 0.08 }: { size?: number; opacity?: number }) => (
+  <div style={{
+    position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 1, opacity,
+    backgroundImage: `linear-gradient(var(--text-tertiary) 1px, transparent 1px), linear-gradient(90deg, var(--text-tertiary) 1px, transparent 1px)`,
+    backgroundSize: `${size}px ${size}px`,
+  }} />
+);
+
+/* Glowing blob */
+const GlowBlob = ({ top, left, right, bottom, w = 350, h = 350, opacity = 0.06, blur = 100 }: any) => (
+  <motion.div
+    animate={{ scale: [1, 1.15, 1], opacity: [opacity, opacity * 1.4, opacity] }}
+    transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+    style={{
+      position: 'absolute', width: w, height: h, borderRadius: '50%',
+      background: 'var(--accent-primary)', filter: `blur(${blur}px)`,
+      top, left, right, bottom, pointerEvents: 'none', zIndex: 1,
+    }}
+  />
+);
+
+/* Thin luxury horizontal line */
+const LuxuryLine = () => (
+  <div style={{
+    width: '100%', height: '1px', zIndex: 5,
+    background: 'linear-gradient(to right, transparent, var(--accent-primary) 20%, var(--accent-light) 50%, var(--accent-primary) 80%, transparent)',
+    opacity: 0.3,
+  }} />
+);
 
 const Services = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const { scrollY } = useScroll();
+  const heroParallax = useTransform(scrollY, [0, 400], [0, -40]);
+
   return (
-    <>
+    <div className="dh-services-page">
+
+      {/* 1. CINEMATIC HERO */}
+      <section className="theme-brown" style={{ minHeight: '70vh', display: 'flex', alignItems: 'center', background: 'var(--bg-primary)', overflow: 'hidden', position: 'relative', paddingTop: '80px' }}>
+        <Grain />
+        <GridBg size={50} opacity={0.06} />
+        <Particles count={16} />
+        <GlowBlob top="-10%" right="-5%" w={400} h={400} opacity={0.04} blur={120} />
+        <GlowBlob bottom="0" left="-10%" w={300} h={300} opacity={0.03} blur={100} />
+
+        {/* Gold top accent line */}
+        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '2px', background: 'linear-gradient(to right, transparent, var(--accent-primary) 25%, var(--accent-light) 50%, var(--accent-primary) 75%, transparent)', zIndex: 10 }} />
+
+        {/* Decorative rotating ring */}
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 60, repeat: Infinity, ease: 'linear' }}
+          style={{ position: 'absolute', top: '8%', right: '8%', width: 200, height: 200, border: '1px solid var(--border-light)', borderRadius: '50%', pointerEvents: 'none', zIndex: 2, opacity: 0.3 }}
+        />
+        <motion.div
+          animate={{ rotate: -360 }}
+          transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
+          style={{ position: 'absolute', top: '12%', right: '10%', width: 140, height: 140, border: '1px solid var(--border-faint)', borderRadius: '50%', pointerEvents: 'none', zIndex: 2, opacity: 0.2 }}
+        />
+
+        <motion.div style={{ y: heroParallax, width: '100%', position: 'relative', zIndex: 10 }}>
+          <div className="dh-container">
+            <motion.div initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.1 } } }}>
+              <motion.div variants={fadeUp} className="dh-label">OUR EXPERTISE</motion.div>
+
+              <h1 className="dh-display dh-hero-title">
+                <span className="dh-hero-line">
+                  <motion.span custom={0} variants={titleV}>HIGH-TECH</motion.span>
+                </span>
+                <span className="dh-hero-line">
+                  <motion.span custom={1} variants={titleV} className="dh-hero-stroked">SOLUTIONS &</motion.span>
+                </span>
+                <span className="dh-hero-line">
+                  <motion.span custom={2} variants={titleV} className="dh-hero-accent">STRATEGY.</motion.span>
+                </span>
+              </h1>
+
+              <motion.p variants={fadeUp} className="dh-body" style={{ maxWidth: '600px', fontSize: '1.2rem' }}>
+                We provide a comprehensive ecosystem of services designed to accelerate your <strong style={{ color: 'var(--accent-primary)' }}>growth and digital authority.</strong>
+              </motion.p>
+            </motion.div>
+          </div>
+        </motion.div>
+
+        {/* Scroll indicator */}
+        <motion.div
+          animate={{ y: [0, 6, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+          style={{ position: 'absolute', bottom: 24, left: '50%', transform: 'translateX(-50%)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, zIndex: 10 }}
+        >
+          <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: 9, letterSpacing: '0.3em', color: 'var(--text-tertiary)', fontWeight: 600 }}>SCROLL</span>
+          <div style={{ width: 1, height: 24, background: 'linear-gradient(to bottom, var(--accent-light), transparent)' }} />
+        </motion.div>
+      </section>
+
+      <LuxuryLine />
+
+      {/* 2. SERVICES — BENTO GRID */}
+      <section className="theme-beige" style={{ position: 'relative', padding: '100px 0', background: 'var(--bg-primary)', overflow: 'hidden' }}>
+        <Grain />
+        <GridBg size={30} opacity={0.04} />
+        <GlowBlob top="15%" right="-80px" w={350} h={350} opacity={0.05} blur={90} />
+        <GlowBlob bottom="10%" left="-60px" w={280} h={280} opacity={0.04} blur={80} />
+
+        <div className="dh-container" style={{ position: 'relative', zIndex: 10 }}>
+          {/* Section header */}
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} style={{ marginBottom: '3rem' }}>
+            <div className="dh-label">WHAT WE OFFER</div>
+            <h2 className="dh-display" style={{ fontSize: '3.5rem', marginBottom: '1rem' }}>
+              OUR <span style={{ color: 'var(--accent-primary)' }}>SERVICES.</span>
+            </h2>
+          </motion.div>
+
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(3, 1fr)',
+            gap: '1.5rem',
+          }} className="dh-services-grid dh-responsive-grid">
+            {services.map((service, i) => (
+              <motion.div
+                key={i}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fadeUp}
+                transition={{ delay: i * 0.08 }}
+                className="dh-services-card"
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  background: 'var(--card-bg)',
+                  border: '1px solid var(--border-faint)',
+                  borderRadius: '16px',
+                  padding: '28px',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  transition: 'all 0.5s cubic-bezier(0.22, 1, 0.36, 1)',
+                  boxShadow: '0 4px 20px rgba(0,0,0,0.02)',
+                  backdropFilter: 'blur(10px)',
+                  cursor: 'pointer',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-6px)';
+                  e.currentTarget.style.borderColor = 'var(--accent-primary)';
+                  e.currentTarget.style.boxShadow = '0 16px 40px rgba(0,0,0,0.06)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.borderColor = 'var(--border-faint)';
+                  e.currentTarget.style.boxShadow = '0 4px 20px rgba(0,0,0,0.02)';
+                }}
+              >
+                <Link to={`/services/${service.slug}`} style={{ display: 'flex', flexDirection: 'column', height: '100%', width: '100%', textDecoration: 'none', color: 'inherit' }}>
+                  {service.img && (
+                    <div className="dh-services-img-wrapper" style={{
+                      width: '100%',
+                      height: '160px',
+                      borderRadius: '10px',
+                      overflow: 'hidden',
+                      marginBottom: '20px',
+                      background: 'var(--bg-secondary)',
+                      position: 'relative'
+                    }}>
+                      <img
+                        src={service.img}
+                        alt={service.title}
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'cover',
+                          transition: 'transform 0.5s ease'
+                        }}
+                        onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.05)'; }}
+                        onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; }}
+                      />
+                      <div style={{
+                        position: 'absolute',
+                        top: 0, left: 0, right: 0, bottom: 0,
+                        background: 'linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.15))',
+                        pointerEvents: 'none'
+                      }} />
+                    </div>
+                  )}
+
+                  {/* Corner accent */}
+                  <div style={{
+                    position: 'absolute', top: 0, right: 0,
+                    width: 60, height: 60,
+                    background: 'linear-gradient(135deg, transparent 50%, var(--accent-primary) 50%)',
+                    opacity: 0.06, borderRadius: '0 16px 0 0',
+                  }} />
+
+                  <div className="dh-services-icon" style={{ color: 'var(--accent-primary)', marginBottom: '1rem' }}>{service.icon}</div>
+                  <h3 className="dh-heading dh-services-title" style={{ fontSize: '1.4rem', marginBottom: '0.5rem' }}>{service.title}</h3>
+                  <p className="dh-body dh-services-desc" style={{ marginBottom: '1rem', flex: 1, fontSize: '0.9rem', lineHeight: 1.5 }}>{service.desc}</p>
+                  <ul className="dh-services-features" style={{ listStyle: 'none', padding: 0, marginBottom: '1.5rem' }}>
+                    {service.features.map((f, j) => (
+                      <li key={j} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+                        <CheckCircle size={12} style={{ color: 'var(--accent-primary)' }} /> {f}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="dh-services-explore" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--accent-primary)', fontSize: '0.8rem', fontWeight: 800, letterSpacing: '0.1em', marginTop: 'auto' }}>
+                    EXPLORE SERVICE <ArrowRight size={14} />
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <LuxuryLine />
+
+      {/* 3. METHODOLOGY (HOW WE THINK) */}
+      <section className="theme-brown" style={{ position: 'relative', padding: '100px 0', background: 'var(--bg-primary)', overflow: 'hidden' }}>
+        <Grain />
+        <GlowBlob top="30%" left="-5%" w={300} h={300} opacity={0.04} blur={90} />
+
+        <div className="dh-container" style={{ position: 'relative', zIndex: 10 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8rem', alignItems: 'center' }} className="dh-responsive-grid">
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
+              <div className="dh-label">OUR PHILOSOPHY</div>
+              <h2 className="dh-display" style={{ fontSize: '4rem', marginBottom: '1.5rem' }}>HOW WE <br /><span style={{ color: 'var(--accent-primary)' }}>THINK.</span></h2>
+              <p className="dh-body" style={{ fontSize: '1.15rem', lineHeight: 1.8, marginBottom: '2rem' }}>
+                Our methodology is rooted in architectural design principles—prioritizing structure, clarity, and intent above all else. We don't just deliver; we architect for long-term scalability.
+              </p>
+              <div style={{ borderRadius: '16px', overflow: 'hidden', border: '1px solid var(--border-faint)', height: '200px' }}>
+                <img src="/hey.png" alt="Our methodology in action" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.8)', transition: 'transform 0.6s ease' }}
+                  onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.03)'; }}
+                  onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; }}
+                />
+              </div>
+            </motion.div>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }} className="dh-responsive-grid">
+              {[
+                { icon: <Search size={28} />, title: 'Discovery', desc: 'Deep immersion into the business ecosystem.' },
+                { icon: <Zap size={28} />, title: 'Synthesis', desc: 'Engineered prototyping for technical function.' },
+                { icon: <Code size={28} />, title: 'Execution', desc: 'Rigorous deployment with focus on fidelity.' },
+                { icon: <TrendingUp size={28} />, title: 'Evolution', desc: 'Algorithmic refinement for peak performance.' }
+              ].map((item, i) => (
+                <motion.div
+                  key={i}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  variants={fadeUp}
+                  transition={{ delay: i * 0.1 }}
+                  style={{
+                    padding: '2rem',
+                    background: 'var(--card-bg)',
+                    borderRadius: '16px',
+                    border: '1px solid var(--border-faint)',
+                    backdropFilter: 'blur(10px)',
+                    transition: 'all 0.4s cubic-bezier(0.22, 1, 0.36, 1)',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = 'var(--accent-primary)';
+                    e.currentTarget.style.transform = 'translateY(-4px)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = 'var(--border-faint)';
+                    e.currentTarget.style.transform = 'translateY(0)';
+                  }}
+                >
+                  <div style={{ color: 'var(--accent-primary)', marginBottom: '1.5rem' }}>{item.icon}</div>
+                  <h4 className="dh-heading" style={{ fontSize: '1.2rem', marginBottom: '0.8rem' }}>{item.title}</h4>
+                  <p className="dh-body" style={{ fontSize: '0.85rem' }}>{item.desc}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <LuxuryLine />
+
+      {/* 4. PROCESS WORKFLOW (Steps) */}
+      <section className="theme-beige" style={{ position: 'relative', padding: '100px 0', background: 'var(--bg-primary)', overflow: 'hidden' }}>
+        <Grain />
+        <GridBg size={40} opacity={0.03} />
+        <GlowBlob bottom="5%" right="-5%" w={300} h={300} opacity={0.04} blur={100} />
+
+        <div className="dh-container" style={{ position: 'relative', zIndex: 10 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6rem', alignItems: 'center' }} className="dh-responsive-grid">
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
+              <div className="dh-label">OUR WORKFLOW</div>
+              <h2 className="dh-display" style={{ fontSize: '4rem', marginBottom: '2.5rem' }}>BATTLE-TESTED <br /><span style={{ color: 'var(--accent-primary)' }}>PROCESS.</span></h2>
+              <p className="dh-body" style={{ fontSize: '1.1rem', marginBottom: '3rem' }}>
+                A systematic approach to digital success. We ensure transparency and quality at every stage of the lifecycle.
+              </p>
+              <button className="dh-btn-fill">DOWNLOAD METHODOLOGY</button>
+            </motion.div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
+              {[
+                { step: '01', title: 'Deep Discovery', desc: 'Analyzing your market position and business objectives.' },
+                { step: '02', title: 'Strategic Blueprint', desc: 'Defining the roadmap and technical architecture.' },
+                { step: '03', title: 'Agile Execution', desc: 'Iterative development with complete transparency.' },
+                { step: '04', title: 'Performance Scale', desc: 'Launching and optimizing for measurable impact.' }
+              ].map((p, i) => (
+                <motion.div
+                  key={i}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  variants={fadeUp}
+                  transition={{ delay: i * 0.1 }}
+                  style={{
+                    display: 'flex', gap: '2rem', padding: '1.8rem 1.5rem',
+                    borderBottom: '1px solid var(--border-faint)',
+                    borderRadius: '12px',
+                    transition: 'all 0.3s ease',
+                    cursor: 'default',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = 'var(--card-bg)';
+                    e.currentTarget.style.transform = 'translateX(8px)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = 'transparent';
+                    e.currentTarget.style.transform = 'translateX(0)';
+                  }}
+                >
+                  <span style={{ fontSize: '1.2rem', fontFamily: "'Syne'", fontWeight: 800, color: 'var(--accent-primary)' }}>{p.step}</span>
+                  <div>
+                    <h4 className="dh-heading" style={{ fontSize: '1.2rem', marginBottom: '0.5rem' }}>{p.title}</h4>
+                    <p className="dh-body" style={{ fontSize: '0.9rem' }}>{p.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <LuxuryLine />
+
+      {/* 5. CTA SECTION */}
+      <section className="theme-brown" style={{ position: 'relative', padding: '80px 0', background: 'var(--bg-primary)', overflow: 'hidden' }}>
+        <Grain />
+        <Particles count={8} />
+        <GlowBlob top="20%" left="30%" w={400} h={400} opacity={0.03} blur={120} />
+
+        <div className="dh-container" style={{ position: 'relative', zIndex: 10 }}>
+          <div style={{
+            padding: '6rem 4rem', textAlign: 'center',
+            background: 'var(--card-bg)', borderRadius: '24px',
+            border: '1px solid var(--border-faint)',
+            backdropFilter: 'blur(10px)',
+            position: 'relative', overflow: 'hidden',
+          }}>
+            {/* CTA decorative corners */}
+            <div style={{ position: 'absolute', top: 0, left: 0, width: 80, height: 80, borderTop: '2px solid var(--accent-primary)', borderLeft: '2px solid var(--accent-primary)', borderRadius: '24px 0 0 0', opacity: 0.3 }} />
+            <div style={{ position: 'absolute', bottom: 0, right: 0, width: 80, height: 80, borderBottom: '2px solid var(--accent-primary)', borderRight: '2px solid var(--accent-primary)', borderRadius: '0 0 24px 0', opacity: 0.3 }} />
+
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
+              <h2 className="dh-display" style={{ fontSize: 'clamp(2rem, 5vw, 4rem)', marginBottom: '2rem', lineHeight: 1.1 }}>
+                READY TO SCALE YOUR <br />
+                <span style={{ color: 'var(--accent-primary)' }}>
+                  <RotatingText
+                    words={["DIGITAL ASSETS", "COMMERCE HUB", "TECH STACK", "MARKET SHARE"]}
+                    interval={3000}
+                    className="dh-display"
+                  />
+                </span> <br />
+                INTO THE FUTURE?
+              </h2>
+              <p className="dh-body" style={{ maxWidth: '600px', margin: '0 auto 4rem', fontSize: '1.2rem' }}>
+                Join 150+ global clients who trust Avani Enterprises for their technical and strategic oversight.
+              </p>
+              <div style={{ display: 'flex', gap: '2rem', justifyContent: 'center' }} className="dh-responsive-grid">
+                <Link to="/contact" className="dh-btn-fill">INITIATE PROJECT <ArrowRight size={18} /></Link>
+                <Link to="/projects" className="dh-btn-ghost">VIEW PORTFOLIO</Link>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700;800;900&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
-        
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
-        }
-        .grain-bg {
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-            opacity: 0.04;
-            pointer-events: none;
-        }
-        .grid-texture {
-            background-size: 40px 40px;
-            background-image: linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
-                              linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
-        }
-        .text-gradient {
-            background: linear-gradient(135deg, #4f46e5, #ec4899);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .font-headline-md { font-family: 'Space Grotesk', sans-serif; font-size: 32px; line-height: 1.2; letter-spacing: -0.01em; font-weight: 500; }
-        .font-body-lg { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 18px; line-height: 1.6; font-weight: 400; }
-        .font-headline-sm { font-family: 'Space Grotesk', sans-serif; font-size: 24px; line-height: 1.3; font-weight: 500; }
-        .font-display-xl { font-family: 'Space Grotesk', sans-serif; font-size: 88px; line-height: 1.0; letter-spacing: -0.04em; font-weight: 800; }
-        .font-label-caps { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 12px; line-height: 1.0; letter-spacing: 0.1em; font-weight: 700; }
-        .font-body-sm { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; line-height: 1.5; font-weight: 400; }
-        .font-display-lg { font-family: 'Space Grotesk', sans-serif; font-size: 64px; line-height: 1.1; letter-spacing: -0.03em; font-weight: 700; }
-        .font-body-md { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; line-height: 1.6; font-weight: 400; }
-        
-        .material-symbols-outlined {
-          font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
-        }
-
         @media (max-width: 768px) {
-          .font-display-xl { font-size: 48px; }
-          .font-display-lg { font-size: 36px; }
-          .font-headline-md { font-size: 24px; }
+          .dh-services-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 12px !important;
+          }
+          .dh-services-card {
+            padding: 16px !important;
+            border-radius: 12px !important;
+          }
+          .dh-services-img-wrapper {
+            height: 90px !important;
+            margin-bottom: 12px !important;
+            border-radius: 8px !important;
+          }
+          .dh-services-icon {
+            display: none !important;
+          }
+          .dh-services-title {
+            font-size: 14px !important;
+            margin-bottom: 6px !important;
+            line-height: 1.2 !important;
+          }
+          .dh-services-desc {
+            font-size: 11px !important;
+            -webkit-line-clamp: 2 !important;
+            display: -webkit-box !important;
+            -webkit-box-orient: vertical !important;
+            overflow: hidden !important;
+            margin-bottom: 8px !important;
+          }
+          .dh-services-features {
+            display: none !important;
+          }
+          .dh-services-explore {
+            font-size: 10px !important;
+          }
+        }
+        @media (max-width: 400px) {
+          .dh-services-grid {
+            gap: 8px !important;
+          }
+          .dh-services-img-wrapper {
+            height: 70px !important;
+          }
+          .dh-services-title {
+            font-size: 12px !important;
+          }
         }
       `}</style>
-
-
-<main className="relative">
-{/* Hero Section */}
-<section className="relative min-h-screen flex items-center px-[32px] pt-32 pb-24 overflow-hidden bg-gradient-to-br from-[#faf9f7] to-[#e9e8e6]">
-<div className="grid-texture absolute inset-0"></div>
-<div className="grain-bg absolute inset-0"></div>
-<div className="max-w-[1440px] mx-auto w-full grid grid-cols-12 gap-[32px] relative z-10">
-<div className="col-span-12 lg:col-span-10">
-<span className="inline-block font-label-caps text-[#4f46e5] font-bold mb-6 tracking-widest bg-[#4f46e5]/10 px-4 py-2 rounded-full border border-[#4f46e5]/20">— EST. 2024 DIGITAL FRONTIER</span>
-<h1 className="font-display-xl text-[#172124] leading-none mb-12">
-                        WE CREATE <br/>
-<span className="text-gradient italic font-light">FUTURE DIGITAL</span> <br/>
-                        EXPERIENCES
-                    </h1>
-</div>
-<div className="col-span-12 lg:col-span-8 lg:col-start-5 flex flex-col md:flex-row items-end gap-[32px]">
-<p className="font-body-lg text-[#434749] max-w-lg leading-relaxed text-xl">
-                        A bespoke technical collective specializing in high-performance digital infrastructure and elevated aesthetic engineering. We build the tools that define the next era of commerce.
-                    </p>
-<div className="relative w-full md:w-2/3 h-[450px] rounded-2xl overflow-hidden glass-panel p-2 flex-shrink-0 shadow-2xl group border border-white/60">
-<div className="absolute inset-0 bg-gradient-to-tr from-[#4f46e5]/20 to-[#ec4899]/20 z-10 mix-blend-overlay"></div>
-<img alt="Digital Experience" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-in-out" data-alt="A sophisticated close-up of a high-resolution curved monitor displaying a complex, minimalist web application architecture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3xCrTqRNqnUVpg1y2ftaoKQC5jGHh-TovJJnPydAVrxV5QC4pNDtH9S3_orvUOw_BeS9q884An4cWniPEWmXysCxsnhP5A9RiaPBzT7chxSle62hxUXnoLdDf7UuCM9uk0RYn917Yg3XzEcXJXA7UXZiuaBQZHHfE304MxY30FjXdapqxNC--TrQahPsvkp2k6r77QeRsfZU3cBPXoRMhyUfTlJhqeR5aSCCp5JGMcD6dYwdoIHLtGR2F8NL9iUmRvET_QWpnJw"/>
-</div>
-</div>
-</div>
-{/* Floating Decorative Element */}
-<div className="absolute -right-32 top-1/4 w-[600px] h-[600px] bg-gradient-to-tr from-[#4f46e5]/20 to-[#06b6d4]/20 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
-<div className="absolute -left-32 bottom-1/4 w-[400px] h-[400px] bg-gradient-to-tr from-[#ec4899]/20 to-[#4f46e5]/20 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
-</section>
-{/* Expertise Section */}
-<section className="py-24 bg-white relative">
-<div className="max-w-[1440px] mx-auto px-[32px]">
-<div className="flex justify-between items-end mb-20 border-b-2 border-[#172124] pb-8">
-<h2 className="font-display-lg text-[#172124] uppercase font-black tracking-tight">OUR EXPERTISE</h2>
-<span className="font-label-caps text-[#4f46e5] font-bold text-lg">001 — 006</span>
-</div>
-<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-{/* Web Development */}
-<div className="group relative p-8 rounded-2xl glass-panel hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden bg-[#f4f3f1] border border-[#c3c7c9]/30">
-<div className="relative z-10 flex flex-col h-full">
-<span className="font-label-caps text-[#4f46e5] mb-6 block text-lg font-bold">/ 01</span>
-<h3 className="font-headline-md mb-4 uppercase tracking-tighter font-bold">Web Development</h3>
-<p className="font-body-sm text-[#434749] mb-6 text-base">High-performance, scalable web architectures built with modern frameworks and precision engineering.</p>
-<div className="mt-auto overflow-hidden rounded-xl">
-<img alt="Web Development" className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-700" data-alt="A clean, wide-angle shot of a minimalist workstation with multiple monitors displaying clean lines of code in a bright environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSCKeNThhEDyNHIntrHs92c1NL6a8KClafOaotNkJTIDBC0HTvpIdm71ok3-N3drZjl-WCH96XT1wzlP9iIyvoz8TbRvN052OBW7XYj-rEslXLOOj-wSxVSjOxKQ7bb-M29bsb_8LwPUiKs5wtv8okK4mhur8TSEQIu1yGbmJnhHbHL2JcZTvBHJSq9pqxZ6iwCFKoQ5UwmLfNFbLsRf-MJz3CslOFjJVP-wyHIaIHBZuWLQ7UBNFTXYVlsiwM1UryDuLXib-6Rg"/>
-</div>
-</div>
-</div>
-{/* SEO & Content */}
-<div className="group relative p-8 rounded-2xl glass-panel hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden bg-[#f4f3f1] border border-[#c3c7c9]/30">
-<div className="relative z-10 flex flex-col h-full">
-<span className="font-label-caps text-[#ec4899] mb-6 block text-lg font-bold">/ 02</span>
-<h3 className="font-headline-md mb-4 uppercase tracking-tighter font-bold">SEO &amp; Content</h3>
-<p className="font-body-sm text-[#434749] mb-6 text-base">Strategic visibility through data-driven content architecture and technical search engine optimization.</p>
-<div className="mt-auto overflow-hidden rounded-xl">
-<img alt="SEO" className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-700" data-alt="An overhead view of a minimalist workspace featuring high-end digital devices and organized analytical documents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYG8QSjckm38kdFWXVv3jBC4Xg5t1vSIpIGlsKyb7tCXX4KKywinIe2aSlvQYlk7kwBTOHZ-QT3rx1LV7du35iHAuNDmovHxbvHxAtlWuPJ-CVB7y8SB_DpFt7JPQBjvaxHSb4IvXUzS21Uo5ynyRXkF-b8TuEadJeTkFCHB4Vk688YpIGbbGf0L_lKdnIA7MCvUwVx_Igb2W68M3XDuIagdKvc8IWu_AGmpI9XHPMgouOsxYr2qHNNK9ostH-Olx3kreOEdSOvw"/>
-</div>
-</div>
-</div>
-{/* AI Solutions */}
-<div className="group relative p-8 rounded-2xl glass-panel hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden bg-[#f4f3f1] border border-[#c3c7c9]/30">
-<div className="relative z-10 flex flex-col h-full">
-<span className="font-label-caps text-[#06b6d4] mb-6 block text-lg font-bold">/ 03</span>
-<h3 className="font-headline-md mb-4 uppercase tracking-tighter font-bold">AI Solutions</h3>
-<p className="font-body-sm text-[#434749] mb-6 text-base">Custom machine learning models and automated cognitive workflows for the modern enterprise.</p>
-<div className="mt-auto overflow-hidden rounded-xl">
-<img alt="AI" className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-700" data-alt="Abstract visualization of flowing neural networks in a clean, bright digital space." src="https://lh3.googleusercontent.com/aida-public/AB6AXuClkiULPzct6d9Z5BkpuGXyVC4RuqMbrvsbmd6sUCoV9QMZ-3AC-BVTKn_N4o_wiz2-s24UM6xyqKe7HWHSu_N8fME3klq6ji99OEWEC72Pm6WzTgE4ltwd2VLj9WXdTJvDrI2H1xB2nnTaURe5WEXvqC8D_VaatZIfGNtB97yW7HdFfJaCIpC725fHNvD6wLtnAQ77wPLwMKTHB9OgR6Dbtk89zBCQsjSsOI9GuNkiJK5_KQiYWDBCmZKw9zsQ8r_LZnxgI6cgfw"/>
-</div>
-</div>
-</div>
-{/* Social Media */}
-<div className="group relative p-8 rounded-2xl glass-panel hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden bg-[#f4f3f1] border border-[#c3c7c9]/30">
-<div className="relative z-10 flex flex-col h-full">
-<span className="font-label-caps text-[#4f46e5] mb-6 block text-lg font-bold">/ 04</span>
-<h3 className="font-headline-md mb-4 uppercase tracking-tighter font-bold">Social Media</h3>
-<p className="font-body-sm text-[#434749] mb-6 text-base">Curated brand experiences and community engagement through elevated digital storytelling.</p>
-<div className="mt-auto overflow-hidden rounded-xl">
-<img alt="Social" className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-700" data-alt="A collection of sleek, high-end smartphones arranged artistically on a white marble surface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBF7QRczzChUe1lIGG_8tH4FHxyy9C06nnXBMjLV9AU-MPbqYli_KaUz8MphbJm-ti_R4YDEXjzJKQP6Es3rneBqyqvCG-5C2i7eIQ9jkITtJmJjZbRbjmneBK-PW-ckm6HjIVLBYMilTjuu6TyYNnMDOx86LMgDhGbztgPUYAKR5fMkL6q2xY1NJuaIt0wOBvVq6TsXBBwS38jwf0Lql3vSbMMlOLfgZFO4OdaKhpgDtn497U7vK1oGKh6y8JtNT9UZvii4QEtpA"/>
-</div>
-</div>
-</div>
-{/* Podcast Production */}
-<div className="group relative p-8 rounded-2xl glass-panel hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden bg-[#f4f3f1] border border-[#c3c7c9]/30">
-<div className="relative z-10 flex flex-col h-full">
-<span className="font-label-caps text-[#ec4899] mb-6 block text-lg font-bold">/ 05</span>
-<h3 className="font-headline-md mb-4 uppercase tracking-tighter font-bold">Podcast Production</h3>
-<p className="font-body-sm text-[#434749] mb-6 text-base">Full-spectrum audio engineering and high-fidelity sonic identity for influential voices.</p>
-<div className="mt-auto overflow-hidden rounded-xl">
-<img alt="Podcast" className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-700" data-alt="A professional podcast studio setup featuring a high-end silver microphone on a sleek arm." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpTJCNSk53k3iuuEOpF7sV8rkC6bQGLn-MmJb2LYnsYcU0XnOPmwqDwgVr7nVviQPrPY8R3jT-gDitbaaguteOa-GCUidyOByNhY-E252vbSyA-VJZSPwgbtE35_wesXREdnr0UWA4_d9btXnlP2xt3lUcl_DTVISzI9Jfpy08pMTIsAS6oJhyGrQh_qhnymCIsKCG6th5t5P4Ro2LIkeU8-CMYpU74JmOgkFty6rhlnt4gJz_U4ja2KfEUuWzQpYY047nVC2djQ"/>
-</div>
-</div>
-</div>
-{/* Financial Consulting */}
-<div className="group relative p-8 rounded-2xl glass-panel hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden bg-[#f4f3f1] border border-[#c3c7c9]/30">
-<div className="relative z-10 flex flex-col h-full">
-<span className="font-label-caps text-[#06b6d4] mb-6 block text-lg font-bold">/ 06</span>
-<h3 className="font-headline-md mb-4 uppercase tracking-tighter font-bold">Financial Consulting</h3>
-<p className="font-body-sm text-[#434749] mb-6 text-base">Fintech integration and digital-first economic modeling for rapid agency scale.</p>
-<div className="mt-auto overflow-hidden rounded-xl">
-<img alt="Financial" className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-700" data-alt="A minimalist architectural shot of a bright modern office interior, focusing on clean lines, glass walls, and structured analytical data projected onto a wall." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBH9Vn-7IvDnEEx-C4HONw4_3yb5TMwdcLdXfk7J3HZHSg07b7HXoA8M1zhUH9PlsEExiO1pSyP8fwH1oqIgOkiWioSjfa0o7LK2fMKMQcyBPMLf66fDEGDieftJTxCu0jD1oBbnbGRztnQoqwTyYn-LgEwM4lfNTuWLnpAynNhc_sok08QzsxXepUBcDoKFRoqkrvmCRYbUIlF3Nh6pZaLRpeKHJMJjZBJfXN_0kwULF9giP3Lj0sBye8uyso4zmOfRDRe1Y6GjA"/>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-{/* Process Section / Bento Grid */}
-<section className="py-24 bg-[#f4f3f1] relative">
-<div className="grid-texture absolute inset-0 opacity-50"></div>
-<div className="max-w-[1440px] mx-auto px-[32px] relative z-10">
-<div className="grid grid-cols-12 gap-12">
-<div className="col-span-12 lg:col-span-4 mb-[32px] lg:mb-0">
-<h2 className="font-display-lg text-[#172124] uppercase leading-tight mb-8 font-black">HOW WE<br/>THINK.</h2>
-<p className="font-body-lg text-[#434749] text-xl leading-relaxed">Our methodology is rooted in architectural design principles—prioritizing structure, clarity, and intent above all else.</p>
-</div>
-<div className="col-span-12 lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-<div className="glass-panel p-10 rounded-2xl bg-white flex flex-col justify-between h-72 border border-[#c3c7c9]/30 hover:border-[#4f46e5] hover:shadow-2xl transition-all group">
-<span className="material-symbols-outlined text-[#4f46e5] text-5xl group-hover:scale-110 transition-transform">architecture</span>
-<div>
-<h4 className="font-headline-sm mb-3 uppercase font-bold tracking-tight">Discovery</h4>
-<p className="font-body-sm text-[#434749] text-base">Deep immersion into the business ecosystem to identify core friction points.</p>
-</div>
-</div>
-<div className="p-10 rounded-2xl bg-gradient-to-br from-[#4f46e5] to-[#ec4899] text-white flex flex-col justify-between h-72 shadow-2xl md:translate-y-8 group hover:-translate-y-2 transition-all duration-500">
-<span className="material-symbols-outlined text-white text-5xl group-hover:scale-110 transition-transform">precision_manufacturing</span>
-<div>
-<h4 className="font-headline-sm mb-3 uppercase font-bold tracking-tight">Synthesis</h4>
-<p className="font-body-sm text-white/90 text-base">Engineered prototyping where form perfectly aligns with technical function.</p>
-</div>
-</div>
-<div className="glass-panel p-10 rounded-2xl bg-white flex flex-col justify-between h-72 border border-[#c3c7c9]/30 hover:border-[#06b6d4] hover:shadow-2xl transition-all group">
-<span className="material-symbols-outlined text-[#06b6d4] text-5xl group-hover:scale-110 transition-transform">terminal</span>
-<div>
-<h4 className="font-headline-sm mb-3 uppercase font-bold tracking-tight">Execution</h4>
-<p className="font-body-sm text-[#434749] text-base">Rigorous deployment with a focus on load speeds and interactive fidelity.</p>
-</div>
-</div>
-<div className="glass-panel p-10 rounded-2xl bg-white flex flex-col justify-between h-72 border border-[#c3c7c9]/30 hover:border-[#ec4899] hover:shadow-2xl transition-all md:translate-y-8 group">
-<span className="material-symbols-outlined text-[#ec4899] text-5xl group-hover:scale-110 transition-transform">auto_graph</span>
-<div>
-<h4 className="font-headline-sm mb-3 uppercase font-bold tracking-tight">Evolution</h4>
-<p className="font-body-sm text-[#434749] text-base">Continuous monitoring and algorithmic refinement for peak performance.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-{/* CTA Section */}
-<section className="py-32 relative overflow-hidden bg-[#172124] text-white">
-<div className="absolute inset-0 bg-gradient-to-br from-[#172124] via-[#172124] to-[#4f46e5]/40 mix-blend-multiply"></div>
-<div className="max-w-[1440px] mx-auto px-[32px] text-center relative z-10">
-<div className="inline-block p-1 border border-white/20 rounded-full mb-10 bg-white/5 backdrop-blur-md">
-<div className="bg-white/10 px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest text-white">Ready to scale?</div>
-</div>
-<h2 className="font-display-xl text-white mb-14 uppercase font-black tracking-tighter">Let's build the <br/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ec4899] to-[#06b6d4]">future together.</span></h2>
-<button className="bg-white text-[#172124] px-14 py-6 rounded-full font-label-caps uppercase text-lg font-bold hover:scale-105 hover:shadow-[0_0_40px_rgba(255,255,255,0.3)] transition-all duration-300">
-                    Initiate Project
-                </button>
-</div>
-{/* Large faint background text */}
-<div className="absolute bottom-0 left-0 w-full overflow-hidden select-none pointer-events-none opacity-10">
-<h2 className="text-[350px] font-black uppercase whitespace-nowrap leading-none transform translate-y-1/3 text-white">AGENCY EXPERIENCE</h2>
-</div>
-</section>
-</main>
-
-
-
-    </>
+    </div>
   );
 };
 

@@ -1,326 +1,210 @@
 import React, { useState, useEffect } from 'react';
-import { getBackendUrl } from '../lib/api';
-import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import {
-  Calendar,
-  User,
-  Clock,
-  ArrowRight,
-  Search,
-  Tag,
-  Eye,
-  Share2,
-  TrendingUp,
-  Sparkles
-} from 'lucide-react';
-import AnimatedSection from '../components/AnimatedSection';
-import Breadcrumbs from '../components/Breadcrumbs';
+import { Calendar, User, ArrowRight, Search, Tag } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { getBackendUrl } from '../lib/api';
+import '../components/Home.css';
 
+const titleV = {
+  hidden: { y: 100, opacity: 0 },
+  visible: (i: number) => ({ y: 0, opacity: 1, transition: { duration: 1, ease: [.22, 1, .36, 1], delay: .2 + i * .12 } })
+};
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+};
+
+/* Shared visual helpers */
+const Grain = () => (
+  <div style={{ position: 'absolute', inset: 0, zIndex: 1, opacity: 0.04, pointerEvents: 'none', backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`, backgroundSize: '200px' }} />
+);
+const GridBg = ({ size = 40, opacity = 0.06 }: any) => (
+  <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 1, opacity, backgroundImage: `linear-gradient(var(--text-tertiary) 1px, transparent 1px), linear-gradient(90deg, var(--text-tertiary) 1px, transparent 1px)`, backgroundSize: `${size}px ${size}px` }} />
+);
+const GlowBlob = ({ top, left, right, bottom, w = 300, opacity = 0.05, blur = 100 }: any) => (
+  <motion.div animate={{ scale: [1, 1.15, 1], opacity: [opacity, opacity * 1.4, opacity] }} transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }} style={{ position: 'absolute', width: w, height: w, borderRadius: '50%', background: 'var(--accent-primary)', filter: `blur(${blur}px)`, top, left, right, bottom, pointerEvents: 'none', zIndex: 1 }} />
+);
+const LuxuryLine = () => (
+  <div style={{ width: '100%', height: '1px', background: 'linear-gradient(to right, transparent, var(--accent-primary) 20%, var(--accent-light) 50%, var(--accent-primary) 80%, transparent)', opacity: 0.3 }} />
+);
 
 const Blog = () => {
-  const [activeCategory, setActiveCategory] = useState('all');
-  const [searchQuery, setSearchQuery] = useState('');
-
-  const categories = [
-    { id: 'all', name: 'All Posts' },
-    { id: 'digital-marketing', name: 'Digital Marketing' },
-    { id: 'seo', name: 'SEO' },
-    { id: 'web-development', name: 'Web Development' },
-    { id: 'ai-technology', name: 'AI & Technology' },
-    { id: 'business-strategy', name: 'Business Strategy' }
-  ];
-
-  const [blogPosts, setBlogPosts] = useState([]);
-  const [loadingPosts, setLoadingPosts] = useState(true);
-  const [postsError, setPostsError] = useState(null);
+  const [blogs, setBlogs] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      setLoadingPosts(true);
+    window.scrollTo(0, 0);
+    const fetchBlogs = async () => {
       try {
         const API_BASE = getBackendUrl();
         const res = await fetch(`${API_BASE}/blogs`);
         const json = await res.json();
-        if (json?.success) setBlogPosts(json.data || []);
-        else setPostsError(json?.message || "Failed to load posts");
-      } catch (err) {
-        setPostsError(err.message || "Failed to load posts");
+        if (json?.success) {
+          const fetched = json.data || [];
+          setBlogs(fetched.filter((post: any) => post.isPublished));
+        }
+      } catch (error) { 
+        console.error('Error fetching blogs:', error); 
       }
-      setLoadingPosts(false);
+      finally { setIsLoading(false); }
     };
-    fetchPosts();
+    fetchBlogs();
   }, []);
 
-  const filteredPosts = blogPosts.filter(post => {
-    const matchesCategory = activeCategory === 'all' || post.category === activeCategory;
-    const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      (post.excerpt || "").toLowerCase().includes(searchQuery.toLowerCase()) ||
-      (post.tags || []).some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
-    return matchesCategory && matchesSearch;
-  });
-
-  const featuredPosts = filteredPosts.filter(post => post.isPublished && (post.featuredImage || post.isFeatured));
-  const regularPosts = filteredPosts.filter(post => post.isPublished && !(post.featuredImage || post.isFeatured));
-
   return (
-    <div className="pt-20">
-      {/* Hero Section - Matching Theme */}
-      <section className="relative py-20 bg-gradient-to-br from-slate-50 via-white to-slate-50 overflow-hidden">
-        {/* Background decoration */}
-        <div className="absolute inset-0 z-0">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-blue-100/30 blur-[100px] rounded-full" />
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-100/30 blur-[100px] rounded-full" />
-        </div>
+    <div className="dh-blog-page">
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="pt-8">
-            <Breadcrumbs />
-          </div>
-          <AnimatedSection animation="fadeInUp" delay={0.2}>
-            <div className="text-center">
-              <motion.h1
-                className="text-3xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, ease: "easeOut" }}
-              >
-                Insights on{" "}
-                <span className="text-amber-500">Digital Growth</span>
-              </motion.h1>
-              <motion.p
-                className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-              >
-                Stay ahead with expert insights on digital marketing, technology, and business strategy.
-                Real-world knowledge to fuel your growth.
-              </motion.p>
-            </div>
-          </AnimatedSection>
+      {/* 1. CINEMATIC HERO */}
+      <section className="theme-brown" style={{ minHeight: '70vh', display: 'flex', alignItems: 'center', background: 'var(--bg-primary)', overflow: 'hidden', position: 'relative', paddingTop: '80px' }}>
+        <Grain />
+        <GridBg size={50} opacity={0.06} />
+        <GlowBlob top="-5%" right="-5%" w={400} opacity={0.04} blur={120} />
+        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '2px', background: 'linear-gradient(to right, transparent, var(--accent-primary) 25%, var(--accent-light) 50%, var(--accent-primary) 75%, transparent)', zIndex: 10 }} />
+        <div className="dh-container" style={{ position: 'relative', zIndex: 10 }}>
+          <motion.div initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.1 } } }}>
+            <motion.div variants={fadeUp} className="dh-label">EDITORIAL</motion.div>
+            <h1 className="dh-display dh-hero-title">
+              <span className="dh-hero-line"><motion.span custom={0} variants={titleV}>THOUGHT</motion.span></span>
+              <span className="dh-hero-line"><motion.span custom={1} variants={titleV} className="dh-hero-stroked">DIGITAL</motion.span></span>
+              <span className="dh-hero-line"><motion.span custom={2} variants={titleV} className="dh-hero-accent">INTEL.</motion.span></span>
+            </h1>
+            <motion.p variants={fadeUp} className="dh-body" style={{ maxWidth: '600px', fontSize: '1.2rem' }}>
+              Deep dives into <strong style={{ color: 'var(--accent-primary)' }}>enterprise technology, market shifts, and digital craftsmanship.</strong>
+            </motion.p>
+          </motion.div>
         </div>
       </section>
 
-      {/* Search and Filter */}
-      <section className="py-12 bg-white border-b border-slate-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection animation="fadeInUp" delay={0.3}>
-            <div className="bg-white rounded-[2rem] shadow-2xl p-8 border border-slate-100">
-              <div className="flex flex-col lg:flex-row gap-6 items-center justify-between">
-                <div className="relative flex-1 max-w-md w-full">
-                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400 w-5 h-5" />
-                  <input
-                    type="text"
-                    placeholder="Search articles..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full pl-12 pr-4 py-4 bg-slate-50 border-b-2 border-slate-200 focus:border-amber-500 text-slate-900 font-bold transition-all outline-none rounded-lg"
-                  />
-                </div>
-                <div className="flex flex-wrap gap-2 justify-center lg:justify-end w-full lg:w-auto">
-                  {categories.map((category) => (
-                    <button
-                      key={category.id}
-                      onClick={() => setActiveCategory(category.id)}
-                      className={`px-3 py-2 md:px-5 md:py-2.5 rounded-xl font-black text-[9px] md:text-[10px] uppercase tracking-wider transition-all duration-200 whitespace-nowrap ${activeCategory === category.id
-                        ? 'bg-gradient-to-r from-amber-400 to-orange-500 text-slate-900 shadow-lg shadow-yellow-200/50'
-                        : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                        }`}
+      <LuxuryLine />
+
+      {/* 2. SEARCH & TAGS */}
+      <section className="theme-beige" style={{ padding: '2rem 0', background: 'var(--bg-primary)', borderBottom: '1px solid var(--border-faint)' }}>
+        <div className="dh-container">
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }} className="dh-responsive-grid">
+            <div style={{ position: 'relative', width: '100%', maxWidth: '400px' }}>
+              <Search size={18} style={{ position: 'absolute', left: '0', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-tertiary)' }} />
+              <input type="text" placeholder="SEARCH INTEL..." style={{ width: '100%', padding: '1rem 0 1rem 2.5rem', background: 'transparent', border: 'none', color: 'var(--text-primary)', fontSize: '0.8rem', fontWeight: 700, letterSpacing: '0.1em', outline: 'none' }} />
+            </div>
+            <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>
+              {['ALL', 'TECHNOLOGY', 'BUSINESS', 'MARKETING', 'AI'].map((tag, i) => (
+                <button key={i} style={{ background: 'none', border: 'none', color: i === 0 ? 'var(--accent-primary)' : 'var(--text-tertiary)', fontWeight: 800, fontSize: '0.7rem', letterSpacing: '0.1em', cursor: 'pointer', transition: 'color 0.3s' }}>
+                  {tag}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. BLOG GRID */}
+      <section className="theme-beige" style={{ position: 'relative', padding: '80px 0', background: 'var(--bg-primary)', overflow: 'hidden' }}>
+        <Grain />
+        <GridBg size={30} opacity={0.03} />
+        <GlowBlob bottom="10%" right="-60px" w={280} opacity={0.04} />
+        <div className="dh-container" style={{ position: 'relative', zIndex: 10 }}>
+          {isLoading ? (
+            <div style={{ textAlign: 'center', padding: '10rem 0' }}>
+              <div className="dh-label">SYNCHRONIZING...</div>
+            </div>
+          ) : (
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '32px' }} className="dh-blog-grid">
+              {blogs.map((blog, i) => (
+                <motion.div key={blog._id} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: i * 0.05 }} style={{ display: 'flex' }}>
+                  <Link to={`/blog/${blog.slug}`} style={{ textDecoration: 'none', color: 'inherit', display: 'flex', width: '100%' }}>
+                    <div style={{
+                      display: 'flex', flexDirection: 'column',
+                      border: '1px solid var(--border-light)', borderRadius: '16px', background: 'var(--card-bg)', cursor: 'pointer', transition: 'all 0.4s cubic-bezier(0.22, 1, 0.36, 1)',
+                      position: 'relative', overflow: 'hidden', width: '100%',
+                      boxShadow: '0 4px 20px rgba(0,0,0,0.02)'
+                    }}
+                      onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-8px)'; e.currentTarget.style.borderColor = 'var(--accent-primary)'; e.currentTarget.style.boxShadow = '0 12px 30px rgba(0,0,0,0.08)'; const img = e.currentTarget.querySelector('.dh-blog-img') as HTMLElement; if (img) img.style.transform = 'scale(1.05)'; }}
+                      onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.borderColor = 'var(--border-light)'; e.currentTarget.style.boxShadow = '0 4px 20px rgba(0,0,0,0.02)'; const img = e.currentTarget.querySelector('.dh-blog-img') as HTMLElement; if (img) img.style.transform = 'scale(1)'; }}
+                      className="dh-blog-card"
                     >
-                      {category.name}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
-
-      {/* Featured Posts */}
-      {featuredPosts.length > 0 && (
-        <section className="py-20 bg-slate-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <AnimatedSection animation="fadeInUp" delay={0.1}>
-              <div className="flex items-center gap-3 mb-12">
-                <Sparkles className="w-8 h-8 text-amber-500" />
-                <h2 className="text-4xl font-black text-slate-900 tracking-tight">Featured Articles</h2>
-              </div>
-            </AnimatedSection>
-
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {featuredPosts.map((post, index) => (
-                <AnimatedSection key={post._id || post.id || `featured-${index}`} animation="fadeInUp" delay={index * 0.1}>
-                  <article className="group bg-white rounded-[2rem] shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 border border-slate-100">
-                    <div className="relative overflow-hidden">
-                      <Link to={`/blog/${post.slug}`}>
-                        <img
-                          src={post.featuredImage || post.image}
-                          alt={post.title}
-                          className="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500"
-                        />
-                      </Link>
-                      <div className="absolute top-6 left-6">
-                        <span className="bg-gradient-to-r from-amber-400 to-orange-500 text-slate-900 px-4 py-2 rounded-xl text-xs font-black uppercase tracking-wider shadow-lg">
-                          Featured
-                        </span>
-                      </div>
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    </div>
-                    <div className="p-8">
-                      <div className="flex items-center text-xs text-slate-500 mb-4 font-bold uppercase tracking-wider">
-                        {new Date(post.publishedAt || post.createdAt).toLocaleDateString()}
-                        {post.readTime && <span className="ml-4">{post.readTime}</span>}
-                      </div>
-                      <h3 className="text-2xl font-black text-slate-900 mb-4 tracking-tight group-hover:text-amber-500 transition-colors">
-                        {post.title}
-                      </h3>
-                      <p className="text-slate-600 mb-6 leading-relaxed font-medium">
-                        {post.excerpt}
-                      </p>
-                      <div className="flex items-center justify-end pt-6 border-t border-slate-100">
-                        <Link to={`/blog/${post.slug}`} className="text-slate-900 hover:text-amber-500 font-black text-xs uppercase tracking-wider flex items-center transition-colors">
-                          Read More <ArrowRight className="ml-2 w-4 h-4" />
-                        </Link>
-                      </div>
-                    </div>
-                  </article>
-                </AnimatedSection>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Regular Posts */}
-      {regularPosts.length > 0 && (
-        <section className="py-20 bg-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <AnimatedSection animation="fadeInUp" delay={0.1}>
-              <div className="flex items-center gap-3 mb-12">
-                <TrendingUp className="w-8 h-8 text-amber-500" />
-                <h2 className="text-4xl font-black text-slate-900 tracking-tight">Latest Articles</h2>
-              </div>
-            </AnimatedSection>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {regularPosts.map((post, index) => (
-                <AnimatedSection key={post._id || post.id || `regular-${index}`} animation="fadeInUp" delay={index * 0.05}>
-                  <article className="group bg-slate-50 rounded-[1.5rem] shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 border border-slate-100 hover:border-amber-500">
-                    <div className="relative overflow-hidden">
-                      <Link to={`/blog/${post.slug}`}>
-                        <img
-                          src={post.featuredImage || post.image}
-                          alt={post.title}
-                          className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-500"
-                        />
-                      </Link>
-                      <div className="absolute top-4 left-4">
-                        <span className="bg-slate-900 text-amber-500 px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-wider shadow-lg">
-                          {categories.find(cat => cat.id === post.category)?.name}
-                        </span>
-                      </div>
-                    </div>
-                    <div className="p-6">
-                      <div className="flex items-center text-[10px] text-slate-500 mb-4 font-bold uppercase tracking-wider">
-                        {new Date(post.publishedAt || post.createdAt).toLocaleDateString()}
-                        {post.readTime && <span className="ml-3">{post.readTime}</span>}
-                      </div>
-                      <h3 className="text-xl font-black text-slate-900 mb-3 tracking-tight group-hover:text-amber-500 transition-colors line-clamp-2">
-                        {post.title}
-                      </h3>
-                      <p className="text-slate-600 mb-4 leading-relaxed text-sm font-medium line-clamp-3">
-                        {post.excerpt}
-                      </p>
-
-                      <div className="flex items-center justify-between">
-                        <div className="flex flex-wrap gap-2">
-                          {(post.tags || []).slice(0, 2).map((tag) => (
-                            <span
-                              key={tag}
-                              className="bg-white text-slate-600 px-2 py-1 rounded-lg text-[10px] font-bold border border-slate-200"
-                            >
-                              {tag}
-                            </span>
-                          ))}
+                      {/* Image */}
+                      {(blog.featuredImage || blog.image) ? (
+                        <div style={{ width: '100%', height: '220px', overflow: 'hidden', borderBottom: '1px solid var(--border-faint)' }}>
+                          <img src={blog.featuredImage || blog.image} alt={blog.title} className="dh-blog-img" style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease' }} />
                         </div>
-                        <Link to={`/blog/${post.slug}`} className="text-slate-900 hover:text-amber-500 font-black text-[10px] uppercase tracking-wider flex items-center transition-colors">
-                          Read <ArrowRight className="ml-1 w-3.5 h-3.5" />
-                        </Link>
+                      ) : (
+                        <div style={{ width: '100%', height: '220px', background: 'var(--border-faint)', display: 'flex', alignItems: 'center', justifyContent: 'center', borderBottom: '1px solid var(--border-faint)' }}>
+                          <span style={{ color: 'var(--text-tertiary)', fontSize: '0.8rem', letterSpacing: '0.1em' }}>NO IMAGE</span>
+                        </div>
+                      )}
+
+                      {/* Content */}
+                      <div style={{ display: 'flex', flexDirection: 'column', padding: '24px', flex: 1 }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '16px' }}>
+                          <span style={{ fontSize: '0.65rem', fontWeight: 800, color: 'var(--accent-primary)', display: 'flex', alignItems: 'center', gap: '0.4rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+                            <Calendar size={12} /> {new Date(blog.createdAt).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })}
+                          </span>
+                        </div>
+                        <h3 className="dh-heading" style={{ fontSize: '1.4rem', margin: '0 0 16px 0', lineHeight: 1.3 }}>{blog.title}</h3>
+                        
+                        <div style={{ marginTop: 'auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '16px', borderTop: '1px solid var(--border-faint)' }}>
+                          <div style={{ display: 'flex', gap: '0.5rem' }}>
+                            <span style={{ fontSize: '0.65rem', fontWeight: 800, color: 'var(--text-secondary)', background: 'var(--bg-primary)', padding: '4px 10px', borderRadius: '100px', border: '1px solid var(--border-light)' }}>
+                              {typeof blog.category === 'object' && blog.category?.name ? blog.category.name : 'INSIGHTS'}
+                            </span>
+                          </div>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--accent-primary)', fontSize: '0.75rem', fontWeight: 800, letterSpacing: '0.1em' }}>
+                            READ <ArrowRight size={14} />
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </article>
-                </AnimatedSection>
+                  </Link>
+                </motion.div>
               ))}
             </div>
-          </div>
-        </section>
-      )}
+          )}
+        </div>
+      </section>
 
+      <LuxuryLine />
 
-
-      {/* Popular Topics */}
-      <section className="pt-12 pb-24 md:py-24 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection animation="fadeInUp" delay={0.1}>
-            <div className="text-center mb-16">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white rounded-full border border-slate-200 mb-6 shadow-sm">
-                <span className="w-2 h-2 bg-gradient-to-r from-amber-400 to-orange-500 rounded-full" />
-                <span className="text-slate-400 font-black text-[10px] uppercase tracking-[0.3em]">Explore Topics</span>
-              </div>
-              <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-4 tracking-tight">
-                Popular Topics
-              </h2>
-              <p className="text-xl text-slate-600 font-medium">
-                Dive into our most-read content and trending discussions.
-              </p>
+      {/* 4. NEWSLETTER CTA */}
+      <section className="theme-brown" style={{ position: 'relative', padding: '100px 0', background: 'var(--bg-primary)', overflow: 'hidden' }}>
+        <Grain />
+        <GlowBlob top="20%" left="30%" w={400} opacity={0.03} blur={120} />
+        <div className="dh-container" style={{ position: 'relative', zIndex: 10 }}>
+          <div style={{ padding: '5rem', background: 'var(--card-bg)', borderRadius: '24px', border: '1px solid var(--border-faint)', textAlign: 'center', backdropFilter: 'blur(10px)', position: 'relative', overflow: 'hidden' }}>
+            <div style={{ position: 'absolute', top: 0, left: 0, width: 80, height: 80, borderTop: '2px solid var(--accent-primary)', borderLeft: '2px solid var(--accent-primary)', borderRadius: '24px 0 0 0', opacity: 0.3 }} />
+            <div style={{ position: 'absolute', bottom: 0, right: 0, width: 80, height: 80, borderBottom: '2px solid var(--accent-primary)', borderRight: '2px solid var(--accent-primary)', borderRadius: '0 0 24px 0', opacity: 0.3 }} />
+            <div className="dh-label">INTEL FEED</div>
+            <h2 className="dh-display" style={{ fontSize: '3rem', marginBottom: '2rem' }}>SUBSCRIBE TO INSIGHTS</h2>
+            <p className="dh-body" style={{ maxWidth: '600px', margin: '0 auto 3rem' }}>Join 5,000+ industry leaders receiving our weekly deep-dives on technology and market strategy.</p>
+            <div style={{ display: 'flex', maxWidth: '500px', margin: '0 auto', gap: '1rem' }} className="dh-responsive-grid">
+              <input type="email" placeholder="YOUR EMAIL ADDRESS" style={{ flex: 1, background: 'var(--bg-primary)', border: '1px solid var(--border-light)', borderRadius: '100px', padding: '0 2rem', color: 'var(--text-primary)', outline: 'none' }} />
+              <button className="dh-btn-fill">JOIN NOW</button>
             </div>
-          </AnimatedSection>
-
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 max-w-7xl mx-auto">
-            {[
-              { title: "SEO", description: "15+ articles on search engine optimization and ranking strategies.", icon: <Search className="w-5 h-5 md:w-6 h-6 text-white" />, delay: 0.1 },
-              { title: "Social Media", description: "12+ articles on social media marketing and engagement strategies.", icon: <Share2 className="w-5 h-5 md:w-6 h-6 text-white" />, delay: 0.15 },
-              { title: "Content", description: "10+ articles on content strategy and creation best practices.", icon: <Tag className="w-5 h-5 md:w-6 h-6 text-white" />, delay: 0.2 },
-              { title: "Digital", description: "8+ articles on digital transformation and business strategy.", icon: <TrendingUp className="w-5 h-5 md:w-6 h-6 text-white" />, delay: 0.25 }
-            ].map((topic, index) => (
-              <AnimatedSection
-                key={index}
-                animation="fadeInUp"
-                delay={topic.delay}
-              >
-                <div className="bg-white rounded-[1.5rem] md:rounded-[2.5rem] p-4 md:p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border-2 border-slate-100 hover:border-amber-200 h-full group flex flex-col">
-                  <div className="flex flex-col md:flex-row items-center md:items-center gap-3 md:gap-5 mb-3 md:mb-5 text-center md:text-left">
-                    <div className="w-10 h-10 md:w-14 h-14 bg-gradient-to-br from-amber-500 to-orange-500 rounded-xl md:rounded-2xl flex items-center justify-center shadow-lg shadow-amber-200 group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
-                      {topic.icon}
-                    </div>
-                    <h3 className="text-base md:text-2xl font-bold text-slate-900 tracking-tight leading-tight">
-                      {topic.title}
-                    </h3>
-                  </div>
-                  <p className="text-slate-600 leading-relaxed text-xs md:text-lg font-medium text-center md:text-left">
-                    {topic.description}
-                  </p>
-                </div>
-              </AnimatedSection>
-            ))}
           </div>
         </div>
       </section>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .dh-responsive-grid {
+            flex-direction: column !important;
+            gap: 1.5rem !important;
+          }
+          .dh-blog-item {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 1.5rem !important;
+            padding: 1.5rem 1rem !important;
+          }
+          .dh-hide-mobile {
+            display: none !important;
+          }
+          .dh-hero-title {
+            font-size: clamp(2.5rem, 8vw, 4rem) !important;
+          }
+        }
+      `}</style>
     </div>
   );
 };
 
 export default Blog;
-
-
-
-
-
-
-
-
-
-
-

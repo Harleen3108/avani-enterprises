@@ -1,504 +1,385 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { useSeo } from '../contexts/SeoContext';
-
-import {
-  Target,
-  Users,
-  Award,
-  TrendingUp,
-  CheckCircle,
-  Globe,
-  Lightbulb,
-  Heart,
-  Shield,
-  Zap
-} from 'lucide-react';
-import AnimatedSection from '../components/AnimatedSection';
-import AnimatedCounter from '../components/AnimatedCounter';
-import EcosystemMap from '../components/EcosystemMap';
+import { Shield, Target, Users, ArrowRight, CheckCircle, Globe, Zap, Lightbulb, Heart } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import RotatingText from '../components/RotatingText';
-import Breadcrumbs from '../components/Breadcrumbs';
+import AnimatedCounter from '../components/AnimatedCounter';
 
+import '../components/Home.css';
+
+const titleV = {
+  hidden: { y: 60, opacity: 0 },
+  visible: (i: number) => ({ y: 0, opacity: 1, transition: { duration: 0.8, ease: [.22, 1, .36, 1], delay: i * 0.1 } })
+};
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+};
+
+const row1Logos = [
+  { name: 'Paragon', logo: '/paragon.png' },
+  { name: 'Indus group of institutions', logo: '/indus.jpeg' },
+  { name: 'Policicue', logo: '/policucue.jpeg' },
+  { name: 'Frd Nutrition', logo: '/frd-nutrition-new.png' },
+  { name: 'Rohtak Shoe Co.', logo: '/shoes.jpeg' },
+  { name: 'Gaon se ghar tak', logo: '/gaonsegharatk.png' },
+];
+
+const row2Logos = [
+  { name: 'Redball Cricket Ground', logo: '/redball.png' },
+  { name: 'The Page', logo: '/thepage.png' },
+  { name: 'King\'s Pet Hospital', logo: '/kingspet.png' },
+  { name: 'Hi-tech Homes', logo: '/hitech.jpeg' },
+  { name: 'Sanjeevni Hospital', logo: '/sanjeevni.jpeg' },
+];
+
+const tripledRow1 = [...row1Logos, ...row1Logos, ...row1Logos];
+const tripledRow2 = [...row2Logos, ...row2Logos, ...row2Logos];
 
 const About = () => {
-  const { seo } = useSeo();
-  const values = [
-
-    {
-      icon: <Target className="w-8 h-8" />,
-      title: "Results-Driven",
-      description: "We focus on measurable outcomes and ROI for every project we undertake."
-    },
-    {
-      icon: <Users className="w-8 h-8" />,
-      title: "Client-Centric",
-      description: "Your success is our success. We build long-term partnerships based on trust."
-    },
-    {
-      icon: <Lightbulb className="w-8 h-8" />,
-      title: "Innovation-First",
-      description: "We stay ahead of industry trends and leverage cutting-edge technologies."
-    },
-    {
-      icon: <Heart className="w-8 h-8" />,
-      title: "Passion for Excellence",
-      description: "We're passionate about delivering exceptional quality in everything we do."
-    }
-  ];
-
-  const achievements = [
-    {
-      number: "150+",
-      label: "Happy Clients",
-      icon: <Users className="w-6 h-6" />
-    },
-    {
-      number: "300+",
-      label: "Projects Completed",
-      icon: <Award className="w-6 h-6" />
-    },
-    {
-      number: "85%",
-      label: "Average Growth",
-      icon: <TrendingUp className="w-6 h-6" />
-    },
-    {
-      number: "8+",
-      label: "Years Experience",
-      icon: <Globe className="w-6 h-6" />
-    }
-  ];
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
-    <div className="pt-20">
-      {/* Hero Section with Ecosystem Map */}
-      <section className="relative py-20 bg-gradient-to-br from-slate-50 via-white to-slate-50 overflow-hidden">
-        {/* Background decoration */}
-        <div className="absolute inset-0 z-0">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-amber-100/30 blur-[100px] rounded-full" />
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-orange-100/30 blur-[100px] rounded-full" />
-        </div>
+    <div className="dh-about-page" style={{ fontFamily: "'Inter', sans-serif" }}>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Breadcrumbs />
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-8"
-          >
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-4">
-              {seo?.seoHeading ? (
-                seo.seoHeading
-              ) : (
-                <>About <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-600">Avani Enterprises</span></>
-              )}
-            </h1>
-            <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-              Transforming businesses through strategic digital solutions and innovative technology
-            </p>
-          </motion.div>
+      {/* 1. CINEMATIC HERO WITH FLOATING PICTURES */}
+      <section className="theme-brown" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', background: 'var(--bg-primary)', overflow: 'hidden', position: 'relative', paddingTop: '120px', paddingBottom: '80px' }}>
+        {/* Abstract Background Grid */}
+        <div style={{ 
+          position: 'absolute', 
+          inset: 0, 
+          opacity: 0.1, 
+          backgroundImage: 'linear-gradient(var(--text-tertiary) 1px, transparent 1px), linear-gradient(90deg, var(--text-tertiary) 1px, transparent 1px)', 
+          backgroundSize: '40px 40px',
+          pointerEvents: 'none',
+          zIndex: 1
+        }} />
 
-          {/* Ecosystem Map */}
-          <EcosystemMap />
-
-          {/* Compact Stats Row */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1.2 }}
-            className="flex flex-wrap justify-center gap-8 md:gap-16 mt-16 pt-12 border-t border-slate-200"
-          >
-            <div className="text-center group cursor-default">
-              <div className="text-3xl md:text-4xl font-black text-slate-900 mb-1 group-hover:text-amber-500 transition-colors">
-                <AnimatedCounter target={8} suffix="+" />
+        {/* Top Moving Bar */}
+        <div style={{ overflow: 'hidden', marginBottom: '40px', opacity: 0.8, position: 'relative', zIndex: 10 }}>
+          <motion.div animate={{ x: ['0%', '-33.33%'] }} transition={{ duration: 28, ease: 'linear', repeat: Infinity }}
+            style={{ display: 'flex', gap: '16px', width: 'max-content' }}>
+            {tripledRow1.map((l: any, i: number) => (
+              <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 18px', background: 'var(--card-bg)', border: '1px solid var(--border-faint)', borderRadius: '100px', flexShrink: 0 }}>
+                <div style={{ width: '22px', height: '22px', borderRadius: '50%', background: 'rgba(255,255,255,0.9)', overflow: 'hidden' }}>
+                  <img src={l.logo} alt={l.name} style={{ width: '100%', height: '100%', objectFit: 'contain', padding: '2px' }} />
+                </div>
+                <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', fontWeight: 500, color: 'var(--text-secondary)', whiteSpace: 'nowrap' }}>{l.name}</span>
               </div>
-              <div className="text-sm text-slate-500 uppercase tracking-wider font-bold">Years</div>
-            </div>
-            <div className="text-center group cursor-default">
-              <div className="text-3xl md:text-4xl font-black text-slate-900 mb-1 group-hover:text-amber-500 transition-colors">
-                <AnimatedCounter target={150} suffix="+" />
-              </div>
-              <div className="text-sm text-slate-500 uppercase tracking-wider font-bold">Clients</div>
-            </div>
-            <div className="text-center group cursor-default">
-              <div className="text-3xl md:text-4xl font-black text-slate-900 mb-1 group-hover:text-amber-500 transition-colors">
-                <AnimatedCounter target={300} suffix="+" />
-              </div>
-              <div className="text-sm text-slate-500 uppercase tracking-wider font-bold">Projects</div>
-            </div>
+            ))}
           </motion.div>
         </div>
-      </section>
-      <section className="relative pt-12 pb-24 md:py-24 bg-white overflow-hidden">
-        {/* Dreamy Background Accents */}
-        <div className="absolute inset-0 z-0">
-          <div className="absolute top-1/4 left-0 w-[500px] h-[500px] bg-amber-50/50 blur-[100px] rounded-full -translate-x-1/2" />
-          <div className="absolute bottom-1/4 right-0 w-[500px] h-[500px] bg-orange-50/50 blur-[100px] rounded-full translate-x-1/2" />
-          <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')]" />
-        </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4 tracking-tight">
-              Meet Our Leadership
-            </h2>
-            <p className="text-xl text-slate-600 max-w-3xl mx-auto font-medium">
-              Experienced professional with proven track record in business transformation and startup consulting.
-            </p>
-          </div>
-          <div className="max-w-4xl mx-auto">
-            <AnimatedSection animation="fadeInUp" delay={0.2}>
-              <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
-                <div className="md:flex">
-                  <div className="md:w-1/3">
-                    <img
-                      src="/kapil_khandelwal.jpg"
-                      alt="Kapil Khandelwal"
-                      className="w-full h-64 md:h-full object-cover"
-                    />
-                  </div>
-                  <div className="md:w-2/3 p-8">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                      Kapil Khandelwal
-                    </h3>
-                    <p className="text-blue-600 font-medium text-lg mb-4">
-                      CEO - Avani Enterprises
-                    </p>
-                    <p className="text-gray-600 mb-6 leading-relaxed">
-                      Kapil Khandelwal is a distinguished Business and Startup Consultant with over a decade of experience
-                      in transforming businesses and nurturing startups to success. As the CEO of Avani Enterprises,
-                      he leads a team of professionals dedicated to delivering innovative digital solutions and strategic
-                      growth strategies.
-                    </p>
+        <div className="dh-container" style={{ position: 'relative', zIndex: 10, marginBottom: '40px' }}>
+          <div className="dh-responsive-grid" style={{ display: 'grid', gridTemplateColumns: '1.10fr 0.90fr', gap: '60px', alignItems: 'center' }}>
 
-                    <div className="space-y-4 mb-6">
-                      <div className="flex items-start">
-                        <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
-                        <div>
-                          <h4 className="font-semibold text-gray-900">Business & Startup Consultant</h4>
-                          <p className="text-gray-600 text-sm">
-                            Expert guidance for businesses and startups in scaling operations, market expansion, and strategic planning.
-                          </p>
-                        </div>
-                      </div>
+            <motion.div initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.1 } } }}>
+              <motion.div variants={fadeUp} style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', letterSpacing: '0.2em', color: 'var(--accent-primary)', fontWeight: 600, display: 'block', marginBottom: '16px' }}>
+                OUR HERITAGE
+              </motion.div>
 
-                      <div className="flex items-start">
-                        <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
-                        <div>
-                          <h4 className="font-semibold text-gray-900">Active Investor</h4>
-                          <p className="text-gray-600 text-sm">
-                            Strategic investments in Gyan Ganga Marketing Co and 2 promising startups, contributing to their growth and success.
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-start">
-                        <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
-                        <div>
-                          <h4 className="font-semibold text-gray-900">Author & Thought Leader</h4>
-                          <p className="text-gray-600 text-sm">
-                            Writer of "The Startup Summary Book" 📚, sharing insights and strategies for startup success and business growth.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-3 md:grid-cols-3 gap-2 md:gap-4 mb-6">
-                      <div className="text-center p-2 md:p-4 bg-gray-50 rounded-lg">
-                        <div className="text-xl md:text-2xl font-bold text-blue-600 mb-1">10+</div>
-                        <div className="text-[10px] md:text-sm text-gray-600">Years Exp.</div>
-                      </div>
-                      <div className="text-center p-2 md:p-4 bg-gray-50 rounded-lg">
-                        <div className="text-xl md:text-2xl font-bold text-amber-600 mb-1">50+</div>
-                        <div className="text-[10px] md:text-sm text-gray-600">Businesses</div>
-                      </div>
-                      <div className="text-center p-2 md:p-4 bg-gray-50 rounded-lg">
-                        <div className="text-xl md:text-2xl font-bold text-green-600 mb-1">3</div>
-                        <div className="text-[10px] md:text-sm text-gray-600">Investments</div>
-                      </div>
-                    </div>
-
-                    <div className="flex flex-wrap gap-2">
-                      <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
-                        Business Strategy
-                      </span>
-                      <span className="bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-sm font-medium">
-                        Startup Consulting
-                      </span>
-                      <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
-                        Investment
-                      </span>
-                      <span className="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">
-                        Author
-                      </span>
-                      <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">
-                        Digital Marketing
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </AnimatedSection>
-          </div>
-        </div>
-      </section>
-
-      {/* Mission & Vision */}
-      <section className="pt-12 pb-24 md:py-24 bg-white overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12">
-
-            {/* Mission Card */}
-            <AnimatedSection animation="fadeInUp" delay={0.2}>
-              <div className="relative h-full min-h-[250px] md:min-h-[500px] rounded-[1.5rem] md:rounded-[3rem] overflow-hidden shadow-2xl group flex flex-col justify-end p-5 md:p-12 border border-slate-200/50">
-                <div className="absolute inset-0 z-0">
-                  <img
-                    src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2070&auto=format&fit=crop"
-                    alt="Our Mission"
-                    className="w-full h-full object-cover blur-[2px] transition-transform duration-1000 group-hover:scale-110"
-                  />
-                  {/* Neutral Warm Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-                  <div className="absolute inset-0 bg-amber-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                </div>
-
-                <div className="relative z-10">
-                  <div className="inline-flex items-center justify-center w-12 h-12 md:w-20 md:h-20 rounded-2xl md:rounded-3xl bg-white/10 backdrop-blur-md border border-white/20 mb-4 md:mb-8 shadow-2xl group-hover:-translate-y-2 transition-transform duration-500">
-                    <Target className="w-6 h-6 md:w-10 md:h-10 text-amber-500" />
-                  </div>
-
-                  <h2 className="text-2xl md:text-5xl font-black text-white mb-3 md:mb-6 tracking-tight uppercase">
-                    Our <span className="text-amber-500">Mission</span>
-                  </h2>
-
-                  <div className="max-w-md">
-                    <p className="text-sm md:text-lg text-slate-200 mb-4 md:mb-8 leading-relaxed font-medium">
-                      To empower businesses with cutting-edge digital solutions that drive growth,
-                      enhance brand presence, and deliver measurable ROI.
-                    </p>
-                    <div className="h-1 w-12 md:w-20 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mb-4 opacity-70" />
-                    <p className="text-[10px] md:text-sm text-amber-500/80 font-bold uppercase tracking-widest italic">
-                      "Innovation through Trust & Results"
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </AnimatedSection>
-
-            {/* Vision Card */}
-            <AnimatedSection animation="fadeInUp" delay={0.4}>
-              <div className="relative h-full min-h-[250px] md:min-h-[500px] rounded-[1.5rem] md:rounded-[3rem] overflow-hidden shadow-2xl group flex flex-col justify-end p-5 md:p-12 border border-slate-200/50">
-                <div className="absolute inset-0 z-0">
-                  <img
-                    src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop"
-                    alt="Our Vision"
-                    className="w-full h-full object-cover blur-[2px] transition-transform duration-1000 group-hover:scale-110"
-                  />
-                  {/* Neutral Warm Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-                  <div className="absolute inset-0 bg-orange-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                </div>
-
-                <div className="relative z-10">
-                  <div className="inline-flex items-center justify-center w-12 h-12 md:w-20 md:h-20 rounded-2xl md:rounded-3xl bg-white/10 backdrop-blur-md border border-white/20 mb-4 md:mb-8 shadow-2xl group-hover:-translate-y-2 transition-transform duration-500">
-                    <Globe className="w-6 h-6 md:w-10 md:h-10 text-orange-500" />
-                  </div>
-
-                  <h3 className="text-2xl md:text-5xl font-black text-white mb-3 md:mb-6 tracking-tight uppercase">
-                    Our <span className="text-orange-500">Vision</span>
-                  </h3>
-
-                  <div className="max-w-md">
-                    <p className="text-sm md:text-lg text-slate-200 mb-4 md:mb-8 leading-relaxed font-medium">
-                      To be the leading digital transformation partner for businesses across India,
-                      known for our innovative solutions and exceptional service.
-                    </p>
-
-                    <div className="flex flex-wrap gap-2 md:gap-3">
-                      {['Data-Driven', 'Innovation', 'Success'].map((tag) => (
-                        <div key={tag} className="flex items-center bg-white/5 backdrop-blur-md px-3 py-1 md:px-4 md:py-2 rounded-xl border border-white/10 text-[8px] md:text-xs font-bold text-orange-400 uppercase tracking-widest">
-                          <CheckCircle className="w-2 h-2 md:w-3 md:h-3 mr-1 md:mr-2" />
-                          {tag}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </AnimatedSection>
-          </div>
-        </div>
-      </section>
-
-      {/* Values Section */}
-      <section className="relative pt-12 pb-24 md:py-24 overflow-hidden bg-white">
-        {/* Creative Background Design */}
-        <div className="absolute inset-0 z-0">
-          {/* Gradient Base */}
-          <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-slate-50" />
-
-          {/* Large Decorative Blobs */}
-          <div className="absolute top-20 right-10 w-[600px] h-[600px] bg-gradient-to-br from-amber-200/40 to-orange-200/40 blur-[120px] rounded-full animate-pulse" />
-          <div className="absolute bottom-20 left-10 w-[600px] h-[600px] bg-gradient-to-br from-orange-200/40 to-amber-200/40 blur-[120px] rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
-
-          {/* Geometric Patterns */}
-          <div className="absolute top-1/4 left-1/4 w-32 h-32 border-2 border-amber-200/30 rounded-full" />
-          <div className="absolute bottom-1/3 right-1/4 w-24 h-24 border-2 border-orange-200/30 rounded-full" />
-
-          {/* Subtle Dot Pattern */}
-          <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'radial-gradient(circle, #f59e0b 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
-        </div>
-
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <AnimatedSection animation="fadeInUp" delay={0.1}>
-              <div className="inline-block mb-6">
-                <span className="px-4 py-2 bg-gradient-to-r from-amber-400 to-orange-500 text-white rounded-full text-xs font-black uppercase tracking-wider shadow-lg">
-                  Our Foundation
+              <h1 style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(36px, 5.5vw, 68px)', fontWeight: 800, lineHeight: 0.95, color: 'var(--text-primary)', letterSpacing: '-0.02em', margin: '0 0 24px 0', textTransform: 'uppercase' }}>
+                <span style={{ display: 'block', overflow: 'hidden' }}>
+                  <motion.span custom={0} variants={titleV} style={{ display: 'block' }}>CRAFTING</motion.span>
                 </span>
-              </div>
-              <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-6 tracking-tight">
-                Our Core Values
-              </h2>
-              <p className="text-xl text-slate-600 max-w-2xl mx-auto font-medium leading-relaxed">
-                The principles that guide everything we do and every decision we make.
-              </p>
-            </AnimatedSection>
-          </div>
+                <span style={{ display: 'block', overflow: 'hidden' }}>
+                  <motion.span custom={1} variants={titleV} style={{ display: 'block', color: 'transparent', WebkitTextStroke: '1.5px var(--text-primary)' }}>A TIMELESS</motion.span>
+                </span>
+                <span style={{ display: 'block', overflow: 'hidden' }}>
+                  <motion.span custom={2} variants={titleV} style={{ display: 'block', color: 'var(--accent-primary)' }}>LEGACY.</motion.span>
+                </span>
+              </h1>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8 max-w-7xl mx-auto">
-            {[
-              {
-                title: "Results Driven",
-                description: "We focus on measurable outcomes and strive to deliver the very best in every project we undertake.",
-                icon: <Target className="w-5 h-5 md:w-6 h-6 text-white" />
-              },
-              {
-                title: "Client-Centric",
-                description: "Our client's success is our success. We prioritize their needs, personalize based on trust.",
-                icon: <Users className="w-5 h-5 md:w-6 h-6 text-white" />
-              },
-              {
-                title: "Innovation First",
-                description: "We stay ahead of the curve by continuously exploring new ideas and digital technologies.",
-                icon: <Lightbulb className="w-5 h-5 md:w-6 h-6 text-white" />
-              },
-              {
-                title: "Passion for Excellence",
-                description: "We set high standards in everything we do, striving for quality and continuous improvement.",
-                icon: <Heart className="w-5 h-5 md:w-7 h-7 text-white" />
-              }
-            ].map((value, index) => (
-              <AnimatedSection
-                key={index}
-                animation="fadeInUp"
-                delay={0.2 + (0.1 * index)}
-              >
-                <div className="bg-white rounded-[1.5rem] md:rounded-[2.5rem] p-4 md:p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border-2 border-slate-100 hover:border-amber-200 h-full group flex flex-col">
-                  <div className="flex flex-col md:flex-row items-center md:items-center gap-3 md:gap-5 mb-3 md:mb-5 text-center md:text-left">
-                    <div className="w-10 h-10 md:w-14 h-14 bg-gradient-to-br from-amber-500 to-orange-500 rounded-xl md:rounded-2xl flex items-center justify-center shadow-lg shadow-amber-200 group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
-                      {value.icon}
-                    </div>
-                    <h3 className="text-base md:text-2xl font-bold text-slate-900 tracking-tight leading-tight">
-                      {value.title}
-                    </h3>
-                  </div>
-                  <p className="text-slate-600 leading-relaxed text-xs md:text-lg font-medium text-center md:text-left">
-                    {value.description}
-                  </p>
+              <motion.p variants={fadeUp} style={{ fontSize: '15px', color: 'var(--text-secondary)', maxWidth: '500px', lineHeight: 1.6, fontWeight: 400, marginBottom: '32px' }}>
+                Since 2016, we have been at the forefront of digital transformation, blending traditional values with future-ready technology to build remarkable brand experiences.
+              </motion.p>
+
+              <motion.div variants={fadeUp}>
+                <Link to="/contact" className="dh-btn-fill" style={{ textDecoration: 'none', display: 'inline-flex' }}>
+                  Get Free Consultation
+                </Link>
+              </motion.div>
+            </motion.div>
+
+            {/* Symmetrical Aligned Grid for Images */}
+            <div className="dh-about-hero-images" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '16px', width: '100%' }}>
+              {[
+                { src: '/indus.jpeg', title: 'Indus Group' },
+                { src: '/sanjeevni.jpeg', title: 'Sanjeevni Hospital' },
+                { src: '/hitech.jpeg', title: 'Hi-Tech Homes' },
+                { src: '/shoes.jpeg', title: 'Rohtak Shoe' }
+              ].map((imgData, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, scale: 0.95, y: 15 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  transition={{ delay: 0.4 + idx * 0.1, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                  style={{
+                    aspectRatio: '4/3',
+                    borderRadius: '16px',
+                    overflow: 'hidden',
+                    border: '1px solid var(--border-light)',
+                    boxShadow: '0 8px 24px rgba(0,0,0,0.06)',
+                    background: 'var(--card-bg)',
+                    position: 'relative'
+                  }}
+                  onMouseEnter={(e) => {
+                    const img = e.currentTarget.querySelector('img');
+                    if (img) img.style.transform = 'scale(1.05)';
+                  }}
+                  onMouseLeave={(e) => {
+                    const img = e.currentTarget.querySelector('img');
+                    if (img) img.style.transform = 'scale(1)';
+                  }}
+                >
+                  <img
+                    src={imgData.src}
+                    alt={imgData.title}
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      transition: 'transform 0.5s ease'
+                    }}
+                  />
+                  <div style={{
+                    position: 'absolute',
+                    top: 0, left: 0, right: 0, bottom: 0,
+                    background: 'linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.4))',
+                    pointerEvents: 'none'
+                  }} />
+                  <span style={{
+                    position: 'absolute',
+                    bottom: '12px',
+                    left: '12px',
+                    fontSize: '11px',
+                    fontFamily: "'Outfit', sans-serif",
+                    fontWeight: 700,
+                    color: '#ffffff',
+                    letterSpacing: '0.05em',
+                    textTransform: 'uppercase'
+                  }}>
+                    {imgData.title}
+                  </span>
+                </motion.div>
+              ))}
+            </div>
+
+          </div>
+        </div>
+
+        {/* Bottom Moving Bar */}
+        <div style={{ overflow: 'hidden', marginTop: '20px', opacity: 0.8, position: 'relative', zIndex: 10 }}>
+          <motion.div animate={{ x: ['-33.33%', '0%'] }} transition={{ duration: 35, ease: 'linear', repeat: Infinity }}
+            style={{ display: 'flex', gap: '16px', width: 'max-content' }}>
+            {tripledRow2.map((l: any, i: number) => (
+              <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 18px', background: 'var(--card-bg)', border: '1px solid var(--border-faint)', borderRadius: '100px', flexShrink: 0 }}>
+                <div style={{ width: '22px', height: '22px', borderRadius: '50%', background: 'rgba(255,255,255,0.9)', overflow: 'hidden' }}>
+                  <img src={l.logo} alt={l.name} style={{ width: '100%', height: '100%', objectFit: 'contain', padding: '2px' }} />
                 </div>
-              </AnimatedSection>
+                <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', fontWeight: 500, color: 'var(--text-secondary)', whiteSpace: 'nowrap' }}>{l.name}</span>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* 2. LEADERSHIP SECTION (Reduced Size) */}
+      <section className="theme-beige" style={{ padding: '80px 0', background: 'var(--bg-primary)', borderTop: '1px solid var(--border-faint)' }}>
+        <div className="dh-container">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '40px', alignItems: 'center' }}>
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} style={{ position: 'relative', maxWidth: '400px', margin: '0 auto' }}>
+              <div style={{ borderRadius: '24px', overflow: 'hidden', border: '1px solid var(--border-light)', aspectRatio: '4/5' }}>
+                <img src="/kapil_khandelwal.jpg" alt="Kapil Khandelwal" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              </div>
+              <div style={{ position: 'absolute', bottom: '-15px', right: '-15px', background: 'var(--accent-primary)', color: 'white', padding: '1.2rem', borderRadius: '16px', boxShadow: '0 10px 20px rgba(0,0,0,0.1)' }}>
+                <div style={{ fontSize: '1.5rem', fontFamily: "'Outfit', sans-serif", fontWeight: 800, lineHeight: 1 }}>10+</div>
+                <div style={{ fontSize: '9px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em' }}>Years Exp</div>
+              </div>
+            </motion.div>
+
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: 0.2 }}>
+              <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', letterSpacing: '0.2em', color: 'var(--accent-primary)', fontWeight: 600, display: 'block', marginBottom: '12px' }}>
+                THE LEADERSHIP
+              </span>
+              <h2 style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 700, marginBottom: '20px', color: 'var(--text-primary)', lineHeight: 1.1 }}>
+                Kapil <span style={{ color: 'var(--accent-primary)' }}>Khandelwal</span>
+              </h2>
+              <p style={{ fontSize: '14px', marginBottom: '24px', lineHeight: 1.6, color: 'var(--text-secondary)' }}>
+                Distinguished Business Consultant with over a decade of experience in transforming businesses and nurturing startups. As the CEO of Avani Enterprises, he leads professionals dedicated to delivering innovative digital solutions.
+              </p>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '12px', marginBottom: '30px' }}>
+                {[
+                  { title: 'Author', desc: 'Writer of "The Startup Summary Book".' },
+                  { title: 'Investor', desc: 'Active strategic investments in promising tech startups.' },
+                  { title: 'Visionary', desc: 'Leading Avani to become a global technical powerhouse.' }
+                ].map((item, i) => (
+                  <div key={i} style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
+                    <CheckCircle size={16} style={{ color: 'var(--accent-primary)', marginTop: '2px' }} />
+                    <div>
+                      <h4 style={{ fontFamily: "'Outfit', sans-serif", fontSize: '15px', fontWeight: 600, marginBottom: '4px', color: 'var(--text-primary)' }}>{item.title}</h4>
+                      <p style={{ fontSize: '13px', margin: 0, color: 'var(--text-secondary)' }}>{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. PHILOSOPHY & VISION (Compact) */}
+      <section className="theme-brown" style={{ padding: '80px 0', background: 'var(--bg-primary)' }}>
+        <div className="dh-container">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
+
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} style={{ padding: '32px', background: 'var(--card-bg)', borderRadius: '16px', border: '1px solid var(--border-faint)' }}>
+              <Shield size={28} style={{ color: 'var(--accent-primary)', marginBottom: '16px' }} />
+              <h3 style={{ fontFamily: "'Outfit', sans-serif", fontSize: '20px', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '12px' }}>Core Philosophy</h3>
+              <p style={{ fontSize: '13px', color: 'var(--text-secondary)', lineHeight: 1.6 }}>We believe in "Excellence by Design." Every line of code is crafted to ensure your business doesn't just grow, but thrives.</p>
+            </motion.div>
+
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: 0.1 }} style={{ padding: '32px', background: 'var(--card-bg)', borderRadius: '16px', border: '1px solid var(--border-faint)' }}>
+              <Target size={28} style={{ color: 'var(--accent-primary)', marginBottom: '16px' }} />
+              <h3 style={{ fontFamily: "'Outfit', sans-serif", fontSize: '20px', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '12px' }}>The Mission</h3>
+              <p style={{ fontSize: '13px', color: 'var(--text-secondary)', lineHeight: 1.6 }}>To empower businesses with cutting-edge digital solutions that drive growth, enhance brand presence, and deliver ROI.</p>
+            </motion.div>
+
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: 0.2 }} style={{ padding: '32px', background: 'var(--card-bg)', borderRadius: '16px', border: '1px solid var(--border-faint)' }}>
+              <Globe size={28} style={{ color: 'var(--accent-primary)', marginBottom: '16px' }} />
+              <h3 style={{ fontFamily: "'Outfit', sans-serif", fontSize: '20px', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '12px' }}>The Vision</h3>
+              <p style={{ fontSize: '13px', color: 'var(--text-secondary)', lineHeight: 1.6 }}>To be the leading digital transformation partner globally, known for innovative solutions and exceptional architecture.</p>
+            </motion.div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* 4. ACHIEVEMENTS SECTION (Smaller Stats) */}
+      <section className="theme-beige" style={{ padding: '60px 0', background: 'var(--bg-primary)', borderTop: '1px solid var(--border-faint)' }}>
+        <div className="dh-container">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '24px' }} className="dh-responsive-grid dh-stats-grid">
+            {[
+              { val: 150, label: 'Happy Clients' },
+              { val: 300, label: 'Projects Done' },
+              { val: 85, label: 'Growth Avg', suffix: '%' },
+              { val: 8, label: 'Years Exp' }
+            ].map((stat, i) => (
+              <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: i * 0.1 }} 
+                style={{ 
+                  textAlign: 'center',
+                  padding: '30px 20px',
+                  background: 'var(--card-bg)',
+                  borderRadius: '12px',
+                  border: '1px solid var(--border-faint)',
+                  boxShadow: '0 4px 15px rgba(0,0,0,0.02)',
+                  transition: 'all 0.3s ease'
+                }}
+                onMouseEnter={e => {
+                  e.currentTarget.style.transform = 'translateY(-5px)';
+                  e.currentTarget.style.borderColor = 'var(--accent-primary)';
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.borderColor = 'var(--border-faint)';
+                }}
+              >
+                <div style={{ fontSize: '42px', fontFamily: "'Outfit', sans-serif", fontWeight: 800, color: 'var(--accent-primary)', marginBottom: '8px' }}>
+                  <AnimatedCounter target={stat.val} suffix={stat.suffix || '+'} />
+                </div>
+                <div style={{ fontSize: '12px', fontWeight: 600, color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{stat.label}</div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Team Section */}
-
-
-      {/* Achievements Section */}
-      <section className="relative pt-12 pb-24 md:py-24 bg-white overflow-hidden">
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 mb-6 font-sans">
-                Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-500">Achievements</span>
-              </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                Numbers that speak for themselves and demonstrate our commitment to excellence.
-              </p>
-            </motion.div>
+      {/* 5. CORE VALUES WITH PICTURE IN THE MIDDLE */}
+      <section className="theme-brown" style={{ padding: '80px 0', background: 'var(--bg-primary)' }}>
+        <div className="dh-container">
+          <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+            <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', letterSpacing: '0.2em', color: 'var(--accent-primary)', fontWeight: 600, display: 'block', marginBottom: '12px' }}>FOUNDATION</span>
+            <h2 style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 700, color: 'var(--text-primary)', margin: 0 }}>Core Values</h2>
           </div>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '32px', justifyContent: 'center', alignItems: 'center' }}>
+            <div className="dh-about-core-col-left" style={{ display: 'flex', flexDirection: 'column', gap: '24px', flex: 1, minWidth: '250px' }}>
+              <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="dh-about-core-item" style={{ textAlign: 'right' }}>
+                <Target size={24} className="dh-about-core-icon" style={{ color: 'var(--accent-primary)', marginBottom: '8px', marginLeft: 'auto' }} />
+                <h3 style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18px', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '6px' }}>Results Driven</h3>
+                <p style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>We focus on measurable outcomes.</p>
+              </motion.div>
+              <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ delay: 0.1 }} className="dh-about-core-item" style={{ textAlign: 'right' }}>
+                <Users size={24} className="dh-about-core-icon" style={{ color: 'var(--accent-primary)', marginBottom: '8px', marginLeft: 'auto' }} />
+                <h3 style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18px', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '6px' }}>Client-Centric</h3>
+                <p style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>We personalize based on trust.</p>
+              </motion.div>
+            </div>
+
+            <div className="dh-about-core-img" style={{ width: '280px', height: '280px', borderRadius: '50%', overflow: 'hidden', border: '4px solid var(--border-light)', flexShrink: 0, background: 'var(--card-bg)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <img src="/logo0.jpg" alt="Avani Logo" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            </div>
+
+            <div className="dh-about-core-col-right" style={{ display: 'flex', flexDirection: 'column', gap: '24px', flex: 1, minWidth: '250px' }}>
+              <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ delay: 0.2 }} className="dh-about-core-item" style={{ textAlign: 'left' }}>
+                <Lightbulb size={24} className="dh-about-core-icon dh-about-core-icon-left" style={{ color: 'var(--accent-primary)', marginBottom: '8px' }} />
+                <h3 style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18px', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '6px' }}>Innovation First</h3>
+                <p style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>Exploring new future technologies.</p>
+              </motion.div>
+              <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ delay: 0.3 }} className="dh-about-core-item" style={{ textAlign: 'left' }}>
+                <Heart size={24} className="dh-about-core-icon dh-about-core-icon-left" style={{ color: 'var(--accent-primary)', marginBottom: '8px' }} />
+                <h3 style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18px', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '6px' }}>Passion</h3>
+                <p style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>Setting high standards in everything.</p>
+              </motion.div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 6. WHY CHOOSE AVANI ENTERPRISES */}
+      <section className="theme-beige" style={{ padding: '80px 0', background: 'var(--bg-primary)', overflow: 'hidden', position: 'relative' }}>
+        {/* Grain */}
+        <div style={{ position: 'absolute', inset: 0, zIndex: 1, opacity: 0.04, pointerEvents: 'none', backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`, backgroundSize: '200px' }} />
+        <div className="dh-container" style={{ position: 'relative', zIndex: 10 }}>
+          <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+            <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', letterSpacing: '0.2em', color: 'var(--accent-primary)', fontWeight: 600, display: 'block', marginBottom: '12px' }}>THE AVANI ADVANTAGE</span>
+            <h2 style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 700, color: 'var(--text-primary)', margin: 0 }}>
+              Why Choose <span style={{ color: 'var(--accent-primary)' }}>Avani Enterprises?</span>
+            </h2>
+            <p style={{ fontSize: '14px', color: 'var(--text-secondary)', maxWidth: '600px', margin: '16px auto 0', lineHeight: 1.7 }}>
+              Empowering your digital journey with strategic excellence and innovative solutions.
+            </p>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '24px' }} className="dh-responsive-grid dh-adv-grid">
             {[
-              {
-                icon: <Users className="w-8 h-8" />,
-                value: 150,
-                suffix: "+",
-                label: "Happy Clients",
-                gradient: "from-amber-500 to-orange-500",
-                delay: 0.2
-              },
-              {
-                icon: <Award className="w-8 h-8" />,
-                value: 300,
-                suffix: "+",
-                label: "Projects Completed",
-                gradient: "from-orange-500 to-amber-500",
-                delay: 0.3
-              },
-              {
-                icon: <TrendingUp className="w-8 h-8" />,
-                value: 85,
-                suffix: "%",
-                label: "Average Growth",
-                gradient: "from-amber-500 to-orange-500",
-                delay: 0.4
-              },
-              {
-                icon: <Globe className="w-8 h-8" />,
-                value: 8,
-                suffix: "+",
-                label: "Years Experience",
-                gradient: "from-orange-500 to-amber-500",
-                delay: 0.5
-              }
-            ].map((stat, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: stat.delay }}
-                className="group"
+              { img: '/about_proven_track_record.png', icon: <Shield size={24} />, title: 'Proven Track Record', desc: 'With 8+ years of experience and 300+ successful projects, we have the strategic depth and technical expertise to handle any digital challenge.' },
+              { img: '/about_innovation_driven.png', icon: <Zap size={24} />, title: 'Innovation-Driven', desc: 'We stay ahead of industry trends and leverage cutting-edge technologies to deliver innovative solutions that give you a competitive edge.' },
+              { img: '/about_client_centric.png', icon: <Users size={24} />, title: 'Client-Centric', desc: 'Your success is our priority. We build long-term partnerships based on trust, transparency, and delivering high-impact results.' },
+              { img: '/about_proven_track_record.png', icon: <Target size={24} />, title: 'Tailored Strategies', desc: 'We do not believe in one-size-fits-all. Every strategy is custom-built to align perfectly with your unique business goals and market dynamics.' }
+            ].map((card, i) => (
+              <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: i * 0.1 }}
+                className="dh-about-adv-card"
+                style={{ background: 'var(--card-bg)', borderRadius: '16px', border: '1px solid var(--border-faint)', overflow: 'hidden', transition: 'all 0.4s ease', backdropFilter: 'blur(10px)' }}
+                onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-5px)'; e.currentTarget.style.borderColor = 'var(--accent-primary)'; e.currentTarget.style.boxShadow = '0 12px 30px rgba(0,0,0,0.06)'; }}
+                onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.borderColor = 'var(--border-faint)'; e.currentTarget.style.boxShadow = 'none'; }}
               >
-                <div className="relative bg-slate-50 rounded-2xl p-8 border border-slate-200 hover:border-amber-400 transition-all duration-500 hover:transform hover:-translate-y-2 hover:shadow-xl">
-                  {/* Icon */}
-                  <div className={`w-16 h-16 bg-gradient-to-br ${stat.gradient} rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
-                    {stat.icon}
+                <div className="dh-about-adv-img" style={{ height: '180px', overflow: 'hidden' }}>
+                  <img src={card.img} alt={card.title} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.6s ease' }}
+                    onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.05)'; }}
+                    onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; }}
+                  />
+                </div>
+                <div className="dh-about-adv-content" style={{ padding: '24px' }}>
+                  <div className="dh-about-adv-icon" style={{ width: '44px', height: '44px', borderRadius: '12px', background: 'var(--accent-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', marginTop: '-40px', position: 'relative', zIndex: 2, boxShadow: '0 4px 12px rgba(0,0,0,0.1)', marginBottom: '16px' }}>
+                    {card.icon}
                   </div>
-
-                  {/* Value */}
-                  <div className="text-4xl md:text-5xl font-black text-slate-900 mb-2 group-hover:text-amber-500 transition-colors duration-300">
-                    <AnimatedCounter target={stat.value} suffix={stat.suffix} />
-                  </div>
-
-                  {/* Label */}
-                  <div className="text-sm font-bold text-gray-600 uppercase tracking-wider group-hover:text-gray-700 transition-colors duration-300">
-                    {stat.label}
-                  </div>
-
-                  {/* Decorative Corner */}
-                  <div className={`absolute bottom-0 right-0 w-20 h-20 bg-gradient-to-tl ${stat.gradient} opacity-0 group-hover:opacity-10 rounded-tl-full transition-opacity duration-500`} />
+                  <h3 className="dh-about-adv-title" style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18px', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '10px' }}>{card.title}</h3>
+                  <p className="dh-about-adv-desc" style={{ fontSize: '13px', color: 'var(--text-secondary)', lineHeight: 1.6 }}>{card.desc}</p>
                 </div>
               </motion.div>
             ))}
@@ -506,176 +387,91 @@ const About = () => {
         </div>
       </section>
 
-      {/* Why Choose Us */}
-      <section className="relative pt-12 pb-24 md:py-24 overflow-hidden bg-slate-50">
-        {/* Advanced Background Design */}
-        <div className="absolute inset-0 z-0">
-          {/* Subtle Mesh Gradient */}
-          <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_20%_20%,rgba(59,130,246,0.05)_0%,transparent_50%),radial-gradient(circle_at_80%_80%,rgba(168,85,247,0.05)_0%,transparent_50%)]" />
-
-          {/* Tech Blueprint Grid */}
-          <div className="absolute inset-0 opacity-[0.03]"
-            style={{ backgroundImage: 'radial-gradient(#3b82f6 0.5px, transparent 0.5px), radial-gradient(#3b82f6 0.5px, #f8fafc 0.5px)', backgroundSize: '40px 40px' }} />
-
-          {/* Floating Decorative Shapes */}
-          <div className="absolute top-1/4 -left-20 w-96 h-96 bg-amber-100/30 blur-[100px] rounded-full animate-pulse" />
-          <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-orange-100/30 blur-[100px] rounded-full animate-pulse delay-700" />
-
-          {/* Subtle SVG Wave at bottom */}
-          <div className="absolute bottom-0 left-0 w-full leading-none z-0 opacity-[0.05]">
-            <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="w-full h-24 text-blue-600 fill-current">
-              <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,1022.62,118.42V120H0V0C48.1,6,95.66,15.71,144.14,24.52,217.43,37.89,286.79,47.3,321.39,56.44Z"></path>
-            </svg>
-          </div>
-        </div>
-
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <AnimatedSection animation="fadeInUp">
-              <span className="inline-block px-4 py-1.5 mb-4 text-xs font-bold tracking-[0.2em] text-amber-600 uppercase bg-amber-50 rounded-full border border-amber-200">
-                The Avani Advantage
-              </span>
-              <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 font-sans tracking-tight">
-                Why Choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-500">Avani Enterprises?</span>
+      {/* 7. CTA SECTION */}
+      <section className="theme-brown" style={{ padding: '80px 0', background: 'var(--bg-primary)' }}>
+        <div className="dh-container">
+          <div style={{ padding: '60px 40px', textAlign: 'center', background: 'var(--card-bg)', borderRadius: '24px', border: '1px solid var(--border-faint)', position: 'relative', overflow: 'hidden' }}>
+            {/* Corner accents */}
+            <div style={{ position: 'absolute', top: 0, left: 0, width: 60, height: 60, borderTop: '2px solid var(--accent-primary)', borderLeft: '2px solid var(--accent-primary)', borderRadius: '24px 0 0 0', opacity: 0.3 }} />
+            <div style={{ position: 'absolute', bottom: 0, right: 0, width: 60, height: 60, borderBottom: '2px solid var(--accent-primary)', borderRight: '2px solid var(--accent-primary)', borderRadius: '0 0 24px 0', opacity: 0.3 }} />
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
+              <h2 style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(28px, 4vw, 48px)', fontWeight: 800, marginBottom: '24px', lineHeight: 1.1, color: 'var(--text-primary)' }}>
+                LET'S BUILD YOUR <br />
+                <span style={{ color: 'var(--accent-primary)' }}>
+                  <RotatingText words={["SUCCESS STORY", "DIGITAL FUTURE", "GROWTH ENGINE"]} interval={3000} className="dh-display" />
+                </span>
               </h2>
-              <p className="text-xl text-slate-600 max-w-2xl mx-auto font-medium leading-relaxed">
-                Empowering your digital journey with strategic excellence and innovative solutions.
+              <p style={{ fontSize: '14px', color: 'var(--text-secondary)', maxWidth: '500px', margin: '0 auto 32px' }}>
+                Partner with us to unlock growth opportunities and achieve your business vision.
               </p>
-            </AnimatedSection>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <AnimatedSection animation="fadeInUp" delay={0.1}>
-              <div className="group relative bg-white rounded-3xl overflow-hidden shadow-[0_10px_40px_rgba(0,0,0,0.03)] border border-white hover:border-amber-300 transition-all duration-500 hover:-translate-y-2 h-full flex flex-col">
-                <div className="relative h-48 overflow-hidden">
-                  <img
-                    src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2070&auto=format&fit=crop"
-                    alt="Proven Track Record"
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-                </div>
-                <div className="p-8 flex-grow">
-                  <div className="w-16 h-16 bg-gradient-to-br from-amber-500 to-orange-500 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg shadow-amber-200 -mt-16 relative z-10 group-hover:rotate-6 transition-transform">
-                    <Shield className="w-8 h-8" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-slate-900 mb-4 tracking-tight">Proven Track Record</h3>
-                  <p className="text-slate-600 text-lg leading-relaxed">
-                    With 8+ years of experience and 300+ successful projects, we have the strategic depth and technical expertise
-                    to handle any digital challenge.
-                  </p>
-                </div>
+              <div style={{ display: 'flex', gap: '16px', justifyContent: 'center' }}>
+                <Link to="/contact" style={{ padding: '12px 24px', background: 'var(--accent-primary)', color: '#fff', borderRadius: '8px', textDecoration: 'none', fontWeight: 600, fontSize: '13px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  GET CONSULTATION <ArrowRight size={14} />
+                </Link>
               </div>
-            </AnimatedSection>
-
-            <AnimatedSection animation="fadeInUp" delay={0.2}>
-              <div className="group relative bg-white rounded-3xl overflow-hidden shadow-[0_10px_40px_rgba(0,0,0,0.03)] border border-white hover:border-orange-300 transition-all duration-500 hover:-translate-y-2 h-full flex flex-col">
-                <div className="relative h-48 overflow-hidden">
-                  <img
-                    src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=2070&auto=format&fit=crop"
-                    alt="Innovation-Driven"
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-                </div>
-                <div className="p-8 flex-grow">
-                  <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-amber-500 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg shadow-orange-200 -mt-16 relative z-10 group-hover:rotate-6 transition-transform">
-                    <Zap className="w-8 h-8" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-slate-900 mb-4 tracking-tight">Innovation-Driven</h3>
-                  <p className="text-slate-600 text-lg leading-relaxed">
-                    We stay ahead of industry trends and leverage cutting-edge technologies to
-                    deliver innovative solutions that give you a competitive edge.
-                  </p>
-                </div>
-              </div>
-            </AnimatedSection>
-
-            <AnimatedSection animation="fadeInUp" delay={0.3}>
-              <div className="group relative bg-white rounded-3xl overflow-hidden shadow-[0_10px_40px_rgba(0,0,0,0.03)] border border-white hover:border-amber-300 transition-all duration-500 hover:-translate-y-2 h-full flex flex-col">
-                <div className="relative h-48 overflow-hidden">
-                  <img
-                    src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop"
-                    alt="Client-Centric"
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-                </div>
-                <div className="p-8 flex-grow">
-                  <div className="w-16 h-16 bg-gradient-to-br from-amber-500 to-orange-500 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg shadow-amber-200 -mt-16 relative z-10 group-hover:rotate-6 transition-transform">
-                    <Users className="w-8 h-8" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-slate-900 mb-4 tracking-tight">Client-Centric</h3>
-                  <p className="text-slate-600 text-lg leading-relaxed">
-                    Your success is our priority. We build long-term partnerships based on trust,
-                    transparency, and delivering high-impact results.
-                  </p>
-                </div>
-              </div>
-            </AnimatedSection>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="relative py-8 md:py-16 bg-[#FBF9F4] overflow-hidden">
-
-        <div className="relative z-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-0 md:pt-4 pb-12 md:pb-20">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <h2 className="text-3xl md:text-5xl lg:text-6xl font-black text-slate-900 mb-2 md:mb-3 font-sans tracking-tight">
-              Let's Build Your
-            </h2>
-            <h2 className="text-3xl md:text-5xl lg:text-6xl font-black mb-6 md:mb-8 font-sans tracking-tight">
-              <RotatingText
-                words={["Success Story", "Digital Future", "Growth Engine", "Next Big Move"]}
-                interval={3000}
-                className="text-orange-600 inline-block min-w-[280px] md:min-w-[400px]"
-              /> <span className="text-slate-900">Together</span>
-            </h2>
-
-            <div className="w-full max-w-xl mx-auto h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent mb-6 md:mb-8"></div>
-
-            <p className="text-base md:text-xl text-slate-600 font-medium max-w-2xl mx-auto leading-relaxed mb-6 md:mb-12 px-2">
-              Partner with us to unlock growth opportunities, streamline operations, and achieve your business vision with expert guidance every step of the way.
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex flex-row gap-3 md:gap-6 justify-center items-center w-full sm:w-auto"
-          >
-            <Link
-              to="/contact"
-              className="flex-1 sm:flex-none px-4 py-3 md:px-10 md:py-4 bg-gradient-to-b from-orange-400 to-orange-600 hover:from-orange-500 hover:to-orange-700 text-white rounded-lg font-bold uppercase tracking-widest shadow-[0_4px_0_rgb(154,52,18)] active:shadow-none active:translate-y-1 transition-all duration-200 text-[10px] sm:text-xs md:text-sm whitespace-nowrap"
-            >
-              Get Consultation
-            </Link>
-            <Link
-              to="/contact"
-              className="flex-1 sm:flex-none px-4 py-3 md:px-10 md:py-4 bg-gradient-to-b from-slate-800 to-black hover:from-slate-700 hover:to-slate-900 text-white rounded-lg font-bold uppercase tracking-widest shadow-[0_4px_0_rgb(0,0,0)] active:shadow-none active:translate-y-1 transition-all duration-200 text-[10px] sm:text-xs md:text-sm border-t border-slate-700 whitespace-nowrap"
-            >
-              Talk to Expert
-            </Link>
-          </motion.div>
-        </div>
-
-        {/* Bottom Curved Shapes */}
-        <div className="absolute bottom-0 left-0 w-full z-10 leading-none">
-          <svg viewBox="0 0 1440 60" className="w-full h-8 md:h-20 block" preserveAspectRatio="none">
-            <path d="M0,0 C480,80 960,80 1440,0 V60 H0 V0 Z" fill="#f97316"></path>
-          </svg>
-        </div>
-      </section>
+      <style>{`
+        @media (max-width: 768px) {
+          .dh-stats-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 16px !important;
+          }
+          .dh-stats-grid > div {
+            padding: 20px 10px !important;
+          }
+          .dh-about-hero-images {
+            display: none !important;
+          }
+          .dh-about-core-img {
+            width: 180px !important;
+            height: 180px !important;
+            margin: 0 0 32px 0 !important;
+            order: -1 !important; /* Move logo to the top on mobile */
+          }
+          .dh-about-core-item {
+            text-align: center !important;
+          }
+          .dh-about-core-icon {
+            margin: 0 auto 12px auto !important;
+          }
+          .dh-about-adv-img {
+            display: none !important;
+          }
+          .dh-adv-grid {
+            grid-template-columns: 1fr !important; /* Stack why choose cards nicely */
+          }
+          .dh-about-adv-content {
+            padding: 16px !important;
+          }
+          .dh-about-adv-icon {
+            margin-top: 0 !important;
+            width: 32px !important;
+            height: 32px !important;
+            margin-bottom: 12px !important;
+          }
+          .dh-about-adv-icon svg {
+            width: 16px !important;
+            height: 16px !important;
+          }
+          .dh-about-adv-title {
+            font-size: 15px !important;
+            margin-bottom: 6px !important;
+          }
+          .dh-about-adv-desc {
+            font-size: 12px !important;
+            -webkit-line-clamp: 3 !important;
+            display: -webkit-box !important;
+            -webkit-box-orient: vertical !important;
+            overflow: hidden !important;
+          }
+        }
+      `}</style>
     </div>
   );
 };
 
-export default About; 
+export default About;

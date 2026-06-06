@@ -1,4 +1,4 @@
-// DummyHome — Main page for /dummyhome route
+// Home — Main page for /home route
 // This page assembles all dummy components for the redesigned homepage.
 // Original homepage (/) is completely untouched.
 
@@ -6,15 +6,15 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { API_BASE_URL } from '../utils/api';
 
-import DummyAnnouncement from '../components/dummy/DummyAnnouncement';
-import DummyHero from '../components/dummy/DummyHero';
-import DummyLogoMarquee from '../components/dummy/DummyLogoMarquee';
-import DummyServices from '../components/dummy/DummyServices';
-import DummyProcess from '../components/dummy/DummyProcess';
-import DummyProjects from '../components/dummy/DummyProjects';
-import DummyTestimonials from '../components/dummy/DummyTestimonials';
-import DummyBlog from '../components/dummy/DummyBlog';
-import DummyCTA from '../components/dummy/DummyCTA';
+import DummyAnnouncement from '../components/Announcement';
+import DummyHero from '../components/Hero';
+import DummyLogoMarquee from '../components/LogoMarquee';
+import DummyServices from '../components/Services';
+import DummyProcess from '../components/Process';
+import DummyProjects from '../components/Projects';
+import DummyTestimonials from '../components/Testimonials';
+import DummyBlog from '../components/Blog';
+import DummyCTA from '../components/CTA';
 
 /* ═══════════════════════════════════════════════════════════════ */
 /*  ALL DATA — identical to Home.tsx, fully self-contained        */
@@ -123,7 +123,7 @@ const testimonials = [
   { name: 'Dr. Mohit Verma', position: 'Director, Sanjeevni Hospital', content: 'The hospital management portal developed by Avani Enterprises has streamlined our operations significantly. Patient appointment booking is now effortless, and the admin panel is incredibly user-friendly. A truly professional solution!', rating: 5, image: '/sanjeevni.jpeg' },
 ];
 
-const DummyHome = () => {
+const Home = () => {
   const [blogs, setBlogs] = useState([]);
   const [newsletters, setNewsletters] = useState([]);
   const [loadingBlogs, setLoadingBlogs] = useState(true);
@@ -189,4 +189,4 @@ const DummyHome = () => {
   );
 };
 
-export default DummyHome;
+export default Home;

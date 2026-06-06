@@ -1,391 +1,323 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Phone, ChevronDown, ExternalLink } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useState, useEffect, useRef } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X, ArrowRight, ChevronDown, Phone } from 'lucide-react';
+import { projectsData } from '../data/ProjectsData';
+
+const navLinks = [
+  { label: 'HOME', path: '/' },
+  { label: 'ABOUT', path: '/about' },
+  { 
+    label: 'SERVICES', 
+    path: '/services',
+    dropdown: [
+      { label: 'ALL SERVICES', path: '/services' },
+      { label: 'WEB & APP DEVELOPMENT', path: '/services/web-app-development' },
+      { label: 'SEO & CONTENT MARKETING', path: '/services/seo-content-marketing' },
+      { label: 'SOCIAL MEDIA MARKETING', path: '/services/social-media-marketing' },
+      { label: 'AI SOLUTIONS', path: '/services/ai-solutions' },
+      { label: 'PODCAST PRODUCTION', path: '/services/podcast-production' },
+      { label: 'FINANCIAL CONSULTING', path: '/services/financial-consulting' }
+    ]
+  },
+  { 
+    label: 'PROJECTS', 
+    path: '/projects',
+    dropdown: [
+      { label: 'ALL PROJECTS', path: '/projects' },
+      ...projectsData.map(p => ({ label: p.title.toUpperCase(), path: `/projects/${p.slug}` }))
+    ]
+  },
+  {
+    label: 'RESOURCES',
+    dropdown: [
+      { label: 'BLOG', path: '/blog' },
+      { label: 'NEWSLETTERS', path: '/newsletters' },
+      { label: 'COURSES', path: '/courses' },
+      { label: 'CASE STUDIES', path: '/case-studies' },
+    ]
+  },
+  { label: 'JOIN US', path: '/careers' },
+  { label: 'GLOBAL PRESENCE', path: '/global-presence' },
+  { label: 'CONTACT', path: '/contact' },
+];
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const location = useLocation();
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const navRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      // If mobile menu is open, don't use this click-outside logic 
-      // as it conflicts with mobile dropdown toggles.
-      if (isOpen) return;
-
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      const target = event.target as Node;
+      const isInsideMobileMenu = target instanceof Element && target.closest('.dummy-nav-mobile-container');
+      if (navRef.current && !navRef.current.contains(target) && !isInsideMobileMenu) {
         setOpenDropdown(null);
+        setMobileOpen(false);
       }
     };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [isOpen]);
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
-  // Cleanup dropdown state when mobile menu closes
   useEffect(() => {
-    if (!isOpen) {
-      setOpenDropdown(null);
-    }
-  }, [isOpen]);
+    setMobileOpen(false);
+    setOpenDropdown(null);
+  }, [location.pathname]);
 
-  const navItems = [
-    { name: "Home", path: "/" },
-    { name: "About", path: "/about" },
-    { name: "Services", path: "/services" },
-    {
-      name: "Our Products",
-      path: "/our-products",
-      subItems: [
-        { name: "Avani Business OS", path: "/our-products", scrollTo: "avani-business-os", external: "https://os.avanienterprises.in" },
-        { name: "School Management", path: "/our-products", scrollTo: "school-management", external: "https://indus-school-page.vercel.app/admission" },
-        { name: "Project CRM", path: "/our-products", scrollTo: "crm-portal", external: "https://team-lead-gamma.vercel.app/" },
-        { name: "Custom E-commerce", path: "/our-products", scrollTo: "ecommerce-web", external: "https://shoes-ecommerce-iota.vercel.app/" },
-      ]
-    },
-    {
-      name: "Resources",
-      dropdown: [
-        { name: "Blog", path: "/blog" },
-        { name: "Newsletters", path: "/newsletters" },
-        { name: "Courses", path: "/courses" },
-        { name: "Case Studies", path: "/case-studies" },
-      ],
-    },
-    { name: "Careers", path: "/careers" },
-    { name: "Global Presence", path: "/global-presence" },
-    { name: "Contact", path: "/contact" },
-  ];
-
-  const isActiveDropdown = (dropdown: any[]) => {
-    return dropdown.some((item) => location.pathname === item.path);
-  };
-
-  const toggleDropdown = (name: string) => {
-    setOpenDropdown(openDropdown === name ? null : name);
+  const toggleDropdown = (label: string) => {
+    setOpenDropdown(openDropdown === label ? null : label);
   };
 
   return (
-    <nav
-      itemScope
-      itemType="http://schema.org/SiteNavigationElement"
-      className={`fixed left-0 right-0 z-50 transition-all duration-500 ease-in-out font-sans top-0
-        ${isScrolled
-          ? "bg-white/95 backdrop-blur-xl shadow-sm py-2"
-          : "bg-[#0b1220] py-2 sm:py-3"
-        }
-      `}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-14 gap-2 lg:gap-4 xl:gap-8">
-
-          {/* LEFT: Logo Section */}
-          <div className="flex items-center justify-start flex-shrink-0 min-w-0">
-            <Link to="/" className="flex items-center space-x-3 group min-w-0">
-              <div className="relative flex-shrink-0">
-                <img
-                  src="/logo0.jpg"
-                  alt="Avani Enterprises"
-                  className="h-10 w-10 md:h-11 md:w-11 rounded-xl shadow-md transition-transform duration-500 group-hover:scale-105"
-                />
-                <div className="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-amber-500 rounded-full border-2 border-white shadow-sm" />
-              </div>
-              <span className="text-[18px] sm:text-[20px] lg:text-[16px] xl:text-[20px] font-black tracking-tight truncate transition-colors duration-300 text-amber-500">
-                Avani Enterprises
-              </span>
-            </Link>
-          </div>
-
-          {/* CENTER: Navigation Links with Dropdowns */}
-          <div className="hidden lg:flex flex-1 items-center justify-center min-w-0" ref={dropdownRef}>
-            <div className="flex items-center gap-0 xl:gap-2">
-              {navItems.map((item) => {
-                // Special Case: Projects (Integrated Mega-style Sub-menu)
-                if (item.subItems) {
-                  const isActive = location.pathname === item.path;
-                  return (
-                    <div key={item.name} className="relative group/mega">
-                      <Link
-                        to={item.path}
-                        className={`relative px-1 xl:px-3 py-2 group whitespace-nowrap flex items-center gap-1 text-[11px] xl:text-[13px] font-bold tracking-wide transition-all duration-300 ${isActive ? "text-amber-600" : "text-amber-500 hover:text-amber-600"}`}
-                      >
-                        {item.name}
-                        <motion.div
-                          className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 h-0.5 bg-amber-600 rounded-full"
-                          initial={{ width: isActive ? "4px" : 0 }}
-                          animate={{ width: isActive ? "100%" : 0 }}
-                          whileHover={{ width: "100%" }}
-                        />
-                      </Link>
-                      {/* Horizontal Expansion Panel */}
-                      <div className={`absolute top-full left-1/2 -translate-x-1/2 mt-0 pt-4 transition-all duration-300 z-50 
-                        ${isActive
-                          ? "opacity-100 visible"
-                          : "opacity-0 invisible group-hover/mega:opacity-100 group-hover/mega:visible"
-                        }
-                      `}>
-                        <div className="bg-white/95 backdrop-blur-md rounded-2xl shadow-xl border border-amber-100 p-2 flex items-center gap-1 whitespace-nowrap min-w-max">
-                          {item.subItems.map((sub: any) => (
-                            <div key={sub.name} className="flex items-center">
-                              <Link
-                                to={sub.path}
-                                state={sub.scrollTo ? { scrollTo: sub.scrollTo } : undefined}
-                                className={`px-4 py-2 text-[11px] font-black uppercase tracking-wider rounded-xl transition-all ${location.state?.scrollTo === sub.scrollTo ? "bg-amber-100 text-amber-700" : "text-slate-600 hover:bg-amber-50 hover:text-amber-600"}`}
-                              >
-                                {sub.name}
-                              </Link>
-                              {sub.external && (
-                                <a href={sub.external} target="_blank" rel="noopener noreferrer" className="p-1.5 text-slate-900 hover:text-amber-600">
-                                  <ExternalLink size={12} />
-                                </a>
-                              )}
-                              <div className="w-px h-4 bg-slate-100 last:hidden mx-1" />
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  );
-                }
-
-                // Standard Case: Custom Dropdowns (Resources)
-                if (item.dropdown) {
-                  const isActive = isActiveDropdown(item.dropdown);
-                  return (
-                    <div key={item.name} className="relative">
-                      <button
-                        onClick={() => toggleDropdown(item.name)}
-                        className={`relative px-1 xl:px-3 py-2 group whitespace-nowrap flex items-center gap-1 text-[11px] xl:text-[13px] font-bold tracking-wide transition-all duration-300 ${isActive || openDropdown === item.name ? "text-amber-600" : "text-amber-500 hover:text-amber-600"}`}
-                      >
-                        {item.name}
-                        <ChevronDown size={16} className={`transition-transform duration-300 ${openDropdown === item.name ? "rotate-180" : ""}`} />
-                        <motion.div
-                          className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 h-0.5 bg-amber-600 rounded-full"
-                          initial={{ width: isActive ? "4px" : 0 }}
-                          animate={{ width: openDropdown === item.name ? "100%" : isActive ? "4px" : 0 }}
-                        />
-                      </button>
-                      <AnimatePresence>
-                        {openDropdown === item.name && (
-                          <motion.div
-                            initial={{ opacity: 0, y: -10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -10 }}
-                            className="absolute top-full left-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden z-50"
-                          >
-                            {item.dropdown.map((sub: any) => (
-                              <Link key={sub.path} to={sub.path} onClick={() => setOpenDropdown(null)} className="block px-4 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-50 hover:text-amber-600">
-                                {sub.name}
-                              </Link>
-                            ))}
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
-                  );
-                }
-
-                // Simple Link Case
-                const isActive = location.pathname === item.path;
-                return (
-                  <Link
-                    key={item.name}
-                    to={item.path}
-                    itemProp="url"
-                    className={`relative px-1 xl:px-3 py-2 group whitespace-nowrap text-[11px] xl:text-[13px] font-bold tracking-wide transition-all duration-300 ${isActive ? "text-amber-600" : "text-amber-500 hover:text-amber-600"}`}
-                  >
-                    <span itemProp="name">{item.name}</span>
-                    {item.name !== "Home" && (
-                      <motion.div
-                        className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 h-0.5 bg-amber-600 rounded-full"
-                        initial={{ width: isActive ? "4px" : 0 }}
-                        whileHover={{ width: "100%" }}
-                      />
-                    )}
-                  </Link>
-                );
-              })}
+    <>
+      <nav ref={navRef} style={{
+        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000,
+        padding: scrolled ? '10px 0' : '14px 0',
+        background: scrolled ? 'var(--nav-scrolled)' : 'transparent',
+        backdropFilter: scrolled ? 'blur(20px)' : 'none',
+        borderBottom: scrolled ? '1px solid var(--border-light)' : '1px solid transparent',
+        transition: 'all 0.35s ease',
+      }}>
+        <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 48px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }} className="dummy-nav-container">
+          {/* Logo */}
+          <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <div style={{ width: '32px', height: '32px', borderRadius: '8px', overflow: 'hidden', background: '#fff', padding: '2px' }}>
+              <img src="/logo0.jpg" alt="Avani" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
             </div>
+            <div>
+              <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18px', letterSpacing: '0.14em', color: 'var(--text-primary)', lineHeight: 1, fontWeight: 700 }}>AVANI</div>
+              <div style={{ fontFamily: "'Inter', sans-serif", fontSize: '8px', letterSpacing: '0.2em', color: 'var(--accent-primary)', marginTop: '1px', fontWeight: 500 }}>ENTERPRISES</div>
+            </div>
+          </Link>
+
+          {/* Desktop links */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }} className="dummy-nav-links">
+            {navLinks.map((link) => {
+              if (link.dropdown) {
+                const isActive = link.dropdown.some(sub => location.pathname === sub.path);
+                return (
+                  <div key={link.label} style={{ position: 'relative' }}
+                    onMouseEnter={() => setOpenDropdown(link.label)}
+                    onMouseLeave={() => setOpenDropdown(null)}
+                  >
+                    <button
+                      onClick={() => setOpenDropdown(openDropdown === link.label ? null : link.label)}
+                      style={{
+                        fontFamily: "'Outfit', sans-serif", fontSize: '13px', letterSpacing: '0.12em', fontWeight: 600,
+                        color: isActive || openDropdown === link.label ? 'var(--accent-primary)' : 'var(--text-secondary)',
+                        background: 'none', border: 'none', cursor: 'pointer',
+                        textDecoration: 'none', position: 'relative', padding: '4px 0',
+                        display: 'flex', alignItems: 'center', gap: '4px',
+                        transition: 'color 0.25s',
+                      }}
+                    >
+                      {link.label}
+                      <ChevronDown size={14} style={{ transform: openDropdown === link.label ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
+                      {isActive && <div style={{ position: 'absolute', bottom: -2, left: 0, right: 0, height: '2px', background: 'var(--accent-primary)', borderRadius: '1px' }} />}
+                    </button>
+
+                    <AnimatePresence>
+                      {openDropdown === link.label && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: 10 }}
+                          transition={{ duration: 0.2 }}
+                          style={{
+                            position: 'absolute', top: '100%', left: '50%', transform: 'translateX(-50%)',
+                            background: '#1A1512', backdropFilter: 'blur(20px)',
+                            border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px',
+                            boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
+                            padding: '12px 0', minWidth: '180px', zIndex: 100,
+                            marginTop: '8px'
+                          }}
+                        >
+                          {link.dropdown.map(sub => (
+                            <Link key={sub.path} to={sub.path}
+                              style={{
+                                display: 'block', padding: '8px 20px',
+                                fontFamily: "'Outfit', sans-serif", fontSize: '12px', letterSpacing: '0.1em', fontWeight: 600,
+                                color: location.pathname === sub.path ? 'var(--accent-primary)' : 'rgba(255,255,255,0.7)',
+                                textDecoration: 'none', transition: 'all 0.2s',
+                              }}
+                              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.05)'; (e.currentTarget as HTMLElement).style.color = '#fff'; }}
+                              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'none'; (e.currentTarget as HTMLElement).style.color = location.pathname === sub.path ? 'var(--accent-primary)' : 'rgba(255,255,255,0.7)'; }}
+                            >
+                              {sub.label}
+                            </Link>
+                          ))}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                );
+              }
+
+              const isActive = location.pathname === link.path;
+              return (
+                <Link key={link.path} to={link.path}
+                  style={{
+                    fontFamily: "'Outfit', sans-serif", fontSize: '13px', letterSpacing: '0.12em', fontWeight: 600,
+                    color: isActive ? 'var(--accent-primary)' : 'var(--text-secondary)',
+                    textDecoration: 'none', position: 'relative', padding: '4px 0',
+                    transition: 'color 0.25s',
+                  }}
+                  onMouseEnter={e => { if (!isActive) (e.currentTarget as HTMLElement).style.color = 'var(--text-primary)'; }}
+                  onMouseLeave={e => { if (!isActive) (e.currentTarget as HTMLElement).style.color = 'var(--text-secondary)'; }}
+                >
+                  {link.label}
+                  {isActive && <motion.div layoutId="dummy-nav-indicator" style={{ position: 'absolute', bottom: -2, left: 0, right: 0, height: '2px', background: 'var(--accent-primary)', borderRadius: '1px' }} transition={{ duration: 0.3 }} />}
+                </Link>
+              );
+            })}
           </div>
 
-          {/* RIGHT: Actions Section */}
-          <div className="hidden lg:flex items-center justify-end gap-2 xl:gap-4 flex-shrink-0">
-
-            <motion.a
-              href="tel:+919253625099"
-              className="p-2.5 bg-amber-50 text-amber-600 rounded-full hover:bg-amber-100 transition-all duration-300 shadow-sm border border-amber-100"
-              title="Call Us"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          {/* CTA + Mobile toggle */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <a href="tel:+919253625099" style={{
+              display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '8px 16px',
+              background: 'none', border: '1px solid var(--border-light)', color: 'var(--text-primary)',
+              borderRadius: '5px', textDecoration: 'none', fontFamily: "'Outfit', sans-serif",
+              fontSize: '12px', letterSpacing: '0.12em', fontWeight: 600,
+              transition: 'all 0.3s',
+            }}
+              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'var(--accent-hover)'; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'none'; }}
             >
-              <Phone size={18} />
-            </motion.a>
-
-            <motion.div
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              <Phone size={12} style={{ color: 'var(--accent-primary)' }} /> CALL NOW
+            </a>
+            <Link to="/contact" style={{
+              display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '8px 20px',
+              background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-light))', color: 'var(--bg-primary)',
+              borderRadius: '5px', textDecoration: 'none', fontFamily: "'Outfit', sans-serif",
+              fontSize: '12px', letterSpacing: '0.12em', fontWeight: 600,
+              boxShadow: '0 4px 16px var(--accent-hover)', transition: 'all 0.3s',
+            }} className="dummy-nav-cta"
+              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(-1px)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 6px 24px var(--border-light)'; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = 'none'; (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 16px var(--accent-hover)'; }}
             >
-              <Link
-                to="/contact"
-                className="bg-gradient-to-r from-amber-400 to-orange-500 
-                text-white px-4 xl:px-6 py-2.5 rounded-full text-[11px] xl:text-sm font-semibold whitespace-nowrap
-                shadow-[0_4px_12px_rgba(245,158,11,0.15)] hover:shadow-[0_8px_20px_rgba(245,158,11,0.3)]
-                transition-all duration-300 inline-block"
-              >
-                Get Started
-              </Link>
-            </motion.div>
-          </div>
-
-          {/* MOBILE TOGGLE */}
-          <div className="lg:hidden flex items-center ml-4">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-xl transition-all duration-300 bg-slate-100 text-slate-900 shadow-sm"
-            >
-              {isOpen ? <X size={22} /> : <Menu size={22} />}
+              GET STARTED <ArrowRight size={12} />
+            </Link>
+            <button onClick={() => setMobileOpen(!mobileOpen)}
+              className="dummy-nav-burger"
+              style={{ display: 'none', background: 'none', border: '1px solid var(--border-light)', borderRadius: '6px', padding: '6px', cursor: 'pointer', color: 'var(--text-primary)' }}>
+              {mobileOpen ? <X size={18} /> : <Menu size={18} />}
             </button>
           </div>
         </div>
+      </nav>
 
-        {/* MOBILE OVERLAY */}
-        {isOpen && (
-          <div className="lg:hidden fixed inset-x-0 top-[calc(var(--announcement-bar-height)+70px)] mx-4 bg-white shadow-2xl rounded-3xl border border-slate-100 overflow-hidden animate-fadeInDown max-h-[80vh] overflow-y-auto">
-            <div className="p-5 space-y-1">
-              {navItems.map((item) => {
-                // Projects (Always expanded on mobile)
-                if (item.subItems) {
-                  const isActive = location.pathname === item.path;
-                  return (
-                    <div key={item.name} className="py-1">
-                      <Link
-                        to={item.path}
-                        onClick={() => {
-                          setIsOpen(false);
-                          setOpenDropdown(null);
-                        }}
-                        className={`flex items-center justify-between px-6 py-4 rounded-2xl text-[15px] font-bold transition-all ${isActive ? "bg-amber-50 text-amber-600" : "text-slate-500 hover:bg-slate-50"}`}
-                      >
-                        {item.name}
-                        {isActive && <div className="w-1.5 h-1.5 bg-amber-500 rounded-full" />}
-                      </Link>
-                      <div className="space-y-1 ml-4 border-l-2 border-amber-50">
-                        {item.subItems.map((sub: any) => (
-                          <div key={sub.name} className="flex items-center justify-between px-6 rounded-xl hover:bg-slate-50 group/item">
-                            <Link
-                              to={sub.path}
-                              state={sub.scrollTo ? { scrollTo: sub.scrollTo } : undefined}
-                              onClick={() => setIsOpen(false)}
-                              className={`flex-1 py-3 text-sm font-bold transition-all ${location.state?.scrollTo === sub.scrollTo ? "text-amber-700" : "text-slate-500"}`}
-                            >
-                              {sub.name}
-                            </Link>
-                            {sub.external && (
-                              <a href={sub.external} target="_blank" rel="noopener noreferrer" className="p-2 text-slate-900 hover:text-amber-600 transition-colors">
-                                <ExternalLink size={14} />
-                              </a>
-                            )}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  );
-                }
-
-                // Resources (Toggleable on mobile)
-                if (item.dropdown) {
-                  const isDropdownActive = isActiveDropdown(item.dropdown);
-                  return (
-                    <div key={item.name}>
-                      <button
-                        onClick={() => toggleDropdown(item.name)}
-                        className={`w-full flex items-center justify-between px-6 py-4 rounded-2xl text-[15px] font-semibold transition-all ${isDropdownActive || openDropdown === item.name ? "bg-amber-50 text-amber-600" : "text-slate-500 hover:bg-slate-50"}`}
-                      >
-                        <span>{item.name}</span>
-                        <ChevronDown size={18} className={`transition-transform duration-300 ${openDropdown === item.name ? "rotate-180" : ""}`} />
-                      </button>
-                      <AnimatePresence>
-                        {openDropdown === item.name && (
-                          <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: "auto", opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            className="overflow-hidden ml-4"
-                          >
-                            {item.dropdown.map((sub: any) => (
-                              <Link
-                                key={sub.path}
-                                to={sub.path}
-                                onClick={() => {
-                                  setIsOpen(false);
-                                  setOpenDropdown(null);
-                                }}
-                                className={`block px-6 py-3 rounded-xl text-sm font-semibold ${location.pathname === sub.path ? "text-amber-700" : "text-slate-400"}`}
-                              >
-                                {sub.name}
-                              </Link>
-                            ))}
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
-                  );
-                }
-
-                // Simple Links
-                const isActive = location.pathname === item.path;
+      {/* Mobile menu */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.25 }}
+            style={{
+              position: 'fixed', top: '52px', left: 0, right: 0, bottom: 0, zIndex: 999,
+              background: 'var(--nav-scrolled)', backdropFilter: 'blur(20px)',
+              padding: '32px 48px', display: 'flex', flexDirection: 'column', gap: '4px',
+              overflowY: 'auto'
+            }} className="dummy-nav-mobile-container"
+          >
+            {navLinks.map((link, i) => {
+              if (link.dropdown) {
+                const isActive = link.dropdown.some(sub => location.pathname === sub.path);
                 return (
-                  <Link
-                    key={item.name}
-                    to={item.path}
-                    onClick={() => {
-                      setIsOpen(false);
-                      setOpenDropdown(null);
-                    }}
-                    className={`flex items-center justify-between px-6 py-4 rounded-2xl text-[15px] font-semibold transition-all ${isActive ? "bg-amber-50 text-amber-600" : "text-slate-500 hover:bg-slate-50"}`}
-                  >
-                    {item.name}
-                    {isActive && <div className="w-1.5 h-1.5 bg-amber-500 rounded-full" />}
-                  </Link>
+                  <div key={link.label}>
+                    <div style={{
+                      display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%',
+                      borderBottom: '1px solid var(--border-faint)'
+                    }}>
+                      <button onClick={() => toggleDropdown(link.label)} style={{
+                        flex: 1, textAlign: 'left', padding: '14px 0', background: 'none', border: 'none', cursor: 'pointer',
+                        fontFamily: "'Outfit', sans-serif", fontSize: '20px', letterSpacing: '0.12em', fontWeight: 600,
+                        color: isActive || openDropdown === link.label ? 'var(--accent-primary)' : 'var(--text-secondary)',
+                      }}>
+                        {link.label}
+                      </button>
+                      <button onClick={() => toggleDropdown(link.label)} style={{ padding: '14px', background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-primary)' }}>
+                        <ChevronDown size={18} style={{ transform: openDropdown === link.label ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
+                      </button>
+                    </div>
+                    <AnimatePresence>
+                      {openDropdown === link.label && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          style={{ overflow: 'hidden', paddingLeft: '16px' }}
+                        >
+                          {link.dropdown.map(sub => (
+                            <Link key={sub.path} to={sub.path} onClick={() => setMobileOpen(false)}
+                              style={{
+                                display: 'block', padding: '10px 0',
+                                fontFamily: "'Outfit', sans-serif", fontSize: '16px', letterSpacing: '0.08em', fontWeight: 600,
+                                color: location.pathname === sub.path ? 'var(--accent-primary)' : 'var(--text-tertiary)',
+                                textDecoration: 'none',
+                              }}
+                            >
+                              {sub.label}
+                            </Link>
+                          ))}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
                 );
-              })}
+              }
 
-              <div className="pt-4 mt-2 flex flex-col gap-3">
-
-                <a
-                  href="tel:+919253625099"
-                  className="flex items-center justify-center space-x-3 text-slate-500 font-medium text-sm py-4 border-t border-slate-50"
-                >
-                  <Phone size={16} className="text-amber-500" />
-                  <span>Talk to Experts</span>
-                </a>
-
-                <Link
-                  to="/contact"
-                  onClick={() => setIsOpen(false)}
-                  className="block w-full bg-gradient-to-r from-amber-400 to-orange-500 
-                  text-white py-4 rounded-2xl font-bold text-center shadow-lg shadow-amber-100"
-                >
-                  Register Now
-                </Link>
-              </div>
-            </div>
-          </div>
+              return (
+                <motion.div key={link.path} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.05 }}>
+                  <Link to={link.path} onClick={() => setMobileOpen(false)}
+                    style={{
+                      display: 'block', padding: '14px 0', borderBottom: '1px solid var(--border-faint)',
+                      fontFamily: "'Outfit', sans-serif", fontSize: '20px', letterSpacing: '0.12em', fontWeight: 600,
+                      color: location.pathname === link.path ? 'var(--accent-primary)' : 'var(--text-secondary)',
+                      textDecoration: 'none',
+                    }}>
+                    {link.label}
+                  </Link>
+                </motion.div>
+              );
+            })}
+            <Link to="/contact" onClick={() => setMobileOpen(false)} style={{
+              display: 'inline-flex', alignItems: 'center', gap: '8px', marginTop: '24px',
+              padding: '12px 28px', background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-light))',
+              color: 'var(--bg-primary)', borderRadius: '6px', textDecoration: 'none',
+              fontFamily: "'Outfit', sans-serif", fontSize: '14px', letterSpacing: '0.12em', fontWeight: 600,
+              alignSelf: 'flex-start',
+            }}>
+              GET CONSULTATION <ArrowRight size={14} />
+            </Link>
+          </motion.div>
         )}
-      </div>
-    </nav>
+      </AnimatePresence>
+
+      <style>{`
+        @media (max-width: 1024px) {
+          .dummy-nav-links { gap: 16px !important; }
+        }
+        @media (max-width: 900px) {
+          .dummy-nav-links { display: none !important; }
+          .dummy-nav-burger { display: flex !important; }
+          .dummy-nav-cta { display: none !important; }
+        }
+        @media (max-width: 768px) {
+          .dummy-nav-container { padding: 0 24px !important; }
+          .dummy-nav-mobile-container { padding: 24px !important; }
+        }
+      `}</style>
+    </>
   );
 };
 

@@ -1,198 +1,215 @@
 import React, { useState, useEffect } from 'react';
-import { getBackendUrl } from '../lib/api';
-import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import {
-  Calendar,
-  ArrowRight,
-  Search,
-  Mail,
-  Newspaper,
-  Sparkles,
-  TrendingUp
-} from 'lucide-react';
-import AnimatedSection from '../components/AnimatedSection';
+import { Mail, ArrowRight, Download, Eye, Sparkles, Send, CheckCircle } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import '../components/Home.css';
+
+/* Reusable components from other pages */
+const Grain = () => (
+  <div style={{ position: 'absolute', inset: 0, opacity: 0.03, pointerEvents: 'none', backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.15 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }} />
+);
+
+const GridBg = ({ size = 40, opacity = 0.05 }) => (
+  <div style={{ position: 'absolute', inset: 0, backgroundImage: `linear-gradient(rgba(255,255,255,${opacity}) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,${opacity}) 1px, transparent 1px)`, backgroundSize: `${size}px ${size}px`, pointerEvents: 'none' }} />
+);
+
+const GlowBlob = ({ top, left, right, bottom, w = 300, h = 300, color = 'var(--accent-primary)', opacity = 0.05, blur = 80 }: any) => (
+  <div style={{ position: 'absolute', top, left, right, bottom, width: w, height: h, background: color, opacity, filter: `blur(${blur}px)`, borderRadius: '50%', pointerEvents: 'none', zIndex: 1 }} />
+);
+
+const titleV = {
+  hidden: { y: 100, opacity: 0 },
+  visible: (i: number) => ({ y: 0, opacity: 1, transition: { duration: 1, ease: [.22, 1, .36, 1], delay: .2 + i * .12 } })
+};
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+};
+
+import axios from 'axios';
+import { getBackendUrl } from '../lib/api';
+
+const FALLBACK_NEWSLETTERS = [
+  { _id: '1', title: 'The Future of AI in Enterprise', excerpt: 'How Large Language Models are transforming business operations.', publishedAt: '2026-05-10T10:00:00.000Z', slug: 'future-ai-enterprise', pdfUrl: '/resource.pdf' },
+  { _id: '2', title: 'Scaling Digital Architecture', excerpt: 'Best practices for building high-performance web systems.', publishedAt: '2026-04-15T10:00:00.000Z', slug: 'scaling-digital-architecture', pdfUrl: '/resource.pdf' },
+  { _id: '3', title: 'Mastering Semantic SEO', excerpt: 'Dominating search landscapes through strategic authority.', publishedAt: '2026-03-20T10:00:00.000Z', slug: 'mastering-semantic-seo', pdfUrl: '/resource.pdf' },
+  { _id: '4', title: 'The Power of Narrative Design', excerpt: 'Building meaningful brand stories that resonate globally.', publishedAt: '2026-02-05T10:00:00.000Z', slug: 'power-narrative-design', pdfUrl: '/resource.pdf' }
+];
 
 const Newsletters = () => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [newsletters, setNewsletters] = useState([]);
+  const [email, setEmail] = useState('');
+  const [isSubscribed, setIsSubscribed] = useState(false);
+  const [newsletters, setNewsletters] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
-  useEffect(() => {
+  useEffect(() => { 
+    window.scrollTo(0, 0); 
+    
     const fetchNewsletters = async () => {
-      setLoading(true);
       try {
+        setLoading(true);
         const API_BASE = getBackendUrl();
-        const res = await fetch(`${API_BASE}/api/newsletters`, {
-          headers: {
-            'Accept': 'application/json'
-          }
+        const response = await fetch(`${API_BASE}/api/newsletters`, {
+          headers: { 'Accept': 'application/json' }
         });
-        const json = await res.json();
-        if (json?.success) setNewsletters(json.data || []);
-        else setError(json?.message || "Failed to load newsletters");
-      } catch (err: any) {
-        setError(err.message || "Failed to load newsletters");
+        const json = await response.json();
+        if (json?.success) {
+          const fetched = json.data || [];
+          setNewsletters(fetched);
+        }
+      } catch (error) {
+        console.error('Error fetching newsletters:', error);
+        setNewsletters(FALLBACK_NEWSLETTERS);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
+    
     fetchNewsletters();
   }, []);
 
-  const filteredNewsletters = newsletters.filter(n =>
-    n.title.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const handleSubscribe = (e: any) => { 
+    e.preventDefault(); 
+    if (email) setIsSubscribed(true); 
+  };
 
   return (
-    <div className="pt-20">
-      {/* Hero Section - Matching Blog Theme */}
-      <section className="relative py-20 bg-gradient-to-br from-slate-50 via-white to-slate-50 overflow-hidden">
-        {/* Background decoration */}
-        <div className="absolute inset-0 z-0">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-amber-100/30 blur-[100px] rounded-full" />
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-100/30 blur-[100px] rounded-full" />
-        </div>
+    <div className="dh-newsletters-page" style={{ background: 'var(--bg-primary)', color: 'var(--text-primary)', minHeight: '100vh' }}>
+      
+      {/* 1. CINEMATIC HERO */}
+      <section className="theme-brown" style={{ minHeight: '60vh', display: 'flex', alignItems: 'center', background: 'var(--bg-primary)', overflow: 'hidden', position: 'relative', paddingTop: '80px' }}>
+        <Grain />
+        <GridBg size={50} opacity={0.05} />
+        <GlowBlob top="-5%" right="-5%" w={350} opacity={0.04} blur={120} />
+        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '2px', background: 'linear-gradient(to right, transparent, var(--accent-primary) 25%, var(--accent-light) 50%, var(--accent-primary) 75%, transparent)', zIndex: 10 }} />
+        
+        <div className="dh-container" style={{ position: 'relative', zIndex: 10 }}>
+          <motion.div initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.1 } } }}>
+            <div className="dh-label">RESOURCES & INSIGHTS</div>
+            
+            <h1 className="dh-display" style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)', marginBottom: '1.5rem' }}>
+              <span className="dh-hero-line"><motion.span custom={0} variants={titleV}>CURATED</motion.span></span>
+              <span className="dh-hero-line"><motion.span custom={1} variants={titleV} className="dh-hero-stroked">DIGITAL</motion.span></span>
+              <span className="dh-hero-line"><motion.span custom={2} variants={titleV} className="dh-hero-accent">INTEL.</motion.span></span>
+            </h1>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection animation="fadeInUp" delay={0.2}>
-            <div className="text-center">
-              <motion.h1
-                className="text-3xl md:text-5xl lg:text-6xl font-black text-slate-900 mb-6"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, ease: "easeOut" }}
-              >
-                Our <span className="text-amber-500">Newsletters</span>
-              </motion.h1>
-              <motion.p
-                className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed font-medium"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-              >
-                Stay updated with our latest expert insights, strategic updates, and industrial milestones delivered straight to you.
-              </motion.p>
-            </div>
-          </AnimatedSection>
+            <motion.p variants={fadeUp} className="dh-body" style={{ maxWidth: '600px', fontSize: '1.1rem' }}>
+              Strategic insights, market intelligence, and technical oversight delivered directly to your <strong style={{ color: 'var(--accent-primary)' }}>command center.</strong>
+            </motion.p>
+          </motion.div>
         </div>
       </section>
 
-      {/* Search Section */}
-      <section className="py-12 bg-white border-b border-slate-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection animation="fadeInUp" delay={0.3}>
-            <div className="bg-white rounded-[2rem] shadow-2xl p-8 border border-slate-100 max-w-2xl mx-auto">
-                <div className="relative">
-                    <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400 w-5 h-5" />
-                    <input
-                    type="text"
-                    placeholder="Search newsletters..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full pl-12 pr-4 py-4 bg-slate-50 border-b-2 border-slate-200 focus:border-amber-500 text-slate-900 font-bold transition-all outline-none rounded-lg"
-                    />
+      {/* 2. SUBSCRIPTION BAR */}
+      <section style={{ padding: '6rem 0', background: 'var(--bg-secondary)', borderTop: '1px solid var(--border-faint)', borderBottom: '1px solid var(--border-faint)' }}>
+        <div className="dh-container">
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr', gap: '4rem', alignItems: 'center' }} className="dh-responsive-grid">
+            <div>
+              <div className="dh-label">STAY INFORMED</div>
+              <h2 className="dh-display" style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>THE INSIDE TRACK.</h2>
+              <p className="dh-body" style={{ fontSize: '0.95rem' }}>Get exclusive deep-dives that we don't publish anywhere else.</p>
+            </div>
+
+            <div>
+              {isSubscribed ? (
+                <div style={{ background: 'var(--accent-hover)', padding: '2rem', borderRadius: '16px', display: 'flex', alignItems: 'center', gap: '1.5rem', color: 'var(--accent-primary)', border: '1px solid var(--accent-primary)' }}>
+                  <CheckCircle size={32} />
+                  <div>
+                    <h4 className="dh-heading" style={{ fontSize: '1.2rem', marginBottom: '0.2rem' }}>WELCOME TO THE INNER CIRCLE</h4>
+                    <p style={{ fontSize: '0.9rem', color: 'var(--text-primary)' }}>You've been successfully registered for our next transmission.</p>
+                  </div>
                 </div>
+              ) : (
+                <form onSubmit={handleSubscribe} style={{ display: 'flex', gap: '1rem' }} className="dh-responsive-grid">
+                  <input type="email" placeholder="ENTER YOUR WORK EMAIL" required value={email} onChange={(e) => setEmail(e.target.value)} style={{ flex: 1, background: 'var(--bg-primary)', border: '1px solid var(--border-light)', borderRadius: '100px', padding: '0 2rem', color: 'var(--text-primary)', fontSize: '0.9rem', fontWeight: 600, outline: 'none', height: '60px' }} />
+                  <button type="submit" className="dh-btn-fill" style={{ height: '60px' }}><Send size={18} /> SUBSCRIBE</button>
+                </form>
+              )}
             </div>
-          </AnimatedSection>
+          </div>
         </div>
       </section>
 
-      {/* List Section */}
-      <section className="py-20 bg-white min-h-[400px]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection animation="fadeInUp" delay={0.1}>
-            <div className="flex items-center gap-3 mb-12">
-              <Sparkles className="w-8 h-8 text-amber-500" />
-              <h2 className="text-4xl font-black text-slate-900 tracking-tight">Featured Updates</h2>
-            </div>
-          </AnimatedSection>
+      {/* 3. ARCHIVE LIST */}
+      <section className="theme-beige" style={{ padding: '100px 0', background: 'var(--bg-primary)' }}>
+        <div className="dh-container">
+          <div style={{ marginBottom: '3rem' }}>
+            <div className="dh-label">ARCHIVES</div>
+            <h2 className="dh-display" style={{ fontSize: '3rem' }}>PREVIOUS EDITIONS</h2>
+          </div>
 
-          {loading ? (
-            <div className="flex flex-col items-center justify-center py-20">
-              <div className="w-12 h-12 border-4 border-amber-500 border-t-transparent rounded-full animate-spin mb-4" />
-              <p className="text-slate-500 font-bold tracking-widest uppercase text-xs">Loading Knowledge Base...</p>
-            </div>
-          ) : error ? (
-            <div className="text-center py-20">
-              <p className="text-red-500 font-bold">{error}</p>
-            </div>
-          ) : filteredNewsletters.length === 0 ? (
-            <div className="text-center py-20">
-              <Newspaper className="w-16 h-16 text-slate-300 mx-auto mb-4" />
-              <p className="text-slate-500 font-bold">No newsletters found matching your search.</p>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredNewsletters.map((n, index) => (
-                <AnimatedSection key={n._id} animation="fadeInUp" delay={index * 0.05}>
-                  <article className="group bg-slate-50 rounded-[1.5rem] shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 border border-slate-100 hover:border-amber-500 h-full flex flex-col">
-                    <div className="relative overflow-hidden h-64">
-                      <Link to={`/newsletters/${n.slug}`}>
-                        <img
-                          src={n.imageUrl ? (n.imageUrl.startsWith('http') ? n.imageUrl : `${getBackendUrl()}${n.imageUrl.startsWith('/') ? '' : '/'}${n.imageUrl}`) : "https://placehold.co/800x450?text=Newsletter"}
-                          alt={n.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                          onError={(e: any) => e.target.src = "https://placehold.co/800x450?text=Newsletter"}
-                        />
-                      </Link>
-                      <div className="absolute top-4 left-4">
-                        <span className="bg-slate-900 text-amber-500 px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-wider shadow-lg">
-                           Newsletter
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+            {newsletters.map((item, i) => (
+              <motion.div 
+                key={item._id} 
+                initial="hidden" 
+                whileInView="visible" 
+                viewport={{ once: true }} 
+                variants={fadeUp} 
+                transition={{ delay: i * 0.1 }}
+              >
+                <div style={{ 
+                  padding: '1.2rem 2rem', 
+                  display: 'flex', 
+                  justifyContent: 'space-between', 
+                  alignItems: 'center', 
+                  background: 'linear-gradient(90deg, var(--card-bg) 0%, rgba(240, 235, 225, 0.05) 100%)', 
+                  border: '1px solid var(--border-faint)', 
+                  borderLeft: '4px solid var(--accent-primary)',
+                  borderRadius: '8px', 
+                  transition: 'all 0.3s ease' 
+                }}
+                  onMouseEnter={e => { e.currentTarget.style.transform = 'translateX(8px)'; e.currentTarget.style.background = 'linear-gradient(90deg, rgba(240, 235, 225, 0.08) 0%, rgba(240, 235, 225, 0.15) 100%)'; e.currentTarget.style.borderColor = 'var(--accent-primary)'; }}
+                  onMouseLeave={e => { e.currentTarget.style.transform = 'translateX(0)'; e.currentTarget.style.background = 'linear-gradient(90deg, var(--card-bg) 0%, rgba(240, 235, 225, 0.05) 100%)'; e.currentTarget.style.borderColor = 'var(--border-faint)'; }}
+                  className="dh-responsive-grid dh-newsletter-bar"
+                >
+                  <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
+                    <div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '0.3rem' }}>
+                        <span style={{ fontSize: '0.65rem', fontWeight: 800, color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+                          {new Date(item.publishedAt).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })}
                         </span>
+                        <h3 className="dh-heading" style={{ fontSize: '1.15rem', margin: 0 }}>{item.title}</h3>
                       </div>
-                    </div>
-                    <div className="p-6 flex flex-col flex-1">
-                      <div className="flex items-center text-[10px] text-slate-500 mb-4 font-bold uppercase tracking-wider">
-                        <Calendar className="w-3.5 h-3.5 mr-2 text-amber-500" />
-                        {new Date(n.publishedAt || n.createdAt).toLocaleDateString()}
-                      </div>
-                      <h3 className="text-xl font-bold text-slate-900 mb-3 tracking-tight group-hover:text-amber-500 transition-colors line-clamp-2 leading-tight">
-                        {n.title}
-                      </h3>
-                      <div className="mt-auto flex items-center justify-between pt-6 border-t border-slate-200">
-                        <Link to={`/newsletters/${n.slug}`} className="text-slate-900 hover:text-amber-500 font-black text-[10px] uppercase tracking-wider flex items-center transition-colors">
-                          Read Newsletter <ArrowRight className="ml-2 w-4 h-4" />
-                        </Link>
-                      </div>
-                    </div>
-                  </article>
-                </AnimatedSection>
-              ))}
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* Subscription Section */}
-      <section className="pt-12 pb-24 md:py-24 bg-slate-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="bg-slate-900 rounded-[3rem] p-12 relative overflow-hidden group">
-                  <div className="absolute top-0 right-0 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl -mr-32 -mt-32 group-hover:bg-amber-500/20 transition-all duration-700" />
-                  <div className="relative z-10 flex flex-col items-center text-center">
-                    <div className="w-16 h-16 bg-amber-500 rounded-2xl flex items-center justify-center mb-8 shadow-xl shadow-amber-500/20 group-hover:scale-110 transition-transform duration-300">
-                        <Mail className="w-8 h-8 text-white" />
-                    </div>
-                    <h2 className="text-3xl md:text-5xl font-black text-white mb-6 tracking-tight leading-tight">
-                        Don't Miss our <span className="text-amber-500">Next Update</span>
-                    </h2>
-                    <p className="text-slate-400 text-lg mb-10 max-w-xl font-medium">
-                        Join our community of industry leaders and get the latest strategic insights delivered to your inbox.
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-4 w-full max-w-md">
-                        <input 
-                            type="email" 
-                            placeholder="Enter your email" 
-                            className="flex-1 bg-white/10 border border-white/20 rounded-xl px-6 py-4 focus:outline-none focus:border-amber-500 text-white font-bold"
-                        />
-                        <button className="bg-amber-500 hover:bg-amber-600 text-slate-900 px-8 py-4 rounded-xl font-black uppercase text-xs tracking-widest transition-all">
-                            Subscribe
-                        </button>
+                      <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', margin: 0 }}>{item.excerpt}</p>
                     </div>
                   </div>
-              </div>
+                  <div style={{ display: 'flex', gap: '1rem', flexShrink: 0 }}>
+                    <button onClick={() => window.open(item.pdfUrl || '/resource.pdf', '_blank')} style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '10px 20px', borderRadius: '6px', border: 'none', background: 'var(--accent-primary)', color: '#fff', cursor: 'pointer', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.1em', transition: 'all 0.3s' }}
+                      onMouseEnter={e => { e.currentTarget.style.opacity = '0.9'; }}
+                      onMouseLeave={e => { e.currentTarget.style.opacity = '1'; }}
+                    >
+                      <Download size={14} /> GET PDF
+                    </button>
+                    <Link to={`/newsletters/${item.slug}`} style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '10px 20px', borderRadius: '6px', border: '1px solid var(--border-light)', background: 'transparent', color: 'var(--text-primary)', cursor: 'pointer', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.1em', transition: 'all 0.3s', textDecoration: 'none' }}
+                      onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--text-primary)'; }}
+                      onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border-light)'; }}
+                    >
+                      <Eye size={14} /> READ
+                    </Link>
+
+                  </div>
+                </div>
+              </motion.div>
+            ))}
           </div>
+        </div>
       </section>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .dh-responsive-grid {
+            grid-template-columns: 1fr !important;
+            flex-direction: column !important;
+            gap: 1.5rem !important;
+          }
+          .dh-newsletter-bar {
+            padding: 1.5rem !important;
+            align-items: flex-start !important;
+          }
+        }
+      `}</style>
     </div>
   );
 };

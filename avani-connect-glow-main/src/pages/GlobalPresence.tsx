@@ -1,282 +1,262 @@
-import React from 'react';
-import { Helmet } from 'react-helmet-async';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { MapPin, Mail, Phone, Globe, ArrowUpRight, Zap, Target } from 'lucide-react';
+import { MapPin, Mail, Phone, Globe, ArrowUpRight, Target } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import '../components/Home.css';
 
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } }
+};
+const titleV = {
+  hidden: { y: 100, opacity: 0 },
+  visible: (i: number) => ({ y: 0, opacity: 1, transition: { duration: 1, ease: [.22, 1, .36, 1], delay: .2 + i * .12 } })
+};
+
+// Themed background utilities
+const ThemedGrain = () => (
+  <div style={{ position: 'absolute', inset: 0, zIndex: 1, opacity: 0.04, pointerEvents: 'none', backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`, backgroundSize: '200px' }} />
+);
+const ThemedGridBg = ({ size = 60, opacity = 0.05 }: any) => (
+  <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 1, opacity, backgroundImage: `linear-gradient(var(--text-tertiary) 1px, transparent 1px), linear-gradient(90deg, var(--text-tertiary) 1px, transparent 1px)`, backgroundSize: `${size}px ${size}px` }} />
+);
+const ThemedGlowBlob = ({ top, left, right, bottom, w = 300, opacity = 0.05, blur = 100, color = 'var(--accent-primary)' }: any) => (
+  <motion.div animate={{ scale: [1, 1.2, 1], opacity: [opacity, opacity * 1.5, opacity] }} transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }} style={{ position: 'absolute', width: w, height: w, borderRadius: '50%', background: color, filter: `blur(${blur}px)`, top, left, right, bottom, pointerEvents: 'none', zIndex: 1 }} />
+);
+const ThemedLuxuryLine = () => (
+  <div style={{ width: '100%', height: '1px', background: 'linear-gradient(to right, transparent, var(--border-light) 20%, var(--accent-light) 50%, var(--border-light) 80%, transparent)', opacity: 0.5 }} />
+);
 
 const officeDetails = [
   {
-    city: 'Rohtak',
-    country: 'India',
-    label: 'Corporate Headquarters',
+    city: 'Rohtak', country: 'India', label: 'Corporate Headquarters',
     description: 'Our flagship innovation center where strategy meets execution. As our founding hub, Rohtak continues to drive our core values across the nation.',
     image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop',
-    tagline: 'The Heart of Innovation',
-    contact: {
-       address: '106, First Floor, Agro Mall, Rohtak',
-       email: 'kp@avanienterprises.in',
-       phone: '+91 9253625099'
-    }
+    tagline: 'The Heart of Innovation', color: '#ff6b6b',
+    contact: { address: '106, First Floor, Agro Mall, Rohtak', email: 'kp@avanienterprises.in', phone: '+91 9253625099' }
   },
   {
-    city: 'Gurgaon',
-    country: 'India',
-    label: 'Strategic NCR Hub',
+    city: 'Gurgaon', country: 'India', label: 'Strategic NCR Hub',
     description: 'Located in the steel-and-glass heart of Cyber City, our Gurgaon office bridges the gap between digital vision and enterprise reality.',
     image: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=1200&auto=format&fit=crop',
-    tagline: 'Enterprise Connectivity',
-    contact: {
-       address: 'Tower B, 3rd Floor, Unitech Cyber Park, Sector 39, Gurugram, 122002',
-       email: 'kp@avanienterprises.in',
-       phone: '+91 9253625099'
-    }
+    tagline: 'Enterprise Connectivity', color: '#feca57',
+    contact: { address: 'Tower B, 3rd Floor, Unitech Cyber Park, Sector 39, Gurugram, 122002', email: 'kp@avanienterprises.in', phone: '+91 9253625099' }
   },
   {
-    city: 'Mumbai',
-    country: 'India',
-    label: 'Western India Operations',
+    city: 'Mumbai', country: 'India', label: 'Western India Operations',
     description: 'In the financial capital of India, we empower businesses with cutting-edge tech solutions that drive real commercial growth.',
     image: 'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?q=80&w=1200&auto=format&fit=crop',
-    tagline: 'Scale & Growth Center',
-    contact: {
-       address: 'Third Floor, Vasudev Chamber, 4RFX+QJ3, Teli Galli Cross Rd, Mogra Village, Mogra Pada, Natwar Nagar, Andheri East, Mumbai, Maharashtra 400069',
-       email: 'kp@avanienterprises.in',
-       phone: '+91 9253625099'
-    }
+    tagline: 'Scale & Growth Center', color: '#48dbfb',
+    contact: { address: 'Third Floor, Vasudev Chamber, Teli Galli Cross Rd, Natwar Nagar, Andheri East, Mumbai, Maharashtra 400069', email: 'kp@avanienterprises.in', phone: '+91 9253625099' }
   },
   {
-    city: 'Australia',
-    country: 'Australia',
-    label: 'APAC Regional Office',
+    city: 'Australia', country: 'Australia', label: 'APAC Regional Office',
     description: 'Extending our reach across the Pacific, our Australian presence ensures global support and local expertise for our international partners.',
     image: 'https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?q=80&w=1200&auto=format&fit=crop',
-    tagline: 'Global Outreach',
-    contact: {
-       address: 'Australia',
-       email: 'kp@avanienterprises.in',
-       phone: '+91 9253625099'
-    }
+    tagline: 'Global Outreach', color: '#1dd1a1',
+    contact: { address: 'Australia', email: 'kp@avanienterprises.in', phone: '+91 9253625099' }
   },
 ];
 
-const GlobalPresence = () => {
+const tickerItems = [
+  "GLOBAL NETWORK", "•", "INNOVATIVE SOLUTIONS", "•", "ENTERPRISE CONNECTIVITY", "•", "STRATEGIC GROWTH", "•",
+  "GLOBAL NETWORK", "•", "INNOVATIVE SOLUTIONS", "•", "ENTERPRISE CONNECTIVITY", "•", "STRATEGIC GROWTH", "•"
+];
 
+const GlobalPresence = () => {
+  useEffect(() => { window.scrollTo(0, 0); }, []);
 
   return (
-    <div className="bg-white min-h-screen font-sans">
-      <Helmet>
-        <title>Global Presence | High-Tech Network | Avani Enterprises</title>
-        <meta name="description" content="Discover Avani Enterprises' premium global network. From our Rohtak HQ to our Australia regional office, we serve clients with excellence." />
-      </Helmet>
+    <div className="dh-global-page" style={{ background: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
 
-      {/* High-Impact Hero Section */}
-      <section className="relative pt-32 pb-24 md:pt-44 md:pb-32 lg:pt-52 lg:pb-40 overflow-hidden bg-[#FCFAFA] px-4 md:px-0">
-        {/* Dynamic Background Elements */}
-        <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
-           <div className="absolute top-1/4 -left-20 w-[600px] h-[600px] bg-amber-500/10 rounded-full blur-[120px] animate-pulse" />
-           <div className="absolute top-0 right-1/4 w-[800px] h-[400px] bg-sky-500/5 rounded-full blur-[100px]" />
+      {/* 1. HERO WITH MOVING TICKER */}
+      <section className="theme-brown" style={{ minHeight: '75vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', background: 'radial-gradient(circle at 50% 0%, var(--bg-secondary) 0%, var(--bg-primary) 70%)', overflow: 'hidden', position: 'relative', paddingTop: '100px', paddingBottom: '60px' }}>
+        <ThemedGrain />
+        <ThemedGridBg size={50} opacity={0.03} />
+        <ThemedGlowBlob top="-5%" left="20%" w={600} opacity={0.05} blur={150} color="var(--accent-hover)" />
+        <ThemedGlowBlob top="-5%" right="10%" w={500} opacity={0.05} blur={120} color="var(--accent-primary)" />
+        
+        {/* Top Moving Marquee */}
+        <div style={{ overflow: 'hidden', width: '100%', marginBottom: '40px', position: 'relative', zIndex: 10 }}>
+          <motion.div animate={{ x: ['0%', '-50%'] }} transition={{ duration: 25, ease: 'linear', repeat: Infinity }}
+            style={{ display: 'flex', gap: '40px', width: 'max-content', alignItems: 'center' }}>
+            {[...tickerItems, ...tickerItems].map((item, i) => (
+              <span key={i} style={{ fontFamily: "'Outfit', sans-serif", fontSize: '13px', fontWeight: 700, color: item === '•' ? 'var(--accent-primary)' : 'var(--text-secondary)', letterSpacing: '0.2em', whiteSpace: 'nowrap' }}>
+                {item}
+              </span>
+            ))}
+          </motion.div>
         </div>
         
-        <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 text-center relative z-10 w-full overflow-hidden">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, ease: "circOut" }}
-          >
-            <div className="inline-flex items-center gap-3 bg-white border border-slate-200 rounded-full px-4 md:px-6 py-2 md:py-2.5 mb-8 md:mb-10 shadow-xl shadow-slate-200/40">
-                <Globe className="w-4 h-4 md:w-5 md:h-5 text-amber-500 animate-spin-slow" />
-                <span className="text-slate-900 text-[10px] md:text-xs font-black uppercase tracking-[0.2em] md:tracking-[0.3em]">Worldwide Operations</span>
-            </div>
+        <div className="dh-container" style={{ position: 'relative', zIndex: 10, textAlign: 'center', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          <motion.div initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.1 } } }}>
             
-            <h1 className="text-[clamp(2.5rem,10vw,4rem)] sm:text-6xl md:text-8xl lg:text-9xl font-black text-slate-900 tracking-[-0.04em] mb-8 md:mb-10 leading-none md:leading-[0.85] uppercase w-full">
-              Global <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600">
-                Connectivity
+            <motion.div variants={fadeUp} style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', padding: '8px 24px', background: 'var(--card-bg)', border: '1px solid var(--border-light)', borderRadius: '100px', marginBottom: '2rem', backdropFilter: 'blur(10px)', boxShadow: '0 4px 12px rgba(0,0,0,0.02)' }}>
+              <Globe size={16} style={{ color: 'var(--accent-primary)' }} />
+              <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.7rem', fontWeight: 600, color: 'var(--text-primary)', letterSpacing: '0.3em' }}>WORLDWIDE OPERATIONS</span>
+            </motion.div>
+            
+            <h1 style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(3rem, 7vw, 6rem)', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-0.02em', marginBottom: '1.5rem', overflow: 'hidden', color: 'var(--text-primary)' }}>
+              <span style={{ display: 'block', overflow: 'hidden' }}>
+                <motion.span custom={0} variants={titleV} style={{ display: 'block', color: 'transparent', WebkitTextStroke: '1.5px var(--text-primary)' }}>GLOBAL</motion.span>
+              </span>
+              <span style={{ display: 'block', overflow: 'hidden' }}>
+                <motion.span custom={1} variants={titleV} style={{ display: 'block', color: 'var(--accent-primary)' }}>CONNECTIVITY.</motion.span>
               </span>
             </h1>
             
-            <p className="text-lg md:text-2xl text-slate-600 max-w-3xl mx-auto leading-relaxed font-medium mb-12 md:mb-16 px-4 md:px-0">
+            <motion.p variants={fadeUp} style={{ fontFamily: "'Inter', sans-serif", maxWidth: '700px', margin: '0 auto 3rem', fontSize: '1.1rem', color: 'var(--text-secondary)', lineHeight: 1.6 }}>
               Delivering premium, high-tech networking solutions from our headquarters in Rohtak to our international hubs. We bridge continents with digital excellence and innovative enterprise strategies.
-            </p>
+            </motion.p>
+            
+            <motion.div variants={fadeUp} style={{ display: 'flex', justifyContent: 'center', gap: '4rem', flexWrap: 'wrap' }}>
+              {[{ val: '04', label: 'Major Hubs' }, { val: '02', label: 'Continents' }, { val: '∞', label: 'Digital Reach' }].map((s, i) => (
+                <div key={i} style={{ textAlign: 'center' }}>
+                  <div style={{ fontSize: '3rem', fontFamily: "'Clash Display', 'Bebas Neue', 'Outfit', sans-serif", fontWeight: 600, color: 'var(--text-primary)', lineHeight: 1, letterSpacing: '0.05em' }}>{s.val}</div>
+                  <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.7rem', fontWeight: 600, color: 'var(--accent-primary)', letterSpacing: '0.2em', marginTop: '8px' }}>{s.label.toUpperCase()}</div>
+                </div>
+              ))}
+            </motion.div>
+          </motion.div>
+        </div>
 
-            <div className="flex flex-wrap justify-center gap-6 md:gap-16 px-2">
-               <div className="flex flex-col items-center">
-                  <span className="text-3xl md:text-4xl font-black text-slate-900 leading-none">04</span>
-                  <span className="text-[9px] md:text-[10px] font-bold text-amber-600 uppercase tracking-widest mt-2">Major Hubs</span>
-               </div>
-               <div className="h-10 w-px bg-slate-200 hidden md:block" />
-               <div className="flex flex-col items-center">
-                  <span className="text-3xl md:text-4xl font-black text-slate-900 leading-none">02</span>
-                  <span className="text-[9px] md:text-[10px] font-bold text-amber-600 uppercase tracking-widest mt-2">Continents</span>
-               </div>
-               <div className="h-10 w-px bg-slate-200 hidden md:block" />
-               <div className="flex flex-col items-center">
-                  <span className="text-3xl md:text-4xl font-black text-slate-900 leading-none">∞</span>
-                  <span className="text-[9px] md:text-[10px] font-bold text-amber-600 uppercase tracking-widest mt-2">Digital reach</span>
-               </div>
+        {/* Bottom Moving Marquee */}
+        <div style={{ overflow: 'hidden', width: '100%', marginTop: '60px', position: 'relative', zIndex: 10 }}>
+          <motion.div animate={{ x: ['-50%', '0%'] }} transition={{ duration: 30, ease: 'linear', repeat: Infinity }}
+            style={{ display: 'flex', gap: '40px', width: 'max-content', alignItems: 'center' }}>
+            {[...tickerItems, ...tickerItems].map((item, i) => (
+              <span key={i} style={{ fontFamily: "'Outfit', sans-serif", fontSize: '13px', fontWeight: 700, color: item === '•' ? 'var(--accent-primary)' : 'var(--text-secondary)', letterSpacing: '0.2em', whiteSpace: 'nowrap', opacity: 0.7 }}>
+                {item}
+              </span>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      <ThemedLuxuryLine />
+
+      {/* 3. OFFICE COLLECTION */}
+      <section className="theme-beige" style={{ position: 'relative', padding: '100px 0', background: 'var(--bg-primary)', overflow: 'hidden' }}>
+        <ThemedGrain />
+        <ThemedGlowBlob top="20%" right="-5%" w={400} opacity={0.03} blur={150} color="var(--accent-hover)" />
+        <ThemedGlowBlob bottom="10%" left="-10%" w={500} opacity={0.03} blur={150} color="var(--accent-primary)" />
+        
+        <div className="dh-container" style={{ position: 'relative', zIndex: 10 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '2rem', marginBottom: '5rem' }}>
+            <div style={{ flex: 1, height: '1px', background: 'var(--border-light)' }} />
+            <div style={{ textAlign: 'center' }}>
+              <h2 style={{ fontFamily: "'Outfit', sans-serif", fontSize: '2.5rem', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '0.02em', margin: 0 }}>OFFICE COLLECTION</h2>
+              <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.8rem', fontWeight: 600, color: 'var(--accent-primary)', letterSpacing: '0.2em', marginTop: '8px' }}>DETAILED NETWORK OVERVIEW</div>
+            </div>
+            <div style={{ flex: 1, height: '1px', background: 'var(--border-light)' }} />
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(450px, 1fr))', gap: '4rem', maxWidth: '1200px', margin: '0 auto' }} className="dh-responsive-grid">
+            {officeDetails.map((office, i) => (
+              <motion.div key={office.city} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: i * 0.1 }}
+                style={{ display: 'flex', flexDirection: 'column', background: 'var(--card-bg)', borderRadius: '24px', overflow: 'hidden', border: '1px solid var(--border-light)', boxShadow: '0 10px 40px rgba(0,0,0,0.03)' }}>
+                
+                {/* FIXED IMAGE SIZING */}
+                <div style={{ position: 'relative', width: '100%', height: '320px', overflow: 'hidden', borderBottom: '1px solid var(--border-light)', transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)' }}
+                  onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.02)'; }}
+                  onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; }}
+                >
+                  <img src={office.image} alt={office.city} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 1.5s ease', opacity: 0.95 }}
+                    onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.08)'; e.currentTarget.style.opacity = '1'; }}
+                    onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.opacity = '0.95'; }}
+                  />
+                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.5), transparent 60%)', pointerEvents: 'none' }} />
+                  
+                  <div style={{ position: 'absolute', top: 20, left: 20, display: 'flex', alignItems: 'center', gap: '8px', background: 'var(--card-bg)', backdropFilter: 'blur(12px)', padding: '8px 16px', borderRadius: '100px', border: '1px solid var(--border-light)', boxShadow: '0 4px 12px rgba(0,0,0,0.05)' }}>
+                    <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--accent-primary)', boxShadow: `0 0 10px var(--accent-primary)` }} />
+                    <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.65rem', fontWeight: 700, color: 'var(--text-primary)', letterSpacing: '0.15em' }}>{office.tagline.toUpperCase()}</span>
+                  </div>
+                  
+                  <div style={{ position: 'absolute', bottom: 20, right: 20 }}>
+                    <Link to="/contact" style={{ width: 48, height: 48, borderRadius: '50%', background: 'var(--card-bg)', backdropFilter: 'blur(10px)', border: '1px solid var(--border-light)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent-primary)', textDecoration: 'none', transition: 'all 0.3s', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}
+                      onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'var(--accent-primary)'; (e.currentTarget as HTMLElement).style.color = '#fff'; }}
+                      onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'var(--card-bg)'; (e.currentTarget as HTMLElement).style.color = 'var(--accent-primary)'; }}>
+                      <ArrowUpRight size={20} />
+                    </Link>
+                  </div>
+                </div>
+
+                {/* CONTENT PADDING AND MARGINS */}
+                <div style={{ padding: '36px' }}>
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '16px', marginBottom: '24px' }}>
+                    <div style={{ width: 52, height: 52, borderRadius: '14px', background: 'var(--bg-secondary)', border: '1px solid var(--border-light)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 12px rgba(0,0,0,0.02)', flexShrink: 0 }}>
+                      <MapPin size={24} style={{ color: 'var(--accent-primary)' }} />
+                    </div>
+                    <div>
+                      <h3 style={{ fontFamily: "'Outfit', sans-serif", fontSize: '2.2rem', fontWeight: 800, color: 'var(--text-primary)', lineHeight: 1, marginBottom: '8px' }}>{office.city.toUpperCase()}</h3>
+                      <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.75rem', fontWeight: 600, color: 'var(--accent-primary)', letterSpacing: '0.15em' }}>{office.label.toUpperCase()}</div>
+                    </div>
+                  </div>
+                  
+                  <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '1rem', color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: '32px' }}>{office.description}</p>
+                  
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1.2rem' }}>
+                    <div style={{ padding: '20px', background: 'var(--bg-secondary)', borderRadius: '16px', border: '1px solid var(--border-light)' }}>
+                      <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.65rem', fontWeight: 700, color: 'var(--accent-primary)', letterSpacing: '0.15em', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <div style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--accent-primary)', opacity: 0.5 }} /> LOCATION
+                      </div>
+                      <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.9rem', fontWeight: 400, color: 'var(--text-primary)', lineHeight: 1.5, display: 'block' }}>{office.contact.address}</span>
+                    </div>
+                    
+                    <div style={{ padding: '20px', background: 'var(--bg-secondary)', borderRadius: '16px', border: '1px solid var(--border-light)' }}>
+                      <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.65rem', fontWeight: 700, color: 'var(--accent-primary)', letterSpacing: '0.15em', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <div style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--accent-primary)', opacity: 0.5 }} /> CONTACT DETAILS
+                      </div>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                          <Mail size={14} style={{ color: 'var(--text-tertiary)' }} />
+                          <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.9rem', fontWeight: 400, color: 'var(--text-primary)' }}>{office.contact.email}</span>
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                          <Phone size={14} style={{ color: 'var(--text-tertiary)' }} />
+                          <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.9rem', fontWeight: 400, color: 'var(--text-primary)' }}>{office.contact.phone}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <ThemedLuxuryLine />
+
+      {/* 4. CTA */}
+      <section className="theme-brown" style={{ position: 'relative', padding: '100px 0', background: 'radial-gradient(circle at 50% 100%, var(--bg-secondary) 0%, var(--bg-primary) 70%)', overflow: 'hidden' }}>
+        <ThemedGrain />
+        <ThemedGlowBlob top="30%" left="40%" w={400} opacity={0.03} blur={150} color="var(--accent-primary)" />
+        
+        <div className="dh-container" style={{ position: 'relative', zIndex: 10, textAlign: 'center' }}>
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} style={{ padding: '60px 40px', background: 'var(--card-bg)', border: '1px solid var(--border-light)', borderRadius: '24px', backdropFilter: 'blur(10px)', maxWidth: '900px', margin: '0 auto', boxShadow: '0 20px 40px rgba(0,0,0,0.04)' }}>
+            <h2 style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: 800, color: 'var(--text-primary)', lineHeight: 1.1, marginBottom: '1.5rem', letterSpacing: '-0.02em' }}>
+              START YOUR <span style={{ color: 'transparent', WebkitTextStroke: '1px var(--accent-primary)', backgroundImage: 'linear-gradient(90deg, var(--text-primary), var(--accent-primary))', WebkitBackgroundClip: 'text' }}>JOURNEY</span> <br />ACROSS OUR NETWORK
+            </h2>
+            <p style={{ fontFamily: "'Inter', sans-serif", maxWidth: '600px', margin: '0 auto 3rem', fontSize: '1.1rem', color: 'var(--text-secondary)', lineHeight: 1.6 }}>
+              Join forward-thinking enterprises that leverage our global expertise and innovative connectivity solutions to scale new heights.
+            </p>
+            <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <Link to="/contact" style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', padding: '16px 32px', background: 'var(--accent-primary)', color: '#fff', borderRadius: '100px', textDecoration: 'none', fontFamily: "'Outfit', sans-serif", fontSize: '13px', letterSpacing: '0.15em', fontWeight: 700, transition: 'all 0.3s' }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 10px 20px var(--accent-hover)'; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = 'none'; (e.currentTarget as HTMLElement).style.boxShadow = 'none'; }}>
+                PARTNER WITH US <ArrowUpRight size={16} />
+              </Link>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Global Network Video */}
-      <section className="py-12 md:py-24 bg-[#FCFAFA] relative border-b border-slate-100 px-4 md:px-0">
-        <motion.div
-           initial={{ opacity: 0, y: 40, scale: 0.98 }}
-           whileInView={{ opacity: 1, y: 0, scale: 1 }}
-           viewport={{ once: true, margin: "-100px" }}
-           transition={{ duration: 0.8, ease: "easeOut" }}
-           className="max-w-[90rem] mx-auto sm:px-6 lg:px-8"
-        >
-          <div className="relative w-full aspect-square sm:aspect-video lg:h-[75vh] 2xl:h-[80vh] rounded-3xl md:rounded-[3rem] overflow-hidden shadow-2xl shadow-indigo-900/10 border border-slate-200/50 bg-slate-900 group">
-            <img 
-              src="/global2.png"
-              alt="Global Network"
-              className="absolute inset-0 w-full h-full object-cover object-[center_30%] md:object-top transition-transform duration-1000 group-hover:scale-110"
-            />
-            {/* Subtle inner premium gradient over image */}
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent pointer-events-none" />
-          </div>
-        </motion.div>
-      </section>
-
-      {/* Featured Office Collection - Premium Detailed Listing */}
-      <section className="py-24 md:py-40 bg-white relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-           <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6 mb-16 md:mb-24">
-              <div className="h-px bg-slate-200 w-full md:flex-1 hidden md:block" />
-              <div className="text-center px-2 md:px-6">
-                 <h2 className="text-3xl md:text-4xl font-black text-slate-900 uppercase tracking-tighter">Office Collection</h2>
-                 <p className="text-amber-600 text-[10px] md:text-xs font-bold tracking-widest uppercase mt-2">Detailed Network Overview</p>
-              </div>
-              <div className="h-px bg-slate-200 w-full md:flex-1 hidden md:block" />
-           </div>
-
-           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32">
-              {officeDetails.map((office, index) => (
-                 <motion.div
-                    key={office.city}
-                    initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8, ease: "easeOut" }}
-                    className="flex flex-col group"
-                 >
-                    {/* Visual Container */}
-                    <div className="relative aspect-[16/10] sm:aspect-video rounded-3xl md:rounded-[3rem] overflow-hidden shadow-2xl shadow-slate-200 mb-8 md:mb-10">
-                       <img 
-                          src={office.image} 
-                          alt={office.city} 
-                          className="w-full h-full object-cover grayscale-0 group-hover:scale-110 transition-transform duration-1000"
-                       />
-                       {/* Overlay Gradient */}
-                       <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-60" />
-                       
-                       {/* Floating Stats or Tags */}
-                       <div className="absolute top-4 left-4 md:top-8 md:left-8">
-                           <div className="bg-white/90 backdrop-blur-md px-3 py-1.5 md:px-5 md:py-2 rounded-xl md:rounded-2xl shadow-xl flex items-center gap-2 md:gap-3 border border-white/50">
-                              <Target className="w-3 h-3 md:w-4 md:h-4 text-amber-500" />
-                              <span className="text-[9px] md:text-[10px] font-black text-slate-900 uppercase tracking-widest">{office.tagline}</span>
-                           </div>
-                       </div>
-
-                       <div className="absolute bottom-4 right-4 md:bottom-8 md:right-8">
-                           <Link to="/contact" className="w-10 h-10 md:w-14 md:h-14 bg-amber-500 rounded-full flex items-center justify-center text-white shadow-xl hover:bg-white hover:text-amber-500 transition-all duration-300">
-                              <ArrowUpRight className="w-5 h-5 md:w-6 md:h-6" />
-                           </Link>
-                       </div>
-                    </div>
-
-                    {/* Content Section */}
-                    <div className="px-2 md:px-4 flex flex-col h-full flex-grow">
-                        <div className="flex items-center gap-3 md:gap-4 mb-6">
-                           <div className="w-10 h-10 md:w-12 md:h-12 bg-slate-50 rounded-xl md:rounded-2xl flex items-center justify-center border border-slate-100 flex-shrink-0">
-                              <MapPin className="w-5 h-5 md:w-6 md:h-6 text-slate-800" />
-                           </div>
-                           <div className="min-w-0">
-                              <h3 className="text-3xl md:text-4xl font-black text-slate-900 leading-[1.1] mb-1 truncate md:overflow-visible md:whitespace-normal">{office.city}</h3>
-                              <p className="text-amber-600 font-bold text-[9px] md:text-[10px] uppercase tracking-[0.2em]">{office.label}</p>
-                           </div>
-                        </div>
-
-                        <p className="text-base md:text-lg text-slate-500 leading-relaxed font-medium mb-8 md:mb-10 flex-grow">
-                           {office.description}
-                        </p>
-
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 border-t border-slate-100 pt-8 mt-auto md:pt-10">
-                           <div className="space-y-3 md:space-y-4">
-                              <div className="text-[9px] md:text-[10px] font-black text-amber-600 uppercase tracking-[0.2em] mb-2 flex items-center gap-2">
-                                 <div className="w-1.5 h-1.5 rounded-full bg-amber-500 flex-shrink-0" /> Location
-                              </div>
-                              <div className="flex items-start h-full pb-2">
-                                 <span className="text-xs font-bold text-slate-900 leading-relaxed bg-slate-50/50 p-3 rounded-xl border border-slate-100 w-full h-full block break-words">{office.contact.address}</span>
-                              </div>
-                           </div>
-                           <div className="space-y-3 md:space-y-4">
-                              <div className="text-[9px] md:text-[10px] font-black text-amber-600 uppercase tracking-[0.2em] mb-2 flex items-center gap-2">
-                                 <div className="w-1.5 h-1.5 rounded-full bg-amber-500 flex-shrink-0" /> Contact Details
-                              </div>
-                              <div className="flex flex-col justify-center gap-3 bg-slate-50/50 p-3 rounded-xl border border-slate-100 h-full pb-2">
-                                 <div className="flex items-center gap-2 overflow-hidden">
-                                    <Mail className="w-3 h-3 text-slate-400 flex-shrink-0" />
-                                    <span className="text-xs font-bold text-slate-900 truncate">{office.contact.email}</span>
-                                 </div>
-                                 <div className="flex items-center gap-2">
-                                    <Phone className="w-3 h-3 text-slate-400 flex-shrink-0" />
-                                    <span className="text-xs font-bold text-slate-900">{office.contact.phone}</span>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                    </div>
-                 </motion.div>
-              ))}
-           </div>
-        </div>
-      </section>
-
-      {/* Futuristic Final CTA Section */}
-      <section className="py-24 md:py-40 bg-slate-950 relative overflow-hidden px-4 md:px-0">
-         {/* Particles background effect (simulated with CSS dots) */}
-         <div className="absolute inset-0 opacity-10" style={{
-            backgroundImage: 'radial-gradient(circle, #f59e0b 0.5px, transparent 0.5px)',
-            backgroundSize: '20px 20px'
-         }} />
-         
-         <div className="max-w-5xl mx-auto px-2 md:px-4 relative z-10 text-center">
-            <motion.div
-               initial={{ opacity: 0, y: 30 }}
-               whileInView={{ opacity: 1, y: 0 }}
-               viewport={{ once: true }}
-               transition={{ duration: 1 }}
-            >
-               <h2 className="text-4xl sm:text-5xl md:text-8xl font-black text-white tracking-tighter mb-8 md:mb-10 uppercase leading-[1.1] md:leading-[0.85] break-words">
-                  Start Your <span className="text-amber-500">Journey</span> <br className="hidden md:block"/>
-                  Across Our Network
-               </h2>
-               
-               <p className="text-slate-400 text-lg md:text-xl font-medium max-w-2xl mx-auto mb-12 md:mb-16 leading-relaxed px-2">
-                  Join forward-thinking enterprises that leverage our global expertise and innovative connectivity solutions to scale new heights.
-               </p>
-               
-               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-8 w-full max-w-md md:max-w-none mx-auto">
-                  <Link
-                    to="/contact"
-                    className="w-full sm:w-auto px-8 md:px-16 py-5 md:py-7 bg-amber-500 text-slate-900 rounded-[2rem] font-black text-[10px] md:text-xs uppercase tracking-[0.2em] hover:bg-white transition-all duration-500 shadow-2xl shadow-amber-500/30 text-center"
-                  >
-                    Partner With Us
-                  </Link>
-                  <Link
-                    to="/contact"
-                    className="w-full sm:w-auto px-8 md:px-16 py-5 md:py-7 bg-transparent text-white border-2 border-slate-700 rounded-[2rem] font-black text-[10px] md:text-xs uppercase tracking-[0.2em] hover:border-amber-500 hover:text-amber-500 transition-all duration-500 text-center"
-                  >
-                    Book Deep-Dive
-                  </Link>
-               </div>
-            </motion.div>
-         </div>
-      </section>
+      <style>{`
+        @media (max-width: 768px) {
+          .dh-responsive-grid { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
     </div>
   );
 };

@@ -108,18 +108,8 @@ import SeoHead from "./components/SeoHead";
 import { useLocation } from "react-router-dom";
 
 // Pages
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Services from "./pages/Services";
-import CaseStudies from "./pages/CaseStudies";
-import Contact from "./pages/Contact";
-import Blog from "./pages/Blog";
-import Courses from "./pages/Courses";
-import CourseDetail from "./pages/CourseDetail";
 import GetConsultation from "./pages/GetConsultation";
 import NotFound from "./pages/NotFound";
-import PrivacyPolicy from "./pages/privacypolicy";
-import TermsConditions from "./pages/termsnandcondition";
 import Index from "./pages/Index";
 import Policicue from "./pages/Policicue";
 import PolicicueProject from "./pages/PolicicueProject";
@@ -128,7 +118,6 @@ import FrdNutritionProject from "./pages/FrdNutritionProject";
 import HiTechHomesProject from "./pages/HiTechHomesProject";
 import SanjeevniHospitalProject from "./pages/SanjeevniHospitalProject";
 import RohtakShoeProject from "./pages/RohtakShoeProject";
-import ServiceDetail from "./pages/ServiceDetail";
 import LeadManagementProject from "./pages/LeadManagementProject";
 import WhatsAppAutomationProject from "./pages/WhatsAppAutomationProject";
 import BusinessProcessOptimizationProject from "./pages/BusinessProcessOptimizationProject";
@@ -138,68 +127,61 @@ import SevenDayLaunch from "./pages/SevenDayLaunch";
 import ThankYou from "./pages/ThankYou";
 import LandingPage from "./pages/LandingPage";
 import LandingPage1 from "./pages/LandingPage1";
-import BlogDetail from "./pages/BlogDetail";
 import Chatbot from "./components/Chatbot";
-import Careers from "./pages/Careers";
-import CareerDetail from "./pages/CareerDetail";
-import OurProducts from "./pages/OurProducts";
-import Newsletters from "./pages/Newsletters";
-import NewsletterDetail from "./pages/NewsletterDetail";
-import GlobalPresence from "./pages/GlobalPresence";
 import Links from "./pages/Links";
-import DummyHome from "./components/dummy/DummyHome";
-import DummyHome2 from "./pages/DummyHome2";
-import DH2Layout from "./components/dummyhome2/DH2Layout";
-import DH2About from "./pages/dummyhome2/DH2About";
-import DH2Services from "./pages/dummyhome2/DH2Services";
-import DH2Contact from "./pages/dummyhome2/DH2Contact";
-import DH2Consultation from "./pages/dummyhome2/DH2Consultation";
-import DH2CaseStudies from "./pages/dummyhome2/DH2CaseStudies";
-import DH2Blog from "./pages/dummyhome2/DH2Blog";
-import DH2Products from "./pages/dummyhome2/DH2Products";
-import DH2GlobalPresence from "./pages/dummyhome2/DH2GlobalPresence";
-import DH2Careers from "./pages/dummyhome2/DH2Careers";
-import DH2Newsletters from "./pages/dummyhome2/DH2Newsletters";
-import DH2Privacy from "./pages/dummyhome2/DH2Privacy";
-import DH2Terms from "./pages/dummyhome2/DH2Terms";
-import DH2ServiceDetail from "./pages/dummyhome2/DH2ServiceDetail";
-import DH2BlogDetail from "./pages/dummyhome2/DH2BlogDetail";
-import DH2NewsletterDetail from "./pages/dummyhome2/DH2NewsletterDetail";
-import DH2CareerDetail from "./pages/dummyhome2/DH2CareerDetail";
-import DH2Courses from "./pages/dummyhome2/DH2Courses";
-import DH2CourseDetail from "./pages/dummyhome2/DH2CourseDetail";
+import Home from "./components/Home";
+import Home2 from "./pages/Home2";
+import DH2Layout from "./components/home2/DH2Layout";
+import DH2About from "./pages/home2/DH2About";
+import DH2Services from "./pages/home2/DH2Services";
+import DH2Contact from "./pages/home2/DH2Contact";
+import DH2Consultation from "./pages/home2/DH2Consultation";
+import DH2CaseStudies from "./pages/home2/DH2CaseStudies";
+import DH2Blog from "./pages/home2/DH2Blog";
+import DH2Products from "./pages/home2/DH2Products";
+import DH2GlobalPresence from "./pages/home2/DH2GlobalPresence";
+import DH2Careers from "./pages/home2/DH2Careers";
+import DH2Newsletters from "./pages/home2/DH2Newsletters";
+import DH2Privacy from "./pages/home2/DH2Privacy";
+import DH2Terms from "./pages/home2/DH2Terms";
+import DH2ServiceDetail from "./pages/home2/DH2ServiceDetail";
+import DH2BlogDetail from "./pages/home2/DH2BlogDetail";
+import DH2NewsletterDetail from "./pages/home2/DH2NewsletterDetail";
+import DH2CareerDetail from "./pages/home2/DH2CareerDetail";
+import DH2Courses from "./pages/home2/DH2Courses";
+import DH2CourseDetail from "./pages/home2/DH2CourseDetail";
 
-// DummyHome Heritage Imports
-import DHLayout from "./pages/dummyhome/DHLayout";
-import DHAbout from "./pages/dummyhome/DHAbout";
-import DHServices from "./pages/dummyhome/DHServices";
-import DHContact from "./pages/dummyhome/DHContact";
-import DHProjects from "./pages/dummyhome/DHProjects";
-import DHBlog from "./pages/dummyhome/DHBlog";
-import DHBlogDetail from "./pages/dummyhome/DHBlogDetail";
-import DHNewsletterDetail from "./pages/dummyhome/DHNewsletterDetail";
-import DHProducts from "./pages/dummyhome/DHProducts";
-import DHGlobalPresence from "./pages/dummyhome/DHGlobalPresence";
-import DHCareers from "./pages/dummyhome/DHCareers";
-import DHNewsletters from "./pages/dummyhome/DHNewsletters";
-import DHCourses from "./pages/dummyhome/DHCourses";
-import DHCourseDetail from "./pages/dummyhome/DHCourseDetail";
-import DHCaseStudies from "./pages/dummyhome/DHCaseStudies";
-import DHCareerDetail from "./pages/dummyhome/DHCareerDetail";
-import DHServiceDetail from "./pages/dummyhome/DHServiceDetail";
-import DHProjectDetail from "./pages/dummyhome/DHProjectDetail";
-import DHPrivacy from "./pages/dummyhome/DHPrivacy";
-import DHTerms from "./pages/dummyhome/DHTerms";
+// Home Heritage Imports
+import MainLayout from "./pages/MainLayout";
+import About from "./pages/About";
+import Services from "./pages/Services";
+import Contact from "./pages/Contact";
+import Projects from "./pages/Projects";
+import Blog from "./pages/Blog";
+import BlogDetail from "./pages/BlogDetail";
+import NewsletterDetail from "./pages/NewsletterDetail";
+import OurProducts from "./pages/OurProducts";
+import GlobalPresence from "./pages/GlobalPresence";
+import Careers from "./pages/Careers";
+import Newsletters from "./pages/Newsletters";
+import Courses from "./pages/Courses";
+import CourseDetail from "./pages/CourseDetail";
+import CaseStudies from "./pages/CaseStudies";
+import CareerDetail from "./pages/CareerDetail";
+import ServiceDetail from "./pages/ServiceDetail";
+import ProjectDetail from "./pages/ProjectDetail";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsConditions from "./pages/TermsConditions";
 
-import DH2PolicicueProject from './pages/dummyhome2/DH2PolicicueProject';
-import DH2IndusProject from './pages/dummyhome2/DH2IndusProject';
-import DH2FrdNutritionProject from './pages/dummyhome2/DH2FrdNutritionProject';
-import DH2HiTechHomesProject from './pages/dummyhome2/DH2HiTechHomesProject';
-import DH2SanjeevniHospitalProject from './pages/dummyhome2/DH2SanjeevniHospitalProject';
-import DH2RohtakShoeProject from './pages/dummyhome2/DH2RohtakShoeProject';
-import DH2LeadManagementProject from './pages/dummyhome2/DH2LeadManagementProject';
-import DH2WhatsAppAutomationProject from './pages/dummyhome2/DH2WhatsAppAutomationProject';
-import DH2BusinessProcessOptimizationProject from './pages/dummyhome2/DH2BusinessProcessOptimizationProject';
+import DH2PolicicueProject from './pages/home2/DH2PolicicueProject';
+import DH2IndusProject from './pages/home2/DH2IndusProject';
+import DH2FrdNutritionProject from './pages/home2/DH2FrdNutritionProject';
+import DH2HiTechHomesProject from './pages/home2/DH2HiTechHomesProject';
+import DH2SanjeevniHospitalProject from './pages/home2/DH2SanjeevniHospitalProject';
+import DH2RohtakShoeProject from './pages/home2/DH2RohtakShoeProject';
+import DH2LeadManagementProject from './pages/home2/DH2LeadManagementProject';
+import DH2WhatsAppAutomationProject from './pages/home2/DH2WhatsAppAutomationProject';
+import DH2BusinessProcessOptimizationProject from './pages/home2/DH2BusinessProcessOptimizationProject';
 
 import { SeoProvider } from "./contexts/SeoContext";
 import { ThemeProvider } from "./components/theme-provider";
@@ -229,11 +211,11 @@ const AppLayout = () => {
 
   const pathForCheck = pathname.toLowerCase();
   
-  // Define all paths that belong to the new DHLayout
+  // Define all paths that belong to the new MainLayout
   const isDHRoot = ["/", "/about", "/services", "/projects", "/contact", "/blog", "/global-presence", "/careers", "/newsletters", "/courses", "/case-studies", "/get-consultation", "/privacy-policy", "/terms-and-conditions"].includes(pathForCheck);
   const isDHSub = pathForCheck.startsWith("/services/") || pathForCheck.startsWith("/projects/") || pathForCheck.startsWith("/blog/") || pathForCheck.startsWith("/careers/") || pathForCheck.startsWith("/newsletters/") || pathForCheck.startsWith("/courses/");
   const isDH1 = isDHRoot || isDHSub;
-  const isDH2 = pathForCheck.startsWith('/dummyhome2');
+  const isDH2 = pathForCheck.startsWith('/home2');
 
   // Pages where Navbar should be hidden completely
   const hideNavbar = pathForCheck === "/thank-you" || pathForCheck === "/business-setup" || pathForCheck === "/businesssetup1" || isDH1 || isDH2;
@@ -254,32 +236,32 @@ const AppLayout = () => {
       <main className="pt-0">
         <Routes>
           {/* New Main Website (formerly dummyhome) */}
-          <Route path="/" element={<DHLayout />}>
-            <Route index element={<DummyHome />} />
-            <Route path="about" element={<DHAbout />} />
-            <Route path="services" element={<DHServices />} />
-            <Route path="projects" element={<DHProjects />} />
-            <Route path="contact" element={<DHContact />} />
-            <Route path="blog" element={<DHBlog />} />
-            <Route path="blog/:slug" element={<DHBlogDetail />} />
-            <Route path="global-presence" element={<DHGlobalPresence />} />
-            <Route path="careers" element={<DHCareers />} />
-            <Route path="careers/:id" element={<DHCareerDetail />} />
-            <Route path="newsletters" element={<DHNewsletters />} />
-            <Route path="newsletters/:slug" element={<DHNewsletterDetail />} />
-            <Route path="courses" element={<DHCourses />} />
-            <Route path="courses/:id" element={<DHCourseDetail />} />
-            <Route path="case-studies" element={<DHCaseStudies />} />
-            <Route path="get-consultation" element={<DHContact />} />
-            <Route path="services/:slug" element={<DHServiceDetail />} />
-            <Route path="projects/:slug" element={<DHProjectDetail />} />
-            <Route path="privacy-policy" element={<DHPrivacy />} />
-            <Route path="terms-and-conditions" element={<DHTerms />} />
+          <Route path="/" element={<MainLayout />}>
+            <Route index element={<Home />} />
+            <Route path="about" element={<About />} />
+            <Route path="services" element={<Services />} />
+            <Route path="projects" element={<Projects />} />
+            <Route path="contact" element={<Contact />} />
+            <Route path="blog" element={<Blog />} />
+            <Route path="blog/:slug" element={<BlogDetail />} />
+            <Route path="global-presence" element={<GlobalPresence />} />
+            <Route path="careers" element={<Careers />} />
+            <Route path="careers/:id" element={<CareerDetail />} />
+            <Route path="newsletters" element={<Newsletters />} />
+            <Route path="newsletters/:slug" element={<NewsletterDetail />} />
+            <Route path="courses" element={<Courses />} />
+            <Route path="courses/:id" element={<CourseDetail />} />
+            <Route path="case-studies" element={<CaseStudies />} />
+            <Route path="get-consultation" element={<Contact />} />
+            <Route path="services/:slug" element={<ServiceDetail />} />
+            <Route path="projects/:slug" element={<ProjectDetail />} />
+            <Route path="privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="terms-and-conditions" element={<TermsConditions />} />
           </Route>
 
           {/* DH2 Sub-pages with shared layout */}
-          <Route path="/dummyhome2" element={<DH2Layout />}>
-            <Route index element={<DummyHome2 />} />
+          <Route path="/home2" element={<DH2Layout />}>
+            <Route index element={<Home2 />} />
             <Route path="about" element={<DH2About />} />
             <Route path="services" element={<DH2Services />} />
             <Route path="services/:id" element={<DH2ServiceDetail />} />
@@ -299,7 +281,7 @@ const AppLayout = () => {
             <Route path="privacy-policy" element={<DH2Privacy />} />
             <Route path="terms-and-conditions" element={<DH2Terms />} />
 
-            {/* DummyHome2 Project Routes */}
+            {/* Home2 Project Routes */}
             <Route path="our-products/policicue" element={<DH2PolicicueProject />} />
             <Route path="our-products/indus" element={<DH2IndusProject />} />
             <Route path="our-products/frd-nutrition" element={<DH2FrdNutritionProject />} />

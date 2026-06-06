@@ -1,26 +1,33 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import axios from 'axios';
-import RotatingText from '../components/RotatingText';
 import { API_BASE_URL } from '../utils/api';
-import {
-  Users,
-  Clock,
-  MapPin,
-  ArrowRight,
-  CheckCircle,
-  Briefcase,
-  Code,
-  Palette,
-  TrendingUp,
-  Search,
-  Building2,
-  Target,
-  Award,
-  Heart,
-} from 'lucide-react';
+import RotatingText from '../components/RotatingText';
+import { Users, Clock, MapPin, ArrowRight, CheckCircle, Briefcase, Code, Palette, TrendingUp, Search, Building2, Target } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import AnimatedSection from '../components/AnimatedSection';
+import '../components/Home.css';
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } }
+};
+const titleV = {
+  hidden: { y: 100, opacity: 0 },
+  visible: (i: number) => ({ y: 0, opacity: 1, transition: { duration: 1, ease: [.22, 1, .36, 1], delay: .2 + i * .12 } })
+};
+
+const Grain = () => (
+  <div style={{ position: 'absolute', inset: 0, zIndex: 1, opacity: 0.04, pointerEvents: 'none', backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`, backgroundSize: '200px' }} />
+);
+const GridBg = ({ size = 40, opacity = 0.06 }: any) => (
+  <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 1, opacity, backgroundImage: `linear-gradient(var(--text-tertiary) 1px, transparent 1px), linear-gradient(90deg, var(--text-tertiary) 1px, transparent 1px)`, backgroundSize: `${size}px ${size}px` }} />
+);
+const GlowBlob = ({ top, left, right, bottom, w = 300, opacity = 0.05, blur = 100 }: any) => (
+  <motion.div animate={{ scale: [1, 1.15, 1], opacity: [opacity, opacity * 1.4, opacity] }} transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }} style={{ position: 'absolute', width: w, height: w, borderRadius: '50%', background: 'var(--accent-primary)', filter: `blur(${blur}px)`, top, left, right, bottom, pointerEvents: 'none', zIndex: 1 }} />
+);
+const LuxuryLine = () => (
+  <div style={{ width: '100%', height: '1px', background: 'linear-gradient(to right, transparent, var(--accent-primary) 20%, var(--accent-light) 50%, var(--accent-primary) 80%, transparent)', opacity: 0.3 }} />
+);
 
 interface Job {
   _id: string;
@@ -34,6 +41,92 @@ interface Job {
   image?: string;
 }
 
+const departments = [
+  { id: 'all', name: 'All Departments', icon: <Briefcase size={16} /> },
+  { id: 'development', name: 'Development', icon: <Code size={16} /> },
+  { id: 'design', name: 'Design', icon: <Palette size={16} /> },
+  { id: 'marketing', name: 'Marketing', icon: <TrendingUp size={16} /> },
+  { id: 'business', name: 'Business', icon: <Building2 size={16} /> },
+];
+
+const getJobImage = (department: string, index: number) => {
+  const images: Record<string, string[]> = {
+    development: [
+      'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=300&fit=crop',
+    ],
+    design: [
+      'https://images.unsplash.com/photo-1626785774573-4b799315345d?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1541462608143-67571c6738dd?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1558655143-df239ec2c75f?w=400&h=300&fit=crop',
+    ],
+    marketing: [
+      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1533750516457-a7f992034fec?w=400&h=300&fit=crop',
+    ],
+    business: [
+      'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1556761175-59730532277c?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=300&fit=crop',
+    ],
+    analytics: [
+      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1543286386-2e659306cd6c?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1551434678-e076c223a692?w=400&h=300&fit=crop',
+    ],
+  };
+  const deptImages = images[department.toLowerCase()] || [
+    'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=400&h=300&fit=crop',
+    'https://images.unsplash.com/photo-1504384308090-c564bd248273?w=400&h=300&fit=crop',
+  ];
+  return deptImages[index % deptImages.length];
+};
+
+export const FALLBACK_JOBS = [
+  {
+    _id: "mern-developer",
+    title: "MERN Stack Developer",
+    department: "development",
+    location: "Gurugram / Remote",
+    type: "Full-Time",
+    experience: "1-3 years",
+    description: "We are looking for a MERN Stack Developer who is passionate about building scalable, high-performance web applications. You will be responsible for creating front-end interfaces using React and building robust backend services with Node.js, Express, and MongoDB. Familiarity with TypeScript and modern cloud hosting is highly preferred.",
+    status: "active"
+  },
+  {
+    _id: "ui-ux-designer",
+    title: "Lead UI/UX Designer",
+    department: "design",
+    location: "Remote",
+    type: "Full-Time",
+    experience: "3-5 years",
+    description: "Join us as a Lead UI/UX Designer and take ownership of our client and product design ecosystems. You will create high-fidelity prototypes, user journey maps, wireframes, and gorgeous visual layouts. Proficiency with Figma, design systems, and a strong eye for clean, minimalist premium aesthetics is required.",
+    status: "active"
+  },
+  {
+    _id: "marketing-specialist",
+    title: "Digital Marketing Specialist",
+    department: "marketing",
+    location: "Delhi NCR",
+    type: "Full-Time",
+    experience: "1-3 years",
+    description: "We are seeking a results-driven Digital Marketing Specialist to lead organic growth and paid acquisition campaigns. You will manage social media handles, design content marketing schedules, run high-ROI search/social ads, and perform detailed analytics tracking to boost conversions and sales pipelines.",
+    status: "active"
+  },
+  {
+    _id: "bd-associate",
+    title: "Business Development Associate",
+    department: "business",
+    location: "Gurugram / Hybrid",
+    type: "Full-Time",
+    experience: "0-2 years",
+    description: "We are looking for an energetic Business Development Associate to drive enterprise sales and client acquisition. You will research potential leads, coordinate product demos, manage CRM records, and assist with proposal writing and sales pitches to build strong, long-lasting client relationships.",
+    status: "active"
+  }
+];
+
 const Careers = () => {
   const [jobs, setJobs] = useState<Job[]>([]);
   const [loading, setLoading] = useState(true);
@@ -43,29 +136,19 @@ const Careers = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
 
-  const departments = [
-    { id: 'all', name: 'All Departments', icon: <Briefcase className="w-5 h-5" /> },
-    { id: 'development', name: 'Development', icon: <Code className="w-5 h-5" /> },
-    { id: 'design', name: 'Design', icon: <Palette className="w-5 h-5" /> },
-    { id: 'marketing', name: 'Marketing', icon: <TrendingUp className="w-5 h-5" /> },
-    { id: 'business', name: 'Business', icon: <Building2 className="w-5 h-5" /> },
-    { id: 'analytics', name: 'Analytics', icon: <Target className="w-5 h-5" /> }
-  ];
-
   useEffect(() => {
+    window.scrollTo(0, 0);
     const fetchJobs = async () => {
       try {
         setLoading(true);
         const response = await axios.get(`${API_BASE_URL}/jobs`);
-        setJobs(response.data.data || []);
+        const fetched = response.data.data || [];
+        setJobs(fetched.length > 0 ? fetched : FALLBACK_JOBS);
       } catch (error) {
         console.error('Error fetching jobs:', error);
-        setJobs([]);
-      } finally {
-        setLoading(false);
-      }
+        setJobs(FALLBACK_JOBS);
+      } finally { setLoading(false); }
     };
-
     fetchJobs();
   }, []);
 
@@ -79,427 +162,264 @@ const Careers = () => {
   });
 
   const getStatusBadge = (status: string) => {
-    const statusConfig: Record<string, { bg: string; text: string; label: string }> = {
-      active: { bg: 'bg-green-500', text: 'text-white', label: 'Active' },
-      filled: { bg: 'bg-gray-500', text: 'text-white', label: 'Filled' },
-      closed: { bg: 'bg-red-500', text: 'text-white', label: 'Closed' }
+    const cfg: Record<string, { bg: string; label: string }> = {
+      active: { bg: '#22c55e', label: 'Active' },
+      filled: { bg: '#6b7280', label: 'Filled' },
+      closed: { bg: '#ef4444', label: 'Closed' },
     };
-
-    const config = statusConfig[status.toLowerCase()] || statusConfig.active;
+    const c = cfg[status.toLowerCase()] || cfg.active;
     return (
-      <span className={`${config.bg} ${config.text} px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider shadow-lg`}>
-        {config.label}
+      <span style={{ background: c.bg, color: '#fff', padding: '3px 10px', borderRadius: '100px', fontSize: '0.55rem', fontWeight: 800, letterSpacing: '0.1em' }}>
+        {c.label.toUpperCase()}
       </span>
     );
   };
 
-  const getJobImage = (department: string) => {
-    const images: Record<string, string> = {
-      development: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&h=300&fit=crop',
-      design: 'https://images.unsplash.com/photo-1626785774573-4b799315345d?w=400&h=300&fit=crop',
-      marketing: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop',
-      business: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=300&fit=crop',
-      analytics: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop'
-    };
-    return images[department.toLowerCase()] || 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=400&h=300&fit=crop';
+  const selectStyle: React.CSSProperties = {
+    padding: '8px 16px', background: 'var(--card-bg)', border: '1px solid var(--border-faint)',
+    borderRadius: '8px', color: 'var(--text-primary)', fontSize: '0.8rem', fontWeight: 600, outline: 'none',
+    cursor: 'pointer', appearance: 'none' as any,
   };
 
   return (
-    <div className="pt-20">
-      {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-br from-slate-50 via-white to-slate-50 overflow-hidden">
-        {/* Background decoration */}
-        <div className="absolute inset-0 z-0">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-blue-100/30 blur-[100px] rounded-full" />
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-100/30 blur-[100px] rounded-full" />
-        </div>
+    <div className="dh-careers-page">
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection animation="fadeInUp" delay={0.2}>
-            <div className="text-center">
-              <motion.h1
-                className="text-3xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, ease: "easeOut" }}
-              >
-                Join Our Team of{" "}
-                <RotatingText
-                  words={[
-                    "Developers",
-                    "Designers",
-                    "Marketers",
-                    "Analysts",
-                    "Innovators",
-                    "Leaders"
-                  ]}
-                  interval={2500}
-                  className="text-amber-500"
+      {/* 1. HERO */}
+      <section className="theme-brown" style={{ minHeight: '60vh', display: 'flex', alignItems: 'center', background: 'var(--bg-primary)', overflow: 'hidden', position: 'relative', paddingTop: '80px' }}>
+        <Grain />
+        <GridBg size={50} opacity={0.05} />
+        <GlowBlob top="-5%" right="-5%" w={350} opacity={0.04} blur={120} />
+        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '2px', background: 'linear-gradient(to right, transparent, var(--accent-primary) 25%, var(--accent-light) 50%, var(--accent-primary) 75%, transparent)', zIndex: 10 }} />
+        <div className="dh-container" style={{ position: 'relative', zIndex: 10, textAlign: 'center' }}>
+          <motion.div initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.1 } } }}>
+            <motion.div variants={fadeUp} className="dh-label">JOIN OUR TEAM</motion.div>
+            <h1 className="dh-display" style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)', marginBottom: '1.5rem' }}>
+              <span className="dh-hero-line"><motion.span custom={0} variants={titleV}>JOIN OUR TEAM OF</motion.span></span>
+              <span className="dh-hero-line">
+                <motion.span custom={1} variants={titleV} style={{ color: 'var(--accent-primary)' }}>
+                  <RotatingText words={['DEVELOPERS', 'DESIGNERS', 'MARKETERS', 'ANALYSTS', 'INNOVATORS', 'LEADERS']} interval={2500} className="dh-display" />
+                </motion.span>
+              </span>
+            </h1>
+            <motion.p variants={fadeUp} className="dh-body" style={{ maxWidth: '600px', margin: '0 auto', fontSize: '1rem' }}>
+              Discover exciting career opportunities and be part of a team that's shaping the future of technology and innovation.
+            </motion.p>
+          </motion.div>
+        </div>
+      </section>
+
+      <LuxuryLine />
+
+      {/* 2. SEARCH & FILTER */}
+      <section className="theme-beige" style={{ padding: '1.5rem 0', background: 'var(--bg-primary)', borderBottom: '1px solid var(--border-faint)' }}>
+        <div className="dh-container">
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            {/* Search + Department Filters */}
+            <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center', flexWrap: 'wrap' }}>
+              <div style={{ position: 'relative', width: '100%', maxWidth: '300px' }}>
+                <Search size={16} style={{ position: 'absolute', left: 0, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-tertiary)' }} />
+                <input type="text" placeholder="SEARCH JOBS..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)}
+                  style={{ width: '100%', padding: '10px 0 10px 2rem', background: 'transparent', border: 'none', borderBottom: '1px solid var(--border-faint)', color: 'var(--text-primary)', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.1em', outline: 'none' }}
                 />
-              </motion.h1>
-              <motion.p
-                className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-              >
-                Discover exciting career opportunities and be part of a team that's
-                shaping the future of technology and innovation.
-              </motion.p>
+              </div>
+              <div style={{ display: 'flex', gap: '0.8rem', flexWrap: 'wrap' }}>
+                {departments.map(dept => (
+                  <button key={dept.id} onClick={() => setActiveDepartment(dept.id)}
+                    style={{
+                      display: 'flex', alignItems: 'center', gap: '6px', padding: '6px 14px',
+                      borderRadius: '8px', border: '1px solid var(--border-faint)', cursor: 'pointer',
+                      background: activeDepartment === dept.id ? 'var(--accent-primary)' : 'var(--card-bg)',
+                      color: activeDepartment === dept.id ? '#000' : 'var(--text-secondary)',
+                      fontSize: '0.7rem', fontWeight: 800, letterSpacing: '0.08em', transition: 'all 0.3s',
+                    }}
+                  >
+                    {dept.icon} {dept.name.toUpperCase()}
+                  </button>
+                ))}
+              </div>
             </div>
-          </AnimatedSection>
-        </div>
-      </section>
-
-      {/* Search and Filter */}
-      <section className="py-12 bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row gap-6 items-center justify-between">
-            <div className="relative flex-1 max-w-md">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-              <input
-                type="text"
-                placeholder="Search jobs..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
-              />
-            </div>
-            <div className="grid grid-cols-3 lg:flex lg:flex-wrap lg:justify-center gap-2 md:gap-4">
-              {departments.map((department) => (
-                <button
-                  key={department.id}
-                  onClick={() => setActiveDepartment(department.id)}
-                  className={`flex flex-col lg:flex-row items-center justify-center space-y-1 lg:space-y-0 lg:space-x-2 px-2 py-2.5 lg:px-4 lg:py-2 rounded-lg font-bold transition-all duration-300 ${activeDepartment === department.id
-                    ? 'bg-amber-500 text-white shadow-lg transform -translate-y-0.5'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                    }`}
-                >
-                  <div className="scale-75 lg:scale-100">{department.icon}</div>
-                  <span className="text-[10px] lg:text-sm tracking-tight lg:tracking-normal line-clamp-1">{department.name}</span>
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Additional Filters */}
-          <div className="mt-6 flex flex-wrap gap-4">
-            <div className="flex items-center gap-2">
-              <MapPin className="w-4 h-4 text-gray-500" />
-              <select
-                value={activeLocation}
-                onChange={(e) => setActiveLocation(e.target.value)}
-                className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent text-sm bg-white text-gray-900 font-medium"
-              >
-                <option value="all">All Locations</option>
-                <option value="remote">Remote</option>
-                <option value="delhi">Delhi</option>
-                <option value="mumbai">Mumbai</option>
-                <option value="bangalore">Bangalore</option>
-                <option value="hyderabad">Hyderabad</option>
-              </select>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <Briefcase className="w-4 h-4 text-gray-500" />
-              <select
-                value={activeType}
-                onChange={(e) => setActiveType(e.target.value)}
-                className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent text-sm bg-white text-gray-900 font-medium"
-              >
-                <option value="all">All Types</option>
-                <option value="full-time">Full-Time</option>
-                <option value="part-time">Part-Time</option>
-                <option value="contract">Contract</option>
-                <option value="internship">Internship</option>
-              </select>
+            {/* Location + Type Selects */}
+            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <MapPin size={14} style={{ color: 'var(--text-tertiary)' }} />
+                <select value={activeLocation} onChange={e => setActiveLocation(e.target.value)} style={selectStyle}>
+                  <option value="all">All Locations</option>
+                  <option value="remote">Remote</option>
+                  <option value="delhi">Delhi</option>
+                  <option value="mumbai">Mumbai</option>
+                  <option value="bangalore">Bangalore</option>
+                  <option value="hyderabad">Hyderabad</option>
+                </select>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <Briefcase size={14} style={{ color: 'var(--text-tertiary)' }} />
+                <select value={activeType} onChange={e => setActiveType(e.target.value)} style={selectStyle}>
+                  <option value="all">All Types</option>
+                  <option value="full-time">Full-Time</option>
+                  <option value="part-time">Part-Time</option>
+                  <option value="contract">Contract</option>
+                  <option value="internship">Internship</option>
+                </select>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Job Grid with Creative Light Background */}
-      <section className="relative py-24 overflow-hidden bg-[#fefaf6]">
-        {/* Creative Background Design */}
-        <div className="absolute inset-0 z-0 pointer-events-none">
-          {/* Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-amber-50/60 via-orange-50/40 to-transparent" />
-          
-          {/* Large Decorative Blobs */}
-          <div className="absolute top-20 right-10 w-[600px] h-[600px] bg-gradient-to-br from-amber-200/30 to-orange-200/30 blur-[120px] rounded-full" />
-          <div className="absolute bottom-20 left-10 w-[600px] h-[600px] bg-gradient-to-br from-orange-200/30 to-amber-200/30 blur-[120px] rounded-full" />
-          
-          {/* Subtle Dot Pattern */}
-          <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'radial-gradient(circle, #f59e0b 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
-        </div>
-
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* 3. JOB GRID */}
+      <section className="theme-beige" style={{ position: 'relative', padding: '60px 0 80px', background: 'var(--bg-primary)', overflow: 'hidden' }}>
+        <Grain />
+        <GridBg size={30} opacity={0.03} />
+        <GlowBlob bottom="10%" right="-60px" w={280} opacity={0.04} />
+        <div className="dh-container" style={{ position: 'relative', zIndex: 10 }}>
           {loading ? (
-            <div className="text-center py-12">
-              <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-amber-500"></div>
-              <p className="text-slate-900 mt-4 font-bold">Loading opportunities...</p>
+            <div style={{ textAlign: 'center', padding: '8rem 0' }}>
+              <div className="dh-label">LOADING OPPORTUNITIES...</div>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredJobs.map((job, index) => (
-                <AnimatedSection key={job._id} animation="fadeInUp" delay={0.4 + (index * 0.1)}>
-                  <div 
-                    className="group flex flex-col bg-white rounded-[2rem] shadow-lg hover:shadow-2xl overflow-hidden transition-all duration-500 hover:-translate-y-2 border border-slate-100 h-full cursor-pointer"
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }} className="dh-career-list">
+              {filteredJobs.map((job, i) => (
+                <motion.div key={job._id} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: i * 0.05 }}>
+                  <div
                     onClick={() => navigate(`/careers/${job._id}`)}
+                    style={{
+                      display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '2rem 0',
+                      borderBottom: '1px solid var(--border-faint)', cursor: 'pointer', transition: 'all 0.3s ease',
+                      position: 'relative'
+                    }}
+                    onMouseEnter={e => { e.currentTarget.style.paddingLeft = '1rem'; e.currentTarget.style.paddingRight = '1rem'; e.currentTarget.style.background = 'rgba(255,255,255,0.02)'; }}
+                    onMouseLeave={e => { e.currentTarget.style.paddingLeft = '0'; e.currentTarget.style.paddingRight = '0'; e.currentTarget.style.background = 'transparent'; }}
+                    className="dh-career-item"
                   >
-                    {/* Thumbnail Section */}
-                    <div className="relative h-44 overflow-hidden">
-                      <img
-                        src={job.image || getJobImage(job.department)}
-                        alt={job.title}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent" />
-
-                      {/* Department Overlay */}
-                      <div className="absolute top-4 left-4">
-                        <span className="bg-amber-500 text-white px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider shadow-lg">
-                          {job.department}
+                    {/* Left: Job Title and Meta */}
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', flex: 1 }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
+                        <span style={{ fontSize: '0.6rem', fontWeight: 800, color: 'var(--accent-primary)', letterSpacing: '0.1em', background: 'var(--accent-hover)', padding: '4px 8px', borderRadius: '4px' }}>
+                          {job.department.toUpperCase()}
                         </span>
-                      </div>
-
-                      {/* Status Badge Overlay */}
-                      <div className="absolute bottom-4 right-4">
                         {getStatusBadge(job.status)}
                       </div>
+                      <h3 className="dh-heading" style={{ fontSize: '1.6rem', margin: 0 }}>{job.title}</h3>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', marginTop: '0.3rem', flexWrap: 'wrap' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                          <MapPin size={12} style={{ color: 'var(--text-tertiary)' }} />
+                          <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-secondary)' }}>{job.location}</span>
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                          <Briefcase size={12} style={{ color: 'var(--text-tertiary)' }} />
+                          <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-secondary)' }}>{job.type}</span>
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }} className="dh-hide-mobile">
+                          <Clock size={12} style={{ color: 'var(--text-tertiary)' }} />
+                          <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-secondary)' }}>Experience: {job.experience}</span>
+                        </div>
+                      </div>
                     </div>
 
-                    {/* Body Content */}
-                    <div className="p-6 flex flex-col flex-grow">
-                      <h3 className="text-lg font-black text-slate-900 mb-2 leading-tight group-hover:text-amber-600 transition-colors h-14 line-clamp-2">
-                        {job.title}
-                      </h3>
-                      <p className="text-slate-500 text-[13px] leading-relaxed mb-4 line-clamp-2 h-10 font-medium">
-                        {job.description}
-                      </p>
-
-                      {/* Bento Info Grid */}
-                      <div className="grid grid-cols-2 gap-2 mb-4">
-                        <div className="bg-slate-50 p-2 rounded-xl flex items-center gap-2 border border-slate-100">
-                          <MapPin className="w-3.5 h-3.5 text-amber-500" />
-                          <span className="text-[10px] font-bold text-slate-600 uppercase tracking-tighter">{job.location}</span>
-                        </div>
-                        <div className="bg-slate-50 p-2 rounded-xl flex items-center gap-2 border border-slate-100">
-                          <Briefcase className="w-3.5 h-3.5 text-amber-500" />
-                          <span className="text-[10px] font-bold text-slate-600 uppercase tracking-tighter">{job.type}</span>
-                        </div>
-                      </div>
-
-                      {/* Experience Block */}
-                      <div className="flex items-center justify-between p-3 bg-amber-50 rounded-2xl border border-amber-100/50 mb-5">
-                        <div className="flex items-center gap-2">
-                          <Clock className="w-4 h-4 text-amber-600" />
-                          <span className="text-sm font-black text-amber-700">Experience: {job.experience}</span>
-                        </div>
-                      </div>
-
-                      {/* Mini Job Details Footer */}
-                      <div className="mt-auto space-y-4 pt-2 border-t border-slate-50">
-                        <div className="flex flex-wrap gap-x-4 gap-y-1 text-[11px] font-bold text-slate-400">
-                          <div className="flex items-center">
-                            <CheckCircle className="w-3 h-3 text-emerald-500 mr-1.5" />
-                            <span>Department: {job.department}</span>
-                          </div>
-                          <div className="flex items-center">
-                            <CheckCircle className="w-3 h-3 text-emerald-500 mr-1.5" />
-                            <span>Type: {job.type}</span>
-                          </div>
-                        </div>
-
-                        {/* Call to Actions */}
-                        <div className="flex gap-2">
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              navigate(`/careers/${job._id}`);
-                            }}
-                            className="flex-1 text-center py-2.5 px-3 rounded-xl text-[12px] font-black text-amber-600 border border-amber-100 hover:bg-amber-50 transition-all duration-300 uppercase tracking-wider"
-                          >
-                            View Details
-                          </button>
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              navigate(`/careers/${job._id}`);
-                            }}
-                            className="flex-[1.5] text-center py-2.5 px-3 rounded-xl text-[12px] font-black text-white bg-gradient-to-r from-amber-500 to-orange-600 hover:shadow-lg hover:shadow-amber-200 transition-all duration-300 uppercase tracking-wider flex items-center justify-center gap-1"
-                          >
-                            Apply Now
-                            <ArrowRight className="w-3 h-3" />
-                          </button>
-                        </div>
-                      </div>
+                    {/* Right: Apply Button */}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }} className="dh-career-action">
+                      <button onClick={e => { e.stopPropagation(); navigate(`/careers/${job._id}?apply=true`); }}
+                        style={{ padding: '12px 28px', borderRadius: '100px', border: '1px solid var(--accent-primary)', background: 'transparent', color: 'var(--text-primary)', fontSize: '0.75rem', fontWeight: 800, letterSpacing: '0.1em', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.3s' }}
+                        onMouseEnter={e => { e.currentTarget.style.background = 'var(--accent-primary)'; e.currentTarget.style.color = '#000'; }}
+                        onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--text-primary)'; }}
+                      >
+                        APPLY NOW <ArrowRight size={14} />
+                      </button>
                     </div>
                   </div>
-                </AnimatedSection>
+                </motion.div>
               ))}
             </div>
           )}
 
           {!loading && filteredJobs.length === 0 && (
-            <div className="text-center py-12">
-              <Briefcase className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-              <p className="text-slate-900 text-lg font-bold">
-                No jobs found matching your criteria.
-              </p>
+            <div style={{ textAlign: 'center', padding: '6rem 0' }}>
+              <Briefcase size={48} style={{ color: 'var(--text-tertiary)', margin: '0 auto 1rem' }} />
+              <p className="dh-heading" style={{ fontSize: '1.2rem' }}>No jobs found matching your criteria.</p>
             </div>
           )}
         </div>
       </section>
 
-      {/* Why Join Us Benefits - Creative Design */}
-      <section className="relative py-24 bg-gradient-to-br from-slate-50 via-white to-slate-50 overflow-hidden">
-        {/* Background Elements */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-20 right-10 w-72 h-72 bg-amber-100/40 rounded-full blur-[120px]" />
-          <div className="absolute bottom-20 left-10 w-72 h-72 bg-orange-100/40 rounded-full blur-[120px]" />
-        </div>
+      <LuxuryLine />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Header */}
-          <AnimatedSection animation="fadeInUp" delay={0.1}>
-            <div className="text-center mb-16">
-              <div className="inline-block mb-6">
-                <span className="px-4 py-2 bg-gradient-to-r from-amber-400 to-orange-500 text-white rounded-full text-xs font-black uppercase tracking-wider shadow-lg">
-                  Join Our Team
-                </span>
-              </div>
-              <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-6 tracking-tight">
-                Why Join Us?
-              </h2>
-              <p className="text-xl text-slate-600 max-w-3xl mx-auto font-medium leading-relaxed">
-                We provide a dynamic work environment with competitive benefits and endless growth opportunities.
-              </p>
+      {/* 4. WHY JOIN US */}
+      <section className="theme-brown" style={{ position: 'relative', padding: '80px 0', background: 'var(--bg-primary)', overflow: 'hidden' }}>
+        <Grain />
+        <GlowBlob top="20%" right="-5%" w={300} opacity={0.04} blur={100} />
+        <div className="dh-container" style={{ position: 'relative', zIndex: 10 }}>
+          <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+            <div className="dh-label">JOIN OUR TEAM</div>
+            <h2 className="dh-display" style={{ fontSize: '2.8rem', marginBottom: '1rem' }}>WHY JOIN <span style={{ color: 'var(--accent-primary)' }}>US?</span></h2>
+            <p className="dh-body" style={{ maxWidth: '600px', margin: '0 auto', fontSize: '0.95rem' }}>
+              We provide a dynamic work environment with competitive benefits and endless growth opportunities.
+            </p>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1.5rem' }} className="dh-responsive-grid">
+            {[
+              { num: '01', title: 'Career Growth', desc: 'Continuous learning and advancement opportunities with mentorship programs, skill development workshops, and clear career progression paths.' },
+              { num: '02', title: 'Great Team', desc: 'Work with talented and passionate professionals who are committed to excellence and collaborative success in every project.' },
+              { num: '03', title: 'Work-Life Balance', desc: 'Flexible hours and remote work options available to ensure you maintain a healthy balance between professional and personal life.' },
+              { num: '04', title: 'Competitive Pay', desc: 'Industry-leading compensation and benefits package including health insurance, performance bonuses, and comprehensive perks.' },
+            ].map((b, i) => (
+              <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: i * 0.1 }}
+                style={{
+                  padding: '2rem', background: 'var(--card-bg)', borderRadius: '16px',
+                  border: '1px solid var(--border-faint)', backdropFilter: 'blur(10px)',
+                  position: 'relative', overflow: 'hidden', transition: 'all 0.4s ease',
+                }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--accent-primary)'; e.currentTarget.style.transform = 'translateY(-3px)'; }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border-faint)'; e.currentTarget.style.transform = 'translateY(0)'; }}
+              >
+                <div style={{ position: 'absolute', top: 10, right: 16, fontSize: '3.5rem', fontFamily: "'Syne'", fontWeight: 800, color: 'var(--accent-primary)', opacity: 0.08, lineHeight: 1 }}>{b.num}</div>
+                <div style={{ width: 48, height: 4, background: 'var(--accent-primary)', borderRadius: '100px', marginBottom: '1.2rem' }} />
+                <h3 className="dh-heading" style={{ fontSize: '1.3rem', marginBottom: '0.8rem' }}>{b.title}</h3>
+                <p className="dh-body" style={{ fontSize: '0.85rem', lineHeight: 1.6 }}>{b.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <LuxuryLine />
+
+      {/* 5. CTA */}
+      <section className="theme-beige" style={{ position: 'relative', padding: '80px 0', background: 'var(--bg-primary)', overflow: 'hidden' }}>
+        <Grain />
+        <div className="dh-container" style={{ position: 'relative', zIndex: 10, textAlign: 'center' }}>
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
+            <h2 className="dh-display" style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', marginBottom: '1.5rem' }}>
+              LET'S BUILD YOUR <span style={{ color: 'var(--accent-primary)' }}>SUCCESS STORY</span> TOGETHER
+            </h2>
+            <p className="dh-body" style={{ maxWidth: '600px', margin: '0 auto 2.5rem', fontSize: '1rem' }}>
+              Partner with us to unlock growth opportunities, streamline operations, and achieve your business vision with expert guidance every step of the way.
+            </p>
+            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <button onClick={() => navigate('/contact')} className="dh-btn-fill">GET CONSULTATION</button>
+              <a href="tel:+919253625099" className="dh-btn-ghost" style={{ textDecoration: 'none' }}>TALK TO EXPERT</a>
             </div>
-          </AnimatedSection>
-
-          {/* Benefits Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Benefit 1 */}
-            <AnimatedSection animation="fadeInUp" delay={0.2}>
-              <div className="group relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-slate-100 overflow-hidden">
-                {/* Decorative Number */}
-                <div className="absolute top-4 right-4 text-[60px] font-black text-amber-500/30 leading-none">01</div>
-                
-                <div className="relative z-10">
-                  {/* Accent Bar */}
-                  <div className="w-16 h-1.5 bg-gradient-to-r from-amber-400 to-orange-500 rounded-full mb-6" />
-                  
-                  <h3 className="text-2xl font-black text-slate-900 mb-4 tracking-tight">
-                    Career Growth
-                  </h3>
-                  <p className="text-slate-600 text-base leading-relaxed font-medium">
-                    Continuous learning and advancement opportunities with mentorship programs, skill development workshops, and clear career progression paths.
-                  </p>
-                </div>
-
-                {/* Hover Effect Border */}
-                <div className="absolute inset-0 border-2 border-transparent group-hover:border-amber-500/20 rounded-3xl transition-all duration-500" />
-              </div>
-            </AnimatedSection>
-
-            {/* Benefit 2 */}
-            <AnimatedSection animation="fadeInUp" delay={0.3}>
-              <div className="group relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-slate-100 overflow-hidden">
-                {/* Decorative Number */}
-                <div className="absolute top-4 right-4 text-[60px] font-black text-amber-500/30 leading-none">02</div>
-                
-                <div className="relative z-10">
-                  {/* Accent Bar */}
-                  <div className="w-16 h-1.5 bg-gradient-to-r from-amber-400 to-orange-500 rounded-full mb-6" />
-                  
-                  <h3 className="text-2xl font-black text-slate-900 mb-4 tracking-tight">
-                    Great Team
-                  </h3>
-                  <p className="text-slate-600 text-base leading-relaxed font-medium">
-                    Work with talented and passionate professionals who are committed to excellence and collaborative success in every project.
-                  </p>
-                </div>
-
-                {/* Hover Effect Border */}
-                <div className="absolute inset-0 border-2 border-transparent group-hover:border-amber-500/20 rounded-3xl transition-all duration-500" />
-              </div>
-            </AnimatedSection>
-
-            {/* Benefit 3 */}
-            <AnimatedSection animation="fadeInUp" delay={0.4}>
-              <div className="group relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-slate-100 overflow-hidden">
-                {/* Decorative Number */}
-                <div className="absolute top-4 right-4 text-[60px] font-black text-amber-500/30 leading-none">03</div>
-                
-                <div className="relative z-10">
-                  {/* Accent Bar */}
-                  <div className="w-16 h-1.5 bg-gradient-to-r from-amber-400 to-orange-500 rounded-full mb-6" />
-                  
-                  <h3 className="text-2xl font-black text-slate-900 mb-4 tracking-tight">
-                    Work-Life Balance
-                  </h3>
-                  <p className="text-slate-600 text-base leading-relaxed font-medium">
-                    Flexible hours and remote work options available to ensure you maintain a healthy balance between professional and personal life.
-                  </p>
-                </div>
-
-                {/* Hover Effect Border */}
-                <div className="absolute inset-0 border-2 border-transparent group-hover:border-amber-500/20 rounded-3xl transition-all duration-500" />
-              </div>
-            </AnimatedSection>
-
-            {/* Benefit 4 */}
-            <AnimatedSection animation="fadeInUp" delay={0.5}>
-              <div className="group relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-slate-100 overflow-hidden">
-                {/* Decorative Number */}
-                <div className="absolute top-4 right-4 text-[60px] font-black text-amber-500/30 leading-none">04</div>
-                
-                <div className="relative z-10">
-                  {/* Accent Bar */}
-                  <div className="w-16 h-1.5 bg-gradient-to-r from-amber-400 to-orange-500 rounded-full mb-6" />
-                  
-                  <h3 className="text-2xl font-black text-slate-900 mb-4 tracking-tight">
-                    Competitive Pay
-                  </h3>
-                  <p className="text-slate-600 text-base leading-relaxed font-medium">
-                    Industry-leading compensation and benefits package including health insurance, performance bonuses, and comprehensive perks.
-                  </p>
-                </div>
-
-                {/* Hover Effect Border */}
-                <div className="absolute inset-0 border-2 border-transparent group-hover:border-amber-500/20 rounded-3xl transition-all duration-500" />
-              </div>
-            </AnimatedSection>
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="relative py-24 bg-white overflow-hidden">
-        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-black text-slate-900 mb-6 font-sans leading-tight">
-            Let's Build Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-500">Success Story</span> Together
-          </h2>
-          <p className="text-xl mb-10 text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            Partner with us to unlock growth opportunities, streamline operations, and achieve your business vision with expert guidance every step of the way.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button
-              onClick={() => navigate('/contact')}
-              className="px-8 py-4 bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-500 hover:to-orange-600 text-white rounded-xl font-black uppercase tracking-widest shadow-lg transition-all duration-300"
-            >
-              Get Consultation
-            </button>
-            <a
-              href="tel:+919253625099"
-              className="bg-slate-100 text-slate-900 border-2 border-slate-200 px-8 py-4 rounded-xl font-bold uppercase tracking-wider hover:bg-slate-200 hover:border-slate-300 transition-all duration-300"
-            >
-              Talk to Expert
-            </a>
-          </div>
-        </div>
-      </section>
+      <style>{`
+        @media (max-width: 768px) {
+          .dh-responsive-grid {
+            grid-template-columns: 1fr !important;
+            gap: 1.5rem !important;
+          }
+          .dh-career-item {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 1.5rem !important;
+            padding: 1.5rem 1rem !important;
+          }
+          .dh-hide-mobile {
+            display: none !important;
+          }
+        }
+      `}</style>
     </div>
   );
 };

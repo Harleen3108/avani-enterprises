@@ -1,543 +1,300 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Mail, Phone, MapPin, Send, MessageSquare, Globe, ArrowRight, ChevronDown, CheckCircle, ChevronUp } from 'lucide-react';
 import { getBackendUrl } from '../lib/api';
-import {
-  Mail,
-  Phone,
-  MapPin,
-  Clock,
-  Send,
-  MessageSquare,
-  ChevronUp
-} from 'lucide-react';
-import { motion } from "framer-motion";
-import AnimatedSection from '../components/AnimatedSection';
+import '../components/Home.css';
+
+const titleV = {
+  hidden: { y: 100, opacity: 0 },
+  visible: (i: number) => ({ y: 0, opacity: 1, transition: { duration: 1, ease: [.22, 1, .36, 1], delay: .2 + i * .12 } })
+};
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+};
+
+const services = [
+  "Web & App Development",
+  "SEO and Content Marketing",
+  "Social Media Marketing",
+  "AI Solutions",
+  "Podcast Production",
+  "Financial Consulting",
+  "Business Consultation",
+  "Business Loans",
+  "Business Insurance",
+  "Other"
+];
+
+const locations = [
+  { city: 'GURGAON', office: 'Headquarters', address: 'Tower B, 3rd Floor, Unitech Cyber Park, Sector 39, Gurugram, Haryana 122002', phone: '+91 9253625099' },
+  { city: 'MUMBAI', office: 'Operations Center', address: 'Third Floor, Vasudev Chamber, Teli Galli Cross Rd, Natwar Nagar, Andheri East, Mumbai, Maharashtra 400069', phone: '+91 9253625099' },
+  { city: 'ROHTAK', office: 'Innovation Hub', address: '106, First Floor, Agro Mall, Rohtak, Haryana', phone: '+91 9253625099' },
+  { city: 'AUSTRALIA', office: 'Global Outreach', address: 'Strategic Liaison, Australia', phone: '+91 9253625099' }
+];
+
+/* Shared visual helpers */
+const Grain = () => (
+  <div style={{ position: 'absolute', inset: 0, zIndex: 1, opacity: 0.04, pointerEvents: 'none', backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`, backgroundSize: '200px' }} />
+);
+const GridBg = ({ size = 40, opacity = 0.06 }: any) => (
+  <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 1, opacity, backgroundImage: `linear-gradient(var(--text-tertiary) 1px, transparent 1px), linear-gradient(90deg, var(--text-tertiary) 1px, transparent 1px)`, backgroundSize: `${size}px ${size}px` }} />
+);
+const GlowBlob = ({ top, left, right, bottom, w = 300, opacity = 0.05, blur = 100 }: any) => (
+  <motion.div animate={{ scale: [1, 1.15, 1], opacity: [opacity, opacity * 1.4, opacity] }} transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }} style={{ position: 'absolute', width: w, height: w, borderRadius: '50%', background: 'var(--accent-primary)', filter: `blur(${blur}px)`, top, left, right, bottom, pointerEvents: 'none', zIndex: 1 }} />
+);
+const LuxuryLine = () => (
+  <div style={{ width: '100%', height: '1px', background: 'linear-gradient(to right, transparent, var(--accent-primary) 20%, var(--accent-light) 50%, var(--accent-primary) 80%, transparent)', opacity: 0.3 }} />
+);
 
 const Contact = () => {
-  const whatsappNumber = '919253625099';
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    company: '',
-    service: [],
-    message: '',
-    otherService: ''
+  const [formData, setFormData] = useState({ 
+    name: '', email: '', phone: '', company: '', 
+    service: [] as string[], message: '', otherService: ''
   });
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [openFaq, setOpenFaq] = useState<number | null>(0);
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+  useEffect(() => { window.scrollTo(0, 0); }, []);
+
+  const handleInputChange = (e: any) => { 
+    const { name, value } = e.target; 
+    setFormData(prev => ({ ...prev, [name]: value })); 
   };
 
-  const handleServiceToggle = (service) => {
+  const handleServiceToggle = (service: string) => {
     setFormData(prev => {
-      const services = prev.service.includes(service)
+      const srvs = prev.service.includes(service)
         ? prev.service.filter(s => s !== service)
         : [...prev.service, service];
-      return { ...prev, service: services };
+      return { ...prev, service: srvs };
     });
   };
-
-  const handleSubmit = (e) => {
+  
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
-
-    const API_BASE = getBackendUrl();
-
     setIsLoading(true);
-
-    // prepare payload to match backend expectations
-    const payload = {
-      fullName: formData.name,
-      email: formData.email,
-      phoneNu: formData.phone,
-      service: formData.service.length > 0 ? (formData.service.length === 1 ? formData.service[0] : formData.service.join(', ')) : '',
-      companyName: formData.company,
-      projectDetails: formData.message,
-      otherService: formData.otherService
+    const API_BASE = getBackendUrl();
+    const payload = { 
+      fullName: formData.name, email: formData.email, phoneNu: formData.phone, 
+      service: formData.service.join(', '), companyName: formData.company, 
+      projectDetails: formData.message, otherService: formData.otherService
     };
-
-    // send to backend endpoint expected: POST /api/forms/submit
-    (async () => {
-      try {
-        const res = await fetch(`${API_BASE.replace(/\/$/, '')}/avani-form`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-        });
-
-        if (!res.ok) {
-          const text = await res.text().catch(() => '');
-          console.error('Backend error submitting form', res.status, text);
-          alert('Unable to submit form to server. Please try again later.');
-          return;
-        }
-
-        setIsSubmitted(true);
-      } catch (err) {
-        console.error('Submit error:', err);
-        alert('There was an error submitting the form. Please try again.');
-      } finally {
-        setIsLoading(false);
-      }
-    })();
+    try {
+      const res = await fetch(`${API_BASE.replace(/\/$/, '')}/avani-form`, { 
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) 
+      });
+      if (res.ok) setIsSubmitted(true);
+      else alert('Error submitting form. Please try again.');
+    } catch { 
+      alert('Network error. Please try again.'); 
+    } finally { setIsLoading(false); }
   };
 
-  const services = [
-    "Web & App Development",
-    "SEO and Content Marketing",
-    "Social Media Marketing",
-    "AI Solutions",
-    "Podcast Production",
-    "Financial Consulting",
-    "Business Consultation",
-    "Business Loans",
-    "Business Insurance",
-    "Other"
-  ];
-
-  const faqs = [
-    {
-      question: "What is your typical project timeline?",
-      answer: "Project timelines vary based on scope and complexity. Web development projects typically take 4-12 weeks, while marketing campaigns are ongoing. We'll provide a detailed timeline during our initial consultation."
-    },
-    {
-      question: "Do you provide ongoing support after project completion?",
-      answer: "Yes, we offer various support and maintenance packages to ensure your digital assets continue to perform optimally. We also provide training and documentation for your team."
-    },
-    {
-      question: "What makes Avani Enterprises different from other agencies?",
-      answer: "We combine technical expertise with strategic business understanding. Our team includes IIT/IIM alumni with proven track records in digital transformation. We focus on measurable ROI and long-term partnerships."
-    },
-    {
-      question: "How do you measure success for marketing campaigns?",
-      answer: "We establish clear KPIs at the beginning of each project, including traffic growth, conversion rates, lead generation, and ROI. We provide regular reports and optimize based on performance data."
-    }
-  ];
+  const inputStyle: React.CSSProperties = { width: '100%', padding: '1.2rem 0', background: 'transparent', border: 'none', borderBottom: '1px solid var(--border-light)', color: 'var(--text-primary)', fontSize: '0.95rem', fontWeight: 500, outline: 'none', transition: 'border-color 0.3s' };
+  const labelStyle: React.CSSProperties = { display: 'block', fontSize: '0.65rem', fontWeight: 800, color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: '0.2rem' };
 
   return (
-    <div className="pt-20">
-      <div className="bg-white">
-        {/* Hero Section - Full Page */}
-        <section className="relative pt-10 pb-24 md:pb-40 overflow-hidden">
-          {/* Curved Background Split */}
-          <div className="absolute top-0 right-0 w-[55%] h-full pointer-events-none hidden lg:block">
-            <div className="absolute inset-0 bg-gradient-to-br from-amber-100/40 via-orange-50/30 to-transparent rounded-l-[20rem] transform scale-x-110 translate-x-20" />
-          </div>
+    <div className="dh-contact-page">
+      
+      {/* 1. CINEMATIC HERO */}
+      <section className="theme-brown" style={{ minHeight: '70vh', display: 'flex', alignItems: 'center', background: 'var(--bg-primary)', overflow: 'hidden', position: 'relative', paddingTop: '80px' }}>
+        <Grain />
+        <GridBg size={50} opacity={0.06} />
+        <GlowBlob top="-5%" right="-5%" w={400} opacity={0.04} blur={120} />
+        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '2px', background: 'linear-gradient(to right, transparent, var(--accent-primary) 25%, var(--accent-light) 50%, var(--accent-primary) 75%, transparent)', zIndex: 10 }} />
+        <div className="dh-container" style={{ position: 'relative', zIndex: 10 }}>
+          <motion.div initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.1 } } }}>
+            <motion.div variants={fadeUp} className="dh-label">CONNECT WITH US</motion.div>
+            <h1 className="dh-display dh-hero-title">
+              <span className="dh-hero-line"><motion.span custom={0} variants={titleV}>LET'S START</motion.span></span>
+              <span className="dh-hero-line"><motion.span custom={1} variants={titleV} className="dh-hero-stroked">SOMETHING</motion.span></span>
+              <span className="dh-hero-line"><motion.span custom={2} variants={titleV} className="dh-hero-accent">EXTRAORDINARY.</motion.span></span>
+            </h1>
+            <motion.p variants={fadeUp} className="dh-body" style={{ maxWidth: '600px', fontSize: '1.2rem' }}>
+              We're ready to architect your next digital success story. Reach out for strategic <strong style={{ color: 'var(--accent-primary)' }}>consultation and technical oversight.</strong>
+            </motion.p>
+          </motion.div>
+        </div>
+      </section>
 
-          <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
-            <div className="max-w-4xl mx-auto text-center">
-              {/* Content - Centered */}
-              <span className="text-amber-600 font-bold text-sm tracking-wide mb-4 block">
-                We're Here to Help
-              </span>
+      <LuxuryLine />
 
-              <motion.h1
-                className="font-sans text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-slate-900 leading-[1.1] mb-8 tracking-tight"
-                initial="hidden"
-                animate="visible"
-                variants={{
-                  hidden: { opacity: 0 },
-                  visible: {
-                    opacity: 1,
-                    transition: {
-                      staggerChildren: 0.08,
-                      delayChildren: 0.3
-                    }
-                  }
-                }}
-              >
-                {"Let's Start a ".split("").map((char, index) => (
-                  <motion.span
-                    key={`char-1-${index}`}
-                    style={{ display: "inline-block" }}
-                    variants={{
-                      hidden: { opacity: 0, y: 20 },
-                      visible: { opacity: 1, y: 0 }
-                    }}
+      {/* 2. CONTACT SPLIT */}
+      <section className="theme-beige" style={{ position: 'relative', padding: '100px 0', background: 'var(--bg-primary)', overflow: 'hidden' }}>
+        <Grain />
+        <GridBg size={30} opacity={0.03} />
+        <GlowBlob bottom="10%" left="-60px" w={280} opacity={0.04} />
+        <div className="dh-container" style={{ position: 'relative', zIndex: 10 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1.8fr', gap: '6rem' }} className="dh-responsive-grid">
+            
+            {/* Left: Intel */}
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
+              <div className="dh-label" style={{ marginBottom: '3rem' }}>CHANNELS</div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
+                {[
+                  { icon: <Mail size={24} />, title: 'Electronic Mail', val: 'kp@avanienterprises.in', sub: 'For detailed proposals and RFP' },
+                  { icon: <Phone size={24} />, title: 'Direct Transmission', val: '+91 9253625099', sub: 'Available for immediate consultation' },
+                  { icon: <MessageSquare size={24} />, title: 'WhatsApp Hotline', val: '+91 9253625099', sub: 'Instant connection with lead strategists' }
+                ].map((item, i) => (
+                  <div key={i} style={{ display: 'flex', gap: '1.5rem', padding: '1.5rem', background: 'var(--card-bg)', borderRadius: '12px', border: '1px solid var(--border-faint)', backdropFilter: 'blur(10px)', transition: 'all 0.3s' }}
+                    onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--accent-primary)'; }}
+                    onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border-faint)'; }}
                   >
-                    {char === " " ? "\u00A0" : char}
-                  </motion.span>
+                    <div style={{ color: 'var(--accent-primary)', marginTop: '4px' }}>{item.icon}</div>
+                    <div>
+                      <h4 className="dh-heading" style={{ fontSize: '1.1rem', marginBottom: '0.4rem' }}>{item.title}</h4>
+                      <p style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '0.2rem' }}>{item.val}</p>
+                      <p className="dh-body" style={{ fontSize: '0.8rem' }}>{item.sub}</p>
+                    </div>
+                  </div>
                 ))}
-                <span className="text-amber-500 inline-block">
-                  {"Project.".split("").map((char, index) => (
-                    <motion.span
-                      key={`char-2-${index}`}
-                      style={{ display: "inline-block" }}
-                      variants={{
-                        hidden: { opacity: 0, y: 20 },
-                        visible: { opacity: 1, y: 0 }
-                      }}
+              </div>
+
+              <div style={{ marginTop: '4rem' }}>
+                <div className="dh-label" style={{ marginBottom: '2rem' }}>GLOBAL NODES</div>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }} className="dh-responsive-grid">
+                  {locations.map((loc, i) => (
+                    <div key={i} style={{ padding: '1.2rem', background: 'var(--card-bg)', borderRadius: '12px', border: '1px solid var(--border-faint)', transition: 'all 0.3s' }}
+                      onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--accent-primary)'; }}
+                      onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border-faint)'; }}
                     >
-                      {char === " " ? "\u00A0" : char}
-                    </motion.span>
+                      <h4 className="dh-heading" style={{ fontSize: '1rem', marginBottom: '0.5rem', color: 'var(--accent-primary)' }}>{loc.city}</h4>
+                      <div style={{ fontSize: '0.7rem', fontWeight: 800, color: 'var(--text-tertiary)', marginBottom: '0.5rem' }}>{loc.office.toUpperCase()}</div>
+                      <p className="dh-body" style={{ fontSize: '0.8rem', lineHeight: 1.6 }}>{loc.address}</p>
+                    </div>
                   ))}
-                </span>
-              </motion.h1>
-
-              <p className="text-lg md:text-xl text-slate-600 mb-10 leading-relaxed font-medium max-w-2xl mx-auto">
-                We combine strategic business understanding with technical excellence to deliver solutions that don't just work—they win.
-              </p>
-
-              <div className="flex flex-col gap-8 mb-16">
-                <div className="flex flex-row items-center justify-center gap-3 sm:gap-6">
-                  <a
-                    href="#contact-form"
-                    className="flex-1 sm:flex-none px-4 py-3 sm:px-10 sm:py-5 bg-amber-500 hover:bg-amber-600 text-white rounded-xl sm:rounded-2xl font-black text-[11px] sm:text-sm uppercase tracking-widest shadow-lg shadow-amber-500/20 active:scale-95 transition-all duration-300 text-center"
-                  >
-                    Send Message
-                  </a>
-                  <a
-                    href={`https://wa.me/${whatsappNumber}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 sm:flex-none px-4 py-3 sm:px-10 sm:py-5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl sm:rounded-2xl font-black text-[11px] sm:text-sm uppercase tracking-widest shadow-lg active:scale-95 transition-all duration-300 text-center"
-                  >
-                    WhatsApp
-                  </a>
-                </div>
-
-                <div className="flex items-center justify-center gap-3">
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-amber-500 flex items-center justify-center text-white font-bold text-sm">
-                      ⚡
-                    </div>
-                    <span className="text-xs sm:text-sm font-bold text-slate-600">Quick Response Guaranteed</span>
-                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </section>
+            </motion.div>
 
-        {/* Main Content Section */}
-        <section id="contact-form" className="relative -mt-20 md:-mt-24 z-20 pb-12 md:pb-24">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-
-              {/* Left Column: Business Card Inspired Info - Order changes on mobile */}
-              <div className="lg:col-span-5 space-y-6 order-2 lg:order-1">
-                <AnimatedSection animation="fadeInLeft" delay={0.3}>
-                  <div className="bg-white p-1 rounded-3xl shadow-2xl overflow-hidden group">
-                    <div className="bg-slate-900 p-10 rounded-[1.4rem] relative overflow-hidden">
-                      {/* Corner Accent */}
-                      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-r from-amber-400 to-orange-500 -translate-x-1/2 -translate-y-1/2 rotate-45" />
-
-                      <div className="relative z-10">
-                        <div className="flex items-center gap-3 mb-10">
-                          <div className="w-10 h-10 rounded-lg overflow-hidden flex-shrink-0 shadow-lg">
-                            <img src="/logo0.jpg" alt="Avani Enterprises" className="w-full h-full object-cover" />
-                          </div>
-                          <span className="text-white font-black uppercase tracking-[0.3em] text-sm">DIRECT SUPPORT</span>
-                        </div>
-
-                        <h2 className="text-3xl font-black text-white mb-2 tracking-tight">Get in Touch</h2>
-                        <p className="text-slate-400 text-sm font-bold uppercase tracking-widest mb-10">Available 24/7 for you</p>
-
-                        <div className="space-y-6">
-                          <a href="tel:+919253625099" className="flex items-center gap-4 group/item">
-                            <div className="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center text-amber-500 group-hover/item:bg-gradient-to-r from-amber-400 to-orange-500 group-hover/item:text-slate-900 transition-all">
-                              <Phone className="w-5 h-5" />
-                            </div>
-                            <div>
-                              <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Phone</p>
-                              <p className="text-white font-bold text-lg">+91 9253625099</p>
-                            </div>
-                          </a>
-
-                          <a href="mailto:kp@avanienterprises.in" className="flex items-center gap-4 group/item">
-                            <div className="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center text-amber-500 group-hover/item:bg-gradient-to-r from-amber-400 to-orange-500 group-hover/item:text-slate-900 transition-all">
-                              <Mail className="w-5 h-5" />
-                            </div>
-                            <div>
-                              <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Email</p>
-                              <p className="text-white font-bold text-lg">kp@avanienterprises.in</p>
-                            </div>
-                          </a>
-
-                          <a
-                            href="https://maps.app.goo.gl/h4wX8BCPpE3BCsg56?g_st=ipc"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-4 group/item"
-                          >
-                            <div className="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center text-amber-500 group-hover/item:bg-gradient-to-r from-amber-400 to-orange-500 group-hover/item:text-slate-900 transition-all">
-                              <MapPin className="w-5 h-5" />
-                            </div>
-                            <div className="space-y-4">
-                              <div>
-                                <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1">Gurgaon Office</p>
-                                <p className="text-white font-bold leading-tight text-[11px]">
-                                  Tower B, 3rd Floor, Unitech Cyber Park, Sector 39, Gurugram, Haryana 122002
-                                </p>
-                              </div>
-                              <div>
-                                <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1">Mumbai Office</p>
-                                <p className="text-white font-bold leading-tight text-[11px]">
-                                  Third Floor, Vasudev Chamber, 4RFX+QJ3, Teli Galli Cross Rd, Mogra Village, Mogra Pada, Natwar Nagar, Andheri East, Mumbai, Maharashtra 400069
-                                </p>
-                              </div>
-                              <div>
-                                <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1">Rohtak Office</p>
-                                <p className="text-white font-bold leading-tight text-[11px]">
-                                  106, First Floor, Agro Mall, Rohtak
-                                </p>
-                              </div>
-                              <div>
-                                <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1">Australia</p>
-                                <p className="text-white font-bold leading-tight text-[11px]">Australia</p>
-                              </div>
-                            </div>
-                          </a>
-                        </div>
-
-                        <div className="mt-12 flex gap-4">
-                          <a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noopener noreferrer" className="flex-1 py-4 bg-gradient-to-r from-amber-400 to-orange-500 text-slate-900 rounded-xl font-black text-[10px] uppercase tracking-widest text-center hover:bg-white transition-all">
-                            WhatsApp
-                          </a>
-                          <a href="tel:+919253625099" className="flex-1 py-4 border border-slate-700 text-white rounded-xl font-black text-[10px] uppercase tracking-widest text-center hover:bg-slate-800 transition-all">
-                            Call Expert
-                          </a>
-                        </div>
-                      </div>
+            {/* Right: Form */}
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: 0.2 }}>
+              <div style={{ background: 'var(--card-bg)', border: '1px solid var(--border-light)', borderRadius: '24px', padding: '3.5rem', backdropFilter: 'blur(10px)', position: 'relative', overflow: 'hidden' }}>
+                <div style={{ position: 'absolute', top: 0, right: 0, width: 60, height: 60, background: 'linear-gradient(135deg, transparent 50%, var(--accent-primary) 50%)', opacity: 0.06, borderRadius: '0 24px 0 0' }} />
+                <div className="dh-label">INQUIRY FORM</div>
+                <h2 className="dh-display" style={{ fontSize: '2.5rem', marginBottom: '3rem' }}>PROJECT BRIEF</h2>
+                
+                {isSubmitted ? (
+                  <div style={{ textAlign: 'center', padding: '4rem 0' }}>
+                    <div style={{ width: '80px', height: '80px', borderRadius: '50%', background: 'var(--accent-hover)', color: 'var(--accent-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 2.5rem' }}>
+                      <CheckCircle size={40} />
                     </div>
+                    <h3 className="dh-heading" style={{ fontSize: '2rem', marginBottom: '1rem' }}>TRANSMISSION RECEIVED</h3>
+                    <p className="dh-body">Our team will review your project details and contact you within 24 standard business hours.</p>
                   </div>
-                </AnimatedSection>
-
-                {/* Business Values */}
-                <AnimatedSection animation="fadeInUp" delay={0.4}>
-                  <div className="bg-amber-50/50 p-8 rounded-3xl border border-amber-100/50">
-                    <h4 className="text-slate-900 font-black text-lg mb-4">Why connect?</h4>
-                    <ul className="space-y-3">
-                      {['Free Consultation', 'Expert Strategy Session', 'Custom Tech Roadmap', 'Dedicated Account Manager'].map((text, i) => (
-                        <li key={i} className="flex items-center gap-3 text-slate-600 text-sm font-bold uppercase tracking-tight">
-                          <div className="w-1.5 h-1.5 bg-gradient-to-r from-amber-400 to-orange-500 rounded-full" /> {text}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </AnimatedSection>
-              </div>
-
-              {/* Right Column: Premium Compact Form - Order changes on mobile */}
-              <div className="lg:col-span-7 order-1 lg:order-2">
-                <AnimatedSection animation="fadeInRight" delay={0.2}>
-                  <div className="bg-white rounded-[1.5rem] shadow-2xl p-6 md:p-10 border border-slate-100 max-w-xl mx-auto lg:ml-auto lg:mr-0">
-                    <div className="mb-8">
-                      <span className="text-amber-500 font-black text-[10px] uppercase tracking-[0.3em] mb-2 block">Inquiry Form</span>
-                      <h3 className="text-3xl font-black text-slate-900 mb-3 tracking-tight">Send a Proposal</h3>
-                      <div className="w-12 h-1 bg-gradient-to-r from-amber-400 to-orange-500" />
+                ) : (
+                  <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2.5rem' }} className="dh-responsive-grid">
+                      <div><label style={labelStyle}>Full Name</label><input type="text" name="name" required value={formData.name} onChange={handleInputChange} placeholder="John Doe" style={inputStyle} /></div>
+                      <div><label style={labelStyle}>Work Email</label><input type="email" name="email" required value={formData.email} onChange={handleInputChange} placeholder="john@company.com" style={inputStyle} /></div>
                     </div>
-
-                    <form onSubmit={handleSubmit} className="space-y-6">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="group">
-                          <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1 block mb-1 transition-colors group-focus-within:text-amber-500">Full Name *</label>
-                          <input
-                            type="text" name="name" required value={formData.name} onChange={handleInputChange}
-                            className="w-full px-4 py-3 bg-amber-50/20 border-b border-amber-100 focus:border-amber-500 text-slate-900 font-bold transition-all outline-none text-sm"
-                            placeholder="Your Name"
-                          />
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2.5rem' }} className="dh-responsive-grid">
+                      <div><label style={labelStyle}>Phone Number</label><input type="tel" name="phone" required value={formData.phone} onChange={handleInputChange} placeholder="+91 00000 00000" style={inputStyle} /></div>
+                      <div><label style={labelStyle}>Company Name</label><input type="text" name="company" value={formData.company} onChange={handleInputChange} placeholder="Acme Corp" style={inputStyle} /></div>
+                    </div>
+                    
+                    <div>
+                      <label style={labelStyle}>Project Category</label>
+                      <div style={{ position: 'relative' }}>
+                        <div onClick={() => setIsDropdownOpen(!isDropdownOpen)} style={{ ...inputStyle, cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 0' }}>
+                          <span style={{ opacity: formData.service.length === 0 ? 0.4 : 1 }}>
+                            {formData.service.length === 0 ? "Select Services" : `${formData.service.length} Selected`}
+                          </span>
+                          <ChevronUp size={16} style={{ transform: isDropdownOpen ? 'none' : 'rotate(180deg)', transition: 'transform 0.3s', color: 'var(--accent-primary)' }} />
                         </div>
-                        <div className="group">
-                          <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1 block mb-1 group-focus-within:text-amber-500">Work Email *</label>
-                          <input
-                            type="email" name="email" required value={formData.email} onChange={handleInputChange}
-                            className="w-full px-4 py-3 bg-amber-50/20 border-b border-amber-100 focus:border-amber-500 text-slate-900 font-bold transition-all outline-none text-sm"
-                            placeholder="Email Address"
-                          />
-                        </div>
-                      </div>
-
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="group">
-                          <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1 block mb-1 group-focus-within:text-amber-500">Mobile Phone</label>
-                          <input
-                            type="tel" name="phone" value={formData.phone} onChange={handleInputChange}
-                            className="w-full px-4 py-3 bg-amber-50/20 border-b border-amber-100 focus:border-amber-500 text-slate-900 font-bold transition-all outline-none text-sm"
-                            placeholder="+91"
-                          />
-                        </div>
-                        <div className="group">
-                          <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1 block mb-1 group-focus-within:text-amber-500">Organization</label>
-                          <input
-                            type="text" name="company" value={formData.company} onChange={handleInputChange}
-                            className="w-full px-4 py-3 bg-amber-50/20 border-b border-amber-100 focus:border-amber-500 text-slate-900 font-bold transition-all outline-none text-sm"
-                            placeholder="Company Name"
-                          />
-                        </div>
-                      </div>
-
-                      <div className="group">
-                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1 block mb-1 group-focus-within:text-amber-500">Project Category</label>
-                        <div className="relative">
-                          <button
-                            type="button" onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                            className="w-full px-4 py-3 bg-amber-50/20 border-b border-amber-100 text-left flex justify-between items-center outline-none transition-all focus:border-amber-500"
-                          >
-                            <span className={`font-bold text-sm ${formData.service.length === 0 ? 'text-slate-400' : 'text-slate-900'}`}>
-                              {formData.service.length === 0 ? "Select Services" : `${formData.service.length} Selected`}
-                            </span>
-                            <ChevronUp className={`w-4 h-4 transition-transform duration-300 ${isDropdownOpen ? '' : 'rotate-180'}`} />
-                          </button>
+                        <AnimatePresence>
                           {isDropdownOpen && (
-                            <div className="absolute z-50 mt-2 w-full bg-white shadow-2xl rounded-xl py-2 border border-slate-100 max-h-48 overflow-auto">
-                              {services.map((service) => (
-                                <div key={service} onClick={() => handleServiceToggle(service)} className="px-4 py-2 hover:bg-amber-50 cursor-pointer flex items-center gap-3">
-                                  <input type="checkbox" checked={formData.service.includes(service)} readOnly className="w-3.5 h-3.5 text-amber-500 focus:ring-amber-500 border-slate-300 rounded" />
-                                  <span className="text-xs font-bold text-slate-700">{service}</span>
+                            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }}
+                              style={{ position: 'absolute', zIndex: 10, top: '100%', left: 0, width: '100%', background: 'var(--bg-primary)', borderRadius: '16px', border: '1px solid var(--border-faint)', marginTop: '0.5rem', maxHeight: '250px', overflowY: 'auto', padding: '1rem' }}
+                            >
+                              {services.map(s => (
+                                <div key={s} onClick={() => handleServiceToggle(s)} style={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '0.8rem', cursor: 'pointer', borderBottom: '1px solid var(--border-faint)', transition: 'background 0.2s' }}
+                                  onMouseEnter={e => { e.currentTarget.style.background = 'var(--accent-hover)'; }}
+                                  onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; }}
+                                >
+                                  <div style={{ width: '16px', height: '16px', border: '1px solid var(--accent-primary)', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: formData.service.includes(s) ? 'var(--accent-primary)' : 'transparent' }}>
+                                    {formData.service.includes(s) && <CheckCircle size={12} color="#000" />}
+                                  </div>
+                                  <span style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-primary)' }}>{s}</span>
                                 </div>
                               ))}
-                            </div>
+                            </motion.div>
                           )}
-                        </div>
+                        </AnimatePresence>
                       </div>
-
-                      {formData.service.includes("Other") && (
-                        <div className="group">
-                          <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1 block mb-1 group-focus-within:text-amber-500">Please Specify Other Service</label>
-                          <input
-                            type="text" name="otherService" value={formData.otherService} onChange={handleInputChange}
-                            className="w-full px-4 py-3 bg-amber-50/20 border-b border-amber-100 focus:border-amber-500 text-slate-900 font-bold transition-all outline-none text-sm"
-                            placeholder="Describe your service need"
-                          />
-                        </div>
-                      )}
-
-                      <div className="group">
-                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1 block mb-1 group-focus-within:text-amber-500">Message *</label>
-                        <textarea
-                          name="message" required value={formData.message} onChange={handleInputChange} rows={2}
-                          className="w-full px-4 py-3 bg-slate-50 border-b border-slate-200 focus:border-amber-500 text-slate-900 font-bold transition-all outline-none resize-none text-sm"
-                          placeholder="Detail your requirements..."
-                        />
-                      </div>
-
-                      <button
-                        type="submit" disabled={isLoading}
-                        className="w-full py-4 bg-gradient-to-r from-amber-400 to-orange-500 text-slate-900 rounded-xl font-black text-[10px] uppercase tracking-[0.3em] hover:bg-gradient-to-r from-amber-400 to-orange-500 hover:brightness-110 transition-all flex items-center justify-center gap-2 shadow-lg shadow-yellow-200/50"
-                      >
-                        {isLoading ? (
-                          <div className="w-4 h-4 border-2 border-slate-900/10 border-t-slate-900 rounded-full animate-spin" />
-                        ) : (
-                          <>Submit <Send className="w-3.5 h-3.5" /></>
-                        )}
-                      </button>
-
-                      {isSubmitted && (
-                        <div className="p-3 bg-emerald-50 text-emerald-700 rounded-lg font-bold text-center text-[11px] border border-emerald-100 uppercase tracking-wider">
-                          Form submitted successfully!
-                        </div>
-                      )}
-                    </form>
-                  </div>
-                </AnimatedSection>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Immersive Map Section */}
-        <section className="relative h-[400px] md:h-[550px] w-full mt-0">
-          <div className="absolute inset-0">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3508.1803296113567!2d77.0552583!3d28.4439799!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d19493189b131%3A0x36a763d6ab00e2cb!2sAKASA%20Coworking%20Unitech%20Cyber%20Park!5e0!3m2!1sen!2sin!4v1768455888190!5m2!1sen!2sin"
-              width="100%" height="100%" style={{ border: 0 }} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade" className="w-full h-full"
-            />
-          </div>
-
-          {/* Floating Location Card - Responsive */}
-          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-end justify-end md:items-center md:justify-start pb-2 md:pb-0 pointer-events-none">
-            <AnimatedSection animation="fadeInUp" className="pointer-events-auto w-auto">
-              <div className="bg-white/95 backdrop-blur-md p-3 md:p-10 rounded-xl md:rounded-[2rem] shadow-2xl border border-white/50 max-w-[190px] md:max-w-sm">
-                <div className="w-6 h-6 md:w-12 md:h-12 bg-slate-900 text-amber-500 rounded-lg md:rounded-xl flex items-center justify-center mb-2 md:mb-6">
-                  <MapPin className="w-4 h-4 md:w-6 h-6" />
-                </div>
-                <h3 className="text-sm md:text-2xl font-black text-slate-900 mb-1 md:mb-4 tracking-tight">Visit our Office</h3>
-                <p className="text-slate-600 font-bold text-[10px] md:text-sm leading-relaxed mb-3 md:mb-8">
-                  Unitech Cyber Park, Tower B, <br />
-                  Sector 39, Gurugram, Haryana 122002
-                </p>
-                <div className="pt-3 md:pt-6 border-t border-slate-100 flex items-center gap-3 md:gap-4">
-                  <div className="w-6 h-6 md:w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-amber-500 shadow-sm"><Phone className="w-2.5 h-2.5 md:w-4 h-4" /></div>
-                  <span className="text-slate-900 font-black text-[10px] md:text-sm tracking-tight">+91 9253625099</span>
-                </div>
-              </div>
-            </AnimatedSection>
-          </div>
-        </section>
-
-        {/* FAQ Section - Refined Light Grid Accordion */}
-        <section className="pt-12 pb-20 md:py-32 bg-white relative overflow-hidden">
-          {/* Subtle Light Background Pattern */}
-          <div className="absolute inset-0 opacity-[0.05] bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]" />
-
-          {/* Decorative Light Geometric Accents */}
-          <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-slate-200/40 rounded-full -translate-x-1/2 -translate-y-1/2 blur-[100px] animate-pulse" />
-          <div className="absolute bottom-0 right-0 w-400 h-400 bg-white rounded-full translate-x-1/4 translate-y-1/4 blur-[80px]" />
-
-          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-20">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white rounded-full border border-slate-200 mb-6 shadow-sm">
-                <span className="w-2 h-2 bg-gradient-to-r from-amber-400 to-orange-500 rounded-full" />
-                <span className="text-slate-400 font-black text-[10px] uppercase tracking-[0.3em]">Knowledge Base</span>
-              </div>
-              <h2 className="text-4xl md:text-6xl font-black text-slate-900 mb-6 tracking-tight">Common Queries</h2>
-              <div className="w-20 h-1 bg-gradient-to-r from-amber-400 to-orange-500 mx-auto rounded-full" />
-            </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
-              {faqs.map((faq, index) => (
-                <AnimatedSection key={index} animation="fadeInUp" delay={index * 0.1}>
-                  <div
-                    className={`group rounded-[2rem] transition-all duration-500 border ${openFaq === index
-                      ? 'bg-white border-amber-500 shadow-2xl shadow-slate-200/50'
-                      : 'bg-white border-slate-100 font-medium hover:border-slate-200 shadow-sm'
-                      }`}
-                  >
-                    <button
-                      onClick={() => setOpenFaq(openFaq === index ? null : index)}
-                      className="w-full flex items-center justify-between p-8 text-left"
-                    >
-                      <span className={`text-lg font-bold transition-colors ${openFaq === index ? 'text-slate-900' : 'text-slate-600'}`}>
-                        {faq.question}
-                      </span>
-                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all ${openFaq === index ? 'bg-gradient-to-r from-amber-400 to-orange-500 text-slate-900 shadow-lg shadow-yellow-100' : 'bg-slate-50 text-slate-400 group-hover:bg-white group-hover:shadow-md'}`}>
-                        <ChevronUp className={`w-5 h-5 transition-transform duration-300 ${openFaq === index ? 'rotate-0' : 'rotate-180'}`} />
-                      </div>
-                    </button>
-                    <div
-                      className={`transition-all duration-500 ease-in-out px-8 overflow-hidden ${openFaq === index ? 'max-h-60 pb-8 opacity-100' : 'max-h-0 opacity-0'
-                        }`}
-                    >
-                      <p className="text-slate-500 font-medium text-sm leading-relaxed pt-5 border-t border-slate-50 text-justify">
-                        {faq.answer}
-                      </p>
                     </div>
-                  </div>
-                </AnimatedSection>
-              ))}
-            </div>
 
-            {/* FAQ Footer CTA */}
-            <div className="mt-12 md:mt-20 text-center">
-              <p className="text-slate-400 font-bold mb-6">Still have questions?</p>
-              <button
-                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                className="px-8 py-4 rounded-xl bg-black text-white font-black uppercase text-xs tracking-[0.2em] hover:bg-slate-800 transition-all shadow-xl shadow-slate-200"
-              >
-                Contact Support
-              </button>
-            </div>
+                    {formData.service.includes("Other") && (
+                      <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }}>
+                        <label style={labelStyle}>Specify Other Service</label>
+                        <input type="text" name="otherService" value={formData.otherService} onChange={handleInputChange} placeholder="E.g. Branding, UI/UX Audit" style={inputStyle} />
+                      </motion.div>
+                    )}
+
+                    <div>
+                      <label style={labelStyle}>Project Vision</label>
+                      <textarea name="message" required value={formData.message} onChange={handleInputChange} placeholder="Tell us about your objectives..." rows={4} style={{ ...inputStyle, resize: 'none' }} />
+                    </div>
+                    <button type="submit" disabled={isLoading} className="dh-btn-fill" style={{ width: '100%', justifyContent: 'center', height: '70px' }}>
+                      {isLoading ? 'INITIATING...' : <><Send size={18} /> SEND PROPOSAL</>}
+                    </button>
+                  </form>
+                )}
+              </div>
+            </motion.div>
+
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
+
+      <LuxuryLine />
+
+      {/* 3. IMMERSIVE MAP */}
+      <section style={{ height: '500px', width: '100%', borderTop: '1px solid var(--border-faint)', borderBottom: '1px solid var(--border-faint)', filter: 'grayscale(1) contrast(1.1) invert(0.9) opacity(0.8)' }}>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3508.1803296113567!2d77.0552583!3d28.4439799!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d19493189b131%3A0x36a763d6ab00e2cb!2sAKASA%20Coworking%20Unitech%20Cyber%20Park!5e0!3m2!1sen!2sin!4v1768455888190!5m2!1sen!2sin"
+          width="100%" height="100%" style={{ border: 0 }} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade"
+        />
+      </section>
+
+      {/* 4. FAQ SECTION */}
+      <section className="theme-brown" style={{ position: 'relative', padding: '100px 0', background: 'var(--bg-primary)', overflow: 'hidden' }}>
+        <Grain />
+        <GlowBlob top="20%" right="-5%" w={300} opacity={0.04} blur={100} />
+        <div className="dh-container" style={{ position: 'relative', zIndex: 10 }}>
+          <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+            <div className="dh-label">CLARIFICATIONS</div>
+            <h2 className="dh-display" style={{ fontSize: '3.5rem' }}>COMMONLY ASKED</h2>
+          </div>
+
+          <div style={{ maxWidth: '900px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            {[
+              { q: 'What is your typical engagement timeline?', a: 'Standard enterprise projects range from 8 to 16 weeks depending on complexity. We provide a detailed architectural blueprint before kickoff.' },
+              { q: 'Do you offer post-launch support?', a: 'Yes, we provide 24/7 technical oversight and maintenance packages to ensure continuous performance and security.' },
+              { q: 'What makes Avani Enterprises different?', a: 'We combine IIT/IIM grade strategic oversight with high-performance technical engineering. Our focus is on long-term scalability and distinct digital identity.' },
+              { q: 'How do you handle data security?', a: 'We implement industry-standard encryption and high-security protocols in every digital solution we architect.' }
+            ].map((faq, i) => (
+              <motion.div key={i} 
+                style={{ padding: '2rem', cursor: 'pointer', background: 'var(--card-bg)', borderRadius: '16px', border: `1px solid ${openFaq === i ? 'var(--accent-primary)' : 'var(--border-faint)'}`, backdropFilter: 'blur(10px)', transition: 'all 0.3s' }} 
+                onClick={() => setOpenFaq(openFaq === i ? null : i)}
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <h4 className="dh-heading" style={{ fontSize: '1.2rem' }}>{faq.q}</h4>
+                  <ChevronDown size={20} style={{ transform: openFaq === i ? 'rotate(180deg)' : 'none', transition: 'transform 0.4s', color: 'var(--accent-primary)', flexShrink: 0, marginLeft: '1rem' }} />
+                </div>
+                <div style={{ maxHeight: openFaq === i ? '200px' : '0', overflow: 'hidden', transition: 'all 0.5s ease' }}>
+                  <p className="dh-body" style={{ marginTop: '1.5rem' }}>{faq.a}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
     </div>
   );
 };

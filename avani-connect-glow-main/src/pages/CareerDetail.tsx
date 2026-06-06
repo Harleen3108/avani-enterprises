@@ -1,30 +1,51 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
-import { useParams, useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
-import {
-  Briefcase,
-  MapPin,
-  Building2,
-  Clock,
-  Calendar,
-  CheckCircle,
-  ArrowLeft,
-  Upload,
-  Loader2,
-  XCircle,
-} from "lucide-react";
-import { Helmet } from "react-helmet-async";
-import { API_BASE_URL } from "../utils/api";
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import axios from 'axios';
+import { API_BASE_URL } from '../utils/api';
+import { FALLBACK_JOBS } from './Careers';
+import { Briefcase, MapPin, Clock, ArrowRight, CheckCircle, Mail, Phone, Upload, Loader2, X } from 'lucide-react';
+import '../components/Home.css';
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } }
+};
+
+const Grain = () => (
+  <div style={{ position: 'absolute', inset: 0, zIndex: 1, opacity: 0.04, pointerEvents: 'none', backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`, backgroundSize: '200px' }} />
+);
+const GridBg = ({ size = 40, opacity = 0.06 }: any) => (
+  <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 1, opacity, backgroundImage: `linear-gradient(var(--text-tertiary) 1px, transparent 1px), linear-gradient(90deg, var(--text-tertiary) 1px, transparent 1px)`, backgroundSize: `${size}px ${size}px` }} />
+);
+const GlowBlob = ({ top, left, right, bottom, w = 300, opacity = 0.05, blur = 100 }: any) => (
+  <motion.div animate={{ scale: [1, 1.15, 1], opacity: [opacity, opacity * 1.4, opacity] }} transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }} style={{ position: 'absolute', width: w, height: w, borderRadius: '50%', background: 'var(--accent-primary)', filter: `blur(${blur}px)`, top, left, right, bottom, pointerEvents: 'none', zIndex: 1 }} />
+);
+const LuxuryLine = () => (
+  <div style={{ width: '100%', height: '1px', background: 'linear-gradient(to right, transparent, var(--accent-primary) 20%, var(--accent-light) 50%, var(--accent-primary) 80%, transparent)', opacity: 0.3 }} />
+);
+
+interface Job {
+  _id: string;
+  title: string;
+  department: string;
+  location: string;
+  type: string;
+  experience: string;
+  description: string;
+  status: string;
+}
 
 const CareerDetail = () => {
-  const { id } = useParams();
-  const navigate = useNavigate();
-  const [job, setJob] = useState<any>(null);
+  const { id } = useParams<{ id: string }>();
+  const [job, setJob] = useState<Job | null>(null);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -41,7 +62,6 @@ const CareerDetail = () => {
     highestQualification: "",
     otherQualification: "",
     resume: null as File | null,
-    coverLetter: null as File | null,
     coverLetterText: "",
     howDidYouHear: "",
     willingToRelocate: "",
@@ -49,28 +69,43 @@ const CareerDetail = () => {
   });
 
   useEffect(() => {
-    fetchJob();
+    window.scrollTo(0, 0);
+    const fetchJob = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get(`${API_BASE_URL}/jobs/${id}`);
+        const fetchedJob = response.data.data;
+        if (fetchedJob) {
+          setJob(fetchedJob);
+        } else {
+          const fallback = FALLBACK_JOBS.find(j => j._id === id);
+          setJob(fallback || null);
+        }
+      } catch (error) {
+        console.error('Error fetching job details:', error);
+        const fallback = FALLBACK_JOBS.find(j => j._id === id);
+        setJob(fallback || null);
+      } finally { setLoading(false); }
+    };
+    if (id) fetchJob();
   }, [id]);
 
-  const fetchJob = async () => {
-    try {
-      // Fetch from public endpoint
-      const res = await axios.get(
-        `${API_BASE_URL}/jobs/${id}`
-      );
-      setJob(res.data.data);
-      setLoading(false);
-    } catch (err) {
-      console.error("Failed to fetch job", err);
-      setJob(null);
-      setLoading(false);
+  useEffect(() => {
+    if (location.search.includes('apply=true')) {
+      setShowForm(true);
+      setTimeout(() => {
+        const formElem = document.getElementById('application-form-section');
+        if (formElem) {
+          formElem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 500);
     }
-  };
+  }, [location.search]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>, field: string) => {
     const file = e.target.files?.[0];
     if (file) {
-      setFormData({ ...formData, [field]: file });
+      setFormData(prev => ({ ...prev, [field]: file }));
     }
   };
 
@@ -116,800 +151,393 @@ const CareerDetail = () => {
       if (formData.resume) {
         data.append("resume", formData.resume);
       }
-      if (formData.coverLetter) {
-        data.append("coverLetter", formData.coverLetter);
-      }
 
-      const response = await axios.post(`${API_BASE_URL}/applications`, data, {
+      await axios.post(`${API_BASE_URL}/applications`, data, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
       setIsSubmitted(true);
       setShowForm(false);
-      // Use instant scroll for a "no-scroll" feel
+      
       setTimeout(() => {
         const successElem = document.getElementById('application-success');
         if (successElem) {
-          successElem.scrollIntoView({ behavior: 'auto', block: 'start' });
+          successElem.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       }, 50);
     } catch (err: any) {
       console.error("Failed to submit application", err);
       alert(err.response?.data?.message || "Failed to submit application. Please try again.");
+    } finally {
       setSubmitting(false);
     }
   };
 
+  const handleApplyClick = () => {
+    setShowForm(true);
+    setTimeout(() => {
+      const formElem = document.getElementById('application-form-section');
+      if (formElem) {
+        formElem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 50);
+  };
+
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#fefaf6] flex items-center justify-center pt-20">
-        <div className="animate-spin rounded-full h-12 w-12 border-2 border-amber-500 border-t-transparent" />
+      <div style={{ minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--bg-primary)' }}>
+        <div className="dh-label" style={{ margin: 'auto' }}>LOADING JOB DETAILS...</div>
       </div>
     );
   }
 
   if (!job) {
     return (
-      <div className="min-h-screen bg-[#fefaf6] flex items-center justify-center pt-20">
-        <div className="text-center">
-          <p className="text-slate-600 mb-4">Job not found</p>
-          <button
-            onClick={() => navigate("/careers")}
-            className="text-amber-600 hover:text-amber-700 transition-colors font-bold"
-          >
-            Back to Careers
-          </button>
-        </div>
+      <div style={{ minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--bg-primary)', flexDirection: 'column', gap: '1rem' }}>
+        <div className="dh-heading" style={{ fontSize: '1.5rem', margin: 'auto' }}>Job not found.</div>
+        <button onClick={() => navigate('/careers')} className="dh-btn-fill" style={{ margin: 'auto' }}>BACK TO CAREERS</button>
       </div>
     );
   }
 
-  const isActive = job.status === "Active" && job.isActive;
-  const isFilled = job.status === "Filled";
+  const inputStyle: React.CSSProperties = {
+    width: '100%',
+    padding: '12px 16px',
+    background: 'var(--bg-primary)',
+    border: '1px solid var(--border-light)',
+    borderRadius: '10px',
+    color: 'var(--text-primary)',
+    fontSize: '0.9rem',
+    fontWeight: 500,
+    outline: 'none',
+    transition: 'all 0.3s'
+  };
+
+  const labelStyle: React.CSSProperties = {
+    display: 'block',
+    fontSize: '0.65rem',
+    fontWeight: 800,
+    color: 'var(--accent-primary)',
+    textTransform: 'uppercase',
+    letterSpacing: '0.15em',
+    marginBottom: '0.5rem'
+  };
 
   return (
-    <>
-      <Helmet>
-        <title>{job.title} - Careers | Avani Enterprises</title>
-        <meta name="description" content={job.description} />
-      </Helmet>
-
-      <div className="min-h-screen bg-[#fefaf6] pt-20 relative">
-        {/* Background Effects */}
-        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-          <div className="absolute inset-0 bg-gradient-to-br from-amber-50/60 via-orange-50/40 to-transparent" />
-          <div className="absolute top-20 right-10 w-[600px] h-[600px] bg-gradient-to-br from-amber-200/30 to-orange-200/30 blur-[120px] rounded-full" />
-          <div className="absolute bottom-20 left-10 w-[600px] h-[600px] bg-gradient-to-br from-orange-200/30 to-amber-200/30 blur-[120px] rounded-full" />
-          <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'radial-gradient(circle, #f59e0b 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
-        </div>
-
-        <main className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
-          {/* Back Button */}
-          <motion.button
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            onClick={() => navigate("/careers")}
-            className="inline-flex items-center gap-2 text-slate-600 hover:text-amber-600 transition-colors font-bold"
-          >
-            <ArrowLeft size={20} />
-            Back to Careers
-          </motion.button>
-
-          {/* Job Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="bg-white rounded-3xl border border-slate-100 shadow-2xl p-6 md:p-10"
-          >
-            <div className="flex flex-col md:flex-row items-start gap-4 md:gap-6 mb-8">
-              <div className="p-4 md:p-5 bg-gradient-to-br from-amber-500/20 to-orange-500/20 rounded-2xl shrink-0">
-                <Briefcase className="w-8 h-8 md:w-10 md:h-10 text-amber-500" />
-              </div>
-
-              <div className="flex-1 w-full">
-                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-4">
-                  <h1 className="text-2xl md:text-4xl font-bold text-slate-900 leading-tight">
-                    {job.title}
-                  </h1>
-                  <div className="flex shrink-0">
-                    {isActive ? (
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] md:text-xs font-bold bg-emerald-500/10 text-emerald-600 border border-emerald-500/20 whitespace-nowrap">
-                        <CheckCircle size={14} />
-                        Active
-                      </span>
-                    ) : (
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] md:text-xs font-bold bg-slate-100 text-slate-500 border border-slate-200 whitespace-nowrap">
-                        {isFilled ? "Position Filled" : "Closed"}
-                      </span>
-                    )}
-                  </div>
-                </div>
-
-                <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs md:text-sm text-slate-600 font-medium">
-                  <span className="flex items-center gap-1.5 bg-slate-50 px-3 py-1.5 rounded-lg border border-slate-100">
-                    <Building2 className="w-4 h-4 text-amber-500" />
-                    {job.department}
-                  </span>
-                  <span className="flex items-center gap-1.5 bg-slate-50 px-3 py-1.5 rounded-lg border border-slate-100">
-                    <MapPin className="w-4 h-4 text-amber-500" />
-                    {job.location}
-                  </span>
-                  <span className="flex items-center gap-1.5 bg-slate-50 px-3 py-1.5 rounded-lg border border-slate-100">
-                    <Clock className="w-4 h-4 text-amber-500" />
-                    {job.type}
-                  </span>
-                  {job.experience && (
-                    <span className="flex items-center gap-1.5 bg-slate-50 px-3 py-1.5 rounded-lg border border-slate-100">
-                      <Calendar className="w-4 h-4 text-amber-500" />
-                      {job.experience}
-                    </span>
-                  )}
-                </div>
-              </div>
+    <div className="dh-career-detail-page">
+      <Grain />
+      
+      {/* Hero */}
+      <section className="theme-brown" style={{ padding: '120px 0 60px', background: 'var(--bg-primary)', position: 'relative' }}>
+        <GridBg size={50} opacity={0.05} />
+        <div className="dh-container" style={{ position: 'relative', zIndex: 10 }}>
+          <button onClick={() => navigate('/careers')} style={{ background: 'none', border: 'none', color: 'var(--accent-primary)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '2rem', fontSize: '0.8rem', fontWeight: 800 }}>
+            <ArrowRight size={14} style={{ transform: 'rotate(180deg)' }} /> BACK TO CAREERS
+          </button>
+          
+          <div className="dh-label">{job.department.toUpperCase()}</div>
+          <h1 className="dh-display" style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', marginBottom: '1.5rem' }}>{job.title}</h1>
+          
+          <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', marginBottom: '2rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <MapPin size={16} style={{ color: 'var(--accent-primary)' }} />
+              <span style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>{job.location}</span>
             </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <Briefcase size={16} style={{ color: 'var(--accent-primary)' }} />
+              <span style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>{job.type}</span>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <Clock size={16} style={{ color: 'var(--accent-primary)' }} />
+              <span style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>{job.experience}</span>
+            </div>
+          </div>
 
+          {!showForm && !isSubmitted && (
+            <button onClick={handleApplyClick} className="dh-btn-fill">APPLY FOR THIS POSITION</button>
+          )}
+        </div>
+      </section>
 
+      <LuxuryLine />
 
-            {!showForm && !isSubmitted && (
-              <button
-                onClick={() => setShowForm(true)}
-                className="w-full bg-gradient-to-r from-amber-400 to-orange-500 text-white px-8 py-4 
-                  rounded-2xl hover:from-amber-500 hover:to-orange-600 transition-all shadow-lg 
-                  shadow-amber-500/20 font-bold text-lg"
-              >
-                Apply for this Position
-              </button>
-            )}
-
-            {!isActive && !isSubmitted && (
-              <div className="mt-4 bg-amber-500/10 border border-amber-500/30 rounded-2xl p-4 text-center text-sm text-amber-400">
-                {isFilled ? "This position has been filled, but you can still apply for future opportunities" : "This position is closed, but you can still submit your application"}
-              </div>
-            )}
-          </motion.div>
-
-          {/* Job Details */}
-          {!showForm && (
-            <div className="space-y-6">
-              {job.description && (
+      {/* Content */}
+      <section className="theme-beige" style={{ padding: '60px 0', background: 'var(--bg-primary)' }}>
+        <div className="dh-container">
+          <div style={{ display: 'grid', gridTemplateColumns: '2.1fr 0.9fr', gap: '4rem' }} className="dh-responsive-grid">
+            
+            {/* Left Col */}
+            <div>
+              {isSubmitted && (
                 <motion.div
+                  id="application-success"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.1 }}
-                  className="bg-white rounded-3xl border border-slate-100 shadow-xl p-6 md:p-8"
+                  style={{
+                    background: 'var(--card-bg)',
+                    border: '2px solid var(--accent-primary)',
+                    borderRadius: '24px',
+                    padding: '3rem',
+                    textAlign: 'center',
+                    marginBottom: '3rem',
+                    boxShadow: '0 20px 50px rgba(0, 0, 0, 0.3)'
+                  }}
                 >
-                  <h2 className="text-2xl font-bold text-slate-900 mb-4">
-                    Job Description
-                  </h2>
-                  <p className="text-slate-600 whitespace-pre-wrap leading-relaxed font-medium">
-                    {job.description}
+                  <div style={{ width: '70px', height: '70px', borderRadius: '50%', background: 'var(--accent-hover)', color: 'var(--accent-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 2rem' }}>
+                    <CheckCircle size={36} style={{ margin: 'auto' }} />
+                  </div>
+                  <h2 className="dh-heading" style={{ fontSize: '1.8rem', marginBottom: '1rem' }}>APPLICATION TRANSMITTED</h2>
+                  <p className="dh-body" style={{ color: 'var(--text-secondary)', maxWidth: '500px', margin: '0 auto' }}>
+                    Thank you for applying. We have received your materials. Our management team reviews submissions on a rolling basis and will reach out if there is alignment.
                   </p>
                 </motion.div>
               )}
 
-              {job.responsibilities && job.responsibilities.length > 0 && (
+              {showForm && !isSubmitted ? (
                 <motion.div
+                  id="application-form-section"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                  className="bg-white rounded-3xl border border-slate-100 shadow-xl p-6 md:p-8"
+                  style={{
+                    background: 'var(--card-bg)',
+                    border: '1px solid var(--border-light)',
+                    borderRadius: '24px',
+                    padding: '3rem',
+                    boxShadow: '0 20px 50px rgba(0, 0, 0, 0.2)',
+                    marginBottom: '3rem'
+                  }}
                 >
-                  <h2 className="text-2xl font-bold text-slate-900 mb-4">
-                    Responsibilities
-                  </h2>
-                  <ul className="space-y-3 text-slate-600 font-medium">
-                    {(Array.isArray(job.responsibilities)
-                      ? job.responsibilities
-                      : job.responsibilities.split("\n")
-                    ).map((item: string, idx: number) => (
-                      <li key={idx} className="flex items-start gap-3">
-                        <span className="text-amber-500 mt-1 text-lg">•</span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </motion.div>
-              )}
-
-              {job.qualifications && job.qualifications.length > 0 && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
-                  className="bg-white rounded-3xl border border-slate-100 shadow-xl p-6 md:p-8"
-                >
-                  <h2 className="text-2xl font-bold text-slate-900 mb-4">
-                    Qualifications
-                  </h2>
-                  <ul className="space-y-3 text-slate-600 font-medium">
-                    {(Array.isArray(job.qualifications)
-                      ? job.qualifications
-                      : job.qualifications.split("\n")
-                    ).map((item: string, idx: number) => (
-                      <li key={idx} className="flex items-start gap-3">
-                        <span className="text-amber-500 mt-1 text-lg">•</span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </motion.div>
-              )}
-
-              {job.skills && job.skills.length > 0 && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.4 }}
-                  className="bg-white rounded-3xl border border-slate-100 shadow-xl p-6 md:p-8"
-                >
-                  <h2 className="text-2xl font-bold text-slate-900 mb-4">
-                    Skills Required
-                  </h2>
-                  <div className="flex flex-wrap gap-3">
-                    {(Array.isArray(job.skills)
-                      ? job.skills
-                      : job.skills.split(",")
-                    ).map((skill: string, idx: number) => (
-                      <span
-                        key={idx}
-                        className="px-4 py-2 bg-amber-500/10 text-amber-500 text-sm font-medium rounded-full border border-amber-500/30"
-                      >
-                        {typeof skill === 'string' ? skill.trim() : skill}
-                      </span>
-                    ))}
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '2.5rem' }}>
+                    <div>
+                      <div className="dh-label" style={{ color: 'var(--accent-primary)' }}>SUBMIT RESUME</div>
+                      <h2 className="dh-heading" style={{ fontSize: '2rem' }}>APPLICATION PROFILE</h2>
+                    </div>
+                    <button 
+                      onClick={() => setShowForm(false)} 
+                      style={{ background: 'none', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', padding: '8px', transition: 'color 0.3s' }}
+                      onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-primary)'}
+                      onMouseLeave={e => e.currentTarget.style.color = 'var(--text-secondary)'}
+                    >
+                      <X size={24} />
+                    </button>
                   </div>
-                </motion.div>
-              )}
 
-              {job.benefits && job.benefits.length > 0 && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.5 }}
-                  className="bg-white rounded-3xl border border-slate-100 shadow-xl p-6 md:p-8"
-                >
-                  <h2 className="text-2xl font-bold text-slate-900 mb-4">
-                    Benefits
-                  </h2>
-                  <ul className="space-y-3 text-slate-600 font-medium">
-                    {(Array.isArray(job.benefits)
-                      ? job.benefits
-                      : job.benefits.split("\n")
-                    ).map((item: string, idx: number) => (
-                      <li key={idx} className="flex items-start gap-3">
-                        <span className="text-emerald-500 mt-1 text-lg">✓</span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+                    
+                    {/* Personal */}
+                    <div>
+                      <h3 className="dh-heading" style={{ fontSize: '1.1rem', marginBottom: '1.5rem', color: 'var(--accent-primary)', borderBottom: '1px solid var(--border-faint)', paddingBottom: '0.5rem' }}>
+                        1. Personal Details
+                      </h3>
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }} className="dh-responsive-grid">
+                        <div>
+                          <label style={labelStyle}>Full Name *</label>
+                          <input type="text" required value={formData.fullName} onChange={e => setFormData({ ...formData, fullName: e.target.value })} placeholder="Enter your full name" style={inputStyle} />
+                        </div>
+                        <div>
+                          <label style={labelStyle}>Email Address *</label>
+                          <input type="email" required value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })} placeholder="your.email@example.com" style={inputStyle} />
+                        </div>
+                        <div>
+                          <label style={labelStyle}>Phone Number *</label>
+                          <input type="tel" required value={formData.phone} onChange={e => setFormData({ ...formData, phone: e.target.value })} placeholder="+91 00000 00000" style={inputStyle} />
+                        </div>
+                        <div>
+                          <label style={labelStyle}>Current Location</label>
+                          <input type="text" value={formData.currentLocation} onChange={e => setFormData({ ...formData, currentLocation: e.target.value })} placeholder="e.g. Gurugram, Haryana" style={inputStyle} />
+                        </div>
+                        <div>
+                          <label style={labelStyle}>LinkedIn URL</label>
+                          <input type="url" value={formData.linkedinProfile} onChange={e => setFormData({ ...formData, linkedinProfile: e.target.value })} placeholder="https://linkedin.com/in/..." style={inputStyle} />
+                        </div>
+                        <div>
+                          <label style={labelStyle}>Portfolio Website</label>
+                          <input type="url" value={formData.portfolioWebsite} onChange={e => setFormData({ ...formData, portfolioWebsite: e.target.value })} placeholder="https://..." style={inputStyle} />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Professional */}
+                    <div>
+                      <h3 className="dh-heading" style={{ fontSize: '1.1rem', marginBottom: '1.5rem', color: 'var(--accent-primary)', borderBottom: '1px solid var(--border-faint)', paddingBottom: '0.5rem' }}>
+                        2. Professional Background
+                      </h3>
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }} className="dh-responsive-grid">
+                        <div>
+                          <label style={labelStyle}>Total Experience *</label>
+                          <select required value={formData.experience} onChange={e => setFormData({ ...formData, experience: e.target.value })} style={inputStyle}>
+                            <option value="">Select experience</option>
+                            <option value="0-1 years">0-1 years</option>
+                            <option value="1-3 years">1-3 years</option>
+                            <option value="3-5 years">3-5 years</option>
+                            <option value="5-10 years">5-10 years</option>
+                            <option value="10+ years">10+ years</option>
+                          </select>
+                        </div>
+                        <div>
+                          <label style={labelStyle}>Highest Qualification *</label>
+                          <select required value={formData.highestQualification} onChange={e => setFormData({ ...formData, highestQualification: e.target.value })} style={inputStyle}>
+                            <option value="">Select qualification</option>
+                            <option value="High School">High School</option>
+                            <option value="Diploma">Diploma</option>
+                            <option value="Bachelor's Degree">Bachelor's Degree</option>
+                            <option value="Master's Degree">Master's Degree</option>
+                            <option value="PhD">PhD</option>
+                            <option value="Other">Other</option>
+                          </select>
+                        </div>
+                        {formData.highestQualification === "Other" && (
+                          <div style={{ gridColumn: 'span 2' }}>
+                            <label style={labelStyle}>Specify Qualification *</label>
+                            <input type="text" required value={formData.otherQualification} onChange={e => setFormData({ ...formData, otherQualification: e.target.value })} placeholder="Please specify" style={inputStyle} />
+                          </div>
+                        )}
+                        <div>
+                          <label style={labelStyle}>Current Designation</label>
+                          <input type="text" value={formData.currentDesignation} onChange={e => setFormData({ ...formData, currentDesignation: e.target.value })} placeholder="Job title" style={inputStyle} />
+                        </div>
+                        <div>
+                          <label style={labelStyle}>Current Company</label>
+                          <input type="text" value={formData.currentCompany} onChange={e => setFormData({ ...formData, currentCompany: e.target.value })} placeholder="Company name" style={inputStyle} />
+                        </div>
+                        <div>
+                          <label style={labelStyle}>Current CTC (Annual)</label>
+                          <input type="text" value={formData.currentCTC} onChange={e => setFormData({ ...formData, currentCTC: e.target.value })} placeholder="e.g. 6 LPA" style={inputStyle} />
+                        </div>
+                        <div>
+                          <label style={labelStyle}>Expected CTC (Annual)</label>
+                          <input type="text" value={formData.expectedCTC} onChange={e => setFormData({ ...formData, expectedCTC: e.target.value })} placeholder="e.g. 8 LPA" style={inputStyle} />
+                        </div>
+                        <div>
+                          <label style={labelStyle}>Notice Period *</label>
+                          <select required value={formData.noticePeriod} onChange={e => setFormData({ ...formData, noticePeriod: e.target.value })} style={inputStyle}>
+                            <option value="">Select notice period</option>
+                            <option value="Immediate">Immediate</option>
+                            <option value="15 days">15 days</option>
+                            <option value="1 month">1 month</option>
+                            <option value="2 months">2 months</option>
+                            <option value="3 months">3 months</option>
+                          </select>
+                        </div>
+                        <div>
+                          <label style={labelStyle}>Willing to Relocate?</label>
+                          <div style={{ display: 'flex', gap: '2rem', padding: '10px 0' }}>
+                            <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', fontSize: '0.9rem' }}>
+                              <input type="radio" name="willingToRelocate" value="Yes" checked={formData.willingToRelocate === "Yes"} onChange={e => setFormData({ ...formData, willingToRelocate: e.target.value })} style={{ accentColor: 'var(--accent-primary)' }} />
+                              Yes
+                            </label>
+                            <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', fontSize: '0.9rem' }}>
+                              <input type="radio" name="willingToRelocate" value="No" checked={formData.willingToRelocate === "No"} onChange={e => setFormData({ ...formData, willingToRelocate: e.target.value })} style={{ accentColor: 'var(--accent-primary)' }} />
+                              No
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Files & Letter */}
+                    <div>
+                      <h3 className="dh-heading" style={{ fontSize: '1.1rem', marginBottom: '1.5rem', color: 'var(--accent-primary)', borderBottom: '1px solid var(--border-faint)', paddingBottom: '0.5rem' }}>
+                        3. Documents & Vision
+                      </h3>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                        <div>
+                          <label style={labelStyle}>Upload Resume * (PDF/DOC, max 5MB)</label>
+                          <input type="file" required accept=".pdf,.doc,.docx" onChange={e => handleFileChange(e, "resume")} id="dh-resume-file" style={{ display: 'none' }} />
+                          <label 
+                            htmlFor="dh-resume-file" 
+                            style={{
+                              display: 'flex', alignItems: 'center', gap: '10px', justifyContent: 'center',
+                              padding: '16px', border: '1px dashed var(--border-light)', borderRadius: '10px',
+                              background: 'var(--bg-primary)', cursor: 'pointer', transition: 'all 0.3s'
+                            }}
+                            onMouseEnter={e => e.currentTarget.style.borderColor = 'var(--accent-primary)'}
+                            onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--border-light)'}
+                          >
+                            <Upload size={18} style={{ color: 'var(--accent-primary)' }} />
+                            <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: 600 }}>
+                              {formData.resume ? formData.resume.name : "Click to select a file"}
+                            </span>
+                          </label>
+                        </div>
+                        <div>
+                          <label style={labelStyle}>Cover Letter / Message (Optional)</label>
+                          <textarea rows={4} value={formData.coverLetterText} onChange={e => setFormData({ ...formData, coverLetterText: e.target.value })} placeholder="Tell us why you are a great fit..." style={{ ...inputStyle, resize: 'none' }} />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Action buttons */}
+                    <div style={{ display: 'flex', gap: '1.5rem', marginTop: '1rem' }}>
+                      <button 
+                        type="submit" 
+                        disabled={submitting} 
+                        className="dh-btn-fill" 
+                        style={{ flex: 1, justifyContent: 'center', gap: '8px' }}
+                      >
+                        {submitting ? (
+                          <>
+                            <Loader2 size={16} className="animate-spin" />
+                            SUBMITTING...
+                          </>
+                        ) : (
+                          "SUBMIT APPLICATION"
+                        )}
+                      </button>
+                      <button 
+                        type="button" 
+                        disabled={submitting} 
+                        onClick={() => setShowForm(false)} 
+                        className="dh-btn-ghost"
+                        style={{ border: '1px solid var(--border-light)' }}
+                      >
+                        CANCEL
+                      </button>
+                    </div>
+
+                  </form>
                 </motion.div>
-              )}
+              ) : null}
+
+              <h2 className="dh-heading" style={{ fontSize: '1.8rem', marginBottom: '1.5rem' }}>Job Description</h2>
+              <div className="dh-body" style={{ fontSize: '1rem', lineHeight: 1.8, whiteSpace: 'pre-wrap' }}>
+                {job.description}
+              </div>
             </div>
-          )}
 
-          {/* Application Form */}
-          {showForm && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="bg-white rounded-3xl border border-slate-100 shadow-3xl p-6 md:p-10"
-            >
-              <div className="mb-8">
-                <h2 className="text-3xl font-bold text-slate-900 mb-2">
-                  Apply for {job.title}
-                </h2>
-                <p className="text-sm text-slate-500 font-medium">
-                  Fill out the form below to submit your application
-                </p>
+            {/* Right Col */}
+            <div>
+              <div style={{ background: 'var(--card-bg)', border: '1px solid var(--border-faint)', borderRadius: '16px', padding: '2rem', position: 'sticky', top: '100px' }}>
+                <h3 className="dh-heading" style={{ fontSize: '1.2rem', marginBottom: '1rem' }}>Position Summary</h3>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                  <div>
+                    <div style={{ fontSize: '0.65rem', fontWeight: 800, color: 'var(--text-tertiary)', letterSpacing: '0.1em' }}>DEPARTMENT</div>
+                    <div style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--text-primary)' }}>{job.department}</div>
+                  </div>
+                  <div>
+                    <div style={{ fontSize: '0.65rem', fontWeight: 800, color: 'var(--text-tertiary)', letterSpacing: '0.1em' }}>LOCATION</div>
+                    <div style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--text-primary)' }}>{job.location}</div>
+                  </div>
+                  <div>
+                    <div style={{ fontSize: '0.65rem', fontWeight: 800, color: 'var(--text-tertiary)', letterSpacing: '0.1em' }}>EMPLOYMENT TYPE</div>
+                    <div style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--text-primary)' }}>{job.type}</div>
+                  </div>
+                  <div>
+                    <div style={{ fontSize: '0.65rem', fontWeight: 800, color: 'var(--text-tertiary)', letterSpacing: '0.1em' }}>EXPERIENCE</div>
+                    <div style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--text-primary)' }}>{job.experience}</div>
+                  </div>
+                </div>
+                <LuxuryLine />
+                {!showForm && !isSubmitted && (
+                  <button onClick={handleApplyClick} className="dh-btn-fill" style={{ width: '100%', marginTop: '1.5rem', justifyContent: 'center' }}>APPLY NOW</button>
+                )}
               </div>
+            </div>
 
-              <form onSubmit={handleSubmit} className="space-y-8">
-                {/* Personal Information */}
-                <div>
-                  <h3 className="text-xl font-bold text-slate-900 mb-6 pb-3 border-b border-slate-200">
-                    Personal Information
-                  </h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    <div>
-                      <label className="block text-sm font-medium text-slate-700 mb-2">
-                        Full Name *
-                      </label>
-                      <input
-                        type="text"
-                        required
-                        value={formData.fullName}
-                        onChange={(e) =>
-                          setFormData({ ...formData, fullName: e.target.value })
-                        }
-                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl 
-                          focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500
-                          text-slate-900 placeholder-slate-400 transition-all"
-                        placeholder="Enter your full name"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-slate-700 mb-2">
-                        Email Address *
-                      </label>
-                      <input
-                        type="email"
-                        required
-                        value={formData.email}
-                        onChange={(e) =>
-                          setFormData({ ...formData, email: e.target.value })
-                        }
-                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl 
-                          focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500
-                          text-slate-900 placeholder-slate-400 transition-all"
-                        placeholder="your.email@example.com"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-slate-700 mb-2">
-                        Phone Number *
-                      </label>
-                      <input
-                        type="tel"
-                        required
-                        value={formData.phone}
-                        onChange={(e) =>
-                          setFormData({ ...formData, phone: e.target.value })
-                        }
-                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl 
-                          focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500
-                          text-slate-900 placeholder-slate-400 transition-all"
-                        placeholder="+91 1234567890"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-slate-700 mb-2">
-                        Current Location (City, State)
-                      </label>
-                      <input
-                        type="text"
-                        value={formData.currentLocation}
-                        onChange={(e) =>
-                          setFormData({ ...formData, currentLocation: e.target.value })
-                        }
-                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl 
-                          focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500
-                          text-slate-900 placeholder-slate-400 transition-all"
-                        placeholder="e.g., Mumbai, Maharashtra"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-slate-700 mb-2">
-                        LinkedIn Profile URL
-                      </label>
-                      <input
-                        type="url"
-                        value={formData.linkedinProfile}
-                        onChange={(e) =>
-                          setFormData({ ...formData, linkedinProfile: e.target.value })
-                        }
-                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl 
-                          focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500
-                          text-slate-900 placeholder-slate-400 transition-all"
-                        placeholder="https://linkedin.com/in/yourprofile"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-slate-700 mb-2">
-                        Portfolio/Website
-                      </label>
-                      <input
-                        type="url"
-                        value={formData.portfolioWebsite}
-                        onChange={(e) =>
-                          setFormData({ ...formData, portfolioWebsite: e.target.value })
-                        }
-                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl 
-                          focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500
-                          text-slate-900 placeholder-slate-400 transition-all"
-                        placeholder="https://yourportfolio.com"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Professional Information */}
-                <div>
-                  <h3 className="text-xl font-bold text-slate-900 mb-6 pb-3 border-b border-slate-200">
-                    Professional Information
-                  </h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    <div className="md:col-span-2">
-                      <label className="block text-sm font-medium text-slate-700 mb-2">
-                        Position Applied For *
-                      </label>
-                      <input
-                        type="text"
-                        required
-                        value={job?.title || ""}
-                        disabled
-                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-500"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-slate-700 mb-2">
-                        Total Years of Experience *
-                      </label>
-                      <select
-                        required
-                        value={formData.experience}
-                        onChange={(e) =>
-                          setFormData({ ...formData, experience: e.target.value })
-                        }
-                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl 
-                          focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500
-                          text-slate-900 appearance-none cursor-pointer"
-                      >
-                        <option value="" className="bg-white">Select experience</option>
-                        <option value="0-1 years" className="bg-white">0-1 years</option>
-                        <option value="1-3 years" className="bg-white">1-3 years</option>
-                        <option value="3-5 years" className="bg-white">3-5 years</option>
-                        <option value="5-10 years" className="bg-white">5-10 years</option>
-                        <option value="10+ years" className="bg-white">10+ years</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-slate-700 mb-2">
-                        Highest Qualification *
-                      </label>
-                      <select
-                        required
-                        value={formData.highestQualification}
-                        onChange={(e) =>
-                          setFormData({ ...formData, highestQualification: e.target.value })
-                        }
-                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl 
-                          focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500
-                          text-slate-900 appearance-none cursor-pointer"
-                      >
-                        <option value="" className="bg-white">Select qualification</option>
-                        <option value="High School" className="bg-white">High School</option>
-                        <option value="Diploma" className="bg-white">Diploma</option>
-                        <option value="Bachelor's Degree" className="bg-white">Bachelor's Degree</option>
-                        <option value="Master's Degree" className="bg-white">Master's Degree</option>
-                        <option value="PhD" className="bg-white">PhD</option>
-                        <option value="Other" className="bg-white">Other</option>
-                      </select>
-                    </div>
-
-                    {formData.highestQualification === "Other" && (
-                      <div className="md:col-span-2">
-                        <label className="block text-sm font-medium text-slate-300 mb-2">
-                          Please specify your qualification *
-                        </label>
-                        <input
-                          type="text"
-                          required
-                          value={formData.otherQualification}
-                          onChange={(e) =>
-                            setFormData({ ...formData, otherQualification: e.target.value })
-                          }
-                          className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl 
-                            focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500
-                            text-slate-900 placeholder-slate-400 transition-all"
-                          placeholder="e.g., Professional Certification, Trade School, etc."
-                        />
-                      </div>
-                    )}
-
-                    <div>
-                      <label className="block text-sm font-medium text-slate-700 mb-2">
-                        Current/Last Company
-                      </label>
-                      <input
-                        type="text"
-                        value={formData.currentCompany}
-                        onChange={(e) =>
-                          setFormData({ ...formData, currentCompany: e.target.value })
-                        }
-                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl 
-                          focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500/50
-                          text-white placeholder-slate-500 transition-all"
-                        placeholder="Company name"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-slate-700 mb-2">
-                        Current/Last Designation
-                      </label>
-                      <input
-                        type="text"
-                        value={formData.currentDesignation}
-                        onChange={(e) =>
-                          setFormData({ ...formData, currentDesignation: e.target.value })
-                        }
-                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl 
-                          focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500
-                          text-slate-900 placeholder-slate-400 transition-all"
-                        placeholder="Your job title"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-slate-700 mb-2">
-                        Current CTC (Annual)
-                      </label>
-                      <input
-                        type="text"
-                        value={formData.currentCTC}
-                        onChange={(e) =>
-                          setFormData({ ...formData, currentCTC: e.target.value })
-                        }
-                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl 
-                          focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500
-                          text-slate-900 placeholder-slate-400 transition-all"
-                        placeholder="e.g., 5 LPA"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-slate-700 mb-2">
-                        Expected CTC (Annual)
-                      </label>
-                      <input
-                        type="text"
-                        value={formData.expectedCTC}
-                        onChange={(e) =>
-                          setFormData({ ...formData, expectedCTC: e.target.value })
-                        }
-                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl 
-                          focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500
-                          text-slate-900 placeholder-slate-400 transition-all"
-                        placeholder="e.g., 7 LPA"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-slate-700 mb-2">
-                        Notice Period *
-                      </label>
-                      <select
-                        required
-                        value={formData.noticePeriod}
-                        onChange={(e) =>
-                          setFormData({ ...formData, noticePeriod: e.target.value })
-                        }
-                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl 
-                          focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500
-                          text-slate-900 appearance-none cursor-pointer"
-                      >
-                        <option value="" className="bg-white">Select notice period</option>
-                        <option value="Immediate" className="bg-white">Immediate</option>
-                        <option value="15 days" className="bg-white">15 days</option>
-                        <option value="1 month" className="bg-white">1 month</option>
-                        <option value="2 months" className="bg-white">2 months</option>
-                        <option value="3 months" className="bg-white">3 months</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Documents */}
-                <div>
-                  <h3 className="text-xl font-bold text-slate-900 mb-6 pb-3 border-b border-slate-200">
-                    Documents
-                  </h3>
-                  <div className="space-y-5">
-                    <div>
-                      <label className="block text-sm font-medium text-slate-700 mb-2">
-                        Upload Resume * (PDF/DOC, max 5MB)
-                      </label>
-                      <div className="relative">
-                        <input
-                          type="file"
-                          required
-                          accept=".pdf,.doc,.docx"
-                          onChange={(e) => handleFileChange(e, "resume")}
-                          className="hidden"
-                          id="resume-upload"
-                        />
-                        <label
-                          htmlFor="resume-upload"
-                          className="flex items-center justify-center gap-3 w-full px-6 py-4 border-2 border-dashed border-slate-200 rounded-xl hover:border-amber-500/50 transition-all cursor-pointer bg-slate-50 hover:bg-slate-100"
-                        >
-                          <Upload size={20} className="text-slate-400" />
-                          <span className="text-sm text-slate-600 font-medium">
-                            {formData.resume
-                              ? formData.resume.name
-                              : "Click to upload resume"}
-                          </span>
-                        </label>
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-slate-700 mb-2">
-                        Upload Cover Letter (Optional)
-                      </label>
-                      <div className="relative">
-                        <input
-                          type="file"
-                          accept=".pdf,.doc,.docx"
-                          onChange={(e) => handleFileChange(e, "coverLetter")}
-                          className="hidden"
-                          id="cover-letter-upload"
-                        />
-                        <label
-                          htmlFor="cover-letter-upload"
-                          className="flex items-center justify-center gap-3 w-full px-6 py-4 border-2 border-dashed border-slate-200 rounded-xl hover:border-amber-500/50 transition-all cursor-pointer bg-slate-50 hover:bg-slate-100"
-                        >
-                          <Upload size={20} className="text-slate-400" />
-                          <span className="text-sm text-slate-600 font-medium">
-                            {formData.coverLetter
-                              ? formData.coverLetter.name
-                              : "Click to upload cover letter"}
-                          </span>
-                        </label>
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-slate-700 mb-2">
-                        Or Write Cover Letter (Optional)
-                      </label>
-                      <textarea
-                        rows={4}
-                        value={formData.coverLetterText}
-                        onChange={(e) =>
-                          setFormData({ ...formData, coverLetterText: e.target.value })
-                        }
-                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl 
-                          focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500
-                          text-slate-900 placeholder-slate-400 transition-all resize-none"
-                        placeholder="Write your cover letter here..."
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Additional Information */}
-                <div>
-                  <h3 className="text-xl font-bold text-slate-900 mb-6 pb-3 border-b border-slate-200">
-                    Additional Information
-                  </h3>
-                  <div className="space-y-5">
-                    <div>
-                      <label className="block text-sm font-medium text-slate-700 mb-2">
-                        How did you hear about us?
-                      </label>
-                      <select
-                        value={formData.howDidYouHear}
-                        onChange={(e) =>
-                          setFormData({ ...formData, howDidYouHear: e.target.value })
-                        }
-                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl 
-                          focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500
-                          text-slate-900 appearance-none cursor-pointer"
-                      >
-                        <option value="" className="bg-white">Select an option</option>
-                        <option value="LinkedIn" className="bg-white">LinkedIn</option>
-                        <option value="Job Portal" className="bg-white">Job Portal (Naukri, Indeed, etc.)</option>
-                        <option value="Company Website" className="bg-white">Company Website</option>
-                        <option value="Referral" className="bg-white">Referral</option>
-                        <option value="Social Media" className="bg-white">Social Media</option>
-                        <option value="Other" className="bg-white">Other</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-slate-700 mb-2">
-                        Are you willing to relocate?
-                      </label>
-                      <div className="flex gap-6">
-                        <label className="flex items-center gap-2 cursor-pointer">
-                          <input
-                            type="radio"
-                            name="relocate"
-                            value="Yes"
-                            checked={formData.willingToRelocate === "Yes"}
-                            onChange={(e) =>
-                              setFormData({ ...formData, willingToRelocate: e.target.value })
-                            }
-                            className="w-4 h-4 text-amber-500 focus:ring-amber-500"
-                          />
-                          <span className="text-sm text-slate-600 font-medium">Yes</span>
-                        </label>
-                        <label className="flex items-center gap-2 cursor-pointer">
-                          <input
-                            type="radio"
-                            name="relocate"
-                            value="No"
-                            checked={formData.willingToRelocate === "No"}
-                            onChange={(e) =>
-                              setFormData({ ...formData, willingToRelocate: e.target.value })
-                            }
-                            className="w-4 h-4 text-amber-500 focus:ring-amber-500"
-                          />
-                          <span className="text-sm text-slate-600 font-medium">No</span>
-                        </label>
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-slate-700 mb-2">
-                        Additional Comments/Message
-                      </label>
-                      <textarea
-                        rows={4}
-                        value={formData.additionalComments}
-                        onChange={(e) =>
-                          setFormData({ ...formData, additionalComments: e.target.value })
-                        }
-                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl 
-                          focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500
-                          text-slate-900 placeholder-slate-400 transition-all resize-none"
-                        placeholder="Any additional information you'd like to share..."
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex gap-4 pt-6">
-                  <button
-                    type="submit"
-                    disabled={submitting}
-                    className="flex-1 bg-gradient-to-r from-amber-400 to-orange-500 text-white px-8 py-4 
-                      rounded-2xl hover:from-amber-500 hover:to-orange-600 transition-all shadow-lg 
-                      shadow-amber-500/20 font-bold disabled:opacity-50 disabled:cursor-not-allowed 
-                      flex items-center justify-center gap-2"
-                  >
-                    {submitting ? (
-                      <>
-                        <Loader2 size={20} className="animate-spin" />
-                        Submitting...
-                      </>
-                    ) : (
-                      "Submit Application"
-                    )}
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setShowForm(false)}
-                    disabled={submitting}
-                    className="px-8 py-4 border border-slate-200 rounded-2xl hover:bg-slate-50 
-                      transition-all disabled:opacity-50 disabled:cursor-not-allowed text-slate-600 font-medium"
-                  >
-                    Cancel
-                  </button>
-                </div>
-              </form>
-            </motion.div>
-          )}
-
-          {isSubmitted && (
-            <motion.div
-              id="application-success"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="scroll-mt-32 mt-6 p-10 md:p-16 bg-emerald-50 text-emerald-700 rounded-3xl font-bold text-center border-2 border-emerald-200 uppercase tracking-widest shadow-2xl min-h-[300px] flex flex-col items-center justify-center"
-            >
-              <div className="flex items-center justify-center gap-3 mb-3">
-                <CheckCircle className="w-8 h-8 md:w-10 md:h-10" />
-                <span className="text-xl md:text-2xl font-black">Application Submitted!</span>
-              </div>
-              <p className="text-sm md:text-lg font-bold opacity-90 max-w-2xl mx-auto normal-case">
-                Thank you for applying. We have received your application and will review it meticulously.
-                Our team will reach out to you if your profile matches our requirements.
-              </p>
-            </motion.div>
-          )}
-        </main>
-      </div>
-    </>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 };
 

@@ -1,50 +1,46 @@
-import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 
-interface RotatingTextProps {
-    words: string[];
-    interval?: number;
-    className?: string;
+interface DummyRotatingTextProps {
+  words: string[];
+  interval?: number;
 }
 
-/**
- * Rotating Text Component - ADKO-Inspired
- * Smoothly rotates through an array of words with vertical slide animation
- */
-const RotatingText = ({
-    words,
-    interval = 3000,
-    className = ""
-}: RotatingTextProps) => {
-    const [currentIndex, setCurrentIndex] = useState(0);
+const DummyRotatingText: React.FC<DummyRotatingTextProps> = ({ words, interval = 3000 }) => {
+  const [index, setIndex] = useState(0);
 
-    useEffect(() => {
-        const timer = setInterval(() => {
-            setCurrentIndex((prev) => (prev + 1) % words.length);
-        }, interval);
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex((prev) => (prev + 1) % words.length);
+    }, interval);
+    return () => clearInterval(timer);
+  }, [words.length, interval]);
 
-        return () => clearInterval(timer);
-    }, [words.length, interval]);
-
-    return (
-        <span className={`inline-block ${className}`}>
-            <AnimatePresence mode="wait">
-                <motion.span
-                    key={currentIndex}
-                    initial={{ y: 20, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    exit={{ y: -20, opacity: 0 }}
-                    transition={{
-                        duration: 0.5,
-                        ease: [0.16, 1, 0.3, 1] // easeOut
-                    }}
-                    className="inline-block"
-                >
-                    {words[currentIndex]}
-                </motion.span>
-            </AnimatePresence>
-        </span>
-    );
+  return (
+    <span style={{ display: 'inline-block', position: 'relative', overflow: 'hidden', minWidth: '320px', verticalAlign: 'bottom' }}>
+      <AnimatePresence mode="wait">
+        <motion.span
+          key={index}
+          initial={{ y: '100%', opacity: 0 }}
+          animate={{ y: '0%', opacity: 1 }}
+          exit={{ y: '-100%', opacity: 0 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          style={{
+            display: 'inline-block',
+            fontFamily: "'Cormorant Garamond', Georgia, serif",
+            fontSize: 'clamp(39px, 4.5vw, 66px)',
+            fontWeight: 700,
+            lineHeight: 1.05,
+            letterSpacing: '-0.02em',
+            color: '#C4913A',
+            fontStyle: 'italic',
+          }}
+        >
+          {words[index]}
+        </motion.span>
+      </AnimatePresence>
+    </span>
+  );
 };
 
-export default RotatingText;
+export default DummyRotatingText;

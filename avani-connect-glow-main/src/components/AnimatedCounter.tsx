@@ -1,66 +1,28 @@
-import { useEffect, useRef, useState } from "react";
-import { useInView, useReducedMotion } from "framer-motion";
+import React, { useState, useEffect, useRef } from 'react';
 
-interface AnimatedCounterProps {
-  target: number;
-  suffix?: string;
-  prefix?: string;
-  duration?: number;
-  className?: string;
-  decimals?: number;
-}
-
-/**
- * Animated Counter Component - ADKO-Inspired
- * Counts from 0 to target number when element enters viewport
- */
-const AnimatedCounter = ({
-  target,
-  suffix = "",
-  prefix = "",
-  duration = 2000,
-  className = "",
-  decimals = 0
-}: AnimatedCounterProps) => {
+const DummyAnimatedCounter = ({ target, suffix = '', duration = 2000 }: any) => {
   const [count, setCount] = useState(0);
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const shouldReduceMotion = useReducedMotion();
+  const ref = useRef<HTMLSpanElement>(null);
+  const animated = useRef(false);
 
   useEffect(() => {
-    if (!isInView) return;
-
-    // If user prefers reduced motion, jump to target immediately
-    if (shouldReduceMotion) {
-      setCount(target);
-      return;
-    }
-
-    let start = 0;
-    const increment = target / (duration / 16); // 60fps
-
-    const timer = setInterval(() => {
-      start += increment;
-      if (start >= target) {
-        setCount(target);
-        clearInterval(timer);
-      } else {
-        setCount(start);
+    const obs = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting && !animated.current) {
+        animated.current = true;
+        const steps = 60;
+        let cur = 0;
+        const timer = setInterval(() => {
+          cur++;
+          setCount(Math.min(Math.floor((target / steps) * cur), target));
+          if (cur >= steps) clearInterval(timer);
+        }, duration / steps);
       }
-    }, 16);
+    }, { threshold: 0.3 });
+    if (ref.current) obs.observe(ref.current);
+    return () => obs.disconnect();
+  }, [target, duration]);
 
-    return () => clearInterval(timer);
-  }, [isInView, target, duration, shouldReduceMotion]);
-
-  const displayValue = decimals > 0
-    ? count.toFixed(decimals)
-    : Math.floor(count);
-
-  return (
-    <div ref={ref} className={className}>
-      {prefix}{displayValue}{suffix}
-    </div>
-  );
+  return <span ref={ref}>{count}{suffix}</span>;
 };
 
-export default AnimatedCounter;
+export default DummyAnimatedCounter;
