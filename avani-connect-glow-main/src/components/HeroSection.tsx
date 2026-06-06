@@ -37,7 +37,7 @@ export default function HeroSection({ source }: HeroSectionProps) {
     <section
       id="home"
       ref={heroRef}
-      className="relative min-h-[85vh] flex items-center pt-24 sm:pt-28 md:pt-24 lg:pt-28 overflow-hidden bg-white"
+      className="relative min-h-[85vh] flex items-center pt-32 md:pt-32 lg:pt-36 pb-16 md:pb-24 overflow-hidden bg-white"
     >
       {/* BACKGROUND: Corporate Geometric Theme */}
       <div className="absolute inset-0 z-0 overflow-hidden">
@@ -64,7 +64,7 @@ export default function HeroSection({ source }: HeroSectionProps) {
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10 w-full">
-        <div className="grid lg:grid-cols-2 gap-8 md:gap-16 items-start lg:items-center">
+        <div className="grid lg:grid-cols-2 gap-12 md:gap-16 items-start lg:items-center">
 
           {/* Left Side: Content Bundle */}
           <motion.div

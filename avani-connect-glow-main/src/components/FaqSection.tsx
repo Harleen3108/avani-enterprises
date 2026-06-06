@@ -97,7 +97,7 @@ const FAQItem = ({ item, index }: FAQItemProps) => {
 // --- Main FAQ Section ---
 const FAQSection = () => {
   return (
-    <section id="faq" className="py-24 relative overflow-hidden">
+    <section id="faq" className="py-16 md:py-24 relative overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-accent/5 rounded-full blur-3xl" />
