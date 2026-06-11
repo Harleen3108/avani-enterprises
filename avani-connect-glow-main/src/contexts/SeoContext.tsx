@@ -4,12 +4,22 @@ import axios from 'axios';
 import { API_BASE_URL } from '../utils/api';
 
 interface SeoData {
+  // Core
   title?: string;
   metaDescription?: string;
   metaKeywords?: string;
   seoHeading?: string;
-  [key: string]: any;
+  // Canonical & indexability
+  canonicalUrl?: string;
+  robots?: string;
+  // Open Graph / Social
+  ogImage?: string;
+  // Structured data (JSON-LD) — backend sends pre-built schema or component builds it
+  structuredData?: string | Record<string, unknown>;
+  // Allow any extra fields the backend may send
+  [key: string]: unknown;
 }
+
 
 interface SeoContextType {
   seo: SeoData | null;

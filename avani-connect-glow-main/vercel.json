@@ -5,6 +5,22 @@
       "maxDuration": 15
     }
   },
+  "headers": [
+    {
+      "source": "/sitemap.xml",
+      "headers": [
+        { "key": "Content-Type", "value": "application/xml; charset=utf-8" },
+        { "key": "Cache-Control", "value": "public, max-age=3600, s-maxage=3600" }
+      ]
+    },
+    {
+      "source": "/robots.txt",
+      "headers": [
+        { "key": "Content-Type", "value": "text/plain; charset=utf-8" },
+        { "key": "Cache-Control", "value": "public, max-age=86400, s-maxage=86400" }
+      ]
+    }
+  ],
   "redirects": [
     {
       "source": "/news-sitemap.xml",
@@ -23,7 +39,7 @@
       "destination": "/assets/:path*"
     },
     {
-      "source": "/((?!api|assets|admin|favicon.ico|logo.png|.*\\..*).*)",
+      "source": "/((?!api|assets|admin|sitemap\\.xml|robots\\.txt|BingSiteAuth\\.xml|favicon\\.ico|logo\\.png|.*\\..*).*)",
       "destination": "/api/seo?path=/$1"
     }
   ]
