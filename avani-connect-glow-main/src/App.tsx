@@ -173,6 +173,40 @@ import ProjectDetail from "./pages/ProjectDetail";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsConditions from "./pages/TermsConditions";
 
+// ── SEO Product Landing Pages Imports ─────────────────────────────────────────
+import HrPortal from "./pages/product/HrPortal";
+import HrmsSoftwareIndia from "./pages/product/HrmsSoftwareIndia";
+import PayrollSoftwareIndia from "./pages/product/PayrollSoftwareIndia";
+import AttendanceManagementSystem from "./pages/product/AttendanceManagementSystem";
+import LeaveManagementSoftware from "./pages/product/LeaveManagementSoftware";
+import EmployeeManagementSoftware from "./pages/product/EmployeeManagementSoftware";
+import EmployeePortal from "./pages/product/EmployeePortal";
+import CrmSoftwareIndia from "./pages/product/CrmSoftwareIndia";
+import WorkforceManagementSoftware from "./pages/product/WorkforceManagementSoftware";
+import ProjectManagementSoftware from "./pages/product/ProjectManagementSoftware";
+import BusinessOperatingSystem from "./pages/product/BusinessOperatingSystem";
+
+// ── Competitor Alternative Pages Imports ──────────────────────────────────────
+import KekaAlternative from "./pages/compare/KekaAlternative";
+import GreythrAlternative from "./pages/compare/GreythrAlternative";
+import DarwinboxAlternative from "./pages/compare/DarwinboxAlternative";
+import ZohoPeopleAlternative from "./pages/compare/ZohoPeopleAlternative";
+
+// ── Local SEO & City Pages Imports ────────────────────────────────────────────
+import Delhi from "./pages/local/Delhi";
+import Faridabad from "./pages/local/Faridabad";
+import Gurgaon from "./pages/local/Gurgaon";
+import Rohtak from "./pages/local/Rohtak";
+import DigitalMarketingDelhi from "./pages/local/DigitalMarketingDelhi";
+import DigitalMarketingHaryana from "./pages/local/DigitalMarketingHaryana";
+import GoogleAdsHaryana from "./pages/local/GoogleAdsHaryana";
+import SeoDelhi from "./pages/local/SeoDelhi";
+import SeoHaryana from "./pages/local/SeoHaryana";
+import SmmDelhi from "./pages/local/SmmDelhi";
+import SmmHaryana from "./pages/local/SmmHaryana";
+import WebDevDelhi from "./pages/local/WebDevDelhi";
+import WebDevHaryana from "./pages/local/WebDevHaryana";
+
 import DH2PolicicueProject from './pages/home2/DH2PolicicueProject';
 import DH2IndusProject from './pages/home2/DH2IndusProject';
 import DH2FrdNutritionProject from './pages/home2/DH2FrdNutritionProject';
@@ -214,7 +248,37 @@ const AppLayout = () => {
   // Define all paths that belong to the new MainLayout
   const isDHRoot = ["/", "/about", "/services", "/projects", "/contact", "/blog", "/global-presence", "/careers", "/newsletters", "/courses", "/case-studies", "/get-consultation", "/privacy-policy", "/terms-and-conditions"].includes(pathForCheck);
   const isDHSub = pathForCheck.startsWith("/services/") || pathForCheck.startsWith("/projects/") || pathForCheck.startsWith("/blog/") || pathForCheck.startsWith("/careers/") || pathForCheck.startsWith("/newsletters/") || pathForCheck.startsWith("/courses/");
-  const isDH1 = isDHRoot || isDHSub;
+  const isSeoPath = [
+    "/hr-portal",
+    "/hrms-software-india",
+    "/payroll-software-india",
+    "/attendance-management-system",
+    "/leave-management-software",
+    "/employee-management-software",
+    "/employee-portal",
+    "/crm-software-india",
+    "/workforce-management-software",
+    "/project-management-software",
+    "/business-operating-system",
+    "/keka-alternative",
+    "/greythr-alternative",
+    "/darwinbox-alternative",
+    "/zoho-people-alternative",
+    "/rohtak",
+    "/gurgaon",
+    "/faridabad",
+    "/delhi",
+    "/web-development-company-haryana",
+    "/web-development-company-delhi",
+    "/social-media-marketing-agency-haryana",
+    "/social-media-marketing-agency-delhi",
+    "/digital-marketing-agency-haryana",
+    "/digital-marketing-agency-delhi",
+    "/seo-company-haryana",
+    "/seo-company-delhi",
+    "/google-ads-agency-haryana"
+  ].includes(pathForCheck);
+  const isDH1 = isDHRoot || isDHSub || isSeoPath;
   const isDH2 = pathForCheck.startsWith('/home2');
 
   // Pages where Navbar should be hidden completely
@@ -257,6 +321,40 @@ const AppLayout = () => {
             <Route path="projects/:slug" element={<ProjectDetail />} />
             <Route path="privacy-policy" element={<PrivacyPolicy />} />
             <Route path="terms-and-conditions" element={<TermsConditions />} />
+
+            {/* ── SEO Product Landing Pages ───────────────────────────────────── */}
+            <Route path="hr-portal" element={<HrPortal />} />
+            <Route path="hrms-software-india" element={<HrmsSoftwareIndia />} />
+            <Route path="payroll-software-india" element={<PayrollSoftwareIndia />} />
+            <Route path="attendance-management-system" element={<AttendanceManagementSystem />} />
+            <Route path="leave-management-software" element={<LeaveManagementSoftware />} />
+            <Route path="employee-management-software" element={<EmployeeManagementSoftware />} />
+            <Route path="employee-portal" element={<EmployeePortal />} />
+            <Route path="crm-software-india" element={<CrmSoftwareIndia />} />
+            <Route path="workforce-management-software" element={<WorkforceManagementSoftware />} />
+            <Route path="project-management-software" element={<ProjectManagementSoftware />} />
+            <Route path="business-operating-system" element={<BusinessOperatingSystem />} />
+
+            {/* ── Competitor Alternative Pages ────────────────────────────────── */}
+            <Route path="keka-alternative" element={<KekaAlternative />} />
+            <Route path="greythr-alternative" element={<GreythrAlternative />} />
+            <Route path="darwinbox-alternative" element={<DarwinboxAlternative />} />
+            <Route path="zoho-people-alternative" element={<ZohoPeopleAlternative />} />
+
+            {/* ── Local SEO & City Pages ──────────────────────────────────────── */}
+            <Route path="rohtak" element={<Rohtak />} />
+            <Route path="gurgaon" element={<Gurgaon />} />
+            <Route path="faridabad" element={<Faridabad />} />
+            <Route path="delhi" element={<Delhi />} />
+            <Route path="web-development-company-haryana" element={<WebDevHaryana />} />
+            <Route path="web-development-company-delhi" element={<WebDevDelhi />} />
+            <Route path="social-media-marketing-agency-haryana" element={<SmmHaryana />} />
+            <Route path="social-media-marketing-agency-delhi" element={<SmmDelhi />} />
+            <Route path="digital-marketing-agency-haryana" element={<DigitalMarketingHaryana />} />
+            <Route path="digital-marketing-agency-delhi" element={<DigitalMarketingDelhi />} />
+            <Route path="seo-company-haryana" element={<SeoHaryana />} />
+            <Route path="seo-company-delhi" element={<SeoDelhi />} />
+            <Route path="google-ads-agency-haryana" element={<GoogleAdsHaryana />} />
           </Route>
 
           {/* DH2 Sub-pages with shared layout */}

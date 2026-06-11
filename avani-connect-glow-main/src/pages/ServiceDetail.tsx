@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Code, Search, Share2, Zap, Radio, PieChart, ArrowLeft, CheckCircle, ArrowRight, Lightbulb, TrendingUp, Shield } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
+import { Code, Search, Share2, Zap, Radio, PieChart, ArrowLeft, CheckCircle, ArrowRight, Lightbulb, TrendingUp, Shield, Target, Globe, ChevronDown, ChevronUp } from 'lucide-react';
+import Breadcrumb from '../components/seo/Breadcrumb';
+import InternalLinking from '../components/seo/InternalLinking';
 
 /* Background effects */
 const Grain = () => (
@@ -43,6 +46,11 @@ interface ArchitectureLayer {
   color: string;
 }
 
+interface FAQItem {
+  q: string;
+  a: string;
+}
+
 interface ServiceDetail {
   icon: any;
   title: string;
@@ -56,6 +64,12 @@ interface ServiceDetail {
   stats: string[][];
   workflow: WorkflowStep[];
   layers: ArchitectureLayer[];
+  faqs?: FAQItem[];
+  meta?: {
+    title: string;
+    description: string;
+    keywords: string;
+  };
 }
 
 const serviceData: Record<string, ServiceDetail> = {
@@ -80,6 +94,21 @@ const serviceData: Record<string, ServiceDetail> = {
       { number: "01", title: "VISUAL INTERFACE (FRONTEND)", tech: ["React", "Next.js", "Framer Motion", "Tailwind CSS"], purpose: "Creating fluid, responsive client-side routing, high-fidelity micro-interactions, and premium visual components that capture visitor attention instantly.", color: "var(--accent-primary)" },
       { number: "02", title: "LOGIC & INTEGRATION ENGINE (API)", tech: ["Node.js", "GraphQL", "REST APIs", "Serverless"], purpose: "Managing data-fetching pipelines, handling security handshakes, processing payments, and executing real-time communications.", color: "#00f0ff" },
       { number: "03", title: "RELIABLE DATA CORE (INFRA)", tech: ["PostgreSQL", "MongoDB", "Redis", "AWS Cloud"], purpose: "Securing database persistence, high-speed RAM caching, scalable storage buckets, and automated global CDN distribution.", color: "#a855f7" }
+    ],
+    meta: {
+      title: 'Custom Web & Mobile App Development Services | Avani Enterprises',
+      description: 'Design and engineer ultra-fast, secure, and custom-coded websites and mobile applications built on React and Next.js. Book a free systems audit.',
+      keywords: 'custom web development, mobile app development, nextjs development agency, custom react app, database design, payment integrations'
+    },
+    faqs: [
+      { q: 'What web frameworks do you specialize in?', a: 'We specialize in React, Next.js, and clean custom-coded TypeScript setups, ensuring high security and millisecond loading speeds.' },
+      { q: 'How long does it take to build a custom website?', a: 'A standard professional business website takes 7 to 14 days, while complex custom web apps or e-commerce platforms take 21 to 45 business days.' },
+      { q: 'Do you build native mobile apps for iOS and Android?', a: 'Yes, we use React Native and Flutter to build cross-platform mobile apps that run flawlessly on both Apple and Google platforms.' },
+      { q: 'Are your websites mobile-responsive?', a: 'Absolutely. Every site we build is fully responsive, optimized for smartphones, tablets, and wide desktop screens.' },
+      { q: 'Do you provide website maintenance and support?', a: 'Yes, we offer monthly retainer packages for technical updates, security monitoring, sitemap logs, and performance optimization.' },
+      { q: 'Can you integrate payment gateways like Razorpay or Stripe?', a: 'Yes. We configure checkout systems, secure transaction tokens, and automated invoice dispatches.' },
+      { q: 'Will my website rank on Google after launch?', a: 'We build all sites with clean SEO code, correct HTML structures, and JSON-LD schemas, giving you the best organic launch foundation.' },
+      { q: 'How do we request a project quote?', a: 'Click the "Get Started" button or call +91 92536 25099 to discuss your custom project requirements.' }
     ]
   },
   'seo-content-marketing': {
@@ -103,6 +132,21 @@ const serviceData: Record<string, ServiceDetail> = {
       { number: "01", title: "SEMANTIC LANDING ENGINE", tech: ["Optimized HTML5", "JSON-LD Schema", "Next.js SSG"], purpose: "Rendering crawlable content structures, technical metadata, and responsive articles that satisfy search algorithms instantly.", color: "var(--accent-primary)" },
       { number: "02", title: "VISIBILITY ANALYTICS CORE", tech: ["Search Console API", "Keyword Metrics", "Semantic Maps"], purpose: "Scanning real-time search query shifts, identifying competitive gaps, and targeting high-converting keyword vectors.", color: "#00f0ff" },
       { number: "03", title: "AUTHORITY BACKBONE MATRIX", tech: ["Link Acquisition", "Domain Ledger", "Trust Metrics"], purpose: "Establishing high-domain backlink portfolios that signal absolute industry authority and trust to search engine indexing bots.", color: "#a855f7" }
+    ],
+    meta: {
+      title: 'Expert Google SEO & Content Marketing Agency | Avani Enterprises',
+      description: 'Rank first on search engine results, drive organic high-intent traffic, and scale your brand authority. Request a free detailed SEO site audit.',
+      keywords: 'google seo services, content marketing agency, technical seo audit, organic search ranking, link building, keyword research'
+    },
+    faqs: [
+      { q: 'How does SEO drive business revenue?', a: 'SEO ranks your website first on Google when buyers search for your services. This drives free, highly qualified organic traffic that converts into sales.' },
+      { q: 'How long before we see results from SEO?', a: 'SEO is a compounding strategy. You will typically see significant keyword rank improvements and organic traffic increases within 90 to 120 days.' },
+      { q: 'What is technical SEO?', a: 'Technical SEO refers to backend optimizations like sitemaps, schema data, robot.txt files, and page speeds that help search crawlers read and index your site.' },
+      { q: 'Do you help write blog content?', a: 'Yes. Our team drafts unique, well-researched, and SEO-optimized articles designed for both search engines and human readers.' },
+      { q: 'What is link building?', a: 'Link building involves securing links from other respected, high-authority websites back to your site, signaling credibility to Google.' },
+      { q: 'Do you provide local Google Maps SEO?', a: 'Yes. We optimize your Google Business Profile to rank first for geographic local queries.' },
+      { q: 'Do we get monthly progress reports?', a: 'Yes, we provide reports tracking search impressions, keyword ranks, clicks, and organic conversions.' },
+      { q: 'How do we schedule a site audit?', a: 'Contact our search engine consulting team at +91 92536 25099 for a free website health audit.' }
     ]
   },
   'social-media-marketing': {
@@ -126,6 +170,135 @@ const serviceData: Record<string, ServiceDetail> = {
       { number: "01", title: "NARRATIVE CREATIVE FACTORY", tech: ["Cinematic Video", "Kinetic Graphics", "Premium Copy"], purpose: "Designing attention-grabbing hooks, scroll-stopping graphic assets, and compelling storylines that convert casual viewers into active followers.", color: "var(--accent-primary)" },
       { number: "02", title: "CHANNEL MULTI-PUBLISHER", tech: ["Scheduling APIs", "Multi-Platform Dispatch", "Audience Sync"], purpose: "Automating high-engagement timing releases across LinkedIn, Instagram, TikTok, and Twitter, ensuring maximum global reach.", color: "#00f0ff" },
       { number: "03", title: "CONVERSION RETARGETING", tech: ["Tracking Pixels", "Lead Capture Form", "Audience Sync"], purpose: "Monitoring user behaviors, capturing visitor registrations, and retargeting ads to transform attention into revenue-ready pipeline.", color: "#a855f7" }
+    ],
+    meta: {
+      title: 'Premium Social Media Marketing Agency | Avani Enterprises',
+      description: 'Scale your audience and build brand voice. We manage Instagram, LinkedIn, and Meta Ads campaigns with reel production and graphics design.',
+      keywords: 'social media management, instagram reels production, meta ads agency, linkedin b2b marketing, audience engagement, social media branding'
+    },
+    faqs: [
+      { q: 'What platforms do you manage?', a: 'We manage Instagram, Facebook, LinkedIn, Twitter, and YouTube, customizing content for each channel.' },
+      { q: 'Do you create video reels?', a: 'Yes. We write scripts, edit video reels, and manage video publishing schedules.' },
+      { q: 'How frequently do you post?', a: 'Posting schedules depend on your plan. Standard packages include 3-4 posts/week, while premium plans offer daily stories and reels.' },
+      { q: 'How do you target social media ads?', a: 'We configure campaigns using detailed demographics, user interests, custom databases, and lookalike modeling.' },
+      { q: 'Who writes captions and copy?', a: 'Our content team handles all caption copywriting and hashtag research.' },
+      { q: 'Do you reply to page comments and messages?', a: 'Yes, we manage standard comment moderation and answer direct messages based on your FAQs.' },
+      { q: 'Can we review the content calendar ahead of time?', a: 'Yes, we share a monthly content calendar for your approvals before publishing.' },
+      { q: 'How do we start?', a: 'Call +91 92536 25099 to schedule a 20-minute brand consulting session with our creative directors.' }
+    ]
+  },
+  'digital-marketing': {
+    icon: <Globe size={48} />,
+    title: 'Digital Marketing Services',
+    titleLines: { line1: "DIGITAL", line2: "FULL-FUNNEL", line3: "MARKETING" },
+    image: "/whatwecreate/services-social.png",
+    desc: 'We deliver comprehensive digital marketing strategies that align search visibility, paid ads, and conversion optimization to drive revenue.',
+    hook: 'Scale your business with full-funnel marketing campaigns.',
+    ctaHook: 'Ready to align your acquisition channels and capture market share?',
+    longDesc: 'Generic campaigns waste resources. We align your SEO, PPC search ads, social media reels, and landing page designs into a single conversion pipeline. Track customer acquisition costs (CAC) and scale your campaigns systematically.',
+    features: ['Full-funnel marketing strategy', 'Custom landing page conversion optimization', 'Multi-channel attribution logs', 'Weekly campaign progress reports', 'B2B & B2C customer acquisition'],
+    stats: [['4.5x', 'Avg ROI'], ['200+', 'Campaigns Done'], ['45%', 'Lower CPL']],
+    workflow: [
+      { title: "1. STRATEGY AUDIT", desc: "We review your current traffic channels, landing page flow, and competitor ad setups to find acquisition gaps." },
+      { title: "2. PLATFORM OPTIMIZATION", desc: "We design custom, fast landing pages and set up tracking pixels to ensure ad spend converts." },
+      { title: "3. MULTI-CHANNEL LAUNCH", desc: "We deploy search ads, retargeting display ads, and authority SEO content concurrently." },
+      { title: "4. DURATION MANAGEMENT", desc: "We optimize campaigns daily, reallocating budgets to high-performing keywords and ad creatives." }
+    ],
+    layers: [
+      { number: "01", title: "CONVERSION OPTIMIZED SITES", tech: ["HTML5", "Conversion Funnels", "Web analytics"], purpose: "Building landing pages designed to load in milliseconds and convert traffic into leads.", color: "var(--accent-primary)" },
+      { number: "02", title: "PAID MEDIA CHANNELS", tech: ["Google Ads", "Meta Ads", "LinkedIn Campaign Manager"], purpose: "Reaching prospective customers across search, social, and display directories.", color: "#00f0ff" },
+      { number: "03", title: "DATA & ANALYTICS STACK", tech: ["Google Tag Manager", "Attribution Models", "Audience Logs"], purpose: "Tracking cost-per-lead (CPL) and ad spend returns to optimize allocations.", color: "#a855f7" }
+    ],
+    meta: {
+      title: 'Full-Funnel Digital Marketing Services | Avani Enterprises',
+      description: 'Scale your customer acquisition with our full-service digital agency. We optimize SEO, paid media, and custom landing page designs.',
+      keywords: 'digital marketing company, customer acquisition services, full funnel marketing agency, cro software, conversion optimization'
+    },
+    faqs: [
+      { q: 'What is full-funnel digital marketing?', a: 'It is a strategy that targets buyers at all stages — awareness (SEO, reels), consideration (blogs, guides), and conversion (search ads, retargeting).' },
+      { q: 'How do you structure ad campaigns?', a: 'We structure ad campaigns by separating research keywords, commercial terms, and remarketing lists to maximize conversion rates.' },
+      { q: 'Do you help write website copy?', a: 'Yes, our copywriting team writes SEO-optimized copy for landing pages.' },
+      { q: 'Can we configure custom landing pages?', a: 'Yes. We design and host custom landing pages designed specifically for your ad campaigns.' },
+      { q: 'What metrics do we track?', a: 'We track cost-per-click (CPC), cost-per-lead (CPL), search impressions, conversion rates, and total return on ad spend (ROAS).' },
+      { q: 'Is B2B lead generation supported?', a: 'Yes, we optimize campaigns on Google and LinkedIn to reach enterprise decision-makers.' },
+      { q: 'How long are your contracts?', a: 'We offer flexible monthly retainer plans with custom SLAs.' },
+      { q: 'How do we schedule a consulting session?', a: 'Call +91 92536 25099 to arrange an online walkthrough with our marketing directors.' }
+    ]
+  },
+  'google-ads': {
+    icon: <Target size={48} />,
+    title: 'Google Search Ads',
+    titleLines: { line1: "GOOGLE", line2: "HIGH-ROI", line3: "SEARCH ADS" },
+    image: "/whatwecreate/services-seo.png",
+    desc: 'Maximize your ROI with structured pay-per-click search, display, and shopping campaigns targeted at active buyers.',
+    hook: 'Acquire high-intent customers the moment they search.',
+    ctaHook: 'Ready to eliminate ad budget waste and scale qualified leads?',
+    longDesc: 'We manage keyword research, write ad headlines, filter out negative keywords weekly, and design high-converting landing pages. Lower your cost-per-lead (CPL) and maximize your return on ad spend (ROAS) on Google.',
+    features: ['Negative keyword filtering', 'High-converting ad copy testing', 'Conversion tracking configuration', 'Google Shopping & Performance Max', 'Weekly CPL optimization audits'],
+    stats: [['4x+', 'Average ROAS'], ['Under 24h', 'Leads Flow'], ['100%', 'Audience Target']],
+    workflow: [
+      { title: "1. KEYWORD INTENT RESEARCH", desc: "We target commercial keywords that active buyers search for, avoiding expensive informational terms." },
+      { title: "2. NEGATIVE KEYWORD MATRIX", desc: "We draft a comprehensive negative keyword list to block irrelevant search queries immediately." },
+      { title: "3. AD COPYWRITING", desc: "We write ad headlines and descriptions, maximizing quality scores and click-through rates." },
+      { title: "4. BID OPTIMIZATION", desc: "We adjust bids dynamically to capture top-of-page ranks for high-value search queries." }
+    ],
+    layers: [
+      { number: "01", title: "AD HEADLINES INTERFACE", tech: ["Responsive Search Ads", "Call extensions", "Dynamic text"], purpose: "Creating ad copy that stands out on search engine results pages.", color: "var(--accent-primary)" },
+      { number: "02", title: "BIDDING & CONVERSION ENGINE", tech: ["Smart Bidding", "Target CPA", "ROAS models"], purpose: "Optimizing ad bids automatically to secure leads at the lowest cost.", color: "#00f0ff" },
+      { number: "03", title: "AUDIENCE SEGMENTS", tech: ["Remarketing Lists", "Customer Match", "Similar Segments"], purpose: "Retargeting warm prospects who visited your site to complete their purchases.", color: "#a855f7" }
+    ],
+    meta: {
+      title: 'Google Ads & PPC Management Agency | Avani Enterprises',
+      description: 'Maximize your return on ad spend (ROAS) on Google. We manage keyword research, ad copy, and landing pages. Request a free PPC audit.',
+      keywords: 'google ads agency, ppc campaign management, google search ads, search engine marketing, click through rate optimization, lead tracking'
+    },
+    faqs: [
+      { q: 'What budget is required for Google Ads?', a: 'We recommend starting with an ad budget of at least ₹10,000/month. We customize campaigns to fit your budget.' },
+      { q: 'How fast do we generate leads?', a: 'Google Ads are active instantly, meaning you can start generating leads within 24 hours of launch.' },
+      { q: 'Do you help with negative keywords?', a: 'Yes. We filter out irrelevant search queries weekly to prevent budget waste.' },
+      { q: 'Can we build custom landing pages?', a: 'Yes, we design landing pages specifically for your PPC ads.' },
+      { q: 'Do you manage Google Display and Shopping Ads?', a: 'Yes, we manage search, display, shopping, Performance Max, and YouTube campaigns.' },
+      { q: 'What is ROAS?', a: 'ROAS (Return on Ad Spend) measures the revenue generated for every rupee spent on ads. We target a 3x to 5x ROAS.' },
+      { q: 'How are conversions tracked?', a: 'We set up tracking via Google Analytics and Tag Manager for calls, form submissions, and sales.' },
+      { q: 'How do we start?', a: 'Call +91 92536 25099 to arrange a free PPC audit of your current campaigns.' }
+    ]
+  },
+  'performance-marketing': {
+    icon: <TrendingUp size={48} />,
+    title: 'Performance Marketing',
+    titleLines: { line1: "PERFORMANCE", line2: "DATA-DRIVEN", line3: "MARKETING" },
+    image: "/whatwecreate/services-web-dev.png",
+    desc: 'Scale your customer acquisition cost-effectively using data-backed paid ads, conversion rate optimization, and tracking pixels.',
+    hook: 'Data-driven paid ads scaled for maximum conversions.',
+    ctaHook: 'Ready to optimize your ad spend and scale customer acquisition?',
+    longDesc: 'We coordinate paid campaigns across Meta, Google, and LinkedIn with advanced tracking setups (Meta Pixel, Google Tag Manager). Monitor conversion rates, retarget warm visitors, and lower CAC systematically.',
+    features: ['Tracking pixels integration', 'Conversion rate optimization (CRO)', 'Dynamic retargeting funnels', 'Ad creative asset testing', 'Detailed CAC & CPL dashboards'],
+    stats: [['5x+', 'ROAS Scale'], ['40%', 'Lower CAC'], ['10M+', 'Ad Spend Managed']],
+    workflow: [
+      { title: "1. PIXEL AUDIT & SETUP", desc: "We set up tracking pixels, conversion API hooks, and dashboards to trace customer actions." },
+      { title: "2. CREATIVE TESTING", desc: "We draft and test multiple ad formats, headlines, and visuals to find high-performing ads." },
+      { title: "3. SCALE ACQUISITION", desc: "We direct budgets to high-performing campaigns to maximize sales volume." },
+      { title: "4. RETARGETING FUNNELS", desc: "We retarget warm visitors who abandoned carts or forms, increasing sales." }
+    ],
+    layers: [
+      { number: "01", title: "HIGH CONVERTING CREATIVES", tech: ["Video Ads", "Banner Designs", "Copywriting"], purpose: "Designing visual ad assets that capture viewer attention and drive clicks.", color: "var(--accent-primary)" },
+      { number: "02", title: "TRACKING & ATTRIBUTION", tech: ["Meta Conversions API", "Custom Events", "Attribution windows"], purpose: "Recording exact customer purchase steps to analyze campaign revenue.", color: "#00f0ff" },
+      { number: "03", title: "SCALE RETARGETING", tech: ["Dynamic Product Ads", "LAL Audiences", "Custom lists"], purpose: "Scaling ad spend on high-converting audience categories.", color: "#a855f7" }
+    ],
+    meta: {
+      title: 'Performance Marketing Agency | Data-Driven Paid Ads | Avani Enterprises',
+      description: 'Acquire customers cost-effectively using advanced tracking setups, landing pages, and conversion optimizations. Request a free audit.',
+      keywords: 'performance marketing company, conversion rate optimization, tracking pixels setup, meta conversion api, lead generation dashboards'
+    },
+    faqs: [
+      { q: 'What is performance marketing?', a: 'It is a digital strategy focused on measurable outcomes (leads, registrations, sales) where budgets are optimized based on conversion metrics.' },
+      { q: 'What networks do you run ads on?', a: 'We manage campaigns across Meta (Facebook, Instagram), Google, YouTube, LinkedIn, and programmatic networks.' },
+      { q: 'Do you manage tracking pixels?', a: 'Yes. We set up Meta Pixel, Conversions API, Google Tag Manager, and custom UTM parameters.' },
+      { q: 'Can you help lower our customer acquisition cost (CAC)?', a: 'Yes. We optimize landing page conversion rates and ad copy to lower CPL and overall CAC.' },
+      { q: 'How often do you test new ad creative designs?', a: 'We test new ad graphics and copy angles weekly to prevent ad fatigue.' },
+      { q: 'What reports do we receive?', a: 'You receive weekly dashboards showing ad spend, CPL, click logs, and conversion revenue.' },
+      { q: 'Is B2B lead generation supported?', a: 'Yes, we run targeted LinkedIn and Google Search campaigns for B2B client acquisition.' },
+      { q: 'How do we start?', a: 'Reach out to our marketing consultants at +91 92536 25099 to arrange an online marketing audit.' }
     ]
   },
   'ai-solutions': {
@@ -273,6 +446,7 @@ const ServiceDetail = () => {
   const service = slug ? serviceData[slug] : null;
   const [activeStep, setActiveStep] = useState(0);
   const [selectedLayer, setSelectedLayer] = useState(0);
+  const [faqOpen, setFaqOpen] = useState<number | null>(null);
 
   useEffect(() => { 
     window.scrollTo(0, 0); 
@@ -291,9 +465,29 @@ const ServiceDetail = () => {
 
   const { line1, line2, line3 } = service.titleLines;
 
+  // Build FAQ JSON-LD if FAQs exist
+  const faqLd = service.faqs ? {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    'mainEntity': service.faqs.map(item => ({
+      '@type': 'Question',
+      'name': item.q,
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': item.a
+      }
+    }))
+  } : null;
+
   return (
     <div className="dh-service-detail-page" style={{ background: 'var(--bg-primary)', color: 'var(--text-primary)', minHeight: '100vh', overflow: 'hidden' }}>
-      
+      <Helmet>
+        {service.meta?.title && <title>{service.meta.title}</title>}
+        {service.meta?.description && <meta name="description" content={service.meta.description} />}
+        {service.meta?.keywords && <meta name="keywords" content={service.meta.keywords} />}
+        {faqLd && <script type="application/ld+json">{JSON.stringify(faqLd)}</script>}
+      </Helmet>
+
       {/* 1. HERO - Dual Column Premium Layout */}
       <section className="theme-brown" style={{ minHeight: '70vh', display: 'flex', alignItems: 'center', background: 'var(--bg-primary)', overflow: 'hidden', position: 'relative', paddingTop: '120px', paddingBottom: '80px' }}>
         <Grain />
@@ -303,7 +497,10 @@ const ServiceDetail = () => {
         <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '2px', background: 'linear-gradient(to right, transparent, var(--accent-primary) 25%, var(--accent-light) 50%, var(--accent-primary) 75%, transparent)', zIndex: 10 }} />
         
         <div className="dh-container" style={{ position: 'relative', zIndex: 10 }}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '4rem', alignItems: 'center' }} className="dh-responsive-grid">
+          {/* Visible breadcrumb added */}
+          <Breadcrumb />
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '4rem', alignItems: 'center', marginTop: '2rem' }} className="dh-responsive-grid">
             
             {/* Left Content Column */}
             <motion.div 
@@ -429,7 +626,8 @@ const ServiceDetail = () => {
             </motion.div>
             
           </div>
-        </div></section>
+        </div>
+      </section>
 
       <LuxuryLine />
 
@@ -830,6 +1028,44 @@ const ServiceDetail = () => {
           </div>
         </div>
       </section>
+
+      <LuxuryLine />
+
+      {/* 5. AUDITED FAQ ACCORDION SECTION */}
+      {service.faqs && (
+        <section style={{ padding: '90px 0', background: 'var(--bg-secondary)', position: 'relative', overflow: 'hidden' }}>
+          <Grain /><GridBg size={30} opacity={0.04} />
+          <div className="dh-container" style={{ maxWidth: '800px', position: 'relative', zIndex: 10 }}>
+            <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+              <span style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '.15em', color: 'var(--accent-primary)', textTransform: 'uppercase', display: 'block', marginBottom: '.75rem' }}>FAQ</span>
+              <h2 style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>Frequently Asked Questions</h2>
+            </div>
+            
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              {service.faqs.map((f, i) => (
+                <div key={i} 
+                  style={{ background: 'var(--card-bg)', border: `1px solid ${faqOpen === i ? 'var(--accent-primary)' : 'var(--border-faint)'}`, borderRadius: '16px', overflow: 'hidden', cursor: 'pointer', transition: 'border-color .3s' }}
+                  onClick={() => setFaqOpen(faqOpen === i ? null : i)}>
+                  <div style={{ padding: '20px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '1rem' }}>
+                    <h3 style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.95rem', fontWeight: 700, color: 'var(--text-primary)', margin: 0, lineHeight: 1.4 }}>{f.q}</h3>
+                    {faqOpen === i ? <ChevronUp size={18} color="var(--accent-primary)" /> : <ChevronDown size={18} color="var(--text-secondary)" />}
+                  </div>
+                  {faqOpen === i && (
+                    <div style={{ padding: '0 24px 20px', borderTop: '1px solid var(--border-faint)' }}>
+                      <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 1.7, margin: '12px 0 0' }}>{f.a}</p>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      <LuxuryLine />
+
+      {/* Internal linking component added */}
+      <InternalLinking />
 
       <style>{`
         @media (max-width: 768px) {

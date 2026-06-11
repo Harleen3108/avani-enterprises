@@ -1,0 +1,18 @@
+# Avani Enterprises
+
+An enterprise-grade technology and digital marketing agency based in Gurgaon, Haryana, India. We build high-performance web applications, automate business processes, and run high-ROI digital campaigns.
+
+## Services
+
+- **Web Development**: Custom web applications, corporate websites, e-commerce platforms, and API integrations using modern tech stacks (React, Node.js, Next.js).
+- **SEO (Search Engine Optimization)**: Technical SEO audits, local SEO, content strategy, and enterprise keyword rankings.
+- **Social Media Marketing**: Brand strategy, visual design, content calendars, and targeted Meta/LinkedIn ads.
+- **Google Ads**: Hyper-targeted paid search, display network, and YouTube campaign management.
+- **Digital Marketing**: Full-funnel digital strategy, conversion rate optimization (CRO), and growth marketing.
+
+## Core URLs
+
+- **Homepage**: https://www.avanienterprises.in
+- **Services**: https://www.avanienterprises.in/services
+- **Contact**: https://www.avanienterprises.in/contact
+- **Blog**: https://www.avanienterprises.in/blog

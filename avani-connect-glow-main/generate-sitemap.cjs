@@ -98,6 +98,40 @@ const urls = [
     priority:   "0.7",
   },
 
+  // ── SEO Product Landing Pages ─────────────────────────────────────────────
+  { loc: `${BASE_URL}/hr-portal`,                      lastmod: "2026-06-10", changefreq: "monthly", priority: "0.9" },
+  { loc: `${BASE_URL}/hrms-software-india`,            lastmod: "2026-06-10", changefreq: "monthly", priority: "0.9" },
+  { loc: `${BASE_URL}/payroll-software-india`,         lastmod: "2026-06-10", changefreq: "monthly", priority: "0.9" },
+  { loc: `${BASE_URL}/attendance-management-system`,   lastmod: "2026-06-10", changefreq: "monthly", priority: "0.9" },
+  { loc: `${BASE_URL}/leave-management-software`,      lastmod: "2026-06-10", changefreq: "monthly", priority: "0.9" },
+  { loc: `${BASE_URL}/employee-management-software`,   lastmod: "2026-06-10", changefreq: "monthly", priority: "0.9" },
+  { loc: `${BASE_URL}/employee-portal`,                lastmod: "2026-06-10", changefreq: "monthly", priority: "0.9" },
+  { loc: `${BASE_URL}/crm-software-india`,             lastmod: "2026-06-10", changefreq: "monthly", priority: "0.9" },
+  { loc: `${BASE_URL}/workforce-management-software`,  lastmod: "2026-06-10", changefreq: "monthly", priority: "0.9" },
+  { loc: `${BASE_URL}/project-management-software`,    lastmod: "2026-06-10", changefreq: "monthly", priority: "0.9" },
+  { loc: `${BASE_URL}/business-operating-system`,      lastmod: "2026-06-10", changefreq: "monthly", priority: "0.9" },
+
+  // ── Competitor Alternative Pages ──────────────────────────────────────────
+  { loc: `${BASE_URL}/keka-alternative`,               lastmod: "2026-06-10", changefreq: "monthly", priority: "0.85" },
+  { loc: `${BASE_URL}/greythr-alternative`,            lastmod: "2026-06-10", changefreq: "monthly", priority: "0.85" },
+  { loc: `${BASE_URL}/darwinbox-alternative`,          lastmod: "2026-06-10", changefreq: "monthly", priority: "0.85" },
+  { loc: `${BASE_URL}/zoho-people-alternative`,        lastmod: "2026-06-10", changefreq: "monthly", priority: "0.85" },
+
+  // ── Local SEO & City Pages ────────────────────────────────────────────────
+  { loc: `${BASE_URL}/rohtak`,                         lastmod: "2026-06-10", changefreq: "monthly", priority: "0.85" },
+  { loc: `${BASE_URL}/gurgaon`,                        lastmod: "2026-06-10", changefreq: "monthly", priority: "0.85" },
+  { loc: `${BASE_URL}/faridabad`,                      lastmod: "2026-06-10", changefreq: "monthly", priority: "0.85" },
+  { loc: `${BASE_URL}/delhi`,                          lastmod: "2026-06-10", changefreq: "monthly", priority: "0.85" },
+  { loc: `${BASE_URL}/web-development-company-haryana`, lastmod: "2026-06-10", changefreq: "monthly", priority: "0.85" },
+  { loc: `${BASE_URL}/web-development-company-delhi`,   lastmod: "2026-06-10", changefreq: "monthly", priority: "0.85" },
+  { loc: `${BASE_URL}/social-media-marketing-agency-haryana`, lastmod: "2026-06-10", changefreq: "monthly", priority: "0.85" },
+  { loc: `${BASE_URL}/social-media-marketing-agency-delhi`,   lastmod: "2026-06-10", changefreq: "monthly", priority: "0.85" },
+  { loc: `${BASE_URL}/digital-marketing-agency-haryana`, lastmod: "2026-06-10", changefreq: "monthly", priority: "0.85" },
+  { loc: `${BASE_URL}/digital-marketing-agency-delhi`,   lastmod: "2026-06-10", changefreq: "monthly", priority: "0.85" },
+  { loc: `${BASE_URL}/seo-company-haryana`,            lastmod: "2026-06-10", changefreq: "monthly", priority: "0.85" },
+  { loc: `${BASE_URL}/seo-company-delhi`,              lastmod: "2026-06-10", changefreq: "monthly", priority: "0.85" },
+  { loc: `${BASE_URL}/google-ads-agency-haryana`,      lastmod: "2026-06-10", changefreq: "monthly", priority: "0.85" },
+
   // ── Legal / Utility (low priority — still indexable) ─────────────────────
   {
     loc:        `${BASE_URL}/privacy-policy`,
