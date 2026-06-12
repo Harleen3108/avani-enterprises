@@ -24,7 +24,7 @@ const PAGE: LocalServicePageProps = {
       { value: '80+', label: 'Delhi Clients' },
     ],
   },
-  intro: `Delhi\'s search engine landscape is highly competitive. To rank on the first page, your site must load instantly, have structured schema markup, and hold high-authority backlink profiles. Our SEO Company Delhi designs custom optimization campaigns.
+  intro: `Delhi's search engine landscape is highly competitive. To rank on the first page, your site must load instantly, have structured schema markup, and hold high-authority backlink profiles. Our SEO Company Delhi designs custom optimization campaigns.
 
 Avani Enterprises has managed SEO campaigns for over 80+ companies in Delhi, helping them achieve first-page Google rankings and consistently lower customer acquisition costs.`,
   whyAvani: [

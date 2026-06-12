@@ -24,7 +24,7 @@ const PAGE: LocalServicePageProps = {
       { value: '10M+', label: 'Ad Spend Managed' },
     ],
   },
-  intro: `Gurgaon is India\'s corporate and technology hub. To stand out, businesses need high-fidelity platforms and advanced digital campaigns. Avani Enterprises provides custom React/Next.js development, technical SEO, and targeted paid media campaigns.
+  intro: `Gurgaon is India's corporate and technology hub. To stand out, businesses need high-fidelity platforms and advanced digital campaigns. Avani Enterprises provides custom React/Next.js development, technical SEO, and targeted paid media campaigns.
 
 We have designed enterprise portals, CRM systems, and managed performance marketing campaigns for over 150+ companies in Gurgaon, helping them accelerate growth.`,
   whyAvani: [

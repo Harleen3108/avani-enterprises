@@ -24,7 +24,7 @@ const PAGE: LocalServicePageProps = {
       { value: '50+', label: 'Happy Rohtak Brands' },
     ],
   },
-  intro: `Rohtak\'s business community is expanding rapidly. To stay competitive, local brands need a digital presence that builds trust and drives visibility. Avani Enterprises is the premier digital agency in Rohtak, helping local businesses scale with custom web design, SEO, and social media.
+  intro: `Rohtak's business community is expanding rapidly. To stay competitive, local brands need a digital presence that builds trust and drives visibility. Avani Enterprises is the premier digital agency in Rohtak, helping local businesses scale with custom web design, SEO, and social media.
 
 We have designed portals for local institutions and e-commerce websites for local retail businesses, making us the most trusted technology team in Rohtak.`,
   whyAvani: [

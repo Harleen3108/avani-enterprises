@@ -24,7 +24,7 @@ const PAGE: LocalServicePageProps = {
       { value: '10M+', label: 'Ad Spend Managed' },
     ],
   },
-  intro: `Delhi is India\'s fast-paced commercial capital. To stand out, businesses need high-fidelity platforms and advanced digital campaigns. Avani Enterprises provides custom React/Next.js development, technical SEO, and targeted paid media campaigns.
+  intro: `Delhi is India's fast-paced commercial capital. To stand out, businesses need high-fidelity platforms and advanced digital campaigns. Avani Enterprises provides custom React/Next.js development, technical SEO, and targeted paid media campaigns.
 
 We have designed enterprise portals, CRM systems, and managed performance marketing campaigns for over 150+ companies in Delhi, helping them accelerate growth.`,
   whyAvani: [

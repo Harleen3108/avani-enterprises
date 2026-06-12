@@ -48,7 +48,17 @@ const Grain = () => (
 const Grid = () => (
   <div style={{ position:'absolute',inset:0,backgroundImage:'linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px)',backgroundSize:'40px 40px',pointerEvents:'none' }} />
 );
-const Blob = ({ top,left,right,bottom,size=300,color=T.accent,opacity=0.06,blur=100 }:any) => (
+interface BlobProps {
+  top?: string;
+  left?: string;
+  right?: string;
+  bottom?: string;
+  size?: number;
+  color?: string;
+  opacity?: number;
+  blur?: number;
+}
+const Blob = ({ top,left,right,bottom,size=300,color=T.accent,opacity=0.06,blur=100 }: BlobProps) => (
   <div style={{ position:'absolute',top,left,right,bottom,width:size,height:size,background:color,opacity,filter:`blur(${blur}px)`,borderRadius:'50%',pointerEvents:'none',zIndex:1 }} />
 );
 const Line = () => (
