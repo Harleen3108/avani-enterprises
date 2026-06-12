@@ -13,7 +13,17 @@ const Grain = () => (
 const Grid = () => (
   <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px)',backgroundSize:'40px 40px',pointerEvents:'none',opacity: 0.5 }} />
 );
-const GlowBlob = ({ top, left, right, bottom, size = 300, color = 'var(--accent-primary)', opacity = 0.05, blur = 100 }: any) => (
+interface GlowBlobProps {
+  top?: string;
+  left?: string;
+  right?: string;
+  bottom?: string;
+  size?: number;
+  color?: string;
+  opacity?: number;
+  blur?: number;
+}
+const GlowBlob = ({ top, left, right, bottom, size = 300, color = 'var(--accent-primary)', opacity = 0.05, blur = 100 }: GlowBlobProps) => (
   <div style={{ position: 'absolute', top, left, right, bottom, width: size, height: size, background: color, opacity, filter: `blur(${blur}px)`, borderRadius: '50%', pointerEvents: 'none', zIndex: 1 }} />
 );
 const LuxuryLine = () => (
@@ -198,7 +208,7 @@ export default function ComparisonPageTemplate({ data }: ComparisonPageTemplateP
         <div className="dh-container" style={{ maxWidth: '800px' }}>
           <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
             <span style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '.15em', color: 'var(--accent-primary)', textTransform: 'uppercase', display: 'block', marginBottom: '.75rem' }}>FAQ</span>
-            <h2 style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(1.6rem,3.5vw,2.2rem)', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-\.02em', margin: 0 }}>Frequently Asked Questions</h2>
+            <h2 style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(1.6rem,3.5vw,2.2rem)', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.02em', margin: 0 }}>Frequently Asked Questions</h2>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
