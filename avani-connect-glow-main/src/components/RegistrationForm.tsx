@@ -1237,9 +1237,11 @@ interface RegistrationFormProps {
   uniqueConsentId: string;
   source?: string;
   isEmbedded?: boolean;
+  /** When true, adds an "Other" service option with a free-text field for a custom requirement. */
+  allowCustomService?: boolean;
 }
 
-export default function RegistrationForm({ uniqueConsentId, source, isEmbedded = false }: RegistrationFormProps) {
+export default function RegistrationForm({ uniqueConsentId, source, isEmbedded = false, allowCustomService = false }: RegistrationFormProps) {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
@@ -1258,6 +1260,7 @@ export default function RegistrationForm({ uniqueConsentId, source, isEmbedded =
   const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({});
 
   const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const [customService, setCustomService] = useState("");
   const [isBusinessOpen, setIsBusinessOpen] = useState(false);
   const [openCountryCode, setOpenCountryCode] = useState(false);
   const [selectedCountryCode, setSelectedCountryCode] = useState("+91");
@@ -1322,12 +1325,19 @@ export default function RegistrationForm({ uniqueConsentId, source, isEmbedded =
     }
 
     try {
+      // Replace the "Other" marker with the user's custom requirement text.
+      // For forms without allowCustomService this is a no-op (no "Other" is ever selected).
+      const rawServices = (formData.service as string[]) ?? [];
+      const finalServices = rawServices.flatMap((s) =>
+        s === "Other" ? (customService.trim() ? [customService.trim()] : []) : [s]
+      );
+
       const validatedData = formSchema.parse({
         name: formData.name,
         email: formData.email,
         cityState: formData.cityState,
         phone: formData.phone,
-        service: formData.service ?? [],
+        service: finalServices,
         businessCategory: formData.businessCategory,
         consent: formData.consent,
       });
@@ -1650,7 +1660,7 @@ export default function RegistrationForm({ uniqueConsentId, source, isEmbedded =
 
                 {isServicesOpen && (
                   <div className={cn("absolute z-20 w-full mt-1 backdrop-blur-md border border-border shadow-xl rounded-lg py-1 animate-in fade-in zoom-in-95 duration-200", isEmbedded ? "bg-white/95" : "bg-background/95")}>
-                    {services.map((service) => (
+                    {(allowCustomService ? [...services, "Other"] : services).map((service) => (
                       <div
                         key={service}
                         className="flex items-center px-3 py-2 hover:bg-primary/10 cursor-pointer transition-colors"
@@ -1671,6 +1681,20 @@ export default function RegistrationForm({ uniqueConsentId, source, isEmbedded =
                         <span className={cn("text-base select-none", inputColor)}>{service}</span>
                       </div>
                     ))}
+                  </div>
+                )}
+                {allowCustomService && formData.service?.includes("Other") && (
+                  <div className="relative w-full mt-2">
+                    <div className={cn("absolute left-3 top-1/2 -translate-y-1/2", iconColor)}>
+                      <FileText className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
+                    </div>
+                    <Input
+                      type="text"
+                      placeholder="Tell us what you need *"
+                      value={customService}
+                      onChange={(e) => setCustomService(e.target.value)}
+                      className={cn("pl-10 sm:pl-12 border-border/60 focus:border-primary py-2 sm:py-2.5 text-base w-full", "bg-white hover:bg-slate-50 transition-colors", inputColor, placeholderColor)}
+                    />
                   </div>
                 )}
                 {errors.service && (

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { LayoutDashboard, LogOut, Menu, X, User, MessageSquare, Briefcase, FileText, BarChart3, Rocket, Link as LinkIcon } from "lucide-react";
+import { LayoutDashboard, LogOut, Menu, X, User, MessageSquare, Briefcase, FileText, BarChart3, Rocket, Sparkles, Link as LinkIcon } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import clsx from "clsx";
 
@@ -68,6 +68,7 @@ const Sidebar = () => {
                             <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-4">Leads</p>
                             <NavItem to="/" icon={LayoutDashboard} label="Leads Dashboard" />
                             <NavItem to="/7-day-launch" icon={Rocket} label="7-Day Launch" />
+                            <NavItem to="/landing-page-free" icon={Sparkles} label="LandingPageFree" />
                             <NavItem to="/avani-forms" icon={MessageSquare} label="Contact Submissions" />
                             <NavItem to="/growth-plan-leads" icon={Rocket} label="Growth Plan Leads" />
                             <NavItem to="/consultations" icon={User} label="Consultations" />

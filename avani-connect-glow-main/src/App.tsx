@@ -127,6 +127,7 @@ import SevenDayLaunch from "./pages/SevenDayLaunch";
 import ThankYou from "./pages/ThankYou";
 import LandingPage from "./pages/LandingPage";
 import LandingPage1 from "./pages/LandingPage1";
+import LandingPage2 from "./pages/LandingPage2";
 import Chatbot from "./components/Chatbot";
 import Links from "./pages/Links";
 import Home from "./components/Home";
@@ -282,7 +283,7 @@ const AppLayout = () => {
   const isDH2 = pathForCheck.startsWith('/home2');
 
   // Pages where Navbar should be hidden completely
-  const hideNavbar = pathForCheck === "/thank-you" || pathForCheck === "/business-setup" || pathForCheck === "/businesssetup1" || isDH1 || isDH2;
+  const hideNavbar = pathForCheck === "/thank-you" || pathForCheck === "/business-setup" || pathForCheck === "/businesssetup1" || pathForCheck === "/businesssetup2" || isDH1 || isDH2;
 
   // Pages where Navbar1 should be used instead of default Navbar
   const useNavbar1 = pathForCheck === "/web-dev" || pathForCheck === "/7-day-launch";
@@ -398,6 +399,7 @@ const AppLayout = () => {
           <Route path="/thank-you" element={<ThankYou />} />
           <Route path="/business-setup" element={<LandingPage />} />
           <Route path="/businesssetup1" element={<LandingPage1 />} />
+          <Route path="/businesssetup2" element={<LandingPage2 />} />
 
           <Route path="/not-found" element={<NotFound />} />
           <Route path="/web-dev" element={<Index />} />

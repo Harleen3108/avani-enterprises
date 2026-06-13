@@ -17,6 +17,7 @@ import SeoManager from "./pages/SeoManager";
 import BlogManagement from "./pages/BlogManagement";
 import NewsletterManagement from "./pages/NewsletterManagement";
 import SevenDayLaunch from "./pages/SevenDayLaunch";
+import LandingPageFree from "./pages/LandingPageFree";
 import GrowthPlanLeads from "./pages/GrowthPlanLeads";
 import LinkManagement from "./pages/LinkManagement";
 import LinkAnalytics from "./pages/LinkAnalytics";
@@ -96,6 +97,7 @@ function App() {
           >
             <Route index element={<Dashboard />} />
             <Route path="7-day-launch" element={<SevenDayLaunch />} />
+            <Route path="landing-page-free" element={<LandingPageFree />} />
             <Route path="contacted-leads" element={<ContactedLeads />} />
             <Route path="analytics" element={<AnalyticsDashboard />} />
             <Route path="growth-plan-leads" element={<GrowthPlanLeads />} />
