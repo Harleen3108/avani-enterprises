@@ -34,7 +34,7 @@ const services = [
 ];
 
 // Country codes array - सभी major countries के codes
-const countryCodes = [
+export const countryCodes = [
   {
     "value": "+91",
     "label": "India (+91)",

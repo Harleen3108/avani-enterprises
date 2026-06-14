@@ -128,6 +128,7 @@ import ThankYou from "./pages/ThankYou";
 import LandingPage from "./pages/LandingPage";
 import LandingPage1 from "./pages/LandingPage1";
 import LandingPage2 from "./pages/LandingPage2";
+import LandingPage3 from "./pages/LandingPage3";
 import Chatbot from "./components/Chatbot";
 import Links from "./pages/Links";
 import Home from "./components/Home";
@@ -207,6 +208,14 @@ import SmmDelhi from "./pages/local/SmmDelhi";
 import SmmHaryana from "./pages/local/SmmHaryana";
 import WebDevDelhi from "./pages/local/WebDevDelhi";
 import WebDevHaryana from "./pages/local/WebDevHaryana";
+import WebDevGurgaon from "./pages/local/WebDevGurgaon";
+import WebDevNoida from "./pages/local/WebDevNoida";
+import WebDevChandigarh from "./pages/local/WebDevChandigarh";
+import WebDevIndia from "./pages/local/WebDevIndia";
+import WebDevMumbai from "./pages/local/WebDevMumbai";
+import WebDevBangalore from "./pages/local/WebDevBangalore";
+import WebDevPune from "./pages/local/WebDevPune";
+import WebDevHyderabad from "./pages/local/WebDevHyderabad";
 
 import DH2PolicicueProject from './pages/home2/DH2PolicicueProject';
 import DH2IndusProject from './pages/home2/DH2IndusProject';
@@ -271,6 +280,14 @@ const AppLayout = () => {
     "/delhi",
     "/web-development-company-haryana",
     "/web-development-company-delhi",
+    "/web-development-company-gurgaon",
+    "/web-development-company-noida",
+    "/web-development-company-chandigarh",
+    "/web-development-company-india",
+    "/web-development-company-mumbai",
+    "/web-development-company-bangalore",
+    "/web-development-company-pune",
+    "/web-development-company-hyderabad",
     "/social-media-marketing-agency-haryana",
     "/social-media-marketing-agency-delhi",
     "/digital-marketing-agency-haryana",
@@ -283,13 +300,13 @@ const AppLayout = () => {
   const isDH2 = pathForCheck.startsWith('/home2');
 
   // Pages where Navbar should be hidden completely
-  const hideNavbar = pathForCheck === "/thank-you" || pathForCheck === "/business-setup" || pathForCheck === "/businesssetup1" || pathForCheck === "/businesssetup2" || isDH1 || isDH2;
+  const hideNavbar = pathForCheck === "/thank-you" || pathForCheck === "/business-setup" || pathForCheck === "/businesssetup1" || pathForCheck === "/businesssetup2" || pathForCheck === "/businesssetup3" || isDH1 || isDH2;
 
   // Pages where Navbar1 should be used instead of default Navbar
   const useNavbar1 = pathForCheck === "/web-dev" || pathForCheck === "/7-day-launch";
 
   // Pages where Footer should be hidden completely
-  const hideFooter = pathForCheck === "/thank-you" || pathForCheck === "/links" || isDH1 || isDH2;
+  const hideFooter = pathForCheck === "/thank-you" || pathForCheck === "/links" || pathForCheck === "/businesssetup3" || isDH1 || isDH2;
 
   // Pages where Footer1 should be used instead of default Footer
   const useFooter1 = pathForCheck === "/web-dev" || pathForCheck === "/7-day-launch";
@@ -349,6 +366,14 @@ const AppLayout = () => {
             <Route path="delhi" element={<Delhi />} />
             <Route path="web-development-company-haryana" element={<WebDevHaryana />} />
             <Route path="web-development-company-delhi" element={<WebDevDelhi />} />
+            <Route path="web-development-company-gurgaon" element={<WebDevGurgaon />} />
+            <Route path="web-development-company-noida" element={<WebDevNoida />} />
+            <Route path="web-development-company-chandigarh" element={<WebDevChandigarh />} />
+            <Route path="web-development-company-india" element={<WebDevIndia />} />
+            <Route path="web-development-company-mumbai" element={<WebDevMumbai />} />
+            <Route path="web-development-company-bangalore" element={<WebDevBangalore />} />
+            <Route path="web-development-company-pune" element={<WebDevPune />} />
+            <Route path="web-development-company-hyderabad" element={<WebDevHyderabad />} />
             <Route path="social-media-marketing-agency-haryana" element={<SmmHaryana />} />
             <Route path="social-media-marketing-agency-delhi" element={<SmmDelhi />} />
             <Route path="digital-marketing-agency-haryana" element={<DigitalMarketingHaryana />} />
@@ -400,6 +425,7 @@ const AppLayout = () => {
           <Route path="/business-setup" element={<LandingPage />} />
           <Route path="/businesssetup1" element={<LandingPage1 />} />
           <Route path="/businesssetup2" element={<LandingPage2 />} />
+          <Route path="/businesssetup3" element={<LandingPage3 />} />
 
           <Route path="/not-found" element={<NotFound />} />
           <Route path="/web-dev" element={<Index />} />

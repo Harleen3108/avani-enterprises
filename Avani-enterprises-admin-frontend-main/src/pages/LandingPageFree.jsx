@@ -66,8 +66,8 @@ const LandingPageFree = () => {
             // Handle different response formats
             const allData = Array.isArray(res.data) ? res.data : (res.data.data || res.data.leads || []);
 
-            // ✅ FILTER FOR LANDING PAGE FREE LEADS ONLY (from /businesssetup2)
-            const data = allData.filter(lead => lead.source === "businesssetup2");
+            // ✅ FILTER FOR LANDING PAGE FREE LEADS ONLY (from /businesssetup2 & /businesssetup3)
+            const data = allData.filter(lead => ["businesssetup2", "businesssetup3"].includes(lead.source));
 
             setLeads(data);
 
