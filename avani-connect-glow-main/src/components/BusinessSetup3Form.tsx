@@ -230,12 +230,12 @@ export default function BusinessSetup3Form() {
           <span className="b3f-new">₹0</span>
           <span className="b3f-off">100% OFF</span>
         </div>
-        <p className="b3f-offer-note">Free strategy session — claim your slot before it's gone!</p>
+        <p className="b3f-offer-note">Limited slots — claim yours before it's gone!</p>
       </div>
 
       <div className="b3f-body">
-        <h3 className="b3f-title">Book Your Free Session</h3>
-        <p className="b3f-subtitle">Fill in your details — it takes under 60 seconds.</p>
+        <h3 className="b3f-title">Get Started in 60 Seconds</h3>
+        <p className="b3f-subtitle">Fill in your details and our team will reach out shortly.</p>
 
         <form onSubmit={handleSubmit} noValidate>
           <div className="b3f-grid2">
@@ -333,7 +333,7 @@ export default function BusinessSetup3Form() {
           {apiError && <p className="b3f-apierr">{apiError}</p>}
 
           <button type="submit" className="b3f-submit" disabled={isLoading}>
-            {isLoading ? (<><Loader2 size={18} className="b3f-spin" /> Submitting...</>) : (<>Claim My Free Session <Send size={17} /></>)}
+            {isLoading ? (<><Loader2 size={18} className="b3f-spin" /> Submitting...</>) : (<>Get Started Now <Send size={17} /></>)}
           </button>
           <p className="b3f-trust">🔒 100% free · No spam · We reply within 24 hours</p>
         </form>

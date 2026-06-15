@@ -29,7 +29,7 @@ const benefits = [
   { icon: <Rocket />, title: "Done-For-You", desc: "Website, ads, content & AI handled by one expert team." },
   { icon: <Clock />, title: "Launch in 7 Days", desc: "Go live fast — no tech headaches, no delays." },
   { icon: <TrendingUp />, title: "Proven ROI", desc: "4x–10x returns delivered across 300+ projects." },
-  { icon: <ShieldCheck />, title: "Start at ₹0", desc: "Free strategy session. Zero upfront cost." },
+  { icon: <ShieldCheck />, title: "Start at ₹0", desc: "No upfront cost — start growing right away." },
 ];
 
 const services = [
@@ -57,9 +57,29 @@ const whyUs = [
 
 const steps = [
   { n: "1", title: "Share Your Details", desc: "Fill the quick form — takes under 60 seconds." },
-  { n: "2", title: "Free Strategy Call", desc: "We map a custom growth plan for your business." },
+  { n: "2", title: "Discovery Call", desc: "We map a custom growth plan for your business." },
   { n: "3", title: "We Build & Launch", desc: "Our team executes everything end-to-end." },
   { n: "4", title: "You Grow", desc: "Watch leads, sales and visibility climb." },
+];
+
+// Portfolio — content sourced from the web-dev page, restyled for this page
+const portfolio = [
+  { title: "School Management (ERP)", category: "Web App", image: "/h-sm.jpg", growth: "+180%", metric: "Sales Growth", desc: "Automates attendance, timetables, fee management & role-based dashboards for schools." },
+  { title: "Shoe E-Commerce", category: "E-Commerce", image: "/s-shoe.jpg", growth: "+210%", metric: "Online Sales", desc: "3D product previews, secure checkout, smart inventory & delivery dashboards." },
+  { title: "HR Portal (ERP)", category: "Web App", image: "/s-hr.jpg", growth: "+70%", metric: "Efficiency", desc: "Attendance, leave, payroll, performance analytics & secure document handling." },
+  { title: "Hospital Website", category: "Healthcare", image: "/s2.jpg", growth: "+320%", metric: "Lead Generation", desc: "AI chatbot, online OPD booking, payments & an admin analytics dashboard." },
+  { title: "Hi-tech Property", category: "Real Estate", image: "/s6.jpg", growth: "−60%", metric: "Support Tickets", desc: "Rich property listings, lead-capture tools & admin management for real-estate teams." },
+  { title: "Insurance Platform", category: "Fintech", image: "/s5.jpg", growth: "+500K", metric: "Monthly Leads", desc: "Plan comparison, instant quotes & secure policy management for customers." },
+];
+
+// Reviews — content sourced from the main site testimonials, restyled for this page
+const reviews = [
+  { name: "Director, Indus School", role: "Indus Public School", image: "/indus.jpeg", rating: 5, text: "Avani delivered an outstanding website that perfectly captures our school's vision. Modern, intuitive and beyond our expectations." },
+  { name: "Vikram Sharma", role: "MD, Rohtak Shoe Company", image: "/shoes.jpeg", rating: 5, text: "Our e-commerce platform transformed the business — online sales jumped 250% in just 3 months. Fast, user-friendly and reliable." },
+  { name: "Sanjay Vats", role: "Co-Founder, Policicue", image: "/policucue.jpeg", rating: 5, text: "A game-changer for our startup. They built a sophisticated platform with exceptional UI/UX and top-notch technical expertise." },
+  { name: "Amit Kapoor", role: "Founder, FRD Nutrition", image: "/frd-nutrition-new.png", rating: 5, text: "A stunning website with seamless e-commerce integration. We've seen a 180% increase in online orders. Outstanding service!" },
+  { name: "Aman Sharma", role: "CEO, Hi-Tech Luxury Homes", image: "/hitech.jpeg", rating: 5, text: "An elegant website that beautifully represents our luxury properties. Sophisticated design and easy-to-manage listings." },
+  { name: "Dr. Mohit Verma", role: "Director, Sanjeevni Hospital", image: "/sanjeevni.jpeg", rating: 5, text: "The portal streamlined our operations significantly. Appointment booking is effortless and the admin panel is wonderfully user-friendly." },
 ];
 
 export default function BusinessSetup3() {
@@ -152,10 +172,63 @@ export default function BusinessSetup3() {
 
         .bs3-services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 
+        /* ── Services (animated, highlighted bento) ── */
+        @keyframes bs3Shine { 0% { left: -60%; } 55%, 100% { left: 130%; } }
+        @keyframes bs3FloatY { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+        .bs3-svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+        .bs3-svc-card { position: relative; background: ${C.card}; border: 1px solid ${C.border}; border-radius: 18px; padding: 28px 24px; overflow: hidden; animation: bs3Fade .6s ease both; transition: transform .35s cubic-bezier(.16,1,.3,1), box-shadow .35s ease, border-color .35s ease; }
+        .bs3-svc-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, ${C.accent}, ${C.accentLight}); transform: scaleX(0); transform-origin: left; transition: transform .4s ease; }
+        .bs3-svc-card:hover::before { transform: scaleX(1); }
+        .bs3-svc-card:hover { transform: translateY(-8px); box-shadow: 0 22px 50px rgba(212,160,23,0.16); border-color: rgba(212,160,23,0.4); }
+        .bs3-svc-num { position: absolute; top: 16px; right: 22px; font-size: 40px; font-weight: 800; color: rgba(26,26,46,0.05); line-height: 1; }
+        .bs3-svc-ico { width: 58px; height: 58px; border-radius: 16px; display: flex; align-items: center; justify-content: center; color: #fff; background: linear-gradient(135deg, ${C.accent}, ${C.accentLight}); box-shadow: 0 10px 22px rgba(212,160,23,0.32); margin-bottom: 18px; transition: transform .45s cubic-bezier(.16,1,.3,1); }
+        .bs3-svc-card:hover .bs3-svc-ico { transform: rotate(-8deg) scale(1.1); }
+        .bs3-svc-ico svg { width: 26px; height: 26px; }
+        .bs3-svc-card h3 { font-size: 18px; font-weight: 800; margin-bottom: 8px; }
+        .bs3-svc-card p { font-size: 14px; color: ${C.muted}; line-height: 1.55; margin-bottom: 14px; }
+        .bs3-svc-more { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: ${C.accent}; opacity: 0; transform: translateX(-6px); transition: all .3s ease; }
+        .bs3-svc-card:hover .bs3-svc-more { opacity: 1; transform: translateX(0); }
+        .bs3-svc-card.feat { background: linear-gradient(135deg, #1A1A2E 0%, #0F0F1A 100%); border-color: transparent; }
+        .bs3-svc-card.feat h3 { color: #fff; }
+        .bs3-svc-card.feat p { color: rgba(255,255,255,0.72); }
+        .bs3-svc-card.feat .bs3-svc-num { color: rgba(255,255,255,0.08); }
+        .bs3-svc-card.feat::after { content: ''; position: absolute; top: -50%; left: -60%; width: 45%; height: 200%; background: linear-gradient(90deg, transparent, rgba(212,160,23,0.18), transparent); transform: rotate(18deg); animation: bs3Shine 4.5s ease-in-out infinite; pointer-events: none; }
+        .bs3-svc-card.feat .bs3-svc-ico { animation: bs3FloatY 3s ease-in-out infinite; }
+        .bs3-ribbon { position: absolute; top: 16px; right: -34px; transform: rotate(45deg); background: ${C.accent}; color: #1A1A2E; font-size: 10px; font-weight: 900; letter-spacing: 1px; padding: 4px 40px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+
+        /* ── Results / Portfolio (warm yellow, image-free) ── */
+        .bs3-results { background: linear-gradient(180deg, #FFFBEE 0%, #FBEFC9 100%); position: relative; }
+        .bs3-port-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+        .bs3-port-card { position: relative; background: #fff; border: 1px solid rgba(212,160,23,0.28); border-radius: 18px; padding: 24px; overflow: hidden; animation: bs3Fade .6s ease both; transition: transform .35s cubic-bezier(.16,1,.3,1), box-shadow .35s ease, border-color .35s ease; }
+        .bs3-port-card::before { content: ''; position: absolute; top: 0; left: 0; bottom: 0; width: 4px; background: linear-gradient(180deg, ${C.accent}, ${C.accentLight}); transform: scaleY(0); transform-origin: top; transition: transform .4s ease; }
+        .bs3-port-card:hover::before { transform: scaleY(1); }
+        .bs3-port-card:hover { transform: translateY(-6px); box-shadow: 0 22px 48px rgba(212,160,23,0.24); border-color: rgba(212,160,23,0.55); }
+        .bs3-port-cat { display: inline-block; background: rgba(212,160,23,0.13); color: #9a7a14; font-size: 10px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; padding: 5px 11px; border-radius: 999px; margin-bottom: 14px; }
+        .bs3-port-statline { display: flex; align-items: baseline; gap: 8px; margin-bottom: 12px; }
+        .bs3-port-growth { font-size: clamp(2rem, 5.5vw, 2.8rem); font-weight: 900; line-height: 1; letter-spacing: -1.5px; background: linear-gradient(120deg, ${C.accent} 0%, ${C.accentLight} 60%, #C4920E 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+        .bs3-port-metric { font-size: 11px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: ${C.muted}; }
+        .bs3-port-card h3 { font-size: 17px; font-weight: 800; margin-bottom: 7px; color: ${C.text}; }
+        .bs3-port-card p { font-size: 13.5px; color: ${C.muted}; line-height: 1.55; }
+
+        /* ── Reviews (image-free, gold accents) ── */
+        .bs3-rev-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+        .bs3-rev-card { position: relative; background: linear-gradient(180deg, #fff 0%, #FFFBEF 100%); border: 1px solid rgba(212,160,23,0.22); border-radius: 18px; padding: 26px 24px; display: flex; flex-direction: column; overflow: hidden; animation: bs3Fade .6s ease both; transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease; }
+        .bs3-rev-card::before { content: ''; position: absolute; top: 0; left: 24px; right: 24px; height: 3px; background: linear-gradient(90deg, ${C.accent}, ${C.accentLight}); border-radius: 0 0 4px 4px; opacity: 0; transition: opacity .3s ease; }
+        .bs3-rev-card:hover::before { opacity: 1; }
+        .bs3-rev-card:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(212,160,23,0.16); border-color: rgba(212,160,23,0.45); }
+        .bs3-rev-quote { position: absolute; top: 8px; right: 22px; font-size: 64px; line-height: 1; color: rgba(212,160,23,0.18); font-family: Georgia, serif; }
+        .bs3-rev-stars { display: flex; gap: 2px; margin-bottom: 12px; }
+        .bs3-rev-text { font-size: 14px; color: ${C.text}; line-height: 1.6; margin-bottom: 18px; flex-grow: 1; }
+        .bs3-rev-person { display: flex; align-items: center; gap: 12px; }
+        .bs3-rev-avatar { width: 46px; height: 46px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 800; color: #1A1A2E; background: linear-gradient(135deg, ${C.accent}, ${C.accentLight}); flex-shrink: 0; box-shadow: 0 6px 14px rgba(212,160,23,0.32); }
+        .bs3-rev-name { font-size: 14px; font-weight: 800; }
+        .bs3-rev-role { font-size: 12px; color: ${C.muted}; }
+
         /* ── Why us ── */
         .bs3-why { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 36px; align-items: center; }
         .bs3-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
-        .bs3-stat { background: ${C.card}; border: 1px solid ${C.border}; border-radius: 16px; padding: 22px; text-align: center; }
+        .bs3-stat { background: linear-gradient(160deg, #fff 0%, #FFF8E3 100%); border: 1px solid rgba(212,160,23,0.28); border-radius: 16px; padding: 22px; text-align: center; transition: transform .3s ease, box-shadow .3s ease; }
+        .bs3-stat:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(212,160,23,0.16); }
         .bs3-stat .num { font-size: clamp(1.8rem, 5vw, 2.6rem); font-weight: 800; color: ${C.accent}; line-height: 1; }
         .bs3-stat .lab { font-size: 12px; font-weight: 600; color: ${C.muted}; text-transform: uppercase; letter-spacing: 1px; margin-top: 6px; }
         .bs3-why-list { list-style: none; padding: 0; margin: 18px 0 0; display: flex; flex-direction: column; gap: 12px; }
@@ -186,6 +259,7 @@ export default function BusinessSetup3() {
           .bs3-hero-grid { grid-template-columns: 1fr; gap: 22px; }
           .bs3-benefits { grid-template-columns: repeat(2, 1fr); }
           .bs3-services-grid { grid-template-columns: 1fr; }
+          .bs3-svc-grid, .bs3-port-grid, .bs3-rev-grid { grid-template-columns: repeat(2, 1fr); }
           .bs3-why { grid-template-columns: 1fr; gap: 24px; }
           .bs3-steps { grid-template-columns: repeat(2, 1fr); }
         }
@@ -198,6 +272,7 @@ export default function BusinessSetup3() {
           .bs3-trust { gap: 12px; }
           .bs3-cta { width: 100%; }
           .bs3-steps { grid-template-columns: 1fr; }
+          .bs3-svc-grid, .bs3-port-grid, .bs3-rev-grid { grid-template-columns: 1fr; }
           .bs3-brand span { font-size: 11px; letter-spacing: 1px; }
           .bs3-claim { display: none; }
           .bs3-foot-links { gap: 14px; }
@@ -234,7 +309,7 @@ export default function BusinessSetup3() {
             </h1>
             <p className="bs3-hero-sub">
               Website, social media, ads &amp; AI — handled by one expert team.
-              Book your <strong>free</strong> strategy session today and start growing in days, not months.
+              Get your custom growth plan and start growing in days, not months.
             </p>
             <div className="bs3-trust">
               <span className="bs3-trust-item"><Star size={15} color={C.accent} fill={C.accent} /> 4.9/5 Rated</span>
@@ -243,7 +318,7 @@ export default function BusinessSetup3() {
             </div>
             <div className="bs3-cta-wrap" style={{ display: "flex" }}>
               <button className="bs3-cta" onClick={scrollToForm}>
-                Claim Your Free Session <ArrowRight size={18} />
+                Get Started Now <ArrowRight size={18} />
               </button>
             </div>
           </div>
@@ -282,12 +357,15 @@ export default function BusinessSetup3() {
             <h2 className="bs3-h2">Done-For-You Growth Services</h2>
             <p className="bs3-sub" style={{ margin: "0 auto" }}>Pick what you need — or let us build your complete growth engine.</p>
           </div>
-          <div className="bs3-services-grid">
+          <div className="bs3-svc-grid">
             {services.map((s, i) => (
-              <div key={i} className="bs3-card">
-                <div className="bs3-ico">{s.icon}</div>
+              <div key={i} className={`bs3-svc-card${i === 0 ? " feat" : ""}`} style={{ animationDelay: `${i * 0.08}s` }}>
+                {i === 0 && <span className="bs3-ribbon">POPULAR</span>}
+                <span className="bs3-svc-num">{String(i + 1).padStart(2, "0")}</span>
+                <div className="bs3-svc-ico">{s.icon}</div>
                 <h3>{s.title}</h3>
                 <p>{s.desc}</p>
+                <span className="bs3-svc-more" onClick={scrollToForm} style={{ cursor: "pointer" }}>Get started <ArrowRight size={14} /></span>
               </div>
             ))}
           </div>
@@ -306,7 +384,7 @@ export default function BusinessSetup3() {
               ))}
             </ul>
             <button className="bs3-cta" style={{ marginTop: 24 }} onClick={scrollToForm}>
-              Get Started Free <ArrowRight size={18} />
+              Get Started Now <ArrowRight size={18} />
             </button>
           </div>
           <div className="bs3-stats">
@@ -314,6 +392,63 @@ export default function BusinessSetup3() {
               <div key={i} className="bs3-stat">
                 <div className="num">{s.value}</div>
                 <div className="lab">{s.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Results / Portfolio ── */}
+      <section className="bs3-section bs3-results">
+        <div className="bs3-wrap">
+          <div style={{ textAlign: "center", marginBottom: 30 }}>
+            <span className="bs3-kicker"><TrendingUp size={14} /> Our Work</span>
+            <h2 className="bs3-h2">Results We've Delivered</h2>
+            <p className="bs3-sub" style={{ margin: "0 auto" }}>Real projects, real growth — a snapshot of the impact we create for our clients.</p>
+          </div>
+          <div className="bs3-port-grid">
+            {portfolio.map((p, i) => (
+              <div key={i} className="bs3-port-card" style={{ animationDelay: `${i * 0.07}s` }}>
+                <span className="bs3-port-cat">{p.category}</span>
+                <div className="bs3-port-statline">
+                  <span className="bs3-port-growth">{p.growth}</span>
+                  <span className="bs3-port-metric">{p.metric}</span>
+                </div>
+                <h3>{p.title}</h3>
+                <p>{p.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Reviews ── */}
+      <section className="bs3-section">
+        <div className="bs3-wrap">
+          <div style={{ textAlign: "center", marginBottom: 30 }}>
+            <span className="bs3-kicker"><Star size={14} /> Client Love</span>
+            <h2 className="bs3-h2">What Our Clients Say</h2>
+            <p className="bs3-sub" style={{ margin: "0 auto" }}>Trusted by 150+ founders and businesses across India and abroad.</p>
+          </div>
+          <div className="bs3-rev-grid">
+            {reviews.map((r, i) => (
+              <div key={i} className="bs3-rev-card" style={{ animationDelay: `${i * 0.07}s` }}>
+                <span className="bs3-rev-quote">&ldquo;</span>
+                <div className="bs3-rev-stars">
+                  {Array.from({ length: r.rating }).map((_, s) => (
+                    <Star key={s} size={15} color={C.accent} fill={C.accent} />
+                  ))}
+                </div>
+                <p className="bs3-rev-text">{r.text}</p>
+                <div className="bs3-rev-person">
+                  <div className="bs3-rev-avatar">
+                    {r.name.split(/[ ,.]+/).filter(Boolean).map((w) => w[0]).slice(0, 2).join("").toUpperCase()}
+                  </div>
+                  <div>
+                    <div className="bs3-rev-name">{r.name}</div>
+                    <div className="bs3-rev-role">{r.role}</div>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
@@ -343,10 +478,10 @@ export default function BusinessSetup3() {
       <section className="bs3-section">
         <div className="bs3-wrap">
           <div className="bs3-cta-band">
-            <h2>Your Free Strategy Session Is Waiting</h2>
+            <h2>Let's Grow Your Business Together</h2>
             <p>No cost. No commitment. Just a clear plan to grow your business.</p>
             <button className="bs3-cta" onClick={scrollToForm}>
-              Claim Your ₹0 Session <ArrowRight size={18} />
+              Get Started Now <ArrowRight size={18} />
             </button>
           </div>
         </div>
@@ -360,11 +495,11 @@ export default function BusinessSetup3() {
             <span style={{ color: C.text, fontWeight: 800, fontSize: 13, letterSpacing: 1 }}>AVANI ENTERPRISES</span>
           </div>
           <div className="bs3-foot-links">
-            <a href="tel:+919311967319"><Phone size={14} /> +91 93119 67319</a>
-            <a href="mailto:info@avanienterprises.in"><Mail size={14} /> info@avanienterprises.in</a>
-            <a href="https://wa.me/919311967319" target="_blank" rel="noopener noreferrer"><MessageSquare size={14} /> WhatsApp</a>
+            <a href="tel:+919253625099"><Phone size={14} /> +91 92536 25099</a>
+            <a href="mailto:kp@avanienterprises.in"><Mail size={14} /> kp@avanienterprises.in</a>
+            <a href="https://wa.me/918930008118" target="_blank" rel="noopener noreferrer"><MessageSquare size={14} /> WhatsApp: +91 89300 08118</a>
           </div>
-          <span style={{ color: C.muted, fontSize: 12 }}>© {2026} Avani Enterprises</span>
+          <span style={{ color: C.muted, fontSize: 12 }}>Gurgaon · Mumbai · Rohtak · Australia · © {2026} Avani Enterprises</span>
         </div>
       </footer>
     </div>

@@ -11,6 +11,11 @@ const ThankYou = () => {
 
   const formattedService = Array.isArray(service) ? service.join(", ") : service;
 
+  // WhatsApp contact (with a friendly pre-filled message)
+  const waNumber = "918930008118";
+  const waMessage = `Hi Avani Enterprises! I just submitted my details on your website${name ? ` (${name})` : ""}${formattedService ? ` for ${formattedService}` : ""}. I'd like to know the next steps.`;
+  const waLink = `https://wa.me/${waNumber}?text=${encodeURIComponent(waMessage)}`;
+
   useEffect(() => {
     // Scroll to top
     window.scrollTo(0, 0);
@@ -68,7 +73,7 @@ const ThankYou = () => {
               className="text-4xl md:text-5xl font-bold mb-6 tracking-tight text-white font-display"
               style={{ fontFamily: "'Bebas Neue', sans-serif", letterSpacing: "1px" }}
             >
-              PAYMENT SUCCESSFUL{name ? `, ${name.toUpperCase()}` : ""}
+              THANK YOU{name ? `, ${name.toUpperCase()}` : ""}
             </motion.h1>
 
             {/* Message */}
@@ -80,11 +85,11 @@ const ThankYou = () => {
             >
               {formattedService ? (
                 <>
-                  Your request for <span className="text-[#E1AD01] font-medium">{formattedService}</span> has been successfully processed. Our growth team will contact you shortly to begin the onboarding process.
+                  Thank you! Your request for <span className="text-[#E1AD01] font-medium">{formattedService}</span> has been received. Our growth team will reach out to you shortly to get started.
                 </>
               ) : (
                 <>
-                  Your order has been confirmed successfully. Welcome to Avani Enterprises. Our growth team will reach out to schedule your session.
+                  Thank you for reaching out to Avani Enterprises! Your details have been received and our growth team will contact you shortly to get started.
                 </>
               )}
             </motion.p>
@@ -101,13 +106,13 @@ const ThankYou = () => {
               <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
                 <div className="flex items-center gap-4">
                   <a
-                    href="https://wa.me/919311967319"
+                    href={waLink}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="group relative inline-flex items-center gap-3 px-8 py-4 bg-[#E1AD01] text-black text-sm font-bold tracking-widest uppercase transition-all hover:bg-[#FFD700] hover:-translate-y-1"
                     style={{ borderRadius: "1px", boxShadow: "0 10px 30px rgba(225,173,1,0.2)" }}
                   >
-                    <span>Message Us</span>
+                    <span>Message Us on WhatsApp</span>
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </a>
                 </div>
@@ -121,13 +126,17 @@ const ThankYou = () => {
               transition={{ delay: 0.7 }}
               className="flex flex-col sm:flex-row justify-center gap-8 mt-10 pt-6"
             >
+              <a href={waLink} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 text-gray-500 hover:text-[#E1AD01] transition-colors text-sm font-medium">
+                <Phone className="w-4 h-4" />
+                <span>WhatsApp: +91 89300 08118</span>
+              </a>
               <a href="mailto:kp@avanienterprises.in" className="flex items-center justify-center gap-2 text-gray-500 hover:text-[#E1AD01] transition-colors text-sm font-medium">
                 <Mail className="w-4 h-4" />
                 <span>kp@avanienterprises.in</span>
               </a>
-              <a href="tel:+919311967319" className="flex items-center justify-center gap-2 text-gray-500 hover:text-[#E1AD01] transition-colors text-sm font-medium">
+              <a href="tel:+919253625099" className="flex items-center justify-center gap-2 text-gray-500 hover:text-[#E1AD01] transition-colors text-sm font-medium">
                 <Phone className="w-4 h-4" />
-                <span>+91 93119 67319</span>
+                <span>+91 92536 25099</span>
               </a>
             </motion.div>
 
