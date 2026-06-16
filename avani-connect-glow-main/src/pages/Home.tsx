@@ -570,7 +570,7 @@ No.1 Digital Marketing Agency in India we provide best Digital Marketing, Web De
               {/* <HeroDashboard /> */}
 
               {/* NEW: Newsletter Widget */}
-              <div className="absolute top-[28%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[92%] bg-white/95 backdrop-blur-md rounded-[2.5rem] shadow-[0_40px_100px_rgba(0,0,0,0.08)] border border-white overflow-hidden z-10">
+              <div className="absolute top-[35%] left-0 right-0 mx-auto w-[90%] max-w-lg -translate-y-1/2 bg-white/95 backdrop-blur-md rounded-[2.5rem] shadow-[0_40px_100px_rgba(0,0,0,0.08)] border border-white overflow-hidden z-10">
                 {/* Widget Header */}
                 <div className="flex items-center justify-between px-7 pt-7 pb-5 border-b border-slate-100">
                   <h3 className="text-lg font-black text-slate-900 tracking-tight uppercase">News & Updates</h3>
