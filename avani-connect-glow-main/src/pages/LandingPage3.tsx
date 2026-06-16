@@ -134,7 +134,7 @@ export default function BusinessSetup3() {
         .bs3-claim:hover { transform: translateY(-1px); background: ${C.accentLight}; }
 
         .bs3-section { padding: 56px 5%; }
-        .bs3-wrap { max-width: 1200px; margin: 0 auto; }
+        .bs3-wrap { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
         .bs3-kicker { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: ${C.accent}; }
         .bs3-h2 { font-size: clamp(1.6rem, 4.5vw, 2.6rem); font-weight: 800; line-height: 1.1; margin: 10px 0 8px; }
         .bs3-sub { color: ${C.muted}; font-size: 15px; line-height: 1.6; max-width: 620px; }
@@ -176,7 +176,7 @@ export default function BusinessSetup3() {
         @keyframes bs3Shine { 0% { left: -60%; } 55%, 100% { left: 130%; } }
         @keyframes bs3FloatY { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
         .bs3-svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-        .bs3-svc-card { position: relative; background: ${C.card}; border: 1px solid ${C.border}; border-radius: 18px; padding: 28px 24px; overflow: hidden; animation: bs3Fade .6s ease both; transition: transform .35s cubic-bezier(.16,1,.3,1), box-shadow .35s ease, border-color .35s ease; }
+        .bs3-svc-card { position: relative; background: ${C.card}; border: 1px solid rgba(212,160,23,0.18); border-radius: 18px; padding: 28px 24px; overflow: hidden; box-shadow: 0 8px 22px rgba(180,140,20,0.08); animation: bs3Fade .6s ease both; transition: transform .35s cubic-bezier(.16,1,.3,1), box-shadow .35s ease, border-color .35s ease; }
         .bs3-svc-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, ${C.accent}, ${C.accentLight}); transform: scaleX(0); transform-origin: left; transition: transform .4s ease; }
         .bs3-svc-card:hover::before { transform: scaleX(1); }
         .bs3-svc-card:hover { transform: translateY(-8px); box-shadow: 0 22px 50px rgba(212,160,23,0.16); border-color: rgba(212,160,23,0.4); }
@@ -195,6 +195,15 @@ export default function BusinessSetup3() {
         .bs3-svc-card.feat::after { content: ''; position: absolute; top: -50%; left: -60%; width: 45%; height: 200%; background: linear-gradient(90deg, transparent, rgba(212,160,23,0.18), transparent); transform: rotate(18deg); animation: bs3Shine 4.5s ease-in-out infinite; pointer-events: none; }
         .bs3-svc-card.feat .bs3-svc-ico { animation: bs3FloatY 3s ease-in-out infinite; }
         .bs3-ribbon { position: absolute; top: 16px; right: -34px; transform: rotate(45deg); background: ${C.accent}; color: #1A1A2E; font-size: 10px; font-weight: 900; letter-spacing: 1px; padding: 4px 40px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+        /* Warm yellow section background (highlighted Services / Results) */
+        .bs3-yellow { background: linear-gradient(180deg, #FFF9E6 0%, #FBEAC0 100%); position: relative; overflow: hidden; }
+        .bs3-yellow::before { content: ''; position: absolute; top: -60px; left: 50%; transform: translateX(-50%); width: 700px; height: 280px; background: radial-gradient(ellipse at center, rgba(212,160,23,0.18) 0%, transparent 70%); pointer-events: none; }
+        /* Continuous soft glow on service icons (doesn't fight the hover rotate) */
+        @keyframes bs3IconGlow { 0%,100% { box-shadow: 0 8px 20px rgba(212,160,23,0.28); } 50% { box-shadow: 0 12px 30px rgba(212,160,23,0.55); } }
+        .bs3-svc-ico { animation: bs3IconGlow 3s ease-in-out infinite; }
+        /* Animated gradient underline under the section heading */
+        @keyframes bs3Underline { 0% { background-position: 0% 0; } 100% { background-position: 200% 0; } }
+        .bs3-svc-underline { width: 70px; height: 4px; margin: 14px auto 0; border-radius: 4px; background: linear-gradient(90deg, ${C.accent}, ${C.accentLight}, ${C.accent}); background-size: 200% 100%; animation: bs3Underline 2.4s linear infinite; }
 
         /* ── Results / Portfolio (warm yellow, image-free) ── */
         .bs3-results { background: linear-gradient(180deg, #FFFBEE 0%, #FBEFC9 100%); position: relative; }
@@ -350,19 +359,20 @@ export default function BusinessSetup3() {
       </section>
 
       {/* ── Services ── */}
-      <section className="bs3-section" style={{ background: "#fff" }}>
+      <section className="bs3-section bs3-yellow">
         <div className="bs3-wrap">
-          <div style={{ textAlign: "center", marginBottom: 30 }}>
+          <div style={{ textAlign: "center", marginBottom: 36 }}>
             <span className="bs3-kicker"><Briefcase size={14} /> Our Services</span>
             <h2 className="bs3-h2">Done-For-You Growth Services</h2>
-            <p className="bs3-sub" style={{ margin: "0 auto" }}>Pick what you need — or let us build your complete growth engine.</p>
+            <div className="bs3-svc-underline" />
+            <p className="bs3-sub" style={{ margin: "14px auto 0" }}>Pick what you need — or let us build your complete growth engine.</p>
           </div>
           <div className="bs3-svc-grid">
             {services.map((s, i) => (
               <div key={i} className={`bs3-svc-card${i === 0 ? " feat" : ""}`} style={{ animationDelay: `${i * 0.08}s` }}>
                 {i === 0 && <span className="bs3-ribbon">POPULAR</span>}
                 <span className="bs3-svc-num">{String(i + 1).padStart(2, "0")}</span>
-                <div className="bs3-svc-ico">{s.icon}</div>
+                <div className="bs3-svc-ico" style={{ animationDelay: `${i * 0.5}s` }}>{s.icon}</div>
                 <h3>{s.title}</h3>
                 <p>{s.desc}</p>
                 <span className="bs3-svc-more" onClick={scrollToForm} style={{ cursor: "pointer" }}>Get started <ArrowRight size={14} /></span>

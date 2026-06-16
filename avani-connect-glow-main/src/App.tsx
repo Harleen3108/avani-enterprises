@@ -83,7 +83,7 @@
 
 // export default App;
 
-import { useEffect } from "react";
+import { useEffect, lazy, Suspense } from "react";
 import "./App.css";
 
 // UI + Providers
@@ -176,46 +176,46 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsConditions from "./pages/TermsConditions";
 
 // ── SEO Product Landing Pages Imports ─────────────────────────────────────────
-import HrPortal from "./pages/product/HrPortal";
-import HrmsSoftwareIndia from "./pages/product/HrmsSoftwareIndia";
-import PayrollSoftwareIndia from "./pages/product/PayrollSoftwareIndia";
-import AttendanceManagementSystem from "./pages/product/AttendanceManagementSystem";
-import LeaveManagementSoftware from "./pages/product/LeaveManagementSoftware";
-import EmployeeManagementSoftware from "./pages/product/EmployeeManagementSoftware";
-import EmployeePortal from "./pages/product/EmployeePortal";
-import CrmSoftwareIndia from "./pages/product/CrmSoftwareIndia";
-import WorkforceManagementSoftware from "./pages/product/WorkforceManagementSoftware";
-import ProjectManagementSoftware from "./pages/product/ProjectManagementSoftware";
-import BusinessOperatingSystem from "./pages/product/BusinessOperatingSystem";
+const HrPortal = lazy(() => import("./pages/product/HrPortal"));
+const HrmsSoftwareIndia = lazy(() => import("./pages/product/HrmsSoftwareIndia"));
+const PayrollSoftwareIndia = lazy(() => import("./pages/product/PayrollSoftwareIndia"));
+const AttendanceManagementSystem = lazy(() => import("./pages/product/AttendanceManagementSystem"));
+const LeaveManagementSoftware = lazy(() => import("./pages/product/LeaveManagementSoftware"));
+const EmployeeManagementSoftware = lazy(() => import("./pages/product/EmployeeManagementSoftware"));
+const EmployeePortal = lazy(() => import("./pages/product/EmployeePortal"));
+const CrmSoftwareIndia = lazy(() => import("./pages/product/CrmSoftwareIndia"));
+const WorkforceManagementSoftware = lazy(() => import("./pages/product/WorkforceManagementSoftware"));
+const ProjectManagementSoftware = lazy(() => import("./pages/product/ProjectManagementSoftware"));
+const BusinessOperatingSystem = lazy(() => import("./pages/product/BusinessOperatingSystem"));
 
 // ── Competitor Alternative Pages Imports ──────────────────────────────────────
-import KekaAlternative from "./pages/compare/KekaAlternative";
-import GreythrAlternative from "./pages/compare/GreythrAlternative";
-import DarwinboxAlternative from "./pages/compare/DarwinboxAlternative";
-import ZohoPeopleAlternative from "./pages/compare/ZohoPeopleAlternative";
+const KekaAlternative = lazy(() => import("./pages/compare/KekaAlternative"));
+const GreythrAlternative = lazy(() => import("./pages/compare/GreythrAlternative"));
+const DarwinboxAlternative = lazy(() => import("./pages/compare/DarwinboxAlternative"));
+const ZohoPeopleAlternative = lazy(() => import("./pages/compare/ZohoPeopleAlternative"));
 
 // ── Local SEO & City Pages Imports ────────────────────────────────────────────
-import Delhi from "./pages/local/Delhi";
-import Faridabad from "./pages/local/Faridabad";
-import Gurgaon from "./pages/local/Gurgaon";
-import Rohtak from "./pages/local/Rohtak";
-import DigitalMarketingDelhi from "./pages/local/DigitalMarketingDelhi";
-import DigitalMarketingHaryana from "./pages/local/DigitalMarketingHaryana";
-import GoogleAdsHaryana from "./pages/local/GoogleAdsHaryana";
-import SeoDelhi from "./pages/local/SeoDelhi";
-import SeoHaryana from "./pages/local/SeoHaryana";
-import SmmDelhi from "./pages/local/SmmDelhi";
-import SmmHaryana from "./pages/local/SmmHaryana";
-import WebDevDelhi from "./pages/local/WebDevDelhi";
-import WebDevHaryana from "./pages/local/WebDevHaryana";
-import WebDevGurgaon from "./pages/local/WebDevGurgaon";
-import WebDevNoida from "./pages/local/WebDevNoida";
-import WebDevChandigarh from "./pages/local/WebDevChandigarh";
-import WebDevIndia from "./pages/local/WebDevIndia";
-import WebDevMumbai from "./pages/local/WebDevMumbai";
-import WebDevBangalore from "./pages/local/WebDevBangalore";
-import WebDevPune from "./pages/local/WebDevPune";
-import WebDevHyderabad from "./pages/local/WebDevHyderabad";
+const Delhi = lazy(() => import("./pages/local/Delhi"));
+const Faridabad = lazy(() => import("./pages/local/Faridabad"));
+const Gurgaon = lazy(() => import("./pages/local/Gurgaon"));
+const Rohtak = lazy(() => import("./pages/local/Rohtak"));
+const DigitalMarketingDelhi = lazy(() => import("./pages/local/DigitalMarketingDelhi"));
+const DigitalMarketingHaryana = lazy(() => import("./pages/local/DigitalMarketingHaryana"));
+const GoogleAdsHaryana = lazy(() => import("./pages/local/GoogleAdsHaryana"));
+const SeoDelhi = lazy(() => import("./pages/local/SeoDelhi"));
+const SeoHaryana = lazy(() => import("./pages/local/SeoHaryana"));
+const SmmDelhi = lazy(() => import("./pages/local/SmmDelhi"));
+const SmmHaryana = lazy(() => import("./pages/local/SmmHaryana"));
+const WebDevDelhi = lazy(() => import("./pages/local/WebDevDelhi"));
+const WebDevHaryana = lazy(() => import("./pages/local/WebDevHaryana"));
+const WebDevGurgaon = lazy(() => import("./pages/local/WebDevGurgaon"));
+const WebDevNoida = lazy(() => import("./pages/local/WebDevNoida"));
+const WebDevChandigarh = lazy(() => import("./pages/local/WebDevChandigarh"));
+const WebDevIndia = lazy(() => import("./pages/local/WebDevIndia"));
+const WebDevMumbai = lazy(() => import("./pages/local/WebDevMumbai"));
+const WebDevBangalore = lazy(() => import("./pages/local/WebDevBangalore"));
+const WebDevPune = lazy(() => import("./pages/local/WebDevPune"));
+const WebDevHyderabad = lazy(() => import("./pages/local/WebDevHyderabad"));
 
 import DH2PolicicueProject from './pages/home2/DH2PolicicueProject';
 import DH2IndusProject from './pages/home2/DH2IndusProject';
@@ -316,6 +316,7 @@ const AppLayout = () => {
       <SeoHead />
       {!hideNavbar && (useNavbar1 ? <Navbar1 /> : <Navbar />)}
       <main className="pt-0">
+        <Suspense fallback={<div style={{ minHeight: "70vh" }} aria-busy="true" />}>
         <Routes>
           {/* New Main Website (formerly dummyhome) */}
           <Route path="/" element={<MainLayout />}>
@@ -437,6 +438,7 @@ const AppLayout = () => {
           {/* Catch-all */}
           <Route path="*" element={<Navigate to="/not-found" replace />} />
         </Routes>
+        </Suspense>
       </main>
       {!hideFooter && (useFooter1 ? <Footer1 /> : <Footer />)}
       {!hideNavbar && <Chatbot />}

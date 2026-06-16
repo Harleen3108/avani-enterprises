@@ -344,7 +344,8 @@ export default function LocalServicePage({
         <meta name="description" content={seo.description} />
         <meta name="keywords" content={seo.keywords} />
         <meta name="robots" content="index,follow" />
-        <link rel="canonical" href={seo.canonical} />
+        {/* Canonical is injected once, per-route, by the server (api/seo.js) to
+            avoid a duplicate <link rel="canonical"> tag. */}
         {/* OG */}
         <meta property="og:type"        content="website" />
         <meta property="og:title"       content={seo.title} />

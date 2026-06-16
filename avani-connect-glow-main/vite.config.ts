@@ -76,4 +76,24 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    target: "es2020",
+    cssCodeSplit: true,
+    chunkSizeWarningLimit: 1000,
+    rollupOptions: {
+      output: {
+        // Split third-party code into a few long-cacheable, cycle-free chunks.
+        // React core stays bundled with the rest of node_modules ("vendor") to
+        // avoid circular chunk references; only clearly leaf-level heavy libs
+        // (which nothing else re-imports) are pulled out separately.
+        manualChunks(id: string) {
+          if (!id.includes("node_modules")) return;
+          if (id.includes("html2canvas")) return "html2canvas";
+          if (id.includes("recharts") || id.includes("/d3-")) return "charts";
+          if (id.includes("gsap")) return "gsap";
+          return "vendor";
+        },
+      },
+    },
+  },
 }));

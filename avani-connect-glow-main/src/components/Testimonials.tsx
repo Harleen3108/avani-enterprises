@@ -16,7 +16,7 @@ const DummyTestimonials = ({ testimonials }: any) => {
     <section className="theme-brown" style={{ position: 'relative', overflow: 'hidden', minHeight: '480px', display: 'flex', alignItems: 'center' }}>
       {/* BG Image */}
       <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
-        <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=2070&auto=format&fit=crop" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+        <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=2070&auto=format&fit=crop" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
         <div style={{ position: 'absolute', inset: 0, background: 'var(--bg-primary)', opacity: 0.88 }} />
         <div style={{ position: 'absolute', inset: 0, backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`, backgroundSize: '200px', opacity: 0.04 }} />
       </div>
@@ -48,7 +48,7 @@ const DummyTestimonials = ({ testimonials }: any) => {
               </p>
               <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
                 <div style={{ width: '44px', height: '44px', borderRadius: '50%', overflow: 'hidden', border: '2px solid var(--border-light)', flexShrink: 0, background: 'var(--bg-tertiary)' }}>
-                  <img src={t.image} alt={t.name} style={{ width: '100%', height: '100%', objectFit: 'contain', padding: '3px' }} />
+                  <img loading="lazy" decoding="async" src={t.image} alt={t.name} style={{ width: '100%', height: '100%', objectFit: 'contain', padding: '3px' }} />
                 </div>
                 <div>
                   <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: '15px', color: 'var(--text-primary)', letterSpacing: '0.06em', fontWeight: 600 }}>{t.name}</div>
@@ -65,7 +65,7 @@ const DummyTestimonials = ({ testimonials }: any) => {
                 onClick={() => setCur(i)}
                 style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '10px 14px', borderRadius: '10px', border: `1px solid ${cur === i ? 'var(--accent-primary)' : 'var(--border-faint)'}`, background: cur === i ? 'var(--accent-hover)' : 'var(--card-bg)', cursor: 'pointer', transition: 'all 0.3s' }}>
                 <div style={{ width: '32px', height: '32px', borderRadius: '50%', overflow: 'hidden', border: '2px solid var(--border-light)', background: 'var(--bg-tertiary)', flexShrink: 0 }}>
-                  <img src={item.image} alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'contain', padding: '2px' }} />
+                  <img loading="lazy" decoding="async" src={item.image} alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'contain', padding: '2px' }} />
                 </div>
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: '12px', color: cur === i ? 'var(--text-primary)' : 'var(--text-tertiary)', letterSpacing: '0.06em', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', fontWeight: 600 }}>{item.name}</div>

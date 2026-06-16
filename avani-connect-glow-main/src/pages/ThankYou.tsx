@@ -124,7 +124,7 @@ const ThankYou = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.7 }}
-              className="flex flex-col sm:flex-row justify-center gap-8 mt-10 pt-6"
+              className="flex flex-row flex-wrap items-center justify-center gap-6 mt-10 pt-6"
             >
               <a href={waLink} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 text-gray-500 hover:text-[#E1AD01] transition-colors text-sm font-medium">
                 <Phone className="w-4 h-4" />
@@ -133,10 +133,6 @@ const ThankYou = () => {
               <a href="mailto:kp@avanienterprises.in" className="flex items-center justify-center gap-2 text-gray-500 hover:text-[#E1AD01] transition-colors text-sm font-medium">
                 <Mail className="w-4 h-4" />
                 <span>kp@avanienterprises.in</span>
-              </a>
-              <a href="tel:+919253625099" className="flex items-center justify-center gap-2 text-gray-500 hover:text-[#E1AD01] transition-colors text-sm font-medium">
-                <Phone className="w-4 h-4" />
-                <span>+91 92536 25099</span>
               </a>
             </motion.div>
 

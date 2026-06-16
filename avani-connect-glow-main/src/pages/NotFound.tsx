@@ -1,15 +1,24 @@
-import React, { useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
-import { Home, ArrowRight, Phone, Mail, FileText } from 'lucide-react';
+import { Home, ArrowRight, Phone, Mail, Search } from 'lucide-react';
 
 export default function NotFound() {
   const location = useLocation();
+  const navigate = useNavigate();
+  const [query, setQuery] = useState('');
 
   useEffect(() => {
-    console.error("404 Error: Path not found:", location.pathname);
+    // Soft 404 signal for logs only (no user-facing console noise)
+    if (import.meta.env.DEV) console.warn("404 — path not found:", location.pathname);
   }, [location.pathname]);
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    const q = query.trim();
+    if (q) navigate(`/blog?q=${encodeURIComponent(q)}`);
+  };
 
   const services = [
     { label: 'Web Development', href: '/services/web-app-development' },
@@ -38,7 +47,7 @@ export default function NotFound() {
       <div style={{ position: 'absolute', top: '20%', left: '10%', width: '350px', height: '350px', background: 'var(--accent-primary, #C4913A)', opacity: 0.05, filter: 'blur(120px)', borderRadius: '50%', pointerEvents: 'none' }} />
       <div style={{ position: 'absolute', bottom: '20%', right: '10%', width: '300px', height: '300px', background: '#e11d48', opacity: 0.03, filter: 'blur(100px)', borderRadius: '50%', pointerEvents: 'none' }} />
 
-      <div style={{ maxWidth: '680px', width: '100%', textPosition: 'relative', zIndex: 10, textAlign: 'center' }}>
+      <div style={{ maxWidth: '680px', width: '100%', position: 'relative', zIndex: 10, textAlign: 'center' }}>
         
         {/* Animated Error Code */}
         <motion.h1 
@@ -65,8 +74,33 @@ export default function NotFound() {
           transition={{ delay: 0.3, duration: 0.6 }}
           style={{ color: '#a0a0a0', fontSize: '1rem', lineHeight: 1.7, margin: '0 auto 40px auto', maxWidth: '500px' }}
         >
-          The page you requested might have been moved, renamed, or is temporarily unavailable. Use the links below to find what you need.
+          The page you requested might have been moved, renamed, or is temporarily unavailable. Search our site or use the links below to find what you need.
         </motion.p>
+
+        {/* Search */}
+        <motion.form
+          onSubmit={handleSearch}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.35, duration: 0.6 }}
+          style={{ display: 'flex', gap: '10px', maxWidth: '460px', margin: '0 auto 44px auto' }}
+          role="search"
+        >
+          <div style={{ position: 'relative', flex: 1 }}>
+            <Search size={16} color="#888" style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)' }} />
+            <input
+              type="search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search our site…"
+              aria-label="Search the site"
+              style={{ width: '100%', padding: '13px 14px 13px 40px', borderRadius: '10px', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.12)', color: '#fff', fontSize: '0.92rem', outline: 'none' }}
+            />
+          </div>
+          <button type="submit" style={{ padding: '13px 24px', borderRadius: '10px', background: 'var(--accent-primary, #C4913A)', color: '#000', fontWeight: 700, fontSize: '0.9rem', border: 'none', cursor: 'pointer' }}>
+            Search
+          </button>
+        </motion.form>
 
         {/* Categories Link Grid */}
         <motion.div 

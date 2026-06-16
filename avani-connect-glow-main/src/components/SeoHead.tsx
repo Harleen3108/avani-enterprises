@@ -202,7 +202,9 @@ export default function SeoHead() {
       {noIndex && <meta name="googlebot" content="noindex,nofollow" />}
 
       {/* ── Canonical ───────────────────────────────────────────────────── */}
-      <link rel="canonical" href={canonical} />
+      {/* Canonical is injected once, per-route, by the server (api/seo.js into
+          template.html). We intentionally do NOT render it here to avoid a
+          duplicate <link rel="canonical"> tag. */}
 
       {/* ── Primary SEO ─────────────────────────────────────────────────── */}
       {seo?.title           && <title>{seo.title}</title>}

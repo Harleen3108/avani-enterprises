@@ -100,7 +100,7 @@ const PortfolioSection = () => {
             >
               {/* Image */}
               <div className="relative h-56 overflow-hidden">
-                <img
+                <img loading="lazy" decoding="async"
                   src={item.image}
                   alt={item.title}
                   className="w-full h-full  transition-transform duration-500 group-hover:scale-110"
