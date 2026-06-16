@@ -7,7 +7,7 @@ const PAGE: LocalServicePageProps = {
     description: 'Avani Enterprises is a top web development company in Bangalore (Bengaluru). We build fast, SEO-ready websites, SaaS products & web apps for startups and tech firms across Koramangala, Indiranagar, Whitefield & Electronic City. Free quote in 24 hrs.',
     keywords: 'web development company bangalore, website development company bengaluru, best web development company bangalore, saas development bangalore, web app development bangalore, web design company bengaluru, ecommerce website bangalore, website designers koramangala',
     canonical: 'https://www.avanienterprises.in/web-development-company-bangalore',
-    ogImage: 'https://www.avanienterprises.in/logo0.jpg',
+    ogImage: 'https://www.avanienterprises.in/logo0.webp',
   },
   breadcrumbs: [
     { label: 'Home', href: '/' },

@@ -23,7 +23,7 @@ const row1Logos = [
   { name: 'Policicue', logo: '/policucue.jpeg' },
   { name: 'Frd Nutrition', logo: '/frd-nutrition-new.png' },
   { name: 'Rohtak Shoe Co.', logo: '/shoes.jpeg' },
-  { name: 'Gaon se ghar tak', logo: '/gaonsegharatk.png' },
+  { name: 'Gaon se ghar tak', logo: '/gaonsegharatk.webp' },
 ];
 
 const row2Logos = [
@@ -321,7 +321,7 @@ const About = () => {
             </div>
 
             <div className="dh-about-core-img" style={{ width: '280px', height: '280px', borderRadius: '50%', overflow: 'hidden', border: '4px solid var(--border-light)', flexShrink: 0, background: 'var(--card-bg)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <img src="/logo0.jpg" alt="Avani Logo" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              <img src="/logo0.webp" alt="Avani Logo" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
 
             <div className="dh-about-core-col-right" style={{ display: 'flex', flexDirection: 'column', gap: '24px', flex: 1, minWidth: '250px' }}>
@@ -357,10 +357,10 @@ const About = () => {
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '24px' }} className="dh-responsive-grid dh-adv-grid">
             {[
-              { img: '/about_proven_track_record.png', icon: <Shield size={24} />, title: 'Proven Track Record', desc: 'With 8+ years of experience and 300+ successful projects, we have the strategic depth and technical expertise to handle any digital challenge.' },
-              { img: '/about_innovation_driven.png', icon: <Zap size={24} />, title: 'Innovation-Driven', desc: 'We stay ahead of industry trends and leverage cutting-edge technologies to deliver innovative solutions that give you a competitive edge.' },
-              { img: '/about_client_centric.png', icon: <Users size={24} />, title: 'Client-Centric', desc: 'Your success is our priority. We build long-term partnerships based on trust, transparency, and delivering high-impact results.' },
-              { img: '/about_proven_track_record.png', icon: <Target size={24} />, title: 'Tailored Strategies', desc: 'We do not believe in one-size-fits-all. Every strategy is custom-built to align perfectly with your unique business goals and market dynamics.' }
+              { img: '/about_proven_track_record.webp', icon: <Shield size={24} />, title: 'Proven Track Record', desc: 'With 8+ years of experience and 300+ successful projects, we have the strategic depth and technical expertise to handle any digital challenge.' },
+              { img: '/about_innovation_driven.webp', icon: <Zap size={24} />, title: 'Innovation-Driven', desc: 'We stay ahead of industry trends and leverage cutting-edge technologies to deliver innovative solutions that give you a competitive edge.' },
+              { img: '/about_client_centric.webp', icon: <Users size={24} />, title: 'Client-Centric', desc: 'Your success is our priority. We build long-term partnerships based on trust, transparency, and delivering high-impact results.' },
+              { img: '/about_proven_track_record.webp', icon: <Target size={24} />, title: 'Tailored Strategies', desc: 'We do not believe in one-size-fits-all. Every strategy is custom-built to align perfectly with your unique business goals and market dynamics.' }
             ].map((card, i) => (
               <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: i * 0.1 }}
                 className="dh-about-adv-card"

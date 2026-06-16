@@ -7,7 +7,7 @@ const PAGE: LocalServicePageProps = {
     description: 'Looking for the best web development company in Haryana? Avani Enterprises builds fast, SEO-ready custom websites and mobile apps for businesses in Gurgaon, Rohtak, Faridabad & across Haryana. Free consultation.',
     keywords: 'web development company haryana, website development company haryana, best web development company haryana, web design company haryana, custom website development haryana, web app development haryana, website design gurgaon, web development rohtak, web development faridabad',
     canonical: 'https://www.avanienterprises.in/web-development-company-haryana',
-    ogImage: 'https://www.avanienterprises.in/logo0.jpg',
+    ogImage: 'https://www.avanienterprises.in/logo0.webp',
   },
   breadcrumbs: [
     { label: 'Home', href: '/' },

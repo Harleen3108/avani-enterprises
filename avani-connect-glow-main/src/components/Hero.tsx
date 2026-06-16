@@ -103,7 +103,7 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
 
         {/* Parallax BG */}
         <motion.div style={{ scale: heroBgScale, position: 'absolute', inset: 0, zIndex: 0 }}>
-          <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=2069" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+          <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=2069" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} fetchPriority="high" loading="eager" />
           <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, var(--bg-primary) 0%, var(--glass-bg) 50%, transparent 100%)' }} />
           <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, var(--bg-primary) 0%, transparent 100%)' }} />
           <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 72% 38%, var(--border-light) 0%, transparent 55%)' }} />
@@ -230,7 +230,7 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
               {/* Avatar */}
               <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
                 style={{ position: 'absolute', top: '-10px', right: '-8px', width: '56px', height: '56px', borderRadius: '50%', overflow: 'hidden', border: '3px solid var(--glass-bg)', boxShadow: '0 16px 40px rgba(0,0,0,0.6)', zIndex: 20 }}>
-                <img src="https://images.unsplash.com/photo-1589386417686-0d34b5903d23?q=80&w=400" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                <img src="https://images.unsplash.com/photo-1589386417686-0d34b5903d23?q=80&w=400" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} fetchPriority="high" loading="eager" />
               </motion.div>
 
               {/* Newsletter Card */}

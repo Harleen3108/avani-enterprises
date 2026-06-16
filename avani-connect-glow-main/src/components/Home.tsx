@@ -83,7 +83,7 @@ const Home = () => {
       description: 'We build stunning, lightning-fast websites and mobile apps tailored to your business. From eye-catching designs to seamless functionality, we bring your digital ideas to life and help you scale effortlessly.',
       slug: 'web-app-development',
       index: '01',
-      image: '/whatwecreate/webdev.png',
+      image: '/whatwecreate/webdev.webp',
       subLinks: [
         { name: 'Custom Websites', path: '/services/web-app-development' },
         { name: 'Mobile Apps', path: '/services/web-app-development' },
@@ -167,7 +167,7 @@ const Home = () => {
       description: 'Scale your business with expert guidance and strategy. We analyze your day-to-day operations to find hidden opportunities, streamline workflows, and set you up for long-term, sustainable success.',
       slug: 'business-consultation',
       index: '07',
-      image: '/whatwecreate/consultation.png',
+      image: '/whatwecreate/consultation.webp',
       subLinks: [
         { name: 'Growth Strategy', path: '/services/business-consultation' },
         { name: 'Workflow Analysis', path: '/services/business-consultation' },
@@ -181,7 +181,7 @@ const Home = () => {
       description: 'Get the funding you need to grow and expand. We connect you with flexible business loans, working capital, and equipment financing at competitive rates, with quick approvals and hassle-free processing.',
       slug: 'business-loans',
       index: '08',
-      image: '/whatwecreate/loans.png',
+      image: '/whatwecreate/loans.webp',
       subLinks: [
         { name: 'Working Capital', path: '/services/business-loans' },
         { name: 'Equipment Financing', path: '/services/business-loans' },
@@ -195,7 +195,7 @@ const Home = () => {
       description: 'Secure your hard work and protect your business from risks. We offer customized insurance plans to safeguard your assets, employees, and operations, giving you absolute peace of mind.',
       slug: 'business-insurance',
       index: '09',
-      image: '/whatwecreate/insurance.png',
+      image: '/whatwecreate/insurance.webp',
       subLinks: [
         { name: 'Asset Protection', path: '/services/business-insurance' },
         { name: 'Liability Coverage', path: '/services/business-insurance' },

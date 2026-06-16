@@ -73,14 +73,14 @@ export default function ProductPageTemplate({ data }: ProductPageTemplateProps) 
         <meta property="og:title" content={data.seo.title} />
         <meta property="og:description" content={data.seo.description} />
         <meta property="og:url" content={data.seo.canonical} />
-        <meta property="og:image" content="https://www.avanienterprises.in/logo0.jpg" />
+        <meta property="og:image" content="https://www.avanienterprises.in/logo0.webp" />
         <meta property="og:site_name" content="Avani Enterprises" />
         
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={data.seo.title} />
         <meta name="twitter:description" content={data.seo.description} />
-        <meta name="twitter:image" content="https://www.avanienterprises.in/logo0.jpg" />
+        <meta name="twitter:image" content="https://www.avanienterprises.in/logo0.webp" />
 
         <script type="application/ld+json">{JSON.stringify(faqLd)}</script>
       </Helmet>

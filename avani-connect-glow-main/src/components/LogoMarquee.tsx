@@ -7,7 +7,7 @@ const row1Logos = [
   { name: 'Policicue', logo: '/policucue.jpeg' },
   { name: 'Frd Nutrition', logo: '/frd-nutrition-new.png' },
   { name: 'Rohtak Shoe Co.', logo: '/shoes.jpeg' },
-  { name: 'Gaon se ghar tak', logo: '/gaonsegharatk.png' },
+  { name: 'Gaon se ghar tak', logo: '/gaonsegharatk.webp' },
 ];
 
 const row2Logos = [

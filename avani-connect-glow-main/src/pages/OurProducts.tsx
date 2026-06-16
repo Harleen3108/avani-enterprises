@@ -34,7 +34,7 @@ const products = [
     link: 'https://os.avanienterprises.in',
     features: ['Unified Team Workspace', 'Automated Operations', 'Real-Time KPIs & Metrics', 'Custom Invoicing & Payroll', 'Activity Timeline Logging', 'Role-Based Access Control'],
     highlights: ['Workflow OS', 'Real-time Analytics', 'Automation Portal'],
-    image: '/hrportal.png',
+    image: '/hrportal.webp',
     featured: true,
   },
   {
@@ -46,7 +46,7 @@ const products = [
     link: 'https://indus-school-page.vercel.app/admission',
     features: ['Teacher Student Module', 'Fee Management & Invoicing', 'Examination & Result Processing', 'Timetable & Scheduling', 'Parent-Teacher Communication', 'Library & Inventory Management'],
     highlights: ['Online Admissions', 'Exam Management', 'Fee Tracking'],
-    image: '/school-management-hero.png',
+    image: '/school-management-hero.webp',
   },
   {
     id: 'crm-portal',

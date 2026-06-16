@@ -7,7 +7,7 @@ const PAGE: LocalServicePageProps = {
     description: 'Avani Enterprises is a top web development company in Hyderabad. We build fast, SEO-ready websites, e-commerce stores & web apps for IT, pharma & startup businesses across HITEC City, Gachibowli & Madhapur. Free quote in 24 hrs.',
     keywords: 'web development company hyderabad, website development company hyderabad, best web development company hyderabad, web design company hyderabad, ecommerce website development hyderabad, web app development hyderabad, website designers hitec city gachibowli',
     canonical: 'https://www.avanienterprises.in/web-development-company-hyderabad',
-    ogImage: 'https://www.avanienterprises.in/logo0.jpg',
+    ogImage: 'https://www.avanienterprises.in/logo0.webp',
   },
   breadcrumbs: [
     { label: 'Home', href: '/' },

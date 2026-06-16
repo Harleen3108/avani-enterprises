@@ -45,7 +45,7 @@ const AnnouncementBar: React.FC<AnnouncementBarProps> = ({
           custom={0}
           className="relative"
         >
-          <img src="/logo0.jpg" alt="Avani Logo" className="h-7 w-7 rounded-lg shadow-lg object-cover ring-2 ring-white/20" />
+          <img src="/logo0.webp" alt="Avani Logo" className="h-7 w-7 rounded-lg shadow-lg object-cover ring-2 ring-white/20" />
           <motion.div 
             className="absolute -inset-1 bg-white/20 blur-sm rounded-lg -z-10"
             animate={{ opacity: [0.2, 0.5, 0.2] }}

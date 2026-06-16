@@ -7,7 +7,7 @@ const PAGE: LocalServicePageProps = {
     description: 'Avani Enterprises is a top web development company in Gurgaon (Gurugram). We build fast, SEO-ready custom websites, e-commerce stores & web apps for startups and MNCs across Cyber City, Golf Course Road & Sohna Road. Free quote in 24 hrs.',
     keywords: 'web development company gurgaon, website development company gurgaon, best web development company gurugram, web design company gurgaon, custom website development gurgaon, ecommerce website gurgaon, web app development gurugram, website designers cyber city',
     canonical: 'https://www.avanienterprises.in/web-development-company-gurgaon',
-    ogImage: 'https://www.avanienterprises.in/logo0.jpg',
+    ogImage: 'https://www.avanienterprises.in/logo0.webp',
   },
   breadcrumbs: [
     { label: 'Home', href: '/' },

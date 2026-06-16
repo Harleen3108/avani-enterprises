@@ -7,7 +7,7 @@ const PAGE: LocalServicePageProps = {
     description: 'Avani Enterprises is a top web development company in Pune. We build fast, SEO-ready websites, e-commerce stores & web apps for IT, automotive, education & manufacturing businesses across Hinjewadi, Kharadi & Baner. Free quote in 24 hrs.',
     keywords: 'web development company pune, website development company pune, best web development company pune, web design company pune, ecommerce website development pune, web app development pune, website designers hinjewadi kharadi',
     canonical: 'https://www.avanienterprises.in/web-development-company-pune',
-    ogImage: 'https://www.avanienterprises.in/logo0.jpg',
+    ogImage: 'https://www.avanienterprises.in/logo0.webp',
   },
   breadcrumbs: [
     { label: 'Home', href: '/' },

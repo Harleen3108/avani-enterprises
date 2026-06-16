@@ -32,7 +32,7 @@ const Footer = () => (
         <div>
           <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '18px' }}>
             <div style={{ width: '32px', height: '32px', borderRadius: '8px', overflow: 'hidden', background: '#fff', padding: '2px' }}>
-              <img src="/logo0.jpg" alt="Avani" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+              <img src="/logo0.webp" alt="Avani" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
             </div>
             <div>
               <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18px', letterSpacing: '0.14em', color: 'var(--text-primary)', lineHeight: 1, fontWeight: 700 }}>AVANI</div>

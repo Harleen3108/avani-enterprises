@@ -129,7 +129,7 @@ const DH2GlobalPresence = () => {
         <div className="dh2-container">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
             <div style={{ position: 'relative', borderRadius: '32px', overflow: 'hidden', border: '1px solid var(--border-s)', height: '60vh', background: 'var(--bg-surface)' }}>
-              <img src="/global2.png" alt="Global Network" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.7, filter: 'grayscale(100%) brightness(0.5)' }} />
+              <img src="/global2.webp" alt="Global Network" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.7, filter: 'grayscale(100%) brightness(0.5)' }} />
               <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 50%, transparent 0%, var(--bg-deep) 100%)' }} />
               
               <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>

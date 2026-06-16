@@ -82,15 +82,15 @@ export default defineConfig(({ mode }) => ({
     chunkSizeWarningLimit: 1000,
     rollupOptions: {
       output: {
-        // Split third-party code into a few long-cacheable, cycle-free chunks.
-        // React core stays bundled with the rest of node_modules ("vendor") to
-        // avoid circular chunk references; only clearly leaf-level heavy libs
-        // (which nothing else re-imports) are pulled out separately.
         manualChunks(id: string) {
           if (!id.includes("node_modules")) return;
           if (id.includes("html2canvas")) return "html2canvas";
           if (id.includes("recharts") || id.includes("/d3-")) return "charts";
           if (id.includes("gsap")) return "gsap";
+          if (id.includes("framer-motion")) return "framer-motion";
+          if (id.includes("lucide-react")) return "lucide-react";
+          if (id.includes("@radix-ui")) return "radix-ui";
+          if (id.includes("react-dom") || id.includes("react-router") || id.includes("react/")) return "react-core";
           return "vendor";
         },
       },

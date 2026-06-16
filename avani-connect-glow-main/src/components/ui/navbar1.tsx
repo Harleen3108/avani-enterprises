@@ -15,7 +15,7 @@ const Navbar = () => {
                         <div className="relative">
                             <div className="absolute -inset-2 bg-purple-500/20 rounded-full blur-md opacity-0 group-hover:opacity-100 transition duration-500" />
                             <img
-                                src="/logo0.jpg"
+                                src="/logo0.webp"
                                 alt="Avani Enterprises"
                                 className="w-12 h-12 rounded-xl object-cover relative z-10"
                             />

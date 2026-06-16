@@ -16,15 +16,15 @@ const fadeUp = {
 };
 
 const services = [
-  { img: '/whatwecreate/webdev.png', icon: <Code size={32} />, title: 'Web & App Development', slug: 'web-app-development', desc: 'Crafting high-performance digital architectures with precision and scale.', features: ['Custom React Frameworks', 'Mobile App Ecosystems', 'Enterprise Solutions'] },
+  { img: '/whatwecreate/webdev.webp', icon: <Code size={32} />, title: 'Web & App Development', slug: 'web-app-development', desc: 'Crafting high-performance digital architectures with precision and scale.', features: ['Custom React Frameworks', 'Mobile App Ecosystems', 'Enterprise Solutions'] },
   { img: '/whatwecreate/seoandcontent.jpg', icon: <Search size={32} />, title: 'SEO & Content Marketing', slug: 'seo-content-marketing', desc: 'Dominating search landscapes through strategic authority and visibility.', features: ['Semantic SEO', 'Authority Building', 'Content Strategy'] },
   { img: '/whatwecreate/socialmedia.png', icon: <Share2 size={32} />, title: 'Social Media Marketing', slug: 'social-media-marketing', desc: 'Building meaningful brand narratives that resonate globally.', features: ['Narrative Design', 'Viral Mechanics', 'Community Growth'] },
   { img: '/whatwecreate/aisolutions.webp', icon: <Zap size={32} />, title: 'AI Solutions', slug: 'ai-solutions', desc: 'Harnessing the power of automation to drive operational intelligence.', features: ['LLM Integration', 'Process Automation', 'Intelligent Chatbots'] },
   { img: '/whatwecreate/podcast.webp', icon: <Radio size={32} />, title: 'Podcast Production', slug: 'podcast-production', desc: 'Amplifying your brand voice through cinematic audio experiences.', features: ['Audio Engineering', 'Global Distribution', 'Narrative Production'] },
   { img: '/whatwecreate/finance.webp', icon: <PieChart size={32} />, title: 'Financial Consulting', slug: 'financial-consulting', desc: 'Navigating market complexities with data-driven strategic oversight.', features: ['Growth Capital', 'Risk Management', 'Strategic Scaling'] },
-  { img: '/whatwecreate/consultation.png', icon: <Lightbulb size={32} />, title: 'Business Consultation', slug: 'business-consultation', desc: 'Analyzing day-to-day operations to find hidden opportunities and streamline workflows.', features: ['Workflow Audits', 'Operational Scaling', 'Opportunity Scouting'] },
-  { img: '/whatwecreate/loans.png', icon: <TrendingUp size={32} />, title: 'Business Loans', slug: 'business-loans', desc: 'Securing flexible working capital and equipment financing at competitive rates.', features: ['Growth Capital', 'Hassle-Free Processing', 'Flexible Terms'] },
-  { img: '/whatwecreate/insurance.png', icon: <Shield size={32} />, title: 'Business Insurance', slug: 'business-insurance', desc: 'Customized insurance plans to safeguard your enterprise assets and operations.', features: ['Asset Safeguarding', 'Liability Protection', 'Absolute Peace of Mind'] },
+  { img: '/whatwecreate/consultation.webp', icon: <Lightbulb size={32} />, title: 'Business Consultation', slug: 'business-consultation', desc: 'Analyzing day-to-day operations to find hidden opportunities and streamline workflows.', features: ['Workflow Audits', 'Operational Scaling', 'Opportunity Scouting'] },
+  { img: '/whatwecreate/loans.webp', icon: <TrendingUp size={32} />, title: 'Business Loans', slug: 'business-loans', desc: 'Securing flexible working capital and equipment financing at competitive rates.', features: ['Growth Capital', 'Hassle-Free Processing', 'Flexible Terms'] },
+  { img: '/whatwecreate/insurance.webp', icon: <Shield size={32} />, title: 'Business Insurance', slug: 'business-insurance', desc: 'Customized insurance plans to safeguard your enterprise assets and operations.', features: ['Asset Safeguarding', 'Liability Protection', 'Absolute Peace of Mind'] },
 ];
 
 
@@ -300,7 +300,7 @@ const Services = () => {
                 Our methodology is rooted in architectural design principles—prioritizing structure, clarity, and intent above all else. We don't just deliver; we architect for long-term scalability.
               </p>
               <div style={{ borderRadius: '16px', overflow: 'hidden', border: '1px solid var(--border-faint)', height: '200px' }}>
-                <img src="/hey.png" alt="Our methodology in action" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.8)', transition: 'transform 0.6s ease' }}
+                <img src="/hey.webp" alt="Our methodology in action" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.8)', transition: 'transform 0.6s ease' }}
                   onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.03)'; }}
                   onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; }}
                 />

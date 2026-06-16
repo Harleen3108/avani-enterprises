@@ -4,7 +4,7 @@ import { useSeo } from "../contexts/SeoContext";
 
 // ── Constants ─────────────────────────────────────────────────────────────────
 const SITE_URL      = "https://www.avanienterprises.in";
-const DEFAULT_IMAGE = `${SITE_URL}/logo0.jpg`;
+const DEFAULT_IMAGE = `${SITE_URL}/logo0.webp`;
 const SITE_NAME     = "Avani Enterprises";
 const TWITTER_HANDLE = "@AvaniEnterprises";
 
@@ -91,7 +91,7 @@ function buildSitewideLd() {
         "logo": `${SITE_URL}/logo.png`,
         "telephone": "+919253625099",
         "email": "kp@avanienterprises.in",
-        "image": `${SITE_URL}/logo0.jpg`,
+        "image": `${SITE_URL}/logo0.webp`,
         "priceRange": "$$",
         "address": {
           "@type": "PostalAddress",

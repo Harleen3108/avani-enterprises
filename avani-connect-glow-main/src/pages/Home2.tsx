@@ -13,12 +13,12 @@ import '../components/home2/Home2.css';
 const words = ['Websites', 'Products', 'Solutions', 'Experiences'];
 
 const newProjectData = [
-  { name: 'Indus Group of Institutions', cat: 'Education', img: '/indus_aesthetic_1777270461175.png', link: '/home2/our-products/indus' },
-  { name: 'Policicue', cat: 'InsurTech', img: '/policicue_aesthetic_1777270486926.png', link: '/home2/our-products/policicue' },
-  { name: 'FRD Nutrition', cat: 'E-Commerce', img: '/frd_aesthetic_1777270509667.png', link: '/home2/our-products/frd-nutrition' },
-  { name: 'Hi-tech Homes', cat: 'Real Estate', img: '/hitech_aesthetic_1777270543762.png', link: '/home2/our-products/hitech-homes' },
-  { name: 'Sanjeevni Hospital', cat: 'Healthcare', img: '/sanjeevni_aesthetic_1777270573722.png', link: '/home2/our-products/sanjeevni' },
-  { name: 'Rohtak Shoe co.', cat: 'Fashion', img: '/rohtak_aesthetic_1777270648142.png', link: '/home2/our-products/rohtak-shoe' },
+  { name: 'Indus Group of Institutions', cat: 'Education', img: '/indus_aesthetic_1777270461175.webp', link: '/home2/our-products/indus' },
+  { name: 'Policicue', cat: 'InsurTech', img: '/policicue_aesthetic_1777270486926.webp', link: '/home2/our-products/policicue' },
+  { name: 'FRD Nutrition', cat: 'E-Commerce', img: '/frd_aesthetic_1777270509667.webp', link: '/home2/our-products/frd-nutrition' },
+  { name: 'Hi-tech Homes', cat: 'Real Estate', img: '/hitech_aesthetic_1777270543762.webp', link: '/home2/our-products/hitech-homes' },
+  { name: 'Sanjeevni Hospital', cat: 'Healthcare', img: '/sanjeevni_aesthetic_1777270573722.webp', link: '/home2/our-products/sanjeevni' },
+  { name: 'Rohtak Shoe co.', cat: 'Fashion', img: '/rohtak_aesthetic_1777270648142.webp', link: '/home2/our-products/rohtak-shoe' },
 ];
 
 const StackedVinylProjects = () => {
@@ -309,7 +309,7 @@ const Home2 = () => {
               <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
                 <div className="dh2-gp-map">
                   <div style={{ position: 'absolute', inset: 0, opacity: .04, pointerEvents: 'none', backgroundImage: 'linear-gradient(rgba(255,255,255,.15) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.15) 1px, transparent 1px)', backgroundSize: '35px 35px' }} />
-                  <img src="/global2.png" alt="Global Network" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: .4, mixBlendMode: 'screen', pointerEvents: 'none' }} />
+                  <img src="/global2.webp" alt="Global Network" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: .4, mixBlendMode: 'screen', pointerEvents: 'none' }} />
                   {offices.map((_, i) => (
                     <div key={i} style={{ position: 'absolute', left: dotPos[i].l, top: dotPos[i].t, transform: 'translate(-50%,-50%)', zIndex: i === gpIdx ? 10 : 5 }}>
                       {i === gpIdx ? (

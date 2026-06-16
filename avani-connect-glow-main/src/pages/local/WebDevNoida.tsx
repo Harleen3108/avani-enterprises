@@ -7,7 +7,7 @@ const PAGE: LocalServicePageProps = {
     description: 'Looking for web development services in Noida? Avani Enterprises builds fast, SEO-ready websites, e-commerce stores & web apps for businesses across Noida, Greater Noida & the Noida Expressway. Free consultation & quote in 24 hrs.',
     keywords: 'web development services noida, web development company noida, website development noida, web design company noida, ecommerce website development noida, web app development greater noida, website designers noida expressway',
     canonical: 'https://www.avanienterprises.in/web-development-company-noida',
-    ogImage: 'https://www.avanienterprises.in/logo0.jpg',
+    ogImage: 'https://www.avanienterprises.in/logo0.webp',
   },
   breadcrumbs: [
     { label: 'Home', href: '/' },

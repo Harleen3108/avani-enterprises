@@ -19,7 +19,7 @@ export const projectsData: ProjectItem[] = [
     slug: "avani-business-os",
     title: "Business OS Website",
     subtitle: "Complete business platform designed to centralize and automate enterprise operations.",
-    image: "/businessos.png",
+    image: "/businessos.webp",
     liveLink: "https://os.avanienterprises.in",
     overview: "Avani Business OS is an all-in-one operating platform designed to centralize and automate enterprise operations. It integrates employee workflows, real-time activity logs, project pipelines, financial ledgers, and comprehensive performance metrics. By unifying operational databases into a single interface, it empowers organizations to eliminate fragmented tools, streamline communication, and drive productivity.",
     keyFeatures: [
@@ -103,7 +103,7 @@ export const projectsData: ProjectItem[] = [
     slug: "school-transport-management",
     title: "School Management System",
     subtitle: "Unified School Operations, Bus & Transport Ecosystem",
-    image: "/schoolmanagement.png",
+    image: "/schoolmanagement.webp",
     liveLink: "https://sms-frontend-steel-xi.vercel.app/",
     overview: "A comprehensive operational hub for primary and secondary educational institutions. It integrates student information systems, academic performance trackers, fee management registers, examinations scheduling, and school bus transport tracking. Designed to foster ultimate connectivity between school administration, teachers, bus drivers, and anxious parents.",
     keyFeatures: [
@@ -130,7 +130,7 @@ export const projectsData: ProjectItem[] = [
     slug: "alumni-management",
     title: "Alumni Management Portal",
     subtitle: "Dynamic Networking & Career Platform",
-    image: "/alumnimanagement.png",
+    image: "/alumnimanagement.webp",
     liveLink: "https://alumnexus-xi.vercel.app/",
     overview: "A premium, exclusive networking platform engineered to connect university alumni across graduating batches. It facilitates meaningful mentor-mentee professional engagements, promotes job opportunities within the private network, showcases upcoming events, and archives historic university accomplishments.",
     keyFeatures: [
@@ -151,7 +151,7 @@ export const projectsData: ProjectItem[] = [
     slug: "motoxpress",
     title: "MotoXpress",
     subtitle: "Bike Buying, Selling & Renting Platform",
-    image: "/motoexpress.png",
+    image: "/motoexpress.webp",
     liveLink: "https://bike-service-website-gamma.vercel.app/",
     imageStyle: { objectFit: "contain", background: "#12100e", padding: "8px" },
     overview: "MotoXpress is a comprehensive online marketplace tailored for motorcycle enthusiasts, buyers, and sellers. It provides a secure, seamless environment to list, discover, buy, sell, and rent bikes. The platform is custom built to enable users to sell bikes, buy bikes from verified listings, book bike related services, browse bike spare parts, and rent bikes with live location captured.",
@@ -174,7 +174,7 @@ export const projectsData: ProjectItem[] = [
     slug: "autoxpress",
     title: "AutoXpress",
     subtitle: "Car Buying, Selling & Renting Platform",
-    image: "/autoexpress.png",
+    image: "/autoexpress.webp",
     liveLink: "https://car-service-website-tau.vercel.app/",
     imageStyle: { objectFit: "contain", background: "#12100e", padding: "8px" },
     overview: "AutoXpress is a premium automotive marketplace designed to simplify car commerce. It enables users to sell cars, buy cars from verified inventory lists, book car related services, browse car spare parts, and rent cars with live location captured.",
@@ -197,7 +197,7 @@ export const projectsData: ProjectItem[] = [
     slug: "lms-portal",
     title: "Learning Management System (LMS)",
     subtitle: "Enterprise Learning, Training & Course Delivery Platform",
-    image: "/lmsportal.png",
+    image: "/lmsportal.webp",
     liveLink: "https://cms-lovat-phi.vercel.app/",
     imageStyle: { transform: "scale(1.15)", transformOrigin: "center" },
     overview: "A scalable learning management system (LMS) designed to coordinate employee training programs, academic course loads, and executive development paths. Features rich video playback tracking, modular custom quiz engines, certificates generation templates, and group collaboration tools.",
@@ -213,14 +213,14 @@ export const projectsData: ProjectItem[] = [
       "92% average completion rate of onboarding course programs",
       "Detailed tracking data revealing and solving lesson drop-off bottlenecks"
     ],
-    galleryImages: ["/lmsportal.png", "/lmsportal2.png"]
+    galleryImages: ["/lmsportal.webp", "/lmsportal2.webp"]
   },
   {
     id: "millionaire-club",
     slug: "millionaire-club",
     title: "Real Estate Management System (Millionaire Investment Club)",
     subtitle: "Luxury Real Estate & AI Portfolio Management Portal",
-    image: "/millionareclub.png",
+    image: "/millionareclub.webp",
     liveLink: "https://real-estate-platform-self.vercel.app/",
     overview: "Millionaire Club is a premium real estate marketplace designed for luxury property agencies, high-net-worth investors, tenants, and buyers. It displays high-end luxury property listings using interactive elements, manages users' portfolio distributions, processes dynamic real estate queries with AI-powered rate recommendations, and coordinates booking allocations for elite co-living, residential, and commercial spaces.",
     keyFeatures: [
@@ -243,7 +243,7 @@ export const projectsData: ProjectItem[] = [
     slug: "college-management",
     title: "College Management",
     subtitle: "Advanced Campus ERP & CMS",
-    image: "/collegemanagement.png",
+    image: "/collegemanagement.webp",
     liveLink: "https://cms-lovat-phi.vercel.app/",
     overview: "A highly-scalable Enterprise Resource Planning software for large-scale colleges and universities. College Management manages student and staff lifecycle logs, coordinates complex semester registrations, generates unified student reports, and handles payroll registers for academics and support staff.",
     keyFeatures: [
@@ -264,7 +264,7 @@ export const projectsData: ProjectItem[] = [
     slug: "gaon-se-ghar-tak",
     title: "Gaon Se Ghar Tak",
     subtitle: "Rural-to-Urban Supply Chain",
-    image: "/gaonsegharatk.png",
+    image: "/gaonsegharatk.webp",
     liveLink: "https://gaonseghartak.in/",
     imageStyle: { transform: "scale(1.15)", transformOrigin: "center" },
     overview: "Gaon Se Ghar Tak is a noble farm-to-table digital logistics supply chain designed to eliminate intermediates. It directly connects rural farming cooperatives with urban retail hubs, enabling transparent fair trade, micro-inventory records, temperature-sensitive shipping trackers, and bulk order placements.",

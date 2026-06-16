@@ -87,7 +87,7 @@ const GlobalPresenceComponent = () => {
               <div style={{ position: 'absolute', inset: 0, opacity: 0.1, backgroundImage: 'linear-gradient(var(--text-tertiary) 1px, transparent 1px), linear-gradient(90deg, var(--text-tertiary) 1px, transparent 1px)', backgroundSize: '40px 40px', pointerEvents: 'none' }} />
               <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 50%, transparent 20%, var(--bg-secondary) 100%)', pointerEvents: 'none', zIndex: 2 }} />
               
-              <img src="/global2.png" alt="Global Network" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 0.5, mixBlendMode: 'screen', pointerEvents: 'none' }} />
+              <img src="/global2.webp" alt="Global Network" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 0.5, mixBlendMode: 'screen', pointerEvents: 'none' }} />
 
               <motion.div key={activeIndex} initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} transition={{ type: 'spring', damping: 15 }}
                 style={{ position: 'absolute', left: activeIndex === 0 ? '66%' : activeIndex === 1 ? '68%' : activeIndex === 2 ? '64%' : '84%', top: activeIndex === 0 ? '42%' : activeIndex === 1 ? '45%' : activeIndex === 2 ? '52%' : '75%', transform: 'translate(-50%,-50%)', zIndex: 10 }}>

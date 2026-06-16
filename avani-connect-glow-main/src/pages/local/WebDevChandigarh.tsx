@@ -7,7 +7,7 @@ const PAGE: LocalServicePageProps = {
     description: 'Avani Enterprises is a leading web design & development company in Chandigarh. We craft fast, SEO-ready websites, e-commerce stores & web apps for businesses across the Tricity — Chandigarh, Mohali & Panchkula. Free quote in 24 hrs.',
     keywords: 'web design company chandigarh, web development company chandigarh, website development chandigarh, web designers mohali, ecommerce website chandigarh, web development panchkula, website design tricity, web app development chandigarh',
     canonical: 'https://www.avanienterprises.in/web-development-company-chandigarh',
-    ogImage: 'https://www.avanienterprises.in/logo0.jpg',
+    ogImage: 'https://www.avanienterprises.in/logo0.webp',
   },
   breadcrumbs: [
     { label: 'Home', href: '/' },

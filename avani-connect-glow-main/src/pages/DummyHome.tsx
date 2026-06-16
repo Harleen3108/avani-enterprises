@@ -35,7 +35,7 @@ const services = [
     title: 'Web & App Development', 
     description: 'We build stunning, lightning-fast websites and mobile apps tailored to your business. From eye-catching designs to seamless functionality, we bring your digital ideas to life and help you scale effortlessly.', 
     slug: 'web-app-development',
-    image: '/whatwecreate/webdev.png',
+    image: '/whatwecreate/webdev.webp',
     customPath: '/web-dev',
     subLinks: [
       { name: 'Core Tech Stack', path: '/web-dev' },
@@ -87,21 +87,21 @@ const services = [
     title: 'Business Consultation', 
     description: 'Scale your business with expert guidance and strategy. We analyze your day-to-day operations to find hidden opportunities, streamline workflows, and set you up for long-term, sustainable success.', 
     slug: 'business-consultation',
-    image: '/whatwecreate/consultation.png'
+    image: '/whatwecreate/consultation.webp'
   },
   { 
     index: '08', 
     title: 'Business Loans', 
     description: 'Get the funding you need to grow and expand. We connect you with flexible business loans, working capital, and equipment financing at competitive rates, with quick approvals and hassle-free processing.', 
     slug: 'business-loans',
-    image: '/whatwecreate/loans.png'
+    image: '/whatwecreate/loans.webp'
   },
   { 
     index: '09', 
     title: 'Business Insurance', 
     description: 'Secure your hard work and protect your business from risks. We offer customized insurance plans to safeguard your assets, employees, and operations, giving you absolute peace of mind.', 
     slug: 'business-insurance',
-    image: '/whatwecreate/insurance.png'
+    image: '/whatwecreate/insurance.webp'
   }
 ];
 

@@ -7,7 +7,7 @@ const PAGE: LocalServicePageProps = {
     description: 'Avani Enterprises is a trusted website development agency in India. We build fast, SEO-ready custom websites, e-commerce platforms & web apps for businesses pan-India and abroad. 150+ projects delivered. Free consultation.',
     keywords: 'website development agency india, web development company india, best web development company in india, custom website development india, ecommerce website development india, web app development company india, software development company india',
     canonical: 'https://www.avanienterprises.in/web-development-company-india',
-    ogImage: 'https://www.avanienterprises.in/logo0.jpg',
+    ogImage: 'https://www.avanienterprises.in/logo0.webp',
   },
   breadcrumbs: [
     { label: 'Home', href: '/' },

@@ -79,7 +79,7 @@ const FullMapSection: React.FC = () => {
           <div className="absolute -bottom-16 -right-16 w-48 h-48 bg-orange-500/[0.06] rounded-full blur-[60px] pointer-events-none" />
           
           <img 
-            src="/global2.png"
+            src="/global2.webp"
             alt="Global Network"
             className="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-screen pointer-events-none z-0"
           />
@@ -257,7 +257,7 @@ const InteractiveMapSection: React.FC = () => {
               <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(circle at 50% 50%, transparent 40%, rgba(0,0,0,0.3) 100%)' }} />
 
               <img 
-                src="/global2.png"
+                src="/global2.webp"
                 alt="Global Network"
                 className="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-screen pointer-events-none z-0"
               />

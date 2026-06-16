@@ -2,7 +2,6 @@
 import { useRef } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Play, Sparkles } from "lucide-react";
-import html2canvas from "html2canvas";
 import { Button } from "@/components/ui/button";
 import profilePlaceholder from "@/assets/profile-placeholder.jpg";
 import RegistrationForm from "@/components/RegistrationForm"; // ADDED: registration form import
@@ -23,6 +22,7 @@ export default function HeroSection({ source }: HeroSectionProps) {
 
   const exportAsImage = async () => {
     if (!heroRef.current) return;
+    const html2canvas = (await import("html2canvas")).default;
     const canvas = await html2canvas(heroRef.current, { useCORS: true, scale: 2, backgroundColor: "#0b1220" });
     const dataURL = canvas.toDataURL("image/png");
     const a = document.createElement("a");

@@ -1419,7 +1419,7 @@ No.1 Digital Marketing Agency in India we provide best Digital Marketing, Web De
                     <div key={i} className="flex items-center gap-6 md:gap-10 px-6 md:px-10">
                       <div className="flex items-center gap-3 bg-white/5 backdrop-blur-md px-4 py-2 rounded-2xl border border-white/10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)] shrink-0">
                         <div className="p-1 bg-gradient-to-br from-amber-400 to-orange-500 rounded-xl shadow-md shrink-0">
-                          <img src="/logo0.jpg" alt="Avani" className="h-8 w-8 md:h-10 md:w-10 rounded-lg object-contain bg-white shrink-0" />
+                          <img src="/logo0.webp" alt="Avani" className="h-8 w-8 md:h-10 md:w-10 rounded-lg object-contain bg-white shrink-0" />
                         </div>
                         <span className="text-white/40 font-black text-lg md:text-xl shrink-0">×</span>
                         <div className="p-1 bg-white rounded-xl shadow-md shrink-0">

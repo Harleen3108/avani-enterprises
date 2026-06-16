@@ -7,7 +7,7 @@ const PAGE: LocalServicePageProps = {
     description: 'Avani Enterprises is a top web development company in Mumbai. We build fast, SEO-ready custom websites, e-commerce stores & web apps for fintech, media, retail & D2C brands across BKC, Andheri & South Mumbai. Free quote in 24 hrs.',
     keywords: 'web development company mumbai, website development company mumbai, best web development company mumbai, web design company mumbai, ecommerce website development mumbai, web app development mumbai, website designers andheri bkc',
     canonical: 'https://www.avanienterprises.in/web-development-company-mumbai',
-    ogImage: 'https://www.avanienterprises.in/logo0.jpg',
+    ogImage: 'https://www.avanienterprises.in/logo0.webp',
   },
   breadcrumbs: [
     { label: 'Home', href: '/' },
