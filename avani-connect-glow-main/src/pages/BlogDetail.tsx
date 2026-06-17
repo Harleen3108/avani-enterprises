@@ -16,7 +16,7 @@ const BlogDetail = () => {
     const fetchBlog = async () => {
       try {
         const backendUrl = getBackendUrl();
-        const response = await fetch(`${backendUrl}/api/blogs/${slug}`);
+        const response = await fetch(`${backendUrl}/blogs/${slug}`);
         const data = await response.json();
         if (data.success) setBlog(data.data);
       } catch (error) {
