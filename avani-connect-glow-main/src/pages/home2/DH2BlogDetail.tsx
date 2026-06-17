@@ -15,7 +15,7 @@ const DH2BlogDetail = () => {
   useEffect(() => {
     const fetchBlog = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}/blogs/${slug}`);
+        const response = await fetch(`${API_BASE_URL}/blogs/${encodeURIComponent(slug || '')}`);
         const data = await response.json();
         if (data.success) setBlog(data.data);
       } catch (error) {

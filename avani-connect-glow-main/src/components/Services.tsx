@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUpRight, ChevronDown } from 'lucide-react';
 
 const DummyServices = ({ services }: any) => {
   const [expandedIdx, setExpandedIdx] = useState<number | null>(null);
+  const navigate = useNavigate();
 
   const toggleExpand = (idx: number, e: React.MouseEvent) => {
     e.preventDefault(); // Prevent link navigation just for the accordion toggle if we want, but since they are links, maybe we just expand on hover or keep it as a link?
@@ -65,11 +66,13 @@ const DummyServices = ({ services }: any) => {
               whileInView={{ opacity: 1, y: 0 }} 
               viewport={{ once: true }} 
               transition={{ delay: i * 0.1, duration: 0.6 }}
-              style={{ 
+              onClick={() => navigate(svc.customPath || `/services/${svc.slug}`)}
+              style={{
                 background: 'var(--card-bg)',
                 border: '1px solid var(--border-light)',
                 borderRadius: '16px',
                 padding: '24px',
+                cursor: 'pointer',
                 display: 'flex',
                 flexDirection: 'column',
                 minHeight: '440px',
@@ -176,6 +179,7 @@ const DummyServices = ({ services }: any) => {
                       <Link
                         key={subIdx}
                         to={sub.path}
+                        onClick={(e) => e.stopPropagation()}
                         style={{
                           fontSize: '11px',
                           padding: '4px 10px',
@@ -205,9 +209,10 @@ const DummyServices = ({ services }: any) => {
                 )}
               </div>
 
-              <Link 
-                to={svc.customPath || `/services/${svc.slug}`} 
-                style={{ 
+              <Link
+                to={svc.customPath || `/services/${svc.slug}`}
+                onClick={(e) => e.stopPropagation()}
+                style={{
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '6px',
