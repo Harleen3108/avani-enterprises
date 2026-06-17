@@ -117,7 +117,7 @@ const DummyCaseStudies = () => {
                         transform: hovered === i ? 'scale(1.08)' : 'scale(1)',
                       }}
                     />
-                    <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, var(--bg-secondary) 0%, var(--glass-bg) 50%, transparent 100%)' }} />
+                    <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.1) 28%, transparent 55%)' }} />
 
                     {/* Category badge */}
                     <div style={{ position: 'absolute', top: '14px', left: '14px', display: 'flex', alignItems: 'center', gap: '6px', padding: '4px 12px', background: 'var(--glass-bg)', backdropFilter: 'blur(10px)', borderRadius: '100px', border: `1px solid ${cs.color}33` }}>

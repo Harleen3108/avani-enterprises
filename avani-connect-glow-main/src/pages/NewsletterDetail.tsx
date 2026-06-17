@@ -16,7 +16,7 @@ const NewsletterDetail = () => {
     const fetchNewsletter = async () => {
       try {
         const backendUrl = getBackendUrl();
-        const response = await fetch(`${backendUrl}/api/newsletters/${slug}`, {
+        const response = await fetch(`${backendUrl}/api/newsletters/${encodeURIComponent(slug || '')}`, {
           headers: { 'Accept': 'application/json' }
         });
         const data = await response.json();

@@ -257,7 +257,7 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
                     const month = date.toLocaleDateString('en-US', { month: 'short' }).toUpperCase();
                     const day = date.getDate().toString().padStart(2, '0');
                     return (
-                      <Link key={n._id} to={`/newsletters/${n.slug}`}
+                      <Link key={n._id} to={`/newsletters/${encodeURIComponent(n.slug)}`}
                         style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '10px 20px', borderBottom: '1px solid var(--border-faint)', textDecoration: 'none', transition: 'background 0.2s' }}
                         onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = 'var(--accent-hover)'}
                         onMouseLeave={e => (e.currentTarget as HTMLElement).style.background = 'transparent'}

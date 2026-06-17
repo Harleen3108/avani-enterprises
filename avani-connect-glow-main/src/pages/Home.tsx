@@ -555,14 +555,14 @@ No.1 Digital Marketing Agency in India we provide best Digital Marketing, Web De
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, delay: 0.2 }}
-              className="relative hidden lg:block h-[600px]"
+              className="relative hidden lg:block h-[560px] overflow-hidden"
             >
               {/* Background Design */}
               <div className="absolute inset-0 z-0">
-                <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-amber-200/20 rounded-full blur-[80px] animate-pulse-slow" />
-                <div className="absolute bottom-1/4 right-0 w-[300px] h-[300px] bg-sky-200/20 rounded-full blur-[80px] animate-pulse-slow delay-700" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] border border-amber-500/5 rounded-full" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] border border-amber-500/5 rounded-full" />
+                <div className="absolute top-1/4 left-1/4 w-[260px] h-[260px] bg-amber-200/20 rounded-full blur-[80px] animate-pulse-slow" />
+                <div className="absolute bottom-1/4 right-0 w-[220px] h-[220px] bg-sky-200/20 rounded-full blur-[80px] animate-pulse-slow delay-700" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[360px] h-[360px] border border-amber-500/5 rounded-full" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[440px] h-[440px] border border-amber-500/5 rounded-full" />
               </div>
 
               {/* OLD: Dashboard Chart — extracted to <HeroDashboard /> in src/components/HeroDashboard.tsx */}
@@ -570,27 +570,27 @@ No.1 Digital Marketing Agency in India we provide best Digital Marketing, Web De
               {/* <HeroDashboard /> */}
 
               {/* NEW: Newsletter Widget */}
-              <div className="absolute top-[35%] left-0 right-0 mx-auto w-[88%] max-w-md -translate-y-1/2 bg-white/95 backdrop-blur-md rounded-[2.5rem] shadow-[0_40px_100px_rgba(0,0,0,0.08)] border border-white overflow-hidden z-10">
+              <div className="absolute top-1/2 left-0 right-0 mx-auto w-[82%] max-w-[340px] -translate-y-1/2 bg-white/95 backdrop-blur-md rounded-[1.75rem] shadow-[0_30px_80px_rgba(0,0,0,0.08)] border border-white overflow-hidden z-10">
                 {/* Widget Header */}
-                <div className="flex items-center justify-between px-7 pt-7 pb-5 border-b border-slate-100">
-                  <h3 className="text-lg font-black text-slate-900 tracking-tight uppercase">News & Updates</h3>
-                  <div className="w-9 h-9 bg-amber-50 rounded-xl flex items-center justify-center border border-amber-100">
-                    <Mail className="w-4 h-4 text-amber-500" />
+                <div className="flex items-center justify-between px-5 pt-5 pb-3.5 border-b border-slate-100">
+                  <h3 className="text-sm font-black text-slate-900 tracking-tight uppercase">News & Updates</h3>
+                  <div className="w-8 h-8 bg-amber-50 rounded-lg flex items-center justify-center border border-amber-100">
+                    <Mail className="w-3.5 h-3.5 text-amber-500" />
                   </div>
                 </div>
 
                 {/* Newsletter Items */}
                 <div className="divide-y divide-slate-50">
                   {loadingNewsletters ? (
-                    <div className="flex justify-center py-12">
-                      <div className="w-8 h-8 border-3 border-amber-500 border-t-transparent rounded-full animate-spin" />
+                    <div className="flex justify-center py-10">
+                      <div className="w-7 h-7 border-3 border-amber-500 border-t-transparent rounded-full animate-spin" />
                     </div>
                   ) : newsletters.length === 0 ? (
-                    <div className="text-center py-12 px-6">
+                    <div className="text-center py-10 px-6">
                       <p className="text-slate-400 font-medium text-sm italic">Updates coming soon...</p>
                     </div>
                   ) : (
-                    newsletters.slice(0, 4).map((n: any) => {
+                    newsletters.slice(0, 3).map((n: any) => {
                       const date = new Date(n.publishedAt || n.createdAt);
                       const month = date.toLocaleDateString('en-US', { month: 'short' }).toUpperCase();
                       const day = date.getDate().toString().padStart(2, '0');
@@ -599,13 +599,13 @@ No.1 Digital Marketing Agency in India we provide best Digital Marketing, Web De
                       return (
                         <Link
                           key={n._id}
-                          to={`/newsletters/${n.slug}`}
-                          className="group flex items-center gap-4 px-7 py-4 hover:bg-amber-50/40 transition-colors duration-200"
+                          to={`/newsletters/${encodeURIComponent(n.slug)}`}
+                          className="group flex items-center gap-3 px-5 py-3 hover:bg-amber-50/40 transition-colors duration-200"
                         >
                           {/* Image or Date Badge */}
                           <div className="shrink-0">
                             {n.imageUrl ? (
-                              <div className="w-14 h-14 rounded-xl overflow-hidden border-2 border-slate-100 group-hover:border-amber-300 transition-colors shadow-sm">
+                              <div className="w-11 h-11 rounded-lg overflow-hidden border-2 border-slate-100 group-hover:border-amber-300 transition-colors shadow-sm">
                                 <img
                                   src={n.imageUrl.startsWith('http') ? n.imageUrl : `${API_BASE_URL}${n.imageUrl.startsWith('/') ? '' : '/'}${n.imageUrl}`}
                                   alt={n.title}
@@ -614,24 +614,24 @@ No.1 Digital Marketing Agency in India we provide best Digital Marketing, Web De
                                 />
                               </div>
                             ) : (
-                              <div className="w-14 h-14 rounded-xl bg-slate-50 border-2 border-slate-100 group-hover:border-amber-300 transition-colors flex flex-col items-center justify-center">
-                                <span className="text-[9px] font-black text-amber-500 uppercase leading-none tracking-wider">{month}</span>
-                                <span className="text-lg font-black text-slate-900 leading-tight">{day}</span>
+                              <div className="w-11 h-11 rounded-lg bg-slate-50 border-2 border-slate-100 group-hover:border-amber-300 transition-colors flex flex-col items-center justify-center">
+                                <span className="text-[8px] font-black text-amber-500 uppercase leading-none tracking-wider">{month}</span>
+                                <span className="text-base font-black text-slate-900 leading-tight">{day}</span>
                               </div>
                             )}
                           </div>
 
                           {/* Title + Meta */}
                           <div className="flex-1 min-w-0">
-                            <h4 className="text-sm font-bold text-slate-900 group-hover:text-amber-600 transition-colors line-clamp-1 leading-snug mb-0.5">
+                            <h4 className="text-[13px] font-bold text-slate-900 group-hover:text-amber-600 transition-colors line-clamp-1 leading-snug mb-0.5">
                               {n.title}
                             </h4>
                             <div className="flex items-center gap-2">
-                              <span className="text-[11px] text-slate-400 font-medium">
+                              <span className="text-[10px] text-slate-400 font-medium">
                                 {date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                               </span>
                               {isRecent && (
-                                <span className="text-[9px] font-black text-amber-500 uppercase tracking-wider bg-amber-50 px-1.5 py-0.5 rounded-full border border-amber-100">
+                                <span className="text-[8px] font-black text-amber-500 uppercase tracking-wider bg-amber-50 px-1.5 py-0.5 rounded-full border border-amber-100">
                                   New
                                 </span>
                               )}
@@ -639,7 +639,7 @@ No.1 Digital Marketing Agency in India we provide best Digital Marketing, Web De
                           </div>
 
                           {/* Arrow */}
-                          <ChevronRight className="w-4 h-4 text-slate-300 group-hover:text-amber-500 transition-colors shrink-0" />
+                          <ChevronRight className="w-3.5 h-3.5 text-slate-300 group-hover:text-amber-500 transition-colors shrink-0" />
                         </Link>
                       );
                     })
@@ -648,12 +648,12 @@ No.1 Digital Marketing Agency in India we provide best Digital Marketing, Web De
 
                 {/* View All */}
                 {!loadingNewsletters && newsletters.length > 0 && (
-                  <div className="px-7 py-4 border-t border-slate-100 bg-slate-50/30">
+                  <div className="px-5 py-3 border-t border-slate-100 bg-slate-50/30">
                     <Link
                       to="/newsletters"
-                      className="group flex items-center justify-center gap-2 w-full py-2.5 bg-white border border-slate-200 hover:border-amber-400 text-slate-700 hover:text-amber-600 rounded-xl font-black text-[10px] uppercase tracking-widest transition-all shadow-sm hover:shadow-md"
+                      className="group flex items-center justify-center gap-2 w-full py-2 bg-white border border-slate-200 hover:border-amber-400 text-slate-700 hover:text-amber-600 rounded-lg font-black text-[9px] uppercase tracking-widest transition-all shadow-sm hover:shadow-md"
                     >
-                      View All <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                      View All <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                     </Link>
                   </div>
                 )}
@@ -663,7 +663,7 @@ No.1 Digital Marketing Agency in India we provide best Digital Marketing, Web De
               <motion.div
                 animate={{ y: [0, -20, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute top-[2%] right-0 w-24 h-24 rounded-full border-8 border-white shadow-2xl overflow-hidden z-20"
+                className="absolute top-[6%] right-[4%] w-20 h-20 rounded-full border-[6px] border-white shadow-2xl overflow-hidden z-20"
               >
                 <img src="https://images.unsplash.com/photo-1589386417686-0d34b5903d23?q=80&w=800&auto=format&fit=crop" alt="Indian Businessman" className="w-full h-full object-cover" />
               </motion.div>
@@ -671,7 +671,7 @@ No.1 Digital Marketing Agency in India we provide best Digital Marketing, Web De
               <motion.div
                 animate={{ y: [0, 20, 0] }}
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                className="absolute top-[50%] left-0 w-20 h-20 rounded-full border-8 border-white shadow-2xl overflow-hidden z-20"
+                className="absolute top-[58%] left-[4%] w-16 h-16 rounded-full border-[6px] border-white shadow-2xl overflow-hidden z-20"
               >
                 <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800&auto=format&fit=crop" alt="Indian Businesswoman" className="w-full h-full object-cover" />
               </motion.div>
@@ -1266,7 +1266,7 @@ No.1 Digital Marketing Agency in India we provide best Digital Marketing, Web De
                 {blogs.slice(0, 3).map((blog, index) => (
                   <AnimatedSection key={blog._id} delay={index * 0.1}>
                     <Link
-                      to={`/blog/${blog.slug}`}
+                      to={`/blog/${encodeURIComponent(blog.slug)}`}
                       className="group relative bg-white border-2 border-gray-200 rounded-2xl overflow-hidden hover:border-amber-400 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-amber-100"
                     >
                       {/* Glow Effect on Hover */}

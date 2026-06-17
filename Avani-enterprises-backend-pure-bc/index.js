@@ -1236,7 +1236,12 @@ app.get("/blogs", async (req, res) => {
 app.get("/blogs/:slug", async (req, res) => {
   try {
     const { slug } = req.params;
-    const blog = await Blog.findOne({ slug, isPublished: true });
+    // Resolve by slug first, then fall back to _id so articles always open
+    // even if a slug contains special characters or is missing.
+    let blog = await Blog.findOne({ slug, isPublished: true });
+    if (!blog && mongoose.Types.ObjectId.isValid(slug)) {
+      blog = await Blog.findOne({ _id: slug, isPublished: true });
+    }
     if (!blog) return res.status(404).json({ message: "Blog not found" });
 
     // increment views asynchronously
