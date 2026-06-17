@@ -17,6 +17,7 @@ const Chatbot = () => {
         }
     ]);
     const [isTyping, setIsTyping] = useState(false);
+    const [input, setInput] = useState('');
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const navigate = useNavigate();
 
@@ -37,62 +38,99 @@ const Chatbot = () => {
         "Financial Consulting"
     ];
 
-    const handleOptionClick = async (option: string) => {
-        // Add user message
-        setMessages(prev => [...prev, { type: 'user', text: option }]);
+    const serviceIdMap: { [key: string]: string } = {
+        "Web & App Development": "web-development",
+        "SEO and Content Marketing": "seo-content",
+        "Social Media Marketing": "social-media",
+        "AI Solutions": "ai-solutions",
+        "Podcast Production": "podcast-production",
+        "Financial Consulting": "financial-consulting"
+    };
+
+    const followUp = ['View Services', 'Book a Consultation', 'Contact Support'];
+
+    const addBot = (text: string, options?: string[]) => {
+        setMessages(prev => [...prev, { type: 'bot', text, options }]);
+    };
+
+    // Generate a reply for free-typed questions using keyword matching.
+    const answerFreeText = (raw: string) => {
+        const q = raw.toLowerCase();
+
+        // Match a specific service mentioned in the question
+        const matchedService = services.find(s => {
+            const id = serviceIdMap[s];
+            return q.includes(s.toLowerCase()) ||
+                (id && q.includes(id.replace('-', ' ')));
+        });
+
+        if (q.includes('price') || q.includes('cost') || q.includes('quote') || q.includes('charge') || q.includes('budget')) {
+            addBot("Pricing depends on your project scope. The quickest way to get an accurate quote is a free consultation — want me to set that up?", ['Book a Consultation', 'View Services']);
+            return;
+        }
+        if (q.includes('contact') || q.includes('call') || q.includes('phone') || q.includes('email') || q.includes('reach') || q.includes('support') || q.includes('whatsapp')) {
+            addBot("You can reach us at +91 9253625099 or email kp@avanienterprises.in. Happy to help with anything else!", followUp);
+            return;
+        }
+        if (q.includes('book') || q.includes('consult') || q.includes('meeting') || q.includes('appointment') || q.includes('demo')) {
+            addBot("Sure! I can take you to our contact page to book a free consultation.", ['Book a Consultation', ...services]);
+            return;
+        }
+        if (matchedService) {
+            addBot(`Great question about ${matchedService}! It's one of our core offerings. Want me to take you to that section, or would you like to book a consultation?`, [matchedService, 'Book a Consultation']);
+            return;
+        }
+        if (q.includes('service') || q.includes('offer') || q.includes('do you') || q.includes('help with') || q.includes('what can')) {
+            addBot("Here's everything we offer. Pick one to learn more or book it:", services);
+            return;
+        }
+        if (q.includes('hi') || q.includes('hello') || q.includes('hey') || q.includes('thanks') || q.includes('thank')) {
+            addBot("Happy to help! 😊 Ask me anything, or pick an option below.", followUp);
+            return;
+        }
+
+        // Fallback — stay conversational and keep options open
+        addBot("Great question! I can help with our services, pricing, or booking a consultation. Ask me anything else, or pick an option below:", followUp);
+    };
+
+    const respond = (text: string, isOption: boolean) => {
+        setMessages(prev => [...prev, { type: 'user', text }]);
         setIsTyping(true);
 
-        // Simulate delay
         setTimeout(() => {
             setIsTyping(false);
 
-            if (option === 'View Services') {
-                setMessages(prev => [...prev, {
-                    type: 'bot',
-                    text: "Here are the services we offer. Select one to proceed with booking:",
-                    options: services
-                }]);
-            } else if (services.includes(option)) {
-                // Map service names to IDs
-                const serviceIdMap: { [key: string]: string } = {
-                    "Web & App Development": "web-development",
-                    "SEO and Content Marketing": "seo-content",
-                    "Social Media Marketing": "social-media",
-                    "AI Solutions": "ai-solutions",
-                    "Podcast Production": "podcast-production",
-                    "Financial Consulting": "financial-consulting"
-                };
-
-                const serviceId = serviceIdMap[option];
-
-                setMessages(prev => [...prev, {
-                    type: 'bot',
-                    text: `Great choice! I'm taking you to the ${option} section.`
-                }]);
+            if (isOption && text === 'View Services') {
+                addBot("Here are the services we offer. Select one to proceed with booking:", services);
+            } else if (isOption && services.includes(text)) {
+                const serviceId = serviceIdMap[text];
+                addBot(`Great choice! I'm taking you to the ${text} section.`);
                 setTimeout(() => {
                     setIsOpen(false);
-                    if (serviceId) {
-                        navigate('/services', { state: { scrollTo: serviceId } });
-                    } else {
-                        navigate('/services');
-                    }
+                    navigate('/services', serviceId ? { state: { scrollTo: serviceId } } : undefined);
                 }, 1500);
-            } else if (option === 'Book a Consultation') {
-                setMessages(prev => [...prev, {
-                    type: 'bot',
-                    text: "Sure! Let's get you connected. Redirecting to our contact page..."
-                }]);
+            } else if (isOption && text === 'Book a Consultation') {
+                addBot("Sure! Let's get you connected. Redirecting to our contact page...");
                 setTimeout(() => {
                     setIsOpen(false);
                     navigate('/contact');
                 }, 1500);
-            } else if (option === 'Contact Support') {
-                setMessages(prev => [...prev, {
-                    type: 'bot',
-                    text: "You can reach us at +91 9253625099 or email kp@avanienterprises.in."
-                }]);
+            } else if (isOption && text === 'Contact Support') {
+                addBot("You can reach us at +91 9253625099 or email kp@avanienterprises.in.", followUp);
+            } else {
+                // Free-typed question — answer and keep the conversation going
+                answerFreeText(text);
             }
         }, 1000);
+    };
+
+    const handleOptionClick = (option: string) => respond(option, true);
+
+    const handleSend = () => {
+        const text = input.trim();
+        if (!text || isTyping) return;
+        setInput('');
+        respond(text, false);
     };
 
     return (
@@ -179,16 +217,25 @@ const Chatbot = () => {
                             <div ref={messagesEndRef} />
                         </div>
 
-                        {/* Input Area (Mock) */}
+                        {/* Input Area */}
                         <div className="p-3 bg-card border-t border-[#ff9d00]/30">
-                            <div className="flex items-center space-x-2 bg-white/5 rounded-full px-4 py-2 border border-[#ff9d00]/30">
+                            <div className="flex items-center space-x-2 bg-white rounded-full px-4 py-2 border border-[#ff9d00]/30 focus-within:border-[#ff9d00]">
                                 <input
                                     type="text"
-                                    placeholder="Select an option above..."
-                                    disabled
-                                    className="flex-1 bg-transparent text-sm focus:outline-none text-muted-foreground cursor-not-allowed"
+                                    value={input}
+                                    onChange={(e) => setInput(e.target.value)}
+                                    onKeyDown={(e) => { if (e.key === 'Enter') handleSend(); }}
+                                    placeholder="Ask me anything..."
+                                    className="flex-1 bg-transparent text-sm focus:outline-none text-black placeholder:text-gray-400"
                                 />
-                                <Send size={16} className="text-gray-400" />
+                                <button
+                                    onClick={handleSend}
+                                    disabled={!input.trim() || isTyping}
+                                    className="text-[#ff9d00] disabled:text-gray-300 transition-colors"
+                                    aria-label="Send message"
+                                >
+                                    <Send size={16} />
+                                </button>
                             </div>
                         </div>
                     </motion.div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import axios from 'axios';
 import { API_BASE_URL } from '../utils/api';
@@ -152,6 +152,32 @@ const Careers = () => {
     fetchJobs();
   }, []);
 
+  // Build filter options from the actual jobs so they always match what's available.
+  const locationOptions = useMemo(() => {
+    const set = new Set<string>();
+    jobs.forEach(job => job.location.split('/').forEach(loc => {
+      const trimmed = loc.trim();
+      if (trimmed) set.add(trimmed);
+    }));
+    return Array.from(set).sort();
+  }, [jobs]);
+
+  const typeOptions = useMemo(() => {
+    const set = new Set<string>();
+    jobs.forEach(job => { if (job.type) set.add(job.type.trim()); });
+    return Array.from(set).sort();
+  }, [jobs]);
+
+  // Reset stale selections if the chosen value no longer exists in the job list.
+  useEffect(() => {
+    if (activeLocation !== 'all' && !locationOptions.some(l => l.toLowerCase() === activeLocation)) {
+      setActiveLocation('all');
+    }
+    if (activeType !== 'all' && !typeOptions.some(t => t.toLowerCase() === activeType)) {
+      setActiveType('all');
+    }
+  }, [locationOptions, typeOptions]); // eslint-disable-line react-hooks/exhaustive-deps
+
   const filteredJobs = jobs.filter(job => {
     const matchesDepartment = activeDepartment === 'all' || job.department.toLowerCase() === activeDepartment;
     const matchesLocation = activeLocation === 'all' || job.location.toLowerCase().includes(activeLocation.toLowerCase());
@@ -244,21 +270,18 @@ const Careers = () => {
                 <MapPin size={14} style={{ color: 'var(--text-tertiary)' }} />
                 <select value={activeLocation} onChange={e => setActiveLocation(e.target.value)} style={selectStyle}>
                   <option value="all">All Locations</option>
-                  <option value="remote">Remote</option>
-                  <option value="delhi">Delhi</option>
-                  <option value="mumbai">Mumbai</option>
-                  <option value="bangalore">Bangalore</option>
-                  <option value="hyderabad">Hyderabad</option>
+                  {locationOptions.map(loc => (
+                    <option key={loc} value={loc.toLowerCase()}>{loc}</option>
+                  ))}
                 </select>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                 <Briefcase size={14} style={{ color: 'var(--text-tertiary)' }} />
                 <select value={activeType} onChange={e => setActiveType(e.target.value)} style={selectStyle}>
                   <option value="all">All Types</option>
-                  <option value="full-time">Full-Time</option>
-                  <option value="part-time">Part-Time</option>
-                  <option value="contract">Contract</option>
-                  <option value="internship">Internship</option>
+                  {typeOptions.map(type => (
+                    <option key={type} value={type.toLowerCase()}>{type}</option>
+                  ))}
                 </select>
               </div>
             </div>

@@ -100,7 +100,7 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop links */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }} className="dummy-nav-links">
+          <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '30px' }} className="dummy-nav-links">
             {navLinks.map((link) => {
               if (link.dropdown) {
                 const isActive = link.dropdown.some(sub => location.pathname === sub.path);

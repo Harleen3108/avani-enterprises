@@ -182,7 +182,7 @@ const CaseStudies = () => {
         <Grain />
         <GridBg size={30} opacity={0.03} />
         <div className="dh-container" style={{ position: 'relative', zIndex: 10 }}>
-          <div className="dh-case-study-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))', gap: '2rem' }}>
+          <div className="dh-case-study-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '1.75rem' }}>
             {caseStudies.map((study, i) => (
               <motion.div key={study.id} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: i * 0.1 }}>
                 <div style={{
@@ -196,61 +196,61 @@ const CaseStudies = () => {
                   onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.borderColor = 'var(--border-light)'; e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.2)'; }}
                 >
                   {/* Image Header */}
-                  <div style={{ width: '100%', height: '220px', position: 'relative' }}>
+                  <div style={{ width: '100%', height: '170px', position: 'relative' }}>
                     <img src={study.image} alt={study.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                     <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, var(--card-bg) 0%, transparent 100%)' }} />
-                    <div style={{ position: 'absolute', bottom: '1rem', left: '1.5rem', padding: '4px 12px', background: 'var(--accent-primary)', color: 'var(--bg-primary)', borderRadius: '100px', fontSize: '0.65rem', fontWeight: 800, letterSpacing: '0.1em' }}>
+                    <div style={{ position: 'absolute', bottom: '0.85rem', left: '1.25rem', padding: '4px 12px', background: 'var(--accent-primary)', color: 'var(--bg-primary)', borderRadius: '100px', fontSize: '0.6rem', fontWeight: 800, letterSpacing: '0.1em' }}>
                       {study.industry.toUpperCase()}
                     </div>
                   </div>
 
                   {/* Content Body */}
-                  <div style={{ padding: '2rem 1.5rem', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
-                    
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', marginBottom: '1rem' }}>
-                      <span style={{ fontSize: '0.65rem', fontWeight: 800, color: 'var(--accent-primary)', letterSpacing: '0.1em' }}>CLIENT: {study.client.toUpperCase()}</span>
-                      <span style={{ fontSize: '0.65rem', fontWeight: 800, color: 'var(--text-tertiary)', background: 'rgba(255,255,255,0.05)', padding: '4px 10px', border: '1px solid var(--border-faint)', borderRadius: '100px' }}>{study.category.toUpperCase().replace('-', ' ')}</span>
+                  <div style={{ padding: '1.5rem 1.4rem', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
+
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.75rem', flexWrap: 'wrap' }}>
+                      <span style={{ fontSize: '0.6rem', fontWeight: 800, color: 'var(--accent-primary)', letterSpacing: '0.1em' }}>CLIENT: {study.client.toUpperCase()}</span>
+                      <span style={{ fontSize: '0.6rem', fontWeight: 800, color: 'var(--text-tertiary)', background: 'rgba(255,255,255,0.05)', padding: '3px 9px', border: '1px solid var(--border-faint)', borderRadius: '100px' }}>{study.category.toUpperCase().replace('-', ' ')}</span>
                     </div>
 
-                    <h3 className="dh-heading" style={{ fontSize: '1.4rem', marginBottom: '1rem', lineHeight: 1.3 }}>{study.title}</h3>
-                    
-                    <div style={{ marginBottom: '1.5rem' }}>
-                      <h4 style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Challenge</h4>
-                      <p className="dh-body" style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', margin: 0 }}>{study.challenge}</p>
+                    <h3 className="dh-heading" style={{ fontSize: '1.15rem', marginBottom: '0.85rem', lineHeight: 1.3 }}>{study.title}</h3>
+
+                    <div style={{ marginBottom: '0.85rem' }}>
+                      <h4 style={{ fontSize: '0.7rem', color: 'var(--text-tertiary)', marginBottom: '0.35rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Challenge</h4>
+                      <p className="dh-body" style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', margin: 0, display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{study.challenge}</p>
                     </div>
 
-                    <div style={{ marginBottom: '2rem' }}>
-                      <h4 style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Solution</h4>
-                      <p className="dh-body" style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', margin: 0 }}>{study.solution}</p>
+                    <div style={{ marginBottom: '1.25rem' }}>
+                      <h4 style={{ fontSize: '0.7rem', color: 'var(--text-tertiary)', marginBottom: '0.35rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Solution</h4>
+                      <p className="dh-body" style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', margin: 0, display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{study.solution}</p>
                     </div>
 
                     {/* Results Grid */}
-                    <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid var(--border-faint)', borderRadius: '12px', padding: '1.2rem', marginBottom: '2rem' }}>
-                      <h4 style={{ fontSize: '0.65rem', color: 'var(--accent-light)', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.15em', fontWeight: 800 }}>Metrics of Success</h4>
-                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                    <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid var(--border-faint)', borderRadius: '12px', padding: '1rem', marginBottom: '1.25rem' }}>
+                      <h4 style={{ fontSize: '0.6rem', color: 'var(--accent-light)', marginBottom: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.15em', fontWeight: 800 }}>Metrics of Success</h4>
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
                         {Object.entries(study.results).map(([key, value]) => (
                           <div key={key}>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '4px' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '3px' }}>
                               <BarChart3 size={10} style={{ color: 'var(--accent-primary)' }} />
-                              <span style={{ fontSize: '0.6rem', color: 'var(--text-tertiary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{key}</span>
+                              <span style={{ fontSize: '0.58rem', color: 'var(--text-tertiary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{key}</span>
                             </div>
-                            <div style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)' }}>{String(value)}</div>
+                            <div style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-primary)' }}>{String(value)}</div>
                           </div>
                         ))}
                       </div>
                     </div>
 
                     {/* Footer Info */}
-                    <div style={{ marginTop: 'auto', paddingTop: '1.5rem', borderTop: '1px solid var(--border-faint)' }}>
-                      <div style={{ display: 'flex', gap: '1.5rem', marginBottom: '1.5rem', fontSize: '0.75rem', color: 'var(--text-tertiary)', fontWeight: 600 }}>
+                    <div style={{ marginTop: 'auto', paddingTop: '1.1rem', borderTop: '1px solid var(--border-faint)' }}>
+                      <div style={{ display: 'flex', gap: '1.25rem', marginBottom: '1rem', fontSize: '0.7rem', color: 'var(--text-tertiary)', fontWeight: 600, flexWrap: 'wrap' }}>
                         <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><Globe size={12} style={{ color: 'var(--accent-primary)' }}/> {study.duration}</span>
                         <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><BarChart3 size={12} style={{ color: 'var(--accent-primary)' }}/> {study.team}</span>
                       </div>
-                      
+
                       {/* Technologies */}
-                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
                         {study.technologies.map(tech => (
-                          <span key={tech} style={{ padding: '4px 10px', background: 'rgba(212, 175, 55, 0.1)', color: 'var(--accent-light)', border: '1px solid rgba(212, 175, 55, 0.2)', borderRadius: '4px', fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.05em' }}>
+                          <span key={tech} style={{ padding: '4px 9px', background: 'rgba(212, 175, 55, 0.1)', color: 'var(--accent-light)', border: '1px solid rgba(212, 175, 55, 0.2)', borderRadius: '4px', fontSize: '0.62rem', fontWeight: 700, letterSpacing: '0.05em' }}>
                             {tech}
                           </span>
                         ))}

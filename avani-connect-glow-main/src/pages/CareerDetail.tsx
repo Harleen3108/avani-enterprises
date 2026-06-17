@@ -421,15 +421,31 @@ const CareerDetail = () => {
                         </div>
                         <div>
                           <label style={labelStyle}>Willing to Relocate?</label>
-                          <div style={{ display: 'flex', gap: '2rem', padding: '10px 0' }}>
-                            <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', fontSize: '0.9rem' }}>
-                              <input type="radio" name="willingToRelocate" value="Yes" checked={formData.willingToRelocate === "Yes"} onChange={e => setFormData({ ...formData, willingToRelocate: e.target.value })} style={{ accentColor: 'var(--accent-primary)' }} />
-                              Yes
-                            </label>
-                            <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', fontSize: '0.9rem' }}>
-                              <input type="radio" name="willingToRelocate" value="No" checked={formData.willingToRelocate === "No"} onChange={e => setFormData({ ...formData, willingToRelocate: e.target.value })} style={{ accentColor: 'var(--accent-primary)' }} />
-                              No
-                            </label>
+                          <div style={{ display: 'flex', gap: '0.75rem', padding: '2px 0' }}>
+                            {["Yes", "No"].map(opt => {
+                              const selected = formData.willingToRelocate === opt;
+                              return (
+                                <button
+                                  type="button"
+                                  key={opt}
+                                  onClick={() => setFormData({ ...formData, willingToRelocate: opt })}
+                                  style={{
+                                    flex: 1,
+                                    padding: '11px 16px',
+                                    borderRadius: '10px',
+                                    border: `1px solid ${selected ? 'var(--accent-primary)' : 'var(--border-light)'}`,
+                                    background: selected ? 'var(--accent-primary)' : 'var(--bg-primary)',
+                                    color: selected ? '#000' : 'var(--text-primary)',
+                                    fontSize: '0.9rem',
+                                    fontWeight: 700,
+                                    cursor: 'pointer',
+                                    transition: 'all 0.25s',
+                                  }}
+                                >
+                                  {opt}
+                                </button>
+                              );
+                            })}
                           </div>
                         </div>
                       </div>
