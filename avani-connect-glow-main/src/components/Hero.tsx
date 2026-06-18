@@ -137,7 +137,7 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
               <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15, duration: 0.8 }}
                 style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '6px 16px', border: '1px solid var(--border-light)', borderRadius: '100px', background: 'var(--accent-hover)', backdropFilter: 'blur(10px)', marginBottom: '24px' }}>
                 <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--accent-primary)', boxShadow: '0 0 8px var(--accent-primary), 0 0 16px var(--border-light)' }} />
-                <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: '11px', letterSpacing: '0.25em', color: 'var(--accent-light)', fontWeight: 600 }}>NO.1 DIGITAL MARKETING AGENCY IN INDIA</span>
+                <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: '11px', letterSpacing: '0.25em', color: 'var(--accent-light)', fontWeight: 600 }}>AVANI ENTERPRISES · NO.1 DIGITAL MARKETING AGENCY IN INDIA</span>
               </motion.div>
 
               {/* Headline */}
@@ -157,8 +157,8 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
               </motion.div>
 
               <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.55, duration: 0.8 }}
-                style={{ fontFamily: "'Inter', sans-serif", fontSize: '15px', lineHeight: 1.7, color: 'var(--text-secondary)', maxWidth: '560px', marginBottom: '16px', fontWeight: 400 }}>
-                No.1 Digital Marketing Agency in India we provide best Digital Marketing, Web Development, App Development and AI Solution in india ( Rohtak , Gurgaon, and Mumbai ). We deliver result-driven SEO, PPC, social media, and branding solutions. Our data-focused strategies help businesses generate quality leads and maximize ROI.
+                style={{ fontFamily: "'Inter', sans-serif", fontSize: '16px', lineHeight: 1.8, letterSpacing: '0.01em', color: 'var(--text-secondary)', maxWidth: '560px', marginBottom: '16px', fontWeight: 400 }}>
+                Avani Enterprises is the No.1 Digital Marketing Agency in India, providing the best Digital Marketing, Web Development, App Development, and AI Solutions across India (Rohtak, Gurgaon, and Mumbai). We deliver result-driven SEO, PPC, social media, and branding solutions, and our data-focused strategies help businesses generate quality leads and maximize ROI.
               </motion.p>
 
               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.65 }}
@@ -203,10 +203,10 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
             </div>
 
             {/* RIGHT: newsletter */}
-            <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3, duration: 1, ease: [0.22, 1, 0.36, 1] }} style={{ position: 'relative' }} className="dummy-right-col">
+            <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3, duration: 1, ease: [0.22, 1, 0.36, 1] }} style={{ position: 'relative', width: '100%', maxWidth: '320px', marginLeft: 'auto' }} className="dummy-right-col">
               {/* Trusted pill */}
               <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 1, duration: 0.6 }}
-                style={{ position: 'absolute', top: '-28px', left: '-14px', padding: '8px 14px', background: 'var(--accent-hover)', backdropFilter: 'blur(16px)', border: '1px solid var(--border-light)', borderRadius: '10px', zIndex: 20, display: 'flex', alignItems: 'center', gap: '10px' }}>
+                style={{ position: 'absolute', top: '-20px', left: '4px', padding: '8px 14px', background: 'var(--accent-hover)', backdropFilter: 'blur(16px)', border: '1px solid var(--border-light)', borderRadius: '10px', zIndex: 20, display: 'flex', alignItems: 'center', gap: '10px' }}>
                 <div style={{ display: 'flex' }}>
                   {[0, 1, 5, 3].map((idx, i) => (
                     <div key={i} style={{ width: '22px', height: '22px', borderRadius: '50%', border: '2px solid var(--glass-bg)', background: '#fff', overflow: 'hidden', marginLeft: i > 0 ? '-6px' : 0 }}>
@@ -222,14 +222,14 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
 
               {/* Rating pill bottom-left */}
               <motion.div animate={{ y: [0, -8, 0] }} transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1.5 }}
-                style={{ position: 'absolute', bottom: '-12px', left: '-12px', padding: '8px 14px', background: 'var(--glass-bg)', backdropFilter: 'blur(20px)', border: '1px solid var(--border-light)', borderRadius: '10px', zIndex: 20, display: 'flex', alignItems: 'center', gap: '6px' }}>
+                style={{ position: 'absolute', bottom: '-10px', left: '4px', padding: '8px 14px', background: 'var(--glass-bg)', backdropFilter: 'blur(20px)', border: '1px solid var(--border-light)', borderRadius: '10px', zIndex: 20, display: 'flex', alignItems: 'center', gap: '6px' }}>
                 <div style={{ display: 'flex', gap: '2px' }}>{[...Array(5)].map((_, i) => <Star key={i} size={9} fill="var(--accent-primary)" color="var(--accent-primary)" />)}</div>
                 <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '10px', color: 'var(--text-secondary)', fontWeight: 500 }}>5.0 · 300+ Projects</span>
               </motion.div>
 
               {/* Avatar */}
               <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
-                style={{ position: 'absolute', top: '-10px', right: '-8px', width: '56px', height: '56px', borderRadius: '50%', overflow: 'hidden', border: '3px solid var(--glass-bg)', boxShadow: '0 16px 40px rgba(0,0,0,0.6)', zIndex: 20 }}>
+                style={{ position: 'absolute', top: '-14px', right: '0px', width: '52px', height: '52px', borderRadius: '50%', overflow: 'hidden', border: '3px solid var(--glass-bg)', boxShadow: '0 16px 40px rgba(0,0,0,0.6)', zIndex: 20 }}>
                 <img src="https://images.unsplash.com/photo-1589386417686-0d34b5903d23?q=80&w=400" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} fetchPriority="high" loading="eager" />
               </motion.div>
 
