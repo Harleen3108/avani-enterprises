@@ -432,7 +432,7 @@ const Home = () => {
               className="sm:mt-0"
             >
               <span className="text-amber-600 font-extrabold text-lg tracking-wide mb-2 block">
-                No.1 Digital Marketing Agency in India
+                Avani Enterprises — No.1 Digital Marketing Agency in India
               </span>
 
               <motion.h1
@@ -476,8 +476,8 @@ const Home = () => {
                 )}
               </motion.h1>
 
-              <p className="text-lg md:text-xl text-slate-600 mb-10 leading-relaxed font-medium max-w-xl">
-No.1 Digital Marketing Agency in India we provide best Digital Marketing, Web Development, App Development and AI Solution in india ( Rohtak , Gurgaon, and Mumbai ). We deliver result-driven SEO, PPC, social media, and branding solutions. Our data-focused strategies help businesses generate quality leads and maximize ROI.
+              <p className="font-body text-[15px] md:text-base text-slate-600 mb-10 leading-7 md:leading-8 font-normal tracking-[0.01em] max-w-xl">
+Avani Enterprises is the No.1 Digital Marketing Agency in India, providing the best Digital Marketing, Web Development, App Development, and AI Solutions across India (Rohtak, Gurgaon, and Mumbai). We deliver result-driven SEO, PPC, social media, and branding solutions. Our data-focused strategies help businesses generate quality leads and maximize ROI.
               </p>
 
               {/* Global Expansion Text */}

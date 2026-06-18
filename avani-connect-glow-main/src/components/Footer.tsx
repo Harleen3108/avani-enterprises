@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Mail, Phone, MapPin } from 'lucide-react';
+import { ArrowRight, Mail, Phone, MapPin, Instagram, Facebook, Linkedin } from 'lucide-react';
 
 const footerLinks = {
   company: [
@@ -56,6 +56,29 @@ const Footer = () => (
             <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', fontFamily: "'Inter', sans-serif", fontSize: '12px', color: 'var(--text-secondary)' }}>
               <MapPin size={12} color="var(--accent-primary)" style={{ marginTop: '2px', flexShrink: 0 }} /> Gurgaon · Mumbai · Rohtak · Australia
             </div>
+          </div>
+
+          {/* Social Media */}
+          <div style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
+            {[
+              { Icon: Instagram, href: 'https://www.instagram.com/avanienterprises.branding/', label: 'Instagram' },
+              { Icon: Facebook, href: 'https://www.facebook.com/people/Avani-Enterprises/61576229620845/', label: 'Facebook' },
+              { Icon: Linkedin, href: 'https://www.linkedin.com/company/avani-enterprises-india/', label: 'LinkedIn' },
+              { Icon: Mail, href: 'mailto:kp@avanienterprises.in', label: 'Email' },
+            ].map(({ Icon, href, label }) => (
+              <a
+                key={label}
+                href={href}
+                target={href.startsWith('mailto:') ? undefined : '_blank'}
+                rel="noopener noreferrer"
+                aria-label={label}
+                style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '34px', height: '34px', borderRadius: '8px', border: '1px solid var(--border-light)', color: 'var(--text-secondary)', transition: 'all 0.2s' }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'var(--accent-primary)'; (e.currentTarget as HTMLElement).style.color = '#fff'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent-primary)'; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'transparent'; (e.currentTarget as HTMLElement).style.color = 'var(--text-secondary)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-light)'; }}
+              >
+                <Icon size={16} />
+              </a>
+            ))}
           </div>
         </div>
 
