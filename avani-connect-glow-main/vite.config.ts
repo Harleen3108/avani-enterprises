@@ -82,25 +82,10 @@ export default defineConfig(({ mode }) => ({
     chunkSizeWarningLimit: 1000,
     rollupOptions: {
       output: {
-        manualChunks(id: string) {
-          if (!id.includes("node_modules")) return;
-          // Independent heavy libs that do NOT touch the React runtime can be split safely.
-          if (id.includes("html2canvas")) return "html2canvas";
-          if (id.includes("recharts") || id.includes("/d3-")) return "charts";
-          if (id.includes("gsap")) return "gsap";
-          // Keep React and EVERYTHING that consumes its runtime (radix, router,
-          // framer-motion, lucide) in ONE chunk so React initializes first.
-          // Previously @radix-ui was split into its own chunk that executed before
-          // React loaded -> "Cannot read properties of undefined (reading 'forwardRef')".
-          if (
-            id.includes("react") ||
-            id.includes("@radix-ui") ||
-            id.includes("scheduler") ||
-            id.includes("framer-motion") ||
-            id.includes("lucide-react")
-          ) return "react-core";
-          return "vendor";
-        },
+        // No manualChunks: hand-splitting React's ecosystem created circular
+        // chunk dependencies (vendor <-> react-core) that left React.forwardRef /
+        // React.createContext undefined and white-screened the site. Vite's
+        // automatic chunking orders shared deps correctly, so let it decide.
       },
     },
   },
