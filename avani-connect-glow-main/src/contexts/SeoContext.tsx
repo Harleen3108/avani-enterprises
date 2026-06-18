@@ -49,7 +49,7 @@ export const SeoProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     const fetchSeo = async () => {
       setLoading(true);
       try {
-        const res = await axios.get(`${API_BASE_URL}/seo`, { params: { page: currentPage } });
+        const res = await axios.get(`${API_BASE_URL}/seo`, { params: { page: currentPage }, timeout: 4000 });
         setSeo(res.data.data);
       } catch (err) {
         console.error("Failed to fetch SEO data:", err);

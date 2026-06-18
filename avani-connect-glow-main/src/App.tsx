@@ -84,6 +84,7 @@
 // export default App;
 
 import { useEffect, lazy, Suspense } from "react";
+import { lazyWithRetry } from "./utils/lazyWithRetry";
 import "./App.css";
 
 // UI + Providers
@@ -108,124 +109,124 @@ import SeoHead from "./components/SeoHead";
 import { useLocation } from "react-router-dom";
 
 // Pages
-const GetConsultation = lazy(() => import("./pages/GetConsultation"));
-const NotFound = lazy(() => import("./pages/NotFound"));
-const Index = lazy(() => import("./pages/Index"));
-const Policicue = lazy(() => import("./pages/Policicue"));
-const PolicicueProject = lazy(() => import("./pages/PolicicueProject"));
-const IndusProject = lazy(() => import("./pages/IndusProject"));
-const FrdNutritionProject = lazy(() => import("./pages/FrdNutritionProject"));
-const HiTechHomesProject = lazy(() => import("./pages/HiTechHomesProject"));
-const SanjeevniHospitalProject = lazy(() => import("./pages/SanjeevniHospitalProject"));
-const RohtakShoeProject = lazy(() => import("./pages/RohtakShoeProject"));
-const LeadManagementProject = lazy(() => import("./pages/LeadManagementProject"));
-const WhatsAppAutomationProject = lazy(() => import("./pages/WhatsAppAutomationProject"));
-const BusinessProcessOptimizationProject = lazy(() => import("./pages/BusinessProcessOptimizationProject"));
-const SevenDayLaunch = lazy(() => import("./pages/SevenDayLaunch"));
+const GetConsultation = lazyWithRetry(() => import("./pages/GetConsultation"));
+const NotFound = lazyWithRetry(() => import("./pages/NotFound"));
+const Index = lazyWithRetry(() => import("./pages/Index"));
+const Policicue = lazyWithRetry(() => import("./pages/Policicue"));
+const PolicicueProject = lazyWithRetry(() => import("./pages/PolicicueProject"));
+const IndusProject = lazyWithRetry(() => import("./pages/IndusProject"));
+const FrdNutritionProject = lazyWithRetry(() => import("./pages/FrdNutritionProject"));
+const HiTechHomesProject = lazyWithRetry(() => import("./pages/HiTechHomesProject"));
+const SanjeevniHospitalProject = lazyWithRetry(() => import("./pages/SanjeevniHospitalProject"));
+const RohtakShoeProject = lazyWithRetry(() => import("./pages/RohtakShoeProject"));
+const LeadManagementProject = lazyWithRetry(() => import("./pages/LeadManagementProject"));
+const WhatsAppAutomationProject = lazyWithRetry(() => import("./pages/WhatsAppAutomationProject"));
+const BusinessProcessOptimizationProject = lazyWithRetry(() => import("./pages/BusinessProcessOptimizationProject"));
+const SevenDayLaunch = lazyWithRetry(() => import("./pages/SevenDayLaunch"));
 
 // नई लाइन: ThankYou page import
-const ThankYou = lazy(() => import("./pages/ThankYou"));
-const LandingPage = lazy(() => import("./pages/LandingPage"));
-const LandingPage1 = lazy(() => import("./pages/LandingPage1"));
-const LandingPage2 = lazy(() => import("./pages/LandingPage2"));
-const LandingPage3 = lazy(() => import("./pages/LandingPage3"));
+const ThankYou = lazyWithRetry(() => import("./pages/ThankYou"));
+const LandingPage = lazyWithRetry(() => import("./pages/LandingPage"));
+const LandingPage1 = lazyWithRetry(() => import("./pages/LandingPage1"));
+const LandingPage2 = lazyWithRetry(() => import("./pages/LandingPage2"));
+const LandingPage3 = lazyWithRetry(() => import("./pages/LandingPage3"));
 import Chatbot from "./components/Chatbot";
-const Links = lazy(() => import("./pages/Links"));
+const Links = lazyWithRetry(() => import("./pages/Links"));
 import Home from "./components/Home";
-const Home2 = lazy(() => import("./pages/Home2"));
+const Home2 = lazyWithRetry(() => import("./pages/Home2"));
 import DH2Layout from "./components/home2/DH2Layout";
-const DH2About = lazy(() => import("./pages/home2/DH2About"));
-const DH2Services = lazy(() => import("./pages/home2/DH2Services"));
-const DH2Contact = lazy(() => import("./pages/home2/DH2Contact"));
-const DH2Consultation = lazy(() => import("./pages/home2/DH2Consultation"));
-const DH2CaseStudies = lazy(() => import("./pages/home2/DH2CaseStudies"));
-const DH2Blog = lazy(() => import("./pages/home2/DH2Blog"));
-const DH2Products = lazy(() => import("./pages/home2/DH2Products"));
-const DH2GlobalPresence = lazy(() => import("./pages/home2/DH2GlobalPresence"));
-const DH2Careers = lazy(() => import("./pages/home2/DH2Careers"));
-const DH2Newsletters = lazy(() => import("./pages/home2/DH2Newsletters"));
-const DH2Privacy = lazy(() => import("./pages/home2/DH2Privacy"));
-const DH2Terms = lazy(() => import("./pages/home2/DH2Terms"));
-const DH2ServiceDetail = lazy(() => import("./pages/home2/DH2ServiceDetail"));
-const DH2BlogDetail = lazy(() => import("./pages/home2/DH2BlogDetail"));
-const DH2NewsletterDetail = lazy(() => import("./pages/home2/DH2NewsletterDetail"));
-const DH2CareerDetail = lazy(() => import("./pages/home2/DH2CareerDetail"));
-const DH2Courses = lazy(() => import("./pages/home2/DH2Courses"));
-const DH2CourseDetail = lazy(() => import("./pages/home2/DH2CourseDetail"));
+const DH2About = lazyWithRetry(() => import("./pages/home2/DH2About"));
+const DH2Services = lazyWithRetry(() => import("./pages/home2/DH2Services"));
+const DH2Contact = lazyWithRetry(() => import("./pages/home2/DH2Contact"));
+const DH2Consultation = lazyWithRetry(() => import("./pages/home2/DH2Consultation"));
+const DH2CaseStudies = lazyWithRetry(() => import("./pages/home2/DH2CaseStudies"));
+const DH2Blog = lazyWithRetry(() => import("./pages/home2/DH2Blog"));
+const DH2Products = lazyWithRetry(() => import("./pages/home2/DH2Products"));
+const DH2GlobalPresence = lazyWithRetry(() => import("./pages/home2/DH2GlobalPresence"));
+const DH2Careers = lazyWithRetry(() => import("./pages/home2/DH2Careers"));
+const DH2Newsletters = lazyWithRetry(() => import("./pages/home2/DH2Newsletters"));
+const DH2Privacy = lazyWithRetry(() => import("./pages/home2/DH2Privacy"));
+const DH2Terms = lazyWithRetry(() => import("./pages/home2/DH2Terms"));
+const DH2ServiceDetail = lazyWithRetry(() => import("./pages/home2/DH2ServiceDetail"));
+const DH2BlogDetail = lazyWithRetry(() => import("./pages/home2/DH2BlogDetail"));
+const DH2NewsletterDetail = lazyWithRetry(() => import("./pages/home2/DH2NewsletterDetail"));
+const DH2CareerDetail = lazyWithRetry(() => import("./pages/home2/DH2CareerDetail"));
+const DH2Courses = lazyWithRetry(() => import("./pages/home2/DH2Courses"));
+const DH2CourseDetail = lazyWithRetry(() => import("./pages/home2/DH2CourseDetail"));
 
 // Home Heritage Imports
 import MainLayout from "./pages/MainLayout";
-const About = lazy(() => import("./pages/About"));
-const Services = lazy(() => import("./pages/Services"));
-const Contact = lazy(() => import("./pages/Contact"));
-const Projects = lazy(() => import("./pages/Projects"));
-const Blog = lazy(() => import("./pages/Blog"));
-const BlogDetail = lazy(() => import("./pages/BlogDetail"));
-const NewsletterDetail = lazy(() => import("./pages/NewsletterDetail"));
-const OurProducts = lazy(() => import("./pages/OurProducts"));
-const GlobalPresence = lazy(() => import("./pages/GlobalPresence"));
-const Careers = lazy(() => import("./pages/Careers"));
-const Newsletters = lazy(() => import("./pages/Newsletters"));
-const Courses = lazy(() => import("./pages/Courses"));
-const CourseDetail = lazy(() => import("./pages/CourseDetail"));
-const CaseStudies = lazy(() => import("./pages/CaseStudies"));
-const CareerDetail = lazy(() => import("./pages/CareerDetail"));
-const ServiceDetail = lazy(() => import("./pages/ServiceDetail"));
-const ProjectDetail = lazy(() => import("./pages/ProjectDetail"));
-const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
-const TermsConditions = lazy(() => import("./pages/TermsConditions"));
+const About = lazyWithRetry(() => import("./pages/About"));
+const Services = lazyWithRetry(() => import("./pages/Services"));
+const Contact = lazyWithRetry(() => import("./pages/Contact"));
+const Projects = lazyWithRetry(() => import("./pages/Projects"));
+const Blog = lazyWithRetry(() => import("./pages/Blog"));
+const BlogDetail = lazyWithRetry(() => import("./pages/BlogDetail"));
+const NewsletterDetail = lazyWithRetry(() => import("./pages/NewsletterDetail"));
+const OurProducts = lazyWithRetry(() => import("./pages/OurProducts"));
+const GlobalPresence = lazyWithRetry(() => import("./pages/GlobalPresence"));
+const Careers = lazyWithRetry(() => import("./pages/Careers"));
+const Newsletters = lazyWithRetry(() => import("./pages/Newsletters"));
+const Courses = lazyWithRetry(() => import("./pages/Courses"));
+const CourseDetail = lazyWithRetry(() => import("./pages/CourseDetail"));
+const CaseStudies = lazyWithRetry(() => import("./pages/CaseStudies"));
+const CareerDetail = lazyWithRetry(() => import("./pages/CareerDetail"));
+const ServiceDetail = lazyWithRetry(() => import("./pages/ServiceDetail"));
+const ProjectDetail = lazyWithRetry(() => import("./pages/ProjectDetail"));
+const PrivacyPolicy = lazyWithRetry(() => import("./pages/PrivacyPolicy"));
+const TermsConditions = lazyWithRetry(() => import("./pages/TermsConditions"));
 
 // ── SEO Product Landing Pages Imports ─────────────────────────────────────────
-const HrPortal = lazy(() => import("./pages/product/HrPortal"));
-const HrmsSoftwareIndia = lazy(() => import("./pages/product/HrmsSoftwareIndia"));
-const PayrollSoftwareIndia = lazy(() => import("./pages/product/PayrollSoftwareIndia"));
-const AttendanceManagementSystem = lazy(() => import("./pages/product/AttendanceManagementSystem"));
-const LeaveManagementSoftware = lazy(() => import("./pages/product/LeaveManagementSoftware"));
-const EmployeeManagementSoftware = lazy(() => import("./pages/product/EmployeeManagementSoftware"));
-const EmployeePortal = lazy(() => import("./pages/product/EmployeePortal"));
-const CrmSoftwareIndia = lazy(() => import("./pages/product/CrmSoftwareIndia"));
-const WorkforceManagementSoftware = lazy(() => import("./pages/product/WorkforceManagementSoftware"));
-const ProjectManagementSoftware = lazy(() => import("./pages/product/ProjectManagementSoftware"));
-const BusinessOperatingSystem = lazy(() => import("./pages/product/BusinessOperatingSystem"));
+const HrPortal = lazyWithRetry(() => import("./pages/product/HrPortal"));
+const HrmsSoftwareIndia = lazyWithRetry(() => import("./pages/product/HrmsSoftwareIndia"));
+const PayrollSoftwareIndia = lazyWithRetry(() => import("./pages/product/PayrollSoftwareIndia"));
+const AttendanceManagementSystem = lazyWithRetry(() => import("./pages/product/AttendanceManagementSystem"));
+const LeaveManagementSoftware = lazyWithRetry(() => import("./pages/product/LeaveManagementSoftware"));
+const EmployeeManagementSoftware = lazyWithRetry(() => import("./pages/product/EmployeeManagementSoftware"));
+const EmployeePortal = lazyWithRetry(() => import("./pages/product/EmployeePortal"));
+const CrmSoftwareIndia = lazyWithRetry(() => import("./pages/product/CrmSoftwareIndia"));
+const WorkforceManagementSoftware = lazyWithRetry(() => import("./pages/product/WorkforceManagementSoftware"));
+const ProjectManagementSoftware = lazyWithRetry(() => import("./pages/product/ProjectManagementSoftware"));
+const BusinessOperatingSystem = lazyWithRetry(() => import("./pages/product/BusinessOperatingSystem"));
 
 // ── Competitor Alternative Pages Imports ──────────────────────────────────────
-const KekaAlternative = lazy(() => import("./pages/compare/KekaAlternative"));
-const GreythrAlternative = lazy(() => import("./pages/compare/GreythrAlternative"));
-const DarwinboxAlternative = lazy(() => import("./pages/compare/DarwinboxAlternative"));
-const ZohoPeopleAlternative = lazy(() => import("./pages/compare/ZohoPeopleAlternative"));
+const KekaAlternative = lazyWithRetry(() => import("./pages/compare/KekaAlternative"));
+const GreythrAlternative = lazyWithRetry(() => import("./pages/compare/GreythrAlternative"));
+const DarwinboxAlternative = lazyWithRetry(() => import("./pages/compare/DarwinboxAlternative"));
+const ZohoPeopleAlternative = lazyWithRetry(() => import("./pages/compare/ZohoPeopleAlternative"));
 
 // ── Local SEO & City Pages Imports ────────────────────────────────────────────
-const Delhi = lazy(() => import("./pages/local/Delhi"));
-const Faridabad = lazy(() => import("./pages/local/Faridabad"));
-const Gurgaon = lazy(() => import("./pages/local/Gurgaon"));
-const Rohtak = lazy(() => import("./pages/local/Rohtak"));
-const DigitalMarketingDelhi = lazy(() => import("./pages/local/DigitalMarketingDelhi"));
-const DigitalMarketingHaryana = lazy(() => import("./pages/local/DigitalMarketingHaryana"));
-const GoogleAdsHaryana = lazy(() => import("./pages/local/GoogleAdsHaryana"));
-const SeoDelhi = lazy(() => import("./pages/local/SeoDelhi"));
-const SeoHaryana = lazy(() => import("./pages/local/SeoHaryana"));
-const SmmDelhi = lazy(() => import("./pages/local/SmmDelhi"));
-const SmmHaryana = lazy(() => import("./pages/local/SmmHaryana"));
-const WebDevDelhi = lazy(() => import("./pages/local/WebDevDelhi"));
-const WebDevHaryana = lazy(() => import("./pages/local/WebDevHaryana"));
-const WebDevGurgaon = lazy(() => import("./pages/local/WebDevGurgaon"));
-const WebDevNoida = lazy(() => import("./pages/local/WebDevNoida"));
-const WebDevChandigarh = lazy(() => import("./pages/local/WebDevChandigarh"));
-const WebDevIndia = lazy(() => import("./pages/local/WebDevIndia"));
-const WebDevMumbai = lazy(() => import("./pages/local/WebDevMumbai"));
-const WebDevBangalore = lazy(() => import("./pages/local/WebDevBangalore"));
-const WebDevPune = lazy(() => import("./pages/local/WebDevPune"));
-const WebDevHyderabad = lazy(() => import("./pages/local/WebDevHyderabad"));
+const Delhi = lazyWithRetry(() => import("./pages/local/Delhi"));
+const Faridabad = lazyWithRetry(() => import("./pages/local/Faridabad"));
+const Gurgaon = lazyWithRetry(() => import("./pages/local/Gurgaon"));
+const Rohtak = lazyWithRetry(() => import("./pages/local/Rohtak"));
+const DigitalMarketingDelhi = lazyWithRetry(() => import("./pages/local/DigitalMarketingDelhi"));
+const DigitalMarketingHaryana = lazyWithRetry(() => import("./pages/local/DigitalMarketingHaryana"));
+const GoogleAdsHaryana = lazyWithRetry(() => import("./pages/local/GoogleAdsHaryana"));
+const SeoDelhi = lazyWithRetry(() => import("./pages/local/SeoDelhi"));
+const SeoHaryana = lazyWithRetry(() => import("./pages/local/SeoHaryana"));
+const SmmDelhi = lazyWithRetry(() => import("./pages/local/SmmDelhi"));
+const SmmHaryana = lazyWithRetry(() => import("./pages/local/SmmHaryana"));
+const WebDevDelhi = lazyWithRetry(() => import("./pages/local/WebDevDelhi"));
+const WebDevHaryana = lazyWithRetry(() => import("./pages/local/WebDevHaryana"));
+const WebDevGurgaon = lazyWithRetry(() => import("./pages/local/WebDevGurgaon"));
+const WebDevNoida = lazyWithRetry(() => import("./pages/local/WebDevNoida"));
+const WebDevChandigarh = lazyWithRetry(() => import("./pages/local/WebDevChandigarh"));
+const WebDevIndia = lazyWithRetry(() => import("./pages/local/WebDevIndia"));
+const WebDevMumbai = lazyWithRetry(() => import("./pages/local/WebDevMumbai"));
+const WebDevBangalore = lazyWithRetry(() => import("./pages/local/WebDevBangalore"));
+const WebDevPune = lazyWithRetry(() => import("./pages/local/WebDevPune"));
+const WebDevHyderabad = lazyWithRetry(() => import("./pages/local/WebDevHyderabad"));
 
-const DH2PolicicueProject = lazy(() => import('./pages/home2/DH2PolicicueProject'));
-const DH2IndusProject = lazy(() => import('./pages/home2/DH2IndusProject'));
-const DH2FrdNutritionProject = lazy(() => import('./pages/home2/DH2FrdNutritionProject'));
-const DH2HiTechHomesProject = lazy(() => import('./pages/home2/DH2HiTechHomesProject'));
-const DH2SanjeevniHospitalProject = lazy(() => import('./pages/home2/DH2SanjeevniHospitalProject'));
-const DH2RohtakShoeProject = lazy(() => import('./pages/home2/DH2RohtakShoeProject'));
-const DH2LeadManagementProject = lazy(() => import('./pages/home2/DH2LeadManagementProject'));
-const DH2WhatsAppAutomationProject = lazy(() => import('./pages/home2/DH2WhatsAppAutomationProject'));
-const DH2BusinessProcessOptimizationProject = lazy(() => import('./pages/home2/DH2BusinessProcessOptimizationProject'));
+const DH2PolicicueProject = lazyWithRetry(() => import('./pages/home2/DH2PolicicueProject'));
+const DH2IndusProject = lazyWithRetry(() => import('./pages/home2/DH2IndusProject'));
+const DH2FrdNutritionProject = lazyWithRetry(() => import('./pages/home2/DH2FrdNutritionProject'));
+const DH2HiTechHomesProject = lazyWithRetry(() => import('./pages/home2/DH2HiTechHomesProject'));
+const DH2SanjeevniHospitalProject = lazyWithRetry(() => import('./pages/home2/DH2SanjeevniHospitalProject'));
+const DH2RohtakShoeProject = lazyWithRetry(() => import('./pages/home2/DH2RohtakShoeProject'));
+const DH2LeadManagementProject = lazyWithRetry(() => import('./pages/home2/DH2LeadManagementProject'));
+const DH2WhatsAppAutomationProject = lazyWithRetry(() => import('./pages/home2/DH2WhatsAppAutomationProject'));
+const DH2BusinessProcessOptimizationProject = lazyWithRetry(() => import('./pages/home2/DH2BusinessProcessOptimizationProject'));
 
 import { SeoProvider } from "./contexts/SeoContext";
 import { ThemeProvider } from "./components/theme-provider";
@@ -316,7 +317,12 @@ const AppLayout = () => {
       <SeoHead />
       {!hideNavbar && (useNavbar1 ? <Navbar1 /> : <Navbar />)}
       <main className="pt-0">
-        <Suspense fallback={<div style={{ minHeight: "70vh" }} aria-busy="true" />}>
+        <Suspense fallback={
+          <div style={{ minHeight: "70vh", display: "flex", alignItems: "center", justifyContent: "center" }} aria-busy="true">
+            <div style={{ width: 36, height: 36, border: "3px solid rgba(255,157,0,0.25)", borderTopColor: "#ff9d00", borderRadius: "50%", animation: "rt-spin 0.7s linear infinite" }} />
+            <style>{`@keyframes rt-spin{to{transform:rotate(360deg)}}`}</style>
+          </div>
+        }>
         <Routes>
           {/* New Main Website (formerly dummyhome) */}
           <Route path="/" element={<MainLayout />}>
