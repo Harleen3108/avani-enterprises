@@ -569,8 +569,9 @@ No.1 Digital Marketing Agency in India we provide best Digital Marketing, Web De
               {/* To revert: uncomment <HeroDashboard /> and remove the newsletter widget below */}
               {/* <HeroDashboard /> */}
 
-              {/* NEW: Newsletter Widget */}
-              <div className="absolute top-1/2 left-0 right-0 mx-auto w-[82%] max-w-[340px] -translate-y-1/2 bg-white/95 backdrop-blur-md rounded-[1.75rem] shadow-[0_30px_80px_rgba(0,0,0,0.08)] border border-white overflow-hidden z-10">
+              {/* NEW: Newsletter Widget — centered wrapper so avatars anchor to the card, not the column margins */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[82%] max-w-[340px] z-10">
+                <div className="relative bg-white/95 backdrop-blur-md rounded-[1.75rem] shadow-[0_30px_80px_rgba(0,0,0,0.08)] border border-white overflow-hidden">
                 {/* Widget Header */}
                 <div className="flex items-center justify-between px-5 pt-5 pb-3.5 border-b border-slate-100">
                   <h3 className="text-sm font-black text-slate-900 tracking-tight uppercase">News & Updates</h3>
@@ -659,22 +660,23 @@ No.1 Digital Marketing Agency in India we provide best Digital Marketing, Web De
                 )}
               </div>
 
-              {/* Floating Indian Avatars */}
-              <motion.div
-                animate={{ y: [0, -20, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute top-[6%] right-[4%] w-20 h-20 rounded-full border-[6px] border-white shadow-2xl overflow-hidden z-20"
-              >
-                <img src="https://images.unsplash.com/photo-1589386417686-0d34b5903d23?q=80&w=800&auto=format&fit=crop" alt="Indian Businessman" className="w-full h-full object-cover" />
-              </motion.div>
+                {/* Floating Indian Avatars — anchored to the card corners */}
+                <motion.div
+                  animate={{ y: [0, -20, 0] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute -top-5 -right-3 w-20 h-20 rounded-full border-[6px] border-white shadow-2xl overflow-hidden z-20"
+                >
+                  <img src="https://images.unsplash.com/photo-1589386417686-0d34b5903d23?q=80&w=800&auto=format&fit=crop" alt="Indian Businessman" className="w-full h-full object-cover" />
+                </motion.div>
 
-              <motion.div
-                animate={{ y: [0, 20, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                className="absolute top-[58%] left-[4%] w-16 h-16 rounded-full border-[6px] border-white shadow-2xl overflow-hidden z-20"
-              >
-                <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800&auto=format&fit=crop" alt="Indian Businesswoman" className="w-full h-full object-cover" />
-              </motion.div>
+                <motion.div
+                  animate={{ y: [0, 20, 0] }}
+                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                  className="absolute top-[60%] -left-4 w-16 h-16 rounded-full border-[6px] border-white shadow-2xl overflow-hidden z-20"
+                >
+                  <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800&auto=format&fit=crop" alt="Indian Businesswoman" className="w-full h-full object-cover" />
+                </motion.div>
+              </div>
 
 
             </motion.div>
