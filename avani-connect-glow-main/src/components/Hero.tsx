@@ -156,10 +156,10 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
                 </div>
               </motion.div>
 
-              <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.55, duration: 0.8 }}
+              {/* <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.55, duration: 0.8 }}
                 style={{ fontFamily: "'Inter', sans-serif", fontSize: '16px', lineHeight: 1.8, letterSpacing: '0.01em', color: 'var(--text-secondary)', maxWidth: '560px', marginBottom: '16px', fontWeight: 400 }}>
                 Avani Enterprises is the No.1 Digital Marketing Agency in India, providing the best Digital Marketing, Web Development, App Development, and AI Solutions across India (Rohtak, Gurgaon, and Mumbai). We deliver result-driven SEO, PPC, social media, and branding solutions, and our data-focused strategies help businesses generate quality leads and maximize ROI.
-              </motion.p>
+              </motion.p> */}
 
               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.65 }}
                 style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '28px' }}>

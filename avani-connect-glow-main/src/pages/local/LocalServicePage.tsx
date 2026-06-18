@@ -121,6 +121,7 @@ export const FAQSection = ({ faqs, heading='Frequently Asked Questions' }: { faq
 // ─── Review Card ──────────────────────────────────────────────────────────────
 interface Review { name: string; role: string; city: string; text: string; rating?: number }
 export const ReviewsSection = ({ reviews, heading='What Our Clients Say' }: { reviews: Review[]; heading?: string }) => (
+  !reviews || reviews.length === 0 ? null :
   <section style={{ padding:'80px 0',background:T.bg,position:'relative',overflow:'hidden' }}>
     <Grain /><Grid />
     <div className="dh-container" style={{ position:'relative',zIndex:10 }}>
