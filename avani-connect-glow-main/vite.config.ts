@@ -84,13 +84,21 @@ export default defineConfig(({ mode }) => ({
       output: {
         manualChunks(id: string) {
           if (!id.includes("node_modules")) return;
+          // Independent heavy libs that do NOT touch the React runtime can be split safely.
           if (id.includes("html2canvas")) return "html2canvas";
           if (id.includes("recharts") || id.includes("/d3-")) return "charts";
           if (id.includes("gsap")) return "gsap";
-          if (id.includes("framer-motion")) return "framer-motion";
-          if (id.includes("lucide-react")) return "lucide-react";
-          if (id.includes("@radix-ui")) return "radix-ui";
-          if (id.includes("react-dom") || id.includes("react-router") || id.includes("react/")) return "react-core";
+          // Keep React and EVERYTHING that consumes its runtime (radix, router,
+          // framer-motion, lucide) in ONE chunk so React initializes first.
+          // Previously @radix-ui was split into its own chunk that executed before
+          // React loaded -> "Cannot read properties of undefined (reading 'forwardRef')".
+          if (
+            id.includes("react") ||
+            id.includes("@radix-ui") ||
+            id.includes("scheduler") ||
+            id.includes("framer-motion") ||
+            id.includes("lucide-react")
+          ) return "react-core";
           return "vendor";
         },
       },
