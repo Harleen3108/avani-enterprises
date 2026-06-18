@@ -118,6 +118,17 @@ const urls = [
   { loc: `${BASE_URL}/google-ads-agency`,               lastmod: TODAY, changefreq: "weekly", priority: "0.9" },
   { loc: `${BASE_URL}/ai-automation-company`,           lastmod: TODAY, changefreq: "weekly", priority: "0.9" },
   { loc: `${BASE_URL}/crm-development-company`,          lastmod: TODAY, changefreq: "weekly", priority: "0.9" },
+  // Batch 2 service pages
+  { loc: `${BASE_URL}/web-design-company`, lastmod: TODAY, changefreq: "weekly", priority: "0.9" },
+  { loc: `${BASE_URL}/ecommerce-development-company`, lastmod: TODAY, changefreq: "weekly", priority: "0.9" },
+  { loc: `${BASE_URL}/custom-software-development-company`, lastmod: TODAY, changefreq: "weekly", priority: "0.9" },
+  { loc: `${BASE_URL}/mobile-app-development-company`, lastmod: TODAY, changefreq: "weekly", priority: "0.9" },
+  { loc: `${BASE_URL}/hr-portal-development-company`, lastmod: TODAY, changefreq: "weekly", priority: "0.9" },
+  { loc: `${BASE_URL}/meta-ads-agency`, lastmod: TODAY, changefreq: "weekly", priority: "0.9" },
+  { loc: `${BASE_URL}/social-media-marketing-company`, lastmod: TODAY, changefreq: "weekly", priority: "0.9" },
+  { loc: `${BASE_URL}/ai-solutions-company`, lastmod: TODAY, changefreq: "weekly", priority: "0.9" },
+  { loc: `${BASE_URL}/local-seo-services`, lastmod: TODAY, changefreq: "weekly", priority: "0.9" },
+  { loc: `${BASE_URL}/business-process-automation`, lastmod: TODAY, changefreq: "weekly", priority: "0.9" },
 
   // ── Competitor Alternative Pages ──────────────────────────────────────────
   { loc: `${BASE_URL}/keka-alternative`,               lastmod: "2026-06-10", changefreq: "monthly", priority: "0.85" },

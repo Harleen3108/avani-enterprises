@@ -2140,5 +2140,1395 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       headline: 'Build a CRM Your Team Will Actually Use',
       sub: 'Request a free demo and consultation, we will map your sales process and show you what a custom CRM can do.'
     }
+  },
+
+  'web-design-company': {
+      "slug": "web-design-company",
+      "seo": {
+          "title": "Web Design Company in India | Avani Enterprises",
+          "description": "Avani Enterprises is a design-led web design company in India building conversion-focused, mobile-first UI/UX and brand-aligned websites. Get a free design consult.",
+          "keywords": "web design company, website design company, web design agency, ui ux design company, professional web design services india, custom web design, conversion focused web design, mobile first website design",
+          "canonical": "https://www.avanienterprises.in/web-design-company"
+      },
+      "breadcrumbs": [
+          {
+              "label": "Home",
+              "href": "/"
+          },
+          {
+              "label": "Services",
+              "href": "/services"
+          },
+          {
+              "label": "Web Design Company",
+              "href": "/web-design-company"
+          }
+      ],
+      "hero": {
+          "tag": "Design-Led Studio",
+          "h1": "Web Design Company in India",
+          "subtitle": "We design brand-aligned, conversion-focused websites with UI/UX that turns first-time visitors into customers, mobile-first and pixel-perfect on every screen.",
+          "stats": [
+              {
+                  "value": "300+",
+                  "label": "Projects Designed"
+              },
+              {
+                  "value": "8+",
+                  "label": "Years of Craft"
+              },
+              {
+                  "value": "5.0",
+                  "label": "Client Rating"
+              }
+          ]
+      },
+      "intro": "As a design-led web design company in India, Avani Enterprises treats your website as your hardest-working salesperson, not just a brochure. From DLF Cyber City, Gurugram, our UI/UX design team builds custom web design grounded in user research, brand identity, and clear conversion goals, so every layout, colour, and click moves a visitor closer to enquiry. With 150+ clients across Delhi NCR and pan-India, we deliver professional web design services that look distinctive and perform measurably.",
+      "whyAvani": [
+          {
+              "title": "Design Tied to Conversions",
+              "desc": "We design around the actions you need, enquiries, bookings, sales, then map layout, hierarchy, and CTAs to that goal so the site looks great and converts."
+          },
+          {
+              "title": "Brand-Aligned, Not Templated",
+              "desc": "Every interface is a custom web design built from your brand colours, typography, and voice, so you get a site that feels unmistakably yours, never a recycled theme."
+          },
+          {
+              "title": "Mobile-First by Default",
+              "desc": "With most Indian traffic on phones, we design mobile-first and scale up, delivering fast, thumb-friendly experiences across every device and screen size."
+          }
+      ],
+      "features": [
+          {
+              "title": "UI/UX Design & Research",
+              "desc": "As a UI/UX design company, we run user flows, wireframes, and prototypes to validate journeys before a single line of code is written."
+          },
+          {
+              "title": "Brand-Aligned Visual Design",
+              "desc": "High-fidelity mockups, custom illustration, and a consistent visual language that carries your brand across landing pages, product pages, and forms."
+          },
+          {
+              "title": "Design Systems & Components",
+              "desc": "Reusable component libraries and style guides that keep your site consistent, easy to scale, and quick to update as you grow."
+          },
+          {
+              "title": "Conversion-Focused Layouts",
+              "desc": "Strategic placement of CTAs, trust signals, and content hierarchy, plus responsive, mobile-first layouts engineered to lift enquiries and reduce bounce."
+          }
+      ],
+      "bodySections": [
+          {
+              "heading": "Design That Earns Attention and Drives Action",
+              "paragraphs": [
+                  "A beautiful website that does not convert is an expensive ornament. Our web design agency starts every project by understanding who your visitors are, what they came to do, and where they hesitate. That research shapes the wireframes, the visual hierarchy, and the placement of every call to action, so design decisions are deliberate rather than decorative.",
+                  "From there our designers craft brand-aligned visuals, custom layouts, and micro-interactions that guide the eye and build trust. The result is professional web design that feels premium, loads fast, and is engineered to move the metrics that matter to your business, leads, enquiries, and sales."
+              ]
+          },
+          {
+              "heading": "Mobile-First UI/UX Built on Reusable Design Systems",
+              "paragraphs": [
+                  "Most of your audience in India browses on a phone, so we design mobile-first and then scale up to tablet and desktop. Touch targets, readable type, and fast-loading visuals are baked in from the first frame, not patched in afterwards, giving every visitor a polished experience regardless of device.",
+                  "Behind the visuals, we build a structured design system, reusable components, defined spacing, and a documented style guide. This keeps your website visually consistent, makes future pages quick to add, and gives your development team a clean handoff that turns into clean, maintainable code."
+              ]
+          }
+      ],
+      "faqs": [
+          {
+              "q": "How much does professional web design cost in India?",
+              "a": "Pricing depends on the number of pages, the depth of UI/UX work, and whether you need a custom design system. We scope each project individually and share a transparent, fixed quote after a free consultation, so there are no surprises."
+          },
+          {
+              "q": "How long does a website design project take?",
+              "a": "A focused brand or marketing site typically moves through research, wireframes, and high-fidelity design in a few weeks, while larger custom web design projects take longer. We share a clear milestone timeline before we start."
+          },
+          {
+              "q": "What is your web design process?",
+              "a": "We follow a proven flow: discovery and user research, wireframes, brand-aligned visual design, prototype review, and a development-ready handoff. You review and approve at each stage, so the final design reflects your goals."
+          },
+          {
+              "q": "Do you design mobile-first and responsive websites?",
+              "a": "Yes. Every site we design is mobile-first and fully responsive, optimised for the smartphone-heavy Indian audience and tested across major devices and screen sizes before launch."
+          },
+          {
+              "q": "Do you only design, or can you build the website too?",
+              "a": "Both. As a design-led studio we can hand off pixel-perfect designs to your team, or our in-house developers can build the site end to end, keeping design intent intact from mockup to live site."
+          },
+          {
+              "q": "Do you work with businesses outside Delhi NCR?",
+              "a": "Yes. We are headquartered in Gurugram and serve clients across Haryana, Delhi NCR, Rohtak, and pan-India including Mumbai and Pune, working remotely with 24/7 communication."
+          }
+      ],
+      "relatedLinks": [
+          {
+              "label": "Web Development Company",
+              "href": "/web-development-company",
+              "desc": "Build the design into fast code."
+          },
+          {
+              "label": "Digital Marketing Company",
+              "href": "/digital-marketing-company",
+              "desc": "Drive traffic to your new design."
+          },
+          {
+              "label": "SEO Company",
+              "href": "/seo-company",
+              "desc": "Design that also ranks higher."
+          }
+      ],
+      "cta": {
+          "headline": "Ready for a Website That Converts?",
+          "sub": "Book a free design consultation with Avani Enterprises. Get UI/UX, brand-aligned visuals, and conversion-focused design built for the Indian market."
+      }
+  },
+
+  'ecommerce-development-company': {
+      "slug": "ecommerce-development-company",
+      "seo": {
+          "title": "Ecommerce Development Company in India | Avani Enterprises",
+          "description": "Avani Enterprises is an ecommerce development company in India building Shopify, WooCommerce & custom online stores that convert. 300+ projects. Get a free quote today.",
+          "keywords": "ecommerce development company, ecommerce website development, online store development, shopify development, woocommerce development, custom ecommerce india",
+          "canonical": "https://www.avanienterprises.in/ecommerce-development-company"
+      },
+      "breadcrumbs": [
+          {
+              "label": "Home",
+              "href": "/"
+          },
+          {
+              "label": "Services",
+              "href": "/services"
+          },
+          {
+              "label": "Ecommerce Development Company",
+              "href": "/ecommerce-development-company"
+          }
+      ],
+      "hero": {
+          "tag": "Stores That Sell",
+          "h1": "Ecommerce Development Company in India",
+          "subtitle": "We build fast, secure online stores on Shopify, WooCommerce, and custom stacks, engineered around payments, inventory, and conversion so your D2C brand scales profitably.",
+          "stats": [
+              {
+                  "value": "300+",
+                  "label": "Projects Delivered"
+              },
+              {
+                  "value": "150+",
+                  "label": "Happy Clients"
+              },
+              {
+                  "value": "5.0",
+                  "label": "Client Rating"
+              }
+          ]
+      },
+      "intro": "Avani Enterprises is an ecommerce development company in India helping D2C brands, retailers, and B2B sellers launch online stores that actually sell. Whether you need Shopify development, WooCommerce development, or a fully custom ecommerce build, we engineer every store around fast checkout, reliable payments, real-time inventory, and a buyer journey designed to lift conversion and average order value.",
+      "whyAvani": [
+          {
+              "title": "Conversion-Led Store Design",
+              "desc": "We optimise product pages, search, and a frictionless checkout to lift conversion rate and average order value, not just looks."
+          },
+          {
+              "title": "Payments & Inventory Done Right",
+              "desc": "Razorpay, Cashfree, PayU, COD, and live inventory sync configured so orders, stock, and refunds never break."
+          },
+          {
+              "title": "Built to Scale With D2C Growth",
+              "desc": "Stores architected to stay fast through sale-day traffic spikes, catalogue growth, and multi-channel selling."
+          }
+      ],
+      "features": [
+          {
+              "title": "Shopify Store Development",
+              "desc": "Custom Shopify and Shopify Plus themes, app integrations, and conversion-tuned storefronts ready to launch fast."
+          },
+          {
+              "title": "WooCommerce Development",
+              "desc": "Flexible WordPress and WooCommerce stores with custom plugins, payment gateways, and full content control."
+          },
+          {
+              "title": "Custom Ecommerce Platforms",
+              "desc": "Headless and bespoke stores on modern stacks for unique catalogues, B2B pricing, and complex workflows."
+          },
+          {
+              "title": "Migration, Support & Growth",
+              "desc": "Replatforming, speed optimisation, integrations, and ongoing support to keep your store fast and selling."
+          }
+      ],
+      "bodySections": [
+          {
+              "heading": "An Ecommerce Development Company Built Around Conversion",
+              "paragraphs": [
+                  "A beautiful store that loads slowly or buries the buy button quietly leaks revenue on every visit. Our ecommerce development process starts with your funnel — how shoppers find products, what stops them buying, and where carts get abandoned — then we engineer the store to remove that friction.",
+                  "From product discovery and search to a one-step, mobile-first checkout, every element is optimised to turn browsers into buyers. We wire in analytics, conversion tracking, and abandoned-cart recovery from day one, so you can see exactly what drives sales and where to grow next."
+              ]
+          },
+          {
+              "heading": "Payments, Inventory, and a Platform That Scales",
+              "paragraphs": [
+                  "We set up the operational backbone that keeps an online store running cleanly: multiple payment gateways with COD support, secure checkout, live inventory and stock sync, automated order and shipping flows, and GST-ready invoicing built for the Indian market.",
+                  "Whether you sell ten SKUs or ten thousand, we choose the right platform — Shopify, WooCommerce, or a custom build — and architect it to stay fast during festive-sale spikes and scale across marketplaces without an expensive rebuild later."
+              ]
+          }
+      ],
+      "faqs": [
+          {
+              "q": "How much does ecommerce website development cost in India?",
+              "a": "Cost depends on platform and scope; a starter Shopify store differs from a custom multi-vendor build. We share a fixed, transparent quote after a free requirements call so there are no surprises."
+          },
+          {
+              "q": "How long does it take to build an online store?",
+              "a": "A standard Shopify or WooCommerce store typically takes 3 to 6 weeks; custom ecommerce platforms take longer. We agree a clear milestone timeline before development starts."
+          },
+          {
+              "q": "Should I choose Shopify, WooCommerce, or a custom build?",
+              "a": "Shopify suits fast, hassle-free launches; WooCommerce gives full control over content and costs; custom builds fit unique catalogues or B2B logic. We recommend the right fit after understanding your products and goals."
+          },
+          {
+              "q": "Which payment gateways and features do you integrate?",
+              "a": "We integrate Razorpay, Cashfree, PayU, UPI, cards, and Cash on Delivery, plus inventory sync, GST invoicing, shipping, and abandoned-cart recovery built for Indian ecommerce."
+          },
+          {
+              "q": "Can you redesign or migrate my existing store?",
+              "a": "Yes. We migrate stores between platforms and redesign existing ones while preserving products, orders, SEO rankings, and URLs, with zero data loss and minimal downtime."
+          },
+          {
+              "q": "Do you provide support after the store goes live?",
+              "a": "Absolutely. We offer ongoing maintenance, security updates, speed optimisation, new integrations, and feature development to keep your store fast, secure, and converting."
+          }
+      ],
+      "relatedLinks": [
+          {
+              "label": "Web Development Company",
+              "href": "/web-development-company",
+              "desc": "Custom websites and web apps built fast."
+          },
+          {
+              "label": "SEO Company",
+              "href": "/seo-company",
+              "desc": "Rank product pages and win organic sales."
+          },
+          {
+              "label": "Digital Marketing Company",
+              "href": "/digital-marketing-company",
+              "desc": "Drive traffic and sales to your store."
+          }
+      ],
+      "cta": {
+          "headline": "Ready to Launch a Store That Sells?",
+          "sub": "Get a free, no-obligation quote and ecommerce roadmap from our store development team."
+      }
+  },
+
+  'custom-software-development-company': {
+      "slug": "custom-software-development-company",
+      "seo": {
+          "title": "Custom Software Development Company in India | Avani Enterprises",
+          "description": "Avani Enterprises is a custom software development company in India building bespoke business software, SaaS, internal tools, and integrations. 300+ projects, 8+ years. Get a free scoping call.",
+          "keywords": "custom software development company, bespoke software development, software development company, enterprise software development, saas development india, custom application development, internal tools development, software integration services",
+          "canonical": "https://www.avanienterprises.in/custom-software-development-company"
+      },
+      "breadcrumbs": [
+          {
+              "label": "Home",
+              "href": "/"
+          },
+          {
+              "label": "Services",
+              "href": "/services"
+          },
+          {
+              "label": "Custom Software Development",
+              "href": "/custom-software-development-company"
+          }
+      ],
+      "hero": {
+          "tag": "Software Built Around You",
+          "h1": "Custom Software Development Company in India",
+          "subtitle": "We design and build bespoke business software, SaaS platforms, internal tools, and integrations engineered for scale, so your operations run on systems shaped to fit how you actually work.",
+          "stats": [
+              {
+                  "value": "300+",
+                  "label": "Projects Delivered"
+              },
+              {
+                  "value": "8+",
+                  "label": "Years of Experience"
+              },
+              {
+                  "value": "70%",
+                  "label": "Manual Tasks Automated"
+              }
+          ]
+      },
+      "intro": "Avani Enterprises is a custom software development company in India helping businesses replace spreadsheets, manual workflows, and disconnected tools with software built for their exact processes. From bespoke business applications and SaaS products to internal tools and system integrations, we engineer every solution for clean architecture, security, and the kind of scalability that grows with you instead of being rebuilt later.",
+      "whyAvani": [
+          {
+              "title": "Process-First Engineering",
+              "desc": "We map your real workflows before writing a line of code, so the software automates how you operate rather than forcing you onto a rigid off-the-shelf template."
+          },
+          {
+              "title": "Scalable Architecture",
+              "desc": "Modular, API-driven builds on modern stacks that handle growing users, data, and features without expensive re-platforming down the line."
+          },
+          {
+              "title": "Integration Specialists",
+              "desc": "We connect your CRM, accounting, payment gateways, and existing tools into one seamless system so data flows automatically instead of being re-entered by hand."
+          }
+      ],
+      "features": [
+          {
+              "title": "Bespoke Business Software",
+              "desc": "Custom applications built around your operations, inventory, projects, approvals, and dashboards, mapped to how your team actually works."
+          },
+          {
+              "title": "SaaS Product Development",
+              "desc": "Multi-tenant SaaS platforms with subscriptions, role-based access, and admin controls, built MVP-first and ready to scale."
+          },
+          {
+              "title": "Internal Tools & Automation",
+              "desc": "Admin panels, workflow engines, and back-office tools that automate repetitive tasks and replace fragile spreadsheets."
+          },
+          {
+              "title": "System Integrations & APIs",
+              "desc": "Custom APIs and connectors that unify your CRM, ERP, payment, and third-party services into a single connected stack."
+          }
+      ],
+      "bodySections": [
+          {
+              "heading": "A Custom Software Development Company That Solves the Right Problem",
+              "paragraphs": [
+                  "Off-the-shelf software forces your business to bend around its limitations, and the workarounds quietly cost you time, accuracy, and money every day. We take the opposite approach: every engagement starts by understanding your processes, the bottlenecks, the manual handoffs, and the data trapped in disconnected tools, before we propose a single feature.",
+                  "From there we design bespoke software that fits your workflow precisely, automating up to 70% of repetitive tasks and giving your team a single source of truth. The result is enterprise software development that removes friction instead of adding it, with measurable gains in speed, accuracy, and visibility across your operations."
+              ]
+          },
+          {
+              "heading": "Architecture and Technology Built to Scale",
+              "paragraphs": [
+                  "We build on proven, modern technologies: React and Next.js on the front end, Node.js and secure databases on the back end, with cloud hosting and clean, documented APIs at the core. Every system is structured to be modular, maintainable, and ready for new features without costly rebuilds.",
+                  "Whether you need a focused internal tool, a complex enterprise application, or full SaaS development for the Indian and global market, we architect it for security, performance, and growth. You own the code, the data, and the roadmap, so your software remains a long-term asset rather than a dependency."
+              ]
+          }
+      ],
+      "faqs": [
+          {
+              "q": "How much does custom software development cost in India?",
+              "a": "Cost depends on scope, complexity, and the number of features and integrations involved. After a free scoping call, we provide a fixed, transparent quote with a clear breakdown, so there are no surprises mid-project."
+          },
+          {
+              "q": "How long does it take to build custom software?",
+              "a": "A focused internal tool can take 4 to 8 weeks, while a full SaaS platform or enterprise application takes longer. We work in milestones and share a clear timeline before development begins, often shipping a usable MVP first."
+          },
+          {
+              "q": "What is your custom software development process?",
+              "a": "We follow a structured process: discovery and requirement mapping, architecture and UI design, agile development in sprints, testing and QA, then deployment and support. You see working progress regularly and give feedback at every stage."
+          },
+          {
+              "q": "Which technologies do you use for development?",
+              "a": "We primarily build with React, Next.js, and Node.js, backed by secure databases and cloud hosting, chosen per project for performance and scalability. We also build custom APIs to integrate with your existing tools."
+          },
+          {
+              "q": "Can you integrate the software with our existing systems?",
+              "a": "Yes. Integrations are a core strength: we connect your software with CRMs, accounting tools, payment gateways, ERPs, and third-party services through secure APIs so your data stays in sync automatically."
+          },
+          {
+              "q": "Do you provide support after the software is launched?",
+              "a": "Yes. We offer ongoing maintenance, security updates, performance monitoring, and feature development, with 24/7 support options to keep your software reliable as your business grows."
+          }
+      ],
+      "relatedLinks": [
+          {
+              "label": "CRM Development Company",
+              "href": "/crm-development-company",
+              "desc": "Custom CRM to automate your pipeline."
+          },
+          {
+              "label": "Business Operating System",
+              "href": "/business-operating-system",
+              "desc": "Unify CRM, HR, and project systems."
+          },
+          {
+              "label": "Web Development Company",
+              "href": "/web-development-company",
+              "desc": "Fast, scalable websites and web apps."
+          }
+      ],
+      "cta": {
+          "headline": "Ready to Build Software Made for Your Business?",
+          "sub": "Get a free scoping call and a project roadmap from our custom software development team."
+      }
+  },
+
+  'mobile-app-development-company': {
+      "slug": "mobile-app-development-company",
+      "seo": {
+          "title": "Mobile App Development Company in India | Avani Enterprises",
+          "description": "Avani Enterprises is a mobile app development company in India building iOS, Android & cross-platform apps with React Native and Flutter. 300+ projects delivered. Get a free quote.",
+          "keywords": "mobile app development company, android app development, ios app development, app development company, cross platform app development, react native app development india, flutter app development",
+          "canonical": "https://www.avanienterprises.in/mobile-app-development-company"
+      },
+      "breadcrumbs": [
+          {
+              "label": "Home",
+              "href": "/"
+          },
+          {
+              "label": "Services",
+              "href": "/services"
+          },
+          {
+              "label": "Mobile App Development",
+              "href": "/mobile-app-development-company"
+          }
+      ],
+      "hero": {
+          "tag": "Build. Launch. Scale.",
+          "h1": "Mobile App Development Company in India",
+          "subtitle": "We design and build fast, secure iOS, Android, and cross-platform apps — handling UX, backend, and store launch through to post-launch scale — engineered to delight users and grow your business.",
+          "stats": [
+              {
+                  "value": "300+",
+                  "label": "Projects Delivered"
+              },
+              {
+                  "value": "150+",
+                  "label": "Happy Clients"
+              },
+              {
+                  "value": "5.0",
+                  "label": "Client Rating"
+              }
+          ]
+      },
+      "intro": "Avani Enterprises is a mobile app development company in India helping startups and enterprises ship apps people actually use. From native iOS and Android builds to cross-platform React Native and Flutter apps, we own the full lifecycle — UX design, backend APIs, App Store and Play Store launch, and post-launch scaling — so your product is fast, secure, and ready to grow from day one.",
+      "whyAvani": [
+          {
+              "title": "Native and Cross-Platform Expertise",
+              "desc": "We pick the right stack for your goals: native Swift and Kotlin when raw performance matters, or React Native and Flutter to cover iOS and Android from a single codebase and cut build cost."
+          },
+          {
+              "title": "UX-Led, Conversion-Focused",
+              "desc": "App success is won in the first session. We design intuitive, retention-driven flows and test them on real devices so users onboard fast and keep coming back."
+          },
+          {
+              "title": "Backend and Scale Built In",
+              "desc": "Every app ships with secure APIs, cloud infrastructure, and analytics, so it stays fast and reliable as your user base grows — no costly rebuilds later."
+          }
+      ],
+      "features": [
+          {
+              "title": "iOS App Development",
+              "desc": "Native iPhone and iPad apps in Swift, built to Apple guidelines and optimised for smooth App Store approval and on-device performance."
+          },
+          {
+              "title": "Android App Development",
+              "desc": "Native Android apps in Kotlin, tuned across the full range of devices with clean Material Design and Play Store-ready builds."
+          },
+          {
+              "title": "Cross-Platform Development",
+              "desc": "One codebase for iOS and Android using React Native or Flutter — faster to market and easier to maintain without sacrificing quality."
+          },
+          {
+              "title": "Backend, APIs and Maintenance",
+              "desc": "Scalable backends, secure REST and GraphQL APIs, third-party integrations, plus ongoing updates, monitoring, and feature rollouts."
+          }
+      ],
+      "bodySections": [
+          {
+              "heading": "A Mobile App Development Company That Builds for Adoption",
+              "paragraphs": [
+                  "A great app is more than a build — it is a product users return to. Our process starts with your business goals and your users: what problem the app solves, what action drives value, and how we measure success. From there we map the user journey, prototype the core flows, and validate the design before a single screen ships to production.",
+                  "We then develop on the right stack for your needs — native where raw performance matters, React Native or Flutter where speed-to-market and a shared codebase make sense. Every app launches with analytics, crash reporting, and conversion tracking, so you can see exactly how users behave and where to improve."
+              ]
+          },
+          {
+              "heading": "From App Store Launch to Long-Term Scale",
+              "paragraphs": [
+                  "Shipping is the start, not the finish. We manage the full launch — App Store and Google Play submissions, store-listing optimisation, and release pipelines — so your app goes live cleanly and updates ship without disruption. Backends run on cloud infrastructure with secure databases and APIs that handle growth from your first hundred users to your hundred-thousandth.",
+                  "After launch we stay on as your product partner: monitoring performance, patching security, and rolling out new features based on real usage data. Whether you are a Gurugram startup validating an MVP or an enterprise scaling pan-India across Delhi NCR, Mumbai, and Pune, we engineer your app to grow with you."
+              ]
+          }
+      ],
+      "faqs": [
+          {
+              "q": "How much does mobile app development cost in India?",
+              "a": "Cost depends on scope — a simple single-platform app differs from a complex cross-platform app with a custom backend and integrations. After a free requirements call, we provide a fixed, transparent quote so there are no surprises."
+          },
+          {
+              "q": "How long does it take to build a mobile app?",
+              "a": "A focused MVP typically takes 6 to 10 weeks; feature-rich or multi-platform apps take longer. We share a clear, milestone-based timeline before development begins."
+          },
+          {
+              "q": "Should I build a native or cross-platform app?",
+              "a": "It depends on your goals. Native (Swift or Kotlin) is best for graphics-heavy or performance-critical apps, while React Native or Flutter cover iOS and Android from one codebase to save time and cost. We recommend the right fit after understanding your product."
+          },
+          {
+              "q": "Do you build for both iOS and Android?",
+              "a": "Yes. We develop native iOS and Android apps as well as cross-platform apps using React Native and Flutter, and we handle both App Store and Google Play submissions for you."
+          },
+          {
+              "q": "Do you provide support after the app launches?",
+              "a": "Yes. We offer ongoing maintenance, security updates, OS-version compatibility, performance monitoring, and new feature development to keep your app current and reliable."
+          },
+          {
+              "q": "Can you build apps for businesses outside Gurugram?",
+              "a": "Yes. We are headquartered in DLF Cyber City, Gurugram, and serve clients across Delhi NCR, Haryana, Rohtak, and pan-India including Mumbai and Pune, working remotely with 24/7 communication."
+          }
+      ],
+      "relatedLinks": [
+          {
+              "label": "Custom Software Development Company",
+              "href": "/custom-software-development-company",
+              "desc": "Tailored software to power your app."
+          },
+          {
+              "label": "Web Development Company",
+              "href": "/web-development-company",
+              "desc": "Fast, SEO-ready websites and web apps."
+          },
+          {
+              "label": "Web Design Company",
+              "href": "/web-design-company",
+              "desc": "UX/UI design that converts users."
+          }
+      ],
+      "cta": {
+          "headline": "Ready to Build an App Users Love?",
+          "sub": "Get a free, no-obligation quote and product roadmap from our mobile app development team."
+      }
+  },
+
+  'hr-portal-development-company': {
+      "slug": "hr-portal-development-company",
+      "seo": {
+          "title": "HR Portal Development Company in India | Avani Enterprises",
+          "description": "Avani Enterprises is an HR portal development company building custom HR software and employee self-service portals around your workflow. Integrated, white-label. Get a quote.",
+          "keywords": "hr portal development company, employee portal development, custom hr software development, hr management system development, employee self service portal india, bespoke hr software, white-label hr portal",
+          "canonical": "https://www.avanienterprises.in/hr-portal-development-company"
+      },
+      "breadcrumbs": [
+          {
+              "label": "Home",
+              "href": "/"
+          },
+          {
+              "label": "Services",
+              "href": "/services"
+          },
+          {
+              "label": "HR Portal Development",
+              "href": "/hr-portal-development-company"
+          }
+      ],
+      "hero": {
+          "tag": "Bespoke HR Software",
+          "h1": "HR Portal Development Company in India",
+          "subtitle": "We design and build custom HR portals and employee self-service systems around the way your organisation actually runs. Each build integrates with your payroll, attendance, and existing tools, and ships fully white-label.",
+          "stats": [
+              {
+                  "value": "300+",
+                  "label": "Projects Delivered"
+              },
+              {
+                  "value": "150+",
+                  "label": "Businesses Served"
+              },
+              {
+                  "value": "8+",
+                  "label": "Years of Experience"
+              }
+          ]
+      },
+      "intro": "Avani Enterprises is an HR Portal Development Company in India building custom HR software and employee self-service portals for businesses that have outgrown generic tools and spreadsheets. Instead of forcing your team into a rigid off-the-shelf product, we develop a bespoke HR management system around your exact policies, approval chains, and integrations, owned entirely by you and ready to scale with your headcount.",
+      "whyAvani": [
+          {
+              "title": "Built, Not Configured",
+              "desc": "We develop your HR portal from your real policies and workflows, not a locked template you have to bend your processes to fit."
+          },
+          {
+              "title": "Integrates With Your Stack",
+              "desc": "Connect to your payroll, biometric attendance, accounting, and HRMS tools through clean APIs so data flows automatically."
+          },
+          {
+              "title": "Fully White-Label & Owned",
+              "desc": "Your branding, your domain, your data, with no per-employee licensing that balloons as your team grows."
+          }
+      ],
+      "features": [
+          {
+              "title": "Employee Self-Service Portal",
+              "desc": "Custom ESS where staff apply for leave, download payslips, update details, and raise requests without emailing HR."
+          },
+          {
+              "title": "Custom Approval Workflows",
+              "desc": "We code your exact leave, expense, and reimbursement chains with multi-level routing and digital sign-off."
+          },
+          {
+              "title": "Payroll & Attendance Integration",
+              "desc": "Sync biometric data, attendance, and payroll so the portal reflects accurate balances and salary records."
+          },
+          {
+              "title": "Role-Based Access & Document Vault",
+              "desc": "Granular permissions, secure storage for policies and contracts, and audit trails built to your compliance needs."
+          }
+      ],
+      "bodySections": [
+          {
+              "heading": "Custom-Built vs. a Ready HR Product",
+              "paragraphs": [
+                  "A ready HR product is fast to switch on but rigid. You adapt your policies to its limits, pay per employee, and wait on someone else's roadmap for features you need. For a small team that can be enough, but for a growing organisation with specific approval chains, multiple entities, or regional rules, those constraints quickly become friction.",
+                  "As an HR portal development company, we take the opposite route. We map your actual leave policies, shift patterns, reimbursement logic, and reporting lines, then develop a portal that mirrors them precisely. The result is higher adoption, cleaner data, and a system you own outright rather than rent."
+              ]
+          },
+          {
+              "heading": "How We Develop Your HR Portal",
+              "paragraphs": [
+                  "We start with a discovery session to document your workforce structure, HR processes, and the systems the portal must talk to, such as payroll, biometric attendance, accounting, or an existing HRMS. From there we design the data model, employee self-service screens, and approval workflows, then build in milestones so you can review and start using modules early rather than waiting for one big launch.",
+                  "Every portal is engineered with role-based access, encryption, and audit logging suited to Indian compliance and your internal controls. Once live, you receive the source code, documentation, team onboarding, and ongoing support, so the system keeps evolving with your headcount and policies instead of going stale."
+              ]
+          }
+      ],
+      "faqs": [
+          {
+              "q": "How much does custom HR portal development cost?",
+              "a": "Cost depends on the modules, integrations, and workforce size involved. A focused employee self-service portal is far more affordable than a full HR management system. Share your requirements and we will give you a clear fixed quote."
+          },
+          {
+              "q": "How long does it take to build a custom HR portal?",
+              "a": "A focused self-service portal can typically be delivered in a few weeks, while a full HR management system with payroll and attendance integration takes longer. We work in milestones so you can use parts of it early."
+          },
+          {
+              "q": "What is the difference between this and your ready HR Portal product?",
+              "a": "Our ready HR Portal is a configurable product you switch on quickly. This service is bespoke development: we build a portal coded around your exact workflows, integrations, and branding, owned entirely by you."
+          },
+          {
+              "q": "Can you integrate the portal with our payroll and attendance systems?",
+              "a": "Yes. We connect your HR portal to payroll software, biometric or app-based attendance, accounting tools, and existing HRMS through APIs so data stays in sync automatically."
+          },
+          {
+              "q": "Will the HR portal handle Indian compliance and policies?",
+              "a": "Yes. We build leave rules, statutory deductions, document retention, and approval chains to match Indian regulations and your internal HR policies, configured to your specific entities and locations."
+          },
+          {
+              "q": "Do you offer white-label and ongoing support?",
+              "a": "Yes. Every portal carries your branding and domain, and after launch we provide team onboarding, documentation, and ongoing support and enhancements. We serve clients across Delhi NCR, Haryana, and pan-India."
+          }
+      ],
+      "relatedLinks": [
+          {
+              "label": "HR Portal",
+              "href": "/hr-portal",
+              "desc": "Ready-to-deploy employee self-service product."
+          },
+          {
+              "label": "Custom Software Development Company",
+              "href": "/custom-software-development-company",
+              "desc": "Bespoke internal tools and systems."
+          },
+          {
+              "label": "Business Operating System",
+              "href": "/business-operating-system",
+              "desc": "Unify HR, ops, and finance."
+          }
+      ],
+      "cta": {
+          "headline": "Build an HR Portal That Fits Your Team",
+          "sub": "Request a free consultation and we will map your HR workflows and show you exactly what a custom-built employee portal can do."
+      }
+  },
+
+  'meta-ads-agency': {
+      "slug": "meta-ads-agency",
+      "seo": {
+          "title": "Meta Ads Agency in India | Avani Enterprises",
+          "description": "Avani Enterprises is a results-driven Meta ads agency in India running profitable Facebook and Instagram ad campaigns for lead gen and ecommerce. Book a free strategy call.",
+          "keywords": "meta ads agency, facebook ads agency, instagram ads agency, facebook advertising company, meta advertising agency, social media ads management india, facebook lead generation, ecommerce facebook ads",
+          "canonical": "https://www.avanienterprises.in/meta-ads-agency"
+      },
+      "breadcrumbs": [
+          {
+              "label": "Home",
+              "href": "/"
+          },
+          {
+              "label": "Services",
+              "href": "/services"
+          },
+          {
+              "label": "Meta Ads Agency",
+              "href": "/meta-ads-agency"
+          }
+      ],
+      "hero": {
+          "tag": "Paid Social Experts",
+          "h1": "Meta Ads Agency in India",
+          "subtitle": "We plan, build, and scale Facebook and Instagram ad campaigns that turn cold audiences into qualified leads and paying customers, with every rupee tracked back to ROAS.",
+          "stats": [
+              {
+                  "value": "300+",
+                  "label": "Projects Delivered"
+              },
+              {
+                  "value": "85%",
+                  "label": "Avg Traffic Growth"
+              },
+              {
+                  "value": "5.0",
+                  "label": "Client Rating"
+              }
+          ]
+      },
+      "intro": "As a specialist Meta ads agency in India, Avani Enterprises manages high-performing Facebook ads and Instagram ads campaigns built around clear revenue goals, not vanity metrics. From audience research and scroll-stopping creative to retargeting funnels and ROAS reporting, our Meta advertising team handles the full lifecycle of paid social for lead generation and ecommerce brands across Delhi NCR and pan-India.",
+      "whyAvani": [
+          {
+              "title": "ROAS-First, Not Reach-First",
+              "desc": "We optimise toward purchases, qualified leads, and cost-per-acquisition, not likes. Every campaign ties back to a revenue or pipeline number you actually care about."
+          },
+          {
+              "title": "Creative That Earns the Click",
+              "desc": "In-house copy, static designs, and short-form video built for the Facebook and Instagram feed, with constant A/B testing so the best-performing creative keeps the cost-per-result falling."
+          },
+          {
+              "title": "Full-Funnel Retargeting",
+              "desc": "We layer cold prospecting, warm engagement, and retargeting audiences so no website visitor, cart abandoner, or lead-form drop-off slips through the funnel uncaptured."
+          }
+      ],
+      "features": [
+          {
+              "title": "Facebook & Instagram Ad Campaigns",
+              "desc": "End-to-end campaign setup across feed, Reels, Stories, and Marketplace placements, structured for both Advantage+ (Meta's automated targeting) and manual targeting to maximise reach efficiency."
+          },
+          {
+              "title": "Audience Targeting & Lookalikes",
+              "desc": "Precise interest, custom, and lookalike audience building powered by your CRM and pixel data to put your offer in front of the buyers most likely to convert."
+          },
+          {
+              "title": "Lead Generation & Ecommerce Funnels",
+              "desc": "Instant Forms and Conversions API for B2B lead gen, plus catalogue and dynamic product ads for ecommerce stores selling on Shopify, WooCommerce, and beyond."
+          },
+          {
+              "title": "Retargeting & ROAS Reporting",
+              "desc": "Pixel and Conversions API setup, abandoned-cart retargeting, and transparent dashboards reporting spend, CPL, CPA, and return on ad spend in plain language."
+          }
+      ],
+      "bodySections": [
+          {
+              "heading": "Meta Ads Built for Indian Lead Gen and Ecommerce",
+              "paragraphs": [
+                  "Facebook and Instagram remain the highest-intent paid social channels for Indian businesses, but rising ad costs mean sloppy campaigns burn budget fast. As a focused Meta advertising agency, we start with a tight account audit, a pixel and Conversions API health check, and a funnel map before a single rupee is spent, so your campaigns launch on solid measurement foundations.",
+                  "Whether you are a service business chasing qualified leads or a D2C brand scaling online sales, we structure campaigns around the action that drives revenue. That means conversion-optimised objectives, clean audience segmentation between prospecting and retargeting, and creative refreshed often enough to beat ad fatigue in competitive Indian markets."
+              ]
+          },
+          {
+              "heading": "A Transparent, Test-Driven Process",
+              "paragraphs": [
+                  "Our Facebook advertising process runs on weekly testing cycles. We ship multiple creative angles and audience combinations, kill what underperforms, and double down on the winners, so cost-per-result trends down while volume scales up. You always know which ad, audience, and offer is driving each lead or sale.",
+                  "Reporting is jargon-free and outcome-led. Instead of drowning you in impressions, we report on cost-per-lead, cost-per-acquisition, and ROAS, with a clear read on what to scale next. With 8+ years serving 150+ clients and 24/7 support, your account is never left on autopilot."
+              ]
+          }
+      ],
+      "faqs": [
+          {
+              "q": "How much should I budget for Facebook and Instagram ads in India?",
+              "a": "Most of our clients start with a monthly ad spend of around Rs 30,000 to Rs 1,00,000 plus management fees, then scale once campaigns prove a profitable ROAS. We recommend a budget based on your goals, margins, and market after a free strategy call."
+          },
+          {
+              "q": "How long before Meta ads start showing results?",
+              "a": "Campaigns usually exit the learning phase and stabilise within 7 to 14 days, with meaningful lead or sales data inside the first month. Retargeting and creative testing then compound results over the following 60 to 90 days."
+          },
+          {
+              "q": "What is ROAS and what should I expect?",
+              "a": "ROAS, or return on ad spend, is the revenue earned for every rupee spent on ads. Targets vary by industry and margin, but we build campaigns to push toward a profitable, sustainable ROAS rather than chasing cheap clicks."
+          },
+          {
+              "q": "Do you handle ad creative or do I need to supply it?",
+              "a": "We handle it end to end, including ad copy, static designs, and short-form video for Reels and Stories. If you have existing brand assets or product photography, we will use and optimise those too."
+          },
+          {
+              "q": "Do you set up the Meta pixel and Conversions API?",
+              "a": "Yes. Accurate tracking is non-negotiable, so we install and verify the Meta pixel and server-side Conversions API, configure conversion events, and confirm data is flowing correctly before scaling spend."
+          },
+          {
+              "q": "Do you work with businesses outside Gurgaon and Delhi NCR?",
+              "a": "Yes. We are headquartered at DLF Cyber City, Gurugram and serve Delhi NCR, Rohtak, and clients pan-India including Mumbai and Pune. Most collaboration happens remotely with regular review calls."
+          }
+      ],
+      "relatedLinks": [
+          {
+              "label": "Google Ads Agency",
+              "href": "/google-ads-agency",
+              "desc": "High-intent search and PPC campaigns."
+          },
+          {
+              "label": "SEO Company",
+              "href": "/seo-company",
+              "desc": "Organic search that compounds alongside paid."
+          },
+          {
+              "label": "Digital Marketing Company",
+              "href": "/digital-marketing-company",
+              "desc": "Full-funnel growth under one roof."
+          }
+      ],
+      "cta": {
+          "headline": "Ready to Scale on Facebook and Instagram?",
+          "sub": "Book a free Meta ads strategy call with Avani Enterprises and get a clear plan to lower your cost-per-result and grow ROAS. Call +91 92536 25099 or email kp@avanienterprises.in."
+      }
+  },
+
+  'social-media-marketing-company': {
+      "slug": "social-media-marketing-company",
+      "seo": {
+          "title": "Social Media Marketing Company in India | Avani Enterprises",
+          "description": "Avani Enterprises is a social media marketing company in India building organic growth on Instagram, Facebook & LinkedIn through reels, content & community. Book a free audit.",
+          "keywords": "social media marketing company, social media marketing agency, smm company, instagram marketing, social media management services india, social media agency, organic social media marketing",
+          "canonical": "https://www.avanienterprises.in/social-media-marketing-company"
+      },
+      "breadcrumbs": [
+          {
+              "label": "Home",
+              "href": "/"
+          },
+          {
+              "label": "Services",
+              "href": "/services"
+          },
+          {
+              "label": "Social Media Marketing",
+              "href": "/social-media-marketing-company"
+          }
+      ],
+      "hero": {
+          "tag": "Organic Social Growth",
+          "h1": "Social Media Marketing Company in India",
+          "subtitle": "We grow your brand organically on Instagram, Facebook, and LinkedIn with scroll-stopping reels, consistent content, and an engaged community — no paid ads required.",
+          "stats": [
+              {
+                  "value": "150+",
+                  "label": "Brands Served"
+              },
+              {
+                  "value": "8+",
+                  "label": "Years Experience"
+              },
+              {
+                  "value": "5.0",
+                  "label": "Client Rating"
+              }
+          ]
+      },
+      "intro": "Avani Enterprises is an organic-first social media marketing company in India helping businesses build real audiences — not just follower counts. As a full-service social media agency offering complete social media management services, this SMM company handles content strategy, reels, design, captions, and daily community management across Instagram, Facebook, and LinkedIn, turning your profiles into a steady source of brand awareness, trust, and inbound enquiries.",
+      "whyAvani": [
+          {
+              "title": "Organic, Not Ad-Dependent",
+              "desc": "We build reach and engagement through content and community, so your growth keeps compounding even when ad budgets pause."
+          },
+          {
+              "title": "Reels-First Content Engine",
+              "desc": "Short-form video is where attention lives. We script, direct, and edit reels designed to be saved and shared."
+          },
+          {
+              "title": "A True Brand Voice",
+              "desc": "We craft a consistent visual identity and tone across every post, so your brand looks credible and unmistakably yours."
+          }
+      ],
+      "features": [
+          {
+              "title": "Content Strategy & Calendar",
+              "desc": "A monthly plan mapped to your goals, with themes, hooks, and a posting schedule across every platform."
+          },
+          {
+              "title": "Reels & Short-Form Video",
+              "desc": "Trend-aware reels and shorts, scripted and edited to drive watch time, saves, and shares."
+          },
+          {
+              "title": "Creative Design & Carousels",
+              "desc": "Branded graphics, carousels, and stories that stop the scroll and communicate your message clearly."
+          },
+          {
+              "title": "Community Management",
+              "desc": "Daily replies to comments and DMs, plus engagement that turns followers into loyal advocates and leads."
+          }
+      ],
+      "bodySections": [
+          {
+              "heading": "A Social Media Marketing Company Focused on Organic Growth",
+              "paragraphs": [
+                  "Buying reach with ads is easy; earning it is what builds a lasting brand. We focus on the organic side of social — content people genuinely want to watch, save, and forward — so your audience grows from real interest rather than rented attention. That foundation makes every future campaign, including paid, perform better.",
+                  "Our process starts with understanding your customer and category, then translating that into a content engine: a clear voice, a reliable posting rhythm, and reels and carousels engineered for the algorithm. The result is a profile that looks alive, builds authority in your space, and quietly drives enquiries month after month."
+              ]
+          },
+          {
+              "heading": "Instagram, Facebook & LinkedIn — Managed as One Brand",
+              "paragraphs": [
+                  "Each platform plays a different role. Instagram and reels build reach and personality, Facebook nurtures community and local discovery, and LinkedIn establishes B2B authority and thought leadership. We tailor formats and messaging to each while keeping a single, coherent brand story across all of them.",
+                  "Everything is handled end to end by one accountable team — strategy, scripting, design, scheduling, and community management — so you are never chasing freelancers. You get steady content output, transparent monthly reporting on reach and engagement, and a partner who treats your social presence like a long-term asset."
+              ]
+          }
+      ],
+      "faqs": [
+          {
+              "q": "How much does social media marketing cost in India?",
+              "a": "It depends on the number of platforms, posting frequency, and how much video you need. We offer monthly retainers tailored to your goals and recommend the right content mix on a free call, so you only pay for what moves the needle."
+          },
+          {
+              "q": "Is this organic social or paid ads?",
+              "a": "This service is organic social — content, reels, and community building that grows your brand without ad spend. If you also want paid reach, our Google Ads agency service runs paid campaigns, and we can combine both into one strategy."
+          },
+          {
+              "q": "Which platforms do you manage?",
+              "a": "Primarily Instagram, Facebook, and LinkedIn — the channels that matter most for Indian brands. We tailor the content format and tone to each platform while keeping your brand consistent across all of them."
+          },
+          {
+              "q": "How soon will I see results from organic social?",
+              "a": "Organic growth compounds over time. Most brands see meaningful lifts in reach and engagement within 2 to 3 months of consistent, high-quality posting, with momentum building from there."
+          },
+          {
+              "q": "Do you create the content or do I have to?",
+              "a": "We handle it end to end — strategy, scripting, design, captions, and editing. We may request raw footage or product access for certain reels, but the creative work and execution are ours."
+          },
+          {
+              "q": "Do you work with businesses outside Delhi NCR?",
+              "a": "Yes. We are based in Gurugram and serve clients across Delhi NCR, Rohtak, and pan-India including Mumbai and Pune. Social media management services are fully remote, so location is never a barrier."
+          }
+      ],
+      "relatedLinks": [
+          {
+              "label": "Google Ads Agency",
+              "href": "/google-ads-agency",
+              "desc": "Scale reach with paid campaigns."
+          },
+          {
+              "label": "Digital Marketing Company",
+              "href": "/digital-marketing-company",
+              "desc": "Full-funnel growth across channels."
+          },
+          {
+              "label": "SEO Company",
+              "href": "/seo-company",
+              "desc": "Durable organic search growth."
+          }
+      ],
+      "cta": {
+          "headline": "Let's Grow Your Brand on Social",
+          "sub": "Book a free social media audit and get a custom content plan for Instagram, Facebook, and LinkedIn."
+      }
+  },
+
+  'ai-solutions-company': {
+      "slug": "ai-solutions-company",
+      "seo": {
+          "title": "AI Solutions Company in India | Avani Enterprises",
+          "description": "Avani Enterprises is an AI solutions company in India building custom LLM apps, generative AI, AI chatbots, and ML integrations. Strategy to deployment. Book a free AI consultation.",
+          "keywords": "ai solutions company, ai development company, artificial intelligence company, custom ai solutions, generative ai development, ai consulting india, llm app development, machine learning integration",
+          "canonical": "https://www.avanienterprises.in/ai-solutions-company"
+      },
+      "breadcrumbs": [
+          {
+              "label": "Home",
+              "href": "/"
+          },
+          {
+              "label": "Services",
+              "href": "/services"
+          },
+          {
+              "label": "AI Solutions Company",
+              "href": "/ai-solutions-company"
+          }
+      ],
+      "hero": {
+          "tag": "Build With AI",
+          "h1": "AI Solutions Company in India",
+          "subtitle": "We design and build custom AI solutions, LLM-powered apps, generative AI, intelligent chatbots, and ML integrations, engineered around your data, your product, and your goals.",
+          "stats": [
+              {
+                  "value": "300+",
+                  "label": "Projects Delivered"
+              },
+              {
+                  "value": "150+",
+                  "label": "Clients Served"
+              },
+              {
+                  "value": "5.0",
+                  "label": "Client Rating"
+              }
+          ]
+      },
+      "intro": "Avani Enterprises is an AI solutions company in India helping businesses turn artificial intelligence into real, working products. From generative AI development and custom LLM applications to machine learning integrations and AI strategy consulting, we build bespoke AI systems on top of your own data, then ship them into production with the engineering rigour to keep them reliable and secure.",
+      "whyAvani": [
+          {
+              "title": "Engineers, Not Just Prompts",
+              "desc": "With 8+ years building software, we treat AI as a product with real architecture, your data, evaluation, and production-grade delivery, not a thin wrapper over an API."
+          },
+          {
+              "title": "Custom AI On Your Data",
+              "desc": "We build solutions grounded in your documents, systems, and domain using RAG, fine-tuning, and ML, so outputs are accurate and genuinely useful to your business."
+          },
+          {
+              "title": "Strategy Through Deployment",
+              "desc": "As an artificial intelligence company, one team takes you from AI consulting and use-case selection to a proof of concept and a deployed, supported product, with no fragmented hand-offs."
+          }
+      ],
+      "features": [
+          {
+              "title": "Custom LLM Applications",
+              "desc": "AI assistants, copilots, and knowledge tools built on GPT, Claude, and open models, grounded in your data with RAG for accurate, contextual answers."
+          },
+          {
+              "title": "Generative AI Development",
+              "desc": "Generative AI for text, content, code, images, and document workflows, integrated cleanly into your product or internal tools."
+          },
+          {
+              "title": "AI Chatbots & Agents",
+              "desc": "Intelligent chatbots and multi-step AI agents that understand context, use your data, and complete tasks across web, app, and WhatsApp."
+          },
+          {
+              "title": "ML Integration & AI Consulting",
+              "desc": "Machine learning models for prediction, classification, and search, plus AI strategy and roadmaps to find your highest-value use cases."
+          }
+      ],
+      "bodySections": [
+          {
+              "heading": "An AI Solutions Company That Ships to Production",
+              "paragraphs": [
+                  "Plenty of demos look impressive and then break the moment real users and real data arrive. As an AI development company, we build for production from day one with retrieval over your own knowledge, guardrails, evaluation, and monitoring, so your AI stays accurate, on-brand, and dependable at scale.",
+                  "Whether you need a customer-facing LLM app, an internal copilot for your team, or a generative AI feature inside an existing product, we own the full build: model selection, data pipelines, APIs, security, and the front end. The result is something your business can actually rely on."
+              ]
+          },
+          {
+              "heading": "Custom AI Built Around Your Business",
+              "paragraphs": [
+                  "Off-the-shelf AI tools rarely understand your products, policies, or customers. We change that by grounding solutions in your own data, connecting your documents, CRM, and systems so the AI answers from your context rather than generic guesses, using RAG, fine-tuning, and machine learning where each fits best.",
+                  "Every engagement starts with AI consulting in India and beyond: we map where artificial intelligence creates real value for your business, prove it with a focused proof of concept, then scale the winning use cases into deployed products, measured by outcomes rather than hype."
+              ]
+          }
+      ],
+      "faqs": [
+          {
+              "q": "What does an AI solutions company actually build?",
+              "a": "We build custom AI products: LLM-powered apps and assistants, generative AI features, intelligent chatbots and agents, and machine learning integrations, all tailored to your data and business instead of generic off-the-shelf tools."
+          },
+          {
+              "q": "How is this different from your AI automation services?",
+              "a": "AI automation focuses on automating repetitive workflows and processes. Our AI solutions work is broader: building custom AI products such as LLM apps, generative AI, and ML systems, often with a richer, user-facing product around them."
+          },
+          {
+              "q": "How much does a custom AI solution cost?",
+              "a": "Cost depends on scope, data, and integrations. A focused proof of concept is relatively affordable, while a full production AI product is a larger investment. We scope each project and share clear pricing after a free consultation."
+          },
+          {
+              "q": "How long does it take to build an AI solution?",
+              "a": "A working proof of concept can often be delivered in a few weeks. Full production builds take longer depending on data, integrations, and scale. We work in milestones so you see value early."
+          },
+          {
+              "q": "Which AI models and technologies do you use?",
+              "a": "We work with leading LLMs like GPT and Claude, open-source models, and ML frameworks, and we apply RAG, fine-tuning, and vector search. We pick the right model and approach for your accuracy, cost, and privacy needs."
+          },
+          {
+              "q": "Do you work with businesses across India?",
+              "a": "Yes. Headquartered in DLF Cyber City, Gurugram, we serve clients across Delhi NCR, Haryana, and pan-India including Mumbai and Pune, with remote collaboration and 24/7 support."
+          }
+      ],
+      "relatedLinks": [
+          {
+              "label": "AI Automation Company",
+              "href": "/ai-automation-company",
+              "desc": "Automate repetitive business workflows."
+          },
+          {
+              "label": "Custom Software Development Company",
+              "href": "/custom-software-development-company",
+              "desc": "Bespoke software built around you."
+          },
+          {
+              "label": "Web Development Company",
+              "href": "/web-development-company",
+              "desc": "Custom web apps and platforms."
+          }
+      ],
+      "cta": {
+          "headline": "Turn Your AI Idea Into a Working Product",
+          "sub": "Book a free AI consultation and we will map your highest-value use case and a clear path from proof of concept to production."
+      }
+  },
+
+  'local-seo-services': {
+      "slug": "local-seo-services",
+      "seo": {
+          "title": "Local SEO Services in India | Map Pack & GMB | Avani Enterprises",
+          "description": "Avani Enterprises delivers local SEO services that win the Google map pack, optimise your Google Business Profile, and turn near me searches into walk-ins and calls. Free local audit.",
+          "keywords": "local seo services, local seo company, google business profile optimization, map pack seo, local search optimization, gmb optimization india, near me seo, local citations",
+          "canonical": "https://www.avanienterprises.in/local-seo-services"
+      },
+      "breadcrumbs": [
+          {
+              "label": "Home",
+              "href": "/"
+          },
+          {
+              "label": "Services",
+              "href": "/services"
+          },
+          {
+              "label": "Local SEO Services",
+              "href": "/local-seo-services"
+          }
+      ],
+      "hero": {
+          "tag": "Win The Map Pack",
+          "h1": "Local SEO Services in India",
+          "subtitle": "We get your business into Google's local map pack and in front of nearby customers, optimising your Google Business Profile, citations, and reviews so near me searches turn into calls, footfall, and bookings.",
+          "stats": [
+              {
+                  "value": "85%",
+                  "label": "Avg. Traffic Growth"
+              },
+              {
+                  "value": "150+",
+                  "label": "Businesses Served"
+              },
+              {
+                  "value": "5.0",
+                  "label": "Client Rating"
+              }
+          ]
+      },
+      "intro": "Local SEO Services in India are how nearby buyers find you first, and as a specialist local SEO company Avani Enterprises helps businesses dominate the searches happening right around them. We combine Google Business Profile (GMB) optimisation, local citation building, a structured reviews strategy, and location-page SEO into one system engineered to win map-pack rankings and capture high-intent near me searches across your city.",
+      "whyAvani": [
+          {
+              "title": "Map-Pack Focused",
+              "desc": "We engineer for the local 3-pack and Google local finder, the results that actually drive calls and directions, not just deep organic links nobody scrolls to."
+          },
+          {
+              "title": "Multi-Location Ready",
+              "desc": "Clean, consistent profiles and dedicated location pages for every branch, so each outlet ranks in its own neighbourhood without cannibalising the others."
+          },
+          {
+              "title": "Reviews That Convert",
+              "desc": "Ethical, Google-compliant review generation and reply management that lift your rating and your local ranking signals together."
+          }
+      ],
+      "features": [
+          {
+              "title": "Google Business Profile Optimization",
+              "desc": "Full Google Business Profile (GMB) setup: primary and secondary categories, services, photos, posts, and Q&A tuned to rank and convert browsers into customers."
+          },
+          {
+              "title": "Map Pack & Local Ranking",
+              "desc": "On-page geo-optimisation, proximity signals, and engagement tactics that push you into Google's local 3-pack for your core near me searches."
+          },
+          {
+              "title": "Local Citations & NAP",
+              "desc": "Consistent name, address, and phone listings across Indian directories and data aggregators that build the local trust Google rewards."
+          },
+          {
+              "title": "Reviews & Reputation",
+              "desc": "A structured strategy to earn more genuine reviews, respond fast, and turn reputation into a measurable ranking advantage."
+          }
+      ],
+      "bodySections": [
+          {
+              "heading": "Local SEO Services Built to Win Near Me Searches",
+              "paragraphs": [
+                  "When someone in your area runs searches like plumber near me or salon near me, Google decides in milliseconds which three businesses appear in the map pack, and those listings capture the vast majority of clicks, calls, and directions. Our local SEO services are built to make sure that business is yours.",
+                  "We start by auditing your Google Business Profile, citations, and local rankings against the competitors winning in your area. From there we fix category and NAP inconsistencies, optimise your profile and location pages, and build the relevance, prominence, and proximity signals Google rewards, so you show up exactly when nearby buyers are ready to act."
+              ]
+          },
+          {
+              "heading": "Local Search Optimization For Single and Multi-Location Brands",
+              "paragraphs": [
+                  "Whether you run one outlet in Gurgaon or a chain across Delhi NCR, Mumbai, and Pune, local search optimization has to be handled location by location. We create dedicated, optimised pages and clean profiles for every branch so each one ranks in its own catchment area rather than competing with your other outlets.",
+                  "Local SEO compounds. As reviews accumulate, citations strengthen, and engagement grows, your map-pack positions stabilise and your cost per lead drops, building a local visibility moat that paid ads alone can never replace and competitors struggle to overtake."
+              ]
+          }
+      ],
+      "faqs": [
+          {
+              "q": "How much do local SEO services cost in India?",
+              "a": "Pricing depends on the number of locations, your market's competitiveness, and how much profile and citation cleanup is needed. We scope a plan to fit your budget, often starting with a single location and scaling as results come in. Contact us at +91 92536 25099 for a tailored quote."
+          },
+          {
+              "q": "How long does local SEO take to show results?",
+              "a": "Many businesses see movement in the map pack within 1 to 3 months, because Google Business Profile fixes and citation building take effect faster than broad organic SEO. Competitive city markets and multi-location rollouts can take longer to fully mature."
+          },
+          {
+              "q": "What is Google Business Profile optimization?",
+              "a": "It is the process of fully completing and continuously improving your Google Business Profile (formerly GMB) listing, including correct categories, services, photos, posts, Q&A, and NAP details, so it ranks higher in the map pack and converts more searchers into calls and visits."
+          },
+          {
+              "q": "Can you help a business with multiple locations?",
+              "a": "Yes. We manage multi-location local SEO with a consistent profile, citation, and location-page strategy for each branch, so every outlet ranks in its own area without competing against your other listings."
+          },
+          {
+              "q": "Do reviews really affect local rankings?",
+              "a": "Yes. Review quantity, recency, rating, and your responses are recognised local ranking signals and strongly influence whether searchers choose you. We run an ethical, Google-compliant strategy to earn and manage more reviews."
+          },
+          {
+              "q": "Which cities do you provide local SEO services in?",
+              "a": "We run local SEO campaigns across Gurgaon, Noida, Faridabad, Delhi NCR, Rohtak, and the rest of Haryana, plus pan-India markets including Mumbai and Pune."
+          }
+      ],
+      "relatedLinks": [
+          {
+              "label": "SEO Company",
+              "href": "/seo-company",
+              "desc": "Durable organic growth nationwide."
+          },
+          {
+              "label": "Digital Marketing Company",
+              "href": "/digital-marketing-company",
+              "desc": "Full-funnel local lead generation."
+          },
+          {
+              "label": "Web Development Company",
+              "href": "/web-development-company",
+              "desc": "Fast, local-ready websites that rank."
+          }
+      ],
+      "cta": {
+          "headline": "Get Your Free Local SEO Audit",
+          "sub": "See where you rank in the map pack today and the exact roadmap to outrank your nearby competitors. No cost, no obligation."
+      }
+  },
+
+  'business-process-automation': {
+      "slug": "business-process-automation",
+      "seo": {
+          "title": "Business Process Automation in India | Avani Enterprises",
+          "description": "Avani Enterprises is a business process automation company streamlining approvals, data entry, reporting and integrations to cut manual work. Book a free process audit.",
+          "keywords": "business process automation, workflow automation company, bpa services, process automation company, automation services, robotic process automation india",
+          "canonical": "https://www.avanienterprises.in/business-process-automation"
+      },
+      "breadcrumbs": [
+          {
+              "label": "Home",
+              "href": "/"
+          },
+          {
+              "label": "Services",
+              "href": "/services"
+          },
+          {
+              "label": "Business Process Automation",
+              "href": "/business-process-automation"
+          }
+      ],
+      "hero": {
+          "tag": "Streamline. Automate. Scale.",
+          "h1": "Business Process Automation in India",
+          "subtitle": "We automate the manual workflows running your operations: approvals, data entry, reporting, and system integrations. Your team moves faster, makes fewer errors, and scales without adding headcount.",
+          "stats": [
+              {
+                  "value": "70%",
+                  "label": "Tasks Automated"
+              },
+              {
+                  "value": "300+",
+                  "label": "Projects Delivered"
+              },
+              {
+                  "value": "8+",
+                  "label": "Years of Experience"
+              }
+          ]
+      },
+      "intro": "Avani Enterprises delivers Business Process Automation in India, helping companies replace slow, manual operations with reliable automated workflows. From approval chains and data entry to reporting and cross-system integrations, our BPA services connect the tools you already use and let work flow through them automatically, with or without AI in the loop.",
+      "whyAvani": [
+          {
+              "title": "Operations-Wide, Not Just One Task",
+              "desc": "We automate whole processes end to end, across departments and tools, instead of patching a single isolated task."
+          },
+          {
+              "title": "Works With Your Existing Stack",
+              "desc": "We integrate your CRM, ERP, spreadsheets, email, and apps via APIs so automation fits your operations, not the other way around."
+          },
+          {
+              "title": "Built to Run in Production",
+              "desc": "Every workflow ships with audit trails, error handling, and monitoring so it runs dependably day after day, not just in a demo."
+          }
+      ],
+      "features": [
+          {
+              "title": "Approval & Sign-Off Workflows",
+              "desc": "Automate multi-step approvals for purchases, leaves, invoices, and documents with routing, reminders, and full audit trails."
+          },
+          {
+              "title": "Data Entry & Document Automation",
+              "desc": "Eliminate manual keying by extracting, validating, and syncing data between forms, files, and your business systems."
+          },
+          {
+              "title": "Reporting & Dashboard Automation",
+              "desc": "Auto-generate and distribute MIS reports, KPIs, and dashboards on schedule, with no more manual spreadsheet wrangling."
+          },
+          {
+              "title": "System Integration & RPA",
+              "desc": "Connect disconnected apps and use robotic process automation to move data and trigger actions across platforms automatically."
+          }
+      ],
+      "bodySections": [
+          {
+              "heading": "A Process Automation Company That Maps Before It Builds",
+              "paragraphs": [
+                  "Most operational drag comes from handoffs, copying data between systems, chasing approvals, and rebuilding the same report every week. We start by mapping your real workflows to find the steps costing the most time and creating the most errors, then automate the highest-impact ones first.",
+                  "Because we focus on the whole process rather than a single tool, the gains are measurable: shorter cycle times, cleaner data, fewer bottlenecks, and a team freed from repetitive busywork to focus on work that actually grows the business."
+              ]
+          },
+          {
+              "heading": "Workflow Automation Built Around Your Existing Tools",
+              "paragraphs": [
+                  "Your processes already span a CRM, spreadsheets, email, accounting software, and a few apps in between. Our automation services connect these through APIs and robotic process automation, so data moves on its own and each task triggers the next step without anyone copy-pasting or chasing follow-ups.",
+                  "We design each workflow to slot into how your team already works and to scale as volumes grow. With validation, error handling, and audit logs built in, you get reliability and visibility rather than a fragile script that breaks the moment something changes."
+              ]
+          }
+      ],
+      "faqs": [
+          {
+              "q": "What is business process automation?",
+              "a": "Business process automation uses software to run repetitive, multi-step operational tasks, such as approvals, data entry, reporting, and data syncing, automatically. It reduces manual effort, errors, and turnaround time across your operations."
+          },
+          {
+              "q": "How is BPA different from AI automation?",
+              "a": "BPA automates the workflow and movement of work across your systems, with or without AI. AI automation adds intelligence such as chatbots or document understanding. We often combine both, but many high-value processes need rules and integrations, not AI."
+          },
+          {
+              "q": "What does business process automation cost in India?",
+              "a": "Cost depends on the number of processes, their complexity, and the systems involved. We scope each project after a process audit and prioritise quick, high-ROI wins first, so you can start small and expand."
+          },
+          {
+              "q": "How long does a BPA project take?",
+              "a": "A focused workflow, such as an approval flow or an automated report, can go live in a few weeks. Broader, multi-system automation takes longer, and we deliver in milestones so you see value early."
+          },
+          {
+              "q": "Will automation integrate with our CRM, ERP, and existing tools?",
+              "a": "Yes. We connect your CRM, ERP, spreadsheets, email, and apps via APIs and RPA so data and tasks flow between them automatically, without replacing the tools your team already uses."
+          },
+          {
+              "q": "Do you provide support after the automation goes live?",
+              "a": "Yes. We offer monitoring, error handling, and ongoing support, and we refine your workflows as your processes and volumes change, so automation keeps running reliably over time."
+          }
+      ],
+      "relatedLinks": [
+          {
+              "label": "AI Automation Company",
+              "href": "/ai-automation-company",
+              "desc": "Add AI to your workflows."
+          },
+          {
+              "label": "Custom Software Development",
+              "href": "/custom-software-development-company",
+              "desc": "Bespoke software for your operations."
+          },
+          {
+              "label": "CRM Development Company",
+              "href": "/crm-development-company",
+              "desc": "Automate your sales pipeline."
+          }
+      ],
+      "cta": {
+          "headline": "Automate the Workflows Slowing You Down",
+          "sub": "Book a free process audit and we will map your operations and show you the highest-ROI workflows to automate first."
+      }
   }
 };

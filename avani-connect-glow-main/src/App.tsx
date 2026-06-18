@@ -192,6 +192,17 @@ const DigitalMarketingCompany = lazyWithRetry(() => import("./pages/service/Digi
 const GoogleAdsAgency = lazyWithRetry(() => import("./pages/service/GoogleAdsAgency"));
 const AiAutomationCompany = lazyWithRetry(() => import("./pages/service/AiAutomationCompany"));
 const CrmDevelopmentCompany = lazyWithRetry(() => import("./pages/service/CrmDevelopmentCompany"));
+// Batch 2 service pages
+const WebDesignCompany = lazyWithRetry(() => import("./pages/service/WebDesignCompany"));
+const EcommerceDevelopmentCompany = lazyWithRetry(() => import("./pages/service/EcommerceDevelopmentCompany"));
+const CustomSoftwareDevelopmentCompany = lazyWithRetry(() => import("./pages/service/CustomSoftwareDevelopmentCompany"));
+const MobileAppDevelopmentCompany = lazyWithRetry(() => import("./pages/service/MobileAppDevelopmentCompany"));
+const HrPortalDevelopmentCompany = lazyWithRetry(() => import("./pages/service/HrPortalDevelopmentCompany"));
+const MetaAdsAgency = lazyWithRetry(() => import("./pages/service/MetaAdsAgency"));
+const SocialMediaMarketingCompany = lazyWithRetry(() => import("./pages/service/SocialMediaMarketingCompany"));
+const AiSolutionsCompany = lazyWithRetry(() => import("./pages/service/AiSolutionsCompany"));
+const LocalSeoServices = lazyWithRetry(() => import("./pages/service/LocalSeoServices"));
+const BusinessProcessAutomation = lazyWithRetry(() => import("./pages/service/BusinessProcessAutomation"));
 const WorkforceManagementSoftware = lazyWithRetry(() => import("./pages/product/WorkforceManagementSoftware"));
 const ProjectManagementSoftware = lazyWithRetry(() => import("./pages/product/ProjectManagementSoftware"));
 const BusinessOperatingSystem = lazyWithRetry(() => import("./pages/product/BusinessOperatingSystem"));
@@ -284,6 +295,16 @@ const AppLayout = () => {
     "/google-ads-agency",
     "/ai-automation-company",
     "/crm-development-company",
+    "/web-design-company",
+    "/ecommerce-development-company",
+    "/custom-software-development-company",
+    "/mobile-app-development-company",
+    "/hr-portal-development-company",
+    "/meta-ads-agency",
+    "/social-media-marketing-company",
+    "/ai-solutions-company",
+    "/local-seo-services",
+    "/business-process-automation",
     "/keka-alternative",
     "/greythr-alternative",
     "/darwinbox-alternative",
@@ -380,6 +401,16 @@ const AppLayout = () => {
             <Route path="google-ads-agency" element={<GoogleAdsAgency />} />
             <Route path="ai-automation-company" element={<AiAutomationCompany />} />
             <Route path="crm-development-company" element={<CrmDevelopmentCompany />} />
+            <Route path="web-design-company" element={<WebDesignCompany />} />
+            <Route path="ecommerce-development-company" element={<EcommerceDevelopmentCompany />} />
+            <Route path="custom-software-development-company" element={<CustomSoftwareDevelopmentCompany />} />
+            <Route path="mobile-app-development-company" element={<MobileAppDevelopmentCompany />} />
+            <Route path="hr-portal-development-company" element={<HrPortalDevelopmentCompany />} />
+            <Route path="meta-ads-agency" element={<MetaAdsAgency />} />
+            <Route path="social-media-marketing-company" element={<SocialMediaMarketingCompany />} />
+            <Route path="ai-solutions-company" element={<AiSolutionsCompany />} />
+            <Route path="local-seo-services" element={<LocalSeoServices />} />
+            <Route path="business-process-automation" element={<BusinessProcessAutomation />} />
 
             {/* ── Competitor Alternative Pages ────────────────────────────────── */}
             <Route path="keka-alternative" element={<KekaAlternative />} />

@@ -203,17 +203,11 @@ const Projects = () => {
                           transform: hovIdx === i ? 'scale(1.05)' : 'scale(1)' 
                         }} 
                       />
-                      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 50%, transparent 100%)', pointerEvents: 'none' }} />
-                      <div style={{ position: 'absolute', inset: 0, padding: '20px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '4px' }}>
-                          <span style={{ fontSize: '0.6rem', fontWeight: 800, color: 'var(--accent-primary)', letterSpacing: '0.12em' }}>{project.category.toUpperCase()}</span>
-                          <span style={{ width: '3px', height: '3px', borderRadius: '50%', background: 'rgba(255,255,255,0.4)' }} />
-                          <span style={{ fontSize: '0.6rem', fontWeight: 800, color: '#fff', letterSpacing: '0.08em' }}>{project.impact.toUpperCase()}</span>
-                        </div>
-                        <h3 style={{ fontFamily: "'Outfit', sans-serif", fontSize: '1.2rem', color: '#fff', letterSpacing: '0.03em', lineHeight: 1.1, fontWeight: 700, marginBottom: '2px' }}>
-                          {project.name.toUpperCase()}
-                        </h3>
-                      </div>
+                      {/* Small category chip only — keeps the picture fully visible.
+                          Project name, category & impact are shown in the content side below. */}
+                      <span style={{ position: 'absolute', top: '12px', left: '12px', padding: '4px 11px', background: 'var(--accent-primary)', color: '#000', borderRadius: '100px', fontSize: '0.6rem', fontWeight: 800, letterSpacing: '0.1em', boxShadow: '0 2px 8px rgba(0,0,0,0.18)' }}>
+                        {project.category.toUpperCase()}
+                      </span>
                     </div>
                   </div>
 

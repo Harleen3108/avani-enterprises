@@ -225,12 +225,12 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Mobile menu */}
-      <AnimatePresence>
-        {mobileOpen && (
+      {/* Mobile menu — plain conditional render (no AnimatePresence exit) so the
+          overlay can never get stuck on screen after navigation */}
+      {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.25 }}
+            initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.2 }}
             style={{
               position: 'fixed', top: '52px', left: 0, right: 0, bottom: 0, zIndex: 10000,
               background: 'var(--nav-scrolled)', backdropFilter: 'blur(20px)',
@@ -310,7 +310,6 @@ const Navbar = () => {
             </Link>
           </motion.div>
         )}
-      </AnimatePresence>
 
       <style>{`
         @media (max-width: 1024px) {
