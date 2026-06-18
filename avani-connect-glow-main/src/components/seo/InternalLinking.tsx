@@ -1,37 +1,43 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Search, Code, Share2, Target, Globe } from 'lucide-react';
+import { ArrowRight, Search, Code, Target, Globe, Bot, Database } from 'lucide-react';
 
 const coreServices = [
   {
-    title: 'SEO Services',
-    href: '/services/seo-content-marketing',
-    desc: 'Dominate organic search results, build domain trust, and acquire customers 24/7.',
-    icon: <Search size={20} />
-  },
-  {
-    title: 'Web & App Development',
-    href: '/services/web-app-development',
-    desc: 'Bespoke React and Next.js applications engineered for millisecond speeds and robust security.',
+    title: 'Web Development Company',
+    href: '/web-development-company',
+    desc: 'Fast, secure, SEO-ready websites, web apps, and ecommerce stores built to convert.',
     icon: <Code size={20} />
   },
   {
-    title: 'Social Media Marketing',
-    href: '/services/social-media-marketing',
-    desc: 'Cinematic reel production and targeted campaigns on Instagram, Facebook, and LinkedIn.',
-    icon: <Share2 size={20} />
+    title: 'SEO Company',
+    href: '/seo-company',
+    desc: 'Dominate organic search, build domain authority, and acquire qualified leads 24/7.',
+    icon: <Search size={20} />
   },
   {
-    title: 'Google Search Ads',
-    href: '/services/google-ads',
-    desc: 'Maximize conversion ROAS and acquire instant leads with negative-keyword filtered PPC.',
+    title: 'Digital Marketing Company',
+    href: '/digital-marketing-company',
+    desc: 'Full-funnel growth across SEO, paid ads, and social, measured against real ROI.',
+    icon: <Globe size={20} />
+  },
+  {
+    title: 'Google Ads Agency',
+    href: '/google-ads-agency',
+    desc: 'High-ROI PPC engineered to lower cost per lead and scale profitably.',
     icon: <Target size={20} />
   },
   {
-    title: 'Digital Marketing Services',
-    href: '/services/digital-marketing',
-    desc: 'Full-funnel customer acquisition combining SEO, content syndication, and CRO strategy.',
-    icon: <Globe size={20} />
+    title: 'AI Automation Company',
+    href: '/ai-automation-company',
+    desc: 'AI chatbots and workflow automation that cut costs and scale operations.',
+    icon: <Bot size={20} />
+  },
+  {
+    title: 'CRM Development Company',
+    href: '/crm-development-company',
+    desc: 'Custom CRM software built around your exact sales process and pipeline.',
+    icon: <Database size={20} />
   }
 ];
 

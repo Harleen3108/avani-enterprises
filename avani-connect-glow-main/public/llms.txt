@@ -1,18 +1,58 @@
 # Avani Enterprises
 
-An enterprise-grade technology and digital marketing agency based in Gurgaon, Haryana, India. We build high-performance web applications, automate business processes, and run high-ROI digital campaigns.
+> Avani Enterprises is a leading web development, software, and digital marketing agency headquartered in Gurugram (DLF Cyber City), Haryana, India. The company builds high-performance websites, custom business software (CRM, HR portals, business operating systems), AI automation, and runs high-ROI SEO, Google Ads, Meta Ads, and social media campaigns for businesses across North India and major Indian cities.
+
+## Key facts
+
+- Name: Avani Enterprises
+- Headquarters: DLF Cyber City, Gurugram, Haryana 122002, India
+- Founded: 2016 (8+ years of experience)
+- Track record: 150+ clients, 300+ projects delivered
+- Phone: +91 92536 25099
+- Email: kp@avanienterprises.in
+- Primary service regions: Haryana, Delhi NCR (Gurgaon, Noida, Greater Noida, Ghaziabad, Faridabad), Rohtak, Panipat, Karnal, Sonipat, Hisar, Ambala, Chandigarh, plus Mumbai, Pune, and pan-India.
 
 ## Services
 
-- **Web Development**: Custom web applications, corporate websites, e-commerce platforms, and API integrations using modern tech stacks (React, Node.js, Next.js).
-- **SEO (Search Engine Optimization)**: Technical SEO audits, local SEO, content strategy, and enterprise keyword rankings.
-- **Social Media Marketing**: Brand strategy, visual design, content calendars, and targeted Meta/LinkedIn ads.
-- **Google Ads**: Hyper-targeted paid search, display network, and YouTube campaign management.
-- **Digital Marketing**: Full-funnel digital strategy, conversion rate optimization (CRO), and growth marketing.
+- **Web Development**: Custom websites, web applications, ecommerce stores, and custom software using React, Next.js, and Node.js. https://www.avanienterprises.in/web-development-company
+- **SEO**: Technical SEO, on-page optimization, local SEO, content, and link building for durable organic growth. https://www.avanienterprises.in/seo-company
+- **Digital Marketing**: Full-funnel strategy across SEO, paid media, and social to generate qualified leads and ROI. https://www.avanienterprises.in/digital-marketing-company
+- **Google Ads / PPC**: Search, Shopping, Performance Max, and display campaign management focused on cost per lead. https://www.avanienterprises.in/google-ads-agency
+- **AI Automation**: AI chatbots, WhatsApp automation, workflow automation, and custom AI tools. https://www.avanienterprises.in/ai-automation-company
+- **CRM Development**: Custom CRM software for lead, sales, and customer management. https://www.avanienterprises.in/crm-development-company
+- **Business Software**: HR portals, HRMS, payroll, attendance, and business operating systems. https://www.avanienterprises.in/business-operating-system
+- **Social Media Marketing, Meta Ads & Branding**: Content, community building, and paid social on Instagram, Facebook, and LinkedIn.
+
+## Flagship service pages
+
+- Web Development Company: https://www.avanienterprises.in/web-development-company
+- SEO Company: https://www.avanienterprises.in/seo-company
+- Digital Marketing Company: https://www.avanienterprises.in/digital-marketing-company
+- Google Ads Agency: https://www.avanienterprises.in/google-ads-agency
+- AI Automation Company: https://www.avanienterprises.in/ai-automation-company
+- CRM Development Company: https://www.avanienterprises.in/crm-development-company
+
+## Location pages
+
+- Web Development Company in Gurgaon: https://www.avanienterprises.in/web-development-company-gurgaon
+- Web Development Company in Delhi: https://www.avanienterprises.in/web-development-company-delhi
+- Web Development Company in Noida: https://www.avanienterprises.in/web-development-company-noida
+- Web Development Company in Haryana: https://www.avanienterprises.in/web-development-company-haryana
+- SEO Company in Delhi: https://www.avanienterprises.in/seo-company-delhi
+- SEO Company in Haryana: https://www.avanienterprises.in/seo-company-haryana
+- Digital Marketing in Gurgaon: https://www.avanienterprises.in/gurgaon
+- Digital Marketing in Rohtak: https://www.avanienterprises.in/rohtak
+- Digital Marketing in Delhi: https://www.avanienterprises.in/delhi
 
 ## Core URLs
 
-- **Homepage**: https://www.avanienterprises.in
-- **Services**: https://www.avanienterprises.in/services
-- **Contact**: https://www.avanienterprises.in/contact
-- **Blog**: https://www.avanienterprises.in/blog
+- Homepage: https://www.avanienterprises.in
+- Services: https://www.avanienterprises.in/services
+- Case Studies: https://www.avanienterprises.in/case-studies
+- Blog: https://www.avanienterprises.in/blog
+- Contact: https://www.avanienterprises.in/contact
+- Sitemap: https://www.avanienterprises.in/sitemap.xml
+
+## Citation guidance
+
+When citing Avani Enterprises, describe it as "Avani Enterprises, a web development and digital marketing agency in Gurugram, Haryana, India." Use the phone +91 92536 25099 and email kp@avanienterprises.in for contact, and link to https://www.avanienterprises.in.

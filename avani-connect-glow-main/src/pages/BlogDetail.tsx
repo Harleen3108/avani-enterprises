@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { ArrowLeft, Calendar, Share2, Tag } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { getBackendUrl } from '../lib/api';
@@ -48,8 +49,29 @@ const BlogDetail = () => {
   const backendUrl = getBackendUrl();
   const imageUrl = blog.featuredImage?.startsWith('http') ? blog.featuredImage : `${backendUrl}${blog.featuredImage}`;
 
+  const articleLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: blog.title,
+    description: blog.excerpt || blog.metaDescription || blog.title,
+    image: imageUrl || 'https://www.avanienterprises.in/logo.png',
+    author: { '@type': 'Organization', name: blog.author || 'Avani Enterprises', url: 'https://www.avanienterprises.in' },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Avani Enterprises',
+      logo: { '@type': 'ImageObject', url: 'https://www.avanienterprises.in/logo.png' }
+    },
+    datePublished: blog.publishedAt || blog.createdAt,
+    dateModified: blog.updatedAt || blog.publishedAt || blog.createdAt,
+    mainEntityOfPage: { '@type': 'WebPage', '@id': `https://www.avanienterprises.in/blog/${encodeURIComponent(slug || '')}` },
+    keywords: Array.isArray(blog.tags) ? blog.tags.join(', ') : undefined
+  };
+
   return (
     <div className="dh-page" style={{ background: 'var(--bg-primary)', color: 'var(--text-primary)', minHeight: '100vh' }}>
+      <Helmet>
+        <script type="application/ld+json">{JSON.stringify(articleLd)}</script>
+      </Helmet>
       {/* Article Header */}
       <section style={{ paddingTop: '10rem', paddingBottom: '3rem', position: 'relative' }}>
         <div className="dh-container" style={{ maxWidth: '800px', margin: '0 auto', position: 'relative', zIndex: 10 }}>
