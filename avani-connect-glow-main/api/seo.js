@@ -35,6 +35,107 @@ function buildCanonical(pagePath) {
 }
 
 const STATIC_SEO_LOOKUP = {
+  // Batch 3 city pages
+  "/web-development-company-rohtak": {
+    title: "Web Development Company in Rohtak | Avani Enterprises",
+    description: "Avani Enterprises builds fast, custom websites and ecommerce stores for Rohtak businesses. 300+ projects, 5.0 rating, 8+ years. Get a free quote today.",
+    keywords: "web development company rohtak, website development rohtak, web designer rohtak, ecommerce development rohtak, custom website rohtak, web design agency rohtak, business website rohtak"
+  },
+  "/web-development-company-panipat": {
+    title: "Web Development Company in Panipat | Avani Enterprises",
+    description: "Avani Enterprises builds fast, SEO-ready websites & e-commerce stores for Panipat's textile exporters, manufacturers & retailers. Free quote in 24 hours \u2014 call today.",
+    keywords: "web development company panipat, website development panipat, web design panipat, ecommerce website panipat, website designer panipat, textile export website panipat, web developers panipat, business website panipat"
+  },
+  "/web-development-company-karnal": {
+    title: "Web Development Company in Karnal | Avani Enterprises",
+    description: "Avani Enterprises builds fast, SEO-ready websites & web apps for Karnal businesses \u2014 basmati exporters, agri-firms, clinics & retailers. Get a free quote in 24 hrs.",
+    keywords: "web development company karnal, website development karnal, web design karnal, website designer karnal, ecommerce website karnal, web app development karnal, web designers karnal"
+  },
+  "/web-development-company-sonipat": {
+    title: "Web Development Company in Sonipat | Avani Enterprises",
+    description: "Avani Enterprises builds fast, custom websites and ecommerce stores for Sonipat businesses across Kundli, Rai, Murthal and Barhi. Get a free site audit today.",
+    keywords: "web development company sonipat, website development sonipat, web design sonipat, ecommerce sonipat, web developers sonipat, custom website sonipat, business website sonipat"
+  },
+  "/web-development-company-hisar": {
+    title: "Web Development Company in Hisar | Avani Enterprises",
+    description: "Avani Enterprises builds fast, SEO-ready websites & web apps for Hisar businesses \u2014 steel, agriculture, education & retail. Free quote in 24 hours. Call now.",
+    keywords: "web development company hisar, website development hisar, web design hisar, website designer hisar, ecommerce website hisar, web app development hisar, business website hisar, custom website hisar"
+  },
+  "/web-development-company-ambala": {
+    title: "Web Development Company in Ambala | Avani Enterprises",
+    description: "Avani Enterprises builds fast, SEO-ready websites & e-commerce stores for Ambala businesses \u2014 scientific instrument exporters, mixie makers & retailers. Free quote in 24 hrs.",
+    keywords: "web development company ambala, website development ambala, web design ambala, ecommerce website ambala, web developers ambala cantt, website company ambala city, scientific instrument website ambala, web app development ambala"
+  },
+  "/web-development-company-faridabad": {
+    title: "Web Development Company in Faridabad | Avani Enterprises",
+    description: "Avani Enterprises builds fast, SEO-ready websites & ecommerce stores for Faridabad businesses \u2014 from NIT manufacturers to Greater Faridabad retail. Free quote in 24 hrs.",
+    keywords: "web development company faridabad, website development faridabad, web design faridabad, ecommerce faridabad, web developers faridabad, custom website faridabad, web design company faridabad"
+  },
+  "/web-development-company-ghaziabad": {
+    title: "Web Development Company in Ghaziabad | Avani Enterprises",
+    description: "Web development company in Ghaziabad building fast, SEO-ready websites & ecommerce stores for MSMEs, manufacturers & traders. Free consultation + quote in 24 hrs.",
+    keywords: "web development company ghaziabad, website development ghaziabad, web design ghaziabad, ecommerce ghaziabad, web designers ghaziabad, ecommerce website development ghaziabad, website company sahibabad"
+  },
+  "/web-development-company-greater-noida": {
+    title: "Web Development Company in Greater Noida \u2014 Avani Enterprises",
+    description: "Avani Enterprises is a web development company in Greater Noida building fast, SEO-ready websites, e-commerce stores & web apps for businesses near the Yamuna Expressway, Knowledge Park & Greater Noida West. Free quote in 24 hrs.",
+    keywords: "web development company greater noida, website development greater noida, web design greater noida, ecommerce website development greater noida, web app development greater noida west, website designers yamuna expressway, custom website greater noida"
+  },
+  "/seo-company-gurgaon": {
+    title: "SEO Company in Gurgaon | First-Page Rankings \u2014 Avani Enterprises",
+    description: "Avani Enterprises is a results-driven SEO company in Gurgaon. We grow organic traffic 3x for Cyber City startups, D2C brands & MNCs. Get a free SEO audit today.",
+    keywords: "seo company gurgaon, seo services gurgaon, seo agency gurgaon, local seo gurgaon, best seo company gurugram, search engine optimization gurgaon, google ranking gurgaon"
+  },
+  "/seo-company-noida": {
+    title: "SEO Company in Noida | First-Page Rankings \u2014 Avani Enterprises",
+    description: "Avani Enterprises is an SEO company in Noida driving 3x organic traffic and first-page Google rankings for IT, D2C, real estate & education brands. Free SEO audit.",
+    keywords: "seo company noida, seo services noida, seo agency noida, local seo noida, search engine optimization noida, best seo company greater noida, google ranking services noida"
+  },
+  "/seo-company-rohtak": {
+    title: "SEO Company in Rohtak | Avani Enterprises",
+    description: "Top SEO company in Rohtak driving 3x organic traffic and first-page rankings for local businesses, institutes, and manufacturers. Get a free SEO audit today.",
+    keywords: "seo company rohtak, seo services rohtak, seo agency rohtak, local seo rohtak, google ranking rohtak, search engine optimization rohtak"
+  },
+  "/seo-company-panipat": {
+    title: "SEO Company in Panipat | Avani Enterprises",
+    description: "Avani Enterprises is a results-driven SEO company in Panipat helping textile, handloom and home-furnishing export businesses rank on Google. Get a free local SEO audit today.",
+    keywords: "seo company panipat, seo services panipat, seo agency panipat, local seo panipat, search engine optimization panipat, seo for textile exporters panipat, google ranking panipat"
+  },
+  "/digital-marketing-company-gurgaon": {
+    title: "Digital Marketing Company in Gurgaon \u2014 Avani Enterprises",
+    description: "Avani Enterprises is a results-driven digital marketing company in Gurgaon delivering SEO, Google Ads, social media & lead-gen for Cyber City & Sohna Road brands. Free audit in 24 hrs.",
+    keywords: "digital marketing company gurgaon, digital marketing agency gurgaon, digital marketing services gurgaon, seo company gurgaon, social media marketing gurgaon, ppc agency gurugram, performance marketing gurgaon, lead generation gurgaon"
+  },
+  "/digital-marketing-company-noida": {
+    title: "Digital Marketing Company in Noida \u2014 Avani Enterprises",
+    description: "Avani Enterprises is a results-driven digital marketing company in Noida delivering SEO, Google Ads & Meta Ads for IT, manufacturing & D2C brands. Get a free strategy call in 24 hrs.",
+    keywords: "digital marketing company noida, digital marketing agency noida, digital marketing services noida, seo company noida, ppc agency noida, social media marketing noida, google ads noida"
+  },
+  "/digital-marketing-company-rohtak": {
+    title: "Digital Marketing Company in Rohtak | Avani Enterprises",
+    description: "Avani Enterprises is a results-driven digital marketing company in Rohtak. SEO, Meta and Google Ads, and social media for local brands. Get a free strategy audit today.",
+    keywords: "digital marketing company rohtak, digital marketing agency rohtak, digital marketing services rohtak, seo rohtak, social media marketing rohtak, google ads rohtak"
+  },
+  "/digital-marketing-company-delhi": {
+    title: "Digital Marketing Company in Delhi | Avani Enterprises",
+    description: "Avani Enterprises is a results-driven digital marketing company in Delhi delivering SEO, Google Ads, and social media that grow leads. Get a free audit today.",
+    keywords: "digital marketing company delhi, digital marketing agency delhi, digital marketing services delhi, performance marketing delhi, seo company delhi, google ads agency delhi, social media marketing delhi"
+  },
+  "/ai-automation-company-gurgaon": {
+    title: "AI Automation Company in Gurgaon \u2014 Avani Enterprises",
+    description: "Avani Enterprises is a top AI automation company in Gurgaon. We build AI chatbots, workflow automation & business automation for Cyber City, Udyog Vihar & Sohna Road firms. Free audit in 24 hrs.",
+    keywords: "ai automation company gurgaon, business automation gurgaon, ai chatbot gurgaon, workflow automation gurgaon, ai agency gurugram, intelligent automation gurgaon, process automation cyber city"
+  },
+  "/ai-solutions-company-noida": {
+    title: "AI Solutions Company in Noida \u2014 Avani Enterprises",
+    description: "Avani Enterprises is an AI solutions company in Noida building custom AI, automation & ML models for IT firms, manufacturers & D2C brands. Free AI audit in 24 hrs.",
+    keywords: "ai solutions company noida, ai development company noida, artificial intelligence company noida, custom ai noida, machine learning company noida, ai automation noida, generative ai development noida"
+  },
+  "/ai-solutions-company-delhi": {
+    title: "AI Solutions Company in Delhi | Avani Enterprises",
+    description: "Avani Enterprises is a custom AI solutions company in Delhi building AI chatbots, automation, and ML systems for Delhi NCR businesses. 8+ years, 150+ clients. Free AI consult.",
+    keywords: "ai solutions company delhi, ai development company delhi, artificial intelligence company delhi, custom ai delhi, ai chatbot development delhi, machine learning company delhi, generative ai delhi, ai automation delhi"
+  },
   // Batch 2 service pages
   "/web-design-company": {
     title: "Web Design Company in India | Avani Enterprises",

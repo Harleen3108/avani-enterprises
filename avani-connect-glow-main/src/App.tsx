@@ -203,6 +203,27 @@ const SocialMediaMarketingCompany = lazyWithRetry(() => import("./pages/service/
 const AiSolutionsCompany = lazyWithRetry(() => import("./pages/service/AiSolutionsCompany"));
 const LocalSeoServices = lazyWithRetry(() => import("./pages/service/LocalSeoServices"));
 const BusinessProcessAutomation = lazyWithRetry(() => import("./pages/service/BusinessProcessAutomation"));
+// Batch 3 city pages
+const WebDevelopmentCompanyRohtak = lazyWithRetry(() => import("./pages/city/WebDevelopmentCompanyRohtak"));
+const WebDevelopmentCompanyPanipat = lazyWithRetry(() => import("./pages/city/WebDevelopmentCompanyPanipat"));
+const WebDevelopmentCompanyKarnal = lazyWithRetry(() => import("./pages/city/WebDevelopmentCompanyKarnal"));
+const WebDevelopmentCompanySonipat = lazyWithRetry(() => import("./pages/city/WebDevelopmentCompanySonipat"));
+const WebDevelopmentCompanyHisar = lazyWithRetry(() => import("./pages/city/WebDevelopmentCompanyHisar"));
+const WebDevelopmentCompanyAmbala = lazyWithRetry(() => import("./pages/city/WebDevelopmentCompanyAmbala"));
+const WebDevelopmentCompanyFaridabad = lazyWithRetry(() => import("./pages/city/WebDevelopmentCompanyFaridabad"));
+const WebDevelopmentCompanyGhaziabad = lazyWithRetry(() => import("./pages/city/WebDevelopmentCompanyGhaziabad"));
+const WebDevelopmentCompanyGreaterNoida = lazyWithRetry(() => import("./pages/city/WebDevelopmentCompanyGreaterNoida"));
+const SeoCompanyGurgaon = lazyWithRetry(() => import("./pages/city/SeoCompanyGurgaon"));
+const SeoCompanyNoida = lazyWithRetry(() => import("./pages/city/SeoCompanyNoida"));
+const SeoCompanyRohtak = lazyWithRetry(() => import("./pages/city/SeoCompanyRohtak"));
+const SeoCompanyPanipat = lazyWithRetry(() => import("./pages/city/SeoCompanyPanipat"));
+const DigitalMarketingCompanyGurgaon = lazyWithRetry(() => import("./pages/city/DigitalMarketingCompanyGurgaon"));
+const DigitalMarketingCompanyNoida = lazyWithRetry(() => import("./pages/city/DigitalMarketingCompanyNoida"));
+const DigitalMarketingCompanyRohtak = lazyWithRetry(() => import("./pages/city/DigitalMarketingCompanyRohtak"));
+const DigitalMarketingCompanyDelhi = lazyWithRetry(() => import("./pages/city/DigitalMarketingCompanyDelhi"));
+const AiAutomationCompanyGurgaon = lazyWithRetry(() => import("./pages/city/AiAutomationCompanyGurgaon"));
+const AiSolutionsCompanyNoida = lazyWithRetry(() => import("./pages/city/AiSolutionsCompanyNoida"));
+const AiSolutionsCompanyDelhi = lazyWithRetry(() => import("./pages/city/AiSolutionsCompanyDelhi"));
 const WorkforceManagementSoftware = lazyWithRetry(() => import("./pages/product/WorkforceManagementSoftware"));
 const ProjectManagementSoftware = lazyWithRetry(() => import("./pages/product/ProjectManagementSoftware"));
 const BusinessOperatingSystem = lazyWithRetry(() => import("./pages/product/BusinessOperatingSystem"));
@@ -305,6 +326,26 @@ const AppLayout = () => {
     "/ai-solutions-company",
     "/local-seo-services",
     "/business-process-automation",
+    "/web-development-company-rohtak",
+    "/web-development-company-panipat",
+    "/web-development-company-karnal",
+    "/web-development-company-sonipat",
+    "/web-development-company-hisar",
+    "/web-development-company-ambala",
+    "/web-development-company-faridabad",
+    "/web-development-company-ghaziabad",
+    "/web-development-company-greater-noida",
+    "/seo-company-gurgaon",
+    "/seo-company-noida",
+    "/seo-company-rohtak",
+    "/seo-company-panipat",
+    "/digital-marketing-company-gurgaon",
+    "/digital-marketing-company-noida",
+    "/digital-marketing-company-rohtak",
+    "/digital-marketing-company-delhi",
+    "/ai-automation-company-gurgaon",
+    "/ai-solutions-company-noida",
+    "/ai-solutions-company-delhi",
     "/keka-alternative",
     "/greythr-alternative",
     "/darwinbox-alternative",
@@ -411,6 +452,27 @@ const AppLayout = () => {
             <Route path="ai-solutions-company" element={<AiSolutionsCompany />} />
             <Route path="local-seo-services" element={<LocalSeoServices />} />
             <Route path="business-process-automation" element={<BusinessProcessAutomation />} />
+            {/* ── City Pages (Batch 3) ─────────────────────────────────────── */}
+            <Route path="web-development-company-rohtak" element={<WebDevelopmentCompanyRohtak />} />
+            <Route path="web-development-company-panipat" element={<WebDevelopmentCompanyPanipat />} />
+            <Route path="web-development-company-karnal" element={<WebDevelopmentCompanyKarnal />} />
+            <Route path="web-development-company-sonipat" element={<WebDevelopmentCompanySonipat />} />
+            <Route path="web-development-company-hisar" element={<WebDevelopmentCompanyHisar />} />
+            <Route path="web-development-company-ambala" element={<WebDevelopmentCompanyAmbala />} />
+            <Route path="web-development-company-faridabad" element={<WebDevelopmentCompanyFaridabad />} />
+            <Route path="web-development-company-ghaziabad" element={<WebDevelopmentCompanyGhaziabad />} />
+            <Route path="web-development-company-greater-noida" element={<WebDevelopmentCompanyGreaterNoida />} />
+            <Route path="seo-company-gurgaon" element={<SeoCompanyGurgaon />} />
+            <Route path="seo-company-noida" element={<SeoCompanyNoida />} />
+            <Route path="seo-company-rohtak" element={<SeoCompanyRohtak />} />
+            <Route path="seo-company-panipat" element={<SeoCompanyPanipat />} />
+            <Route path="digital-marketing-company-gurgaon" element={<DigitalMarketingCompanyGurgaon />} />
+            <Route path="digital-marketing-company-noida" element={<DigitalMarketingCompanyNoida />} />
+            <Route path="digital-marketing-company-rohtak" element={<DigitalMarketingCompanyRohtak />} />
+            <Route path="digital-marketing-company-delhi" element={<DigitalMarketingCompanyDelhi />} />
+            <Route path="ai-automation-company-gurgaon" element={<AiAutomationCompanyGurgaon />} />
+            <Route path="ai-solutions-company-noida" element={<AiSolutionsCompanyNoida />} />
+            <Route path="ai-solutions-company-delhi" element={<AiSolutionsCompanyDelhi />} />
 
             {/* ── Competitor Alternative Pages ────────────────────────────────── */}
             <Route path="keka-alternative" element={<KekaAlternative />} />

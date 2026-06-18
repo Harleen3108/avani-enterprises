@@ -130,6 +130,28 @@ const urls = [
   { loc: `${BASE_URL}/local-seo-services`, lastmod: TODAY, changefreq: "weekly", priority: "0.9" },
   { loc: `${BASE_URL}/business-process-automation`, lastmod: TODAY, changefreq: "weekly", priority: "0.9" },
 
+  // ── City Pages (Batch 3) ──────────────────────────────────────────────────
+  { loc: `${BASE_URL}/web-development-company-rohtak`, lastmod: TODAY, changefreq: "weekly", priority: "0.85" },
+  { loc: `${BASE_URL}/web-development-company-panipat`, lastmod: TODAY, changefreq: "weekly", priority: "0.85" },
+  { loc: `${BASE_URL}/web-development-company-karnal`, lastmod: TODAY, changefreq: "weekly", priority: "0.85" },
+  { loc: `${BASE_URL}/web-development-company-sonipat`, lastmod: TODAY, changefreq: "weekly", priority: "0.85" },
+  { loc: `${BASE_URL}/web-development-company-hisar`, lastmod: TODAY, changefreq: "weekly", priority: "0.85" },
+  { loc: `${BASE_URL}/web-development-company-ambala`, lastmod: TODAY, changefreq: "weekly", priority: "0.85" },
+  { loc: `${BASE_URL}/web-development-company-faridabad`, lastmod: TODAY, changefreq: "weekly", priority: "0.85" },
+  { loc: `${BASE_URL}/web-development-company-ghaziabad`, lastmod: TODAY, changefreq: "weekly", priority: "0.85" },
+  { loc: `${BASE_URL}/web-development-company-greater-noida`, lastmod: TODAY, changefreq: "weekly", priority: "0.85" },
+  { loc: `${BASE_URL}/seo-company-gurgaon`, lastmod: TODAY, changefreq: "weekly", priority: "0.85" },
+  { loc: `${BASE_URL}/seo-company-noida`, lastmod: TODAY, changefreq: "weekly", priority: "0.85" },
+  { loc: `${BASE_URL}/seo-company-rohtak`, lastmod: TODAY, changefreq: "weekly", priority: "0.85" },
+  { loc: `${BASE_URL}/seo-company-panipat`, lastmod: TODAY, changefreq: "weekly", priority: "0.85" },
+  { loc: `${BASE_URL}/digital-marketing-company-gurgaon`, lastmod: TODAY, changefreq: "weekly", priority: "0.85" },
+  { loc: `${BASE_URL}/digital-marketing-company-noida`, lastmod: TODAY, changefreq: "weekly", priority: "0.85" },
+  { loc: `${BASE_URL}/digital-marketing-company-rohtak`, lastmod: TODAY, changefreq: "weekly", priority: "0.85" },
+  { loc: `${BASE_URL}/digital-marketing-company-delhi`, lastmod: TODAY, changefreq: "weekly", priority: "0.85" },
+  { loc: `${BASE_URL}/ai-automation-company-gurgaon`, lastmod: TODAY, changefreq: "weekly", priority: "0.85" },
+  { loc: `${BASE_URL}/ai-solutions-company-noida`, lastmod: TODAY, changefreq: "weekly", priority: "0.85" },
+  { loc: `${BASE_URL}/ai-solutions-company-delhi`, lastmod: TODAY, changefreq: "weekly", priority: "0.85" },
+
   // ── Competitor Alternative Pages ──────────────────────────────────────────
   { loc: `${BASE_URL}/keka-alternative`,               lastmod: "2026-06-10", changefreq: "monthly", priority: "0.85" },
   { loc: `${BASE_URL}/greythr-alternative`,            lastmod: "2026-06-10", changefreq: "monthly", priority: "0.85" },
