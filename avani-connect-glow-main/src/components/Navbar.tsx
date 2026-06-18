@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ArrowRight, ChevronDown, Phone } from 'lucide-react';
 import { projectsData } from '../data/ProjectsData';
@@ -47,7 +47,16 @@ const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const location = useLocation();
+  const navigate = useNavigate();
   const navRef = useRef<HTMLElement>(null);
+
+  // Programmatic navigation for the mobile menu — bulletproof against any
+  // overlay/touch-event quirk that could swallow an <a> tap.
+  const goMobile = (path: string) => {
+    setMobileOpen(false);
+    setOpenDropdown(null);
+    navigate(path);
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -223,7 +232,7 @@ const Navbar = () => {
             initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.25 }}
             style={{
-              position: 'fixed', top: '52px', left: 0, right: 0, bottom: 0, zIndex: 999,
+              position: 'fixed', top: '52px', left: 0, right: 0, bottom: 0, zIndex: 10000,
               background: 'var(--nav-scrolled)', backdropFilter: 'blur(20px)',
               padding: '32px 48px', display: 'flex', flexDirection: 'column', gap: '4px',
               overflowY: 'auto'
@@ -258,7 +267,7 @@ const Navbar = () => {
                           style={{ overflow: 'hidden', paddingLeft: '16px' }}
                         >
                           {link.dropdown.map(sub => (
-                            <Link key={sub.path} to={sub.path} onClick={() => setMobileOpen(false)}
+                            <Link key={sub.path} to={sub.path} onClick={(e) => { e.preventDefault(); goMobile(sub.path); }}
                               style={{
                                 display: 'block', padding: '10px 0',
                                 fontFamily: "'Outfit', sans-serif", fontSize: '16px', letterSpacing: '0.08em', fontWeight: 600,
@@ -278,7 +287,7 @@ const Navbar = () => {
 
               return (
                 <motion.div key={link.path} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.05 }}>
-                  <Link to={link.path} onClick={() => setMobileOpen(false)}
+                  <Link to={link.path} onClick={(e) => { e.preventDefault(); goMobile(link.path); }}
                     style={{
                       display: 'block', padding: '14px 0', borderBottom: '1px solid var(--border-faint)',
                       fontFamily: "'Outfit', sans-serif", fontSize: '20px', letterSpacing: '0.12em', fontWeight: 600,
@@ -290,7 +299,7 @@ const Navbar = () => {
                 </motion.div>
               );
             })}
-            <Link to="/contact" onClick={() => setMobileOpen(false)} style={{
+            <Link to="/contact" onClick={(e) => { e.preventDefault(); goMobile('/contact'); }} style={{
               display: 'inline-flex', alignItems: 'center', gap: '8px', marginTop: '24px',
               padding: '12px 28px', background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-light))',
               color: 'var(--bg-primary)', borderRadius: '6px', textDecoration: 'none',

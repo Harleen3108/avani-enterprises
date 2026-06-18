@@ -24,8 +24,9 @@ const MainLayout = () => {
       <div className="dh-root" style={{ background: 'var(--bg-primary)', color: 'var(--text-primary)', minHeight: '100vh', transition: 'background 0.5s ease' }}>
         <DummyScrollProgress />
 
-        {/* Navbar should be above everything */}
-        <div style={{ position: 'relative', zIndex: 1000 }}>
+        {/* Navbar should be above everything (incl. the z-9999 sticky CTA) so the
+            mobile menu overlay is never blocked by other fixed elements */}
+        <div style={{ position: 'relative', zIndex: 100000 }}>
           <Navbar />
         </div>
 
