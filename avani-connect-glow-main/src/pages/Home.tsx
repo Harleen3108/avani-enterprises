@@ -559,10 +559,10 @@ Avani Enterprises is the No.1 Digital Marketing Agency in India, providing the b
             >
               {/* Background Design */}
               <div className="absolute inset-0 z-0">
-                <div className="absolute top-1/4 left-1/4 w-[260px] h-[260px] bg-amber-200/20 rounded-full blur-[80px] animate-pulse-slow" />
-                <div className="absolute bottom-1/4 right-0 w-[220px] h-[220px] bg-sky-200/20 rounded-full blur-[80px] animate-pulse-slow delay-700" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[360px] h-[360px] border border-amber-500/5 rounded-full" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[440px] h-[440px] border border-amber-500/5 rounded-full" />
+                <div className="absolute top-1/4 left-1/4 w-[200px] h-[200px] bg-amber-200/20 rounded-full blur-[70px] animate-pulse-slow" />
+                <div className="absolute bottom-1/4 right-0 w-[180px] h-[180px] bg-sky-200/20 rounded-full blur-[70px] animate-pulse-slow delay-700" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] border border-amber-500/5 rounded-full" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[370px] h-[370px] border border-amber-500/5 rounded-full" />
               </div>
 
               {/* OLD: Dashboard Chart — extracted to <HeroDashboard /> in src/components/HeroDashboard.tsx */}
@@ -570,8 +570,8 @@ Avani Enterprises is the No.1 Digital Marketing Agency in India, providing the b
               {/* <HeroDashboard /> */}
 
               {/* NEW: Newsletter Widget — centered wrapper so avatars anchor to the card, not the column margins */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[82%] max-w-[340px] z-10">
-                <div className="relative bg-white/95 backdrop-blur-md rounded-[1.75rem] shadow-[0_30px_80px_rgba(0,0,0,0.08)] border border-white overflow-hidden">
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[68%] max-w-[290px] z-10">
+                <div className="relative bg-white/95 backdrop-blur-md rounded-[1.5rem] shadow-[0_30px_80px_rgba(0,0,0,0.08)] border border-white overflow-hidden">
                 {/* Widget Header */}
                 <div className="flex items-center justify-between px-5 pt-5 pb-3.5 border-b border-slate-100">
                   <h3 className="text-sm font-black text-slate-900 tracking-tight uppercase">News & Updates</h3>
@@ -664,7 +664,7 @@ Avani Enterprises is the No.1 Digital Marketing Agency in India, providing the b
                 <motion.div
                   animate={{ y: [0, -20, 0] }}
                   transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute -top-5 -right-3 w-20 h-20 rounded-full border-[6px] border-white shadow-2xl overflow-hidden z-20"
+                  className="absolute -top-4 -right-2 w-14 h-14 rounded-full border-4 border-white shadow-2xl overflow-hidden z-20"
                 >
                   <img src="https://images.unsplash.com/photo-1589386417686-0d34b5903d23?q=80&w=800&auto=format&fit=crop" alt="Indian Businessman" className="w-full h-full object-cover" />
                 </motion.div>
@@ -672,7 +672,7 @@ Avani Enterprises is the No.1 Digital Marketing Agency in India, providing the b
                 <motion.div
                   animate={{ y: [0, 20, 0] }}
                   transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                  className="absolute top-[60%] -left-4 w-16 h-16 rounded-full border-[6px] border-white shadow-2xl overflow-hidden z-20"
+                  className="absolute top-[62%] -left-3 w-12 h-12 rounded-full border-4 border-white shadow-2xl overflow-hidden z-20"
                 >
                   <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800&auto=format&fit=crop" alt="Indian Businesswoman" className="w-full h-full object-cover" />
                 </motion.div>
