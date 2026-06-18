@@ -185,6 +185,13 @@ const LeaveManagementSoftware = lazyWithRetry(() => import("./pages/product/Leav
 const EmployeeManagementSoftware = lazyWithRetry(() => import("./pages/product/EmployeeManagementSoftware"));
 const EmployeePortal = lazyWithRetry(() => import("./pages/product/EmployeePortal"));
 const CrmSoftwareIndia = lazyWithRetry(() => import("./pages/product/CrmSoftwareIndia"));
+// Flagship service pages
+const WebDevelopmentCompany = lazyWithRetry(() => import("./pages/service/WebDevelopmentCompany"));
+const SeoCompany = lazyWithRetry(() => import("./pages/service/SeoCompany"));
+const DigitalMarketingCompany = lazyWithRetry(() => import("./pages/service/DigitalMarketingCompany"));
+const GoogleAdsAgency = lazyWithRetry(() => import("./pages/service/GoogleAdsAgency"));
+const AiAutomationCompany = lazyWithRetry(() => import("./pages/service/AiAutomationCompany"));
+const CrmDevelopmentCompany = lazyWithRetry(() => import("./pages/service/CrmDevelopmentCompany"));
 const WorkforceManagementSoftware = lazyWithRetry(() => import("./pages/product/WorkforceManagementSoftware"));
 const ProjectManagementSoftware = lazyWithRetry(() => import("./pages/product/ProjectManagementSoftware"));
 const BusinessOperatingSystem = lazyWithRetry(() => import("./pages/product/BusinessOperatingSystem"));
@@ -271,6 +278,12 @@ const AppLayout = () => {
     "/workforce-management-software",
     "/project-management-software",
     "/business-operating-system",
+    "/web-development-company",
+    "/seo-company",
+    "/digital-marketing-company",
+    "/google-ads-agency",
+    "/ai-automation-company",
+    "/crm-development-company",
     "/keka-alternative",
     "/greythr-alternative",
     "/darwinbox-alternative",
@@ -359,6 +372,14 @@ const AppLayout = () => {
             <Route path="workforce-management-software" element={<WorkforceManagementSoftware />} />
             <Route path="project-management-software" element={<ProjectManagementSoftware />} />
             <Route path="business-operating-system" element={<BusinessOperatingSystem />} />
+
+            {/* ── Flagship Service Pages ──────────────────────────────────────── */}
+            <Route path="web-development-company" element={<WebDevelopmentCompany />} />
+            <Route path="seo-company" element={<SeoCompany />} />
+            <Route path="digital-marketing-company" element={<DigitalMarketingCompany />} />
+            <Route path="google-ads-agency" element={<GoogleAdsAgency />} />
+            <Route path="ai-automation-company" element={<AiAutomationCompany />} />
+            <Route path="crm-development-company" element={<CrmDevelopmentCompany />} />
 
             {/* ── Competitor Alternative Pages ────────────────────────────────── */}
             <Route path="keka-alternative" element={<KekaAlternative />} />

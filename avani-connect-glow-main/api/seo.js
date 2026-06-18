@@ -35,6 +35,37 @@ function buildCanonical(pagePath) {
 }
 
 const STATIC_SEO_LOOKUP = {
+  // Flagship service pages
+  "/web-development-company": {
+    title: "Web Development Company in India | Custom Websites & Apps | Avani Enterprises",
+    description: "Avani Enterprises is a leading web development company in India building fast, secure, SEO-ready websites, web apps, and ecommerce stores. 300+ projects delivered. Get a free quote.",
+    keywords: "web development company, website development company, web developer, custom website development, web application development, react web development company india"
+  },
+  "/seo-company": {
+    title: "SEO Company in India | SEO Services & Agency | Avani Enterprises",
+    description: "Avani Enterprises is a results-driven SEO company in India. We grow organic traffic, rankings, and qualified leads with technical SEO, content, and link building. Free SEO audit.",
+    keywords: "seo company, seo agency, seo services, local seo company, search engine optimization company india, best seo agency"
+  },
+  "/digital-marketing-company": {
+    title: "Digital Marketing Company in India | Agency & Services | Avani Enterprises",
+    description: "Avani Enterprises is a full-service digital marketing company in India delivering SEO, Google Ads, social media, and performance marketing that generates qualified leads and ROI. Free strategy call.",
+    keywords: "digital marketing company, digital marketing agency, digital marketing services, performance marketing agency, online marketing company india, best digital marketing agency"
+  },
+  "/google-ads-agency": {
+    title: "Google Ads Agency in India | PPC Management | Avani Enterprises",
+    description: "Avani Enterprises is a certified Google Ads agency managing high-ROI PPC, search, shopping, and display campaigns. Lower your cost per lead. Request a free Google Ads audit.",
+    keywords: "google ads agency, google ads management, ppc agency, ppc management company, google adwords agency india, paid search agency"
+  },
+  "/ai-automation-company": {
+    title: "AI Automation Company in India | Business Process Automation | Avani Enterprises",
+    description: "Avani Enterprises is an AI automation company building AI chatbots, workflow automation, and custom AI solutions that cut costs and scale operations. Book a free automation audit.",
+    keywords: "ai automation company, business automation company, ai solutions company, ai development company, ai chatbot development, workflow automation company india"
+  },
+  "/crm-development-company": {
+    title: "CRM Development Company in India | Custom CRM Software | Avani Enterprises",
+    description: "Avani Enterprises is a CRM development company building custom CRM software to manage leads, sales, and customers. Tailored to your workflow, fully integrated. Request a demo.",
+    keywords: "crm development company, crm software company, custom crm development, crm software development, sales crm software india, lead management crm"
+  },
   // Products
   "/hr-portal": {
     title: "Advanced HR Portal Software for Employee Self-Service | Avani Enterprises",

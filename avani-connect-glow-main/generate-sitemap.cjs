@@ -111,6 +111,14 @@ const urls = [
   { loc: `${BASE_URL}/project-management-software`,    lastmod: "2026-06-10", changefreq: "monthly", priority: "0.9" },
   { loc: `${BASE_URL}/business-operating-system`,      lastmod: "2026-06-10", changefreq: "monthly", priority: "0.9" },
 
+  // ── Flagship Service Pages ────────────────────────────────────────────────
+  { loc: `${BASE_URL}/web-development-company`,         lastmod: TODAY, changefreq: "weekly", priority: "0.95" },
+  { loc: `${BASE_URL}/seo-company`,                     lastmod: TODAY, changefreq: "weekly", priority: "0.95" },
+  { loc: `${BASE_URL}/digital-marketing-company`,       lastmod: TODAY, changefreq: "weekly", priority: "0.95" },
+  { loc: `${BASE_URL}/google-ads-agency`,               lastmod: TODAY, changefreq: "weekly", priority: "0.9" },
+  { loc: `${BASE_URL}/ai-automation-company`,           lastmod: TODAY, changefreq: "weekly", priority: "0.9" },
+  { loc: `${BASE_URL}/crm-development-company`,          lastmod: TODAY, changefreq: "weekly", priority: "0.9" },
+
   // ── Competitor Alternative Pages ──────────────────────────────────────────
   { loc: `${BASE_URL}/keka-alternative`,               lastmod: "2026-06-10", changefreq: "monthly", priority: "0.85" },
   { loc: `${BASE_URL}/greythr-alternative`,            lastmod: "2026-06-10", changefreq: "monthly", priority: "0.85" },

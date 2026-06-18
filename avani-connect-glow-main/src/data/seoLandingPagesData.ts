@@ -1719,5 +1719,426 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       headline: 'Accelerate Your Delhi Brand',
       sub: 'Free 20-minute digital audit. Let\'s evaluate your website and build a custom local growth plan.'
     }
+  },
+
+  // ─── Flagship Service Pages (high-intent, generic) ────────────────────────
+  'web-development-company': {
+    slug: 'web-development-company',
+    seo: {
+      title: 'Web Development Company in India | Custom Websites & Apps | Avani Enterprises',
+      description: 'Avani Enterprises is a leading web development company in India building fast, secure, SEO-ready websites, web apps, and ecommerce stores. 300+ projects delivered. Get a free quote.',
+      keywords: 'web development company, website development company, web developer, custom website development, web application development, react web development company india',
+      canonical: 'https://www.avanienterprises.in/web-development-company'
+    },
+    breadcrumbs: [
+      { label: 'Home', href: '/' },
+      { label: 'Services', href: '/services' },
+      { label: 'Web Development Company', href: '/web-development-company' }
+    ],
+    hero: {
+      tag: 'Engineering Digital Growth',
+      h1: 'Web Development Company in India',
+      subtitle: 'We design and build high-performance websites, web apps, and ecommerce platforms engineered to load fast, rank on Google, and convert visitors into customers.',
+      stats: [
+        { value: '300+', label: 'Projects Delivered' },
+        { value: '150+', label: 'Happy Clients' },
+        { value: '8+', label: 'Years of Experience' }
+      ]
+    },
+    intro: 'Avani Enterprises is a full-stack web development company helping startups and enterprises across India launch websites and web applications that perform. From corporate sites and ecommerce stores to custom SaaS dashboards, we engineer every build for speed, security, search visibility, and measurable conversions.',
+    whyAvani: [
+      { title: 'Performance-First Engineering', desc: 'Core Web Vitals optimised builds on modern stacks (React, Node.js, Next.js) that load in under 2 seconds.' },
+      { title: 'SEO Built In', desc: 'Clean semantic markup, schema, sitemaps, and on-page SEO baked into every site so you rank from day one.' },
+      { title: 'Conversion-Focused Design', desc: 'UX/UI designed around your buyer journey to turn traffic into qualified leads and sales.' }
+    ],
+    features: [
+      { title: 'Custom Website Development', desc: 'Bespoke corporate, business, and portfolio websites tailored to your brand and goals.' },
+      { title: 'Web Application Development', desc: 'Scalable, secure web apps, portals, and SaaS products built on modern frameworks.' },
+      { title: 'Ecommerce Development', desc: 'High-converting online stores with secure payments, inventory, and order management.' },
+      { title: 'Maintenance & Support', desc: 'Ongoing updates, security patches, performance monitoring, and feature rollouts.' }
+    ],
+    bodySections: [
+      {
+        heading: 'A Web Development Company That Builds for Results',
+        paragraphs: [
+          'A website is your hardest-working sales asset, and a slow or outdated one quietly costs you customers every day. Our web development process starts with your business objectives: who your customers are, what action you want them to take, and how we measure success.',
+          'We then design and develop a fast, mobile-first, search-optimised website on a stack that scales with you. Every project ships with analytics, on-page SEO, and conversion tracking so you can see exactly how your investment performs.'
+        ]
+      },
+      {
+        heading: 'Technology That Scales With Your Business',
+        paragraphs: [
+          'We build on proven, modern technologies, React and Next.js on the front end, Node.js and secure databases on the back end, and cloud hosting with global CDNs for speed and reliability.',
+          'Whether you need a five-page brochure site, a content-heavy SEO platform, or a complex multi-user web application, we architect it to be maintainable, secure, and ready to grow without expensive rebuilds later.'
+        ]
+      }
+    ],
+    faqs: [
+      { q: 'How much does website development cost in India?', a: 'Cost depends on scope, a business website differs from a custom web app or ecommerce store. We provide a fixed, transparent quote after a free requirements call so there are no surprises.' },
+      { q: 'How long does it take to build a website?', a: 'A standard business website typically takes 3 to 5 weeks; larger web apps and ecommerce platforms take longer. We share a clear milestone timeline before we start.' },
+      { q: 'Will my website be SEO-friendly and rank on Google?', a: 'Yes. Every site we build includes technical SEO, fast load speeds, schema markup, and clean structure so it is ready to rank, and we offer ongoing SEO services to grow rankings further.' },
+      { q: 'Do you build mobile-responsive websites?', a: 'Absolutely. Every website is designed mobile-first and tested across phones, tablets, and desktops to ensure a flawless experience on every device.' },
+      { q: 'Which technologies do you use?', a: 'We primarily use React, Next.js, and Node.js with secure databases and cloud hosting, chosen per project for performance, scalability, and maintainability.' },
+      { q: 'Do you provide support after launch?', a: 'Yes, we offer ongoing maintenance, security updates, performance monitoring, and feature development to keep your site fast, secure, and current.' }
+    ],
+    relatedLinks: [
+      { label: 'SEO Company', href: '/seo-company', desc: 'Rank your new website on Google.' },
+      { label: 'Digital Marketing Company', href: '/digital-marketing-company', desc: 'Drive traffic and leads at scale.' },
+      { label: 'CRM Development Company', href: '/crm-development-company', desc: 'Manage the leads your site generates.' }
+    ],
+    cta: {
+      headline: 'Ready to Build a Website That Performs?',
+      sub: 'Get a free, no-obligation quote and project roadmap from our web development team.'
+    }
+  },
+
+  'seo-company': {
+    slug: 'seo-company',
+    seo: {
+      title: 'SEO Company in India | SEO Services & Agency | Avani Enterprises',
+      description: 'Avani Enterprises is a results-driven SEO company in India. We grow organic traffic, rankings, and qualified leads with technical SEO, content, and link building. Free SEO audit.',
+      keywords: 'seo company, seo agency, seo services, local seo company, search engine optimization company india, best seo agency',
+      canonical: 'https://www.avanienterprises.in/seo-company'
+    },
+    breadcrumbs: [
+      { label: 'Home', href: '/' },
+      { label: 'Services', href: '/services' },
+      { label: 'SEO Company', href: '/seo-company' }
+    ],
+    hero: {
+      tag: 'Rank. Grow. Convert.',
+      h1: 'SEO Company in India',
+      subtitle: 'We help businesses rank higher on Google and turn organic search into a predictable channel for qualified leads, using white-hat technical SEO, content, and authority building.',
+      stats: [
+        { value: '85%', label: 'Avg. Traffic Growth' },
+        { value: '150+', label: 'Brands Grown' },
+        { value: '5.0', label: 'Client Rating' }
+      ]
+    },
+    intro: 'As a data-driven SEO company, Avani Enterprises helps Indian businesses win the searches that matter. We combine technical SEO, on-page optimisation, high-quality content, and ethical link building into a single growth engine that compounds month after month, so you depend less on paid ads and more on durable organic visibility.',
+    whyAvani: [
+      { title: 'Technical SEO Expertise', desc: 'Site audits, Core Web Vitals, crawlability, and schema fixes that unlock rankings competitors miss.' },
+      { title: 'Content That Ranks', desc: 'Search-intent-led content and on-page optimisation built around the keywords your buyers actually use.' },
+      { title: 'Transparent Reporting', desc: 'Clear monthly reports on rankings, traffic, and leads, no vanity metrics, just business outcomes.' }
+    ],
+    features: [
+      { title: 'SEO Audit & Strategy', desc: 'A full technical and competitive audit with a prioritised, ROI-focused roadmap.' },
+      { title: 'On-Page & Technical SEO', desc: 'Site speed, structure, schema, internal linking, and on-page optimisation done right.' },
+      { title: 'Local SEO', desc: 'Google Business Profile, local citations, and map-pack rankings for city-level visibility.' },
+      { title: 'Content & Link Building', desc: 'Authority-building content and ethical backlinks that grow domain trust.' }
+    ],
+    bodySections: [
+      {
+        heading: 'An SEO Company Focused on Revenue, Not Vanity Metrics',
+        paragraphs: [
+          'Plenty of agencies report rankings and impressions. We focus on the metrics that grow your business, qualified organic traffic, leads, and revenue, and reverse-engineer the SEO strategy to get there.',
+          'Every engagement starts with a deep audit of your site, competitors, and target keywords. From there we fix technical foundations, optimise existing pages, and build new search-intent content so you capture demand at every stage of the buyer journey.'
+        ]
+      },
+      {
+        heading: 'White-Hat SEO That Lasts',
+        paragraphs: [
+          'Search algorithms reward genuine authority and great user experience. We never use risky shortcuts that trigger penalties, our methods are fully white-hat and aligned with Google\'s guidelines.',
+          'The result is durable visibility: rankings that hold and compound over time, lowering your cost per lead and building an organic moat your competitors struggle to overtake.'
+        ]
+      }
+    ],
+    faqs: [
+      { q: 'How long does SEO take to show results?', a: 'Most businesses see meaningful movement in 3 to 6 months, with compounding gains beyond that. Timelines depend on competition, your starting point, and content velocity.' },
+      { q: 'Do you guarantee #1 rankings?', a: 'No reputable SEO company can guarantee a specific position, Google controls rankings. We guarantee a proven, transparent process and consistent, measurable growth in traffic and leads.' },
+      { q: 'What is included in your SEO services?', a: 'Technical SEO, on-page optimisation, content, local SEO, link building, and monthly reporting, tailored to your goals and budget.' },
+      { q: 'Do you offer local SEO for specific cities?', a: 'Yes. We run dedicated local SEO campaigns to win map-pack and city-level rankings in Gurgaon, Delhi, Rohtak, Noida, and across India.' },
+      { q: 'Is your SEO safe and Google-compliant?', a: 'Completely. We use only white-hat, guideline-compliant techniques so your rankings are durable and penalty-free.' },
+      { q: 'How do you report progress?', a: 'You receive clear monthly reports covering keyword rankings, organic traffic, and leads, plus the work completed and the plan ahead.' }
+    ],
+    relatedLinks: [
+      { label: 'Digital Marketing Company', href: '/digital-marketing-company', desc: 'Full-funnel growth across channels.' },
+      { label: 'Google Ads Agency', href: '/google-ads-agency', desc: 'Instant traffic while SEO compounds.' },
+      { label: 'Web Development Company', href: '/web-development-company', desc: 'SEO-ready websites built to rank.' }
+    ],
+    cta: {
+      headline: 'Get Your Free SEO Audit',
+      sub: 'See exactly what is holding your rankings back, and the roadmap to fix it. No cost, no obligation.'
+    }
+  },
+
+  'digital-marketing-company': {
+    slug: 'digital-marketing-company',
+    seo: {
+      title: 'Digital Marketing Company in India | Agency & Services | Avani Enterprises',
+      description: 'Avani Enterprises is a full-service digital marketing company in India delivering SEO, Google Ads, social media, and performance marketing that generates qualified leads and ROI. Free strategy call.',
+      keywords: 'digital marketing company, digital marketing agency, digital marketing services, performance marketing agency, online marketing company india, best digital marketing agency',
+      canonical: 'https://www.avanienterprises.in/digital-marketing-company'
+    },
+    breadcrumbs: [
+      { label: 'Home', href: '/' },
+      { label: 'Services', href: '/services' },
+      { label: 'Digital Marketing Company', href: '/digital-marketing-company' }
+    ],
+    hero: {
+      tag: 'Full-Funnel Growth',
+      h1: 'Digital Marketing Company in India',
+      subtitle: 'We run integrated SEO, paid ads, and social campaigns built around one goal, generating qualified leads and measurable ROI for your business.',
+      stats: [
+        { value: '150+', label: 'Brands Scaled' },
+        { value: '300+', label: 'Campaigns Run' },
+        { value: '5.0', label: 'Client Rating' }
+      ]
+    },
+    intro: 'Avani Enterprises is a results-first digital marketing company that helps businesses across India acquire customers profitably. Instead of selling channels in isolation, we build a connected strategy, SEO, Google Ads, Meta Ads, and social, that works together to fill your pipeline with quality leads and maximise return on every rupee.',
+    whyAvani: [
+      { title: 'ROI-Driven Strategy', desc: 'Every campaign is tied to leads and revenue, with budgets allocated to what actually performs.' },
+      { title: 'Full-Channel Coverage', desc: 'SEO, Google Ads, Meta, Instagram, and content under one accountable team, no silos.' },
+      { title: 'Data & Tracking', desc: 'Proper analytics, pixels, and conversion tracking so every decision is backed by data.' }
+    ],
+    features: [
+      { title: 'Search Engine Optimization', desc: 'Grow durable organic traffic and rankings for the keywords your buyers search.' },
+      { title: 'Paid Advertising (PPC)', desc: 'High-ROI Google and Meta ad campaigns engineered for low cost per acquisition.' },
+      { title: 'Social Media Marketing', desc: 'Content and community building that grows reach, engagement, and brand authority.' },
+      { title: 'Performance Marketing', desc: 'Conversion-focused funnels, landing pages, and retargeting that turn clicks into customers.' }
+    ],
+    bodySections: [
+      {
+        heading: 'A Digital Marketing Company Built Around Your Pipeline',
+        paragraphs: [
+          'Marketing that does not generate leads is just expense. We start by understanding your customer, your margins, and your sales process, then design a digital marketing strategy that delivers a steady flow of qualified opportunities.',
+          'We combine the compounding power of SEO with the speed of paid media and the trust of organic social, so you get both quick wins and a durable growth engine, all measured against real business outcomes.'
+        ]
+      },
+      {
+        heading: 'Channels That Work Together',
+        paragraphs: [
+          'Most agencies optimise a single channel in a vacuum. We orchestrate them: search ads capture high-intent demand today, SEO builds free traffic for tomorrow, and social plus retargeting keep your brand in front of buyers until they convert.',
+          'With unified tracking across every touchpoint, we know exactly which channels, campaigns, and creatives drive your leads, so budget always flows to what works.'
+        ]
+      }
+    ],
+    faqs: [
+      { q: 'What does a digital marketing company do?', a: 'We plan and run campaigns across SEO, paid ads, and social media to grow your visibility, traffic, and qualified leads, then optimise continuously against ROI.' },
+      { q: 'How much should I budget for digital marketing?', a: 'It depends on your goals and competition. We build a plan to fit your budget and recommend the channel mix that will deliver the best return, starting small and scaling what works.' },
+      { q: 'Which channels do you manage?', a: 'SEO, Google Ads, Meta (Facebook & Instagram) Ads, social media management, content, and conversion-focused landing pages, all under one team.' },
+      { q: 'How do you measure success?', a: 'By leads, cost per lead, and revenue, not vanity metrics. You get transparent monthly reporting tied to your business goals.' },
+      { q: 'Do you work with small businesses and startups?', a: 'Yes. We tailor strategy and budget for businesses of every size, from local startups to established enterprises across India.' },
+      { q: 'When will I see results?', a: 'Paid campaigns can drive leads within days; SEO and organic compound over 3 to 6 months. We balance both for quick wins and long-term growth.' }
+    ],
+    relatedLinks: [
+      { label: 'SEO Company', href: '/seo-company', desc: 'Durable organic growth.' },
+      { label: 'Google Ads Agency', href: '/google-ads-agency', desc: 'High-ROI paid search.' },
+      { label: 'Web Development Company', href: '/web-development-company', desc: 'Convert traffic with a fast site.' }
+    ],
+    cta: {
+      headline: 'Let\'s Build Your Growth Plan',
+      sub: 'Book a free strategy call and get a custom digital marketing roadmap for your business.'
+    }
+  },
+
+  'google-ads-agency': {
+    slug: 'google-ads-agency',
+    seo: {
+      title: 'Google Ads Agency in India | PPC Management | Avani Enterprises',
+      description: 'Avani Enterprises is a certified Google Ads agency managing high-ROI PPC, search, shopping, and display campaigns. Lower your cost per lead. Request a free Google Ads audit.',
+      keywords: 'google ads agency, google ads management, ppc agency, ppc management company, google adwords agency india, paid search agency',
+      canonical: 'https://www.avanienterprises.in/google-ads-agency'
+    },
+    breadcrumbs: [
+      { label: 'Home', href: '/' },
+      { label: 'Services', href: '/services' },
+      { label: 'Google Ads Agency', href: '/google-ads-agency' }
+    ],
+    hero: {
+      tag: 'High-ROI Paid Search',
+      h1: 'Google Ads Agency in India',
+      subtitle: 'We manage Google Ads campaigns that lower your cost per lead and scale profitably, structured around conversions, not clicks.',
+      stats: [
+        { value: '300+', label: 'Campaigns Managed' },
+        { value: '150+', label: 'Advertisers Served' },
+        { value: '5.0', label: 'Client Rating' }
+      ]
+    },
+    intro: 'As a performance-focused Google Ads agency, Avani Enterprises helps businesses across India turn paid search into a reliable, profitable acquisition channel. From keyword strategy and ad copy to landing pages and bid optimisation, we engineer every campaign to drive qualified leads at the lowest possible cost per acquisition.',
+    whyAvani: [
+      { title: 'Conversion-Led Campaigns', desc: 'We optimise for leads and sales, not vanity clicks, with proper conversion tracking from day one.' },
+      { title: 'Tight Budget Control', desc: 'Continuous bid, keyword, and negative-keyword management to cut wasted spend and protect ROI.' },
+      { title: 'Landing Page Optimisation', desc: 'High-converting landing pages and funnels so your ad clicks actually become customers.' }
+    ],
+    features: [
+      { title: 'Search Ads', desc: 'High-intent keyword campaigns that capture buyers actively searching for your services.' },
+      { title: 'Shopping & Performance Max', desc: 'Product and PMax campaigns that scale ecommerce and lead-gen profitably.' },
+      { title: 'Display & Retargeting', desc: 'Stay in front of warm prospects across the web until they convert.' },
+      { title: 'Conversion Tracking & CRO', desc: 'Accurate tracking plus landing-page optimisation to maximise return on ad spend.' }
+    ],
+    bodySections: [
+      {
+        heading: 'A Google Ads Agency Obsessed With Cost Per Lead',
+        paragraphs: [
+          'Most wasted ad spend comes from poor campaign structure, broad keywords, weak ad copy, and landing pages that do not convert. We fix all three. Every campaign is built around tightly themed ad groups, intent-matched keywords, and compelling copy.',
+          'We then connect ads to optimised landing pages and proper conversion tracking, so we can see exactly which keywords and ads produce leads, and shift budget toward them in real time.'
+        ]
+      },
+      {
+        heading: 'Scale Profitably, Not Just Spend More',
+        paragraphs: [
+          'Scaling Google Ads is not about increasing budget, it is about improving efficiency first. We systematically lower your cost per acquisition through bid strategy, negative keywords, audience refinement, and continuous A/B testing.',
+          'Once a campaign is profitable and predictable, we scale it confidently, expanding into new keywords, shopping, and retargeting to grow your lead volume without sacrificing ROI.'
+        ]
+      }
+    ],
+    faqs: [
+      { q: 'How much should I spend on Google Ads?', a: 'It depends on your industry, competition, and goals. We recommend starting with a test budget to find profitable keywords, then scaling what works. We help you set the right number on a free call.' },
+      { q: 'Do you charge a management fee on top of ad spend?', a: 'Yes, our management fee covers strategy, setup, optimisation, and reporting. We keep it transparent and tied to the value and ROI we deliver.' },
+      { q: 'How quickly can Google Ads generate leads?', a: 'Campaigns can start driving qualified leads within days of launch, then improve as we optimise bids, keywords, and landing pages.' },
+      { q: 'Are you a certified Google Ads partner?', a: 'Our team works daily in Google Ads with hands-on certified expertise across search, shopping, Performance Max, and display.' },
+      { q: 'Will you improve my existing campaigns?', a: 'Yes. We frequently audit and restructure underperforming accounts to cut wasted spend and lift conversions, often improving ROI without raising budget.' },
+      { q: 'Do you optimise landing pages too?', a: 'Absolutely. Great ads need great landing pages, we build and optimise conversion-focused pages to maximise your return on ad spend.' }
+    ],
+    relatedLinks: [
+      { label: 'Digital Marketing Company', href: '/digital-marketing-company', desc: 'Full-funnel growth.' },
+      { label: 'SEO Company', href: '/seo-company', desc: 'Free traffic alongside paid.' },
+      { label: 'Web Development Company', href: '/web-development-company', desc: 'High-converting landing pages.' }
+    ],
+    cta: {
+      headline: 'Get a Free Google Ads Audit',
+      sub: 'We will review your account (or plan a new one) and show you how to lower cost per lead and scale profitably.'
+    }
+  },
+
+  'ai-automation-company': {
+    slug: 'ai-automation-company',
+    seo: {
+      title: 'AI Automation Company in India | Business Process Automation | Avani Enterprises',
+      description: 'Avani Enterprises is an AI automation company building AI chatbots, workflow automation, and custom AI solutions that cut costs and scale operations. Book a free automation audit.',
+      keywords: 'ai automation company, business automation company, ai solutions company, ai development company, ai chatbot development, workflow automation company india',
+      canonical: 'https://www.avanienterprises.in/ai-automation-company'
+    },
+    breadcrumbs: [
+      { label: 'Home', href: '/' },
+      { label: 'Services', href: '/services' },
+      { label: 'AI Automation Company', href: '/ai-automation-company' }
+    ],
+    hero: {
+      tag: 'Automate. Scale. Save.',
+      h1: 'AI Automation Company in India',
+      subtitle: 'We build AI chatbots, automated workflows, and custom AI tools that eliminate repetitive work, cut operational costs, and let your team scale without scaling headcount.',
+      stats: [
+        { value: '70%', label: 'Tasks Automated' },
+        { value: '24/7', label: 'AI Availability' },
+        { value: '8+', label: 'Years Building Tech' }
+      ]
+    },
+    intro: 'Avani Enterprises is an AI automation company helping businesses across India work smarter, not harder. We identify the repetitive, time-consuming processes draining your team, then deploy AI chatbots, intelligent workflows, and custom automation that handle them accurately, around the clock, and at a fraction of the cost.',
+    whyAvani: [
+      { title: 'Process-First Approach', desc: 'We map your workflows and automate the highest-impact bottlenecks first for fast, measurable ROI.' },
+      { title: 'Custom AI, Not Templates', desc: 'Solutions built around your business, data, and tools, integrated with your existing systems.' },
+      { title: 'Practical & Reliable', desc: 'Automation that actually runs in production, with monitoring, guardrails, and human-in-the-loop where it matters.' }
+    ],
+    features: [
+      { title: 'AI Chatbots & Assistants', desc: 'Intelligent chatbots for support, lead qualification, and WhatsApp automation that respond instantly 24/7.' },
+      { title: 'Workflow Automation', desc: 'Automate lead routing, data entry, follow-ups, and approvals across your tools.' },
+      { title: 'Lead Management Automation', desc: 'Capture, qualify, and route leads automatically so none slip through the cracks.' },
+      { title: 'Custom AI Solutions', desc: 'Bespoke AI tools and integrations tailored to your data and business processes.' }
+    ],
+    bodySections: [
+      {
+        heading: 'An AI Automation Company Focused on ROI',
+        paragraphs: [
+          'AI is only valuable when it solves a real business problem. We do not chase hype, we find the repetitive tasks and slow workflows costing you time and money, and automate them with the right blend of AI and engineering.',
+          'The outcome is tangible: faster response times, fewer errors, lower operational cost, and a team freed to focus on high-value work instead of manual busywork.'
+        ]
+      },
+      {
+        heading: 'From Chatbots to End-to-End Automation',
+        paragraphs: [
+          'Many businesses start with an AI chatbot to handle customer queries and qualify leads instantly, then expand into automating the workflows behind them, CRM updates, follow-up sequences, WhatsApp messaging, and reporting.',
+          'We build these systems to integrate with the tools you already use, so automation slots into your operations smoothly and scales as you grow, without adding complexity or headcount.'
+        ]
+      }
+    ],
+    faqs: [
+      { q: 'What is an AI automation company?', a: 'We use artificial intelligence and software automation to handle repetitive business tasks, like answering queries, qualifying leads, and updating records, so your team can focus on higher-value work.' },
+      { q: 'What processes can you automate?', a: 'Customer support and chat, lead capture and qualification, WhatsApp messaging, data entry, follow-ups, approvals, and reporting, among many others. We start with your highest-impact bottlenecks.' },
+      { q: 'Will AI automation integrate with my existing tools?', a: 'Yes. We build automations that connect with your CRM, website, WhatsApp, and other systems via APIs, so everything works together.' },
+      { q: 'How quickly will I see results?', a: 'Many automations, like an AI chatbot or lead-routing workflow, deliver value within weeks. We prioritise quick, high-ROI wins first.' },
+      { q: 'Is AI automation reliable and safe?', a: 'Yes. We build with proper guardrails, monitoring, and human-in-the-loop checks where needed, so automation is accurate and dependable in production.' },
+      { q: 'Do I need technical knowledge to use it?', a: 'No. We design intuitive, hands-off solutions and handle setup, integration, and support so your team simply benefits from the results.' }
+    ],
+    relatedLinks: [
+      { label: 'CRM Development Company', href: '/crm-development-company', desc: 'Automate your sales pipeline.' },
+      { label: 'Web Development Company', href: '/web-development-company', desc: 'Custom software and web apps.' },
+      { label: 'Digital Marketing Company', href: '/digital-marketing-company', desc: 'Feed automation with quality leads.' }
+    ],
+    cta: {
+      headline: 'Automate Your Business With AI',
+      sub: 'Book a free automation audit and we will map the highest-ROI processes to automate first.'
+    }
+  },
+
+  'crm-development-company': {
+    slug: 'crm-development-company',
+    seo: {
+      title: 'CRM Development Company in India | Custom CRM Software | Avani Enterprises',
+      description: 'Avani Enterprises is a CRM development company building custom CRM software to manage leads, sales, and customers. Tailored to your workflow, fully integrated. Request a demo.',
+      keywords: 'crm development company, crm software company, custom crm development, crm software development, sales crm software india, lead management crm',
+      canonical: 'https://www.avanienterprises.in/crm-development-company'
+    },
+    breadcrumbs: [
+      { label: 'Home', href: '/' },
+      { label: 'Services', href: '/services' },
+      { label: 'CRM Development Company', href: '/crm-development-company' }
+    ],
+    hero: {
+      tag: 'Own Your Customer Data',
+      h1: 'CRM Development Company in India',
+      subtitle: 'We build custom CRM software that fits your sales process exactly, capturing every lead, automating follow-ups, and giving you full visibility into your pipeline.',
+      stats: [
+        { value: '300+', label: 'Projects Delivered' },
+        { value: '150+', label: 'Businesses Served' },
+        { value: '8+', label: 'Years of Experience' }
+      ]
+    },
+    intro: 'Avani Enterprises is a CRM development company building custom customer relationship management software for businesses that have outgrown spreadsheets and off-the-shelf tools. We design CRMs around your real sales process, so your team captures every lead, automates the busywork, and closes more deals with complete pipeline visibility.',
+    whyAvani: [
+      { title: 'Built Around Your Workflow', desc: 'No forcing your team into rigid software, your CRM is designed around how you actually sell.' },
+      { title: 'Automation Built In', desc: 'Automatic lead capture, assignment, follow-up reminders, and reporting to keep deals moving.' },
+      { title: 'You Own Your Data', desc: 'A custom CRM means full control of your customer data, no per-seat fees that balloon as you grow.' }
+    ],
+    features: [
+      { title: 'Lead & Pipeline Management', desc: 'Capture, track, and move leads through customisable pipeline stages with full visibility.' },
+      { title: 'Sales Automation', desc: 'Automate lead assignment, follow-ups, reminders, and email/WhatsApp sequences.' },
+      { title: 'Reporting & Dashboards', desc: 'Real-time dashboards on sales performance, conversion rates, and team activity.' },
+      { title: 'Integrations', desc: 'Connect your CRM with your website, WhatsApp, email, and existing business tools.' }
+    ],
+    bodySections: [
+      {
+        heading: 'A CRM Built for How You Actually Sell',
+        paragraphs: [
+          'Generic CRMs force your team to adapt to the software, often leading to messy data and low adoption. A custom CRM flips that: we design it around your exact sales stages, fields, and processes, so it feels intuitive and your team actually uses it.',
+          'Every lead from your website, ads, and WhatsApp flows into one place, gets assigned automatically, and is followed up on time, so nothing slips through the cracks and your pipeline stays full.'
+        ]
+      },
+      {
+        heading: 'Automation, Visibility, and Control',
+        paragraphs: [
+          'Beyond storing contacts, a great CRM drives action. We build in automation, assignment rules, follow-up reminders, and email/WhatsApp sequences, so your reps spend time selling, not on admin.',
+          'Real-time dashboards give you and your managers clear visibility into pipeline value, conversion rates, and rep performance, turning your CRM into a decision-making tool, not just a database.'
+        ]
+      }
+    ],
+    faqs: [
+      { q: 'Why choose a custom CRM over a ready-made one?', a: 'A custom CRM fits your exact process, removes per-seat costs that grow with your team, and gives you full ownership of your data and roadmap, no compromises or feature bloat.' },
+      { q: 'How long does CRM development take?', a: 'A focused CRM can be delivered in a few weeks; more complex systems take longer. We work in milestones so you see progress and can use it early.' },
+      { q: 'Can you integrate the CRM with WhatsApp and my website?', a: 'Yes. We connect your CRM to your website forms, WhatsApp, email, and other tools so leads and updates flow automatically.' },
+      { q: 'Will it automate lead follow-ups?', a: 'Yes. We build automated lead capture, assignment, reminders, and follow-up sequences so no opportunity is missed.' },
+      { q: 'Can existing data be migrated into the new CRM?', a: 'Absolutely. We migrate your contacts and historical data from spreadsheets or your current CRM during setup.' },
+      { q: 'Do you provide training and support?', a: 'Yes. We onboard your team, provide documentation, and offer ongoing support and enhancements as your needs evolve.' }
+    ],
+    relatedLinks: [
+      { label: 'AI Automation Company', href: '/ai-automation-company', desc: 'Automate your sales workflows.' },
+      { label: 'HR Portal', href: '/hr-portal', desc: 'Custom internal business software.' },
+      { label: 'Web Development Company', href: '/web-development-company', desc: 'Custom software development.' }
+    ],
+    cta: {
+      headline: 'Build a CRM Your Team Will Actually Use',
+      sub: 'Request a free demo and consultation, we will map your sales process and show you what a custom CRM can do.'
+    }
   }
 };
