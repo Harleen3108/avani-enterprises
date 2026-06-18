@@ -169,7 +169,7 @@ const Blog = () => {
         <Grain />
         <GlowBlob top="20%" left="30%" w={400} opacity={0.03} blur={120} />
         <div className="dh-container" style={{ position: 'relative', zIndex: 10 }}>
-          <div style={{ padding: '5rem', background: 'var(--card-bg)', borderRadius: '24px', border: '1px solid var(--border-faint)', textAlign: 'center', backdropFilter: 'blur(10px)', position: 'relative', overflow: 'hidden' }}>
+          <div style={{ padding: 'clamp(1.75rem, 5vw, 5rem)', background: 'var(--card-bg)', borderRadius: '24px', border: '1px solid var(--border-faint)', textAlign: 'center', backdropFilter: 'blur(10px)', position: 'relative', overflow: 'hidden' }}>
             <div style={{ position: 'absolute', top: 0, left: 0, width: 80, height: 80, borderTop: '2px solid var(--accent-primary)', borderLeft: '2px solid var(--accent-primary)', borderRadius: '24px 0 0 0', opacity: 0.3 }} />
             <div style={{ position: 'absolute', bottom: 0, right: 0, width: 80, height: 80, borderBottom: '2px solid var(--accent-primary)', borderRight: '2px solid var(--accent-primary)', borderRadius: '0 0 24px 0', opacity: 0.3 }} />
             <div className="dh-label">INTEL FEED</div>

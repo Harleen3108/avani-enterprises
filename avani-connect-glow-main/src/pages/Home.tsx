@@ -988,7 +988,7 @@ No.1 Digital Marketing Agency in India we provide best Digital Marketing, Web De
                     style={cardStyle}
                   >
                     <motion.div
-                      className="relative bg-white rounded-2xl overflow-hidden shadow-2xl w-80 md:w-96 h-full flex flex-col group"
+                      className="relative bg-white rounded-2xl overflow-hidden shadow-2xl w-[85vw] max-w-xs sm:w-80 md:w-96 h-full flex flex-col group"
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.5, delay: index * 0.1 }}

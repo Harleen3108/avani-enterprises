@@ -182,7 +182,7 @@ const CaseStudies = () => {
         <Grain />
         <GridBg size={30} opacity={0.03} />
         <div className="dh-container" style={{ position: 'relative', zIndex: 10 }}>
-          <div className="dh-case-study-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '1.75rem' }}>
+          <div className="dh-case-study-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 320px), 1fr))', gap: '1.75rem' }}>
             {caseStudies.map((study, i) => (
               <motion.div key={study.id} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: i * 0.1 }}>
                 <div style={{

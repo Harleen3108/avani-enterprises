@@ -190,7 +190,7 @@ const About = () => {
       {/* 2. LEADERSHIP SECTION (Reduced Size) */}
       <section className="theme-beige" style={{ padding: '80px 0', background: 'var(--bg-primary)', borderTop: '1px solid var(--border-faint)' }}>
         <div className="dh-container">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '40px', alignItems: 'center' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '40px', alignItems: 'center' }}>
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} style={{ position: 'relative', maxWidth: '400px', margin: '0 auto' }}>
               <div style={{ borderRadius: '24px', overflow: 'hidden', border: '1px solid var(--border-light)', aspectRatio: '4/5' }}>
                 <img src="/kapil_khandelwal.jpg" alt="Kapil Khandelwal" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
@@ -235,7 +235,7 @@ const About = () => {
       {/* 3. PHILOSOPHY & VISION (Compact) */}
       <section className="theme-brown" style={{ padding: '80px 0', background: 'var(--bg-primary)' }}>
         <div className="dh-container">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '24px' }}>
 
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} style={{ padding: '32px', background: 'var(--card-bg)', borderRadius: '16px', border: '1px solid var(--border-faint)' }}>
               <Shield size={28} style={{ color: 'var(--accent-primary)', marginBottom: '16px' }} />
@@ -355,7 +355,7 @@ const About = () => {
             </p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '24px' }} className="dh-responsive-grid dh-adv-grid">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))', gap: '24px' }} className="dh-responsive-grid dh-adv-grid">
             {[
               { img: '/about_proven_track_record.webp', icon: <Shield size={24} />, title: 'Proven Track Record', desc: 'With 8+ years of experience and 300+ successful projects, we have the strategic depth and technical expertise to handle any digital challenge.' },
               { img: '/about_innovation_driven.webp', icon: <Zap size={24} />, title: 'Innovation-Driven', desc: 'We stay ahead of industry trends and leverage cutting-edge technologies to deliver innovative solutions that give you a competitive edge.' },

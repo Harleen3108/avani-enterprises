@@ -500,7 +500,7 @@ const ServiceDetail = () => {
           {/* Visible breadcrumb added */}
           <Breadcrumb />
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '4rem', alignItems: 'center', marginTop: '2rem' }} className="dh-responsive-grid">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))', gap: '4rem', alignItems: 'center', marginTop: '2rem' }} className="dh-responsive-grid">
             
             {/* Left Content Column */}
             <motion.div 

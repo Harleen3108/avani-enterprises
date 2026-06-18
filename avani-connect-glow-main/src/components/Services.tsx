@@ -58,7 +58,7 @@ const DummyServices = ({ services }: any) => {
         </motion.div>
 
         {/* Premium Book Grid Style */}
-        <div className="dummy-services-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '32px' }}>
+        <div className="dummy-services-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 320px), 1fr))', gap: '32px' }}>
           {services.map((svc: any, i: number) => (
             <motion.div 
               key={i} 
