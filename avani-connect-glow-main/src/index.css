@@ -147,6 +147,33 @@ body {
   }
 }
 
+/* ===========================================================================
+   MOBILE PERFORMANCE — remove GPU-heavy decorative effects that cause scroll lag.
+   backdrop-filter (frosted glass) and animated 80–120px blur "glow blobs" are the
+   two biggest mobile scroll-jank sources. We neutralize only the expensive paint
+   work; elements/content remain (no layout or content loss).
+   =========================================================================== */
+@media (max-width: 768px) {
+  /* Frosted-glass blur is recomposited on every scroll frame — disable it. */
+  [style*="backdrop-filter"],
+  [class*="backdrop-blur"],
+  .glass,
+  .dh-glass {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  /* Decorative glow blobs use filter: blur(80–120px) and animate forever.
+     Dropping the blur removes the constant GPU repaint. (Safe on backdrop-filter
+     elements too: setting `filter` doesn't touch their `backdrop-filter`.) */
+  [style*="filter: blur"] {
+    filter: none !important;
+  }
+
+  /* Hero ambient particles: 24 shadowed elements animating forever — hide. */
+  .dummy-hero-particles { display: none !important; }
+}
+
 :root {
   --announcement-bar-height: 40px;
 }
