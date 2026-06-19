@@ -17,7 +17,10 @@ const navLinks = [
       { label: 'SOCIAL MEDIA MARKETING', path: '/services/social-media-marketing' },
       { label: 'AI SOLUTIONS', path: '/services/ai-solutions' },
       { label: 'PODCAST PRODUCTION', path: '/services/podcast-production' },
-      { label: 'FINANCIAL CONSULTING', path: '/services/financial-consulting' }
+      { label: 'FINANCIAL CONSULTING', path: '/services/financial-consulting' },
+      { label: 'BUSINESS CONSULTATION', path: '/services/business-consultation' },
+      { label: 'BUSINESS LOANS', path: '/services/business-loans' },
+      { label: 'BUSINESS INSURANCE', path: '/services/business-insurance' }
     ]
   },
   { 
