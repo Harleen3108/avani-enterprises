@@ -109,7 +109,7 @@ const GlobalPresence = () => {
               Delivering premium, high-tech networking solutions from our headquarters in Rohtak to our international hubs. We bridge continents with digital excellence and innovative enterprise strategies.
             </motion.p>
             
-            <motion.div variants={fadeUp} style={{ display: 'flex', justifyContent: 'center', gap: '4rem', flexWrap: 'wrap' }}>
+            <motion.div variants={fadeUp} style={{ display: 'flex', justifyContent: 'center', gap: 'clamp(1.5rem, 7vw, 4rem)', flexWrap: 'wrap' }}>
               {[{ val: '04', label: 'Major Hubs' }, { val: '02', label: 'Continents' }, { val: '∞', label: 'Digital Reach' }].map((s, i) => (
                 <div key={i} style={{ textAlign: 'center' }}>
                   <div style={{ fontSize: '3rem', fontFamily: "'Clash Display', 'Bebas Neue', 'Outfit', sans-serif", fontWeight: 600, color: 'var(--text-primary)', lineHeight: 1, letterSpacing: '0.05em' }}>{s.val}</div>
@@ -136,22 +136,22 @@ const GlobalPresence = () => {
       <ThemedLuxuryLine />
 
       {/* 3. OFFICE COLLECTION */}
-      <section className="theme-beige" style={{ position: 'relative', padding: '100px 0', background: 'var(--bg-primary)', overflow: 'hidden' }}>
+      <section className="theme-beige" style={{ position: 'relative', padding: 'clamp(56px, 11vw, 100px) 0', background: 'var(--bg-primary)', overflow: 'hidden' }}>
         <ThemedGrain />
         <ThemedGlowBlob top="20%" right="-5%" w={400} opacity={0.03} blur={150} color="var(--accent-hover)" />
         <ThemedGlowBlob bottom="10%" left="-10%" w={500} opacity={0.03} blur={150} color="var(--accent-primary)" />
         
         <div className="dh-container" style={{ position: 'relative', zIndex: 10 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '2rem', marginBottom: '5rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'clamp(0.75rem, 3vw, 2rem)', marginBottom: 'clamp(2.5rem, 8vw, 5rem)' }}>
             <div style={{ flex: 1, height: '1px', background: 'var(--border-light)' }} />
-            <div style={{ textAlign: 'center' }}>
-              <h2 style={{ fontFamily: "'Outfit', sans-serif", fontSize: '2.5rem', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '0.02em', margin: 0 }}>OFFICE COLLECTION</h2>
+            <div style={{ textAlign: 'center', flexShrink: 0 }}>
+              <h2 style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(1.4rem, 6vw, 2.5rem)', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '0.02em', margin: 0 }}>OFFICE COLLECTION</h2>
               <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.8rem', fontWeight: 600, color: 'var(--accent-primary)', letterSpacing: '0.2em', marginTop: '8px' }}>DETAILED NETWORK OVERVIEW</div>
             </div>
             <div style={{ flex: 1, height: '1px', background: 'var(--border-light)' }} />
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 450px), 1fr))', gap: '4rem', maxWidth: '1200px', margin: '0 auto' }} className="dh-responsive-grid">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 450px), 1fr))', gap: 'clamp(1.75rem, 5vw, 4rem)', maxWidth: '1200px', margin: '0 auto' }} className="dh-responsive-grid">
             {officeDetails.map((office, i) => (
               <motion.div key={office.city} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: i * 0.1 }}
                 style={{ display: 'flex', flexDirection: 'column', background: 'var(--card-bg)', borderRadius: '24px', overflow: 'hidden', border: '1px solid var(--border-light)', boxShadow: '0 10px 40px rgba(0,0,0,0.03)' }}>
@@ -229,12 +229,12 @@ const GlobalPresence = () => {
       <ThemedLuxuryLine />
 
       {/* 4. CTA */}
-      <section className="theme-brown" style={{ position: 'relative', padding: '100px 0', background: 'radial-gradient(circle at 50% 100%, var(--bg-secondary) 0%, var(--bg-primary) 70%)', overflow: 'hidden' }}>
+      <section className="theme-brown" style={{ position: 'relative', padding: 'clamp(56px, 11vw, 100px) 0', background: 'radial-gradient(circle at 50% 100%, var(--bg-secondary) 0%, var(--bg-primary) 70%)', overflow: 'hidden' }}>
         <ThemedGrain />
         <ThemedGlowBlob top="30%" left="40%" w={400} opacity={0.03} blur={150} color="var(--accent-primary)" />
         
         <div className="dh-container" style={{ position: 'relative', zIndex: 10, textAlign: 'center' }}>
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} style={{ padding: '60px 40px', background: 'var(--card-bg)', border: '1px solid var(--border-light)', borderRadius: '24px', backdropFilter: 'blur(10px)', maxWidth: '900px', margin: '0 auto', boxShadow: '0 20px 40px rgba(0,0,0,0.04)' }}>
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} style={{ padding: 'clamp(2rem, 7vw, 60px) clamp(1.25rem, 5vw, 40px)', background: 'var(--card-bg)', border: '1px solid var(--border-light)', borderRadius: '24px', backdropFilter: 'blur(10px)', maxWidth: '900px', margin: '0 auto', boxShadow: '0 20px 40px rgba(0,0,0,0.04)' }}>
             <h2 style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: 800, color: 'var(--text-primary)', lineHeight: 1.1, marginBottom: '1.5rem', letterSpacing: '-0.02em' }}>
               START YOUR <span style={{ color: 'transparent', WebkitTextStroke: '1px var(--accent-primary)', backgroundImage: 'linear-gradient(90deg, var(--text-primary), var(--accent-primary))', WebkitBackgroundClip: 'text' }}>JOURNEY</span> <br />ACROSS OUR NETWORK
             </h2>
