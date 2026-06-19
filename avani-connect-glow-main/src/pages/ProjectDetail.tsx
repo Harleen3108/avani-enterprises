@@ -65,7 +65,7 @@ const ProjectDetail = () => {
         
         <div className="dh-container" style={{ position: 'relative', zIndex: 10 }}>
           {/* Dual-column grid styled to guarantee bulletproof proportional layouts */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '4rem', alignItems: 'center' }} className="dh-responsive-grid">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))', gap: '4rem', alignItems: 'center' }} className="dh-responsive-grid">
             
             {/* Left Content Side */}
             <motion.div 
@@ -269,7 +269,7 @@ const ProjectDetail = () => {
 
             <div style={{ 
               display: 'grid', 
-              gridTemplateColumns: project.galleryImages.length >= 4 ? 'repeat(auto-fit, minmax(240px, 1fr))' : 'repeat(auto-fit, minmax(320px, 1fr))', 
+              gridTemplateColumns: project.galleryImages.length >= 4 ? 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))' : 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))',
               gap: '24px' 
             }}>
               {project.galleryImages.map((img, i) => (

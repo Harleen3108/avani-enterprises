@@ -807,14 +807,14 @@ const ServiceDetail = () => {
           </motion.div>
 
           {/* Isometric 3D Layer Stack Integration */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '4rem', alignItems: 'center' }} className="dh-responsive-grid">
-            
+          <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '4rem', alignItems: 'center' }} className="dh-responsive-grid dh-arch-grid">
+
             {/* Left Box: Selected Layer Breakdown */}
-            <div style={{ 
-              background: 'var(--card-bg)', 
-              border: '1px solid var(--border-faint)', 
-              borderRadius: '24px', 
-              padding: '3rem', 
+            <div className="dh-arch-left-box" style={{
+              background: 'var(--card-bg)',
+              border: '1px solid var(--border-faint)',
+              borderRadius: '24px',
+              padding: '3rem',
               minHeight: '380px', 
               display: 'flex', 
               flexDirection: 'column', 
@@ -1068,25 +1068,44 @@ const ServiceDetail = () => {
       <InternalLinking />
 
       <style>{`
-        @media (max-width: 768px) {
+        /* Architecture Layers: the 3D isometric stack (fixed 320px, rotated) breaks
+           in any narrow column, so below 1024px we collapse the section to one
+           column and flatten the stack into a normal vertical, tappable list. */
+        @media (max-width: 1024px) {
+          .dh-arch-grid {
+            grid-template-columns: 1fr !important;
+            gap: 2.5rem !important;
+          }
           .dh-arch-right-box {
             height: auto !important;
-            margin-top: 2rem !important;
+            margin-top: 0 !important;
+            width: 100% !important;
           }
           .dh-arch-stack {
             transform: none !important;
+            perspective: none !important;
+            transform-style: flat !important;
             width: 100% !important;
+            max-width: 480px !important;
             height: auto !important;
             display: flex !important;
             flex-direction: column !important;
-            gap: 16px !important;
+            gap: 14px !important;
+            margin: 0 auto !important;
           }
           .dh-arch-layer {
             position: relative !important;
             transform: none !important;
             height: auto !important;
-            min-height: 100px !important;
+            min-height: 92px !important;
+            width: 100% !important;
           }
+        }
+        @media (max-width: 768px) {
+          .dh-arch-left-box { padding: 1.75rem !important; min-height: 0 !important; }
+        }
+        @media (max-width: 400px) {
+          .dh-arch-left-box { padding: 1.25rem !important; }
         }
       `}</style>
     </div>

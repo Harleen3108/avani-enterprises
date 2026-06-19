@@ -417,7 +417,7 @@ const Services = () => {
 
         <div className="dh-container" style={{ position: 'relative', zIndex: 10 }}>
           <div style={{
-            padding: '6rem 4rem', textAlign: 'center',
+            padding: 'clamp(2.5rem, 7vw, 6rem) clamp(1.25rem, 5vw, 4rem)', textAlign: 'center',
             background: 'var(--card-bg)', borderRadius: '24px',
             border: '1px solid var(--border-faint)',
             backdropFilter: 'blur(10px)',
