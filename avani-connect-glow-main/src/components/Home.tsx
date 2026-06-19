@@ -9,6 +9,7 @@ import { API_BASE_URL } from '../utils/api';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import DummyHero from './Hero';
+import AboutBrief from './AboutBrief';
 import DummyServices from './Services';
 import DummyProcess from './Process';
 import DummyTestimonials from './Testimonials';
@@ -270,6 +271,7 @@ const Home = () => {
   return (
     <div style={{ fontFamily: "'Inter', sans-serif" }}>
       <DummyHero newsletters={newsletters} loadingNewsletters={loadingNewsletters} clientLogos={clientLogos} />
+      <AboutBrief />
       <DummyLogoMarquee clientLogos={clientLogos} />
       <DummyImpactBar />
       <DummyServices services={services} />
