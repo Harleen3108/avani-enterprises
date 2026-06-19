@@ -56,7 +56,7 @@ const DummyCaseStudies = () => {
       {/* Dot pattern */}
       <div style={{ position: 'absolute', inset: 0, opacity: 0.03, backgroundImage: `radial-gradient(circle, var(--text-tertiary) 1px, transparent 0)`, backgroundSize: '40px 40px', pointerEvents: 'none' }} />
 
-      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 48px', position: 'relative', zIndex: 5 }} className="dummy-cases-container">
+      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 clamp(1rem, 5vw, 48px)', position: 'relative', zIndex: 5 }} className="dummy-cases-container">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}

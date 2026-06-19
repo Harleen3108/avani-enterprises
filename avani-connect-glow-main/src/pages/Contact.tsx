@@ -173,7 +173,7 @@ const Contact = () => {
 
             {/* Right: Form */}
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: 0.2 }}>
-              <div style={{ background: 'var(--card-bg)', border: '1px solid var(--border-light)', borderRadius: '24px', padding: '3.5rem', backdropFilter: 'blur(10px)', position: 'relative', overflow: 'hidden' }}>
+              <div style={{ background: 'var(--card-bg)', border: '1px solid var(--border-light)', borderRadius: '24px', padding: 'clamp(1.5rem, 5vw, 3.5rem)', backdropFilter: 'blur(10px)', position: 'relative', overflow: 'hidden' }}>
                 <div style={{ position: 'absolute', top: 0, right: 0, width: 60, height: 60, background: 'linear-gradient(135deg, transparent 50%, var(--accent-primary) 50%)', opacity: 0.06, borderRadius: '0 24px 0 0' }} />
                 <div className="dh-label">INQUIRY FORM</div>
                 <h2 className="dh-display" style={{ fontSize: '2.5rem', marginBottom: '3rem' }}>PROJECT BRIEF</h2>

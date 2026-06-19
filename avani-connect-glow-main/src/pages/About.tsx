@@ -390,7 +390,7 @@ const About = () => {
       {/* 7. CTA SECTION */}
       <section className="theme-brown" style={{ padding: '80px 0', background: 'var(--bg-primary)' }}>
         <div className="dh-container">
-          <div style={{ padding: '60px 40px', textAlign: 'center', background: 'var(--card-bg)', borderRadius: '24px', border: '1px solid var(--border-faint)', position: 'relative', overflow: 'hidden' }}>
+          <div style={{ padding: 'clamp(2rem, 6vw, 60px) clamp(1.5rem, 5vw, 40px)', textAlign: 'center', background: 'var(--card-bg)', borderRadius: '24px', border: '1px solid var(--border-faint)', position: 'relative', overflow: 'hidden' }}>
             {/* Corner accents */}
             <div style={{ position: 'absolute', top: 0, left: 0, width: 60, height: 60, borderTop: '2px solid var(--accent-primary)', borderLeft: '2px solid var(--accent-primary)', borderRadius: '24px 0 0 0', opacity: 0.3 }} />
             <div style={{ position: 'absolute', bottom: 0, right: 0, width: 60, height: 60, borderBottom: '2px solid var(--accent-primary)', borderRight: '2px solid var(--accent-primary)', borderRadius: '0 0 24px 0', opacity: 0.3 }} />

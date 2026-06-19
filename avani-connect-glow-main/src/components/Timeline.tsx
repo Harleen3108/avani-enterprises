@@ -34,7 +34,7 @@ const DummyTimeline = () => {
         </motion.div>
 
         {/* Compact Grid Timeline */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '20px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))', gap: '20px' }}>
           {milestones.map((ms, i) => {
             const Icon = ms.icon;
             

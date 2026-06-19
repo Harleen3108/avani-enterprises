@@ -103,7 +103,7 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
 
         {/* Parallax BG */}
         <motion.div style={{ scale: heroBgScale, position: 'absolute', inset: 0, zIndex: 0 }}>
-          <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=2069" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} fetchPriority="high" loading="eager" />
+          <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=68&w=1280" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} fetchPriority="high" loading="eager" />
           <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, var(--bg-primary) 0%, var(--glass-bg) 50%, transparent 100%)' }} />
           <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, var(--bg-primary) 0%, transparent 100%)' }} />
           <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 72% 38%, var(--border-light) 0%, transparent 55%)' }} />
@@ -135,22 +135,22 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
             <div>
               {/* Badge */}
               <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15, duration: 0.8 }}
-                style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '6px 16px', border: '1px solid var(--border-light)', borderRadius: '100px', background: 'var(--accent-hover)', backdropFilter: 'blur(10px)', marginBottom: '24px' }}>
-                <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--accent-primary)', boxShadow: '0 0 8px var(--accent-primary), 0 0 16px var(--border-light)' }} />
-                <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: '11px', letterSpacing: '0.25em', color: 'var(--accent-light)', fontWeight: 600 }}>AVANI ENTERPRISES · NO.1 DIGITAL MARKETING AGENCY IN INDIA</span>
+                style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '6px 16px', border: '1px solid var(--border-light)', borderRadius: '100px', background: 'var(--accent-hover)', backdropFilter: 'blur(10px)', marginBottom: '24px', maxWidth: '100%' }}>
+                <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--accent-primary)', boxShadow: '0 0 8px var(--accent-primary), 0 0 16px var(--border-light)', flexShrink: 0 }} />
+                <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(9px, 2.3vw, 11px)', letterSpacing: '0.12em', color: 'var(--accent-light)', fontWeight: 600, lineHeight: 1.4 }}>AVANI ENTERPRISES · NO.1 DIGITAL MARKETING AGENCY IN INDIA</span>
               </motion.div>
 
               {/* Headline */}
               <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25, duration: 1, ease: [0.22, 1, 0.36, 1] }}>
-                <h1 style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(52px, 10vw, 110px)', fontWeight: 800, lineHeight: 0.95, color: 'var(--text-primary)', letterSpacing: '-0.02em', margin: 0, textTransform: 'uppercase' }}>
+                <h1 style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(2.1rem, 9.5vw, 110px)', fontWeight: 800, lineHeight: 0.95, color: 'var(--text-primary)', letterSpacing: '-0.02em', margin: 0, textTransform: 'uppercase' }}>
                   WE BUILD<br />
                   <span style={{ color: 'transparent', WebkitTextStroke: '2px var(--text-primary)' }}>HIGH-PERFORMING</span>
                 </h1>
 
                 {/* Animated outline word */}
-                <div style={{ overflow: 'hidden', height: 'clamp(52px, 10vw, 110px)', margin: '4px 0' }}>
+                <div style={{ overflow: 'hidden', height: 'clamp(2.1rem, 9.5vw, 110px)', margin: '4px 0' }}>
                   <motion.div key={wordIndex} initial={{ y: '110%' }} animate={{ y: '0%' }} transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-                    style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(52px, 10vw, 110px)', fontWeight: 800, lineHeight: 0.95, color: 'var(--accent-primary)', letterSpacing: '-0.02em', display: 'block', textTransform: 'uppercase' }}>
+                    style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(2.1rem, 9.5vw, 110px)', fontWeight: 800, lineHeight: 0.95, color: 'var(--accent-primary)', letterSpacing: '-0.02em', display: 'block', textTransform: 'uppercase' }}>
                     {words[wordIndex]}
                   </motion.div>
                 </div>

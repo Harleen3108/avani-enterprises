@@ -108,7 +108,7 @@ const Blog = () => {
               <div className="dh-label">SYNCHRONIZING...</div>
             </div>
           ) : (
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '32px' }} className="dh-blog-grid">
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 320px), 1fr))', gap: '32px' }} className="dh-blog-grid">
               {blogs.map((blog, i) => (
                 <motion.div key={blog._id} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: i * 0.05 }} style={{ display: 'flex' }}>
                   <Link to={`/blog/${encodeURIComponent(blog.slug)}`} style={{ textDecoration: 'none', color: 'inherit', display: 'flex', width: '100%' }}>
