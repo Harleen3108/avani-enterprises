@@ -129,6 +129,22 @@ const urls = [
   { loc: `${BASE_URL}/ai-solutions-company`, lastmod: TODAY, changefreq: "weekly", priority: "0.9" },
   { loc: `${BASE_URL}/local-seo-services`, lastmod: TODAY, changefreq: "weekly", priority: "0.9" },
   { loc: `${BASE_URL}/business-process-automation`, lastmod: TODAY, changefreq: "weekly", priority: "0.9" },
+  // Batch A services + comparison
+  { loc: `${BASE_URL}/custom-web-development-company`, lastmod: TODAY, changefreq: "weekly", priority: "0.9" },
+  { loc: `${BASE_URL}/frontend-development-company`, lastmod: TODAY, changefreq: "weekly", priority: "0.9" },
+  { loc: `${BASE_URL}/backend-development-company`, lastmod: TODAY, changefreq: "weekly", priority: "0.9" },
+  { loc: `${BASE_URL}/ecommerce-website-development-company`, lastmod: TODAY, changefreq: "weekly", priority: "0.9" },
+  { loc: `${BASE_URL}/business-management-software-development`, lastmod: TODAY, changefreq: "weekly", priority: "0.9" },
+  { loc: `${BASE_URL}/agentic-ai-development-company`, lastmod: TODAY, changefreq: "weekly", priority: "0.9" },
+  { loc: `${BASE_URL}/custom-ai-development`, lastmod: TODAY, changefreq: "weekly", priority: "0.9" },
+  { loc: `${BASE_URL}/webmok-alternative`, lastmod: TODAY, changefreq: "weekly", priority: "0.85" },
+  { loc: `${BASE_URL}/web-aspiration-alternative`, lastmod: TODAY, changefreq: "weekly", priority: "0.85" },
+  { loc: `${BASE_URL}/leo-digitals-alternative`, lastmod: TODAY, changefreq: "weekly", priority: "0.85" },
+  { loc: `${BASE_URL}/the-growth-box-alternative`, lastmod: TODAY, changefreq: "weekly", priority: "0.85" },
+  { loc: `${BASE_URL}/techmagnate-alternative`, lastmod: TODAY, changefreq: "weekly", priority: "0.85" },
+  { loc: `${BASE_URL}/pagetraffic-alternative`, lastmod: TODAY, changefreq: "weekly", priority: "0.85" },
+  { loc: `${BASE_URL}/ez-rankings-alternative`, lastmod: TODAY, changefreq: "weekly", priority: "0.85" },
+  { loc: `${BASE_URL}/indeedseo-alternative`, lastmod: TODAY, changefreq: "weekly", priority: "0.85" },
 
   // ── City Pages (Batch 3) ──────────────────────────────────────────────────
   { loc: `${BASE_URL}/web-development-company-rohtak`, lastmod: TODAY, changefreq: "weekly", priority: "0.85" },

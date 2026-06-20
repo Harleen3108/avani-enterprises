@@ -35,6 +35,82 @@ function buildCanonical(pagePath) {
 }
 
 const STATIC_SEO_LOOKUP = {
+  // Batch A services + comparison
+  "/custom-web-development-company": {
+    title: "Custom Web Development Company India | Avani Enterprises",
+    description: "Avani Enterprises is a custom web development company in India building bespoke, no-template web applications engineered to your exact requirements. 300+ projects delivered. Get a free scope call.",
+    keywords: "custom web development company, bespoke web development, tailored web applications, custom website development india, custom web application development, no-template web development"
+  },
+  "/frontend-development-company": {
+    title: "Frontend Development Company in India | React UI | Avani Enterprises",
+    description: "Avani Enterprises is a frontend development company in India building fast, pixel-perfect React and Next.js interfaces with strong Core Web Vitals. 300+ projects. Get a free quote.",
+    keywords: "frontend development company, react development company, ui development, frontend developers india, next.js development, core web vitals optimization"
+  },
+  "/backend-development-company": {
+    title: "Backend Development Company in India | Avani Enterprises",
+    description: "Avani Enterprises builds scalable backend systems, secure APIs, and cloud architecture with Node.js. 300+ projects, 8+ years, 5.0 rating. Book a free architecture call.",
+    keywords: "backend development company, api development company, node.js development, backend developers india, scalable backend architecture, secure database design, cloud backend development, rest api development"
+  },
+  "/ecommerce-website-development-company": {
+    title: "Ecommerce Website Development Company | Avani Enterprises",
+    description: "Avani Enterprises is an ecommerce website development company in India building conversion-focused online stores with payments, inventory & mobile checkout. Get a quote.",
+    keywords: "ecommerce website development company, online store development, ecommerce web development india, mobile checkout development, payment gateway integration, conversion ecommerce store"
+  },
+  "/business-management-software-development": {
+    title: "Business Management Software Development | Avani Enterprises",
+    description: "Avani Enterprises builds custom business management software to run tasks, approvals, inventory & reporting in one system. 300+ projects, 8+ years. Book a free demo.",
+    keywords: "business management software development, business software development company india, custom business management system, operations management software, inventory management software development, approval workflow software, business reporting dashboard software"
+  },
+  "/agentic-ai-development-company": {
+    title: "Agentic AI Development Company India | Avani Enterprises",
+    description: "Avani Enterprises is an agentic AI development company building autonomous AI agents that plan and execute multi-step tasks with tools. Book a free agent scoping call.",
+    keywords: "agentic ai development company, ai agent development, autonomous ai agents, agentic ai india, ai agent development company, multi-agent systems, llm agent development"
+  },
+  "/custom-ai-development": {
+    title: "Custom AI Development in India | Avani Enterprises",
+    description: "Avani Enterprises builds custom AI solutions around your data, tools, and processes, bespoke AI development engineered for production in India. Book a free AI scoping call.",
+    keywords: "custom ai development, custom ai solutions, bespoke ai development india, custom ai software, ai development company india, ai application development, custom llm development, ai integration services"
+  },
+  "/webmok-alternative": {
+    title: "WebMok Alternative \u2014 Avani Enterprises",
+    description: "Looking for a WebMok alternative? Avani Enterprises delivers full-stack web, software, AI and marketing under one roof with transparent fixed quotes. Talk to us today.",
+    keywords: "webmok alternative, webmok competitor, web design agency alternative, full-stack development agency, custom web development company, seo and marketing agency, transparent fixed quote agency, gurugram web agency"
+  },
+  "/web-aspiration-alternative": {
+    title: "Web Aspiration Alternative \u2014 Avani Enterprises",
+    description: "Looking for a Web Aspiration alternative? Avani Enterprises delivers full-stack web, software, AI and marketing under one roof with transparent fixed quotes. Talk to us today.",
+    keywords: "web aspiration alternative, web design agency alternative, digital agency alternative, web development company, seo agency, full-stack development agency, avani enterprises"
+  },
+  "/leo-digitals-alternative": {
+    title: "Leo Digitals Alternative \u2014 Avani Enterprises",
+    description: "Looking for a Leo Digitals alternative? Avani Enterprises pairs web, software, AI, SEO and digital marketing under one roof with transparent fixed quotes. Talk to us today.",
+    keywords: "leo digitals alternative, leo digitals competitor, digital marketing agency alternative, web development agency, seo company india, full-stack marketing agency, gurugram digital agency"
+  },
+  "/the-growth-box-alternative": {
+    title: "The Growth Box Alternative \u2014 Avani Enterprises",
+    description: "Looking for a The Growth Box alternative? Avani Enterprises blends web, software, AI, SEO and marketing under one roof with transparent fixed quotes. Talk to us today.",
+    keywords: "the growth box alternative, growth marketing agency alternative, digital marketing agency, seo agency india, full-stack development agency, the growth box competitor, growth agency gurugram"
+  },
+  "/techmagnate-alternative": {
+    title: "Techmagnate Alternative \u2014 Avani Enterprises",
+    description: "Looking for a Techmagnate alternative? Avani Enterprises pairs SEO and digital marketing with full-stack web, software, and AI under one roof. Talk to us.",
+    keywords: "techmagnate alternative, techmagnate competitor, seo agency alternative, digital marketing agency india, full-stack marketing agency, gurugram seo company, transparent seo pricing"
+  },
+  "/pagetraffic-alternative": {
+    title: "PageTraffic Alternative \u2014 Avani Enterprises",
+    description: "Looking for a PageTraffic alternative? Avani Enterprises delivers SEO plus full-stack web, software, AI and marketing under one roof with transparent fixed quotes. Talk to us today.",
+    keywords: "pagetraffic alternative, seo agency alternative, pagetraffic competitor, full-stack seo agency india, transparent seo pricing, gurugram seo company, digital marketing alternative"
+  },
+  "/ez-rankings-alternative": {
+    title: "EZ Rankings Alternative \u2014 Avani Enterprises",
+    description: "Looking for an EZ Rankings alternative? Avani Enterprises pairs SEO and digital marketing with full-stack web, software, and AI delivery under one roof. Talk to us.",
+    keywords: "ez rankings alternative, ez rankings competitor, seo agency alternative, digital marketing agency india, full-stack seo company, transparent seo pricing, alternative to ez rankings"
+  },
+  "/indeedseo-alternative": {
+    title: "IndeedSEO Alternative \u2014 Avani Enterprises",
+    description: "Looking for an IndeedSEO alternative? Avani Enterprises delivers SEO, web, software, AI and marketing under one roof with transparent fixed quotes. Talk to us today.",
+    keywords: "indeedseo alternative, indeedseo competitor, seo agency india, digital marketing alternative, full-stack seo company, transparent seo pricing, gurugram seo agency"
+  },
   // Batch 3 city pages
   "/web-development-company-rohtak": {
     title: "Web Development Company in Rohtak | Avani Enterprises",

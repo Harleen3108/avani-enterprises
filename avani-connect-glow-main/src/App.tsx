@@ -203,6 +203,23 @@ const SocialMediaMarketingCompany = lazyWithRetry(() => import("./pages/service/
 const AiSolutionsCompany = lazyWithRetry(() => import("./pages/service/AiSolutionsCompany"));
 const LocalSeoServices = lazyWithRetry(() => import("./pages/service/LocalSeoServices"));
 const BusinessProcessAutomation = lazyWithRetry(() => import("./pages/service/BusinessProcessAutomation"));
+// Batch A services + comparison
+const CustomWebDevelopmentCompany = lazyWithRetry(() => import("./pages/service/CustomWebDevelopmentCompany"));
+const FrontendDevelopmentCompany = lazyWithRetry(() => import("./pages/service/FrontendDevelopmentCompany"));
+const BackendDevelopmentCompany = lazyWithRetry(() => import("./pages/service/BackendDevelopmentCompany"));
+const EcommerceWebsiteDevelopmentCompany = lazyWithRetry(() => import("./pages/service/EcommerceWebsiteDevelopmentCompany"));
+const BusinessManagementSoftwareDevelopment = lazyWithRetry(() => import("./pages/service/BusinessManagementSoftwareDevelopment"));
+const AgenticAiDevelopmentCompany = lazyWithRetry(() => import("./pages/service/AgenticAiDevelopmentCompany"));
+const CustomAiDevelopment = lazyWithRetry(() => import("./pages/service/CustomAiDevelopment"));
+// New comparison pages
+const WebmokAlternative = lazyWithRetry(() => import("./pages/compare/WebmokAlternative"));
+const WebAspirationAlternative = lazyWithRetry(() => import("./pages/compare/WebAspirationAlternative"));
+const LeoDigitalsAlternative = lazyWithRetry(() => import("./pages/compare/LeoDigitalsAlternative"));
+const TheGrowthBoxAlternative = lazyWithRetry(() => import("./pages/compare/TheGrowthBoxAlternative"));
+const TechmagnateAlternative = lazyWithRetry(() => import("./pages/compare/TechmagnateAlternative"));
+const PagetrafficAlternative = lazyWithRetry(() => import("./pages/compare/PagetrafficAlternative"));
+const EzRankingsAlternative = lazyWithRetry(() => import("./pages/compare/EzRankingsAlternative"));
+const IndeedseoAlternative = lazyWithRetry(() => import("./pages/compare/IndeedseoAlternative"));
 // Batch 3 city pages
 const WebDevelopmentCompanyRohtak = lazyWithRetry(() => import("./pages/city/WebDevelopmentCompanyRohtak"));
 const WebDevelopmentCompanyPanipat = lazyWithRetry(() => import("./pages/city/WebDevelopmentCompanyPanipat"));
@@ -326,6 +343,21 @@ const AppLayout = () => {
     "/ai-solutions-company",
     "/local-seo-services",
     "/business-process-automation",
+    "/custom-web-development-company",
+    "/frontend-development-company",
+    "/backend-development-company",
+    "/ecommerce-website-development-company",
+    "/business-management-software-development",
+    "/agentic-ai-development-company",
+    "/custom-ai-development",
+    "/webmok-alternative",
+    "/web-aspiration-alternative",
+    "/leo-digitals-alternative",
+    "/the-growth-box-alternative",
+    "/techmagnate-alternative",
+    "/pagetraffic-alternative",
+    "/ez-rankings-alternative",
+    "/indeedseo-alternative",
     "/web-development-company-rohtak",
     "/web-development-company-panipat",
     "/web-development-company-karnal",
@@ -452,6 +484,13 @@ const AppLayout = () => {
             <Route path="ai-solutions-company" element={<AiSolutionsCompany />} />
             <Route path="local-seo-services" element={<LocalSeoServices />} />
             <Route path="business-process-automation" element={<BusinessProcessAutomation />} />
+            <Route path="custom-web-development-company" element={<CustomWebDevelopmentCompany />} />
+            <Route path="frontend-development-company" element={<FrontendDevelopmentCompany />} />
+            <Route path="backend-development-company" element={<BackendDevelopmentCompany />} />
+            <Route path="ecommerce-website-development-company" element={<EcommerceWebsiteDevelopmentCompany />} />
+            <Route path="business-management-software-development" element={<BusinessManagementSoftwareDevelopment />} />
+            <Route path="agentic-ai-development-company" element={<AgenticAiDevelopmentCompany />} />
+            <Route path="custom-ai-development" element={<CustomAiDevelopment />} />
             {/* ── City Pages (Batch 3) ─────────────────────────────────────── */}
             <Route path="web-development-company-rohtak" element={<WebDevelopmentCompanyRohtak />} />
             <Route path="web-development-company-panipat" element={<WebDevelopmentCompanyPanipat />} />
@@ -476,6 +515,14 @@ const AppLayout = () => {
 
             {/* ── Competitor Alternative Pages ────────────────────────────────── */}
             <Route path="keka-alternative" element={<KekaAlternative />} />
+            <Route path="webmok-alternative" element={<WebmokAlternative />} />
+            <Route path="web-aspiration-alternative" element={<WebAspirationAlternative />} />
+            <Route path="leo-digitals-alternative" element={<LeoDigitalsAlternative />} />
+            <Route path="the-growth-box-alternative" element={<TheGrowthBoxAlternative />} />
+            <Route path="techmagnate-alternative" element={<TechmagnateAlternative />} />
+            <Route path="pagetraffic-alternative" element={<PagetrafficAlternative />} />
+            <Route path="ez-rankings-alternative" element={<EzRankingsAlternative />} />
+            <Route path="indeedseo-alternative" element={<IndeedseoAlternative />} />
             <Route path="greythr-alternative" element={<GreythrAlternative />} />
             <Route path="darwinbox-alternative" element={<DarwinboxAlternative />} />
             <Route path="zoho-people-alternative" element={<ZohoPeopleAlternative />} />

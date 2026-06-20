@@ -3530,5 +3530,2418 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
           "headline": "Automate the Workflows Slowing You Down",
           "sub": "Book a free process audit and we will map your operations and show you the highest-ROI workflows to automate first."
       }
+  },
+
+  'custom-web-development-company': {
+    "slug": "custom-web-development-company",
+    "seo": {
+      "title": "Custom Web Development Company India | Avani Enterprises",
+      "description": "Avani Enterprises is a custom web development company in India building bespoke, no-template web applications engineered to your exact requirements. 300+ projects delivered. Get a free scope call.",
+      "keywords": "custom web development company, bespoke web development, tailored web applications, custom website development india, custom web application development, no-template web development",
+      "canonical": "https://www.avanienterprises.in/custom-web-development-company"
+    },
+    "breadcrumbs": [
+      {
+        "label": "Home",
+        "href": "/"
+      },
+      {
+        "label": "Services",
+        "href": "/services"
+      },
+      {
+        "label": "Custom Web Development",
+        "href": "/custom-web-development-company"
+      }
+    ],
+    "hero": {
+      "tag": "Built To Your Spec",
+      "h1": "Custom Web Development Company in India",
+      "subtitle": "We build bespoke websites and web applications from the ground up — no templates, no compromises — engineered to match your exact workflows, brand, and scale.",
+      "stats": [
+        {
+          "value": "300+",
+          "label": "Projects Delivered"
+        },
+        {
+          "value": "8+",
+          "label": "Years of Experience"
+        },
+        {
+          "value": "2s",
+          "label": "Target Load Times"
+        }
+      ]
+    },
+    "intro": "Avani Enterprises is a custom web development company in India building bespoke, requirement-driven web applications for businesses across India, the Gulf, and beyond. Where template builders force your business to fit the software, our tailored web development approach does the opposite — we engineer every screen, data model, and integration around exactly how you operate, then build it to scale cleanly as you grow. From a marketing site to a complex internal platform, our custom website development in India is shaped by your spec, not a stock theme.",
+    "features": [
+      {
+        "title": "Bespoke Web Applications",
+        "desc": "Custom dashboards, portals, and internal tools built around your exact processes, user roles, and business rules from scratch."
+      },
+      {
+        "title": "Custom Frontend Engineering",
+        "desc": "Hand-built React and Next.js interfaces tuned for sub-2-second loads, accessibility, and pixel-accurate brand fidelity on every device."
+      },
+      {
+        "title": "Tailored Backend & APIs",
+        "desc": "Secure Node.js services, custom data models, and clean REST or GraphQL APIs designed for your integrations and reporting needs."
+      },
+      {
+        "title": "Third-Party & System Integrations",
+        "desc": "Connect payment gateways, CRMs, ERPs, and legacy systems so your custom app fits seamlessly into your existing tech stack."
+      }
+    ],
+    "whyAvani": [
+      {
+        "title": "Zero Templates, Pure Custom Code",
+        "desc": "No themes, no page builders, no plugin sprawl. Every component is written for your use case, so you own clean code with no bloat, licensing traps, or rigid limits."
+      },
+      {
+        "title": "Engineered Around Your Requirements",
+        "desc": "We start from your workflows and edge cases, not a generic layout. The build mirrors how your team actually works, capturing the logic off-the-shelf products can't."
+      },
+      {
+        "title": "Architected to Scale, Not Rebuild",
+        "desc": "Modular, well-documented architecture that absorbs new features, users, and traffic without the costly re-platforming that template sites force on growing companies."
+      }
+    ],
+    "bodySections": [
+      {
+        "heading": "Custom Web Development That Fits Your Business, Not the Other Way Round",
+        "paragraphs": [
+          "Off-the-shelf platforms and template themes are fast to launch but slow to live with. The moment your process has a quirk the template didn't anticipate, you're forced into workarounds, manual exports, or paid plugins that bloat your site and break with every update. Bespoke web development removes that ceiling entirely — we build exactly what your requirement document describes and nothing it doesn't.",
+          "Our process begins with a structured discovery phase where we map your workflows, data, user roles, and edge cases into a clear technical specification. You sign off on scope before a line of code is written, so there are no surprises. From there we build in reviewable milestones, giving you a working, testable product early and often rather than a black box you only see at the end."
+        ]
+      },
+      {
+        "heading": "Tailored Web Applications Engineered to Scale",
+        "paragraphs": [
+          "A custom application is only as valuable as its ability to grow with you. We architect every build on modern, proven technology — React and Next.js on the front end, Node.js and secure databases on the back end — with modular components and documented code so new features slot in cleanly. That means adding a module, a user tier, or a new integration is a planned enhancement, not an expensive rebuild.",
+          "Performance and security are engineered in, not bolted on. We target sub-2-second load times, build with clean semantic structure for SEO, and apply secure coding standards across authentication, data handling, and APIs. The result is a tailored web application that performs under real load, stays maintainable for years, and remains fully yours, with no vendor lock-in or recurring template licences."
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "q": "How much does custom web development cost in India?",
+        "a": "Custom web development is priced by scope — the number of features, user roles, integrations, and complexity of business logic. Because every bespoke build is unique, Avani Enterprises provides a fixed, transparent quote after a free discovery call rather than a one-size-fits-all package price."
+      },
+      {
+        "q": "How long does a custom web application take to build?",
+        "a": "A focused custom web app typically takes 6 to 12 weeks, while larger, multi-module platforms take longer. After scoping your requirements we share a milestone-based timeline so you know exactly what ships and when before development begins."
+      },
+      {
+        "q": "What is your custom web development process?",
+        "a": "We follow four phases: discovery and requirement mapping, technical scoping and sign-off, milestone-based development with regular reviews, then testing, deployment, and support. You see working software early and approve scope upfront, so there are no black-box surprises."
+      },
+      {
+        "q": "Which technologies do you use for custom web development?",
+        "a": "We build on modern, proven stacks: React and Next.js for frontends, Node.js with secure SQL or NoSQL databases for backends, and REST or GraphQL APIs. The exact stack is chosen per project based on your performance, integration, and scalability needs."
+      },
+      {
+        "q": "Do you provide support and maintenance after launch?",
+        "a": "Yes. Avani Enterprises offers ongoing maintenance, security updates, performance monitoring, and feature development with 24/7 support availability, so your custom application stays fast, secure, and current as your business evolves."
+      },
+      {
+        "q": "Do you build custom web applications for businesses outside India?",
+        "a": "Yes. Headquartered at DLF Cyber City, Gurugram, we serve clients across India, the Gulf, and international markets. Our remote-first delivery, structured documentation, and clear milestones keep cross-border projects on track regardless of location."
+      }
+    ],
+    "relatedLinks": [
+      {
+        "label": "Custom Software Development Company",
+        "href": "/custom-software-development-company",
+        "desc": "Bespoke software beyond the browser, built to spec."
+      },
+      {
+        "label": "Web Development Company",
+        "href": "/web-development-company",
+        "desc": "Full-stack websites and web apps that perform."
+      },
+      {
+        "label": "Ecommerce Development Company",
+        "href": "/ecommerce-development-company",
+        "desc": "Custom online stores engineered to convert."
+      }
+    ],
+    "cta": {
+      "headline": "Have a Spec No Template Can Handle?",
+      "sub": "Book a free discovery call and get a clear scope, timeline, and fixed quote for your bespoke web application."
+    }
+  },
+
+  'frontend-development-company': {
+    "slug": "frontend-development-company",
+    "seo": {
+      "title": "Frontend Development Company in India | React UI | Avani Enterprises",
+      "description": "Avani Enterprises is a frontend development company in India building fast, pixel-perfect React and Next.js interfaces with strong Core Web Vitals. 300+ projects. Get a free quote.",
+      "keywords": "frontend development company, react development company, ui development, frontend developers india, next.js development, core web vitals optimization",
+      "canonical": "https://www.avanienterprises.in/frontend-development-company"
+    },
+    "breadcrumbs": [
+      {
+        "label": "Home",
+        "href": "/"
+      },
+      {
+        "label": "Services",
+        "href": "/services"
+      },
+      {
+        "label": "Frontend Development",
+        "href": "/frontend-development-company"
+      }
+    ],
+    "hero": {
+      "tag": "Pixel-Perfect Interfaces",
+      "h1": "Frontend Development Company in India",
+      "subtitle": "We engineer fast, accessible, pixel-perfect user interfaces in React and Next.js, tuned for Core Web Vitals and flawless across every screen size and device.",
+      "stats": [
+        {
+          "value": "300+",
+          "label": "Projects Delivered"
+        },
+        {
+          "value": "2s",
+          "label": "Target Load Times"
+        },
+        {
+          "value": "5.0",
+          "label": "Client Rating"
+        }
+      ]
+    },
+    "intro": "Avani Enterprises is a specialist frontend development company in India helping product teams and enterprises ship interfaces that are fast, responsive, and a pleasure to use. Our frontend developers turn Figma designs into pixel-perfect, production-grade React and Next.js code, with UI development that obsesses over performance, accessibility, and Core Web Vitals so your product feels instant on every device.",
+    "features": [
+      {
+        "title": "React & Next.js Development",
+        "desc": "Modern SPAs, SSR, and static sites built on React, Next.js, and TypeScript for speed and maintainability."
+      },
+      {
+        "title": "UI Component Libraries",
+        "desc": "Reusable, documented design systems and component libraries that keep your product consistent and quick to extend."
+      },
+      {
+        "title": "Figma-to-Code Conversion",
+        "desc": "Pixel-perfect, responsive frontends from your Figma, XD, or Sketch designs, faithful to spacing, type, and interaction."
+      },
+      {
+        "title": "Performance Optimization",
+        "desc": "Code-splitting, lazy loading, image and bundle optimisation to pass Core Web Vitals and load in under two seconds."
+      }
+    ],
+    "whyAvani": [
+      {
+        "title": "React & Next.js UI Engineering",
+        "desc": "Component-driven frontends built with React, Next.js, and TypeScript, structured for reuse, scale, and clean handoff to your team."
+      },
+      {
+        "title": "Core Web Vitals Tuned",
+        "desc": "We engineer for LCP, CLS, and INP from the first commit, targeting sub-2-second loads that lift rankings and conversions."
+      },
+      {
+        "title": "Pixel-Perfect, Responsive Builds",
+        "desc": "Every layout matches your design to the pixel and adapts fluidly across mobile, tablet, and desktop, no broken breakpoints."
+      }
+    ],
+    "bodySections": [
+      {
+        "heading": "A Frontend Development Company That Ships Fast, Polished Interfaces",
+        "paragraphs": [
+          "The frontend is where your users actually meet your product, and a slow, janky, or off-brand interface erodes trust before a single feature is tried. Our frontend developers treat the UI as a first-class engineering problem: component architecture, state management, accessibility, and performance are designed in from the start, not patched on later.",
+          "We build with React, Next.js, and TypeScript on top of clean, semantic markup, so your interface is fast, search-friendly, and easy for any team to maintain. Whether you are launching a new SaaS dashboard, a marketing site, or a complex web app, we deliver code that matches the design exactly and behaves predictably across browsers and devices."
+        ]
+      },
+      {
+        "heading": "Core Web Vitals and Responsive Design, Built In",
+        "paragraphs": [
+          "Google now ranks pages partly on how they feel to real users, measured through Core Web Vitals like LCP, CLS, and INP. We engineer every frontend to hit those targets through code-splitting, lazy loading, optimised assets, and disciplined rendering, so your UI loads fast and stays smooth even under heavy interaction.",
+          "Responsiveness is non-negotiable: with most Indian traffic on mobile, we build mobile-first and test across phones, tablets, and desktops to guarantee a pixel-perfect experience everywhere. The result is an interface that loads in around two seconds, ranks better, and converts more of the visitors you already pay to acquire."
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "q": "How much does frontend development cost in India?",
+        "a": "Cost depends on the scope and complexity of the interface, a marketing site differs from a data-heavy dashboard or a full design system. Avani Enterprises provides a fixed, transparent quote after a free requirements call, so there are no surprises."
+      },
+      {
+        "q": "How long does a frontend development project take?",
+        "a": "A typical marketing or product frontend takes around 3 to 5 weeks; larger applications with custom component libraries take longer. We share a clear milestone timeline before development starts."
+      },
+      {
+        "q": "What is your frontend development process?",
+        "a": "We start by reviewing your designs and requirements, define component architecture, build pixel-perfect responsive UI in React or Next.js, then optimise for Core Web Vitals and test across devices before handoff and launch."
+      },
+      {
+        "q": "Which frontend technologies do you use?",
+        "a": "We primarily build with React, Next.js, and TypeScript, using modern CSS, Tailwind, and component libraries, chosen per project for performance, scalability, and easy maintenance by your team."
+      },
+      {
+        "q": "Do you provide support after the frontend is delivered?",
+        "a": "Yes. We offer ongoing maintenance, UI updates, performance monitoring, and new feature development to keep your interface fast, accessible, and current as your product evolves."
+      },
+      {
+        "q": "Can you work with teams across India and abroad?",
+        "a": "Absolutely. Headquartered in Gurugram, Haryana, we serve clients across India, the Gulf, and international markets, collaborating remotely with in-house teams and providing 24/7 communication on active projects."
+      }
+    ],
+    "relatedLinks": [
+      {
+        "label": "Web Development Company",
+        "href": "/web-development-company",
+        "desc": "Full-stack websites and web apps, frontend to backend."
+      },
+      {
+        "label": "Web Design Company",
+        "href": "/web-design-company",
+        "desc": "The UI and UX designs we engineer to the pixel."
+      },
+      {
+        "label": "Mobile App Development Company",
+        "href": "/mobile-app-development-company",
+        "desc": "Take your interface to native iOS and Android."
+      }
+    ],
+    "cta": {
+      "headline": "Ready to Ship a Faster, Sharper Frontend?",
+      "sub": "Get a free, no-obligation quote and frontend roadmap from our React and Next.js engineering team."
+    }
+  },
+
+  'backend-development-company': {
+    "slug": "backend-development-company",
+    "seo": {
+      "title": "Backend Development Company in India | Avani Enterprises",
+      "description": "Avani Enterprises builds scalable backend systems, secure APIs, and cloud architecture with Node.js. 300+ projects, 8+ years, 5.0 rating. Book a free architecture call.",
+      "keywords": "backend development company, api development company, node.js development, backend developers india, scalable backend architecture, secure database design, cloud backend development, rest api development",
+      "canonical": "https://www.avanienterprises.in/backend-development-company"
+    },
+    "breadcrumbs": [
+      {
+        "label": "Home",
+        "href": "/"
+      },
+      {
+        "label": "Services",
+        "href": "/services"
+      },
+      {
+        "label": "Backend Development",
+        "href": "/backend-development-company"
+      }
+    ],
+    "hero": {
+      "tag": "APIs Built to Scale",
+      "h1": "Backend Development Company in India",
+      "subtitle": "We engineer the backbone behind your apps and platforms: scalable Node.js APIs, secure databases, and cloud architecture that stays fast and stable as your traffic and data grow. The frontend gets the praise, but the backend decides whether you survive scale.",
+      "stats": [
+        {
+          "value": "300+",
+          "label": "Projects Delivered"
+        },
+        {
+          "value": "8+",
+          "label": "Years of Experience"
+        },
+        {
+          "value": "5.0",
+          "label": "Client Rating"
+        }
+      ]
+    },
+    "intro": "Avani Enterprises is a backend development company in India building the server-side engine that powers reliable web and mobile products. As an API development company specializing in Node.js development, we design RESTful and event-driven APIs, secure relational and NoSQL databases, and cloud architecture on AWS and similar platforms. Our backend developers in India focus on what users never see but always feel: low latency, watertight data security, and infrastructure that scales without falling over.",
+    "features": [
+      {
+        "title": "Scalable REST & Event-Driven APIs",
+        "desc": "Well-structured Node.js APIs with clear versioning, pagination, caching, and documentation, built to serve web, mobile, and partner integrations from a single dependable source."
+      },
+      {
+        "title": "Secure Database Engineering",
+        "desc": "Schema design, indexing, and query optimization across PostgreSQL, MySQL, and MongoDB, with backups, encryption, and access controls that keep your data fast and protected."
+      },
+      {
+        "title": "Cloud Architecture & DevOps",
+        "desc": "Deployment on AWS and cloud platforms with load balancing, autoscaling, CI/CD pipelines, and monitoring, so your backend stays available and recovers gracefully under pressure."
+      },
+      {
+        "title": "Third-Party & Microservices Integration",
+        "desc": "Payment gateways, messaging, CRMs, and ERPs connected through secure services and webhooks, with microservices where they reduce risk instead of adding needless complexity."
+      }
+    ],
+    "whyAvani": [
+      {
+        "title": "Architecture Before Code",
+        "desc": "We design your data models, API contracts, and scaling strategy before writing endpoints, so your backend handles 10x traffic without a costly rewrite. Most performance problems are architecture decisions made too late, and we make them early."
+      },
+      {
+        "title": "Security-First Backends",
+        "desc": "Authentication, role-based access, encrypted data at rest and in transit, rate limiting, and input validation are built in from day one, not bolted on after an audit. Your database and APIs are hardened against the attacks that actually happen."
+      },
+      {
+        "title": "API-First, Frontend-Agnostic",
+        "desc": "We build clean, documented APIs that any web app, mobile app, or third-party system can consume. Your backend becomes a reusable asset that outlives any single frontend, instead of logic tangled into one application."
+      }
+    ],
+    "bodySections": [
+      {
+        "heading": "A Backend Development Company That Plans for Load, Not Just Launch",
+        "paragraphs": [
+          "Plenty of products run beautifully in a demo and buckle the moment real users arrive. The difference is almost always the backend: unindexed queries, blocking operations, no caching layer, and an architecture that assumed traffic would never grow. We treat that scenario as the design starting point, modeling your expected load, data volume, and concurrency before a single endpoint is built.",
+          "From there our backend developers in India build Node.js services with asynchronous, non-blocking patterns, caching, queues for heavy work, and a database tuned with the right indexes and relationships. The result is sub-2-second response behavior under realistic load and an API layer that keeps performing as your user base, catalog, or transaction volume multiplies."
+        ]
+      },
+      {
+        "heading": "Secure APIs and Cloud Infrastructure You Can Trust",
+        "paragraphs": [
+          "Backends hold your most sensitive data, so security is not a feature we add at the end. Every API we ship includes proper authentication and authorization, encrypted connections, validated and sanitized inputs, rate limiting, and audit-friendly logging. Databases are configured with least-privilege access, encryption, and automated backups so a bad day never becomes a lost business.",
+          "On infrastructure, we deploy to cloud platforms like AWS with autoscaling, load balancing, and CI/CD pipelines that ship updates safely. Monitoring and alerting catch issues before your users do, and clean documentation means your team, or ours under a 24/7 support arrangement, can operate the system confidently for years."
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "q": "How much does backend development cost in India?",
+        "a": "Backend cost depends on the number of APIs, database complexity, integrations, and scale requirements. After a free architecture call, Avani Enterprises provides a fixed, transparent quote with a clear breakdown, so you know the investment before development begins."
+      },
+      {
+        "q": "How long does it take to build a backend system?",
+        "a": "A focused API for an MVP can take 3 to 6 weeks, while a complex, multi-service backend with integrations takes longer. We work in milestones, define the architecture upfront, and often deliver a working core API first so frontend and mobile teams can build in parallel."
+      },
+      {
+        "q": "What is your backend development process?",
+        "a": "We follow a structured process: requirement and data modeling, API and architecture design, development in sprints, security and load testing, then deployment and monitoring. You get documented APIs and visible progress at every stage."
+      },
+      {
+        "q": "Which technologies do you use for backend development?",
+        "a": "We primarily build with Node.js for APIs, backed by secure databases such as PostgreSQL, MySQL, and MongoDB, and deploy on cloud platforms like AWS. We choose REST, event-driven, or microservices patterns per project based on scale and reliability needs."
+      },
+      {
+        "q": "Do you provide support and maintenance after launch?",
+        "a": "Yes. We offer ongoing maintenance, security patching, performance tuning, monitoring, and new feature development, with 24/7 support options to keep your APIs and databases reliable as traffic grows."
+      },
+      {
+        "q": "Do you build backends for clients across India and abroad?",
+        "a": "Yes. As a backend development company headquartered in Gurugram, India, with 150+ clients and 300+ projects over 8+ years, we serve businesses across India, the Gulf, and international markets, working remotely with clear communication and documented handoffs."
+      }
+    ],
+    "relatedLinks": [
+      {
+        "label": "Web Development Company",
+        "href": "/web-development-company",
+        "desc": "Fast, scalable web apps running on the backends we engineer."
+      },
+      {
+        "label": "Mobile App Development Company",
+        "href": "/mobile-app-development-company",
+        "desc": "Android and iOS apps powered by secure, reliable Node.js APIs."
+      },
+      {
+        "label": "Custom Software Development Company",
+        "href": "/custom-software-development-company",
+        "desc": "Bespoke platforms engineered on robust, scalable backend architecture."
+      }
+    ],
+    "cta": {
+      "headline": "Ready to Build a Backend That Scales With You?",
+      "sub": "Book a free architecture call and get an API and infrastructure plan from our backend development team."
+    }
+  },
+
+  'ecommerce-website-development-company': {
+    "slug": "ecommerce-website-development-company",
+    "seo": {
+      "title": "Ecommerce Website Development Company | Avani Enterprises",
+      "description": "Avani Enterprises is an ecommerce website development company in India building conversion-focused online stores with payments, inventory & mobile checkout. Get a quote.",
+      "keywords": "ecommerce website development company, online store development, ecommerce web development india, mobile checkout development, payment gateway integration, conversion ecommerce store",
+      "canonical": "https://www.avanienterprises.in/ecommerce-website-development-company"
+    },
+    "breadcrumbs": [
+      {
+        "label": "Home",
+        "href": "/"
+      },
+      {
+        "label": "Services",
+        "href": "/services"
+      },
+      {
+        "label": "Ecommerce Website Development",
+        "href": "/ecommerce-website-development-company"
+      }
+    ],
+    "hero": {
+      "tag": "Stores That Convert",
+      "h1": "Ecommerce Website Development Company in India",
+      "subtitle": "We build conversion-focused online stores engineered around reliable payments, real-time inventory, and a mobile checkout so fast your buyers finish the order instead of abandoning it.",
+      "stats": [
+        {
+          "value": "300+",
+          "label": "Projects Delivered"
+        },
+        {
+          "value": "2s",
+          "label": "Store Load Times"
+        },
+        {
+          "value": "5.0",
+          "label": "Client Rating"
+        }
+      ]
+    },
+    "intro": "Avani Enterprises is an ecommerce website development company in India focused on one outcome: more completed orders. Our online store development engineers every storefront around frictionless mobile checkout, dependable payment gateways, and live inventory sync, so the traffic you already pay for turns into revenue instead of abandoned carts. From single-brand D2C stores to multi-SKU retail catalogues, our ecommerce web development team in India ships fast, secure stores that hold up on sale day and scale as you grow.",
+    "features": [
+      {
+        "title": "Conversion-Tuned Product Pages",
+        "desc": "Fast-loading product pages with smart search, filters, reviews, and a sticky add-to-cart designed to move shoppers from browse to buy without friction."
+      },
+      {
+        "title": "One-Step Mobile Checkout",
+        "desc": "A streamlined single-screen checkout with UPI, wallets, COD, address autofill, and abandoned-cart recovery that recaptures buyers who drop off mid-purchase."
+      },
+      {
+        "title": "Payments & GST-Ready Billing",
+        "desc": "Secure multi-gateway payments with automated order flows, GST-compliant invoicing, shipping integrations, and refund handling built for Indian ecommerce operations."
+      },
+      {
+        "title": "Inventory & Order Management",
+        "desc": "Real-time inventory sync, low-stock alerts, multi-channel order routing, and dashboards that keep stock, orders, and fulfilment accurate as your catalogue grows."
+      }
+    ],
+    "whyAvani": [
+      {
+        "title": "Mobile Checkout Engineered to Close",
+        "desc": "Over two-thirds of Indian ecommerce traffic is mobile, so we build a one-screen, UPI-first checkout with autofill, saved addresses, and COD that lets buyers pay in seconds, not minutes."
+      },
+      {
+        "title": "Payments That Never Drop an Order",
+        "desc": "Razorpay, Cashfree, PayU, UPI, cards, and Cash on Delivery configured with retry logic and reconciliation so failed transactions, refunds, and webhooks are handled cleanly every time."
+      },
+      {
+        "title": "Live Inventory You Can Trust",
+        "desc": "Real-time stock sync across your store, warehouse, and marketplaces means no overselling, no manual reconciliation, and accurate availability shown to every shopper at checkout."
+      }
+    ],
+    "bodySections": [
+      {
+        "heading": "Online Store Development Designed to Lift Conversion",
+        "paragraphs": [
+          "Most online stores do not have a traffic problem, they have a checkout problem. A buy button buried below the fold, a checkout that demands six fields on a phone, or a 6-second page load quietly leaks revenue on every visit. Our online store development process starts by mapping your funnel, where shoppers land, where they hesitate, and where carts get abandoned, then engineering each step to remove that friction.",
+          "We build product discovery, search, and a one-step mobile checkout that lets buyers complete an order in a few taps, and we target 2-second load times because every extra second of delay measurably drops conversion. Analytics, conversion tracking, and abandoned-cart recovery are wired in from day one, so you can see exactly what drives sales and where to invest next."
+        ]
+      },
+      {
+        "heading": "Payments, Inventory, and Infrastructure That Hold on Sale Day",
+        "paragraphs": [
+          "A store is only as good as the operations behind it. We set up the backbone that keeps an online store running cleanly: multiple payment gateways with UPI and COD, secure PCI-aware checkout, real-time inventory and stock sync, automated order and shipping flows, and GST-ready invoicing built specifically for the Indian market. Failed payments, refunds, and webhook events are handled with retry and reconciliation logic so your numbers always reconcile.",
+          "Whether you sell fifty SKUs or fifty thousand, we architect the store to stay fast during festive-sale and flash-sale spikes and to scale across marketplaces without an expensive rebuild. As a full-service ecommerce web development company in India serving clients across India, the Gulf, and international markets, we stay on after launch with monitoring, speed optimisation, and ongoing feature development."
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "q": "How much does ecommerce website development cost in India?",
+        "a": "Cost depends on scope: a focused single-brand store with standard payments and inventory differs from a large multi-SKU or multi-vendor build. Avani Enterprises shares a fixed, transparent quote after a free requirements call, so there are no surprises mid-project."
+      },
+      {
+        "q": "How long does it take to build an online store?",
+        "a": "A standard conversion-focused online store typically takes 3 to 6 weeks, while larger catalogues, custom checkout logic, or marketplace integrations take longer. We agree a clear milestone timeline before development begins and ship in reviewable stages."
+      },
+      {
+        "q": "What is your ecommerce website development process?",
+        "a": "We start with a funnel and requirements call, then move through UX and store design, development with payments and inventory integration, QA and load testing, and launch. After go-live we monitor performance and provide ongoing 24/7 support."
+      },
+      {
+        "q": "Which payment gateways, checkout, and inventory features do you integrate?",
+        "a": "We integrate Razorpay, Cashfree, PayU, UPI, cards, and Cash on Delivery, plus a one-step mobile checkout, real-time inventory sync, GST invoicing, shipping, and abandoned-cart recovery built for Indian ecommerce."
+      },
+      {
+        "q": "Do you provide support and maintenance after the store goes live?",
+        "a": "Yes. Avani Enterprises offers 24/7 support with ongoing maintenance, security updates, speed optimisation targeting 2-second load times, new integrations, and feature development to keep your store fast, secure, and converting."
+      },
+      {
+        "q": "Do you build ecommerce websites for businesses outside India?",
+        "a": "Yes. Headquartered in DLF Cyber City, Gurugram, we serve clients across India, the Gulf, and international markets, configuring region-appropriate payment gateways, currencies, taxes, and shipping for each store we build."
+      }
+    ],
+    "relatedLinks": [
+      {
+        "label": "Ecommerce Development Company",
+        "href": "/ecommerce-development-company",
+        "desc": "Shopify, WooCommerce, and custom online store builds that convert."
+      },
+      {
+        "label": "Web Development Company",
+        "href": "/web-development-company",
+        "desc": "Fast, secure custom websites and web applications for growing brands."
+      },
+      {
+        "label": "Local SEO Services",
+        "href": "/local-seo-services",
+        "desc": "Rank higher in local search and drive qualified buyers to your online store."
+      }
+    ],
+    "cta": {
+      "headline": "Ready to build an online store that actually sells?",
+      "sub": "Talk to Avani Enterprises about a conversion-focused ecommerce website with payments, inventory, and mobile checkout done right. Call +91 92536 25099 or email kp@avanienterprises.in for a free quote."
+    }
+  },
+
+  'business-management-software-development': {
+    "slug": "business-management-software-development",
+    "seo": {
+      "title": "Business Management Software Development | Avani Enterprises",
+      "description": "Avani Enterprises builds custom business management software to run tasks, approvals, inventory & reporting in one system. 300+ projects, 8+ years. Book a free demo.",
+      "keywords": "business management software development, business software development company india, custom business management system, operations management software, inventory management software development, approval workflow software, business reporting dashboard software",
+      "canonical": "https://www.avanienterprises.in/business-management-software-development"
+    },
+    "breadcrumbs": [
+      {
+        "label": "Home",
+        "href": "/"
+      },
+      {
+        "label": "Services",
+        "href": "/services"
+      },
+      {
+        "label": "Business Management Software Development",
+        "href": "/business-management-software-development"
+      }
+    ],
+    "hero": {
+      "tag": "Run Your Whole Operation",
+      "h1": "Business Management Software Development in India",
+      "subtitle": "We build custom business management software that runs your operations end to end, from task assignments and multi-level approvals to inventory and live reporting, so your whole company works inside one system instead of a dozen scattered tools.",
+      "stats": [
+        {
+          "value": "300+",
+          "label": "Projects Delivered"
+        },
+        {
+          "value": "70%",
+          "label": "Routine Tasks Automated"
+        },
+        {
+          "value": "8+",
+          "label": "Years of Experience"
+        }
+      ]
+    },
+    "intro": "Avani Enterprises is a business software development company in India building custom business management software that brings your day-to-day operations into a single, connected platform. Instead of juggling spreadsheets, WhatsApp approvals, and disconnected apps, your team gets one system to assign tasks, route approvals, track inventory, and pull live reports, all mapped to exactly how your business runs.",
+    "features": [
+      {
+        "title": "Task & Workflow Management",
+        "desc": "Assign, schedule, and track tasks with deadlines, owners, and status, plus automated reminders and escalations so nothing slips through unowned or unfinished."
+      },
+      {
+        "title": "Multi-Level Approval Engine",
+        "desc": "Configurable approval chains for purchases, expenses, leave, and quotations, with mobile sign-offs and full audit logs that replace email threads and WhatsApp screenshots."
+      },
+      {
+        "title": "Inventory & Stock Control",
+        "desc": "Real-time inventory tracking across locations with stock movements, low-stock alerts, and reorder triggers, kept in sync with sales, purchases, and tasks."
+      },
+      {
+        "title": "Live Reporting & Dashboards",
+        "desc": "Role-based dashboards and exportable reports that turn operational data into decisions, updated in real time so owners and managers see the true picture without chasing updates."
+      }
+    ],
+    "whyAvani": [
+      {
+        "title": "Operations-First, Not Feature-First",
+        "desc": "We design around how work actually moves through your company, who raises a request, who approves it, what triggers the next step, so the software mirrors your operations instead of forcing your team to adapt to a rigid template."
+      },
+      {
+        "title": "One System, Zero Silos",
+        "desc": "Tasks, approvals, inventory, and reporting live in the same platform sharing one database, so a stock movement or a closed task updates dashboards instantly, with no re-entry and no version-mismatch between teams."
+      },
+      {
+        "title": "Role-Based Control for Indian Teams",
+        "desc": "Granular permissions, approval hierarchies, and audit trails built for multi-branch Indian businesses, so owners and managers get visibility and control while staff only see what they need to act on."
+      }
+    ],
+    "bodySections": [
+      {
+        "heading": "Business Management Software Built Around How You Operate",
+        "paragraphs": [
+          "Most businesses do not fail at strategy; they leak time in the gaps between tools. A task lives in one app, the approval happens over a phone call, stock is tracked in a spreadsheet, and the monthly report is stitched together by hand. Our business management software development closes those gaps by putting tasks, approvals, inventory, and reporting into one connected system that reflects your real operating model.",
+          "We start by mapping your actual workflows, the requests, the handoffs, and the people who sign off, before designing a single feature. The result is a platform where a raised request flows automatically to the right approver, a completed task updates the dashboard, and a stock movement adjusts inventory in real time, automating up to 70% of the routine coordination your team does manually today."
+        ]
+      },
+      {
+        "heading": "Visibility, Control, and a System That Grows With You",
+        "paragraphs": [
+          "When operations run on one system, owners stop chasing status updates. Live dashboards show what is pending, who is blocking it, what stock is running low, and how each branch is performing, with role-based access so every person sees exactly what their job requires. Audit trails on tasks and approvals give you accountability that scattered tools can never provide.",
+          "We build on modern, scalable technology with clean APIs, so your business management software can connect to your CRM, accounting, and payment tools and expand as you add branches, teams, and processes. You own the code and the data, with 24/7 support options, so the system stays a long-term operational asset rather than something you outgrow and replace."
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "q": "How much does business management software development cost in India?",
+        "a": "Cost depends on the modules you need, such as tasks, approvals, inventory, and reporting, along with the number of users and integrations. After a free scoping call, Avani Enterprises provides a fixed, transparent quote with a clear breakdown so there are no surprises mid-project."
+      },
+      {
+        "q": "How long does it take to build a custom business management system?",
+        "a": "A focused system covering core operations like tasks and approvals typically takes 6 to 10 weeks, while a full multi-module platform with inventory and reporting takes longer. We work in milestones and usually ship a usable version first so you start benefiting early."
+      },
+      {
+        "q": "What is your development process for business management software?",
+        "a": "We follow a structured process: mapping your operational workflows, designing the system and dashboards, building in agile sprints, testing and QA, then deployment, training, and support. You review working progress regularly and give feedback at every stage."
+      },
+      {
+        "q": "Which technologies do you use to build the software?",
+        "a": "We primarily build with React and Next.js on the front end and Node.js with secure databases on the back end, hosted on the cloud with clean, documented APIs. The stack is chosen per project for fast load times, security, and scalability across branches and teams."
+      },
+      {
+        "q": "Can the software integrate with our existing accounting, CRM, or inventory tools?",
+        "a": "Yes. Integration is a core strength. We connect your business management system to accounting software, CRMs, payment gateways, and existing inventory tools through secure APIs so data stays in sync automatically instead of being re-entered by hand."
+      },
+      {
+        "q": "Do you provide support and training after launch in India?",
+        "a": "Yes. We provide team training, ongoing maintenance, security updates, and feature development, with 24/7 support options. As an India-based team in Gurugram serving clients across India, the Gulf, and internationally, we stay available as your operations grow."
+      }
+    ],
+    "relatedLinks": [
+      {
+        "label": "Business Operating System",
+        "href": "/business-operating-system",
+        "desc": "Unify CRM, HR, and operations in one platform."
+      },
+      {
+        "label": "Business Process Automation",
+        "href": "/business-process-automation",
+        "desc": "Automate approvals and routine workflows end to end."
+      },
+      {
+        "label": "Custom Software Development",
+        "href": "/custom-software-development-company",
+        "desc": "Bespoke applications built around your processes."
+      }
+    ],
+    "cta": {
+      "headline": "Ready to Run Your Operations in One System?",
+      "sub": "Book a free demo and get a roadmap for business management software built around how your company actually works."
+    }
+  },
+
+  'agentic-ai-development-company': {
+    "slug": "agentic-ai-development-company",
+    "seo": {
+      "title": "Agentic AI Development Company India | Avani Enterprises",
+      "description": "Avani Enterprises is an agentic AI development company building autonomous AI agents that plan and execute multi-step tasks with tools. Book a free agent scoping call.",
+      "keywords": "agentic ai development company, ai agent development, autonomous ai agents, agentic ai india, ai agent development company, multi-agent systems, llm agent development",
+      "canonical": "https://www.avanienterprises.in/agentic-ai-development-company"
+    },
+    "breadcrumbs": [
+      {
+        "label": "Home",
+        "href": "/"
+      },
+      {
+        "label": "Services",
+        "href": "/services"
+      },
+      {
+        "label": "Agentic AI Development",
+        "href": "/agentic-ai-development-company"
+      }
+    ],
+    "hero": {
+      "tag": "Agents That Act",
+      "h1": "Agentic AI Development Company in India",
+      "subtitle": "We build autonomous AI agents that plan, reason, and execute multi-step workflows using your tools and data — not chatbots that just reply, but agents that get the job done end to end.",
+      "stats": [
+        {
+          "value": "70%",
+          "label": "Tasks Automated"
+        },
+        {
+          "value": "24/7",
+          "label": "Agent Uptime"
+        },
+        {
+          "value": "8+",
+          "label": "Years Building Tech"
+        }
+      ]
+    },
+    "intro": "Avani Enterprises is an agentic AI development company in India, building autonomous AI agents for businesses across India, the Gulf, and beyond. Unlike a chatbot that answers a single question, an agentic AI system plans a goal, breaks it into steps, calls the right tools and APIs, checks its own work, and completes the task — from researching a lead to processing an order to reconciling data across systems.",
+    "features": [
+      {
+        "title": "Autonomous Task Agents",
+        "desc": "Goal-driven agents that decompose a request into steps, execute each one, and self-correct until the task is complete."
+      },
+      {
+        "title": "Tool & Function Calling",
+        "desc": "Agents that securely invoke your APIs, query databases, send messages, and update records to take real action across your stack."
+      },
+      {
+        "title": "Multi-Agent Workflows",
+        "desc": "Specialised agents that collaborate — a researcher, a planner, an executor — to handle complex pipelines no single agent could."
+      },
+      {
+        "title": "Memory & Context Retrieval",
+        "desc": "RAG and persistent memory so agents work from your documents, history, and live data for accurate, grounded decisions."
+      }
+    ],
+    "whyAvani": [
+      {
+        "title": "Plan-and-Execute, Not Just Reply",
+        "desc": "Our agents reason through multi-step goals, decide which tools to use, and take action — turning open-ended tasks into completed outcomes."
+      },
+      {
+        "title": "Tool & API Orchestration",
+        "desc": "We give agents secure access to your CRM, databases, WhatsApp, email, and internal APIs so they actually do the work rather than just talk about it."
+      },
+      {
+        "title": "Guardrails & Human-in-the-Loop",
+        "desc": "Every autonomous agent ships with scoped permissions, approval gates, logging, and fallbacks so it runs safely in production from day one."
+      }
+    ],
+    "bodySections": [
+      {
+        "heading": "What Makes Agentic AI Different From a Chatbot",
+        "paragraphs": [
+          "A chatbot responds to one prompt at a time and stops. An agentic AI system is given an objective, then plans the steps, chooses and calls the right tools, evaluates the result, and keeps going until the goal is met — all without a human driving each step. That difference is what turns AI from a conversation into completed work.",
+          "We design agents around a clear scope: what they are allowed to do, which systems they can touch, and when they must pause for human approval. This makes autonomous AI practical and trustworthy for real operations — lead qualification, order processing, data reconciliation, report generation, and support resolution — rather than a demo that impresses but never ships."
+        ]
+      },
+      {
+        "heading": "How We Build and Deploy Autonomous AI Agents",
+        "paragraphs": [
+          "We start by mapping a high-value, repetitive workflow and defining the agent's goal, tools, and guardrails. From there we build the planning and reasoning loop, connect it to your APIs and data through secure tool calling, add memory and retrieval where context matters, and test rigorously against real cases before going live.",
+          "Once deployed, your agent runs around the clock with full logging, monitoring, and human-in-the-loop checkpoints on sensitive actions. Because we are an engineering and automation team first, every agent integrates cleanly with the CRM, website, and tools you already use, and scales as you add more workflows."
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "q": "What does an agentic AI development company do?",
+        "a": "An agentic AI development company builds autonomous AI agents that plan and execute multi-step tasks on their own, using tools, APIs, and data. Avani Enterprises designs, builds, and deploys these agents to complete real business workflows end to end, not just answer questions like a basic chatbot."
+      },
+      {
+        "q": "How much does agentic AI development cost in India?",
+        "a": "Cost depends on the agent's scope, the number of tools and systems it integrates with, and the guardrails required. A focused single-task agent is far cheaper than a multi-agent pipeline. We scope your use case and give a fixed, transparent quote, so you invest in the highest-ROI workflow first. Call +91 92536 25099 for an estimate."
+      },
+      {
+        "q": "How long does it take to build an autonomous AI agent?",
+        "a": "A well-scoped single agent can typically be built and deployed in a few weeks, while complex multi-agent systems take longer. We work in milestones so you can test the agent on real tasks early and expand its responsibilities once it proves reliable."
+      },
+      {
+        "q": "What technology do you use to build AI agents?",
+        "a": "We build on leading large language models and agent frameworks, combined with secure tool and function calling, RAG for grounded context, persistent memory, and orchestration layers. We choose the stack based on your accuracy, cost, and data-privacy needs rather than a one-size-fits-all platform."
+      },
+      {
+        "q": "Are autonomous AI agents safe and reliable for production?",
+        "a": "Yes, when built correctly. We ship every agent with scoped permissions, approval gates on sensitive actions, full logging, monitoring, and fallbacks. Human-in-the-loop checkpoints ensure the agent stays accurate and accountable while running 24/7 in production."
+      },
+      {
+        "q": "Can you build agentic AI for businesses in India and the Gulf?",
+        "a": "Yes. Avani Enterprises is headquartered in DLF Cyber City, Gurugram, and serves clients across India, the Gulf, and international markets. We build agents that integrate with WhatsApp, regional tools, and your existing systems, and provide ongoing support after launch."
+      }
+    ],
+    "relatedLinks": [
+      {
+        "label": "AI Automation Company",
+        "href": "/ai-automation-company",
+        "desc": "Automate repetitive workflows end to end."
+      },
+      {
+        "label": "AI Solutions Company",
+        "href": "/ai-solutions-company",
+        "desc": "Custom AI tools built for your business."
+      },
+      {
+        "label": "Custom Software Development Company",
+        "href": "/custom-software-development-company",
+        "desc": "The systems your agents plug into."
+      }
+    ],
+    "cta": {
+      "headline": "Build an AI Agent That Gets Work Done",
+      "sub": "Book a free agent scoping call and we will map the highest-ROI workflow to automate with an autonomous AI agent first."
+    }
+  },
+
+  'custom-ai-development': {
+    "slug": "custom-ai-development",
+    "seo": {
+      "title": "Custom AI Development in India | Avani Enterprises",
+      "description": "Avani Enterprises builds custom AI solutions around your data, tools, and processes, bespoke AI development engineered for production in India. Book a free AI scoping call.",
+      "keywords": "custom ai development, custom ai solutions, bespoke ai development india, custom ai software, ai development company india, ai application development, custom llm development, ai integration services",
+      "canonical": "https://www.avanienterprises.in/custom-ai-development"
+    },
+    "breadcrumbs": [
+      {
+        "label": "Home",
+        "href": "/"
+      },
+      {
+        "label": "Services",
+        "href": "/services"
+      },
+      {
+        "label": "Custom AI Development",
+        "href": "/custom-ai-development"
+      }
+    ],
+    "hero": {
+      "tag": "Built Around You",
+      "h1": "Custom AI Development in India",
+      "subtitle": "We build bespoke AI systems around your own data, your existing tools, and the way your business actually works, then engineer them to run reliably in production.",
+      "stats": [
+        {
+          "value": "8+",
+          "label": "Years Building Software"
+        },
+        {
+          "value": "300+",
+          "label": "Projects Delivered"
+        },
+        {
+          "value": "5.0",
+          "label": "Client Rating"
+        }
+      ]
+    },
+    "intro": "Avani Enterprises is a Custom AI Development company in India building bespoke AI solutions that fit your business instead of forcing your business to fit a tool. We design, engineer, and deploy custom AI around your proprietary data, your existing software stack, and your real workflows, so the system understands your context, plugs into the tools your team already uses, and delivers outputs you can act on.",
+    "features": [
+      {
+        "title": "Data Grounding & Retrieval",
+        "desc": "RAG pipelines over your knowledge base, fine-tuning where it pays off, and vector search so the AI answers accurately from your own content with sources, not hallucinations."
+      },
+      {
+        "title": "Custom Models & AI Agents",
+        "desc": "Purpose-built LLM applications, copilots, and multi-step AI agents that reason over your context and complete tasks across web, app, WhatsApp, and internal tools."
+      },
+      {
+        "title": "Deep System Integration",
+        "desc": "Secure APIs and connectors into your CRM, ERP, databases, and SaaS stack, so the AI pulls live data and pushes results straight back into your workflow."
+      },
+      {
+        "title": "Evaluation, Guardrails & Monitoring",
+        "desc": "Test suites, output guardrails, access controls, and live monitoring so your bespoke AI stays accurate, on-brand, and safe as data and usage grow."
+      }
+    ],
+    "whyAvani": [
+      {
+        "title": "Engineered Around Your Data",
+        "desc": "Your documents, records, and domain knowledge become the foundation of the model using RAG, fine-tuning, and vector search, so answers come from your reality, not a generic guess off the open internet."
+      },
+      {
+        "title": "Wired Into Your Existing Tools",
+        "desc": "We connect custom AI to the CRM, ERP, databases, and apps you already run, so it reads and writes where your work lives, instead of adding one more disconnected dashboard nobody opens."
+      },
+      {
+        "title": "Shaped By Your Real Processes",
+        "desc": "We map how your team actually works first, then build AI that fits those steps, with the right human checkpoints, so adoption is high and the system earns trust from day one."
+      }
+    ],
+    "bodySections": [
+      {
+        "heading": "Bespoke AI Development That Fits Your Business, Not a Template",
+        "paragraphs": [
+          "Most AI products are built for the average company, which means they understand none in particular. Custom AI development flips that: we start from your data, your terminology, and the decisions you actually make, then engineer a system that reflects how your business works rather than a one-size-fits-all template. The result reads your context, speaks your language, and produces output your team can use without second-guessing it.",
+          "With 8+ years building production software, we treat AI as engineering, not a demo. Every build includes proper data pipelines, retrieval over your own knowledge, evaluation, and security, so what looks impressive in a prototype keeps working when real users and real data arrive. You own the system, the integrations, and the roadmap, all shaped around your business."
+        ]
+      },
+      {
+        "heading": "From Data and Tools to a Deployed, Working System",
+        "paragraphs": [
+          "We begin by understanding your data, the tools your team already depends on, and the processes where AI can remove the most friction. From there we scope a focused proof of concept against a real use case, prove the value, then engineer it into a production system connected to your CRM, ERP, databases, and apps, so it operates inside your workflow instead of beside it.",
+          "Because the AI is grounded in your data and wired into your stack, it can automate the repetitive parts of a task, surface the right information instantly, and hand off to a person at exactly the right moment. We measure success by outcomes, faster turnaround, fewer manual steps, better decisions, and support the system 24/7 as your needs evolve."
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "q": "How much does custom AI development cost in India?",
+        "a": "Cost depends on the data, integrations, and scope involved. A focused proof of concept on a single use case is relatively affordable, while a full production system wired into your tools is a larger investment. Avani Enterprises scopes every project and shares clear pricing after a free consultation. Call +91 92536 25099 for a quote."
+      },
+      {
+        "q": "How long does it take to build a custom AI solution?",
+        "a": "A working proof of concept can often be delivered in a few weeks. Full bespoke builds with deep data grounding and system integrations take longer, typically a few months depending on complexity. We work in milestones so you see value early rather than waiting for one big launch."
+      },
+      {
+        "q": "What does your custom AI development process look like?",
+        "a": "We start by understanding your data, existing tools, and processes, then scope a proof of concept on a high-value use case. After proving it, we engineer the production system with retrieval, integrations, evaluation, and guardrails, deploy it into your stack, and support it 24/7 as it scales."
+      },
+      {
+        "q": "Which AI models and technologies do you use?",
+        "a": "We work with leading LLMs such as GPT and Claude, open-source models, and ML frameworks, applying RAG, fine-tuning, and vector search. We choose the model and approach that best fit your accuracy, cost, and data-privacy needs rather than defaulting to one vendor."
+      },
+      {
+        "q": "Can the AI connect to our existing software and data?",
+        "a": "Yes. Deep integration is the core of our bespoke approach. We build secure APIs and connectors into your CRM, ERP, databases, and SaaS tools so the AI reads live data and writes results back into the systems your team already uses, with proper access controls."
+      },
+      {
+        "q": "Do you build custom AI for businesses across India?",
+        "a": "Yes. Headquartered at DLF Cyber City, Gurugram, Avani Enterprises serves clients across Delhi NCR, Haryana, and pan-India, plus the Gulf and international markets, with remote collaboration and 24/7 support throughout the build and after launch."
+      }
+    ],
+    "relatedLinks": [
+      {
+        "label": "AI Solutions Company",
+        "href": "/ai-solutions-company",
+        "desc": "LLM apps and generative AI products."
+      },
+      {
+        "label": "AI Automation Company",
+        "href": "/ai-automation-company",
+        "desc": "Automate repetitive business workflows."
+      },
+      {
+        "label": "Custom Software Development Company",
+        "href": "/custom-software-development-company",
+        "desc": "Bespoke software built around you."
+      }
+    ],
+    "cta": {
+      "headline": "Build AI That Fits Your Business",
+      "sub": "Book a free scoping call and we will map your data, your tools, and the highest-value use case, then lay out a clear path from proof of concept to production."
+    }
+  },
+
+  'webmok-alternative': {
+    "slug": "webmok-alternative",
+    "seo": {
+      "title": "WebMok Alternative — Avani Enterprises",
+      "description": "Looking for a WebMok alternative? Avani Enterprises delivers full-stack web, software, AI and marketing under one roof with transparent fixed quotes. Talk to us today.",
+      "keywords": "webmok alternative, webmok competitor, web design agency alternative, full-stack development agency, custom web development company, seo and marketing agency, transparent fixed quote agency, gurugram web agency",
+      "canonical": "https://www.avanienterprises.in/webmok-alternative"
+    },
+    "breadcrumbs": [
+      {
+        "label": "Home",
+        "href": "/"
+      },
+      {
+        "label": "Services",
+        "href": "/services"
+      },
+      {
+        "label": "Webmok Alternative Alternative",
+        "href": "/webmok-alternative"
+      }
+    ],
+    "hero": {
+      "tag": "A Strong Alternative to WebMok",
+      "h1": "Looking for a WebMok Alternative?",
+      "subtitle": "If you want one partner for web, software, AI and digital marketing — with transparent fixed quotes and direct founder access — Avani Enterprises is built to deliver end to end.",
+      "stats": [
+        {
+          "value": "300+",
+          "label": "Projects Delivered"
+        },
+        {
+          "value": "150+",
+          "label": "Clients Served"
+        },
+        {
+          "value": "5.0",
+          "label": "Client Rating"
+        }
+      ]
+    },
+    "intro": "If you're evaluating a WebMok alternative, Avani Enterprises is a strong option for teams that want more than a website — combining web and software development, AI, SEO and digital marketing under one roof, with transparent fixed quotes and enterprise-grade quality at Tier-2 pricing. We're a fit for founders and growing companies who want a single accountable partner across the full build-and-grow journey.",
+    "features": [
+      {
+        "title": "Web & Software Development",
+        "desc": "Custom, responsive websites and web applications built on modern stacks — fast, secure and engineered to scale with your business."
+      },
+      {
+        "title": "SEO & Digital Marketing",
+        "desc": "Beyond launch, we drive growth with technical SEO, content and performance marketing so your site actually attracts and converts customers."
+      },
+      {
+        "title": "AI-Powered Solutions",
+        "desc": "From chatbots to custom AI workflows and automations, we integrate practical AI that saves time and adds real capability to your product."
+      },
+      {
+        "title": "Global Delivery",
+        "desc": "We deliver across India, the Gulf and international markets, with 24/7 support keeping your project moving across time zones."
+      }
+    ],
+    "whyAvani": [
+      {
+        "title": "Everything Under One Roof",
+        "desc": "Web, custom software, AI and digital marketing live with one team. Instead of stitching together separate vendors, you get a single partner accountable for the whole stack."
+      },
+      {
+        "title": "Transparent Fixed Quotes",
+        "desc": "You get a clear, fixed scope and price before work begins. No surprise change orders or vague hourly creep — just a defined deliverable you can plan a budget around."
+      },
+      {
+        "title": "Direct Founder Access",
+        "desc": "You work directly with the people steering the project, not layers of account managers. Decisions move faster and your priorities stay front and center."
+      }
+    ],
+    "bodySections": [
+      {
+        "heading": "Why Teams Consider Avani as a WebMok Alternative",
+        "paragraphs": [
+          "A great website is only the starting point. Many businesses come to us wanting a partner who can also build the software behind the scenes, layer in AI, and drive traffic and conversions after launch. Avani Enterprises brings all of that capability into one team, so your web project, internal tools, and marketing all share a single roadmap.",
+          "Founded in 2016, we've spent 8+ years delivering 300+ projects for 150+ clients while maintaining a 5.0 rating. That track record, combined with transparent fixed quotes and direct founder access, gives teams the confidence to move quickly without worrying about hidden costs or vendor handoffs."
+        ]
+      },
+      {
+        "heading": "Built for Growing Businesses and Ambitious Founders",
+        "paragraphs": [
+          "Avani is a strong fit for founders and growing companies that want enterprise-grade quality without enterprise-agency overhead. Our Tier-2 pricing model means you get senior, full-stack delivery at a cost structure that respects a growing budget, with no compromise on engineering standards.",
+          "Because web, software, AI and marketing sit with one accountable partner, you avoid the friction of coordinating multiple vendors. We deliver across India, the Gulf and international markets with 24/7 support, so wherever your customers are, your project keeps moving."
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "q": "Is Avani Enterprises a good alternative to WebMok?",
+        "a": "Yes — if you want a single partner for web, custom software, AI and digital marketing rather than web design alone, Avani delivers the full stack with transparent fixed quotes and direct founder access."
+      },
+      {
+        "q": "What does Avani Enterprises offer beyond web design?",
+        "a": "Alongside websites and web apps, we build custom software, integrate AI chatbots and automations, and run SEO and digital marketing campaigns so your site grows after launch — all under one roof."
+      },
+      {
+        "q": "How is Avani's pricing structured?",
+        "a": "We provide transparent fixed quotes with a clear scope before work begins. Our Tier-2 pricing delivers enterprise-grade quality at a cost structure that suits growing businesses, with no hidden change-order surprises."
+      },
+      {
+        "q": "Can Avani work with clients outside India?",
+        "a": "Yes. We deliver across India, the Gulf and international markets, backed by 24/7 support so your project keeps moving across time zones."
+      },
+      {
+        "q": "How do I get started with Avani Enterprises?",
+        "a": "Reach out at +91 92536 25099 or kp@avanienterprises.in for a free consultation and a transparent fixed quote tailored to your project."
+      }
+    ],
+    "relatedLinks": [
+      {
+        "label": "Web Development Company",
+        "href": "/web-development-company",
+        "desc": "Custom, responsive websites and web apps built to scale."
+      },
+      {
+        "label": "SEO Company",
+        "href": "/seo-company",
+        "desc": "Technical SEO and content that grows your organic traffic."
+      },
+      {
+        "label": "Digital Marketing Company",
+        "href": "/digital-marketing-company",
+        "desc": "Performance marketing that turns visitors into customers."
+      }
+    ],
+    "cta": {
+      "headline": "Ready for a Full-Stack Partner?",
+      "sub": "Get a transparent fixed quote for web, software, AI or marketing. Call +91 92536 25099 or email kp@avanienterprises.in to start a free consultation."
+    },
+    "comparisonTable": {
+      "headers": [
+        "Capability",
+        "Avani Enterprises",
+        "WebMok"
+      ],
+      "rows": [
+        {
+          "metric": "Service Scope",
+          "avani": "Web + software + AI + digital marketing under one roof",
+          "competitor": "Contact them for details on current scope",
+          "isPositive": true
+        },
+        {
+          "metric": "Pricing Model",
+          "avani": "Transparent fixed quotes with Tier-2 pricing",
+          "competitor": "Varies by project — contact them for details",
+          "isPositive": true
+        },
+        {
+          "metric": "SEO & Marketing",
+          "avani": "In-house SEO, content and performance marketing",
+          "competitor": "Varies by plan — contact them for details",
+          "isPositive": true
+        },
+        {
+          "metric": "AI Capabilities",
+          "avani": "Custom AI chatbots, workflows and automation",
+          "competitor": "Contact them for availability",
+          "isPositive": true
+        },
+        {
+          "metric": "Client Access",
+          "avani": "Direct founder access on every project",
+          "competitor": "Varies by engagement",
+          "isPositive": true
+        },
+        {
+          "metric": "Delivery Reach",
+          "avani": "India, Gulf and international with 24/7 support",
+          "competitor": "Contact them for details",
+          "isPositive": true
+        }
+      ]
+    }
+  },
+
+  'web-aspiration-alternative': {
+    "slug": "web-aspiration-alternative",
+    "seo": {
+      "title": "Web Aspiration Alternative — Avani Enterprises",
+      "description": "Looking for a Web Aspiration alternative? Avani Enterprises delivers full-stack web, software, AI and marketing under one roof with transparent fixed quotes. Talk to us today.",
+      "keywords": "web aspiration alternative, web design agency alternative, digital agency alternative, web development company, seo agency, full-stack development agency, avani enterprises",
+      "canonical": "https://www.avanienterprises.in/web-aspiration-alternative"
+    },
+    "breadcrumbs": [
+      {
+        "label": "Home",
+        "href": "/"
+      },
+      {
+        "label": "Services",
+        "href": "/services"
+      },
+      {
+        "label": "Web Aspiration Alternative Alternative",
+        "href": "/web-aspiration-alternative"
+      }
+    ],
+    "hero": {
+      "tag": "A Strong Alternative for Web, Software & Marketing",
+      "h1": "Looking for a Web Aspiration Alternative?",
+      "subtitle": "Avani Enterprises pairs web design with full-stack development, AI, SEO and digital marketing under one roof — backed by transparent fixed quotes and direct founder access.",
+      "stats": [
+        {
+          "value": "300+",
+          "label": "Projects Delivered"
+        },
+        {
+          "value": "150+",
+          "label": "Clients Served"
+        },
+        {
+          "value": "5.0",
+          "label": "Client Rating"
+        }
+      ]
+    },
+    "intro": "If you are searching for a Web Aspiration alternative, Avani Enterprises is a Gurugram-based web, software and digital marketing partner that brings design, full-stack development, AI and SEO together under one roof. Web Aspiration is a web design and digital agency that helps businesses build and promote their online presence; Avani offers a comparable starting point and adds custom software, AI and sustained marketing with the same accountable team. With 8+ years of delivery and 300+ projects, we focus on transparent fixed quotes from first wireframe to ongoing growth.",
+    "features": [
+      {
+        "title": "Conversion-Focused Web Design",
+        "desc": "Responsive, fast-loading websites and landing pages built to convert visitors, with clean code and SEO-ready structure from day one."
+      },
+      {
+        "title": "Custom Software & AI",
+        "desc": "Beyond brochure sites — we build web apps, dashboards, automations and AI-powered features that fit your exact business workflows."
+      },
+      {
+        "title": "SEO & Digital Marketing",
+        "desc": "Technical SEO, content and paid campaigns that turn your new site into a measurable channel for leads and revenue, not just a static page."
+      },
+      {
+        "title": "End-to-End Delivery",
+        "desc": "From discovery and design to development, launch and 24/7 support, one team owns the full lifecycle so nothing falls between the cracks."
+      }
+    ],
+    "whyAvani": [
+      {
+        "title": "Everything Under One Roof",
+        "desc": "Web design, custom software, AI features, SEO and paid marketing handled by one accountable team — no juggling multiple vendors as your project grows."
+      },
+      {
+        "title": "Transparent Fixed Quotes",
+        "desc": "You get a clear, fixed scope and price before work begins, so there are no surprise add-ons mid-project and budgeting stays predictable."
+      },
+      {
+        "title": "Direct Founder Access",
+        "desc": "Talk to decision-makers, not layers of account managers. You reach the people responsible for your delivery directly at +91 92536 25099."
+      }
+    ],
+    "bodySections": [
+      {
+        "heading": "Why Businesses Consider Avani as a Web Aspiration Alternative",
+        "paragraphs": [
+          "Many businesses start with a website and quickly need more — custom software, an AI feature, an e-commerce store, or a sustained SEO and marketing program. Avani Enterprises was built as a full-stack web, software and marketing agency precisely so you can scale all of that with a single partner rather than stitching together separate specialists.",
+          "Founded in 2016 and headquartered in Gurugram, Haryana, Avani brings Tier-2 pricing with enterprise-grade quality. With 150+ clients, 300+ projects, a 5.0 rating and 24/7 support, we combine the affordability businesses want with the reliability and accountability larger projects demand."
+        ]
+      },
+      {
+        "heading": "Who Avani Fits Best",
+        "paragraphs": [
+          "Avani is a strong fit for founders and growing companies who want one team to design, build and market their digital presence — and who value transparent fixed quotes and direct access to the people doing the work. If you are tired of coordinating a designer, a developer and a marketer separately, our under-one-roof model removes that friction.",
+          "We deliver across India, the Gulf and international markets, so whether you are launching locally or expanding abroad, you get consistent quality and a single point of contact. Reach us at kp@avanienterprises.in to scope your project and get a transparent quote."
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "q": "Why is Avani Enterprises a good alternative to Web Aspiration?",
+        "a": "Avani combines web design with full-stack software, AI, SEO and digital marketing under one roof, offers transparent fixed quotes, and gives you direct founder access — ideal if you want one accountable partner for your whole digital presence."
+      },
+      {
+        "q": "Does Avani only build websites?",
+        "a": "No. Alongside web design we build custom web applications, AI-powered features, e-commerce stores and run SEO and paid marketing, so your site can grow into a complete digital platform with the same team."
+      },
+      {
+        "q": "How does Avani's pricing work?",
+        "a": "We provide transparent fixed quotes with a clear scope agreed before work begins, so you know the cost upfront and avoid surprise charges mid-project. Contact us for a tailored estimate."
+      },
+      {
+        "q": "Where is Avani Enterprises based and who do you serve?",
+        "a": "We are headquartered in Gurugram, Haryana, India, and deliver to clients across India, the Gulf and international markets. We have served 150+ clients on 300+ projects since 2016."
+      },
+      {
+        "q": "How do I get started or compare options?",
+        "a": "Reach our team at +91 92536 25099 or kp@avanienterprises.in to discuss your project, see relevant work, and receive a transparent fixed quote."
+      }
+    ],
+    "relatedLinks": [
+      {
+        "label": "Web Development Company",
+        "href": "/web-development-company",
+        "desc": "Custom websites and web apps built full-stack."
+      },
+      {
+        "label": "SEO Company",
+        "href": "/seo-company",
+        "desc": "Technical SEO and content that drive organic leads."
+      },
+      {
+        "label": "Digital Marketing Company",
+        "href": "/digital-marketing-company",
+        "desc": "Paid campaigns and growth marketing that convert."
+      }
+    ],
+    "cta": {
+      "headline": "Ready to Compare? Talk to Avani Enterprises",
+      "sub": "Get a transparent fixed quote for your web, software and marketing project. Call +91 92536 25099 or email kp@avanienterprises.in."
+    },
+    "comparisonTable": {
+      "headers": [
+        "Capability",
+        "Avani Enterprises",
+        "Web Aspiration"
+      ],
+      "rows": [
+        {
+          "metric": "Service Scope",
+          "avani": "Web + software + AI + SEO + marketing under one roof",
+          "competitor": "Primarily web design and digital services — contact them for details",
+          "isPositive": true
+        },
+        {
+          "metric": "Pricing Model",
+          "avani": "Transparent fixed quotes before work begins",
+          "competitor": "Varies by plan and project",
+          "isPositive": true
+        },
+        {
+          "metric": "Client Access",
+          "avani": "Direct founder access at +91 92536 25099",
+          "competitor": "Contact them for their engagement model",
+          "isPositive": true
+        },
+        {
+          "metric": "Custom Software & AI",
+          "avani": "Full-stack web apps and AI features in-house",
+          "competitor": "Contact them for available offerings",
+          "isPositive": true
+        },
+        {
+          "metric": "Delivery Reach",
+          "avani": "India, Gulf and international delivery",
+          "competitor": "Varies — contact them for coverage",
+          "isPositive": true
+        },
+        {
+          "metric": "Support",
+          "avani": "24/7 support with 8+ years and 300+ projects",
+          "competitor": "Contact them for support details",
+          "isPositive": true
+        }
+      ]
+    }
+  },
+
+  'leo-digitals-alternative': {
+    "slug": "leo-digitals-alternative",
+    "seo": {
+      "title": "Leo Digitals Alternative — Avani Enterprises",
+      "description": "Looking for a Leo Digitals alternative? Avani Enterprises pairs web, software, AI, SEO and digital marketing under one roof with transparent fixed quotes. Talk to us today.",
+      "keywords": "leo digitals alternative, leo digitals competitor, digital marketing agency alternative, web development agency, seo company india, full-stack marketing agency, gurugram digital agency",
+      "canonical": "https://www.avanienterprises.in/leo-digitals-alternative"
+    },
+    "breadcrumbs": [
+      {
+        "label": "Home",
+        "href": "/"
+      },
+      {
+        "label": "Services",
+        "href": "/services"
+      },
+      {
+        "label": "Leo Digitals Alternative Alternative",
+        "href": "/leo-digitals-alternative"
+      }
+    ],
+    "hero": {
+      "tag": "A Strong Alternative to Leo Digitals",
+      "h1": "Looking for a Leo Digitals Alternative?",
+      "subtitle": "Get web development, custom software, AI, SEO and digital marketing delivered by one accountable team — with transparent fixed quotes and direct founder access.",
+      "stats": [
+        {
+          "value": "150+",
+          "label": "Clients Served"
+        },
+        {
+          "value": "300+",
+          "label": "Projects Delivered"
+        },
+        {
+          "value": "5.0",
+          "label": "Client Rating"
+        }
+      ]
+    },
+    "intro": "Leo Digitals is known for its digital marketing services. If you are evaluating a Leo Digitals alternative, Avani Enterprises offers a broader full-stack model — combining web and software development, AI, SEO and digital marketing under one roof — so strategy, build and growth stay aligned with a single accountable partner.",
+    "features": [
+      {
+        "title": "Web & Software Development",
+        "desc": "Custom websites, web apps and software built on modern stacks, engineered to be fast, scalable and easy to maintain as your business grows."
+      },
+      {
+        "title": "SEO That Compounds",
+        "desc": "Technical SEO, content and on-page optimization designed to grow organic visibility and qualified traffic over time, not just short-term spikes."
+      },
+      {
+        "title": "Digital Marketing & Ads",
+        "desc": "Performance campaigns across search and social, planned and measured against real business outcomes like leads, sales and return on spend."
+      },
+      {
+        "title": "AI & Automation",
+        "desc": "Practical AI features, chatbots and workflow automation integrated directly into your website, software and marketing operations."
+      }
+    ],
+    "whyAvani": [
+      {
+        "title": "Everything Under One Roof",
+        "desc": "Web, custom software, AI, SEO and marketing handled by one team, removing the handoffs that can slow projects when build and growth sit with separate vendors."
+      },
+      {
+        "title": "Transparent Fixed Quotes",
+        "desc": "You get a clear, fixed scope and price up front — no surprise add-ons — so you always know exactly what you are paying for and what you will receive."
+      },
+      {
+        "title": "Direct Founder Access",
+        "desc": "Work directly with the people accountable for delivery, not a rotating account layer, backed by 24/7 support across India, the Gulf and international markets."
+      }
+    ],
+    "bodySections": [
+      {
+        "heading": "Why Businesses Consider Avani as a Leo Digitals Alternative",
+        "paragraphs": [
+          "Marketing performs best when the website, software and campaigns behind it are built to support it. Because Avani delivers web, software, AI, SEO and marketing in-house, your landing pages, tracking, content and ads are designed to work together from day one rather than being stitched across multiple vendors.",
+          "Founded in 2016 and headquartered in Gurugram, Haryana, Avani brings 8+ years of delivery across 300+ projects for 150+ clients. That combination of full-stack capability and a single point of accountability is what teams look for when comparing agencies."
+        ]
+      },
+      {
+        "heading": "Tier-2 Pricing, Enterprise-Grade Quality",
+        "paragraphs": [
+          "Avani operates on a Tier-2 cost base while holding to enterprise standards of code quality, design and delivery. With transparent fixed quotes, you can budget with confidence and avoid the unpredictability that comes from open-ended engagements.",
+          "Delivery spans India, the Gulf and international markets, with 24/7 support and direct founder access. Whether you need a single website, a marketing engine or an end-to-end build-and-grow partner, the same team stays accountable from kickoff through results."
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "q": "Is Avani Enterprises a good alternative to Leo Digitals?",
+        "a": "Yes. If you want web development, custom software, AI, SEO and digital marketing handled by one accountable team rather than coordinating multiple specialists, Avani is a strong full-stack alternative with transparent fixed quotes and direct founder access."
+      },
+      {
+        "q": "How is Avani different from a pure digital marketing agency?",
+        "a": "Beyond marketing, Avani also builds the websites, web apps, software and AI that campaigns rely on. That means your site, tracking, content and ads are designed to work together under a single team from the start."
+      },
+      {
+        "q": "How does Avani's pricing work?",
+        "a": "Avani provides transparent fixed quotes with a clear scope agreed up front, so you know exactly what you are paying for. Operating on a Tier-2 cost base lets us keep enterprise-grade quality at competitive rates."
+      },
+      {
+        "q": "Can Avani handle both my website and my marketing?",
+        "a": "Yes. Avani delivers web and software development, SEO, digital marketing and AI under one roof, so you can run an end-to-end build-and-grow engagement with one partner instead of several vendors."
+      },
+      {
+        "q": "How do I get started with Avani?",
+        "a": "Reach out at +91 92536 25099 or kp@avanienterprises.in for a free consultation and a transparent fixed quote tailored to your project and goals."
+      }
+    ],
+    "relatedLinks": [
+      {
+        "label": "Digital Marketing Company",
+        "href": "/digital-marketing-company",
+        "desc": "Performance marketing across search and social tied to real business outcomes."
+      },
+      {
+        "label": "SEO Company",
+        "href": "/seo-company",
+        "desc": "Technical SEO, content and on-page work that grows organic visibility over time."
+      },
+      {
+        "label": "Web Development Company",
+        "href": "/web-development-company",
+        "desc": "Custom websites and web apps engineered to be fast, scalable and conversion-ready."
+      }
+    ],
+    "cta": {
+      "headline": "Ready for a Full-Stack Alternative?",
+      "sub": "Get web, software, AI, SEO and marketing from one accountable team. Contact Avani Enterprises at +91 92536 25099 for a free consultation and a transparent fixed quote."
+    },
+    "comparisonTable": {
+      "headers": [
+        "Capability",
+        "Avani Enterprises",
+        "Leo Digitals"
+      ],
+      "rows": [
+        {
+          "metric": "Core Focus",
+          "avani": "Full-stack: web, software, AI, SEO & marketing",
+          "competitor": "Primarily digital marketing services",
+          "isPositive": true
+        },
+        {
+          "metric": "Web & Software Development",
+          "avani": "Custom websites, web apps & software in-house",
+          "competitor": "Contact them for details",
+          "isPositive": true
+        },
+        {
+          "metric": "Pricing Model",
+          "avani": "Transparent fixed quotes",
+          "competitor": "Varies by plan",
+          "isPositive": true
+        },
+        {
+          "metric": "Point of Contact",
+          "avani": "Direct founder access",
+          "competitor": "Contact them for details",
+          "isPositive": true
+        },
+        {
+          "metric": "Delivery Reach",
+          "avani": "India, Gulf & international",
+          "competitor": "Varies by engagement",
+          "isPositive": true
+        },
+        {
+          "metric": "Support Availability",
+          "avani": "24/7 support",
+          "competitor": "Contact them for details",
+          "isPositive": true
+        }
+      ]
+    }
+  },
+
+  'the-growth-box-alternative': {
+    "slug": "the-growth-box-alternative",
+    "seo": {
+      "title": "The Growth Box Alternative — Avani Enterprises",
+      "description": "Looking for a The Growth Box alternative? Avani Enterprises blends web, software, AI, SEO and marketing under one roof with transparent fixed quotes. Talk to us today.",
+      "keywords": "the growth box alternative, growth marketing agency alternative, digital marketing agency, seo agency india, full-stack development agency, the growth box competitor, growth agency gurugram",
+      "canonical": "https://www.avanienterprises.in/the-growth-box-alternative"
+    },
+    "breadcrumbs": [
+      {
+        "label": "Home",
+        "href": "/"
+      },
+      {
+        "label": "Services",
+        "href": "/services"
+      },
+      {
+        "label": "The Growth Box Alternative Alternative",
+        "href": "/the-growth-box-alternative"
+      }
+    ],
+    "hero": {
+      "tag": "A Strong Alternative to The Growth Box",
+      "h1": "Looking for a The Growth Box Alternative?",
+      "subtitle": "If you want growth marketing plus the engineering muscle to build what your campaigns send traffic to, Avani Enterprises delivers web, software, AI, SEO and digital marketing from a single accountable team.",
+      "stats": [
+        {
+          "value": "8+ Years",
+          "label": "In Business Since 2016"
+        },
+        {
+          "value": "300+",
+          "label": "Projects Delivered"
+        },
+        {
+          "value": "5.0",
+          "label": "Client Rating"
+        }
+      ]
+    },
+    "intro": "If you are evaluating a The Growth Box alternative, it helps to know what each team focuses on. The Growth Box is a digital marketing and growth agency that helps brands grow through marketing-led campaigns and strategy. Avani Enterprises is a full-stack alternative that pairs that same growth-marketing focus with in-house web, software, and AI development, so your campaigns and the products behind them are built by one team. Founded in 2016 and serving 150+ clients across India, the Gulf, and international markets, Avani offers transparent fixed quotes and direct founder access.",
+    "features": [
+      {
+        "title": "Growth-Focused Digital Marketing",
+        "desc": "Performance campaigns, paid media, social, and content built around measurable funnels — designed to turn traffic into qualified leads and revenue."
+      },
+      {
+        "title": "SEO That Compounds",
+        "desc": "Technical SEO, on-page optimization, and content strategy that build durable organic visibility instead of relying on paid spend alone."
+      },
+      {
+        "title": "Web & Custom Software",
+        "desc": "Full-stack websites, web apps, and bespoke software — so landing pages, dashboards, and the products your marketing promotes are engineered in-house."
+      },
+      {
+        "title": "AI-Powered Automation",
+        "desc": "AI integrations, chatbots, and workflow automation that streamline lead handling, personalization, and reporting across your marketing stack."
+      }
+    ],
+    "whyAvani": [
+      {
+        "title": "Everything Under One Roof",
+        "desc": "Web development, custom software, AI, SEO, and digital marketing sit on one team — no stitching together a marketing agency and a separate dev shop to ship a campaign and the product behind it."
+      },
+      {
+        "title": "Transparent Fixed Quotes",
+        "desc": "You get a clear, fixed scope and price before work begins. No open-ended retainers or surprise line items — you know exactly what you are paying for and what you receive."
+      },
+      {
+        "title": "Direct Founder Access",
+        "desc": "Work directly with the people accountable for delivery. Reach the founder on +91 92536 25099 or kp@avanienterprises.in, backed by 24/7 support across time zones."
+      }
+    ],
+    "bodySections": [
+      {
+        "heading": "When Avani Is the Right Fit",
+        "paragraphs": [
+          "The Growth Box is a solid choice for teams that want a dedicated growth-marketing partner. Avani Enterprises fits best when your growth plans also depend on building things — a new website, a web app, an AI tool, or custom software — and you would rather not coordinate a marketing agency and a separate development vendor.",
+          "Because Avani keeps marketing and engineering on one team, campaigns and the products behind them stay aligned. That removes hand-off delays, reduces finger-pointing when something breaks, and lets you move from idea to launch faster with a single point of accountability."
+        ]
+      },
+      {
+        "heading": "Enterprise Quality at Tier-2 Pricing",
+        "paragraphs": [
+          "Headquartered in Gurugram, Haryana, Avani delivers enterprise-grade work at Tier-2 city pricing — giving you strong value without compromising on craft. The same team supports clients across India, the Gulf, and international markets.",
+          "Every engagement starts with a transparent, fixed quote so budgets are predictable from day one. With 8+ years in business, 150+ clients, 300+ projects, a 5.0 rating, and 24/7 support, Avani is built to be a dependable long-term partner as you scale."
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "q": "Is Avani Enterprises a good alternative to The Growth Box?",
+        "a": "Yes — especially if your growth plans involve building websites, web apps, AI tools, or custom software alongside marketing. Avani combines growth-focused digital marketing and SEO with in-house development under one accountable team."
+      },
+      {
+        "q": "What does Avani do that a pure marketing agency may not?",
+        "a": "Avani builds the things your campaigns point to — landing pages, web apps, dashboards, and custom software — using in-house web, software, and AI teams, so marketing and engineering stay aligned without a separate vendor."
+      },
+      {
+        "q": "How does Avani price its work?",
+        "a": "Avani provides transparent fixed quotes with a clear scope and price agreed before work begins, so there are no open-ended retainers or surprise charges."
+      },
+      {
+        "q": "Where is Avani based and who does it serve?",
+        "a": "Avani is headquartered in Gurugram, Haryana, India, and delivers to clients across India, the Gulf, and international markets, with 24/7 support across time zones."
+      },
+      {
+        "q": "How do I get started with Avani?",
+        "a": "Call +91 92536 25099 or email kp@avanienterprises.in for direct founder access and a transparent fixed quote tailored to your goals."
+      }
+    ],
+    "relatedLinks": [
+      {
+        "label": "Digital Marketing Company",
+        "href": "/digital-marketing-company",
+        "desc": "Performance marketing and campaigns built around measurable growth."
+      },
+      {
+        "label": "SEO Company",
+        "href": "/seo-company",
+        "desc": "Technical and content SEO that builds durable organic visibility."
+      },
+      {
+        "label": "Web Development Company",
+        "href": "/web-development-company",
+        "desc": "Full-stack websites and web apps engineered in-house."
+      }
+    ],
+    "cta": {
+      "headline": "Get Growth Marketing and the Team to Build It",
+      "sub": "Talk to Avani Enterprises for a transparent fixed quote across marketing, SEO, web, and software. Call +91 92536 25099 or email kp@avanienterprises.in."
+    },
+    "comparisonTable": {
+      "headers": [
+        "Capability",
+        "Avani Enterprises",
+        "The Growth Box"
+      ],
+      "rows": [
+        {
+          "metric": "Service Breadth",
+          "avani": "Web, software, AI, SEO, and marketing under one roof",
+          "competitor": "Primarily digital marketing and growth services",
+          "isPositive": true
+        },
+        {
+          "metric": "Pricing Model",
+          "avani": "Transparent fixed quotes before work begins",
+          "competitor": "Varies by plan — contact them for details",
+          "isPositive": true
+        },
+        {
+          "metric": "In-House Development",
+          "avani": "Full-stack web and custom software teams in-house",
+          "competitor": "Contact them for details on technical scope",
+          "isPositive": true
+        },
+        {
+          "metric": "Client Access",
+          "avani": "Direct founder access and 24/7 support",
+          "competitor": "Varies by engagement",
+          "isPositive": true
+        },
+        {
+          "metric": "Delivery Regions",
+          "avani": "India, Gulf, and international delivery",
+          "competitor": "Varies — contact them for coverage",
+          "isPositive": true
+        },
+        {
+          "metric": "Value Positioning",
+          "avani": "Tier-2 pricing with enterprise quality",
+          "competitor": "Varies by plan",
+          "isPositive": true
+        }
+      ]
+    }
+  },
+
+  'techmagnate-alternative': {
+    "slug": "techmagnate-alternative",
+    "seo": {
+      "title": "Techmagnate Alternative — Avani Enterprises",
+      "description": "Looking for a Techmagnate alternative? Avani Enterprises pairs SEO and digital marketing with full-stack web, software, and AI under one roof. Talk to us.",
+      "keywords": "techmagnate alternative, techmagnate competitor, seo agency alternative, digital marketing agency india, full-stack marketing agency, gurugram seo company, transparent seo pricing",
+      "canonical": "https://www.avanienterprises.in/techmagnate-alternative"
+    },
+    "breadcrumbs": [
+      {
+        "label": "Home",
+        "href": "/"
+      },
+      {
+        "label": "Services",
+        "href": "/services"
+      },
+      {
+        "label": "Techmagnate Alternative Alternative",
+        "href": "/techmagnate-alternative"
+      }
+    ],
+    "hero": {
+      "tag": "A Strong Alternative for SEO + Digital",
+      "h1": "Looking for a Techmagnate Alternative?",
+      "subtitle": "Avani Enterprises blends SEO and performance marketing with web, software, and AI build capability — so growth, code, and conversions live under one roof, with direct founder access and fixed, transparent quotes.",
+      "stats": [
+        {
+          "value": "150+",
+          "label": "Clients Served"
+        },
+        {
+          "value": "5.0",
+          "label": "Client Rating"
+        },
+        {
+          "value": "24/7",
+          "label": "Support"
+        }
+      ]
+    },
+    "intro": "Techmagnate is a well-established national digital marketing and SEO agency in India serving enterprises across many sectors. Avani Enterprises is a strong Techmagnate alternative for businesses that want SEO and digital marketing delivered alongside the actual website, software, and AI build — with transparent fixed quotes, Tier-2 pricing, and direct access to the people doing the work. We fit best when you want one accountable partner for growth and the technology behind it, not separate vendors stitched together.",
+    "features": [
+      {
+        "title": "Technical & On-Page SEO",
+        "desc": "Site audits, Core Web Vitals fixes, schema markup, internal linking, and content optimization — implemented straight into your codebase by the same team."
+      },
+      {
+        "title": "Performance & Search Marketing",
+        "desc": "Google Ads, Meta, and multi-channel campaigns built around measurable pipeline and ROI, with transparent reporting on what each rupee returns."
+      },
+      {
+        "title": "Conversion-Ready Web & Commerce",
+        "desc": "Fast, SEO-friendly websites, landing pages, and ecommerce builds engineered to convert the traffic your marketing earns."
+      },
+      {
+        "title": "AI-Powered Growth Tooling",
+        "desc": "Custom AI workflows, chatbots, and automation to scale content, lead handling, and reporting alongside your marketing efforts."
+      }
+    ],
+    "whyAvani": [
+      {
+        "title": "Full-Stack Under One Roof",
+        "desc": "Web, software, AI, and digital marketing sit in one team, so SEO recommendations get implemented in code directly — no hand-off gaps between your agency and your developers."
+      },
+      {
+        "title": "Transparent Fixed Quotes",
+        "desc": "You get clear, fixed scope and pricing before work starts. Tier-2 cost structure from our Gurugram HQ delivers enterprise-grade quality without enterprise-agency overhead."
+      },
+      {
+        "title": "Direct Founder Access",
+        "desc": "Work directly with senior decision-makers, not layers of account managers. With 8+ years and 300+ projects delivered, you reach people who can act on your account."
+      }
+    ],
+    "bodySections": [
+      {
+        "heading": "Why Businesses Consider Avani as a Techmagnate Alternative",
+        "paragraphs": [
+          "Many companies hire one agency for SEO and marketing and a separate firm to build or fix their website and software. That split can slow everything down: ranking recommendations wait in a developer queue, and the marketing team and the build team rarely share goals. Avani removes that gap by keeping SEO, marketing, web, software, and AI in one accountable team.",
+          "This integrated model is why growing brands and mid-market companies look at Avani when evaluating alternatives to larger national agencies. You get transparent fixed quotes, Tier-2 pricing, and direct founder access — with the technical capability to actually implement what the strategy calls for, not just recommend it."
+        ]
+      },
+      {
+        "heading": "Who Avani Fits Best",
+        "paragraphs": [
+          "Avani is the right alternative if you want a single partner that owns both the growth strategy and the technology behind it — SEO and digital marketing tied directly to the website, app, or AI tooling that drives conversions. We deliver across India, the Gulf, and international markets, supported 24/7.",
+          "If your priority is one vendor, transparent pricing, senior attention on your account, and the ability to ship technical fixes fast, Avani is built for exactly that. Founded in 2016, we have served 150+ clients and delivered 300+ projects with a 5.0 client rating."
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "q": "Why consider Avani Enterprises as a Techmagnate alternative?",
+        "a": "Avani delivers SEO and digital marketing alongside web, software, and AI development in one team. You get transparent fixed quotes, Tier-2 pricing, direct founder access, and the ability to implement technical SEO fixes directly in your code rather than waiting on a separate developer."
+      },
+      {
+        "q": "Is Avani a full digital marketing and SEO agency?",
+        "a": "Yes. We deliver technical and on-page SEO, content optimization, Google and Meta ads, and multi-channel performance marketing — backed by in-house web, software, and AI capability to build whatever the strategy needs."
+      },
+      {
+        "q": "How is Avani's pricing different?",
+        "a": "We provide transparent, fixed quotes with clear scope agreed before work starts. Our Gurugram-based Tier-2 cost structure delivers enterprise-grade quality without large-agency overhead. Contact us at +91 92536 25099 for a quote."
+      },
+      {
+        "q": "Do you work with enterprises and mid-market companies?",
+        "a": "Yes. Founded in 2016, we have served 150+ clients and delivered 300+ projects across India, the Gulf, and international markets, with a 5.0 client rating and 24/7 support."
+      },
+      {
+        "q": "Can Avani handle both my marketing and my website or software?",
+        "a": "That is our core strength. SEO, marketing, web, software, and AI all sit under one roof, so growth strategy and technical execution stay aligned — no hand-offs between separate vendors. Reach us at kp@avanienterprises.in."
+      }
+    ],
+    "relatedLinks": [
+      {
+        "label": "SEO Company",
+        "href": "/seo-company",
+        "desc": "Technical, on-page, and content SEO that ranks and converts."
+      },
+      {
+        "label": "Digital Marketing Company",
+        "href": "/digital-marketing-company",
+        "desc": "Performance marketing across Google, Meta, and more."
+      },
+      {
+        "label": "Web Development Company",
+        "href": "/web-development-company",
+        "desc": "Fast, SEO-friendly websites built to convert your traffic."
+      }
+    ],
+    "cta": {
+      "headline": "Get a Transparent Quote Today",
+      "sub": "See how Avani delivers SEO, marketing, web, software, and AI under one roof. Call +91 92536 25099 or email kp@avanienterprises.in for a free consultation."
+    },
+    "comparisonTable": {
+      "headers": [
+        "Capability",
+        "Avani Enterprises",
+        "Techmagnate"
+      ],
+      "rows": [
+        {
+          "metric": "Service Scope",
+          "avani": "SEO, marketing, web, software & AI under one roof",
+          "competitor": "Primarily digital marketing & SEO",
+          "isPositive": true
+        },
+        {
+          "metric": "Pricing Model",
+          "avani": "Transparent fixed quotes, Tier-2 pricing",
+          "competitor": "Varies by plan — contact them for details",
+          "isPositive": true
+        },
+        {
+          "metric": "Point of Contact",
+          "avani": "Direct founder & senior team access",
+          "competitor": "Account-managed engagement model",
+          "isPositive": true
+        },
+        {
+          "metric": "Technical Implementation",
+          "avani": "SEO fixes shipped directly into your codebase",
+          "competitor": "Varies by engagement",
+          "isPositive": true
+        },
+        {
+          "metric": "Delivery Regions",
+          "avani": "India, Gulf & international delivery",
+          "competitor": "Contact them for details",
+          "isPositive": true
+        },
+        {
+          "metric": "Support",
+          "avani": "24/7 support, 5.0 client rating",
+          "competitor": "Contact them for details",
+          "isPositive": true
+        }
+      ]
+    }
+  },
+
+  'pagetraffic-alternative': {
+    "slug": "pagetraffic-alternative",
+    "seo": {
+      "title": "PageTraffic Alternative — Avani Enterprises",
+      "description": "Looking for a PageTraffic alternative? Avani Enterprises delivers SEO plus full-stack web, software, AI and marketing under one roof with transparent fixed quotes. Talk to us today.",
+      "keywords": "pagetraffic alternative, seo agency alternative, pagetraffic competitor, full-stack seo agency india, transparent seo pricing, gurugram seo company, digital marketing alternative",
+      "canonical": "https://www.avanienterprises.in/pagetraffic-alternative"
+    },
+    "breadcrumbs": [
+      {
+        "label": "Home",
+        "href": "/"
+      },
+      {
+        "label": "Services",
+        "href": "/services"
+      },
+      {
+        "label": "Pagetraffic Alternative Alternative",
+        "href": "/pagetraffic-alternative"
+      }
+    ],
+    "hero": {
+      "tag": "A Strong Alternative for SEO + Growth",
+      "h1": "Looking for a PageTraffic Alternative?",
+      "subtitle": "If you want SEO that connects directly to your website, software and marketing engine, Avani Enterprises pairs proven search expertise with full-stack delivery, transparent fixed quotes and direct founder access.",
+      "stats": [
+        {
+          "value": "8+ Years",
+          "label": "Delivering Growth"
+        },
+        {
+          "value": "300+",
+          "label": "Projects Delivered"
+        },
+        {
+          "value": "5.0",
+          "label": "Client Rating"
+        }
+      ]
+    },
+    "intro": "PageTraffic is an established national SEO agency known for search optimization and digital marketing services. Avani Enterprises is a strong PageTraffic alternative for businesses that want SEO delivered alongside the website, software and AI it depends on — one accountable partner instead of separate vendors. We are best suited to growing brands that value transparent fixed quotes, Tier-2 pricing with enterprise-grade quality, and direct access to the founder on every engagement.",
+    "features": [
+      {
+        "title": "Technical & On-Page SEO",
+        "desc": "Site audits, Core Web Vitals optimization, schema markup, site architecture and on-page improvements engineered for sustainable organic visibility."
+      },
+      {
+        "title": "Content & Link Strategy",
+        "desc": "Keyword-driven content planning, topical authority building and ethical, white-hat link acquisition aligned to your industry and target queries."
+      },
+      {
+        "title": "SEO-Ready Web & Software Builds",
+        "desc": "Fast, crawlable, conversion-focused websites and custom software built on modern stacks, so your SEO foundation is strong from day one."
+      },
+      {
+        "title": "Performance Marketing & AI",
+        "desc": "Paid search, social campaigns and AI-powered automation that complement organic growth and turn traffic into measurable leads and revenue."
+      }
+    ],
+    "whyAvani": [
+      {
+        "title": "SEO Plus Full-Stack Under One Roof",
+        "desc": "Rankings depend on site speed, structure and content systems. Avani combines SEO with web, software, AI and marketing in-house, so technical fixes and growth work happen together — not across disconnected vendors."
+      },
+      {
+        "title": "Transparent Fixed Quotes",
+        "desc": "You receive a clear, fixed scope and price before work begins. No ambiguous retainers or surprise add-ons — just defined deliverables, timelines and accountable outcomes you can plan your budget around."
+      },
+      {
+        "title": "Direct Founder Access",
+        "desc": "Work directly with the people accountable for results. Founder-led engagement means faster decisions, sharper strategy and a partner genuinely invested in your search and revenue growth."
+      }
+    ],
+    "bodySections": [
+      {
+        "heading": "Why Consider Avani as a PageTraffic Alternative",
+        "paragraphs": [
+          "Specialist SEO agencies do solid search work, but in many engagements ranking gains stall when the underlying website is slow, poorly structured or hard to update and the build sits with a separate vendor. Avani Enterprises closes that gap by handling SEO and the web, software and AI it relies on under one roof — so technical recommendations actually get implemented instead of waiting in another vendor's queue.",
+          "Founded in 2016 and serving 150+ clients across India, the Gulf and international markets, Avani brings 8+ years of delivery, a 5.0 client rating and 24/7 support. With transparent fixed quotes and Tier-2 pricing backed by enterprise-grade quality, you get senior attention and clear accountability throughout the engagement."
+        ]
+      },
+      {
+        "heading": "Who Avani Fits Best",
+        "paragraphs": [
+          "Avani is a strong fit for growing businesses that want SEO tied directly to a website rebuild, custom software, an ecommerce platform or an AI initiative — and prefer a single accountable partner over coordinating multiple specialists. Our full-stack model removes the handoffs that slow down search and growth programs.",
+          "It is also a great match for founders and teams who value direct access to decision-makers, predictable fixed pricing and responsive support. If transparency, speed and integrated delivery matter as much as rankings, Avani Enterprises is built for you. Reach us at +91 92536 25099 or kp@avanienterprises.in."
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "q": "Is Avani Enterprises a good alternative to PageTraffic?",
+        "a": "Yes. PageTraffic is a respected national SEO agency. Avani is a strong alternative for businesses that want SEO delivered alongside the website, software, AI and marketing it depends on — with transparent fixed quotes and direct founder access."
+      },
+      {
+        "q": "What makes Avani different from a traditional SEO agency?",
+        "a": "Avani is a full-stack partner. Beyond SEO, we build the websites, custom software and AI systems your search performance relies on, so technical fixes and growth work happen together under one accountable team."
+      },
+      {
+        "q": "How does Avani's pricing work?",
+        "a": "We provide transparent fixed quotes with a defined scope and price before work begins. With Tier-2 pricing and enterprise-grade quality, you get clear, predictable budgeting and no surprise add-ons."
+      },
+      {
+        "q": "Can Avani handle both SEO and a website rebuild together?",
+        "a": "Yes. That is one of our biggest strengths. We deliver SEO-ready, fast and crawlable websites and software in-house, so your search foundation is built right from day one without juggling multiple vendors."
+      },
+      {
+        "q": "How do I get started with Avani Enterprises?",
+        "a": "Call us at +91 92536 25099 or email kp@avanienterprises.in for a free consultation. We serve clients across India, the Gulf and international markets with 24/7 support and a 5.0 rating."
+      }
+    ],
+    "relatedLinks": [
+      {
+        "label": "SEO Company",
+        "href": "/seo-company",
+        "desc": "Technical, on-page and content SEO built for sustainable organic growth."
+      },
+      {
+        "label": "Digital Marketing Company",
+        "href": "/digital-marketing-company",
+        "desc": "Performance marketing and campaigns that turn traffic into measurable revenue."
+      },
+      {
+        "label": "Web Development Company",
+        "href": "/web-development-company",
+        "desc": "Fast, SEO-ready websites engineered to rank and convert from day one."
+      }
+    ],
+    "cta": {
+      "headline": "Ready for SEO and Growth Under One Roof?",
+      "sub": "Get a transparent fixed quote and talk directly with our founder. Call +91 92536 25099 or email kp@avanienterprises.in to start your free consultation."
+    },
+    "comparisonTable": {
+      "headers": [
+        "Capability",
+        "Avani Enterprises",
+        "PageTraffic"
+      ],
+      "rows": [
+        {
+          "metric": "Service Scope",
+          "avani": "SEO + web + software + AI + marketing under one roof",
+          "competitor": "Primarily SEO and digital marketing focus",
+          "isPositive": true
+        },
+        {
+          "metric": "Pricing Model",
+          "avani": "Transparent fixed quotes before work begins",
+          "competitor": "Varies by plan — contact them for details",
+          "isPositive": true
+        },
+        {
+          "metric": "Build & Implementation",
+          "avani": "In-house SEO-ready web and software development",
+          "competitor": "Varies — contact them for details",
+          "isPositive": true
+        },
+        {
+          "metric": "Client Access",
+          "avani": "Direct founder access on every engagement",
+          "competitor": "Varies by account structure",
+          "isPositive": true
+        },
+        {
+          "metric": "Delivery Reach",
+          "avani": "India + Gulf + international delivery",
+          "competitor": "Varies — contact them for details",
+          "isPositive": true
+        },
+        {
+          "metric": "Support",
+          "avani": "24/7 support with a 5.0 client rating",
+          "competitor": "Contact them for support details",
+          "isPositive": true
+        }
+      ]
+    }
+  },
+
+  'ez-rankings-alternative': {
+    "slug": "ez-rankings-alternative",
+    "seo": {
+      "title": "EZ Rankings Alternative — Avani Enterprises",
+      "description": "Looking for an EZ Rankings alternative? Avani Enterprises pairs SEO and digital marketing with full-stack web, software, and AI delivery under one roof. Talk to us.",
+      "keywords": "ez rankings alternative, ez rankings competitor, seo agency alternative, digital marketing agency india, full-stack seo company, transparent seo pricing, alternative to ez rankings",
+      "canonical": "https://www.avanienterprises.in/ez-rankings-alternative"
+    },
+    "breadcrumbs": [
+      {
+        "label": "Home",
+        "href": "/"
+      },
+      {
+        "label": "Services",
+        "href": "/services"
+      },
+      {
+        "label": "Ez Rankings Alternative Alternative",
+        "href": "/ez-rankings-alternative"
+      }
+    ],
+    "hero": {
+      "tag": "A Strong Alternative",
+      "h1": "Looking for an EZ Rankings Alternative?",
+      "subtitle": "If you want SEO and digital marketing that connects directly to the people building your website, software, and AI, Avani Enterprises delivers it all under one accountable roof — with transparent fixed quotes and direct founder access.",
+      "stats": [
+        {
+          "value": "150+",
+          "label": "Clients Served"
+        },
+        {
+          "value": "8+ Years",
+          "label": "In Business"
+        },
+        {
+          "value": "5.0",
+          "label": "Client Rating"
+        }
+      ]
+    },
+    "intro": "EZ Rankings is an established SEO and digital marketing agency that provides search optimization and online marketing services to businesses. If you are weighing your options, Avani Enterprises is a strong EZ Rankings alternative for teams that want their SEO and marketing tightly integrated with web, software, and AI development — handled by one full-stack partner with transparent fixed quotes and direct founder access.",
+    "features": [
+      {
+        "title": "Technical & On-Page SEO",
+        "desc": "Site audits, Core Web Vitals fixes, schema markup, internal linking, and content optimization — implemented directly in your codebase by the same team that built it."
+      },
+      {
+        "title": "Content & Off-Page Strategy",
+        "desc": "Keyword-led content, blog programs, and outreach designed to build topical authority and steady organic growth for your most valuable search terms."
+      },
+      {
+        "title": "Full-Stack Web & Software",
+        "desc": "High-performance websites, e-commerce stores, and custom software engineered for speed and search — so your marketing has a fast, conversion-ready foundation."
+      },
+      {
+        "title": "AI & Marketing Automation",
+        "desc": "AI chatbots, automation, and data-driven campaign management that turn organic and paid traffic into qualified leads across India, the Gulf, and international markets."
+      }
+    ],
+    "whyAvani": [
+      {
+        "title": "Everything Under One Roof",
+        "desc": "Instead of coordinating separate vendors for SEO, your website, and your software, Avani delivers web development, custom software, AI, and digital marketing as one integrated team — so SEO wins are built into the product, not bolted on after."
+      },
+      {
+        "title": "Transparent Fixed Quotes",
+        "desc": "You receive a clear, fixed scope and price before work begins. No ambiguous retainers or surprise add-ons — you always know exactly what you are paying for and what you are getting."
+      },
+      {
+        "title": "Direct Founder Access",
+        "desc": "You work directly with the people accountable for results. Founder-level access means faster decisions, honest advice, and a partner who treats your growth as their own — backed by 24/7 support."
+      }
+    ],
+    "bodySections": [
+      {
+        "heading": "Why Consider Avani Enterprises as Your SEO Partner",
+        "paragraphs": [
+          "Many businesses outgrow a pure SEO agency once their needs expand to a faster website, a custom platform, or an AI-powered workflow. With Avani Enterprises, SEO is one capability inside a full-stack team — meaning the engineers improving your rankings can also rebuild a slow page, fix a broken funnel, or ship a new feature without waiting on a separate development vendor.",
+          "Founded in 2016 and based in Gurugram, Haryana, Avani has served 150+ clients and delivered 300+ projects with a 5.0 rating. That track record, combined with transparent fixed quotes and Tier-2 pricing for enterprise-quality work, makes Avani a practical alternative when you want results, clarity, and a single point of accountability."
+        ]
+      },
+      {
+        "heading": "Who Avani Fits Best",
+        "paragraphs": [
+          "Avani is an ideal fit for founders and growing companies who are tired of stitching together separate agencies for marketing, web, and software. If you value a partner who can rank your site, build the product behind it, and automate the operations around it — all with direct founder access — Avani is built for you.",
+          "We deliver across India, the Gulf, and international markets with 24/7 support, so distributed and cross-border teams get the same responsiveness and ownership. From local businesses to scaling enterprises, the goal is the same: measurable growth delivered transparently, on a fixed and predictable scope."
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "q": "Is Avani Enterprises a good alternative to EZ Rankings?",
+        "a": "Yes. EZ Rankings is an established SEO and digital marketing agency. Avani is a strong alternative for businesses that want SEO and marketing integrated with full-stack web, software, and AI delivery, transparent fixed quotes, and direct founder access — all from one accountable team."
+      },
+      {
+        "q": "What makes Avani different from a pure SEO agency?",
+        "a": "Avani delivers SEO alongside web development, custom software, e-commerce, and AI under one roof. So instead of handing recommendations to a separate developer, the same team that improves your rankings can also fix your site speed, rebuild a page, or automate a workflow."
+      },
+      {
+        "q": "How does Avani price its SEO and marketing services?",
+        "a": "Avani works on transparent fixed quotes with a clear scope agreed before the project starts. You know exactly what you are paying for upfront, with no ambiguous retainers — and Tier-2 pricing keeps enterprise-quality work affordable."
+      },
+      {
+        "q": "Does Avani work with clients outside India?",
+        "a": "Yes. Founded in 2016 and headquartered in Gurugram, Haryana, Avani delivers across India, the Gulf, and international markets, with 24/7 support so cross-border and distributed teams stay fully supported."
+      },
+      {
+        "q": "How do I get started or compare options with Avani?",
+        "a": "Reach out for a free consultation. Call +91 92536 25099 or email kp@avanienterprises.in, and you will get direct founder-level guidance on whether Avani is the right SEO and growth partner for your business."
+      }
+    ],
+    "relatedLinks": [
+      {
+        "label": "SEO Company",
+        "href": "/seo-company",
+        "desc": "Technical, on-page, and content SEO that drives sustainable organic growth."
+      },
+      {
+        "label": "Digital Marketing Company",
+        "href": "/digital-marketing-company",
+        "desc": "Full-funnel marketing, paid ads, and automation under one roof."
+      },
+      {
+        "label": "Web Development Company",
+        "href": "/web-development-company",
+        "desc": "Fast, search-ready websites and platforms built to convert."
+      }
+    ],
+    "cta": {
+      "headline": "Ready for an SEO Partner That Does More?",
+      "sub": "Get SEO, marketing, web, software, and AI from one accountable team — with transparent fixed quotes and direct founder access. Contact Avani Enterprises for a free consultation."
+    },
+    "comparisonTable": {
+      "headers": [
+        "Capability",
+        "Avani Enterprises",
+        "EZ Rankings"
+      ],
+      "rows": [
+        {
+          "metric": "Core Focus",
+          "avani": "Full-stack: web, software, AI, and digital marketing under one roof",
+          "competitor": "Primarily SEO and digital marketing services",
+          "isPositive": true
+        },
+        {
+          "metric": "Pricing Model",
+          "avani": "Transparent fixed quotes defined upfront",
+          "competitor": "Varies by plan — contact them for details",
+          "isPositive": true
+        },
+        {
+          "metric": "Web & Software Development",
+          "avani": "In-house web, e-commerce, and custom software teams",
+          "competitor": "Contact them for current service scope",
+          "isPositive": true
+        },
+        {
+          "metric": "AI & Automation",
+          "avani": "AI chatbots, automation, and marketing automation built in",
+          "competitor": "Contact them for current service scope",
+          "isPositive": true
+        },
+        {
+          "metric": "Client Access",
+          "avani": "Direct founder access with 24/7 support",
+          "competitor": "Account-based support — contact them for details",
+          "isPositive": true
+        },
+        {
+          "metric": "Delivery Reach",
+          "avani": "India, Gulf, and international markets",
+          "competitor": "Contact them for current delivery coverage",
+          "isPositive": true
+        }
+      ]
+    }
+  },
+
+  'indeedseo-alternative': {
+    "slug": "indeedseo-alternative",
+    "seo": {
+      "title": "IndeedSEO Alternative — Avani Enterprises",
+      "description": "Looking for an IndeedSEO alternative? Avani Enterprises delivers SEO, web, software, AI and marketing under one roof with transparent fixed quotes. Talk to us today.",
+      "keywords": "indeedseo alternative, indeedseo competitor, seo agency india, digital marketing alternative, full-stack seo company, transparent seo pricing, gurugram seo agency",
+      "canonical": "https://www.avanienterprises.in/indeedseo-alternative"
+    },
+    "breadcrumbs": [
+      {
+        "label": "Home",
+        "href": "/"
+      },
+      {
+        "label": "Services",
+        "href": "/services"
+      },
+      {
+        "label": "Indeedseo Alternative Alternative",
+        "href": "/indeedseo-alternative"
+      }
+    ],
+    "hero": {
+      "tag": "A Strong Alternative for Growth-Focused Brands",
+      "h1": "Looking for an IndeedSEO Alternative?",
+      "subtitle": "Avani Enterprises pairs technical SEO and digital marketing with in-house web, software, and AI engineering, so your rankings, your website, and your product roadmap all move together under one accountable team.",
+      "stats": [
+        {
+          "value": "8+",
+          "label": "Years Delivering Growth"
+        },
+        {
+          "value": "300+",
+          "label": "Projects Shipped"
+        },
+        {
+          "value": "5.0",
+          "label": "Client Rating"
+        }
+      ]
+    },
+    "intro": "If you are weighing an IndeedSEO alternative, it helps to start with what each team is built for. IndeedSEO is an established SEO and digital marketing services company that helps businesses improve search visibility and run online campaigns. Avani Enterprises is a strong alternative for teams that want SEO plus the web development, custom software, and AI capabilities to act on it, all from one founder-led agency. Where many specialists hand you a report, we own the strategy, the build, and the results end to end.",
+    "features": [
+      {
+        "title": "Technical SEO and Site Health",
+        "desc": "Core Web Vitals, crawlability, schema, and on-page optimization implemented by engineers who can actually touch your codebase, not just advise."
+      },
+      {
+        "title": "Content and On-Page Strategy",
+        "desc": "Keyword research, content roadmaps, and on-page optimization built around real search intent and your conversion goals."
+      },
+      {
+        "title": "Digital Marketing and Paid Media",
+        "desc": "Google, Meta, and other paid campaigns that work alongside organic SEO so spend and rankings reinforce each other instead of competing."
+      },
+      {
+        "title": "Web, Software, and AI Builds",
+        "desc": "When SEO needs a faster site, a landing page system, or an AI-powered feature, our in-house team builds it instead of outsourcing it."
+      }
+    ],
+    "whyAvani": [
+      {
+        "title": "Full-Stack Under One Roof",
+        "desc": "SEO, web development, custom software, AI, and paid marketing live in one team, so technical fixes and content changes ship without juggling multiple vendors."
+      },
+      {
+        "title": "Transparent Fixed Quotes",
+        "desc": "You get a clear, fixed scope and price before work starts. No vague retainers or surprise add-ons, just defined deliverables you can plan around."
+      },
+      {
+        "title": "Direct Founder Access",
+        "desc": "Work straight with the people accountable for results. Reach the founder directly for strategy, escalations, and fast decisions, backed by 24/7 support."
+      }
+    ],
+    "bodySections": [
+      {
+        "heading": "SEO That Connects to Your Whole Digital Stack",
+        "paragraphs": [
+          "Many SEO providers can recommend changes but rely on your developers or a third party to implement them, which slows everything down. Avani Enterprises closes that gap by combining SEO strategists with in-house web, software, and AI engineers, so a technical recommendation can be planned, coded, and deployed by the same accountable team.",
+          "This matters most when growth depends on more than keywords, such as a faster website, a programmatic landing page system, cleaner site architecture, or an AI feature that improves engagement. With Avani you do not have to choose between an SEO agency and a development partner, because you get both in one engagement."
+        ]
+      },
+      {
+        "heading": "Built for Tier-2 Value and Global Delivery",
+        "paragraphs": [
+          "Avani Enterprises operates from Gurugram, Haryana, giving you enterprise-grade quality at Tier-2 pricing. Founded in 2016, we have spent 8+ years serving 150+ clients across 300+ projects, with a 5.0 rating and 24/7 support backing every engagement.",
+          "We deliver across India, the Gulf, and international markets, and every project starts with a transparent fixed quote so you know the scope and cost up front. If you want a partner who is confident about SEO and equally capable of building what your growth plan needs, Avani is a strong alternative to consider alongside IndeedSEO."
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "q": "Why consider Avani Enterprises as an IndeedSEO alternative?",
+        "a": "Avani combines SEO and digital marketing with in-house web, software, and AI engineering, so strategy and implementation happen in one accountable team. You also get transparent fixed quotes and direct founder access."
+      },
+      {
+        "q": "Does Avani handle both SEO and the development work it needs?",
+        "a": "Yes. Our in-house engineers implement technical SEO fixes, build faster sites, and create landing page systems or AI features, so you do not need a separate development vendor to act on recommendations."
+      },
+      {
+        "q": "How does Avani price its SEO and marketing work?",
+        "a": "We provide a transparent, fixed quote with a clear scope before work begins, so you know the deliverables and cost up front rather than committing to an open-ended retainer."
+      },
+      {
+        "q": "Where is Avani based and which regions do you serve?",
+        "a": "Avani is headquartered in Gurugram, Haryana, India, and delivers across India, the Gulf, and international markets, offering enterprise-grade quality at Tier-2 pricing."
+      },
+      {
+        "q": "How do I get started or compare options with Avani?",
+        "a": "Call +91 92536 25099 or email kp@avanienterprises.in. You will get direct access to our team and a clear, fixed proposal for your SEO and growth goals."
+      }
+    ],
+    "relatedLinks": [
+      {
+        "label": "SEO Company",
+        "href": "/seo-company",
+        "desc": "Technical SEO, content, and on-page optimization that drive organic growth."
+      },
+      {
+        "label": "Digital Marketing Company",
+        "href": "/digital-marketing-company",
+        "desc": "Paid media and full-funnel campaigns aligned with your SEO strategy."
+      },
+      {
+        "label": "Web Development Company",
+        "href": "/web-development-company",
+        "desc": "Fast, SEO-ready websites built in-house by our engineering team."
+      }
+    ],
+    "cta": {
+      "headline": "Ready for an SEO Partner Who Builds, Not Just Advises?",
+      "sub": "Get a transparent fixed quote and direct founder access. Call +91 92536 25099 or email kp@avanienterprises.in to compare Avani with your current option."
+    },
+    "comparisonTable": {
+      "headers": [
+        "Capability",
+        "Avani Enterprises",
+        "IndeedSEO"
+      ],
+      "rows": [
+        {
+          "metric": "Service Breadth",
+          "avani": "SEO, web, software, AI, and marketing under one roof",
+          "competitor": "Primarily SEO and digital marketing services",
+          "isPositive": true
+        },
+        {
+          "metric": "Pricing Model",
+          "avani": "Transparent fixed quotes before work begins",
+          "competitor": "Varies by plan — contact them for details",
+          "isPositive": true
+        },
+        {
+          "metric": "Implementation",
+          "avani": "In-house engineers implement technical SEO fixes",
+          "competitor": "Scope varies — contact them for details",
+          "isPositive": true
+        },
+        {
+          "metric": "Client Access",
+          "avani": "Direct founder access and 24/7 support",
+          "competitor": "Account handling varies by plan",
+          "isPositive": true
+        },
+        {
+          "metric": "Delivery Reach",
+          "avani": "India, Gulf, and international delivery",
+          "competitor": "Coverage varies — contact them for details",
+          "isPositive": true
+        },
+        {
+          "metric": "Experience",
+          "avani": "8+ years, 150+ clients, 300+ projects, 5.0 rating",
+          "competitor": "See their website for company details",
+          "isPositive": true
+        }
+      ]
+    }
   }
 };
