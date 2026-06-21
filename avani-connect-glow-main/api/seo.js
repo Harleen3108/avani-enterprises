@@ -35,6 +35,182 @@ function buildCanonical(pagePath) {
 }
 
 const STATIC_SEO_LOOKUP = {
+  // Batch A (35 service-cluster pages)
+  "/website-development-company": {
+    title: "Website Development Company in India | Avani Enterprises",
+    description: "Avani Enterprises is a website development company in India building fast, responsive, lead-focused business websites on flexible CMS platforms. Get a free quote today.",
+    keywords: "website development company, website developer, professional website development, business website development india, corporate website development, cms website development, responsive website company"
+  },
+  "/full-stack-development-company": {
+    title: "Full Stack Development Company in India | Avani Enterprises",
+    description: "Avani Enterprises is a full stack development company in India. One team owns frontend + backend on MERN/MEAN \u2014 300+ projects, 8+ years. Get a free quote.",
+    keywords: "full stack development company, full stack developers, mern stack development, end to end web development india, mean stack development, full stack web development company"
+  },
+  "/shopify-development-company": {
+    title: "Shopify Development Company in India | Avani Enterprises",
+    description: "Avani Enterprises is a Shopify development company in India building custom Liquid themes, private apps & zero-downtime migrations for scaling D2C brands. 300+ projects, 8+ years. Get a free quote.",
+    keywords: "shopify development company, shopify developer, shopify store setup, shopify theme development india, shopify plus development, shopify app development, shopify migration"
+  },
+  "/woocommerce-development-company": {
+    title: "WooCommerce Development Company in India | Avani",
+    description: "Avani Enterprises is a WooCommerce development company in India building fast WordPress stores, custom plugins & smooth payments. 300+ projects. Get a free quote.",
+    keywords: "woocommerce development company, woocommerce developer, wordpress ecommerce development india, custom woocommerce plugins, woocommerce store development, woocommerce speed optimisation"
+  },
+  "/custom-ecommerce-development": {
+    title: "Custom Ecommerce Development India | Avani Enterprises",
+    description: "Custom and headless ecommerce development in India for brands outgrowing templates. Bespoke platforms built to scale. 300+ projects, 8+ years. Get a free quote.",
+    keywords: "custom ecommerce development, headless ecommerce development, bespoke ecommerce platform india, custom ecommerce india, composable commerce, headless commerce development"
+  },
+  "/custom-crm-development": {
+    title: "Custom CRM Development in India | Avani Enterprises",
+    description: "Custom CRM development built to your exact sales process. Own your data and roadmap, no per-seat fees or feature bloat. 8+ years, 300+ projects. Book a free demo.",
+    keywords: "custom crm development, bespoke crm software, tailored crm system india, custom crm software development, sales process crm, crm development company india"
+  },
+  "/crm-software-development": {
+    title: "CRM Software Development in India | Avani Enterprises",
+    description: "Avani Enterprises builds custom CRM software with sales pipelines, automation, dashboards & integrations. 300+ projects, 8+ years. Book a free CRM scoping call.",
+    keywords: "crm software development, crm software development company, sales crm software india, custom crm build, crm automation, pipeline management software, crm dashboards, crm integrations"
+  },
+  "/crm-consulting-company": {
+    title: "CRM Consulting Company in India | Avani Enterprises",
+    description: "Vendor-neutral CRM consulting company in India: CRM strategy, selection, implementation, migration, and adoption. 8+ years, 150+ clients, 5.0 rating. Book a free consult.",
+    keywords: "crm consulting company, crm consultant, crm implementation services, crm strategy india, crm migration services, crm adoption consulting, crm selection consultant"
+  },
+  "/erp-development-company": {
+    title: "ERP Development Company in India | Avani Enterprises",
+    description: "Custom ERP development company unifying finance, inventory, operations & reporting on one platform. 8+ years, 300+ projects, 5.0 rated. Book a free ERP demo.",
+    keywords: "erp development company, custom erp development company, erp solutions india, erp software development, custom erp india, enterprise resource planning company"
+  },
+  "/custom-erp-development": {
+    title: "Custom ERP Development in India | Avani Enterprises",
+    description: "Custom ERP development in India by Avani Enterprises. Bespoke ERP modules mapped to your real operations, not rigid suites. 300+ projects, 8+ years. Get a free ERP scoping call.",
+    keywords: "custom erp development, bespoke erp software, tailored erp modules india, erp development company, custom erp software, erp module development, enterprise resource planning software, erp implementation india"
+  },
+  "/erp-software-development-company": {
+    title: "ERP Software Development Company in India | Avani Enterprises",
+    description: "Avani Enterprises is an ERP software development company in India building modular, integrated ERP with role-based access. 300+ projects, 8+ years. Get a free demo.",
+    keywords: "erp software development company, erp software development, enterprise resource planning software india, custom erp development, erp modules, erp system integration"
+  },
+  "/hrms-development-company": {
+    title: "HRMS Development Company in India | Avani Enterprises",
+    description: "Avani Enterprises is an HRMS development company in India building custom HR management systems: onboarding, attendance, payroll, and performance in one platform. Book a demo.",
+    keywords: "hrms development company, hrms software development, hr management system development india, custom hrms software, payroll software development, attendance management system"
+  },
+  "/hr-software-development-company": {
+    title: "HR Software Development Company India | Avani Enterprises",
+    description: "Avani Enterprises is an HR software development company building custom HR software in India around your policies, payroll, and workflows. Fully owned, integrated. Get a quote.",
+    keywords: "hr software development company, hr software development, custom hr software india, hrms development, payroll software development, bespoke hr software, hr management system development"
+  },
+  "/attendance-management-software-development": {
+    title: "Attendance Management Software Development in India | Avani Enterprises",
+    description: "Avani Enterprises builds custom attendance management software in India with biometric, geo-fenced, and shift-based tracking. Leave, payroll-ready, owned by you. Get a quote.",
+    keywords: "attendance management software development, attendance system development, biometric attendance software india, geo attendance tracking, shift management software, leave management system, employee attendance app"
+  },
+  "/payroll-software-development": {
+    title: "Payroll Software Development in India | Avani Enterprises",
+    description: "Avani Enterprises builds custom payroll software for India with automated PF, ESI, TDS compliance and instant payslips. 8+ years, 5.0 rating. Get a quote today.",
+    keywords: "payroll software development, payroll software development company, custom payroll system india, pf esi tds payroll software, automated payslip software, statutory compliance payroll, payroll automation india"
+  },
+  "/business-operating-system-development": {
+    title: "Business Operating System Development India | Avani Enterprises",
+    description: "Replace scattered CRM, HR, ops & project tools with one connected business operating system. Built in India by Avani Enterprises. Book a free consultation.",
+    keywords: "business operating system development, business os development, unified business software india, custom business operating system, connected crm hr ops platform, internal business software development"
+  },
+  "/workflow-automation-software-development": {
+    title: "Workflow Automation Software Development in India | Avani",
+    description: "Avani Enterprises is a workflow automation company building custom software to automate approvals, data entry, routing and reporting across your tools. Book a free workflow audit.",
+    keywords: "workflow automation software development, workflow automation company, process automation software india, custom workflow automation, approval automation software, business workflow automation"
+  },
+  "/ai-development-company": {
+    title: "AI Development Company in India | Avani Enterprises",
+    description: "Avani Enterprises is a custom AI development company in India building ML models, AI products, and integrations from strategy to deployment. Book a free AI scoping call.",
+    keywords: "ai development company, artificial intelligence development company, custom ai development india, machine learning development company, ai product development, ml model development, ai engineering services, ai software development india"
+  },
+  "/ai-chatbot-development": {
+    title: "AI Chatbot Development in India | Avani Enterprises",
+    description: "Avani Enterprises builds AI chatbots and WhatsApp automation that handle support and qualify leads 24/7. 8+ years, 150+ clients. Book a free chatbot demo.",
+    keywords: "ai chatbot development, chatbot development company, whatsapp chatbot development india, ai chatbot company, customer support chatbot, lead qualification chatbot"
+  },
+  "/openai-development-company": {
+    title: "OpenAI Development Company in India | Avani Enterprises",
+    description: "Avani Enterprises is an OpenAI development company building GPT apps, OpenAI API integrations & ChatGPT assistants for Indian business. Book a free scoping call.",
+    keywords: "openai development company, gpt development, openai api integration, chatgpt app development india, gpt powered apps, ai assistant development, openai integration company"
+  },
+  "/claude-ai-development": {
+    title: "Claude AI Development in India | Avani Enterprises",
+    description: "Avani Enterprises builds Claude AI apps and assistants on Anthropic Claude for reliable, safe AI, with full Claude API integration across India. Book a free AI consult.",
+    keywords: "claude ai development, anthropic claude development, claude api integration india, claude ai app development, claude assistant development, claude ai agency india, anthropic api development"
+  },
+  "/gemini-ai-development": {
+    title: "Gemini AI Development in India | Avani Enterprises",
+    description: "Avani Enterprises builds Google Gemini-powered multimodal apps and Gemini API integrations for text, image, audio, and video in India. Book a free Gemini scoping call.",
+    keywords: "gemini ai development, google gemini development, gemini api integration india, gemini multimodal app development, gemini pro development, gemini flash integration, gemini ai company india"
+  },
+  "/mcp-development-company": {
+    title: "MCP Development Company in India | Avani Enterprises",
+    description: "Avani Enterprises builds Model Context Protocol (MCP) servers that connect AI to your tools and data securely. 8+ years, 300+ projects. Book a free MCP scoping call.",
+    keywords: "mcp development company, model context protocol development, mcp server development india, mcp integration services, ai tool integration, custom mcp server, llm data connectors"
+  },
+  "/llm-development-company": {
+    title: "LLM Development Company in India | Avani Enterprises",
+    description: "Avani Enterprises is an LLM development company building RAG apps, fine-tuned models, and production LLM systems with real evaluation. Book a free LLM scoping call.",
+    keywords: "llm development company, llm app development, rag development, llm fine tuning india, llm integration services, production llm deployment, custom llm solutions, ai chatbot llm"
+  },
+  "/ai-consulting-company": {
+    title: "AI Consulting Company in India | Avani Enterprises",
+    description: "Avani Enterprises is an AI consulting company building AI strategy, roadmaps, and use-case discovery that turn AI into ROI. Book a free AI strategy call today.",
+    keywords: "ai consulting company, ai consultant, ai strategy consulting, ai advisory india, ai roadmap consulting, ai use case discovery, enterprise ai consulting"
+  },
+  "/android-app-development-company": {
+    title: "Android App Development Company in India | Avani",
+    description: "Avani Enterprises builds native Android apps in Kotlin \u2014 fast, secure, Play Store-ready. 8+ years, 300+ projects, 5.0 rating. Get a free Android app quote.",
+    keywords: "android app development company, android app developer, android application development india, kotlin app development, native android development, play store app launch, android development company gurgaon"
+  },
+  "/ios-app-development-company": {
+    title: "iOS App Development Company in India | Avani Enterprises",
+    description: "Avani Enterprises is an iOS app development company in India building native Swift iPhone apps with polished UX and smooth App Store launches. Get a free quote today.",
+    keywords: "ios app development company, iphone app development, ios app developer india, native swift app development, app store launch, swift app development company, ipad app development"
+  },
+  "/flutter-app-development-company": {
+    title: "Flutter App Development Company in India | Avani",
+    description: "Avani Enterprises is a Flutter app development company in India building one codebase for iOS + Android. Faster launches, lower cost. Get a free quote today.",
+    keywords: "flutter app development company, flutter developer, cross platform app development india, flutter app development india, hire flutter developer, flutter ios android app, flutter mobile app company"
+  },
+  "/react-native-development-company": {
+    title: "React Native Development Company India | Avani Enterprises",
+    description: "Avani Enterprises is a React Native development company in India building cross-platform apps with near-native performance from one codebase. 300+ projects, 8+ years. Get a quote.",
+    keywords: "react native development company, react native app development, cross platform app india, react native developers, react native app development company, hire react native developers"
+  },
+  "/seo-services": {
+    title: "SEO Services in India | Full-Stack SEO | Avani Enterprises",
+    description: "Avani Enterprises offers complete SEO services in India: audit, technical, on-page, content & link building. 8+ years, 150+ clients. Get your free SEO audit today.",
+    keywords: "seo services, seo services company, search engine optimization services india, technical seo services, on-page seo, link building services, seo audit india, content seo"
+  },
+  "/enterprise-seo-services": {
+    title: "Enterprise SEO Services in India | Avani Enterprises",
+    description: "Enterprise SEO services for large-scale sites: site architecture, template optimisation, programmatic SEO, and governance. Scale rankings across thousands of URLs. Get a free audit.",
+    keywords: "enterprise seo services, enterprise seo company, large scale seo india, programmatic seo, technical seo at scale, enterprise seo agency, site architecture seo, seo governance"
+  },
+  "/ecommerce-seo-services": {
+    title: "Ecommerce SEO Services in India | Avani Enterprises",
+    description: "Avani Enterprises is an ecommerce SEO company growing organic store sales through category and product page SEO that lowers CAC. Get your free ecommerce SEO audit.",
+    keywords: "ecommerce seo services, ecommerce seo company, product page seo, online store seo india, category page seo, ecommerce seo agency, shopify seo, woocommerce seo"
+  },
+  "/performance-marketing-agency": {
+    title: "Performance Marketing Agency in India | Avani Enterprises",
+    description: "Avani Enterprises is a ROI-driven performance marketing agency running paid search and social built around conversions and CAC, not clicks. Get a free growth audit.",
+    keywords: "performance marketing agency, performance marketing company, roi driven marketing india, paid acquisition agency, paid media agency, ppc and social agency, growth marketing agency india"
+  },
+  "/facebook-ads-agency": {
+    title: "Facebook Ads Agency in India | Avani Enterprises",
+    description: "Avani Enterprises is a Facebook ads agency in India running lead-gen and ecommerce campaigns engineered for strong, profitable ROAS. Book a free strategy call today.",
+    keywords: "facebook ads agency, facebook advertising agency, facebook ads management india, facebook lead generation, ecommerce facebook ads, facebook ads roas, facebook ppc agency, facebook ads company india"
+  },
+  "/instagram-marketing-agency": {
+    title: "Instagram Marketing Agency in India | Avani Enterprises",
+    description: "Avani Enterprises is an Instagram marketing agency in India growing reach with Reels, creative, and Instagram ads that convert followers into customers. Book a free call.",
+    keywords: "instagram marketing agency, instagram marketing company, instagram ads agency india, instagram reels marketing, instagram growth agency, instagram advertising company, instagram management services, instagram for business india"
+  },
   // Batch A services + comparison
   "/custom-web-development-company": {
     title: "Custom Web Development Company India | Avani Enterprises",

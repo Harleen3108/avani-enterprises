@@ -203,6 +203,42 @@ const SocialMediaMarketingCompany = lazyWithRetry(() => import("./pages/service/
 const AiSolutionsCompany = lazyWithRetry(() => import("./pages/service/AiSolutionsCompany"));
 const LocalSeoServices = lazyWithRetry(() => import("./pages/service/LocalSeoServices"));
 const BusinessProcessAutomation = lazyWithRetry(() => import("./pages/service/BusinessProcessAutomation"));
+// Batch A (35 service-cluster pages)
+const WebsiteDevelopmentCompany = lazyWithRetry(() => import("./pages/service/WebsiteDevelopmentCompany"));
+const FullStackDevelopmentCompany = lazyWithRetry(() => import("./pages/service/FullStackDevelopmentCompany"));
+const ShopifyDevelopmentCompany = lazyWithRetry(() => import("./pages/service/ShopifyDevelopmentCompany"));
+const WoocommerceDevelopmentCompany = lazyWithRetry(() => import("./pages/service/WoocommerceDevelopmentCompany"));
+const CustomEcommerceDevelopment = lazyWithRetry(() => import("./pages/service/CustomEcommerceDevelopment"));
+const CustomCrmDevelopment = lazyWithRetry(() => import("./pages/service/CustomCrmDevelopment"));
+const CrmSoftwareDevelopment = lazyWithRetry(() => import("./pages/service/CrmSoftwareDevelopment"));
+const CrmConsultingCompany = lazyWithRetry(() => import("./pages/service/CrmConsultingCompany"));
+const ErpDevelopmentCompany = lazyWithRetry(() => import("./pages/service/ErpDevelopmentCompany"));
+const CustomErpDevelopment = lazyWithRetry(() => import("./pages/service/CustomErpDevelopment"));
+const ErpSoftwareDevelopmentCompany = lazyWithRetry(() => import("./pages/service/ErpSoftwareDevelopmentCompany"));
+const HrmsDevelopmentCompany = lazyWithRetry(() => import("./pages/service/HrmsDevelopmentCompany"));
+const HrSoftwareDevelopmentCompany = lazyWithRetry(() => import("./pages/service/HrSoftwareDevelopmentCompany"));
+const AttendanceManagementSoftwareDevelopment = lazyWithRetry(() => import("./pages/service/AttendanceManagementSoftwareDevelopment"));
+const PayrollSoftwareDevelopment = lazyWithRetry(() => import("./pages/service/PayrollSoftwareDevelopment"));
+const BusinessOperatingSystemDevelopment = lazyWithRetry(() => import("./pages/service/BusinessOperatingSystemDevelopment"));
+const WorkflowAutomationSoftwareDevelopment = lazyWithRetry(() => import("./pages/service/WorkflowAutomationSoftwareDevelopment"));
+const AiDevelopmentCompany = lazyWithRetry(() => import("./pages/service/AiDevelopmentCompany"));
+const AiChatbotDevelopment = lazyWithRetry(() => import("./pages/service/AiChatbotDevelopment"));
+const OpenaiDevelopmentCompany = lazyWithRetry(() => import("./pages/service/OpenaiDevelopmentCompany"));
+const ClaudeAiDevelopment = lazyWithRetry(() => import("./pages/service/ClaudeAiDevelopment"));
+const GeminiAiDevelopment = lazyWithRetry(() => import("./pages/service/GeminiAiDevelopment"));
+const McpDevelopmentCompany = lazyWithRetry(() => import("./pages/service/McpDevelopmentCompany"));
+const LlmDevelopmentCompany = lazyWithRetry(() => import("./pages/service/LlmDevelopmentCompany"));
+const AiConsultingCompany = lazyWithRetry(() => import("./pages/service/AiConsultingCompany"));
+const AndroidAppDevelopmentCompany = lazyWithRetry(() => import("./pages/service/AndroidAppDevelopmentCompany"));
+const IosAppDevelopmentCompany = lazyWithRetry(() => import("./pages/service/IosAppDevelopmentCompany"));
+const FlutterAppDevelopmentCompany = lazyWithRetry(() => import("./pages/service/FlutterAppDevelopmentCompany"));
+const ReactNativeDevelopmentCompany = lazyWithRetry(() => import("./pages/service/ReactNativeDevelopmentCompany"));
+const SeoServices = lazyWithRetry(() => import("./pages/service/SeoServices"));
+const EnterpriseSeoServices = lazyWithRetry(() => import("./pages/service/EnterpriseSeoServices"));
+const EcommerceSeoServices = lazyWithRetry(() => import("./pages/service/EcommerceSeoServices"));
+const PerformanceMarketingAgency = lazyWithRetry(() => import("./pages/service/PerformanceMarketingAgency"));
+const FacebookAdsAgency = lazyWithRetry(() => import("./pages/service/FacebookAdsAgency"));
+const InstagramMarketingAgency = lazyWithRetry(() => import("./pages/service/InstagramMarketingAgency"));
 // Batch A services + comparison
 const CustomWebDevelopmentCompany = lazyWithRetry(() => import("./pages/service/CustomWebDevelopmentCompany"));
 const FrontendDevelopmentCompany = lazyWithRetry(() => import("./pages/service/FrontendDevelopmentCompany"));
@@ -343,6 +379,41 @@ const AppLayout = () => {
     "/ai-solutions-company",
     "/local-seo-services",
     "/business-process-automation",
+    "/website-development-company",
+    "/full-stack-development-company",
+    "/shopify-development-company",
+    "/woocommerce-development-company",
+    "/custom-ecommerce-development",
+    "/custom-crm-development",
+    "/crm-software-development",
+    "/crm-consulting-company",
+    "/erp-development-company",
+    "/custom-erp-development",
+    "/erp-software-development-company",
+    "/hrms-development-company",
+    "/hr-software-development-company",
+    "/attendance-management-software-development",
+    "/payroll-software-development",
+    "/business-operating-system-development",
+    "/workflow-automation-software-development",
+    "/ai-development-company",
+    "/ai-chatbot-development",
+    "/openai-development-company",
+    "/claude-ai-development",
+    "/gemini-ai-development",
+    "/mcp-development-company",
+    "/llm-development-company",
+    "/ai-consulting-company",
+    "/android-app-development-company",
+    "/ios-app-development-company",
+    "/flutter-app-development-company",
+    "/react-native-development-company",
+    "/seo-services",
+    "/enterprise-seo-services",
+    "/ecommerce-seo-services",
+    "/performance-marketing-agency",
+    "/facebook-ads-agency",
+    "/instagram-marketing-agency",
     "/custom-web-development-company",
     "/frontend-development-company",
     "/backend-development-company",
@@ -484,6 +555,41 @@ const AppLayout = () => {
             <Route path="ai-solutions-company" element={<AiSolutionsCompany />} />
             <Route path="local-seo-services" element={<LocalSeoServices />} />
             <Route path="business-process-automation" element={<BusinessProcessAutomation />} />
+            <Route path="website-development-company" element={<WebsiteDevelopmentCompany />} />
+            <Route path="full-stack-development-company" element={<FullStackDevelopmentCompany />} />
+            <Route path="shopify-development-company" element={<ShopifyDevelopmentCompany />} />
+            <Route path="woocommerce-development-company" element={<WoocommerceDevelopmentCompany />} />
+            <Route path="custom-ecommerce-development" element={<CustomEcommerceDevelopment />} />
+            <Route path="custom-crm-development" element={<CustomCrmDevelopment />} />
+            <Route path="crm-software-development" element={<CrmSoftwareDevelopment />} />
+            <Route path="crm-consulting-company" element={<CrmConsultingCompany />} />
+            <Route path="erp-development-company" element={<ErpDevelopmentCompany />} />
+            <Route path="custom-erp-development" element={<CustomErpDevelopment />} />
+            <Route path="erp-software-development-company" element={<ErpSoftwareDevelopmentCompany />} />
+            <Route path="hrms-development-company" element={<HrmsDevelopmentCompany />} />
+            <Route path="hr-software-development-company" element={<HrSoftwareDevelopmentCompany />} />
+            <Route path="attendance-management-software-development" element={<AttendanceManagementSoftwareDevelopment />} />
+            <Route path="payroll-software-development" element={<PayrollSoftwareDevelopment />} />
+            <Route path="business-operating-system-development" element={<BusinessOperatingSystemDevelopment />} />
+            <Route path="workflow-automation-software-development" element={<WorkflowAutomationSoftwareDevelopment />} />
+            <Route path="ai-development-company" element={<AiDevelopmentCompany />} />
+            <Route path="ai-chatbot-development" element={<AiChatbotDevelopment />} />
+            <Route path="openai-development-company" element={<OpenaiDevelopmentCompany />} />
+            <Route path="claude-ai-development" element={<ClaudeAiDevelopment />} />
+            <Route path="gemini-ai-development" element={<GeminiAiDevelopment />} />
+            <Route path="mcp-development-company" element={<McpDevelopmentCompany />} />
+            <Route path="llm-development-company" element={<LlmDevelopmentCompany />} />
+            <Route path="ai-consulting-company" element={<AiConsultingCompany />} />
+            <Route path="android-app-development-company" element={<AndroidAppDevelopmentCompany />} />
+            <Route path="ios-app-development-company" element={<IosAppDevelopmentCompany />} />
+            <Route path="flutter-app-development-company" element={<FlutterAppDevelopmentCompany />} />
+            <Route path="react-native-development-company" element={<ReactNativeDevelopmentCompany />} />
+            <Route path="seo-services" element={<SeoServices />} />
+            <Route path="enterprise-seo-services" element={<EnterpriseSeoServices />} />
+            <Route path="ecommerce-seo-services" element={<EcommerceSeoServices />} />
+            <Route path="performance-marketing-agency" element={<PerformanceMarketingAgency />} />
+            <Route path="facebook-ads-agency" element={<FacebookAdsAgency />} />
+            <Route path="instagram-marketing-agency" element={<InstagramMarketingAgency />} />
             <Route path="custom-web-development-company" element={<CustomWebDevelopmentCompany />} />
             <Route path="frontend-development-company" element={<FrontendDevelopmentCompany />} />
             <Route path="backend-development-company" element={<BackendDevelopmentCompany />} />
