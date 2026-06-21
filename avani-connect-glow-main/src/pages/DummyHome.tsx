@@ -66,7 +66,7 @@ const services = [
     title: 'Social Media Marketing', 
     description: 'Grow your social presence and connect with your dream audience. We create high-performing campaigns and scroll-stopping posts on Instagram, Facebook, and LinkedIn to build real engagement and drive sales.', 
     slug: 'social-media-marketing',
-    image: '/whatwecreate/socialmedia.png'
+    image: '/whatwecreate/socialmedia.webp'
   },
   { 
     index: '05', 

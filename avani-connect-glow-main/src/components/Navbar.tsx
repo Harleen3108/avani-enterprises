@@ -221,6 +221,8 @@ const Navbar = () => {
             </Link>
             <button onClick={() => setMobileOpen(!mobileOpen)}
               className="dummy-nav-burger"
+              aria-label={mobileOpen ? 'Close navigation menu' : 'Open navigation menu'}
+              aria-expanded={mobileOpen}
               style={{ display: 'none', background: 'none', border: '1px solid var(--border-light)', borderRadius: '6px', padding: '6px', cursor: 'pointer', color: 'var(--text-primary)' }}>
               {mobileOpen ? <X size={18} /> : <Menu size={18} />}
             </button>

@@ -126,7 +126,7 @@ const Home = () => {
       description: 'Grow your social presence and connect with your dream audience. We create high-performing campaigns and scroll-stopping posts on Instagram, Facebook, and LinkedIn to build real engagement and drive sales.',
       slug: 'social-media-marketing',
       index: '04',
-      image: '/whatwecreate/socialmedia.png',
+      image: '/whatwecreate/socialmedia.webp',
       subLinks: [
         { name: 'Campaign Strategy', path: '/services/social-media-marketing' },
         { name: 'Audience Growth', path: '/services/social-media-marketing' },

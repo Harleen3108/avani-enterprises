@@ -40,7 +40,7 @@ export const projectsData: ProjectItem[] = [
     slug: "project-leads-management",
     title: "Project & Leads Management",
     subtitle: "Centralized execution, tracking, delegation, and reporting workspace",
-    image: "/crm-hero.png",
+    image: "/crm-hero.webp",
     liveLink: "https://team-lead-32ha.vercel.app/",
     overview: "A sophisticated Project & Leads Management workspace developed for modern agencies and organizations. This platform simplifies lead generation, captures real-time data from various funnels, tracks pipeline progression, and facilitates tasks delegation with micro-milestone status reports. Built to empower teams with extreme accountability and crystal-clear progress visualization.",
     keyFeatures: [
@@ -61,7 +61,7 @@ export const projectsData: ProjectItem[] = [
     slug: "sales-edge-crm",
     title: "Sales Edge CRM",
     subtitle: "Enterprise CRM for sales organizations",
-    image: "/salesedge.png",
+    image: "/salesedge.webp",
     liveLink: "https://crm-sales-portal.vercel.app/",
     overview: "Sales Edge Portal is an enterprise CRM developed specifically for high-velocity sales organizations. It optimizes sales funnels, automates client outreach across multiple channels, hosts a robust customer relationship database, and serves visual interactive reporting dashboards that empower sales leaders to skyrocket conversion rates and pipeline velocity.",
     keyFeatures: [
@@ -82,7 +82,7 @@ export const projectsData: ProjectItem[] = [
     slug: "placement-management",
     title: "Placement Management",
     subtitle: "Centralized Campus Hiring Platform",
-    image: "/placementmanagement.png",
+    image: "/placementmanagement.webp",
     liveLink: "https://placement-management-system-80spgis9n.vercel.app/",
     overview: "A centralized platform designed to connect universities, students, and recruiters for seamless campus hiring. It enables university administrators to manage placement drives, students to build professional profiles and apply for opportunities, and recruiters to evaluate candidates and update hiring progress efficiently. The system streamlines the entire placement process from job creation to final offer release through structured workflows and real-time tracking.",
     keyFeatures: [

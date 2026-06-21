@@ -57,7 +57,7 @@ const products = [
     link: 'https://team-lead-gamma.vercel.app/',
     features: ['Lead Pipeline Automation', 'Project Task Management', 'Client Communication Hub', 'Sales Forecasting Reports', 'Document Management', 'Team Collaboration Tools'],
     highlights: ['Lead Tracking', 'Automated Follow-ups', 'Revenue Insights'],
-    image: '/crm-hero.png',
+    image: '/crm-hero.webp',
   },
   {
     id: 'ecommerce-web',

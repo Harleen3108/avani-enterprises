@@ -111,6 +111,7 @@ const DummyCaseStudies = () => {
                   <div style={{ height: '200px', overflow: 'hidden', position: 'relative' }}>
                     <img
                       src={cs.image} alt={cs.name}
+                      width={400} height={200} loading="lazy" decoding="async"
                       style={{
                         width: '100%', height: '100%', objectFit: 'cover',
                         transition: 'transform 0.7s ease',
@@ -127,7 +128,7 @@ const DummyCaseStudies = () => {
 
                     {/* Logo */}
                     <div style={{ position: 'absolute', bottom: '14px', left: '14px', width: '36px', height: '36px', borderRadius: '10px', background: 'var(--glass-bg)', backdropFilter: 'blur(8px)', border: '1px solid var(--border-light)', overflow: 'hidden', padding: '4px' }}>
-                      <img src={cs.logo} alt="" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+                      <img src={cs.logo} alt="" width={36} height={36} loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
                     </div>
                   </div>
 

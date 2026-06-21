@@ -4,23 +4,23 @@ import { Calendar, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const StickyConsultationButton = ({ to = "/contact" }: { to?: string }) => {
-  const [scrollY, setScrollY] = useState(0);
+  // Store the derived boolean only — React bails out of re-renders when the value
+  // is unchanged, so scrolling no longer triggers a render on every frame.
+  const [isAtTop, setIsAtTop] = useState(true);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
+    const handleScroll = () => setIsAtTop(window.scrollY < 120);
     const handleResize = () => setIsMobile(window.innerWidth < 768);
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', handleResize);
-    
+    window.addEventListener('resize', handleResize, { passive: true });
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleResize);
     };
   }, []);
-
-  const isAtTop = scrollY < 120;
 
   return (
     <Link to={to} style={{ textDecoration: 'none' }}>

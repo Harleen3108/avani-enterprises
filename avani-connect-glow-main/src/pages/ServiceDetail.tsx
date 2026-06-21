@@ -153,7 +153,7 @@ const serviceData: Record<string, ServiceDetail> = {
     icon: <Share2 size={48} />,
     title: 'Social Media Marketing',
     titleLines: { line1: "SOCIAL MEDIA", line2: "ENGAGEMENT", line3: "MARKETING" },
-    image: "/whatwecreate/socialmedia.png",
+    image: "/whatwecreate/socialmedia.webp",
     desc: 'Grow your audience, build brand loyalty, and drive sales on social media. We create thumb-stopping visual posts, engaging video reels, and manage high-converting ad campaigns tailored to your target market.',
     hook: 'Social media is where your customers hang out. We make your brand look professional, engaging, and impossible to scroll past.',
     ctaHook: 'Ready to capture absolute customer attention and build a legendary brand voice? Scale your audience reach and conversion loops with us today.',

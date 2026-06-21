@@ -64,18 +64,33 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
     return () => clearInterval(t);
   }, []);
 
-  // Cursor glow effect
+  // Cursor glow effect — rect cached + writes batched via rAF to avoid layout thrashing
+  const glowRect = useRef<DOMRect | null>(null);
+  const glowPos = useRef({ x: 0, y: 0 });
+  const glowRaf = useRef<number | null>(null);
+
+  const handleMouseEnter = useCallback(() => {
+    if (heroRef.current) glowRect.current = heroRef.current.getBoundingClientRect();
+  }, []);
+
   const handleMouseMove = useCallback((e: React.MouseEvent) => {
-    if (glowRef.current && heroRef.current) {
-      const rect = heroRef.current.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      glowRef.current.style.transform = `translate(${x - 150}px, ${y - 150}px)`;
-      glowRef.current.style.opacity = '1';
-    }
+    // Read layout only once (on enter / first move), never per-move — prevents forced reflow
+    if (!glowRect.current && heroRef.current) glowRect.current = heroRef.current.getBoundingClientRect();
+    const rect = glowRect.current;
+    if (!rect) return;
+    glowPos.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
+    if (glowRaf.current != null) return; // coalesce multiple moves into one write per frame
+    glowRaf.current = requestAnimationFrame(() => {
+      glowRaf.current = null;
+      if (glowRef.current) {
+        glowRef.current.style.transform = `translate(${glowPos.current.x - 150}px, ${glowPos.current.y - 150}px)`;
+        glowRef.current.style.opacity = '1';
+      }
+    });
   }, []);
 
   const handleMouseLeave = useCallback(() => {
+    if (glowRaf.current != null) { cancelAnimationFrame(glowRaf.current); glowRaf.current = null; }
     if (glowRef.current) glowRef.current.style.opacity = '0';
   }, []);
 
@@ -83,6 +98,7 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
     <>
       <section className="theme-brown"
         ref={heroRef}
+        onMouseEnter={handleMouseEnter}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         style={{ minHeight: '100vh', position: 'relative', overflow: 'hidden', display: 'flex', alignItems: 'center', background: 'var(--bg-primary)' }}
@@ -227,7 +243,7 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
               {/* Avatar */}
               <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
                 style={{ position: 'absolute', top: '-14px', right: '0px', width: '52px', height: '52px', borderRadius: '50%', overflow: 'hidden', border: '3px solid var(--glass-bg)', boxShadow: '0 16px 40px rgba(0,0,0,0.6)', zIndex: 20 }}>
-                <img src="https://images.unsplash.com/photo-1589386417686-0d34b5903d23?q=80&w=400" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} fetchPriority="high" loading="eager" />
+                <img src="https://images.unsplash.com/photo-1589386417686-0d34b5903d23?q=80&w=400" alt="" width={52} height={52} style={{ width: '100%', height: '100%', objectFit: 'cover' }} fetchPriority="low" loading="lazy" />
               </motion.div>
 
               {/* Newsletter Card */}
