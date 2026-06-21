@@ -64,28 +64,22 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
     return () => clearInterval(t);
   }, []);
 
-  // Cursor glow effect — rect cached + writes batched via rAF to avoid layout thrashing
-  const glowRect = useRef<DOMRect | null>(null);
+  // Cursor glow effect — writes batched via rAF. The rect is read once *inside* the frame
+  // callback (not per-mousemove), so it stays fresh during scroll/resize and the glow stays
+  // glued to the cursor, while still avoiding the per-move getBoundingClientRect() that
+  // previously caused layout thrashing (now ≤ one layout read per animation frame).
   const glowPos = useRef({ x: 0, y: 0 });
   const glowRaf = useRef<number | null>(null);
 
-  const handleMouseEnter = useCallback(() => {
-    if (heroRef.current) glowRect.current = heroRef.current.getBoundingClientRect();
-  }, []);
-
   const handleMouseMove = useCallback((e: React.MouseEvent) => {
-    // Read layout only once (on enter / first move), never per-move — prevents forced reflow
-    if (!glowRect.current && heroRef.current) glowRect.current = heroRef.current.getBoundingClientRect();
-    const rect = glowRect.current;
-    if (!rect) return;
-    glowPos.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
+    glowPos.current = { x: e.clientX, y: e.clientY };
     if (glowRaf.current != null) return; // coalesce multiple moves into one write per frame
     glowRaf.current = requestAnimationFrame(() => {
       glowRaf.current = null;
-      if (glowRef.current) {
-        glowRef.current.style.transform = `translate(${glowPos.current.x - 150}px, ${glowPos.current.y - 150}px)`;
-        glowRef.current.style.opacity = '1';
-      }
+      const rect = heroRef.current?.getBoundingClientRect();
+      if (!rect || !glowRef.current) return;
+      glowRef.current.style.transform = `translate(${glowPos.current.x - rect.left - 150}px, ${glowPos.current.y - rect.top - 150}px)`;
+      glowRef.current.style.opacity = '1';
     });
   }, []);
 
@@ -94,11 +88,13 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
     if (glowRef.current) glowRef.current.style.opacity = '0';
   }, []);
 
+  // Cancel any queued glow frame on unmount
+  useEffect(() => () => { if (glowRaf.current != null) cancelAnimationFrame(glowRaf.current); }, []);
+
   return (
     <>
       <section className="theme-brown"
         ref={heroRef}
-        onMouseEnter={handleMouseEnter}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         style={{ minHeight: '100vh', position: 'relative', overflow: 'hidden', display: 'flex', alignItems: 'center', background: 'var(--bg-primary)' }}

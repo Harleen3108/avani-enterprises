@@ -555,6 +555,18 @@ export default async function handler(req, res) {
       html = html.replace(regex, `$1"${val}"`);
     });
 
+    // ── 4b. Homepage-only LCP preload ───────────────────────────────────────
+    // Preload the hero background image (the LCP element on "/") so it begins
+    // downloading during HTML parse instead of after the JS bundle mounts and
+    // React renders the hero. Injected only for "/" because the SPA shares one
+    // template — preloading it globally would waste the download on every route.
+    if (normalizedPath === "/") {
+      const heroPreload =
+        '<link rel="preload" as="image" fetchpriority="high" ' +
+        'href="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=68&w=1280">';
+      html = html.replace(/<\/head>/i, `${heroPreload}</head>`);
+    }
+
     // ── 5. noindex: also set X-Robots-Tag HTTP header for Googlebot ────────
     if (isNoIndex(normalizedPath)) {
       res.setHeader('X-Robots-Tag', 'noindex, nofollow');

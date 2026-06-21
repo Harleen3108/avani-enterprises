@@ -16,8 +16,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
-  <!-- Warm up the LCP image origin (homepage hero) for a faster Largest Contentful Paint -->
-  <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+  <!-- Warm up the LCP image origin (homepage hero). No crossorigin: the hero <img> is a
+       plain no-cors request, so the warmed connection must match its (non-CORS) pool. -->
+  <link rel="preconnect" href="https://images.unsplash.com">
   <!-- Warm up the API origin used for data/SEO fetches -->
   <link rel="preconnect" href="https://avani-enterprises.onrender.com" crossorigin>
   <link rel="dns-prefetch" href="https://avani-enterprises.onrender.com">
