@@ -37,7 +37,7 @@ export default function HeroSection({ source }: HeroSectionProps) {
     <section
       id="home"
       ref={heroRef}
-      className="relative min-h-[85vh] flex items-center pt-32 md:pt-32 lg:pt-36 pb-16 md:pb-24 overflow-hidden bg-white"
+      className="relative min-h-[100vh] sm:min-h-[85vh] flex items-center pt-20 sm:pt-24 md:pt-32 lg:pt-36 pb-16 md:pb-24 overflow-hidden bg-white"
     >
       {/* BACKGROUND: Corporate Geometric Theme */}
       <div className="absolute inset-0 z-0 overflow-hidden">

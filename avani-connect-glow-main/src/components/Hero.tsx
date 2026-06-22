@@ -321,11 +321,10 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
           @keyframes dummy-spin { to { transform: rotate(360deg); } }
           @media (max-width: 1024px) { .dummy-right-col { display: none !important; } .dummy-cursor-glow { display: none !important; } }
           @media (max-width: 768px) {
-            /* Fit the hero to the visible viewport on load: use small-viewport-height
-               (excludes the mobile browser chrome) and anchor content to the top so the
-               heading + CTA are immediately visible without scrolling. */
-            .dummy-hero-section { min-height: 100vh !important; min-height: 100svh !important; align-items: flex-start !important; }
-            .dummy-hero-grid { grid-template-columns: 1fr !important; padding: 72px 24px 24px !important; }
+            /* Center the hero content vertically to fit seamlessly in the whole mobile screen
+               without causing layout overflow or excessive top-heavy spacing. */
+            .dummy-hero-section { min-height: 100vh !important; min-height: 100svh !important; align-items: center !important; justify-content: center !important; }
+            .dummy-hero-grid { grid-template-columns: 1fr !important; padding: 56px 24px 24px !important; }
             .dummy-hero-buttons { flex-direction: column; width: 100%; align-items: stretch; margin-bottom: 24px !important; }
             .dummy-hero-buttons > * { width: 100%; justify-content: center; }
             .dummy-hero-stats { display: grid !important; grid-template-columns: repeat(2, 1fr) !important; gap: 16px 0 !important; padding-top: 18px !important; }
