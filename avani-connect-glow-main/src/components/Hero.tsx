@@ -170,7 +170,7 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
 
 
 
-              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.65 }}
+              <motion.div className="dummy-hero-mappin" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.65 }}
                 style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '28px' }}>
                 <MapPin size={11} color="var(--accent-primary)" />
                 <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', color: 'var(--accent-light)', letterSpacing: '0.04em', fontWeight: 500 }}>
@@ -321,28 +321,75 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
           @keyframes dummy-spin { to { transform: rotate(360deg); } }
           @media (max-width: 1024px) { .dummy-right-col { display: none !important; } .dummy-cursor-glow { display: none !important; } .dummy-hero-grid { grid-template-columns: 1fr !important; } }
           @media (max-width: 900px) {
-            /* Anchor the hero content to the TOP (not centered) so the heading starts right
-               below the transparent fixed navbar with no empty gap above it, and the whole
-               hero fits within the visible viewport (svh) so there's no scroll on load. */
-            /* Center the content in the area BELOW the navbar: the 56px top padding clears
-               the fixed navbar (and gives breathing room), then the content is vertically
-               centered in the remaining space so it fills the screen with balanced spacing
-               (no lopsided empty area at the bottom). */
-            .dummy-hero-section { min-height: 100vh !important; min-height: 100svh !important; align-items: center !important; justify-content: flex-start !important; padding-top: 56px !important; padding-bottom: 28px !important; }
-            /* Hide the decorative gold top line on mobile (user request) */
+            /* Center the entire hero section content vertically and horizontally to fit mobile screen seamlessly */
+            .dummy-hero-section {
+              min-height: 100vh !important;
+              min-height: 100svh !important;
+              display: flex !important;
+              flex-direction: column !important;
+              align-items: center !important;
+              justify-content: center !important;
+              padding: 92px 18px 48px !important;
+            }
+            /* Hide the decorative gold top line on mobile */
             .dummy-hero-topline { display: none !important; }
-            .dummy-hero-grid { grid-template-columns: 1fr !important; padding: 0 18px !important; }
-            /* slightly tighter letter-spacing on mobile so the larger heading still fits one line */
-            .dummy-hero-headline h1, .dummy-hero-headline > div > div { letter-spacing: -0.035em !important; }
-            /* Heading leads on mobile (right after the navbar); the badge drops just below it.
-               align-self keeps the badge a content-width pill (flex column would stretch it). */
-            .dummy-hero-left { display: flex !important; flex-direction: column !important; align-items: stretch !important; }
-            .dummy-hero-headline { order: -1 !important; margin-bottom: 12px !important; }
-            .dummy-hero-badge { order: 0 !important; align-self: flex-start !important; margin-bottom: 16px !important; }
-            .dummy-hero-buttons { flex-direction: column; width: 100%; align-items: stretch; margin-bottom: 20px !important; }
-            .dummy-hero-buttons > * { width: 100%; justify-content: center; }
-            .dummy-hero-stats { display: grid !important; grid-template-columns: repeat(2, 1fr) !important; gap: 14px 0 !important; padding-top: 16px !important; }
-            .dummy-hero-stat-item { padding: 0 !important; border-right: none !important; }
+            .dummy-hero-grid {
+              grid-template-columns: 1fr !important;
+              width: 100% !important;
+              padding: 0 !important;
+            }
+            /* Tighter spacing and typography centering on mobile */
+            .dummy-hero-headline h1, .dummy-hero-headline > div > div {
+              letter-spacing: -0.03em !important;
+              text-align: center !important;
+            }
+            /* Make the left column flex and center aligned to eliminate empty space on the right */
+            .dummy-hero-left {
+              display: flex !important;
+              flex-direction: column !important;
+              align-items: center !important;
+              text-align: center !important;
+              width: 100% !important;
+            }
+            .dummy-hero-headline {
+              margin-bottom: 16px !important;
+              width: 100% !important;
+            }
+            .dummy-hero-badge {
+              align-self: center !important;
+              margin-bottom: 20px !important;
+            }
+            .dummy-hero-mappin {
+              justify-content: center !important;
+              margin-bottom: 24px !important;
+              width: 100% !important;
+            }
+            .dummy-hero-buttons {
+              flex-direction: column !important;
+              width: 100% !important;
+              max-width: 320px !important;
+              align-items: stretch !important;
+              margin-bottom: 24px !important;
+              gap: 12px !important;
+            }
+            .dummy-hero-buttons > * {
+              width: 100% !important;
+              justify-content: center !important;
+            }
+            .dummy-hero-stats {
+              display: grid !important;
+              grid-template-columns: repeat(2, 1fr) !important;
+              gap: 16px 0 !important;
+              padding-top: 18px !important;
+              width: 100% !important;
+              max-width: 440px !important;
+              margin: 0 auto !important;
+            }
+            .dummy-hero-stat-item {
+              padding: 0 !important;
+              border-right: none !important;
+              text-align: center !important;
+            }
             .dummy-hero-rings { display: none !important; }
           }
         `}</style>

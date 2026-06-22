@@ -3,6 +3,8 @@ import axios from "axios";
 import ErrorFallback from "../components/ErrorFallback";
 import { useAuth } from "../context/AuthContext";
 import { Link } from "react-router-dom";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 import {
   Plus,
   Edit2,
@@ -42,6 +44,19 @@ const BlogManagement = () => {
   const [uploadingImage, setUploadingImage] = useState(false);
 
   const { loading: authLoading } = useAuth();
+
+  const quillModules = {
+    toolbar: [
+      [{ header: [1, 2, 3, 4, 5, 6, false] }],
+      [{ size: ["small", false, "large", "huge"] }],
+      ["bold", "italic", "underline", "strike", "blockquote", "code-block"],
+      [{ color: [] }, { background: [] }],
+      [{ list: "ordered" }, { list: "bullet" }, { indent: "-1" }, { indent: "+1" }],
+      [{ align: [] }],
+      ["link", "image", "video"],
+      ["clean"]
+    ]
+  };
 
   useEffect(() => {
     if (!authLoading) fetchBlogs();
@@ -397,12 +412,15 @@ const BlogManagement = () => {
 
                     <div className="space-y-1.5">
                       <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Blog Content</label>
-                      <textarea
-                        placeholder="Write your amazing content here..."
-                        value={form.content}
-                        onChange={e => setForm({ ...form, content: e.target.value })}
-                        className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 outline-none focus:border-indigo-500 font-bold transition-all h-80 resize-none"
-                      />
+                      <div className="h-[500px] overflow-hidden rounded-xl border border-slate-200 bg-white">
+                        <ReactQuill
+                          theme="snow"
+                          value={form.content}
+                          onChange={(content) => setForm({ ...form, content })}
+                          modules={quillModules}
+                          className="h-[450px]"
+                        />
+                      </div>
                     </div>
                   </div>
 
