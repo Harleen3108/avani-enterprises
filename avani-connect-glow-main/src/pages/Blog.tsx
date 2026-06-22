@@ -32,6 +32,8 @@ const LuxuryLine = () => (
 const Blog = () => {
   const [blogs, setBlogs] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [activeFilter, setActiveFilter] = useState('ALL');
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -51,6 +53,22 @@ const Blog = () => {
     };
     fetchBlogs();
   }, []);
+
+  // Normalize a blog's category to an uppercase label (backend sends an object, string, or nothing)
+  const getCat = (b: any) => {
+    const c = b?.category;
+    const name = (c && typeof c === 'object' && c.name) ? c.name : (typeof c === 'string' ? c : '');
+    return (name || 'INSIGHTS').toString().toUpperCase();
+  };
+
+  // Filter buttons are derived from the categories actually present, so every button filters real data
+  const categories = ['ALL', ...Array.from(new Set(blogs.map(getCat)))];
+  const visibleBlogs = blogs.filter((b) => {
+    const matchCat = activeFilter === 'ALL' || getCat(b) === activeFilter;
+    const q = search.trim().toLowerCase();
+    const matchSearch = !q || (b.title || '').toLowerCase().includes(q) || (b.excerpt || '').toLowerCase().includes(q);
+    return matchCat && matchSearch;
+  });
 
   return (
     <div className="dh-blog-page">
@@ -84,11 +102,11 @@ const Blog = () => {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }} className="dh-responsive-grid">
             <div style={{ position: 'relative', width: '100%', maxWidth: '400px' }}>
               <Search size={18} style={{ position: 'absolute', left: '0', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-tertiary)' }} />
-              <input type="text" placeholder="SEARCH INTEL..." style={{ width: '100%', padding: '1rem 0 1rem 2.5rem', background: 'transparent', border: 'none', color: 'var(--text-primary)', fontSize: '0.8rem', fontWeight: 700, letterSpacing: '0.1em', outline: 'none' }} />
+              <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="SEARCH INTEL..." style={{ width: '100%', padding: '1rem 0 1rem 2.5rem', background: 'transparent', border: 'none', color: 'var(--text-primary)', fontSize: '0.8rem', fontWeight: 700, letterSpacing: '0.1em', outline: 'none' }} />
             </div>
             <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>
-              {['ALL', 'TECHNOLOGY', 'BUSINESS', 'MARKETING', 'AI'].map((tag, i) => (
-                <button key={i} style={{ background: 'none', border: 'none', color: i === 0 ? 'var(--accent-primary)' : 'var(--text-tertiary)', fontWeight: 800, fontSize: '0.7rem', letterSpacing: '0.1em', cursor: 'pointer', transition: 'color 0.3s' }}>
+              {categories.map((tag) => (
+                <button key={tag} onClick={() => setActiveFilter(tag)} style={{ background: 'none', border: 'none', color: activeFilter === tag ? 'var(--accent-primary)' : 'var(--text-tertiary)', fontWeight: 800, fontSize: '0.7rem', letterSpacing: '0.1em', cursor: 'pointer', transition: 'color 0.3s' }}>
                   {tag}
                 </button>
               ))}
@@ -107,9 +125,13 @@ const Blog = () => {
             <div style={{ textAlign: 'center', padding: '10rem 0' }}>
               <div className="dh-label">SYNCHRONIZING...</div>
             </div>
+          ) : visibleBlogs.length === 0 ? (
+            <div style={{ textAlign: 'center', padding: '8rem 0' }}>
+              <div className="dh-label">NO ARTICLES FOUND</div>
+            </div>
           ) : (
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 320px), 1fr))', gap: '32px' }} className="dh-blog-grid">
-              {blogs.map((blog, i) => (
+              {visibleBlogs.map((blog, i) => (
                 <motion.div key={blog._id} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: i * 0.05 }} style={{ display: 'flex' }}>
                   <Link to={`/blog/${encodeURIComponent(blog.slug)}`} style={{ textDecoration: 'none', color: 'inherit', display: 'flex', width: '100%' }}>
                     <div style={{

@@ -326,10 +326,11 @@ const Navbar = () => {
           .dummy-nav-cta { display: none !important; }
         }
         @media (max-width: 768px) {
-          /* Compact mobile navbar so the hero starts higher */
-          .dummy-navbar { padding: 6px 0 !important; }
-          .dummy-nav-logo { width: 26px !important; height: 26px !important; }
-          .dummy-nav-container { padding: 0 24px !important; }
+          /* Very compact mobile navbar so the hero starts as high as possible */
+          .dummy-navbar { padding: 4px 0 !important; }
+          .dummy-nav-logo { width: 22px !important; height: 22px !important; }
+          .dummy-nav-burger { padding: 4px !important; }
+          .dummy-nav-container { padding: 0 20px !important; }
           .dummy-nav-mobile-container { padding: 24px !important; }
         }
       `}</style>

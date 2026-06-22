@@ -749,6 +749,9 @@ export default async function handler(req, res) {
     }
 
     res.setHeader('Content-Type', 'text/html');
+    // Always revalidate the HTML shell so a new deploy's bundle is picked up immediately
+    // (the hashed JS/CSS assets stay long-cached & immutable — only this small doc revalidates).
+    res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
     res.status(200).send(html);
   } catch (err) {
     console.error("❌ Vercel SEO Error:", err);
