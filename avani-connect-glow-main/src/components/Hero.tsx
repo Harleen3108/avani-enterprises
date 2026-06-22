@@ -154,15 +154,15 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
 
               {/* Headline */}
               <motion.div className="dummy-hero-headline" initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25, duration: 1, ease: [0.22, 1, 0.36, 1] }}>
-                <h1 style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(2.1rem, 9.5vw, 110px)', fontWeight: 800, lineHeight: 0.95, color: 'var(--text-primary)', letterSpacing: '-0.02em', margin: 0, textTransform: 'uppercase' }}>
+                <h1 style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(2.4rem, 10.5vw, 118px)', fontWeight: 800, lineHeight: 0.95, color: 'var(--text-primary)', letterSpacing: '-0.02em', margin: 0, textTransform: 'uppercase' }}>
                   WE BUILD<br />
                   <span style={{ color: 'transparent', WebkitTextStroke: '2px var(--text-primary)' }}>HIGH-PERFORMING</span>
                 </h1>
 
                 {/* Animated outline word */}
-                <div style={{ overflow: 'hidden', height: 'clamp(2.1rem, 9.5vw, 110px)', margin: '4px 0' }}>
+                <div style={{ overflow: 'hidden', height: 'clamp(2.4rem, 10.5vw, 118px)', margin: '4px 0' }}>
                   <motion.div key={wordIndex} initial={{ y: '110%' }} animate={{ y: '0%' }} transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-                    style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(2.1rem, 9.5vw, 110px)', fontWeight: 800, lineHeight: 0.95, color: 'var(--accent-primary)', letterSpacing: '-0.02em', display: 'block', textTransform: 'uppercase' }}>
+                    style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(2.4rem, 10.5vw, 118px)', fontWeight: 800, lineHeight: 0.95, color: 'var(--accent-primary)', letterSpacing: '-0.02em', display: 'block', textTransform: 'uppercase' }}>
                     {words[wordIndex]}
                   </motion.div>
                 </div>
@@ -327,7 +327,9 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
             .dummy-hero-section { min-height: 100vh !important; min-height: 100svh !important; align-items: flex-start !important; justify-content: flex-start !important; }
             /* Hide the decorative gold top line on mobile (user request) */
             .dummy-hero-topline { display: none !important; }
-            .dummy-hero-grid { grid-template-columns: 1fr !important; padding: 52px 20px 20px !important; }
+            .dummy-hero-grid { grid-template-columns: 1fr !important; padding: 64px 18px 24px !important; }
+            /* slightly tighter letter-spacing on mobile so the larger heading still fits one line */
+            .dummy-hero-headline h1, .dummy-hero-headline > div > div { letter-spacing: -0.035em !important; }
             /* Heading leads on mobile (right after the navbar); the badge drops just below it.
                align-self keeps the badge a content-width pill (flex column would stretch it). */
             .dummy-hero-left { display: flex !important; flex-direction: column !important; align-items: stretch !important; }
