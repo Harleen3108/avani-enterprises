@@ -324,10 +324,14 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
             /* Anchor the hero content to the TOP (not centered) so the heading starts right
                below the transparent fixed navbar with no empty gap above it, and the whole
                hero fits within the visible viewport (svh) so there's no scroll on load. */
-            .dummy-hero-section { min-height: 100vh !important; min-height: 100svh !important; align-items: flex-start !important; justify-content: flex-start !important; }
+            /* Center the content in the area BELOW the navbar: the 56px top padding clears
+               the fixed navbar (and gives breathing room), then the content is vertically
+               centered in the remaining space so it fills the screen with balanced spacing
+               (no lopsided empty area at the bottom). */
+            .dummy-hero-section { min-height: 100vh !important; min-height: 100svh !important; align-items: center !important; justify-content: flex-start !important; padding-top: 56px !important; padding-bottom: 28px !important; }
             /* Hide the decorative gold top line on mobile (user request) */
             .dummy-hero-topline { display: none !important; }
-            .dummy-hero-grid { grid-template-columns: 1fr !important; padding: 64px 18px 24px !important; }
+            .dummy-hero-grid { grid-template-columns: 1fr !important; padding: 0 18px !important; }
             /* slightly tighter letter-spacing on mobile so the larger heading still fits one line */
             .dummy-hero-headline h1, .dummy-hero-headline > div > div { letter-spacing: -0.035em !important; }
             /* Heading leads on mobile (right after the navbar); the badge drops just below it.
