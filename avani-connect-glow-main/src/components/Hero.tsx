@@ -144,7 +144,7 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
           <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '80px 48px 48px', display: 'grid', gridTemplateColumns: '1.15fr 0.85fr', gap: '48px', alignItems: 'center' }} className="dummy-hero-grid">
 
             {/* LEFT */}
-            <div>
+            <div className="dummy-hero-left">
               {/* Badge */}
               <motion.div className="dummy-hero-badge" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15, duration: 0.8 }}
                 style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '6px 16px', border: '1px solid var(--border-light)', borderRadius: '100px', background: 'var(--accent-hover)', backdropFilter: 'blur(10px)', marginBottom: '24px', maxWidth: '100%' }}>
@@ -153,7 +153,7 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
               </motion.div>
 
               {/* Headline */}
-              <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25, duration: 1, ease: [0.22, 1, 0.36, 1] }}>
+              <motion.div className="dummy-hero-headline" initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25, duration: 1, ease: [0.22, 1, 0.36, 1] }}>
                 <h1 style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(2.1rem, 9.5vw, 110px)', fontWeight: 800, lineHeight: 0.95, color: 'var(--text-primary)', letterSpacing: '-0.02em', margin: 0, textTransform: 'uppercase' }}>
                   WE BUILD<br />
                   <span style={{ color: 'transparent', WebkitTextStroke: '2px var(--text-primary)' }}>HIGH-PERFORMING</span>
@@ -328,7 +328,11 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
             /* Hide the decorative gold top line on mobile (user request) */
             .dummy-hero-topline { display: none !important; }
             .dummy-hero-grid { grid-template-columns: 1fr !important; padding: 36px 20px 20px !important; }
-            .dummy-hero-badge { margin-bottom: 10px !important; }
+            /* Heading leads on mobile (right after the navbar); the badge drops just below it.
+               align-self keeps the badge a content-width pill (flex column would stretch it). */
+            .dummy-hero-left { display: flex !important; flex-direction: column !important; align-items: stretch !important; }
+            .dummy-hero-headline { order: -1 !important; margin-bottom: 12px !important; }
+            .dummy-hero-badge { order: 0 !important; align-self: flex-start !important; margin-bottom: 16px !important; }
             .dummy-hero-buttons { flex-direction: column; width: 100%; align-items: stretch; margin-bottom: 20px !important; }
             .dummy-hero-buttons > * { width: 100%; justify-content: center; }
             .dummy-hero-stats { display: grid !important; grid-template-columns: repeat(2, 1fr) !important; gap: 14px 0 !important; padding-top: 16px !important; }
