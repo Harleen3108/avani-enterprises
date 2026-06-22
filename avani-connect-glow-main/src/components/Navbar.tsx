@@ -321,15 +321,13 @@ const Navbar = () => {
           .dummy-nav-links { gap: 16px !important; }
         }
         @media (max-width: 900px) {
+          /* Mobile mode = hamburger. Make the bar compact here (not at 768px) so large
+             phones / foldables / desktop-site mode also get the small navbar. */
           .dummy-nav-links { display: none !important; }
-          .dummy-nav-burger { display: flex !important; }
+          .dummy-nav-burger { display: flex !important; padding: 4px !important; }
           .dummy-nav-cta { display: none !important; }
-        }
-        @media (max-width: 768px) {
-          /* Very compact mobile navbar so the hero starts as high as possible */
           .dummy-navbar { padding: 4px 0 !important; }
           .dummy-nav-logo { width: 22px !important; height: 22px !important; }
-          .dummy-nav-burger { padding: 4px !important; }
           .dummy-nav-container { padding: 0 20px !important; }
           .dummy-nav-mobile-container { padding: 24px !important; }
         }

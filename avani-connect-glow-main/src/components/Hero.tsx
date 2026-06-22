@@ -319,8 +319,8 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
 
         <style>{`
           @keyframes dummy-spin { to { transform: rotate(360deg); } }
-          @media (max-width: 1024px) { .dummy-right-col { display: none !important; } .dummy-cursor-glow { display: none !important; } }
-          @media (max-width: 768px) {
+          @media (max-width: 1024px) { .dummy-right-col { display: none !important; } .dummy-cursor-glow { display: none !important; } .dummy-hero-grid { grid-template-columns: 1fr !important; } }
+          @media (max-width: 900px) {
             /* Anchor the hero content to the TOP (not centered) so the heading starts right
                below the transparent fixed navbar with no empty gap above it, and the whole
                hero fits within the visible viewport (svh) so there's no scroll on load. */
