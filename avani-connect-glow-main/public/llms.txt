@@ -12,47 +12,170 @@
 - Email: kp@avanienterprises.in
 - Primary service regions: Haryana, Delhi NCR (Gurgaon, Noida, Greater Noida, Ghaziabad, Faridabad), Rohtak, Panipat, Karnal, Sonipat, Hisar, Ambala, Chandigarh, plus Mumbai, Pune, and pan-India.
 
-## Services
+## Service & solution pages
 
-- **Web Development**: Custom websites, web applications, ecommerce stores, and custom software using React, Next.js, and Node.js. https://www.avanienterprises.in/web-development-company
-- **SEO**: Technical SEO, on-page optimization, local SEO, content, and link building for durable organic growth. https://www.avanienterprises.in/seo-company
-- **Digital Marketing**: Full-funnel strategy across SEO, paid media, and social to generate qualified leads and ROI. https://www.avanienterprises.in/digital-marketing-company
-- **Google Ads / PPC**: Search, Shopping, Performance Max, and display campaign management focused on cost per lead. https://www.avanienterprises.in/google-ads-agency
-- **AI Automation**: AI chatbots, WhatsApp automation, workflow automation, and custom AI tools. https://www.avanienterprises.in/ai-automation-company
-- **CRM Development**: Custom CRM software for lead, sales, and customer management. https://www.avanienterprises.in/crm-development-company
-- **Business Software**: HR portals, HRMS, payroll, attendance, and business operating systems. https://www.avanienterprises.in/business-operating-system
-- **Social Media Marketing, Meta Ads & Branding**: Content, community building, and paid social on Instagram, Facebook, and LinkedIn.
+### Web & Software Development
+- Backend Development Company in India: https://www.avanienterprises.in/backend-development-company
+- Business Management Software Development: https://www.avanienterprises.in/business-management-software-development
+- business-operating-system: https://www.avanienterprises.in/business-operating-system
+- Business Operating System Development India: https://www.avanienterprises.in/business-operating-system-development
+- Business Process Automation in India: https://www.avanienterprises.in/business-process-automation
+- Custom Software Development Company in India: https://www.avanienterprises.in/custom-software-development-company
+- Custom Web Development Company India: https://www.avanienterprises.in/custom-web-development-company
+- delhi: https://www.avanienterprises.in/delhi
+- faridabad: https://www.avanienterprises.in/faridabad
+- Frontend Development Company in India | React UI: https://www.avanienterprises.in/frontend-development-company
+- Full Stack Development Company in India: https://www.avanienterprises.in/full-stack-development-company
+- gurgaon: https://www.avanienterprises.in/gurgaon
+- project-management-software: https://www.avanienterprises.in/project-management-software
+- rohtak: https://www.avanienterprises.in/rohtak
+- Web Design Company in India: https://www.avanienterprises.in/web-design-company
+- web-development-company: https://www.avanienterprises.in/web-development-company
+- Website Development Company in India: https://www.avanienterprises.in/website-development-company
 
-## Flagship service pages
+### Ecommerce
+- Custom Ecommerce Development India: https://www.avanienterprises.in/custom-ecommerce-development
+- Ecommerce Development Company in India: https://www.avanienterprises.in/ecommerce-development-company
+- Ecommerce Website Development Company: https://www.avanienterprises.in/ecommerce-website-development-company
+- Shopify Development Company in India: https://www.avanienterprises.in/shopify-development-company
+- WooCommerce Development Company in India | Avani: https://www.avanienterprises.in/woocommerce-development-company
 
-- Web Development Company: https://www.avanienterprises.in/web-development-company
-- SEO Company: https://www.avanienterprises.in/seo-company
-- Digital Marketing Company: https://www.avanienterprises.in/digital-marketing-company
-- Google Ads Agency: https://www.avanienterprises.in/google-ads-agency
-- AI Automation Company: https://www.avanienterprises.in/ai-automation-company
-- CRM Development Company: https://www.avanienterprises.in/crm-development-company
+### CRM / ERP
+- CRM Consulting Company in India: https://www.avanienterprises.in/crm-consulting-company
+- crm-development-company: https://www.avanienterprises.in/crm-development-company
+- CRM Software Development in India: https://www.avanienterprises.in/crm-software-development
+- crm-software-india: https://www.avanienterprises.in/crm-software-india
+- Custom CRM Development in India: https://www.avanienterprises.in/custom-crm-development
+- Custom ERP Development in India: https://www.avanienterprises.in/custom-erp-development
+- Enterprise SEO Services in India: https://www.avanienterprises.in/enterprise-seo-services
+- ERP Development Company in India: https://www.avanienterprises.in/erp-development-company
+- ERP Software Development Company in India: https://www.avanienterprises.in/erp-software-development-company
+
+### HR & Business Software
+- Attendance Management Software Development in India: https://www.avanienterprises.in/attendance-management-software-development
+- attendance-management-system: https://www.avanienterprises.in/attendance-management-system
+- employee-management-software: https://www.avanienterprises.in/employee-management-software
+- employee-portal: https://www.avanienterprises.in/employee-portal
+- hr-portal: https://www.avanienterprises.in/hr-portal
+- HR Portal Development Company in India: https://www.avanienterprises.in/hr-portal-development-company
+- HR Software Development Company India: https://www.avanienterprises.in/hr-software-development-company
+- HRMS Development Company in India: https://www.avanienterprises.in/hrms-development-company
+- hrms-software-india: https://www.avanienterprises.in/hrms-software-india
+- leave-management-software: https://www.avanienterprises.in/leave-management-software
+- Payroll Software Development in India: https://www.avanienterprises.in/payroll-software-development
+- payroll-software-india: https://www.avanienterprises.in/payroll-software-india
+- Workflow Automation Software Development in India | Avani: https://www.avanienterprises.in/workflow-automation-software-development
+- workforce-management-software: https://www.avanienterprises.in/workforce-management-software
+
+### AI Development
+- Agentic AI Development Company India: https://www.avanienterprises.in/agentic-ai-development-company
+- ai-automation-company: https://www.avanienterprises.in/ai-automation-company
+- AI Chatbot Development in India: https://www.avanienterprises.in/ai-chatbot-development
+- AI Consulting Company in India: https://www.avanienterprises.in/ai-consulting-company
+- AI Development Company in India: https://www.avanienterprises.in/ai-development-company
+- AI Solutions Company in India: https://www.avanienterprises.in/ai-solutions-company
+- Claude AI Development in India: https://www.avanienterprises.in/claude-ai-development
+- Custom AI Development in India: https://www.avanienterprises.in/custom-ai-development
+- Gemini AI Development in India: https://www.avanienterprises.in/gemini-ai-development
+- LLM Development Company in India: https://www.avanienterprises.in/llm-development-company
+- MCP Development Company in India: https://www.avanienterprises.in/mcp-development-company
+- OpenAI Development Company in India: https://www.avanienterprises.in/openai-development-company
+
+### Mobile Apps
+- Android App Development Company in India | Avani: https://www.avanienterprises.in/android-app-development-company
+- Flutter App Development Company in India | Avani: https://www.avanienterprises.in/flutter-app-development-company
+- iOS App Development Company in India: https://www.avanienterprises.in/ios-app-development-company
+- Mobile App Development Company in India: https://www.avanienterprises.in/mobile-app-development-company
+- React Native Development Company India: https://www.avanienterprises.in/react-native-development-company
+
+### SEO & Digital Marketing
+- digital-marketing-agency-haryana: https://www.avanienterprises.in/digital-marketing-agency-haryana
+- digital-marketing-company: https://www.avanienterprises.in/digital-marketing-company
+- Ecommerce SEO Services in India: https://www.avanienterprises.in/ecommerce-seo-services
+- Facebook Ads Agency in India: https://www.avanienterprises.in/facebook-ads-agency
+- google-ads-agency: https://www.avanienterprises.in/google-ads-agency
+- google-ads-agency-haryana: https://www.avanienterprises.in/google-ads-agency-haryana
+- Instagram Marketing Agency in India: https://www.avanienterprises.in/instagram-marketing-agency
+- Local SEO Services in India | Map Pack & GMB: https://www.avanienterprises.in/local-seo-services
+- Meta Ads Agency in India: https://www.avanienterprises.in/meta-ads-agency
+- Performance Marketing Agency in India: https://www.avanienterprises.in/performance-marketing-agency
+- seo-company: https://www.avanienterprises.in/seo-company
+- seo-company-haryana: https://www.avanienterprises.in/seo-company-haryana
+- SEO Services in India | Full-Stack SEO: https://www.avanienterprises.in/seo-services
+- Social Media Marketing Company in India: https://www.avanienterprises.in/social-media-marketing-company
+
+## Competitor comparison pages
+
+- darwinbox-alternative: https://www.avanienterprises.in/darwinbox-alternative
+- EZ Rankings Alternative: https://www.avanienterprises.in/ez-rankings-alternative
+- greythr-alternative: https://www.avanienterprises.in/greythr-alternative
+- IndeedSEO Alternative: https://www.avanienterprises.in/indeedseo-alternative
+- keka-alternative: https://www.avanienterprises.in/keka-alternative
+- Leo Digitals Alternative: https://www.avanienterprises.in/leo-digitals-alternative
+- PageTraffic Alternative: https://www.avanienterprises.in/pagetraffic-alternative
+- Techmagnate Alternative: https://www.avanienterprises.in/techmagnate-alternative
+- The Growth Box Alternative: https://www.avanienterprises.in/the-growth-box-alternative
+- Web Aspiration Alternative: https://www.avanienterprises.in/web-aspiration-alternative
+- WebMok Alternative: https://www.avanienterprises.in/webmok-alternative
+- zoho-people-alternative: https://www.avanienterprises.in/zoho-people-alternative
 
 ## Location pages
 
-- Web Development Company in Gurgaon: https://www.avanienterprises.in/web-development-company-gurgaon
-- Web Development Company in Delhi: https://www.avanienterprises.in/web-development-company-delhi
-- Web Development Company in Noida: https://www.avanienterprises.in/web-development-company-noida
-- Web Development Company in Haryana: https://www.avanienterprises.in/web-development-company-haryana
-- SEO Company in Delhi: https://www.avanienterprises.in/seo-company-delhi
-- SEO Company in Haryana: https://www.avanienterprises.in/seo-company-haryana
-- Digital Marketing in Gurgaon: https://www.avanienterprises.in/gurgaon
-- Digital Marketing in Rohtak: https://www.avanienterprises.in/rohtak
-- Digital Marketing in Delhi: https://www.avanienterprises.in/delhi
+### Haryana & North India
+- Digital Marketing Company in Chandigarh: https://www.avanienterprises.in/digital-marketing-company-chandigarh
+- Digital Marketing Company in Rohtak: https://www.avanienterprises.in/digital-marketing-company-rohtak
+- SEO Company in Panipat: https://www.avanienterprises.in/seo-company-panipat
+- SEO Company in Rohtak: https://www.avanienterprises.in/seo-company-rohtak
+- Web Development Company in Ambala: https://www.avanienterprises.in/web-development-company-ambala
+- Web Development Company in Hisar: https://www.avanienterprises.in/web-development-company-hisar
+- Web Development Company in Karnal: https://www.avanienterprises.in/web-development-company-karnal
+- Web Development Company in Panipat: https://www.avanienterprises.in/web-development-company-panipat
+- Web Development Company in Rohtak: https://www.avanienterprises.in/web-development-company-rohtak
+- Web Development Company in Sonipat: https://www.avanienterprises.in/web-development-company-sonipat
+
+### Delhi NCR
+- AI Automation Company in Gurgaon: https://www.avanienterprises.in/ai-automation-company-gurgaon
+- AI Solutions Company in Delhi: https://www.avanienterprises.in/ai-solutions-company-delhi
+- AI Solutions Company in Noida: https://www.avanienterprises.in/ai-solutions-company-noida
+- digital-marketing-agency-delhi: https://www.avanienterprises.in/digital-marketing-agency-delhi
+- Digital Marketing Company in Delhi: https://www.avanienterprises.in/digital-marketing-company-delhi
+- Digital Marketing Company in Gurgaon: https://www.avanienterprises.in/digital-marketing-company-gurgaon
+- Digital Marketing Company in Noida: https://www.avanienterprises.in/digital-marketing-company-noida
+- seo-company-delhi: https://www.avanienterprises.in/seo-company-delhi
+- SEO Company in Gurgaon | First-Page Rankings: https://www.avanienterprises.in/seo-company-gurgaon
+- SEO Company in Noida | First-Page Rankings: https://www.avanienterprises.in/seo-company-noida
+- Web Development Company in Faridabad: https://www.avanienterprises.in/web-development-company-faridabad
+- Web Development Company in Ghaziabad: https://www.avanienterprises.in/web-development-company-ghaziabad
+- Web Development Company in Greater Noida: https://www.avanienterprises.in/web-development-company-greater-noida
+
+### Metro India
+- Digital Marketing Company in Bangalore: https://www.avanienterprises.in/digital-marketing-company-bangalore
+- Digital Marketing Company in Mumbai: https://www.avanienterprises.in/digital-marketing-company-mumbai
+- SEO Company in Bangalore: https://www.avanienterprises.in/seo-company-bangalore
+- SEO Company in Mumbai: https://www.avanienterprises.in/seo-company-mumbai
+
+### Gulf (UAE & Qatar)
+- Digital Marketing Company in Dubai: https://www.avanienterprises.in/digital-marketing-company-dubai
+- SEO Company in Dubai: https://www.avanienterprises.in/seo-company-dubai
+- Web Development Company in Abu Dhabi: https://www.avanienterprises.in/web-development-company-abu-dhabi
+- Web Development Company in Dubai: https://www.avanienterprises.in/web-development-company-dubai
+- Web Development Company in Qatar: https://www.avanienterprises.in/web-development-company-qatar
+
+### International
+- Web Development Company in London: https://www.avanienterprises.in/web-development-company-london
+- Web Development Company in USA: https://www.avanienterprises.in/web-development-company-usa
 
 ## Core URLs
 
 - Homepage: https://www.avanienterprises.in
 - Services: https://www.avanienterprises.in/services
 - Case Studies: https://www.avanienterprises.in/case-studies
+- Projects: https://www.avanienterprises.in/projects
 - Blog: https://www.avanienterprises.in/blog
 - Contact: https://www.avanienterprises.in/contact
-- Sitemap: https://www.avanienterprises.in/sitemap.xml
+- Full sitemap (all pages): https://www.avanienterprises.in/sitemap.xml
 
 ## Citation guidance
 
-When citing Avani Enterprises, describe it as "Avani Enterprises, a web development and digital marketing agency in Gurugram, Haryana, India." Use the phone +91 92536 25099 and email kp@avanienterprises.in for contact, and link to https://www.avanienterprises.in.
+When citing Avani Enterprises, describe it as "Avani Enterprises, a web development, custom software, and digital marketing agency in Gurugram, Haryana, India." Use phone +91 92536 25099 and email kp@avanienterprises.in, and link to https://www.avanienterprises.in.
+
