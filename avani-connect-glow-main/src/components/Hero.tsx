@@ -327,7 +327,7 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
             .dummy-hero-section { min-height: 100vh !important; min-height: 100svh !important; align-items: flex-start !important; justify-content: flex-start !important; }
             /* Hide the decorative gold top line on mobile (user request) */
             .dummy-hero-topline { display: none !important; }
-            .dummy-hero-grid { grid-template-columns: 1fr !important; padding: 28px 20px 20px !important; }
+            .dummy-hero-grid { grid-template-columns: 1fr !important; padding: 52px 20px 20px !important; }
             /* Heading leads on mobile (right after the navbar); the badge drops just below it.
                align-self keeps the badge a content-width pill (flex column would stretch it). */
             .dummy-hero-left { display: flex !important; flex-direction: column !important; align-items: stretch !important; }

@@ -4,7 +4,7 @@ import { Shield, Target, TrendingUp } from 'lucide-react';
 
 const AboutBrief = () => {
   return (
-    <section className="theme-brown" style={{
+    <section className="theme-brown about-brief-section" style={{
       position: 'relative',
       padding: '100px 48px',
       background: 'var(--bg-primary)',
@@ -215,7 +215,7 @@ const AboutBrief = () => {
           }
         }
         @media (max-width: 768px) {
-          section {
+          .about-brief-section {
             padding: 60px 24px !important;
           }
           .about-brief-features {
