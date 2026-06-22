@@ -327,8 +327,8 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
             .dummy-hero-section { min-height: 100vh !important; min-height: 100svh !important; align-items: flex-start !important; justify-content: flex-start !important; }
             /* Hide the decorative gold top line on mobile (user request) */
             .dummy-hero-topline { display: none !important; }
-            .dummy-hero-grid { grid-template-columns: 1fr !important; padding: 44px 20px 20px !important; }
-            .dummy-hero-badge { margin-bottom: 12px !important; }
+            .dummy-hero-grid { grid-template-columns: 1fr !important; padding: 36px 20px 20px !important; }
+            .dummy-hero-badge { margin-bottom: 10px !important; }
             .dummy-hero-buttons { flex-direction: column; width: 100%; align-items: stretch; margin-bottom: 20px !important; }
             .dummy-hero-buttons > * { width: 100%; justify-content: center; }
             .dummy-hero-stats { display: grid !important; grid-template-columns: repeat(2, 1fr) !important; gap: 14px 0 !important; padding-top: 16px !important; }

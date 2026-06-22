@@ -91,7 +91,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav ref={navRef} style={{
+      <nav ref={navRef} className="dummy-navbar" style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000,
         padding: scrolled ? '10px 0' : '14px 0',
         background: scrolled ? 'var(--nav-scrolled)' : 'transparent',
@@ -102,7 +102,7 @@ const Navbar = () => {
         <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 48px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }} className="dummy-nav-container">
           {/* Logo */}
           <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <div style={{ width: '32px', height: '32px', borderRadius: '8px', overflow: 'hidden', background: '#fff', padding: '2px' }}>
+            <div className="dummy-nav-logo" style={{ width: '32px', height: '32px', borderRadius: '8px', overflow: 'hidden', background: '#fff', padding: '2px' }}>
               <img src="/logo0.webp" alt="Avani" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
             </div>
             <div>
@@ -326,6 +326,9 @@ const Navbar = () => {
           .dummy-nav-cta { display: none !important; }
         }
         @media (max-width: 768px) {
+          /* Compact mobile navbar so the hero starts higher */
+          .dummy-navbar { padding: 6px 0 !important; }
+          .dummy-nav-logo { width: 26px !important; height: 26px !important; }
           .dummy-nav-container { padding: 0 24px !important; }
           .dummy-nav-mobile-container { padding: 24px !important; }
         }
