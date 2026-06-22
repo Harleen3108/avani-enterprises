@@ -146,7 +146,7 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
             {/* LEFT */}
             <div>
               {/* Badge */}
-              <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15, duration: 0.8 }}
+              <motion.div className="dummy-hero-badge" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15, duration: 0.8 }}
                 style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '6px 16px', border: '1px solid var(--border-light)', borderRadius: '100px', background: 'var(--accent-hover)', backdropFilter: 'blur(10px)', marginBottom: '24px', maxWidth: '100%' }}>
                 <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--accent-primary)', boxShadow: '0 0 8px var(--accent-primary), 0 0 16px var(--border-light)', flexShrink: 0 }} />
                 <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(9px, 2.3vw, 11px)', letterSpacing: '0.12em', color: 'var(--accent-light)', fontWeight: 600, lineHeight: 1.4 }}>AVANI ENTERPRISES · NO.1 DIGITAL MARKETING AGENCY IN INDIA</span>
@@ -321,13 +321,15 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
           @keyframes dummy-spin { to { transform: rotate(360deg); } }
           @media (max-width: 1024px) { .dummy-right-col { display: none !important; } .dummy-cursor-glow { display: none !important; } }
           @media (max-width: 768px) {
-            /* Center the hero content vertically to fit seamlessly in the whole mobile screen
-               without causing layout overflow or excessive top-heavy spacing. */
-            .dummy-hero-section { min-height: 100vh !important; min-height: 100svh !important; align-items: center !important; justify-content: center !important; }
-            .dummy-hero-grid { grid-template-columns: 1fr !important; padding: 56px 24px 24px !important; }
-            .dummy-hero-buttons { flex-direction: column; width: 100%; align-items: stretch; margin-bottom: 24px !important; }
+            /* Anchor the hero content to the TOP (not centered) so the heading starts right
+               below the transparent fixed navbar with no empty gap above it, and the whole
+               hero fits within the visible viewport (svh) so there's no scroll on load. */
+            .dummy-hero-section { min-height: 100vh !important; min-height: 100svh !important; align-items: flex-start !important; justify-content: flex-start !important; }
+            .dummy-hero-grid { grid-template-columns: 1fr !important; padding: 50px 20px 20px !important; }
+            .dummy-hero-badge { margin-bottom: 14px !important; }
+            .dummy-hero-buttons { flex-direction: column; width: 100%; align-items: stretch; margin-bottom: 20px !important; }
             .dummy-hero-buttons > * { width: 100%; justify-content: center; }
-            .dummy-hero-stats { display: grid !important; grid-template-columns: repeat(2, 1fr) !important; gap: 16px 0 !important; padding-top: 18px !important; }
+            .dummy-hero-stats { display: grid !important; grid-template-columns: repeat(2, 1fr) !important; gap: 14px 0 !important; padding-top: 16px !important; }
             .dummy-hero-stat-item { padding: 0 !important; border-right: none !important; }
             .dummy-hero-rings { display: none !important; }
           }
