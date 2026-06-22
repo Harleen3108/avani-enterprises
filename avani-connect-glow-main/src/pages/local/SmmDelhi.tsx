@@ -58,12 +58,7 @@ Avani Enterprises has managed social media for 80+ Delhi businesses across indus
     { q: 'What results can I expect in 3 months?', a: 'In 3 months, most Delhi clients see 30–150% follower growth, 50–200% engagement improvement, and 20–100 monthly leads from social media depending on budget and industry.' },
     { q: 'How do I get started?', a: 'Call +91 92536 25099 or email kp@avanienterprises.in. We start with a free 20-minute social media audit reviewing your current profiles and market position.' },
   ],
-  reviews: [
-    { name: 'Sakshi Malhotra', role: 'Owner, Malhotra Sarees', city: 'Lajpat Nagar, Delhi', text: 'From 1,200 followers to 22,000 in 5 months. Their reels and Instagram shop setup transformed our boutique into a Delhi-famous brand. Sales increased 3× compared to last year.' },
-    { name: 'Vikas Jain', role: 'Director, JainTech IT Solutions', city: 'Nehru Place, Delhi', text: 'Our LinkedIn marketing generated 15 enterprise leads in the first quarter. Avani understands the Delhi B2B market exceptionally well. Best marketing investment we\'ve made.' },
-    { name: 'Meena Arora', role: 'Head Chef, Arora\'s Kitchen', city: 'Hauz Khas, Delhi', text: 'The food reels they produce are breathtaking. We are now booked solid 2 weeks in advance. Our Instagram went from 800 to 15,000 followers and keeps growing.' },
-    { name: 'Rahul Bhatia', role: 'MD, Bhatia Builders', city: 'Dwarka, Delhi', text: 'Their real estate social media strategy brought us buyers from Noida, Gurgaon, and even overseas NRIs. Excellent targeting and beautiful property videos. Highly recommend.' },
-  ],
+  reviews: [],
   relatedLinks: [
     { label: 'Social Media Marketing — Haryana', href: '/social-media-marketing-agency-haryana', desc: 'SMM services for Haryana businesses.' },
     { label: 'Digital Marketing Agency — Delhi', href: '/digital-marketing-agency-delhi', desc: 'Full-service digital marketing in Delhi.' },

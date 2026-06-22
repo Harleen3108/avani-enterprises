@@ -58,12 +58,7 @@ We've built websites for manufacturers in Okhla, retailers in Karol Bagh, consul
     { q: 'Can you build websites in Hindi for Delhi businesses?', a: 'Yes. We build fully Hindi or bilingual Hindi-English websites with proper Unicode support, Devanagari fonts, and Hindi keyword optimisation for local Delhi search traffic.' },
     { q: 'How do I start a project?', a: 'Call +91 92536 25099 or email kp@avanienterprises.in. We\'ll schedule a free 30-minute consultation, assess your requirements, and provide a detailed proposal within 24 hours.' },
   ],
-  reviews: [
-    { name: 'Manish Agarwal', role: 'Owner, Agarwal Jewellers', city: 'Karol Bagh, Delhi', text: 'Avani transformed our offline jewellery business into a thriving online store. Our website now attracts customers from all over Delhi and we get 80+ online orders monthly.' },
-    { name: 'Dr. Pooja Mehta', role: 'Director, Mehta Dental Clinic', city: 'South Delhi', text: 'Professional, responsive team. They built a beautiful clinic website with online appointment booking. Our new patient walk-ins increased 40% in the first month after launch.' },
-    { name: 'Suresh Kapoor', role: 'MD, Kapoor Exports', city: 'Okhla, Delhi', text: 'We needed a B2B export website with product catalogs and inquiry management. Avani delivered perfectly — on time and within our budget. Excellent work!' },
-    { name: 'Nisha Singh', role: 'Founder, Delhi Fit Studio', city: 'Rohini, Delhi', text: 'Our fitness studio website with online class booking and membership management has been a game changer. Avani\'s team understood our requirements from day one.' },
-  ],
+  reviews: [],
   relatedLinks: [
     { label: 'Digital Marketing Agency — Delhi', href: '/digital-marketing-agency-delhi', desc: 'Full-service digital marketing for Delhi businesses.' },
     { label: 'SEO Company — Delhi', href: '/seo-company-delhi', desc: 'Rank your Delhi business website on Google page 1.' },

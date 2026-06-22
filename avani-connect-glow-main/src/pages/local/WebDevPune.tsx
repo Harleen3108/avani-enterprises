@@ -57,12 +57,7 @@ We build corporate websites, e-commerce platforms, B2B portals, and custom web a
     { q: 'Is post-launch support included?', a: 'Yes — 30 days of free support comes with every project, plus affordable annual maintenance plans for security, backups and updates.' },
     { q: 'How do I get started?', a: 'Call +91 92536 25099 or fill the contact form for a free 30-minute discovery call and a proposal within 24 hours.' },
   ],
-  reviews: [
-    { name: 'Mahesh Kulkarni', role: 'Director, TechBridge IT', city: 'Hinjewadi, Pune', text: 'Avani rebuilt our company site and client portal. Clean code, fast delivery and noticeably more enquiries from Google. A dependable web development company in Pune.' },
-    { name: 'Aishwarya Patil', role: 'Owner, Saaj Handicrafts', city: 'Kharadi, Pune', text: 'Our e-commerce store launched in under five weeks with smooth UPI checkout. Online orders have grown month on month since.' },
-    { name: 'Rohit Deshmukh', role: 'GM, AutoParts Industries', city: 'Pimpri-Chinchwad', text: 'They built a multilingual product catalogue that impresses our B2B buyers. On-time delivery and great support.' },
-    { name: 'Prachi Joshi', role: 'Admin Head, Vidya Academy', city: 'Baner, Pune', text: 'Our institute website handles admission enquiries beautifully and looks great on mobile. Leads have clearly improved.' },
-  ],
+  reviews: [],
   relatedLinks: [
     { label: 'Web Development — Mumbai', href: '/web-development-company-mumbai', desc: 'Custom web development for Mumbai brands.' },
     { label: 'Web Development — Bangalore', href: '/web-development-company-bangalore', desc: 'Custom web & SaaS development in Bengaluru.' },

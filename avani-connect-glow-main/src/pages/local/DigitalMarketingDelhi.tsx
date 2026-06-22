@@ -55,10 +55,7 @@ Avani Enterprises has designed digital systems for over 80+ companies in Delhi, 
     { q: 'What industries do you serve in Delhi?', a: 'We work with professional services, real estate developers, educational institutes, and retail brands.' },
     { q: 'How do we request a consultation?', a: 'Click the "Get Consultation" button or call +91 92536 25099 to set up an online audit.' }
   ],
-  reviews: [
-    { name: 'Vijay Malhotra', role: 'MD, Malhotra Sarees', city: 'Lajpat Nagar, Delhi', text: 'Avani Enterprises restructured our social media strategy. Our store walk-ins increased by 150% within 3 months. Their team is extremely creative and professional.' },
-    { name: 'Amit Jain', role: 'Director, JainTech IT Solutions', city: 'Nehru Place, Delhi', text: 'Our B2B software inquiries doubled after Avani took over our Google search ads and LinkedIn marketing. Highly recommended for Delhi brands!' },
-  ],
+  reviews: [],
   relatedLinks: [
     { label: 'Web Development Delhi', href: '/web-development-company-delhi', desc: 'Custom website engineering in Delhi.' },
     { label: 'SEO Company Delhi', href: '/seo-company-delhi', desc: 'Google rankings for Delhi brands.' },

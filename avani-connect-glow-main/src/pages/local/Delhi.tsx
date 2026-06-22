@@ -55,10 +55,7 @@ We have designed enterprise portals, CRM systems, and managed performance market
     { q: 'What is the support response time?', a: 'Our engineers respond via chat or call in under 15 minutes for critical requests.' },
     { q: 'How do we schedule a meeting?', a: 'Contact our consulting team at +91 92536 25099 to set up an online or local meeting.' }
   ],
-  reviews: [
-    { name: 'Karan Mehra', role: 'Owner, Mehra & Associates', city: 'South Delhi, Delhi', text: 'Avani Enterprises designed our corporate website and managed our SEO. Our client inquiries increased by 200%. Best technical agency in Delhi.' },
-    { name: 'Sanjay Gupta', role: 'Director, Gupta Medical Equipments', city: 'Karol Bagh, Delhi', text: 'Our sales leads increased by 3x after Avani optimized our Google Ads and landing pages. Outstanding support.' },
-  ],
+  reviews: [],
   relatedLinks: [
     { label: 'Web Development Haryana', href: '/web-development-company-haryana', desc: 'Web services for Haryana brands.' },
     { label: 'SEO Company Haryana', href: '/seo-company-haryana', desc: 'Google ranking optimization in Haryana.' },

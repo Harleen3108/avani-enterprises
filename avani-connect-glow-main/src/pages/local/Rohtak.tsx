@@ -55,10 +55,7 @@ We have designed portals for local institutions and e-commerce websites for loca
     { q: 'Do you write the website copy?', a: 'Yes, our copywriting team writes SEO-optimized copy for your site.' },
     { q: 'How do we get started?', a: 'Call +91 92536 25099 or email kp@avanienterprises.in to arrange a free consultation.' }
   ],
-  reviews: [
-    { name: 'Dr. Mohit Verma', role: 'Director, Sanjeevni Hospital', city: 'Delhi Road, Rohtak', text: 'Avani Enterprises developed our hospital website and optimized our Google Map listing. Our appointment bookings have increased by 200%. Best tech agency in Rohtak.' },
-    { name: 'Vikram Sharma', role: 'Owner, Rohtak Shoe Company', city: 'Model Town, Rohtak', text: 'Our e-commerce store is incredibly fast and secure. Sales have increased by 3x since launch. Highly recommend Avani web development services.' },
-  ],
+  reviews: [],
   relatedLinks: [
     { label: 'Web Development Haryana', href: '/web-development-company-haryana', desc: 'Custom website engineering in Haryana.' },
     { label: 'SEO Company Haryana', href: '/seo-company-haryana', desc: 'Google rankings for Haryana brands.' },

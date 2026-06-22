@@ -55,10 +55,7 @@ We have designed enterprise portals, CRM systems, and managed performance market
     { q: 'What is the support response time?', a: 'Our engineers respond via chat or call in under 15 minutes for critical requests.' },
     { q: 'How do we schedule a meeting?', a: 'Contact our consulting team at +91 92536 25099 to set up an online or local meeting.' }
   ],
-  reviews: [
-    { name: 'Aman Sharma', role: 'CEO, Hi-Tech Luxury Homes', city: 'Golf Course Road, Gurgaon', text: 'Avani Enterprises designed our real estate website and managed our search engine marketing. The lead generation is highly optimized. Best digital agency in Gurgaon.' },
-    { name: 'Pooja Aggarwal', role: 'Marketing Lead, EduPath Group', city: 'Sohna Road, Gurgaon', text: 'Our B2B corporate sales leads increased by 3x after Avani optimized our Google Ads and landing pages. Their team is extremely professional and responsive.' },
-  ],
+  reviews: [],
   relatedLinks: [
     { label: 'Web Development Haryana', href: '/web-development-company-haryana', desc: 'Web services for Haryana brands.' },
     { label: 'SEO Company Haryana', href: '/seo-company-haryana', desc: 'Google ranking optimization in Haryana.' },

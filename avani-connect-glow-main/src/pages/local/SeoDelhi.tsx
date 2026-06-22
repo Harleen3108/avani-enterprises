@@ -54,10 +54,7 @@ Avani Enterprises has managed SEO campaigns for over 80+ companies in Delhi, hel
     { q: 'How do we track progress?', a: 'We share monthly reports tracking organic search impressions, ranks, clicks, and conversion events.' },
     { q: 'How do we get started?', a: 'Call +91 92536 25099 or email kp@avanienterprises.in to arrange a free, detailed website audit.' }
   ],
-  reviews: [
-    { name: 'Karan Mehra', role: 'Owner, Mehra & Associates', city: 'South Delhi, Delhi', text: 'Our law firm ranked first for competitive legal searches in Delhi NCR within 90 days. The organic phone calls have increased by 200%. Excellent SEO work.' },
-    { name: 'Sanjay Gupta', role: 'Director, Gupta Medical Equipments', city: 'Karol Bagh, Delhi', text: 'Our organic search leads increased by 3x after Avani took over our search engine optimization. Outstanding service and deep technical expertise.' },
-  ],
+  reviews: [],
   relatedLinks: [
     { label: 'Web Development Delhi', href: '/web-development-company-delhi', desc: 'Custom website engineering in Delhi.' },
     { label: 'SEO Company Haryana', href: '/seo-company-haryana', desc: 'Google ranking optimization in Haryana.' },

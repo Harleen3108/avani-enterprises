@@ -57,12 +57,7 @@ From Gachibowli IT firms to Madhapur startups and Genome Valley pharma companies
     { q: 'Is post-launch support included?', a: 'Yes — 30 days of free support comes with every project, plus annual maintenance plans for security, backups, speed and content updates.' },
     { q: 'How do I get started?', a: 'Call +91 92536 25099 or fill the contact form for a free 30-minute discovery call and a proposal within 24 hours.' },
   ],
-  reviews: [
-    { name: 'Srinivas Rao', role: 'Founder, CloudKart SaaS', city: 'HITEC City, Hyderabad', text: 'Avani built our SaaS marketing site and customer dashboard. Fast, clean and reliable — and sign-ups grew noticeably after launch. Best web development company in Hyderabad for us.' },
-    { name: 'Lakshmi Prasad', role: 'Owner, Pearl Boutique', city: 'Banjara Hills, Hyderabad', text: 'Our online store looks elegant and loads instantly. UPI checkout is seamless and orders keep rising. Wonderful team to work with.' },
-    { name: 'Vamsi Krishna', role: 'Director, MediCore Pharma', city: 'Genome Valley, Hyderabad', text: 'They delivered a professional, compliant corporate website that our global partners appreciate. Thorough and dependable.' },
-    { name: 'Harika Reddy', role: 'Marketing Lead, GrowthLabs', city: 'Gachibowli, Hyderabad', text: 'Beautiful, fast website with solid SEO. Our organic traffic and enquiries improved steadily within a quarter.' },
-  ],
+  reviews: [],
   relatedLinks: [
     { label: 'Web Development — Bangalore', href: '/web-development-company-bangalore', desc: 'Custom web & SaaS development in Bengaluru.' },
     { label: 'Web Development — Mumbai', href: '/web-development-company-mumbai', desc: 'Custom web development for Mumbai brands.' },

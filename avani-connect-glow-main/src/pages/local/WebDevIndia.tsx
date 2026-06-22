@@ -57,12 +57,7 @@ Working remotely with a proven delivery process, we build corporate websites, D2
     { q: 'Do you provide ongoing maintenance and support?', a: 'Yes. Every project includes 30 days of free post-launch support, with affordable annual maintenance plans covering security, backups, performance and content updates.' },
     { q: 'How do we get started?', a: 'Call +91 92536 25099 or fill the contact form. We\'ll schedule a free 30-minute discovery call and send a detailed proposal within 24 hours.' },
   ],
-  reviews: [
-    { name: 'Rohan Mehta', role: 'Co-Founder, ScaleUp SaaS', city: 'Bangalore', text: 'We hired Avani remotely and the experience was flawless. They delivered our SaaS platform on time with clean, scalable code. A genuinely reliable web development agency in India.' },
-    { name: 'Farah Khan', role: 'Director, Khan Exports', city: 'Mumbai', text: 'Our multilingual e-commerce site now serves customers across India and the Gulf. Fast, professional and brilliant after-sales support.' },
-    { name: 'Sanjay Patel', role: 'Founder, AgroLink', city: 'Ahmedabad', text: 'They built our B2B portal that connects farmers and buyers nationwide. Remote collaboration was smooth and they understood our pan-India needs perfectly.' },
-    { name: 'Meera Iyer', role: 'CEO, Bloom Wellness (NRI)', city: 'London, UK', text: 'As an NRI founder, I needed a partner I could trust from afar. Avani delivered a stunning, fast website for my India launch and were always responsive across timezones.' },
-  ],
+  reviews: [],
   relatedLinks: [
     { label: 'Web Development — Mumbai', href: '/web-development-company-mumbai', desc: 'Websites & web apps for Mumbai businesses.' },
     { label: 'Web Development — Bangalore', href: '/web-development-company-bangalore', desc: 'Custom web & SaaS development in Bengaluru.' },

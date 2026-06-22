@@ -57,12 +57,7 @@ We design and develop custom websites, e-commerce stores, and web applications t
     { q: 'Is post-launch support included?', a: 'Yes — 30 days of free support comes with every project, plus optional annual maintenance for security, backups and updates.' },
     { q: 'How do I get started?', a: 'Call +91 92536 25099 or fill the contact form for a free 30-minute consultation and a detailed proposal within 24 hours.' },
   ],
-  reviews: [
-    { name: 'Gurpreet Singh', role: 'Founder, CodeNova Labs', city: 'Mohali Phase 8', text: 'Avani designed our SaaS website and admin dashboard. The design quality is top-tier and the build is fast. Easily the best web design company in Chandigarh region for us.' },
-    { name: 'Neha Bansal', role: 'Owner, Bansal Boutique', city: 'Sector 17, Chandigarh', text: 'Our online store looks gorgeous and loads instantly. UPI checkout works perfectly and orders keep climbing. Wonderful experience start to finish.' },
-    { name: 'Dr. Anil Khanna', role: 'Director, Khanna Clinic', city: 'Panchkula', text: 'The new clinic website with online appointment booking has reduced phone load and brought in new patients. Professional and patient team.' },
-    { name: 'Simran Kaur', role: 'Manager, EduRise Institute', city: 'Zirakpur', text: 'Beautiful, mobile-friendly site with admission enquiry forms. Our online leads have clearly improved since launch.' },
-  ],
+  reviews: [],
   relatedLinks: [
     { label: 'Web Development — Delhi', href: '/web-development-company-delhi', desc: 'Custom website development for Delhi businesses.' },
     { label: 'Web Development — Haryana', href: '/web-development-company-haryana', desc: 'Web development across Haryana, near the Tricity.' },

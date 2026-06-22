@@ -59,12 +59,7 @@ Every website we deliver is engineered for speed (Core Web Vitals green), optimi
     { q: 'What CMS do you use?', a: 'We offer WordPress (most popular), headless CMS (Contentful, Sanity), and fully custom admin panels built with Node.js. We recommend based on your team\'s technical comfort and long-term maintenance needs.' },
     { q: 'How do I get started?', a: 'Call us on +91 92536 25099 or fill the contact form. We\'ll schedule a free 30-minute discovery call, understand your business goals, and send a detailed proposal within 24 hours.' },
   ],
-  reviews: [
-    { name: 'Amit Sharma', role: 'Owner, Sharma Traders', city: 'Rohtak', text: 'Avani Enterprises built our e-commerce website in under 3 weeks. The site loads fast and our online orders have doubled in 2 months. Best web development company in Haryana for SMBs.' },
-    { name: 'Priya Gupta', role: 'Director, GreenLeaf Foods', city: 'Faridabad', text: 'Professional team with deep local understanding. They handled our Hindi-English bilingual website and integrated our Tally ERP seamlessly. Highly recommend for any Faridabad business.' },
-    { name: 'Rajesh Yadav', role: 'Founder, YadavTech Solutions', city: 'Gurgaon', text: 'We needed a custom web application for our field service management. Avani delivered an outstanding product on time, within budget. Their Gurgaon team is always responsive.' },
-    { name: 'Sunita Hooda', role: 'CEO, Hooda Real Estate', city: 'Panipat', text: 'Our property listing website now generates 50+ leads per month. The team understood our Haryana real estate market perfectly and created a site that truly works.' },
-  ],
+  reviews: [],
   relatedLinks: [
     { label: 'Digital Marketing Agency — Haryana', href: '/digital-marketing-agency-haryana', desc: 'Grow your online presence with SEO, social media & PPC campaigns.' },
     { label: 'SEO Company — Haryana', href: '/seo-company-haryana', desc: 'Rank your website on Google for Haryana keywords.' },

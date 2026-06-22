@@ -55,10 +55,7 @@ Avani Enterprises has managed SEO campaigns for over 50+ companies in Haryana, h
     { q: 'How do we track organic search progress?', a: 'We set up Google Analytics and Search Console dashboards tracking clicks, ranks, and conversions.' },
     { q: 'How do we get started?', a: 'Contact our SEO consulting team at +91 92536 25099 to receive a free, detailed website audit.' }
   ],
-  reviews: [
-    { name: 'Ankur Hooda', role: 'Owner, Hooda Diagnostics', city: 'Rohtak, Haryana', text: 'Our diagnostic lab ranks first for local searches in Rohtak. The call volume from Google Maps has increased by 180%. Extremely satisfied with Avani SEO services.' },
-    { name: 'Megha Sharma', role: 'Director, Panipat Textile Exports', city: 'Panipat, Haryana', text: 'Our B2B export inquiries from international buyers doubled after Avani optimized our B2B technical SEO strategy. They are ranking experts.' },
-  ],
+  reviews: [],
   relatedLinks: [
     { label: 'Web Development Haryana', href: '/web-development-company-haryana', desc: 'Web services for Haryana brands.' },
     { label: 'SEO Company Delhi', href: '/seo-company-delhi', desc: 'Google ranking optimization in Delhi.' },

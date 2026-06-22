@@ -57,12 +57,7 @@ From sector-based SMBs to enterprises along the Noida-Greater Noida Expressway, 
     { q: 'Do you provide post-launch support?', a: 'Yes — 30 days of free support is included, with affordable annual maintenance plans for security, backups, speed and content updates.' },
     { q: 'How do I get started?', a: 'Call +91 92536 25099 or fill the contact form. We\'ll set up a free 30-minute discovery call and send a proposal within 24 hours.' },
   ],
-  reviews: [
-    { name: 'Deepak Verma', role: 'Director, VeriTech IT', city: 'Sector 62, Noida', text: 'Avani rebuilt our company website and B2B portal. Fast, clean and SEO-ready — enquiries from Google went up noticeably within two months.' },
-    { name: 'Shalini Mishra', role: 'Founder, NestCraft Decor', city: 'Sector 18, Noida', text: 'Our e-commerce store launched in just 4 weeks with smooth UPI checkout. Mobile orders have grown every single month since.' },
-    { name: 'Arvind Singh', role: 'Owner, Singh Exports', city: 'Greater Noida', text: 'They built a multilingual product catalogue that impresses our overseas buyers. Reliable team and on-time delivery.' },
-    { name: 'Pooja Nair', role: 'Admin Head, BrightFuture Academy', city: 'Noida Extension', text: 'Our institute website now handles admissions enquiries and online forms beautifully. Great support after launch too.' },
-  ],
+  reviews: [],
   relatedLinks: [
     { label: 'Web Development — Delhi', href: '/web-development-company-delhi', desc: 'Custom website development for Delhi businesses.' },
     { label: 'Web Development — Gurgaon', href: '/web-development-company-gurgaon', desc: 'Premium websites & web apps for Gurugram.' },

@@ -57,12 +57,7 @@ From BKC corporate headquarters to Andheri startups and Lower Parel agencies, we
     { q: 'Is support included after launch?', a: 'Yes — 30 days of free support is included, with annual maintenance plans for security, backups, speed and content updates.' },
     { q: 'How do we get started?', a: 'Call +91 92536 25099 or fill the contact form for a free 30-minute discovery call and a detailed proposal within 24 hours.' },
   ],
-  reviews: [
-    { name: 'Aditya Joshi', role: 'Co-Founder, PayNimbus', city: 'BKC, Mumbai', text: 'Avani delivered our fintech marketing site and a secure customer dashboard. Fast, polished and reliable — exactly the standard you need to compete in BKC.' },
-    { name: 'Sneha Kulkarni', role: 'Founder, Tide & Co.', city: 'Bandra, Mumbai', text: 'Our D2C store was rebuilt in five weeks with seamless UPI checkout. Mobile conversions jumped sharply. Best web development company in Mumbai for D2C brands.' },
-    { name: 'Imran Shaikh', role: 'Director, Skyline Realty', city: 'Lower Parel, Mumbai', text: 'Premium property site generating consistent qualified leads. The team understood the Mumbai real estate buyer perfectly.' },
-    { name: 'Tanvi Desai', role: 'Marketing Lead, MediaWorks', city: 'Andheri, Mumbai', text: 'Beautiful, lightning-fast website and great SEO foundations. Our organic traffic climbed steadily after relaunch.' },
-  ],
+  reviews: [],
   relatedLinks: [
     { label: 'Web Development — Pune', href: '/web-development-company-pune', desc: 'Websites & web apps for Pune businesses.' },
     { label: 'Web Development — Bangalore', href: '/web-development-company-bangalore', desc: 'Custom web & SaaS development in Bengaluru.' },

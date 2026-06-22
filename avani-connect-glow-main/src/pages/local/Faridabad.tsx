@@ -55,10 +55,7 @@ We have designed portals for local institutions and B2B websites for local manuf
     { q: 'Do you write the website copy?', a: 'Yes, our copywriting team writes SEO-optimized copy for your site.' },
     { q: 'How do we get started?', a: 'Call +91 92536 25099 or email kp@avanienterprises.in to arrange a free consultation.' }
   ],
-  reviews: [
-    { name: 'Rajesh Goel', role: 'Owner, Goel Plastics', city: 'Sector 31, Faridabad', text: 'Avani Enterprises designed our corporate website and managed our B2B SEO. Our export inquiries increased by 200%. Best technical agency in Faridabad.' },
-    { name: 'Kavita Mehta', role: 'Director, NIT Educational Hub', city: 'NIT, Faridabad', text: 'Our student admission inquiries doubled after Avani optimized our search ads and Google maps presence. Outstanding support.' },
-  ],
+  reviews: [],
   relatedLinks: [
     { label: 'Web Development Haryana', href: '/web-development-company-haryana', desc: 'Custom website engineering in Haryana.' },
     { label: 'SEO Company Haryana', href: '/seo-company-haryana', desc: 'Google ranking optimization in Haryana.' },

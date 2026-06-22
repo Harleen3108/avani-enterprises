@@ -57,12 +57,7 @@ We've delivered corporate sites, SaaS dashboards, and high-volume e-commerce sto
     { q: 'Can you redesign our existing website without losing rankings?', a: 'Yes. We carefully migrate content, preserve URL structures and add 301 redirects so your existing Google rankings and traffic are protected during a redesign.' },
     { q: 'How do we get started?', a: 'Call +91 92536 25099 or fill the contact form. We\'ll book a free 30-minute discovery call and send a detailed proposal within 24 hours.' },
   ],
-  reviews: [
-    { name: 'Karan Malhotra', role: 'Founder, NexaCloud SaaS', city: 'Cyber City, Gurgaon', text: 'Avani built our SaaS marketing site and onboarding dashboard. Clean code, fast delivery and it looks as polished as any MNC site in Cyber City. Lead sign-ups jumped 40%.' },
-    { name: 'Ritu Ahuja', role: 'Director, Bloom D2C', city: 'Sohna Road, Gurgaon', text: 'Our Shopify-style store was rebuilt in 4 weeks with UPI checkout. Mobile sales nearly doubled. Genuinely the best web development company in Gurgaon we\'ve worked with.' },
-    { name: 'Vivek Sethi', role: 'CEO, Sethi Realty', city: 'Golf Course Road, Gurgaon', text: 'Premium property listing site that generates 60+ leads a month. The team understood the Gurugram real estate audience perfectly.' },
-    { name: 'Ananya Rao', role: 'Marketing Head, FinEdge', city: 'Udyog Vihar, Gurgaon', text: 'Responsive, fast, and SEO-ready. Our organic traffic tripled within a quarter of relaunch. Highly recommended for any Gurgaon business.' },
-  ],
+  reviews: [],
   relatedLinks: [
     { label: 'Web Development — Delhi', href: '/web-development-company-delhi', desc: 'Custom website development for Delhi businesses.' },
     { label: 'Web Development — Noida', href: '/web-development-company-noida', desc: 'Websites & web apps for Noida & Greater Noida.' },

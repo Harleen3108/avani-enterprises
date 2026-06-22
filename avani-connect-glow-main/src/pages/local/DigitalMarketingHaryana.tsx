@@ -55,10 +55,7 @@ Avani Enterprises has designed digital systems for over 150+ companies in Haryan
     { q: 'Do you write the website copy?', a: 'Yes. Our team of copywriters creates SEO-optimized, engaging copy for your landing pages.' },
     { q: 'How do we get started?', a: 'Call +91 92536 25099 or email kp@avanienterprises.in to book a free 20-minute digital audit.' }
   ],
-  reviews: [
-    { name: 'Rakesh Goel', role: 'MD, Goel Plastics', city: 'Faridabad, Haryana', text: 'Avani Enterprises restructured our B2B digital strategy. Our export inquiries increased by 200% within 4 months. Their team is extremely professional and tech-savvy.' },
-    { name: 'Sunita Hooda', role: 'Director, Hooda Educational Institute', city: 'Rohtak, Haryana', text: 'Our student admissions inquiries doubled after Avani took over our SEO and local search maps optimization. Highly recommended for local businesses in Haryana!' },
-  ],
+  reviews: [],
   relatedLinks: [
     { label: 'Web Development Haryana', href: '/web-development-company-haryana', desc: 'Custom website engineering in Haryana.' },
     { label: 'SEO Company Haryana', href: '/seo-company-haryana', desc: 'Google rankings for Haryana brands.' },

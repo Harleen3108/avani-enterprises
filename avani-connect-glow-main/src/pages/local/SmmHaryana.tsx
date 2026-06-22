@@ -58,12 +58,7 @@ Avani Enterprises manages social media for 50+ Haryana businesses. We create scr
     { q: 'Can I see examples of your social media work?', a: 'Yes. Visit our case studies section or call us for a detailed portfolio review. We\'ve managed social media for restaurants, real estate, education, healthcare, and manufacturing businesses across Haryana.' },
     { q: 'Do you offer a free social media audit?', a: 'Yes. Call +91 92536 25099 for a free 20-minute social media audit. We\'ll review your current profiles, identify gaps, and give you 3 quick wins you can implement immediately.' },
   ],
-  reviews: [
-    { name: 'Kavita Rohilla', role: 'Owner, Rohilla Boutique', city: 'Rohtak', text: 'Our Instagram went from 500 to 8,000 followers in 4 months. The reels they create are stunning and our boutique now gets online orders from across Haryana. Best social media agency in Rohtak.' },
-    { name: 'Deepak Nain', role: 'Director, Nain Motors', city: 'Gurgaon', text: 'Avani runs our Facebook and Instagram ads for our used car showroom. Our inquiry calls have tripled. They understand the Gurgaon market and target the right audience perfectly.' },
-    { name: 'Ritu Verma', role: 'Principal, Verma Coaching Centre', city: 'Faridabad', text: 'Our coaching centre enrollment increased 65% after Avani started managing our social media. Their Hindi content creation and local hashtag strategy works exceptionally well in Faridabad.' },
-    { name: 'Ankit Bhardwaj', role: 'Owner, The Haryana Dhaba', city: 'Panipat', text: 'The food reels they make for us get thousands of views. Our restaurant is now fully booked every weekend. Genuine social media experts who understand Haryana food culture.' },
-  ],
+  reviews: [],
   relatedLinks: [
     { label: 'Social Media Marketing — Delhi', href: '/social-media-marketing-agency-delhi', desc: 'Expert SMM for Delhi businesses.' },
     { label: 'Digital Marketing Agency — Haryana', href: '/digital-marketing-agency-haryana', desc: 'Full digital marketing services in Haryana.' },

@@ -55,10 +55,7 @@ Avani Enterprises has managed PPC ad campaigns for over 50+ companies in Haryana
     { q: 'How do we track ad conversions?', a: 'We set up Google Tag Manager to track calls, form submissions, and direct sales.' },
     { q: 'How do we get started?', a: 'Call +91 92536 25099 or email kp@avanienterprises.in to book a free campaign review.' }
   ],
-  reviews: [
-    { name: 'Devendra Malik', role: 'Owner, Malik Furnitures', city: 'Rohtak, Haryana', text: 'Our furniture orders increased by 3x in Rohtak and surrounding districts. The conversion rates are outstanding. The best Google Ads agency in Haryana.' },
-    { name: 'Ritu Phogat', role: 'Marketing Manager, Phogat Agro Industries', city: 'Sonipat, Haryana', text: 'We were wasting significant budget on generic clicks. Avani set up precise keyword matching and customized landing pages that halved our acquisition cost.' },
-  ],
+  reviews: [],
   relatedLinks: [
     { label: 'Web Development Haryana', href: '/web-development-company-haryana', desc: 'Custom website engineering in Haryana.' },
     { label: 'SEO Company Haryana', href: '/seo-company-haryana', desc: 'Google rankings for Haryana brands.' },

@@ -57,12 +57,7 @@ From Koramangala startups raising their first round to Whitefield enterprises an
     { q: 'Can you redesign or rebuild our existing product?', a: 'Yes. We refactor and modernise existing sites and products while preserving data, SEO and user experience through careful migration.' },
     { q: 'How do we get started?', a: 'Call +91 92536 25099 or fill the contact form for a free 30-minute discovery call and a detailed proposal within 24 hours.' },
   ],
-  reviews: [
-    { name: 'Nikhil Reddy', role: 'Founder, FlowMetric (SaaS)', city: 'Koramangala, Bangalore', text: 'Avani built our SaaS product MVP and marketing site. The engineering quality impressed even our technical advisors. Shipped on time and scaled smoothly post-launch.' },
-    { name: 'Divya Menon', role: 'Co-Founder, LeafCart', city: 'HSR Layout, Bangalore', text: 'Our D2C store is fast, clean and converts well. UPI checkout is seamless. Easily the best web development company in Bangalore for early-stage startups.' },
-    { name: 'Arjun Pillai', role: 'Product Lead, TechNova', city: 'Whitefield, Bangalore', text: 'They integrated cleanly with our in-house team and Git workflow. Well-documented code and zero drama. Will work with them again.' },
-    { name: 'Kavya Shetty', role: 'Marketing Head, GrowEasy', city: 'Indiranagar, Bangalore', text: 'Beautiful website with great Core Web Vitals and SEO. Organic sign-ups grew steadily within the first quarter.' },
-  ],
+  reviews: [],
   relatedLinks: [
     { label: 'Web Development — Hyderabad', href: '/web-development-company-hyderabad', desc: 'Web & SaaS development for Hyderabad tech firms.' },
     { label: 'Web Development — Pune', href: '/web-development-company-pune', desc: 'Websites & web apps for Pune businesses.' },
