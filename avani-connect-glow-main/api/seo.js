@@ -35,6 +35,67 @@ function buildCanonical(pagePath) {
 }
 
 const STATIC_SEO_LOOKUP = {
+  // Batch B (12 city pages)
+  "/seo-company-mumbai": {
+    title: "SEO Company in Mumbai | Avani Enterprises",
+    description: "Avani Enterprises is an SEO company in Mumbai driving 3x organic traffic for BKC, Lower Parel & Andheri businesses. 95% first-page success, 8+ years. Get a free SEO audit.",
+    keywords: "seo company mumbai, seo services mumbai, seo agency mumbai, local seo mumbai, search engine optimization mumbai, google ranking company mumbai, ecommerce seo mumbai"
+  },
+  "/seo-company-bangalore": {
+    title: "SEO Company in Bangalore | Avani Enterprises",
+    description: "Avani Enterprises is an SEO company in Bangalore (Bengaluru) driving 3x organic traffic for startups, SaaS & D2C brands. 95% first-page success. Get a free SEO audit.",
+    keywords: "seo company bangalore, seo services bengaluru, seo agency bangalore, local seo bangalore, technical seo bangalore, saas seo bengaluru, organic growth bangalore"
+  },
+  "/digital-marketing-company-mumbai": {
+    title: "Digital Marketing Company in Mumbai | Avani Enterprises",
+    description: "Avani Enterprises is a performance-driven digital marketing company in Mumbai delivering SEO, Google & Meta ads, and social media that grow leads. Get a free audit.",
+    keywords: "digital marketing company mumbai, digital marketing agency mumbai, performance marketing mumbai, social media marketing mumbai, seo company mumbai, google ads agency mumbai, ppc mumbai, digital marketing services mumbai"
+  },
+  "/digital-marketing-company-bangalore": {
+    title: "Digital Marketing Company in Bangalore | Avani Enterprises",
+    description: "Avani Enterprises is a performance-driven digital marketing company in Bangalore delivering SEO, Google Ads & PPC that grow qualified leads. Get a free audit today.",
+    keywords: "digital marketing company bangalore, digital marketing agency bengaluru, performance marketing bangalore, ppc bangalore, seo company bangalore, google ads agency bangalore, social media marketing bengaluru"
+  },
+  "/digital-marketing-company-chandigarh": {
+    title: "Digital Marketing Company in Chandigarh \u2014 Avani Enterprises",
+    description: "Avani Enterprises is a results-driven digital marketing company in Chandigarh delivering SEO, Google Ads, Meta Ads & social media for tricity brands. Book a free strategy call in 24 hrs.",
+    keywords: "digital marketing company chandigarh, digital marketing agency chandigarh, social media marketing chandigarh, ppc chandigarh, seo company chandigarh, google ads chandigarh, digital marketing services chandigarh"
+  },
+  "/web-development-company-dubai": {
+    title: "Web Development Company in Dubai | Avani Enterprises",
+    description: "Web development company serving Dubai \u2014 fast, bilingual, SEO-ready websites & ecommerce stores for free-zone, real estate, retail & hospitality brands. Free quote in 24 hrs.",
+    keywords: "web development company dubai, website development dubai, web design dubai, ecommerce development dubai, web developers dubai, custom website dubai, website company dubai, ecommerce website dubai"
+  },
+  "/web-development-company-abu-dhabi": {
+    title: "Web Development Company in Abu Dhabi | Avani Enterprises",
+    description: "Avani Enterprises builds fast, bilingual websites & ecommerce stores for Abu Dhabi businesses across real estate, trading, hospitality & services. Get a free quote today.",
+    keywords: "web development company abu dhabi, website development abu dhabi, web design abu dhabi, ecommerce abu dhabi, website designer abu dhabi, web development agency abu dhabi, business website abu dhabi"
+  },
+  "/web-development-company-qatar": {
+    title: "Web Development Company in Qatar | Avani Enterprises",
+    description: "Avani Enterprises builds fast, bilingual Arabic-English websites and ecommerce stores for Qatar and Doha businesses. 300+ projects, 8+ years, 5.0 rating. Get a free quote.",
+    keywords: "web development company qatar, website development doha, web design qatar, ecommerce development qatar, web developers doha, arabic website qatar, business website qatar, qatar web agency"
+  },
+  "/seo-company-dubai": {
+    title: "SEO Company in Dubai | Rank #1 \u2014 Avani Enterprises",
+    description: "Avani Enterprises is a results-driven SEO company in Dubai. We grow organic traffic 3x for Business Bay, DIFC & Dubai Marina brands. Get a free SEO audit today.",
+    keywords: "seo company dubai, seo services dubai, seo agency dubai, local seo dubai, best seo company dubai, search engine optimization dubai, google ranking dubai, seo experts uae"
+  },
+  "/digital-marketing-company-dubai": {
+    title: "Digital Marketing Company in Dubai \u2014 Avani Enterprises",
+    description: "Avani Enterprises is a performance-driven digital marketing company serving Dubai \u2014 SEO, Google Ads, Meta & social media for real estate, retail & DIFC brands. Free audit in 24 hrs.",
+    keywords: "digital marketing company dubai, digital marketing agency dubai, performance marketing dubai, social media marketing dubai, seo company dubai, ppc agency dubai, google ads dubai"
+  },
+  "/web-development-company-london": {
+    title: "Web Development Company in London | Avani Enterprises",
+    description: "Avani Enterprises builds fast, custom websites and ecommerce stores for London businesses. 300+ projects, 5.0 rating, 8+ years. Get a free quote today.",
+    keywords: "web development company london, website development london, web design london, ecommerce development london, custom website london, web developer london, react development london"
+  },
+  "/web-development-company-usa": {
+    title: "Web Development Company in USA | Avani Enterprises",
+    description: "Avani Enterprises builds fast, SEO-ready websites & ecommerce stores for USA businesses \u2014 offshore web development from India at startup-friendly rates. Free quote in 24 hrs.",
+    keywords: "web development company usa, website development usa, offshore web development usa, ecommerce development usa, web developers usa, custom website development usa, react development company usa"
+  },
   // Batch A (35 service-cluster pages)
   "/website-development-company": {
     title: "Website Development Company in India | Avani Enterprises",

@@ -184,6 +184,19 @@ const urls = [
 
   // ── City Pages (Batch 3) ──────────────────────────────────────────────────
   { loc: `${BASE_URL}/web-development-company-rohtak`, lastmod: TODAY, changefreq: "weekly", priority: "0.85" },
+  // Batch B (12 city pages)
+  { loc: `${BASE_URL}/seo-company-mumbai`, lastmod: TODAY, changefreq: "weekly", priority: "0.85" },
+  { loc: `${BASE_URL}/seo-company-bangalore`, lastmod: TODAY, changefreq: "weekly", priority: "0.85" },
+  { loc: `${BASE_URL}/digital-marketing-company-mumbai`, lastmod: TODAY, changefreq: "weekly", priority: "0.85" },
+  { loc: `${BASE_URL}/digital-marketing-company-bangalore`, lastmod: TODAY, changefreq: "weekly", priority: "0.85" },
+  { loc: `${BASE_URL}/digital-marketing-company-chandigarh`, lastmod: TODAY, changefreq: "weekly", priority: "0.85" },
+  { loc: `${BASE_URL}/web-development-company-dubai`, lastmod: TODAY, changefreq: "weekly", priority: "0.85" },
+  { loc: `${BASE_URL}/web-development-company-abu-dhabi`, lastmod: TODAY, changefreq: "weekly", priority: "0.85" },
+  { loc: `${BASE_URL}/web-development-company-qatar`, lastmod: TODAY, changefreq: "weekly", priority: "0.85" },
+  { loc: `${BASE_URL}/seo-company-dubai`, lastmod: TODAY, changefreq: "weekly", priority: "0.85" },
+  { loc: `${BASE_URL}/digital-marketing-company-dubai`, lastmod: TODAY, changefreq: "weekly", priority: "0.85" },
+  { loc: `${BASE_URL}/web-development-company-london`, lastmod: TODAY, changefreq: "weekly", priority: "0.85" },
+  { loc: `${BASE_URL}/web-development-company-usa`, lastmod: TODAY, changefreq: "weekly", priority: "0.85" },
   { loc: `${BASE_URL}/web-development-company-panipat`, lastmod: TODAY, changefreq: "weekly", priority: "0.85" },
   { loc: `${BASE_URL}/web-development-company-karnal`, lastmod: TODAY, changefreq: "weekly", priority: "0.85" },
   { loc: `${BASE_URL}/web-development-company-sonipat`, lastmod: TODAY, changefreq: "weekly", priority: "0.85" },

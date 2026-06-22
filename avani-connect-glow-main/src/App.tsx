@@ -258,6 +258,19 @@ const EzRankingsAlternative = lazyWithRetry(() => import("./pages/compare/EzRank
 const IndeedseoAlternative = lazyWithRetry(() => import("./pages/compare/IndeedseoAlternative"));
 // Batch 3 city pages
 const WebDevelopmentCompanyRohtak = lazyWithRetry(() => import("./pages/city/WebDevelopmentCompanyRohtak"));
+// Batch B (12 metro/Gulf/intl city pages)
+const SeoCompanyMumbai = lazyWithRetry(() => import("./pages/city/SeoCompanyMumbai"));
+const SeoCompanyBangalore = lazyWithRetry(() => import("./pages/city/SeoCompanyBangalore"));
+const DigitalMarketingCompanyMumbai = lazyWithRetry(() => import("./pages/city/DigitalMarketingCompanyMumbai"));
+const DigitalMarketingCompanyBangalore = lazyWithRetry(() => import("./pages/city/DigitalMarketingCompanyBangalore"));
+const DigitalMarketingCompanyChandigarh = lazyWithRetry(() => import("./pages/city/DigitalMarketingCompanyChandigarh"));
+const WebDevelopmentCompanyDubai = lazyWithRetry(() => import("./pages/city/WebDevelopmentCompanyDubai"));
+const WebDevelopmentCompanyAbuDhabi = lazyWithRetry(() => import("./pages/city/WebDevelopmentCompanyAbuDhabi"));
+const WebDevelopmentCompanyQatar = lazyWithRetry(() => import("./pages/city/WebDevelopmentCompanyQatar"));
+const SeoCompanyDubai = lazyWithRetry(() => import("./pages/city/SeoCompanyDubai"));
+const DigitalMarketingCompanyDubai = lazyWithRetry(() => import("./pages/city/DigitalMarketingCompanyDubai"));
+const WebDevelopmentCompanyLondon = lazyWithRetry(() => import("./pages/city/WebDevelopmentCompanyLondon"));
+const WebDevelopmentCompanyUsa = lazyWithRetry(() => import("./pages/city/WebDevelopmentCompanyUsa"));
 const WebDevelopmentCompanyPanipat = lazyWithRetry(() => import("./pages/city/WebDevelopmentCompanyPanipat"));
 const WebDevelopmentCompanyKarnal = lazyWithRetry(() => import("./pages/city/WebDevelopmentCompanyKarnal"));
 const WebDevelopmentCompanySonipat = lazyWithRetry(() => import("./pages/city/WebDevelopmentCompanySonipat"));
@@ -430,6 +443,18 @@ const AppLayout = () => {
     "/ez-rankings-alternative",
     "/indeedseo-alternative",
     "/web-development-company-rohtak",
+    "/seo-company-mumbai",
+    "/seo-company-bangalore",
+    "/digital-marketing-company-mumbai",
+    "/digital-marketing-company-bangalore",
+    "/digital-marketing-company-chandigarh",
+    "/web-development-company-dubai",
+    "/web-development-company-abu-dhabi",
+    "/web-development-company-qatar",
+    "/seo-company-dubai",
+    "/digital-marketing-company-dubai",
+    "/web-development-company-london",
+    "/web-development-company-usa",
     "/web-development-company-panipat",
     "/web-development-company-karnal",
     "/web-development-company-sonipat",
@@ -599,6 +624,18 @@ const AppLayout = () => {
             <Route path="custom-ai-development" element={<CustomAiDevelopment />} />
             {/* ── City Pages (Batch 3) ─────────────────────────────────────── */}
             <Route path="web-development-company-rohtak" element={<WebDevelopmentCompanyRohtak />} />
+            <Route path="seo-company-mumbai" element={<SeoCompanyMumbai />} />
+            <Route path="seo-company-bangalore" element={<SeoCompanyBangalore />} />
+            <Route path="digital-marketing-company-mumbai" element={<DigitalMarketingCompanyMumbai />} />
+            <Route path="digital-marketing-company-bangalore" element={<DigitalMarketingCompanyBangalore />} />
+            <Route path="digital-marketing-company-chandigarh" element={<DigitalMarketingCompanyChandigarh />} />
+            <Route path="web-development-company-dubai" element={<WebDevelopmentCompanyDubai />} />
+            <Route path="web-development-company-abu-dhabi" element={<WebDevelopmentCompanyAbuDhabi />} />
+            <Route path="web-development-company-qatar" element={<WebDevelopmentCompanyQatar />} />
+            <Route path="seo-company-dubai" element={<SeoCompanyDubai />} />
+            <Route path="digital-marketing-company-dubai" element={<DigitalMarketingCompanyDubai />} />
+            <Route path="web-development-company-london" element={<WebDevelopmentCompanyLondon />} />
+            <Route path="web-development-company-usa" element={<WebDevelopmentCompanyUsa />} />
             <Route path="web-development-company-panipat" element={<WebDevelopmentCompanyPanipat />} />
             <Route path="web-development-company-karnal" element={<WebDevelopmentCompanyKarnal />} />
             <Route path="web-development-company-sonipat" element={<WebDevelopmentCompanySonipat />} />
