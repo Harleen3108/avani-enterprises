@@ -127,7 +127,7 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
 
 
         {/* Gold top line */}
-        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '2px', background: 'linear-gradient(to right, transparent, var(--accent-primary) 25%, var(--accent-light) 50%, var(--accent-primary) 75%, transparent)', zIndex: 10 }} />
+        <div className="dummy-hero-topline" style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '2px', background: 'linear-gradient(to right, transparent, var(--accent-primary) 25%, var(--accent-light) 50%, var(--accent-primary) 75%, transparent)', zIndex: 10 }} />
 
         {/* Rotating rings */}
         <div className="dummy-hero-rings">
@@ -325,8 +325,10 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
                below the transparent fixed navbar with no empty gap above it, and the whole
                hero fits within the visible viewport (svh) so there's no scroll on load. */
             .dummy-hero-section { min-height: 100vh !important; min-height: 100svh !important; align-items: flex-start !important; justify-content: flex-start !important; }
-            .dummy-hero-grid { grid-template-columns: 1fr !important; padding: 50px 20px 20px !important; }
-            .dummy-hero-badge { margin-bottom: 14px !important; }
+            /* Hide the decorative gold top line on mobile (user request) */
+            .dummy-hero-topline { display: none !important; }
+            .dummy-hero-grid { grid-template-columns: 1fr !important; padding: 44px 20px 20px !important; }
+            .dummy-hero-badge { margin-bottom: 12px !important; }
             .dummy-hero-buttons { flex-direction: column; width: 100%; align-items: stretch; margin-bottom: 20px !important; }
             .dummy-hero-buttons > * { width: 100%; justify-content: center; }
             .dummy-hero-stats { display: grid !important; grid-template-columns: repeat(2, 1fr) !important; gap: 14px 0 !important; padding-top: 16px !important; }
