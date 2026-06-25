@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { CheckCircle, ChevronDown, ChevronUp, ArrowRight, Phone, Mail } from 'lucide-react';
 import Breadcrumb from './Breadcrumb';
 import InternalLinking from './InternalLinking';
+import RegistrationForm from '../RegistrationForm';
 import { SeoPageConfig } from '../../data/seoLandingPagesData';
 
 // Background overlays matching the premium aesthetic
@@ -110,9 +111,9 @@ export default function ProductPageTemplate({ data }: ProductPageTemplateProps) 
               </motion.p>
 
               <motion.div variants={fadeUp} style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center', marginBottom: '3rem' }}>
-                <Link to="/contact" className="dh-btn-fill" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+                <a href="#consultation" className="dh-btn-fill" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
                   Request Free Demo <ArrowRight size={15} />
-                </Link>
+                </a>
                 <a href="tel:+919253625099" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'transparent', color: 'var(--text-primary)', padding: '12px 24px', borderRadius: '10px', fontFamily: "'Outfit', sans-serif", fontWeight: 700, fontSize: '.88rem', textDecoration: 'none', border: '1px solid var(--border-light)', transition: 'border-color .2s' }}
                   onMouseEnter={e => e.currentTarget.style.borderColor = 'var(--accent-primary)'}
                   onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--border-light)'}>
@@ -132,20 +133,12 @@ export default function ProductPageTemplate({ data }: ProductPageTemplateProps) 
             </motion.div>
 
             {/* Right Form/Widget Column */}
-            <motion.div initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }} style={{ display: 'flex', alignItems: 'center' }}>
+            <motion.div id="consultation" initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }} style={{ display: 'flex', alignItems: 'center' }}>
               <div style={{ width: '100%', padding: '32px', background: 'var(--card-bg)', border: '1px solid var(--border-light)', borderRadius: '24px', boxShadow: '0 20px 40px rgba(0,0,0,0.03)' }}>
                 <h3 style={{ fontFamily: "'Outfit', sans-serif", fontSize: '1.3rem', fontWeight: 800, marginBottom: '8px' }}>Book Direct Demo</h3>
                 <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>See our enterprise software systems in action with a custom walkthrough.</p>
                 
-                <form onSubmit={e => { e.preventDefault(); window.location.href='/contact'; }} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                  <input type="text" placeholder="Your Name" required style={{ width: '100%', padding: '12px 16px', background: 'var(--bg-secondary)', border: '1px solid var(--border-light)', borderRadius: '8px', color: 'var(--text-primary)', fontSize: '0.9rem' }} />
-                  <input type="email" placeholder="Business Email" required style={{ width: '100%', padding: '12px 16px', background: 'var(--bg-secondary)', border: '1px solid var(--border-light)', borderRadius: '8px', color: 'var(--text-primary)', fontSize: '0.9rem' }} />
-                  <input type="tel" placeholder="Phone Number" required style={{ width: '100%', padding: '12px 16px', background: 'var(--bg-secondary)', border: '1px solid var(--border-light)', borderRadius: '8px', color: 'var(--text-primary)', fontSize: '0.9rem' }} />
-                  
-                  <button type="submit" className="dh-btn-fill" style={{ width: '100%', justifyContent: 'center', marginTop: '8px' }}>
-                    BOOK CONSULTATION <ArrowRight size={14} />
-                  </button>
-                </form>
+                <RegistrationForm uniqueConsentId={`consent-${data.slug}`} source={data.slug} isEmbedded allowCustomService />
               </div>
             </motion.div>
           </div>
@@ -261,9 +254,9 @@ export default function ProductPageTemplate({ data }: ProductPageTemplateProps) 
               {data.cta.sub}
             </p>
             <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap', alignItems: 'center' }}>
-              <Link to="/contact" className="dh-btn-fill" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+              <a href="#consultation" className="dh-btn-fill" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
                 Contact HR Expert <ArrowRight size={16} />
-              </Link>
+              </a>
             </div>
             <div style={{ marginTop: '2.5rem', display: 'flex', gap: '32px', justifyContent: 'center', flexWrap: 'wrap', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
               <a href="tel:+919253625099" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', alignItems: 'center', gap: '6px' }} onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-primary)'} onMouseLeave={e => e.currentTarget.style.color = 'inherit'}>

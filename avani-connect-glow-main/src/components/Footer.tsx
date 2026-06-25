@@ -140,6 +140,28 @@ const Footer = () => (
         </div>
       </div>
 
+      {/* SEO Footnote Paragraph & Internal Links */}
+      <div style={{ borderTop: '1px solid var(--border-faint)', paddingTop: '24px', paddingBottom: '8px' }}>
+        <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '12px', lineHeight: 1.6, color: 'var(--text-tertiary)', margin: 0, fontWeight: 400 }}>
+          Avani Enterprises is a digital marketing agency in India offering website development, SEO, Google Ads, Meta Ads, social media marketing, AI automation, and custom software solutions for businesses.
+        </p>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px 12px', marginTop: '12px', alignItems: 'center' }}>
+          <Link to="/web-development-company" style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', color: 'var(--text-tertiary)', textDecoration: 'none', transition: 'color 0.2s', fontWeight: 500 }} onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = 'var(--accent-primary)'} onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'var(--text-tertiary)'}>Web Development</Link>
+          <span style={{ color: 'var(--border-faint)', fontSize: '11px' }}>•</span>
+          <Link to="/seo-company" style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', color: 'var(--text-tertiary)', textDecoration: 'none', transition: 'color 0.2s', fontWeight: 500 }} onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = 'var(--accent-primary)'} onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'var(--text-tertiary)'}>SEO Company</Link>
+          <span style={{ color: 'var(--border-faint)', fontSize: '11px' }}>•</span>
+          <Link to="/digital-marketing-company" style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', color: 'var(--text-tertiary)', textDecoration: 'none', transition: 'color 0.2s', fontWeight: 500 }} onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = 'var(--accent-primary)'} onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'var(--text-tertiary)'}>Digital Marketing</Link>
+          <span style={{ color: 'var(--border-faint)', fontSize: '11px' }}>•</span>
+          <Link to="/google-ads-agency" style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', color: 'var(--text-tertiary)', textDecoration: 'none', transition: 'color 0.2s', fontWeight: 500 }} onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = 'var(--accent-primary)'} onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'var(--text-tertiary)'}>Google Ads Agency</Link>
+          <span style={{ color: 'var(--border-faint)', fontSize: '11px' }}>•</span>
+          <Link to="/hrms-software-india" style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', color: 'var(--text-tertiary)', textDecoration: 'none', transition: 'color 0.2s', fontWeight: 500 }} onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = 'var(--accent-primary)'} onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'var(--text-tertiary)'}>HRMS Software</Link>
+          <span style={{ color: 'var(--border-faint)', fontSize: '11px' }}>•</span>
+          <Link to="/social-media-management-tool" style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', color: 'var(--text-tertiary)', textDecoration: 'none', transition: 'color 0.2s', fontWeight: 500 }} onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = 'var(--accent-primary)'} onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'var(--text-tertiary)'}>Social Media Tool</Link>
+          <span style={{ color: 'var(--border-faint)', fontSize: '11px' }}>•</span>
+          <Link to="/contact" style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', color: 'var(--text-tertiary)', textDecoration: 'none', transition: 'color 0.2s', fontWeight: 500 }} onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = 'var(--accent-primary)'} onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'var(--text-tertiary)'}>Contact Us</Link>
+        </div>
+      </div>
+
       {/* Bottom bar */}
       <div style={{ borderTop: '1px solid var(--border-faint)', paddingTop: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
         <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', color: 'var(--text-tertiary)' }}>

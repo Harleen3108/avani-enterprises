@@ -149,15 +149,15 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
               <motion.div className="dummy-hero-badge" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15, duration: 0.8 }}
                 style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '6px 16px', border: '1px solid var(--border-light)', borderRadius: '100px', background: 'var(--accent-hover)', backdropFilter: 'blur(10px)', marginBottom: '24px', maxWidth: '100%' }}>
                 <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--accent-primary)', boxShadow: '0 0 8px var(--accent-primary), 0 0 16px var(--border-light)', flexShrink: 0 }} />
-                <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(9px, 2.3vw, 11px)', letterSpacing: '0.12em', color: 'var(--accent-light)', fontWeight: 600, lineHeight: 1.4 }}>AVANI ENTERPRISES · NO.1 DIGITAL MARKETING AGENCY IN INDIA</span>
+                <h1 style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(9px, 2.3vw, 11px)', letterSpacing: '0.12em', color: 'var(--accent-light)', fontWeight: 600, lineHeight: 1.4, display: 'inline', margin: 0, padding: 0 }}>AVANI ENTERPRISES · DIGITAL MARKETING AGENCY IN INDIA</h1>
               </motion.div>
 
               {/* Headline */}
               <motion.div className="dummy-hero-headline" initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25, duration: 1, ease: [0.22, 1, 0.36, 1] }}>
-                <h1 style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(2.4rem, 10.5vw, 118px)', fontWeight: 800, lineHeight: 0.95, color: 'var(--text-primary)', letterSpacing: '-0.02em', margin: 0, textTransform: 'uppercase' }}>
+                <h2 style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(2.4rem, 10.5vw, 118px)', fontWeight: 800, lineHeight: 0.95, color: 'var(--text-primary)', letterSpacing: '-0.02em', margin: 0, textTransform: 'uppercase' }}>
                   WE BUILD<br />
                   <span style={{ color: 'transparent', WebkitTextStroke: '2px var(--text-primary)' }}>HIGH-PERFORMING</span>
-                </h1>
+                </h2>
 
                 {/* Animated outline word */}
                 <div style={{ overflow: 'hidden', height: 'clamp(2.4rem, 10.5vw, 118px)', margin: '4px 0' }}>
@@ -339,7 +339,7 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
               padding: 0 !important;
             }
             /* Tighter spacing and typography centering on mobile */
-            .dummy-hero-headline h1, .dummy-hero-headline > div > div {
+            .dummy-hero-headline h2, .dummy-hero-headline > div > div {
               letter-spacing: -0.03em !important;
               text-align: center !important;
             }

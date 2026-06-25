@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { CheckCircle, ChevronDown, ChevronUp, Phone, Mail, MapPin, Star, ArrowRight } from 'lucide-react';
+import RegistrationForm from '../../components/RegistrationForm';
 
 // ─── Design Tokens (mirrors existing CSS vars, works standalone) ──────────────
 const T = {
@@ -152,9 +153,9 @@ export const ReviewsSection = ({ reviews, heading='What Our Clients Say' }: { re
 );
 
 // ─── CTA Section ─────────────────────────────────────────────────────────────
-export const CTASection = ({ headline, sub, primaryLabel='Get Free Consultation', primaryHref='/contact', secondaryLabel='View Our Work', secondaryHref='/case-studies' }:
-  { headline: string; sub: string; primaryLabel?: string; primaryHref?: string; secondaryLabel?: string; secondaryHref?: string }) => (
-  <section style={{ padding:'100px 0',background:`linear-gradient(135deg,${T.bgSec} 0%,#1a0f16 50%,${T.bgSec} 100%)`,position:'relative',overflow:'hidden',textAlign:'center' }}>
+export const CTASection = ({ headline, sub, source }:
+  { headline: string; sub: string; source: string }) => (
+  <section id="consultation" style={{ padding:'100px 0',background:`linear-gradient(135deg,${T.bgSec} 0%,#1a0f16 50%,${T.bgSec} 100%)`,position:'relative',overflow:'hidden',textAlign:'center' }}>
     <Grain />
     <Blob top="0" left="50%" size={600} blur={150} opacity={0.05} />
     <div style={{ position:'absolute',top:0,left:0,right:0,height:'2px',background:`linear-gradient(to right,transparent,${T.accent} 25%,${T.accentLt} 50%,${T.accent} 75%,transparent)` }} />
@@ -165,17 +166,8 @@ export const CTASection = ({ headline, sub, primaryLabel='Get Free Consultation'
         </div>
         <h2 style={{ fontFamily:"'Outfit',sans-serif",fontSize:'clamp(1.8rem,4vw,3rem)',fontWeight:900,color:T.text,letterSpacing:'-.03em',margin:'0 0 1rem',lineHeight:1.1 }}>{headline}</h2>
         <p style={{ fontFamily:"'Inter',sans-serif",fontSize:'1.05rem',color:T.muted,maxWidth:'560px',margin:'0 auto 2.5rem',lineHeight:1.7 }}>{sub}</p>
-        <div style={{ display:'flex',gap:'16px',justifyContent:'center',flexWrap:'wrap',alignItems:'center' }}>
-          <Link to={primaryHref} style={{ display:'inline-flex',alignItems:'center',gap:'8px',background:`linear-gradient(135deg,${T.accent},${T.accentLt})`,color:'#0a0508',padding:'14px 28px',borderRadius:'10px',fontFamily:"'Outfit',sans-serif",fontWeight:800,fontSize:'.9rem',letterSpacing:'.05em',textDecoration:'none',textTransform:'uppercase',transition:'transform .2s,box-shadow .2s' }}
-            onMouseEnter={e => { e.currentTarget.style.transform='translateY(-2px)'; e.currentTarget.style.boxShadow=`0 12px 40px rgba(196,145,58,0.35)` }}
-            onMouseLeave={e => { e.currentTarget.style.transform='translateY(0)'; e.currentTarget.style.boxShadow='none' }}>
-            {primaryLabel} <ArrowRight size={16} />
-          </Link>
-          <Link to={secondaryHref} style={{ display:'inline-flex',alignItems:'center',gap:'8px',background:'transparent',color:T.text,padding:'13px 28px',borderRadius:'10px',fontFamily:"'Outfit',sans-serif",fontWeight:700,fontSize:'.9rem',letterSpacing:'.05em',textDecoration:'none',border:`1px solid ${T.border}`,textTransform:'uppercase',transition:'border-color .2s' }}
-            onMouseEnter={e => e.currentTarget.style.borderColor=T.accent}
-            onMouseLeave={e => e.currentTarget.style.borderColor=T.border}>
-            {secondaryLabel}
-          </Link>
+        <div style={{ maxWidth: '500px', margin: '0 auto 2.5rem', padding: '24px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '24px', textAlign: 'left', boxShadow: '0 20px 40px rgba(0,0,0,0.03)' }}>
+          <RegistrationForm uniqueConsentId={`consent-${source}`} source={source} isEmbedded allowCustomService />
         </div>
         <div style={{ marginTop:'2.5rem',display:'flex',gap:'32px',justifyContent:'center',flexWrap:'wrap' }}>
           <a href={`tel:${BIZ.phone}`} style={{ display:'flex',alignItems:'center',gap:'8px',color:T.muted,textDecoration:'none',fontSize:'.85rem',transition:'color .2s' }}
@@ -334,6 +326,8 @@ export default function LocalServicePage({
 }: LocalServicePageProps) {
   useEffect(() => { window.scrollTo(0, 0); }, []);
 
+  const source = seo.canonical.substring(seo.canonical.lastIndexOf('/') + 1) || 'local-service';
+
   const faqLd       = buildFaqLd(faqs);
   const bcLd        = buildBreadcrumbLd(breadcrumbs);
   const bizLd       = buildLocalBusinessLd({ service, city, description: localBizDescription, areaServed });
@@ -386,9 +380,9 @@ export default function LocalServicePage({
               {hero.subtitle}
             </motion.p>
             <motion.div variants={fadeUp} style={{ display:'flex',gap:'12px',flexWrap:'wrap',alignItems:'center',marginBottom:'3rem' }}>
-              <Link to="/contact" style={{ display:'inline-flex',alignItems:'center',gap:'8px',background:`linear-gradient(135deg,${T.accent},${T.accentLt})`,color:'#0a0508',padding:'13px 26px',borderRadius:'10px',fontFamily:"'Outfit',sans-serif",fontWeight:800,fontSize:'.88rem',letterSpacing:'.05em',textDecoration:'none',textTransform:'uppercase' }}>
+              <a href="#consultation" style={{ display:'inline-flex',alignItems:'center',gap:'8px',background:`linear-gradient(135deg,${T.accent},${T.accentLt})`,color:'#0a0508',padding:'13px 26px',borderRadius:'10px',fontFamily:"'Outfit',sans-serif",fontWeight:800,fontSize:'.88rem',letterSpacing:'.05em',textDecoration:'none',textTransform:'uppercase' }}>
                 Get Free Consultation <ArrowRight size={15} />
-              </Link>
+              </a>
               <a href={`tel:${BIZ.phone}`} style={{ display:'inline-flex',alignItems:'center',gap:'8px',background:'transparent',color:T.text,padding:'12px 24px',borderRadius:'10px',fontFamily:"'Outfit',sans-serif",fontWeight:700,fontSize:'.88rem',textDecoration:'none',border:`1px solid ${T.border}`,transition:'border-color .2s' }}
                 onMouseEnter={e=>e.currentTarget.style.borderColor=T.accent} onMouseLeave={e=>e.currentTarget.style.borderColor=T.border}>
                 <Phone size={15} color={T.accent} /> Call Now
@@ -481,7 +475,7 @@ export default function LocalServicePage({
       <Line />
       <RelatedLinksSection links={relatedLinks} />
       <Line />
-      <CTASection headline={cta.headline} sub={cta.sub} />
+      <CTASection headline={cta.headline} sub={cta.sub} source={source} />
     </div>
   );
 }
