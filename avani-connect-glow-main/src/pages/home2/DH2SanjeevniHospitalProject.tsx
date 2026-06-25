@@ -14,7 +14,7 @@ const DH2SanjeevniHospitalProject = () => {
         "Key features include secure online OPD and test booking, fully integrated with a secure payment gateway. The platform provides a robust Admin analytics dashboard and patient portals for managing orders and accessing downloadable invoices, streamlining the entire healthcare experience.",
         "Built with modern web technologies, the platform offers optimized layout for branding and business presentation, creating a professional and trustworthy digital presence in the healthcare industry."
       ]}
-      overviewImage="/sanjeevni1.png"
+      overviewImage="/sanjeevni1.webp"
       features={[
         "<strong>AI Chatbot integration</strong> for instant support and efficient appointment booking",
         "<strong>Secure online OPD and test booking</strong> with integrated payment gateway",

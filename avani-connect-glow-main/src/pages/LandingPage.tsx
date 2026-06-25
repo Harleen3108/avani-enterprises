@@ -9,6 +9,7 @@ import {
   Linkedin, Twitter, Instagram, ExternalLink, Menu, Volume2, VolumeX
 } from "lucide-react";
 import { motion, useInView, useSpring, useTransform, AnimatePresence } from "framer-motion";
+import { loadRazorpayScript } from "../utils/loadRazorpay";
 
 const C = {
   accent: "#D4A017",
@@ -331,11 +332,11 @@ export default function AvaniEnterprises() {
   ];
 
   const projects = [
-    { tag: "ERP / WEB APP", title: "School Management", desc: "A full-featured web application designed to modernize school operations and administration. It automates core tasks, including digital attendance tracking, seamless timetable generation, and secure online fee management. The system features dedicated, role-based access for Admin, Teacher, and Parent users. This setup allows for real-time data analytics to significantly boost institutional efficiency and stakeholder communication.", metric: "100+ Schools", img: "/school.jpg", color: "#F0F5F0" },
-    { tag: "E-COMMERCE", title: "Shoe E-Commerce", desc: "Developed a feature-rich footwear e-commerce platform optimized for a modern shopping experience. Key functionalities include stunning 3D product previews and a smooth, secure cart-to-checkout process. The system also features smart inventory management and admin/delivery dashboards. It allows for advanced features like order rescheduling, refund tracking, and analytics-driven business insights.", metric: "3D Integration", img: "/shoe.jpg", color: "#F0F0F5" },
+    { tag: "ERP / WEB APP", title: "School Management", desc: "A full-featured web application designed to modernize school operations and administration. It automates core tasks, including digital attendance tracking, seamless timetable generation, and secure online fee management. The system features dedicated, role-based access for Admin, Teacher, and Parent users. This setup allows for real-time data analytics to significantly boost institutional efficiency and stakeholder communication.", metric: "100+ Schools", img: "/school.webp", color: "#F0F5F0" },
+    { tag: "E-COMMERCE", title: "Shoe E-Commerce", desc: "Developed a feature-rich footwear e-commerce platform optimized for a modern shopping experience. Key functionalities include stunning 3D product previews and a smooth, secure cart-to-checkout process. The system also features smart inventory management and admin/delivery dashboards. It allows for advanced features like order rescheduling, refund tracking, and analytics-driven business insights.", metric: "3D Integration", img: "/shoe.webp", color: "#F0F0F5" },
     { tag: "SAAS / ERP", title: "Avani Business OS", desc: "A comprehensive business platform designed to centralize and automate enterprise operations. It integrates employee workflows, real-time activity logs, project pipelines, financial ledgers, and comprehensive performance metrics. By unifying operational databases into a single interface, it empowers organizations to eliminate fragmented tools, streamline communication, and drive productivity.", metric: "All-in-one OS", img: "/hrportal.webp", color: "#F0F5F0" },
-    { tag: "HEALTHCARE", title: "Hospital Website", desc: "Developed a comprehensive web platform for Holy Heart Hospital, specializing in advanced cardiac care. The system integrates an AI Chatbot ('HealthBot') for instant support and efficient appointment booking. Features include secure online OPD booking, integrated with Razorpay. It provides a robust Admin analytics dashboard and patient portals for managing orders and downloading invoices.", metric: "Razorpay + AI", img: "/hospital.jpg", color: "#F5F0F0" },
-    { tag: "REAL ESTATE", title: "Hi-tech Property", desc: "A professional, full-service property management portal designed to centralize real estate operations. The platform features an extensive listing module for showcasing available properties with high-quality media. It includes robust lead capture tools to streamline client inquiries and follow-ups effectively. Dedicated admin tools are provided to ensure efficient management of listings, client data, and workflows.", metric: "Lead Capture", img: "/hitechproperty.jpg", color: "#F0F2F5" },
+    { tag: "HEALTHCARE", title: "Hospital Website", desc: "Developed a comprehensive web platform for Holy Heart Hospital, specializing in advanced cardiac care. The system integrates an AI Chatbot ('HealthBot') for instant support and efficient appointment booking. Features include secure online OPD booking, integrated with Razorpay. It provides a robust Admin analytics dashboard and patient portals for managing orders and downloading invoices.", metric: "Razorpay + AI", img: "/hospital.webp", color: "#F5F0F0" },
+    { tag: "REAL ESTATE", title: "Hi-tech Property", desc: "A professional, full-service property management portal designed to centralize real estate operations. The platform features an extensive listing module for showcasing available properties with high-quality media. It includes robust lead capture tools to streamline client inquiries and follow-ups effectively. Dedicated admin tools are provided to ensure efficient management of listings, client data, and workflows.", metric: "Lead Capture", img: "/hitechproperty.webp", color: "#F0F2F5" },
   ];
 
   const faqs = [
@@ -377,6 +378,15 @@ export default function AvaniEnterprises() {
 
     try {
       setShowModal(false);
+      setPaymentState("processing");
+
+      const loaded = await loadRazorpayScript();
+      if (!loaded) {
+        setPaymentState("fail");
+        alert("Failed to load secure payment gateway. Please check your internet connection and try again.");
+        return;
+      }
+
       const options = {
         key: import.meta.env.VITE_RAZORPAY_KEY_ID || "rzp_test_SGgUxNXJPhFnL7",
         amount: selectedAmount * 100, // paise
@@ -404,8 +414,8 @@ export default function AvaniEnterprises() {
         updatePaymentStatusById(leadId, "Failed");
       });
       rzp1.open();
-      setPaymentState("processing");
     } catch (err) {
+      setPaymentState("fail");
       alert("Failed to submit request. Please try again.");
     }
   };

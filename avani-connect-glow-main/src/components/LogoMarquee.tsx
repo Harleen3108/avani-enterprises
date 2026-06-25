@@ -3,10 +3,10 @@ import { motion } from 'framer-motion';
 
 const row1Logos = [
   { name: 'Paragon', logo: '/paragon.png' },
-  { name: 'Indus group of institutions', logo: '/indus.jpeg' },
+  { name: 'Indus group of institutions', logo: '/indus.webp' },
   { name: 'Policicue', logo: '/policucue.jpeg' },
-  { name: 'Frd Nutrition', logo: '/frd-nutrition-new.png' },
-  { name: 'Rohtak Shoe Co.', logo: '/shoes.jpeg' },
+  { name: 'Frd Nutrition', logo: '/frd-nutrition-new.webp' },
+  { name: 'Rohtak Shoe Co.', logo: '/shoes.webp' },
   { name: 'Gaon se ghar tak', logo: '/gaonsegharatk.webp' },
 ];
 

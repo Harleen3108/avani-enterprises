@@ -149,7 +149,7 @@ const Chatbot = () => {
                         <div className="bg-[#ffb133] p-4 flex items-center justify-between text-black">
                             <div className="flex items-center space-x-3">
                                 <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-[#ff9d00]">
-                                    <img src="/assistant-v2.jpg" alt="Chat" className="w-full h-full object-cover" />
+                                    <img src="/assistant-v2.webp" alt="Chat" className="w-full h-full object-cover" />
                                 </div>
                                 <div>
                                     <h3 className="font-semibold text-sm">Ask Avani Assistant</h3>
@@ -173,7 +173,7 @@ const Chatbot = () => {
                                 <div key={idx} className={`flex ${msg.type === 'user' ? 'justify-end' : 'justify-start'}`}>
                                     {msg.type === 'bot' && (
                                         <div className="w-8 h-8 rounded-full overflow-hidden mr-2 flex-shrink-0 mt-1 border border-[#ff9d00]">
-                                            <img src="/assistant-v2.jpg" alt="Chat" className="w-full h-full object-cover" />
+                                            <img src="/assistant-v2.webp" alt="Chat" className="w-full h-full object-cover" />
                                         </div>
                                     )}
                                     <div className={`max-w-[80%] space-y-2`}>
@@ -203,7 +203,7 @@ const Chatbot = () => {
                             {isTyping && (
                                 <div className="flex justify-start">
                                     <div className="w-8 h-8 rounded-full overflow-hidden mr-2 flex-shrink-0 mt-1 border border-[#ff9d00]">
-                                        <img src="/assistant-v2.jpg" alt="Assistant" className="w-full h-full object-cover" />
+                                        <img src="/assistant-v2.webp" alt="Assistant" className="w-full h-full object-cover" />
                                     </div>
                                     <div className="bg-white p-3 rounded-2xl rounded-tl-none shadow-sm border border-[#ff9d00]/30 w-16">
                                         <div className="flex space-x-1 justify-center items-center h-full">
@@ -287,7 +287,7 @@ const Chatbot = () => {
                                 <div className="absolute top-1/2 -right-1 -translate-y-1/2 w-2 h-2 bg-[#ff9d00] border-r border-t border-[#ff9d00]/20 rotate-45"></div>
                             </motion.div>
                             <div className="relative w-full h-full rounded-full overflow-hidden">
-                                <img src="/assistant-v2.jpg" alt="Chat" className="w-full h-full object-cover" />
+                                <img src="/assistant-v2.webp" alt="Chat" className="w-full h-full object-cover" />
                                 <motion.div
                                     animate={{ opacity: [0, 1, 0], scale: [0.8, 1.2, 0.8] }}
                                     transition={{ duration: 2, repeat: Infinity, repeatDelay: 1 }}

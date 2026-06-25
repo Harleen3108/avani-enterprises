@@ -19,10 +19,10 @@ const fadeUp = {
 
 const row1Logos = [
   { name: 'Paragon', logo: '/paragon.png' },
-  { name: 'Indus group of institutions', logo: '/indus.jpeg' },
+  { name: 'Indus group of institutions', logo: '/indus.webp' },
   { name: 'Policicue', logo: '/policucue.jpeg' },
-  { name: 'Frd Nutrition', logo: '/frd-nutrition-new.png' },
-  { name: 'Rohtak Shoe Co.', logo: '/shoes.jpeg' },
+  { name: 'Frd Nutrition', logo: '/frd-nutrition-new.webp' },
+  { name: 'Rohtak Shoe Co.', logo: '/shoes.webp' },
   { name: 'Gaon se ghar tak', logo: '/gaonsegharatk.webp' },
 ];
 
@@ -107,10 +107,10 @@ const About = () => {
             {/* Symmetrical Aligned Grid for Images */}
             <div className="dh-about-hero-images" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '16px', width: '100%' }}>
               {[
-                { src: '/indus.jpeg', title: 'Indus Group' },
+                { src: '/indus.webp', title: 'Indus Group' },
                 { src: '/sanjeevni.jpeg', title: 'Sanjeevni Hospital' },
                 { src: '/hitech.jpeg', title: 'Hi-Tech Homes' },
-                { src: '/shoes.jpeg', title: 'Rohtak Shoe' }
+                { src: '/shoes.webp', title: 'Rohtak Shoe' }
               ].map((imgData, idx) => (
                 <motion.div
                   key={idx}

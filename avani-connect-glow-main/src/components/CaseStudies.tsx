@@ -7,8 +7,8 @@ const caseStudies = [
   {
     name: 'Indus Group of Institutions',
     slug: 'indus',
-    image: '/indus1.png',
-    logo: '/indus.jpeg',
+    image: '/indus1.webp',
+    logo: '/indus.webp',
     category: 'Education',
     description: 'Complete digital overhaul for one of the leading educational institutions — website, SEO, and enrollment funnel.',
     metrics: [
@@ -21,7 +21,7 @@ const caseStudies = [
   {
     name: 'Policicue',
     slug: 'policicue',
-    image: '/policy1.png',
+    image: '/policy1.webp',
     logo: '/policucue.jpeg',
     category: 'InsurTech',
     description: 'Built a sophisticated policy management platform from scratch — handling complex workflows with an exceptional UI/UX.',
@@ -35,8 +35,8 @@ const caseStudies = [
   {
     name: 'FRD Nutrition',
     slug: 'frd-nutrition',
-    image: '/frd-nutrition-new.png',
-    logo: '/frd-nutrition-new.png',
+    image: '/frd-nutrition-new.webp',
+    logo: '/frd-nutrition-new.webp',
     category: 'E-Commerce',
     description: 'Full e-commerce build with product catalog, payment integration, and performance-optimized storefront.',
     metrics: [

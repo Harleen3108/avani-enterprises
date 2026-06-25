@@ -91,7 +91,7 @@ const SanjeevniHospitalProject = () => {
             <AnimatedSection animation="fadeInRight" delay={0.4}>
               <div className="relative">
                 <img
-                  src="/sanjeevni1.png"
+                  src="/sanjeevni1.webp"
                   alt="Hospital Website"
                   className="rounded-2xl shadow-2xl w-full"
                 />
@@ -173,7 +173,7 @@ const SanjeevniHospitalProject = () => {
             <AnimatedSection animation="fadeInUp" delay={0.1}>
               <div className="relative rounded-xl overflow-hidden shadow-lg group">
                 <img
-                  src="/sanjeevni2.png"
+                  src="/sanjeevni2.webp"
                   alt="Hospital Website"
                   className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
                 />
@@ -182,7 +182,7 @@ const SanjeevniHospitalProject = () => {
             <AnimatedSection animation="fadeInUp" delay={0.2}>
               <div className="relative rounded-xl overflow-hidden shadow-lg group">
                 <img
-                  src="/sanjeevni3.png"
+                  src="/sanjeevni3.webp"
                   alt="Appointment Booking"
                   className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
                 />
@@ -191,7 +191,7 @@ const SanjeevniHospitalProject = () => {
             <AnimatedSection animation="fadeInUp" delay={0.3}>
               <div className="relative rounded-xl overflow-hidden shadow-lg group">
                 <img
-                  src="/sanjeevni4.png"
+                  src="/sanjeevni4.webp"
                   alt="Patient Portal"
                   className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
                 />

@@ -26,12 +26,12 @@ const DH2EcosystemMap = () => {
     ];
 
     const projects: EcosystemItem[] = [
-        { id: 'p1', name: 'Indus Group', image: '/indus.jpeg', link: '/projects/indus', type: 'project' },
+        { id: 'p1', name: 'Indus Group', image: '/indus.webp', link: '/projects/indus', type: 'project' },
         { id: 'p2', name: 'Policicue', image: '/policucue.jpeg', link: '/projects/policicue', type: 'project' },
-        { id: 'p3', name: 'FRD Nutrition', image: '/frd-nutrition-new.png', link: '/projects/frd-nutrition', type: 'project' },
+        { id: 'p3', name: 'FRD Nutrition', image: '/frd-nutrition-new.webp', link: '/projects/frd-nutrition', type: 'project' },
         { id: 'p4', name: 'Hi-Tech Homes', image: '/hitech.jpeg', link: '/projects/hitech-homes', type: 'project' },
         { id: 'p5', name: 'Sanjeevni Hospital', image: '/sanjeevni.jpeg', link: '/projects/sanjeevni-hospital', type: 'project' },
-        { id: 'p6', name: 'Rohtak Shoe Co', image: '/shoes.jpeg', link: '/projects/rohtak-shoe', type: 'project' },
+        { id: 'p6', name: 'Rohtak Shoe Co', image: '/shoes.webp', link: '/projects/rohtak-shoe', type: 'project' },
     ];
 
     const caseStudies: EcosystemItem[] = [

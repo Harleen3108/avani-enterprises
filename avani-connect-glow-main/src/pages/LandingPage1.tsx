@@ -10,6 +10,7 @@ import {
   Check, Crown, Sparkles, Minus
 } from "lucide-react";
 import { motion, useInView, useSpring, useTransform, AnimatePresence } from "framer-motion";
+import { loadRazorpayScript } from "../utils/loadRazorpay";
 
 const C = {
   accent: "#D4A017",
@@ -342,11 +343,11 @@ export default function AvaniEnterprises1() {
   ];
 
   const projects = [
-    { tag: "ERP / WEB APP", title: "School Management", desc: "A full-featured web application designed to modernize school operations and administration. It automates core tasks, including digital attendance tracking, seamless timetable generation, and secure online fee management. The system features dedicated, role-based access for Admin, Teacher, and Parent users. This setup allows for real-time data analytics to significantly boost institutional efficiency and stakeholder communication.", metric: "100+ Schools", img: "/school.jpg", color: "#F0F5F0" },
-    { tag: "E-COMMERCE", title: "Shoe E-Commerce", desc: "Developed a feature-rich footwear e-commerce platform optimized for a modern shopping experience. Key functionalities include stunning 3D product previews and a smooth, secure cart-to-checkout process. The system also features smart inventory management and admin/delivery dashboards. It allows for advanced features like order rescheduling, refund tracking, and analytics-driven business insights.", metric: "3D Integration", img: "/shoe.jpg", color: "#F0F0F5" },
+    { tag: "ERP / WEB APP", title: "School Management", desc: "A full-featured web application designed to modernize school operations and administration. It automates core tasks, including digital attendance tracking, seamless timetable generation, and secure online fee management. The system features dedicated, role-based access for Admin, Teacher, and Parent users. This setup allows for real-time data analytics to significantly boost institutional efficiency and stakeholder communication.", metric: "100+ Schools", img: "/school.webp", color: "#F0F5F0" },
+    { tag: "E-COMMERCE", title: "Shoe E-Commerce", desc: "Developed a feature-rich footwear e-commerce platform optimized for a modern shopping experience. Key functionalities include stunning 3D product previews and a smooth, secure cart-to-checkout process. The system also features smart inventory management and admin/delivery dashboards. It allows for advanced features like order rescheduling, refund tracking, and analytics-driven business insights.", metric: "3D Integration", img: "/shoe.webp", color: "#F0F0F5" },
     { tag: "SAAS / ERP", title: "Avani Business OS", desc: "A comprehensive business platform designed to centralize and automate enterprise operations. It integrates employee workflows, real-time activity logs, project pipelines, financial ledgers, and comprehensive performance metrics. By unifying operational databases into a single interface, it empowers organizations to eliminate fragmented tools, streamline communication, and drive productivity.", metric: "All-in-one OS", img: "/hrportal.webp", color: "#F0F5F0" },
-    { tag: "HEALTHCARE", title: "Hospital Management System", desc: "Developed a comprehensive web platform for Holy Heart Hospital, specializing in advanced cardiac care. The system integrates an AI Chatbot ('HealthBot') for instant support and efficient appointment booking. Features include secure online OPD booking, integrated with Razorpay. It provides a robust Admin analytics dashboard and patient portals for managing orders and downloading invoices.", metric: "Razorpay + AI", img: "/hospital.jpg", color: "#F5F0F0" },
-    { tag: "REAL ESTATE", title: "Millionaire Club", desc: "A professional, full-service property management portal designed to centralize real estate operations. The platform features an extensive listing module for showcasing available properties with high-quality media. It includes robust lead capture tools to streamline client inquiries and follow-ups effectively. Dedicated admin tools are provided to ensure efficient management of listings, client data, and workflows.", metric: "Lead Capture", img: "/hitechproperty.jpg", color: "#F0F2F5" },
+    { tag: "HEALTHCARE", title: "Hospital Management System", desc: "Developed a comprehensive web platform for Holy Heart Hospital, specializing in advanced cardiac care. The system integrates an AI Chatbot ('HealthBot') for instant support and efficient appointment booking. Features include secure online OPD booking, integrated with Razorpay. It provides a robust Admin analytics dashboard and patient portals for managing orders and downloading invoices.", metric: "Razorpay + AI", img: "/hospital.webp", color: "#F5F0F0" },
+    { tag: "REAL ESTATE", title: "Millionaire Club", desc: "A professional, full-service property management portal designed to centralize real estate operations. The platform features an extensive listing module for showcasing available properties with high-quality media. It includes robust lead capture tools to streamline client inquiries and follow-ups effectively. Dedicated admin tools are provided to ensure efficient management of listings, client data, and workflows.", metric: "Lead Capture", img: "/hitechproperty.webp", color: "#F0F2F5" },
   ];
 
   const faqs = [
@@ -360,9 +361,9 @@ export default function AvaniEnterprises1() {
     { name: "Manish Verma", role: "Founder, FRD Nutrition", text: "Avani delivered our nutrition brand website in under 3 weeks — fast, clean, and built to convert. Online inquiries have nearly tripled since launch and the team's responsiveness has been top-class throughout.", stars: 5, image: "/review_person1.webp" },
     { name: "Rajat Kapoor", role: "Director, Paragon", text: "Their AI video pipeline completely transformed how we produce content. What used to take our team two weeks now takes a few hours, and the output quality has genuinely impressed our clients. A real growth partner.", stars: 5, image: "/review_person2.webp" },
     { name: "Aman Sharma", role: "Owner, Hi-tech Properties", text: "I needed a website that projects trust at the high-ticket end of real estate. Avani delivered exactly that — a clean, professional platform that turns property inquiries into closed deals. Highly recommended.", stars: 5, image: "/review_person3.webp" },
-    { name: "Karan Bhatia", role: "Founder, Rohtak Shoe Co.", text: "We needed an e-commerce platform that did justice to our footwear range. The 3D product previews, smart inventory and clean checkout Avani built have driven a real lift in conversions and average order value.", stars: 5, image: "/review1.png" },
-    { name: "Dr. Neha Singh", role: "Director, Sanjeevni Hospital", text: "Running OPD bookings, online payments and patient records across departments was draining our staff. Avani streamlined everything end-to-end — the AI chatbot alone now handles a large chunk of patient queries without human intervention.", stars: 5, image: "/review2.png" },
-    { name: "Dr. Suresh Khanna", role: "Principal, Indus Public School", text: "From digital attendance to fee management, the school platform Avani built runs our daily operations without friction. Parents, teachers and admin all have what they need in one clean dashboard. Our team highly endorses them.", stars: 5, image: "/review3.png" },
+    { name: "Karan Bhatia", role: "Founder, Rohtak Shoe Co.", text: "We needed an e-commerce platform that did justice to our footwear range. The 3D product previews, smart inventory and clean checkout Avani built have driven a real lift in conversions and average order value.", stars: 5, image: "/review1.webp" },
+    { name: "Dr. Neha Singh", role: "Director, Sanjeevni Hospital", text: "Running OPD bookings, online payments and patient records across departments was draining our staff. Avani streamlined everything end-to-end — the AI chatbot alone now handles a large chunk of patient queries without human intervention.", stars: 5, image: "/review2.webp" },
+    { name: "Dr. Suresh Khanna", role: "Principal, Indus Public School", text: "From digital attendance to fee management, the school platform Avani built runs our daily operations without friction. Parents, teachers and admin all have what they need in one clean dashboard. Our team highly endorses them.", stars: 5, image: "/review3.webp" },
   ];
   // Plan payment handler for pricing table
 
@@ -391,6 +392,15 @@ export default function AvaniEnterprises1() {
 
     try {
       setShowModal(false);
+      setPaymentState("processing");
+
+      const loaded = await loadRazorpayScript();
+      if (!loaded) {
+        setPaymentState("fail");
+        alert("Failed to load secure payment gateway. Please check your internet connection and try again.");
+        return;
+      }
+
       const options = {
         key: import.meta.env.VITE_RAZORPAY_KEY_ID || "rzp_test_SGgUxNXJPhFnL7",
         amount: selectedAmount * 100, // paise
@@ -418,8 +428,8 @@ export default function AvaniEnterprises1() {
         updatePaymentStatusById(leadId, "Failed");
       });
       rzp1.open();
-      setPaymentState("processing");
     } catch (err) {
+      setPaymentState("fail");
       alert("Failed to submit request. Please try again.");
     }
   };

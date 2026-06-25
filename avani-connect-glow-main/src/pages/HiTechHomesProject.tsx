@@ -90,7 +90,7 @@ const HiTechHomesProject = () => {
             <AnimatedSection animation="fadeInRight" delay={0.4}>
               <div className="relative">
                 <img
-                  src="/hitech1.png"
+                  src="/hitech1.webp"
                   alt="Property Management Portal"
                   className="rounded-2xl shadow-2xl w-full"
                 />
@@ -172,7 +172,7 @@ const HiTechHomesProject = () => {
             <AnimatedSection animation="fadeInUp" delay={0.1}>
               <div className="relative rounded-xl overflow-hidden shadow-lg group">
                 <img
-                  src="/hitech2.png"
+                  src="/hitech2.webp"
                   alt="Property Listings"
                   className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
                 />
@@ -181,7 +181,7 @@ const HiTechHomesProject = () => {
             <AnimatedSection animation="fadeInUp" delay={0.2}>
               <div className="relative rounded-xl overflow-hidden shadow-lg group">
                 <img
-                  src="/hitech3.png"
+                  src="/hitech3.webp"
                   alt="Property Details"
                   className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
                 />
@@ -190,7 +190,7 @@ const HiTechHomesProject = () => {
             <AnimatedSection animation="fadeInUp" delay={0.3}>
               <div className="relative rounded-xl overflow-hidden shadow-lg group">
                 <img
-                  src="/hitech4.png"
+                  src="/hitech4.webp"
                   alt="Admin Dashboard"
                   className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
                 />

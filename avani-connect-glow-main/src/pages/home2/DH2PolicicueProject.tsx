@@ -14,7 +14,7 @@ const DH2PolicicueProject = () => {
         "As an insurance website, Policicue features professional service listings with detailed descriptions, making it easy for users to understand the various insurance products and policies available. The website includes dedicated sections to display company offerings and policies, ensuring clear communication of services and terms.",
         "The website also features an \"About Us\" section that provides visitors with comprehensive information about the company, its mission, values, and expertise in the insurance industry. Built with modern web technologies, the platform offers optimized layout for branding and business presentation, creating a professional and trustworthy digital presence."
       ]}
-      overviewImage="/policy1.png"
+      overviewImage="/policy1.webp"
       features={[
         "<strong>Professional service listing</strong> with detailed descriptions of insurance products and services",
         "<strong>Dedicated sections</strong> to display company offerings and policies clearly and comprehensively",

@@ -14,7 +14,7 @@ const DH2HiTechHomesProject = () => {
         "The system includes robust lead capture tools to streamline client inquiries and follow-ups effectively. Dedicated admin tools are provided to ensure efficient management of all listings, client data, and operational workflows.",
         "Built with modern web technologies, the platform offers an optimized layout for branding and business presentation, creating a professional and trustworthy digital presence in the real estate industry."
       ]}
-      overviewImage="/hitech1.png"
+      overviewImage="/hitech1.webp"
       features={[
         "<strong>Extensive property listings</strong> with high-quality media and detailed descriptions",
         "<strong>Robust lead capture tools</strong> to streamline client inquiries and follow-ups",

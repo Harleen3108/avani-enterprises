@@ -454,6 +454,26 @@ const BlogManagement = () => {
                           className="w-full bg-white border border-slate-200 rounded-xl p-3 outline-none focus:border-indigo-500 font-bold transition-all text-xs"
                         />
                       </div>
+
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Author</label>
+                        <input
+                          placeholder="Author name..."
+                          value={form.author}
+                          onChange={e => setForm({ ...form, author: e.target.value })}
+                          className="w-full bg-white border border-slate-200 rounded-xl p-3 outline-none focus:border-indigo-500 font-bold transition-all text-xs"
+                        />
+                      </div>
+
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Tags</label>
+                        <input
+                          placeholder="comma, separated, tags"
+                          value={form.tags}
+                          onChange={e => setForm({ ...form, tags: e.target.value })}
+                          className="w-full bg-white border border-slate-200 rounded-xl p-3 outline-none focus:border-indigo-500 font-bold transition-all text-xs"
+                        />
+                      </div>
                     </div>
 
                     {/* SEO Optimization */}

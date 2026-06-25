@@ -41,8 +41,8 @@ const projects = projectsData.map(p => ({
 }));
 
 const testimonials = [
-  { name: "Dr. Rajesh Kumar", position: "Principal, Indus Public School", content: "Avani Enterprises delivered an outstanding website that perfectly captures our school's vision and values. The design is modern and intuitive.", image: "/indus.jpeg" },
-  { name: "Vikram Sharma", position: "MD, Rohtak Shoe Company", content: "The e-commerce platform developed by Avani Enterprises transformed our business. Online sales increased by 250% in just 3 months.", image: "/shoes.jpeg" },
+  { name: "Dr. Rajesh Kumar", position: "Principal, Indus Public School", content: "Avani Enterprises delivered an outstanding website that perfectly captures our school's vision and values. The design is modern and intuitive.", image: "/indus.webp" },
+  { name: "Vikram Sharma", position: "MD, Rohtak Shoe Company", content: "The e-commerce platform developed by Avani Enterprises transformed our business. Online sales increased by 250% in just 3 months.", image: "/shoes.webp" },
   { name: "Ankit Verma", position: "Co-Founder, Policicue", content: "Working with Avani was a game-changer. They built a sophisticated platform that handles complex policy management with ease.", image: "/policucue.jpeg" }
 ];
 

@@ -9,7 +9,7 @@ const portfolioItems = [
     category: "Web Development",
     description:
       "A full-featured web application designed to modernize school operations and administration. It automates core tasks, including digital attendance tracking, seamless timetable generation, and secure online fee management. The system features dedicated, role-based access for Admin, Teacher, and Parent users. This setup allows for real-time data analytics to significantly boost institutional efficiency and stakeholder communication.",
-    image: "./h-sm.jpg",
+    image: "./h-sm.webp",
     stats: { growth: "+180%", metric: "Sales Growth" },
   },
   {
@@ -17,7 +17,7 @@ const portfolioItems = [
     category: "Web Development",
     description:
       "Developed a feature-rich footwear e-commerce platform optimized for a modern shopping experience. Key functionalities include stunning 3D product previews and a smooth, secure cart-to-checkout process. The system also features smart inventory management and dedicated admin/delivery dashboards. It allows for advanced features like order rescheduling, refund tracking, and analytics-driven business insights.",
-    image: "./s-shoe.jpg",
+    image: "./s-shoe.webp",
     stats: { growth: "+210%", metric: "Online Sales" },
   },
   {
@@ -25,7 +25,7 @@ const portfolioItems = [
     category: "Web Development",
     description:
       "A comprehensive HR management system built to streamline and automate workforce operations. It includes robust features for attendance tracking, efficient leave management, and automated payroll processing. The platform provides employee performance analytics, secure document handling, and internal communication tools. All functions are governed by dedicated role-based access dashboards for a centralized, efficient HR workflow.",
-    image: "./s-hr.jpg",
+    image: "./s-hr.webp",
     stats: { growth: "+70%", metric: "Operational Efficiency" },
   },
  
@@ -33,7 +33,7 @@ const portfolioItems = [
     title: "Hospital Website",
     category: "Web Development",
     description:"Developed a comprehensive web platform for Holy Heart Hospital, specializing in advanced cardiac care services. The system integrates an AI Chatbot ('HealthBot') for instant support and efficient appointment booking for patients. Key features include secure online OPD and test booking, fully integrated with a secure payment gateway (Razorpay). Additionally, it provides a robust Admin analytics dashboard and patient portals for managing orders and accessing downloadable invoices.",
-    image: "./s2.jpg",
+    image: "./s2.webp",
     stats: { growth: "+320%", metric: "Lead Generation" },
   },
   
@@ -42,7 +42,7 @@ const portfolioItems = [
     category: "Web Development",
     description:
       "A professional, full-service property management portal designed to centralize real estate operations. The platform features an extensive listing module for showcasing available properties with high-quality media. It includes robust lead capture tools to streamline client inquiries and follow-ups effectively. Dedicated admin tools are provided to ensure efficient management of all listings, client data, and operational workflows.",
-    image: "./s6.jpg",
+    image: "./s6.webp",
     stats: { growth: "-60%", metric: "Support Tickets" },
   },
   {
@@ -50,7 +50,7 @@ const portfolioItems = [
     category: "Web Development",
     description:
       "A specialized platform focused on simplifying the insurance selection and management process for users. It offers clear, intuitive plan comparison tools, making it easy for customers to choose the right coverage. The system facilitates quick and accurate quote requests directly through the site for instant service delivery. All processes are designed around secure policy management, building customer trust and providing clarity in every interaction.",
-    image: "./s5.jpg",
+    image: "./s5.webp",
     stats: { growth: "+500K", metric: "Monthly Leads" },
   },
 ];

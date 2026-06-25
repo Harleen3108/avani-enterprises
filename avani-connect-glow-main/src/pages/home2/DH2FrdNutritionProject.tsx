@@ -5,16 +5,16 @@ const DH2FrdNutritionProject = () => {
   return (
     <DH2ProjectTemplate
       title="Frd Nutrition"
-      logo="/frd-nutrition-new.png"
+      logo="/frd-nutrition-new.webp"
       videoSrc="/FrdNutrition.mp4"
-      posterSrc="/frd-nutrition-new.png"
+      posterSrc="/frd-nutrition-new.webp"
       subtitle="A comprehensive nutrition and wellness platform designed to promote healthy living and dietary awareness"
       overviewText={[
         "Frd Nutrition is a comprehensive digital platform dedicated to nutrition and wellness. The website provides valuable information about nutritional products, dietary plans, and health-related services to help users make informed decisions about their health and wellness journey.",
         "The platform features professional service listings with detailed descriptions of nutritional products and services. It includes dedicated sections to display company offerings, making it easy for users to explore and understand the available solutions.",
         "Built with modern web technologies, the website offers optimized layout for branding and business presentation, creating a professional and trustworthy digital presence in the health and nutrition industry."
       ]}
-      overviewImage="/frd-nutrition-new.png"
+      overviewImage="/frd-nutrition-new.webp"
       features={[
         "<strong>Professional service listing</strong> with detailed descriptions of nutritional products and services",
         "<strong>Dedicated sections</strong> to display company offerings and product information",

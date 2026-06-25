@@ -323,7 +323,7 @@ const Home = () => {
       content:
         "Avani Enterprises delivered an outstanding website that perfectly captures our school's vision and values. The design is modern, intuitive, and makes it easy for parents and students to find information. Their team was professional, responsive, and delivered beyond our expectations.",
       rating: 5,
-      image: "/indus.jpeg"
+      image: "/indus.webp"
     },
     {
       name: "Vikram Sharma",
@@ -331,7 +331,7 @@ const Home = () => {
       content:
         "The e-commerce platform developed by Avani Enterprises transformed our business completely. Online sales increased by 250% in just 3 months. The website is fast, user-friendly, and our customers love the shopping experience. Highly recommended!",
       rating: 5,
-      image: "/shoes.jpeg"
+      image: "/shoes.webp"
     },
     {
       name: "Sanjay Vats",
@@ -347,7 +347,7 @@ const Home = () => {
       content:
         "The team created a stunning website that perfectly showcases our nutrition products. The e-commerce integration is seamless, and we've seen a 180% increase in online orders. Their attention to detail and customer service is outstanding!",
       rating: 5,
-      image: "/frd-nutrition-new.png"
+      image: "/frd-nutrition-new.webp"
     },
     {
       name: "Aman Sharma",
@@ -370,44 +370,44 @@ const Home = () => {
   const clientLogos = [
     {
       name: "Indus group of Institution",
-      logo: "./indus.jpeg",
+      logo: "./indus.webp",
       video: "./indus.mp4",
-      image: "/indus1.png",
+      image: "/indus1.webp",
       link: "/projects/indus"
     },
     {
       name: "Policicue",
       logo: "./policucue.jpeg",
       video: "./policicue.mp4",
-      image: "/policy1.png",
+      image: "/policy1.webp",
       link: "/projects/policicue"
     },
     {
       name: "Frd Nutrition",
-      logo: "/frd-nutrition-new.png",
+      logo: "/frd-nutrition-new.webp",
       video: "./FrdNutrition.mp4",
-      image: "/frd-nutrition-new.png",
+      image: "/frd-nutrition-new.webp",
       link: "/projects/frd-nutrition"
     },
     {
       name: "Hi-tech Homes",
       logo: "./hitech.jpeg",
       video: "./hitech.mp4",
-      image: "/hitech1.png",
+      image: "/hitech1.webp",
       link: "/projects/hitech-homes"
     },
     {
       name: "Sanjeevni Hospital",
       logo: "./sanjeevni.jpeg",
       video: "./Sanjeevni.mp4",
-      image: "/sanjeevni1.png",
+      image: "/sanjeevni1.webp",
       link: "/projects/sanjeevni-hospital"
     },
     {
       name: "Rohtak Shoe co.",
-      logo: "./shoes.jpeg",
+      logo: "./shoes.webp",
       video: "./Rohtak Shoe.mp4",
-      image: "/shoes1.png",
+      image: "/shoes1.webp",
       link: "/projects/rohtak-shoe"
     }
   ];

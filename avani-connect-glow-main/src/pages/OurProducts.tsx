@@ -68,7 +68,7 @@ const products = [
     link: 'https://shoes-ecommerce-iota.vercel.app/',
     features: ['Product Catalog Management', 'Secure Payment Integration', 'Inventory & Order Tracking', 'Customer Account Portals', 'SEO Optimized Architecture', 'Mobile-First Responsive Design'],
     highlights: ['Multi-vendor Support', 'Flash Sales Engine', 'Safe Checkout'],
-    image: '/ecommerce-hero.png',
+    image: '/ecommerce-hero.webp',
   },
 ];
 

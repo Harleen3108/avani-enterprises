@@ -64,20 +64,20 @@ const steps = [
 
 // Portfolio — content sourced from the web-dev page, restyled for this page
 const portfolio = [
-  { title: "School Management (ERP)", category: "Web App", image: "/h-sm.jpg", growth: "+180%", metric: "Sales Growth", desc: "Automates attendance, timetables, fee management & role-based dashboards for schools." },
-  { title: "Shoe E-Commerce", category: "E-Commerce", image: "/s-shoe.jpg", growth: "+210%", metric: "Online Sales", desc: "3D product previews, secure checkout, smart inventory & delivery dashboards." },
-  { title: "HR Portal (ERP)", category: "Web App", image: "/s-hr.jpg", growth: "+70%", metric: "Efficiency", desc: "Attendance, leave, payroll, performance analytics & secure document handling." },
-  { title: "Hospital Website", category: "Healthcare", image: "/s2.jpg", growth: "+320%", metric: "Lead Generation", desc: "AI chatbot, online OPD booking, payments & an admin analytics dashboard." },
-  { title: "Hi-tech Property", category: "Real Estate", image: "/s6.jpg", growth: "−60%", metric: "Support Tickets", desc: "Rich property listings, lead-capture tools & admin management for real-estate teams." },
-  { title: "Insurance Platform", category: "Fintech", image: "/s5.jpg", growth: "+500K", metric: "Monthly Leads", desc: "Plan comparison, instant quotes & secure policy management for customers." },
+  { title: "School Management (ERP)", category: "Web App", image: "/h-sm.webp", growth: "+180%", metric: "Sales Growth", desc: "Automates attendance, timetables, fee management & role-based dashboards for schools." },
+  { title: "Shoe E-Commerce", category: "E-Commerce", image: "/s-shoe.webp", growth: "+210%", metric: "Online Sales", desc: "3D product previews, secure checkout, smart inventory & delivery dashboards." },
+  { title: "HR Portal (ERP)", category: "Web App", image: "/s-hr.webp", growth: "+70%", metric: "Efficiency", desc: "Attendance, leave, payroll, performance analytics & secure document handling." },
+  { title: "Hospital Website", category: "Healthcare", image: "/s2.webp", growth: "+320%", metric: "Lead Generation", desc: "AI chatbot, online OPD booking, payments & an admin analytics dashboard." },
+  { title: "Hi-tech Property", category: "Real Estate", image: "/s6.webp", growth: "−60%", metric: "Support Tickets", desc: "Rich property listings, lead-capture tools & admin management for real-estate teams." },
+  { title: "Insurance Platform", category: "Fintech", image: "/s5.webp", growth: "+500K", metric: "Monthly Leads", desc: "Plan comparison, instant quotes & secure policy management for customers." },
 ];
 
 // Reviews — content sourced from the main site testimonials, restyled for this page
 const reviews = [
-  { name: "Director, Indus School", role: "Indus Public School", image: "/indus.jpeg", rating: 5, text: "Avani delivered an outstanding website that perfectly captures our school's vision. Modern, intuitive and beyond our expectations." },
-  { name: "Vikram Sharma", role: "MD, Rohtak Shoe Company", image: "/shoes.jpeg", rating: 5, text: "Our e-commerce platform transformed the business — online sales jumped 250% in just 3 months. Fast, user-friendly and reliable." },
+  { name: "Director, Indus School", role: "Indus Public School", image: "/indus.webp", rating: 5, text: "Avani delivered an outstanding website that perfectly captures our school's vision. Modern, intuitive and beyond our expectations." },
+  { name: "Vikram Sharma", role: "MD, Rohtak Shoe Company", image: "/shoes.webp", rating: 5, text: "Our e-commerce platform transformed the business — online sales jumped 250% in just 3 months. Fast, user-friendly and reliable." },
   { name: "Sanjay Vats", role: "Co-Founder, Policicue", image: "/policucue.jpeg", rating: 5, text: "A game-changer for our startup. They built a sophisticated platform with exceptional UI/UX and top-notch technical expertise." },
-  { name: "Amit Kapoor", role: "Founder, FRD Nutrition", image: "/frd-nutrition-new.png", rating: 5, text: "A stunning website with seamless e-commerce integration. We've seen a 180% increase in online orders. Outstanding service!" },
+  { name: "Amit Kapoor", role: "Founder, FRD Nutrition", image: "/frd-nutrition-new.webp", rating: 5, text: "A stunning website with seamless e-commerce integration. We've seen a 180% increase in online orders. Outstanding service!" },
   { name: "Aman Sharma", role: "CEO, Hi-Tech Luxury Homes", image: "/hitech.jpeg", rating: 5, text: "An elegant website that beautifully represents our luxury properties. Sophisticated design and easy-to-manage listings." },
   { name: "Dr. Mohit Verma", role: "Director, Sanjeevni Hospital", image: "/sanjeevni.jpeg", rating: 5, text: "The portal streamlined our operations significantly. Appointment booking is effortless and the admin panel is wonderfully user-friendly." },
 ];

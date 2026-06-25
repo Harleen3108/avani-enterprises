@@ -21,12 +21,12 @@ import DummyCTA from '../components/CTA';
 /* ═══════════════════════════════════════════════════════════════ */
 
 const clientLogos = [
-  { name: 'Indus group of Institution', logo: '/indus.jpeg', video: '/indus.mp4', image: '/indus1.png', link: '/projects/indus' },
-  { name: 'Policicue', logo: '/policucue.jpeg', video: '/policicue.mp4', image: '/policy1.png', link: '/projects/policicue' },
-  { name: 'Frd Nutrition', logo: '/frd-nutrition-new.png', video: '/FrdNutrition.mp4', image: '/frd-nutrition-new.png', link: '/projects/frd-nutrition' },
-  { name: 'Hi-tech Homes', logo: '/hitech.jpeg', video: '/hitech.mp4', image: '/hitech1.png', link: '/projects/hitech-homes' },
-  { name: 'Sanjeevni Hospital', logo: '/sanjeevni.jpeg', video: '/Sanjeevni.mp4', image: '/sanjeevni1.png', link: '/projects/sanjeevni-hospital' },
-  { name: 'Rohtak Shoe co.', logo: '/shoes.jpeg', video: '/Rohtak Shoe.mp4', image: '/shoes1.png', link: '/projects/rohtak-shoe' },
+  { name: 'Indus group of Institution', logo: '/indus.webp', video: '/indus.mp4', image: '/indus1.webp', link: '/projects/indus' },
+  { name: 'Policicue', logo: '/policucue.jpeg', video: '/policicue.mp4', image: '/policy1.webp', link: '/projects/policicue' },
+  { name: 'Frd Nutrition', logo: '/frd-nutrition-new.webp', video: '/FrdNutrition.mp4', image: '/frd-nutrition-new.webp', link: '/projects/frd-nutrition' },
+  { name: 'Hi-tech Homes', logo: '/hitech.jpeg', video: '/hitech.mp4', image: '/hitech1.webp', link: '/projects/hitech-homes' },
+  { name: 'Sanjeevni Hospital', logo: '/sanjeevni.jpeg', video: '/Sanjeevni.mp4', image: '/sanjeevni1.webp', link: '/projects/sanjeevni-hospital' },
+  { name: 'Rohtak Shoe co.', logo: '/shoes.webp', video: '/Rohtak Shoe.mp4', image: '/shoes1.webp', link: '/projects/rohtak-shoe' },
 ];
 
 const services = [
@@ -47,7 +47,7 @@ const services = [
     title: 'SEO & Content Marketing', 
     description: 'Get found on Google and turn casual visitors into loyal customers. We write engaging content and optimize your site so you rank higher, attract more traffic, and grow your brand organically.', 
     slug: 'seo-content-marketing',
-    image: '/whatwecreate/seoandcontent.jpg'
+    image: '/whatwecreate/seoandcontent.webp'
   },
   { 
     index: '03', 
@@ -115,10 +115,10 @@ const processSteps = [
 ];
 
 const testimonials = [
-  { name: 'Director Of Indus School', position: 'Principal, Indus Public School', content: "Avani Enterprises delivered an outstanding website that perfectly captures our school's vision and values. The design is modern, intuitive, and makes it easy for parents and students to find information. Their team was professional, responsive, and delivered beyond our expectations.", rating: 5, image: '/indus.jpeg' },
-  { name: 'Vikram Sharma', position: 'Managing Director, Rohtak Shoe Company', content: 'The e-commerce platform developed by Avani Enterprises transformed our business completely. Online sales increased by 250% in just 3 months. The website is fast, user-friendly, and our customers love the shopping experience. Highly recommended!', rating: 5, image: '/shoes.jpeg' },
+  { name: 'Director Of Indus School', position: 'Principal, Indus Public School', content: "Avani Enterprises delivered an outstanding website that perfectly captures our school's vision and values. The design is modern, intuitive, and makes it easy for parents and students to find information. Their team was professional, responsive, and delivered beyond our expectations.", rating: 5, image: '/indus.webp' },
+  { name: 'Vikram Sharma', position: 'Managing Director, Rohtak Shoe Company', content: 'The e-commerce platform developed by Avani Enterprises transformed our business completely. Online sales increased by 250% in just 3 months. The website is fast, user-friendly, and our customers love the shopping experience. Highly recommended!', rating: 5, image: '/shoes.webp' },
   { name: 'Sanjay Vats', position: 'Co-Founder, Policicue', content: 'Working with Avani Enterprises was a game-changer for our startup. They built a sophisticated platform that handles complex policy management with ease. The UI/UX is exceptional, and their technical expertise is top-notch. Our users are impressed!', rating: 5, image: '/policucue.jpeg' },
-  { name: 'Amit Kapoor', position: 'Founder, FRD Nutrition', content: "The team created a stunning website that perfectly showcases our nutrition products. The e-commerce integration is seamless, and we've seen a 180% increase in online orders. Their attention to detail and customer service is outstanding!", rating: 5, image: '/frd-nutrition-new.png' },
+  { name: 'Amit Kapoor', position: 'Founder, FRD Nutrition', content: "The team created a stunning website that perfectly showcases our nutrition products. The e-commerce integration is seamless, and we've seen a 180% increase in online orders. Their attention to detail and customer service is outstanding!", rating: 5, image: '/frd-nutrition-new.webp' },
   { name: 'Aman Sharma', position: 'CEO, Hi-Tech Luxury Homes', content: "We're thrilled with the elegant website that beautifully represents our luxury properties. The design is sophisticated, the property listings are easy to manage, and our clients love the virtual tour feature. Excellent work!", rating: 5, image: '/hitech.jpeg' },
   { name: 'Dr. Mohit Verma', position: 'Director, Sanjeevni Hospital', content: 'The hospital management portal developed by Avani Enterprises has streamlined our operations significantly. Patient appointment booking is now effortless, and the admin panel is incredibly user-friendly. A truly professional solution!', rating: 5, image: '/sanjeevni.jpeg' },
 ];

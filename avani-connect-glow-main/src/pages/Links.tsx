@@ -97,7 +97,7 @@ const testimonials = [
     content:
       "Avani Enterprises delivered an outstanding website that perfectly captures our school's vision and values. The design is modern, intuitive, and makes it easy for parents and students to find information. Their team was professional, responsive, and delivered beyond our expectations.",
     rating: 5,
-    image: "/indus.jpeg"
+    image: "/indus.webp"
   },
   {
     name: "Vikram Sharma",
@@ -105,7 +105,7 @@ const testimonials = [
     content:
       "The e-commerce platform developed by Avani Enterprises transformed our business completely. Online sales increased by 250% in just 3 months. The website is fast, user-friendly, and our customers love the shopping experience. Highly recommended!",
     rating: 5,
-    image: "/shoes.jpeg"
+    image: "/shoes.webp"
   },
   {
     name: "Sanjay Vats",
@@ -121,7 +121,7 @@ const testimonials = [
     content:
       "The team created a stunning website that perfectly showcases our nutrition products. The e-commerce integration is seamless, and we've seen a 180% increase in online orders. Their attention to detail and customer service is outstanding!",
     rating: 5,
-    image: "/frd-nutrition-new.png"
+    image: "/frd-nutrition-new.webp"
   },
   {
     name: "Aman Sharma",

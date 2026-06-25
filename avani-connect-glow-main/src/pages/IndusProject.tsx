@@ -38,7 +38,7 @@ const IndusProject = () => {
                   muted
                   loop
                   playsInline
-                  poster="/indus.jpeg"
+                  poster="/indus.webp"
                 />
               </div>
             </AnimatedSection>
@@ -47,7 +47,7 @@ const IndusProject = () => {
             <AnimatedSection animation="fadeInRight" delay={0.4}>
               <div className="flex flex-col items-start gap-4">
                 <img
-                  src="/indus.jpeg"
+                  src="/indus.webp"
                   alt="Indus group of Institution Logo"
                   className="h-16 md:h-20 object-contain bg-white p-3 rounded-xl shadow-md"
                 />
@@ -89,7 +89,7 @@ const IndusProject = () => {
             <AnimatedSection animation="fadeInRight" delay={0.4}>
               <div className="relative">
                 <img
-                  src="/indus1.png"
+                  src="/indus1.webp"
                   alt="School Management System"
                   className="rounded-2xl shadow-2xl w-full"
                 />
@@ -171,7 +171,7 @@ const IndusProject = () => {
             <AnimatedSection animation="fadeInUp" delay={0.1}>
               <div className="relative rounded-xl overflow-hidden shadow-lg group">
                 <img
-                  src="/indus2.png"
+                  src="/indus2.webp"
                   alt="Dashboard View"
                   className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
                 />
@@ -180,7 +180,7 @@ const IndusProject = () => {
             <AnimatedSection animation="fadeInUp" delay={0.2}>
               <div className="relative rounded-xl overflow-hidden shadow-lg group">
                 <img
-                  src="/indus3.png"
+                  src="/indus3.webp"
                   alt="User Interface"
                   className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
                 />
@@ -189,7 +189,7 @@ const IndusProject = () => {
             <AnimatedSection animation="fadeInUp" delay={0.3}>
               <div className="relative rounded-xl overflow-hidden shadow-lg group">
                 <img
-                  src="/indus4.png"
+                  src="/indus4.webp"
                   alt="Mobile Responsive"
                   className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
                 />

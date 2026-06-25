@@ -115,7 +115,7 @@ const serviceData: Record<string, ServiceDetail> = {
     icon: <Search size={48} />,
     title: 'SEO & Content Marketing',
     titleLines: { line1: "SEO & CONTENT", line2: "AUTHORITY", line3: "MARKETING" },
-    image: "/whatwecreate/seoandcontent.jpg",
+    image: "/whatwecreate/seoandcontent.webp",
     desc: 'Get found on Google by active buyers without paying for expensive ads. We write engaging, high-ranking articles and optimize your website so you rank higher, attract more organic traffic, and build authority.',
     hook: 'If customers can\'t find you on Google, they find your competitors instead. We make sure you show up first when they look for your services.',
     ctaHook: 'Ready to dominate search pages and command absolute organic authority? Start your organic growth engine with us today to scale your traffic.',

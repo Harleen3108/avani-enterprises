@@ -94,7 +94,7 @@ const PolicicueProject = () => {
             <AnimatedSection animation="fadeInRight" delay={0.4}>
               <div className="relative">
                 <img
-                  src="/policy1.png"
+                  src="/policy1.webp"
                   alt="Policicue Platform Dashboard"
                   className="rounded-2xl shadow-2xl w-full"
                 />
@@ -178,7 +178,7 @@ const PolicicueProject = () => {
             <AnimatedSection animation="fadeInUp" delay={0.1}>
               <div className="relative rounded-xl overflow-hidden shadow-lg group">
                 <img
-                  src="/policy2.png"
+                  src="/policy2.webp"
                   alt="Dashboard View"
                   className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
                 />
@@ -187,7 +187,7 @@ const PolicicueProject = () => {
             <AnimatedSection animation="fadeInUp" delay={0.2}>
               <div className="relative rounded-xl overflow-hidden shadow-lg group">
                 <img
-                  src="/policy3.png"
+                  src="/policy3.webp"
                   alt="User Interface"
                   className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
                 />
@@ -196,7 +196,7 @@ const PolicicueProject = () => {
             <AnimatedSection animation="fadeInUp" delay={0.3}>
               <div className="relative rounded-xl overflow-hidden shadow-lg group">
                 <img
-                  src="/policy4.png"
+                  src="/policy4.webp"
                   alt="Mobile Responsive"
                   className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
                 />

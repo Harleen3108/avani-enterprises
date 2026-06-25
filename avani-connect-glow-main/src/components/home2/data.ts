@@ -8,9 +8,9 @@ export const services = [
 ];
 
 export const caseStudies = [
-  { name:'Indus Group of Institutions', cat:'Education', desc:'Complete digital overhaul — website, SEO, and enrollment funnel.', img:'/indus1.png', logo:'/indus.jpeg', metrics:['+340% Traffic','+65% Enrollment','0.8s Load'], wide:true },
-  { name:'Policicue', cat:'InsurTech', desc:'Sophisticated policy management platform from scratch.', img:'/policy1.png', logo:'/policucue.jpeg', metrics:['+180% Signups','5K+ Policies','4.8★ Rating'] },
-  { name:'FRD Nutrition', cat:'E-Commerce', desc:'Full e-commerce build with catalog, payments, and performance.', img:'/frd-nutrition-new.png', logo:'/frd-nutrition-new.png', metrics:['+250% Sales','4.2% CVR','+35% AOV'] },
+  { name:'Indus Group of Institutions', cat:'Education', desc:'Complete digital overhaul — website, SEO, and enrollment funnel.', img:'/indus1.webp', logo:'/indus.webp', metrics:['+340% Traffic','+65% Enrollment','0.8s Load'], wide:true },
+  { name:'Policicue', cat:'InsurTech', desc:'Sophisticated policy management platform from scratch.', img:'/policy1.webp', logo:'/policucue.jpeg', metrics:['+180% Signups','5K+ Policies','4.8★ Rating'] },
+  { name:'FRD Nutrition', cat:'E-Commerce', desc:'Full e-commerce build with catalog, payments, and performance.', img:'/frd-nutrition-new.webp', logo:'/frd-nutrition-new.webp', metrics:['+250% Sales','4.2% CVR','+35% AOV'] },
 ];
 
 export const industries = [
@@ -76,10 +76,10 @@ export const processSteps = [
 ];
 
 export const testimonials = [
-  { name:'Director Of Indus School', role:'Principal, Indus Public School', text:"Avani Enterprises delivered an outstanding website that perfectly captures our school's vision and values. The design is modern, intuitive, and makes it easy for parents and students to find information.", img:'/indus.jpeg' },
-  { name:'Vikram Sharma', role:'MD, Rohtak Shoe Company', text:'The e-commerce platform transformed our business completely. Online sales increased by 250% in just 3 months. The website is fast, user-friendly, and our customers love the shopping experience.', img:'/shoes.jpeg' },
+  { name:'Director Of Indus School', role:'Principal, Indus Public School', text:"Avani Enterprises delivered an outstanding website that perfectly captures our school's vision and values. The design is modern, intuitive, and makes it easy for parents and students to find information.", img:'/indus.webp' },
+  { name:'Vikram Sharma', role:'MD, Rohtak Shoe Company', text:'The e-commerce platform transformed our business completely. Online sales increased by 250% in just 3 months. The website is fast, user-friendly, and our customers love the shopping experience.', img:'/shoes.webp' },
   { name:'Sanjay Vats', role:'Co-Founder, Policicue', text:"Working with Avani was a game-changer for our startup. They built a sophisticated platform that handles complex policy management with ease. The UI/UX is exceptional.", img:'/policucue.jpeg' },
-  { name:'Amit Kapoor', role:'Founder, FRD Nutrition', text:"The team created a stunning website that perfectly showcases our nutrition products. The e-commerce integration is seamless, and we've seen a 180% increase in online orders.", img:'/frd-nutrition-new.png' },
+  { name:'Amit Kapoor', role:'Founder, FRD Nutrition', text:"The team created a stunning website that perfectly showcases our nutrition products. The e-commerce integration is seamless, and we've seen a 180% increase in online orders.", img:'/frd-nutrition-new.webp' },
   { name:'Aman Sharma', role:'CEO, Hi-Tech Luxury Homes', text:"We're thrilled with the elegant website that beautifully represents our luxury properties. The design is sophisticated, and our clients love the virtual tour feature.", img:'/hitech.jpeg' },
   { name:'Dr. Mohit Verma', role:'Director, Sanjeevni Hospital', text:'The hospital management portal has streamlined our operations significantly. Patient appointment booking is now effortless, and the admin panel is incredibly user-friendly.', img:'/sanjeevni.jpeg' },
 ];
@@ -122,12 +122,12 @@ export const faqs = [
 ];
 
 export const clientLogos = [
-  { name:'Indus Group', logo:'/indus.jpeg' },
+  { name:'Indus Group', logo:'/indus.webp' },
   { name:'Policicue', logo:'/policucue.jpeg' },
-  { name:'FRD Nutrition', logo:'/frd-nutrition-new.png' },
+  { name:'FRD Nutrition', logo:'/frd-nutrition-new.webp' },
   { name:'Hi-Tech Homes', logo:'/hitech.jpeg' },
   { name:'Sanjeevni Hospital', logo:'/sanjeevni.jpeg' },
-  { name:'Rohtak Shoe Co.', logo:'/shoes.jpeg' },
+  { name:'Rohtak Shoe Co.', logo:'/shoes.webp' },
 ];
 
 export const footerLinks = {

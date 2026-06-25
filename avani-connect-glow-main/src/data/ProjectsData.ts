@@ -123,7 +123,7 @@ export const projectsData: ProjectItem[] = [
       "Enhanced student security with live route tracking of school transport",
       "Direct digital notification loop reducing paper waste by 95%"
     ],
-    galleryImages: ["/indus1.png", "/indus2.png", "/indus3.png", "/indus4.png"]
+    galleryImages: ["/indus1.webp", "/indus2.webp", "/indus3.webp", "/indus4.webp"]
   },
   {
     id: "alumni-management",
@@ -236,7 +236,7 @@ export const projectsData: ProjectItem[] = [
       "Immediate tracking and organization of high-value investment leads",
       "Unrivaled visual experience boosting buyer interest on listed assets"
     ],
-    galleryImages: ["/hitech1.png", "/hitech2.png", "/hitech3.png", "/hitech4.png"]
+    galleryImages: ["/hitech1.webp", "/hitech2.webp", "/hitech3.webp", "/hitech4.webp"]
   },
   {
     id: "college-management",

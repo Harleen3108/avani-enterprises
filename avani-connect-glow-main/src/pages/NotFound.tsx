@@ -22,16 +22,15 @@ export default function NotFound() {
 
   const services = [
     { label: 'Web Development', href: '/services/web-app-development' },
+    { label: 'Business OS', href: '/business-os' },
+    { label: 'Social Sync', href: '/social-sync' },
     { label: 'Google SEO Services', href: '/services/seo-content-marketing' },
-    { label: 'Social Media Marketing', href: '/services/social-media-marketing' },
-    { label: 'Performance Marketing', href: '/services/performance-marketing' },
   ];
 
   const quickLinks = [
-    { label: 'Home', href: '/' },
-    { label: 'About Us', href: '/about' },
+    { label: 'Return Home', href: '/' },
     { label: 'Our Services', href: '/services' },
-    { label: 'Case Studies', href: '/case-studies' },
+    { label: 'Contact Us', href: '/contact' },
     { label: 'Read Our Blog', href: '/blog' },
   ];
 
@@ -54,9 +53,9 @@ export default function NotFound() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(5rem, 15vw, 8.5rem)', fontWeight: 900, margin: 0, lineHeight: 1, background: 'linear-gradient(135deg, #FFF 30%, var(--accent-primary, #C4913A) 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}
+          style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(3rem, 10vw, 5.5rem)', fontWeight: 900, margin: 0, lineHeight: 1.1, background: 'linear-gradient(135deg, #FFF 30%, var(--accent-primary, #C4913A) 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}
         >
-          404
+          Page Not Found
         </motion.h1>
 
         <motion.h2 

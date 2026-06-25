@@ -38,7 +38,7 @@ const FrdNutritionProject = () => {
                   muted
                   loop
                   playsInline
-                  poster="/frd-nutrition-new.png"
+                  poster="/frd-nutrition-new.webp"
                 />
               </div>
             </AnimatedSection>
@@ -47,7 +47,7 @@ const FrdNutritionProject = () => {
             <AnimatedSection animation="fadeInRight" delay={0.4}>
               <div className="flex flex-col items-start gap-4">
                 <img
-                  src="/frd-nutrition-new.png"
+                  src="/frd-nutrition-new.webp"
                   alt="Frd Nutrition Logo"
                   className="h-16 md:h-20 object-contain bg-white p-3 rounded-xl shadow-md"
                 />
@@ -91,7 +91,7 @@ const FrdNutritionProject = () => {
             <AnimatedSection animation="fadeInRight" delay={0.4}>
               <div className="relative">
                 <img
-                  src="/frd-nutrition-new.png"
+                  src="/frd-nutrition-new.webp"
                   alt="Nutrition Platform"
                   className="rounded-2xl shadow-2xl w-full"
                 />
@@ -173,7 +173,7 @@ const FrdNutritionProject = () => {
             <AnimatedSection animation="fadeInUp" delay={0.1}>
               <div className="relative rounded-xl overflow-hidden shadow-lg group">
                 <img
-                  src="/frd-nutrition-new.png"
+                  src="/frd-nutrition-new.webp"
                   alt="Dashboard View"
                   className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
                 />
@@ -182,7 +182,7 @@ const FrdNutritionProject = () => {
             <AnimatedSection animation="fadeInUp" delay={0.2}>
               <div className="relative rounded-xl overflow-hidden shadow-lg group">
                 <img
-                  src="/frd-nutrition-new.png"
+                  src="/frd-nutrition-new.webp"
                   alt="Products"
                   className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
                 />
@@ -191,7 +191,7 @@ const FrdNutritionProject = () => {
             <AnimatedSection animation="fadeInUp" delay={0.3}>
               <div className="relative rounded-xl overflow-hidden shadow-lg group">
                 <img
-                  src="/frd-nutrition-new.png"
+                  src="/frd-nutrition-new.webp"
                   alt="Services"
                   className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
                 />

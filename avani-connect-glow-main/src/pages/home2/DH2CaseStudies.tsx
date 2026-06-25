@@ -16,11 +16,11 @@ const fadeUp = {
 
 const projects = [
   { title: 'Policicue', tag: 'INSURANCE', desc: 'A sophisticated digital ecosystem for complex policy management, prioritizing security and seamless user journeys.', img: '/policucue.jpeg', link: '/home2/our-products/policicue', size: 'large' },
-  { title: 'Indus School', tag: 'EDUCATION', desc: 'Capturing the future of education through a modern, intuitive platform for students and visionaries.', img: '/indus.jpeg', link: '/home2/our-products/indus', size: 'small' },
-  { title: 'FRD Nutrition', tag: 'E-COMMERCE', desc: 'Engineering a high-performance product showcase that resulted in a 180% surge in conversion rates.', img: '/frd-nutrition-new.png', link: '/home2/our-products/frd-nutrition', size: 'small' },
+  { title: 'Indus School', tag: 'EDUCATION', desc: 'Capturing the future of education through a modern, intuitive platform for students and visionaries.', img: '/indus.webp', link: '/home2/our-products/indus', size: 'small' },
+  { title: 'FRD Nutrition', tag: 'E-COMMERCE', desc: 'Engineering a high-performance product showcase that resulted in a 180% surge in conversion rates.', img: '/frd-nutrition-new.webp', link: '/home2/our-products/frd-nutrition', size: 'small' },
   { title: 'Hi-Tech Homes', tag: 'REAL ESTATE', desc: 'An elegant, immersive portal for luxury properties, redefining the digital real estate experience.', img: '/hitech.jpeg', link: '/home2/our-products/hitech-homes', size: 'large' },
   { title: 'Sanjeevni Hospital', tag: 'HEALTHCARE', desc: 'Streamlining critical healthcare operations through a robust, patient-centric management system.', img: '/sanjeevni.jpeg', link: '/home2/our-products/sanjeevni', size: 'small' },
-  { title: 'Rohtak Shoe Co.', tag: 'RETAIL', desc: 'A powerful e-commerce engine that fueled a 250% increase in online revenue within one quarter.', img: '/shoes.jpeg', link: '/home2/our-products/rohtak-shoe', size: 'small' },
+  { title: 'Rohtak Shoe Co.', tag: 'RETAIL', desc: 'A powerful e-commerce engine that fueled a 250% increase in online revenue within one quarter.', img: '/shoes.webp', link: '/home2/our-products/rohtak-shoe', size: 'small' },
 ];
 
 const DH2CaseStudies = () => (

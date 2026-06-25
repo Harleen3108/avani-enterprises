@@ -759,7 +759,7 @@ const AppLayout = () => {
           <Route path="/admin" element={<AdminRedirect />} />
 
           {/* Catch-all */}
-          <Route path="*" element={<Navigate to="/not-found" replace />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
         </Suspense>
       </main>

@@ -80,28 +80,35 @@
   <meta name="google-site-verification" content="btLwCqsDMCRiF9M1VEpHCehG-lRBEbAj3fPKMoKZK-U" />
 
   <!-- Meta Pixel Code -->
-  <script defer>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '2263948097472371');
-    fbq('track', 'PageView');
+  <script>
+    window.addEventListener('load', function() {
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '2263948097472371');
+      fbq('track', 'PageView');
+    });
   </script>
   <!-- End Meta Pixel Code -->
 
   <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17823419321"></script>
-  <script defer>
+  <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-
-    gtag('config', 'AW-17823419321');
+    window.gtag = gtag;
+    window.addEventListener('load', function() {
+      var script = document.createElement('script');
+      script.async = true;
+      script.src = 'https://www.googletagmanager.com/gtag/js?id=AW-17823419321';
+      document.head.appendChild(script);
+      gtag('js', new Date());
+      gtag('config', 'AW-17823419321');
+    });
   </script>
 
   <!-- Structured Data: Organization + WebSite (static, crawlable before JS) -->
@@ -194,7 +201,6 @@
   }
   </script>
   <!-- Dynamic structured data (BreadcrumbList, FAQPage) injected per-route by React -->
-  <script defer src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
 
 <body>
