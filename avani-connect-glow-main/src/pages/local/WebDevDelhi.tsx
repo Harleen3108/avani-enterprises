@@ -16,7 +16,7 @@ const PAGE: LocalServicePageProps = {
   ],
   hero: {
     tag: '🏙️ Delhi\'s Trusted Web Development Agency',
-    h1: 'Website Development Company in Delhi',
+    h1: 'Best Web Development Company in Delhi',
     subtitle: 'Avani Enterprises delivers premium custom websites, e-commerce platforms, and web applications for Delhi businesses. Fast turnaround, transparent pricing, and results that speak for themselves.',
     stats: [
       { value: '200+', label: 'Delhi Projects' },
@@ -25,26 +25,26 @@ const PAGE: LocalServicePageProps = {
       { value: '24hr', label: 'Query Response' },
     ],
   },
-  intro: `Delhi is India's most competitive business market. Your website needs to work harder than your competitors' — faster, smarter, and more persuasive. Avani Enterprises brings enterprise-grade web development to Delhi businesses at SMB-friendly prices.
+  intro: `Delhi is India's most competitive business market, where establishing a robust online presence is essential for long-term growth. Your corporate website needs to work harder than your competitors'—delivering faster loading speeds, smarter user experiences, and highly persuasive conversion paths. Avani Enterprises brings custom, enterprise-grade web development services to Delhi-based enterprises, B2B manufacturers, and local retailers at highly accessible rates.
 
-We've built websites for manufacturers in Okhla, retailers in Karol Bagh, consultants in Connaught Place, and service businesses across Dwarka, Rohini, Laxmi Nagar, and Vasant Kunj. Every project is unique, every deliverable is on time, and every site we build generates measurable business results.`,
+We have a proven history of engineering specialized web solutions: from responsive portals for manufacturers in Okhla and e-commerce setups for local retailers in Karol Bagh, to clean corporate websites for consultants in Connaught Place and customer acquisition funnels for service brands in South Delhi, Dwarka, and Laxmi Nagar. Our development process centers on absolute speed, premium security, and conversion rate optimization to transform page visitors into qualified business leads. Every site we build is tailored to individual business objectives, ensuring a high-performance platform that ranks organically and scales seamlessly with your operational demands.`,
   whyAvani: [
-    { title: 'Delhi Market Expertise', desc: 'We understand Delhi\'s diverse business landscape — from wholesale markets in Chandni Chowk to IT firms in Nehru Place and fashion brands in South Ex.' },
-    { title: 'GST & Compliance Ready', desc: 'All our e-commerce sites come with GST invoice generation, TCS/TDS handling, and compliance features required for Indian businesses.' },
-    { title: 'Hindi + English Bilingual', desc: 'Delhi businesses often serve both English-speaking professionals and Hindi-speaking consumers. We build bilingual sites that capture both audiences.' },
-    { title: 'Post-Launch Growth Support', desc: 'We don\'t disappear after delivery. Our Delhi clients get dedicated account managers, monthly performance reviews, and continuous improvement plans.' },
+    { title: 'Delhi Market Expertise', desc: 'We possess deep knowledge of Delhi\'s commercial demographics, enabling us to adapt platforms to local audiences—from manufacturing companies in Okhla to retail stores in Connaught Place, and corporate agencies in Nehru Place or South Extension.' },
+    { title: 'GST & Compliance Ready', desc: 'Our custom software and e-commerce engines are built to comply with Indian financial standards, integrating automatic GST calculations, structured invoicing formats, and secure customer data privacy configurations.' },
+    { title: 'Hindi + English Bilingual', desc: 'We build multi-language and bilingual web architectures that allow you to engage a wider demographic across NCR, rendering clear content versions in both Hindi and English with optimized local typography.' },
+    { title: 'Post-Launch Growth Support', desc: 'We offer continuous post-launch support and regular check-ins, monitoring load times, security updates, server backups, and providing optimization suggestions to keep your website competitive in search results.' },
   ],
-  localAreaText: `We actively serve businesses in South Delhi, North Delhi, West Delhi, East Delhi, Central Delhi, Dwarka, Rohini, Laxmi Nagar, Vasant Kunj, Hauz Khas, Saket, Lajpat Nagar, Karol Bagh, Connaught Place, Janakpuri, and Pitampura. We also serve businesses in Noida, Greater Noida, and Ghaziabad that operate in the Delhi NCR market.`,
+  localAreaText: `We actively serve businesses across the entire Delhi NCR region, including major commercial zones in South Delhi (Saket, Vasant Kunj, Lajpat Nagar, GK), Central Delhi (Connaught Place, Karol Bagh), West Delhi (Dwarka, Janakpuri, Rajouri Garden), East Delhi (Laxmi Nagar, Preet Vihar), and North Delhi (Rohini, Pitampura). We also collaborate closely with corporate entities located in nearby growth corridors such as Noida, Greater Noida, Gurgaon, and Ghaziabad.`,
   areaServed: ['South Delhi', 'North Delhi', 'East Delhi', 'West Delhi', 'Dwarka', 'Rohini', 'Noida', 'Greater Noida', 'Ghaziabad'],
   features: [
-    { icon: '🏢', title: 'Corporate Website Development', desc: 'Authoritative corporate sites with team pages, service showcases, case studies, and client portals that establish credibility with Delhi\'s B2B buyers.' },
-    { icon: '🛍️', title: 'E-Commerce for Delhi Retailers', desc: 'Online stores with multi-currency support, Delhi-specific shipping zones, COD integration, and WhatsApp order notifications.' },
-    { icon: '📐', title: 'UI/UX Design', desc: 'Research-driven interface design that reduces bounce rates and increases time-on-site, keeping Delhi visitors engaged long enough to convert.' },
-    { icon: '🔗', title: 'CRM & ERP Integration', desc: 'Connect your website to Zoho CRM, Salesforce, Tally, or custom ERP systems — critical for Delhi\'s fast-paced business operations.' },
-    { icon: '📊', title: 'Landing Page Optimisation', desc: 'High-converting landing pages for Google Ads, social media, and WhatsApp marketing campaigns — designed specifically for Delhi\'s urban buyers.' },
-    { icon: '🛡️', title: 'Security & Compliance', desc: 'PCI-DSS compliant e-commerce, GDPR-ready privacy implementations, and security audits for businesses handling customer data in Delhi.' },
-    { icon: '⚡', title: 'Speed Optimisation', desc: 'Sub-2-second load times achieved through CDN deployment, image optimisation, lazy loading, and server-side caching.' },
-    { icon: '📱', title: 'Progressive Web Apps (PWA)', desc: 'App-like experiences accessible via browser — perfect for Delhi businesses wanting mobile app reach without app store costs.' },
+    { icon: '🏢', title: 'Corporate Website Development', desc: 'We build responsive, clean corporate portals complete with service lists, dynamic blogs, case study portfolios, and secure client communication systems that build immediate trust with B2B decision-makers.' },
+    { icon: '🛍️', title: 'E-Commerce for Delhi Retailers', desc: 'Robust storefronts featuring custom shopping carts, local payment gate integration, GST compliance calculators, cash-on-delivery tracking, and automated stock alerts to streamline regional operations.' },
+    { icon: '📐', title: 'UI/UX Design', desc: 'Human-centric web interfaces optimized for fast navigation, visual engagement, and smooth interactions, keeping Delhi visitors connected and converting them from passive readers into active buyers.' },
+    { icon: '🔗', title: 'CRM & ERP Integration', desc: 'We sync websites with Salesforce, Zoho, Tally, and custom administrative ERPs, enabling real-time lead routing and order tracking for fast-growing Delhi organizations.' },
+    { icon: '📊', title: 'Landing Page Optimisation', desc: 'High-converting campaign landing pages built for local search ads, social media outreach, and mobile newsletters, engineered to drive immediate phone calls and inquiry form submissions.' },
+    { icon: '🛡️', title: 'Security & Compliance', desc: 'Implementation of SSL certificates, regular malware scanning, PCI-DSS compliance for shopping, and local data policy setups to guarantee secure user interactions.' },
+    { icon: '⚡', title: 'Speed Optimisation', desc: 'Achieve sub-2-second loading speeds through localized CDNs, dynamic image compression, lazy script evaluation, and code minification to satisfy Google Core Web Vitals.' },
+    { icon: '📱', title: 'Progressive Web Apps (PWA)', desc: 'Deliver fast, app-like performance directly through standard web browsers, offering push notifications and offline access to maximize customer retention across Delhi NCR.' },
   ],
   faqs: [
     { q: 'What is the cost of website development in Delhi?', a: 'Basic business websites in Delhi start at ₹12,000–₹25,000. E-commerce sites start at ₹40,000. Custom web applications start at ₹80,000. We provide detailed fixed quotes after a free discovery call with no hidden charges.' },
@@ -57,6 +57,9 @@ We've built websites for manufacturers in Okhla, retailers in Karol Bagh, consul
     { q: 'What industries do you serve in Delhi?', a: 'We serve all major Delhi industries: retail, manufacturing, real estate, hospitality, education, healthcare, professional services (CA, lawyers, architects), NGOs, and technology companies.' },
     { q: 'Can you build websites in Hindi for Delhi businesses?', a: 'Yes. We build fully Hindi or bilingual Hindi-English websites with proper Unicode support, Devanagari fonts, and Hindi keyword optimisation for local Delhi search traffic.' },
     { q: 'How do I start a project?', a: 'Call +91 92536 25099 or email kp@avanienterprises.in. We\'ll schedule a free 30-minute consultation, assess your requirements, and provide a detailed proposal within 24 hours.' },
+    { q: 'What technologies do you use for web development in Delhi?', a: 'We specialize in modern, high-performance web technologies including React.js, Next.js, Node.js, and TypeScript, combined with clean CSS styling. For content-managed sites, we build optimized WordPress and WooCommerce platforms. Our stack ensures fast loading speeds, exceptional security, and long-term codebase scalability.' },
+    { q: 'Who is your web development service suitable for?', a: 'Our services are designed for mid-sized enterprises, local retail brands looking to transition online, service businesses aiming for high-quality lead generation, and B2B manufacturers needing supplier portals. We tailor our engineering complexity and visual polishing to align with your organization\'s scale, industry standards, and budget constraints.' },
+    { q: 'How does the discovery and consultation process work?', a: 'We start with a free discovery call to analyze your target keywords, evaluate competitor websites in Delhi, and list your functional requirements. Next, we outline a clear system architecture and fixed-price quote. Once approved, we build a private staging link where you can monitor weekly development updates, ensuring full visibility before go-live.' },
   ],
   reviews: [],
   relatedLinks: [
