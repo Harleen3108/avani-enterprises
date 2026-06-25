@@ -105,97 +105,97 @@ export const newSeoData = {
     "description": "Schedule posts, publish reels, deploy automated DMs, and manage multiple client brands from a single screen. Use credit-based posting (1 credit = 1 post) with no platform limits. Try free.",
     "keywords": "socialsync, social media tool, unified scheduling, scheduling posts, auto dm instagram"
   },
-  "/social-sync/social-media-management-tool": {
+  "/social-media-management-tool": {
     "title": "Multi-Channel Social Media Management Tool | SocialSync",
     "description": "Manage your presence across Instagram, Facebook, X/Twitter, YouTube, and LinkedIn in one dashboard. Use credit-based posting (1 credit = 1 post) with no platform limits. Try free.",
     "keywords": "socialsync, social media tool, management tool, scheduling posts, auto dm instagram"
   },
-  "/social-sync/social-media-scheduler": {
+  "/social-media-scheduler": {
     "title": "Social Media Content Scheduler | SocialSync",
     "description": "Schedule and queue posts, reels, stories, and videos in advance using our drag-and-drop calendar. Use credit-based posting (1 credit = 1 post) with no platform limits. Try free.",
     "keywords": "socialsync, social media tool, content scheduler, scheduling posts, auto dm instagram"
   },
-  "/social-sync/social-media-tool-for-agencies": {
+  "/social-media-tool-for-agencies": {
     "title": "Social Media Software for Agencies | SocialSync",
     "description": "Secure workspaces for client accounts, custom team permissions, approval logs, and white-label options. Use credit-based posting (1 credit = 1 post) with no platform limits. Try free.",
     "keywords": "socialsync, social media tool, agency admin desk, scheduling posts, auto dm instagram"
   },
-  "/social-sync/social-media-tool-for-creators": {
+  "/social-media-tool-for-creators": {
     "title": "Social Media Scheduler for Creators | SocialSync",
     "description": "Automate Reels scheduling, capture engagement with auto DM replies, and manage channels on one calendar. Use credit-based posting (1 credit = 1 post) with no platform limits. Try free.",
     "keywords": "socialsync, social media tool, creator toolkit, scheduling posts, auto dm instagram"
   },
-  "/social-sync/social-media-tool-for-small-business": {
+  "/social-media-tool-for-small-business": {
     "title": "Social Media Tool for Small Business | SocialSync",
     "description": "Grow your local reach without spending hours online. Schedule weekly posts and automate customer inquiries. Use credit-based posting (1 credit = 1 post) with no platform limits. Try free.",
     "keywords": "socialsync, social media tool, small business social, scheduling posts, auto dm instagram"
   },
-  "/social-sync/social-media-management-for-enterprises": {
+  "/social-media-management-for-enterprises": {
     "title": "Enterprise Social Media Management Software | SocialSync",
     "description": "High-security workspaces, multi-brand routing, strict editor approvals, and analytics tracking at scale. Use credit-based posting (1 credit = 1 post) with no platform limits. Try free.",
     "keywords": "socialsync, social media tool, enterprise workspaces, scheduling posts, auto dm instagram"
   },
-  "/social-sync/instagram-post-scheduler": {
+  "/instagram-post-scheduler": {
     "title": "Instagram Post & Reels Scheduler | SocialSync",
     "description": "Direct auto-publishing for Instagram posts, reels, and stories, complete with auto DM comment triggers. Use credit-based posting (1 credit = 1 post) with no platform limits. Try free.",
     "keywords": "socialsync, social media tool, instagram scheduling, scheduling posts, auto dm instagram"
   },
-  "/social-sync/instagram-reels-scheduler": {
+  "/instagram-reels-scheduler": {
     "title": "Instagram Reels Scheduler Tool | SocialSync",
     "description": "Queue and schedule vertical reels in advance with direct mobile publishing and comment monitoring. Use credit-based posting (1 credit = 1 post) with no platform limits. Try free.",
     "keywords": "socialsync, social media tool, reels auto-publish, scheduling posts, auto dm instagram"
   },
-  "/social-sync/facebook-post-scheduler": {
+  "/facebook-post-scheduler": {
     "title": "Facebook Post & Story Scheduler | SocialSync",
     "description": "Auto-publish images, link cards, and stories directly to Facebook pages and communities. Use credit-based posting (1 credit = 1 post) with no platform limits. Try free.",
     "keywords": "socialsync, social media tool, facebook publishing, scheduling posts, auto dm instagram"
   },
-  "/social-sync/facebook-story-scheduler": {
+  "/facebook-story-scheduler": {
     "title": "Facebook Story Scheduler Tool | SocialSync",
     "description": "Draft and queue vertical story media to auto-publish on Facebook without manual alerts. Use credit-based posting (1 credit = 1 post) with no platform limits. Try free.",
     "keywords": "socialsync, social media tool, facebook stories, scheduling posts, auto dm instagram"
   },
-  "/social-sync/linkedin-post-scheduler": {
+  "/linkedin-post-scheduler": {
     "title": "LinkedIn Post Scheduler for Personal Brands | SocialSync",
     "description": "Schedule PDF carousels, text thoughts, and video posts to build your founder profile on LinkedIn. Use credit-based posting (1 credit = 1 post) with no platform limits. Try free.",
     "keywords": "socialsync, social media tool, linkedin scheduling, scheduling posts, auto dm instagram"
   },
-  "/social-sync/youtube-video-scheduler": {
+  "/youtube-video-scheduler": {
     "title": "YouTube Shorts & Video Scheduler | SocialSync",
     "description": "Queue long-form videos and shorts with title and description template inputs. Use credit-based posting (1 credit = 1 post) with no platform limits. Try free.",
     "keywords": "socialsync, social media tool, youtube uploads, scheduling posts, auto dm instagram"
   },
-  "/social-sync/twitter-post-scheduler": {
+  "/twitter-post-scheduler": {
     "title": "X / Twitter Post Scheduler Tool | SocialSync",
     "description": "Schedule single posts and multi-part X threads, with media support and queue controls. Use credit-based posting (1 credit = 1 post) with no platform limits. Try free.",
     "keywords": "socialsync, social media tool, x/twitter threads, scheduling posts, auto dm instagram"
   },
-  "/social-sync/multi-brand-social-media-management": {
+  "/multi-brand-social-media-management": {
     "title": "Multi-Brand Social Media Software | SocialSync",
     "description": "Separate post calendars, team roles, and metrics dashboards for every brand in your portfolio. Use credit-based posting (1 credit = 1 post) with no platform limits. Try free.",
     "keywords": "socialsync, social media tool, multi-brand setup, scheduling posts, auto dm instagram"
   },
-  "/social-sync/social-media-client-management": {
+  "/social-media-client-management": {
     "title": "Social Media Client Approval Tool | SocialSync",
     "description": "Share preview links with clients to collect feedbacks and approvals before posts go live. Use credit-based posting (1 credit = 1 post) with no platform limits. Try free.",
     "keywords": "socialsync, social media tool, client approval hub, scheduling posts, auto dm instagram"
   },
-  "/social-sync/bulk-dm-tool": {
+  "/bulk-dm-tool": {
     "title": "Instagram & Facebook Bulk DM Tool | SocialSync",
     "description": "Send bulk direct messages to active leads and opt-in clients safely without flagging risk. Use credit-based posting (1 credit = 1 post) with no platform limits. Try free.",
     "keywords": "socialsync, social media tool, bulk dm broadcasts, scheduling posts, auto dm instagram"
   },
-  "/social-sync/auto-dm-tool": {
+  "/auto-dm-tool": {
     "title": "Instagram Auto DM Comment Trigger Tool | SocialSync",
     "description": "Trigger instant DM replies containing product links when users comment specific keywords. Use credit-based posting (1 credit = 1 post) with no platform limits. Try free.",
     "keywords": "socialsync, social media tool, auto dm triggers, scheduling posts, auto dm instagram"
   },
-  "/social-sync/social-media-content-planner": {
+  "/social-media-content-planner": {
     "title": "Social Media Content Planner Calendar | SocialSync",
     "description": "Draft post ideas, schedule drafts, and plan campaigns visually on a shared content dashboard. Use credit-based posting (1 credit = 1 post) with no platform limits. Try free.",
     "keywords": "socialsync, social media tool, content planner, scheduling posts, auto dm instagram"
   },
-  "/social-sync/social-media-approval-workflow": {
+  "/social-media-approval-workflow": {
     "title": "Social Media Post Approval Software | SocialSync",
     "description": "Build review gates where writers submit drafts and designers attach media for admin sign-offs. Use credit-based posting (1 credit = 1 post) with no platform limits. Try free.",
     "keywords": "socialsync, social media tool, approval workflows, scheduling posts, auto dm instagram"

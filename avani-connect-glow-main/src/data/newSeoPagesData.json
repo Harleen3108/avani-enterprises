@@ -3466,17 +3466,17 @@
       },
       {
         "label": "Instagram Scheduler",
-        "href": "/social-sync/instagram-post-scheduler",
+        "href": "/instagram-post-scheduler",
         "desc": "Auto-publish posts and reels."
       },
       {
         "label": "LinkedIn Scheduler",
-        "href": "/social-sync/linkedin-post-scheduler",
+        "href": "/linkedin-post-scheduler",
         "desc": "Founder brand scheduling."
       },
       {
         "label": "Client Approvals",
-        "href": "/social-sync/social-media-client-management",
+        "href": "/social-media-client-management",
         "desc": "Preview portals for clients."
       }
     ],
@@ -3485,14 +3485,14 @@
       "sub": "Join agencies and creators scheduling campaigns with SocialSync. Register for a free credit test run."
     }
   },
-  "social-sync/social-media-management-tool": {
-    "slug": "social-sync/social-media-management-tool",
+  "social-media-management-tool": {
+    "slug": "social-media-management-tool",
     "type": "product",
     "seo": {
       "title": "Multi-Channel Social Media Management Tool | SocialSync",
       "description": "Manage your presence across Instagram, Facebook, X/Twitter, YouTube, and LinkedIn in one dashboard. Use credit-based posting (1 credit = 1 post) with no platform limits. Try free.",
       "keywords": "socialsync, social media tool, management tool, scheduling posts, auto dm instagram",
-      "canonical": "https://www.avanienterprises.in/social-sync/social-media-management-tool"
+      "canonical": "https://www.avanienterprises.in/social-media-management-tool"
     },
     "breadcrumbs": [
       {
@@ -3505,7 +3505,7 @@
       },
       {
         "label": "Management Tool",
-        "href": "/social-sync/social-media-management-tool"
+        "href": "/social-media-management-tool"
       }
     ],
     "hero": {
@@ -3632,17 +3632,17 @@
       },
       {
         "label": "Instagram Scheduler",
-        "href": "/social-sync/instagram-post-scheduler",
+        "href": "/instagram-post-scheduler",
         "desc": "Auto-publish posts and reels."
       },
       {
         "label": "LinkedIn Scheduler",
-        "href": "/social-sync/linkedin-post-scheduler",
+        "href": "/linkedin-post-scheduler",
         "desc": "Founder brand scheduling."
       },
       {
         "label": "Client Approvals",
-        "href": "/social-sync/social-media-client-management",
+        "href": "/social-media-client-management",
         "desc": "Preview portals for clients."
       }
     ],
@@ -3651,14 +3651,14 @@
       "sub": "Join agencies and creators scheduling campaigns with SocialSync. Register for a free credit test run."
     }
   },
-  "social-sync/social-media-scheduler": {
-    "slug": "social-sync/social-media-scheduler",
+  "social-media-scheduler": {
+    "slug": "social-media-scheduler",
     "type": "product",
     "seo": {
       "title": "Social Media Content Scheduler | SocialSync",
       "description": "Schedule and queue posts, reels, stories, and videos in advance using our drag-and-drop calendar. Use credit-based posting (1 credit = 1 post) with no platform limits. Try free.",
       "keywords": "socialsync, social media tool, content scheduler, scheduling posts, auto dm instagram",
-      "canonical": "https://www.avanienterprises.in/social-sync/social-media-scheduler"
+      "canonical": "https://www.avanienterprises.in/social-media-scheduler"
     },
     "breadcrumbs": [
       {
@@ -3671,7 +3671,7 @@
       },
       {
         "label": "Content Scheduler",
-        "href": "/social-sync/social-media-scheduler"
+        "href": "/social-media-scheduler"
       }
     ],
     "hero": {
@@ -3798,17 +3798,17 @@
       },
       {
         "label": "Instagram Scheduler",
-        "href": "/social-sync/instagram-post-scheduler",
+        "href": "/instagram-post-scheduler",
         "desc": "Auto-publish posts and reels."
       },
       {
         "label": "LinkedIn Scheduler",
-        "href": "/social-sync/linkedin-post-scheduler",
+        "href": "/linkedin-post-scheduler",
         "desc": "Founder brand scheduling."
       },
       {
         "label": "Client Approvals",
-        "href": "/social-sync/social-media-client-management",
+        "href": "/social-media-client-management",
         "desc": "Preview portals for clients."
       }
     ],
@@ -3817,14 +3817,14 @@
       "sub": "Join agencies and creators scheduling campaigns with SocialSync. Register for a free credit test run."
     }
   },
-  "social-sync/social-media-tool-for-agencies": {
-    "slug": "social-sync/social-media-tool-for-agencies",
+  "social-media-tool-for-agencies": {
+    "slug": "social-media-tool-for-agencies",
     "type": "product",
     "seo": {
       "title": "Social Media Software for Agencies | SocialSync",
       "description": "Secure workspaces for client accounts, custom team permissions, approval logs, and white-label options. Use credit-based posting (1 credit = 1 post) with no platform limits. Try free.",
       "keywords": "socialsync, social media tool, agency admin desk, scheduling posts, auto dm instagram",
-      "canonical": "https://www.avanienterprises.in/social-sync/social-media-tool-for-agencies"
+      "canonical": "https://www.avanienterprises.in/social-media-tool-for-agencies"
     },
     "breadcrumbs": [
       {
@@ -3837,7 +3837,7 @@
       },
       {
         "label": "Agency Admin Desk",
-        "href": "/social-sync/social-media-tool-for-agencies"
+        "href": "/social-media-tool-for-agencies"
       }
     ],
     "hero": {
@@ -3964,17 +3964,17 @@
       },
       {
         "label": "Instagram Scheduler",
-        "href": "/social-sync/instagram-post-scheduler",
+        "href": "/instagram-post-scheduler",
         "desc": "Auto-publish posts and reels."
       },
       {
         "label": "LinkedIn Scheduler",
-        "href": "/social-sync/linkedin-post-scheduler",
+        "href": "/linkedin-post-scheduler",
         "desc": "Founder brand scheduling."
       },
       {
         "label": "Client Approvals",
-        "href": "/social-sync/social-media-client-management",
+        "href": "/social-media-client-management",
         "desc": "Preview portals for clients."
       }
     ],
@@ -3983,14 +3983,14 @@
       "sub": "Join agencies and creators scheduling campaigns with SocialSync. Register for a free credit test run."
     }
   },
-  "social-sync/social-media-tool-for-creators": {
-    "slug": "social-sync/social-media-tool-for-creators",
+  "social-media-tool-for-creators": {
+    "slug": "social-media-tool-for-creators",
     "type": "product",
     "seo": {
       "title": "Social Media Scheduler for Creators | SocialSync",
       "description": "Automate Reels scheduling, capture engagement with auto DM replies, and manage channels on one calendar. Use credit-based posting (1 credit = 1 post) with no platform limits. Try free.",
       "keywords": "socialsync, social media tool, creator toolkit, scheduling posts, auto dm instagram",
-      "canonical": "https://www.avanienterprises.in/social-sync/social-media-tool-for-creators"
+      "canonical": "https://www.avanienterprises.in/social-media-tool-for-creators"
     },
     "breadcrumbs": [
       {
@@ -4003,7 +4003,7 @@
       },
       {
         "label": "Creator Toolkit",
-        "href": "/social-sync/social-media-tool-for-creators"
+        "href": "/social-media-tool-for-creators"
       }
     ],
     "hero": {
@@ -4130,17 +4130,17 @@
       },
       {
         "label": "Instagram Scheduler",
-        "href": "/social-sync/instagram-post-scheduler",
+        "href": "/instagram-post-scheduler",
         "desc": "Auto-publish posts and reels."
       },
       {
         "label": "LinkedIn Scheduler",
-        "href": "/social-sync/linkedin-post-scheduler",
+        "href": "/linkedin-post-scheduler",
         "desc": "Founder brand scheduling."
       },
       {
         "label": "Client Approvals",
-        "href": "/social-sync/social-media-client-management",
+        "href": "/social-media-client-management",
         "desc": "Preview portals for clients."
       }
     ],
@@ -4149,14 +4149,14 @@
       "sub": "Join agencies and creators scheduling campaigns with SocialSync. Register for a free credit test run."
     }
   },
-  "social-sync/social-media-tool-for-small-business": {
-    "slug": "social-sync/social-media-tool-for-small-business",
+  "social-media-tool-for-small-business": {
+    "slug": "social-media-tool-for-small-business",
     "type": "product",
     "seo": {
       "title": "Social Media Tool for Small Business | SocialSync",
       "description": "Grow your local reach without spending hours online. Schedule weekly posts and automate customer inquiries. Use credit-based posting (1 credit = 1 post) with no platform limits. Try free.",
       "keywords": "socialsync, social media tool, small business social, scheduling posts, auto dm instagram",
-      "canonical": "https://www.avanienterprises.in/social-sync/social-media-tool-for-small-business"
+      "canonical": "https://www.avanienterprises.in/social-media-tool-for-small-business"
     },
     "breadcrumbs": [
       {
@@ -4169,7 +4169,7 @@
       },
       {
         "label": "Small Business Social",
-        "href": "/social-sync/social-media-tool-for-small-business"
+        "href": "/social-media-tool-for-small-business"
       }
     ],
     "hero": {
@@ -4296,17 +4296,17 @@
       },
       {
         "label": "Instagram Scheduler",
-        "href": "/social-sync/instagram-post-scheduler",
+        "href": "/instagram-post-scheduler",
         "desc": "Auto-publish posts and reels."
       },
       {
         "label": "LinkedIn Scheduler",
-        "href": "/social-sync/linkedin-post-scheduler",
+        "href": "/linkedin-post-scheduler",
         "desc": "Founder brand scheduling."
       },
       {
         "label": "Client Approvals",
-        "href": "/social-sync/social-media-client-management",
+        "href": "/social-media-client-management",
         "desc": "Preview portals for clients."
       }
     ],
@@ -4315,14 +4315,14 @@
       "sub": "Join agencies and creators scheduling campaigns with SocialSync. Register for a free credit test run."
     }
   },
-  "social-sync/social-media-management-for-enterprises": {
-    "slug": "social-sync/social-media-management-for-enterprises",
+  "social-media-management-for-enterprises": {
+    "slug": "social-media-management-for-enterprises",
     "type": "product",
     "seo": {
       "title": "Enterprise Social Media Management Software | SocialSync",
       "description": "High-security workspaces, multi-brand routing, strict editor approvals, and analytics tracking at scale. Use credit-based posting (1 credit = 1 post) with no platform limits. Try free.",
       "keywords": "socialsync, social media tool, enterprise workspaces, scheduling posts, auto dm instagram",
-      "canonical": "https://www.avanienterprises.in/social-sync/social-media-management-for-enterprises"
+      "canonical": "https://www.avanienterprises.in/social-media-management-for-enterprises"
     },
     "breadcrumbs": [
       {
@@ -4335,7 +4335,7 @@
       },
       {
         "label": "Enterprise Workspaces",
-        "href": "/social-sync/social-media-management-for-enterprises"
+        "href": "/social-media-management-for-enterprises"
       }
     ],
     "hero": {
@@ -4462,17 +4462,17 @@
       },
       {
         "label": "Instagram Scheduler",
-        "href": "/social-sync/instagram-post-scheduler",
+        "href": "/instagram-post-scheduler",
         "desc": "Auto-publish posts and reels."
       },
       {
         "label": "LinkedIn Scheduler",
-        "href": "/social-sync/linkedin-post-scheduler",
+        "href": "/linkedin-post-scheduler",
         "desc": "Founder brand scheduling."
       },
       {
         "label": "Client Approvals",
-        "href": "/social-sync/social-media-client-management",
+        "href": "/social-media-client-management",
         "desc": "Preview portals for clients."
       }
     ],
@@ -4481,14 +4481,14 @@
       "sub": "Join agencies and creators scheduling campaigns with SocialSync. Register for a free credit test run."
     }
   },
-  "social-sync/instagram-post-scheduler": {
-    "slug": "social-sync/instagram-post-scheduler",
+  "instagram-post-scheduler": {
+    "slug": "instagram-post-scheduler",
     "type": "product",
     "seo": {
       "title": "Instagram Post & Reels Scheduler | SocialSync",
       "description": "Direct auto-publishing for Instagram posts, reels, and stories, complete with auto DM comment triggers. Use credit-based posting (1 credit = 1 post) with no platform limits. Try free.",
       "keywords": "socialsync, social media tool, instagram scheduling, scheduling posts, auto dm instagram",
-      "canonical": "https://www.avanienterprises.in/social-sync/instagram-post-scheduler"
+      "canonical": "https://www.avanienterprises.in/instagram-post-scheduler"
     },
     "breadcrumbs": [
       {
@@ -4501,7 +4501,7 @@
       },
       {
         "label": "Instagram Scheduling",
-        "href": "/social-sync/instagram-post-scheduler"
+        "href": "/instagram-post-scheduler"
       }
     ],
     "hero": {
@@ -4628,17 +4628,17 @@
       },
       {
         "label": "Instagram Scheduler",
-        "href": "/social-sync/instagram-post-scheduler",
+        "href": "/instagram-post-scheduler",
         "desc": "Auto-publish posts and reels."
       },
       {
         "label": "LinkedIn Scheduler",
-        "href": "/social-sync/linkedin-post-scheduler",
+        "href": "/linkedin-post-scheduler",
         "desc": "Founder brand scheduling."
       },
       {
         "label": "Client Approvals",
-        "href": "/social-sync/social-media-client-management",
+        "href": "/social-media-client-management",
         "desc": "Preview portals for clients."
       }
     ],
@@ -4647,14 +4647,14 @@
       "sub": "Join agencies and creators scheduling campaigns with SocialSync. Register for a free credit test run."
     }
   },
-  "social-sync/instagram-reels-scheduler": {
-    "slug": "social-sync/instagram-reels-scheduler",
+  "instagram-reels-scheduler": {
+    "slug": "instagram-reels-scheduler",
     "type": "product",
     "seo": {
       "title": "Instagram Reels Scheduler Tool | SocialSync",
       "description": "Queue and schedule vertical reels in advance with direct mobile publishing and comment monitoring. Use credit-based posting (1 credit = 1 post) with no platform limits. Try free.",
       "keywords": "socialsync, social media tool, reels auto-publish, scheduling posts, auto dm instagram",
-      "canonical": "https://www.avanienterprises.in/social-sync/instagram-reels-scheduler"
+      "canonical": "https://www.avanienterprises.in/instagram-reels-scheduler"
     },
     "breadcrumbs": [
       {
@@ -4667,7 +4667,7 @@
       },
       {
         "label": "Reels Auto-Publish",
-        "href": "/social-sync/instagram-reels-scheduler"
+        "href": "/instagram-reels-scheduler"
       }
     ],
     "hero": {
@@ -4794,17 +4794,17 @@
       },
       {
         "label": "Instagram Scheduler",
-        "href": "/social-sync/instagram-post-scheduler",
+        "href": "/instagram-post-scheduler",
         "desc": "Auto-publish posts and reels."
       },
       {
         "label": "LinkedIn Scheduler",
-        "href": "/social-sync/linkedin-post-scheduler",
+        "href": "/linkedin-post-scheduler",
         "desc": "Founder brand scheduling."
       },
       {
         "label": "Client Approvals",
-        "href": "/social-sync/social-media-client-management",
+        "href": "/social-media-client-management",
         "desc": "Preview portals for clients."
       }
     ],
@@ -4813,14 +4813,14 @@
       "sub": "Join agencies and creators scheduling campaigns with SocialSync. Register for a free credit test run."
     }
   },
-  "social-sync/facebook-post-scheduler": {
-    "slug": "social-sync/facebook-post-scheduler",
+  "facebook-post-scheduler": {
+    "slug": "facebook-post-scheduler",
     "type": "product",
     "seo": {
       "title": "Facebook Post & Story Scheduler | SocialSync",
       "description": "Auto-publish images, link cards, and stories directly to Facebook pages and communities. Use credit-based posting (1 credit = 1 post) with no platform limits. Try free.",
       "keywords": "socialsync, social media tool, facebook publishing, scheduling posts, auto dm instagram",
-      "canonical": "https://www.avanienterprises.in/social-sync/facebook-post-scheduler"
+      "canonical": "https://www.avanienterprises.in/facebook-post-scheduler"
     },
     "breadcrumbs": [
       {
@@ -4833,7 +4833,7 @@
       },
       {
         "label": "Facebook Publishing",
-        "href": "/social-sync/facebook-post-scheduler"
+        "href": "/facebook-post-scheduler"
       }
     ],
     "hero": {
@@ -4960,17 +4960,17 @@
       },
       {
         "label": "Instagram Scheduler",
-        "href": "/social-sync/instagram-post-scheduler",
+        "href": "/instagram-post-scheduler",
         "desc": "Auto-publish posts and reels."
       },
       {
         "label": "LinkedIn Scheduler",
-        "href": "/social-sync/linkedin-post-scheduler",
+        "href": "/linkedin-post-scheduler",
         "desc": "Founder brand scheduling."
       },
       {
         "label": "Client Approvals",
-        "href": "/social-sync/social-media-client-management",
+        "href": "/social-media-client-management",
         "desc": "Preview portals for clients."
       }
     ],
@@ -4979,14 +4979,14 @@
       "sub": "Join agencies and creators scheduling campaigns with SocialSync. Register for a free credit test run."
     }
   },
-  "social-sync/facebook-story-scheduler": {
-    "slug": "social-sync/facebook-story-scheduler",
+  "facebook-story-scheduler": {
+    "slug": "facebook-story-scheduler",
     "type": "product",
     "seo": {
       "title": "Facebook Story Scheduler Tool | SocialSync",
       "description": "Draft and queue vertical story media to auto-publish on Facebook without manual alerts. Use credit-based posting (1 credit = 1 post) with no platform limits. Try free.",
       "keywords": "socialsync, social media tool, facebook stories, scheduling posts, auto dm instagram",
-      "canonical": "https://www.avanienterprises.in/social-sync/facebook-story-scheduler"
+      "canonical": "https://www.avanienterprises.in/facebook-story-scheduler"
     },
     "breadcrumbs": [
       {
@@ -4999,7 +4999,7 @@
       },
       {
         "label": "Facebook Stories",
-        "href": "/social-sync/facebook-story-scheduler"
+        "href": "/facebook-story-scheduler"
       }
     ],
     "hero": {
@@ -5126,17 +5126,17 @@
       },
       {
         "label": "Instagram Scheduler",
-        "href": "/social-sync/instagram-post-scheduler",
+        "href": "/instagram-post-scheduler",
         "desc": "Auto-publish posts and reels."
       },
       {
         "label": "LinkedIn Scheduler",
-        "href": "/social-sync/linkedin-post-scheduler",
+        "href": "/linkedin-post-scheduler",
         "desc": "Founder brand scheduling."
       },
       {
         "label": "Client Approvals",
-        "href": "/social-sync/social-media-client-management",
+        "href": "/social-media-client-management",
         "desc": "Preview portals for clients."
       }
     ],
@@ -5145,14 +5145,14 @@
       "sub": "Join agencies and creators scheduling campaigns with SocialSync. Register for a free credit test run."
     }
   },
-  "social-sync/linkedin-post-scheduler": {
-    "slug": "social-sync/linkedin-post-scheduler",
+  "linkedin-post-scheduler": {
+    "slug": "linkedin-post-scheduler",
     "type": "product",
     "seo": {
       "title": "LinkedIn Post Scheduler for Personal Brands | SocialSync",
       "description": "Schedule PDF carousels, text thoughts, and video posts to build your founder profile on LinkedIn. Use credit-based posting (1 credit = 1 post) with no platform limits. Try free.",
       "keywords": "socialsync, social media tool, linkedin scheduling, scheduling posts, auto dm instagram",
-      "canonical": "https://www.avanienterprises.in/social-sync/linkedin-post-scheduler"
+      "canonical": "https://www.avanienterprises.in/linkedin-post-scheduler"
     },
     "breadcrumbs": [
       {
@@ -5165,7 +5165,7 @@
       },
       {
         "label": "LinkedIn Scheduling",
-        "href": "/social-sync/linkedin-post-scheduler"
+        "href": "/linkedin-post-scheduler"
       }
     ],
     "hero": {
@@ -5292,17 +5292,17 @@
       },
       {
         "label": "Instagram Scheduler",
-        "href": "/social-sync/instagram-post-scheduler",
+        "href": "/instagram-post-scheduler",
         "desc": "Auto-publish posts and reels."
       },
       {
         "label": "LinkedIn Scheduler",
-        "href": "/social-sync/linkedin-post-scheduler",
+        "href": "/linkedin-post-scheduler",
         "desc": "Founder brand scheduling."
       },
       {
         "label": "Client Approvals",
-        "href": "/social-sync/social-media-client-management",
+        "href": "/social-media-client-management",
         "desc": "Preview portals for clients."
       }
     ],
@@ -5311,14 +5311,14 @@
       "sub": "Join agencies and creators scheduling campaigns with SocialSync. Register for a free credit test run."
     }
   },
-  "social-sync/youtube-video-scheduler": {
-    "slug": "social-sync/youtube-video-scheduler",
+  "youtube-video-scheduler": {
+    "slug": "youtube-video-scheduler",
     "type": "product",
     "seo": {
       "title": "YouTube Shorts & Video Scheduler | SocialSync",
       "description": "Queue long-form videos and shorts with title and description template inputs. Use credit-based posting (1 credit = 1 post) with no platform limits. Try free.",
       "keywords": "socialsync, social media tool, youtube uploads, scheduling posts, auto dm instagram",
-      "canonical": "https://www.avanienterprises.in/social-sync/youtube-video-scheduler"
+      "canonical": "https://www.avanienterprises.in/youtube-video-scheduler"
     },
     "breadcrumbs": [
       {
@@ -5331,7 +5331,7 @@
       },
       {
         "label": "YouTube Uploads",
-        "href": "/social-sync/youtube-video-scheduler"
+        "href": "/youtube-video-scheduler"
       }
     ],
     "hero": {
@@ -5458,17 +5458,17 @@
       },
       {
         "label": "Instagram Scheduler",
-        "href": "/social-sync/instagram-post-scheduler",
+        "href": "/instagram-post-scheduler",
         "desc": "Auto-publish posts and reels."
       },
       {
         "label": "LinkedIn Scheduler",
-        "href": "/social-sync/linkedin-post-scheduler",
+        "href": "/linkedin-post-scheduler",
         "desc": "Founder brand scheduling."
       },
       {
         "label": "Client Approvals",
-        "href": "/social-sync/social-media-client-management",
+        "href": "/social-media-client-management",
         "desc": "Preview portals for clients."
       }
     ],
@@ -5477,14 +5477,14 @@
       "sub": "Join agencies and creators scheduling campaigns with SocialSync. Register for a free credit test run."
     }
   },
-  "social-sync/twitter-post-scheduler": {
-    "slug": "social-sync/twitter-post-scheduler",
+  "twitter-post-scheduler": {
+    "slug": "twitter-post-scheduler",
     "type": "product",
     "seo": {
       "title": "X / Twitter Post Scheduler Tool | SocialSync",
       "description": "Schedule single posts and multi-part X threads, with media support and queue controls. Use credit-based posting (1 credit = 1 post) with no platform limits. Try free.",
       "keywords": "socialsync, social media tool, x/twitter threads, scheduling posts, auto dm instagram",
-      "canonical": "https://www.avanienterprises.in/social-sync/twitter-post-scheduler"
+      "canonical": "https://www.avanienterprises.in/twitter-post-scheduler"
     },
     "breadcrumbs": [
       {
@@ -5497,7 +5497,7 @@
       },
       {
         "label": "X/Twitter Threads",
-        "href": "/social-sync/twitter-post-scheduler"
+        "href": "/twitter-post-scheduler"
       }
     ],
     "hero": {
@@ -5624,17 +5624,17 @@
       },
       {
         "label": "Instagram Scheduler",
-        "href": "/social-sync/instagram-post-scheduler",
+        "href": "/instagram-post-scheduler",
         "desc": "Auto-publish posts and reels."
       },
       {
         "label": "LinkedIn Scheduler",
-        "href": "/social-sync/linkedin-post-scheduler",
+        "href": "/linkedin-post-scheduler",
         "desc": "Founder brand scheduling."
       },
       {
         "label": "Client Approvals",
-        "href": "/social-sync/social-media-client-management",
+        "href": "/social-media-client-management",
         "desc": "Preview portals for clients."
       }
     ],
@@ -5643,14 +5643,14 @@
       "sub": "Join agencies and creators scheduling campaigns with SocialSync. Register for a free credit test run."
     }
   },
-  "social-sync/multi-brand-social-media-management": {
-    "slug": "social-sync/multi-brand-social-media-management",
+  "multi-brand-social-media-management": {
+    "slug": "multi-brand-social-media-management",
     "type": "product",
     "seo": {
       "title": "Multi-Brand Social Media Software | SocialSync",
       "description": "Separate post calendars, team roles, and metrics dashboards for every brand in your portfolio. Use credit-based posting (1 credit = 1 post) with no platform limits. Try free.",
       "keywords": "socialsync, social media tool, multi-brand setup, scheduling posts, auto dm instagram",
-      "canonical": "https://www.avanienterprises.in/social-sync/multi-brand-social-media-management"
+      "canonical": "https://www.avanienterprises.in/multi-brand-social-media-management"
     },
     "breadcrumbs": [
       {
@@ -5663,7 +5663,7 @@
       },
       {
         "label": "Multi-Brand Setup",
-        "href": "/social-sync/multi-brand-social-media-management"
+        "href": "/multi-brand-social-media-management"
       }
     ],
     "hero": {
@@ -5790,17 +5790,17 @@
       },
       {
         "label": "Instagram Scheduler",
-        "href": "/social-sync/instagram-post-scheduler",
+        "href": "/instagram-post-scheduler",
         "desc": "Auto-publish posts and reels."
       },
       {
         "label": "LinkedIn Scheduler",
-        "href": "/social-sync/linkedin-post-scheduler",
+        "href": "/linkedin-post-scheduler",
         "desc": "Founder brand scheduling."
       },
       {
         "label": "Client Approvals",
-        "href": "/social-sync/social-media-client-management",
+        "href": "/social-media-client-management",
         "desc": "Preview portals for clients."
       }
     ],
@@ -5809,14 +5809,14 @@
       "sub": "Join agencies and creators scheduling campaigns with SocialSync. Register for a free credit test run."
     }
   },
-  "social-sync/social-media-client-management": {
-    "slug": "social-sync/social-media-client-management",
+  "social-media-client-management": {
+    "slug": "social-media-client-management",
     "type": "product",
     "seo": {
       "title": "Social Media Client Approval Tool | SocialSync",
       "description": "Share preview links with clients to collect feedbacks and approvals before posts go live. Use credit-based posting (1 credit = 1 post) with no platform limits. Try free.",
       "keywords": "socialsync, social media tool, client approval hub, scheduling posts, auto dm instagram",
-      "canonical": "https://www.avanienterprises.in/social-sync/social-media-client-management"
+      "canonical": "https://www.avanienterprises.in/social-media-client-management"
     },
     "breadcrumbs": [
       {
@@ -5829,7 +5829,7 @@
       },
       {
         "label": "Client Approval Hub",
-        "href": "/social-sync/social-media-client-management"
+        "href": "/social-media-client-management"
       }
     ],
     "hero": {
@@ -5956,17 +5956,17 @@
       },
       {
         "label": "Instagram Scheduler",
-        "href": "/social-sync/instagram-post-scheduler",
+        "href": "/instagram-post-scheduler",
         "desc": "Auto-publish posts and reels."
       },
       {
         "label": "LinkedIn Scheduler",
-        "href": "/social-sync/linkedin-post-scheduler",
+        "href": "/linkedin-post-scheduler",
         "desc": "Founder brand scheduling."
       },
       {
         "label": "Client Approvals",
-        "href": "/social-sync/social-media-client-management",
+        "href": "/social-media-client-management",
         "desc": "Preview portals for clients."
       }
     ],
@@ -5975,14 +5975,14 @@
       "sub": "Join agencies and creators scheduling campaigns with SocialSync. Register for a free credit test run."
     }
   },
-  "social-sync/bulk-dm-tool": {
-    "slug": "social-sync/bulk-dm-tool",
+  "bulk-dm-tool": {
+    "slug": "bulk-dm-tool",
     "type": "product",
     "seo": {
       "title": "Instagram & Facebook Bulk DM Tool | SocialSync",
       "description": "Send bulk direct messages to active leads and opt-in clients safely without flagging risk. Use credit-based posting (1 credit = 1 post) with no platform limits. Try free.",
       "keywords": "socialsync, social media tool, bulk dm broadcasts, scheduling posts, auto dm instagram",
-      "canonical": "https://www.avanienterprises.in/social-sync/bulk-dm-tool"
+      "canonical": "https://www.avanienterprises.in/bulk-dm-tool"
     },
     "breadcrumbs": [
       {
@@ -5995,7 +5995,7 @@
       },
       {
         "label": "Bulk DM Broadcasts",
-        "href": "/social-sync/bulk-dm-tool"
+        "href": "/bulk-dm-tool"
       }
     ],
     "hero": {
@@ -6122,17 +6122,17 @@
       },
       {
         "label": "Instagram Scheduler",
-        "href": "/social-sync/instagram-post-scheduler",
+        "href": "/instagram-post-scheduler",
         "desc": "Auto-publish posts and reels."
       },
       {
         "label": "LinkedIn Scheduler",
-        "href": "/social-sync/linkedin-post-scheduler",
+        "href": "/linkedin-post-scheduler",
         "desc": "Founder brand scheduling."
       },
       {
         "label": "Client Approvals",
-        "href": "/social-sync/social-media-client-management",
+        "href": "/social-media-client-management",
         "desc": "Preview portals for clients."
       }
     ],
@@ -6141,14 +6141,14 @@
       "sub": "Join agencies and creators scheduling campaigns with SocialSync. Register for a free credit test run."
     }
   },
-  "social-sync/auto-dm-tool": {
-    "slug": "social-sync/auto-dm-tool",
+  "auto-dm-tool": {
+    "slug": "auto-dm-tool",
     "type": "product",
     "seo": {
       "title": "Instagram Auto DM Comment Trigger Tool | SocialSync",
       "description": "Trigger instant DM replies containing product links when users comment specific keywords. Use credit-based posting (1 credit = 1 post) with no platform limits. Try free.",
       "keywords": "socialsync, social media tool, auto dm triggers, scheduling posts, auto dm instagram",
-      "canonical": "https://www.avanienterprises.in/social-sync/auto-dm-tool"
+      "canonical": "https://www.avanienterprises.in/auto-dm-tool"
     },
     "breadcrumbs": [
       {
@@ -6161,7 +6161,7 @@
       },
       {
         "label": "Auto DM Triggers",
-        "href": "/social-sync/auto-dm-tool"
+        "href": "/auto-dm-tool"
       }
     ],
     "hero": {
@@ -6288,17 +6288,17 @@
       },
       {
         "label": "Instagram Scheduler",
-        "href": "/social-sync/instagram-post-scheduler",
+        "href": "/instagram-post-scheduler",
         "desc": "Auto-publish posts and reels."
       },
       {
         "label": "LinkedIn Scheduler",
-        "href": "/social-sync/linkedin-post-scheduler",
+        "href": "/linkedin-post-scheduler",
         "desc": "Founder brand scheduling."
       },
       {
         "label": "Client Approvals",
-        "href": "/social-sync/social-media-client-management",
+        "href": "/social-media-client-management",
         "desc": "Preview portals for clients."
       }
     ],
@@ -6307,14 +6307,14 @@
       "sub": "Join agencies and creators scheduling campaigns with SocialSync. Register for a free credit test run."
     }
   },
-  "social-sync/social-media-content-planner": {
-    "slug": "social-sync/social-media-content-planner",
+  "social-media-content-planner": {
+    "slug": "social-media-content-planner",
     "type": "product",
     "seo": {
       "title": "Social Media Content Planner Calendar | SocialSync",
       "description": "Draft post ideas, schedule drafts, and plan campaigns visually on a shared content dashboard. Use credit-based posting (1 credit = 1 post) with no platform limits. Try free.",
       "keywords": "socialsync, social media tool, content planner, scheduling posts, auto dm instagram",
-      "canonical": "https://www.avanienterprises.in/social-sync/social-media-content-planner"
+      "canonical": "https://www.avanienterprises.in/social-media-content-planner"
     },
     "breadcrumbs": [
       {
@@ -6327,7 +6327,7 @@
       },
       {
         "label": "Content Planner",
-        "href": "/social-sync/social-media-content-planner"
+        "href": "/social-media-content-planner"
       }
     ],
     "hero": {
@@ -6454,17 +6454,17 @@
       },
       {
         "label": "Instagram Scheduler",
-        "href": "/social-sync/instagram-post-scheduler",
+        "href": "/instagram-post-scheduler",
         "desc": "Auto-publish posts and reels."
       },
       {
         "label": "LinkedIn Scheduler",
-        "href": "/social-sync/linkedin-post-scheduler",
+        "href": "/linkedin-post-scheduler",
         "desc": "Founder brand scheduling."
       },
       {
         "label": "Client Approvals",
-        "href": "/social-sync/social-media-client-management",
+        "href": "/social-media-client-management",
         "desc": "Preview portals for clients."
       }
     ],
@@ -6473,14 +6473,14 @@
       "sub": "Join agencies and creators scheduling campaigns with SocialSync. Register for a free credit test run."
     }
   },
-  "social-sync/social-media-approval-workflow": {
-    "slug": "social-sync/social-media-approval-workflow",
+  "social-media-approval-workflow": {
+    "slug": "social-media-approval-workflow",
     "type": "product",
     "seo": {
       "title": "Social Media Post Approval Software | SocialSync",
       "description": "Build review gates where writers submit drafts and designers attach media for admin sign-offs. Use credit-based posting (1 credit = 1 post) with no platform limits. Try free.",
       "keywords": "socialsync, social media tool, approval workflows, scheduling posts, auto dm instagram",
-      "canonical": "https://www.avanienterprises.in/social-sync/social-media-approval-workflow"
+      "canonical": "https://www.avanienterprises.in/social-media-approval-workflow"
     },
     "breadcrumbs": [
       {
@@ -6493,7 +6493,7 @@
       },
       {
         "label": "Approval Workflows",
-        "href": "/social-sync/social-media-approval-workflow"
+        "href": "/social-media-approval-workflow"
       }
     ],
     "hero": {
@@ -6620,17 +6620,17 @@
       },
       {
         "label": "Instagram Scheduler",
-        "href": "/social-sync/instagram-post-scheduler",
+        "href": "/instagram-post-scheduler",
         "desc": "Auto-publish posts and reels."
       },
       {
         "label": "LinkedIn Scheduler",
-        "href": "/social-sync/linkedin-post-scheduler",
+        "href": "/linkedin-post-scheduler",
         "desc": "Founder brand scheduling."
       },
       {
         "label": "Client Approvals",
-        "href": "/social-sync/social-media-client-management",
+        "href": "/social-media-client-management",
         "desc": "Preview portals for clients."
       }
     ],
