@@ -275,6 +275,35 @@ const urls = [
   // ────────────────────────────────────────────────────────────────────────────
 ];
 
+// ── Dynamic SEO Pages ────────────────────────────────────────────────────────
+const newSeoDataPath = path.join(__dirname, "src", "data", "newSeoPagesData.json");
+if (fs.existsSync(newSeoDataPath)) {
+  try {
+    const rawData = fs.readFileSync(newSeoDataPath, "utf8");
+    const parsedData = JSON.parse(rawData);
+    Object.keys(parsedData).forEach(slug => {
+      let priority = "0.9";
+      const page = parsedData[slug];
+      if (page.type === "product") {
+        priority = "0.9";
+      } else if (page.type === "location") {
+        priority = "0.85";
+      }
+      urls.push({
+        loc: `${BASE_URL}/${slug}`,
+        lastmod: "2026-06-26",
+        changefreq: "monthly",
+        priority: priority
+      });
+    });
+    console.log(`ℹ️ Dynamically loaded ${Object.keys(parsedData).length} paths from newSeoPagesData.json into sitemap.`);
+  } catch (err) {
+    console.error("❌ Error reading or parsing newSeoPagesData.json for sitemap:", err);
+  }
+} else {
+  console.warn("⚠️ newSeoPagesData.json not found, skipping dynamic SEO paths in sitemap.");
+}
+
 // ── Build XML ────────────────────────────────────────────────────────────────
 const urlEntries = urls
   .map(({ loc, lastmod, changefreq, priority }) =>

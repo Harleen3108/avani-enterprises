@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { newSeoData } from './newSeoData.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -750,7 +751,7 @@ export default async function handler(req, res) {
 
     // ── 3. Compute SEO values ───────────────────────────────────────────────
     const lookupKey = normalizedPath.toLowerCase();
-    const fallbackSeo = STATIC_SEO_LOOKUP[lookupKey];
+    const fallbackSeo = STATIC_SEO_LOOKUP[lookupKey] || newSeoData[lookupKey];
 
     const title       = seo?.title            || fallbackSeo?.title       || "Avani Enterprises : No.1 Digital Marketing Agency in India";
     const description = seo?.metaDescription  || fallbackSeo?.description || "No.1 Digital Marketing Agency in India, we deliver result-driven SEO, PPC, social media, and branding solutions.";

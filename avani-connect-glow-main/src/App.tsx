@@ -335,6 +335,8 @@ const DH2BusinessProcessOptimizationProject = lazyWithRetry(() => import('./page
 
 import { SeoProvider } from "./contexts/SeoContext";
 import { ThemeProvider } from "./components/theme-provider";
+import newSeoPagesData from "./data/newSeoPagesData.json";
+const DynamicFlatSeoPage = lazyWithRetry(() => import("./pages/local/DynamicFlatSeoPage"));
 
 
 const queryClient = new QueryClient();
@@ -360,6 +362,10 @@ const AppLayout = () => {
   const pathname = location.pathname;
 
   const pathForCheck = pathname.toLowerCase();
+  
+  // Clean pathname key (strip leading and trailing slashes) to look up in dynamic registry
+  const dynamicKey = pathForCheck.replace(/^\/+|\/+$/g, '');
+  const isDynamicSeoPath = Object.prototype.hasOwnProperty.call(newSeoPagesData, dynamicKey);
   
   // Define all paths that belong to the new MainLayout
   const isDHRoot = ["/", "/about", "/services", "/projects", "/contact", "/blog", "/global-presence", "/careers", "/newsletters", "/courses", "/case-studies", "/get-consultation", "/privacy-policy", "/terms-and-conditions"].includes(pathForCheck);
@@ -499,7 +505,7 @@ const AppLayout = () => {
     "/seo-company-haryana",
     "/seo-company-delhi",
     "/google-ads-agency-haryana"
-  ].includes(pathForCheck);
+  ].includes(pathForCheck) || isDynamicSeoPath;
   const isDH1 = isDHRoot || isDHSub || isSeoPath;
   const isDH2 = pathForCheck.startsWith('/home2');
 
@@ -692,6 +698,13 @@ const AppLayout = () => {
             <Route path="seo-company-haryana" element={<SeoHaryana />} />
             <Route path="seo-company-delhi" element={<SeoDelhi />} />
             <Route path="google-ads-agency-haryana" element={<GoogleAdsHaryana />} />
+
+            {/* Dynamic SEO Routes */}
+            <Route path="business-os" element={<DynamicFlatSeoPage />} />
+            <Route path="business-os/:subpage" element={<DynamicFlatSeoPage />} />
+            <Route path="social-sync" element={<DynamicFlatSeoPage />} />
+            <Route path="social-sync/:subpage" element={<DynamicFlatSeoPage />} />
+            <Route path=":slug" element={<DynamicFlatSeoPage />} />
           </Route>
 
           {/* DH2 Sub-pages with shared layout */}
