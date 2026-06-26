@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { CheckCircle, ChevronDown, ChevronUp, Phone, Mail, MapPin, Star, ArrowRight } from 'lucide-react';
-import RegistrationForm from '../../components/RegistrationForm';
+import BusinessSetup3Form from '../../components/BusinessSetup3Form';
 
 // ─── Design Tokens (mirrors existing CSS vars, works standalone) ──────────────
 const T = {
@@ -166,8 +166,8 @@ export const CTASection = ({ headline, sub, source }:
         </div>
         <h2 style={{ fontFamily:"'Outfit',sans-serif",fontSize:'clamp(1.8rem,4vw,3rem)',fontWeight:900,color:T.text,letterSpacing:'-.03em',margin:'0 0 1rem',lineHeight:1.1 }}>{headline}</h2>
         <p style={{ fontFamily:"'Inter',sans-serif",fontSize:'1.05rem',color:T.muted,maxWidth:'560px',margin:'0 auto 2.5rem',lineHeight:1.7 }}>{sub}</p>
-        <div style={{ maxWidth: '500px', margin: '0 auto 2.5rem', padding: '24px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '24px', textAlign: 'left', boxShadow: '0 20px 40px rgba(0,0,0,0.03)' }}>
-          <RegistrationForm uniqueConsentId={`consent-${source}`} source={source} isEmbedded allowCustomService />
+        <div style={{ maxWidth: '500px', margin: '0 auto 2.5rem', textAlign: 'left' }}>
+          <BusinessSetup3Form source={source} />
         </div>
         <div style={{ marginTop:'2.5rem',display:'flex',gap:'32px',justifyContent:'center',flexWrap:'wrap' }}>
           <a href={`tel:${BIZ.phone}`} style={{ display:'flex',alignItems:'center',gap:'8px',color:T.muted,textDecoration:'none',fontSize:'.85rem',transition:'color .2s' }}

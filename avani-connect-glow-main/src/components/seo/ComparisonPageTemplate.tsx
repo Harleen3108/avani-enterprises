@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { Check, X, ChevronDown, ChevronUp, ArrowRight, Star } from 'lucide-react';
 import Breadcrumb from './Breadcrumb';
 import InternalLinking from './InternalLinking';
-import RegistrationForm from '../RegistrationForm';
+import BusinessSetup3Form from '../BusinessSetup3Form';
 import { SeoPageConfig } from '../../data/seoLandingPagesData';
 
 const Grain = () => (
@@ -248,8 +248,8 @@ export default function ComparisonPageTemplate({ data }: ComparisonPageTemplateP
             <p style={{ fontSize: '1rem', color: 'var(--text-secondary)', maxWidth: '560px', margin: '0 auto 2.5rem', lineHeight: 1.7 }}>
               {data.cta.sub}
             </p>
-            <div style={{ maxWidth: '500px', margin: '0 auto', padding: '24px', background: 'var(--card-bg)', border: '1px solid var(--border-light)', borderRadius: '24px', textAlign: 'left', boxShadow: '0 20px 40px rgba(0,0,0,0.03)' }}>
-              <RegistrationForm uniqueConsentId={`consent-${data.slug}`} source={data.slug} isEmbedded allowCustomService />
+            <div style={{ maxWidth: '500px', margin: '0 auto', textAlign: 'left' }}>
+              <BusinessSetup3Form source={data.slug} />
             </div>
           </motion.div>
         </div>

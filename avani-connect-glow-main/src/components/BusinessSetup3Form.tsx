@@ -37,7 +37,7 @@ type FormShape = z.infer<typeof schema>;
 
 const GOLD = "#D4A017";
 
-export default function BusinessSetup3Form() {
+export default function BusinessSetup3Form({ source = "businesssetup3" }: { source?: string }) {
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -104,7 +104,7 @@ export default function BusinessSetup3Form() {
         consent: data.consent,
       });
 
-      const payload = { ...validated, source: "businesssetup3" };
+      const payload = { ...validated, source };
       const API_BASE = getBackendUrl();
       const response = await fetch(`${API_BASE}/submit-form`, {
         method: "POST",

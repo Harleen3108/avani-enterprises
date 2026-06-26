@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { CheckCircle, ChevronDown, ChevronUp, ArrowRight, Phone, Mail } from 'lucide-react';
 import Breadcrumb from './Breadcrumb';
 import InternalLinking from './InternalLinking';
-import RegistrationForm from '../RegistrationForm';
+import BusinessSetup3Form from '../BusinessSetup3Form';
 import { SeoPageConfig } from '../../data/seoLandingPagesData';
 
 // Background overlays matching the premium aesthetic
@@ -95,9 +95,61 @@ export default function ProductPageTemplate({ data }: ProductPageTemplateProps) 
         <div className="dh-container" style={{ position: 'relative', zIndex: 10 }}>
           <Breadcrumb customCrumbs={data.breadcrumbs} />
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: '4rem', marginTop: '2rem' }} className="dh-responsive-grid">
+          <style>{`
+            .seo-hero-grid {
+              display: grid;
+              grid-template-columns: 1.15fr 0.85fr;
+              gap: 4rem;
+              margin-top: 2rem;
+              align-items: start;
+            }
+            .seo-hero-copy {
+              grid-column: 1;
+              grid-row: 1;
+            }
+            .seo-hero-form {
+              grid-column: 2;
+              grid-row: 1 / span 2;
+              z-index: 20;
+              margin-bottom: -150px;
+            }
+            .seo-hero-stats {
+              grid-column: 1;
+              grid-row: 2;
+              margin-top: 1rem;
+            }
+
+            @media (max-width: 1024px) {
+              .seo-hero-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+              }
+              .seo-hero-copy {
+                grid-column: 1;
+                grid-row: 1;
+              }
+              .seo-hero-form {
+                grid-column: 1;
+                grid-row: 2;
+                margin-bottom: 0;
+              }
+              .seo-hero-stats {
+                grid-column: 1;
+                grid-row: 3;
+                margin-top: 0;
+              }
+            }
+            @media (max-width: 768px) {
+              .seo-hero-grid {
+                gap: 2rem;
+                margin-top: 1rem;
+              }
+            }
+          `}</style>
+
+          <div className="seo-hero-grid">
             {/* Left Content Column */}
-            <motion.div initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.1 } } }}>
+            <motion.div className="seo-hero-copy" initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.1 } } }}>
               <motion.div variants={fadeUp} style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(196, 145, 58, 0.08)', border: '1px solid rgba(196, 145, 58, 0.15)', borderRadius: '100px', padding: '6px 16px', marginBottom: '1.5rem' }}>
                 <span style={{ fontSize: '11px', color: 'var(--accent-primary)', fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase' }}>{data.hero.tag}</span>
               </motion.div>
@@ -110,7 +162,7 @@ export default function ProductPageTemplate({ data }: ProductPageTemplateProps) 
                 {data.hero.subtitle}
               </motion.p>
 
-              <motion.div variants={fadeUp} style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center', marginBottom: '3rem' }}>
+              <motion.div variants={fadeUp} style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center', marginBottom: 0 }}>
                 <a href="#consultation" className="dh-btn-fill" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
                   Request Free Demo <ArrowRight size={15} />
                 </a>
@@ -120,8 +172,17 @@ export default function ProductPageTemplate({ data }: ProductPageTemplateProps) 
                   Contact Consulting
                 </a>
               </motion.div>
+            </motion.div>
 
-              {/* Stats highlights */}
+            {/* Right Form/Widget Column */}
+            <motion.div id="consultation" className="seo-hero-form" initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }} style={{ display: 'flex', alignItems: 'flex-start', scrollMarginTop: 90 }}>
+              <div style={{ width: '100%' }}>
+                <BusinessSetup3Form source={data.slug} />
+              </div>
+            </motion.div>
+
+            {/* Stats highlights */}
+            <motion.div className="seo-hero-stats" initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.1 } } }}>
               <motion.div variants={fadeUp} style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
                 {data.hero.stats.map((s, i) => (
                   <div key={i} style={{ background: 'var(--card-bg)', border: '1px solid var(--border-light)', borderRadius: '12px', padding: '16px 22px', minWidth: '130px' }}>
@@ -130,16 +191,6 @@ export default function ProductPageTemplate({ data }: ProductPageTemplateProps) 
                   </div>
                 ))}
               </motion.div>
-            </motion.div>
-
-            {/* Right Form/Widget Column */}
-            <motion.div id="consultation" initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }} style={{ display: 'flex', alignItems: 'center' }}>
-              <div style={{ width: '100%', padding: '32px', background: 'var(--card-bg)', border: '1px solid var(--border-light)', borderRadius: '24px', boxShadow: '0 20px 40px rgba(0,0,0,0.03)' }}>
-                <h3 style={{ fontFamily: "'Outfit', sans-serif", fontSize: '1.3rem', fontWeight: 800, marginBottom: '8px' }}>Book Direct Demo</h3>
-                <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>See our enterprise software systems in action with a custom walkthrough.</p>
-                
-                <RegistrationForm uniqueConsentId={`consent-${data.slug}`} source={data.slug} isEmbedded allowCustomService />
-              </div>
             </motion.div>
           </div>
         </div>

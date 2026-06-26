@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { CheckCircle, ChevronDown, ChevronUp, ArrowRight, ArrowUpRight, Phone, Mail } from 'lucide-react';
 import Breadcrumb from './Breadcrumb';
-import RegistrationForm from '../RegistrationForm';
+import BusinessSetup3Form from '../BusinessSetup3Form';
 
 // ── Shared data shape for Business OS, Social Sync and service-location pages ──
 export interface SeoLandingData {
@@ -104,8 +104,60 @@ export default function SeoLandingTemplate({ data }: { data: SeoLandingData }) {
         <div className="dh-container" style={{ position: 'relative', zIndex: 10 }}>
           <Breadcrumb customCrumbs={data.breadcrumbs} />
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: '4rem', marginTop: '2rem' }} className="dh-responsive-grid">
-            <motion.div initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.1 } } }}>
+          <style>{`
+            .seo-hero-grid {
+              display: grid;
+              grid-template-columns: 1.15fr 0.85fr;
+              gap: 4rem;
+              margin-top: 2rem;
+              align-items: start;
+            }
+            .seo-hero-copy {
+              grid-column: 1;
+              grid-row: 1;
+            }
+            .seo-hero-form {
+              grid-column: 2;
+              grid-row: 1 / span 2;
+              z-index: 20;
+              margin-bottom: -150px;
+            }
+            .seo-hero-stats {
+              grid-column: 1;
+              grid-row: 2;
+              margin-top: 1rem;
+            }
+
+            @media (max-width: 1024px) {
+              .seo-hero-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+              }
+              .seo-hero-copy {
+                grid-column: 1;
+                grid-row: 1;
+              }
+              .seo-hero-form {
+                grid-column: 1;
+                grid-row: 2;
+                margin-bottom: 0;
+              }
+              .seo-hero-stats {
+                grid-column: 1;
+                grid-row: 3;
+                margin-top: 0;
+              }
+            }
+            @media (max-width: 768px) {
+              .seo-hero-grid {
+                gap: 2rem;
+                margin-top: 1rem;
+              }
+            }
+          `}</style>
+
+          <div className="seo-hero-grid">
+            <motion.div className="seo-hero-copy" initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.1 } } }}>
               <motion.div variants={fadeUp} style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(196, 145, 58, 0.08)', border: '1px solid rgba(196, 145, 58, 0.15)', borderRadius: '100px', padding: '6px 16px', marginBottom: '1.5rem' }}>
                 <span style={{ fontSize: '11px', color: 'var(--accent-primary)', fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase' }}>{data.hero.tag}</span>
               </motion.div>
@@ -118,7 +170,7 @@ export default function SeoLandingTemplate({ data }: { data: SeoLandingData }) {
                 {data.hero.subtitle}
               </motion.p>
 
-              <motion.div variants={fadeUp} style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center', marginBottom: data.hero.stats?.length ? '3rem' : 0 }}>
+              <motion.div variants={fadeUp} style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center', marginBottom: 0 }}>
                 <a href="#consultation" className="dh-btn-fill" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
                   Book Free Consultation <ArrowRight size={15} />
                 </a>
@@ -136,8 +188,18 @@ export default function SeoLandingTemplate({ data }: { data: SeoLandingData }) {
                   </a>
                 )}
               </motion.div>
+            </motion.div>
 
-              {data.hero.stats && data.hero.stats.length > 0 && (
+            {/* Right column — BusinessSetup3Form (posts to admin via /submit-form) */}
+            <motion.div id="consultation" className="seo-hero-form" initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }} style={{ display: 'flex', alignItems: 'flex-start', scrollMarginTop: 90 }}>
+              <div style={{ width: '100%' }}>
+                <BusinessSetup3Form source={data.slug} />
+              </div>
+            </motion.div>
+
+            {/* Stats highlights */}
+            {data.hero.stats && data.hero.stats.length > 0 && (
+              <motion.div className="seo-hero-stats" initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.1 } } }}>
                 <motion.div variants={fadeUp} style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
                   {data.hero.stats.map((s, i) => (
                     <div key={i} style={{ background: 'var(--card-bg)', border: '1px solid var(--border-light)', borderRadius: '12px', padding: '16px 22px', minWidth: '130px' }}>
@@ -146,17 +208,8 @@ export default function SeoLandingTemplate({ data }: { data: SeoLandingData }) {
                     </div>
                   ))}
                 </motion.div>
-              )}
-            </motion.div>
-
-            {/* Right column — REAL consultation form (posts to admin via /submit-form) */}
-            <motion.div id="consultation" initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }} style={{ display: 'flex', alignItems: 'flex-start' }}>
-              <div style={{ width: '100%', padding: '24px', background: 'var(--card-bg)', border: '1px solid var(--border-light)', borderRadius: '24px', boxShadow: '0 20px 40px rgba(0,0,0,0.05)' }}>
-                <h3 style={{ fontFamily: "'Outfit', sans-serif", fontSize: '1.3rem', fontWeight: 800, marginBottom: '6px' }}>{data.formHeading || 'Book a Free Consultation'}</h3>
-                <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '1.25rem' }}>{data.formSub || 'Tell us what you need — our team replies within 24 hours.'}</p>
-                <RegistrationForm uniqueConsentId={`consent-${data.slug}`} source={data.slug} isEmbedded allowCustomService />
-              </div>
-            </motion.div>
+              </motion.div>
+            )}
           </div>
         </div>
       </section>
