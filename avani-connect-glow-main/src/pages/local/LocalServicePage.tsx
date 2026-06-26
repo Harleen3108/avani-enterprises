@@ -361,7 +361,7 @@ export default function LocalServicePage({
       </Helmet>
 
       {/* ── HERO ────────────────────────────────────────────────────────── */}
-      <section style={{ minHeight:'75vh',display:'flex',alignItems:'center',background:T.bg,position:'relative',overflow:'hidden',paddingTop:'110px',paddingBottom:'80px' }}>
+      <section style={{ minHeight:'60vh',display:'flex',alignItems:'center',background:T.bg,position:'relative',overflow:'visible',paddingTop:'110px',paddingBottom:'80px' }}>
         <Grain /><Grid />
         <Blob top="-10%" right="-5%" size={500} opacity={0.07} blur={130} />
         <Blob bottom="-15%" left="-5%" size={350} opacity={0.04} blur={100} />
@@ -369,17 +369,85 @@ export default function LocalServicePage({
 
         <div className="dh-container" style={{ position:'relative',zIndex:10 }}>
           <BreadcrumbBar crumbs={breadcrumbs} />
-          <motion.div initial="hidden" animate="visible" variants={{ visible:{ transition:{ staggerChildren:0.1 } } }} style={{ maxWidth:'780px',marginTop:'2rem' }}>
-            <motion.div variants={fadeUp} style={{ display:'inline-flex',alignItems:'center',gap:'8px',background:`rgba(196,145,58,0.08)`,border:`1px solid rgba(196,145,58,0.15)`,borderRadius:'100px',padding:'6px 16px',marginBottom:'1.5rem' }}>
+
+          <style>{`
+            .seo-hero-grid {
+              display: grid;
+              grid-template-columns: 1.15fr 0.85fr;
+              grid-template-rows: auto auto auto auto auto;
+              gap: 1.5rem 4rem;
+              margin-top: 2rem;
+              align-items: start;
+            }
+            .seo-hero-tag {
+              grid-column: 1;
+              grid-row: 1;
+            }
+            .seo-hero-h1 {
+              grid-column: 1;
+              grid-row: 2;
+              margin: 0;
+            }
+            .seo-hero-sub {
+              grid-column: 1;
+              grid-row: 3;
+              margin: 0;
+            }
+            .seo-hero-btns {
+              grid-column: 1;
+              grid-row: 4;
+            }
+            .seo-hero-stats {
+              grid-column: 1;
+              grid-row: 5;
+              margin-top: 1rem;
+            }
+            .seo-hero-form {
+              grid-column: 2;
+              grid-row: 1 / span 5;
+              z-index: 20;
+              margin-bottom: -120px;
+            }
+
+            @media (max-width: 1024px) {
+              .seo-hero-grid {
+                display: flex;
+                flex-direction: column;
+                gap: 2rem;
+              }
+              .seo-hero-tag { order: 1; }
+              .seo-hero-h1 { order: 2; }
+              .seo-hero-form { order: 3; margin-bottom: 0; }
+              .seo-hero-sub { order: 4; }
+              .seo-hero-btns { order: 5; }
+              .seo-hero-stats { order: 6; }
+            }
+            @media (max-width: 768px) {
+              .seo-hero-grid {
+                gap: 1.5rem;
+                margin-top: 1rem;
+              }
+            }
+          `}</style>
+
+          <motion.div className="seo-hero-grid" initial="hidden" animate="visible" variants={{ visible:{ transition:{ staggerChildren:0.1 } } }}>
+            {/* Tag */}
+            <motion.div className="seo-hero-tag" variants={fadeUp} style={{ display:'inline-flex',alignItems:'center',gap:'8px',background:`rgba(196,145,58,0.08)`,border:`1px solid rgba(196,145,58,0.15)`,borderRadius:'100px',padding:'6px 16px',alignSelf: 'start', width: 'fit-content' }}>
               <span style={{ fontSize:'11px',color:T.accent,fontWeight:700,letterSpacing:'.05em',textTransform:'uppercase' }}>{hero.tag}</span>
             </motion.div>
-            <motion.h1 variants={fadeUp} style={{ fontFamily:"'Outfit',sans-serif",fontSize:'clamp(2rem,5.5vw,3.8rem)',fontWeight:900,color:T.text,letterSpacing:'-.03em',margin:'0 0 1.25rem',lineHeight:1.05 }}>
+
+            {/* H1 Heading */}
+            <motion.h1 variants={fadeUp} className="seo-hero-h1" style={{ fontFamily:"'Outfit',sans-serif",fontSize:'clamp(2rem,5.5vw,3.8rem)',fontWeight:900,color:T.text,letterSpacing:'-.03em',lineHeight:1.05 }}>
               {hero.h1}
             </motion.h1>
-            <motion.p variants={fadeUp} style={{ fontFamily:"'Inter',sans-serif",fontSize:'1.05rem',color:T.muted,lineHeight:1.7,maxWidth:'600px',marginBottom:'2.5rem' }}>
+
+            {/* Subtitle */}
+            <motion.p variants={fadeUp} className="seo-hero-sub" style={{ fontFamily:"'Inter',sans-serif",fontSize:'1.05rem',color:T.muted,lineHeight:1.7,maxWidth:'600px' }}>
               {hero.subtitle}
             </motion.p>
-            <motion.div variants={fadeUp} style={{ display:'flex',gap:'12px',flexWrap:'wrap',alignItems:'center',marginBottom:'3rem' }}>
+
+            {/* Buttons */}
+            <motion.div variants={fadeUp} className="seo-hero-btns" style={{ display:'flex',gap:'12px',flexWrap:'wrap',alignItems:'center' }}>
               <a href="#consultation" style={{ display:'inline-flex',alignItems:'center',gap:'8px',background:`linear-gradient(135deg,${T.accent},${T.accentLt})`,color:'#0a0508',padding:'13px 26px',borderRadius:'10px',fontFamily:"'Outfit',sans-serif",fontWeight:800,fontSize:'.88rem',letterSpacing:'.05em',textDecoration:'none',textTransform:'uppercase' }}>
                 Get Free Consultation <ArrowRight size={15} />
               </a>
@@ -388,14 +456,27 @@ export default function LocalServicePage({
                 <Phone size={15} color={T.accent} /> Call Now
               </a>
             </motion.div>
-            <motion.div variants={fadeUp} style={{ display:'flex',gap:'20px',flexWrap:'wrap' }}>
-              {hero.stats.map((s, i) => (
-                <div key={i} style={{ background:T.card,border:`1px solid ${T.border}`,borderRadius:'12px',padding:'16px 22px',textAlign:'center',minWidth:'120px' }}>
-                  <div style={{ fontFamily:"'Outfit',sans-serif",fontSize:'1.8rem',fontWeight:900,color:T.accent,lineHeight:1 }}>{s.value}</div>
-                  <div style={{ fontFamily:"'Outfit',sans-serif",fontSize:'10px',color:T.muted,marginTop:'4px',fontWeight:600,textTransform:'uppercase',letterSpacing:'.05em' }}>{s.label}</div>
-                </div>
-              ))}
+
+            {/* Form */}
+            <motion.div className="seo-hero-form" variants={fadeUp} style={{ display: 'flex', alignItems: 'flex-start' }}>
+              <div style={{ width: '100%' }}>
+                <BusinessSetup3Form source={source} />
+              </div>
             </motion.div>
+
+            {/* Stats */}
+            {hero.stats && hero.stats.length > 0 && (
+              <motion.div className="seo-hero-stats" variants={fadeUp}>
+                <div style={{ display:'flex',gap:'20px',flexWrap:'wrap' }}>
+                  {hero.stats.map((s, i) => (
+                    <div key={i} style={{ background:T.card,border:`1px solid ${T.border}`,borderRadius:'12px',padding:'16px 22px',textAlign:'center',minWidth:'120px' }}>
+                      <div style={{ fontFamily:"'Outfit',sans-serif",fontSize:'1.8rem',fontWeight:900,color:T.accent,lineHeight:1 }}>{s.value}</div>
+                      <div style={{ fontFamily:"'Outfit',sans-serif",fontSize:'10px',color:T.muted,marginTop:'4px',fontWeight:600,textTransform:'uppercase',letterSpacing:'.05em' }}>{s.label}</div>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
           </motion.div>
         </div>
       </section>

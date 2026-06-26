@@ -85,35 +85,105 @@ export default function ComparisonPageTemplate({ data }: ComparisonPageTemplateP
       </Helmet>
 
       {/* ── HERO ────────────────────────────────────────────────────────── */}
-      <section style={{ minHeight: '50vh', display: 'flex', alignItems: 'center', position: 'relative', overflow: 'hidden', paddingTop: '120px', paddingBottom: '60px' }}>
+      <section style={{ minHeight: '60vh', display: 'flex', alignItems: 'center', position: 'relative', overflow: 'visible', paddingTop: '120px', paddingBottom: '60px' }}>
         <Grain /><Grid />
-        <GlowBlob top="-10%" right="-5%" size={400} />
+        <GlowBlob top="-10%" right="-5%" size={450} />
         <GlowBlob bottom="-15%" left="-5%" size={300} opacity={0.03} />
 
         <div className="dh-container" style={{ position: 'relative', zIndex: 10 }}>
           <Breadcrumb customCrumbs={data.breadcrumbs} />
 
-          <motion.div initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.1 } } }} style={{ maxWidth: '800px', marginTop: '2rem' }}>
-            <motion.div variants={fadeUp} style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(196, 145, 58, 0.08)', border: '1px solid rgba(196, 145, 58, 0.15)', borderRadius: '100px', padding: '6px 16px', marginBottom: '1.5rem' }}>
+          <style>{`
+            .seo-hero-grid {
+              display: grid;
+              grid-template-columns: 1.15fr 0.85fr;
+              grid-template-rows: auto auto auto auto;
+              gap: 1.5rem 4rem;
+              margin-top: 2rem;
+              align-items: start;
+            }
+            .seo-hero-tag {
+              grid-column: 1;
+              grid-row: 1;
+            }
+            .seo-hero-h1 {
+              grid-column: 1;
+              grid-row: 2;
+              margin: 0;
+            }
+            .seo-hero-sub {
+              grid-column: 1;
+              grid-row: 3;
+              margin: 0;
+            }
+            .seo-hero-stats {
+              grid-column: 1;
+              grid-row: 4;
+              margin-top: 1rem;
+            }
+            .seo-hero-form {
+              grid-column: 2;
+              grid-row: 1 / span 4;
+              z-index: 20;
+              margin-bottom: -120px;
+            }
+
+            @media (max-width: 1024px) {
+              .seo-hero-grid {
+                display: flex;
+                flex-direction: column;
+                gap: 2rem;
+              }
+              .seo-hero-tag { order: 1; }
+              .seo-hero-h1 { order: 2; }
+              .seo-hero-form { order: 3; margin-bottom: 0; }
+              .seo-hero-sub { order: 4; }
+              .seo-hero-stats { order: 5; }
+            }
+            @media (max-width: 768px) {
+              .seo-hero-grid {
+                gap: 1.5rem;
+                margin-top: 1rem;
+              }
+            }
+          `}</style>
+
+          <motion.div className="seo-hero-grid" initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.1 } } }}>
+            {/* Tag */}
+            <motion.div className="seo-hero-tag" variants={fadeUp} style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(196, 145, 58, 0.08)', border: '1px solid rgba(196, 145, 58, 0.15)', borderRadius: '100px', padding: '6px 16px', alignSelf: 'start', width: 'fit-content' }}>
               <span style={{ fontSize: '11px', color: 'var(--accent-primary)', fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase' }}>{data.hero.tag}</span>
             </motion.div>
 
-            <motion.h1 variants={fadeUp} style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(2rem, 5.5vw, 3.2rem)', fontWeight: 900, letterSpacing: '-.03em', margin: '0 0 1.25rem', lineHeight: 1.1 }}>
+            {/* H1 Heading */}
+            <motion.h1 className="seo-hero-h1" variants={fadeUp} style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(2rem, 5.5vw, 3.2rem)', fontWeight: 900, letterSpacing: '-.03em', lineHeight: 1.1 }}>
               {data.hero.h1}
             </motion.h1>
 
-            <motion.p variants={fadeUp} style={{ fontSize: '1.05rem', color: 'var(--text-secondary)', lineHeight: 1.7, maxWidth: '600px', marginBottom: '2.5rem' }}>
+            {/* Subtitle */}
+            <motion.p className="seo-hero-sub" variants={fadeUp} style={{ fontSize: '1.05rem', color: 'var(--text-secondary)', lineHeight: 1.7, maxWidth: '600px' }}>
               {data.hero.subtitle}
             </motion.p>
 
-            <motion.div variants={fadeUp} style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
-              {data.hero.stats.map((s, i) => (
-                <div key={i} style={{ background: 'var(--card-bg)', border: '1px solid var(--border-light)', borderRadius: '12px', padding: '12px 20px', minWidth: '120px' }}>
-                  <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: '1.6rem', fontWeight: 900, color: 'var(--accent-primary)', lineHeight: 1 }}>{s.value}</div>
-                  <div style={{ fontSize: '9px', color: 'var(--text-secondary)', marginTop: '4px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '.05em' }}>{s.label}</div>
-                </div>
-              ))}
+            {/* Right Form Column */}
+            <motion.div id="consultation" className="seo-hero-form" variants={fadeUp} style={{ display: 'flex', alignItems: 'flex-start', scrollMarginTop: 90 }}>
+              <div style={{ width: '100%' }}>
+                <BusinessSetup3Form source={data.slug} />
+              </div>
             </motion.div>
+
+            {/* Stats highlights */}
+            {data.hero.stats && data.hero.stats.length > 0 && (
+              <motion.div className="seo-hero-stats" variants={fadeUp}>
+                <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
+                  {data.hero.stats.map((s, i) => (
+                    <div key={i} style={{ background: 'var(--card-bg)', border: '1px solid var(--border-light)', borderRadius: '12px', padding: '12px 20px', minWidth: '120px' }}>
+                      <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: '1.6rem', fontWeight: 900, color: 'var(--accent-primary)', lineHeight: 1 }}>{s.value}</div>
+                      <div style={{ fontSize: '9px', color: 'var(--text-secondary)', marginTop: '4px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '.05em' }}>{s.label}</div>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
           </motion.div>
         </div>
       </section>
