@@ -92,7 +92,6 @@ export default function BusinessSetup3() {
   return (
     <div className="bs3" style={{ background: C.bg, color: C.text, fontFamily: "'Plus Jakarta Sans', sans-serif", overflowX: "hidden" }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
         .bs3 *, .bs3 *::before, .bs3 *::after { box-sizing: border-box; }
         .bs3 { -webkit-font-smoothing: antialiased; }
 

@@ -1,36 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import axios from 'axios';
 import { Sun, Moon } from 'lucide-react';
 import { API_BASE_URL } from '../utils/api';
+import { lazyWithRetry } from '../utils/lazyWithRetry';
 
 // Dummy isolated components
-import Navbar from './Navbar';
-import Footer from './Footer';
 import DummyHero from './Hero';
-import AboutBrief from './AboutBrief';
-import DummyServices from './Services';
-import DummyProcess from './Process';
-import DummyTestimonials from './Testimonials';
-import DummyLogoMarquee from './LogoMarquee';
-import DummyProjects from './Projects';
 import { projectsData } from '../data/ProjectsData';
-import DummyBlog from './Blog';
-import DummyAnnouncement from './Announcement';
-import GlobalPresenceComponent from './GlobalPresenceComponent';
-import DummyCTA from './CTA';
 
-// New Phase 1 components
-import DummyScrollProgress from './ScrollProgress';
+const AboutBrief = lazyWithRetry(() => import('./AboutBrief'));
+const DummyServices = lazyWithRetry(() => import('./Services'));
+const DummyProcess = lazyWithRetry(() => import('./Process'));
+const DummyTestimonials = lazyWithRetry(() => import('./Testimonials'));
+const DummyLogoMarquee = lazyWithRetry(() => import('./LogoMarquee'));
+const DummyProjects = lazyWithRetry(() => import('./Projects'));
+const DummyBlog = lazyWithRetry(() => import('./Blog'));
+const DummyAnnouncement = lazyWithRetry(() => import('./Announcement'));
+const GlobalPresenceComponent = lazyWithRetry(() => import('./GlobalPresenceComponent'));
+const DummyCTA = lazyWithRetry(() => import('./CTA'));
 
 // New Phase 2 components
-import DummyImpactBar from './ImpactBar';
-import DummyCaseStudies from './CaseStudies';
-import DummyIndustries from './Industries';
-import DummyAwards from './Awards';
-import DummyTimeline from './Timeline';
-import DummyFAQ from './FAQ';
+const DummyImpactBar = lazyWithRetry(() => import('./ImpactBar'));
+const DummyCaseStudies = lazyWithRetry(() => import('./CaseStudies'));
+const DummyIndustries = lazyWithRetry(() => import('./Industries'));
+const DummyAwards = lazyWithRetry(() => import('./Awards'));
+const DummyTimeline = lazyWithRetry(() => import('./Timeline'));
+const DummyFAQ = lazyWithRetry(() => import('./FAQ'));
 
 const Home = () => {
   const [blogs, setBlogs] = useState([]);
@@ -39,8 +36,29 @@ const Home = () => {
   const [loadingNewsletters, setLoadingNewsletters] = useState(true);
 
   useEffect(() => {
-    fetchBlogs();
-    fetchNewsletters();
+    const fetchDeferredData = () => {
+      fetchBlogs();
+      fetchNewsletters();
+    };
+
+    if (document.readyState !== 'complete') {
+      const handleLoad = () => {
+        window.removeEventListener('load', handleLoad);
+        if ('requestIdleCallback' in window) {
+          window.requestIdleCallback(() => fetchDeferredData());
+        } else {
+          setTimeout(fetchDeferredData, 200);
+        }
+      };
+      window.addEventListener('load', handleLoad);
+      return () => window.removeEventListener('load', handleLoad);
+    } else {
+      if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(() => fetchDeferredData());
+      } else {
+        setTimeout(fetchDeferredData, 200);
+      }
+    }
   }, []);
 
   const fetchNewsletters = async () => {
@@ -271,22 +289,29 @@ const Home = () => {
   return (
     <div style={{ fontFamily: "'Inter', sans-serif" }}>
       <DummyHero newsletters={newsletters} loadingNewsletters={loadingNewsletters} clientLogos={clientLogos} />
-      <AboutBrief />
-      <DummyLogoMarquee clientLogos={clientLogos} />
-      <DummyImpactBar />
-      <DummyServices services={services} />
-      <DummyProcess processSteps={processSteps} />
-      <DummyCaseStudies />
-      <DummyIndustries />
-      <GlobalPresenceComponent />
-      <DummyProjects clientLogos={clientLogos} />
-      <DummyTestimonials testimonials={testimonials} />
-      <DummyAwards />
-      <DummyTimeline />
-      <DummyBlog blogs={blogs} loadingBlogs={loadingBlogs} />
-      <DummyAnnouncement />
-      <DummyFAQ />
-      <DummyCTA />
+      <Suspense fallback={
+        <div style={{ minHeight: '20vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ width: 24, height: 24, border: "2px solid rgba(255,157,0,0.25)", borderTopColor: "#ff9d00", borderRadius: "50%", animation: "rt-spin 0.7s linear infinite" }} />
+          <style>{`@keyframes rt-spin{to{transform:rotate(360deg)}}`}</style>
+        </div>
+      }>
+        <AboutBrief />
+        <DummyLogoMarquee clientLogos={clientLogos} />
+        <DummyImpactBar />
+        <DummyServices services={services} />
+        <DummyProcess processSteps={processSteps} />
+        <DummyCaseStudies />
+        <DummyIndustries />
+        <GlobalPresenceComponent />
+        <DummyProjects clientLogos={clientLogos} />
+        <DummyTestimonials testimonials={testimonials} />
+        <DummyAwards />
+        <DummyTimeline />
+        <DummyBlog blogs={blogs} loadingBlogs={loadingBlogs} />
+        <DummyAnnouncement />
+        <DummyFAQ />
+        <DummyCTA />
+      </Suspense>
     </div>
   );
 };

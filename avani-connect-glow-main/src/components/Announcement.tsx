@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { getResponsiveImageProps } from '../utils/responsiveImage';
 
 const DummyAnnouncement = () => (
   <section className="theme-brown" style={{ padding: '44px 0', background: 'var(--bg-primary)', position: 'relative', overflow: 'hidden' }}>
@@ -21,7 +22,7 @@ const DummyAnnouncement = () => (
               <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '16px', flexShrink: 0 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '6px 12px', background: 'var(--card-bg)', border: '1px solid var(--border-faint)', borderRadius: '8px' }}>
                   <div style={{ width: '26px', height: '26px', borderRadius: '6px', overflow: 'hidden', background: '#fff', padding: '2px' }}>
-                    <img src="/logo0.webp" alt="Avani" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+                    <img {...getResponsiveImageProps('/logo0.webp')} alt="Avani" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
                   </div>
                   <span style={{ color: 'var(--text-tertiary)', fontSize: '14px', fontWeight: 300 }}>×</span>
                   <div style={{ width: '26px', height: '26px', borderRadius: '6px', overflow: 'hidden', background: '#fff', padding: '2px' }}>

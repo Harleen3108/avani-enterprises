@@ -15,20 +15,19 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
 
-  <!-- Preconnect to font origins (faster handshake) -->
+  <!-- Preconnect to primary origins (faster handshake) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
-  <!-- Warm up the LCP image origin (homepage hero). No crossorigin: the hero <img> is a
-       plain no-cors request, so the warmed connection must match its (non-CORS) pool. -->
-  <link rel="preconnect" href="https://images.unsplash.com">
-  <!-- Warm up the API origin used for data/SEO fetches -->
   <link rel="preconnect" href="https://avani-enterprises.onrender.com" crossorigin>
+  
+  <!-- DNS prefetch for secondary domains to reduce preconnect overhead -->
+  <link rel="dns-prefetch" href="https://api.fontshare.com">
+  <link rel="dns-prefetch" href="https://images.unsplash.com">
   <link rel="dns-prefetch" href="https://avani-enterprises.onrender.com">
 
   <!-- Decorative texture — preloaded at low priority so it never competes with the LCP hero image -->
   <link rel="preload" as="image" href="https://www.transparenttextures.com/patterns/stardust.png" fetchpriority="low" />
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&family=Cormorant+Garamond:ital@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=Great+Vibes&display=swap" />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=Great+Vibes&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@400;500;600;700;800&display=swap" />
   <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=general-sans@200,300,400,500,600,700&f[]=clash-display@200,300,400,500,600,700&f[]=satoshi@300,400,500,700&display=swap" />
 
   <!-- Critical Inline CSS to prevent layout shifts and improve initial rendering -->
@@ -54,11 +53,11 @@
 
   <!-- Fonts merged into 2 requests and loaded non-render-blocking (display=swap), with a noscript fallback -->
   <link rel="stylesheet" media="print" onload="this.media='all'"
-    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&family=Cormorant+Garamond:ital@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=Great+Vibes&display=swap">
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=Great+Vibes&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@400;500;600;700;800&display=swap">
   <link rel="stylesheet" media="print" onload="this.media='all'"
     href="https://api.fontshare.com/v2/css?f[]=general-sans@200,300,400,500,600,700&f[]=clash-display@200,300,400,500,600,700&f[]=satoshi@300,400,500,700&display=swap">
   <noscript>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&family=Cormorant+Garamond:ital@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=Great+Vibes&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=Great+Vibes&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@400;500;600;700;800&display=swap">
     <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@200,300,400,500,600,700&f[]=clash-display@200,300,400,500,600,700&f[]=satoshi@300,400,500,700&display=swap">
   </noscript>
 
@@ -92,36 +91,55 @@
   <meta name="google-site-verification" content="googleae433d72d00df74d" />
   <meta name="google-site-verification" content="btLwCqsDMCRiF9M1VEpHCehG-lRBEbAj3fPKMoKZK-U" />
 
-  <!-- Meta Pixel Code -->
+  <!-- Optimized Third-Party Trackers (Delayed load to reduce TBT / JS execution time) -->
   <script>
-    window.addEventListener('load', function() {
-      !function(f,b,e,v,n,t,s)
-      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', '2263948097472371');
-      fbq('track', 'PageView');
-    });
-  </script>
-  <!-- End Meta Pixel Code -->
+    (function() {
+      var initialized = false;
+      
+      function initTrackers() {
+        if (initialized) return;
+        initialized = true;
+        
+        // Remove event listeners
+        window.removeEventListener('scroll', initTrackers);
+        window.removeEventListener('mousemove', initTrackers);
+        window.removeEventListener('touchstart', initTrackers);
+        window.removeEventListener('click', initTrackers);
+        window.removeEventListener('keydown', initTrackers);
 
-  <!-- Google tag (gtag.js) -->
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    window.gtag = gtag;
-    window.addEventListener('load', function() {
-      var script = document.createElement('script');
-      script.async = true;
-      script.src = 'https://www.googletagmanager.com/gtag/js?id=AW-17823419321';
-      document.head.appendChild(script);
-      gtag('js', new Date());
-      gtag('config', 'AW-17823419321');
-    });
+        // Load Facebook Pixel
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '2263948097472371');
+        fbq('track', 'PageView');
+
+        // Load Google Tag Manager
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function() { window.dataLayer.push(arguments); };
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=AW-17823419321';
+        document.head.appendChild(script);
+        window.gtag('js', new Date());
+        window.gtag('config', 'AW-17823419321');
+      }
+
+      // Initialize on user interaction
+      window.addEventListener('scroll', initTrackers, { passive: true });
+      window.addEventListener('mousemove', initTrackers, { passive: true });
+      window.addEventListener('touchstart', initTrackers, { passive: true });
+      window.addEventListener('click', initTrackers, { passive: true });
+      window.addEventListener('keydown', initTrackers, { passive: true });
+
+      // Fallback: load after 4 seconds if no interaction occurs
+      setTimeout(initTrackers, 4000);
+    })();
   </script>
 
   <!-- Structured Data: Organization + WebSite (static, crawlable before JS) -->

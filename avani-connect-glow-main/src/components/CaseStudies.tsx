@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { getResponsiveImageProps } from '../utils/responsiveImage';
 import { ArrowUpRight, TrendingUp } from 'lucide-react';
 
 const caseStudies = [
@@ -128,7 +129,7 @@ const DummyCaseStudies = () => {
 
                     {/* Logo */}
                     <div style={{ position: 'absolute', bottom: '14px', left: '14px', width: '36px', height: '36px', borderRadius: '10px', background: 'var(--glass-bg)', backdropFilter: 'blur(8px)', border: '1px solid var(--border-light)', overflow: 'hidden', padding: '4px' }}>
-                      <img src={cs.logo} alt="" width={36} height={36} loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+                      <img {...getResponsiveImageProps(cs.logo)} alt="" width={36} height={36} loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
                     </div>
                   </div>
 

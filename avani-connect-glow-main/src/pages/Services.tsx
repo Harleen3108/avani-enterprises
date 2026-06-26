@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Code, Search, Share2, Zap, Radio, PieChart, ArrowRight, CheckCircle, Lightbulb, Shield, Target, MessageSquare, TrendingUp } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { getResponsiveImageProps } from '../utils/responsiveImage';
 import RotatingText from '../components/RotatingText';
 import '../components/Home.css';
 
@@ -236,7 +237,7 @@ const Services = () => {
                       position: 'relative'
                     }}>
                       <img
-                        src={service.img}
+                        {...getResponsiveImageProps(service.img)}
                         alt={service.title}
                         style={{
                           width: '100%',

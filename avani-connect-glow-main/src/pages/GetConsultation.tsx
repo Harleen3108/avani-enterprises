@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import { motion } from "framer-motion";
 import AnimatedSection from '../components/AnimatedSection';
+import { getResponsiveImageProps } from '../utils/responsiveImage';
 
 const GetConsultation = () => {
   const whatsappNumber = '919253625099';
@@ -207,8 +208,8 @@ const GetConsultation = () => {
 
                     <div className="relative z-10">
                       <div className="flex items-center gap-3 mb-10">
-                        <div className="w-10 h-10 rounded-lg overflow-hidden flex-shrink-0 shadow-lg">
-                          <img src="/logo0.webp" alt="Avani Enterprises" className="w-full h-full object-cover" />
+                        <div className="w-10 h-10 rounded-lg overflow-hidden flex-shrink-0 shadow-lg bg-white p-0.5">
+                          <img {...getResponsiveImageProps('/logo0.webp', '40px')} alt="Avani Enterprises" className="w-full h-full object-contain" />
                         </div>
                         <span className="text-white font-black uppercase tracking-[0.3em] text-sm">EXPERT SUPPORT</span>
                       </div>

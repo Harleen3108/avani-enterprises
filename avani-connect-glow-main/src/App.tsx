@@ -134,7 +134,7 @@ import Chatbot from "./components/Chatbot";
 const Links = lazyWithRetry(() => import("./pages/Links"));
 import Home from "./components/Home";
 const Home2 = lazyWithRetry(() => import("./pages/Home2"));
-import DH2Layout from "./components/home2/DH2Layout";
+const DH2Layout = lazyWithRetry(() => import("./components/home2/DH2Layout"));
 const DH2About = lazyWithRetry(() => import("./pages/home2/DH2About"));
 const DH2Services = lazyWithRetry(() => import("./pages/home2/DH2Services"));
 const DH2Contact = lazyWithRetry(() => import("./pages/home2/DH2Contact"));
@@ -335,7 +335,8 @@ const DH2BusinessProcessOptimizationProject = lazyWithRetry(() => import('./page
 
 import { SeoProvider } from "./contexts/SeoContext";
 import { ThemeProvider } from "./components/theme-provider";
-import newSeoPagesData from "./data/newSeoPagesData.json";
+import newSeoPagesKeys from "./data/newSeoPagesKeys.json";
+const newSeoPagesKeysSet = new Set(newSeoPagesKeys);
 const DynamicFlatSeoPage = lazyWithRetry(() => import("./pages/local/DynamicFlatSeoPage"));
 
 
@@ -365,7 +366,7 @@ const AppLayout = () => {
   
   // Clean pathname key (strip leading and trailing slashes) to look up in dynamic registry
   const dynamicKey = pathForCheck.replace(/^\/+|\/+$/g, '');
-  const isDynamicSeoPath = Object.prototype.hasOwnProperty.call(newSeoPagesData, dynamicKey);
+  const isDynamicSeoPath = newSeoPagesKeysSet.has(dynamicKey);
   
   // Define all paths that belong to the new MainLayout
   const isDHRoot = ["/", "/about", "/services", "/projects", "/contact", "/blog", "/global-presence", "/careers", "/newsletters", "/courses", "/case-studies", "/get-consultation", "/privacy-policy", "/terms-and-conditions"].includes(pathForCheck);

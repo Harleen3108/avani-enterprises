@@ -46,20 +46,54 @@ export const SeoProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       return;
     }
 
+    let active = true;
+    let handleLoad: (() => void) | null = null;
+
     const fetchSeo = async () => {
       setLoading(true);
       try {
         const res = await axios.get(`${API_BASE_URL}/seo`, { params: { page: currentPage }, timeout: 4000 });
-        setSeo(res.data.data);
+        if (active) {
+          setSeo(res.data.data);
+        }
       } catch (err) {
         console.error("Failed to fetch SEO data:", err);
-        setSeo(null);
+        if (active) {
+          setSeo(null);
+        }
       } finally {
-        setLoading(false);
+        if (active) {
+          setLoading(false);
+        }
       }
     };
 
-    fetchSeo();
+    if (document.readyState !== 'complete') {
+      handleLoad = () => {
+        if (handleLoad) {
+          window.removeEventListener('load', handleLoad);
+        }
+        if ('requestIdleCallback' in window) {
+          window.requestIdleCallback(() => {
+            if (active) fetchSeo();
+          });
+        } else {
+          setTimeout(() => {
+            if (active) fetchSeo();
+          }, 200);
+        }
+      };
+      window.addEventListener('load', handleLoad);
+    } else {
+      fetchSeo();
+    }
+
+    return () => {
+      active = false;
+      if (handleLoad) {
+        window.removeEventListener('load', handleLoad);
+      }
+    };
   }, [location.pathname]);
 
   return (

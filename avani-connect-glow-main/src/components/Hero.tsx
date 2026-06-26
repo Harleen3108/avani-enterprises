@@ -64,37 +64,58 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
     return () => clearInterval(t);
   }, []);
 
-  // Cursor glow effect — writes batched via rAF. The rect is read once *inside* the frame
-  // callback (not per-mousemove), so it stays fresh during scroll/resize and the glow stays
-  // glued to the cursor, while still avoiding the per-move getBoundingClientRect() that
-  // previously caused layout thrashing (now ≤ one layout read per animation frame).
+  // Cursor glow effect — writes batched via rAF. The rect is cached on enter/resize
+  // to avoid getBoundingClientRect() during hover completely, preventing layout thrashing.
   const glowPos = useRef({ x: 0, y: 0 });
   const glowRaf = useRef<number | null>(null);
+  const heroRect = useRef<DOMRect | null>(null);
 
   const handleMouseMove = useCallback((e: React.MouseEvent) => {
     glowPos.current = { x: e.clientX, y: e.clientY };
     if (glowRaf.current != null) return; // coalesce multiple moves into one write per frame
     glowRaf.current = requestAnimationFrame(() => {
       glowRaf.current = null;
-      const rect = heroRef.current?.getBoundingClientRect();
+      if (!heroRect.current && heroRef.current) {
+        heroRect.current = heroRef.current.getBoundingClientRect();
+      }
+      const rect = heroRect.current;
       if (!rect || !glowRef.current) return;
       glowRef.current.style.transform = `translate(${glowPos.current.x - rect.left - 150}px, ${glowPos.current.y - rect.top - 150}px)`;
       glowRef.current.style.opacity = '1';
     });
   }, []);
 
+  const handleMouseEnter = useCallback(() => {
+    if (heroRef.current) {
+      heroRect.current = heroRef.current.getBoundingClientRect();
+    }
+  }, []);
+
   const handleMouseLeave = useCallback(() => {
     if (glowRaf.current != null) { cancelAnimationFrame(glowRaf.current); glowRaf.current = null; }
     if (glowRef.current) glowRef.current.style.opacity = '0';
+    heroRect.current = null;
   }, []);
 
-  // Cancel any queued glow frame on unmount
-  useEffect(() => () => { if (glowRaf.current != null) cancelAnimationFrame(glowRaf.current); }, []);
+  // Update layout dims on resize
+  useEffect(() => {
+    const handleResize = () => {
+      if (heroRef.current) {
+        heroRect.current = heroRef.current.getBoundingClientRect();
+      }
+    };
+    window.addEventListener('resize', handleResize, { passive: true });
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      if (glowRaf.current != null) cancelAnimationFrame(glowRaf.current);
+    };
+  }, []);
 
   return (
     <>
       <section className="theme-brown dummy-hero-section"
         ref={heroRef}
+        onMouseEnter={handleMouseEnter}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         style={{ minHeight: '100vh', position: 'relative', overflow: 'hidden', display: 'flex', alignItems: 'center', background: 'var(--bg-primary)' }}

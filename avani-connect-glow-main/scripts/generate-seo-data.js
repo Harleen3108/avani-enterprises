@@ -552,6 +552,11 @@ const outputJsonPath = path.join(__dirname, '..', 'src', 'data', 'newSeoPagesDat
 fs.writeFileSync(outputJsonPath, JSON.stringify(data, null, 2), 'utf8');
 console.log(`✅ Generated ${Object.keys(data).length} SEO pages data configuration -> ${outputJsonPath}`);
 
+// Write lightweight keys JSON for fast app booting
+const outputKeysPath = path.join(__dirname, '..', 'src', 'data', 'newSeoPagesKeys.json');
+fs.writeFileSync(outputKeysPath, JSON.stringify(Object.keys(data)), 'utf8');
+console.log(`✅ Generated lightweight keys registry -> ${outputKeysPath}`);
+
 // Generate api/newSeoData.js static lookup for Vercel
 const apiLookup = {};
 Object.keys(data).forEach(k => {

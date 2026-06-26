@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import { Code, Search, Share2, Zap, Radio, PieChart, ArrowLeft, CheckCircle, ArrowRight, Lightbulb, TrendingUp, Shield, Target, Globe, ChevronDown, ChevronUp } from 'lucide-react';
 import Breadcrumb from '../components/seo/Breadcrumb';
+import { getResponsiveImageProps } from '../utils/responsiveImage';
 import InternalLinking from '../components/seo/InternalLinking';
 
 /* Background effects */
@@ -570,7 +571,7 @@ const ServiceDetail = () => {
               >
                 <div style={{ width: '100%', height: '100%', borderRadius: '19px', overflow: 'hidden' }}>
                   <img 
-                    src={service.image} 
+                    {...getResponsiveImageProps(service.image)} 
                     alt={service.title} 
                     style={{ 
                       width: '100%', 

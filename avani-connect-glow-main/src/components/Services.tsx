@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { getResponsiveImageProps } from '../utils/responsiveImage';
 import { ArrowUpRight, ChevronDown } from 'lucide-react';
 
 const DummyServices = ({ services }: any) => {
@@ -109,7 +110,7 @@ const DummyServices = ({ services }: any) => {
                   position: 'relative'
                 }}>
                   <img 
-                    src={svc.image} 
+                    {...getResponsiveImageProps(svc.image)} 
                     alt={svc.title} 
                     className="svc-card-img"
                     style={{ 

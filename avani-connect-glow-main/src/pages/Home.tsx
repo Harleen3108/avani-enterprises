@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useSeo } from '../contexts/SeoContext';
+import { getResponsiveImageProps } from '../utils/responsiveImage';
 
 import { Link } from 'react-router-dom';
 import {
@@ -510,7 +511,7 @@ Avani Enterprises is the No.1 Digital Marketing Agency in India, providing the b
                     {[0, 1, 5, 3].map((idx) => (
                       <div key={idx} className="w-8 h-8 sm:w-9 sm:h-9 rounded-full border-2 border-white bg-white shadow-sm overflow-hidden flex items-center justify-center">
                         <img
-                          src={clientLogos[idx].logo}
+                          {...getResponsiveImageProps(clientLogos[idx].logo)}
                           alt={clientLogos[idx].name}
                           className="w-full h-full object-contain p-1"
                         />
@@ -1024,7 +1025,7 @@ Avani Enterprises is the No.1 Digital Marketing Agency in India, providing the b
                       <div className="relative flex justify-center -mt-10 md:-mt-12 z-20">
                         <div className="p-1 bg-white rounded-full shadow-lg">
                           <img
-                            src={testimonial.image}
+                            {...getResponsiveImageProps(testimonial.image)}
                             alt={testimonial.name}
                             className="w-16 h-16 md:w-20 md:h-20 rounded-full border-4 border-white shadow-sm object-contain bg-white p-1"
                           />
@@ -1175,7 +1176,7 @@ Avani Enterprises is the No.1 Digital Marketing Agency in India, providing the b
                       {/* Content Section */}
                       <div className={`w-full md:w-1/3 p-6 md:p-8 flex flex-col justify-center ${isEven ? 'bg-gradient-to-br from-amber-400 to-yellow-500' : 'bg-slate-900'}`}>
                         <div className={`h-14 w-24 rounded-lg ${isEven ? '' : 'bg-white'} flex items-center justify-center p-2 mb-4`}>
-                          <img src={client.logo} alt={client.name} className="h-full w-auto object-contain" />
+                          <img {...getResponsiveImageProps(client.logo)} alt={client.name} className="h-full w-auto object-contain" />
                         </div>
                         <h3 className={`text-xl md:text-2xl font-black uppercase tracking-wide mb-4 ${isEven ? 'text-slate-900' : 'text-white'}`}>
                           {client.name}
@@ -1421,7 +1422,7 @@ Avani Enterprises is the No.1 Digital Marketing Agency in India, providing the b
                     <div key={i} className="flex items-center gap-6 md:gap-10 px-6 md:px-10">
                       <div className="flex items-center gap-3 bg-white/5 backdrop-blur-md px-4 py-2 rounded-2xl border border-white/10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)] shrink-0">
                         <div className="p-1 bg-gradient-to-br from-amber-400 to-orange-500 rounded-xl shadow-md shrink-0">
-                          <img src="/logo0.webp" alt="Avani" className="h-8 w-8 md:h-10 md:w-10 rounded-lg object-contain bg-white shrink-0" />
+                          <img {...getResponsiveImageProps('/logo0.webp')} alt="Avani" className="h-8 w-8 md:h-10 md:w-10 rounded-lg object-contain bg-white shrink-0" />
                         </div>
                         <span className="text-white/40 font-black text-lg md:text-xl shrink-0">×</span>
                         <div className="p-1 bg-white rounded-xl shadow-md shrink-0">

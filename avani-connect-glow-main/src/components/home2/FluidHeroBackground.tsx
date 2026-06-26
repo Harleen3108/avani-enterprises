@@ -152,6 +152,7 @@ export const FluidHeroBackground = () => {
     let mouseY = 0.5;
     let targetMouseX = 0.5;
     let targetMouseY = 0.5;
+    let rect = canvas.getBoundingClientRect();
 
     const resize = () => {
       // Reduce pixel ratio on mobile for better performance
@@ -163,6 +164,7 @@ export const FluidHeroBackground = () => {
       canvas.height = height * dpr;
       gl.viewport(0, 0, canvas.width, canvas.height);
       gl.uniform2f(uResolution, canvas.width, canvas.height);
+      rect = canvas.getBoundingClientRect();
     };
 
     window.addEventListener('resize', resize);
@@ -171,7 +173,6 @@ export const FluidHeroBackground = () => {
     // Attach mouse/touch listeners to the document/window so it follows anywhere
     // but the coordinates are mapped to the canvas bounds.
     const handleMouseMove = (e: MouseEvent) => {
-      const rect = canvas.getBoundingClientRect();
       targetMouseX = (e.clientX - rect.left) / rect.width;
       // In WebGL, Y is inverted (0 is bottom, 1 is top)
       targetMouseY = 1.0 - ((e.clientY - rect.top) / rect.height);
@@ -180,7 +181,6 @@ export const FluidHeroBackground = () => {
     // Support touch
     const handleTouchMove = (e: TouchEvent) => {
       if (e.touches.length > 0) {
-        const rect = canvas.getBoundingClientRect();
         targetMouseX = (e.touches[0].clientX - rect.left) / rect.width;
         targetMouseY = 1.0 - ((e.touches[0].clientY - rect.top) / rect.height);
       }

@@ -127,9 +127,7 @@ const AnimatedNumber = ({ value, duration = 1.5 }: { value: number; duration?: n
 };
 
 
-const FONT = `
-  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
-`;
+const FONT = ``;
 
 // ── Fixed Bottom Bar Component ──
 const FixedBottomBar = ({ scrollToPricing }: { scrollToPricing: () => void }) => {

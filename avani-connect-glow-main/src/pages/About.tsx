@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Shield, Target, Users, ArrowRight, CheckCircle, Globe, Zap, Lightbulb, Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { getResponsiveImageProps } from '../utils/responsiveImage';
 import RotatingText from '../components/RotatingText';
 import AnimatedCounter from '../components/AnimatedCounter';
 
@@ -65,7 +66,7 @@ const About = () => {
             {tripledRow1.map((l: any, i: number) => (
               <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 18px', background: 'var(--card-bg)', border: '1px solid var(--border-faint)', borderRadius: '100px', flexShrink: 0 }}>
                 <div style={{ width: '22px', height: '22px', borderRadius: '50%', background: 'rgba(255,255,255,0.9)', overflow: 'hidden' }}>
-                  <img src={l.logo} alt={l.name} style={{ width: '100%', height: '100%', objectFit: 'contain', padding: '2px' }} />
+                  <img {...getResponsiveImageProps(l.logo)} alt={l.name} style={{ width: '100%', height: '100%', objectFit: 'contain', padding: '2px' }} />
                 </div>
                 <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', fontWeight: 500, color: 'var(--text-secondary)', whiteSpace: 'nowrap' }}>{l.name}</span>
               </div>
@@ -136,7 +137,7 @@ const About = () => {
                   }}
                 >
                   <img
-                    src={imgData.src}
+                    {...getResponsiveImageProps(imgData.src)}
                     alt={imgData.title}
                     style={{
                       width: '100%',
@@ -178,7 +179,7 @@ const About = () => {
             {tripledRow2.map((l: any, i: number) => (
               <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 18px', background: 'var(--card-bg)', border: '1px solid var(--border-faint)', borderRadius: '100px', flexShrink: 0 }}>
                 <div style={{ width: '22px', height: '22px', borderRadius: '50%', background: 'rgba(255,255,255,0.9)', overflow: 'hidden' }}>
-                  <img src={l.logo} alt={l.name} style={{ width: '100%', height: '100%', objectFit: 'contain', padding: '2px' }} />
+                  <img {...getResponsiveImageProps(l.logo)} alt={l.name} style={{ width: '100%', height: '100%', objectFit: 'contain', padding: '2px' }} />
                 </div>
                 <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', fontWeight: 500, color: 'var(--text-secondary)', whiteSpace: 'nowrap' }}>{l.name}</span>
               </div>
@@ -321,7 +322,7 @@ const About = () => {
             </div>
 
             <div className="dh-about-core-img" style={{ width: '280px', height: '280px', borderRadius: '50%', overflow: 'hidden', border: '4px solid var(--border-light)', flexShrink: 0, background: 'var(--card-bg)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <img src="/logo0.webp" alt="Avani Logo" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              <img {...getResponsiveImageProps('/logo0.webp')} alt="Avani Logo" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
 
             <div className="dh-about-core-col-right" style={{ display: 'flex', flexDirection: 'column', gap: '24px', flex: 1, minWidth: '250px' }}>
