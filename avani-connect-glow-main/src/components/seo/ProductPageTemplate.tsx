@@ -99,100 +99,111 @@ export default function ProductPageTemplate({ data }: ProductPageTemplateProps) 
             .seo-hero-grid {
               display: grid;
               grid-template-columns: 1.15fr 0.85fr;
-              gap: 4rem;
+              grid-template-rows: auto auto auto auto auto;
+              gap: 1.5rem 4rem;
               margin-top: 2rem;
               align-items: start;
             }
-            .seo-hero-copy {
+            .seo-hero-tag {
               grid-column: 1;
               grid-row: 1;
             }
-            .seo-hero-form {
-              grid-column: 2;
-              grid-row: 1 / span 2;
-              z-index: 20;
-              margin-bottom: -120px;
+            .seo-hero-h1 {
+              grid-column: 1;
+              grid-row: 2;
+              margin: 0;
+            }
+            .seo-hero-sub {
+              grid-column: 1;
+              grid-row: 3;
+              margin: 0;
+            }
+            .seo-hero-btns {
+              grid-column: 1;
+              grid-row: 4;
             }
             .seo-hero-stats {
               grid-column: 1;
-              grid-row: 2;
+              grid-row: 5;
               margin-top: 1rem;
+            }
+            .seo-hero-form {
+              grid-column: 2;
+              grid-row: 1 / span 5;
+              z-index: 20;
+              margin-bottom: -120px;
             }
 
             @media (max-width: 1024px) {
               .seo-hero-grid {
-                grid-template-columns: 1fr;
-                gap: 2.5rem;
+                display: flex;
+                flex-direction: column;
+                gap: 2rem;
               }
-              .seo-hero-copy {
-                grid-column: 1;
-                grid-row: 1;
-              }
-              .seo-hero-form {
-                grid-column: 1;
-                grid-row: 2;
-                margin-bottom: 0;
-              }
-              .seo-hero-stats {
-                grid-column: 1;
-                grid-row: 3;
-                margin-top: 0;
-              }
+              .seo-hero-tag { order: 1; }
+              .seo-hero-h1 { order: 2; }
+              .seo-hero-form { order: 3; margin-bottom: 0; }
+              .seo-hero-sub { order: 4; }
+              .seo-hero-btns { order: 5; }
+              .seo-hero-stats { order: 6; }
             }
             @media (max-width: 768px) {
               .seo-hero-grid {
-                gap: 2rem;
+                gap: 1.5rem;
                 margin-top: 1rem;
               }
             }
           `}</style>
 
-          <div className="seo-hero-grid">
-            {/* Left Content Column */}
-            <motion.div className="seo-hero-copy" initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.1 } } }}>
-              <motion.div variants={fadeUp} style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(196, 145, 58, 0.08)', border: '1px solid rgba(196, 145, 58, 0.15)', borderRadius: '100px', padding: '6px 16px', marginBottom: '1.5rem' }}>
-                <span style={{ fontSize: '11px', color: 'var(--accent-primary)', fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase' }}>{data.hero.tag}</span>
-              </motion.div>
+          <motion.div className="seo-hero-grid" initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.1 } } }}>
+            {/* Tag */}
+            <motion.div className="seo-hero-tag" variants={fadeUp} style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(196, 145, 58, 0.08)', border: '1px solid rgba(196, 145, 58, 0.15)', borderRadius: '100px', padding: '6px 16px', alignSelf: 'start', width: 'fit-content' }}>
+              <span style={{ fontSize: '11px', color: 'var(--accent-primary)', fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase' }}>{data.hero.tag}</span>
+            </motion.div>
 
-              <motion.h1 variants={fadeUp} style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 900, letterSpacing: '-.03em', margin: '0 0 1.25rem', lineHeight: 1.1 }}>
-                {data.hero.h1}
-              </motion.h1>
+            {/* H1 Heading */}
+            <motion.h1 className="seo-hero-h1" variants={fadeUp} style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 900, letterSpacing: '-.03em', lineHeight: 1.1 }}>
+              {data.hero.h1}
+            </motion.h1>
 
-              <motion.p variants={fadeUp} style={{ fontSize: '1.05rem', color: 'var(--text-secondary)', lineHeight: 1.7, maxWidth: '600px', marginBottom: '2.5rem' }}>
-                {data.hero.subtitle}
-              </motion.p>
+            {/* Subtitle */}
+            <motion.p className="seo-hero-sub" variants={fadeUp} style={{ fontSize: '1.05rem', color: 'var(--text-secondary)', lineHeight: 1.7, maxWidth: '600px' }}>
+              {data.hero.subtitle}
+            </motion.p>
 
-              <motion.div variants={fadeUp} style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center', marginBottom: 0 }}>
-                <a href="#consultation" className="dh-btn-fill" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
-                  Request Free Demo <ArrowRight size={15} />
-                </a>
-                <a href="tel:+919253625099" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'transparent', color: 'var(--text-primary)', padding: '12px 24px', borderRadius: '10px', fontFamily: "'Outfit', sans-serif", fontWeight: 700, fontSize: '.88rem', textDecoration: 'none', border: '1px solid var(--border-light)', transition: 'border-color .2s' }}
-                  onMouseEnter={e => e.currentTarget.style.borderColor = 'var(--accent-primary)'}
-                  onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--border-light)'}>
-                  Contact Consulting
-                </a>
-              </motion.div>
+            {/* Action Buttons */}
+            <motion.div className="seo-hero-btns" variants={fadeUp} style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
+              <a href="#consultation" className="dh-btn-fill" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+                Request Free Demo <ArrowRight size={15} />
+              </a>
+              <a href="tel:+919253625099" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'transparent', color: 'var(--text-primary)', padding: '12px 24px', borderRadius: '10px', fontFamily: "'Outfit', sans-serif", fontWeight: 700, fontSize: '.88rem', textDecoration: 'none', border: '1px solid var(--border-light)', transition: 'border-color .2s' }}
+                onMouseEnter={e => e.currentTarget.style.borderColor = 'var(--accent-primary)'}
+                onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--border-light)'}>
+                Contact Consulting
+              </a>
             </motion.div>
 
             {/* Right Form/Widget Column */}
-            <motion.div id="consultation" className="seo-hero-form" initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }} style={{ display: 'flex', alignItems: 'flex-start', scrollMarginTop: 90 }}>
+            <motion.div id="consultation" className="seo-hero-form" variants={fadeUp} style={{ display: 'flex', alignItems: 'flex-start', scrollMarginTop: 90 }}>
               <div style={{ width: '100%' }}>
                 <BusinessSetup3Form source={data.slug} />
               </div>
             </motion.div>
 
             {/* Stats highlights */}
-            <motion.div className="seo-hero-stats" initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.1 } } }}>
-              <motion.div variants={fadeUp} style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
-                {data.hero.stats.map((s, i) => (
-                  <div key={i} style={{ background: 'var(--card-bg)', border: '1px solid var(--border-light)', borderRadius: '12px', padding: '16px 22px', minWidth: '130px' }}>
-                    <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: '1.8rem', fontWeight: 900, color: 'var(--accent-primary)', lineHeight: 1 }}>{s.value}</div>
-                    <div style={{ fontSize: '10px', color: 'var(--text-secondary)', marginTop: '4px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '.05em' }}>{s.label}</div>
-                  </div>
-                ))}
+            {data.hero.stats && data.hero.stats.length > 0 && (
+              <motion.div className="seo-hero-stats" variants={fadeUp}>
+                <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
+                  {data.hero.stats.map((s, i) => (
+                    <div key={i} style={{ background: 'var(--card-bg)', border: '1px solid var(--border-light)', borderRadius: '12px', padding: '16px 22px', minWidth: '130px' }}>
+                      <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: '1.8rem', fontWeight: 900, color: 'var(--accent-primary)', lineHeight: 1 }}>{s.value}</div>
+                      <div style={{ fontSize: '10px', color: 'var(--text-secondary)', marginTop: '4px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '.05em' }}>{s.label}</div>
+                    </div>
+                  ))}
+                </div>
               </motion.div>
-            </motion.div>
-          </div>
+            )}
+          </motion.div>
         </div>
       </section>
 
