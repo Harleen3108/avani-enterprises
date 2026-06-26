@@ -87,7 +87,7 @@ export default function ProductPageTemplate({ data }: ProductPageTemplateProps) 
       </Helmet>
 
       {/* ── HERO ────────────────────────────────────────────────────────── */}
-      <section style={{ minHeight: '60vh', display: 'flex', alignItems: 'center', position: 'relative', overflow: 'hidden', paddingTop: '120px', paddingBottom: '60px' }}>
+      <section style={{ minHeight: '60vh', display: 'flex', alignItems: 'center', position: 'relative', overflow: 'visible', paddingTop: '120px', paddingBottom: '60px' }}>
         <Grain /><Grid />
         <GlowBlob top="-10%" right="-5%" size={450} />
         <GlowBlob bottom="-10%" left="-5%" size={300} opacity={0.03} />
@@ -111,7 +111,7 @@ export default function ProductPageTemplate({ data }: ProductPageTemplateProps) 
               grid-column: 2;
               grid-row: 1 / span 2;
               z-index: 20;
-              margin-bottom: -150px;
+              margin-bottom: -120px;
             }
             .seo-hero-stats {
               grid-column: 1;
