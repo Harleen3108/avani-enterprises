@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ArrowRight, ChevronDown, Phone } from 'lucide-react';
 import { getResponsiveImageProps } from '../utils/responsiveImage';
+import { projectsData } from '../data/ProjectsData';
 
 const navLinks = [
   { label: 'HOME', path: '/' },
