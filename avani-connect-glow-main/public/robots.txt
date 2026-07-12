@@ -16,6 +16,7 @@ Disallow: /api/
 Disallow: /thank-you
 Disallow: /links
 Disallow: /home2/
+Disallow: /contact?
 
 Crawl-delay: 1
 
@@ -27,6 +28,7 @@ Disallow: /api/
 Disallow: /thank-you
 Disallow: /links
 Disallow: /home2/
+Disallow: /contact?
 
 User-agent: Googlebot-Image
 Allow: /
@@ -42,6 +44,7 @@ Disallow: /api/
 Disallow: /thank-you
 Disallow: /links
 Disallow: /home2/
+Disallow: /contact?
 
 # ── Other Search Engines ──────────────────────────────────────────────────────
 User-agent: DuckDuckBot
