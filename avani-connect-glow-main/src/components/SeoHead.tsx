@@ -22,6 +22,11 @@ const NOINDEX_PATHS = new Set([
   "/businesssetup1",
   "/not-found",
   "/get-consultation",
+  "/salary-hike-calculator",
+  "/social-media-content-planner",
+  "/auto-dm-tool",
+  "/bulk-dm-tool",
+  "/instagram-reels-scheduler",
 ]);
 const NOINDEX_PREFIXES = ["/home2/", "/api/"];
 
