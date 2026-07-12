@@ -53,7 +53,7 @@ export default function HeroSection({ source }: HeroSectionProps) {
         <div className="absolute -left-20 top-0 w-40 h-[200%] bg-white/5 -rotate-45 blur-2xl font-sans" />
 
         {/* Stardust Texture Overlay */}
-        <div className="absolute inset-0 opacity-[0.05] bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] pointer-events-none"></div>
+        <div className="absolute inset-0 opacity-[0.05] bg-[url('/stardust.png')] pointer-events-none"></div>
 
         {/* Ambient Glows */}
         <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[120px] animate-pulse-slow" />

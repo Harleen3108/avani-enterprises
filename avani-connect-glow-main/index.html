@@ -20,13 +20,19 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://avani-enterprises.onrender.com" crossorigin>
   
-  <!-- DNS prefetch for secondary domains to reduce preconnect overhead -->
+  <!-- DNS prefetch for secondary domains to reduce connection overhead -->
   <link rel="dns-prefetch" href="https://api.fontshare.com">
   <link rel="dns-prefetch" href="https://images.unsplash.com">
-  <link rel="dns-prefetch" href="https://avani-enterprises.onrender.com">
+  <!-- Note: avani-enterprises.onrender.com already covered by preconnect above — no dns-prefetch needed -->
 
-  <!-- Decorative texture — preloaded at low priority so it never competes with the LCP hero image -->
-  <link rel="preload" as="image" href="https://www.transparenttextures.com/patterns/stardust.png" fetchpriority="low" />
+  <!-- Geographic meta tags for local search engines -->
+  <meta name="geo.region" content="IN-HR" />
+  <meta name="geo.placename" content="Gurugram, Haryana, India" />
+  <meta name="geo.position" content="28.4955;77.0888" />
+  <meta name="ICBM" content="28.4955, 77.0888" />
+
+  <!-- Decorative texture (self-hosted) — preloaded at low priority so it never competes with the LCP hero image -->
+  <link rel="preload" as="image" href="/stardust.png" fetchpriority="low" />
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=Great+Vibes&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@400;500;600;700;800&display=swap" />
   <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=general-sans@200,300,400,500,600,700&f[]=clash-display@200,300,400,500,600,700&f[]=satoshi@300,400,500,700&display=swap" />
 
@@ -74,22 +80,27 @@
   <meta property="og:description" content="__SEO_DESCRIPTION__" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="__SEO_CANONICAL__" />
-  <meta property="og:image" content="https://www.avanienterprises.in/logo0.jpg" />
+  <meta property="og:image" content="https://www.avanienterprises.in/logo0.webp" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Avani Enterprises — Digital Marketing & Web Development Agency in India" />
   <meta property="og:site_name" content="Avani Enterprises" />
   <meta property="og:locale" content="en_IN" />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@AvaniEnterprises" />
+  <meta name="twitter:creator" content="@AvaniEnterprises" />
   <meta name="twitter:title" content="__SEO_TITLE__" />
   <meta name="twitter:description" content="__SEO_DESCRIPTION__" />
-  <meta name="twitter:image" content="https://www.avanienterprises.in/logo0.jpg" />
+  <meta name="twitter:image" content="https://www.avanienterprises.in/logo0.webp" />
+  <meta name="twitter:image:alt" content="Avani Enterprises — Digital Marketing & Web Development Agency in India" />
 
-  <!-- Google Site Verification -->
-  <meta name="google-site-verification" content="googleae433d72d00df74d" />
+  <!-- Google Search Console Verification -->
   <meta name="google-site-verification" content="btLwCqsDMCRiF9M1VEpHCehG-lRBEbAj3fPKMoKZK-U" />
+
+  <!-- Mobile browser chrome colour — matches the dark navy background -->
+  <meta name="theme-color" content="#0f172a" />
 
   <!-- Optimized Third-Party Trackers (Delayed load to reduce TBT / JS execution time) -->
   <script>
@@ -142,7 +153,7 @@
     })();
   </script>
 
-  <!-- Structured Data: Organization + WebSite (static, crawlable before JS) -->
+  <!-- Structured Data: Organization + WebSite + LocalBusiness + Person (static, visible to Googlebot before JS) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -151,30 +162,62 @@
         "@type": "Organization",
         "@id": "https://www.avanienterprises.in/#organization",
         "name": "Avani Enterprises",
+        "legalName": "Avani Enterprises",
         "url": "https://www.avanienterprises.in",
+        "foundingDate": "2016",
+        "foundingLocation": {
+          "@type": "Place",
+          "name": "Rohtak, Haryana, India"
+        },
+        "numberOfEmployees": {
+          "@type": "QuantitativeValue",
+          "value": 30
+        },
         "logo": {
           "@type": "ImageObject",
+          "@id": "https://www.avanienterprises.in/#logo",
           "url": "https://www.avanienterprises.in/logo.png",
           "width": 512,
-          "height": 512
+          "height": 512,
+          "caption": "Avani Enterprises"
+        },
+        "image": {
+          "@id": "https://www.avanienterprises.in/#logo"
+        },
+        "founder": {
+          "@id": "https://www.avanienterprises.in/#person/kapilkhandelwal"
         },
         "sameAs": [
           "https://www.linkedin.com/company/avani-enterprises-india",
           "https://www.instagram.com/avani_enterprises_india/",
           "https://twitter.com/AvaniEnterprises"
         ],
-        "contactPoint": {
-          "@type": "ContactPoint",
-          "contactType": "customer service",
-          "availableLanguage": "English"
-        },
-        "description": "Avani Enterprises — India's leading digital marketing and web development agency helping businesses scale with AI-driven SEO, paid media, and custom software."
+        "contactPoint": [
+          {
+            "@type": "ContactPoint",
+            "telephone": "+91-92536-25099",
+            "email": "kp@avanienterprises.in",
+            "contactType": "customer service",
+            "areaServed": ["IN", "AE", "GB", "US"],
+            "availableLanguage": ["English", "Hindi"],
+            "contactOption": "TollFree",
+            "hoursAvailable": {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+              "opens": "09:00",
+              "closes": "19:00"
+            }
+          }
+        ],
+        "description": "Avani Enterprises — India's leading digital marketing and web development agency helping businesses scale with AI-driven SEO, paid media, custom software, and HR solutions. 150+ clients, 300+ projects, 8+ years."
       },
       {
         "@type": "WebSite",
         "@id": "https://www.avanienterprises.in/#website",
         "name": "Avani Enterprises",
         "url": "https://www.avanienterprises.in",
+        "description": "Web development, SEO, digital marketing, AI automation, and custom HR & CRM software for businesses across India.",
+        "inLanguage": "en-IN",
         "publisher": { "@id": "https://www.avanienterprises.in/#organization" },
         "potentialAction": {
           "@type": "SearchAction",
@@ -186,14 +229,18 @@
         }
       },
       {
-        "@type": "ProfessionalService",
+        "@type": ["LocalBusiness", "ProfessionalService"],
         "@id": "https://www.avanienterprises.in/#localbusiness",
         "name": "Avani Enterprises",
-        "image": "https://www.avanienterprises.in/logo.png",
+        "image": {
+          "@id": "https://www.avanienterprises.in/#logo"
+        },
         "url": "https://www.avanienterprises.in",
-        "telephone": "+919253625099",
+        "telephone": "+91-92536-25099",
         "email": "kp@avanienterprises.in",
         "priceRange": "$$",
+        "currenciesAccepted": "INR",
+        "paymentAccepted": "Cash, Credit Card, Bank Transfer, UPI",
         "parentOrganization": { "@id": "https://www.avanienterprises.in/#organization" },
         "address": {
           "@type": "PostalAddress",
@@ -204,34 +251,131 @@
           "addressCountry": "IN"
         },
         "geo": { "@type": "GeoCoordinates", "latitude": 28.4955, "longitude": 77.0888 },
+        "hasMap": "https://maps.google.com/?q=DLF+Cyber+City+Gurugram+Haryana+122002",
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+            "opens": "09:00",
+            "closes": "19:00"
+          }
+        ],
         "areaServed": [
+          { "@type": "Country", "name": "India" },
           { "@type": "AdministrativeArea", "name": "Haryana" },
           { "@type": "AdministrativeArea", "name": "Delhi NCR" },
-          { "@type": "City", "name": "Gurgaon" },
+          { "@type": "City", "name": "Gurugram" },
           { "@type": "City", "name": "Noida" },
           { "@type": "City", "name": "Faridabad" },
           { "@type": "City", "name": "Rohtak" },
           { "@type": "City", "name": "Delhi" },
-          { "@type": "City", "name": "Mumbai" }
+          { "@type": "City", "name": "Mumbai" },
+          { "@type": "City", "name": "Dubai" }
         ],
-        "knowsAbout": ["Web Development", "SEO", "Digital Marketing", "Google Ads", "Meta Ads", "AI Automation", "CRM Development", "HR Portal Development", "Custom Software Development"],
+        "sameAs": [
+          "https://www.linkedin.com/company/avani-enterprises-india",
+          "https://www.instagram.com/avani_enterprises_india/",
+          "https://twitter.com/AvaniEnterprises"
+        ],
+        "knowsAbout": [
+          "Web Development",
+          "Search Engine Optimization",
+          "Digital Marketing",
+          "Google Ads Management",
+          "Meta Advertising",
+          "AI Automation",
+          "CRM Development",
+          "HR Portal Development",
+          "Custom Software Development",
+          "Mobile App Development",
+          "ERP Development",
+          "Social Media Marketing"
+        ],
         "hasOfferCatalog": {
           "@type": "OfferCatalog",
-          "name": "Services",
+          "name": "Digital Services",
           "itemListElement": [
             { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Web Development", "url": "https://www.avanienterprises.in/web-development-company" } },
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "SEO", "url": "https://www.avanienterprises.in/seo-company" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "SEO Services", "url": "https://www.avanienterprises.in/seo-company" } },
             { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Digital Marketing", "url": "https://www.avanienterprises.in/digital-marketing-company" } },
             { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Google Ads", "url": "https://www.avanienterprises.in/google-ads-agency" } },
             { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI Automation", "url": "https://www.avanienterprises.in/ai-automation-company" } },
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "CRM Development", "url": "https://www.avanienterprises.in/crm-development-company" } }
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "CRM Development", "url": "https://www.avanienterprises.in/crm-development-company" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "HR Portal Software", "url": "https://www.avanienterprises.in/hr-portal" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Mobile App Development", "url": "https://www.avanienterprises.in/mobile-app-development-company" } }
           ]
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.9",
+          "reviewCount": "48",
+          "bestRating": "5",
+          "worstRating": "1"
         }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://www.avanienterprises.in/#person/kapilkhandelwal",
+        "name": "Kapil Khandelwal",
+        "givenName": "Kapil",
+        "familyName": "Khandelwal",
+        "jobTitle": "Founder & CEO",
+        "description": "Kapil Khandelwal is the Founder and CEO of Avani Enterprises, a digital marketing and web development agency based in Gurugram, India, with 8+ years of experience delivering SEO, AI, and custom software solutions.",
+        "url": "https://www.avanienterprises.in/about",
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://www.avanienterprises.in/logo.png"
+        },
+        "worksFor": {
+          "@type": "Organization",
+          "@id": "https://www.avanienterprises.in/#organization"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/in/kapil-khandelwal-avani/"
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://www.avanienterprises.in/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What services does Avani Enterprises offer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Avani Enterprises offers Web Development, SEO, Google Ads, Meta Ads, Social Media Marketing, AI Automation, CRM Development, HR Portal Development, and Custom Software Development for businesses across India and internationally."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Where is Avani Enterprises located?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Avani Enterprises is headquartered at DLF Cyber City, Gurugram, Haryana 122002, India. We also serve clients in Mumbai, Delhi NCR, Rohtak, Dubai, London, and across India and internationally."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How many years of experience does Avani Enterprises have?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Avani Enterprises was founded in 2016 and has over 8 years of experience, having delivered 300+ projects for 150+ clients across web development, SEO, digital marketing, and custom software."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does Avani Enterprises work with international clients?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. While we are based in India, Avani Enterprises serves clients in the UAE (Dubai, Abu Dhabi), UK (London), USA, Canada, Australia, Qatar, and Singapore in addition to clients across all major Indian cities."
+            }
+          }
+        ]
       }
     ]
   }
   </script>
-  <!-- Dynamic structured data (BreadcrumbList, FAQPage) injected per-route by React -->
+  <!-- Dynamic structured data (BreadcrumbList, FAQPage, Service, Article) injected per-route by React -->
 </head>
 
 <body>

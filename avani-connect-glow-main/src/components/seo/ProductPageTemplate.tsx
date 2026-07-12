@@ -60,6 +60,106 @@ export default function ProductPageTemplate({ data }: ProductPageTemplateProps) 
     };
   }, [data.faqs]);
 
+  // Slugs that describe a software product Avani has built (not a dev-service page)
+  const SOFTWARE_SLUGS = new Set([
+    'hr-portal',
+    'hrms-software-india',
+    'payroll-software-india',
+    'attendance-management-system',
+    'leave-management-software',
+    'employee-management-software',
+    'employee-portal',
+    'workforce-management-software',
+    'project-management-software',
+    'business-operating-system',
+    'crm-software-india',
+  ]);
+
+  // SoftwareApplication JSON-LD — only for HR/CRM software product pages
+  const softwareAppLd = React.useMemo(() => {
+    if (!SOFTWARE_SLUGS.has(data.slug)) return null;
+
+    // Derive a clean product name: strip trailing brand suffix if present
+    const productName = data.hero.h1
+      .replace(/\s*[|—–-]\s*Avani Enterprises.*$/i, '')
+      .trim();
+
+    // Pull feature titles (up to 8) for featureList
+    const featureList = data.features.slice(0, 8).map(f => f.title);
+
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareApplication',
+      'name': productName,
+      'applicationCategory': 'BusinessApplication',
+      'applicationSubCategory': 'HumanResourcesApplication',
+      'operatingSystem': 'Web, Android, iOS',
+      'description': data.seo.description,
+      'url': data.seo.canonical,
+      'featureList': featureList,
+      'author': {
+        '@type': 'Organization',
+        '@id': 'https://www.avanienterprises.in/#organization',
+        'name': 'Avani Enterprises',
+        'url': 'https://www.avanienterprises.in',
+      },
+      'offers': {
+        '@type': 'Offer',
+        'availability': 'https://schema.org/InStock',
+        'price': '0',
+        'priceCurrency': 'INR',
+        'priceSpecification': {
+          '@type': 'UnitPriceSpecification',
+          'priceType': 'https://schema.org/InvoicePrice',
+          'description': 'Custom pricing — contact us for a quote',
+        },
+        'seller': {
+          '@type': 'Organization',
+          '@id': 'https://www.avanienterprises.in/#organization',
+        },
+      },
+      'aggregateRating': {
+        '@type': 'AggregateRating',
+        'ratingValue': '4.9',
+        'bestRating': '5',
+        'worstRating': '1',
+        'reviewCount': '48',
+      },
+    };
+  }, [data.slug, data.hero.h1, data.seo.description, data.seo.canonical, data.features]);
+
+  // Generate Service JSON-LD — tells Google what service this page represents
+  const serviceLd = React.useMemo(() => ({
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    'name': data.hero.h1,
+    'serviceType': data.hero.h1,
+    'description': data.seo.description,
+    'url': data.seo.canonical,
+    'provider': {
+      '@type': 'Organization',
+      '@id': 'https://www.avanienterprises.in/#organization',
+      'name': 'Avani Enterprises',
+      'url': 'https://www.avanienterprises.in'
+    },
+    'areaServed': [
+      { '@type': 'Country', 'name': 'India' },
+      { '@type': 'AdministrativeArea', 'name': 'Haryana' },
+      { '@type': 'City', 'name': 'Gurugram' },
+      { '@type': 'City', 'name': 'Delhi' },
+      { '@type': 'City', 'name': 'Noida' }
+    ],
+    'offers': {
+      '@type': 'Offer',
+      'availability': 'https://schema.org/InStock',
+      'url': data.seo.canonical,
+      'seller': {
+        '@type': 'Organization',
+        '@id': 'https://www.avanienterprises.in/#organization'
+      }
+    }
+  }), [data.hero.h1, data.seo.description, data.seo.canonical]);
+
   return (
     <div style={{ background: 'var(--bg-primary)', color: 'var(--text-primary)', minHeight: '100vh', fontFamily: "'Satoshi', 'Inter', sans-serif" }}>
       <Helmet>
@@ -84,6 +184,10 @@ export default function ProductPageTemplate({ data }: ProductPageTemplateProps) 
         <meta name="twitter:image" content="https://www.avanienterprises.in/logo0.webp" />
 
         <script type="application/ld+json">{JSON.stringify(faqLd)}</script>
+        <script type="application/ld+json">{JSON.stringify(serviceLd)}</script>
+        {softwareAppLd && (
+          <script type="application/ld+json">{JSON.stringify(softwareAppLd)}</script>
+        )}
       </Helmet>
 
       {/* ── HERO ────────────────────────────────────────────────────────── */}

@@ -128,5 +128,7 @@ Allow: /
 User-agent: TelegramBot
 Allow: /
 
-# ── Sitemap ───────────────────────────────────────────────────────────────────
+# ── Sitemaps ──────────────────────────────────────────────────────────────────
+Sitemap: https://www.avanienterprises.in/sitemap-index.xml
 Sitemap: https://www.avanienterprises.in/sitemap.xml
+Sitemap: https://www.avanienterprises.in/sitemap-images.xml

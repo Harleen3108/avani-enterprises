@@ -688,6 +688,11 @@ const STATIC_SEO_LOOKUP = {
     title: "Google Ads Agency in Haryana | High ROI PPC Campaigns — Avani Enterprises",
     description: "Maximize your ROI with the leading Google Ads agency in Haryana. We design high-converting PPC search, shopping, and display campaigns. Request a free PPC audit.",
     keywords: "google ads agency haryana, ppc company haryana, search engine marketing haryana, google adwords agency panipat"
+  },
+  "/sitemap": {
+    title: "Site Map | Avani Enterprises",
+    description: "Browse the complete site map of Avani Enterprises — all web development, SEO, digital marketing, AI automation, and HR software pages in one place.",
+    keywords: "avani enterprises site map, avani enterprises pages, avani enterprises services list"
   }
 };
 
@@ -758,7 +763,7 @@ export default async function handler(req, res) {
     const keywords    = seo?.metaKeywords     || fallbackSeo?.keywords    || "digital marketing agency in india, seo services india, social media marketing, performance marketing company, lead generation services";
     const canonical   = seo?.canonicalUrl     || buildCanonical(normalizedPath);
     const robots      = isNoIndex(normalizedPath) ? "noindex,nofollow" : (seo?.robots || "index,follow");
-    const ogImage     = seo?.ogImage          || `${SITE_URL}/logo0.jpg`;
+    const ogImage     = seo?.ogImage          || `${SITE_URL}/logo0.webp`;
 
     // ── 4. Inject into HTML (server-side, visible to Googlebot on first crawl) ─
     html = html

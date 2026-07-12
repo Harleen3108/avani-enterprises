@@ -26,6 +26,20 @@
       ]
     },
     {
+      "source": "/sitemap-images.xml",
+      "headers": [
+        { "key": "Content-Type", "value": "application/xml; charset=utf-8" },
+        { "key": "Cache-Control", "value": "public, max-age=3600, s-maxage=3600" }
+      ]
+    },
+    {
+      "source": "/sitemap-index.xml",
+      "headers": [
+        { "key": "Content-Type", "value": "application/xml; charset=utf-8" },
+        { "key": "Cache-Control", "value": "public, max-age=3600, s-maxage=3600" }
+      ]
+    },
+    {
       "source": "/robots.txt",
       "headers": [
         { "key": "Content-Type", "value": "text/plain; charset=utf-8" },
@@ -37,7 +51,7 @@
     {
       "source": "/news-sitemap.xml",
       "destination": "/sitemap.xml",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/admin",
@@ -51,7 +65,7 @@
       "destination": "/assets/:path*"
     },
     {
-      "source": "/((?!api|assets|admin|sitemap\\.xml|robots\\.txt|BingSiteAuth\\.xml|favicon\\.ico|logo\\.png|.*\\..*).*)",
+      "source": "/((?!api|assets|admin|sitemap\\.xml|sitemap-images\\.xml|sitemap-index\\.xml|robots\\.txt|llms\\.txt|BingSiteAuth\\.xml|favicon\\.ico|logo\\.png|.*\\..*).*)",
       "destination": "/api/seo?path=/$1"
     }
   ]

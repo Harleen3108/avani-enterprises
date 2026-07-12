@@ -55,11 +55,17 @@ const BlogDetail = () => {
     headline: blog.title,
     description: blog.excerpt || blog.metaDescription || blog.title,
     image: imageUrl || 'https://www.avanienterprises.in/logo.png',
-    author: { '@type': 'Organization', name: blog.author || 'Avani Enterprises', url: 'https://www.avanienterprises.in' },
+    author: {
+      '@type': 'Person',
+      '@id': 'https://www.avanienterprises.in/#kapil-khandelwal',
+      name: blog.author || 'Kapil Khandelwal',
+      url: 'https://www.linkedin.com/in/kapil-khandelwal-avani/'
+    },
     publisher: {
       '@type': 'Organization',
+      '@id': 'https://www.avanienterprises.in/#organization',
       name: 'Avani Enterprises',
-      logo: { '@type': 'ImageObject', url: 'https://www.avanienterprises.in/logo.png' }
+      logo: { '@type': 'ImageObject', url: 'https://www.avanienterprises.in/logo0.webp', width: 200, height: 60 }
     },
     datePublished: blog.publishedAt || blog.createdAt,
     dateModified: blog.updatedAt || blog.publishedAt || blog.createdAt,

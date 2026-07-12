@@ -189,13 +189,24 @@ export function buildLocalBusinessLd({ service, city, description, areaServed }:
   { service: string; city: string; description: string; areaServed: string[] }) {
   return {
     '@context': 'https://schema.org',
-    '@type': 'MarketingAgency',
+    '@type': ['LocalBusiness', 'MarketingAgency', 'ProfessionalService'],
     '@id': `${BIZ.url}/#localbusiness`,
     name: BIZ.name,
+    legalName: 'Avani Enterprises',
     url: BIZ.url,
     telephone: BIZ.phone,
     email: BIZ.email,
     description,
+    image: `${BIZ.url}/logo0.webp`,
+    logo: {
+      '@type': 'ImageObject',
+      url: `${BIZ.url}/logo0.webp`,
+      width: 200,
+      height: 60,
+    },
+    priceRange: '₹₹',
+    currenciesAccepted: 'INR',
+    paymentAccepted: 'Cash, Credit Card, Debit Card, Bank Transfer, UPI',
     address: {
       '@type': 'PostalAddress',
       streetAddress: BIZ.address.street,
@@ -209,17 +220,43 @@ export function buildLocalBusinessLd({ service, city, description, areaServed }:
       latitude: BIZ.geo.lat,
       longitude: BIZ.geo.lng,
     },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '4.9',
+      bestRating: '5',
+      worstRating: '1',
+      reviewCount: '48',
+    },
     openingHoursSpecification: [{
       '@type': 'OpeningHoursSpecification',
       dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
       opens: '09:00',
       closes: '19:00',
     }],
-    areaServed: areaServed.map(a => ({ '@type': 'City', name: a })),
+    contactPoint: {
+      '@type': 'ContactPoint',
+      telephone: BIZ.phone,
+      email: BIZ.email,
+      contactType: 'sales',
+      availableLanguage: ['English', 'Hindi'],
+      areaServed: 'IN',
+    },
+    areaServed: [
+      { '@type': 'Country', name: 'India' },
+      ...areaServed.map(a => ({ '@type': 'City', name: a })),
+    ],
     sameAs: Object.values(BIZ.social),
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
       name: `${service} Services`,
+      itemListElement: [{
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: `${service} in ${city}`,
+          description,
+        },
+      }],
     },
   };
 }

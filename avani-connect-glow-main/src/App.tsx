@@ -123,6 +123,7 @@ const LeadManagementProject = lazyWithRetry(() => import("./pages/LeadManagement
 const WhatsAppAutomationProject = lazyWithRetry(() => import("./pages/WhatsAppAutomationProject"));
 const BusinessProcessOptimizationProject = lazyWithRetry(() => import("./pages/BusinessProcessOptimizationProject"));
 const SevenDayLaunch = lazyWithRetry(() => import("./pages/SevenDayLaunch"));
+const HtmlSitemap = lazyWithRetry(() => import("./pages/HtmlSitemap"));
 
 // नई लाइन: ThankYou page import
 const ThankYou = lazyWithRetry(() => import("./pages/ThankYou"));
@@ -130,7 +131,7 @@ const LandingPage = lazyWithRetry(() => import("./pages/LandingPage"));
 const LandingPage1 = lazyWithRetry(() => import("./pages/LandingPage1"));
 const LandingPage2 = lazyWithRetry(() => import("./pages/LandingPage2"));
 const LandingPage3 = lazyWithRetry(() => import("./pages/LandingPage3"));
-import Chatbot from "./components/Chatbot";
+const Chatbot = lazyWithRetry(() => import("./components/Chatbot"));
 const Links = lazyWithRetry(() => import("./pages/Links"));
 import Home from "./components/Home";
 const Home2 = lazyWithRetry(() => import("./pages/Home2"));
@@ -752,6 +753,7 @@ const AppLayout = () => {
           <Route path="/businesssetup2" element={<LandingPage2 />} />
           <Route path="/businesssetup3" element={<LandingPage3 />} />
 
+          <Route path="/sitemap" element={<HtmlSitemap />} />
           <Route path="/not-found" element={<NotFound />} />
           <Route path="/web-dev" element={<Index />} />
           <Route path="/7-day-launch" element={<SevenDayLaunch />} />
@@ -765,7 +767,7 @@ const AppLayout = () => {
         </Suspense>
       </main>
       {!hideFooter && (useFooter1 ? <Footer1 /> : <Footer />)}
-      {!hideNavbar && <Chatbot />}
+      {!hideNavbar && <Suspense fallback={null}><Chatbot /></Suspense>}
     </div>
   );
 };
