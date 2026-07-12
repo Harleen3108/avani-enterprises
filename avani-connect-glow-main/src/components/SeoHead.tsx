@@ -28,7 +28,7 @@ const NOINDEX_PATHS = new Set([
   "/bulk-dm-tool",
   "/instagram-reels-scheduler",
 ]);
-const NOINDEX_PREFIXES = ["/home2/", "/api/"];
+const NOINDEX_PREFIXES = ["/home2/", "/api/", "/newsletters/", "/courses/"];
 
 function isNoIndex(pathname: string): boolean {
   const p = pathname.toLowerCase();

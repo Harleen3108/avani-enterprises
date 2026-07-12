@@ -27,7 +27,7 @@ const NOINDEX_PATHS = new Set([
 ]);
 
 // Prefix-based noindex (any path starting with these segments)
-const NOINDEX_PREFIXES = ["/home2/", "/api/"];
+const NOINDEX_PREFIXES = ["/home2/", "/api/", "/newsletters/", "/courses/"];
 
 function isNoIndex(pagePath) {
   if (NOINDEX_PATHS.has(pagePath)) return true;
