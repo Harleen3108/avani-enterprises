@@ -12,7 +12,7 @@ const offices = [
   {
     city: 'Gurgaon', country: 'India', label: 'NCR Office', tagline: 'Corporate powerhouse',
     description: "Strategic presence in India's corporate capital serving enterprise clients.",
-    image: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=800&auto=format&fit=crop', color: '#f59e0b',
+    image: '/gurgaon.jpg', color: '#f59e0b',
   },
   {
     city: 'Mumbai', country: 'India', label: 'West India Office', tagline: 'Financial nerve center',
