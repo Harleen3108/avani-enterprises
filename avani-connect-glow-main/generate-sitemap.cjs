@@ -344,6 +344,16 @@ console.log(`   ${urls.length} URLs | lastmod build date: ${TODAY}`);
 // ── Image Sitemap ─────────────────────────────────────────────────────────────
 // Maps page URLs to their primary images for Google Images discoverability.
 // Only include meaningful, content-relevant images (no icons/favicons).
+
+// XML requires these 5 characters escaped in text content
+function xmlEscape(str) {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
+}
 const imageEntries = [
   {
     loc: `${BASE_URL}/`,
@@ -416,8 +426,8 @@ const imageSitemapEntries = imageEntries
         [
           `    <image:image>`,
           `      <image:loc>${imgLoc}</image:loc>`,
-          `      <image:title>${title}</image:title>`,
-          `      <image:caption>${caption}</image:caption>`,
+          `      <image:title>${xmlEscape(title)}</image:title>`,
+          `      <image:caption>${xmlEscape(caption)}</image:caption>`,
           `    </image:image>`,
         ].join("\n")
       )
