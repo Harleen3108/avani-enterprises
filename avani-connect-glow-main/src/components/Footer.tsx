@@ -54,9 +54,12 @@ const Footer = () => (
               onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'var(--text-secondary)'}>
               <Phone size={12} color="var(--accent-primary)" /> +91 92536 25099
             </a>
-            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', fontFamily: "'Inter', sans-serif", fontSize: '12px', color: 'var(--text-secondary)' }}>
-              <MapPin size={12} color="var(--accent-primary)" style={{ marginTop: '2px', flexShrink: 0 }} /> Gurgaon · Mumbai · Rohtak · Australia
-            </div>
+            <a href="https://maps.google.com/?q=3rd+Floor+Tower-B+Cyber+Park+Durga+Colony+Sector+39+Gurugram+Haryana+122001" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', fontFamily: "'Inter', sans-serif", fontSize: '12px', color: 'var(--text-secondary)', textDecoration: 'none', transition: 'color 0.2s' }}
+              onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = 'var(--accent-primary)'}
+              onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'var(--text-secondary)'}>
+              <MapPin size={12} color="var(--accent-primary)" style={{ marginTop: '2px', flexShrink: 0 }} />
+              <span>3rd Floor, Tower-B, Cyber Park,<br />Durga Colony, Sector 39,<br />Gurugram, Haryana 122001</span>
+            </a>
           </div>
 
           {/* Social Media */}
