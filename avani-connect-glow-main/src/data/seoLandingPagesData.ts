@@ -1981,6 +1981,14 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
           'Scaling Google Ads is not about increasing budget, it is about improving efficiency first. We systematically lower your cost per acquisition through bid strategy, negative keywords, audience refinement, and continuous A/B testing.',
           'Once a campaign is profitable and predictable, we scale it confidently, expanding into new keywords, shopping, and retargeting to grow your lead volume without sacrificing ROI.'
         ]
+      },
+      {
+        heading: 'Google Ads for Indian Markets: Campaigns Built Around How India Actually Buys',
+        paragraphs: [
+          'Indian buyers do not behave like Western audiences, and your Google Ads campaigns should not be set up as if they do. Hindi and regional-language campaigns consistently outperform English-only ads in Tier 2 and Tier 3 cities — markets where cost-per-click is 40-60% lower but purchase intent is rising sharply. We run bilingual campaign structures that serve the right language variant based on user location and device, so your budget is not wasted on mismatched ad copy that fails to convert.',
+          'Mobile drives over 75% of Google search traffic in India, which makes call-only ads one of the most under-used and highest-ROI formats available to Indian businesses. A call-only campaign lets a user in Jaipur or Surat tap your ad and dial directly — no landing page required, no slow 3G load time killing the conversion. We build call-only campaigns alongside standard search, set bid adjustments for peak calling hours, and integrate call tracking so every inbound lead is attributed and measured.',
+          'For Indian ecommerce and D2C brands, Google Shopping and Performance Max campaigns require India-specific product feed optimisation — accurate pricing in INR, GST-inclusive labelling, and festival season budget planning around Diwali, Dussehra, and the January sales window. Performance Max in particular needs strong audience signals seeded from your existing Indian customer data to avoid wasting impressions on irrelevant segments. We manage feed quality, asset group segmentation, and monthly Performance Max audits to keep CPAs in check as competition intensifies on Google India.'
+        ]
       }
     ],
     faqs: [
@@ -1989,7 +1997,9 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       { q: 'How quickly can Google Ads generate leads?', a: 'Campaigns can start driving qualified leads within days of launch, then improve as we optimise bids, keywords, and landing pages.' },
       { q: 'Are you a certified Google Ads partner?', a: 'Our team works daily in Google Ads with hands-on certified expertise across search, shopping, Performance Max, and display.' },
       { q: 'Will you improve my existing campaigns?', a: 'Yes. We frequently audit and restructure underperforming accounts to cut wasted spend and lift conversions, often improving ROI without raising budget.' },
-      { q: 'Do you optimise landing pages too?', a: 'Absolutely. Great ads need great landing pages, we build and optimise conversion-focused pages to maximise your return on ad spend.' }
+      { q: 'Do you optimise landing pages too?', a: 'Absolutely. Great ads need great landing pages, we build and optimise conversion-focused pages to maximise your return on ad spend.' },
+      { q: 'What is a realistic monthly budget to start Google Ads in India and see measurable results?', a: 'For most Indian B2B and service businesses, a starting budget of Rs 30,000 to Rs 60,000 per month gives enough data to optimise within 60 days. Ecommerce and D2C brands targeting pan-India typically need Rs 75,000 or more to run Shopping and Search simultaneously. Below Rs 20,000 per month, the campaign rarely generates enough clicks for statistically valid optimisation, especially in competitive categories like real estate, finance, or education where CPCs range from Rs 80 to Rs 300 per click.' },
+      { q: 'How do you handle Google Ads for businesses that sell in Hindi-speaking markets but only have an English website?', a: 'This is a common situation for Indian brands expanding beyond metros. We run Hindi ad copy that drives traffic to your existing English landing pages while simultaneously advising on which pages to translate first for maximum conversion lift. In the interim, we use ad extensions, structured snippets, and call-out text in Hindi to set the right expectation before the click. Long term, even translating your top three landing pages into Hindi can reduce bounce rates by 25-35% for non-metro audiences, which directly lowers your cost per conversion.' }
     ],
     relatedLinks: [
       { label: 'Digital Marketing Company', href: '/digital-marketing-company', desc: 'Full-funnel growth.' },
@@ -2369,6 +2379,14 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
                   "We set up the operational backbone that keeps an online store running cleanly: multiple payment gateways with COD support, secure checkout, live inventory and stock sync, automated order and shipping flows, and GST-ready invoicing built for the Indian market.",
                   "Whether you sell ten SKUs or ten thousand, we choose the right platform — Shopify, WooCommerce, or a custom build — and architect it to stay fast during festive-sale spikes and scale across marketplaces without an expensive rebuild later."
               ]
+          },
+          {
+              "heading": "Built for India's Ecommerce Reality: COD, Regional Languages, GST Invoicing, and Logistics API Integration",
+              "paragraphs": [
+                  "Over 60% of Indian ecommerce orders are still placed via Cash on Delivery. Any platform that ignores this loses a majority of its potential buyers. We integrate COD workflows with intelligent fraud-scoring logic — minimising RTO (Return to Origin) losses that routinely eat 8–15% of GMV for D2C brands. COD confirmation via WhatsApp OTP, prepaid-incentive nudges, and address-verification layers are built into every store we deliver.",
+                  "India's 780 million internet users speak in dozens of languages. We build multilingual storefronts supporting Hindi, Tamil, Telugu, Marathi, Kannada, and Bengali using structured hreflang and locale-aware CMS setups — not superficial Google Translate overlays. Combined with WhatsApp Commerce integration (Meta's Business API), your customers can browse, ask queries, and complete purchases without ever leaving the app they already use 4+ hours a day.",
+                  "GST-compliant invoicing is non-negotiable for Indian sellers — GSTIN on every invoice, HSN code mapping, and accurate IGST/CGST/SGST breakdowns. We integrate directly with Shiprocket, Delhivery, and Ecom Express APIs to automate AWB generation, real-time shipment tracking pages, and NDR (Non-Delivery Report) management workflows. This eliminates the manual logistics overhead that strangles most growing D2C operations between ₹10L and ₹1Cr monthly revenue."
+              ]
           }
       ],
       "faqs": [
@@ -2395,6 +2413,14 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
           {
               "q": "Do you provide support after the store goes live?",
               "a": "Absolutely. We offer ongoing maintenance, security updates, speed optimisation, new integrations, and feature development to keep your store fast, secure, and converting."
+          },
+          {
+              "q": "Can you migrate our existing Shopify or WooCommerce store without losing product data, SEO rankings, or order history?",
+              "a": "Yes. We handle full-stack migrations including product catalogues, customer records, historical orders, meta titles, canonical URLs, and 301 redirect mapping. Our migration process is staged — we run the new platform in parallel, verify data integrity, and only cut DNS once QA is complete. For stores with 10,000+ SKUs or significant organic traffic, we provide a pre-migration SEO audit to protect rankings during the switchover."
+          },
+          {
+              "q": "How do you handle high-traffic sale events like Big Billion Days or brand-specific flash sales that spike orders 10x overnight?",
+              "a": "We architect ecommerce infrastructure on auto-scaling cloud environments — typically AWS or Google Cloud — with CDN caching, database read-replica failover, and queue-based order processing so the checkout flow does not break under sudden load. Before any major sale event, we run load tests simulating 5x to 20x your baseline traffic. We also configure out-of-stock logic, backorder handling, and dynamic inventory sync with your warehouse or ERP to prevent overselling during peak windows."
           }
       ],
       "relatedLinks": [
@@ -6311,6 +6337,14 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
           "When the Shopify app store cannot do what your brand needs, we build it. Our team develops private Shopify apps, custom sections, and checkout logic for bundles, subscriptions, loyalty, B2B wholesale pricing, and ERP or CRM sync over the Shopify API, so your operations and storefront stay in step as you grow.",
           "Moving to Shopify from WooCommerce, Magento, or a legacy cart is where many brands lose data and rankings. We handle migration end to end, mapping products, variants, orders, customers, and URL redirects so SEO equity, reviews, and history survive the move. The result is a faster, cleaner store on Shopify with minimal downtime and no nasty surprises after launch."
         ]
+      },
+      {
+        "heading": "Shopify vs WooCommerce for Indian Brands: Transaction Fees, GST Handling, and Payment Gateway Reality",
+        "paragraphs": [
+          "Shopify charges a 2% transaction fee on its Basic plan unless you use Shopify Payments — which is not yet available in India. This means every Razorpay or PayU transaction adds that 2% on top of your gateway charges. On WooCommerce, there are no platform-level transaction fees; you pay only Razorpay or PayU's MDR of roughly 1.75-2% depending on your volume tier. For a brand doing Rs. 10 lakh monthly in GMV, that Shopify surcharge alone costs Rs. 20,000 extra per month. Upgrading to Shopify Advanced at Rs. 22,000/month removes the fee but only makes financial sense beyond Rs. 11 lakh monthly revenue.",
+          "Shopify's native tax engine now supports GST with IGST, CGST, and SGST splits, and a competent Shopify developer can configure HSN code mapping and automated tax calculations per state. WooCommerce handles this through plugins like WooCommerce GST Plugin or Astra's tax suite, which require more configuration but offer deeper flexibility for businesses with complex B2B invoicing needs. For D2C brands selling across states, Shopify's built-in compliance is faster to set up; for manufacturers or distributors with tiered GST slabs and credit note workflows, WooCommerce gives more control without per-feature app costs.",
+          "Localization for Indian buyers goes beyond adding rupee symbols. It means supporting Hindi and regional language storefronts, enabling COD as a payment option (still 25-35% of orders on many Indian D2C brands), displaying EMI options from Bajaj Finserv or ZestMoney at checkout, and optimizing for slower mobile connections common in Tier 2 and Tier 3 cities. Shopify handles COD natively through Razorpay Magic Checkout integration; WooCommerce needs an additional COD verification plugin to reduce RTO. Both platforms support INR pricing fully, but Shopify's app ecosystem for Indian-specific UX — such as pincode serviceability checkers and regional courier integrations — is now more mature."
+        ]
       }
     ],
     "faqs": [
@@ -6337,6 +6371,14 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       {
         "q": "Do you work with D2C brands across India and the Gulf?",
         "a": "Yes. From our base at DLF Cyber City, Gurugram, we build and scale Shopify stores for D2C brands and retailers across India, the Gulf, and international markets, with India-ready payments, GST invoicing, and shipping built in."
+      },
+      {
+        "q": "Does Shopify support Razorpay and PayU in India, and are there extra charges?",
+        "a": "Yes, both Razorpay and PayU integrate natively with Shopify via official payment provider plugins. However, because Shopify Payments is unavailable in India, Shopify charges an additional transaction fee of 0.5% to 2% depending on your plan on top of the gateway's own MDR. To eliminate this fee you must upgrade to Shopify Advanced (Rs. 22,000/month) or Shopify Plus. WooCommerce does not charge any platform transaction fee, making it more cost-effective at lower GMV volumes when using the same Indian payment gateways."
+      },
+      {
+        "q": "Can Shopify handle Indian GST filing requirements including HSN codes and interstate tax splits?",
+        "a": "Shopify's tax engine supports IGST, CGST, and SGST splits and can be configured to apply correct GST rates based on the customer's delivery state. A developer can map HSN codes to product categories and generate GST-compliant invoices through apps like Refrens or QuickBooks India integration. However, Shopify's native reporting does not directly integrate with GSTN or generate GSTR-1 files — you still need a third-party accounting integration such as Zoho Books or Tally connector to automate return filing from your Shopify sales data."
       }
     ],
     "relatedLinks": [
@@ -7006,6 +7048,14 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
           "Once the platform is chosen, our CRM implementation services turn the plan into a working system. We configure pipelines, lead routing, automation, and role-based permissions to match your roadmap, then migrate your existing contacts and history, deduplicated and validated, so your team starts day one with clean, trustworthy data instead of a fresh empty database.",
           "The final and most important phase is adoption. We train your reps and managers on the exact workflows they run every day, set up dashboards that surface pipeline value and conversion rates, and automate follow-up reminders so the CRM saves time rather than adding admin. We stay on afterward to optimise, because a CRM is a living system that should improve as your sales process matures."
         ]
+      },
+      {
+        "heading": "Zoho vs Salesforce vs HubSpot for Indian SMBs: CRM Platform Selection and Real ROI Numbers",
+        "paragraphs": [
+          "For Indian SMBs, platform cost is often the deciding factor — and the gap is significant. Zoho CRM starts at approximately Rs. 800 per user per month (billed annually), while Salesforce Essentials runs Rs. 2,100 and HubSpot Sales Hub Pro exceeds Rs. 3,800 per user. Beyond licensing, Zoho holds a clear advantage for Indian businesses: local GST invoicing, INR billing, an India-based support team, and native integration with Tally and Indian payment gateways. For most B2B companies under Rs. 50 crore in revenue, Zoho CRM delivers comparable pipeline management at 30-40% of the Salesforce cost.",
+          "Where Indian CRM deployments consistently fail is in customisation for local sales workflows. Indian sales teams operate through WhatsApp — not email — making WhatsApp CRM integration non-negotiable, not optional. Zoho CRM integrates directly with WhatsApp Business API, allowing conversation logs, lead capture, and follow-up automation to run inside the CRM. Regional language fields for Punjabi, Hindi, Tamil, and Telugu customer records matter for businesses operating across states. Gulf-facing businesses additionally require Arabic right-to-left field support and UAE time zone pipeline views. These are configuration decisions that must be made before deployment, not after.",
+          "Measured across 40+ CRM implementations in sectors including real estate, manufacturing, and IT services, businesses that deploy CRM with proper sales process mapping report 25-40% improvement in lead-to-conversion rates within six months. The critical variable is not the platform — it is whether the CRM mirrors how your sales team actually works. A Salesforce instance configured for a US SaaS company will underperform a well-configured Zoho CRM built around Indian field sales cycles, distributor hierarchies, and seasonal buying patterns. Our consulting engagement maps your existing pipeline before recommending any platform, so you pay only for what your sales process actually needs."
+        ]
       }
     ],
     "faqs": [
@@ -7032,6 +7082,14 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       {
         "q": "Do you offer CRM consulting for businesses across India and the Gulf?",
         "a": "Yes. Headquartered at DLF Cyber City, Gurugram, Avani Enterprises serves clients across India, the Gulf, and international markets. We work remotely and on-site as needed, with 8+ years of experience and a 5.0 client rating across 150+ clients."
+      },
+      {
+        "q": "Is Zoho CRM good enough for a business doing Rs. 10-50 crore in annual revenue, or do we need Salesforce?",
+        "a": "For most Indian SMBs in that revenue bracket, Zoho CRM handles the full sales cycle without requiring Salesforce. Zoho covers lead management, pipeline tracking, WhatsApp integration, multi-currency deals for Gulf clients, and Tally sync — the features your team will actually use. Salesforce is justified when you have 50+ sales users, complex territory hierarchies, or enterprise integration requirements with SAP or Oracle. We assess your actual workflow before recommending a platform, because the wrong choice at this stage costs more to reverse than it saves in features."
+      },
+      {
+        "q": "How long does a CRM implementation take for an Indian SMB, and what is a realistic budget including consulting?",
+        "a": "A properly scoped CRM deployment for a 10-30 user Indian sales team takes 6-10 weeks — not the 2 weeks vendors quote. That timeline covers process mapping, data migration from Excel or legacy systems, WhatsApp Business API setup, user training, and a 2-week parallel-run period before you switch off the old system. Budget-wise, expect Rs. 1.5-3.5 lakh for consulting and configuration on top of annual licensing. Businesses that skip the consulting phase and self-implement typically spend more in lost productivity and re-implementation within 12 months than the consulting fee would have cost."
       }
     ],
     "relatedLinks": [
@@ -8118,6 +8176,14 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
           "We start with discovery, mapping the tools, spreadsheets, and approval chains your teams use today and identifying where data breaks between them. From that map we design a modular architecture: a shared data core with connected CRM, HR, operations, and project modules, plus the dashboards and role permissions your business needs. You review the blueprint before development begins, so there are no surprises.",
           "Development is iterative and built on modern, fast technology, with clean interfaces engineered for sub-2-second load times even on the modest connections common across India and the Gulf. We migrate your existing data, configure role-based access, train your team, and stay on through launch with 24/7 support. Because the system is custom and modular, you can switch on new modules — like inventory, support desks, or finance — as your operations grow, without ripping anything out."
         ]
+      },
+      {
+        "heading": "Custom BOS vs Tally vs SAP: The Real Cost Equation for Indian Businesses",
+        "paragraphs": [
+          "Tally costs around Rs 18,000 per year and handles your books, but it does not manage your sales pipeline, vendor contracts, or field workforce. SAP Business One starts at Rs 5–8 lakh in licensing alone, with annual AMC typically at 18–22% of that cost, and customisation for Indian-specific workflows billed separately at Rs 3,000–6,000 per hour. A custom BOS built by Avani Enterprises consolidates these functions at a total cost of Rs 8–20 lakh for most mid-sized Indian businesses, with no per-seat licensing fees and full ownership of the code.",
+          "A custom BOS is built with Indian statutory compliance embedded from day one, not bolted on later. This means automated GST return preparation aligned with GSTN API formats, TDS deduction logic mapped to applicable sections under the Income Tax Act, and PF and ESI contribution tracking that syncs with EPFO and ESIC portals. When compliance rules change, as they do regularly in India, your BOS is updated without waiting for a software vendor's release cycle or paying for a compliance module upgrade.",
+          "Data sovereignty is a direct concern for Indian businesses dealing with government contracts, BFSI clients, or sensitive customer data under the DPDP Act 2023. A custom BOS is hosted on Indian data centres, whether AWS Mumbai, Azure Central India, or your own servers, with no data leaving the country by default. Beyond compliance, mobile-first access is built for ground-level teams: field sales executives, warehouse staff, and service technicians across Tier 2 and Tier 3 cities access the same live operational data through low-bandwidth-optimised Android and iOS interfaces."
+        ]
       }
     ],
     "faqs": [
@@ -8144,6 +8210,14 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       {
         "q": "Is this suitable for Indian businesses and Gulf operations?",
         "a": "Yes. Avani Enterprises is headquartered in DLF Cyber City, Gurugram, and has built software for 150+ clients across India, the Gulf, and international markets since 2016. We design business operating systems around Indian workflows, compliance needs, and multi-location teams, with the same system serving Gulf and overseas branches."
+      },
+      {
+        "q": "How long does it take to build a custom BOS, and can we migrate data from our existing Tally or Excel setup?",
+        "a": "A core BOS with CRM, operations, and finance modules typically takes 16–24 weeks from scoping to go-live, depending on integration complexity. Data migration from Tally is handled through structured XML exports and mapped to your new system. Excel-based data requires cleaning and normalisation before import, which we do as part of the project. We run both systems in parallel for 4–6 weeks during transition so your team is never operating blind."
+      },
+      {
+        "q": "Will the BOS handle GST filing and TDS compliance automatically, or will we still need a separate CA or software?",
+        "a": "The BOS automates GST calculation, invoice generation in the correct format, and preparation of GSTR-1 and GSTR-3B data for direct upload to the GSTN portal. TDS deductions are calculated based on transaction type and vendor PAN status, with Form 26Q data generated each quarter. Your CA's role shifts from data entry and reconciliation to review and advisory, which most businesses find significantly reduces their monthly accounting costs. We do not replace your CA but we eliminate most of the manual work they currently bill for."
       }
     ],
     "relatedLinks": [
@@ -10620,6 +10694,14 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
           "Our Facebook ads management in India runs on disciplined weekly testing cycles. We ship multiple creative angles, offers, and audience combinations, cut what underperforms early, and pour budget into the winners — so cost-per-result trends down as volume scales up. You always know exactly which ad, audience, and offer is producing each lead or sale, because nothing is left running on guesswork.",
           "Reporting is outcome-led, not vanity-metric noise. Instead of impressions and reach, we report cost-per-lead, cost-per-acquisition, and ROAS, with a clear recommendation on what to scale next. Backed by 8+ years serving 150+ clients and 24/7 support, your Facebook account is actively managed by a team that treats your ad budget like its own."
         ]
+      },
+      {
+        "heading": "Facebook Advertising Across India's 378M+ Users: Regional, Vernacular, and Festival-Driven Campaigns That Convert",
+        "paragraphs": [
+          "India's Facebook user base of 378 million is not a single market — it is a layered mix of languages, purchasing cycles, and cultural triggers. We structure campaigns with state-level and city-level geo-targeting to separate Tier 1 metros like Delhi, Mumbai, and Bengaluru from high-growth Tier 2 markets such as Lucknow, Coimbatore, and Surat. This prevents budget dilution and lets us set accurate CPM expectations per geography, since auction density and cost-per-click vary significantly between a Mumbai audience and a Jaipur audience.",
+          "We build vernacular ad creatives in Hindi, Tamil, Telugu, Bengali, Marathi, and Kannada — not machine-translated copy, but market-specific messaging tested against English versions. For most categories outside luxury and B2B SaaS, regional-language ads outperform English by 20–40% on click-through rate among non-metro audiences. We also integrate WhatsApp click-to-chat ads, which are uniquely effective in India given WhatsApp's near-universal penetration — these route leads directly to a sales conversation with zero form friction, cutting lead response time from hours to seconds.",
+          "India's festival calendar is a hard deadline, not an opportunity. Diwali, Holi, Eid, Navratri, Onam, Pongal, and Dussehra each represent compressed, high-intent buying windows where CPMs spike 30–60% but conversion rates justify the spend. We build 90-day festival ad calendars for every client, pre-loading creative variants and audience segments two to three weeks before each window, so your campaigns go live on day one of the peak — not three days into it while approvals are still pending."
+        ]
       }
     ],
     "faqs": [
@@ -10646,6 +10728,14 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       {
         "q": "Do you run Facebook ads for businesses outside Gurgaon and Delhi NCR?",
         "a": "Yes. We are headquartered at DLF Cyber City, Gurugram and manage Facebook ad campaigns for clients across Delhi NCR and pan-India, as well as the Gulf and international markets. Most collaboration happens remotely with regular review calls."
+      },
+      {
+        "q": "What is the minimum monthly ad budget recommended for Facebook Ads in India?",
+        "a": "For meaningful reach and optimisation data, we recommend a minimum ad spend of Rs. 30,000 per month for Tier 2 and Tier 3 city targeting, and Rs. 60,000 or more for competitive metro markets like Delhi-NCR or Mumbai. Below these thresholds, Meta's algorithm does not gather enough conversion signals to exit the learning phase, which keeps your cost-per-result artificially high. Our management fee is separate from ad spend and is quoted based on campaign complexity."
+      },
+      {
+        "q": "Can you run Facebook Ads in Hindi and other regional languages, and do they actually perform better?",
+        "a": "Yes, we create and test ad creatives in Hindi, Tamil, Telugu, Bengali, Marathi, and Kannada. For non-metro audiences and vernacular-first categories such as education, healthcare, real estate, and consumer goods, regional-language ads consistently outperform English creatives on CTR and cost-per-lead. We A/B test language variants in the first 10–14 days of every campaign and allocate budget toward whichever version is producing lower CPLs, rather than running both indefinitely on equal spend."
       }
     ],
     "relatedLinks": [
