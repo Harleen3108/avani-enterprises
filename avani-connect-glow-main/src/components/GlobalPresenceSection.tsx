@@ -25,7 +25,7 @@ const offices = [
     label: 'NCR Office',
     tagline: 'Corporate powerhouse',
     description: "Strategic presence in India's corporate capital serving enterprise clients.",
-    image: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=800&auto=format&fit=crop',
+    image: '/gurgaon.jpg',
     cx: 660, cy: 232,
     color: '#fb923c',
   },
