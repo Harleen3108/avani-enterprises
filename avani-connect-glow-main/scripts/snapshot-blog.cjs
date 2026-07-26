@@ -148,7 +148,21 @@ function previousSnapshotCount() {
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
     const json = await res.json();
-    const posts = (json.data || []).filter((p) => p && p.isPublished && p.slug);
+
+    // The endpoint already excludes future-dated posts, but snapshot the same
+    // rule locally as well. A scheduled post must never be baked into the build
+    // — that would put it in the sitemap and make it server-rendered before its
+    // publish date, which is the one thing the drip must not do.
+    const nowMs = Date.now();
+    const posts = (json.data || []).filter(
+      (p) => p && p.isPublished && p.slug &&
+        (!p.publishedAt || new Date(p.publishedAt).getTime() <= nowMs)
+    );
+
+    const scheduled = (json.data || []).filter(
+      (p) => p && p.publishedAt && new Date(p.publishedAt).getTime() > nowMs
+    ).length;
+    if (scheduled) console.log(`   (${scheduled} scheduled post(s) held back until their publish date)`);
 
     const trimmed = {};
     posts.forEach((p) => {
@@ -165,6 +179,14 @@ function previousSnapshotCount() {
         readTime: p.readTime || readTime(p.content),
         views: p.views || 0,
         likes: p.likes || 0,
+        // Stored by drip-seeded posts. Older posts keep these inside the body,
+        // so both are empty arrays there and the SSR falls back to extraction.
+        metaTitle: p.metaTitle || "",
+        metaDescription: cleanClaims(p.metaDescription || ""),
+        keyTakeaways: Array.isArray(p.keyTakeaways) ? p.keyTakeaways.map(cleanClaims) : [],
+        faqs: Array.isArray(p.faqs)
+          ? p.faqs.map((f) => ({ q: cleanClaims(f.q || ""), a: cleanClaims(f.a || "") }))
+          : [],
       };
     });
 

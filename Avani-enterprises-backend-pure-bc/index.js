@@ -1294,7 +1294,16 @@ app.get("/blogs", async (req, res) => {
     const limit = parseInt(req.query.limit) || 100;
     const skip = (page - 1) * limit;
 
-    const filter = { isPublished: true };
+    // ── The drip ────────────────────────────────────────────────────────────
+    // Scheduled posts are stored with isPublished:true and a FUTURE
+    // publishedAt. This filter is the entire scheduling mechanism: a post stays
+    // invisible until its date arrives, then appears on its own. No cron, no
+    // scheduler process, nothing to keep alive.
+    //
+    // Safe for the existing corpus — all 52 posts already carry a past
+    // publishedAt, so none are hidden by adding this. A post with publishedAt
+    // unset would be excluded, which is why the seeder always sets it.
+    const filter = { isPublished: true, publishedAt: { $lte: new Date() } };
     console.log(`Fetching blogs (page: ${page}, limit: ${limit})...`);
 
     const items = await Blog.find(filter)
@@ -1317,11 +1326,18 @@ app.get("/blogs", async (req, res) => {
 app.get("/blogs/:slug", async (req, res) => {
   try {
     const { slug } = req.params;
+
+    // Same drip filter as the list. Without it here, a scheduled post would be
+    // hidden from the index but still reachable by guessing its URL — and, more
+    // importantly, still server-rendered and indexable by Google before its
+    // date, which defeats the whole point.
+    const live = { isPublished: true, publishedAt: { $lte: new Date() } };
+
     // Resolve by slug first, then fall back to _id so articles always open
     // even if a slug contains special characters or is missing.
-    let blog = await Blog.findOne({ slug, isPublished: true });
+    let blog = await Blog.findOne({ slug, ...live });
     if (!blog && mongoose.Types.ObjectId.isValid(slug)) {
-      blog = await Blog.findOne({ _id: slug, isPublished: true });
+      blog = await Blog.findOne({ _id: slug, ...live });
     }
     if (!blog) return res.status(404).json({ message: "Blog not found" });
 

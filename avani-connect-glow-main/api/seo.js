@@ -1257,8 +1257,15 @@ function buildBlogHtml(slug, post) {
     `<p>By ${esc(post.author)}${post.publishedAt ? ` · ${esc(String(post.publishedAt).slice(0, 10))}` : ''}</p>`,
     '</header>',
     '<main>',
-    // AI Quick Summary derived from this post's own content.
-    summaryHtml(blogSummary(post, slug)),
+    // Key takeaways when the post stores them (drip-seeded posts do), otherwise
+    // an AI Quick Summary derived from the post's own content. Both give an
+    // answer engine something liftable above the fold; the stored version is
+    // better because a human wrote it as a standalone claim.
+    Array.isArray(post.keyTakeaways) && post.keyTakeaways.length
+      ? '<aside aria-label="Key takeaways"><h2>Key Takeaways</h2><ul>' +
+        post.keyTakeaways.map((t) => `<li>${esc(t)}</li>`).join('') +
+        '</ul></aside>'
+      : summaryHtml(blogSummary(post, slug)),
     // Same formatter the React page uses, so the crawler and the reader get
     // identical semantic markup — headings, lists and tables rather than a wall
     // of text. The prose styles ship inline so the SSR HTML is styled on its own.
@@ -1276,11 +1283,25 @@ function buildBlogHtml(slug, post) {
       '<li><a href="/contact">Contact</a></li>' +
       '</ul></nav></footer>',
   ];
-  // FAQs are lifted from the rendered body so the schema can only ever describe
-  // questions that are actually on the page.
+  // Stored FAQs win; otherwise they are lifted from the rendered body. Either
+  // way the schema can only describe questions that are actually on the page.
+  const storedFaqs = Array.isArray(post.faqs)
+    ? post.faqs.filter((f) => f && f.q && f.a).map((f) => ({ q: f.q, a: f.a }))
+    : [];
+
+  // Stored FAQs are fields, not markup, so render them into the page too —
+  // otherwise the FAQPage schema would describe content a crawler cannot see.
+  if (storedFaqs.length) {
+    parts.push(
+      '<section aria-label="Frequently asked questions"><h2>Frequently Asked Questions</h2><dl>' +
+      storedFaqs.map((f) => `<dt>${esc(f.q)}</dt><dd>${esc(f.a)}</dd>`).join('') +
+      '</dl></section>'
+    );
+  }
+
   return {
     html: parts.filter(Boolean).join(''),
-    faqs: extractFaqs(post.content),
+    faqs: storedFaqs.length ? storedFaqs : extractFaqs(post.content),
     resolved: null,
     post: Object.assign({ slug }, post),
   };

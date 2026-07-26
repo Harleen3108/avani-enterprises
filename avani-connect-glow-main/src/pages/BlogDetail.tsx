@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { getBackendUrl } from '../lib/api';
 import BlogEngagement from '../components/blog/BlogEngagement';
 import BusinessSetup3Form from '../components/BusinessSetup3Form';
+import { KeyTakeaways, FaqAccordion } from '../components/blog/BlogAeoBlocks';
 import { formatBlogBody, PROSE_CSS } from '../data/blogFormat';
 import '../components/Home.css';
 
@@ -76,10 +77,30 @@ const BlogDetail = () => {
     keywords: Array.isArray(blog.tags) ? blog.tags.join(', ') : undefined
   };
 
+  // FAQPage schema from the post's own stored FAQs. Only emitted when they
+  // exist, so schema can never describe questions that are not on the page.
+  const faqLd = Array.isArray(blog.faqs) && blog.faqs.length
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: blog.faqs.map((f: { q: string; a: string }) => ({
+          '@type': 'Question',
+          name: f.q,
+          acceptedAnswer: { '@type': 'Answer', text: f.a },
+        })),
+      }
+    : null;
+
+  const canonical = blog.canonical || `https://www.avanienterprises.in/blog/${encodeURIComponent(slug || '')}`;
+
   return (
     <div className="dh-page" style={{ background: 'var(--bg-primary)', color: 'var(--text-primary)', minHeight: '100vh' }}>
       <Helmet>
+        {blog.metaTitle ? <title>{blog.metaTitle}</title> : null}
+        {blog.metaDescription ? <meta name="description" content={blog.metaDescription} /> : null}
+        <link rel="canonical" href={canonical} />
         <script type="application/ld+json">{JSON.stringify(articleLd)}</script>
+        {faqLd ? <script type="application/ld+json">{JSON.stringify(faqLd)}</script> : null}
       </Helmet>
       {/* Article Header */}
       <section style={{ paddingTop: '7rem', paddingBottom: '2rem', position: 'relative' }}>
@@ -154,6 +175,11 @@ const BlogDetail = () => {
                 .prose supplies the typography. Same function and same markup as
                 the SSR path, so readers and Googlebot get identical output. */}
             <style>{PROSE_CSS}</style>
+
+            {/* Takeaways sit above the body — the block readers skim and AI
+                answer engines lift. Renders only when the post stores them. */}
+            <KeyTakeaways items={blog.keyTakeaways} />
+
             <div
               className="prose"
               style={{ margin: '0 auto' }}
@@ -164,6 +190,10 @@ const BlogDetail = () => {
                 }),
               }}
             />
+
+            {/* FAQ accordion from stored fields, matched by the FAQPage schema
+                emitted above. Older posts keep their FAQs inside the body. */}
+            <FaqAccordion items={blog.faqs} />
 
             <div style={{ maxWidth: '44rem', margin: '3.5rem auto 0', paddingTop: '1.75rem', borderTop: '1px solid #E7E0D5', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div style={{ fontSize: '0.78rem', color: '#6B635A', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em' }}>

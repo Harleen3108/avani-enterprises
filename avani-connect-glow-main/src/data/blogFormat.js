@@ -514,6 +514,39 @@ const PROSE_CSS = `
 .prose .prose-callout li { margin: 0.5em 0; color: var(--ink-body); }
 .prose .prose-faq-title { padding-top: 0.4em; border-top: 2px solid var(--rule); }
 
+/* In-article lead capture. Seeded posts embed .post-cta twice — mid-article and
+   at the end — linking to /contact. Deliberately the one element that breaks the
+   reading rhythm, because that is its job. */
+.prose .post-cta {
+  background: #17141F;
+  border-radius: 16px;
+  padding: 26px 28px;
+  margin: 2.4em 0;
+  color: rgba(255,255,255,0.78);
+}
+.prose .post-cta .post-cta-eyebrow {
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.11em;
+  text-transform: uppercase; color: #D4A017; margin: 0 0 0.5em;
+}
+.prose .post-cta h3 {
+  color: #fff; margin: 0 0 0.55em; font-size: 1.2rem; line-height: 1.3;
+}
+.prose .post-cta p { margin: 0 0 0.9em; font-size: 0.96rem; line-height: 1.65; }
+.prose .post-cta p:last-child { margin-bottom: 0; }
+.prose .post-cta strong { color: #fff; }
+.prose .post-cta .post-cta-btn {
+  display: inline-block;
+  background: #D4A017; color: #17141F;
+  font-weight: 700; font-size: 0.94rem;
+  padding: 12px 22px; border-radius: 10px;
+  text-decoration: none; min-height: 46px; line-height: 22px;
+}
+.prose .post-cta .post-cta-btn:hover { background: #E8B428; color: #17141F; }
+@media (max-width: 640px) {
+  .prose .post-cta { padding: 22px 20px; border-radius: 14px; }
+  .prose .post-cta .post-cta-btn { display: block; text-align: center; }
+}
+
 .prose blockquote {
   margin: 1.9em 0;
   padding: 0.1em 0 0.1em 1.3em;
