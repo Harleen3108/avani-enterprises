@@ -84,9 +84,37 @@ function row(label, value, opts = {}) {
  *   pagePath, pageUrl, referrer
  *   landingPage, utmSource, utmMedium, utmCampaign, gclid, fbclid
  */
+/**
+ * Why notifications are or are not working right now.
+ *
+ * The failure mode this guards against is the quiet one: FROM_EMAIL unset means
+ * every lead saves correctly, the visitor sees a success message, and nobody is
+ * ever told. Nothing in the logs would say so. Called at startup and by the
+ * admin test endpoint.
+ */
+function emailStatus() {
+  const key = process.env.SENDGRID_API_KEY || "";
+  const problems = [];
+  if (!key) problems.push("SENDGRID_API_KEY is not set");
+  else if (!key.startsWith("SG.")) problems.push('SENDGRID_API_KEY does not start with "SG." — it is not a valid SendGrid key');
+  if (!process.env.FROM_EMAIL) problems.push("FROM_EMAIL is not set (must be a SendGrid-verified sender)");
+
+  return { ok: problems.length === 0, problems, to: recipients(), from: process.env.FROM_EMAIL || null };
+}
+
 async function sendLeadEmail(lead = {}) {
   const to = recipients();
-  if (!process.env.FROM_EMAIL || !to.length) return { sent: false, reason: "not-configured" };
+  const status = emailStatus();
+  if (!status.ok || !to.length) {
+    // Loud, and names the lead, so this is obvious in the Render logs rather
+    // than being discovered weeks later by a customer who never heard back.
+    console.error(
+      `🔴 LEAD NOTIFICATION NOT SENT for "${lead.name || "unknown"}" — ` +
+      `${status.problems.join("; ") || "no recipients configured"}. ` +
+      `The lead IS saved; nobody has been told.`
+    );
+    return { sent: false, reason: "not-configured", problems: status.problems };
+  }
 
   const kind = lead.kind || "Lead";
   const name = (lead.name || "").trim() || "Someone";
@@ -194,4 +222,25 @@ async function sendLeadEmail(lead = {}) {
   }
 }
 
-module.exports = { sendLeadEmail, leadRecipients: recipients };
+/**
+ * Send a sample to the configured recipients so delivery can be proven without
+ * waiting for a real enquiry. Used by the admin "send test" button.
+ */
+async function sendTestLeadEmail() {
+  return sendLeadEmail({
+    kind: "TEST — lead notification check",
+    name: "Test Lead",
+    email: "test@example.com",
+    phone: "+919253625099",
+    company: "Avani Enterprises",
+    service: "Notification test",
+    message:
+      "This is a test of the lead notification email. If you are reading this, " +
+      "real leads will reach the same inbox.",
+    source: "admin test button",
+    pagePath: "/contact",
+    pageUrl: `${SITE}/contact`,
+  });
+}
+
+module.exports = { sendLeadEmail, sendTestLeadEmail, emailStatus, leadRecipients: recipients };

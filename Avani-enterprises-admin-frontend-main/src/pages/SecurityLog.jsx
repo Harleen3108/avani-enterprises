@@ -306,6 +306,89 @@ const CredentialForm = ({
 
 const LIMITS = [100, 250, 500];
 
+/**
+ * Shows whether lead notification emails can actually be delivered, lists the
+ * exact recipients, and sends a test to prove it end to end.
+ */
+const LeadEmailStatus = () => {
+  const API = import.meta.env.VITE_API_URL;
+  const [status, setStatus] = useState(null);
+  const [sending, setSending] = useState(false);
+  const [result, setResult] = useState(null);
+
+  const authHeaders = () => ({
+    headers: { Authorization: `Bearer ${localStorage.getItem("token") || ""}` },
+  });
+
+  useEffect(() => {
+    let cancelled = false;
+    axios
+      .get(`${API}/admin/lead-email/status`, authHeaders())
+      .then((r) => { if (!cancelled) setStatus(r.data); })
+      .catch(() => { if (!cancelled) setStatus({ ok: false, problems: ["Could not reach the server."], to: [] }); });
+    return () => { cancelled = true; };
+  }, [API]);
+
+  const sendTest = async () => {
+    setSending(true);
+    setResult(null);
+    try {
+      const r = await axios.post(`${API}/admin/lead-email/test`, {}, authHeaders());
+      setResult({ ok: true, msg: `Test sent to ${(r.data.to || []).join(", ")}. Check the inbox, including spam.` });
+    } catch (err) {
+      const d = err.response?.data;
+      setResult({ ok: false, msg: (d?.problems || []).join("; ") || d?.message || "Could not send the test email." });
+    } finally {
+      setSending(false);
+    }
+  };
+
+  if (!status) return null;
+
+  return (
+    <div className={clsx("rounded-2xl border shadow-sm p-5", status.ok ? "bg-white border-gray-100" : "bg-rose-50 border-rose-200")}>
+      <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+        <div className="min-w-0">
+          <h2 className="text-sm font-semibold text-gray-900 flex items-center gap-2">
+            {status.ok ? "Lead notifications are on" : "Lead notifications are OFF"}
+          </h2>
+
+          {status.ok ? (
+            <p className="text-xs text-gray-500 mt-1">
+              Every new lead emails{" "}
+              <span className="font-medium text-gray-900">{(status.to || []).join(", ")}</span>
+              {status.from ? <> from <span className="font-mono">{status.from}</span></> : null}.
+            </p>
+          ) : (
+            <>
+              <p className="text-xs text-rose-700 mt-1">
+                Leads are still being saved, but nobody is being emailed. Fix on Render, then redeploy:
+              </p>
+              <ul className="text-xs text-rose-700 mt-1.5 list-disc pl-4 space-y-0.5">
+                {(status.problems || []).map((p, i) => <li key={i}>{p}</li>)}
+              </ul>
+            </>
+          )}
+        </div>
+
+        <button
+          onClick={sendTest}
+          disabled={sending}
+          className="shrink-0 inline-flex items-center px-4 py-2.5 rounded-lg bg-gray-900 text-white hover:bg-black text-sm font-medium disabled:opacity-50"
+        >
+          {sending ? "Sending…" : "Send test email"}
+        </button>
+      </div>
+
+      {result && (
+        <p className={clsx("text-xs mt-3 pt-3 border-t", result.ok ? "text-emerald-700 border-gray-100" : "text-rose-700 border-rose-200")}>
+          {result.msg}
+        </p>
+      )}
+    </div>
+  );
+};
+
 const SecurityLog = () => {
   // useAuth() is null outside the provider; destructuring that would throw and
   // take the whole page down rather than showing a sign-in prompt.
@@ -495,6 +578,11 @@ const SecurityLog = () => {
           Refresh
         </button>
       </div>
+
+      {/* Lead notification health. The failure this exists to catch is the
+          quiet one: leads save, visitors see a success message, and nobody is
+          ever emailed. */}
+      <LeadEmailStatus />
 
       {error && (
         <div className="p-4 rounded-lg bg-rose-50 border border-rose-200 text-rose-700 text-sm">

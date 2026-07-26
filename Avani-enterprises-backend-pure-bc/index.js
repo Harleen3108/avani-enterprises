@@ -24,7 +24,7 @@ const GrowthPlanLead = require("./models/GrowthPlanLead");
 const loginSecurity = require("./services/loginSecurity");
 const requestContext = require("./services/requestContext");
 // One notification template shared by /submit-form and /avani-form.
-const { sendLeadEmail } = require("./services/leadEmail");
+const { sendLeadEmail, sendTestLeadEmail, emailStatus } = require("./services/leadEmail");
 require("dotenv").config();
 
 const app = express();
@@ -228,6 +228,20 @@ mongoose
 
 // Set SendGrid API Key
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
+// Say at boot whether lead notifications can actually be delivered. Without
+// this, a missing FROM_EMAIL means every lead saves, every visitor sees a
+// success message, and nobody is ever told — with nothing in the logs to show
+// for it. Printed once, on every deploy.
+{
+  const s = emailStatus();
+  if (s.ok) {
+    console.log(`📧 Lead notifications ON — from ${s.from}, to: ${s.to.join(", ")}`);
+  } else {
+    console.error("🔴 LEAD NOTIFICATIONS ARE OFF. Leads will save but nobody will be emailed.");
+    s.problems.forEach((p) => console.error(`   • ${p}`));
+  }
+}
 
 // Middleware to verify JWT token
 const authMiddleware = (req, res, next) => {
@@ -894,6 +908,24 @@ app.post("/growth-plan-leads", async (req, res) => {
   try {
     const lead = new GrowthPlanLead(req.body);
     await lead.save();
+
+    // This endpoint saved leads and notified nobody. Low volume, but a lead
+    // that lands in a collection with no alert is a lead nobody answers.
+    sendLeadEmail({
+      kind: "Growth plan lead",
+      name: [lead.firstName, lead.lastName].filter(Boolean).join(" "),
+      email: lead.email,
+      phone: lead.phone,
+      company: lead.company,
+      service: [lead.plan, lead.service].filter(Boolean).join(" · "),
+      message: lead.goals,
+      source: "growth plan form",
+      pagePath: req.body.pagePath,
+      pageUrl: req.body.pageUrl,
+      referrer: req.body.referrer,
+      landingPage: req.body.landingPage,
+    }).catch(() => { /* leadEmail logs; never break the response */ });
+
     res.status(201).json(lead);
   } catch (err) {
     res.status(400).json({ message: "Failed to create lead", error: err.message });
@@ -2342,6 +2374,18 @@ app.get(/.*/, async (req, res, next) => {
 // Link Management Routes
 const linkRoutes = require('./routes/links');
 app.use('/api/links', linkRoutes);
+
+// ── Lead notification health ───────────────────────────────────────────────
+// Lets the admin confirm delivery without waiting for a real enquiry, and see
+// exactly which addresses are on the list.
+app.get("/admin/lead-email/status", authMiddleware, (req, res) => {
+  res.json({ success: true, ...emailStatus() });
+});
+
+app.post("/admin/lead-email/test", authMiddleware, async (req, res) => {
+  const result = await sendTestLeadEmail();
+  res.status(result.sent ? 200 : 500).json({ success: result.sent, ...result });
+});
 
 // ── Admin security ─────────────────────────────────────────────────────────
 // Credential changes (each re-verifying the current password), the login audit
