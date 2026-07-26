@@ -72,14 +72,12 @@ function App() {
               </PublicRoute>
             }
           />
-          <Route
-            path="/signup"
-            element={
-              <PublicRoute>
-                <Signup />
-              </PublicRoute>
-            }
-          />
+          {/* Self-registration is removed. The old page created accounts that
+              defaulted to role "admin", so anyone who found this URL could give
+              themselves full access to every lead. New admins are created from
+              the Render Shell: node scripts/createAdmin.js "Name" email@domain
+              The backend returns 403 for /auth/signup regardless of this route. */}
+          <Route path="/signup" element={<Navigate to="/login" replace />} />
           <Route
             path="/forgot-password"
             element={

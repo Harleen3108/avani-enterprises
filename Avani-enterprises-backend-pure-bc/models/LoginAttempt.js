@@ -74,6 +74,31 @@ const loginAttemptSchema = new mongoose.Schema(
       set: capped(320),
     },
 
+    // Which admin panel the attempt was made on, derived from Origin/Referer.
+    // The same backend can serve several front ends, so without this an alert
+    // says someone failed to sign in but not to what.
+    site: {
+      type: String,
+      default: '',
+      trim: true,
+      set: capped(200),
+    },
+
+    // ── Device location ─────────────────────────────────────────────────────
+    // From the browser Geolocation API, which needs the person to grant
+    // permission. Far more precise than the IP estimate when present.
+    //
+    // Read the honest limitation before relying on it: an attacker simply
+    // denies the prompt, so these stay empty for exactly the attempts you most
+    // want them for. Their value is the opposite case — a SUCCESSFUL sign-in
+    // from an unexpected precise location is a strong, specific signal.
+    preciseLat: { type: Number, default: null },
+    preciseLng: { type: Number, default: null },
+    accuracyM: { type: Number, default: null },
+    // 'device' when the browser supplied coordinates, 'ip' when this is only
+    // the IP estimate, 'denied' when the person refused the prompt.
+    locationSource: { type: String, default: 'ip', trim: true },
+
     success: {
       type: Boolean,
       default: false,

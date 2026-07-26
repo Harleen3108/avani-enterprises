@@ -14,7 +14,11 @@
  * the request path or block a login.
  */
 
-const sgMail = require("@sendgrid/mail");
+// Routed through the shared mailer so failed-login alerts use whichever
+// provider is configured. This file used to call SendGrid directly and bail
+// out when SENDGRID_API_KEY was unset, so with Brevo configured and SendGrid
+// not, no alert was ever sent and nothing said why.
+const { sendMail } = require("./mailer");
 
 const LoginAttempt = require("../models/LoginAttempt");
 const requestContext = require("../services/requestContext");
@@ -140,6 +144,35 @@ function unlockedResult(failures) {
  * Resolve IP, hash, approximate geo and user agent from the request.
  * Never throws and never returns a raw IP to the caller for storage.
  */
+/**
+ * Precise coordinates the browser volunteered, if the person granted the
+ * permission prompt. Validated hard: this arrives from an unauthenticated
+ * request and is attacker-controllable.
+ */
+function deviceGeo(req) {
+  const NONE = { lat: null, lng: null, accuracyM: null, source: "ip" };
+
+  const g = req && req.body && req.body.deviceLocation;
+  if (!g || typeof g !== "object" || Array.isArray(g)) return NONE;
+  if (g.denied === true) return { lat: null, lng: null, accuracyM: null, source: "denied" };
+
+  // Numbers only. A string, NaN, Infinity or an object like { $ne: null } is
+  // discarded rather than coerced — this body is unauthenticated input.
+  const num = (v, max) =>
+    typeof v === "number" && Number.isFinite(v) && Math.abs(v) <= max ? v : null;
+
+  const lat = num(g.lat, 90);
+  const lng = num(g.lng, 180);
+  if (lat === null || lng === null) return NONE;
+
+  const acc =
+    typeof g.accuracy === "number" && Number.isFinite(g.accuracy) && g.accuracy >= 0
+      ? Math.min(Math.round(g.accuracy), 10000000)
+      : null;
+
+  return { lat, lng, accuracyM: acc, source: "device" };
+}
+
 function buildContext(req) {
   let ip = "";
   let ipHash = "";
@@ -175,7 +208,14 @@ function buildContext(req) {
     ua = Object.assign({}, EMPTY_UA);
   }
 
-  return { ip, ipHash, userAgent, geo, ua };
+  let site = "";
+  try {
+    site = requestContext.siteFromRequest(req) || "";
+  } catch (_e) {
+    site = "";
+  }
+
+  return { ip, ipHash, userAgent, geo, ua, site, device: deviceGeo(req) };
 }
 
 /** "Mumbai, Maharashtra, India" — or a plain unknown, never a guess. */
@@ -222,6 +262,11 @@ function attemptDoc({ email, success, reason, ctx }) {
     browser: clip(ua.browser || "", MAX_GEO_FIELD_LEN),
     os: clip(ua.os || "", MAX_GEO_FIELD_LEN),
     userAgent: clip((ctx && ctx.userAgent) || "", MAX_UA_LEN),
+    site: clip((ctx && ctx.site) || "", 200),
+    preciseLat: (ctx && ctx.device && ctx.device.lat) != null ? ctx.device.lat : null,
+    preciseLng: (ctx && ctx.device && ctx.device.lng) != null ? ctx.device.lng : null,
+    accuracyM: (ctx && ctx.device && ctx.device.accuracyM) != null ? ctx.device.accuracyM : null,
+    locationSource: (ctx && ctx.device && ctx.device.source) || ip,
   };
 }
 
@@ -340,16 +385,31 @@ function sendFailureAlert({ email, reason, ctx, failures, lock }) {
     const recipients = alertRecipients();
     if (!recipients.length) return;
 
-    // Without a key sgMail.send() is guaranteed to reject; skip silently rather
-    // than logging an error on every failed login of a misconfigured deploy.
-    if (!process.env.SENDGRID_API_KEY) return;
-    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-
     const geo = (ctx && ctx.geo) || EMPTY_GEO;
     const ua = (ctx && ctx.ua) || EMPTY_UA;
     const approx = locationLabel(geo);
     const attemptNo = Number(failures) || 0;
-    const subject = `Failed admin login — ${shortLocationLabel(geo)} (attempt ${attemptNo})`;
+
+    // The site goes FIRST in the subject. Reading this on a phone with several
+    // sites running, "which panel" is the question you need answered before
+    // anything else.
+    const site = (ctx && ctx.site) || "";
+    const siteLabel = site ? `[${site}] ` : "";
+    const subject =
+      `${siteLabel}Failed admin login — ${shortLocationLabel(geo)} (attempt ${attemptNo})`;
+
+    // Device coordinates when the person granted the browser prompt. Usually
+    // absent on a hostile attempt — an attacker just denies it — so this is
+    // most useful for confirming that a login WAS you.
+    const dev = (ctx && ctx.device) || {};
+    const preciseLine =
+      dev.source === "device" && dev.lat != null
+        ? `<p style="margin:6px 0;"><b>Device location:</b> ${dev.lat.toFixed(5)}, ${dev.lng.toFixed(5)}` +
+          (dev.accuracyM != null ? ` (±${dev.accuracyM}m)` : "") +
+          ` — <a href="https://www.google.com/maps?q=${dev.lat},${dev.lng}">open in Maps</a></p>`
+        : dev.source === "denied"
+        ? `<p style="margin:6px 0;color:#a33;"><b>Device location:</b> refused by the browser. Only the IP estimate above is available.</p>`
+        : "";
 
     const nowIst = istString(new Date());
     const lockedUntil =
@@ -377,6 +437,7 @@ function sendFailureAlert({ email, reason, ctx, failures, lock }) {
           <p style="margin:0 0 18px;color:#666;font-size:13px;">${esc(nowIst)} IST</p>
 
           <table style="border-collapse:collapse;width:100%;">
+            ${row("Website", esc(site) || "unknown")}
             ${row("Email tried", esc(clip(email, MAX_EMAIL_LEN)) || "—")}
             ${row("Reason", esc(clip(reason || "bad-password", MAX_REASON_LEN)))}
             ${row("Consecutive failures", String(attemptNo))}
@@ -386,6 +447,8 @@ function sendFailureAlert({ email, reason, ctx, failures, lock }) {
             ${row("Operating system", esc(ua.os))}
             ${row("Time (IST)", esc(nowIst))}
           </table>
+
+          ${preciseLine}
 
           <p style="margin:18px 0 0;font-size:14px;color:#111;">${esc(lockLine)}</p>
 
@@ -406,14 +469,11 @@ function sendFailureAlert({ email, reason, ctx, failures, lock }) {
     };
 
     // Started, never awaited. Nothing here can reject into the login request.
+    // Started, never awaited. Nothing here can reject into the login request.
     Promise.resolve()
-      .then(() => sgMail.send(msg))
+      .then(() => sendMail({ ...msg, label: "Failed-login alert" }))
       .catch((error) => {
-        const detail =
-          error && error.response && error.response.body
-            ? JSON.stringify(error.response.body)
-            : (error && error.message) || String(error);
-        console.error("loginSecurity: failed-login alert email not sent:", detail);
+        console.error("loginSecurity: failed-login alert not sent:", (error && error.message) || String(error));
       });
   } catch (error) {
     // Building the message must never break login either.

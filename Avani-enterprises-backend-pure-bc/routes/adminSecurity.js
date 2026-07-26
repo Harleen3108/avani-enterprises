@@ -153,6 +153,11 @@ function presentAttempt(doc) {
   return {
     _id: doc._id,
     email: doc.email || "",
+    site: doc.site || "",
+    preciseLat: finiteOrNull(doc.preciseLat),
+    preciseLng: finiteOrNull(doc.preciseLng),
+    accuracyM: finiteOrNull(doc.accuracyM),
+    locationSource: doc.locationSource || "ip",
     success: Boolean(doc.success),
     reason: doc.reason || "",
     approximateLocation: label,
@@ -176,13 +181,15 @@ function presentAttempt(doc) {
 // login attempts go to, with location, so the change itself is visible there.
 // This runs after the change has already been committed, so it must never
 // throw into the request path.
-async function writeCredentialAudit(email, req) {
+async function writeCredentialAudit(email, req, reason = "credentials-changed") {
   try {
     const { ipHash, geo, ua, userAgent } = requestFacts(req);
     await LoginAttempt.create({
       email: normaliseEmail(email),
       success: true,
-      reason: "credentials-changed",
+      // Also used for access changes (revoked-access:…, restored-access:…), so
+      // removing someone's access is as visible in the log as changing a password.
+      reason: String(reason).slice(0, 64),
       ip: "", // never store a raw IP
       ipHash,
       country: geo.country || "",
@@ -608,6 +615,119 @@ router.post("/unlock", authMiddleware, async (req, res) => {
     // The detail stays in the server log. Echoing err.message can leak schema,
     // duplicate-key values or connection strings to the browser.
     return res.status(500).json({ message: "Server error" });
+  }
+});
+
+/* ── Account management ─────────────────────────────────────────────────────
+ *
+ * Public self-registration was open, and `role` defaults to "admin" in
+ * models/User.js, so anyone who found the admin URL could register any address
+ * and receive full rights. Signup is closed now, but that does not remove
+ * accounts already created — these endpoints exist so every account can be
+ * seen and any unwanted one cut off.
+ */
+
+/** GET /admin/security/users — every account that exists. */
+router.get("/users", authMiddleware, async (req, res) => {
+  try {
+    const users = await User.find()
+      .select("name email role isVerified createdAt")
+      .sort({ createdAt: 1 })
+      .lean();
+
+    res.json({
+      success: true,
+      you: req.user && req.user._id ? String(req.user._id) : null,
+      users: users.map((u) => ({
+        id: String(u._id),
+        name: u.name || "",
+        email: u.email || "",
+        role: u.role || "",
+        // The only thing that actually matters operationally: can this account
+        // sign in right now?
+        canSignIn: !!u.isVerified && u.role !== "revoked",
+        createdAt: u.createdAt || null,
+      })),
+    });
+  } catch (err) {
+    console.error("adminSecurity /users:", err.message);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+/**
+ * POST /admin/security/users/:id/revoke   { currentPassword }
+ *
+ * Revokes rather than deletes: if an account turns out to be an intrusion, the
+ * record is the evidence. Re-verifies your own password first, like every other
+ * destructive action here.
+ */
+router.post("/users/:id/revoke", authMiddleware, async (req, res) => {
+  try {
+    const me = await User.findById(req.user._id);
+    if (!me) return res.status(401).json({ message: "Your session is no longer valid." });
+
+    const ok = await requireCurrentPassword(req, res, me, req.body && req.body.currentPassword);
+    if (!ok) return undefined;
+
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      return res.status(400).json({ message: "Unknown account." });
+    }
+
+    const target = await User.findById(req.params.id);
+    if (!target) return res.status(404).json({ message: "Unknown account." });
+
+    // You cannot revoke yourself — that is a one-click lockout.
+    if (String(target._id) === String(me._id)) {
+      return res.status(400).json({ message: "You cannot revoke your own access." });
+    }
+
+    // Nor the last account that can still sign in, which would lock everyone
+    // out of the panel with no way back in except the Render shell.
+    const activeCount = await User.countDocuments({ isVerified: true, role: { $ne: "revoked" } });
+    if (activeCount <= 1) {
+      return res.status(400).json({ message: "This is the last account that can sign in. Create another before revoking it." });
+    }
+
+    target.isVerified = false;
+    target.role = "revoked";
+    await target.save();
+
+    await writeCredentialAudit(me.email, req, `revoked-access:${target.email}`);
+
+    res.json({ success: true, message: `${target.email} can no longer sign in.` });
+  } catch (err) {
+    console.error("adminSecurity /users/revoke:", err.message);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+/** POST /admin/security/users/:id/restore   { currentPassword } */
+router.post("/users/:id/restore", authMiddleware, async (req, res) => {
+  try {
+    const me = await User.findById(req.user._id);
+    if (!me) return res.status(401).json({ message: "Your session is no longer valid." });
+
+    const ok = await requireCurrentPassword(req, res, me, req.body && req.body.currentPassword);
+    if (!ok) return undefined;
+
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      return res.status(400).json({ message: "Unknown account." });
+    }
+
+    const target = await User.findById(req.params.id);
+    if (!target) return res.status(404).json({ message: "Unknown account." });
+
+    target.isVerified = true;
+    target.role = "admin";
+    await target.save();
+
+    await writeCredentialAudit(me.email, req, `restored-access:${target.email}`);
+
+    res.json({ success: true, message: `${target.email} can sign in again.` });
+  } catch (err) {
+    console.error("adminSecurity /users/restore:", err.message);
+    res.status(500).json({ message: "Server error" });
   }
 });
 

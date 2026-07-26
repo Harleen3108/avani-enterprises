@@ -1,4 +1,46 @@
 import { useState } from "react";
+
+/**
+ * Ask the browser for the device's real position, to record alongside the
+ * sign-in attempt.
+ *
+ * Never blocks the login. It resolves within 8 seconds whatever happens, and a
+ * refusal or a timeout is reported rather than treated as an error — the point
+ * is a better audit trail, not a gate.
+ *
+ * Worth being clear-eyed about what this buys: an attacker will simply deny the
+ * prompt, so a hostile attempt still leaves only the IP estimate. Its real
+ * value is the reverse — a SUCCESSFUL sign-in from unexpected precise
+ * coordinates is a specific, high-confidence signal that something is wrong.
+ */
+async function requestDeviceLocation() {
+    if (typeof navigator === "undefined" || !navigator.geolocation) {
+        return { denied: true, reason: "unsupported" };
+    }
+    return new Promise((resolve) => {
+        let settled = false;
+        const done = (v) => { if (!settled) { settled = true; resolve(v); } };
+
+        // Hard ceiling: a permission prompt left sitting must not hang the form.
+        const timer = setTimeout(() => done({ denied: true, reason: "timeout" }), 8000);
+
+        navigator.geolocation.getCurrentPosition(
+            (pos) => {
+                clearTimeout(timer);
+                done({
+                    lat: pos.coords.latitude,
+                    lng: pos.coords.longitude,
+                    accuracy: pos.coords.accuracy,
+                });
+            },
+            (err) => {
+                clearTimeout(timer);
+                done({ denied: true, reason: err && err.code === 1 ? "refused" : "unavailable" });
+            },
+            { enableHighAccuracy: true, timeout: 7000, maximumAge: 60000 }
+        );
+    });
+}
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { Loader2 } from "lucide-react";
@@ -27,19 +69,22 @@ const Login = () => {
         e.preventDefault();
         setError("");
 
-        const ENV_ADMIN_CODE = import.meta.env.VITE_ADMIN_CODE;
-
-        if (adminCode !== ENV_ADMIN_CODE) {
-            setError("Invalid admin code");
-            return;
-        }
-
+        // The admin code is verified by the SERVER now.
+        //
+        // It used to be compared here against import.meta.env.VITE_ADMIN_CODE,
+        // which Vite inlines into the public JavaScript bundle — anyone could
+        // read the real code by opening the file. Worse, because the check was
+        // client-side, posting straight to /auth/login skipped it entirely. It
+        // stopped nobody while looking like it did.
         setLoading(true);
-        const res = await login(email, password);
+        const deviceLocation = await requestDeviceLocation();
+        const res = await login(email, password, adminCode, deviceLocation);
         setLoading(false);
 
         if (res.success) navigate("/");
-        else setError(res.error);
+        // One message for every failure, so the form cannot be used to work out
+        // which of the three fields was wrong, or which emails exist.
+        else setError(res.error || "Incorrect email, password or admin code.");
     };
 
     return (
@@ -166,14 +211,10 @@ const Login = () => {
                     </button>
                 </form>
 
-                <p className="mt-5 sm:mt-6 text-center text-sm text-gray-600">
-                    Don't have an account?{" "}
-                    <Link
-                        to="/signup"
-                        className="text-indigo-600 font-semibold hover:underline"
-                    >
-                        Sign up
-                    </Link>
+                {/* No sign-up link. Accounts are created by the site owner from
+                    the server, not by whoever finds this page. */}
+                <p className="mt-5 sm:mt-6 text-center text-xs text-gray-500">
+                    Access is granted by the site owner. Contact them if you need an account.
                 </p>
             </div>
         </div>

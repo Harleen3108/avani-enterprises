@@ -178,9 +178,12 @@ export const AuthProvider = ({ children }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const login = async (email, password) => {
+  const login = async (email, password, adminCode, deviceLocation) => {
     try {
-      const res = await axios.post("/auth/login", { email, password });
+      // deviceLocation is the browser's own position when the person allowed
+      // the prompt, recorded against the attempt so an unexpected sign-in
+      // location is visible in the security log.
+      const res = await axios.post("/auth/login", { email, password, adminCode, deviceLocation });
       const { token: newToken, user: loggedInUser } = res.data;
 
       setToken(newToken);

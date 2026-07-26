@@ -297,7 +297,31 @@ const generateOTP = () =>
   Math.floor(100000 + Math.random() * 900000).toString();
 
 // Signup - Step 1: Validate Admin Code, Create User (Unverified), Send OTP
-app.post("/auth/signup", async (req, res) => {
+/**
+ * Public self-registration is CLOSED, and must stay closed.
+ *
+ * This endpoint accepted any email address, and `role` defaults to "admin" in
+ * models/User.js while signup never set it — so anyone who found the admin URL
+ * could register, confirm the OTP sent to their own inbox, and receive a token
+ * with full administrative rights over every lead on the site. The OTP step
+ * looked like security but only proved the person owned the address they typed.
+ *
+ * Legitimate admins are created from the Render Shell:
+ *     node scripts/createAdmin.js "Name" email@domain.com
+ *
+ * Do not re-open this by adding a shared signup code. A code circulates, and
+ * the blast radius here is every lead the business has ever received.
+ */
+const SIGNUP_CLOSED = {
+  message: "Self-registration is disabled. Contact the site owner for access.",
+};
+
+app.post("/auth/signup", (req, res) => res.status(403).json(SIGNUP_CLOSED));
+app.post("/auth/verify-signup", (req, res) => res.status(403).json(SIGNUP_CLOSED));
+
+// Superseded by the 403 above. Kept for reference only — Express matches the
+// first registration, so neither of the originals below can be reached.
+app.post("/auth/signup__disabled", async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
@@ -357,7 +381,7 @@ app.post("/auth/signup", async (req, res) => {
 });
 
 // Signup - Step 2: Verify OTP
-app.post("/auth/verify-signup", async (req, res) => {
+app.post("/auth/verify-signup__disabled", async (req, res) => {
   try {
     const { email, otp } = req.body;
     const user = await User.findOne({ email });
@@ -395,7 +419,7 @@ app.post("/auth/verify-signup", async (req, res) => {
 // Login
 app.post("/auth/login", async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password, adminCode } = req.body;
 
     // ── Progressive lockout ─────────────────────────────────────────────────
     // Keyed on email + hashed IP together, so an attacker hammering one account
@@ -416,20 +440,36 @@ app.post("/auth/login", async (req, res) => {
     }
 
     // A failure returns the same message whichever check failed, so the
-    // response cannot be used to enumerate which emails exist.
+    // response cannot be used to enumerate which emails exist — or to work out
+    // which of the three fields was wrong.
     const fail = async (reason) => {
       const r = await loginSecurity.recordFailure({ email, reason, req });
       return res.status(400).json({
-        message: "Invalid email or password",
+        message: "Incorrect email, password or admin code",
         attemptsBeforeLock: r.locked ? 0 : undefined,
         lockedUntil: r.locked ? r.until : undefined,
         minutesLeft: r.locked ? r.minutesLeft : undefined,
       });
     };
 
+    // Second factor, checked HERE rather than in the browser. The old check
+    // compared against a Vite env var, which is inlined into the public bundle
+    // and therefore readable by anyone — and being client-side, posting
+    // directly to this endpoint skipped it altogether.
+    //
+    // Optional: with ADMIN_LOGIN_CODE unset the check is skipped, so adding the
+    // variable later cannot lock anyone out in the meantime. Counted as a
+    // failure like any other, so a brute-force of the code trips the lockout.
+    if (process.env.ADMIN_LOGIN_CODE) {
+      if (String(adminCode || "") !== String(process.env.ADMIN_LOGIN_CODE)) {
+        return fail("bad-admin-code");
+      }
+    }
+
     const user = await User.findOne({ email });
     if (!user) return fail("no-user");
     if (!user.isVerified) return fail("unverified");
+    if (user.role === "revoked") return fail("revoked");
 
     const validPass = await bcrypt.compare(password, user.password);
     if (!validPass) return fail("bad-password");

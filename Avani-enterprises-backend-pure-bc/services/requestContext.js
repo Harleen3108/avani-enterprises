@@ -707,8 +707,36 @@ function originFromRequest(req, body = {}) {
   };
 }
 
+/**
+ * Which site a request came from, for people running more than one.
+ *
+ * Prefers Origin, then Referer — both name the admin panel the browser is
+ * actually on. Host is the last resort and is usually the API's own domain
+ * rather than the front end, which is precisely the thing that makes an alert
+ * ambiguous when several sites share a backend.
+ */
+function siteFromRequest(req) {
+  if (!req || typeof req.get !== "function") return "";
+
+  const fromHeader = (value) => {
+    if (!value) return "";
+    try {
+      return new URL(value).host;
+    } catch {
+      return "";
+    }
+  };
+
+  return (
+    fromHeader(req.get("origin")) ||
+    fromHeader(req.get("referer")) ||
+    String(req.get("host") || "").slice(0, 200)
+  );
+}
+
 module.exports = {
   originFromRequest,
+  siteFromRequest,
   clientIp,
   hashIp,
   geoFromIp,

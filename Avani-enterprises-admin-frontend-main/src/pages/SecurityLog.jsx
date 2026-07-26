@@ -79,6 +79,41 @@ const locationText = (row) => {
 /** typeof NaN === "number", so never gate a rendered number on typeof alone. */
 const finiteOrNull = (value) => (Number.isFinite(value) ? value : null);
 
+/**
+ * Exact device coordinates, when the browser gave them up.
+ *
+ * Distinguished from the IP estimate deliberately: one is a real position the
+ * device reported, the other is an ISP allocation that a VPN moves to another
+ * country. Presenting them identically would make the weaker one look reliable.
+ */
+const PreciseLocation = ({ row }) => {
+  if (!row) return null;
+
+  if (row.locationSource === "device") {
+    const lat = finiteOrNull(row.preciseLat);
+    const lng = finiteOrNull(row.preciseLng);
+    if (lat === null || lng === null) return null;
+    return (
+      <a
+        href={`https://www.google.com/maps?q=${lat},${lng}`}
+        target="_blank"
+        rel="noreferrer"
+        className="block text-[11px] text-emerald-700 hover:underline mt-0.5"
+        title="Exact position reported by the device"
+      >
+        📍 {lat.toFixed(4)}, {lng.toFixed(4)}
+        {finiteOrNull(row.accuracyM) !== null ? ` ±${Math.round(row.accuracyM)}m` : ""}
+      </a>
+    );
+  }
+
+  if (row.locationSource === "denied") {
+    return <span className="block text-[11px] text-gray-400 mt-0.5">device location refused</span>;
+  }
+
+  return null;
+};
+
 const deviceIcon = (device) => {
   if (device === "mobile") return Smartphone;
   if (device === "tablet") return Tablet;
@@ -389,6 +424,158 @@ const LeadEmailStatus = () => {
   );
 };
 
+/**
+ * Every account that can sign in to this panel, with a way to cut one off.
+ *
+ * Public self-registration used to be open and `role` defaulted to "admin", so
+ * accounts may exist that nobody intended to create. Anything unfamiliar here
+ * that says "Can sign in" should be revoked.
+ */
+const AdminAccounts = () => {
+  const API = import.meta.env.VITE_API_URL;
+  const [data, setData] = useState(null);
+  const [busyId, setBusyId] = useState(null);
+  const [result, setResult] = useState(null);
+
+  const authHeaders = () => ({
+    headers: { Authorization: `Bearer ${localStorage.getItem("token") || ""}` },
+  });
+
+  const load = () => {
+    axios
+      .get(`${API}/admin/security/users`, authHeaders())
+      .then((r) => setData(r.data))
+      .catch(() => setData({ users: [], error: true }));
+  };
+
+  useEffect(load, [API]);
+
+  const act = async (user, action) => {
+    const verb = action === "revoke" ? "Revoke access for" : "Restore access for";
+    const currentPassword = window.prompt(
+      `${verb} ${user.email}?\n\nEnter YOUR current password to confirm.`
+    );
+    if (!currentPassword) return;
+
+    setBusyId(user.id);
+    setResult(null);
+    try {
+      const r = await axios.post(
+        `${API}/admin/security/users/${user.id}/${action}`,
+        { currentPassword },
+        authHeaders()
+      );
+      setResult({ ok: true, msg: r.data.message });
+      load();
+    } catch (err) {
+      setResult({ ok: false, msg: err.response?.data?.message || "That did not work." });
+    } finally {
+      setBusyId(null);
+    }
+  };
+
+  if (!data) return null;
+
+  const users = data.users || [];
+  const active = users.filter((u) => u.canSignIn);
+
+  return (
+    <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+      <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-4">
+        <div>
+          <h2 className="text-sm font-semibold text-gray-900">Admin accounts</h2>
+          <p className="text-xs text-gray-500 mt-1">
+            {active.length} of {users.length} can sign in. Anything you do not recognise should be revoked.
+            New accounts are created from the server, not from this panel.
+          </p>
+        </div>
+        <button
+          onClick={load}
+          className="shrink-0 px-3 py-2 rounded-lg border border-gray-200 text-gray-700 hover:bg-gray-50 text-xs font-medium"
+        >
+          Reload
+        </button>
+      </div>
+
+      {users.length === 0 ? (
+        <p className="text-xs text-gray-400 italic">No accounts returned.</p>
+      ) : (
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="border-b border-gray-100 bg-gray-50/60">
+                {["Email", "Name", "Role", "Status", "Created", ""].map((h) => (
+                  <th key={h} className="text-left px-3 py-2.5 text-[11px] font-semibold text-gray-500 uppercase tracking-wider whitespace-nowrap">
+                    {h}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {users.map((u) => {
+                const isYou = data.you && String(data.you) === String(u.id);
+                return (
+                  <tr key={u.id} className="border-b border-gray-50">
+                    <td className="px-3 py-3 font-medium text-gray-900 break-all">
+                      {u.email}
+                      {isYou && <span className="ml-2 text-[10px] px-1.5 py-0.5 rounded bg-gray-900 text-white">YOU</span>}
+                    </td>
+                    <td className="px-3 py-3 text-gray-600">{u.name || "—"}</td>
+                    <td className="px-3 py-3 text-gray-600">{u.role || "—"}</td>
+                    <td className="px-3 py-3">
+                      <span className={clsx(
+                        "text-[11px] font-semibold px-2 py-0.5 rounded-md border",
+                        u.canSignIn ? "bg-emerald-50 text-emerald-700 border-emerald-200" : "bg-gray-100 text-gray-500 border-gray-200"
+                      )}>
+                        {u.canSignIn ? "Can sign in" : "Revoked"}
+                      </span>
+                    </td>
+                    <td className="px-3 py-3 text-xs text-gray-500 whitespace-nowrap">
+                      {u.createdAt ? new Date(u.createdAt).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" }) : "—"}
+                    </td>
+                    <td className="px-3 py-3 text-right">
+                      {isYou ? (
+                        <span className="text-xs text-gray-400 italic">this is you</span>
+                      ) : u.canSignIn ? (
+                        <button
+                          onClick={() => act(u, "revoke")}
+                          disabled={busyId === u.id}
+                          className="px-3 py-1.5 rounded-lg bg-rose-50 text-rose-700 hover:bg-rose-100 text-xs font-medium disabled:opacity-50"
+                        >
+                          {busyId === u.id ? "…" : "Revoke access"}
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() => act(u, "restore")}
+                          disabled={busyId === u.id}
+                          className="px-3 py-1.5 rounded-lg border border-gray-200 text-gray-700 hover:bg-gray-50 text-xs font-medium disabled:opacity-50"
+                        >
+                          {busyId === u.id ? "…" : "Restore"}
+                        </button>
+                      )}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {result && (
+        <p className={clsx("text-xs mt-3 pt-3 border-t border-gray-100", result.ok ? "text-emerald-700" : "text-rose-700")}>
+          {result.msg}
+        </p>
+      )}
+
+      <p className="text-[11px] text-gray-400 mt-3">
+        Revoking keeps the record rather than deleting it, so an unwanted account remains as evidence.
+        You cannot revoke yourself or the last account that can sign in.
+      </p>
+    </div>
+  );
+};
+
 const SecurityLog = () => {
   // useAuth() is null outside the provider; destructuring that would throw and
   // take the whole page down rather than showing a sign-in prompt.
@@ -583,6 +770,10 @@ const SecurityLog = () => {
           quiet one: leads save, visitors see a success message, and nobody is
           ever emailed. */}
       <LeadEmailStatus />
+
+      {/* Who can get in. Self-registration was open until recently, so this is
+          the first place to check for accounts nobody meant to create. */}
+      <AdminAccounts />
 
       {error && (
         <div className="p-4 rounded-lg bg-rose-50 border border-rose-200 text-rose-700 text-sm">
@@ -1016,6 +1207,15 @@ const SecurityLog = () => {
                         >
                           {a.email || "—"}
                         </span>
+                        {/* Which panel. Matters when one backend serves several
+                            sites — otherwise an alert says someone failed to
+                            sign in but not to what. */}
+                        {a.site && (
+                          <span className="block text-[11px] text-gray-500 truncate max-w-[220px]" title={a.site}>
+                            on {a.site}
+                          </span>
+                        )}
+                        <PreciseLocation row={a} />
                       </td>
 
                       <td className="px-4 py-3">
