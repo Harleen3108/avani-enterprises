@@ -205,7 +205,7 @@ const AvaniFormsPage = () => {
               <tr>
                 <th className="px-6 py-3.5">Name</th>
                 <th className="px-6 py-3.5">Contact</th>
-                <th className="px-6 py-3.5">Company</th>
+                <th className="px-6 py-3.5">Came from</th>
                 <th className="px-6 py-3.5">Services</th>
                 <th className="px-6 py-3.5">Notes</th>
                 <th className="px-6 py-3.5">Date</th>
@@ -232,8 +232,13 @@ const AvaniFormsPage = () => {
                       )}
                     >
                       <td className="px-6 py-4">
-                        <div className="font-medium text-gray-900">
+                        <div className="font-medium text-gray-900 flex items-center gap-2">
                           {form.fullName || "N/A"}
+                          {form.isSpam && (
+                            <span className="text-[10px] px-1.5 py-0.5 rounded bg-rose-100 text-rose-700 font-semibold">
+                              SPAM
+                            </span>
+                          )}
                         </div>
                       </td>
                       <td className="px-6 py-4">
@@ -246,10 +251,24 @@ const AvaniFormsPage = () => {
                           </span>
                         </div>
                       </td>
+                      {/* Which page produced this enquiry. pagePath is stored on
+                          new submissions; older rows predate the field. */}
                       <td className="px-6 py-4">
-                        <span className="text-sm text-gray-700">
-                          {form.companyName || "—"}
-                        </span>
+                        {form.pagePath ? (
+                          <a
+                            href={form.pageUrl || `https://www.avanienterprises.in${form.pagePath}`}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="font-mono text-xs text-gray-700 hover:text-indigo-600 hover:underline break-all"
+                          >
+                            {form.pagePath}
+                          </a>
+                        ) : (
+                          <span className="text-xs text-gray-400 italic">not recorded</span>
+                        )}
+                        {form.companyName && (
+                          <div className="text-xs text-gray-500 mt-0.5">{form.companyName}</div>
+                        )}
                       </td>
                       <td className="px-6 py-4">
                         <div className="flex flex-wrap gap-1.5">

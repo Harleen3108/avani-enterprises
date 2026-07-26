@@ -9,6 +9,24 @@ that happens again.
 
 ---
 
+## 0. What is queued right now
+
+**`google-business-profile-map-pack-india`** — "Google Business Profile: The
+Setup That Actually Wins the Map Pack". 2,021 words, SEO category, clusters to
+`/seo-company`, `status: 'approved'`.
+
+To publish it from Render Shell:
+
+```bash
+cd avani-connect-glow-main
+AVANI_ADMIN_TOKEN=<admin-jwt> node scripts/seedBlogPosts.js --publish --confirm
+```
+
+The last post published was 2026-07-10, so the 3-day drip gap has long passed
+and it will go out on the first run.
+
+---
+
 ## 1. Add a post
 
 Open `scripts/blogSeedData.js` and copy an existing entry.
@@ -83,6 +101,20 @@ passes the quality gate:
 - a CTA
 
 A post that fails is **skipped**, never published in a weaker form.
+
+### Check it is not a near-duplicate first
+
+The gate counts words; it cannot tell you the topic is already covered. This
+site is recovering from a scaled-content demotion, so that check matters more
+than the word count does. Before approving a post, scan the 52 live titles and
+ask whether it is genuinely new.
+
+If you want to measure it, use **word-level 5-gram containment**, not trigram
+similarity. Trigram similarity saturates on long documents — a post about
+Google Business Profile scores 38% against a post about a viral meme, which
+tells you nothing. Across the published corpus, 5-gram containment has a median
+of 0.00% and a 95th percentile of 0.45%; anything above a few percent is real
+passage reuse and worth investigating.
 
 ---
 
@@ -160,7 +192,14 @@ Request Indexing on the new post.
 
 - `BlogPosting` + `BreadcrumbList` schema; `FAQPage` when FAQs are present
 - An **AI Quick Summary** block derived from the post's own content
-- Article typography — styled headings, lists, tables, quotes and code
+- Article typography on the light reading surface — styled headings, lists,
+  tables, quotes and code
+- A **Key takeaways** callout card, rendered from `keyTakeaways[]`
+- **Automatic internal links**: the first mention of each service links to its
+  money page (`/seo-company`, `/digital-marketing-company`, and so on). Capped
+  at six per post, never inside a heading, never double-linking something you
+  already linked by hand, and never linking a post to itself. Write your own
+  links in markdown wherever a specific one reads better — those take priority
 - Views, likes and moderated comments
 - The lead form at the end (no urgency banner) with a service-specific CTA
 - `generate_lead` firing with `blog:<slug>` so GA4 shows which posts produce

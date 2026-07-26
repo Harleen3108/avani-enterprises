@@ -34,7 +34,7 @@ const offices = [
     country: 'India',
     label: 'West India Office',
     tagline: 'Financial nerve center',
-    description: "Our western hub: Third Floor, Vasudev Chamber, Teli Galli Cross Rd, Andheri East, Mumbai, 400069.",
+    description: "Our western hub: Third Floor, Vasudev Chamber, Teli Galli Cross Rd, Natwar Nagar, Andheri East, Mumbai, Maharashtra 400069.",
     image: 'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?q=80&w=800&auto=format&fit=crop',
     cx: 640, cy: 254,
     color: '#ef4444',

@@ -32,10 +32,10 @@
  *                     organic "serving {city}" copy ONLY — no address, no map,
  *                     no LocalBusiness schema, and no prose claiming an office.
  *
- * Only Gurugram is currently `confirmed`, because it is the only location whose
- * address the client has verified. Everything else is sell-only until confirmed
- * in writing. Do NOT flip `confirmed` to true to make a page look stronger —
- * the page ranking slightly better is not worth a GBP suspension.
+ * Gurugram, Rohtak and Mumbai are `confirmed` — the client has verified each
+ * address in writing. Noida and Dubai remain sell-only. Do NOT flip `confirmed`
+ * to true to make a page look stronger — the page ranking slightly better is
+ * not worth a GBP suspension.
  *
  * Note the `candidateAddress` field: an address found elsewhere in the codebase
  * that MIGHT be real but has not been confirmed. It is never rendered. It exists
@@ -130,19 +130,24 @@ const OFFICES = {
   mumbai: {
     key: 'mumbai',
     city: 'Mumbai',
-    label: 'Mumbai',
-    // Client has confirmed this IS a real office, but the street address is
-    // still pending. Until it arrives we render sell-only copy: no address, no
-    // map, no LocalBusiness schema. Google Business Profile matching needs an
-    // exact address, and publishing an approximate one is worse than waiting.
-    // Flip `confirmed` and fill `address` together — never separately.
-    confirmed: false,
-    realPendingAddress: true,
-    schemaReady: false,
-    address: null,
-    areasServed: ['Bandra Kurla Complex (BKC)', 'Lower Parel', 'Andheri East (MIDC and SEEPZ)', 'Powai'],
+    label: 'Mumbai (Operations Centre)',
+    // Client-confirmed address, supplied 26 July 2026. Promoted from sell-only
+    // to a real staffed premises, so it now gets an address, a map and
+    // LocalBusiness schema like Gurugram and Rohtak.
+    confirmed: true,
+    schemaReady: true,
+    address: {
+      street: 'Third Floor, Vasudev Chamber, Teli Galli Cross Rd, Natwar Nagar',
+      locality: 'Andheri East, Mumbai',
+      region: 'Maharashtra',
+      postalCode: '400069',
+      country: 'IN',
+    },
+    // Teli Galli Cross Road, Andheri East. Street-level, not a survey point.
+    geo: { lat: 19.1136, lng: 72.8497 },
+    areasServed: ['Andheri East (MIDC and SEEPZ)', 'Bandra Kurla Complex (BKC)', 'Lower Parel', 'Powai', 'Marol', 'Vile Parle'],
     localNote:
-      'We work with BFSI, media and D2C clients across BKC, Lower Parel and Andheri East, on IST alongside you.',
+      'Our Mumbai operations centre is on Teli Galli Cross Road in Andheri East, minutes from MIDC and SEEPZ and a short run to BKC, so client reviews with BFSI, media and D2C teams happen in person.',
   },
   dubai: {
     key: 'dubai',

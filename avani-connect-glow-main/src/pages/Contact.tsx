@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Mail, Phone, MapPin, Send, MessageSquare, Globe, ArrowRight, ChevronDown, CheckCircle, ChevronUp } from 'lucide-react';
-import { getBackendUrl } from '../lib/api';
+import { getBackendUrl, pageAttribution } from '../lib/api';
 import '../components/Home.css';
 
 const titleV = {
@@ -81,7 +81,7 @@ const Contact = () => {
     const payload = { 
       fullName: formData.name, email: formData.email, phoneNu: formData.phone, 
       service: formData.service.join(', '), companyName: formData.company, 
-      projectDetails: formData.message, otherService: formData.otherService
+      projectDetails: formData.message, otherService: formData.otherService, ...pageAttribution()
     };
     try {
       const res = await fetch(`${API_BASE.replace(/\/$/, '')}/avani-form`, { 

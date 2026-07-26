@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { getBackendUrl } from '../../lib/api';
+import { getBackendUrl, pageAttribution } from '../../lib/api';
 import { Send, ChevronDown, Phone, Mail, MapPin } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
@@ -21,7 +21,7 @@ const DH2Consultation = () => {
     setIsLoading(true);
     try {
       const API_BASE = getBackendUrl();
-      const res = await fetch(`${API_BASE.replace(/\/$/, '')}/avani-form`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ fullName: formData.name, email: formData.email, phoneNu: formData.phone, service: formData.service.join(', '), companyName: formData.company, projectDetails: formData.message, otherService: formData.otherService }) });
+      const res = await fetch(`${API_BASE.replace(/\/$/, '')}/avani-form`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ fullName: formData.name, email: formData.email, phoneNu: formData.phone, service: formData.service.join(', '), companyName: formData.company, projectDetails: formData.message, otherService: formData.otherService, ...pageAttribution() }) });
       if (res.ok) setIsSubmitted(true); else alert('Unable to submit. Try again.');
     } catch { alert('Error submitting form.'); } finally { setIsLoading(false); }
   };

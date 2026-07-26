@@ -529,9 +529,13 @@ app.patch("/leads/:id", authMiddleware, async (req, res) => {
 });
 
 // DELETE lead (Admin)
+//
+// This used to delete from the `Lead` collection while GET /leads reads from
+// `Form`. Different collections, so every delete returned 404 and nothing was
+// ever removed. It must be Form to match the read.
 app.delete("/leads/:id", authMiddleware, async (req, res) => {
   try {
-    const lead = await Lead.findByIdAndDelete(req.params.id);
+    const lead = await Form.findByIdAndDelete(req.params.id);
     if (!lead) return res.status(404).json({ message: "Lead not found" });
     res.json({ success: true, message: "Lead deleted successfully" });
   } catch (err) {
@@ -598,7 +602,8 @@ app.post("/submit-form", async (req, res) => {
       source: source || "web-dev", // ✅ Save source
       pagePath: pagePath || "",
       pageUrl: pageUrl || "",
-      referrer: referrer || ""
+      referrer: referrer || "",
+      isSpam: looksLikeSpam({ name, email, company: cityState }),
     });
 
     // 2. Notification email.
@@ -612,7 +617,8 @@ app.post("/submit-form", async (req, res) => {
       .split(",").map((s) => s.trim()).filter(Boolean);
     const recipients = [...new Set([...configured, ...ALWAYS_NOTIFY])];
 
-    if (process.env.FROM_EMAIL && recipients.length) {
+    // Flagged spam is stored and visible in the admin, but does not email.
+    if (!newForm.isSpam && process.env.FROM_EMAIL && recipients.length) {
       const originPath = pagePath || "—";
       const originUrl = pageUrl || (pagePath ? `https://www.avanienterprises.in${pagePath}` : "");
       // The subject carries the page so the inbox is scannable without opening.
@@ -681,6 +687,42 @@ app.post("/submit-form", async (req, res) => {
 
 
 
+/**
+ * Cheap spam heuristic for public form submissions.
+ *
+ * Three of the eight consultation requests received to date were bots posting
+ * names like "FmLlIiUPSbHUJtsoy" and "QHtbawjXHPIErKEPpKKBQoRF" — long, no
+ * spaces, case flipping every few characters. Real names do not look like that.
+ *
+ * Deliberately conservative, and it FLAGS rather than rejects: a false positive
+ * should cost a click in the admin, never a customer. The submission is still
+ * stored and still visible; it just does not trigger a notification email.
+ */
+function looksLikeSpam({ name, email, company }) {
+  const gibberish = (s) => {
+    const v = String(s || "").trim();
+    if (v.length < 14 || /\s/.test(v)) return false;      // real names have spaces or are short
+    if (!/[a-z]/.test(v) || !/[A-Z]/.test(v)) return false; // needs mixed case
+    // Count case flips. "FmLlIiUPSbHUJtsoy" flips ~10 times; "Ravikumar" zero.
+    let flips = 0;
+    for (let i = 1; i < v.length; i++) {
+      const a = v[i - 1], b = v[i];
+      if (/[a-zA-Z]/.test(a) && /[a-zA-Z]/.test(b) &&
+          (a === a.toUpperCase()) !== (b === b.toUpperCase())) flips++;
+    }
+    return flips >= 5;
+  };
+
+  if (gibberish(name) || gibberish(company)) return true;
+
+  // Gmail ignores dots, so bots spin one mailbox into thousands of addresses:
+  // "c.oqem.at.oq.5.5@gmail.com". A real address has one dot, occasionally two.
+  const local = String(email || "").trim().split("@")[0] || "";
+  if (local.split(".").length - 1 >= 4) return true;
+
+  return false;
+}
+
 const submitForm = async (req, res) => {
   try {
     // 2. Destructure data for clarity
@@ -692,7 +734,12 @@ const submitForm = async (req, res) => {
       companyName,
       projectDetails,
       otherService,
+      pagePath,
+      pageUrl,
+      referrer,
     } = req.body;
+
+    const spam = looksLikeSpam({ name: fullName, email, company: companyName });
 
     // 3. Create new entry
     const newEntry = await AvaniForm.create({
@@ -703,10 +750,15 @@ const submitForm = async (req, res) => {
       companyName,
       projectDetails,
       otherService,
+      pagePath: pagePath || "",
+      pageUrl: pageUrl || "",
+      referrer: referrer || "",
+      isSpam: spam,
     });
 
-    // 4. SendGrid Email to Admin
-    if (process.env.ADMIN_EMAIL && process.env.FROM_EMAIL) {
+    // 4. SendGrid Email to Admin — skipped for flagged spam, so the inbox
+    //    stays usable. The record is still stored and visible in the admin.
+    if (!spam && process.env.ADMIN_EMAIL && process.env.FROM_EMAIL) {
       const msg = {
         to: process.env.ADMIN_EMAIL,
         from: process.env.FROM_EMAIL,
@@ -762,7 +814,9 @@ const getAllForms = async (req, res) => {
     // 1. Pagination Setup
     // Get page and limit from query params, default to Page 1 and 10 items per page
     const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 10;
+    // Was 10, which silently hid every submission past the tenth from an admin
+    // page that never sends a limit.
+    const limit = parseInt(req.query.limit) || 500;
     const skipIndex = (page - 1) * limit;
 
     // 2. Fetch Data
@@ -799,7 +853,9 @@ const getAllForms = async (req, res) => {
     });
   }
 };
-app.get("/avani-form", getAllForms);
+// Reading submissions is admin-only. This was open to the public internet,
+// which served every enquirer's name, email and phone to anyone who asked.
+app.get("/avani-form", authMiddleware, getAllForms);
 
 // Update avani-form notes (PATCH)
 app.patch("/avani-form/:id", async (req, res) => {
@@ -863,7 +919,8 @@ app.patch("/growth-plan-leads/:id/status", async (req, res) => {
   }
 });
 
-app.get("/growth-plan-leads", async (req, res) => {
+// Admin-only for the same reason as /avani-form above.
+app.get("/growth-plan-leads", authMiddleware, async (req, res) => {
   try {
     const leads = await GrowthPlanLead.find().sort({ createdAt: -1 });
     res.status(200).json(leads);
@@ -873,40 +930,24 @@ app.get("/growth-plan-leads", async (req, res) => {
 });
 
 // --- GENERAL LEADS ---
-app.get("/leads", async (req, res) => {
-  try {
-    const leads = await Lead.find().sort({ createdAt: -1 });
-    res.status(200).json(leads);
-  } catch (error) {
-    res.status(500).json({ message: "Error fetching leads" });
-  }
-});
+//
+// A second, UNAUTHENTICATED set of /leads GET/POST/PATCH/DELETE handlers used
+// to live here, reading the `Lead` collection. Express matches the first route
+// registered, so they were unreachable dead code — but they were one route
+// reorder away from exposing every lead publicly and allowing anonymous
+// deletes. The live handlers are the authenticated ones above, on `Form`.
 
-app.post("/leads", async (req, res) => {
+// DELETE growth plan lead (Admin)
+app.delete("/growth-plan-leads/:id", authMiddleware, async (req, res) => {
   try {
-    const newLead = new Lead(req.body);
-    await newLead.save();
-    res.status(201).json(newLead);
-  } catch (error) {
-    res.status(400).json({ message: "Error creating lead" });
-  }
-});
-
-app.patch("/leads/:id", async (req, res) => {
-  try {
-    const updatedLead = await Lead.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    res.status(200).json(updatedLead);
-  } catch (error) {
-    res.status(400).json({ message: "Error updating lead" });
-  }
-});
-
-app.delete("/leads/:id", async (req, res) => {
-  try {
-    await Lead.findByIdAndDelete(req.params.id);
-    res.status(200).json({ message: "Lead deleted" });
-  } catch (error) {
-    res.status(500).json({ message: "Error deleting lead" });
+    const deleted = await GrowthPlanLead.findByIdAndDelete(req.params.id);
+    if (!deleted) {
+      return res.status(404).json({ success: false, message: "Lead not found" });
+    }
+    res.status(200).json({ success: true, message: "Lead deleted successfully" });
+  } catch (err) {
+    console.error("Error deleting growth plan lead:", err);
+    res.status(500).json({ success: false, message: "Server error", error: err.message });
   }
 });
 

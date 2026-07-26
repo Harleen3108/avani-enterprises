@@ -9,140 +9,218 @@
  * `body` is markdown. src/data/blogFormat.js converts markdown, HTML and plain
  * text alike at render time, so you do not need to write HTML here.
  *
+ * UNIQUENESS MATTERS MORE THAN VOLUME
+ * -----------------------------------
+ * This site is recovering from a scaled-content demotion. Before publishing,
+ * check the post against the 52 already live — topic overlap is what caused the
+ * problem in the first place. The first draft of this file was a "how to choose
+ * a digital marketing agency in Rohtak" piece that measured 56% trigram
+ * similarity against the corpus (the 95th percentile; the median pair is 37%),
+ * because two near-identical posts already existed:
+ *
+ *   • "How to Choose a Digital Marketing Agency in India Without Getting Burned"
+ *   • "digital marketing agency in Rohtak, Gurgaon & Mumbai"
+ *
+ * It was replaced with a topic the corpus genuinely does not cover.
+ *
  * See scripts/BLOG-SEEDING.md for the workflow and the Render command.
  */
 
 export default [
   {
     // ── Identity ────────────────────────────────────────────────────────────
-    slug: 'how-to-choose-digital-marketing-agency-rohtak',
-    title: 'How to Choose a Digital Marketing Agency in Rohtak (2026 Guide)',
+    slug: 'google-business-profile-map-pack-india',
+    title: 'Google Business Profile: The Setup That Actually Wins the Map Pack',
     excerpt:
-      'A practical guide to choosing a digital marketing agency in Rohtak — the criteria that matter, the questions to ask, the red flags, and how the local options compare.',
+      'Most local businesses fill in their Google Business Profile once and never touch it again. Here is what the three-result map pack actually rewards, the setup checklist, and the mistakes that get profiles suspended.',
 
     // ── Classification (drives the /blog category filter) ───────────────────
-    category: 'Digital Marketing',
-    tags: ['Rohtak', 'Agency Selection', 'Local'],
+    category: 'SEO',
+    tags: ['Local SEO', 'Google Business Profile', 'Map Pack'],
 
     // ── Clustering (internal link target) ───────────────────────────────────
-    serviceCluster: 'digital-marketing-company',
-    serviceLabel: 'Digital Marketing Services',
-    related: ['google-business-profile-setup-haryana'],
+    serviceCluster: 'seo-company',
+    serviceLabel: 'SEO Services',
+    related: [],
 
     // ── Meta ────────────────────────────────────────────────────────────────
     author: 'Avani Enterprises',
     coverImage: '',
-    status: 'draft', // 'approved' to allow publishing
+    // Approved so `node scripts/seedBlogPosts.js --publish --confirm` will
+    // publish it. The drip gate and the quality gate still apply.
+    status: 'approved',
 
     keyTakeaways: [
-      'Match the agency to your goal — leads, sales or brand — not to whoever ranks first.',
-      'Ask for recent results in your sector, with numbers you can check.',
-      'Full-service helps when web, ads, SEO and social have to work together.',
-      'Rohtak has several established agencies. Compare on process and proof.',
-      'Walk away from guaranteed rankings, absent reporting and vague scope.',
+      'The map pack shows three results. Ranking fourth is functionally the same as ranking fortieth, so local SEO is a different game from ten blue links.',
+      'Google names three factors: relevance, distance and prominence. You cannot change distance, which means category accuracy and prominence are where the work is.',
+      'Your primary category does more than any other single field. Pick the one that describes what you are, not the one with the most searches.',
+      'Name, address and phone must be byte-identical everywhere. "Ltd" in one place and "Limited" in another is a mismatch to a machine.',
+      'Claiming an address you do not staff is the fastest route to suspension, and reinstatement is far harder than getting it right first time.',
     ],
 
     body: `
-Choosing a digital marketing agency in Rohtak comes down to five things: proven recent results, a clear reporting process, the right service mix for your goal, transparent pricing, and whether the team can grow with you. This guide walks through each, including the questions that separate a serious agency from a confident one — whether you end up hiring us or someone else.
+A Google Business Profile is the single highest-leverage local SEO asset most businesses own, and the one they touch least. It is usually filled in once during setup, never revisited, and then blamed for not producing calls.
 
-## Why the right agency matters more than the cheapest one
+This is a working guide to what the profile actually rewards, what to fill in and in what order, how to measure whether it is working, and the specific mistakes that get profiles suspended.
 
-Marketing spend only works when it is aimed well. An agency that runs ads without conversion tracking can burn a budget faster than a more expensive one that measures every rupee, because nobody can tell which half is working.
+## What the map pack is, and why three slots changes everything
 
-The number to compare is not the monthly fee. It is cost per qualified lead, and the only way to know it is to have tracking in place before the spending starts. An agency that cannot tell you what a qualified lead costs today has no baseline to improve on.
+Search for a service plus a place — "dentist near me", "[seo company](/seo-company) in Gurgaon", "CA firm Andheri" — and Google returns a map with **three** business listings above the organic results. That block is the local pack, or map pack.
 
-## What does a digital marketing agency actually do?
+Three slots is the whole story. In organic search, position six still gets clicks. In the map pack, position four is invisible until someone taps "More places", and most people do not. The distribution is brutal in a way that ordinary SEO is not, which is why local deserves its own strategy rather than being treated as a footnote to your main [SEO](/seo-company) work.
 
-Most cover some combination of five things:
+## The three factors Google actually names
 
-- **SEO** — ranking your site for what buyers actually type
-- **Paid advertising** — Google and Meta campaigns that bring leads now
-- **Social media** — content and community that build familiarity
-- **Landing pages** — where the traffic converts into enquiries
-- **Analytics** — proving which of the above worked
+Google publishes its local ranking factors, which is unusually direct of them. There are three:
 
-The advantage of a full-service team is that these connect. Ads point at a fast landing page, SEO feeds the same funnel, and one team owns the outcome — rather than three vendors each explaining that the problem sits with one of the others.
+| Factor | What it means | How much control you have |
+|---|---|---|
+| Relevance | How well your profile matches what was searched | High — categories, services, description |
+| Distance | How far you are from the searcher or the searched location | None |
+| Prominence | How well known the business is, online and off | Medium — reviews, citations, links, coverage |
 
-The disadvantage is real too: a generalist team may be shallower in any single discipline than a specialist. If you need one thing done exceptionally well and nothing else, a specialist is often the better buy.
+Distance is the one people waste the most energy on, because it is the one they cannot change. You will not rank in the pack for a suburb 30 km away by wishing. What you can change is relevance — which is mostly a data-entry problem — and prominence, which is a slow compounding one.
 
-## Five criteria to judge any Rohtak agency
+That asymmetry should shape your effort. Relevance is a weekend of careful work. Prominence is a year of consistent work. Do the weekend first.
 
-### 1. Do they show recent, relevant results?
+## The setup checklist, in priority order
 
-Ask for two or three examples from the last year, ideally in your sector, with actual numbers — cost per lead, enquiry volume, return on ad spend. "We improved their presence" is not a result.
+Work top to bottom. The items are not equally weighted, and the first three carry most of it.
 
-### 2. Is the reporting clear and regular?
+| # | Field | Why it matters |
+|---|---|---|
+| 1 | Primary category | The single strongest relevance signal on the profile |
+| 2 | Business name | Must match real-world signage. No keyword stuffing |
+| 3 | Address and service area | Determines which searches you are even eligible for |
+| 4 | Secondary categories | Widens eligibility without diluting the primary |
+| 5 | Services and products | Lets you list what you do in Google's own vocabulary |
+| 6 | Hours, including holidays | Affects both ranking and whether people bother calling |
+| 7 | Description | 750 characters. Read by humans; light ranking weight |
+| 8 | Photos | Drives engagement, which feeds prominence |
+| 9 | Booking or enquiry link | Turns a listing into a lead |
 
-You should receive a monthly report tied to business outcomes, not impressions. Ask to see a sample before signing. If the sample is a screenshot of a traffic graph, expect that every month.
+### Getting the primary category right
 
-### 3. Do they fit your goal and stage?
+This is the field people get wrong most often, usually by choosing the category with the biggest apparent search volume rather than the one that describes the business.
 
-A local retailer needs leads and a well-maintained Google Business Profile. A growing brand needs content and organic depth. These are different engagements, and an agency strong at one may be weak at the other.
+Google's category list is fixed — you pick from it, you do not write your own. The primary category should answer "what is this business" in one phrase. Everything you also do goes in secondary categories.
 
-### 4. Is pricing transparent?
+A marketing agency that also builds websites should be **Marketing Agency** primary, **Website Designer** secondary — not the reverse, unless website work is genuinely the larger part of the business. If you are unsure which way round, look at your revenue split, not your ambitions.
 
-Clear scope, clear deliverables, clear fee, with ad spend stated separately from the management fee. Be cautious of anyone who will not itemise what you are paying for.
+Changing the primary category later resets some of the trust the profile has accumulated, so it is worth ten minutes of thought now.
 
-### 5. Can they scale with you?
+### Name: use your actual name
 
-If a website, an app or automation is coming in the next year, a team that also builds those saves you re-hiring and re-explaining your business.
+The temptation is to file as "Sharma Dental — Best Dentist in Rohtak". Do not. The business name field must match the name on your signage, your paperwork and your storefront.
 
-## The Rohtak agency landscape
+Keyword stuffing the name field is one of the most commonly reported violations, precisely because competitors can see it and report it in about fifteen seconds. The penalty is a name reset or a suspension, and you lose whatever the stuffing gained you plus everything else.
 
-Rohtak has a genuinely competitive market. Established local names include Web Aspiration, The Growth Box and Leo Digital, alongside newer full-service teams and Gurugram agencies that serve Haryana remotely.
+## NAP consistency: the boring thing that actually moves rankings
 
-That competition is good for you, and it means you should shortlist two or three and put the same questions to each. We are deliberately not going to characterise other agencies' pricing, team size or results here — we do not have verified information on those, and an agency that confidently describes a competitor's weaknesses is usually guessing.
+NAP is name, address and phone. Google cross-references your profile against your website, directories, and any other mention of your business it finds. Consistency is a trust signal; inconsistency is noise.
 
-## What a competent first month looks like
+The bar is higher than people assume. These are all mismatches to a machine:
 
-This is the most useful thing to ask about, because it exposes whether an agency has a process or a package. A serious first month is mostly diagnosis.
+- "Sector 39" on the website, "Sec. 39" on the profile
+- "+91 92536 25099" in one place, "092536 25099" in another
+- Two different suite numbers because you moved within the same building
+- "Pvt Ltd" versus "Private Limited"
 
-Week one should be an audit: what is currently tracked, what the site actually converts at, which queries you already appear for, and where the existing budget goes. If an agency starts running ads in week one without touching tracking, they are optimising toward numbers nobody has verified.
+Pick one canonical version of each field. Write it down. Use exactly that string everywhere — website footer, contact page, structured data, directory listings, invoices, email signature. When you change one, change all of them in the same week.
 
-By the end of month one you should have working conversion tracking, a documented baseline, a written plan, and the first campaigns or fixes live. You should not yet have dramatic results, and an agency promising them in month one is describing something that does not usually happen.
+The practical way to do this is to keep the canonical NAP in one place in your codebase and have every page read from it, rather than retyping it per template. Retyping is how a business ends up with three versions of its own address without anyone noticing.
 
-## Red flags worth walking away from
+## Reviews, without breaking the rules
 
-- **Guaranteed rankings.** Nobody controls Google's results. A guarantee is either meaningless or a sign the agency does not understand what it is selling.
-- **No tracking.** If they cannot measure leads, they cannot improve them.
-- **Vague scope.** "We will handle everything" means there is nothing to hold them to in month four.
-- **Pressure before proof.** A contract pushed before any audit is a sales process, not a delivery process.
+Reviews feed prominence, and they are the part of the profile a business can most directly influence. The rules are narrower than most people realise:
 
-## Where Avani Enterprises fits
+- **You may ask.** Asking customers for reviews is explicitly allowed.
+- **You may not incentivise.** No discounts, no entries into a draw, no free anything in exchange for a review. This is a policy violation, and Google has become better at detecting review patterns that look bought.
+- **You may not filter.** Asking only your happy customers — "review gating" — is against policy. Ask everyone.
+- **You should reply.** To all of them, including the bad ones, in public, without arguing.
 
-We have an office in Rohtak, which is unusual for a digital agency — most serve Haryana remotely from Delhi or Gurugram — alongside our head office in Gurugram. Local institutes, hospitals, IMT manufacturers and retailers can have project reviews face to face.
+The mechanics that work are unglamorous: ask at the moment the customer is most satisfied, which is usually right after the work is delivered rather than a month later in a newsletter; send the direct review link rather than asking them to search for you; and make it one tap on a phone.
 
-We are full-service in a specific sense: digital marketing sits alongside web, app and AI development in the same team. If your campaigns need a faster landing page, the people who run the campaigns and the people who build the page are in the same review.
+A steady trickle of reviews over time reads as more genuine than fifteen in one week, both to Google and to the person reading them.
 
-Where we are not the right fit: if you want a single specialist discipline delivered at the deepest possible level and nothing else, a dedicated specialist will likely beat us on that one axis.
+## Photos and Posts: engagement is a signal
+
+Profiles with current photos get more interaction, and interaction feeds prominence. This does not require a photographer:
+
+- Exterior shots that help someone recognise the building from the street
+- Interior shots so they know what to expect walking in
+- The team, so the business looks staffed by people
+- Actual work, where the client is happy to be shown
+
+Replace them periodically rather than uploading forty once. Google Posts — short updates that appear on the profile — are worth a fortnightly cadence if you can sustain it, and worth skipping entirely if you cannot; an abandoned Posts feed is worse than none.
+
+## Service areas versus an address, and the suspension risk
+
+This is where businesses get into real trouble.
+
+If customers come to you, you have an address and you display it. If you travel to customers, you can hide the address and set service areas instead. If you do both, display the address and add service areas.
+
+What you cannot do is claim a location you do not physically staff. Virtual offices, coworking hot desks used occasionally, a relative's address in a city you want to rank in, a mailbox — all of these are grounds for suspension, and reinstatement is a slow, evidence-heavy process with no guaranteed outcome.
+
+The reason this is tempting is obvious: distance is a ranking factor you cannot otherwise influence, so inventing proximity looks like the shortcut. It is a shortcut that risks the entire profile, including the locations that are real.
+
+We apply this to ourselves. We publish addresses and local schema for the three offices we actually staff — Gurugram, Rohtak and Mumbai — and describe every other city as a market we deliver into, because that is what it is. It costs us some local visibility. It is still the right trade.
+
+## Measuring whether any of this worked
+
+The profile's performance report gives you real numbers. The ones worth watching:
+
+| Metric | What it tells you |
+|---|---|
+| Searches breakdown | Whether people find you by name (direct) or by service (discovery) |
+| Calls | The clearest lead signal on the profile |
+| Direction requests | Real intent to visit, and roughly where from |
+| Website clicks | How much of your site traffic the profile is sending |
+| Messages | Only meaningful if you actually answer them promptly |
+
+The number to watch is **discovery searches** as a share of the total. Direct searches mean people already knew your name. Discovery searches mean the profile is winning you customers who did not. If discovery is not growing, your relevance and prominence work is not landing, whatever the total impressions say.
+
+Set a baseline before you change anything, then compare quarter on quarter rather than week on week. Local data is noisy at small volumes and seasonal in most sectors.
+
+## The mistakes that cost the most
+
+- **Keyword-stuffed business name** — easily reported, commonly penalised
+- **An address you do not staff** — the highest-risk item on this list
+- **Categories chosen for volume** rather than accuracy
+- **Inconsistent NAP** across the website and directories
+- **Incentivised or gated reviews** — a policy violation, not a grey area
+- **Unanswered questions and messages** — visible to everyone considering you
+- **Hours that are wrong on public holidays** — a small thing that generates genuinely angry reviews
+
+None of these are clever. That is rather the point: local search is won by getting unremarkable things consistently right, which is why so few businesses win it.
     `.trim(),
 
     faqs: [
       {
-        q: 'How much does a digital marketing agency in Rohtak cost?',
-        a: 'It varies by scope — SEO, ads management and social each price differently, and ad spend is separate from the management fee. A good agency will model a realistic starting budget and expected cost per lead for your specific goal rather than quote a flat monthly number before understanding it.',
+        q: 'How long does it take to rank in the map pack?',
+        a: 'Category and profile fixes can show movement within a few weeks because relevance is recalculated as your data changes. Prominence — reviews, citations, coverage — compounds over months. A realistic expectation is small improvements in the first month from setup corrections, and meaningful movement over one to two quarters.',
       },
       {
-        q: 'How long until I see results?',
-        a: 'Paid ads can produce leads within days of going live. SEO typically builds over three to six months because it depends on authority, which compounds. A sensible plan often runs ads for immediate pipeline while organic builds alongside.',
+        q: 'Can I rank in a city where I do not have an office?',
+        a: 'Not in that city\'s map pack, in most cases — distance is a ranking factor and you cannot fake proximity without risking suspension. You can rank organically for city-qualified searches with a well-built location page, which is a different and entirely legitimate route.',
       },
       {
-        q: 'Should I hire a local Rohtak agency or a big-city one?',
-        a: 'Proof and process matter more than location — plenty of remote engagements work well. Local helps when you want in-person reviews or when the work depends on local knowledge, such as Google Business Profile and map-pack visibility.',
+        q: 'How many reviews do I need?',
+        a: 'There is no threshold. What matters is being credible relative to the businesses you compete with locally, and having reviews arrive steadily rather than in bursts. Recency and the pattern over time carry weight, not just the count.',
       },
       {
-        q: 'Can one agency handle marketing, my website and an app?',
-        a: 'Full-service agencies can, and it is usually more efficient than coordinating separate vendors because everything is built to connect. The trade-off is depth in any single discipline, so ask specifically about the capability you care most about.',
+        q: 'Does posting on Google Posts help rankings?',
+        a: 'The direct ranking effect is small. The indirect effect is real: Posts occupy space on your profile, give a reason to click, and signal an active business. Worth doing at a cadence you can sustain, not worth doing sporadically.',
       },
       {
-        q: 'What should I ask for before signing anything?',
-        a: 'A sample monthly report, two recent results with numbers, a written scope with deliverables and exclusions, and clarity on who owns the ad accounts and the content. If any of those four is refused, that answers the question.',
+        q: 'My profile was suspended. What now?',
+        a: 'Do not create a second profile — duplicates make reinstatement harder. Work out which policy was breached, correct it genuinely, then file a reinstatement request with evidence: signage photos, a utility bill or lease at the address, registration documents. The process takes weeks and the outcome is not guaranteed, which is why the address rules are worth respecting from the start.',
       },
     ],
 
     cta: {
-      heading: 'Get a free marketing audit',
-      sub: 'Tell us your goal and we will map a plan with a realistic budget and expected cost per lead — no obligation, and we will say if we are not the right fit.',
+      heading: 'Want your local visibility looked at?',
+      sub: 'We will audit your Google Business Profile against everything above and send you the specific fixes in priority order — no obligation, and we will say plainly if there is nothing worth changing.',
     },
   },
 ];

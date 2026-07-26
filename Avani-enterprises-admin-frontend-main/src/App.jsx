@@ -4,6 +4,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import ForgotPassword from "./pages/ForgotPassword";
 import Dashboard from "./pages/Dashboard";
+import AllLeads from "./pages/AllLeads";
 import ContactedLeads from "./pages/ContactedLeads";
 import AnalyticsDashboard from "./pages/AnalyticsDashboard";
 import AvaniFormDetail from "./pages/AvaniFormDetail";
@@ -95,15 +96,23 @@ function App() {
               </ProtectedRoute>
             }
           >
-            <Route index element={<Dashboard />} />
+            {/* One lead inbox. 7-Day Launch / LandingPageFree / Dashboard were
+                the same table hard-filtered to one `source` value each, which
+                hid every lead from the ~460 pages using the shared form. They
+                are now filters inside AllLeads. The old pages stay routed but
+                unlinked so nothing is lost if you want them back. */}
+            <Route index element={<AllLeads />} />
             <Route path="7-day-launch" element={<SevenDayLaunch />} />
             <Route path="landing-page-free" element={<LandingPageFree />} />
+            <Route path="legacy-dashboard" element={<Dashboard />} />
             <Route path="contacted-leads" element={<ContactedLeads />} />
             <Route path="analytics" element={<AnalyticsDashboard />} />
             <Route path="growth-plan-leads" element={<GrowthPlanLeads />} />
             <Route path="avani-forms/:id" element={<AvaniFormDetail />} />
             <Route path="avani-forms" element={<AvaniFormsPage />} />
-            <Route path="consultations" element={<Consultations />} />
+            {/* Consultations read the exact same endpoint as avani-forms with
+                no filter — the same rows twice. Redirected, file kept. */}
+            <Route path="consultations" element={<Navigate to="/avani-forms" replace />} />
             <Route path="seo" element={<SeoManager />} />
             <Route path="blogs" element={<BlogManagement />} />
             <Route path="newsletters" element={<NewsletterManagement />} />

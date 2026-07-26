@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { getBackendUrl } from '../lib/api';
+import { getBackendUrl, pageAttribution } from '../lib/api';
 import { Link } from 'react-router-dom';
 import {
   Mail,
@@ -59,7 +59,7 @@ const GetConsultation = () => {
       service: formData.service.length > 0 ? (formData.service.length === 1 ? formData.service[0] : formData.service.join(', ')) : '',
       companyName: formData.company,
       projectDetails: formData.message,
-      otherService: formData.otherService
+      otherService: formData.otherService, ...pageAttribution()
     };
 
     // send to backend endpoint expected: POST /api/forms/submit

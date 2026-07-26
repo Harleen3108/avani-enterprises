@@ -125,49 +125,82 @@ const BlogDetail = () => {
         </section>
       )}
 
-      {/* Article Content */}
+      {/* Article Content
+          ----------------
+          The article sits on a light "paper" surface rather than the site's
+          dark chrome. Long-form body copy is easier to read dark-on-light, and
+          it matches the Business OS blog this was modelled on. The surface is
+          self-contained, so the dark header, footer and the rest of the site
+          are unaffected. */}
       <section style={{ paddingTop: '2rem', paddingBottom: '6rem' }}>
-        <div className="dh-container" style={{ maxWidth: '800px', margin: '0 auto' }}>
-          <motion.div initial="hidden" animate="visible" variants={fadeIn} transition={{ delay: 0.3 }}>
+        <div className="dh-container" style={{ maxWidth: '860px', margin: '0 auto' }}>
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={fadeIn}
+            transition={{ delay: 0.3 }}
+            style={{
+              background: '#FFFDF9',
+              borderRadius: '20px',
+              padding: 'clamp(1.75rem, 5vw, 3.25rem)',
+              boxShadow: '0 24px 60px rgba(0,0,0,0.35)',
+            }}
+          >
             {/* Article body.
                 The CMS stores three different shapes — proper HTML, markdown,
                 and plain newline-separated text — and previously all three
                 rendered as one flat wall. formatBlogBody normalises them into
-                semantic HTML, and .prose supplies the typography. Same function
-                and same markup as the SSR path, so readers and Googlebot get
-                identical output. */}
+                semantic HTML, adds internal links to the service pages, and
+                .prose supplies the typography. Same function and same markup as
+                the SSR path, so readers and Googlebot get identical output. */}
             <style>{PROSE_CSS}</style>
             <div
-              className="prose dh-body"
+              className="prose"
+              style={{ margin: '0 auto' }}
               dangerouslySetInnerHTML={{
-                __html: formatBlogBody(blog.content, { title: blog.title }),
+                __html: formatBlogBody(blog.content, {
+                  title: blog.title,
+                  selfPath: `/blog/${slug}`,
+                }),
               }}
             />
 
-            <div style={{ marginTop: '4rem', paddingTop: '2rem', borderTop: '1px solid var(--border-light)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <div style={{ fontSize: '0.9rem', color: 'var(--text-tertiary)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+            <div style={{ maxWidth: '44rem', margin: '3.5rem auto 0', paddingTop: '1.75rem', borderTop: '1px solid #E7E0D5', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div style={{ fontSize: '0.78rem', color: '#6B635A', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
                 Share this article
               </div>
-              <div style={{ display: 'flex', gap: '1rem' }}>
-                <button className="dh-btn-ghost" style={{ padding: '0.6rem', minWidth: 'auto', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Share2 size={16} /></button>
-              </div>
+              <button
+                onClick={() => {
+                  const url = typeof window !== 'undefined' ? window.location.href : '';
+                  if (typeof navigator !== 'undefined' && (navigator as any).share) {
+                    (navigator as any).share({ title: blog.title, url }).catch(() => {});
+                  } else if (typeof navigator !== 'undefined' && navigator.clipboard) {
+                    navigator.clipboard.writeText(url);
+                  }
+                }}
+                style={{ padding: '0.55rem 0.9rem', display: 'flex', alignItems: 'center', gap: '6px', background: 'transparent', border: '1px solid #E7E0D5', borderRadius: '10px', color: '#3A352E', fontSize: '0.82rem', cursor: 'pointer' }}
+              >
+                <Share2 size={14} /> Copy link
+              </button>
             </div>
 
             {/* Conversion: every post ends with the lead form. generate_lead
                 fires on submit carrying this post's path as attribution, so GA4
-                shows which articles actually produce enquiries. */}
+                shows which articles actually produce enquiries.
+                The form keeps the dark treatment deliberately — it is the one
+                element that should interrupt the reading surface. */}
             <section
               id="consultation"
               style={{
-                marginTop: '3rem', background: 'var(--card-bg)',
-                border: '1px solid var(--border-light)', borderRadius: '18px',
-                padding: '28px', scrollMarginTop: 90,
+                maxWidth: '44rem', margin: '2.5rem auto 0',
+                background: '#12101A', borderRadius: '18px',
+                padding: 'clamp(20px, 4vw, 28px)', scrollMarginTop: 90,
               }}
             >
-              <h2 style={{ fontFamily: "'Outfit', sans-serif", fontSize: '1.2rem', fontWeight: 800, margin: '0 0 .4rem' }}>
+              <h2 style={{ fontFamily: "'Outfit', sans-serif", fontSize: '1.2rem', fontWeight: 800, margin: '0 0 .4rem', color: '#fff' }}>
                 Want this looked at for your business?
               </h2>
-              <p style={{ fontSize: '.92rem', color: 'var(--text-secondary)', lineHeight: 1.7, margin: '0 0 1.25rem' }}>
+              <p style={{ fontSize: '.92rem', color: 'rgba(255,255,255,0.7)', lineHeight: 1.7, margin: '0 0 1.25rem' }}>
                 Tell us your goal and we will come back with a written scope — no obligation, and we will
                 say plainly if we are not the right fit.
               </p>
@@ -175,7 +208,9 @@ const BlogDetail = () => {
             </section>
 
             {/* Views, likes and comments */}
-            <BlogEngagement slug={slug || ''} views={blog.views} />
+            <div style={{ maxWidth: '44rem', margin: '0 auto' }}>
+              <BlogEngagement slug={slug || ''} views={blog.views} />
+            </div>
           </motion.div>
         </div>
       </section>

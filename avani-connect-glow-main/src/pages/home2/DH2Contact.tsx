@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { getBackendUrl } from '../../lib/api';
+import { getBackendUrl, pageAttribution } from '../../lib/api';
 import { Mail, Phone, MapPin, Send, ChevronDown, MessageSquare, Zap, Globe, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
 import '../../components/home2/Home2.css';
@@ -33,7 +33,7 @@ const DH2Contact = () => {
     e.preventDefault();
     const API_BASE = getBackendUrl();
     setIsLoading(true);
-    const payload = { fullName: formData.name, email: formData.email, phoneNu: formData.phone, service: formData.service.join(', '), companyName: formData.company, projectDetails: formData.message, otherService: formData.otherService };
+    const payload = { fullName: formData.name, email: formData.email, phoneNu: formData.phone, service: formData.service.join(', '), companyName: formData.company, projectDetails: formData.message, otherService: formData.otherService, ...pageAttribution() };
     (async () => {
       try {
         const res = await fetch(`${API_BASE.replace(/\/$/, '')}/avani-form`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });

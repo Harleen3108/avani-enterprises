@@ -66,12 +66,15 @@ const Sidebar = () => {
                     <nav className="flex-1 px-4 py-6">
                         <div className="mb-4">
                             <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-4">Leads</p>
-                            <NavItem to="/" icon={LayoutDashboard} label="Leads Dashboard" />
-                            <NavItem to="/7-day-launch" icon={Rocket} label="7-Day Launch" />
-                            <NavItem to="/landing-page-free" icon={Sparkles} label="LandingPageFree" />
+                            {/* Six pages became two. 7-Day Launch, LandingPageFree
+                                and the old Dashboard were one table filtered to a
+                                single `source` value each, and Consultations was a
+                                byte-identical copy of Contact Submissions. They are
+                                filters inside All Leads now. Growth Plan Leads is
+                                dropped: 5 records, all tests, none since April.
+                                Every one of those routes still resolves if typed. */}
+                            <NavItem to="/" icon={LayoutDashboard} label="All Leads" />
                             <NavItem to="/avani-forms" icon={MessageSquare} label="Contact Submissions" />
-                            <NavItem to="/growth-plan-leads" icon={Rocket} label="Growth Plan Leads" />
-                            <NavItem to="/consultations" icon={User} label="Consultations" />
                         </div>
 
                         <div className="mb-4">

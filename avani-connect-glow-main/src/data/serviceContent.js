@@ -1209,7 +1209,7 @@ const MODEL_ALIASES = {
 // Claiming a location you do not occupy is how Google Business Profiles get
 // suspended.
 // ---------------------------------------------------------------------------
-const CONFIRMED_OFFICE_CITIES = 'Gurugram and Rohtak';
+const CONFIRMED_OFFICE_CITIES = 'Gurugram, Rohtak and Mumbai';
 
 // ---------------------------------------------------------------------------
 // LOCATIONS — only places we genuinely serve. `office: true` means a real
@@ -1276,11 +1276,13 @@ const LOCATIONS = {
     note: 'Both our offices — Gurugram and Rohtak — are in Haryana, so the state industrial belt is on our doorstep.',
   },
   mumbai: {
-    city: 'Mumbai', region: 'Maharashtra', country: 'India', office: false,
-    districts: ['Bandra Kurla Complex (BKC)', 'Lower Parel', 'Andheri East (MIDC and SEEPZ)', 'Nariman Point', 'Powai'],
+    // Promoted from sell-only on 26 July 2026: client confirmed the Andheri
+    // East operations centre in writing. See src/data/offices.js for the NAP.
+    city: 'Mumbai', region: 'Maharashtra', country: 'India', office: true,
+    districts: ['Andheri East (MIDC and SEEPZ)', 'Bandra Kurla Complex (BKC)', 'Lower Parel', 'Powai', 'Nariman Point'],
     sectors: ['finance', 'media', 'ecommerce', 'pharma', 'logistics'],
     industries: ['banking, financial services and insurance', 'media, film and advertising', 'D2C and retail brands', 'pharmaceuticals', 'logistics and shipping'],
-    note: 'Delivered remotely from our Gurugram head office on IST, with travel for kickoff on larger engagements.',
+    note: 'Our operations centre is on Teli Galli Cross Road in Andheri East, minutes from MIDC and SEEPZ and a short run to BKC, so reviews happen in person.',
   },
   bangalore: {
     city: 'Bengaluru', alt: 'Bangalore', region: 'Karnataka', country: 'India', office: false,

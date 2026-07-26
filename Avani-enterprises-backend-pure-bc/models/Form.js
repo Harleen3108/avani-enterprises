@@ -163,6 +163,9 @@ const formSchema = new mongoose.Schema(
     pagePath: { type: String, default: "", trim: true },
     pageUrl: { type: String, default: "", trim: true },
     referrer: { type: String, default: "", trim: true },
+    // Set by looksLikeSpam() in index.js. Flagged, never rejected — a false
+    // positive should cost you a click, not a customer.
+    isSpam: { type: Boolean, default: false },
   },
   {
     // ✅ timestamps auto add karega: createdAt + updatedAt

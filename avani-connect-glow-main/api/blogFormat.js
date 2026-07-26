@@ -17,14 +17,19 @@
  *   • 10 contain markdown syntax (## headings, - lists, | tables |).
  *
  * Plus 1,583 editor-injected `<span style="background-color: transparent;">`
- * wrappers that add noise and can fight the dark theme.
+ * wrappers that add noise.
  *
  * WHAT THIS DOES
  * --------------
  * Normalises all three into the same semantic HTML — h2/h3, ul/ol, table,
- * blockquote, strong, em, code — which the prose stylesheet then styles. Used by
- * BOTH the React page and api/seo.js, so what a reader sees and what Googlebot
- * indexes are the same markup.
+ * blockquote, strong, em, code — which the prose stylesheet then styles. Then:
+ *
+ *   • wraps "Key takeaways" and "Frequently asked questions" in callout cards
+ *   • auto-links the first mention of each service to its money page, so posts
+ *     pass authority to the pages that need to rank instead of dead-ending
+ *
+ * Used by BOTH the React page and api/seo.js, so what a reader sees and what
+ * Googlebot indexes are the same markup.
  *
  * Import-free so the serverless function can consume it.
  */
@@ -78,13 +83,13 @@ function cleanHtml(html) {
   let s = String(html || '');
 
   // Editor noise: <span style="background-color: transparent;">…</span> and
-  // empty spans/divs contribute nothing and complicate styling on dark theme.
+  // empty spans/divs contribute nothing and complicate styling.
   s = s.replace(/<span[^>]*background-color:\s*transparent[^>]*>/gi, '');
   s = s.replace(/<span\s*>/gi, '');
   s = s.replace(/<\/span>/gi, '');
 
-  // Inline colour/background from a light-theme editor would be unreadable on
-  // the dark article surface, so strip presentational attributes entirely.
+  // Inline colour/background baked in by whichever editor produced the post
+  // will not match this stylesheet, so strip presentational attributes.
   s = s.replace(/\s(?:style|bgcolor|color|face)="[^"]*"/gi, '');
   s = s.replace(/\s(?:style|bgcolor|color|face)='[^']*'/gi, '');
 
@@ -165,13 +170,24 @@ function markdownToHtml(src, opts) {
     }
 
     // Markdown table: | a | b |  /  |---|---|
-    if (/^\|/.test(trimmed) && i + 1 < lines.length && /^\|?[\s:-]*[-]{2,}[\s:|-]*$/.test(lines[i + 1].trim())) {
+    //
+    // The separator row is found by skipping blanks, not by looking at i+1: the
+    // "no blank lines" normalisation above inserts one between every line, which
+    // would otherwise put a blank row between the header and the separator and
+    // stop any table in such a post from ever being recognised.
+    let sep = i + 1;
+    while (sep < lines.length && !lines[sep].trim()) sep++;
+    if (/^\|/.test(trimmed) && sep < lines.length && /^\|?[\s:-]*[-]{2,}[\s:|-]*$/.test(lines[sep].trim())) {
       flushParagraph(para);
       const cells = (row) => row.trim().replace(/^\||\|$/g, '').split('|').map((c) => c.trim());
       const head = cells(trimmed);
-      i += 2;
+      i = sep + 1;
       const body = [];
-      while (i < lines.length && /^\|/.test(lines[i].trim())) { body.push(cells(lines[i])); i++; }
+      while (i < lines.length) {
+        if (!lines[i].trim()) { i++; continue; }   // skip inserted blank rows
+        if (!/^\|/.test(lines[i].trim())) break;
+        body.push(cells(lines[i])); i++;
+      }
       out.push(
         '<div class="prose-table-wrap"><table>' +
         '<thead><tr>' + head.map((h) => `<th>${inline(esc(h))}</th>`).join('') + '</tr></thead>' +
@@ -241,7 +257,10 @@ function markdownToHtml(src, opts) {
 
     const looksLikeHeading =
       trimmed.length < 90 &&
-      !/[.!?,;:]$/.test(trimmed) &&
+      // A trailing "?" is allowed — question-form headings ("Which sourcing
+      // channels give the best value?") are the norm in these posts and were
+      // previously demoted to paragraphs by excluding it.
+      !/[.!,;:]$/.test(trimmed) &&
       next.length > 0 &&
       // The following block must be prose, not another short line.
       next.length > 60 &&
@@ -264,17 +283,128 @@ function markdownToHtml(src, opts) {
   return out.join('\n');
 }
 
+/* ── Internal linking ─────────────────────────────────────────────────────── */
+
+/**
+ * First mention of each service becomes a link to the page that sells it.
+ *
+ * Posts previously dead-ended: 65,000 words of content passing no authority to
+ * the pages that actually need to rank, and no route from a reader who has just
+ * been convinced to the page where they can act on it.
+ *
+ * Order matters — the most specific phrase must be tested first, or "AI" would
+ * swallow "AI chatbot". Each destination is used at most once per post, and the
+ * whole post is capped, because a paragraph peppered with links reads as spam
+ * to both people and Google.
+ */
+const INTERNAL_LINKS = [
+  [/\bAI chatbots?\b/i, '/ai-chatbot-development'],
+  [/\bvoice (?:agents?|bots?)\b/i, '/ai-chatbot-development'],
+  [/\bAI (?:agents?|automation)\b/i, '/ai-automation-company'],
+  [/\bagentic AI\b/i, '/ai-automation-company'],
+  [/\bAI (?:solutions?|development|consulting)\b/i, '/ai-development-company'],
+  [/\bsocial media marketing\b/i, '/social-media-marketing-company'],
+  [/\bdigital marketing\b/i, '/digital-marketing-company'],
+  [/\bsearch engine optimisation\b/i, '/seo-company'],
+  [/\bSEO\b/, '/seo-company'],
+  [/\b(?:web|website) (?:development|design)\b/i, '/web-development-company'],
+  [/\be-?commerce (?:development|website|store)\b/i, '/ecommerce-development-company'],
+  [/\bpodcast production\b/i, '/podcast-production-company'],
+  [/\bBusiness OS\b/, '/business-os'],
+];
+
+const MAX_AUTO_LINKS = 6;
+
+/**
+ * Add internal links to body HTML, skipping anything already linked, any
+ * heading, and any code.
+ *
+ * Works on the HTML string rather than a DOM because api/seo.js runs this in a
+ * serverless function with no document available.
+ */
+function autoLinkBody(html, opts) {
+  const options = opts || {};
+  const selfPath = options.selfPath || '';
+  let added = 0;
+  const used = new Set();
+
+  // Seed with destinations the author already linked by hand, so a post that
+  // links /seo-company in its intro does not get a second automatic one.
+  const existing = html.match(/href="(\/[^"]*)"/g) || [];
+  existing.forEach((h) => used.add(h.slice(6, -1)));
+
+  // Regions we must not touch: existing links, headings, code, and raw tags.
+  const PROTECTED = /(<a\b[^>]*>[\s\S]*?<\/a>|<(h[1-6]|code|pre)\b[^>]*>[\s\S]*?<\/\2>|<[^>]+>)/gi;
+
+  const linkifyText = (text) => {
+    if (added >= MAX_AUTO_LINKS) return text;
+    let out = text;
+    for (const [pattern, href] of INTERNAL_LINKS) {
+      if (added >= MAX_AUTO_LINKS) break;
+      if (used.has(href) || href === selfPath) continue;
+      // Rebuild non-global so replace() only touches the first match.
+      const re = new RegExp(pattern.source, pattern.flags.replace('g', ''));
+      if (!re.test(out)) continue;
+      out = out.replace(re, (m) => `<a href="${href}" class="prose-inline-link">${m}</a>`);
+      used.add(href);
+      added++;
+    }
+    return out;
+  };
+
+  let result = '';
+  let last = 0;
+  let match;
+  PROTECTED.lastIndex = 0;
+  while ((match = PROTECTED.exec(html)) !== null) {
+    result += linkifyText(html.slice(last, match.index));
+    result += match[0];
+    last = match.index + match[0].length;
+  }
+  result += linkifyText(html.slice(last));
+  return result;
+}
+
+/* ── Callouts ─────────────────────────────────────────────────────────────── */
+
+/**
+ * Promote "Key takeaways" and "Frequently asked questions" from plain headings
+ * to visually distinct cards. Both are the sections readers skim and AI engines
+ * quote, so they earn the emphasis.
+ */
+function wrapCallouts(html) {
+  let s = html;
+
+  // "Key takeaways" heading + the list that follows it.
+  s = s.replace(
+    /<h2([^>]*)>\s*(key takeaways?|takeaways?|tl;?dr)\s*<\/h2>\s*(<ul>[\s\S]*?<\/ul>)/gi,
+    (m, attrs, label, list) =>
+      `<div class="prose-callout"><h2${attrs} class="prose-callout-title">${label}</h2>${list}</div>`
+  );
+
+  // FAQ section: mark the heading so the stylesheet can space the Q&A pairs.
+  s = s.replace(
+    /<h2([^>]*)>\s*(frequently asked questions|faqs?)\s*<\/h2>/gi,
+    (m, attrs, label) => `<h2${attrs} class="prose-faq-title">${label}</h2>`
+  );
+
+  return s;
+}
+
 /**
  * The single entry point. Returns semantic HTML ready for the prose styles.
+ *
+ * opts: { title, selfPath, autoLink }
  */
 function formatBlogBody(raw, opts) {
+  const options = opts || {};
   const src = String(raw || '').trim();
   if (!src) return '';
-  let html = looksLikeHtml(src) ? cleanHtml(src) : markdownToHtml(src, opts);
+  let html = looksLikeHtml(src) ? cleanHtml(src) : markdownToHtml(src, options);
 
   // Several posts open with a heading that repeats the article title, so the
   // page showed the same words twice. Drop a leading heading when it matches.
-  const title = opts && opts.title;
+  const title = options.title;
   if (title) {
     const norm = (x) => String(x).toLowerCase().replace(/<[^>]+>/g, '').replace(/[^a-z0-9]/g, '');
     html = html.replace(/^\s*<(h2|h3)[^>]*>([\s\S]*?)<\/\1>/i, (m, tag, body) => {
@@ -285,115 +415,169 @@ function formatBlogBody(raw, opts) {
     }).trim();
   }
 
+  if (options.autoLink !== false) html = autoLinkBody(html, options);
+  html = wrapCallouts(html);
+
   return html;
 }
 
 /**
- * Article typography. Injected once per page by both the React renderer and the
- * SSR path so the two never drift.
+ * Article typography — a light reading surface on a dark site.
  *
- * Scoped to .prose so it cannot leak into the rest of the site.
+ * The article is deliberately a distinct "document" surface rather than more
+ * dark chrome: long-form body copy is measurably easier to read as dark-on-light,
+ * and it matches the Business OS blog this was modelled on. Colours are literal
+ * rather than var()-driven precisely so the dark theme's variables cannot leak
+ * in and produce grey-on-cream.
+ *
+ * Scoped to .prose so it cannot affect the rest of the site.
  */
 const PROSE_CSS = `
 .prose {
-  max-width: 70ch;
-  font-size: 1.05rem;
-  line-height: 1.8;
-  color: var(--text-secondary, rgba(255,255,255,0.78));
+  --ink:        #1A1714;
+  --ink-body:   #3A352E;
+  --ink-muted:  #6B635A;
+  --rule:       #E7E0D5;
+  --paper:      #FFFDF9;
+  --accent:     #A87613;
+  --accent-bg:  #FBF4E3;
+
+  max-width: 44rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 1.075rem;
+  line-height: 1.78;
+  color: var(--ink-body);
+  letter-spacing: -0.003em;
 }
-.prose > * + * { margin-top: 1.25em; }
+.prose > * + * { margin-top: 1.3em; }
+
 .prose h2 {
-  font-family: 'Outfit', sans-serif;
-  font-size: clamp(1.35rem, 2.6vw, 1.7rem);
-  font-weight: 800;
-  line-height: 1.25;
-  letter-spacing: -0.02em;
-  color: var(--text-primary, #fff);
-  margin-top: 2.4em;
-  margin-bottom: 0.7em;
-  padding-top: 0.6em;
-  border-top: 1px solid var(--border-light, rgba(255,255,255,0.08));
+  font-family: 'Outfit', 'Inter', sans-serif;
+  font-size: clamp(1.4rem, 2.7vw, 1.75rem);
+  font-weight: 700;
+  line-height: 1.28;
+  letter-spacing: -0.022em;
+  color: var(--ink);
+  margin-top: 2.5em;
+  margin-bottom: 0.65em;
 }
-.prose h2:first-child { margin-top: 0; border-top: none; padding-top: 0; }
+.prose h2:first-child { margin-top: 0; }
 .prose h3 {
-  font-family: 'Outfit', sans-serif;
-  font-size: 1.15rem; font-weight: 700; line-height: 1.35;
-  color: var(--text-primary, #fff);
-  margin-top: 1.9em; margin-bottom: 0.5em;
+  font-family: 'Outfit', 'Inter', sans-serif;
+  font-size: 1.2rem; font-weight: 700; line-height: 1.35;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin-top: 2em; margin-bottom: 0.5em;
 }
 .prose h4 {
-  font-family: 'Outfit', sans-serif;
-  font-size: 1rem; font-weight: 700;
-  color: var(--text-primary, #fff);
-  margin-top: 1.6em; margin-bottom: 0.4em;
+  font-family: 'Outfit', 'Inter', sans-serif;
+  font-size: 1.02rem; font-weight: 700;
+  color: var(--ink);
+  margin-top: 1.7em; margin-bottom: 0.4em;
 }
 .prose p { margin: 0; }
-.prose strong { color: var(--text-primary, #fff); font-weight: 700; }
+.prose strong { color: var(--ink); font-weight: 650; }
 .prose em { font-style: italic; }
+
 .prose a {
-  color: var(--accent-primary, #D4A017);
+  color: var(--accent);
+  font-weight: 500;
   text-decoration: underline;
+  text-decoration-color: rgba(168,118,19,0.42);
   text-underline-offset: 3px;
-  text-decoration-thickness: 1px;
+  text-decoration-thickness: 1.5px;
+  transition: text-decoration-color 0.15s, color 0.15s;
 }
-.prose a:hover { text-decoration-thickness: 2px; }
-.prose ul, .prose ol { padding-left: 1.35em; margin: 1.25em 0; }
+.prose a:hover { color: #8A5F0C; text-decoration-color: currentColor; }
+
+.prose ul, .prose ol { padding-left: 1.4em; margin: 1.3em 0; }
 .prose ul { list-style: disc; }
 .prose ol { list-style: decimal; }
-.prose li { margin: 0.5em 0; padding-left: 0.25em; }
-.prose li::marker { color: var(--accent-primary, #D4A017); }
-.prose li > ul, .prose li > ol { margin: 0.5em 0; }
+.prose li { margin: 0.55em 0; padding-left: 0.3em; }
+.prose li::marker { color: var(--accent); }
+.prose li > ul, .prose li > ol { margin: 0.55em 0; }
+
+/* Key takeaways — the block readers skim and AI engines quote. */
+.prose .prose-callout {
+  background: var(--accent-bg);
+  border: 1px solid #EBDCB6;
+  border-radius: 14px;
+  padding: 24px 26px;
+  margin: 2em 0;
+}
+.prose .prose-callout-title {
+  font-size: 0.8rem !important;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--accent) !important;
+  margin: 0 0 0.9em 0 !important;
+}
+.prose .prose-callout ul { margin: 0; padding-left: 1.2em; }
+.prose .prose-callout li { margin: 0.5em 0; color: var(--ink-body); }
+.prose .prose-faq-title { padding-top: 0.4em; border-top: 2px solid var(--rule); }
+
 .prose blockquote {
-  margin: 1.75em 0;
-  padding: 0.2em 0 0.2em 1.15em;
-  border-left: 3px solid var(--accent-primary, #D4A017);
-  color: var(--text-primary, #fff);
-  font-size: 1.08rem;
+  margin: 1.9em 0;
+  padding: 0.1em 0 0.1em 1.3em;
+  border-left: 3px solid var(--accent);
+  color: var(--ink);
+  font-size: 1.1rem;
   font-style: italic;
 }
 .prose blockquote p { margin: 0; }
+
 .prose code {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 0.88em;
-  background: rgba(255,255,255,0.07);
-  border: 1px solid var(--border-light, rgba(255,255,255,0.1));
+  font-size: 0.87em;
+  background: #F4F1EA;
+  border: 1px solid var(--rule);
   border-radius: 5px;
   padding: 0.15em 0.4em;
-  color: var(--text-primary, #fff);
+  color: #7A3E00;
 }
 .prose pre {
-  background: rgba(0,0,0,0.35);
-  border: 1px solid var(--border-light, rgba(255,255,255,0.1));
+  background: #1E1B16;
   border-radius: 12px;
-  padding: 16px 18px;
+  padding: 18px 20px;
   overflow-x: auto;
-  margin: 1.6em 0;
+  margin: 1.8em 0;
 }
-.prose pre code { background: none; border: none; padding: 0; font-size: 0.86rem; line-height: 1.65; }
+.prose pre code {
+  background: none; border: none; padding: 0;
+  color: #EDE6D8; font-size: 0.86rem; line-height: 1.65;
+}
+
 /* Tables scroll inside their own container so the page never scrolls sideways */
-.prose .prose-table-wrap { overflow-x: auto; margin: 1.75em 0; border: 1px solid var(--border-light, rgba(255,255,255,0.12)); border-radius: 12px; }
-.prose table { width: 100%; border-collapse: collapse; min-width: 460px; font-size: 0.94rem; }
-.prose thead { background: rgba(255,255,255,0.045); }
+.prose .prose-table-wrap { overflow-x: auto; margin: 1.9em 0; }
+.prose table { width: 100%; border-collapse: collapse; min-width: 460px; font-size: 0.97rem; }
 .prose th {
-  text-align: left; padding: 12px 15px; font-weight: 700; font-size: 0.8rem;
-  text-transform: uppercase; letter-spacing: 0.06em;
-  color: var(--accent-primary, #D4A017);
-  border-bottom: 1px solid var(--border-light, rgba(255,255,255,0.12));
+  text-align: left; padding: 11px 16px 11px 0; font-weight: 700;
+  font-size: 0.95rem; color: var(--ink);
+  border-bottom: 2px solid var(--rule);
   white-space: nowrap;
 }
 .prose td {
-  padding: 12px 15px; vertical-align: top;
-  border-bottom: 1px solid var(--border-light, rgba(255,255,255,0.07));
+  padding: 13px 16px 13px 0; vertical-align: top;
+  color: var(--ink-body);
+  border-bottom: 1px solid var(--rule);
 }
+.prose th:last-child, .prose td:last-child { padding-right: 0; }
 .prose tbody tr:last-child td { border-bottom: none; }
-.prose img { max-width: 100%; height: auto; border-radius: 12px; margin: 1.75em 0; }
-.prose hr { border: none; border-top: 1px solid var(--border-light, rgba(255,255,255,0.1)); margin: 2.5em 0; }
+
+.prose img { max-width: 100%; height: auto; border-radius: 12px; margin: 1.9em 0; }
+.prose hr { border: none; border-top: 1px solid var(--rule); margin: 2.6em 0; }
+
 @media (max-width: 640px) {
-  .prose { font-size: 1rem; line-height: 1.75; }
-  .prose h2 { font-size: 1.3rem; margin-top: 2em; }
+  .prose { font-size: 1.02rem; line-height: 1.72; }
+  .prose h2 { font-size: 1.32rem; margin-top: 2.1em; }
+  .prose .prose-callout { padding: 20px; border-radius: 12px; }
 }
 `;
 
 /* DATA-END */
 
-export { formatBlogBody, cleanHtml, markdownToHtml, slugifyHeading, looksLikeHtml, PROSE_CSS, esc, inline };
+export {
+  formatBlogBody, cleanHtml, markdownToHtml, slugifyHeading, looksLikeHtml,
+  autoLinkBody, wrapCallouts, PROSE_CSS, esc, inline,
+};

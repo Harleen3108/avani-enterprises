@@ -25,3 +25,20 @@ export const getBackendUrl = (): string => {
 
   return baseUrl.replace(/\/$/, '');
 };
+
+/**
+ * Page attribution for lead submissions.
+ *
+ * Spread into any form payload so the notification email and the admin table
+ * can say which page produced the enquiry. Without this the admin only has the
+ * `source` string, which several older forms never set — hence leads arriving
+ * with no traceable origin.
+ */
+export const pageAttribution = () => {
+  if (typeof window === 'undefined') return { pagePath: '', pageUrl: '', referrer: '' };
+  return {
+    pagePath: window.location.pathname,
+    pageUrl: window.location.href,
+    referrer: typeof document !== 'undefined' ? document.referrer : '',
+  };
+};
