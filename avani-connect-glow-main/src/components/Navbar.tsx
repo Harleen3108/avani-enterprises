@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ArrowRight, ChevronDown, Phone } from 'lucide-react';
 import { getResponsiveImageProps } from '../utils/responsiveImage';
 import { projectsData } from '../data/ProjectsData';
+import NavDropdown from './NavDropdown';
 
 const navLinks = [
   { label: 'HOME', path: '/' },
@@ -138,37 +139,11 @@ const Navbar = () => {
                       {isActive && <div style={{ position: 'absolute', bottom: -2, left: 0, right: 0, height: '2px', background: 'var(--accent-primary)', borderRadius: '1px' }} />}
                     </button>
 
+                    {/* Columns scale with the list length and the panel clamps
+                        itself inside the viewport — see NavDropdown.tsx. */}
                     <AnimatePresence>
                       {openDropdown === link.label && (
-                        <motion.div
-                          initial={{ opacity: 0, y: 10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: 10 }}
-                          transition={{ duration: 0.2 }}
-                          style={{
-                            position: 'absolute', top: '100%', left: '50%', transform: 'translateX(-50%)',
-                            background: '#1A1512', backdropFilter: 'blur(20px)',
-                            border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px',
-                            boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
-                            padding: '12px 0', minWidth: '180px', zIndex: 100,
-                            marginTop: '8px'
-                          }}
-                        >
-                          {link.dropdown.map(sub => (
-                            <Link key={sub.path} to={sub.path}
-                              style={{
-                                display: 'block', padding: '8px 20px',
-                                fontFamily: "'Outfit', sans-serif", fontSize: '12px', letterSpacing: '0.1em', fontWeight: 600,
-                                color: location.pathname === sub.path ? 'var(--accent-primary)' : 'rgba(255,255,255,0.7)',
-                                textDecoration: 'none', transition: 'all 0.2s',
-                              }}
-                              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.05)'; (e.currentTarget as HTMLElement).style.color = '#fff'; }}
-                              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'none'; (e.currentTarget as HTMLElement).style.color = location.pathname === sub.path ? 'var(--accent-primary)' : 'rgba(255,255,255,0.7)'; }}
-                            >
-                              {sub.label}
-                            </Link>
-                          ))}
-                        </motion.div>
+                        <NavDropdown items={link.dropdown} currentPath={location.pathname} />
                       )}
                     </AnimatePresence>
                   </div>
@@ -275,8 +250,11 @@ const Navbar = () => {
                           {link.dropdown.map(sub => (
                             <Link key={sub.path} to={sub.path} onClick={(e) => { e.preventDefault(); goMobile(sub.path); }}
                               style={{
-                                display: 'block', padding: '10px 0',
-                                fontFamily: "'Outfit', sans-serif", fontSize: '16px', letterSpacing: '0.08em', fontWeight: 600,
+                                // 44px minimum: these were ~36px, under the tap
+                                // target size a thumb can hit reliably.
+                                display: 'flex', alignItems: 'center', minHeight: '44px',
+                                padding: '8px 0', lineHeight: 1.3,
+                                fontFamily: "'Outfit', sans-serif", fontSize: '15px', letterSpacing: '0.06em', fontWeight: 600,
                                 color: location.pathname === sub.path ? 'var(--accent-primary)' : 'var(--text-tertiary)',
                                 textDecoration: 'none',
                               }}
