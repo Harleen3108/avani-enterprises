@@ -23,6 +23,8 @@ const GrowthPlanLead = require("./models/GrowthPlanLead");
 // Login lockout, audit logging and the geo/UA helpers used by /auth/login.
 const loginSecurity = require("./services/loginSecurity");
 const requestContext = require("./services/requestContext");
+// One notification template shared by /submit-form and /avani-form.
+const { sendLeadEmail } = require("./services/leadEmail");
 require("dotenv").config();
 
 const app = express();
@@ -654,72 +656,32 @@ app.post("/submit-form", async (req, res) => {
       isSpam: looksLikeSpam({ name, email, company: cityState }),
     });
 
-    // 2. Notification email.
-    //
-    // Recipients: LEAD_NOTIFY_EMAILS (comma-separated) if set, otherwise
-    // ADMIN_EMAIL, plus sohamdang0@gmail.com which is always copied. Kept as a
-    // constant rather than an env var so a missing environment variable cannot
-    // silently stop lead notifications reaching a person.
-    const ALWAYS_NOTIFY = ["sohamdang0@gmail.com"];
-    const configured = (process.env.LEAD_NOTIFY_EMAILS || process.env.ADMIN_EMAIL || "")
-      .split(",").map((s) => s.trim()).filter(Boolean);
-    const recipients = [...new Set([...configured, ...ALWAYS_NOTIFY])];
-
-    // Flagged spam is stored and visible in the admin, but does not email.
-    if (!newForm.isSpam && process.env.FROM_EMAIL && recipients.length) {
-      const originPath = pagePath || "—";
-      const originUrl = pageUrl || (pagePath ? `https://www.avanienterprises.in${pagePath}` : "");
-      // The subject carries the page so the inbox is scannable without opening.
-      const subject = `New lead: ${primaryService || "enquiry"} — from ${originPath}`;
-
-      const row = (label, value) =>
-        `<tr><td style="padding:7px 12px 7px 0;color:#666;font-size:13px;white-space:nowrap;vertical-align:top;">${label}</td>` +
-        `<td style="padding:7px 0;font-size:14px;color:#111;">${value || "—"}</td></tr>`;
-
-      const msg = {
-        to: recipients,
-        from: process.env.FROM_EMAIL, // must be verified in SendGrid
-        replyTo: email || undefined,  // reply goes straight to the lead
-        subject,
-        html: `
-          <div style="font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;max-width:620px;">
-            <h2 style="margin:0 0 4px;font-size:19px;color:#111;">New lead from the website</h2>
-            <p style="margin:0 0 18px;color:#666;font-size:13px;">
-              ${new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })} IST
-            </p>
-
-            <table style="border-collapse:collapse;width:100%;">
-              ${row("Name", name)}
-              ${row("Phone", phone ? `<a href="tel:${String(phone).replace(/\s/g, "")}" style="color:#0b57d0;">${phone}</a>` : "")}
-              ${row("Email", email ? `<a href="mailto:${email}" style="color:#0b57d0;">${email}</a>` : "")}
-              ${row("Service", servicesArray.length ? servicesArray.join(", ") : "")}
-              ${row("City", cityState)}
-              ${row("Notes", finalNotes ? `<div style="white-space:pre-wrap;">${finalNotes}</div>` : "")}
-            </table>
-
-            <h3 style="margin:22px 0 6px;font-size:14px;color:#111;">Where this lead came from</h3>
-            <table style="border-collapse:collapse;width:100%;">
-              ${row("Page", originUrl ? `<a href="${originUrl}" style="color:#0b57d0;">${originPath}</a>` : originPath)}
-              ${row("Form", source || "—")}
-              ${row("Referrer", referrer || "direct / none")}
-            </table>
-
-            <p style="margin:22px 0 0;color:#888;font-size:12px;">
-              Sent automatically by avanienterprises.in. Reply to this email to reach the lead directly.
-            </p>
-          </div>
-        `,
-      };
-
-      sgMail.send(msg)
-        .then(() => console.log(`✅ Lead email sent to: ${recipients.join(", ")}`))
-        .catch((error) => console.error("❌ SendGrid Error:", error.response ? error.response.body : error.message));
-
-      console.log("Keep moving: Email delivery started in background...");
-    } else {
-      console.warn("⚠️ FROM_EMAIL not set — lead saved but no notification sent.");
+    // 2. Notification email — one shared template for every lead the site
+    //    produces (services/leadEmail.js), so a contact enquiry and a
+    //    service-page lead arrive looking identical. sohamdang0@gmail.com is
+    //    always copied, hardcoded there so a missing env var cannot silently
+    //    stop notifications reaching a person.
+    if (!newForm.isSpam) {
+      sendLeadEmail({
+        kind: "Lead",
+        name,
+        email,
+        phone,
+        company: cityState,
+        service: primaryService,
+        message: finalNotes,
+        source: source || "lead_form",
+        pagePath,
+        pageUrl,
+        referrer,
+        landingPage: req.body.landingPage,
+        utmSource: req.body.utmSource,
+        utmMedium: req.body.utmMedium,
+        utmCampaign: req.body.utmCampaign,
+        gclid: req.body.gclid,
+        fbclid: req.body.fbclid,
+      }).catch(() => { /* leadEmail logs; never break the response */ });
     }
-
 
 
     res.status(200).json({
@@ -804,35 +766,24 @@ const submitForm = async (req, res) => {
       isSpam: spam,
     });
 
-    // 4. SendGrid Email to Admin — skipped for flagged spam, so the inbox
-    //    stays usable. The record is still stored and visible in the admin.
-    if (!spam && process.env.ADMIN_EMAIL && process.env.FROM_EMAIL) {
-      const msg = {
-        to: process.env.ADMIN_EMAIL,
-        from: process.env.FROM_EMAIL,
-        subject: "New Consultation Request Received",
-        html: `
-            <h2>New Consultation Request</h2>
-            <p><strong>Name:</strong> ${fullName || "—"}</p>
-            <p><strong>Email:</strong> ${email || "—"}</p>
-            <p><strong>Phone:</strong> ${phoneNu || "—"}</p>
-            <p><strong>Service:</strong> ${service || "—"}</p>
-            ${otherService ? `<p><strong>Other Service:</strong> ${otherService}</p>` : ""}
-            <p><strong>Company Name:</strong> ${companyName || "—"}</p>
-            <p><strong>Project Details:</strong></p>
-            <div style="white-space:pre-wrap; background:#f9f9f9; padding:10px; border-radius:5px;">${projectDetails || "—"}</div>
-            <p><strong>Time:</strong> ${new Date().toLocaleString()}</p>
-          `,
-      };
-
-      sgMail
-        .send(msg)
-        .then(() => {
-          console.log(`✅ Consultation Email sent to: ${process.env.ADMIN_EMAIL}`);
-        })
-        .catch((error) => {
-          console.error("❌ SendGrid Error (Consultation):", error.response ? error.response.body : error.message);
-        });
+    // 4. Notification — the same template /submit-form uses, so a contact
+    //    enquiry and a service-page lead arrive looking identical and both
+    //    always reach sohamdang0@gmail.com. Skipped for flagged spam so the
+    //    inbox stays usable; the record is still stored and visible in admin.
+    if (!spam) {
+      sendLeadEmail({
+        kind: "Consultation request",
+        name: fullName,
+        email,
+        phone: phoneNu,
+        company: companyName,
+        service: [service, otherService].filter(Boolean).join(" · "),
+        message: projectDetails,
+        source: "contact form",
+        pagePath,
+        pageUrl,
+        referrer,
+      }).catch(() => { /* sendLeadEmail already logs; never break the response */ });
     }
 
     res.status(201).json({

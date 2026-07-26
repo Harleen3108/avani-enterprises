@@ -4,10 +4,14 @@ import { Helmet } from 'react-helmet-async';
 import { ArrowLeft, Calendar, Share2, Tag } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { getBackendUrl } from '../lib/api';
-import BlogEngagement from '../components/blog/BlogEngagement';
+import { EngagementRail, CommentsSection } from '../components/blog/BlogEngagement';
+import { useRelatedPosts, RelatedRail, RelatedGrid } from '../components/blog/RelatedArticles';
 import BusinessSetup3Form from '../components/BusinessSetup3Form';
 import { KeyTakeaways, FaqAccordion } from '../components/blog/BlogAeoBlocks';
 import { formatBlogBody, PROSE_CSS } from '../data/blogFormat';
+
+/** Matches the article surface in blogFormat.js PROSE_CSS. */
+const PAPER = '#FFFDF9';
 import '../components/Home.css';
 
 const fadeIn = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } };
@@ -32,6 +36,13 @@ const BlogDetail = () => {
     };
     fetchBlog();
   }, [slug]);
+
+  // Called before the early returns below — hooks must run in the same order on
+  // every render, and `blog` is null on the first pass. The hook tolerates an
+  // empty category and simply falls back to the most recent posts.
+  const blogCategory =
+    (blog?.category && typeof blog.category === 'object' ? blog.category.name : blog?.category) || 'Insights';
+  const related = useRelatedPosts(slug || '', String(blogCategory));
 
   if (loading) {
     return (
@@ -135,54 +146,46 @@ const BlogDetail = () => {
         </div>
       </section>
 
-      {/* Featured Image */}
+      {/* Featured image — the transition from the dark hero onto the light
+          article surface. Sitting on its own dark strip between the two left a
+          band of black between two sections and made the white body look like a
+          floating fragment, which is the thing being fixed. */}
       {blog.featuredImage && (
-        <section style={{ paddingTop: '2rem', paddingBottom: '2rem' }}>
-          <div className="dh-container" style={{ maxWidth: '1000px', margin: '0 auto' }}>
-            <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.2, duration: 0.8 }} style={{ borderRadius: '24px', overflow: 'hidden', border: '1px solid var(--border-light)', aspectRatio: '16/9', boxShadow: '0 20px 40px rgba(0,0,0,0.4)' }}>
-              <img src={imageUrl} alt={blog.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+        <section style={{ background: `linear-gradient(to bottom, var(--bg-primary) 0%, var(--bg-primary) 45%, ${PAPER} 45%, ${PAPER} 100%)`, paddingTop: '2rem' }}>
+          <div className="dh-container" style={{ maxWidth: '1100px', margin: '0 auto' }}>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.97 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.2, duration: 0.8 }}
+              style={{ borderRadius: '20px', overflow: 'hidden', aspectRatio: '16/9', boxShadow: '0 24px 55px rgba(0,0,0,0.38)' }}
+            >
+              <img src={imageUrl} alt={blog.title} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
             </motion.div>
           </div>
         </section>
       )}
 
-      {/* Article Content
-          ----------------
-          The article sits on a light "paper" surface rather than the site's
-          dark chrome. Long-form body copy is easier to read dark-on-light, and
-          it matches the Business OS blog this was modelled on. The surface is
-          self-contained, so the dark header, footer and the rest of the site
-          are unaffected. */}
-      <section style={{ paddingTop: '2rem', paddingBottom: '6rem' }}>
-        <div className="dh-container" style={{ maxWidth: '860px', margin: '0 auto' }}>
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={fadeIn}
-            transition={{ delay: 0.3 }}
-            style={{
-              background: '#FFFDF9',
-              borderRadius: '20px',
-              padding: 'clamp(1.75rem, 5vw, 3.25rem)',
-              boxShadow: '0 24px 60px rgba(0,0,0,0.35)',
-            }}
-          >
-            {/* Article body.
-                The CMS stores three different shapes — proper HTML, markdown,
-                and plain newline-separated text — and previously all three
-                rendered as one flat wall. formatBlogBody normalises them into
-                semantic HTML, adds internal links to the service pages, and
-                .prose supplies the typography. Same function and same markup as
-                the SSR path, so readers and Googlebot get identical output. */}
-            <style>{PROSE_CSS}</style>
+      {/* Article body
+          -------------
+          The white surface is now the SECTION, not a card floating inside a dark
+          one. A cream card on a black page reads as a fragment; edge-to-edge
+          light reads as a document, which is what an article is.
 
+          Two columns from 1080px up: the article, and a sticky rail carrying
+          engagement and related posts. Below that width the rail stacks under
+          the article, because a 260px sidebar on a phone is just wasted rows. */}
+      <section style={{ background: PAPER, paddingTop: '3rem', paddingBottom: '4.5rem' }}>
+        <div
+          className="dh-container blog-body-grid"
+          style={{ maxWidth: '1240px', margin: '0 auto' }}
+        >
+          <motion.div initial="hidden" animate="visible" variants={fadeIn} transition={{ delay: 0.25 }}>
             {/* Takeaways sit above the body — the block readers skim and AI
                 answer engines lift. Renders only when the post stores them. */}
             <KeyTakeaways items={blog.keyTakeaways} />
 
             <div
               className="prose"
-              style={{ margin: '0 auto' }}
               dangerouslySetInnerHTML={{
                 __html: formatBlogBody(blog.content, {
                   title: blog.title,
@@ -195,36 +198,17 @@ const BlogDetail = () => {
                 emitted above. Older posts keep their FAQs inside the body. */}
             <FaqAccordion items={blog.faqs} />
 
-            <div style={{ maxWidth: '44rem', margin: '3.5rem auto 0', paddingTop: '1.75rem', borderTop: '1px solid #E7E0D5', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <div style={{ fontSize: '0.78rem', color: '#6B635A', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-                Share this article
-              </div>
-              <button
-                onClick={() => {
-                  const url = typeof window !== 'undefined' ? window.location.href : '';
-                  if (typeof navigator !== 'undefined' && (navigator as any).share) {
-                    (navigator as any).share({ title: blog.title, url }).catch(() => {});
-                  } else if (typeof navigator !== 'undefined' && navigator.clipboard) {
-                    navigator.clipboard.writeText(url);
-                  }
-                }}
-                style={{ padding: '0.55rem 0.9rem', display: 'flex', alignItems: 'center', gap: '6px', background: 'transparent', border: '1px solid #E7E0D5', borderRadius: '10px', color: '#3A352E', fontSize: '0.82rem', cursor: 'pointer' }}
-              >
-                <Share2 size={14} /> Copy link
-              </button>
-            </div>
-
             {/* Conversion: every post ends with the lead form. generate_lead
                 fires on submit carrying this post's path as attribution, so GA4
                 shows which articles actually produce enquiries.
-                The form keeps the dark treatment deliberately — it is the one
-                element that should interrupt the reading surface. */}
+                Kept dark deliberately — it is the one element that should
+                interrupt the reading surface. */}
             <section
               id="consultation"
               style={{
-                maxWidth: '44rem', margin: '2.5rem auto 0',
+                margin: '3rem 0 0',
                 background: '#12101A', borderRadius: '18px',
-                padding: 'clamp(20px, 4vw, 28px)', scrollMarginTop: 90,
+                padding: 'clamp(20px, 4vw, 30px)', scrollMarginTop: 90,
               }}
             >
               <h2 style={{ fontFamily: "'Outfit', sans-serif", fontSize: '1.2rem', fontWeight: 800, margin: '0 0 .4rem', color: '#fff' }}>
@@ -237,13 +221,43 @@ const BlogDetail = () => {
               <BusinessSetup3Form source={`blog:${slug}`} />
             </section>
 
-            {/* Views, likes and comments */}
-            <div style={{ maxWidth: '44rem', margin: '0 auto' }}>
-              <BlogEngagement slug={slug || ''} views={blog.views} />
+            <div style={{ marginTop: '3rem' }}>
+              <CommentsSection slug={slug || ''} />
             </div>
+
+            <RelatedGrid posts={related} />
           </motion.div>
+
+          {/* Sticky rail. Engagement moved here from below the article: a like
+              button under 1,400 words is a like button nobody reaches. */}
+          <aside className="blog-rail">
+            <div style={{ position: 'sticky', top: '96px', display: 'flex', flexDirection: 'column', gap: '18px' }}>
+              <EngagementRail slug={slug || ''} views={blog.views} />
+              <RelatedRail posts={related} />
+            </div>
+          </aside>
         </div>
       </section>
+
+      <style>{`
+        .blog-body-grid { display: block; }
+        .blog-rail { margin-top: 2.5rem; }
+        @media (min-width: 1080px) {
+          .blog-body-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 290px;
+            gap: 56px;
+            align-items: start;
+          }
+          .blog-rail { margin-top: 0; }
+        }
+        /* Wider measure than the default 44rem: with a rail beside it the
+           column is constrained by the grid, so the article can use the room. */
+        .blog-body-grid .prose { max-width: 100%; }
+        .blog-body-grid .prose > * { max-width: 54rem; }
+        .blog-body-grid .prose .prose-table-wrap,
+        .blog-body-grid .prose .post-cta { max-width: 100%; }
+      `}</style>
     </div>
   );
 };
