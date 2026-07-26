@@ -666,7 +666,49 @@ function describeLocation(geo) {
   return str(parts.join(', '), MAX_LOCATION_LENGTH);
 }
 
+/**
+ * Where a submission actually came from.
+ *
+ * Client-supplied pagePath is preferred, but it depends on every form
+ * remembering to send it — and they do not. This site has five separate
+ * components posting to /avani-form alone, plus the chatbot, and a submission
+ * from any of them that omits the field lands in the admin as "not recorded"
+ * with no way to recover it.
+ *
+ * The Referer header is sent by the browser on a same-origin fetch and needs no
+ * cooperation from the form, so it is a reliable fallback. Derived server-side
+ * once, rather than patched into each form and then forgotten in the next one.
+ */
+function originFromRequest(req, body = {}) {
+  const clean = (s, n) => String(s || "").trim().slice(0, n);
+
+  let pagePath = clean(body.pagePath, 300);
+  let pageUrl = clean(body.pageUrl, 600);
+
+  if (!pagePath || !pageUrl) {
+    const referer = req && typeof req.get === "function" ? req.get("referer") || req.get("referrer") : "";
+    if (referer) {
+      try {
+        const u = new URL(referer);
+        if (!pageUrl) pageUrl = clean(u.href, 600);
+        if (!pagePath) pagePath = clean(u.pathname + (u.search || ""), 300);
+      } catch {
+        /* malformed Referer — leave the fields empty rather than store junk */
+      }
+    }
+  }
+
+  return {
+    pagePath,
+    pageUrl,
+    // The visitor's own referrer (how they reached the site) is a different
+    // thing from the Referer of this request, and only the client knows it.
+    referrer: clean(body.referrer, 600),
+  };
+}
+
 module.exports = {
+  originFromRequest,
   clientIp,
   hashIp,
   geoFromIp,

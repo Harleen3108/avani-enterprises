@@ -15,6 +15,92 @@
 const sgMail = require("@sendgrid/mail");
 
 const SITE = (process.env.PUBLIC_SITE_URL || "https://www.avanienterprises.in").replace(/\/$/, "");
+const FROM_NAME = process.env.FROM_NAME || "Avani Enterprises";
+
+/* ── Providers ─────────────────────────────────────────────────────────────
+ *
+ * Brevo is used when BREVO_API_KEY is set, otherwise SendGrid. Two providers
+ * rather than one because a transactional email account can be suspended,
+ * rate-limited or left with an unverified sender, and a lead notification that
+ * does not arrive is a lost customer.
+ *
+ * Brevo is called over its REST API rather than through @getbrevo/brevo. The
+ * SDK's v6 rewrite dropped TransactionalEmailsApi entirely, so any code written
+ * against v2 breaks on install; a plain POST has no such coupling, adds no
+ * dependency, and gives clearer errors.
+ */
+
+/** POST https://api.brevo.com/v3/smtp/email */
+async function sendViaBrevo({ to, cc, subject, html, text, replyTo, from }) {
+  const body = {
+    sender: { name: FROM_NAME, email: from },
+    to: (Array.isArray(to) ? to : [to]).filter(Boolean).map((email) => ({ email })),
+    subject,
+    htmlContent: html,
+  };
+  if (text) body.textContent = text;
+  if (replyTo) body.replyTo = { email: replyTo };
+  if (cc && cc.length) body.cc = (Array.isArray(cc) ? cc : [cc]).filter(Boolean).map((email) => ({ email }));
+
+  let res;
+  try {
+    res = await fetch("https://api.brevo.com/v3/smtp/email", {
+      method: "POST",
+      headers: {
+        "api-key": process.env.BREVO_API_KEY,
+        "content-type": "application/json",
+        accept: "application/json",
+      },
+      body: JSON.stringify(body),
+      signal: AbortSignal.timeout(15000),
+    });
+  } catch (err) {
+    throw new Error(`Brevo unreachable: ${err.message}`);
+  }
+
+  const payload = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    const detail = payload.message || payload.code || "unknown";
+
+    // Brevo's IP allow-list is the failure most likely to bite in production
+    // and the least obvious: the key is valid, the sender is verified, and it
+    // still 401s purely because the server's address is not on the list. Say
+    // exactly what to do rather than leaving a bare "unauthorised".
+    if (/unrecognised IP|unrecognized IP|authorised_ips/i.test(detail)) {
+      throw new Error(
+        `Brevo rejected this server's IP address. Either turn off IP restriction, ` +
+        `or add the server's outbound IPs, at https://app.brevo.com/security/authorised_ips ` +
+        `— on Render the outbound IPs are listed under the service's Connect tab. ` +
+        `Original: ${detail}`
+      );
+    }
+
+    if (/sender/i.test(detail) && /not valid|unknown|verif/i.test(detail)) {
+      throw new Error(
+        `Brevo does not recognise the sender ${from}. Verify it under ` +
+        `Senders, Domains & Dedicated IPs in Brevo. Original: ${detail}`
+      );
+    }
+
+    throw new Error(`Brevo error (${res.status}): ${detail}`);
+  }
+
+  // messageId is what you search for in Brevo → Statistics → Email Activity to
+  // tell a real delivery from one silently dropped by the suppression list.
+  return { provider: "Brevo", id: payload.messageId || null };
+}
+
+async function sendViaSendGrid({ to, subject, html, text, replyTo, from }) {
+  const [res] = await sgMail.send({ to, from, replyTo: replyTo || undefined, subject, text, html });
+  return { provider: "SendGrid", id: res?.headers?.["x-message-id"] || null };
+}
+
+/** Which provider will actually be used, and why. */
+function activeProvider() {
+  if (process.env.BREVO_API_KEY) return "Brevo";
+  if (process.env.SENDGRID_API_KEY) return "SendGrid";
+  return null;
+}
 
 /**
  * Always copied, deliberately hardcoded: a missing environment variable must
@@ -93,13 +179,35 @@ function row(label, value, opts = {}) {
  * admin test endpoint.
  */
 function emailStatus() {
-  const key = process.env.SENDGRID_API_KEY || "";
+  const provider = activeProvider();
   const problems = [];
-  if (!key) problems.push("SENDGRID_API_KEY is not set");
-  else if (!key.startsWith("SG.")) problems.push('SENDGRID_API_KEY does not start with "SG." — it is not a valid SendGrid key');
-  if (!process.env.FROM_EMAIL) problems.push("FROM_EMAIL is not set (must be a SendGrid-verified sender)");
 
-  return { ok: problems.length === 0, problems, to: recipients(), from: process.env.FROM_EMAIL || null };
+  if (!provider) {
+    problems.push("No email provider configured — set BREVO_API_KEY (recommended) or SENDGRID_API_KEY");
+  } else if (provider === "Brevo") {
+    const key = process.env.BREVO_API_KEY || "";
+    if (!key.startsWith("xkeysib-")) {
+      problems.push('BREVO_API_KEY does not start with "xkeysib-" — that is not a Brevo API key');
+    }
+  } else {
+    const key = process.env.SENDGRID_API_KEY || "";
+    if (!key.startsWith("SG.")) {
+      problems.push('SENDGRID_API_KEY does not start with "SG." — that is not a SendGrid key');
+    }
+  }
+
+  if (!process.env.FROM_EMAIL) {
+    problems.push(`FROM_EMAIL is not set (must be a sender verified in ${provider || "your provider"})`);
+  }
+
+  return {
+    ok: problems.length === 0,
+    provider,
+    problems,
+    to: recipients(),
+    from: process.env.FROM_EMAIL || null,
+    fromName: FROM_NAME,
+  };
 }
 
 async function sendLeadEmail(lead = {}) {
@@ -203,22 +311,39 @@ async function sendLeadEmail(lead = {}) {
     `Received ${istNow()} IST`,
   ].filter(Boolean).join("\n");
 
+  const msg = { to, from: process.env.FROM_EMAIL, replyTo: lead.email || undefined, subject, text, html };
+  const provider = activeProvider();
+
   try {
-    await sgMail.send({
-      to,
-      from: process.env.FROM_EMAIL,
-      replyTo: lead.email || undefined,
-      subject,
-      text,
-      html,
-    });
-    console.log(`✅ ${kind} email sent to: ${to.join(", ")}`);
-    return { sent: true, to };
+    const result = provider === "Brevo" ? await sendViaBrevo(msg) : await sendViaSendGrid(msg);
+    console.log(
+      `✅ ${kind} email sent via ${result.provider} to: ${to.join(", ")}` +
+      (result.id ? ` (id ${result.id})` : "")
+    );
+    return { sent: true, to, provider: result.provider, id: result.id };
   } catch (err) {
-    // Logged, never rethrown: the visitor already submitted successfully and
-    // the record is stored. A mail outage is our problem, not theirs.
-    console.error("❌ Lead email failed:", err.response ? err.response.body : err.message);
-    return { sent: false, reason: "send-failed" };
+    const detail = err.response ? JSON.stringify(err.response.body) : err.message;
+    console.error(`❌ Lead email failed via ${provider}: ${detail}`);
+
+    // One retry on the other provider. A suspended account, an unverified
+    // sender or a rate limit takes out one provider at a time, and a lead
+    // notification that never arrives is a lost customer.
+    const fallback = provider === "Brevo" ? "SendGrid" : "Brevo";
+    const fallbackKey = fallback === "Brevo" ? process.env.BREVO_API_KEY : process.env.SENDGRID_API_KEY;
+    if (fallbackKey) {
+      try {
+        const result = fallback === "Brevo" ? await sendViaBrevo(msg) : await sendViaSendGrid(msg);
+        console.log(`✅ ${kind} email sent via FALLBACK ${result.provider} to: ${to.join(", ")}`);
+        return { sent: true, to, provider: result.provider, id: result.id, usedFallback: true };
+      } catch (err2) {
+        console.error(`❌ Fallback ${fallback} also failed: ${err2.message}`);
+        return { sent: false, reason: "send-failed", problems: [detail, err2.message] };
+      }
+    }
+
+    // Never rethrown: the visitor already submitted successfully and the record
+    // is stored. A mail outage is our problem, not theirs.
+    return { sent: false, reason: "send-failed", problems: [detail] };
   }
 }
 

@@ -639,6 +639,10 @@ app.post("/submit-form", async (req, res) => {
 
     const primaryService = servicesArray[0] || "";
 
+    // Same Referer fallback as /avani-form, so a lead never lands with an
+    // origin of "not recorded" just because a form forgot to send one.
+    const leadOrigin = requestContext.originFromRequest(req, req.body);
+
     // 1. Save form data (includes services array and notes)
     const newForm = await Form.create({
       name,
@@ -652,9 +656,10 @@ app.post("/submit-form", async (req, res) => {
       status: "not responded",
       contacted: false,
       source: source || "web-dev", // ✅ Save source
-      pagePath: pagePath || "",
-      pageUrl: pageUrl || "",
-      referrer: referrer || "",
+      // Derived, with a Referer fallback — see requestContext.originFromRequest.
+      pagePath: leadOrigin.pagePath,
+      pageUrl: leadOrigin.pageUrl,
+      referrer: leadOrigin.referrer,
       // First-touch attribution from the visitor's entry page. Read straight off
       // req.body rather than re-derived: only the browser knows which page the
       // session actually started on.
@@ -685,9 +690,9 @@ app.post("/submit-form", async (req, res) => {
         service: primaryService,
         message: finalNotes,
         source: source || "lead_form",
-        pagePath,
-        pageUrl,
-        referrer,
+        pagePath: leadOrigin.pagePath,
+        pageUrl: leadOrigin.pageUrl,
+        referrer: leadOrigin.referrer,
         landingPage: req.body.landingPage,
         utmSource: req.body.utmSource,
         utmMedium: req.body.utmMedium,
@@ -765,6 +770,11 @@ const submitForm = async (req, res) => {
 
     const spam = looksLikeSpam({ name: fullName, email, company: companyName });
 
+    // Five different components post to this endpoint. Rather than trust each
+    // of them to send the origin, derive it here, falling back to the Referer
+    // header the browser sends anyway.
+    const origin = requestContext.originFromRequest(req, req.body);
+
     // 3. Create new entry
     const newEntry = await AvaniForm.create({
       fullName,
@@ -774,9 +784,9 @@ const submitForm = async (req, res) => {
       companyName,
       projectDetails,
       otherService,
-      pagePath: pagePath || "",
-      pageUrl: pageUrl || "",
-      referrer: referrer || "",
+      pagePath: origin.pagePath,
+      pageUrl: origin.pageUrl,
+      referrer: origin.referrer,
       isSpam: spam,
     });
 
@@ -794,9 +804,9 @@ const submitForm = async (req, res) => {
         service: [service, otherService].filter(Boolean).join(" · "),
         message: projectDetails,
         source: "contact form",
-        pagePath,
-        pageUrl,
-        referrer,
+        pagePath: origin.pagePath,
+        pageUrl: origin.pageUrl,
+        referrer: origin.referrer,
       }).catch(() => { /* sendLeadEmail already logs; never break the response */ });
     }
 
