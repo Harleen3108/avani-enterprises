@@ -145,13 +145,27 @@ export const AuthProvider = ({ children }) => {
     setLoading(false);
   }, []);
 
-  // (optional) ✅ 4. 401 aaye to auto logout karne ke liye interceptor
+  // Clear a dead session and send the user back to login.
+  //
+  // This used to fire on 401 only. An invalid-signature token — which is what
+  // every existing session becomes the moment JWT_SECRET is rotated — came back
+  // as 400, so nothing cleared it: the app stayed "logged in" against a token
+  // the server would never accept, showing a raw error on every page with no
+  // route back to the login screen. The backend now returns 401 for that case,
+  // and this also catches the 400 shape so an older backend still recovers.
   useEffect(() => {
     const resInterceptor = axios.interceptors.response.use(
       (response) => response,
       (error) => {
-        if (error?.response?.status === 401) {
-          // token invalid / expired
+        const status = error?.response?.status;
+        const message = String(error?.response?.data?.message || "");
+        const detail = String(error?.response?.data?.error || "");
+        const looksLikeDeadToken =
+          status === 401 ||
+          (status === 400 && /token|jwt|signature|expired|session/i.test(message + " " + detail));
+
+        if (looksLikeDeadToken && localStorage.getItem("token")) {
+          try { sessionStorage.setItem("avani_signed_out_reason", "Your session expired. Please sign in again."); } catch { /* private mode */ }
           logout();
         }
         return Promise.reject(error);

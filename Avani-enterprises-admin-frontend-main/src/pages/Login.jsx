@@ -7,7 +7,18 @@ const Login = () => {
     const [adminCode, setAdminCode] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
+    // Why the user was signed out, when it was not their choice — set by the
+    // auth interceptor. Without it a rotated JWT_SECRET just dumps you back at
+    // a blank login form with no explanation.
+    const [error, setError] = useState(() => {
+        try {
+            const reason = sessionStorage.getItem("avani_signed_out_reason");
+            if (reason) sessionStorage.removeItem("avani_signed_out_reason");
+            return reason || "";
+        } catch {
+            return "";
+        }
+    });
     const [loading, setLoading] = useState(false);
     const { login } = useAuth();
     const navigate = useNavigate();

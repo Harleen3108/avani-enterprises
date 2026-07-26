@@ -269,10 +269,16 @@ const authMiddleware = (req, res, next) => {
       });
     }
 
+    // 401, not 400. The request is well-formed; the CREDENTIAL is not valid,
+    // which is exactly what 401 means. It also matters practically: the admin
+    // app clears its session and redirects to login on 401 only, so returning
+    // 400 left anyone holding a token signed with an older JWT_SECRET
+    // permanently stuck on "Invalid token format" with no way to recover —
+    // the app never logged them out and never let them log back in.
     if (err.name === "JsonWebTokenError") {
-      return res.status(400).json({
-        message: "Invalid token format",
-        hint: "Token is malformed or incorrect",
+      return res.status(401).json({
+        message: "Your session is no longer valid. Please sign in again.",
+        hint: "The token was signed with a different key, or is malformed.",
         error: err.message
       });
     }

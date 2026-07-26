@@ -17,12 +17,16 @@ const auth = (req, res, next) => {
   } catch (err) {
     if (err.name === "TokenExpiredError") {
       return res.status(401).json({
-        message: "Token expired",
+        message: "Your session has expired. Please sign in again.",
       });
     }
 
-    return res.status(400).json({
-      message: "Invalid Token",
+    // 401, not 400 — matching the middleware in index.js. The request is
+    // well-formed; the credential is not valid. The admin app only clears its
+    // session on 401, so a 400 here strands the user on an error screen with a
+    // dead token and no route back to the login page.
+    return res.status(401).json({
+      message: "Your session is no longer valid. Please sign in again.",
       error: err.message,
     });
   }
