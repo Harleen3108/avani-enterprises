@@ -1200,6 +1200,18 @@ const MODEL_ALIASES = {
 };
 
 // ---------------------------------------------------------------------------
+// Confirmed, staffed office cities — MUST match `confirmed: true` in offices.js.
+// Duplicated here because this data slice stays import-free so the serverless
+// function can consume it. generate-sitemap.cjs asserts the two agree and fails
+// the build if they drift, so this cannot silently go stale.
+//
+// Only add a city here once the client confirms a real, staffed premises.
+// Claiming a location you do not occupy is how Google Business Profiles get
+// suspended.
+// ---------------------------------------------------------------------------
+const CONFIRMED_OFFICE_CITIES = 'Gurugram';
+
+// ---------------------------------------------------------------------------
 // LOCATIONS — only places we genuinely serve. `office: true` means a real
 // Avani office. Districts and industry clusters are verifiable public facts
 // about the local economy, which is what makes each page genuinely different.
@@ -1222,18 +1234,18 @@ const LOCATIONS = {
     note: 'Delhi sits under an hour from our Gurugram head office, so in-person meetings are routine.',
   },
   noida: {
-    city: 'Noida', region: 'Uttar Pradesh, Delhi NCR', country: 'India', office: true,
+    city: 'Noida', region: 'Uttar Pradesh, Delhi NCR', country: 'India', office: false,
     districts: ['Sector 62 and 63 IT belt', 'Sector 16A Film City', 'Sector 125–132 expressway corridor', 'Sector 18 commercial hub'],
     sectors: ['saas', 'media', 'education', 'manufacturing', 'ecommerce'],
     industries: ['IT and ITES', 'BPO and shared services', 'media, broadcast and film production', 'electronics manufacturing', 'edtech'],
-    note: 'We have an office in Noida, so expressway-corridor and Film City clients get on-site sessions.',
+    note: 'Delivered from our Gurugram head office, about an hour away, so on-site sessions are practical when a project needs them.',
   },
   'greater-noida': {
     city: 'Greater Noida', region: 'Uttar Pradesh, Delhi NCR', country: 'India', office: false,
     districts: ['Knowledge Park I–V', 'Techzone IV', 'Surajpur industrial area', 'Pari Chowk'],
     sectors: ['manufacturing', 'education', 'logistics', 'realestate'],
     industries: ['manufacturing and industrial units', 'higher education institutions', 'logistics and warehousing', 'residential real estate'],
-    note: 'Covered from our Noida and Gurugram offices.',
+    note: 'Covered from our Gurugram head office.',
   },
   faridabad: {
     city: 'Faridabad', region: 'Haryana, Delhi NCR', country: 'India', office: false,
@@ -1247,28 +1259,28 @@ const LOCATIONS = {
     districts: ['Sahibabad industrial area', 'Indirapuram', 'Raj Nagar Extension', 'Vasundhara'],
     sectors: ['manufacturing', 'logistics', 'realestate', 'ecommerce'],
     industries: ['light manufacturing', 'logistics and transport', 'building materials and real estate', 'local retail chains'],
-    note: 'Covered from our Noida office.',
+    note: 'Covered from our Gurugram head office.',
   },
   rohtak: {
-    city: 'Rohtak', region: 'Haryana', country: 'India', office: true,
+    city: 'Rohtak', region: 'Haryana', country: 'India', office: false,
     districts: ['IMT Rohtak', 'Delhi Road commercial belt', 'Model Town', 'Sector 14 institutional area'],
     sectors: ['education', 'healthcare', 'manufacturing', 'auto'],
     industries: ['education and coaching institutions', 'healthcare and hospitals', 'MSME manufacturing at IMT', 'regional retail and automotive dealerships'],
-    note: 'We have an office in Rohtak, which is unusual for a digital agency and means local businesses get face-to-face support rather than remote-only service.',
+    note: 'Delivered from our Gurugram head office, close enough that on-site sessions with institutes, hospitals and IMT manufacturers are straightforward.',
   },
   haryana: {
     city: 'Haryana', region: 'Haryana', country: 'India', office: true, isRegion: true,
     districts: ['Gurugram', 'Faridabad', 'Manesar', 'Rohtak', 'Panipat', 'Hisar'],
     sectors: ['auto', 'manufacturing', 'textiles', 'saas'],
     industries: ['automotive and auto components', 'textiles at Panipat', 'agri-processing', 'MSME manufacturing across the IMT belt', 'IT and ITES in Gurugram'],
-    note: 'Two of our offices — Gurugram and Rohtak — are in Haryana.',
+    note: 'Our head office is in Gurugram, so the Haryana industrial belt is on our doorstep.',
   },
   mumbai: {
-    city: 'Mumbai', region: 'Maharashtra', country: 'India', office: true,
+    city: 'Mumbai', region: 'Maharashtra', country: 'India', office: false,
     districts: ['Bandra Kurla Complex (BKC)', 'Lower Parel', 'Andheri East (MIDC and SEEPZ)', 'Nariman Point', 'Powai'],
     sectors: ['finance', 'media', 'ecommerce', 'pharma', 'logistics'],
     industries: ['banking, financial services and insurance', 'media, film and advertising', 'D2C and retail brands', 'pharmaceuticals', 'logistics and shipping'],
-    note: 'We have an office in Mumbai, so BKC and Lower Parel clients get in-person meetings.',
+    note: 'Delivered remotely from our Gurugram head office on IST, with travel for kickoff on larger engagements.',
   },
   bangalore: {
     city: 'Bengaluru', alt: 'Bangalore', region: 'Karnataka', country: 'India', office: false,
@@ -1321,26 +1333,26 @@ const LOCATIONS = {
   },
   india: {
     city: 'India', region: 'India', country: 'India', office: true, isRegion: true, isNational: true,
-    districts: ['Gurugram', 'Noida', 'Rohtak', 'Mumbai', 'and remote delivery nationwide'],
+    districts: ['Gurugram', 'Delhi NCR', 'and remote delivery nationwide'],
     sectors: ['manufacturing', 'finance', 'healthcare', 'education', 'ecommerce', 'saas'],
     industries: ['manufacturing and MSME', 'BFSI', 'healthcare', 'education', 'D2C and retail', 'IT and SaaS'],
-    note: 'Four Indian offices — Gurugram, Noida, Rohtak and Mumbai — with remote delivery nationwide.',
+    note: 'Head office in Gurugram, with remote delivery nationwide on IST.',
   },
   dubai: {
-    city: 'Dubai', region: 'Dubai', country: 'UAE', office: true, international: true,
+    city: 'Dubai', region: 'Dubai', country: 'UAE', office: false, international: true,
     currency: 'AED', tzOffset: 'UTC+4', tzNote: 'Dubai runs 1.5 hours behind IST, so an Indian working day overlaps almost entirely with yours.',
     districts: ['Business Bay', 'DMCC and Jumeirah Lakes Towers', 'Dubai Internet City', 'Deira and Bur Dubai'],
     sectors: ['realestate', 'trading', 'hospitality', 'logistics'],
     industries: ['real estate and property brokerage', 'trading and re-export', 'hospitality and tourism', 'logistics and freight', 'free-zone SMEs'],
-    note: 'We have an office in Dubai, so UAE clients get local meetings alongside our India delivery team.',
+    note: 'Delivered from our India team. Dubai runs 1.5 hours behind IST, so the working day overlaps almost entirely.',
   },
   uae: {
-    city: 'the UAE', region: 'United Arab Emirates', country: 'UAE', office: true, international: true, isRegion: true,
+    city: 'the UAE', region: 'United Arab Emirates', country: 'UAE', office: false, international: true, isRegion: true,
     currency: 'AED', tzOffset: 'UTC+4', tzNote: 'The UAE runs 1.5 hours behind IST, giving a near-complete working-day overlap with our India team.',
     districts: ['Dubai', 'Abu Dhabi', 'Sharjah', 'the major free zones'],
     sectors: ['realestate', 'trading', 'hospitality', 'logistics'],
     industries: ['real estate', 'trading and distribution', 'hospitality', 'logistics', 'professional services'],
-    note: 'Our Dubai office covers the UAE, backed by the India delivery team.',
+    note: 'Delivered from our India team, with working hours arranged around the Gulf business day.',
   },
   singapore: {
     city: 'Singapore', region: 'Singapore', country: 'Singapore', office: false, international: true,
@@ -1640,7 +1652,7 @@ const PRODUCT_MODULES = {
 const STATIC_PAGES = {
   about: {
     h1: 'About Avani Enterprises',
-    intro: `Avani Enterprises is a digital agency headquartered at ${COMPANY.hq}, with further offices in Noida, Rohtak, Mumbai and Dubai. We build websites, apps and custom software, run performance marketing, and ship AI systems — chatbots, voice agents, content pipelines, video and autonomous agents.`,
+    intro: `Avani Enterprises is a digital agency headquartered at ${COMPANY.hq}, delivering across India, the UAE, Singapore and the United States. We build websites, apps and custom software, run performance marketing, and ship AI systems — chatbots, voice agents, content pipelines, video and autonomous agents.`,
     sections: [
       {
         heading: 'What we do',
@@ -1657,7 +1669,7 @@ const STATIC_PAGES = {
       },
     ],
     faqs: [
-      { q: 'Where are your offices?', a: `Our head office is at ${COMPANY.hq}. We also have offices in Noida, Rohtak, Mumbai and Dubai, and deliver remotely across India and internationally.` },
+      { q: 'Where are you based?', a: `Our head office is at ${COMPANY.hq}. We deliver remotely across India and internationally, and travel for kickoff on larger engagements.` },
       { q: 'Do you work with businesses outside India?', a: 'Yes — we work with clients in the UAE, Singapore and the United States, with call times arranged around the overlap and invoicing in local currency.' },
       { q: 'How do I get in touch?', a: `Email ${COMPANY.email} or call ${COMPANY.phone}. You can also book a discovery call through the contact form.` },
     ],
@@ -1693,7 +1705,7 @@ const STATIC_PAGES = {
   },
   contact: {
     h1: 'Contact Avani Enterprises',
-    intro: `Head office: ${COMPANY.hq}. Email ${COMPANY.email} or call ${COMPANY.phone}. We also have offices in Noida, Rohtak, Mumbai and Dubai.`,
+    intro: `Head office: ${COMPANY.hq}. Email ${COMPANY.email} or call ${COMPANY.phone}.`,
     sections: [
       {
         heading: 'What happens after you get in touch',
@@ -1754,7 +1766,7 @@ const STATIC_PAGES = {
   },
   careers: {
     h1: 'Careers at Avani Enterprises',
-    intro: 'Open roles across engineering, performance marketing, design and AI, based in our Gurugram, Noida, Rohtak and Mumbai offices.',
+    intro: 'Open roles across engineering, performance marketing, design and AI, based at our Gurugram head office.',
     sections: [
       {
         heading: 'How we hire',
@@ -1828,20 +1840,20 @@ const STATIC_PAGES = {
   },
   'global-presence': {
     h1: 'Global Presence',
-    intro: 'Offices in Gurugram, Noida, Rohtak, Mumbai and Dubai, with delivery across India, the UAE, Singapore and the United States.',
+    intro: 'Head office in Gurugram, with delivery across India, the UAE, Singapore and the United States.',
     sections: [
       {
         heading: 'Where we operate',
         paragraphs: [
-          `India: head office at ${COMPANY.hq}, plus Noida, Rohtak and Mumbai. Delivery nationwide on IST.`,
-          'UAE: a Dubai office covering the Emirates. Dubai runs 1.5 hours behind IST, so the working day overlaps almost entirely.',
+          `India: head office at ${COMPANY.hq}. Delivery nationwide on IST, covering Delhi NCR, Rohtak and the Haryana belt, and the metros — Mumbai, Bengaluru, Pune, Hyderabad, Chennai, Kolkata, Ahmedabad and Jaipur.`,
+          'UAE: served remotely across the Emirates. Dubai runs 1.5 hours behind IST, so the working day overlaps almost entirely, and we invoice in AED.',
           'Singapore: delivered from India, 2.5 hours behind you, so our team is online through your afternoon.',
           'United States: delivered from India with calls scheduled in your morning, and invoicing in USD.',
         ],
       },
     ],
     faqs: [
-      { q: 'Do you have a local team in every market?', a: 'No, and we would rather be clear about it. We have offices in Gurugram, Noida, Rohtak, Mumbai and Dubai. Other markets are served remotely from those offices, with working hours arranged around your time zone.' },
+      { q: 'Do you have a local team in every market?', a: 'No, and we would rather be clear about it. Our office is in Gurugram. Every other market is served remotely from there, with working hours arranged around your time zone and travel for kickoff on larger engagements.' },
     ],
   },
 };
@@ -2222,8 +2234,8 @@ function pageFaqs(resolved) {
       });
     } else {
       out.push({
-        q: `You do not have an office in ${location.city} — how does that work?`,
-        a: `${location.note} We are transparent about this: our offices are in Gurugram, Noida, Rohtak, Mumbai and Dubai. ${service.name} is delivered remotely with scheduled video reviews, a shared staging link and a named point of contact, and we will travel for kickoff on larger engagements.`,
+        q: `Do you have an office in ${location.city}?`,
+        a: `No, and we would rather say so plainly than imply otherwise. Our office is in ${CONFIRMED_OFFICE_CITIES}. ${location.note} ${service.name} is delivered remotely with scheduled video reviews, a shared staging link and a named point of contact, and we travel for kickoff on larger engagements.`,
       });
     }
     const uses = localUseCases(resolved);
@@ -2320,7 +2332,7 @@ function pageDescription(resolved) {
   if (!service) return null;
   if (model) return `${service.name} on ${model.label}. ${model.typicalFit} Model-agnostic benchmarking, guardrails and evaluation before launch. ${COMPANY.name}.`;
   if (location) {
-    const office = location.office ? `Avani has an office in ${location.city}.` : `Delivered from our Gurugram, Noida, Rohtak, Mumbai and Dubai offices.`;
+    const office = location.office ? `Avani has an office in ${location.city}.` : `Delivered remotely from our Gurugram head office.`;
     return `${service.name} ${location.isRegion ? 'across' : 'in'} ${location.city} — ${listSentence(location.districts.slice(0, 3))}. ${office} ${service.timeline}.`;
   }
   return `${service.name}: ${listSentence((service.deliverables || []).slice(0, 3)).toLowerCase()}. ${service.timeline}. ${service.priceModel}.`;

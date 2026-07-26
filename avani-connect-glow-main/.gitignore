@@ -24,3 +24,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Generated per-page JSON for client code-splitting (npm run prebuild / predev)
+src/data/seoPages/

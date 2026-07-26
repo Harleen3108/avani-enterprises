@@ -18,7 +18,9 @@
  *
  * KEPT ON PURPOSE (do not add to this list)
  * -----------------------------------------
- *   Offices:  Gurugram, Noida, Rohtak, Mumbai, Dubai
+ *   Office:   Gurugram (the only confirmed premises — see offices.js)
+ *   Sell-only: Noida, Rohtak, Mumbai, Dubai (kept as organic markets, no
+ *             address, no map and no LocalBusiness schema)
  *   NCR belt: Delhi, Greater Noida, Faridabad, Ghaziabad, Haryana
  *   Metros:   Bengaluru, Pune, Hyderabad, Chennai, Kolkata, Ahmedabad, Jaipur
  *   Intl:     UAE, Singapore, USA

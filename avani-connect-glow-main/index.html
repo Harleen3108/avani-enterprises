@@ -132,15 +132,37 @@
         fbq('init', '2263948097472371');
         fbq('track', 'PageView');
 
-        // Load Google Tag Manager
+        // ── Google tags ──────────────────────────────────────────────────────
+        // AW- is the Google Ads conversion tag (already live).
+        // G-  is the GA4 property. Until a GA4 ID is set, the generate_lead
+        //     event fired by src/lib/leadTracking.ts reaches Google Ads but has
+        //     nowhere to land in GA4, so there is no page-level report of which
+        //     pages produce enquiries.
+        //
+        // ⚠️ TO ENABLE GA4: replace the empty string below with the measurement
+        // ID (looks like "G-XXXXXXXXXX"). Nothing else needs to change — the
+        // lead event, UTM capture and page attribution are already wired.
+        var GOOGLE_ADS_ID = 'AW-17823419321';
+        var GA4_ID = '';
+
         window.dataLayer = window.dataLayer || [];
         window.gtag = function() { window.dataLayer.push(arguments); };
+
         var script = document.createElement('script');
         script.async = true;
-        script.src = 'https://www.googletagmanager.com/gtag/js?id=AW-17823419321';
+        // gtag.js only needs loading once; additional IDs attach via config().
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=' + (GA4_ID || GOOGLE_ADS_ID);
         document.head.appendChild(script);
+
         window.gtag('js', new Date());
-        window.gtag('config', 'AW-17823419321');
+        window.gtag('config', GOOGLE_ADS_ID);
+        if (GA4_ID) {
+          window.gtag('config', GA4_ID, {
+            // We send page_path explicitly with generate_lead, so pages are
+            // attributable even though this is a single-page app.
+            send_page_view: true
+          });
+        }
       }
 
       // Initialize on user interaction
@@ -455,7 +477,7 @@
         </div>
         <div>
           <h3>Where is Avani Enterprises located?</h3>
-          <p>We are based in India, with offices in Gurgaon, Mumbai, and Rohtak, expanding globally to serve clients worldwide.</p>
+          <p>We are based in Gurugram, India, delivering across India, the UAE, Singapore and the United States.</p>
         </div>
       </section>
     </main>

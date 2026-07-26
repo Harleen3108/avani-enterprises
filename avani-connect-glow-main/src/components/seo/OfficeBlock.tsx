@@ -18,9 +18,13 @@ export default function OfficeBlock({ locationKey }: { locationKey?: string }) {
   const office = officeFor(locationKey);
   if (!office) return null;
 
-  const address = formatAddress(office);
-  const embed = mapEmbedUrl(office);
-  const link = mapLinkUrl(office);
+  // A sell-only market gets coverage copy but never an address, opening hours,
+  // map or directions link. Implying premises we do not occupy risks a Google
+  // Business Profile suspension.
+  const confirmed = !!office.confirmed;
+  const address = confirmed ? formatAddress(office) : null;
+  const embed = confirmed ? mapEmbedUrl(office) : null;
+  const link = confirmed ? mapLinkUrl(office) : null;
 
   const row: React.CSSProperties = { display: 'flex', gap: '10px', alignItems: 'flex-start', marginBottom: '12px' };
   const labelStyle: React.CSSProperties = { fontSize: '.88rem', color: 'var(--text-secondary)', lineHeight: 1.6, margin: 0 };
@@ -38,7 +42,7 @@ export default function OfficeBlock({ locationKey }: { locationKey?: string }) {
             display: 'block', marginBottom: '.75rem',
           }}
         >
-          Our office
+          {confirmed ? 'Our office' : 'Coverage'}
         </span>
 
         <h2
@@ -48,7 +52,7 @@ export default function OfficeBlock({ locationKey }: { locationKey?: string }) {
             margin: '0 0 1rem', lineHeight: 1.2,
           }}
         >
-          {NAP.name} in {office.city}
+          {confirmed ? `${NAP.name} in ${office.city}` : `Serving ${office.city}`}
         </h2>
 
         <p style={{ fontSize: '.97rem', color: 'var(--text-secondary)', lineHeight: 1.8, marginBottom: '2rem', maxWidth: '72ch' }}>
@@ -87,15 +91,18 @@ export default function OfficeBlock({ locationKey }: { locationKey?: string }) {
               </p>
             </div>
 
-            <div style={row}>
-              <Clock size={17} color="var(--accent-primary)" style={{ flexShrink: 0, marginTop: '2px' }} />
-              <p style={labelStyle}>Monday to Saturday, 9:00 am – 7:00 pm IST</p>
-            </div>
+            {/* Opening hours only where there is a place to open. */}
+            {confirmed && (
+              <div style={row}>
+                <Clock size={17} color="var(--accent-primary)" style={{ flexShrink: 0, marginTop: '2px' }} />
+                <p style={labelStyle}>Monday to Saturday, 9:00 am – 7:00 pm IST</p>
+              </div>
+            )}
 
             {office.areasServed && office.areasServed.length > 0 && (
               <div style={{ marginTop: '1.5rem' }}>
                 <h3 style={{ fontFamily: "'Outfit', sans-serif", fontSize: '.95rem', fontWeight: 700, margin: '0 0 .6rem' }}>
-                  Areas we cover from {office.city}
+                  Areas we cover in {office.city}
                 </h3>
                 <p style={labelStyle}>{office.areasServed.join(' · ')}</p>
               </div>

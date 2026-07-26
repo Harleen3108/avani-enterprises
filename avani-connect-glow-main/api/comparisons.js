@@ -205,7 +205,7 @@ const COMPARISONS = {
     rows: [
       { metric: 'Focused web design offering', avani: 'Web design is one of several services', competitor: 'Concentrated web and design focus', winner: 'competitor' },
       { metric: 'Custom software and AI in-house', avani: 'Yes', competitor: 'Ask them directly — we cannot verify', winner: 'avani' },
-      { metric: 'Offices you can visit', avani: 'Gurugram, Noida, Rohtak, Mumbai, Dubai', competitor: 'Ask them directly', winner: 'avani' },
+      { metric: 'An office you can visit', avani: 'Yes — our Gurugram head office', competitor: 'Ask them directly', winner: 'avani' },
       { metric: 'Performance marketing alongside the build', avani: 'In-house', competitor: 'Ask them directly', winner: 'avani' },
     ],
     verdict: 'We are deliberately cautious here: we do not have verified detail on Web Aspiration\'s current offering, so compare us on what we state about ourselves and ask them the same questions.',
@@ -242,7 +242,7 @@ const COMPARISONS = {
       { metric: 'Marketing-led agency model', avani: 'Engineering plus marketing', competitor: 'Marketing-focused', winner: 'competitor' },
       { metric: 'In-house development', avani: 'Yes', competitor: 'Ask them directly', winner: 'avani' },
       { metric: 'AI services', avani: 'Chatbots, voice agents, agentic AI, AI video and content', competitor: 'Ask them directly', winner: 'avani' },
-      { metric: 'Offices you can visit', avani: 'Gurugram, Noida, Rohtak, Mumbai, Dubai', competitor: 'Ask them directly', winner: 'avani' },
+      { metric: 'An office you can visit', avani: 'Yes — our Gurugram head office', competitor: 'Ask them directly', winner: 'avani' },
     ],
     verdict: 'We cannot verify Leo Digitals\' current offering in enough detail to compare fairly. Judge us on what we state about ourselves and put the same questions to them.',
     lowConfidence: true,

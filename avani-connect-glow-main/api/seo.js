@@ -10,12 +10,24 @@ import { ssrContent } from './ssrContent.js';
 import { NAP, officeFor, formatAddress, mapLinkUrl, localBusinessSchema } from './offices.js';
 import { comparisonFor } from './comparisons.js';
 import { GUIDES } from './guides.js';
+import { blogContent } from './blogContent.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const SITE_URL    = "https://www.avanienterprises.in";
-const BACKEND_URL = "https://avani-enterprises-backend-1.onrender.com";
+
+// This pointed at avani-enterprises-backend-1.onrender.com, which returns 503 —
+// the frontend (src/lib/api.ts) uses avani-enterprises.onrender.com, which is
+// live. Every server-rendered request was therefore making a doomed round trip
+// and silently falling back, so CMS-managed SEO overrides never applied.
+const BACKEND_URL = process.env.BACKEND_URL || "https://avani-enterprises.onrender.com";
+
+// Short by design. The page already has complete local meta and content, so the
+// backend is an override, not a dependency. An 8s timeout meant one slow
+// backend response could add 8 seconds to TTFB for Googlebot; failing fast and
+// using local data is strictly better.
+const SEO_FETCH_TIMEOUT_MS = Number(process.env.SEO_FETCH_TIMEOUT_MS || 1500);
 
 // Noindex rules (doorway clones + utility routes) live in src/data/noindexPages.js
 // so the sitemap generator and this function can never disagree about what is
@@ -821,9 +833,25 @@ const LOCATIONS_LABEL = {
  * LocalBusiness. The React app emits equivalents, but Googlebot's first pass is
  * pre-JavaScript, so anything only rendered client-side is a second-pass signal.
  */
-function schemaHtml(pagePath, canonical, title, resolved, guide, faqs) {
+function schemaHtml(pagePath, canonical, title, resolved, guide, faqs, post) {
   const graphs = [];
   const slug = String(pagePath || '/').replace(/^\/+/, '').replace(/\/+$/, '');
+
+  // BlogPosting for blog posts — dated, authored editorial content.
+  if (post) {
+    graphs.push({
+      '@context': 'https://schema.org',
+      '@type': 'BlogPosting',
+      headline: post.title,
+      description: post.excerpt || undefined,
+      datePublished: post.publishedAt || undefined,
+      dateModified: post.updatedAt || post.publishedAt || undefined,
+      author: { '@type': 'Organization', name: NAP.name, url: SITE_URL },
+      publisher: { '@type': 'Organization', '@id': `${SITE_URL}/#organization` },
+      mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+      image: post.featuredImage || undefined,
+    });
+  }
 
   // Article — guides only. Signals authored, dated editorial content, which is
   // what both Google and AI answer engines look for on informational queries.
@@ -846,6 +874,8 @@ function schemaHtml(pagePath, canonical, title, resolved, guide, faqs) {
     const crumbs = [{ name: 'Home', url: SITE_URL }];
     if (guide) {
       crumbs.push({ name: 'Guides', url: `${SITE_URL}/guides` });
+    } else if (post) {
+      crumbs.push({ name: 'Blog', url: `${SITE_URL}/blog` });
     } else if (resolved && resolved.service) {
       crumbs.push({ name: 'Services', url: `${SITE_URL}/services` });
     }
@@ -917,6 +947,81 @@ function faqHtml(faqs) {
   );
 }
 
+/**
+ * Blog post body from the build-time snapshot.
+ *
+ * 52 published posts averaging ~1,300 words were completely invisible to search
+ * engines because /blog/:slug fetched them in the browser. They are snapshotted
+ * at build (scripts/snapshot-blog.cjs) and rendered here.
+ *
+ * Content is already sanitised at snapshot time — script, style, iframe and
+ * event-handler attributes are stripped — so it is safe to emit as markup,
+ * which preserves the headings and links that carry the SEO value.
+ */
+// Blog slugs are mixed-case and some contain spaces ("The SEO Playbook"), while
+// path handling lowercases and the URL may arrive percent-encoded. This index
+// resolves all four combinations back to the real key.
+const BLOG_INDEX = Object.keys(blogContent).reduce((acc, k) => {
+  acc[k.toLowerCase()] = k;
+  return acc;
+}, {});
+
+/** Resolve a URL path segment to a real blog key, or null. */
+function resolveBlogSlug(raw) {
+  if (!raw) return null;
+  if (blogContent[raw]) return raw;
+  const lower = String(raw).toLowerCase();
+  if (BLOG_INDEX[lower]) return BLOG_INDEX[lower];
+  try {
+    const decoded = decodeURIComponent(raw);
+    if (blogContent[decoded]) return decoded;
+    const decodedLower = decoded.toLowerCase();
+    if (BLOG_INDEX[decodedLower]) return BLOG_INDEX[decodedLower];
+  } catch { /* malformed escape sequence */ }
+  return null;
+}
+
+function buildBlogHtml(slug, post) {
+  const parts = [
+    '<nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/blog">Blog</a> / ' +
+      `<span>${esc(post.title)}</span></nav>`,
+    `<header><h1>${esc(post.title)}</h1>`,
+    post.excerpt ? `<p>${esc(post.excerpt)}</p>` : '',
+    `<p>By ${esc(post.author)}${post.publishedAt ? ` · ${esc(String(post.publishedAt).slice(0, 10))}` : ''}</p>`,
+    '</header>',
+    '<main>',
+    post.content || '',
+    '</main>',
+    '<footer><nav aria-label="Related"><ul>' +
+      '<li><a href="/blog">All posts</a></li>' +
+      '<li><a href="/guides">Guides</a></li>' +
+      '<li><a href="/services">All Services</a></li>' +
+      '<li><a href="/contact">Contact</a></li>' +
+      '</ul></nav></footer>',
+  ];
+  return { html: parts.filter(Boolean).join(''), faqs: [], resolved: null, post: Object.assign({ slug }, post) };
+}
+
+/** The blog index, listing every snapshotted post so each gets a crawlable link. */
+function buildBlogIndexHtml() {
+  const entries = Object.entries(blogContent);
+  const parts = [
+    '<nav aria-label="Breadcrumb"><a href="/">Home</a> / <span>Blog</span></nav>',
+    '<header><h1>Blog</h1><p>Writing on web development, SEO, paid media, AI and running a digital business.</p></header><main><ul>',
+  ];
+  entries
+    .sort((a, b) => String(b[1].publishedAt || '').localeCompare(String(a[1].publishedAt || '')))
+    .forEach(([slug, p]) => {
+      parts.push(
+        `<li><h2><a href="/blog/${esc(slug)}">${esc(p.title)}</a></h2>` +
+        (p.excerpt ? `<p>${esc(p.excerpt)}</p>` : '') + '</li>'
+      );
+    });
+  parts.push('</ul></main>');
+  parts.push('<footer><nav><ul><li><a href="/guides">Guides</a></li><li><a href="/services">All Services</a></li><li><a href="/contact">Contact</a></li></ul></nav></footer>');
+  return { html: parts.join(''), faqs: [], resolved: null };
+}
+
 /** Strip the **bold** markers the guide copy uses, for plain-HTML output. */
 function inlineHtml(text) {
   return esc(text).replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
@@ -975,6 +1080,7 @@ function buildGuideHtml(slug, g) {
 function buildGuidesIndexHtml() {
   const entries = Object.entries(GUIDES);
   const parts = [
+    '<nav aria-label="Breadcrumb"><a href="/">Home</a> / <span>Guides</span></nav>',
     '<header><h1>Guides</h1><p>Practical guides on web development cost, choosing an SEO agency, ' +
     'Google versus Meta ads, AI chatbots and voice agents, CRM build-or-buy, and why Google refuses ' +
     'to index pages.</p></header><main><ul>',
@@ -1001,7 +1107,7 @@ function buildGuidesIndexHtml() {
  *
  * Returns null only for "/", which keeps its own hand-written fallback.
  */
-function buildUniqueBodyHtml(pagePath, title, description) {
+function buildUniqueBodyHtml(pagePath, title, description, runtimePost) {
   const slug = String(pagePath || '/').toLowerCase().replace(/^\/+/, '').replace(/\/+$/, '');
   if (!slug) return null; // homepage keeps its own fallback copy
 
@@ -1016,6 +1122,17 @@ function buildUniqueBodyHtml(pagePath, title, description) {
   }
   if (slug === 'guides') {
     return buildGuidesIndexHtml();
+  }
+
+  // ── Blog ──────────────────────────────────────────────────────────────────
+  const blogSlug = slug.startsWith('blog/') ? resolveBlogSlug(slug.slice(5)) : null;
+  if (blogSlug && (blogContent[blogSlug] || runtimePost)) {
+    // Snapshot first (instant, no backend dependency); runtimePost only exists
+    // for posts published since the last deploy.
+    return buildBlogHtml(blogSlug, blogContent[blogSlug] || runtimePost);
+  }
+  if (slug === 'blog') {
+    return buildBlogIndexHtml();
   }
 
   const stored = ssrContent[slug] || STATIC_PAGES[slug] || null;
@@ -1144,24 +1261,44 @@ function buildUniqueBodyHtml(pagePath, title, description) {
     parts.push('</section>');
   }
 
-  // Visible NAP + areas served on office-city pages. Google matches the address
-  // in the HTML against the Google Business Profile — JSON-LD alone is weaker.
+  // Location section. Two distinct shapes, and the difference matters:
+  //
+  //   confirmed office  → visible NAP, opening hours and a directions link, so
+  //                       Google can match the address to the Business Profile.
+  //   sell-only market  → coverage copy ONLY. No address, no opening hours, no
+  //                       directions link and no map. Anything that implies a
+  //                       physical presence we do not have risks a GBP
+  //                       suspension, which is far worse than ranking lower.
   const office = resolved && resolved.location ? officeFor(resolved.location.key) : null;
   if (office) {
-    const addr = formatAddress(office);
-    parts.push(`<section><h2>${esc(NAP.name)} in ${esc(office.city)}</h2>`);
+    const confirmed = !!office.confirmed;
+    const addr = confirmed ? formatAddress(office) : null;
+
+    parts.push(
+      confirmed
+        ? `<section><h2>${esc(NAP.name)} in ${esc(office.city)}</h2>`
+        : `<section><h2>Serving ${esc(office.city)}</h2>`
+    );
     parts.push(`<p>${esc(office.localNote)}</p>`);
-    if (addr) {
+
+    if (confirmed && addr) {
       parts.push(
         `<address>${esc(NAP.name)}, ${esc(addr)}. ` +
         `Phone: <a href="tel:${esc(NAP.phone)}">${esc(NAP.phoneDisplay)}</a>. ` +
         `Email: <a href="mailto:${esc(NAP.email)}">${esc(NAP.email)}</a>.</address>`
       );
+      parts.push(`<p>Open Monday to Saturday, 9:00 am to 7:00 pm IST. <a href="${esc(mapLinkUrl(office))}">Get directions</a>.</p>`);
+    } else {
+      // Contact details without an address — true for a remote-served market.
+      parts.push(
+        `<p>Talk to us on <a href="tel:${esc(NAP.phone)}">${esc(NAP.phoneDisplay)}</a> ` +
+        `or <a href="mailto:${esc(NAP.email)}">${esc(NAP.email)}</a>.</p>`
+      );
     }
+
     if (office.areasServed && office.areasServed.length) {
-      parts.push(`<p>Areas we cover from ${esc(office.city)}: ${esc(office.areasServed.join(', '))}.</p>`);
+      parts.push(`<p>Areas we cover in ${esc(office.city)}: ${esc(office.areasServed.join(', '))}.</p>`);
     }
-    parts.push(`<p>Open Monday to Saturday, 9:00 am to 7:00 pm IST. <a href="${esc(mapLinkUrl(office))}">Get directions</a>.</p>`);
     parts.push('</section>');
   }
 
@@ -1182,7 +1319,7 @@ export default async function handler(req, res) {
     // ── 1. Fetch SEO from backend ───────────────────────────────────────────
     let seo = null;
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 8000);
+    const timeoutId = setTimeout(() => controller.abort(), SEO_FETCH_TIMEOUT_MS);
 
     try {
       const fetchUrl = `${BACKEND_URL}/seo?page=${encodeURIComponent(normalizedPath)}`;
@@ -1257,8 +1394,19 @@ export default async function handler(req, res) {
           }
         : null;
 
-    const title       = seo?.title            || guideSeo?.title       || fallbackSeo?.title       || registrySeo?.title       || "Avani Enterprises : No.1 Digital Marketing Agency in India";
-    const description = seo?.metaDescription  || guideSeo?.description || fallbackSeo?.description || registrySeo?.description || derivedDescription || "No.1 Digital Marketing Agency in India, we deliver result-driven SEO, PPC, social media, and branding solutions.";
+    // Blog posts carry their own meta from the snapshot.
+    const rawBlogSlug = cleanSlug.startsWith('blog/') ? cleanSlug.slice(5) : null;
+    const decodedBlogSlug = resolveBlogSlug(rawBlogSlug) || rawBlogSlug;
+    const blogEntry = decodedBlogSlug ? blogContent[decodedBlogSlug] : null;
+    const blogSeo = blogEntry
+      ? {
+          title: `${blogEntry.title} | Avani Enterprises`,
+          description: blogEntry.excerpt || String(blogEntry.content || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 155),
+        }
+      : null;
+
+    const title       = seo?.title            || guideSeo?.title       || blogSeo?.title       || fallbackSeo?.title       || registrySeo?.title       || "Avani Enterprises : No.1 Digital Marketing Agency in India";
+    const description = seo?.metaDescription  || guideSeo?.description || blogSeo?.description || fallbackSeo?.description || registrySeo?.description || derivedDescription || "No.1 Digital Marketing Agency in India, we deliver result-driven SEO, PPC, social media, and branding solutions.";
     const canonical   = seo?.canonicalUrl     || buildCanonical(normalizedPath);
     // "noindex,follow" — not nofollow. De-indexed doorway pages should still pass
     // link equity through to the pages we keep.
@@ -1303,7 +1451,44 @@ export default async function handler(req, res) {
     // ── 4a. Per-route body content (the fix for "Crawled – not indexed") ────
     // Replace the shell's shared homepage block with this page's real content so
     // Googlebot's first pass sees unique HTML rather than the same 455 copies.
-    const built = buildUniqueBodyHtml(normalizedPath, title, description);
+    // Runtime fallback for a blog post published since the last deploy. Only
+    // fires when the slug is genuinely missing from the snapshot, so the
+    // common case never pays for a backend round trip.
+    let runtimePost = null;
+    const maybeBlogSlug = decodedBlogSlug;
+    if (maybeBlogSlug && !blogContent[maybeBlogSlug]) {
+      try {
+        const c = new AbortController();
+        const t = setTimeout(() => c.abort(), SEO_FETCH_TIMEOUT_MS);
+        const r = await fetch(`${BACKEND_URL}/blogs/${encodeURIComponent(maybeBlogSlug)}`, { signal: c.signal });
+        clearTimeout(t);
+        if (r.ok) {
+          const j = await r.json();
+          const p = j && j.data;
+          if (p && p.isPublished) {
+            runtimePost = {
+              title: p.title || '',
+              excerpt: p.excerpt || '',
+              // Same sanitisation as the build-time snapshot.
+              content: String(p.content || '')
+                .replace(/<script[\s\S]*?<\/script>/gi, '')
+                .replace(/<style[\s\S]*?<\/style>/gi, '')
+                .replace(/<iframe[\s\S]*?<\/iframe>/gi, '')
+                .replace(/\son\w+\s*=\s*"[^"]*"/gi, '')
+                .replace(/\son\w+\s*=\s*'[^']*'/gi, '')
+                .replace(/javascript:/gi, ''),
+              author: p.author || 'Avani Enterprises',
+              publishedAt: p.publishedAt || p.createdAt || '',
+              updatedAt: p.updatedAt || p.publishedAt || '',
+            };
+          }
+        }
+      } catch {
+        /* fall through — the SPA still renders it client-side */
+      }
+    }
+
+    const built = buildUniqueBodyHtml(normalizedPath, title, description, runtimePost);
     if (built) {
       const start = html.indexOf(SSR_START);
       const end = html.indexOf(SSR_END);
@@ -1317,7 +1502,7 @@ export default async function handler(req, res) {
       }
 
       // Per-route JSON-LD in the head, describing what the body above actually says.
-      const ld = schemaHtml(normalizedPath, canonical, title, built.resolved, built.guide || null, built.faqs);
+      const ld = schemaHtml(normalizedPath, canonical, title, built.resolved, built.guide || null, built.faqs, built.post || null);
       if (ld) html = html.replace(/<\/head>/i, `${ld}</head>`);
     }
 

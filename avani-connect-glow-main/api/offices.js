@@ -20,16 +20,26 @@
  * third-party citations, and conflicting addresses suppress local rankings. One
  * file now owns this, and everything else reads from it.
  *
- * ⚠️ CLIENT ACTION REQUIRED — see SEO-RECOVERY.md §4
- *   • Confirm which Gurugram address and PIN code is correct. We have used the
- *     Footer version (most recently committed, and the one with a live Maps
- *     link). If it is wrong, fix it HERE and everywhere updates.
- *   • Supply real street addresses for Noida, Rohtak, Mumbai and Dubai. Until
- *     then those offices deliberately emit NO LocalBusiness schema and NO map —
- *     publishing an address we cannot verify would be worse than publishing none.
+ * THE `confirmed` FLAG — READ BEFORE CHANGING
+ * -------------------------------------------
+ * Claiming a location you do not physically staff is how Google Business
+ * Profiles get suspended, and a suspension is far harder to undo than it is to
+ * avoid. So this file distinguishes two things:
  *
- * `schemaReady` gates schema + map emission. It is true only when we hold a
- * verifiable street address. Do not set it true to "fill in the gap".
+ *   confirmed: true   A real, staffed premises. Gets a visible address, a map,
+ *                     LocalBusiness schema, and GBP-oriented copy.
+ *   confirmed: false  A market we sell into and deliver to remotely. Gets
+ *                     organic "serving {city}" copy ONLY — no address, no map,
+ *                     no LocalBusiness schema, and no prose claiming an office.
+ *
+ * Only Gurugram is currently `confirmed`, because it is the only location whose
+ * address the client has verified. Everything else is sell-only until confirmed
+ * in writing. Do NOT flip `confirmed` to true to make a page look stronger —
+ * the page ranking slightly better is not worth a GBP suspension.
+ *
+ * Note the `candidateAddress` field: an address found elsewhere in the codebase
+ * that MIGHT be real but has not been confirmed. It is never rendered. It exists
+ * so the client can confirm or reject it rather than us guessing.
  */
 
 /* DATA-START */
@@ -60,6 +70,10 @@ const OFFICES = {
     city: 'Gurugram',
     label: 'Gurugram (Head Office)',
     isHQ: true,
+    // ⚠️ Address itself still needs client confirmation — three conflicting
+    // versions existed. This is the Footer version. Confirmed = "we agree a real
+    // office exists here"; the street line may still change.
+    confirmed: true,
     schemaReady: true,
     address: {
       street: '3rd Floor, Tower-B, Cyber Park, Durga Colony, Sector 39',
@@ -75,55 +89,88 @@ const OFFICES = {
       'Our head office is on the Sector 39 Cyber Park side of Gurugram, a short drive from Cyber City and the Golf Course Road corridor, so client workshops and review sessions happen in person rather than over video.',
   },
 
-  // ── Offices confirmed by the client but with no verified street address yet ──
-  // schemaReady: false → no LocalBusiness schema, no map, no fabricated address.
+  // ── SELL-ONLY MARKETS ─────────────────────────────────────────────────────
+  // We sell into and deliver to these. We do NOT claim a physical office in any
+  // of them until the client confirms a real, staffed premises in writing.
+  // localNote copy below therefore describes delivery, never a location.
   noida: {
     key: 'noida',
     city: 'Noida',
     label: 'Noida',
+    confirmed: false,
     schemaReady: false,
     address: null,
     areasServed: ['Sector 62', 'Sector 63', 'Sector 16A Film City', 'Sector 125–132 expressway corridor'],
     localNote:
-      'Our Noida office covers the Sector 62–63 IT belt, Film City and the expressway corridor, so meetings do not require a trip across to Gurugram.',
+      'We work with clients across the Sector 62–63 IT belt, Film City and the expressway corridor. Delivery is from our Gurugram head office, roughly an hour away, so on-site meetings are practical when a project needs them.',
   },
   rohtak: {
     key: 'rohtak',
     city: 'Rohtak',
     label: 'Rohtak',
+    confirmed: false,
     schemaReady: false,
     address: null,
+    // Found in GlobalPresenceComponent.tsx, GlobalPresenceSection.tsx and
+    // home2/data.ts as "our founding office". NOT rendered anywhere until the
+    // client confirms it is a real, currently-staffed premises.
+    candidateAddress: '106, First Floor, Agro Mall, Rohtak, Haryana',
     areasServed: ['IMT Rohtak', 'Delhi Road commercial belt', 'Model Town', 'Sector 14 institutional area'],
     localNote:
-      'Having an office in Rohtak is unusual for a digital agency — most serve Haryana remotely from Delhi or Gurugram. It means local institutes, hospitals and IMT manufacturers get face-to-face project reviews.',
+      'We work with institutes, hospitals, IMT manufacturers and retailers across Rohtak. Delivery runs from our Gurugram head office, which is close enough that on-site sessions are straightforward.',
   },
   mumbai: {
     key: 'mumbai',
     city: 'Mumbai',
     label: 'Mumbai',
+    confirmed: false,
     schemaReady: false,
     address: null,
     areasServed: ['Bandra Kurla Complex (BKC)', 'Lower Parel', 'Andheri East (MIDC and SEEPZ)', 'Powai'],
     localNote:
-      'Our Mumbai office covers the BFSI and media corridor — BKC, Lower Parel and Andheri East — with the delivery team on IST alongside you.',
+      'We work with BFSI, media and D2C clients across BKC, Lower Parel and Andheri East. Delivery is remote from our Gurugram head office, on IST alongside you, with travel for kickoff on larger engagements.',
   },
   dubai: {
     key: 'dubai',
     city: 'Dubai',
     label: 'Dubai',
+    confirmed: false,
     schemaReady: false,
     international: true,
     currency: 'AED',
     address: null,
     areasServed: ['Business Bay', 'DMCC and Jumeirah Lakes Towers', 'Dubai Internet City', 'Deira'],
     localNote:
-      'Our Dubai office covers the UAE, backed by the India delivery team. Dubai runs 1.5 hours behind IST, so the working day overlaps almost entirely.',
+      'We work with real estate, trading, hospitality and logistics businesses across the Emirates. Delivery is from our India team — Dubai runs 1.5 hours behind IST, so the working day overlaps almost entirely, and we invoice in AED.',
   },
 };
 
 /** Offices we can legitimately publish an address and map for. */
 function publishableOffices() {
-  return Object.values(OFFICES).filter((o) => o.schemaReady && o.address);
+  return Object.values(OFFICES).filter((o) => o.confirmed && o.schemaReady && o.address);
+}
+
+/** Confirmed, staffed premises — the only ones that may claim a location. */
+function confirmedOffices() {
+  return Object.values(OFFICES).filter((o) => o.confirmed);
+}
+
+/** True when we may make any "we have an office here" claim about this key. */
+function hasConfirmedOffice(locationKey) {
+  const o = officeFor(locationKey);
+  return !!(o && o.confirmed);
+}
+
+/**
+ * Human-readable list of confirmed office cities, for copy that would otherwise
+ * hardcode "Gurugram, Noida, Rohtak, Mumbai and Dubai". Derived, so it shrinks
+ * or grows automatically as offices are confirmed.
+ */
+function confirmedOfficeCities() {
+  const cities = confirmedOffices().map((o) => o.city);
+  if (cities.length === 0) return '';
+  if (cities.length === 1) return cities[0];
+  return cities.slice(0, -1).join(', ') + ' and ' + cities[cities.length - 1];
 }
 
 /** Look up an office by location key, following the gurugram/gurgaon alias. */
@@ -163,7 +210,9 @@ function formatAddress(office) {
  * address — incomplete or invented LocalBusiness markup is worse than none.
  */
 function localBusinessSchema(office, pageUrl) {
-  if (!office || !office.schemaReady || !office.address) return null;
+  // Three gates, all required. An unconfirmed location must never emit
+  // LocalBusiness markup — that is what triggers GBP suspensions.
+  if (!office || !office.confirmed || !office.schemaReady || !office.address) return null;
   const a = office.address;
   return {
     '@context': 'https://schema.org',
@@ -206,6 +255,9 @@ export {
   OFFICES,
   officeFor,
   publishableOffices,
+  confirmedOffices,
+  confirmedOfficeCities,
+  hasConfirmedOffice,
   mapEmbedUrl,
   mapLinkUrl,
   formatAddress,

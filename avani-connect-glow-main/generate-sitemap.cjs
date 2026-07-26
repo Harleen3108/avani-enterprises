@@ -45,6 +45,50 @@ function loadNoindex() {
 
 const NOINDEX = loadNoindex();
 
+// ── Office-claim consistency guard ───────────────────────────────────────────
+// offices.js owns which locations are confirmed, staffed premises. serviceContent.js
+// duplicates the city list because it must stay import-free. If those two ever
+// disagree, the site would claim an office in a place offices.js says is
+// sell-only — the exact thing that gets a Google Business Profile suspended.
+// So the build fails rather than shipping the inconsistency.
+(function assertOfficeClaimsAgree() {
+  const officesPath = path.join(__dirname, "src", "data", "offices.js");
+  const contentPath = path.join(__dirname, "src", "data", "serviceContent.js");
+  if (!fs.existsSync(officesPath) || !fs.existsSync(contentPath)) return;
+
+  const officesSrc = fs.readFileSync(officesPath, "utf8");
+  // Each office block: capture the key, its city, and whether confirmed is true.
+  const confirmed = [];
+  const blockRe = /\n {2}'?([a-z-]+)'?:\s*\{([\s\S]*?)\n {2}\},/g;
+  let m;
+  while ((m = blockRe.exec(officesSrc)) !== null) {
+    const body = m[2];
+    if (/confirmed:\s*true/.test(body)) {
+      const city = (body.match(/city:\s*'([^']+)'/) || [])[1];
+      if (city) confirmed.push(city);
+    }
+  }
+
+  const declared = (fs.readFileSync(contentPath, "utf8")
+    .match(/const\s+CONFIRMED_OFFICE_CITIES\s*=\s*'([^']*)'/) || [])[1];
+
+  const expected = confirmed.length <= 1
+    ? confirmed.join("")
+    : confirmed.slice(0, -1).join(", ") + " and " + confirmed[confirmed.length - 1];
+
+  if (declared !== expected) {
+    console.error(
+      `\n❌ Office claim mismatch.\n` +
+      `   offices.js confirmed premises : "${expected}"\n` +
+      `   serviceContent.js declares    : "${declared}"\n` +
+      `   Update CONFIRMED_OFFICE_CITIES in src/data/serviceContent.js to match.\n` +
+      `   Never claim an office in a location offices.js marks confirmed:false.\n`
+    );
+    process.exit(1);
+  }
+  console.log(`✅ Office claims consistent (confirmed premises: ${expected || "none"})`);
+})();
+
 // ── Consolidated duplicates ──────────────────────────────────────────────────
 // URLs whose canonical points at a different page (CANONICAL_MAP in
 // serviceContent.js). A sitemap should list canonical URLs only — including a
@@ -369,6 +413,54 @@ if (fs.existsSync(newSeoDataPath)) {
   console.warn("⚠️ newSeoPagesData.json not found, skipping dynamic SEO paths in sitemap.");
 }
 
+// ── Blog posts ───────────────────────────────────────────────────────────────
+// Individual posts were never in the sitemap — only /blog was. Read the slugs
+// from the snapshot written by scripts/snapshot-blog.cjs, which runs first.
+(function addBlogPosts() {
+  const p = path.join(__dirname, "api", "blogContent.js");
+  if (!fs.existsSync(p)) {
+    console.warn("⚠️ api/blogContent.js missing — blog posts not added to sitemap.");
+    return;
+  }
+  try {
+    const m = fs.readFileSync(p, "utf8").match(/export const blogContent = ([\s\S]*);\s*$/);
+    const posts = JSON.parse(m[1]);
+    const slugs = Object.keys(posts);
+    if (!slugs.length) {
+      console.warn("⚠️ Blog snapshot is empty — no post URLs added to sitemap.");
+      return;
+    }
+    // 12 of the slugs contain spaces, commas, pipes, colons and question marks.
+    // Those are not valid in a URL and would produce a malformed sitemap that
+    // Google rejects, so every slug is percent-encoded. The content behind them
+    // is good (1,000–1,400 words), so encoding and indexing beats excluding —
+    // but the slugs should still be renamed in the CMS with 301s. See
+    // SEO-RECOVERY.md for the list.
+    const malformed = [];
+    slugs.forEach((s) => {
+      if (!/^[a-z0-9-]+$/.test(s)) malformed.push(s);
+      const lastmod = String(posts[s].updatedAt || posts[s].publishedAt || TODAY).slice(0, 10);
+      urls.push({
+        loc: `${BASE_URL}/blog/${encodeURIComponent(s)}`,
+        lastmod: /^\d{4}-\d{2}-\d{2}$/.test(lastmod) ? lastmod : TODAY,
+        changefreq: "monthly",
+        priority: "0.7",
+      });
+    });
+    console.log(`ℹ️ Added ${slugs.length} blog post(s) to the sitemap.`);
+    if (malformed.length) {
+      console.warn(
+        `⚠️ ${malformed.length} blog slug(s) contain characters invalid in a URL ` +
+        `(spaces, commas, pipes, colons). They are percent-encoded so the sitemap ` +
+        `is valid, but they should be renamed in the CMS with 301s:\n` +
+        malformed.map((s) => `     • ${s}`).join("\n")
+      );
+    }
+  } catch (err) {
+    console.warn(`⚠️ Could not read blog snapshot: ${err.message}`);
+  }
+})();
+
 // ── Guide cluster ────────────────────────────────────────────────────────────
 // Long-form guides live in src/data/guides.js (not the backend-backed blog,
 // which is client-fetched and therefore invisible on the first crawl).
@@ -599,7 +691,7 @@ console.log(`✅ sitemap-index.xml generated → ${sitemapIndexPath}`);
   const out = `# Avani Enterprises
 
 > Avani Enterprises is a digital agency headquartered in Gurugram, Haryana, India,
-> with further offices in Noida, Rohtak, Mumbai and Dubai. We build websites, mobile
+> delivering across India, the UAE, Singapore and the USA. We build websites, mobile
 > apps, e-commerce stores and custom business software (CRM, ERP, HRMS), run SEO,
 > Google Ads, Meta Ads and social media campaigns, and deliver AI systems including
 > chatbots, voice agents, agentic workflows, AI video and AI-assisted content.
@@ -608,7 +700,7 @@ console.log(`✅ sitemap-index.xml generated → ${sitemapIndexPath}`);
 
 - **Name:** Avani Enterprises
 - **Head office:** ${street}, ${locality}, ${region} ${pin}, India
-- **Other offices:** Noida, Rohtak, Mumbai (India) and Dubai (UAE)
+- **Other locations:** none. Every other market is served remotely from Gurugram.
 - **Phone:** ${phone}
 - **Email:** ${email}
 - **Website:** ${BASE_URL}
@@ -690,6 +782,8 @@ const GENERATED_HEADER =
   ["offices.js", "offices.js"],
   ["comparisons.js", "comparisons.js"],
   ["guides.js", "guides.js"],
+  // blogContent.js is written directly into api/ by scripts/snapshot-blog.cjs,
+  // so it is not synced from src/data/.
 ].forEach(([srcName, outName]) => {
   const from = path.join(__dirname, "src", "data", srcName);
   const to = path.join(__dirname, "api", outName);
@@ -722,6 +816,39 @@ function loadSeoLandingPages() {
     return {};
   }
 }
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Per-page JSON for the client bundle (Core Web Vitals)
+//
+// DynamicFlatSeoPage imported the whole 2 MB newSeoPagesData.json, so Vite
+// emitted a single 1.7 MB chunk that every one of the ~300 landing pages had to
+// download and parse before rendering. Splitting it per slug lets Vite code-split
+// so a page ships only its own few KB.
+//
+// Output is gitignored and regenerated by prebuild (and predev), so it never
+// goes stale and does not add 300 files to the repository.
+// ─────────────────────────────────────────────────────────────────────────────
+(function writePerPageJson() {
+  if (!fs.existsSync(newSeoDataPath)) return;
+  const outDir = path.join(__dirname, "src", "data", "seoPages");
+  try {
+    const parsed = JSON.parse(fs.readFileSync(newSeoDataPath, "utf8"));
+    fs.rmSync(outDir, { recursive: true, force: true });
+    fs.mkdirSync(outDir, { recursive: true });
+
+    let written = 0;
+    Object.keys(parsed).forEach((slug) => {
+      // business-os/hrms-software → business-os__hrms-software (flat filenames)
+      const file = slug.replace(/\//g, "__") + ".json";
+      fs.writeFileSync(path.join(outDir, file), JSON.stringify(parsed[slug]), "utf8");
+      written++;
+    });
+    console.log(`✅ src/data/seoPages/ — ${written} per-page JSON file(s) for client code-splitting`);
+  } catch (err) {
+    console.error("❌ Failed to write per-page JSON:", err.message);
+    process.exit(1);
+  }
+})();
 
 // Trimmed page content for server-side rendering: only the fields the crawler
 // needs. Keeps the function bundle small versus importing the full 2 MB JSON.
