@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { LayoutDashboard, LogOut, Menu, X, User, MessageSquare, Briefcase, FileText, BarChart3, Rocket, Sparkles, Link as LinkIcon } from "lucide-react";
+import { LayoutDashboard, LogOut, Menu, X, User, MessageSquare, Briefcase, FileText, BarChart3, ShieldCheck, Rocket, Sparkles, Link as LinkIcon } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import clsx from "clsx";
 
@@ -75,6 +75,12 @@ const Sidebar = () => {
                                 Every one of those routes still resolves if typed. */}
                             <NavItem to="/" icon={LayoutDashboard} label="All Leads" />
                             <NavItem to="/avani-forms" icon={MessageSquare} label="Contact Submissions" />
+                        </div>
+
+                        <div className="mb-4">
+                            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-4">Insights</p>
+                            <NavItem to="/site-analytics" icon={BarChart3} label="Site Analytics" />
+                            <NavItem to="/security" icon={ShieldCheck} label="Security & Access" />
                         </div>
 
                         <div className="mb-4">

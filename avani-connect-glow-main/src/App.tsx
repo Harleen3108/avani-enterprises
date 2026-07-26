@@ -104,6 +104,7 @@ import Footer from "./components/Footer";
 import Footer1 from "./components/Footer1";
 import ScrollToTop from "./components/ScrollToTop";
 import SeoHead from "./components/SeoHead";
+import AnalyticsTracker from "./components/AnalyticsTracker";
 import { captureAttribution } from "./lib/leadTracking";
 
 // Router hook for conditional rendering
@@ -801,6 +802,11 @@ const App = () => {
             <Router>
               <SeoProvider>
                 <ScrollToTop />
+                {/* First-party analytics. Must sit inside the Router because it
+                    reads useLocation(). Renders null, swallows every error, and
+                    sends nothing when an auth token is present so staff never
+                    appear in the visitor stats. */}
+                <AnalyticsTracker />
                 <AppLayout />
               </SeoProvider>
             </Router>

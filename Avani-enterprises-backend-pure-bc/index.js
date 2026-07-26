@@ -20,6 +20,9 @@ const Seo = require("./models/Seo");
 const Blog = require("./models/Blog");
 const Newsletter = require("./models/Newsletter");
 const GrowthPlanLead = require("./models/GrowthPlanLead");
+// Login lockout, audit logging and the geo/UA helpers used by /auth/login.
+const loginSecurity = require("./services/loginSecurity");
+const requestContext = require("./services/requestContext");
 require("dotenv").config();
 
 const app = express();
@@ -121,6 +124,11 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(express.json());
+// navigator.sendBeacon posts as text/plain, which express.json() ignores — the
+// analytics duration endpoint would receive an empty body without this.
+app.use(express.text({ type: ["text/plain", "application/csp-report"], limit: "16kb" }));
+// Render terminates TLS at its proxy, so req.ip is the proxy without this and
+// every visitor would geolocate to a datacentre.
 app.set("trust proxy", 1);
 
 // Serve uploaded files statically
@@ -367,18 +375,46 @@ app.post("/auth/login", async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const user = await User.findOne({ email });
-    if (!user)
-      return res.status(400).json({ message: "Invalid email or password" });
-
-    if (!user.isVerified)
-      return res.status(400).json({
-        message: "Account not verified. Please sign up again to verify.",
+    // ── Progressive lockout ─────────────────────────────────────────────────
+    // Keyed on email + hashed IP together, so an attacker hammering one account
+    // from elsewhere cannot lock the real admin out of their own location.
+    // 1st failure 2 min, then 5, 10, and 30 for every failure after that.
+    const lock = await loginSecurity.checkLock({
+      email,
+      ipHash: requestContext.hashIp(requestContext.clientIp(req)),
+    });
+    if (lock.locked) {
+      // Recorded so a sustained attack is visible in the log, but no email —
+      // otherwise an attacker could flood the inbox by holding down the button.
+      return res.status(429).json({
+        message: `Too many failed attempts. Try again in ${lock.minutesLeft} minute${lock.minutesLeft === 1 ? "" : "s"}.`,
+        lockedUntil: lock.until,
+        minutesLeft: lock.minutesLeft,
       });
+    }
+
+    // A failure returns the same message whichever check failed, so the
+    // response cannot be used to enumerate which emails exist.
+    const fail = async (reason) => {
+      const r = await loginSecurity.recordFailure({ email, reason, req });
+      return res.status(400).json({
+        message: "Invalid email or password",
+        attemptsBeforeLock: r.locked ? 0 : undefined,
+        lockedUntil: r.locked ? r.until : undefined,
+        minutesLeft: r.locked ? r.minutesLeft : undefined,
+      });
+    };
+
+    const user = await User.findOne({ email });
+    if (!user) return fail("no-user");
+    if (!user.isVerified) return fail("unverified");
 
     const validPass = await bcrypt.compare(password, user.password);
-    if (!validPass)
-      return res.status(400).json({ message: "Invalid email or password" });
+    if (!validPass) return fail("bad-password");
+
+    // Successful logins are logged with their location too, not just failures —
+    // an unexpected city on a SUCCESSFUL login is the signal that matters most.
+    await loginSecurity.recordSuccess({ email, req });
 
     const token = jwt.sign(
       { _id: user._id, role: user.role },
@@ -603,6 +639,18 @@ app.post("/submit-form", async (req, res) => {
       pagePath: pagePath || "",
       pageUrl: pageUrl || "",
       referrer: referrer || "",
+      // First-touch attribution from the visitor's entry page. Read straight off
+      // req.body rather than re-derived: only the browser knows which page the
+      // session actually started on.
+      landingPage: (req.body.landingPage || "").slice(0, 300),
+      utmSource: (req.body.utmSource || "").slice(0, 200),
+      utmMedium: (req.body.utmMedium || "").slice(0, 200),
+      utmCampaign: (req.body.utmCampaign || "").slice(0, 200),
+      utmTerm: (req.body.utmTerm || "").slice(0, 200),
+      utmContent: (req.body.utmContent || "").slice(0, 200),
+      gclid: (req.body.gclid || "").slice(0, 200),
+      fbclid: (req.body.fbclid || "").slice(0, 200),
+      visitorId: (req.body.visitorId || "").slice(0, 100),
       isSpam: looksLikeSpam({ name, email, company: cityState }),
     });
 
@@ -2343,6 +2391,20 @@ app.get(/.*/, async (req, res, next) => {
 // Link Management Routes
 const linkRoutes = require('./routes/links');
 app.use('/api/links', linkRoutes);
+
+// ── Admin security ─────────────────────────────────────────────────────────
+// Credential changes (each re-verifying the current password), the login audit
+// log with approximate location, and lock management.
+app.use('/admin/security', require('./routes/adminSecurity'));
+
+// ── First-party analytics ──────────────────────────────────────────────────
+// Ingest is public and unauthenticated by necessity — it is called by every
+// visitor's browser — so it treats all input as hostile and caps every field.
+// The dashboard sits behind authMiddleware inside its own router.
+// Both mount on /api/analytics; Express runs them in order, and their paths
+// do not overlap (track/duration/exclude vs dashboard).
+app.use('/api/analytics', require('./routes/analytics'));
+app.use('/api/analytics', require('./routes/analyticsDashboard'));
 
 // 2. Serve static files from the frontend build
 app.use(express.static(frontendPath));

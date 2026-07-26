@@ -22,6 +22,12 @@ const userSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
+    // Second admin secret, bcrypt-hashed like a password. Null until the user
+    // sets one; existing accounts have none.
+    adminCodeHash: {
+        type: String,
+        default: null,
+    },
     otp: String,
     otpExpires: Date,
     isVerified: {

@@ -210,7 +210,6 @@ const AvaniFormsPage = () => {
                 <th className="px-6 py-3.5">Notes</th>
                 <th className="px-6 py-3.5">Date</th>
                 <th className="px-6 py-3.5">Action</th>
-                <th className="px-6 py-3.5"></th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100 text-sm">
@@ -311,30 +310,35 @@ const AvaniFormsPage = () => {
                           })}
                         </div>
                       </td>
+                      {/* View and Delete share one cell. Delete used to live in
+                          a trailing column with a blank header, which pushed it
+                          off the right edge of the table on normal screens —
+                          the feature was there but effectively invisible. */}
                       <td className="px-6 py-4">
-                        <button
-                          onClick={() => openModal(form)}
-                          className="inline-flex items-center px-3 py-1.5 bg-indigo-50 text-indigo-600 text-xs font-medium rounded-lg hover:bg-indigo-100 transition-colors"
-                        >
-                          <Eye className="w-4 h-4 mr-1" />
-                          View
-                        </button>
-                      </td>
-                      <td className="px-6 py-4">
-                        <button
-                          onClick={() => handleDeleteForm(form._id)}
-                          className="p-1.5 rounded-lg hover:bg-red-50 text-red-600 transition-colors"
-                          title="Delete"
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </button>
+                        <div className="flex items-center gap-2">
+                          <button
+                            onClick={() => openModal(form)}
+                            className="inline-flex items-center px-3 py-1.5 bg-indigo-50 text-indigo-600 text-xs font-medium rounded-lg hover:bg-indigo-100 transition-colors"
+                          >
+                            <Eye className="w-4 h-4 mr-1" />
+                            View
+                          </button>
+                          <button
+                            onClick={() => handleDeleteForm(form._id)}
+                            className="inline-flex items-center px-3 py-1.5 bg-red-50 text-red-600 text-xs font-medium rounded-lg hover:bg-red-100 transition-colors"
+                            title="Delete this submission"
+                          >
+                            <Trash2 className="w-4 h-4 mr-1" />
+                            Delete
+                          </button>
+                        </div>
                       </td>
                     </tr>
 
                     {/* Expanded Notes Panel */}
                     {expandedRow === form._id && (
                       <tr>
-                        <td colSpan={8} className="px-0">
+                        <td colSpan={7} className="px-0">
                           <div className="bg-indigo-50/30 p-4 border-b border-indigo-100 shadow-inner animate-in slide-in-from-top-2 duration-200">
                             <div className="max-w-3xl mx-auto">
                               <div className="flex justify-between items-center mb-3">

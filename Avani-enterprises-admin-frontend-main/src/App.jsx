@@ -5,6 +5,8 @@ import Signup from "./pages/Signup";
 import ForgotPassword from "./pages/ForgotPassword";
 import Dashboard from "./pages/Dashboard";
 import AllLeads from "./pages/AllLeads";
+import SiteAnalytics from "./pages/SiteAnalytics";
+import SecurityLog from "./pages/SecurityLog";
 import ContactedLeads from "./pages/ContactedLeads";
 import AnalyticsDashboard from "./pages/AnalyticsDashboard";
 import AvaniFormDetail from "./pages/AvaniFormDetail";
@@ -107,6 +109,9 @@ function App() {
             <Route path="legacy-dashboard" element={<Dashboard />} />
             <Route path="contacted-leads" element={<ContactedLeads />} />
             <Route path="analytics" element={<AnalyticsDashboard />} />
+            {/* First-party site analytics and the admin security log. */}
+            <Route path="site-analytics" element={<SiteAnalytics />} />
+            <Route path="security" element={<SecurityLog />} />
             <Route path="growth-plan-leads" element={<GrowthPlanLeads />} />
             <Route path="avani-forms/:id" element={<AvaniFormDetail />} />
             <Route path="avani-forms" element={<AvaniFormsPage />} />

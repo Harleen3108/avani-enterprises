@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { Send, Check, Loader2, ChevronDown } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { trackLead } from "@/lib/leadTracking";
+import { trackLead, leadAttributionFields } from "@/lib/leadTracking";
 import { getBackendUrl } from "@/lib/api";
 import { countryCodes } from "@/components/RegistrationForm";
 
@@ -111,6 +111,10 @@ export default function BusinessSetup3Form({ source = "lead_form" }: { source?: 
           pagePath: pathname,
           pageUrl: typeof window !== "undefined" ? window.location.href : "",
           referrer: typeof document !== "undefined" ? document.referrer : "",
+          // First-touch attribution captured on the ENTRY page of this session.
+          // The converting page is rarely the page that earned the lead, so
+          // without landingPage the content that did the work gets no credit.
+          ...leadAttributionFields(),
         }),
       });
       const result = await res.json();

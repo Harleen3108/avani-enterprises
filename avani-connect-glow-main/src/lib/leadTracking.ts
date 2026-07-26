@@ -25,6 +25,8 @@
  *   this module needs no change.
  */
 
+import { getAttribution as getAnalyticsAttribution, getVisitorId } from './analytics';
+
 const STORAGE_KEY = 'avani_attrib_v1';
 
 type Attribution = {
@@ -87,6 +89,37 @@ export function captureAttribution(): void {
     store.setItem(STORAGE_KEY, JSON.stringify(attribution));
   } catch {
     /* storage full or blocked — tracking is best-effort, never blocking */
+  }
+}
+
+/**
+ * Attribution flattened into the field names the backend Form model stores, so
+ * a lead payload can spread it directly.
+ *
+ * Deliberately delegates to lib/analytics rather than reading this module's own
+ * store. Both modules capture first-touch campaign data, and two sources feeding
+ * the same database columns is how attribution quietly splits: the analytics
+ * version re-caps every field on read and treats sessionStorage as untrusted,
+ * so it is the one that reaches the backend. This module's own store continues
+ * to feed the GA4 `generate_lead` event, where the field names differ anyway.
+ */
+export function leadAttributionFields(): Record<string, string> {
+  try {
+    const a = getAnalyticsAttribution();
+    return {
+      landingPage: a.landingPage || '',
+      utmSource: a.utmSource || '',
+      utmMedium: a.utmMedium || '',
+      utmCampaign: a.utmCampaign || '',
+      utmTerm: a.utmTerm || '',
+      utmContent: a.utmContent || '',
+      gclid: a.gclid || '',
+      fbclid: a.fbclid || '',
+      visitorId: getVisitorId(),
+    };
+  } catch {
+    // Attribution is a nice-to-have; a lead must submit regardless.
+    return {};
   }
 }
 

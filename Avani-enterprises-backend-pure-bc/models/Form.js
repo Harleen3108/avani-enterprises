@@ -163,6 +163,21 @@ const formSchema = new mongoose.Schema(
     pagePath: { type: String, default: "", trim: true },
     pageUrl: { type: String, default: "", trim: true },
     referrer: { type: String, default: "", trim: true },
+
+    // First-touch attribution, captured on the visitor's ENTRY page and carried
+    // through the session. Without landingPage, a visitor who arrives on a guide
+    // and converts on a service page is credited entirely to the service page,
+    // and the content that actually earned the lead looks worthless.
+    landingPage: { type: String, default: "", trim: true },
+    utmSource: { type: String, default: "", trim: true },
+    utmMedium: { type: String, default: "", trim: true },
+    utmCampaign: { type: String, default: "", trim: true },
+    utmTerm: { type: String, default: "", trim: true },
+    utmContent: { type: String, default: "", trim: true },
+    gclid: { type: String, default: "", trim: true },
+    fbclid: { type: String, default: "", trim: true },
+    // Links a lead back to its pageview trail in SiteVisit.
+    visitorId: { type: String, default: "", trim: true, index: true },
     // Set by looksLikeSpam() in index.js. Flagged, never rejected — a false
     // positive should cost you a click, not a customer.
     isSpam: { type: Boolean, default: false },
