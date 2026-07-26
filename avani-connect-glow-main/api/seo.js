@@ -1270,7 +1270,7 @@ function buildBlogHtml(slug, post) {
     // identical semantic markup — headings, lists and tables rather than a wall
     // of text. The prose styles ship inline so the SSR HTML is styled on its own.
     `<style>${PROSE_CSS}</style>`,
-    `<div class="prose">${formatBlogBody(post.content, {
+    `<div class="avani-article">${formatBlogBody(post.content, {
       title: post.title,
       // Never link a post to itself.
       selfPath: `/blog/${slug}`,

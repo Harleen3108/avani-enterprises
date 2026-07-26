@@ -186,7 +186,7 @@ function markdownToHtml(src, opts) {
         body.push(cells(lines[i])); i++;
       }
       out.push(
-        '<div class="prose-table-wrap"><table>' +
+        '<div class="article-table-wrap"><table>' +
         '<thead><tr>' + head.map((h) => `<th>${inline(esc(h))}</th>`).join('') + '</tr></thead>' +
         '<tbody>' + body.map((r) => '<tr>' + r.map((c) => `<td>${inline(esc(c))}</td>`).join('') + '</tr>').join('') +
         '</tbody></table></div>'
@@ -342,7 +342,7 @@ function autoLinkBody(html, opts) {
       // Rebuild non-global so replace() only touches the first match.
       const re = new RegExp(pattern.source, pattern.flags.replace('g', ''));
       if (!re.test(out)) continue;
-      out = out.replace(re, (m) => `<a href="${href}" class="prose-inline-link">${m}</a>`);
+      out = out.replace(re, (m) => `<a href="${href}" class="article-inline-link">${m}</a>`);
       used.add(href);
       added++;
     }
@@ -376,13 +376,13 @@ function wrapCallouts(html) {
   s = s.replace(
     /<h2([^>]*)>\s*(key takeaways?|takeaways?|tl;?dr)\s*<\/h2>\s*(<ul>[\s\S]*?<\/ul>)/gi,
     (m, attrs, label, list) =>
-      `<div class="prose-callout"><h2${attrs} class="prose-callout-title">${label}</h2>${list}</div>`
+      `<div class="article-callout"><h2${attrs} class="article-callout-title">${label}</h2>${list}</div>`
   );
 
   // FAQ section: mark the heading so the stylesheet can space the Q&A pairs.
   s = s.replace(
     /<h2([^>]*)>\s*(frequently asked questions|faqs?)\s*<\/h2>/gi,
-    (m, attrs, label) => `<h2${attrs} class="prose-faq-title">${label}</h2>`
+    (m, attrs, label) => `<h2${attrs} class="article-faq-title">${label}</h2>`
   );
 
   return s;
@@ -427,10 +427,10 @@ function formatBlogBody(raw, opts) {
  * rather than var()-driven precisely so the dark theme's variables cannot leak
  * in and produce grey-on-cream.
  *
- * Scoped to .prose so it cannot affect the rest of the site.
+ * Scoped to .avani-article so it cannot affect the rest of the site.
  */
 const PROSE_CSS = `
-.prose {
+.avani-article {
   --ink:        #1A1714;
   --ink-body:   #3A352E;
   --ink-muted:  #6B635A;
@@ -446,9 +446,9 @@ const PROSE_CSS = `
   color: var(--ink-body);
   letter-spacing: -0.003em;
 }
-.prose > * + * { margin-top: 1.3em; }
+.avani-article > * + * { margin-top: 1.3em; }
 
-.prose h2 {
+.avani-article h2 {
   font-family: 'Outfit', 'Inter', sans-serif;
   font-size: clamp(1.4rem, 2.7vw, 1.75rem);
   font-weight: 700;
@@ -458,25 +458,25 @@ const PROSE_CSS = `
   margin-top: 2.5em;
   margin-bottom: 0.65em;
 }
-.prose h2:first-child { margin-top: 0; }
-.prose h3 {
+.avani-article h2:first-child { margin-top: 0; }
+.avani-article h3 {
   font-family: 'Outfit', 'Inter', sans-serif;
   font-size: 1.2rem; font-weight: 700; line-height: 1.35;
   letter-spacing: -0.015em;
   color: var(--ink);
   margin-top: 2em; margin-bottom: 0.5em;
 }
-.prose h4 {
+.avani-article h4 {
   font-family: 'Outfit', 'Inter', sans-serif;
   font-size: 1.02rem; font-weight: 700;
   color: var(--ink);
   margin-top: 1.7em; margin-bottom: 0.4em;
 }
-.prose p { margin: 0; }
-.prose strong { color: var(--ink); font-weight: 650; }
-.prose em { font-style: italic; }
+.avani-article p { margin: 0; }
+.avani-article strong { color: var(--ink); font-weight: 650; }
+.avani-article em { font-style: italic; }
 
-.prose a {
+.avani-article a {
   color: var(--accent);
   font-weight: 500;
   text-decoration: underline;
@@ -485,24 +485,24 @@ const PROSE_CSS = `
   text-decoration-thickness: 1.5px;
   transition: text-decoration-color 0.15s, color 0.15s;
 }
-.prose a:hover { color: #8A5F0C; text-decoration-color: currentColor; }
+.avani-article a:hover { color: #8A5F0C; text-decoration-color: currentColor; }
 
-.prose ul, .prose ol { padding-left: 1.4em; margin: 1.3em 0; }
-.prose ul { list-style: disc; }
-.prose ol { list-style: decimal; }
-.prose li { margin: 0.55em 0; padding-left: 0.3em; }
-.prose li::marker { color: var(--accent); }
-.prose li > ul, .prose li > ol { margin: 0.55em 0; }
+.avani-article ul, .avani-article ol { padding-left: 1.4em; margin: 1.3em 0; }
+.avani-article ul { list-style: disc; }
+.avani-article ol { list-style: decimal; }
+.avani-article li { margin: 0.55em 0; padding-left: 0.3em; }
+.avani-article li::marker { color: var(--accent); }
+.avani-article li > ul, .avani-article li > ol { margin: 0.55em 0; }
 
 /* Key takeaways — the block readers skim and AI engines quote. */
-.prose .prose-callout {
+.avani-article .article-callout {
   background: var(--accent-bg);
   border: 1px solid #EBDCB6;
   border-radius: 14px;
   padding: 24px 26px;
   margin: 2em 0;
 }
-.prose .prose-callout-title {
+.avani-article .article-callout-title {
   font-size: 0.8rem !important;
   font-weight: 700;
   text-transform: uppercase;
@@ -510,44 +510,44 @@ const PROSE_CSS = `
   color: var(--accent) !important;
   margin: 0 0 0.9em 0 !important;
 }
-.prose .prose-callout ul { margin: 0; padding-left: 1.2em; }
-.prose .prose-callout li { margin: 0.5em 0; color: var(--ink-body); }
-.prose .prose-faq-title { padding-top: 0.4em; border-top: 2px solid var(--rule); }
+.avani-article .article-callout ul { margin: 0; padding-left: 1.2em; }
+.avani-article .article-callout li { margin: 0.5em 0; color: var(--ink-body); }
+.avani-article .article-faq-title { padding-top: 0.4em; border-top: 2px solid var(--rule); }
 
 /* In-article lead capture. Seeded posts embed .post-cta twice — mid-article and
    at the end — linking to /contact. Deliberately the one element that breaks the
    reading rhythm, because that is its job. */
-.prose .post-cta {
+.avani-article .post-cta {
   background: #17141F;
   border-radius: 16px;
   padding: 26px 28px;
   margin: 2.4em 0;
   color: rgba(255,255,255,0.78);
 }
-.prose .post-cta .post-cta-eyebrow {
+.avani-article .post-cta .post-cta-eyebrow {
   font-size: 0.72rem; font-weight: 700; letter-spacing: 0.11em;
   text-transform: uppercase; color: #D4A017; margin: 0 0 0.5em;
 }
-.prose .post-cta h3 {
+.avani-article .post-cta h3 {
   color: #fff; margin: 0 0 0.55em; font-size: 1.2rem; line-height: 1.3;
 }
-.prose .post-cta p { margin: 0 0 0.9em; font-size: 0.96rem; line-height: 1.65; }
-.prose .post-cta p:last-child { margin-bottom: 0; }
-.prose .post-cta strong { color: #fff; }
-.prose .post-cta .post-cta-btn {
+.avani-article .post-cta p { margin: 0 0 0.9em; font-size: 0.96rem; line-height: 1.65; }
+.avani-article .post-cta p:last-child { margin-bottom: 0; }
+.avani-article .post-cta strong { color: #fff; }
+.avani-article .post-cta .post-cta-btn {
   display: inline-block;
   background: #D4A017; color: #17141F;
   font-weight: 700; font-size: 0.94rem;
   padding: 12px 22px; border-radius: 10px;
   text-decoration: none; min-height: 46px; line-height: 22px;
 }
-.prose .post-cta .post-cta-btn:hover { background: #E8B428; color: #17141F; }
+.avani-article .post-cta .post-cta-btn:hover { background: #E8B428; color: #17141F; }
 @media (max-width: 640px) {
-  .prose .post-cta { padding: 22px 20px; border-radius: 14px; }
-  .prose .post-cta .post-cta-btn { display: block; text-align: center; }
+  .avani-article .post-cta { padding: 22px 20px; border-radius: 14px; }
+  .avani-article .post-cta .post-cta-btn { display: block; text-align: center; }
 }
 
-.prose blockquote {
+.avani-article blockquote {
   margin: 1.9em 0;
   padding: 0.1em 0 0.1em 1.3em;
   border-left: 3px solid var(--accent);
@@ -555,9 +555,9 @@ const PROSE_CSS = `
   font-size: 1.1rem;
   font-style: italic;
 }
-.prose blockquote p { margin: 0; }
+.avani-article blockquote p { margin: 0; }
 
-.prose code {
+.avani-article code {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 0.87em;
   background: #F4F1EA;
@@ -566,42 +566,42 @@ const PROSE_CSS = `
   padding: 0.15em 0.4em;
   color: #7A3E00;
 }
-.prose pre {
+.avani-article pre {
   background: #1E1B16;
   border-radius: 12px;
   padding: 18px 20px;
   overflow-x: auto;
   margin: 1.8em 0;
 }
-.prose pre code {
+.avani-article pre code {
   background: none; border: none; padding: 0;
   color: #EDE6D8; font-size: 0.86rem; line-height: 1.65;
 }
 
 /* Tables scroll inside their own container so the page never scrolls sideways */
-.prose .prose-table-wrap { overflow-x: auto; margin: 1.9em 0; }
-.prose table { width: 100%; border-collapse: collapse; min-width: 460px; font-size: 0.97rem; }
-.prose th {
+.avani-article .article-table-wrap { overflow-x: auto; margin: 1.9em 0; }
+.avani-article table { width: 100%; border-collapse: collapse; min-width: 460px; font-size: 0.97rem; }
+.avani-article th {
   text-align: left; padding: 11px 16px 11px 0; font-weight: 700;
   font-size: 0.95rem; color: var(--ink);
   border-bottom: 2px solid var(--rule);
   white-space: nowrap;
 }
-.prose td {
+.avani-article td {
   padding: 13px 16px 13px 0; vertical-align: top;
   color: var(--ink-body);
   border-bottom: 1px solid var(--rule);
 }
-.prose th:last-child, .prose td:last-child { padding-right: 0; }
-.prose tbody tr:last-child td { border-bottom: none; }
+.avani-article th:last-child, .avani-article td:last-child { padding-right: 0; }
+.avani-article tbody tr:last-child td { border-bottom: none; }
 
-.prose img { max-width: 100%; height: auto; border-radius: 12px; margin: 1.9em 0; }
-.prose hr { border: none; border-top: 1px solid var(--rule); margin: 2.6em 0; }
+.avani-article img { max-width: 100%; height: auto; border-radius: 12px; margin: 1.9em 0; }
+.avani-article hr { border: none; border-top: 1px solid var(--rule); margin: 2.6em 0; }
 
 @media (max-width: 640px) {
-  .prose { font-size: 1.02rem; line-height: 1.72; }
-  .prose h2 { font-size: 1.32rem; margin-top: 2.1em; }
-  .prose .prose-callout { padding: 20px; border-radius: 12px; }
+  .avani-article { font-size: 1.02rem; line-height: 1.72; }
+  .avani-article h2 { font-size: 1.32rem; margin-top: 2.1em; }
+  .avani-article .article-callout { padding: 20px; border-radius: 12px; }
 }
 `;
 

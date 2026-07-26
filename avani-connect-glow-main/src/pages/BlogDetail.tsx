@@ -8,7 +8,7 @@ import { EngagementRail, CommentsSection } from '../components/blog/BlogEngageme
 import { useRelatedPosts, RelatedRail, RelatedGrid } from '../components/blog/RelatedArticles';
 import BusinessSetup3Form from '../components/BusinessSetup3Form';
 import { KeyTakeaways, FaqAccordion } from '../components/blog/BlogAeoBlocks';
-import { formatBlogBody, PROSE_CSS } from '../data/blogFormat';
+import Prose from '../components/blog/Prose';
 
 /** Matches the article surface in blogFormat.js PROSE_CSS. */
 const PAPER = '#FFFDF9';
@@ -184,15 +184,10 @@ const BlogDetail = () => {
                 answer engines lift. Renders only when the post stores them. */}
             <KeyTakeaways items={blog.keyTakeaways} />
 
-            <div
-              className="prose"
-              dangerouslySetInnerHTML={{
-                __html: formatBlogBody(blog.content, {
-                  title: blog.title,
-                  selfPath: `/blog/${slug}`,
-                }),
-              }}
-            />
+            {/* Body and its stylesheet are one component on purpose — see
+                Prose.tsx. Rendering the markup without the styles is what broke
+                this page, and it failed silently. */}
+            <Prose content={blog.content} title={blog.title} selfPath={`/blog/${slug}`} />
 
             {/* FAQ accordion from stored fields, matched by the FAQPage schema
                 emitted above. Older posts keep their FAQs inside the body. */}
@@ -253,10 +248,10 @@ const BlogDetail = () => {
         }
         /* Wider measure than the default 44rem: with a rail beside it the
            column is constrained by the grid, so the article can use the room. */
-        .blog-body-grid .prose { max-width: 100%; }
-        .blog-body-grid .prose > * { max-width: 54rem; }
-        .blog-body-grid .prose .prose-table-wrap,
-        .blog-body-grid .prose .post-cta { max-width: 100%; }
+        .blog-body-grid .avani-article { max-width: 100%; }
+        .blog-body-grid .avani-article > * { max-width: 54rem; }
+        .blog-body-grid .avani-article .article-table-wrap,
+        .blog-body-grid .avani-article .post-cta { max-width: 100%; }
       `}</style>
     </div>
   );

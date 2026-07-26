@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "prebuild": "node scripts/snapshot-blog.cjs && node generate-sitemap.cjs",
+    "prebuild": "node scripts/check-prose-styles.cjs && node scripts/snapshot-blog.cjs && node generate-sitemap.cjs",
     "build": "vite build && node post-build.cjs",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
