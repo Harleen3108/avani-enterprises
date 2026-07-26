@@ -3,13 +3,13 @@ import { motion } from 'framer-motion';
 import { MapPin, Users, Globe, Rocket, Award, Building2, Zap } from 'lucide-react';
 
 const milestones = [
-  { year: '2016', title: 'Founded in Rohtak', description: 'Avani Enterprises was born with a mission to democratize world-class digital solutions for Indian businesses.', icon: Rocket, color: '#3B82F6' },
+  { year: '2016', title: 'Founded in Rohtak', description: 'Avani Enterprises was born with a mission to democratize digital solutions for Indian businesses.', icon: Rocket, color: '#3B82F6' },
   { year: '2018', title: 'First 50 Clients', description: 'Crossed our first major milestone — 50 happy clients across education, healthcare, and e-commerce verticals.', icon: Users, color: '#8B5CF6' },
   { year: '2020', title: 'Gurgaon Expansion', description: 'Opened our NCR office in Gurgaon to serve enterprise clients and Fortune 500 companies.', icon: Building2, color: '#F97316' },
   { year: '2022', title: 'Mumbai Office Launch', description: 'Expanded to Mumbai\'s Andheri East — establishing our presence in India\'s financial capital.', icon: MapPin, color: '#14B8A6' },
   { year: '2023', title: 'AI Division Launch', description: 'Launched dedicated AI solutions division — chatbots, automation, and intelligent business tools.', icon: Zap, color: '#C4913A' },
   { year: '2024', title: 'Global Reach — Australia', description: 'Crossed international borders with our APAC operations, serving clients across Australia and Southeast Asia.', icon: Globe, color: '#E8B96A' },
-  { year: '2025', title: '150+ Clients', description: 'Surpassed 150 happy clients, 300+ projects delivered, and counting. The journey has just begun.', icon: Award, color: '#22C55E' },
+  { year: '2025', title: 'Clients across India & the Gulf', description: 'Surpassed 150 happy clients, projects delivered across India and the Gulf, and counting. The journey has just begun.', icon: Award, color: '#22C55E' },
 ];
 
 const DummyTimeline = () => {

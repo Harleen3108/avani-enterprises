@@ -57,7 +57,7 @@ const caseStudies = [
     challenge: "EcoSolutions struggled with low organic visibility and needed to establish thought leadership in the sustainability space.",
     solution: "Implemented comprehensive SEO strategy with content marketing, technical optimization, and local SEO to target environmentally conscious businesses.",
     results: {
-      rankings: "Ranked #1 for 15 target keywords",
+      rankings: "Ranked for 15 target keywords",
       traffic: "400% increase in organic traffic",
       leads: "250% more qualified leads",
       authority: "Established as industry thought leader"

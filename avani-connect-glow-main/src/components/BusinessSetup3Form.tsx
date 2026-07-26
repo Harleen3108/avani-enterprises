@@ -232,9 +232,9 @@ export default function BusinessSetup3Form({ source = "businesssetup3" }: { sour
       <div className="b3f-offer">
         <span className="b3f-offer-lab"><Sparkles size={13} /> Limited Time Offer</span>
         <div className="b3f-offer-row">
-          <span className="b3f-old">₹999</span>
+          <span className="b3f-old">Free</span>
           <span className="b3f-new">₹0</span>
-          <span className="b3f-off">100% OFF</span>
+          <span className="b3f-off">No cost</span>
         </div>
         <p className="b3f-offer-note">Limited slots — claim yours before it's gone!</p>
       </div>

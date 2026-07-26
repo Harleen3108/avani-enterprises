@@ -1203,7 +1203,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
   'digital-marketing-agency-haryana': {
     slug: 'digital-marketing-agency-haryana',
     seo: {
-      title: 'Best Digital Marketing Agency in Haryana | Grow Your Brand — Avani Enterprises',
+      title: 'Digital Marketing Agency in Haryana | Grow Your Brand — Avani Enterprises',
       description: 'Top digital marketing agency in Haryana. We help Haryana businesses scale with custom web development, SEO services, social media marketing, and Google Ads. Free audit.',
       keywords: 'digital marketing agency haryana, digital marketing company haryana, online marketing services haryana, digital marketing services panipat, marketing agency haryana',
       canonical: 'https://www.avanienterprises.in/digital-marketing-agency-haryana'
@@ -1816,7 +1816,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
     slug: 'web-development-company',
     seo: {
       title: 'Web Development Company in India | Custom Websites & Apps | Avani Enterprises',
-      description: 'Avani Enterprises is a leading web development company in India building fast, secure, SEO-ready websites, web apps, and ecommerce stores. 300+ projects delivered. Get a free quote.',
+      description: 'Avani Enterprises is a leading web development company in India building fast, secure, SEO-ready websites, web apps, and ecommerce stores. projects delivered across India and the Gulf. Get a free quote.',
       keywords: 'web development company, website development company, web developer, custom website development, web application development, react web development company india',
       canonical: 'https://www.avanienterprises.in/web-development-company'
     },
@@ -1935,7 +1935,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
     ],
     faqs: [
       { q: 'How long does SEO take to show results?', a: 'Most businesses see meaningful movement in 3 to 6 months, with compounding gains beyond that. Timelines depend on competition, your starting point, and content velocity.' },
-      { q: 'Do you guarantee #1 rankings?', a: 'No reputable SEO company can guarantee a specific position, Google controls rankings. We guarantee a proven, transparent process and consistent, measurable growth in traffic and leads.' },
+      { q: 'Do you guarantee rankings?', a: 'No reputable SEO company can guarantee a specific position, Google controls rankings. We guarantee a proven, transparent process and consistent, measurable growth in traffic and leads.' },
       { q: 'What is included in your SEO services?', a: 'Technical SEO, on-page optimisation, content, local SEO, link building, and monthly reporting, tailored to your goals and budget.' },
       { q: 'Do you offer local SEO for specific cities?', a: 'Yes. We run dedicated local SEO campaigns to win map-pack and city-level rankings in Gurgaon, Delhi, Rohtak, Noida, and across India.' },
       { q: 'Is your SEO safe and Google-compliant?', a: 'Completely. We use only white-hat, guideline-compliant techniques so your rankings are durable and penalty-free.' },
@@ -1957,7 +1957,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
     seo: {
       title: 'Digital Marketing Company in India | Agency & Services | Avani Enterprises',
       description: 'Avani Enterprises is a full-service digital marketing company in India delivering SEO, Google Ads, social media, and performance marketing that generates qualified leads and ROI. Free strategy call.',
-      keywords: 'digital marketing company, digital marketing agency, digital marketing services, performance marketing agency, online marketing company india, best digital marketing agency',
+      keywords: 'digital marketing company, digital marketing agency, digital marketing services, performance marketing agency, online marketing company india, digital marketing agency',
       canonical: 'https://www.avanienterprises.in/digital-marketing-company'
     },
     breadcrumbs: [
@@ -2283,7 +2283,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
               }
           ]
       },
-      "intro": "As a design-led web design company in India, Avani Enterprises treats your website as your hardest-working salesperson, not just a brochure. From Unitech Cyber Park, Sector 39, Gurugram, our UI/UX design team builds custom web design grounded in user research, brand identity, and clear conversion goals, so every layout, colour, and click moves a visitor closer to enquiry. With 150+ clients across Delhi NCR and pan-India, we deliver professional web design services that look distinctive and perform measurably.",
+      "intro": "As a design-led web design company in India, Avani Enterprises treats your website as your hardest-working salesperson, not just a brochure. From Unitech Cyber Park, Sector 39, Gurugram, our UI/UX design team builds custom web design grounded in user research, brand identity, and clear conversion goals, so every layout, colour, and click moves a visitor closer to enquiry. With clients across India and the Gulf across Delhi NCR and pan-India, we deliver professional web design services that look distinctive and perform measurably.",
       "whyAvani": [
           {
               "title": "Design Tied to Conversions",
@@ -2385,7 +2385,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       "slug": "ecommerce-development-company",
       "seo": {
           "title": "Ecommerce Development Company in India | Avani Enterprises",
-          "description": "Avani Enterprises is an ecommerce development company in India building Shopify, WooCommerce & custom online stores that convert. 300+ projects. Get a free quote today.",
+          "description": "Avani Enterprises is an ecommerce development company in India building Shopify, WooCommerce & custom online stores that convert. projects across India and the Gulf. Get a free quote today.",
           "keywords": "ecommerce development company, ecommerce website development, online store development, shopify development, woocommerce development, custom ecommerce india",
           "canonical": "https://www.avanienterprises.in/ecommerce-development-company"
       },
@@ -2540,7 +2540,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       "slug": "custom-software-development-company",
       "seo": {
           "title": "Custom Software Development Company in India | Avani Enterprises",
-          "description": "Avani Enterprises is a custom software development company in India building bespoke business software, SaaS, internal tools, and integrations. 300+ projects, 8+ years. Get a free scoping call.",
+          "description": "Avani Enterprises is a custom software development company in India building bespoke business software, SaaS, internal tools, and integrations. projects across India and the Gulf, 8+ years. Get a free scoping call.",
           "keywords": "custom software development company, bespoke software development, software development company, enterprise software development, saas development india, custom application development, internal tools development, software integration services",
           "canonical": "https://www.avanienterprises.in/custom-software-development-company"
       },
@@ -2679,7 +2679,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       "slug": "mobile-app-development-company",
       "seo": {
           "title": "Mobile App Development Company in India | Avani Enterprises",
-          "description": "Avani Enterprises is a mobile app development company in India building iOS, Android & cross-platform apps with React Native and Flutter. 300+ projects delivered. Get a free quote.",
+          "description": "Avani Enterprises is a mobile app development company in India building iOS, Android & cross-platform apps with React Native and Flutter. projects delivered across India and the Gulf. Get a free quote.",
           "keywords": "mobile app development company, android app development, ios app development, app development company, cross platform app development, react native app development india, flutter app development",
           "canonical": "https://www.avanienterprises.in/mobile-app-development-company"
       },
@@ -3039,7 +3039,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
               "heading": "A Transparent, Test-Driven Process",
               "paragraphs": [
                   "Our Facebook advertising process runs on weekly testing cycles. We ship multiple creative angles and audience combinations, kill what underperforms, and double down on the winners, so cost-per-result trends down while volume scales up. You always know which ad, audience, and offer is driving each lead or sale.",
-                  "Reporting is jargon-free and outcome-led. Instead of drowning you in impressions, we report on cost-per-lead, cost-per-acquisition, and ROAS, with a clear read on what to scale next. With 8+ years serving 150+ clients and 24/7 support, your account is never left on autopilot."
+                  "Reporting is jargon-free and outcome-led. Instead of drowning you in impressions, we report on cost-per-lead, cost-per-acquisition, and ROAS, with a clear read on what to scale next. With 8+ years serving clients across India and the Gulf and 24/7 support, your account is never left on autopilot."
               ]
           }
       ],
@@ -3668,7 +3668,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
     "slug": "custom-web-development-company",
     "seo": {
       "title": "Custom Web Development Company India | Avani Enterprises",
-      "description": "Avani Enterprises is a custom web development company in India building bespoke, no-template web applications engineered to your exact requirements. 300+ projects delivered. Get a free scope call.",
+      "description": "Avani Enterprises is a custom web development company in India building bespoke, no-template web applications engineered to your exact requirements. projects delivered across India and the Gulf. Get a free scope call.",
       "keywords": "custom web development company, bespoke web development, tailored web applications, custom website development india, custom web application development, no-template web development",
       "canonical": "https://www.avanienterprises.in/custom-web-development-company"
     },
@@ -3807,7 +3807,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
     "slug": "frontend-development-company",
     "seo": {
       "title": "Frontend Development Company in India | React UI | Avani Enterprises",
-      "description": "Avani Enterprises is a frontend development company in India building fast, pixel-perfect React and Next.js interfaces with strong Core Web Vitals. 300+ projects. Get a free quote.",
+      "description": "Avani Enterprises is a frontend development company in India building fast, pixel-perfect React and Next.js interfaces with strong Core Web Vitals. projects across India and the Gulf. Get a free quote.",
       "keywords": "frontend development company, react development company, ui development, frontend developers india, next.js development, core web vitals optimization",
       "canonical": "https://www.avanienterprises.in/frontend-development-company"
     },
@@ -3946,7 +3946,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
     "slug": "backend-development-company",
     "seo": {
       "title": "Backend Development Company in India | Avani Enterprises",
-      "description": "Avani Enterprises builds scalable backend systems, secure APIs, and cloud architecture with Node.js. 300+ projects, 8+ years, 5.0 rating. Book a free architecture call.",
+      "description": "Avani Enterprises builds scalable backend systems, secure APIs, and cloud architecture with Node.js. projects across India and the Gulf, 8+ years, 5.0 rating. Book a free architecture call.",
       "keywords": "backend development company, api development company, node.js development, backend developers india, scalable backend architecture, secure database design, cloud backend development, rest api development",
       "canonical": "https://www.avanienterprises.in/backend-development-company"
     },
@@ -4055,7 +4055,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       },
       {
         "q": "Do you build backends for clients across India and abroad?",
-        "a": "Yes. As a backend development company headquartered in Gurugram, India, with 150+ clients and 300+ projects over 8+ years, we serve businesses across India, the Gulf, and international markets, working remotely with clear communication and documented handoffs."
+        "a": "Yes. As a backend development company headquartered in Gurugram, India, with clients across India and the Gulf and projects across India and the Gulf over 8+ years, we serve businesses across India, the Gulf, and international markets, working remotely with clear communication and documented handoffs."
       }
     ],
     "relatedLinks": [
@@ -4224,7 +4224,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
     "slug": "business-management-software-development",
     "seo": {
       "title": "Business Management Software Development | Avani Enterprises",
-      "description": "Avani Enterprises builds custom business management software to run tasks, approvals, inventory & reporting in one system. 300+ projects, 8+ years. Book a free demo.",
+      "description": "Avani Enterprises builds custom business management software to run tasks, approvals, inventory & reporting in one system. projects across India and the Gulf, 8+ years. Book a free demo.",
       "keywords": "business management software development, business software development company india, custom business management system, operations management software, inventory management software development, approval workflow software, business reporting dashboard software",
       "canonical": "https://www.avanienterprises.in/business-management-software-development"
     },
@@ -4724,7 +4724,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
         "heading": "Why Teams Consider Avani as a WebMok Alternative",
         "paragraphs": [
           "A great website is only the starting point. Many businesses come to us wanting a partner who can also build the software behind the scenes, layer in AI, and drive traffic and conversions after launch. Avani Enterprises brings all of that capability into one team, so your web project, internal tools, and marketing all share a single roadmap.",
-          "Founded in 2016, we've spent 8+ years delivering 300+ projects for 150+ clients while maintaining a 5.0 rating. That track record, combined with transparent fixed quotes and direct founder access, gives teams the confidence to move quickly without worrying about hidden costs or vendor handoffs."
+          "Founded in 2016, we've spent 8+ years delivering projects across India and the Gulf for clients across India and the Gulf while maintaining a 5.0 rating. That track record, combined with transparent fixed quotes and direct founder access, gives teams the confidence to move quickly without worrying about hidden costs or vendor handoffs."
         ]
       },
       {
@@ -4874,7 +4874,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
         }
       ]
     },
-    "intro": "If you are searching for a Web Aspiration alternative, Avani Enterprises is a Gurugram-based web, software and digital marketing partner that brings design, full-stack development, AI and SEO together under one roof. Web Aspiration is a web design and digital agency that helps businesses build and promote their online presence; Avani offers a comparable starting point and adds custom software, AI and sustained marketing with the same accountable team. With 8+ years of delivery and 300+ projects, we focus on transparent fixed quotes from first wireframe to ongoing growth.",
+    "intro": "If you are searching for a Web Aspiration alternative, Avani Enterprises is a Gurugram-based web, software and digital marketing partner that brings design, full-stack development, AI and SEO together under one roof. Web Aspiration is a web design and digital agency that helps businesses build and promote their online presence; Avani offers a comparable starting point and adds custom software, AI and sustained marketing with the same accountable team. With 8+ years of delivery and projects across India and the Gulf, we focus on transparent fixed quotes from first wireframe to ongoing growth.",
     "features": [
       {
         "title": "Conversion-Focused Web Design",
@@ -4912,7 +4912,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
         "heading": "Why Businesses Consider Avani as a Web Aspiration Alternative",
         "paragraphs": [
           "Many businesses start with a website and quickly need more — custom software, an AI feature, an e-commerce store, or a sustained SEO and marketing program. Avani Enterprises was built as a full-stack web, software and marketing agency precisely so you can scale all of that with a single partner rather than stitching together separate specialists.",
-          "Founded in 2016 and headquartered in Gurugram, Haryana, Avani brings Tier-2 pricing with enterprise-grade quality. With 150+ clients, 300+ projects, a 5.0 rating and 24/7 support, we combine the affordability businesses want with the reliability and accountability larger projects demand."
+          "Founded in 2016 and headquartered in Gurugram, Haryana, Avani brings Tier-2 pricing with enterprise-grade quality. With clients across India and the Gulf, projects across India and the Gulf, a 5.0 rating and 24/7 support, we combine the affordability businesses want with the reliability and accountability larger projects demand."
         ]
       },
       {
@@ -4927,7 +4927,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
         "paragraphs": [
           "Web Aspiration offers standard on-page SEO — keyword placement, meta tags, and basic backlinks. Avani Enterprises engineers technical SEO at a fundamentally different level: Core Web Vitals optimization targeting sub-2.5s LCP scores, automated schema markup for product and service pages, crawl budget management for e-commerce catalogs exceeding 10,000 SKUs, and hreflang implementation for Hindi, Tamil, and regional-language variants of the same site. For businesses targeting customers in Delhi NCR, Mumbai, and Tier-2 cities simultaneously, this multilingual architecture alone can increase organic reach by 35–60% without additional ad spend.",
           "Traffic reports are not revenue. Web Aspiration, like many web-design-first agencies, delivers monthly rankings dashboards but stops short of conversion engineering. Avani Enterprises builds the full funnel: custom landing pages with A/B-tested layouts, embedded lead capture forms compliant with India's IT Act 2000, and WhatsApp Business API chatbots that respond to inquiries within 90 seconds — a critical factor when 78% of Indian SMB buyers expect same-day contact. Clients operating from DLF Cyber City and GIFT City have reported cost-per-lead reductions of Rs 180–Rs 420 per lead after switching from traffic-only SEO engagements to Avani's conversion-integrated campaigns.",
-          "Avani Enterprises operates on a long-term partnership model rather than a monthly retainer-and-report cycle. Every client receives quarterly strategy reviews benchmarking their domain authority, keyword gap analysis against three direct competitors, and a documented response plan within 72 hours of any major Google algorithm update — Helpful Content, Spam, or Core. Web Aspiration, as a smaller agency, lacks the dedicated account management capacity to deliver this proactively. With 150+ clients across eight-plus years and a 5.0 verified rating, Avani's retention model means your strategy evolves with market conditions rather than staying frozen at the contract start date."
+          "Avani Enterprises operates on a long-term partnership model rather than a monthly retainer-and-report cycle. Every client receives quarterly strategy reviews benchmarking their domain authority, keyword gap analysis against three direct competitors, and a documented response plan within 72 hours of any major Google algorithm update — Helpful Content, Spam, or Core. Web Aspiration, as a smaller agency, lacks the dedicated account management capacity to deliver this proactively. With clients across India and the Gulf across eight-plus years and a 5.0 verified rating, Avani's retention model means your strategy evolves with market conditions rather than staying frozen at the contract start date."
         ]
       }
     ],
@@ -4946,7 +4946,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       },
       {
         "q": "Where is Avani Enterprises based and who do you serve?",
-        "a": "We are headquartered in Gurugram, Haryana, India, and deliver to clients across India, the Gulf and international markets. We have served 150+ clients on 300+ projects since 2016."
+        "a": "We are headquartered in Gurugram, Haryana, India, and deliver to clients across India, the Gulf and international markets. We have served clients across India and the Gulf on projects across India and the Gulf since 2016."
       },
       {
         "q": "How do I get started or compare options?",
@@ -5021,7 +5021,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
         },
         {
           "metric": "Support",
-          "avani": "24/7 support with 8+ years and 300+ projects",
+          "avani": "24/7 support with 8+ years and projects across India and the Gulf",
           "competitor": "Contact them for support details",
           "isPositive": true
         }
@@ -5108,7 +5108,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
         "heading": "Why Businesses Consider Avani as a Leo Digitals Alternative",
         "paragraphs": [
           "Marketing performs best when the website, software and campaigns behind it are built to support it. Because Avani delivers web, software, AI, SEO and marketing in-house, your landing pages, tracking, content and ads are designed to work together from day one rather than being stitched across multiple vendors.",
-          "Founded in 2016 and headquartered in Gurugram, Haryana, Avani brings 8+ years of delivery across 300+ projects for 150+ clients. That combination of full-stack capability and a single point of accountability is what teams look for when comparing agencies."
+          "Founded in 2016 and headquartered in Gurugram, Haryana, Avani brings 8+ years of delivery across projects across India and the Gulf for clients across India and the Gulf. That combination of full-stack capability and a single point of accountability is what teams look for when comparing agencies."
         ]
       },
       {
@@ -5121,7 +5121,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       {
         "heading": "Why Indian Businesses Choose Avani Enterprises Over Leo Digitals",
         "paragraphs": [
-          "Avani Enterprises operates from Unitech Cyber Park, Sector 39, Gurugram — India's largest IT and enterprise business hub — giving clients direct access to a talent pool and vendor ecosystem that a Pune-regional agency like Leo Digitals structurally cannot match. With 8+ years of continuous operation, 150+ clients served across NCR, Mumbai, Bengaluru, and Gulf markets, and 300+ completed projects, Avani brings a documented track record versus Leo Digitals' narrower regional footprint. For businesses running Rs 5 lakh or more per month in ad spend, agency scale and platform partner tier directly affect the quality of Google and Meta campaign support available.",
+          "Avani Enterprises operates from Unitech Cyber Park, Sector 39, Gurugram — India's largest IT and enterprise business hub — giving clients direct access to a talent pool and vendor ecosystem that a Pune-regional agency like Leo Digitals structurally cannot match. With 8+ years of continuous operation, clients across India and the Gulf served across NCR, Mumbai, Bengaluru, and Gulf markets, and 300+ completed projects, Avani brings a documented track record versus Leo Digitals' narrower regional footprint. For businesses running Rs 5 lakh or more per month in ad spend, agency scale and platform partner tier directly affect the quality of Google and Meta campaign support available.",
           "Leo Digitals focuses primarily on digital marketing services, whereas Avani Enterprises delivers an integrated stack: Google Ads, Meta Ads, SEO, Instagram marketing, custom web development, and proprietary software including HRMS, CRM, and Business Operations Software. This matters because a mid-sized Indian manufacturer or services firm typically needs its marketing data connected to its internal systems — something a standalone marketing agency cannot provide. Avani's in-house developers build these integrations without third-party markup, while clients of marketing-only agencies in Pune must separately hire development vendors, adding coordination overhead and cost typically ranging from Rs 2–8 lakh per integration project.",
           "Avani's reporting infrastructure offers clients real-time dashboard access with transparent spend breakdowns — no bundled fees, no hidden retainer components. WhatsApp-based 24/7 support ensures that campaign issues during peak sale periods (Big Billion Days, festive season, end-of-quarter pushes) are resolved within hours, not business days. Leo Digitals, as a smaller Pune agency, operates standard Mon–Fri support cycles without documented 24/7 SLAs. For businesses with pan-India operations or Gulf market expansion (UAE, Saudi Arabia), Avani's prior cross-border campaign experience under FEMA-compliant billing structures provides direct operational relevance that a regional agency typically lacks."
         ]
@@ -5266,7 +5266,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
         }
       ]
     },
-    "intro": "If you are evaluating a The Growth Box alternative, it helps to know what each team focuses on. The Growth Box is a digital marketing and growth agency that helps brands grow through marketing-led campaigns and strategy. Avani Enterprises is a full-stack alternative that pairs that same growth-marketing focus with in-house web, software, and AI development, so your campaigns and the products behind them are built by one team. Founded in 2016 and serving 150+ clients across India, the Gulf, and international markets, Avani offers transparent fixed quotes and direct founder access.",
+    "intro": "If you are evaluating a The Growth Box alternative, it helps to know what each team focuses on. The Growth Box is a digital marketing and growth agency that helps brands grow through marketing-led campaigns and strategy. Avani Enterprises is a full-stack alternative that pairs that same growth-marketing focus with in-house web, software, and AI development, so your campaigns and the products behind them are built by one team. Founded in 2016 and serving clients across India and the Gulf across India, the Gulf, and international markets, Avani offers transparent fixed quotes and direct founder access.",
     "features": [
       {
         "title": "Growth-Focused Digital Marketing",
@@ -5311,14 +5311,14 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
         "heading": "Enterprise Quality at Tier-2 Pricing",
         "paragraphs": [
           "Headquartered in Gurugram, Haryana, Avani delivers enterprise-grade work at Tier-2 city pricing — giving you strong value without compromising on craft. The same team supports clients across India, the Gulf, and international markets.",
-          "Every engagement starts with a transparent, fixed quote so budgets are predictable from day one. With 8+ years in business, 150+ clients, 300+ projects, a 5.0 rating, and 24/7 support, Avani is built to be a dependable long-term partner as you scale."
+          "Every engagement starts with a transparent, fixed quote so budgets are predictable from day one. With 8+ years in business, clients across India and the Gulf, projects across India and the Gulf, a 5.0 rating, and 24/7 support, Avani is built to be a dependable long-term partner as you scale."
         ]
       },
       {
         "heading": "Full-Stack Capability, Proven Scale, and Technology That Compounds",
         "paragraphs": [
           "A boutique digital marketing agency like The Growth Box typically manages paid social, Google Ads, and content strategy — and does it well within that lane. The problem for a scaling Indian SMB or SaaS startup is that you then need a separate web development vendor for landing pages, a third party for CRM configuration, and potentially a fourth for WhatsApp automation. Avani Enterprises collapses all of this into one team: Google Ads management, Meta Ads, SEO, Instagram marketing, React-based web development, and custom HRMS, CRM, and BOS software, all delivered from Unitech Cyber Park, Sector 39, Gurugram. Coordinating four vendors adds 15-20% overhead in project management time and creates accountability gaps when campaign performance dips — gaps that simply do not exist inside a single-vendor engagement.",
-          "Scale and market exposure matter when you are picking an agency partner for B2B, SaaS, or Gulf-facing campaigns. Avani has been operating since 2016 — over 8 years — has delivered 300+ projects across 150+ clients, and maintains a verified 5.0 client rating. That track record includes Gulf-facing e-commerce brands, Haryana-based manufacturing exporters filing under the MSME Development Act, and pan-India SaaS startups that needed both performance marketing and custom software delivered to the same roadmap. A smaller boutique agency with a shorter operating history carries measurably higher execution risk on complex, multi-channel mandates where a missed deadline affects a product launch, not just a content calendar.",
+          "Scale and market exposure matter when you are picking an agency partner for B2B, SaaS, or Gulf-facing campaigns. Avani has been operating since 2016 — over 8 years — has delivered projects across India and the Gulf across clients across India and the Gulf, and maintains a verified 5.0 client rating. That track record includes Gulf-facing e-commerce brands, Haryana-based manufacturing exporters filing under the MSME Development Act, and pan-India SaaS startups that needed both performance marketing and custom software delivered to the same roadmap. A smaller boutique agency with a shorter operating history carries measurably higher execution risk on complex, multi-channel mandates where a missed deadline affects a product launch, not just a content calendar.",
           "The compounding advantage Avani holds is architectural: because the same team that runs your Google Ads campaign can also build the landing page it points to, set up the CRM that captures the lead, and deploy a WhatsApp chatbot that follows up within 60 seconds of form submission, every rupee of ad spend converts at a structurally higher rate. A typical Avani client running Rs 1.5 lakh per month in Google Ads sees form-to-CRM sync without manual CSV exports, automated follow-up sequences built on WhatsApp Business API, and conversion-optimised landing pages A/B tested and deployed in-house — a closed loop that an agency without development capability physically cannot offer, regardless of how skilled their media buyers are."
         ]
       }
@@ -5350,7 +5350,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       },
       {
         "q": "How does Avani Enterprises' 8-year track record compare to The Growth Box for B2B or international campaigns targeting Gulf markets?",
-        "a": "Avani Enterprises has operated since 2016, delivered 300+ projects across 150+ clients including Gulf-facing e-commerce and B2B exporters, and holds a 5.0 client rating. This operating depth matters for international mandates — Gulf campaigns often require multi-language ad copy, GST-compliant invoice handling under Indian tax law, and 24/7 support across IST and GST time zones. Avani's WhatsApp-based client support and transparent fixed-fee model are specifically designed for Indian and Gulf SMBs who need predictable costs and fast response, not retainer-heavy agency contracts."
+        "a": "Avani Enterprises has operated since 2016, delivered projects across India and the Gulf across clients across India and the Gulf including Gulf-facing e-commerce and B2B exporters, and holds a 5.0 client rating. This operating depth matters for international mandates — Gulf campaigns often require multi-language ad copy, GST-compliant invoice handling under Indian tax law, and 24/7 support across IST and GST time zones. Avani's WhatsApp-based client support and transparent fixed-fee model are specifically designed for Indian and Gulf SMBs who need predictable costs and fast response, not retainer-heavy agency contracts."
       }
     ],
     "relatedLinks": [
@@ -5492,7 +5492,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       },
       {
         "title": "Direct Founder Access",
-        "desc": "Work directly with senior decision-makers, not layers of account managers. With 8+ years and 300+ projects delivered, you reach people who can act on your account."
+        "desc": "Work directly with senior decision-makers, not layers of account managers. With 8+ years and projects delivered across India and the Gulf, you reach people who can act on your account."
       }
     ],
     "bodySections": [
@@ -5507,14 +5507,14 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
         "heading": "Who Avani Fits Best",
         "paragraphs": [
           "Avani is the right alternative if you want a single partner that owns both the growth strategy and the technology behind it — SEO and digital marketing tied directly to the website, app, or AI tooling that drives conversions. We deliver across India, the Gulf, and international markets, supported 24/7.",
-          "If your priority is one vendor, transparent pricing, senior attention on your account, and the ability to ship technical fixes fast, Avani is built for exactly that. Founded in 2016, we have served 150+ clients and delivered 300+ projects with a 5.0 client rating."
+          "If your priority is one vendor, transparent pricing, senior attention on your account, and the ability to ship technical fixes fast, Avani is built for exactly that. Founded in 2016, we have served clients across India and the Gulf and delivered projects across India and the Gulf with a 5.0 client rating."
         ]
       },
       {
         "heading": "How Avani Enterprises Outperforms Techmagnate for Mid-Market Indian Businesses",
         "paragraphs": [
-          "Techmagnate operates with 500+ employees across Delhi NCR and serves large enterprise accounts. That scale creates a structural reality for SMB and mid-market clients: your account typically lands with a junior manager running templated campaign frameworks built for larger budgets. At Avani Enterprises, every client — whether spending Rs 30,000 or Rs 3,00,000 per month on Google Ads and Meta campaigns — is handled by a senior strategist from Unitech Cyber Park, Sector 39, Gurugram, with direct WhatsApp access and weekly reporting calls. Our 5.0 client rating across 150+ clients reflects that commitment to senior attention on every account, not just enterprise retainers.",
-          "Techmagnate's core offering is campaign management; web development and CRM integration require coordinating separate vendors, which adds 2–4 weeks of handoff delay each time an SEO audit calls for landing page changes or conversion tracking fixes. Avani's in-house team engineers your website, custom HRMS, CRM, or BOS software alongside your SEO and paid media campaigns. When a Core Web Vitals audit identifies a Largest Contentful Paint issue on your product pages, our developers fix it in the same sprint — no purchase orders to a third-party agency, no re-briefing of a separate IT vendor. This unified delivery model has driven measurable gains across 300+ projects without hidden coordination fees.",
+          "Techmagnate operates with 500+ employees across Delhi NCR and serves large enterprise accounts. That scale creates a structural reality for SMB and mid-market clients: your account typically lands with a junior manager running templated campaign frameworks built for larger budgets. At Avani Enterprises, every client — whether spending Rs 30,000 or Rs 3,00,000 per month on Google Ads and Meta campaigns — is handled by a senior strategist from Unitech Cyber Park, Sector 39, Gurugram, with direct WhatsApp access and weekly reporting calls. Our 5.0 client rating across clients across India and the Gulf reflects that commitment to senior attention on every account, not just enterprise retainers.",
+          "Techmagnate's core offering is campaign management; web development and CRM integration require coordinating separate vendors, which adds 2–4 weeks of handoff delay each time an SEO audit calls for landing page changes or conversion tracking fixes. Avani's in-house team engineers your website, custom HRMS, CRM, or BOS software alongside your SEO and paid media campaigns. When a Core Web Vitals audit identifies a Largest Contentful Paint issue on your product pages, our developers fix it in the same sprint — no purchase orders to a third-party agency, no re-briefing of a separate IT vendor. This unified delivery model has driven measurable gains across projects across India and the Gulf without hidden coordination fees.",
           "India's mid-market growth in 2024–25 is being shaped by WhatsApp Business API (registered under the Information Technology Act, 2000 and governed by TRAI OBA guidelines) and AI-driven lead qualification. Avani builds these capabilities directly into client campaigns: WhatsApp lead automation that captures and nurtures inquiries from Google Ads and Meta in under 60 seconds, AI chatbots trained on your product catalogue, and CRM pipelines that sync lead data from Delhi, Mumbai, Bengaluru, and Tier-2 city campaigns into one dashboard. Techmagnate's traditional campaign-only model does not include this automation layer. For a mid-market company generating 200–1,000 leads per month, the difference in cost-per-acquisition can exceed 35–40% within the first quarter."
         ]
       }
@@ -5534,7 +5534,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       },
       {
         "q": "Do you work with enterprises and mid-market companies?",
-        "a": "Yes. Founded in 2016, we have served 150+ clients and delivered 300+ projects across India, the Gulf, and international markets, with a 5.0 client rating and 24/7 support."
+        "a": "Yes. Founded in 2016, we have served clients across India and the Gulf and delivered projects across India and the Gulf across India, the Gulf, and international markets, with a 5.0 client rating and 24/7 support."
       },
       {
         "q": "Can Avani handle both my marketing and my website or software?",
@@ -5696,7 +5696,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
         "heading": "Why Consider Avani as a PageTraffic Alternative",
         "paragraphs": [
           "Specialist SEO agencies do solid search work, but in many engagements ranking gains stall when the underlying website is slow, poorly structured or hard to update and the build sits with a separate vendor. Avani Enterprises closes that gap by handling SEO and the web, software and AI it relies on under one roof — so technical recommendations actually get implemented instead of waiting in another vendor's queue.",
-          "Founded in 2016 and serving 150+ clients across India, the Gulf and international markets, Avani brings 8+ years of delivery, a 5.0 client rating and 24/7 support. With transparent fixed quotes and Tier-2 pricing backed by enterprise-grade quality, you get senior attention and clear accountability throughout the engagement."
+          "Founded in 2016 and serving clients across India and the Gulf across India, the Gulf and international markets, Avani brings 8+ years of delivery, a 5.0 client rating and 24/7 support. With transparent fixed quotes and Tier-2 pricing backed by enterprise-grade quality, you get senior attention and clear accountability throughout the engagement."
         ]
       },
       {
@@ -5709,7 +5709,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       {
         "heading": "Avani Enterprises vs PageTraffic: Account Management, AI-Driven SEO, and ROI Transparency for Indian Businesses",
         "paragraphs": [
-          "PageTraffic, established in Delhi around 2002, built its reputation on high-volume SEO retainers. The trade-off for that scale is a client-to-executive ratio that routinely exceeds 30:1, meaning your account competes for attention with dozens of others. Avani Enterprises, operating out of Unitech Cyber Park, Sector 39, Gurugram, assigns a dedicated account manager to every client — reachable directly on WhatsApp during business hours — with an internal cap of 12 accounts per manager. Across 150+ clients and 300+ projects over 8 years, that structure has produced a 5.0 client rating, a metric that erodes quickly when accounts get deprioritized.",
+          "PageTraffic, established in Delhi around 2002, built its reputation on high-volume SEO retainers. The trade-off for that scale is a client-to-executive ratio that routinely exceeds 30:1, meaning your account competes for attention with dozens of others. Avani Enterprises, operating out of Unitech Cyber Park, Sector 39, Gurugram, assigns a dedicated account manager to every client — reachable directly on WhatsApp during business hours — with an internal cap of 12 accounts per manager. Across clients across India and the Gulf and projects across India and the Gulf over 8 years, that structure has produced a 5.0 client rating, a metric that erodes quickly when accounts get deprioritized.",
           "On technical SEO execution, the gap reflects the difference between a 2002-era workflow and a 2024-era one. Avani deploys AI-assisted content gap analysis using tools such as Surfer SEO and NeuronWriter, automates structured data markup (Schema.org JSON-LD) at scale, and runs weekly Screaming Frog crawls tied to a live client dashboard. PageTraffic's delivery model — built when monthly PDF reports were the industry standard — has been slower to integrate these automated, near-real-time workflows. For a Gurugram or Bengaluru brand competing on high-intent commercial keywords, a four-week lag between a crawl error and its fix can cost measurable ranking positions and, at Rs 50–500 per click on Google Ads, real rupees.",
           "Pricing transparency is where the CFO conversation gets concrete. PageTraffic's retainers are input-based: a fixed monthly fee tied to activities — links built, pages optimised — regardless of ranking movement or leads generated. Avani structures reporting around outcome metrics — keyword rank changes, organic session growth, cost-per-lead from Meta and Google Ads — published in a shared dashboard updated every 48 hours. There are no onboarding fees beyond the stated retainer, no minimum 12-month lock-ins on standard plans, and GST-compliant invoicing from the first billing cycle. For a finance team subject to the Companies Act 2013 audit trail requirements, that level of documented, attributable spend is a meaningful compliance and planning advantage."
         ]
@@ -5738,7 +5738,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       },
       {
         "q": "PageTraffic has been around since 2002 — doesn't their track record make them a safer choice than a newer agency?",
-        "a": "Longevity signals survival, not current capability. PageTraffic's scale — hundreds of clients, large teams — also means your Rs 80,000–1,50,000 monthly retainer funds a shared-service model. Avani Enterprises has 8 years of documented delivery, 150+ clients, a 5.0 rating, and a capped account manager model, so the team working your account in month one is the same team in month twelve. For a CFO, the relevant metric is attributed ROI per rupee spent, not the agency's founding year."
+        "a": "Longevity signals survival, not current capability. PageTraffic's scale — hundreds of clients, large teams — also means your Rs 80,000–1,50,000 monthly retainer funds a shared-service model. Avani Enterprises has 8 years of documented delivery, clients across India and the Gulf, a 5.0 rating, and a capped account manager model, so the team working your account in month one is the same team in month twelve. For a CFO, the relevant metric is attributed ROI per rupee spent, not the agency's founding year."
       },
       {
         "q": "How do I compare what I am actually getting for my money between PageTraffic and Avani Enterprises?",
@@ -5892,7 +5892,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
         "heading": "Why Consider Avani Enterprises as Your SEO Partner",
         "paragraphs": [
           "Many businesses outgrow a pure SEO agency once their needs expand to a faster website, a custom platform, or an AI-powered workflow. With Avani Enterprises, SEO is one capability inside a full-stack team — meaning the engineers improving your rankings can also rebuild a slow page, fix a broken funnel, or ship a new feature without waiting on a separate development vendor.",
-          "Founded in 2016 and based in Gurugram, Haryana, Avani has served 150+ clients and delivered 300+ projects with a 5.0 rating. That track record, combined with transparent fixed quotes and Tier-2 pricing for enterprise-quality work, makes Avani a practical alternative when you want results, clarity, and a single point of accountability."
+          "Founded in 2016 and based in Gurugram, Haryana, Avani has served clients across India and the Gulf and delivered projects across India and the Gulf with a 5.0 rating. That track record, combined with transparent fixed quotes and Tier-2 pricing for enterprise-quality work, makes Avani a practical alternative when you want results, clarity, and a single point of accountability."
         ]
       },
       {
@@ -6094,7 +6094,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       {
         "heading": "Built for Tier-2 Value and Global Delivery",
         "paragraphs": [
-          "Avani Enterprises operates from Gurugram, Haryana, giving you enterprise-grade quality at Tier-2 pricing. Founded in 2016, we have spent 8+ years serving 150+ clients across 300+ projects, with a 5.0 rating and 24/7 support backing every engagement.",
+          "Avani Enterprises operates from Gurugram, Haryana, giving you enterprise-grade quality at Tier-2 pricing. Founded in 2016, we have spent 8+ years serving clients across India and the Gulf across projects across India and the Gulf, with a 5.0 rating and 24/7 support backing every engagement.",
           "We deliver across India, the Gulf, and international markets, and every project starts with a transparent fixed quote so you know the scope and cost up front. If you want a partner who is confident about SEO and equally capable of building what your growth plan needs, Avani is a strong alternative to consider alongside IndeedSEO."
         ]
       },
@@ -6134,7 +6134,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       },
       {
         "q": "How does Avani Enterprises' SEO pricing compare to IndeedSEO for a small Indian business?",
-        "a": "IndeedSEO packages typically start around Rs 5,000–Rs 12,000 per month, but exclude content creation, technical audits, and conversion tracking — costs that add up separately. Avani's retainers start at Rs 18,000 per month and include technical SEO, Hindi or regional-language content, Google Analytics 4 setup, and a WhatsApp support channel with a named account manager. With 150+ clients across Gurugram, Delhi NCR, and major metros, Avani's all-inclusive pricing delivers a measurably lower total cost when factoring in lead quality and no penalty risk."
+        "a": "IndeedSEO packages typically start around Rs 5,000–Rs 12,000 per month, but exclude content creation, technical audits, and conversion tracking — costs that add up separately. Avani's retainers start at Rs 18,000 per month and include technical SEO, Hindi or regional-language content, Google Analytics 4 setup, and a WhatsApp support channel with a named account manager. With clients across India and the Gulf across Gurugram, Delhi NCR, and major metros, Avani's all-inclusive pricing delivers a measurably lower total cost when factoring in lead quality and no penalty risk."
       }
     ],
     "relatedLinks": [
@@ -6197,7 +6197,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
         },
         {
           "metric": "Experience",
-          "avani": "8+ years, 150+ clients, 300+ projects, 5.0 rating",
+          "avani": "8+ years, clients across India and the Gulf, projects across India and the Gulf, 5.0 rating",
           "competitor": "See their website for company details",
           "isPositive": true
         }
@@ -6348,7 +6348,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
     "slug": "full-stack-development-company",
     "seo": {
       "title": "Full Stack Development Company in India | Avani Enterprises",
-      "description": "Avani Enterprises is a full stack development company in India. One team owns frontend + backend on MERN/MEAN — 300+ projects, 8+ years. Get a free quote.",
+      "description": "Avani Enterprises is a full stack development company in India. One team owns frontend + backend on MERN/MEAN — projects across India and the Gulf, 8+ years. Get a free quote.",
       "keywords": "full stack development company, full stack developers, mern stack development, end to end web development india, mean stack development, full stack web development company",
       "canonical": "https://www.avanienterprises.in/full-stack-development-company"
     },
@@ -6487,7 +6487,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
     "slug": "shopify-development-company",
     "seo": {
       "title": "Shopify Development Company in India | Avani Enterprises",
-      "description": "Avani Enterprises is a Shopify development company in India building custom Liquid themes, private apps & zero-downtime migrations for scaling D2C brands. 300+ projects, 8+ years. Get a free quote.",
+      "description": "Avani Enterprises is a Shopify development company in India building custom Liquid themes, private apps & zero-downtime migrations for scaling D2C brands. projects across India and the Gulf, 8+ years. Get a free quote.",
       "keywords": "shopify development company, shopify developer, shopify store setup, shopify theme development india, shopify plus development, shopify app development, shopify migration",
       "canonical": "https://www.avanienterprises.in/shopify-development-company"
     },
@@ -6642,7 +6642,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
     "slug": "woocommerce-development-company",
     "seo": {
       "title": "WooCommerce Development Company in India | Avani",
-      "description": "Avani Enterprises is a WooCommerce development company in India building fast WordPress stores, custom plugins & smooth payments. 300+ projects. Get a free quote.",
+      "description": "Avani Enterprises is a WooCommerce development company in India building fast WordPress stores, custom plugins & smooth payments. projects across India and the Gulf. Get a free quote.",
       "keywords": "woocommerce development company, woocommerce developer, wordpress ecommerce development india, custom woocommerce plugins, woocommerce store development, woocommerce speed optimisation",
       "canonical": "https://www.avanienterprises.in/woocommerce-development-company"
     },
@@ -6781,7 +6781,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
     "slug": "custom-ecommerce-development",
     "seo": {
       "title": "Custom Ecommerce Development India | Avani Enterprises",
-      "description": "Custom and headless ecommerce development in India for brands outgrowing templates. Bespoke platforms built to scale. 300+ projects, 8+ years. Get a free quote.",
+      "description": "Custom and headless ecommerce development in India for brands outgrowing templates. Bespoke platforms built to scale. projects across India and the Gulf, 8+ years. Get a free quote.",
       "keywords": "custom ecommerce development, headless ecommerce development, bespoke ecommerce platform india, custom ecommerce india, composable commerce, headless commerce development",
       "canonical": "https://www.avanienterprises.in/custom-ecommerce-development"
     },
@@ -6920,7 +6920,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
     "slug": "custom-crm-development",
     "seo": {
       "title": "Custom CRM Development in India | Avani Enterprises",
-      "description": "Custom CRM development built to your exact sales process. Own your data and roadmap, no per-seat fees or feature bloat. 8+ years, 300+ projects. Book a free demo.",
+      "description": "Custom CRM development built to your exact sales process. Own your data and roadmap, no per-seat fees or feature bloat. 8+ years, projects across India and the Gulf. Book a free demo.",
       "keywords": "custom crm development, bespoke crm software, tailored crm system india, custom crm software development, sales process crm, crm development company india",
       "canonical": "https://www.avanienterprises.in/custom-crm-development"
     },
@@ -7029,7 +7029,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       },
       {
         "q": "Do you build custom CRMs for businesses across India and abroad?",
-        "a": "Yes. Headquartered at Unitech Cyber Park, Sector 39, Gurugram, Avani Enterprises has served 150+ clients across Delhi NCR and pan-India, plus the Gulf and international markets, delivering tailored CRM systems remotely with full data ownership."
+        "a": "Yes. Headquartered at Unitech Cyber Park, Sector 39, Gurugram, Avani Enterprises has served clients across India and the Gulf across Delhi NCR and pan-India, plus the Gulf and international markets, delivering tailored CRM systems remotely with full data ownership."
       }
     ],
     "relatedLinks": [
@@ -7059,7 +7059,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
     "slug": "crm-software-development",
     "seo": {
       "title": "CRM Software Development in India | Avani Enterprises",
-      "description": "Avani Enterprises builds custom CRM software with sales pipelines, automation, dashboards & integrations. 300+ projects, 8+ years. Book a free CRM scoping call.",
+      "description": "Avani Enterprises builds custom CRM software with sales pipelines, automation, dashboards & integrations. projects across India and the Gulf, 8+ years. Book a free CRM scoping call.",
       "keywords": "crm software development, crm software development company, sales crm software india, custom crm build, crm automation, pipeline management software, crm dashboards, crm integrations",
       "canonical": "https://www.avanienterprises.in/crm-software-development"
     },
@@ -7198,7 +7198,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
     "slug": "crm-consulting-company",
     "seo": {
       "title": "CRM Consulting Company in India | Avani Enterprises",
-      "description": "Vendor-neutral CRM consulting company in India: CRM strategy, selection, implementation, migration, and adoption. 8+ years, 150+ clients, 5.0 rating. Book a free consult.",
+      "description": "Vendor-neutral CRM consulting company in India: CRM strategy, selection, implementation, migration, and adoption. 8+ years, clients across India and the Gulf, 5.0 rating. Book a free consult.",
       "keywords": "crm consulting company, crm consultant, crm implementation services, crm strategy india, crm migration services, crm adoption consulting, crm selection consultant",
       "canonical": "https://www.avanienterprises.in/crm-consulting-company"
     },
@@ -7315,7 +7315,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       },
       {
         "q": "Do you offer CRM consulting for businesses across India and the Gulf?",
-        "a": "Yes. Headquartered at Unitech Cyber Park, Sector 39, Gurugram, Avani Enterprises serves clients across India, the Gulf, and international markets. We work remotely and on-site as needed, with 8+ years of experience and a 5.0 client rating across 150+ clients."
+        "a": "Yes. Headquartered at Unitech Cyber Park, Sector 39, Gurugram, Avani Enterprises serves clients across India, the Gulf, and international markets. We work remotely and on-site as needed, with 8+ years of experience and a 5.0 client rating across clients across India and the Gulf."
       },
       {
         "q": "Is Zoho CRM good enough for a business doing Rs. 10-50 crore in annual revenue, or do we need Salesforce?",
@@ -7353,7 +7353,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
     "slug": "erp-development-company",
     "seo": {
       "title": "ERP Development Company in India | Avani Enterprises",
-      "description": "Custom ERP development company unifying finance, inventory, operations & reporting on one platform. 8+ years, 300+ projects, 5.0 rated. Book a free ERP demo.",
+      "description": "Custom ERP development company unifying finance, inventory, operations & reporting on one platform. 8+ years, projects across India and the Gulf, 5.0 rated. Book a free ERP demo.",
       "keywords": "erp development company, custom erp development company, erp solutions india, erp software development, custom erp india, enterprise resource planning company",
       "canonical": "https://www.avanienterprises.in/erp-development-company"
     },
@@ -7390,7 +7390,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
         }
       ]
     },
-    "intro": "As an ERP development company in India headquartered at Unitech Cyber Park, Sector 39, Gurugram, Avani Enterprises designs enterprise resource planning systems around how your business actually runs, not the other way round. Our custom ERP solutions across India and the Gulf connect accounting, procurement, stock, production, and management reporting on one secure platform, giving leadership a live, accurate view of the entire operation. With 8+ years and 300+ projects behind us, we replace disconnected tools with one system your whole team can trust.",
+    "intro": "As an ERP development company in India headquartered at Unitech Cyber Park, Sector 39, Gurugram, Avani Enterprises designs enterprise resource planning systems around how your business actually runs, not the other way round. Our custom ERP solutions across India and the Gulf connect accounting, procurement, stock, production, and management reporting on one secure platform, giving leadership a live, accurate view of the entire operation. With 8+ years and projects across India and the Gulf behind us, we replace disconnected tools with one system your whole team can trust.",
     "whyAvani": [
       {
         "title": "Built Around Your Workflows",
@@ -7435,7 +7435,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
         "heading": "An ERP Development Partner for India, the Gulf, and Beyond",
         "paragraphs": [
           "We serve clients across India, the Gulf, and international markets, which means our ERP solutions are built for the realities you operate in, GST and Indian compliance, multi-branch and multi-currency operations, and the messy edge cases that generic platforms ignore. Every build starts with a discovery phase to understand your sector, your team, and the workflows that genuinely drive revenue, so the system feels obvious to the people who use it every day.",
-          "Avani Enterprises has delivered 300+ projects over 8+ years for 150+ clients, and that experience shows up in delivery. We work in clear phases, ship in modules so you see value early, and back every system with 24/7 support, training, and a roadmap for future modules. You get a long-term ERP partner, not a one-time vendor who disappears after go-live."
+          "Avani Enterprises has delivered projects across India and the Gulf over 8+ years for clients across India and the Gulf, and that experience shows up in delivery. We work in clear phases, ship in modules so you see value early, and back every system with 24/7 support, training, and a roadmap for future modules. You get a long-term ERP partner, not a one-time vendor who disappears after go-live."
         ]
       }
     ],
@@ -7462,7 +7462,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       },
       {
         "q": "Why choose an Indian custom ERP company over off-the-shelf software?",
-        "a": "Off-the-shelf ERP forces your processes into someone else's template and charges per user forever. A custom ERP from Avani Enterprises is built around your actual workflows, handles GST and Indian compliance natively, supports multi-branch and multi-currency operations, and is owned outright. We serve India, the Gulf, and international clients with a 5.0 client rating across 300+ projects."
+        "a": "Off-the-shelf ERP forces your processes into someone else's template and charges per user forever. A custom ERP from Avani Enterprises is built around your actual workflows, handles GST and Indian compliance natively, supports multi-branch and multi-currency operations, and is owned outright. We serve India, the Gulf, and international clients with a 5.0 client rating across projects across India and the Gulf."
       }
     ],
     "relatedLinks": [
@@ -7492,7 +7492,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
     "slug": "custom-erp-development",
     "seo": {
       "title": "Custom ERP Development in India | Avani Enterprises",
-      "description": "Custom ERP development in India by Avani Enterprises. Bespoke ERP modules mapped to your real operations, not rigid suites. 300+ projects, 8+ years. Get a free ERP scoping call.",
+      "description": "Custom ERP development in India by Avani Enterprises. Bespoke ERP modules mapped to your real operations, not rigid suites. projects across India and the Gulf, 8+ years. Get a free ERP scoping call.",
       "keywords": "custom erp development, bespoke erp software, tailored erp modules india, erp development company, custom erp software, erp module development, enterprise resource planning software, erp implementation india",
       "canonical": "https://www.avanienterprises.in/custom-erp-development"
     },
@@ -7631,7 +7631,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
     "slug": "erp-software-development-company",
     "seo": {
       "title": "ERP Software Development Company in India | Avani Enterprises",
-      "description": "Avani Enterprises is an ERP software development company in India building modular, integrated ERP with role-based access. 300+ projects, 8+ years. Get a free demo.",
+      "description": "Avani Enterprises is an ERP software development company in India building modular, integrated ERP with role-based access. projects across India and the Gulf, 8+ years. Get a free demo.",
       "keywords": "erp software development company, erp software development, enterprise resource planning software india, custom erp development, erp modules, erp system integration",
       "canonical": "https://www.avanienterprises.in/erp-software-development-company"
     },
@@ -8459,7 +8459,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       },
       {
         "q": "Is this suitable for Indian businesses and Gulf operations?",
-        "a": "Yes. Avani Enterprises is headquartered in Unitech Cyber Park, Sector 39, Gurugram, and has built software for 150+ clients across India, the Gulf, and international markets since 2016. We design business operating systems around Indian workflows, compliance needs, and multi-location teams, with the same system serving Gulf and overseas branches."
+        "a": "Yes. Avani Enterprises is headquartered in Unitech Cyber Park, Sector 39, Gurugram, and has built software for clients across India and the Gulf across India, the Gulf, and international markets since 2016. We design business operating systems around Indian workflows, compliance needs, and multi-location teams, with the same system serving Gulf and overseas branches."
       },
       {
         "q": "How long does it take to build a custom BOS, and can we migrate data from our existing Tally or Excel setup?",
@@ -8606,7 +8606,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       },
       {
         "q": "Can you automate workflows for businesses outside India?",
-        "a": "Yes. Headquartered at Unitech Cyber Park, Sector 39, Gurugram, Avani Enterprises has delivered 300+ projects over 8+ years for clients across India, the Gulf, and international markets. Workflow automation software is delivered and supported remotely, so location is no barrier."
+        "a": "Yes. Headquartered at Unitech Cyber Park, Sector 39, Gurugram, Avani Enterprises has delivered projects across India and the Gulf over 8+ years for clients across India, the Gulf, and international markets. Workflow automation software is delivered and supported remotely, so location is no barrier."
       }
     ],
     "relatedLinks": [
@@ -8745,7 +8745,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       },
       {
         "q": "Can you build AI solutions for businesses in India and abroad?",
-        "a": "Yes. Headquartered at Unitech Cyber Park, Sector 39, Gurugram, we have delivered 300+ projects over 8+ years for 150+ clients across India, the Gulf, and international markets, building AI that works with local data and real-world conditions."
+        "a": "Yes. Headquartered at Unitech Cyber Park, Sector 39, Gurugram, we have delivered projects across India and the Gulf over 8+ years for clients across India and the Gulf across India, the Gulf, and international markets, building AI that works with local data and real-world conditions."
       }
     ],
     "relatedLinks": [
@@ -8775,7 +8775,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
     "slug": "ai-chatbot-development",
     "seo": {
       "title": "AI Chatbot Development in India | Avani Enterprises",
-      "description": "Avani Enterprises builds AI chatbots and WhatsApp automation that handle support and qualify leads 24/7. 8+ years, 150+ clients. Book a free chatbot demo.",
+      "description": "Avani Enterprises builds AI chatbots and WhatsApp automation that handle support and qualify leads 24/7. 8+ years, clients across India and the Gulf. Book a free chatbot demo.",
       "keywords": "ai chatbot development, chatbot development company, whatsapp chatbot development india, ai chatbot company, customer support chatbot, lead qualification chatbot",
       "canonical": "https://www.avanienterprises.in/ai-chatbot-development"
     },
@@ -9355,7 +9355,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
     "slug": "mcp-development-company",
     "seo": {
       "title": "MCP Development Company in India | Avani Enterprises",
-      "description": "Avani Enterprises builds Model Context Protocol (MCP) servers that connect AI to your tools and data securely. 8+ years, 300+ projects. Book a free MCP scoping call.",
+      "description": "Avani Enterprises builds Model Context Protocol (MCP) servers that connect AI to your tools and data securely. 8+ years, projects across India and the Gulf. Book a free MCP scoping call.",
       "keywords": "mcp development company, model context protocol development, mcp server development india, mcp integration services, ai tool integration, custom mcp server, llm data connectors",
       "canonical": "https://www.avanienterprises.in/mcp-development-company"
     },
@@ -9404,7 +9404,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       },
       {
         "title": "Full-Stack Context",
-        "desc": "With 8+ years building web, CRM, and automation systems, we know your back end. We wire MCP directly into the databases and APIs we already build for 150+ clients."
+        "desc": "With 8+ years building web, CRM, and automation systems, we know your back end. We wire MCP directly into the databases and APIs we already build for clients across India and the Gulf."
       }
     ],
     "features": [
@@ -9464,7 +9464,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       },
       {
         "q": "Why work with an MCP development company in India?",
-        "a": "Avani Enterprises is based at Unitech Cyber Park, Sector 39, Gurugram, and serves India, the Gulf, and international clients. We build MCP servers around the systems Indian and Gulf businesses actually use, with strong access governance, competitive pricing, and 8+ years and 300+ projects of software engineering behind every build."
+        "a": "Avani Enterprises is based at Unitech Cyber Park, Sector 39, Gurugram, and serves India, the Gulf, and international clients. We build MCP servers around the systems Indian and Gulf businesses actually use, with strong access governance, competitive pricing, and 8+ years and projects across India and the Gulf of software engineering behind every build."
       }
     ],
     "relatedLinks": [
@@ -9603,7 +9603,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       },
       {
         "q": "Do you build LLM solutions for companies in India and the Gulf?",
-        "a": "Yes. Avani Enterprises is headquartered at Unitech Cyber Park, Sector 39, Gurugram, and has served 150+ clients across India, the Gulf, and international markets for 8+ years, delivering LLM and AI solutions remotely and on-site."
+        "a": "Yes. Avani Enterprises is headquartered at Unitech Cyber Park, Sector 39, Gurugram, and has served clients across India and the Gulf across India, the Gulf, and international markets for 8+ years, delivering LLM and AI solutions remotely and on-site."
       }
     ],
     "relatedLinks": [
@@ -9772,7 +9772,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
     "slug": "android-app-development-company",
     "seo": {
       "title": "Android App Development Company in India | Avani",
-      "description": "Avani Enterprises builds native Android apps in Kotlin — fast, secure, Play Store-ready. 8+ years, 300+ projects, 5.0 rating. Get a free Android app quote.",
+      "description": "Avani Enterprises builds native Android apps in Kotlin — fast, secure, Play Store-ready. 8+ years, projects across India and the Gulf, 5.0 rating. Get a free Android app quote.",
       "keywords": "android app development company, android app developer, android application development india, kotlin app development, native android development, play store app launch, android development company gurgaon",
       "canonical": "https://www.avanienterprises.in/android-app-development-company"
     },
@@ -10159,7 +10159,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       },
       {
         "q": "Do you build Flutter apps for businesses across India and the Gulf?",
-        "a": "Yes. Headquartered at Unitech Cyber Park, Sector 39, Gurugram, Avani Enterprises serves clients across India, the Gulf, and international markets. With 8+ years of experience, 300+ projects, and a 5.0 client rating, we work remotely with clear, regular communication."
+        "a": "Yes. Headquartered at Unitech Cyber Park, Sector 39, Gurugram, Avani Enterprises serves clients across India, the Gulf, and international markets. With 8+ years of experience, projects across India and the Gulf, and a 5.0 client rating, we work remotely with clear, regular communication."
       }
     ],
     "relatedLinks": [
@@ -10189,7 +10189,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
     "slug": "react-native-development-company",
     "seo": {
       "title": "React Native Development Company India | Avani Enterprises",
-      "description": "Avani Enterprises is a React Native development company in India building cross-platform apps with near-native performance from one codebase. 300+ projects, 8+ years. Get a quote.",
+      "description": "Avani Enterprises is a React Native development company in India building cross-platform apps with near-native performance from one codebase. projects across India and the Gulf, 8+ years. Get a quote.",
       "keywords": "react native development company, react native app development, cross platform app india, react native developers, react native app development company, hire react native developers",
       "canonical": "https://www.avanienterprises.in/react-native-development-company"
     },
@@ -10328,7 +10328,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
     "slug": "seo-services",
     "seo": {
       "title": "SEO Services in India | Full-Stack SEO | Avani Enterprises",
-      "description": "Avani Enterprises offers complete SEO services in India: audit, technical, on-page, content & link building. 8+ years, 150+ clients. Get your free SEO audit today.",
+      "description": "Avani Enterprises offers complete SEO services in India: audit, technical, on-page, content & link building. 8+ years, clients across India and the Gulf. Get your free SEO audit today.",
       "keywords": "seo services, seo services company, search engine optimization services india, technical seo services, on-page seo, link building services, seo audit india, content seo",
       "canonical": "https://www.avanienterprises.in/seo-services"
     },
@@ -10437,7 +10437,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       },
       {
         "q": "Are your SEO services relevant for Indian and Gulf businesses?",
-        "a": "Yes. Based in DLF Cyber City, Gurugram since 2016, we tune SEO for mobile-first Indian search, regional and English intent, local map-pack rankings, and competitive Gulf and international markets, with 150+ clients served across these regions."
+        "a": "Yes. Based in DLF Cyber City, Gurugram since 2016, we tune SEO for mobile-first Indian search, regional and English intent, local map-pack rankings, and competitive Gulf and international markets, with clients across India and the Gulf served across these regions."
       }
     ],
     "relatedLinks": [
@@ -10576,7 +10576,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       },
       {
         "q": "Why choose an India-based enterprise SEO company like Avani Enterprises?",
-        "a": "Headquartered at Unitech Cyber Park, Sector 39, Gurugram, Avani Enterprises has 8+ years of experience and 300+ projects delivered, serving clients across India, the Gulf, and international markets. You get senior technical SEO expertise and large-scale execution at strong value, with a team that works in your timezone and alongside your engineers."
+        "a": "Headquartered at Unitech Cyber Park, Sector 39, Gurugram, Avani Enterprises has 8+ years of experience and projects delivered across India and the Gulf, serving clients across India, the Gulf, and international markets. You get senior technical SEO expertise and large-scale execution at strong value, with a team that works in your timezone and alongside your engineers."
       }
     ],
     "relatedLinks": [
@@ -10982,7 +10982,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
         "heading": "Transparent Management, Compounding Results",
         "paragraphs": [
           "Our Facebook ads management in India runs on disciplined weekly testing cycles. We ship multiple creative angles, offers, and audience combinations, cut what underperforms early, and pour budget into the winners — so cost-per-result trends down as volume scales up. You always know exactly which ad, audience, and offer is producing each lead or sale, because nothing is left running on guesswork.",
-          "Reporting is outcome-led, not vanity-metric noise. Instead of impressions and reach, we report cost-per-lead, cost-per-acquisition, and ROAS, with a clear recommendation on what to scale next. Backed by 8+ years serving 150+ clients and 24/7 support, your Facebook account is actively managed by a team that treats your ad budget like its own."
+          "Reporting is outcome-led, not vanity-metric noise. Instead of impressions and reach, we report cost-per-lead, cost-per-acquisition, and ROAS, with a clear recommendation on what to scale next. Backed by 8+ years serving clients across India and the Gulf and 24/7 support, your Facebook account is actively managed by a team that treats your ad budget like its own."
         ]
       },
       {
@@ -11137,7 +11137,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
         "heading": "A Creative-Led, Test-Driven Process",
         "paragraphs": [
           "Our Instagram marketing process runs on weekly creative cycles. We test multiple hooks, formats, and ad angles, retire what underperforms, and scale the content and audiences that move the needle, so cost-per-result trends down while your reach and follower quality climb. You always know which Reel, audience, and offer is driving each lead.",
-          "Reporting is plain-English and outcome-led. Instead of drowning you in impressions, we report on saves, profile visits, link clicks, leads, and ad performance, with a clear recommendation on what to scale next. With 8+ years serving 150+ clients and 24/7 support, your Instagram presence is never left running on autopilot."
+          "Reporting is plain-English and outcome-led. Instead of drowning you in impressions, we report on saves, profile visits, link clicks, leads, and ad performance, with a clear recommendation on what to scale next. With 8+ years serving clients across India and the Gulf and 24/7 support, your Instagram presence is never left running on autopilot."
         ]
       },
       {

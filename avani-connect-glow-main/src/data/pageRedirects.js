@@ -1,0 +1,78 @@
+/**
+ * pageRedirects.js — permanent 301s for consolidated pages.
+ *
+ * WHY
+ * ---
+ * The Social Sync scheduler pages were near-identical: /facebook-post-scheduler
+ * and /facebook-story-scheduler measured 94.3% similar, and the whole family of
+ * twelve sat around 520 words each saying effectively the same thing with a
+ * platform name swapped. That is the doorway pattern that caused the original
+ * demotion, surviving inside the product family.
+ *
+ * Rather than write twelve genuinely-distinct pages — which the buyer does not
+ * need, because they are choosing one tool, not twelve — they consolidate into
+ * one deep hub at /social-media-scheduler that covers the real per-platform
+ * differences (formats, limits, Reels/Stories/Shorts, scheduling logic) in
+ * dedicated sections. One strong page concentrates the keywords and the link
+ * equity instead of splitting them twelve ways.
+ *
+ * A 301 (not a canonical) is used deliberately: these pages have no independent
+ * value to preserve, so the cleanest signal is that they have moved.
+ *
+ * KEPT AS SEPARATE PAGES — genuinely distinct Social Sync features, not
+ * variations of the scheduler:
+ *   /social-media-content-planner   /social-media-approval-workflow
+ *   /bulk-dm-tool                   /auto-dm-tool
+ *   /social-media-client-management /multi-brand-social-media-management
+ *
+ * To undo any single consolidation, delete its line and restore the page's
+ * sitemap entry. Nothing is deleted from the registry.
+ */
+
+/* DATA-START */
+
+const PAGE_REDIRECTS = {
+  // Per-platform scheduler clones → the scheduler hub.
+  'facebook-post-scheduler': 'social-media-scheduler',
+  'facebook-story-scheduler': 'social-media-scheduler',
+  'instagram-post-scheduler': 'social-media-scheduler',
+  'instagram-reels-scheduler': 'social-media-scheduler',
+  'linkedin-post-scheduler': 'social-media-scheduler',
+  'youtube-video-scheduler': 'social-media-scheduler',
+  'twitter-post-scheduler': 'social-media-scheduler',
+
+  // Direct synonyms of the same tool.
+  'social-media-management-tool': 'social-media-scheduler',
+
+  // Audience variants that differed only by the noun in the heading.
+  'social-media-tool-for-agencies': 'social-media-scheduler',
+  'social-media-tool-for-creators': 'social-media-scheduler',
+  'social-media-tool-for-small-business': 'social-media-scheduler',
+  'social-media-management-for-enterprises': 'social-media-scheduler',
+
+  // Same service, same city, two slugs — measured 100% identical.
+  'digital-marketing-agency-gurgaon': 'digital-marketing-company-gurgaon',
+  'digital-marketing-agency-noida': 'digital-marketing-company-noida',
+  'digital-marketing-agency-chandigarh': 'digital-marketing-company-chandigarh',
+  'digital-marketing-agency-bangalore': 'digital-marketing-company-bangalore',
+};
+
+function normalise(p) {
+  return String(p || '').toLowerCase().split('?')[0].split('#')[0].replace(/^\/+/, '').replace(/\/+$/, '');
+}
+
+/** The slug this path should permanently redirect to, or null. */
+function redirectTarget(pathname) {
+  const slug = normalise(pathname);
+  const target = PAGE_REDIRECTS[slug];
+  return target && target !== slug ? target : null;
+}
+
+/** True when this slug must be kept out of the sitemap (it 301s elsewhere). */
+function isRedirected(pathname) {
+  return !!redirectTarget(pathname);
+}
+
+/* DATA-END */
+
+export { PAGE_REDIRECTS, redirectTarget, isRedirected };

@@ -254,7 +254,7 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
               <motion.div animate={{ y: [0, -8, 0] }} transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1.5 }}
                 style={{ position: 'absolute', bottom: '-10px', left: '4px', padding: '8px 14px', background: 'var(--glass-bg)', backdropFilter: 'blur(20px)', border: '1px solid var(--border-light)', borderRadius: '10px', zIndex: 20, display: 'flex', alignItems: 'center', gap: '6px' }}>
                 <div style={{ display: 'flex', gap: '2px' }}>{[...Array(5)].map((_, i) => <Star key={i} size={9} fill="var(--accent-primary)" color="var(--accent-primary)" />)}</div>
-                <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '10px', color: 'var(--text-secondary)', fontWeight: 500 }}>5.0 · 300+ Projects</span>
+                <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '10px', color: 'var(--text-secondary)', fontWeight: 500 }}>5.0 · Projects across India & the Gulf</span>
               </motion.div>
 
               {/* Avatar */}

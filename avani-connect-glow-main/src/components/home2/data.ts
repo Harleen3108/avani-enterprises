@@ -102,13 +102,13 @@ export const awards = [
 ];
 
 export const milestones = [
-  { year:'2016', title:'Founded in Rohtak', desc:'Avani Enterprises was born with a mission to democratize world-class digital solutions for Indian businesses.' },
+  { year:'2016', title:'Founded in Rohtak', desc:'Avani Enterprises was born with a mission to democratize digital solutions for Indian businesses.' },
   { year:'2018', title:'First 50 Clients', desc:'Crossed our first major milestone — 50 happy clients across education, healthcare, and e-commerce.' },
   { year:'2020', title:'Gurgaon Expansion', desc:'Opened our NCR office in Gurgaon to serve enterprise clients and Fortune 500 companies.' },
   { year:'2022', title:'Mumbai Office Launch', desc:"Expanded to Mumbai's Andheri East — establishing our presence in India's financial capital." },
   { year:'2023', title:'AI Division Launch', desc:'Launched dedicated AI solutions division — chatbots, automation, and intelligent business tools.' },
   { year:'2024', title:'Global Reach — Australia', desc:'Crossed international borders with APAC operations, serving clients across Australia and Southeast Asia.' },
-  { year:'2025', title:'150+ Clients & Growing', desc:'Surpassed 150 happy clients, 300+ projects delivered, and counting. The journey has just begun.' },
+  { year:'2025', title:'Clients across India & the Gulf & Growing', desc:'Surpassed 150 happy clients, projects delivered across India and the Gulf, and counting. The journey has just begun.' },
 ];
 
 export const faqs = [

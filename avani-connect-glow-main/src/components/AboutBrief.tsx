@@ -85,7 +85,7 @@ const AboutBrief = () => {
             fontWeight: 400,
             maxWidth: '680px'
           }}>
-            Avani Enterprises is the No.1 Digital Marketing Agency in India, providing the best Digital Marketing, Web Development, App Development, and AI Solutions across India (Rohtak, Gurgaon, and Mumbai). We deliver result-driven SEO, PPC, social media, and branding solutions, and our data-focused strategies help businesses generate quality leads and maximize ROI.
+            Avani Enterprises is the Digital, Product & AI Studio in Gurugram & Rohtak, providing the best Digital Marketing, Web Development, App Development, and AI Solutions across India (Rohtak, Gurgaon, and Mumbai). We deliver result-driven SEO, PPC, social media, and branding solutions, and our data-focused strategies help businesses generate quality leads and maximize ROI.
           </p>
 
           {/* Sub features grid */}

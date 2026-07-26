@@ -57,7 +57,7 @@ const servicesList = [
   },
   {
     id: 'business-insurance', title: 'Business Insurance', desc: 'Comprehensive coverage options to protect your business assets and liabilities.',
-    icon: <ShieldCheck size={24} />, price: '₹999/mo+', duration: 'Annual',
+    icon: <ShieldCheck size={24} />, price: 'Free/mo+', duration: 'Annual',
     features: ['General liability', 'Property insurance', 'Cyber insurance', 'Keyman insurance']
   }
 ];

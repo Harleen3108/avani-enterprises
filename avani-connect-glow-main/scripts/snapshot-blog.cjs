@@ -53,6 +53,43 @@ function sanitiseHtml(html) {
     .replace(/javascript:/gi, "");
 }
 
+/**
+ * CMS authors used <h1> for section headings, so nine posts shipped with between
+ * 2 and 18 H1 tags. A page should have exactly one H1 — the title, which the
+ * template renders — so every H1 inside post body content is demoted to H2.
+ */
+function demoteHeadings(html) {
+  return String(html || "")
+    .replace(/<h1(\s[^>]*)?>/gi, "<h2$1>")
+    .replace(/<\/h1>/gi, "</h2>");
+}
+
+/**
+ * Remove unverifiable superlatives and invented counts from CMS copy.
+ * The site cannot claim "No.1" for a brand nobody has heard of, and the numbers
+ * were never substantiated. Applied at snapshot time because this content lives
+ * in the CMS, not the repo — re-running the snapshot re-applies it.
+ */
+const CLAIM_RULES = [
+  [/\bNo\.\s?1\s+(Digital Marketing Agency|digital marketing agency)\b/g, "digital marketing agency"],
+  [/\bIndia's\s+No\.\s?1\b/gi, "a Gurugram-based"],
+  [/\bNo\.\s?1\b/g, ""],
+  [/\s#1\s/g, " "],
+  [/\bIndia's leading\b/gi, "a Gurugram-based"],
+  [/\bbest digital marketing agency\b/gi, "digital marketing agency"],
+  [/\b300\+\s*(Projects|projects)\b/g, "projects"],
+  [/\b150\+\s*(Happy\s*)?(Clients|clients)\b/g, "clients"],
+  [/\b5\.0\s*Client Rating\b/gi, ""],
+  [/\b100% OFF\b/gi, "no cost"],
+  [/₹999\s*\/?-?/g, "Free"],
+];
+
+function cleanClaims(html) {
+  let s = String(html || "");
+  CLAIM_RULES.forEach(([re, to]) => { s = s.replace(re, to); });
+  return s.replace(/\s{2,}/g, " ");
+}
+
 function write(obj, note) {
   fs.writeFileSync(
     OUT,
@@ -87,9 +124,9 @@ function previousSnapshotCount() {
     const trimmed = {};
     posts.forEach((p) => {
       trimmed[p.slug] = {
-        title: p.title || "",
-        excerpt: p.excerpt || "",
-        content: sanitiseHtml(p.content),
+        title: cleanClaims(p.title || ""),
+        excerpt: cleanClaims(p.excerpt || ""),
+        content: cleanClaims(demoteHeadings(sanitiseHtml(p.content))),
         author: p.author || "Avani Enterprises",
         tags: Array.isArray(p.tags) ? p.tags : [],
         featuredImage: p.featuredImage || "",

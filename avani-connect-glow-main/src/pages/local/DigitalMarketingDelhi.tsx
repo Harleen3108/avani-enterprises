@@ -3,8 +3,8 @@ import LocalServicePage, { LocalServicePageProps } from './LocalServicePage';
 
 const PAGE: LocalServicePageProps = {
   seo: {
-    title: 'Best Digital Marketing Agency in Delhi | High ROI Ads — Avani Enterprises',
-    description: 'Looking for the best digital marketing agency in Delhi? We help B2B and B2C brands in Delhi NCR scale with Google Ads, expert SEO, and custom software development.',
+    title: 'Digital Marketing Agency in Delhi | High ROI Ads — Avani Enterprises',
+    description: 'Looking for the digital marketing agency in Delhi? We help B2B and B2C brands in Delhi NCR scale with Google Ads, expert SEO, and custom software development.',
     keywords: 'digital marketing agency delhi, digital marketing company delhi, online marketing services delhi, digital agency south delhi, marketing consultants cp',
     canonical: 'https://www.avanienterprises.in/digital-marketing-agency-delhi',
   },

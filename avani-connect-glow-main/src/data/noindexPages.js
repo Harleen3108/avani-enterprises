@@ -35,19 +35,8 @@
 
 const NOINDEX_ENABLED = true;
 
-// Doorway clones for places with no Avani presence. 130 slugs.
+// Doorway clones for places with no Avani presence. 142 slugs.
 const NOINDEX_SLUGS = [
-  // chandigarh (9)
-  "agentic-ai-development-company-chandigarh",
-  "ai-video-services-chandigarh",
-  "digital-marketing-agency-chandigarh",
-  "digital-marketing-company-chandigarh",
-  "google-ads-agency-chandigarh",
-  "meta-ads-agency-chandigarh",
-  "mobile-app-development-company-chandigarh",
-  "social-media-marketing-agency-chandigarh",
-  "web-development-company-chandigarh",
-
   // amritsar (8)
   "agentic-ai-development-company-amritsar",
   "ai-video-services-amritsar",
@@ -148,6 +137,26 @@ const NOINDEX_SLUGS = [
   "social-media-marketing-agency-rajasthan",
   "web-development-company-rajasthan",
 
+  // singapore (8)
+  "agentic-ai-development-company-singapore",
+  "ai-video-services-singapore",
+  "digital-marketing-agency-singapore",
+  "google-ads-agency-singapore",
+  "meta-ads-agency-singapore",
+  "mobile-app-development-company-singapore",
+  "social-media-marketing-agency-singapore",
+  "web-development-company-singapore",
+
+  // uae (8)
+  "agentic-ai-development-company-uae",
+  "ai-video-services-uae",
+  "digital-marketing-agency-uae",
+  "google-ads-agency-uae",
+  "meta-ads-agency-uae",
+  "mobile-app-development-company-uae",
+  "social-media-marketing-agency-uae",
+  "web-development-company-uae",
+
   // udaipur (8)
   "agentic-ai-development-company-udaipur",
   "ai-video-services-udaipur",
@@ -167,6 +176,16 @@ const NOINDEX_SLUGS = [
   "mobile-app-development-company-uk",
   "social-media-marketing-agency-uk",
   "web-development-company-uk",
+
+  // usa (8)
+  "agentic-ai-development-company-usa",
+  "ai-video-services-usa",
+  "digital-marketing-agency-usa",
+  "google-ads-agency-usa",
+  "meta-ads-agency-usa",
+  "mobile-app-development-company-usa",
+  "social-media-marketing-agency-usa",
+  "web-development-company-usa",
 
   // uttar-pradesh (8)
   "agentic-ai-development-company-uttar-pradesh",
@@ -188,34 +207,64 @@ const NOINDEX_SLUGS = [
   "social-media-marketing-agency-varanasi",
   "web-development-company-varanasi",
 
-  // panipat (2)
-  "seo-company-panipat",
-  "web-development-company-panipat",
+  // dubai (3)
+  "digital-marketing-company-dubai",
+  "seo-company-dubai",
+  "web-development-company-dubai",
 
   // abu-dhabi (1)
   "web-development-company-abu-dhabi",
-
-  // ambala (1)
-  "web-development-company-ambala",
-
-  // hisar (1)
-  "web-development-company-hisar",
-
-  // karnal (1)
-  "web-development-company-karnal",
 
   // london (1)
   "web-development-company-london",
 
   // qatar (1)
   "web-development-company-qatar",
-
-  // sonipat (1)
-  "web-development-company-sonipat",
 ];
 
 // Utility and campaign routes with no search intent. These were previously
 // hard-coded inside api/seo.js; centralised here so there is one source of truth.
+// Blog posts under ~900 words. They cannot reach the 1,200-word bar for
+// editorial content without padding, and a thin post is a liability on a site
+// recovering from a content-quality demotion. They stay live for direct and
+// social traffic; deepen one and remove its line to bring it back.
+const NOINDEX_THIN_BLOG = [
+  "blog/building-scalable-cms-with-appsmith",
+  "blog/meta-ads-checklist-converting-social-campaigns",
+  "blog/ai-videos-business-social-engagement",
+  "blog/custom-web-development-vs-templates-guide",
+  "blog/agentic-ai-business-process-workflow-automation",
+  "blog/b2b-digital-marketing-high-value-lead-gen",
+  "blog/instagram-scheduling-reels-auto-dm-guide",
+  "blog/app-development-flutter-vs-react-native",
+  "blog/boost-ecommerce-instagram-bulk-auto-dm",
+  "blog/linkedin-scheduling-founders-brand-authority",
+  "blog/employee-management-software-remote-teams",
+  "blog/agentic-ai-customer-support-autonomous-reps",
+  "blog/social-media-management-for-agencies-guide",
+  "blog/google-ads-local-business-roi-guide",
+  "blog/geofenced-attendance-management-system",
+  "blog/operations-architecture-resilient-business-os",
+  "blog/reducing-cac-programmatic-seo-traffic-scale",
+  "blog/how-social-media-scheduling-saves-hours",
+  "blog/implement-kpis-okrs-performance-guide",
+  "blog/leave-management-guide-policy-design",
+  "blog/salary-slip-components-deductions-guide",
+  "blog/employee-hr-portal-benefits",
+  "blog/complete-guide-automated-payroll-sme",
+  "blog/best-hrms-software-for-startups",
+  "blog/digital-transformation-guide-modern-businesses",
+  "blog/power-of-business-consulting-expert-guidance",
+  "blog/viral-memes-vs-brand-marketing",
+  "blog/digital-transformation-indian-businesses-avani",
+  "blog/how-to-generate-salary-slips-in-bulk",
+  "blog/how-to-create-employee-kpi-report",
+  "blog/business-loans-comprehensive-guide-financing-growth",
+  "blog/scaling-businesses-with-seo-and-ai",
+  "blog/digital-marketing-growth-story",
+  "blog/android-god-mode-malware-india-business-safety",
+];
+
 const NOINDEX_UTILITY = [
   'thank-you',
   'links',
@@ -237,7 +286,7 @@ const NOINDEX_UTILITY = [
 const NOINDEX_PREFIXES = ['/home2/', '/api/', '/newsletters/', '/courses/'];
 
 const NOINDEX_SET = new Set(
-  NOINDEX_SLUGS.concat(NOINDEX_UTILITY).map((s) => '/' + String(s).replace(/^\/+/, '').replace(/\/+$/, ''))
+  NOINDEX_SLUGS.concat(NOINDEX_THIN_BLOG, NOINDEX_UTILITY).map((s) => '/' + String(s).replace(/^\/+/, '').replace(/\/+$/, ''))
 );
 
 /** True when the path must carry robots "noindex" and stay out of the sitemap. */
@@ -251,4 +300,4 @@ function isNoindexed(pathname) {
 
 /* DATA-END */
 
-export { NOINDEX_ENABLED, NOINDEX_SLUGS, NOINDEX_UTILITY, NOINDEX_PREFIXES, isNoindexed };
+export { NOINDEX_ENABLED, NOINDEX_SLUGS, NOINDEX_THIN_BLOG, NOINDEX_UTILITY, NOINDEX_PREFIXES, isNoindexed };

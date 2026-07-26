@@ -3,8 +3,8 @@ import LocalServicePage, { LocalServicePageProps } from './LocalServicePage';
 
 const PAGE: LocalServicePageProps = {
   seo: {
-    title: 'Best Digital Marketing Agency in Haryana | Growth Retainers — Avani Enterprises',
-    description: 'Looking for the best digital marketing agency in Haryana? We help local brands in Rohtak, Panipat, Gurgaon, and Faridabad scale with SEO, custom web dev, PPC, and social media.',
+    title: 'Digital Marketing Agency in Haryana | Growth Retainers — Avani Enterprises',
+    description: 'Looking for the digital marketing agency in Haryana? We help local brands in Rohtak, Panipat, Gurgaon, and Faridabad scale with SEO, custom web dev, PPC, and social media.',
     keywords: 'digital marketing agency haryana, digital marketing company haryana, online marketing services haryana, digital agency haryana, marketing consultants panipat',
     canonical: 'https://www.avanienterprises.in/digital-marketing-agency-haryana',
   },

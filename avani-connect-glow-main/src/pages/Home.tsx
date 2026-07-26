@@ -304,7 +304,7 @@ const Home = () => {
   //   {
   //     name: "Rajesh Kumar",
   //     position: "Founder, EcoSolutions",
-  //     content: "The team's expertise in SEO and content marketing helped us rank #1 for our target keywords. ROI exceeded our expectations by 200%.",
+  //     content: "The team's expertise in SEO and content marketing helped us rank for our target keywords. ROI exceeded our expectations by 200%.",
   //     rating: 5,
   //     image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"
   //   },
@@ -433,7 +433,7 @@ const Home = () => {
               className="sm:mt-0"
             >
               <span className="text-amber-600 font-extrabold text-lg tracking-wide mb-2 block">
-                Avani Enterprises — No.1 Digital Marketing Agency in India
+                Avani Enterprises — Digital, Product & AI Studio in Gurugram & Rohtak
               </span>
 
               <motion.h1
@@ -451,7 +451,7 @@ const Home = () => {
                   }
                 }}
               >
-                {(seo?.seoHeading && !seo.seoHeading.includes("No.1 Digital Marketing Agency")) ? (
+                {(seo?.seoHeading && !seo.seoHeading.includes("Digital & Product Studio")) ? (
                   seo.seoHeading
                 ) : (
                   <>
@@ -478,7 +478,7 @@ const Home = () => {
               </motion.h1>
 
               <p className="font-body text-[15px] md:text-base text-slate-600 mb-10 leading-7 md:leading-8 font-normal tracking-[0.01em] max-w-xl">
-Avani Enterprises is the No.1 Digital Marketing Agency in India, providing the best Digital Marketing, Web Development, App Development, and AI Solutions across India (Rohtak, Gurgaon, and Mumbai). We deliver result-driven SEO, PPC, social media, and branding solutions. Our data-focused strategies help businesses generate quality leads and maximize ROI.
+Avani Enterprises is the Digital, Product & AI Studio in Gurugram & Rohtak, providing the best Digital Marketing, Web Development, App Development, and AI Solutions across India (Rohtak, Gurgaon, and Mumbai). We deliver result-driven SEO, PPC, social media, and branding solutions. Our data-focused strategies help businesses generate quality leads and maximize ROI.
               </p>
 
               {/* Global Expansion Text */}

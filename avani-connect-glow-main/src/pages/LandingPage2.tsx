@@ -943,7 +943,7 @@ export default function BusinessSetup2() {
               transition: "transform 0.2s ease",
             }}
           >
-            <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "13px", fontWeight: 700, color: "rgba(255,255,255,0.45)", textDecoration: "line-through" }}>₹999</span>
+            <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "13px", fontWeight: 700, color: "rgba(255,255,255,0.45)", textDecoration: "line-through" }}>Free</span>
             <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "16px", fontWeight: 900, color: "#4ADE80", letterSpacing: "-0.5px" }}>₹0</span>
             <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "9px", fontWeight: 900, letterSpacing: "0.5px", color: "#fff", background: "#DC2626", padding: "2px 6px", borderRadius: "4px" }}>FREE</span>
             <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "11px", fontWeight: 800, letterSpacing: "1px", color: C.accent, textTransform: "uppercase" }}>Claim Slot</span>
@@ -1179,7 +1179,7 @@ export default function BusinessSetup2() {
             <div ref={heroFormRef} className="hero-line hero-form-col" style={{ position: "relative", width: "100%", scrollMarginTop: "100px" }}>
               <div style={{ position: "absolute", inset: "-12px", border: `1px solid ${C.accent}25`, borderRadius: "20px", zIndex: 0 }} />
               <div style={{ position: "relative", zIndex: 1, background: "#FFFFFF", borderRadius: "20px", overflow: "hidden", boxShadow: "0 20px 60px rgba(0,0,0,0.12)", border: `1px solid ${C.border}` }}>
-                {/* ── Highlighted ₹999 → ₹0 offer strip ── */}
+                {/* ── Highlighted Free → ₹0 offer strip ── */}
                 <div style={{
                   background: "linear-gradient(135deg, #1A1A2E 0%, #0F0F1A 100%)",
                   padding: "10px 16px", display: "flex", alignItems: "center",
@@ -1187,9 +1187,9 @@ export default function BusinessSetup2() {
                   borderBottom: `2px solid ${C.accent}`,
                 }}>
                   <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "10px", fontWeight: 900, letterSpacing: "1.5px", color: C.accent, textTransform: "uppercase" }}>Limited Offer</span>
-                  <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "15px", fontWeight: 700, color: "rgba(255,255,255,0.45)", textDecoration: "line-through" }}>₹999</span>
+                  <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "15px", fontWeight: 700, color: "rgba(255,255,255,0.45)", textDecoration: "line-through" }}>Free</span>
                   <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "22px", fontWeight: 900, color: "#4ADE80", letterSpacing: "-0.5px" }}>₹0</span>
-                  <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "10px", fontWeight: 900, letterSpacing: "0.5px", color: "#fff", background: "#DC2626", padding: "3px 8px", borderRadius: "4px" }}>100% OFF</span>
+                  <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "10px", fontWeight: 900, letterSpacing: "0.5px", color: "#fff", background: "#DC2626", padding: "3px 8px", borderRadius: "4px" }}>No cost</span>
                   <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "11px", fontWeight: 600, color: "rgba(255,255,255,0.85)" }}>Free consultation — claim your slot below</span>
                 </div>
                 <RegistrationForm uniqueConsentId={"businessSetup2Form"} source="businesssetup2" isEmbedded={true} allowCustomService={true} />

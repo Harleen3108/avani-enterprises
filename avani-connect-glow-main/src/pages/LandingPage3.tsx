@@ -28,7 +28,7 @@ const C = {
 const benefits = [
   { icon: <Rocket />, title: "Done-For-You", desc: "Website, ads, content & AI handled by one expert team." },
   { icon: <Clock />, title: "Launch in 7 Days", desc: "Go live fast — no tech headaches, no delays." },
-  { icon: <TrendingUp />, title: "Proven ROI", desc: "4x–10x returns delivered across 300+ projects." },
+  { icon: <TrendingUp />, title: "Proven ROI", desc: "4x–10x returns delivered across projects across India and the Gulf." },
   { icon: <ShieldCheck />, title: "Start at ₹0", desc: "No upfront cost — start growing right away." },
 ];
 
@@ -295,7 +295,7 @@ export default function BusinessSetup3() {
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
           <div className="bs3-offer bs3-shake">
-            <span className="bs3-offer-old">₹999</span>
+            <span className="bs3-offer-old">Free</span>
             <ArrowRight size={14} color="rgba(255,255,255,0.55)" />
             <span className="bs3-offer-new">₹0</span>
             <span className="bs3-offer-tag">FREE</span>
@@ -321,7 +321,7 @@ export default function BusinessSetup3() {
             </p>
             <div className="bs3-trust">
               <span className="bs3-trust-item"><Star size={15} color={C.accent} fill={C.accent} /> 4.9/5 Rated</span>
-              <span className="bs3-trust-item"><CheckCircle size={15} color={C.green} /> 150+ Clients</span>
+              <span className="bs3-trust-item"><CheckCircle size={15} color={C.green} /> Clients across India & the Gulf</span>
               <span className="bs3-trust-item"><Clock size={15} color={C.accent} /> Results in 24 hrs</span>
             </div>
             <div className="bs3-cta-wrap" style={{ display: "flex" }}>

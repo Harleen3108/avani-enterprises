@@ -30,6 +30,8 @@
 
 /** Old, URL-invalid slug → new clean slug. */
 const BLOG_SLUG_REDIRECTS = {
+  // Two CMS posts shipped with the same title and near-identical content.
+  'real-estate-case-study': 'real-estate-seo-success-story',
   'A-Real-Estate-SEO-Success-Story': 'real-estate-seo-success-story',
   'Digital Marketing Agency in India': 'how-to-choose-digital-marketing-agency-india',
   'The SEO Playbook': 'seo-playbook-for-indian-businesses',

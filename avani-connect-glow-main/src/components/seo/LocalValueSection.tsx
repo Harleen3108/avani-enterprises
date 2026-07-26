@@ -63,11 +63,43 @@ export default function LocalValueSection() {
         <p
           style={{
             fontSize: '1rem', color: 'var(--text-secondary)',
-            lineHeight: 1.85, marginBottom: '2.5rem', maxWidth: '75ch',
+            lineHeight: 1.85, marginBottom: '2rem', maxWidth: '75ch',
           }}
         >
           {block.lead}
         </p>
+
+        {/* AI Quick Summary — placed high because answer engines weight early,
+            self-contained factual statements. Generated from this page's own
+            data, so every bullet is specific and checkable. */}
+        {block.aiSummary?.length > 0 && (
+          <aside
+            aria-label="Quick summary"
+            style={{
+              background: 'var(--card-bg)', border: '1px solid var(--border-light)',
+              borderLeft: '3px solid var(--accent-primary)', borderRadius: '14px',
+              padding: '22px 24px', marginBottom: '2.5rem',
+            }}
+          >
+            <h3
+              style={{
+                fontFamily: "'Outfit', sans-serif", fontSize: '.8rem', fontWeight: 700,
+                textTransform: 'uppercase', letterSpacing: '.1em',
+                color: 'var(--accent-primary)', margin: '0 0 1rem',
+              }}
+            >
+              AI Quick Summary
+            </h3>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              {block.aiSummary.map((line: string, i: number) => (
+                <li key={i} style={{ display: 'flex', gap: '9px', alignItems: 'flex-start' }}>
+                  <CheckCircle size={15} color="var(--accent-primary)" style={{ flexShrink: 0, marginTop: '4px' }} />
+                  <span style={{ fontSize: '.9rem', color: 'var(--text-secondary)', lineHeight: 1.65 }}>{line}</span>
+                </li>
+              ))}
+            </ul>
+          </aside>
+        )}
 
         {/* Location facts — the part that makes each city page genuinely different */}
         {block.localFacts.length > 0 && (
@@ -155,6 +187,32 @@ export default function LocalValueSection() {
                 <p style={{ fontSize: '.9rem', color: 'var(--text-secondary)', margin: '6px 0 0', lineHeight: 1.6 }}>
                   {m.value}
                 </p>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Local long-form depth — real, page-specific detail rather than filler */}
+        {block.bodyBlocks?.length > 0 && (
+          <div style={{ marginBottom: '2rem', maxWidth: '75ch' }}>
+            {block.bodyBlocks.map((b: any, i: number) => (
+              <div key={i} style={{ marginBottom: '1.75rem' }}>
+                <h3
+                  style={{
+                    fontFamily: "'Outfit', sans-serif", fontSize: '1.05rem',
+                    fontWeight: 700, color: 'var(--text-primary)', margin: '0 0 .7rem',
+                  }}
+                >
+                  {b.heading}
+                </h3>
+                {b.paragraphs.map((p: string, j: number) => (
+                  <p
+                    key={j}
+                    style={{ fontSize: '.95rem', color: 'var(--text-secondary)', lineHeight: 1.8, marginBottom: '.9rem' }}
+                  >
+                    {p}
+                  </p>
+                ))}
               </div>
             ))}
           </div>

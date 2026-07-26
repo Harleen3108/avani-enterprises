@@ -3,19 +3,22 @@
  *
  * WHY THIS EXISTS
  * ---------------
- * The codebase carried THREE different Gurugram addresses:
- *   1. Footer.tsx          "3rd Floor, Tower-B, Cyber Park, Durga Colony,
- *                           Sector 39, Gurugram, Haryana 122001"
- *   2. website-content.md  "Tower B, 3rd Floor, Unitech Cyber Park, Sector 39,
- *                           Gurugram, Haryana 122002"   (same building, different PIN)
- *   3. LocalServicePage /  "DLF Cyber City, Gurugram"    (a DIFFERENT part of the city)
- *      cityPagesData.ts
- * …and the phone number appeared in five formats.
+ * The codebase carried three different Gurugram addresses and five phone
+ * formats. All are now reconciled to the client-confirmed canonical below.
  *
  * NAP (Name, Address, Phone) consistency is a direct local-pack ranking factor:
  * Google cross-references your website against your Google Business Profile and
  * third-party citations, and conflicting addresses suppress local rankings. One
  * file now owns this, and everything else reads from it.
+ *
+ * Superseded variants, all now purged:
+ *   1. Footer.tsx          an older Cyber Park variant with PIN 122001
+ *   2. website-content.md  the same building without "Durga Colony"
+ *   3. cityPagesData.ts /  "DLF Cyber City, Gurugram" — a different part of the
+ *      LocalServicePage    city entirely, asserted as our HQ on 87 occasions
+ *
+ * DLF Cyber City still appears on some Gurugram pages as an area we serve.
+ * That is accurate and intentional; only the HQ claims were wrong.
  *
  * THE `confirmed` FLAG — READ BEFORE CHANGING
  * -------------------------------------------
@@ -68,11 +71,11 @@ const OFFICES = {
     label: 'Gurugram (Head Office)',
     isHQ: true,
     // Client-confirmed. Supersedes the two variants that were in the codebase
-    // ("DLF Cyber City" and the 122001 Footer version) — both now purged.
+    // Supersedes the earlier "DLF Cyber City" and alternate-PIN variants.
     confirmed: true,
     schemaReady: true,
     address: {
-      street: 'Tower B, 3rd Floor, Unitech Cyber Park, Sector 39',
+      street: 'Tower B, 3rd Floor, Unitech Cyber Park, Durga Colony, Sector 39',
       locality: 'Gurugram',
       region: 'Haryana',
       postalCode: '122002',

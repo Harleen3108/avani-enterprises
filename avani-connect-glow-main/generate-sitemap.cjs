@@ -34,7 +34,8 @@ function loadNoindex() {
   const slugs = new Set();
   const block = src.match(/const\s+NOINDEX_SLUGS\s*=\s*\[([\s\S]*?)\n\];/);
   const utility = src.match(/const\s+NOINDEX_UTILITY\s*=\s*\[([\s\S]*?)\n\];/);
-  [block, utility].forEach((m) => {
+  const thinBlog = src.match(/const\s+NOINDEX_THIN_BLOG\s*=\s*\[([\s\S]*?)\n\];/);
+  [block, utility, thinBlog].forEach((m) => {
     if (!m) return;
     (m[1].match(/["']([^"']+)["']/g) || []).forEach((q) =>
       slugs.add(q.slice(1, -1).replace(/^\/+/, "").replace(/\/+$/, ""))
@@ -109,10 +110,24 @@ function loadCanonicalised() {
 
 const CANONICALISED = loadCanonicalised();
 
+// Pages that 301 elsewhere (Social Sync scheduler consolidation) must not appear
+// in the sitemap — a sitemap lists redirect destinations, never their sources.
+function loadConsolidated() {
+  const p = path.join(__dirname, "src", "data", "pageRedirects.js");
+  if (!fs.existsSync(p)) return new Set();
+  const src = fs.readFileSync(p, "utf8");
+  const m = src.match(/const PAGE_REDIRECTS = \{([\s\S]*?)\n\};/);
+  if (!m) return new Set();
+  return new Set((m[1].match(/^\s*'([^']+)':/gm) || []).map((l) => l.match(/'([^']+)'/)[1]));
+}
+const CONSOLIDATED = loadConsolidated();
+
 /** True when a slug must be kept out of the sitemap. */
 function isDeindexed(slug) {
   const clean = String(slug).replace(/^\/+/, "").replace(/\/+$/, "");
   if (CANONICALISED.has(clean)) return true;
+  // Consolidated scheduler pages 301 to the hub — never list a redirect source.
+  if (CONSOLIDATED.has(clean)) return true;
   return NOINDEX.enabled && NOINDEX.set.has(clean);
 }
 
@@ -798,6 +813,7 @@ const GENERATED_HEADER =
   ["offices.js", "offices.js"],
   ["comparisons.js", "comparisons.js"],
   ["guides.js", "guides.js"],
+  ["pageRedirects.js", "pageRedirects.js"],
   ["blogSlugRedirects.js", "blogSlugRedirects.js"],
   // blogContent.js is written directly into api/ by scripts/snapshot-blog.cjs,
   // so it is not synced from src/data/.

@@ -9,9 +9,18 @@
       "canonical": "https://www.avanienterprises.in/ai-callers"
     },
     "breadcrumbs": [
-      { "label": "Home", "href": "/" },
-      { "label": "Services", "href": "/services" },
-      { "label": "AI Voice Callers", "href": "/ai-callers" }
+      {
+        "label": "Home",
+        "href": "/"
+      },
+      {
+        "label": "Services",
+        "href": "/services"
+      },
+      {
+        "label": "AI Voice Callers",
+        "href": "/ai-callers"
+      }
     ],
     "hero": {
       "tag": "AI Voice Agents",
@@ -21,18 +30,48 @@
     "introHeading": "Stop losing leads to unanswered calls",
     "intro": "Most businesses lose leads not because the marketing failed but because nobody picked up, or the callback came two days late. An AI voice agent answers every inbound call, calls new leads back within seconds, qualifies them against your criteria, books the appointment, and escalates to a person the moment the conversation needs one.",
     "whyAvani": [
-      { "title": "A conversation, not a phone menu", "desc": "It understands what the caller actually said and asks follow-up questions, instead of making them press 4 for sales." },
-      { "title": "Escalates before it frustrates", "desc": "Sentiment, repeated confusion or a request for a human triggers a transfer, and the agent receives the transcript so the caller never repeats themselves." },
-      { "title": "Every call logged in your CRM", "desc": "Recording, transcript, summary and outcome land against the lead record automatically." },
-      { "title": "Hindi and English", "desc": "Multilingual voice so callers get answered in the language they open with." }
+      {
+        "title": "A conversation, not a phone menu",
+        "desc": "It understands what the caller actually said and asks follow-up questions, instead of making them press 4 for sales."
+      },
+      {
+        "title": "Escalates before it frustrates",
+        "desc": "Sentiment, repeated confusion or a request for a human triggers a transfer, and the agent receives the transcript so the caller never repeats themselves."
+      },
+      {
+        "title": "Every call logged in your CRM",
+        "desc": "Recording, transcript, summary and outcome land against the lead record automatically."
+      },
+      {
+        "title": "Hindi and English",
+        "desc": "Multilingual voice so callers get answered in the language they open with."
+      }
     ],
     "features": [
-      { "title": "Inbound call answering", "desc": "Picks up 24/7, including nights, weekends and while your team is on other calls." },
-      { "title": "Speed-to-lead callbacks", "desc": "A new form, ad or WhatsApp lead can trigger an outbound call within seconds of arriving." },
-      { "title": "Appointment booking", "desc": "Checks live availability and books directly into your calendar during the call." },
-      { "title": "Lead qualification", "desc": "Asks your qualifying questions and scores the lead before it reaches a salesperson." },
-      { "title": "Warm human transfer", "desc": "Hands off mid-call to the right person with the conversation context carried across." },
-      { "title": "Transcripts and analytics", "desc": "Full transcripts, call outcomes and drop-off points so you can see where conversations fail." }
+      {
+        "title": "Inbound call answering",
+        "desc": "Picks up 24/7, including nights, weekends and while your team is on other calls."
+      },
+      {
+        "title": "Speed-to-lead callbacks",
+        "desc": "A new form, ad or WhatsApp lead can trigger an outbound call within seconds of arriving."
+      },
+      {
+        "title": "Appointment booking",
+        "desc": "Checks live availability and books directly into your calendar during the call."
+      },
+      {
+        "title": "Lead qualification",
+        "desc": "Asks your qualifying questions and scores the lead before it reaches a salesperson."
+      },
+      {
+        "title": "Warm human transfer",
+        "desc": "Hands off mid-call to the right person with the conversation context carried across."
+      },
+      {
+        "title": "Transcripts and analytics",
+        "desc": "Full transcripts, call outcomes and drop-off points so you can see where conversations fail."
+      }
     ],
     "bodySections": [
       {
@@ -51,16 +90,40 @@
       }
     ],
     "faqs": [
-      { "q": "What does it cost to run?", "a": "There is a build fee for the script, integrations and testing, then a usage-based per-minute cost for the calls themselves. We quote it after reviewing your actual call volume rather than giving a headline rate that does not survive contact with your traffic." },
-      { "q": "Can it work with our existing phone number?", "a": "Yes. We integrate over SIP or your existing telephony provider, so the number your customers already know keeps working." },
-      { "q": "How long does it take to set up?", "a": "Typically 3 to 8 weeks depending on how many call flows you need and how clean the CRM integration is. We launch on a slice of traffic first and widen once the transcripts look right." }
+      {
+        "q": "What does it cost to run?",
+        "a": "There is a build fee for the script, integrations and testing, then a usage-based per-minute cost for the calls themselves. We quote it after reviewing your actual call volume rather than giving a headline rate that does not survive contact with your traffic."
+      },
+      {
+        "q": "Can it work with our existing phone number?",
+        "a": "Yes. We integrate over SIP or your existing telephony provider, so the number your customers already know keeps working."
+      },
+      {
+        "q": "How long does it take to set up?",
+        "a": "Typically 3 to 8 weeks depending on how many call flows you need and how clean the CRM integration is. We launch on a slice of traffic first and widen once the transcripts look right."
+      }
     ],
     "internalLinks": [
-      { "label": "AI Chatbot Development", "href": "/ai-chatbot-development", "desc": "The same conversational layer for web, app and WhatsApp." },
-      { "label": "Agentic AI Development", "href": "/agentic-ai-development-company", "desc": "Agents that complete tasks across your systems, not just talk." },
-      { "label": "CRM Development", "href": "/crm-development-company", "desc": "Where the qualified calls should land." }
+      {
+        "label": "AI Chatbot Development",
+        "href": "/ai-chatbot-development",
+        "desc": "The same conversational layer for web, app and WhatsApp."
+      },
+      {
+        "label": "Agentic AI Development",
+        "href": "/agentic-ai-development-company",
+        "desc": "Agents that complete tasks across your systems, not just talk."
+      },
+      {
+        "label": "CRM Development",
+        "href": "/crm-development-company",
+        "desc": "Where the qualified calls should land."
+      }
     ],
-    "cta": { "headline": "Hear it answer your own call flow", "sub": "Book a walkthrough and we will demo an agent against a real script from your business." }
+    "cta": {
+      "headline": "Hear it answer your own call flow",
+      "sub": "Book a walkthrough and we will demo an agent against a real script from your business."
+    }
   },
   "ai-content-services": {
     "slug": "ai-content-services",
@@ -72,9 +135,18 @@
       "canonical": "https://www.avanienterprises.in/ai-content-services"
     },
     "breadcrumbs": [
-      { "label": "Home", "href": "/" },
-      { "label": "Services", "href": "/services" },
-      { "label": "AI Content Services", "href": "/ai-content-services" }
+      {
+        "label": "Home",
+        "href": "/"
+      },
+      {
+        "label": "Services",
+        "href": "/services"
+      },
+      {
+        "label": "AI Content Services",
+        "href": "/ai-content-services"
+      }
     ],
     "hero": {
       "tag": "AI Content Production",
@@ -84,18 +156,48 @@
     "introHeading": "Volume is easy. Volume that ranks is not.",
     "intro": "Anyone can generate a thousand words in ten seconds. The reason most AI content fails is that it says nothing only you could say — no data, no point of view, no specifics. We use AI for the drafting speed and put the human effort where it actually changes the outcome: the brand voice guide up front, and the edit, fact-check and originality pass at the end.",
     "whyAvani": [
-      { "title": "A brand voice guide the model is held to", "desc": "Built from your real positioning, terminology and the things you refuse to say — so drafts start in your voice, not a generic one." },
-      { "title": "Human editing on every piece", "desc": "Nothing publishes unedited. The edit is where your data, your customers and your point of view get added." },
-      { "title": "Fact-checked and originality-passed", "desc": "Claims are verified and every piece is checked for originality before delivery." },
-      { "title": "Built for search intent", "desc": "Topics are chosen from what people actually search and what your site can realistically rank for." }
+      {
+        "title": "A brand voice guide the model is held to",
+        "desc": "Built from your real positioning, terminology and the things you refuse to say — so drafts start in your voice, not a generic one."
+      },
+      {
+        "title": "Human editing on every piece",
+        "desc": "Nothing publishes unedited. The edit is where your data, your customers and your point of view get added."
+      },
+      {
+        "title": "Fact-checked and originality-passed",
+        "desc": "Claims are verified and every piece is checked for originality before delivery."
+      },
+      {
+        "title": "Built for search intent",
+        "desc": "Topics are chosen from what people actually search and what your site can realistically rank for."
+      }
     ],
     "features": [
-      { "title": "Long-form articles", "desc": "Researched pieces built around a keyword and a genuine angle, not a word count." },
-      { "title": "Bulk product copy", "desc": "Thousands of product and category descriptions generated from your attribute data." },
-      { "title": "Landing page copy", "desc": "Page copy written to a single conversion goal, matched to the ad or query that brought the visitor." },
-      { "title": "Repurposing", "desc": "One asset cut into social posts, email sequences and short-form video scripts." },
-      { "title": "Brand voice guide", "desc": "A reusable document your team and ours can both write against." },
-      { "title": "Editorial calendar", "desc": "A publishing cadence mapped to intent, so the content compounds instead of scattering." }
+      {
+        "title": "Long-form articles",
+        "desc": "Researched pieces built around a keyword and a genuine angle, not a word count."
+      },
+      {
+        "title": "Bulk product copy",
+        "desc": "Thousands of product and category descriptions generated from your attribute data."
+      },
+      {
+        "title": "Landing page copy",
+        "desc": "Page copy written to a single conversion goal, matched to the ad or query that brought the visitor."
+      },
+      {
+        "title": "Repurposing",
+        "desc": "One asset cut into social posts, email sequences and short-form video scripts."
+      },
+      {
+        "title": "Brand voice guide",
+        "desc": "A reusable document your team and ours can both write against."
+      },
+      {
+        "title": "Editorial calendar",
+        "desc": "A publishing cadence mapped to intent, so the content compounds instead of scattering."
+      }
     ],
     "bodySections": [
       {
@@ -114,16 +216,40 @@
       }
     ],
     "faqs": [
-      { "q": "Will the content be original?", "a": "Yes. Every piece goes through an originality check before delivery, and the human edit adds specifics — your data, your examples, your positioning — that no model could produce on its own." },
-      { "q": "Do you disclose that AI was used?", "a": "That is your call as the publisher, and we will follow your policy. Google does not require AI disclosure for ranking purposes; some industries and some audiences expect it." },
-      { "q": "How much volume can you produce?", "a": "Considerably more than a fully manual team, but we scope it against what your site can realistically get indexed. Publishing far past that point creates the thin-content problem rather than solving it." }
+      {
+        "q": "Will the content be original?",
+        "a": "Yes. Every piece goes through an originality check before delivery, and the human edit adds specifics — your data, your examples, your positioning — that no model could produce on its own."
+      },
+      {
+        "q": "Do you disclose that AI was used?",
+        "a": "That is your call as the publisher, and we will follow your policy. Google does not require AI disclosure for ranking purposes; some industries and some audiences expect it."
+      },
+      {
+        "q": "How much volume can you produce?",
+        "a": "Considerably more than a fully manual team, but we scope it against what your site can realistically get indexed. Publishing far past that point creates the thin-content problem rather than solving it."
+      }
     ],
     "internalLinks": [
-      { "label": "SEO Services", "href": "/seo-company", "desc": "The strategy the content plugs into." },
-      { "label": "AI Video Services", "href": "/ai-video-services", "desc": "Turn the same script into video." },
-      { "label": "Social Media Marketing", "href": "/social-media-marketing-company", "desc": "Where the repurposed cuts get published." }
+      {
+        "label": "SEO Services",
+        "href": "/seo-company",
+        "desc": "The strategy the content plugs into."
+      },
+      {
+        "label": "AI Video Services",
+        "href": "/ai-video-services",
+        "desc": "Turn the same script into video."
+      },
+      {
+        "label": "Social Media Marketing",
+        "href": "/social-media-marketing-company",
+        "desc": "Where the repurposed cuts get published."
+      }
     ],
-    "cta": { "headline": "See a sample in your brand voice", "sub": "Send us two pieces you have published and we will return a draft written against your actual voice." }
+    "cta": {
+      "headline": "See a sample in your brand voice",
+      "sub": "Send us two pieces you have published and we will return a draft written against your actual voice."
+    }
   },
   "business-os": {
     "slug": "business-os",
@@ -3781,9 +3907,9 @@
     "slug": "social-media-scheduler",
     "type": "product",
     "seo": {
-      "title": "Social Media Content Scheduler | SocialSync",
-      "description": "Schedule and queue posts, reels, stories, and videos in advance using our drag-and-drop calendar. Use credit-based posting (1 credit = 1 post) with no platform limits. Try free.",
-      "keywords": "socialsync, social media tool, content scheduler, scheduling posts, auto dm instagram",
+      "title": "Social Media Scheduler for Instagram, LinkedIn, X & YouTube",
+      "description": "Schedule Reels, Stories, carousels, Shorts and threads from one calendar. Per-platform formats, limits and timing handled properly — not one post blasted everywhere.",
+      "keywords": "",
       "canonical": "https://www.avanienterprises.in/social-media-scheduler"
     },
     "breadcrumbs": [
@@ -3792,155 +3918,168 @@
         "href": "/"
       },
       {
-        "label": "SocialSync",
+        "label": "Social Sync",
         "href": "/social-sync"
       },
       {
-        "label": "Content Scheduler",
+        "label": "Social Media Scheduler",
         "href": "/social-media-scheduler"
       }
     ],
     "hero": {
-      "tag": "SocialSync Feature Showcase",
-      "h1": "Social Media Scheduler",
-      "subtitle": "Schedule and queue posts, reels, stories, and videos in advance using our drag-and-drop calendar.",
-      "stats": [
-        {
-          "value": "5+",
-          "label": "Networks Linked"
-        },
-        {
-          "value": "1 Credit",
-          "label": "Per Post"
-        },
-        {
-          "value": "100%",
-          "label": "API Compliant"
-        },
-        {
-          "value": "Instant",
-          "label": "Auto DMs"
-        }
-      ]
+      "tag": "Social Sync",
+      "h1": "Social Media Scheduler for Every Platform",
+      "subtitle": "Plan, schedule and publish to Instagram, Facebook, LinkedIn, X and YouTube from one calendar — with each platform’s formats, limits and timing handled properly rather than one post blasted everywhere."
     },
     "productApp": {
-      "name": "SocialSync",
-      "url": "https://socialsync.avanienterprises.in",
-      "ctaLabel": "Go to SocialSync App"
+      "name": "Social Sync",
+      "url": "https://www.avanienterprises.in/social-sync",
+      "ctaLabel": "See Social Sync"
     },
-    "introHeading": "High-Performance Content Scheduler for Brands",
-    "intro": "SocialSync makes publishing simple. Link your Instagram, Facebook, X, YouTube, and LinkedIn pages to schedule content, configure auto-DMs, and approve drafts on one calendar. Powered by a credit model (1 credit = 1 post) with no seat limits.",
+    "introHeading": "One calendar, five platforms, five different sets of rules",
+    "intro": "A scheduler is only useful if it respects what each platform actually rewards. Instagram wants vertical video and native formats; LinkedIn wants text that stands on its own; X wants brevity or a thread; YouTube wants a title and description that carry search weight. Social Sync schedules to all of them from one calendar while keeping the per-platform differences intact.",
     "whyAvani": [
       {
-        "title": "Credit-Based Pricing",
-        "desc": "Pay only for what you publish. 1 credit equals 1 scheduled post across all channels, with no seat fees."
+        "title": "Per-platform formatting, not cross-posting",
+        "desc": "The same idea is adapted to each platform’s format rather than duplicated — which is what stops a Reel appearing as a letterboxed square on LinkedIn."
       },
       {
-        "title": "Automated DM Triggers",
-        "desc": "Increase lead capture by automatically sending links to users who comment on your posts or message you."
+        "title": "Character and media limits enforced before you schedule",
+        "desc": "Caption and title limits are checked at compose time, so a post does not fail or truncate at publish."
       },
       {
-        "title": "Agency Approval Hub",
-        "desc": "Share draft calendars with clients to collect feedback and approvals before posts are published."
+        "title": "Queue by slot, not by timestamp",
+        "desc": "Define recurring slots per platform and drop content into them, instead of picking a date and time for every single post."
       },
       {
-        "title": "100% Platform Compliant",
-        "desc": "Built strictly on official Meta, Google, LinkedIn, and X developer APIs to protect your accounts."
+        "title": "Approval before anything publishes",
+        "desc": "Optional review step for agencies and multi-brand teams, so nothing goes out unchecked."
       }
     ],
     "features": [
       {
-        "title": "Direct Auto-Publishing",
-        "desc": "Direct publishing for posts, reels, stories, and videos without manual app notifications."
+        "title": "Unified content calendar",
+        "desc": "Every platform in one month view, colour-coded, with drag-to-reschedule."
       },
       {
-        "title": "Keyword DM Replies",
-        "desc": "Send welcome messages or link files when users comment specific words on your posts."
+        "title": "Reels, Stories and Shorts",
+        "desc": "Vertical video scheduled natively to Instagram, Facebook and YouTube rather than posted as a link."
       },
       {
-        "title": "Client Feedback Portal",
-        "desc": "Let client review drafts and sign off on schedules without logging into the main dashboard."
+        "title": "Carousels and documents",
+        "desc": "Multi-image carousels for Instagram and Facebook, and document carousels for LinkedIn."
       },
       {
-        "title": "Workspace Isolation",
-        "desc": "Keep every client brand, team conversation, and calendar separate and secure."
+        "title": "Threads for X",
+        "desc": "Compose and schedule a full thread as one unit instead of timing replies manually."
       },
       {
-        "title": "Dynamic Thread Queue",
-        "desc": "Draft and schedule multi-part X/Twitter threads with image attachments."
+        "title": "Bulk upload",
+        "desc": "Load a month of content from a spreadsheet and assign it to slots in one pass."
       },
       {
-        "title": "Detailed Analytics",
-        "desc": "Monitor reach, click rates, and follower growth trends in clean reports."
+        "title": "First-comment scheduling",
+        "desc": "Schedule the hashtag or link comment alongside the post, so the caption stays clean."
       }
     ],
     "bodySections": [
       {
-        "heading": "Scale Engagement With Content Scheduler",
+        "heading": "Instagram: Reels, Stories, carousels and the caption limit",
         "paragraphs": [
-          "Juggling multiple browser tabs just to post update images and reply to user messages wastes hours. SocialSync consolidates your social operations, allowing you to queue campaigns and automate customer inquiries on a single calendar.",
-          "Our auto DM and keyword triggers let you deliver brochures, registration links, and coupon codes directly to user inboxes instantly. This turns social attention into qualified leads."
+          "Instagram gives you a 2,200-character caption and up to 30 hashtags, and it treats each format differently. Reels are the format shown most readily to people who do not already follow you, which makes them the reach mechanism. Carousels — up to 20 images or videos — tend to earn more time-on-post from existing followers. Stories disappear after 24 hours and are the low-stakes format for behind-the-scenes and polls.",
+          "The scheduling consequence is that a sensible Instagram calendar is not one post type repeated. Social Sync lets you set separate recurring slots for Reels, carousels and Stories, so the mix stays deliberate rather than defaulting to whatever was easiest to make that week.",
+          "Hashtags belong in the first comment for most brands, which keeps the caption readable. That comment is scheduled with the post rather than added manually afterwards."
         ]
       },
       {
-        "heading": "Built for Agencies and Scale Creators",
+        "heading": "Facebook: longer text, Stories, and link behaviour",
         "paragraphs": [
-          "SocialSync provides agency accounts with isolated client workspaces, custom review gates, and team logins. Writers can submit copy and designers upload assets for client approval in one secure app.",
-          "Protect your reputation and prevent mistakes using our client preview links."
+          "Facebook allows far longer text than Instagram — the post limit runs to 63,206 characters — but long posts collapse behind a \"See more\" fold, so the first two lines do the work. Facebook Stories mirror Instagram Stories with the same 24-hour lifespan, and Facebook Reels follow the same vertical video pattern.",
+          "The meaningful difference for scheduling is link behaviour. A post with an external link is treated differently from a native video or image post, so brands driving traffic need a deliberate mix rather than a feed of links. Social Sync schedules native video, image posts and link posts as distinct content types so that balance is visible in the calendar."
+        ]
+      },
+      {
+        "heading": "LinkedIn: 3,000 characters, documents, and weekday rhythm",
+        "paragraphs": [
+          "LinkedIn posts cap at 3,000 characters, and the first three lines appear before the \"see more\" truncation — which is why the opening line matters more here than anywhere else. Document posts, where a PDF becomes a swipeable carousel, are a LinkedIn-specific format with no direct equivalent elsewhere.",
+          "The audience behaves differently too: LinkedIn activity concentrates in weekday working hours rather than evenings and weekends, so the same slot pattern that works for Instagram is wrong here. Social Sync keeps per-platform slot definitions precisely so a B2B calendar can run Tuesday-to-Thursday mornings while the consumer calendar runs evenings.",
+          "Native video and text-only posts both perform on LinkedIn; the thing that consistently underperforms is a bare external link, which is worth structuring the calendar around."
+        ]
+      },
+      {
+        "heading": "X (Twitter): 280 characters, threads and cadence",
+        "paragraphs": [
+          "The standard post limit on X is 280 characters, with a much higher limit on paid tiers. Up to four images can attach to a post, and a thread is the mechanism for anything longer than the limit.",
+          "X rewards frequency more than the other platforms — a daily rhythm is normal here and would be excessive on LinkedIn. Threads need to be composed as a unit, because manually timing each reply is where most scheduling tools fall down. Social Sync schedules a full thread as one object, preserving reply order."
+        ]
+      },
+      {
+        "heading": "YouTube: Shorts, long-form, and metadata that carries search weight",
+        "paragraphs": [
+          "YouTube is the platform where scheduling metadata matters most, because YouTube is a search engine. Titles cap at 100 characters and descriptions at 5,000, and both are indexed — so the description is not an afterthought the way an Instagram caption often is.",
+          "Shorts are vertical videos up to three minutes and sit in a separate discovery surface from long-form. Treating them as one content type is a common mistake: a Shorts cadence and a long-form cadence are different calendars serving different goals.",
+          "Social Sync schedules both, with title, description, tags and thumbnail set at compose time so nothing publishes with placeholder metadata."
+        ]
+      },
+      {
+        "heading": "What a scheduler does not fix",
+        "paragraphs": [
+          "Scheduling solves consistency and coordination. It does not solve content quality, and a calendar full of mediocre posts published reliably performs worse than fewer good ones. If the constraint is that nobody has time to make content, a scheduler helps at the margin; if the constraint is that the content is not worth watching, it does not.",
+          "It also does not replace being present. Comments and DMs still need answering by a person, and platforms respond to engagement that scheduling cannot manufacture. We would rather say that plainly than sell the tool as more than it is."
         ]
       }
     ],
     "faqs": [
       {
-        "q": "How does the SocialSync Content Scheduler work?",
-        "a": "You connect your channels using our secure dashboard, write your copy, attach your media files, and schedule it to publish automatically."
+        "q": "Can I schedule Instagram Reels and Stories directly?",
+        "a": "Yes, both publish natively rather than via a reminder. Reels, Stories, carousels and single posts are separate content types with their own recurring slots, so the mix stays deliberate."
       },
       {
-        "q": "Is it safe for our accounts?",
-        "a": "Yes. SocialSync is an approved developer partner and uses only official APIs, keeping your pages compliant and secure."
+        "q": "Does it post the same content to every platform?",
+        "a": "Only if you want it to. The default is per-platform adaptation — different caption length, different format, different slot — because cross-posting one asset everywhere is what makes a feed look automated."
       },
       {
-        "q": "How does credit-based pricing work?",
-        "a": "We use a simple post-credit system where 1 credit equals 1 scheduled post. There are no recurring fees or per-seat costs."
+        "q": "Can I schedule an X thread?",
+        "a": "Yes. A thread is composed and scheduled as a single unit with reply order preserved, rather than timing individual replies by hand."
       },
       {
-        "q": "Can we schedule Instagram Reels?",
-        "a": "Yes. You can schedule Reels and Stories to auto-publish directly to your page without phone reminders."
+        "q": "How does approval work for agencies?",
+        "a": "Posts can require sign-off before publishing. Approvers see the exact rendered post per platform, and nothing goes live until it is approved — which is the point for multi-brand and client work."
       },
       {
-        "q": "Can client review drafts before publishing?",
-        "a": "Yes. You can send secure, branded preview calendars to clients to collect feedbacks and edits."
+        "q": "What happens if a platform rejects a post?",
+        "a": "You get notified with the platform’s reason rather than the post failing silently. Most failures are caption or media limits, which are checked at compose time to prevent them."
       },
       {
-        "q": "How do we set up the auto-DM tool?",
-        "a": "You can configure keyword triggers (e.g., reply when users comment \"DEMO\") in the automation panel in minutes."
+        "q": "Do you handle YouTube Shorts and long-form separately?",
+        "a": "Yes. They serve different discovery surfaces and usually need different cadences, so they are separate content types with separate slots and their own metadata fields."
       }
     ],
     "internalLinks": [
       {
-        "label": "SocialSync Platform",
+        "label": "Social Sync",
         "href": "/social-sync",
-        "desc": "All-in-one publishing dashboard."
+        "desc": "The full platform this scheduler is part of."
       },
       {
-        "label": "Instagram Scheduler",
-        "href": "/instagram-post-scheduler",
-        "desc": "Auto-publish posts and reels."
+        "label": "Social Media Content Planner",
+        "href": "/social-media-content-planner",
+        "desc": "Plan the calendar before you schedule it."
       },
       {
-        "label": "LinkedIn Scheduler",
-        "href": "/linkedin-post-scheduler",
-        "desc": "Founder brand scheduling."
+        "label": "Social Media Approval Workflows",
+        "href": "/social-media-approval-workflow",
+        "desc": "Sign-off for agencies and multi-brand teams."
       },
       {
-        "label": "Client Approvals",
-        "href": "/social-media-client-management",
-        "desc": "Preview portals for clients."
+        "label": "Social Media Marketing",
+        "href": "/social-media-marketing-company",
+        "desc": "If you would rather we ran it for you."
       }
     ],
     "cta": {
-      "headline": "Automate Your Social Posting Today",
-      "sub": "Join agencies and creators scheduling campaigns with SocialSync. Register for a free credit test run."
+      "headline": "See the scheduler on your own calendar",
+      "sub": "Book a walkthrough and we will load a week of your content so you can see how the per-platform formatting works."
     }
   },
   "social-media-tool-for-agencies": {

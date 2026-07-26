@@ -33,13 +33,13 @@ const SeoContext = createContext<SeoContextType | undefined>(undefined);
 // Keep in sync with api/seo.js STATIC_SEO_LOOKUP for the top priority pages.
 const STATIC_FALLBACK: Record<string, Pick<SeoData, 'title' | 'metaDescription' | 'metaKeywords'>> = {
   "/": {
-    title: "Avani Enterprises — No.1 Digital Marketing Agency in India",
-    metaDescription: "India's leading digital marketing agency. SEO, Google Ads, Meta Ads, web development, AI automation, and custom software. 150+ clients, 300+ projects. Get a free audit.",
+    title: "Avani Enterprises — Digital, Product & AI Studio in Gurugram & Rohtak",
+    metaDescription: "a full-service digital & product studio based in Gurugram & Rohtak. SEO, Google Ads, Meta Ads, web development, AI automation, and custom software. clients across India and the Gulf, projects across India and the Gulf. Get a free audit.",
     metaKeywords: "digital marketing agency india, seo company india, web development company india, google ads agency india, ai automation india"
   },
   "/about": {
     title: "About Avani Enterprises | Digital Marketing Agency Gurugram",
-    metaDescription: "Avani Enterprises is a full-service digital marketing and web development agency founded in 2016, headquartered in Gurugram. 150+ clients, 300+ projects delivered.",
+    metaDescription: "Avani Enterprises is a full-service digital marketing and web development agency founded in 2016, headquartered in Gurugram. clients across India and the Gulf, projects delivered across India and the Gulf.",
     metaKeywords: "about avani enterprises, digital marketing agency gurugram, web development company haryana"
   },
   "/services": {
@@ -59,12 +59,12 @@ const STATIC_FALLBACK: Record<string, Pick<SeoData, 'title' | 'metaDescription' 
   },
   "/web-development-company": {
     title: "Web Development Company in India | Avani Enterprises",
-    metaDescription: "Avani Enterprises builds fast, responsive business websites, e-commerce stores, and custom web apps. 300+ projects, 8+ years. Get a free quote today.",
+    metaDescription: "Avani Enterprises builds fast, responsive business websites, e-commerce stores, and custom web apps. projects across India and the Gulf, 8+ years. Get a free quote today.",
     metaKeywords: "web development company india, website development india, custom web development, react web development"
   },
   "/seo-company": {
-    title: "SEO Company in India | Rank #1 on Google — Avani Enterprises",
-    metaDescription: "Avani Enterprises drives 3x organic traffic for Indian businesses. Technical SEO, content, and link-building. 150+ clients, 8+ years. Get a free SEO audit.",
+    title: "SEO Company in India | Rank on Google — Avani Enterprises",
+    metaDescription: "Avani Enterprises drives 3x organic traffic for Indian businesses. Technical SEO, content, and link-building. clients across India and the Gulf, 8+ years. Get a free SEO audit.",
     metaKeywords: "seo company india, best seo company india, seo services india, search engine optimization india"
   },
   "/digital-marketing-company": {
@@ -74,17 +74,17 @@ const STATIC_FALLBACK: Record<string, Pick<SeoData, 'title' | 'metaDescription' 
   },
   "/google-ads-agency": {
     title: "Google Ads Agency in India | High-ROI PPC — Avani Enterprises",
-    metaDescription: "Avani Enterprises is a Google Ads agency in India running profitable search, shopping, and display campaigns. 150+ clients. Book a free PPC audit.",
+    metaDescription: "Avani Enterprises is a Google Ads agency in India running profitable search, shopping, and display campaigns. clients across India and the Gulf. Book a free PPC audit.",
     metaKeywords: "google ads agency india, ppc company india, google adwords agency india, paid search india"
   },
   "/ai-automation-company": {
     title: "AI Automation Company in India | Avani Enterprises",
-    metaDescription: "Avani Enterprises builds AI automation solutions — chatbots, WhatsApp automation, agentic AI, and custom LLM apps. 8+ years, 300+ projects. Book a free demo.",
+    metaDescription: "Avani Enterprises builds AI automation solutions — chatbots, WhatsApp automation, agentic AI, and custom LLM apps. 8+ years, projects across India and the Gulf. Book a free demo.",
     metaKeywords: "ai automation company india, ai solutions india, chatbot development india, ai agency india"
   },
   "/crm-development-company": {
     title: "CRM Development Company in India | Avani Enterprises",
-    metaDescription: "Avani Enterprises builds custom CRM software with sales pipelines, automation, dashboards, and integrations. 300+ projects, 8+ years. Book a free CRM demo.",
+    metaDescription: "Avani Enterprises builds custom CRM software with sales pipelines, automation, dashboards, and integrations. projects across India and the Gulf, 8+ years. Book a free CRM demo.",
     metaKeywords: "crm development company india, custom crm software india, crm company india, sales crm development"
   },
   "/hr-portal": {
@@ -119,7 +119,7 @@ const STATIC_FALLBACK: Record<string, Pick<SeoData, 'title' | 'metaDescription' 
   },
   "/mobile-app-development-company": {
     title: "Mobile App Development Company in India | Avani Enterprises",
-    metaDescription: "Avani Enterprises builds iOS and Android apps — native, Flutter, and React Native. 300+ projects, 8+ years. Get a free mobile app quote.",
+    metaDescription: "Avani Enterprises builds iOS and Android apps — native, Flutter, and React Native. projects across India and the Gulf, 8+ years. Get a free mobile app quote.",
     metaKeywords: "mobile app development company india, app development company india, ios android app development"
   },
   "/case-studies": {
@@ -129,12 +129,12 @@ const STATIC_FALLBACK: Record<string, Pick<SeoData, 'title' | 'metaDescription' 
   },
   "/projects": {
     title: "Projects Portfolio | Web & App Development — Avani Enterprises",
-    metaDescription: "Browse our portfolio of 300+ projects — websites, e-commerce stores, mobile apps, CRM systems, HR portals, and AI solutions built for businesses across India.",
+    metaDescription: "Browse our portfolio of projects across India and the Gulf — websites, e-commerce stores, mobile apps, CRM systems, HR portals, and AI solutions built for businesses across India.",
     metaKeywords: "avani enterprises projects, web development portfolio, app development portfolio india"
   },
   "/careers": {
     title: "Careers at Avani Enterprises | Join Our Team",
-    metaDescription: "Join Avani Enterprises — India's leading digital agency. We're hiring web developers, SEO specialists, digital marketers, and AI engineers in Gurugram.",
+    metaDescription: "Join Avani Enterprises — a Gurugram-based digital agency. We're hiring web developers, SEO specialists, digital marketers, and AI engineers in Gurugram.",
     metaKeywords: "avani enterprises careers, jobs digital marketing india, web developer jobs gurugram"
   },
 };
@@ -142,7 +142,7 @@ const STATIC_FALLBACK: Record<string, Pick<SeoData, 'title' | 'metaDescription' 
 // Generic fallback used when a path is not in STATIC_FALLBACK
 const GENERIC_FALLBACK: Pick<SeoData, 'title' | 'metaDescription'> = {
   title: "Avani Enterprises — Digital Marketing & Web Development Agency India",
-  metaDescription: "Avani Enterprises is a leading digital marketing and web development agency in India. SEO, Google Ads, AI, custom software, and HR solutions. 150+ clients, 300+ projects.",
+  metaDescription: "Avani Enterprises is a leading digital marketing and web development agency in India. SEO, Google Ads, AI, custom software, and HR solutions. clients across India and the Gulf, projects across India and the Gulf.",
 };
 
 export const SeoProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {

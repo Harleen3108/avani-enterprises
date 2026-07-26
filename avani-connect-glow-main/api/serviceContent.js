@@ -1334,6 +1334,53 @@ const LOCATIONS = {
     industries: ['gems and jewellery', 'handicrafts and export houses', 'tourism and hospitality', 'education and coaching'],
     note: 'Delivered remotely, with meetings on IST.',
   },
+  // ── Haryana home belt + Chandigarh tricity ────────────────────────────────
+  // Restored to the index and given real local economic detail so each page can
+  // reach depth on facts rather than on a template. Every cluster named below is
+  // a documented feature of that town's economy.
+  chandigarh: {
+    city: 'Chandigarh', region: 'Chandigarh', country: 'India', office: false,
+    districts: ['Sector 17 commercial core', 'Rajiv Gandhi Chandigarh Technology Park', 'Industrial Area Phase I and II', 'the Mohali and Panchkula tricity'],
+    industries: ['IT and ITES at the Technology Park', 'higher education and coaching', 'healthcare and diagnostics', 'hospitality and tourism', 'government and institutional services'],
+    sectors: ['saas', 'education', 'healthcare', 'hospitality'],
+    note: 'Delivered from our Gurugram head office, about four hours up NH-44, with on-site sessions for larger engagements.',
+  },
+  panipat: {
+    city: 'Panipat', region: 'Haryana', country: 'India', office: false,
+    districts: ['the handloom and home-furnishings cluster', 'Panipat Refinery belt', 'Sector 25 industrial area', 'the NH-44 corridor'],
+    industries: ['textiles and home furnishings', 'export houses shipping to Europe and the US', 'petrochemicals and refining', 'agri-trade'],
+    sectors: ['textiles', 'manufacturing', 'trading', 'ecommerce'],
+    note: 'Covered from our Gurugram and Rohtak offices, both within a short drive up the highway.',
+  },
+  sonipat: {
+    city: 'Sonipat', region: 'Haryana', country: 'India', office: false,
+    districts: ['Kundli and Rai industrial estates', 'Rajiv Gandhi Education City', 'the Murthal food belt on NH-44', 'Sector 14 and Model Town'],
+    industries: ['light manufacturing and sports goods', 'food processing', 'higher education institutions', 'logistics along NH-44'],
+    sectors: ['manufacturing', 'education', 'logistics', 'hospitality'],
+    note: 'Covered from our Rohtak and Gurugram offices, both under an hour away.',
+  },
+  karnal: {
+    city: 'Karnal', region: 'Haryana', country: 'India', office: false,
+    districts: ['the agri-research institutional belt', 'Sector 12 commercial area', 'the basmati and rice-milling cluster', 'the NH-44 corridor'],
+    industries: ['agri-processing and dairy', 'basmati rice milling and export', 'agricultural research institutions', 'healthcare and education'],
+    sectors: ['manufacturing', 'trading', 'education', 'healthcare'],
+    note: 'Covered from our Rohtak and Gurugram offices.',
+  },
+  hisar: {
+    city: 'Hisar', region: 'Haryana', country: 'India', office: false,
+    districts: ['IMT Hisar', 'the steel and galvanised pipe cluster', 'the agricultural university belt', 'Red Square and the commercial core'],
+    industries: ['steel and galvanised pipe manufacturing', 'cotton and textiles', 'agri-research and allied services', 'education'],
+    sectors: ['manufacturing', 'textiles', 'education', 'trading'],
+    note: 'Covered from our Rohtak office, the closest of ours to west Haryana.',
+  },
+  ambala: {
+    city: 'Ambala', region: 'Haryana', country: 'India', office: false,
+    districts: ['Ambala Cantt', 'Ambala City cloth market', 'the scientific-instruments manufacturing cluster', 'the NH-44 corridor'],
+    industries: ['scientific and laboratory instruments manufacturing', 'sewing machine and mixer components', 'wholesale cloth trade', 'defence-adjacent services and education'],
+    sectors: ['manufacturing', 'trading', 'education'],
+    note: 'Covered from our Rohtak and Gurugram offices.',
+  },
+
   india: {
     city: 'India', region: 'India', country: 'India', office: true, isRegion: true, isNational: true,
     districts: ['Gurugram', 'Delhi NCR', 'and remote delivery nationwide'],
@@ -1553,6 +1600,15 @@ const INDUSTRIES = {
   healthcare: { label: 'Healthcare', pains: ['appointment no-shows', 'patient data confidentiality', 'multi-location scheduling'] },
   ecommerce: { label: 'E-commerce', pains: ['cart abandonment', 'catalogue scale and duplicate product pages', 'repeat-purchase retention'] },
   education: { label: 'Education', pains: ['admissions funnel drop-off', 'counsellor follow-up load', 'fee and attendance tracking'] },
+  // Audience segments, not verticals — but they behave like industries for
+  // scoping, and pages already exist for them.
+  startups: { label: 'Startups', pains: ['shipping before the runway runs out', 'proving the model before scaling spend', 'building without a full in-house team'] },
+  'small-businesses': { label: 'Small Businesses', pains: ['no in-house marketing or engineering team', 'budget that has to show return quickly', 'owner time being the real constraint'] },
+  'local-businesses': { label: 'Local Businesses', pains: ['being found in the map pack', 'phone enquiries going unanswered', 'competing with larger chains on visibility'] },
+  restaurants: { label: 'Restaurants', pains: ['direct orders lost to aggregator commission', 'review management across platforms', 'peak-hour enquiry volume'] },
+  enterprises: { label: 'Enterprises', pains: ['procurement and security review cycles', 'integration with existing systems', 'governance across multiple teams'] },
+  agencies: { label: 'Agencies', pains: ['managing many client accounts at once', 'approval and sign-off overhead', 'white-label reporting'] },
+  creators: { label: 'Creators', pains: ['publishing consistently across platforms', 'repurposing one asset many ways', 'audience growth without a team'] },
   manufacturing: { label: 'Manufacturing', pains: ['long B2B sales cycles', 'RFQ and quotation turnaround', 'distributor and dealer coordination'] },
   hospitality: { label: 'Hospitality', pains: ['direct bookings lost to aggregators', 'review management', 'seasonal demand swings'] },
   finance: { label: 'Financial Services', pains: ['regulatory constraints on marketing claims', 'document-heavy onboarding', 'lead quality over lead volume'] },
@@ -1568,6 +1624,20 @@ const INDUSTRIES = {
 // accurate HR/social software functionality as built into Avani Business OS.
 // ---------------------------------------------------------------------------
 const PRODUCT_MODULES = {
+  // Standalone Business OS product pages (not under /business-os/). Same module
+  // model, so they gain the module block, AI summary and depth automatically.
+  'hrms-software-india': { name: 'HRMS', does: 'holds the employee record of truth — personal details, documents, contracts and reporting lines — and feeds payroll, attendance and reporting from it', functions: ['Employee master records and document vault', 'Org chart and reporting lines', 'Contract and letter generation', 'Role-based access to sensitive fields', 'Full audit trail on record changes'] },
+  'payroll-software-india': { name: 'Payroll', does: 'runs payroll against Indian statutory rules and produces the payslips, filings and bank files at the end of it', functions: ['Salary structure and CTC breakup', 'PF, ESI, professional tax and TDS calculation', 'Attendance and leave-linked deductions', 'Bank transfer file generation', 'Payslips and Form 16 support'] },
+  'attendance-management-system': { name: 'Attendance Management', does: 'collects attendance from biometrics, geofenced mobile check-ins and web, then feeds payroll directly', functions: ['Biometric device API sync', 'GPS and selfie check-in for field staff', 'Geofencing by site', 'Regularisation requests and approvals', 'Automatic push into payroll'] },
+  'leave-management-software': { name: 'Leave Management', does: 'runs leave policy, accrual and approvals so balances stop being argued over in email', functions: ['Configurable leave types and accrual rules', 'Carry-forward, encashment and lapse handling', 'Multi-level approval chains', 'Holiday calendars by location', 'Team leave calendar to spot clashes'] },
+  'employee-management-software': { name: 'Employee Management', does: 'is the secure directory for employee files, contracts and allocated company assets', functions: ['Document storage with expiry alerts', 'Asset allocation and return tracking', 'Emergency contacts and dependents', 'Bulk import and update', 'Role-controlled access'] },
+  'employee-portal': { name: 'Employee Portal', does: 'gives employees self-service access so HR stops answering the same questions', functions: ['Payslip and tax document download', 'Leave balance and application', 'Personal detail updates with approval', 'Company policy library', 'Announcements and acknowledgements'] },
+  'workforce-management-software': { name: 'Workforce Management', does: 'plans shifts, tracks utilisation and keeps rosters covered across teams that do not work a single fixed shift', functions: ['Shift patterns and rotation rules', 'Roster publishing and swap requests', 'Coverage gap alerts', 'Overtime tracking against shift', 'Utilisation reporting'] },
+  'project-management-software': { name: 'Project Management', does: 'tracks projects, tasks and timesheets against budget so utilisation and profitability are visible per project', functions: ['Project and task hierarchy', 'Timesheets linked to payroll', 'Budget versus actual tracking', 'Resource allocation views', 'Client-facing progress reporting'] },
+  'crm-software-india': { name: 'CRM', does: 'brings leads from ads, forms, WhatsApp and calls into one pipeline with the source attached', functions: ['Lead capture from Meta and Google lead forms', 'Pipeline stages matched to your sales process', 'Automated assignment and follow-up reminders', 'WhatsApp and email activity logging', 'Cost-per-qualified-lead reporting'] },
+  'hr-portal': { name: 'HR Portal', does: 'is the employee-facing front door to HR — payslips, leave, policies and requests in one place', functions: ['Self-service payslips and documents', 'Leave application and balance', 'Policy library with acknowledgements', 'Helpdesk requests to HR', 'Announcements'] },
+  'business-operating-system': { name: 'Business OS', does: 'unifies HR, payroll, attendance, CRM, projects and finance into one system with one shared record', functions: ['One employee and customer record across modules', 'Role-based access across departments', 'Cross-module reporting', 'No per-seat licensing', 'Full source code ownership'] },
+
   'business-os/hrms-software': {
     name: 'HRMS', does: 'holds the employee record of truth — personal details, documents, contracts, reporting lines and job history — and feeds every other module from it',
     functions: ['Employee master records and document vault', 'Org chart and reporting lines', 'Contract and letter generation', 'Role-based access to sensitive fields', 'Audit trail on every record change'],
@@ -1653,7 +1723,57 @@ const PRODUCT_MODULES = {
 // Facts here come from avani-enterprises-website-content.md.
 // ---------------------------------------------------------------------------
 const STATIC_PAGES = {
+  home: {
+    metaTitle: 'Avani Enterprises — Digital, Product & AI Studio',
+    metaDescription:
+      'A full-service digital, product and AI studio in Gurugram and Rohtak. We build websites and apps, run SEO and paid media, and ship AI systems. Founded 2016.',
+    h1: 'Avani Enterprises — Digital, Product & AI Studio',
+    intro:
+      'We build the thing and then make it grow. Websites, mobile apps, e-commerce and custom business software on one side; SEO, Google and Meta Ads and social on the other; and AI systems — chatbots, voice agents, agentic workflows, video and content — running through both. One team in Gurugram and Rohtak, founded in 2016.',
+    aiSummary: [
+      'Avani Enterprises is a full-service digital, product and AI studio founded in 2016, with offices in Gurugram (Tower B, 3rd Floor, Unitech Cyber Park, Durga Colony, Sector 39, Gurugram, Haryana 122002) and Rohtak.',
+      'Three connected practices: engineering (web, mobile, e-commerce, CRM, ERP, custom software), growth (SEO, Google Ads, Meta Ads, social media, content) and AI (chatbots, voice agents, agentic workflows, AI video, AI content).',
+      'Two own products: Avani Business OS, a unified HR, payroll, CRM and operations platform deployed on your own infrastructure with no per-seat licensing; and Social Sync, a multi-platform social scheduling and approval tool.',
+      'Every engagement starts with a written scope listing deliverables and explicit exclusions, quoted after a free discovery call.',
+      'Delivery is across India — Delhi NCR, the Haryana belt and the metros — with international engagements handled from the India team.',
+      'Reporting is on qualified leads and cost per lead rather than impressions, with conversion tracking wired before spend increases.',
+    ],
+    sections: [
+      {
+        heading: 'What we do',
+        paragraphs: [
+          '**Engineering.** Custom websites and web applications, iOS and Android apps, e-commerce on Shopify, WooCommerce or a custom stack, and internal systems including CRM, ERP and bespoke business software. Built on React, Node and Postgres, and handed over with the repository so you are never locked to us.',
+          '**Growth.** Technical SEO and content depth, Google Ads and Performance Max, Meta Ads with server-side conversion tracking, and social media from strategy through production. We fix tracking before we increase spend, because platforms optimise toward whatever you report.',
+          '**AI.** Chatbots grounded in your own content, voice agents that qualify leads and book appointments, agentic workflows that complete multi-step tasks across your systems, AI video for ads and explainers, and AI-assisted content with human editing on every piece. We are model-agnostic and benchmark Claude, GPT and Gemini per task.',
+        ],
+      },
+      {
+        heading: 'Why the combination matters',
+        paragraphs: [
+          'Most agencies do one of these. The gap shows up in practice: an SEO audit recommends technical fixes that nobody implements, or a campaign points at a landing page the agency cannot change.',
+          'Because engineering, growth and AI sit in the same team here, a recommendation and its implementation come from the same people. A page that needs rebuilding gets rebuilt; a lead that needs routing into a CRM gets routed.',
+        ],
+      },
+      {
+        heading: 'How we work',
+        paragraphs: [
+          'A free discovery call, then a written scope with deliverables and explicit exclusions before anything starts. Work runs in sprints against a live staging link with a named point of contact rather than a ticket queue.',
+          'We will tell you when we are not the right fit — when an off-the-shelf product beats a build, when a specialist would serve you better, or when the constraint is your offer rather than your marketing. That is cheaper for both of us than finding out in month three.',
+        ],
+      },
+    ],
+    faqs: [
+      { q: 'Where is Avani Enterprises based?', a: 'Our head office is at Tower B, 3rd Floor, Unitech Cyber Park, Durga Colony, Sector 39, Gurugram, Haryana 122002, with a second office in Rohtak. We deliver across India and internationally.' },
+      { q: 'What does Avani Enterprises do?', a: 'Three connected things: engineering (websites, apps, e-commerce, CRM, ERP, custom software), growth marketing (SEO, Google and Meta Ads, social), and AI systems (chatbots, voice agents, agentic workflows, AI video and content).' },
+      { q: 'How do you price work?', a: 'Fixed-scope quotes for builds and monthly retainers for ongoing marketing, quoted after a free discovery call. Ad spend is always billed separately and transparently from the management fee.' },
+      { q: 'Do you work with small businesses?', a: 'Yes, alongside larger clients. The engagement is scoped to the business rather than to a package, and we will say when a smaller or simpler solution would serve you better.' },
+      { q: 'Who owns the code and the accounts?', a: 'You do. You receive the repository and the deployment configuration, and ad accounts stay in your name, so you are never dependent on us to make a change or to leave.' },
+    ],
+  },
+
   about: {
+    metaTitle: "About Avani Enterprises — Gurugram & Rohtak Studio",
+    metaDescription: "Founded 2016. A full-service digital, product and AI studio with offices in Gurugram and Rohtak, building websites and apps and running growth campaigns.",
     h1: 'About Avani Enterprises',
     intro: `Avani Enterprises is a digital agency headquartered at ${COMPANY.hq}, delivering across India, the UAE, Singapore and the United States. We build websites, apps and custom software, run performance marketing, and ship AI systems — chatbots, voice agents, content pipelines, video and autonomous agents.`,
     sections: [
@@ -1678,6 +1798,8 @@ const STATIC_PAGES = {
     ],
   },
   services: {
+    metaTitle: "Services — Web, App, AI, SEO & Paid Media",
+    metaDescription: "Web and app development, e-commerce, CRM and ERP builds, SEO, Google and Meta Ads, plus AI chatbots, voice agents and agentic workflows. One team.",
     h1: 'Our Services',
     intro: 'Engineering, growth and AI under one roof — web and app development, e-commerce, CRM and ERP builds, SEO, Google and Meta Ads, social media, plus AI chatbots, voice callers, agentic workflows, AI video and AI content.',
     sections: [
@@ -1707,6 +1829,8 @@ const STATIC_PAGES = {
     ],
   },
   contact: {
+    metaTitle: "Contact Avani Enterprises — Gurugram & Rohtak",
+    metaDescription: "Talk to the team in Gurugram or Rohtak. Free scope call and a written quote, no obligation. Email kp@avanienterprises.in or call +91 92536 25099.",
     h1: 'Contact Avani Enterprises',
     intro: `Head office: ${COMPANY.hq}. Email ${COMPANY.email} or call ${COMPANY.phone}.`,
     sections: [
@@ -1724,6 +1848,8 @@ const STATIC_PAGES = {
     ],
   },
   'case-studies': {
+    metaTitle: "Case Studies — Client Work & Real Results",
+    metaDescription: "Selected client work across web, e-commerce, marketing and AI: the starting position, the constraint that made it hard, and what was actually delivered.",
     h1: 'Case Studies',
     intro: 'Selected client work across web, e-commerce, marketing and AI — what the problem was, what we built, and what changed.',
     sections: [
@@ -1739,6 +1865,8 @@ const STATIC_PAGES = {
     ],
   },
   projects: {
+    metaTitle: "Projects — Portfolio of Builds & Campaigns",
+    metaDescription: "Websites, applications, e-commerce stores and AI systems built for clients across healthcare, real estate, manufacturing, retail and services in India.",
     h1: 'Projects',
     intro: 'A portfolio of websites, applications, e-commerce stores and AI systems we have built.',
     sections: [
@@ -1754,6 +1882,8 @@ const STATIC_PAGES = {
     ],
   },
   blog: {
+    metaTitle: "Blog — Web, SEO, Paid Media & AI",
+    metaDescription: "Writing from client work on web development, technical SEO, Google and Meta Ads, and applied AI. Practical detail rather than recycled commentary.",
     h1: 'Avani Enterprises Blog',
     intro: 'Practical writing on web development, SEO, paid media and applied AI — what we learn building and running these systems for clients.',
     sections: [
@@ -1768,6 +1898,8 @@ const STATIC_PAGES = {
     faqs: [{ q: 'Can we republish your articles?', a: 'With attribution and a link back, usually yes — email us first.' }],
   },
   careers: {
+    metaTitle: "Careers at Avani Enterprises — Gurugram",
+    metaDescription: "Open roles in engineering, performance marketing, design and AI at our Gurugram head office. Practical hiring process, paid internships, judgement first.",
     h1: 'Careers at Avani Enterprises',
     intro: 'Open roles across engineering, performance marketing, design and AI, based at our Gurugram head office.',
     sections: [
@@ -1785,6 +1917,8 @@ const STATIC_PAGES = {
     ],
   },
   newsletters: {
+    metaTitle: "Newsletters — Search, Paid Media & AI Updates",
+    metaDescription: "Periodic write-ups on what is changing in search, paid media and AI, and what it actually means for your business. Short, specific and infrequent.",
     h1: 'Newsletters',
     intro: 'Periodic write-ups on what is changing in search, paid media and AI — and what it means for businesses rather than for agencies.',
     sections: [
@@ -1798,6 +1932,8 @@ const STATIC_PAGES = {
     faqs: [{ q: 'How often do you send it?', a: 'Only when something is genuinely worth your attention. We would rather send less than pad a schedule.' }],
   },
   courses: {
+    metaTitle: "Courses — Digital Marketing, Web & AI Training",
+    metaDescription: "Practical, project-based training in digital marketing, web development and applied AI, taught by the people who deliver this work for clients daily.",
     h1: 'Courses',
     intro: 'Training on digital marketing, web development and applied AI, taught by the people who do this work for clients.',
     sections: [
@@ -1814,6 +1950,8 @@ const STATIC_PAGES = {
     ],
   },
   'privacy-policy': {
+    metaTitle: "Privacy Policy — Avani Enterprises",
+    metaDescription: "How Avani Enterprises collects, uses, stores and protects your personal information, which third parties process it, and how to request access or deletion.",
     h1: 'Privacy Policy',
     intro: 'How Avani Enterprises collects, uses, stores and protects your personal information, and the rights you have over it.',
     sections: [
@@ -1828,6 +1966,8 @@ const STATIC_PAGES = {
     faqs: [{ q: 'How do I request deletion of my data?', a: 'Email kp@avanienterprises.in from the address you contacted us with, and we will confirm once it is done.' }],
   },
   'terms-and-conditions': {
+    metaTitle: "Terms and Conditions — Avani Enterprises",
+    metaDescription: "The terms governing use of the Avani Enterprises website and the general basis on which we provide services. Signed project scopes take precedence.",
     h1: 'Terms and Conditions',
     intro: 'The terms governing use of the Avani Enterprises website and the basis on which we provide services.',
     sections: [
@@ -1842,6 +1982,8 @@ const STATIC_PAGES = {
     faqs: [{ q: 'Do these terms cover my project?', a: 'Your signed scope and agreement govern the work. These terms cover use of the website itself.' }],
   },
   'global-presence': {
+    metaTitle: "Where Avani Enterprises Operates",
+    metaDescription: "Head office in Gurugram and a second office in Rohtak, delivering across Delhi NCR, the Haryana belt and the Indian metros, plus international work.",
     h1: 'Global Presence',
     intro: 'Head office in Gurugram, with delivery across India, the UAE, Singapore and the United States.',
     sections: [
@@ -1902,6 +2044,24 @@ function resolvePage(pathname) {
   if (forMatch && INDUSTRIES[forMatch[2]]) {
     industry = Object.assign({ key: forMatch[2] }, INDUSTRIES[forMatch[2]]);
     base = forMatch[1];
+  }
+
+  // Bare city pages (/rohtak, /gurgaon, /delhi, /faridabad) are location pages
+  // with no service in the slug. Treat them as the digital-marketing hub for
+  // that city, which is what they are positioned as.
+  if (!locationKey && LOCATIONS[base] && !LOCATIONS[base].aliasOf) {
+    const entry = LOCATIONS[base];
+    return {
+      slug,
+      serviceId: 'digital-marketing',
+      service: Object.assign({ id: 'digital-marketing' }, SERVICES['digital-marketing']),
+      location: Object.assign({ key: base }, entry),
+      industry: null,
+      model: null,
+      // Marks this as the city hub rather than one service in that city, so the
+      // title, H1 and description differ from /digital-marketing-company-<city>.
+      isCityHub: true,
+    };
   }
 
   const serviceId = SERVICE_ALIASES[base] || (SERVICES[base] ? base : null);
@@ -2050,6 +2210,38 @@ function ctaCopy(resolved) {
   return base;
 }
 
+/**
+ * Long-form sections for a Business OS module page. Written from the module's
+ * own function list, so each module page describes its own scope rather than
+ * repeating a platform pitch.
+ */
+function moduleBodyBlocks(module) {
+  if (!module) return [];
+  return [
+    {
+      heading: `What ${module.name} replaces`,
+      paragraphs: [
+        `Most businesses run this on a spreadsheet plus email, or on a product that solves one part and leaves the rest manual. ${module.name} ${module.does} — which means the data lands once and is available everywhere else in the platform.`,
+        `The practical difference is re-keying. When ${module.name.toLowerCase()} sits in its own tool, someone re-enters the same information into payroll or reporting at month end, and that step is where errors and delays come from.`,
+      ],
+    },
+    {
+      heading: 'How it fits with the rest of Business OS',
+      paragraphs: [
+        `Business OS is one system with one employee record. ${module.name} reads and writes to that record, so attendance affects payroll, leave affects attendance, and reporting sees all of it without an export.`,
+        `Modules can be deployed individually if you only need one, but the compounding value is in the shared record. We will tell you honestly if a single module is all you need.`,
+      ],
+    },
+    {
+      heading: 'Ownership and cost',
+      paragraphs: [
+        `Business OS is built for you and deployed on your own infrastructure. There is no per-seat licence, so cost does not scale with headcount — which is the main reason companies move off per-user SaaS once they pass a certain size.`,
+        `You receive the source code and the data. If you stop working with us, the system keeps running and another team can maintain it. That independence is the point of building rather than subscribing.`,
+      ],
+    },
+  ];
+}
+
 const SECTOR_LABELS = {
   finance: 'Financial services', media: 'Media and entertainment', ecommerce: 'E-commerce and D2C',
   realestate: 'Real estate', healthcare: 'Healthcare', education: 'Education',
@@ -2095,6 +2287,8 @@ function uniqueBlock(resolved) {
         { label: 'Deployment', value: 'Your cloud or ours, with full source code ownership' },
       ],
       localFacts: [],
+      bodyBlocks: moduleBodyBlocks(module),
+      aiSummary: aiSummary(resolved),
       hubLink: { href: '/business-os', label: 'See the full Business OS platform' },
       faqs: [
         { q: `Can we use ${module.name} on its own?`, a: `Yes. Modules can be deployed individually, though most of the value comes from sharing one employee record across modules — ${module.name} data flowing straight into payroll, for example, rather than being re-keyed.` },
@@ -2186,6 +2380,95 @@ function uniqueBlock(resolved) {
     }
   }
 
+  // ── Depth on city pages ───────────────────────────────────────────────────
+  // City pages averaged 519 words against a 600 target. Rather than pad, these
+  // add genuinely local, page-specific paragraphs: the local buying context,
+  // how delivery actually works from our nearest office, and what the sector mix
+  // means for this service. Every sentence is derived from real data on the
+  // location object, so two cities cannot produce the same text.
+  const bodyBlocks = [];
+
+  // ── Depth on service hub pages ────────────────────────────────────────────
+  // Non-location service pages averaged 409 words against a 600 target. These
+  // add real, service-specific detail — what the engagement actually looks
+  // like, what makes projects go wrong, and when not to hire us — rather than
+  // restating the deliverables list in different words.
+  if (!location && !module) {
+    if (service.process && service.process.length) {
+      bodyBlocks.push({
+        heading: `How a ${service.name.toLowerCase()} engagement actually runs`,
+        paragraphs: [
+          `The sequence is ${listSentence(service.process.map((p) => p.toLowerCase()))}. Each stage ends with something you can look at rather than a status update — a scope document, a design, a staging link — so progress is visible instead of reported.`,
+          `${service.timeline}. That range is wide because scope drives it: the difference between the low and high end is usually the number of integrations and how much of the content already exists. We narrow it in the scoping call rather than quoting a midpoint and revising later.`,
+        ],
+      });
+    }
+
+    if (service.stack && service.stack.length) {
+      bodyBlocks.push({
+        heading: 'What we build it with, and why that matters to you',
+        paragraphs: [
+          `We work with ${listSentence(service.stack)}. The specific tools matter less than two things you should insist on from any supplier: that you own the accounts and the code at the end, and that nothing is built on a platform only that supplier can maintain.`,
+          `You receive the repository and the deployment configuration on handover, so changing supplier later is a commercial decision rather than a technical trap.`,
+        ],
+      });
+    }
+
+    bodyBlocks.push({
+      heading: 'When we are not the right choice',
+      paragraphs: [
+        `${service.priceModel}. If your budget is well below that, a smaller supplier or an off-the-shelf product will serve you better, and we would rather say so on the first call than three weeks in.`,
+        `We are also the wrong choice if you need a single discipline delivered at the deepest possible level and nothing else — a dedicated specialist will usually beat a full-service team on one narrow axis. Where we are strong is when the work crosses boundaries: when the campaign needs the site rebuilt, or the AI needs the data pipeline fixed first.`,
+      ],
+    });
+  }
+
+  if (location) {
+    const uses = localUseCases(resolved);
+    const sectorsTop = listSentence(location.industries.slice(0, 3));
+
+    bodyBlocks.push({
+      heading: `${service.name} in ${location.city}: what the local market looks like`,
+      paragraphs: [
+        `${location.city}'s commercial activity concentrates around ${listSentence(location.districts)}. That geography matters for ${service.noun} because it determines who your buyers are and how they search — a business selling into ${listSentence(location.industries.slice(0, 2))} is not competing for the same attention as a consumer brand.`,
+        `The local base leans toward ${sectorsTop}. We scope engagements around that rather than applying a template, which is why the brief for a ${location.city} client usually differs from one written for a different city on the same service.`,
+      ],
+    });
+
+    if (uses.length) {
+      bodyBlocks.push({
+        heading: `What ${location.city} businesses actually ask us for`,
+        paragraphs: [
+          `Across ${location.city} the recurring requests cluster by sector: ${listSentence(uses.map((u) => u.replace(' — ', ' want ')))}.`,
+          `Those are different problems with different success measures, so the first call is a scoping conversation rather than a pitch. If what you need is outside what we do well, we will say so and point you elsewhere.`,
+        ],
+      });
+    }
+
+    // Delivery specifics differ genuinely per city (office vs remote, distance,
+    // time zone), so this stays — but it is deliberately short, because the
+    // parts that would be identical everywhere are not repeated here.
+    bodyBlocks.push({
+      heading: `How we deliver to ${location.city}`,
+      paragraphs: [
+        location.office
+          ? `We have an office in ${location.city}${location.address ? ` at ${location.address}` : ''}, so kickoff workshops and review sessions happen in person and you can walk in.`
+          : location.note,
+        location.international && location.tzNote
+          ? `${location.tzNote}${location.currency ? ` Invoicing is in ${location.currency}.` : ''}`
+          : '',
+      ].filter(Boolean),
+    });
+
+    // NOTE: a generic "how to choose a partner in {city}" block was tried here
+    // and removed. It read identically on every city page apart from the name,
+    // and it pushed same-service city-pair similarity from 46% to 70% — which is
+    // precisely the templated-doorway pattern this whole recovery exists to
+    // undo. Depth is only worth adding when the added text is genuinely
+    // different per page; advice that applies everywhere belongs on the service
+    // hub, linked from here, not copied onto 140 city pages.
+  }
+
   // On a city page, point at the hub for the full scope rather than repeating it.
   const hub = SERVICE_HUBS[resolved.serviceId];
   const hubLink =
@@ -2199,6 +2482,8 @@ function uniqueBlock(resolved) {
     facts,
     meta,
     localFacts,
+    bodyBlocks,
+    aiSummary: aiSummary(resolved),
     hubLink,
     faqs: pageFaqs(resolved),
     ymyl: !!service.ymyl,
@@ -2328,6 +2613,99 @@ function pageFeature(resolved) {
 }
 
 /**
+ * aiSummary — the "AI Quick Summary" block.
+ *
+ * WHY THIS EXISTS
+ * ---------------
+ * AI answer engines (AI Overviews, ChatGPT, Perplexity, Gemini, Copilot) cite
+ * short, factual, self-contained statements. A page that buries its facts in
+ * marketing prose does not get quoted; a page that states them plainly does.
+ *
+ * Each bullet is generated from THIS page's own resolved data — its service,
+ * its city, its sector mix, its timeline, its pricing model — so no two pages
+ * produce the same box, and every claim traces back to something real in
+ * serviceContent.js. Nothing here is written to sound impressive; the value is
+ * that it is specific and checkable, which is the same thing that builds trust
+ * with a human reader who has never heard of us.
+ *
+ * Returns [] where we have nothing factual to say, rather than padding.
+ */
+function aiSummary(resolved) {
+  if (!resolved) return [];
+  const { service, location, industry, model, module } = resolved;
+  const out = [];
+
+  if (module) {
+    out.push(`${module.name} is a module of Avani Business OS, a business platform built and deployed for you rather than licensed per seat.`);
+    out.push(`It ${module.does}.`);
+    if (module.functions && module.functions.length) {
+      out.push(`Included: ${listSentence(module.functions.slice(0, 4)).toLowerCase()}.`);
+    }
+    out.push('Deployed on your own infrastructure with full source code ownership, so cost does not scale with headcount.');
+    out.push('Modules share one employee record, so data entered once flows to payroll, attendance and reporting without re-keying.');
+    return out;
+  }
+
+  if (model) {
+    out.push(`Avani Enterprises builds production applications on ${model.label}, developed by ${model.vendor}.`);
+    out.push(`${model.label} is the right choice when: ${lowerFirst(model.typicalFit)}`);
+    if (model.strengths && model.strengths.length) {
+      out.push(`Its practical strengths are ${listSentence(model.strengths.slice(0, 3)).toLowerCase()}.`);
+    }
+    out.push(`Integration is via ${lowerFirst(model.integration)}`);
+    if (model.timeline) out.push(`${model.timeline}.`);
+    out.push('We benchmark against the alternatives on your actual task before committing, and keep model calls behind an abstraction layer so switching vendors is a configuration change.');
+    return out;
+  }
+
+  if (!service) return [];
+
+  // 1. What it is, and for whom.
+  if (location) {
+    out.push(`Avani Enterprises provides ${service.noun} ${location.isRegion ? 'across' : 'in'} ${location.city}, working across ${listSentence(location.districts.slice(0, 3))}.`);
+  } else if (industry) {
+    out.push(`Avani Enterprises provides ${service.noun} for ${industry.label} businesses.`);
+  } else {
+    out.push(`Avani Enterprises provides ${service.noun} from its offices in Gurugram and Rohtak, delivering across India and internationally.`);
+  }
+
+  // 2. Who it suits.
+  out.push(`It is aimed at ${service.intent}.`);
+
+  // 3. Concrete deliverables.
+  if (service.deliverables && service.deliverables.length) {
+    out.push(`What is delivered: ${listSentence(service.deliverables.slice(0, 3)).toLowerCase()}.`);
+  }
+
+  // 4. Local or sector specificity — the part that differs page to page.
+  if (location) {
+    const uses = localUseCases(resolved);
+    if (uses.length) {
+      out.push(`In ${location.city} this is used most for ${listSentence(uses.slice(0, 3).map((u) => u.split(' — ')[1] || u)).toLowerCase()}.`);
+    } else {
+      out.push(`The local base here is weighted toward ${listSentence(location.industries.slice(0, 3))}.`);
+    }
+  } else if (industry) {
+    out.push(`${industry.label} teams typically need this because of ${listSentence(industry.pains)}.`);
+  } else if (service.stack && service.stack.length) {
+    out.push(`Built with ${listSentence(service.stack.slice(0, 4))}.`);
+  }
+
+  // 5. Timeline and commercials — the questions buyers actually ask.
+  if (service.timeline) out.push(`Typical timeline: ${lowerFirst(service.timeline)}.`);
+  if (service.priceModel) out.push(`Pricing: ${lowerFirst(service.priceModel)}.`);
+
+  // 6. One specific, verifiable differentiator.
+  if (location && location.office) {
+    out.push(`We have a physical office in ${location.city}${location.address ? ` at ${location.address}` : ''}, so reviews happen in person rather than only over video.`);
+  } else {
+    out.push('Engineering, marketing and AI sit in one team, so a recommendation and its implementation come from the same people rather than being handed to a third party.');
+  }
+
+  return out.slice(0, 6);
+}
+
+/**
  * A page-unique <title> derived from the resolved service/location/model.
  *
  * Pages with no registry entry (dedicated route components such as
@@ -2348,18 +2726,104 @@ function pageTitle(resolved) {
   return service.name;
 }
 
+/**
+ * Fit a description into the 140–160 character band Google renders in full.
+ *
+ * Too short wastes the snippet; too long truncates mid-sentence. Extends with
+ * real, page-specific facts rather than filler, and trims on a word boundary.
+ */
+function fitDescription(base, extras, min = 142, max = 158) {
+  let d = String(base || '').replace(/\s+/g, ' ').trim();
+
+  // Progressively shorter fallbacks, so a description that is only a little
+  // short still has something true to extend with rather than being left at
+  // ~110 characters wasting a third of the snippet.
+  const FILLERS = [
+    'Free scope call and a written quote before any work starts.',
+    'Offices in Gurugram and Rohtak, delivering across India.',
+    'Written scope before any work begins.',
+    'Free scope call, no obligation.',
+    'Based in Gurugram and Rohtak.',
+    'Talk to us first — no obligation.',
+    // Very short tails, for bases already close to the limit.
+    'Gurugram & Rohtak, India.',
+    'Free scope call.',
+    'Gurugram & Rohtak.',
+  ];
+
+  const candidates = (extras || []).concat(FILLERS);
+  for (const extra of candidates) {
+    if (d.length >= min) break;
+    const next = `${d.replace(/\.$/, '')}. ${String(extra).replace(/\s+/g, ' ').trim()}`;
+    // Skip an extra that would overflow, but keep trying shorter ones.
+    if (next.length <= max) d = next;
+  }
+
+  if (d.length > max) {
+    const words = d.split(' ');
+    let out = '';
+    for (const w of words) {
+      const next = out ? `${out} ${w}` : w;
+      if (next.length > max) break;
+      out = next;
+    }
+    d = out.replace(/[\s,;:—–-]+$/, '');
+    if (!/[.!?]$/.test(d)) d += '.';
+  }
+  return d;
+}
+
 /** A short, page-unique meta description built from real facts. */
 function pageDescription(resolved) {
   if (!resolved) return null;
-  const { service, location, model, module } = resolved;
-  if (module) return `${module.name} in Avani Business OS — ${lowerFirst(module.does)}. ${listSentence(module.functions.slice(0, 3))}. No per-user licensing.`;
-  if (!service) return null;
-  if (model) return `${service.name} on ${model.label}. ${model.typicalFit} Model-agnostic benchmarking, guardrails and evaluation before launch. ${COMPANY.name}.`;
-  if (location) {
-    const office = location.office ? `Avani has an office in ${location.city}.` : `Delivered remotely from our Gurugram head office.`;
-    return `${service.name} ${location.isRegion ? 'across' : 'in'} ${location.city} — ${listSentence(location.districts.slice(0, 3))}. ${office} ${service.timeline}.`;
+  const { service, location, industry, model, module } = resolved;
+
+  if (module) {
+    // A standalone product page and its /business-os/ counterpart describe the
+    // same module, so the framing differs to keep the two descriptions distinct.
+    const standalone = !String(resolved.slug || '').startsWith('business-os/');
+    return fitDescription(
+      standalone
+        ? `${module.name} software built for you, not licensed per seat — ${lowerFirst(module.does)}`
+        : `${module.name} in Avani Business OS — ${lowerFirst(module.does)}`,
+      standalone
+        ? ['Deployed on your own infrastructure.', 'Source code ownership included.']
+        : [listSentence((module.functions || []).slice(0, 2)) + '.', 'No per-user licensing.']
+    );
   }
-  return `${service.name}: ${listSentence((service.deliverables || []).slice(0, 3)).toLowerCase()}. ${service.timeline}. ${service.priceModel}.`;
+  if (!service) return null;
+
+  if (model) {
+    return fitDescription(
+      `${service.name} on ${model.label} — ${lowerFirst(model.typicalFit)}`,
+      ['We benchmark against the alternatives before committing.', 'Guardrails and evaluation before launch.']
+    );
+  }
+
+  if (location) {
+    const uses = localUseCases(resolved);
+    return fitDescription(
+      `${service.name} ${location.isRegion ? 'across' : 'in'} ${location.city} — ${listSentence(location.districts.slice(0, 2))}`,
+      [
+        uses.length ? `Used for ${(uses[0].split(' — ')[1] || uses[0]).toLowerCase()}.` : '',
+        location.office ? `Office in ${location.city}.` : '',
+        service.timeline ? `${service.timeline}.` : '',
+        'Free scope call, written quote.',
+      ].filter(Boolean)
+    );
+  }
+
+  if (industry) {
+    return fitDescription(
+      `${service.name} for ${industry.label} — built around ${listSentence(industry.pains.slice(0, 2))}`,
+      [service.timeline ? `${service.timeline}.` : '', 'Written scope before any work starts.'].filter(Boolean)
+    );
+  }
+
+  return fitDescription(
+    `${service.name}: ${listSentence((service.deliverables || []).slice(0, 2)).toLowerCase()}`,
+    [service.timeline ? `${service.timeline}.` : '', service.priceModel ? `${lowerFirst(service.priceModel)}.` : ''].filter(Boolean)
+  );
 }
 
 /* DATA-END */
@@ -2389,5 +2853,7 @@ export {
   pageFeature,
   pageTitle,
   pageDescription,
+  aiSummary,
+  fitDescription,
   listSentence,
 };

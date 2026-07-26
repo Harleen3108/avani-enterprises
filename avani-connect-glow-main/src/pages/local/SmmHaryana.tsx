@@ -15,7 +15,7 @@ const PAGE: LocalServicePageProps = {
     { label: 'SMM Agency — Haryana', href: '/social-media-marketing-agency-haryana' },
   ],
   hero: {
-    tag: '📱 Haryana\'s #1 Social Media Marketing Agency',
+    tag: '📱 Haryana\'s Social Media Marketing Agency',
     h1: 'Social Media Marketing Agency in Haryana',
     subtitle: 'We turn your social media presence into a 24/7 lead generation machine. Stunning reels, targeted ads, and community management that grows Haryana businesses on Instagram, Facebook & LinkedIn.',
     stats: [

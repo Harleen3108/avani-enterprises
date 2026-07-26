@@ -45,7 +45,7 @@ const Index = () => {
   return (
     <>
       <Helmet>
-        <title>Avani Enterprises : No.1 Digital Marketing Agency in India</title>
+        <title>Avani Enterprises — Digital, Product & AI Studio in Gurugram</title>
         <meta 
           name="description" 
           content="Avani Enterprises provides web development, SEO, and digital marketing services to help businesses grow online." 

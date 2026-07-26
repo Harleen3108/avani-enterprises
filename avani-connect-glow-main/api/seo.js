@@ -4,7 +4,8 @@ import { fileURLToPath } from 'url';
 import { newSeoData } from './newSeoData.js';
 // Generated at prebuild from src/data/ — see generate-sitemap.cjs.
 // Copies live in api/ so the Vercel function bundle is guaranteed to contain them.
-import { resolvePage, uniqueBlock, pageDescription, pageTitle, STATIC_PAGES, canonicalSlugFor } from './serviceContent.js';
+import { resolvePage, uniqueBlock, pageDescription, pageTitle, aiSummary, fitDescription, STATIC_PAGES, canonicalSlugFor } from './serviceContent.js';
+import { redirectTarget } from './pageRedirects.js';
 import { isNoindexed } from './noindexPages.js';
 import { ssrContent } from './ssrContent.js';
 import { NAP, officeFor, formatAddress, mapLinkUrl, localBusinessSchema } from './offices.js';
@@ -768,7 +769,9 @@ function shortenTitle(raw, limit = 60) {
   if (hadBrand) t = t.replace(brandSuffix, '').trim();
 
   // Re-attach a single brand only if there is room for it.
-  const withBrand = `${t} | ${BRAND}`;
+  // If the brand already appears inside the title, do not append it again.
+  const alreadyBranded = t.toLowerCase().includes(BRAND.toLowerCase());
+  const withBrand = alreadyBranded ? t : `${t} | ${BRAND}`;
   if (withBrand.length <= limit) return withBrand;
 
   // 2. Brand dropped. Does the bare title fit?
@@ -908,12 +911,33 @@ function internalLinksHtml(pagePath, resolved) {
     });
   }
 
-  [['/services', 'All Services'], ['/case-studies', 'Case Studies'], ['/contact', 'Contact'], ['/about', 'About']]
-    .forEach(([h, l]) => add(h, l));
+  // Sibling city pages for the same service — the strongest lateral link for a
+  // location page, and what stops the city set becoming a set of orphans.
+  if (resolved && resolved.location) {
+    const base = resolved.slug.replace(new RegExp('-' + resolved.location.key + '$'), '');
+    ['gurgaon', 'rohtak', 'delhi', 'noida', 'faridabad', 'ghaziabad', 'india']
+      .forEach((loc) => {
+        if (loc === resolved.location.key) return;
+        const href = `/${base}-${loc}`;
+        if (isNoIndex(href)) return;
+        add(href, `${resolved.service.name} in ${LOCATIONS_LABEL[loc] || loc}`);
+      });
+  }
+
+  [
+    ['/services', 'All Services'],
+    ['/guides', 'Guides'],
+    ['/blog', 'Blog'],
+    ['/case-studies', 'Case Studies'],
+    ['/projects', 'Projects'],
+    ['/about', 'About'],
+    ['/contact', 'Contact'],
+    ['/sitemap', 'Full site index'],
+  ].forEach(([h, l]) => add(h, l));
 
   return (
     '<nav aria-label="Related"><h2>Related services and locations</h2><ul>' +
-    items.slice(0, 14).map(([href, label]) => `<li><a href="${href}">${esc(label)}</a></li>`).join('') +
+    items.slice(0, 20).map(([href, label]) => `<li><a href="${href}">${esc(label)}</a></li>`).join('') +
     '</ul></nav>'
   );
 }
@@ -935,6 +959,104 @@ const LOCATIONS_LABEL = {
 function schemaHtml(pagePath, canonical, title, resolved, guide, faqs, post) {
   const graphs = [];
   const slug = String(pagePath || '/').replace(/^\/+/, '').replace(/\/+$/, '');
+
+  // ── Organization ──────────────────────────────────────────────────────────
+  // Emitted on every page with a stable @id so every other entity on the site
+  // can reference it. This is the entity anchor: it is how Google and answer
+  // engines resolve "Avani Enterprises" to one organisation with one address
+  // and one phone number, which is what a brand nobody has heard of needs
+  // before it can be surfaced at all.
+  //
+  // Deliberately no aggregateRating — see SEO-RECOVERY.md §4.1.
+  graphs.push({
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    '@id': `${SITE_URL}/#organization`,
+    name: NAP.name,
+    url: SITE_URL,
+    logo: { '@type': 'ImageObject', url: `${SITE_URL}/logo0.webp` },
+    description:
+      'Avani Enterprises is a full-service digital, product and AI studio based in Gurugram and Rohtak, India. It builds websites, mobile apps, e-commerce stores and custom business software, runs SEO and paid media, and develops AI systems including chatbots, voice agents and agentic workflows.',
+    foundingDate: '2016',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Tower B, 3rd Floor, Unitech Cyber Park, Durga Colony, Sector 39',
+      addressLocality: 'Gurugram',
+      addressRegion: 'Haryana',
+      postalCode: '122002',
+      addressCountry: 'IN',
+    },
+    contactPoint: [{
+      '@type': 'ContactPoint',
+      telephone: NAP.phone,
+      email: NAP.email,
+      contactType: 'sales',
+      areaServed: 'IN',
+      availableLanguage: ['English', 'Hindi'],
+    }],
+    sameAs: NAP.sameAs,
+  });
+
+  // ── WebSite + SearchAction ────────────────────────────────────────────────
+  // Homepage only. Declares the site as an entity and exposes internal search,
+  // which is what makes a sitelinks search box eligible.
+  if (!slug) {
+    graphs.push({
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      '@id': `${SITE_URL}/#website`,
+      url: SITE_URL,
+      name: NAP.name,
+      publisher: { '@id': `${SITE_URL}/#organization` },
+      inLanguage: 'en-IN',
+      potentialAction: {
+        '@type': 'SearchAction',
+        target: { '@type': 'EntryPoint', urlTemplate: `${SITE_URL}/blog?q={search_term_string}` },
+        'query-input': 'required name=search_term_string',
+      },
+    });
+  }
+
+  // ── SoftwareApplication — the two real products ───────────────────────────
+  if (slug === 'business-os' || slug.startsWith('business-os/')) {
+    graphs.push({
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareApplication',
+      '@id': `${SITE_URL}/business-os#software`,
+      name: 'Avani Business OS',
+      applicationCategory: 'BusinessApplication',
+      operatingSystem: 'Web',
+      url: `${SITE_URL}/business-os`,
+      description: 'A unified business operating system covering HR, payroll, attendance, CRM, projects and finance, built for the client and deployed on their own infrastructure with no per-seat licensing.',
+      publisher: { '@id': `${SITE_URL}/#organization` },
+      offers: {
+        '@type': 'Offer',
+        priceCurrency: 'INR',
+        // No price: quoted per engagement. Omitted rather than invented.
+        availability: 'https://schema.org/InStock',
+        url: `${SITE_URL}/contact`,
+      },
+    });
+  }
+  if (slug === 'social-sync' || slug.startsWith('social-sync/') || slug === 'social-media-scheduler') {
+    graphs.push({
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareApplication',
+      '@id': `${SITE_URL}/social-sync#software`,
+      name: 'Social Sync',
+      applicationCategory: 'BusinessApplication',
+      operatingSystem: 'Web',
+      url: `${SITE_URL}/social-sync`,
+      description: 'A social media scheduling and management platform covering Instagram, Facebook, LinkedIn, X and YouTube, with per-platform formatting, approval workflows and multi-brand management.',
+      publisher: { '@id': `${SITE_URL}/#organization` },
+      offers: {
+        '@type': 'Offer',
+        priceCurrency: 'INR',
+        availability: 'https://schema.org/InStock',
+        url: `${SITE_URL}/contact`,
+      },
+    });
+  }
 
   // BlogPosting for blog posts — dated, authored editorial content.
   if (post) {
@@ -1128,6 +1250,8 @@ function buildBlogHtml(slug, post) {
     `<p>By ${esc(post.author)}${post.publishedAt ? ` · ${esc(String(post.publishedAt).slice(0, 10))}` : ''}</p>`,
     '</header>',
     '<main>',
+    // AI Quick Summary derived from this post's own content.
+    summaryHtml(blogSummary(post, slug)),
     post.content || '',
     '</main>',
     '<footer><nav aria-label="Related"><ul>' +
@@ -1145,6 +1269,69 @@ function buildBlogHtml(slug, post) {
     resolved: null,
     post: Object.assign({ slug }, post),
   };
+}
+
+/**
+ * HTML site index at /sitemap — the orphan fix.
+ *
+ * 89 pages had no inbound internal link from any other page's rendered body,
+ * which tells Google they do not matter. This lists every indexable URL,
+ * grouped, and is itself linked from every page's related-links footer. Read
+ * from sitemap.xml so it cannot list something that is de-indexed.
+ */
+function buildSiteIndexHtml() {
+  let locs = [];
+  try {
+    const p = ['public/sitemap.xml', 'dist/sitemap.xml', '/var/task/public/sitemap.xml']
+      .find((x) => fs.existsSync(x));
+    if (p) {
+      locs = [...fs.readFileSync(p, 'utf8').matchAll(/<loc>([^<]*)<\/loc>/g)]
+        .map((m) => m[1].replace(SITE_URL, ''))
+        .filter((u) => u && u !== '/');
+    }
+  } catch { /* fall through to the static nav below */ }
+
+  const GROUPS = [
+    ['Company', (u) => ['/about', '/services', '/contact', '/case-studies', '/projects', '/careers', '/courses', '/newsletters', '/global-presence', '/privacy-policy', '/terms-and-conditions'].includes(u)],
+    ['Guides', (u) => u.startsWith('/guides')],
+    ['Blog', (u) => u.startsWith('/blog')],
+    ['Business OS', (u) => u.startsWith('/business-os')],
+    ['Social Sync', (u) => u.startsWith('/social-sync') || /scheduler|social-media-(content|approval|client)|dm-tool|multi-brand/.test(u)],
+    ['Comparisons', (u) => u.endsWith('-alternative')],
+    ['Services by location', (u) => /-(gurgaon|gurugram|rohtak|delhi|noida|greater-noida|faridabad|ghaziabad|haryana|india|mumbai|bangalore|pune|hyderabad|chennai|kolkata|ahmedabad|jaipur|chandigarh|panipat|sonipat|karnal|hisar|ambala)$/.test(u)],
+  ];
+
+  const parts = [
+    '<nav aria-label="Breadcrumb"><a href="/">Home</a> / <span>Site index</span></nav>',
+    '<header><h1>Site Index</h1><p>Every page on avanienterprises.in, grouped. If you are looking for something specific, this is the fastest route to it.</p></header>',
+    '<main>',
+  ];
+
+  const used = new Set();
+  GROUPS.forEach(([name, match]) => {
+    const group = locs.filter((u) => !used.has(u) && match(u));
+    group.forEach((u) => used.add(u));
+    if (!group.length) return;
+    parts.push(`<section><h2>${esc(name)}</h2><ul>`);
+    group.sort().forEach((u) => {
+      const label = decodeURIComponent(u.replace(/^\//, '')).replace(/-/g, ' ').replace(/\//g, ' › ');
+      parts.push(`<li><a href="${esc(u)}">${esc(label)}</a></li>`);
+    });
+    parts.push('</ul></section>');
+  });
+
+  const rest = locs.filter((u) => !used.has(u));
+  if (rest.length) {
+    parts.push('<section><h2>Services</h2><ul>');
+    rest.sort().forEach((u) => {
+      const label = decodeURIComponent(u.replace(/^\//, '')).replace(/-/g, ' ');
+      parts.push(`<li><a href="${esc(u)}">${esc(label)}</a></li>`);
+    });
+    parts.push('</ul></section>');
+  }
+
+  parts.push('</main>');
+  return { html: parts.join(''), faqs: [], resolved: null };
 }
 
 /** The blog index, listing every snapshotted post so each gets a crawlable link. */
@@ -1174,6 +1361,53 @@ function inlineHtml(text) {
 }
 
 /** Full server-rendered guide: takeaways, sections, FAQs and the cluster link. */
+/** Render an AI Quick Summary block from a list of factual lines. */
+function summaryHtml(lines) {
+  if (!lines || !lines.length) return '';
+  return (
+    '<section aria-label="Quick summary"><h2>AI Quick Summary</h2><ul>' +
+    lines.map((l) => `<li>${esc(l)}</li>`).join('') +
+    '</ul></section>'
+  );
+}
+
+/**
+ * Derive an AI Quick Summary for a blog post from its own content.
+ * Uses the excerpt plus the first sentence of each early section, so the block
+ * is specific to the post rather than a generic template.
+ */
+function blogSummary(post, slug) {
+  const text = String(post.content || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+  const lines = [];
+  if (post.excerpt) lines.push(post.excerpt.trim());
+
+  // Section headings make good quotable scaffolding for an answer engine.
+  const headings = [...String(post.content || '').matchAll(/<h2[^>]*>([\s\S]*?)<\/h2>/gi)]
+    .map((m) => m[1].replace(/<[^>]+>/g, '').trim())
+    .filter((h) => h && !/^(frequently asked|key takeaways|ai quick summary)/i.test(h));
+  if (headings.length) {
+    lines.push(`This article covers ${listOf(headings.slice(0, 4))}.`);
+  }
+
+  // First substantive sentence, as the answer-first statement.
+  const firstSentence = (text.match(/[^.!?]{60,240}[.!?]/) || [])[0];
+  if (firstSentence && (!post.excerpt || !post.excerpt.startsWith(firstSentence.slice(0, 40)))) {
+    lines.push(firstSentence.trim());
+  }
+
+  const words = text.split(' ').filter(Boolean).length;
+  lines.push(`Roughly a ${Math.max(1, Math.round(words / 200))}-minute read, published by Avani Enterprises${post.publishedAt ? ` on ${String(post.publishedAt).slice(0, 10)}` : ''}.`);
+  lines.push('Avani Enterprises is a digital, product and AI studio with offices in Gurugram and Rohtak, India.');
+  return lines.filter(Boolean).slice(0, 6);
+}
+
+function listOf(items) {
+  const a = (items || []).filter(Boolean);
+  if (!a.length) return '';
+  if (a.length === 1) return a[0];
+  return a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1];
+}
+
 function buildGuideHtml(slug, g) {
   const parts = [
     '<nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/guides">Guides</a> / ' +
@@ -1182,7 +1416,7 @@ function buildGuideHtml(slug, g) {
     `<p>Last updated ${esc(g.updated)}</p></header>`,
     '<main>',
     // Key takeaways first — this is the block AI answer engines lift most readily.
-    '<section><h2>Key takeaways</h2><ul>',
+    '<section aria-label="Quick summary"><h2>AI Quick Summary</h2><ul>',
     ...g.takeaways.map((t) => `<li>${esc(t)}</li>`),
     '</ul></section>',
   ];
@@ -1255,7 +1489,8 @@ function buildGuidesIndexHtml() {
  */
 function buildUniqueBodyHtml(pagePath, title, description, runtimePost) {
   const slug = String(pagePath || '/').toLowerCase().replace(/^\/+/, '').replace(/\/+$/, '');
-  if (!slug) return null; // homepage keeps its own fallback copy
+  // The homepage now has real content in STATIC_PAGES.home; it no longer keeps
+  // the generic shell copy, which was only 386 words and shared with nothing.
 
   // STATIC_PAGES covers the hand-built React pages (/about, /services, …) that
   // have no registry entry; without it they all fell back to the shared shell.
@@ -1270,6 +1505,14 @@ function buildUniqueBodyHtml(pagePath, title, description, runtimePost) {
     return buildGuidesIndexHtml();
   }
 
+  // ── HTML site index ───────────────────────────────────────────────────────
+  // Every indexable URL gets at least one crawlable inbound link from here, so
+  // no page is orphaned and nothing sits more than three clicks from the home
+  // page. Built from the sitemap so it can never drift from what is indexable.
+  if (slug === 'sitemap') {
+    return buildSiteIndexHtml();
+  }
+
   // ── Blog ──────────────────────────────────────────────────────────────────
   const blogSlug = slug.startsWith('blog/') ? resolveBlogSlug(slug.slice(5)) : null;
   if (blogSlug && (blogContent[blogSlug] || runtimePost)) {
@@ -1281,7 +1524,7 @@ function buildUniqueBodyHtml(pagePath, title, description, runtimePost) {
     return buildBlogIndexHtml();
   }
 
-  const stored = ssrContent[slug] || STATIC_PAGES[slug] || null;
+  const stored = ssrContent[slug] || STATIC_PAGES[slug || 'home'] || null;
   const resolved = resolvePage(pagePath);
   const block = resolved ? uniqueBlock(resolved) : null;
 
@@ -1308,6 +1551,28 @@ function buildUniqueBodyHtml(pagePath, title, description, runtimePost) {
     '<main>',
   ];
 
+  // AI Quick Summary — placed immediately after the H1 because answer engines
+  // weight early, self-contained factual statements most heavily. Generated from
+  // this page's own resolved data, so no two pages produce the same box.
+  // Static pages carry their own summary lines; everything else derives one.
+  let summary = resolved ? aiSummary(resolved) : [];
+  if (!summary.length && stored && stored.aiSummary) summary = stored.aiSummary;
+  if (!summary.length && stored && stored.sections) {
+    // Fall back to the page's own headings and intro — still page-specific.
+    const heads = stored.sections.map((x) => x.heading).filter(Boolean);
+    summary = [
+      stored.intro,
+      heads.length ? 'This page covers ' + listOf(heads.slice(0, 4)) + '.' : '',
+      'Avani Enterprises is a digital, product and AI studio with offices in Gurugram and Rohtak, India.',
+      'Contact: +91 92536 25099 or kp@avanienterprises.in.',
+    ].filter(Boolean);
+  }
+  if (summary.length) {
+    parts.push('<section aria-label="Quick summary"><h2>AI Quick Summary</h2><ul>');
+    summary.forEach((line) => parts.push(`<li>${esc(line)}</li>`));
+    parts.push('</ul></section>');
+  }
+
   if (block) {
     // Do not repeat the lead when it already ran as the intro above.
     parts.push(`<section><h2>${esc(block.heading)}</h2>${intro === block.lead ? '' : `<p>${esc(block.lead)}</p>`}`);
@@ -1329,6 +1594,13 @@ function buildUniqueBodyHtml(pagePath, title, description, runtimePost) {
       block.meta.forEach((m) => parts.push(`<dt>${esc(m.label)}</dt><dd>${esc(m.value)}</dd>`));
       parts.push('</dl>');
     }
+
+    // Genuinely local long-form sections — the depth that gets city pages past
+    // the 600-word bar on facts rather than filler.
+    (block.bodyBlocks || []).forEach((b) => {
+      parts.push(`<h3>${esc(b.heading)}</h3>`);
+      b.paragraphs.forEach((p) => parts.push(`<p>${esc(p)}</p>`));
+    });
 
     // Hub-and-spoke: city pages link up to the service page that holds full detail.
     if (block.hubLink) {
@@ -1462,6 +1734,17 @@ export default async function handler(req, res) {
     const pagePath = req.query.path || "/";
     const normalizedPath = pagePath.startsWith('/') ? pagePath : `/${pagePath}`;
 
+    // ── 0a. Consolidated page 301s ──────────────────────────────────────────
+    // The Social Sync scheduler clones (94% similar to each other) redirect to
+    // the single deep hub. 301 rather than canonical: these pages have no
+    // independent value to preserve.
+    const consolidated = redirectTarget(normalizedPath);
+    if (consolidated) {
+      res.setHeader('Location', `/${consolidated}`);
+      res.setHeader('Cache-Control', 'public, max-age=3600');
+      return res.status(301).send(`Moved permanently to /${consolidated}`);
+    }
+
     // ── 0. Blog slug 301s ───────────────────────────────────────────────────
     // Twelve posts had slugs containing spaces, commas, pipes and colons. Those
     // URLs are unreadable once percent-encoded, so they redirect permanently to
@@ -1550,6 +1833,13 @@ export default async function handler(req, res) {
 
     // Guides carry their own meta.
     const guideEntry = cleanSlug.startsWith('guides/') ? GUIDES[cleanSlug.slice(7)] : null;
+    // Hand-built static pages carry their own meta in STATIC_PAGES.
+    // '' is the homepage; STATIC_PAGES keys it as 'home'.
+    const staticEntry = STATIC_PAGES[cleanSlug || 'home'] || null;
+    const staticSeo = staticEntry && staticEntry.metaTitle
+      ? { title: staticEntry.metaTitle, description: staticEntry.metaDescription }
+      : null;
+
     const guideSeo = guideEntry
       ? { title: guideEntry.metaTitle, description: guideEntry.description }
       : cleanSlug === 'guides'
@@ -1571,10 +1861,27 @@ export default async function handler(req, res) {
         }
       : null;
 
-    const rawTitle    = seo?.title            || guideSeo?.title       || blogSeo?.title       || fallbackSeo?.title       || registrySeo?.title       || derivedTitle || "Avani Enterprises : No.1 Digital Marketing Agency in India";
+    const rawTitle    = seo?.title            || staticSeo?.title      || guideSeo?.title       || blogSeo?.title       || fallbackSeo?.title       || registrySeo?.title       || derivedTitle || "Avani Enterprises — Digital, Product & AI Studio";
     // Trimmed to what Google actually renders — see shortenTitle().
     const title       = shortenTitle(rawTitle);
-    const description = seo?.metaDescription  || guideSeo?.description || blogSeo?.description || fallbackSeo?.description || registrySeo?.description || derivedDescription || "No.1 Digital Marketing Agency in India, we deliver result-driven SEO, PPC, social media, and branding solutions.";
+    // The generated description is preferred because it is always fitted to the
+    // 140–160 band Google renders in full; registry copy is frequently ~112
+    // characters, which wastes a third of the snippet.
+    const rawDescription =
+      staticSeo?.description ||
+      derivedDescription ||
+      seo?.metaDescription ||
+      guideSeo?.description ||
+      blogSeo?.description ||
+      fallbackSeo?.description ||
+      registrySeo?.description ||
+      'Digital, product and AI studio in Gurugram and Rohtak — web and app development, SEO, paid media and AI systems delivered by one team.';
+
+    const description = fitDescription(rawDescription, [
+      'Free scope call and a written quote before any work starts.',
+      'Offices in Gurugram and Rohtak.',
+      'Delivering across India and internationally.',
+    ]);
     const canonical   = seo?.canonicalUrl     || buildCanonical(normalizedPath);
     // "noindex,follow" — not nofollow. De-indexed doorway pages should still pass
     // link equity through to the pages we keep.
