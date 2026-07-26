@@ -1,0 +1,48 @@
+# render.yaml — Render Blueprint
+#
+# Declares ONLY the scheduled blog-publishing job. Your existing backend web
+# service on Render is not managed by this file and is not affected by it.
+#
+# To create the cron job from this file:
+#   Render Dashboard → New → Blueprint → pick this repo → Apply
+# Render will prompt for the two secrets marked `sync: false`.
+#
+# WHY THE JOB LOGS IN RATHER THAN HOLDING A TOKEN
+# Backend JWTs expire after 1 day (index.js: expiresIn "1d"). A cron holding a
+# pasted AVANI_ADMIN_TOKEN would publish for 24 hours and then 401 on every run
+# afterwards, silently. Logging in per run is the only form of this that keeps
+# working, so the job takes AVANI_ADMIN_EMAIL + AVANI_ADMIN_PASSWORD instead.
+
+services:
+  - type: cron
+    name: avani-blog-drip
+    runtime: node
+    plan: starter
+
+    # 04:00 UTC ≈ 09:30 IST, daily.
+    #
+    # Daily is the CHECK frequency, not the publish frequency. The script
+    # publishes at most one post per run and only if DRIP_DAYS have passed since
+    # the last published post, so this yields roughly two posts a week. On any
+    # day with nothing due it exits 0 having done nothing, which is why running
+    # it daily is safe.
+    schedule: "0 4 * * *"
+
+    # The script lives in the frontend directory but has ZERO npm dependencies —
+    # it uses only node built-ins and global fetch. So there is nothing to
+    # install, and we skip the (heavy) frontend install entirely.
+    rootDir: avani-connect-glow-main
+    buildCommand: node --version
+    startCommand: node scripts/seedBlogPosts.js --publish --confirm
+
+    envVars:
+      - key: BACKEND_URL
+        value: https://avani-enterprises.onrender.com
+      - key: DRIP_DAYS
+        value: "3"
+      # sync: false = Render prompts for the value and stores it encrypted.
+      # Never commit these.
+      - key: AVANI_ADMIN_EMAIL
+        sync: false
+      - key: AVANI_ADMIN_PASSWORD
+        sync: false

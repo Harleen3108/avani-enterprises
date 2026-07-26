@@ -24,9 +24,19 @@
  *   week rather than dumping the queue at once.
  *
  * ENV
- *   BACKEND_URL         defaults to https://avani-enterprises.onrender.com
- *   AVANI_ADMIN_TOKEN   required to publish (admin JWT)
- *   DRIP_DAYS           optional, default 3
+ *   BACKEND_URL           defaults to https://avani-enterprises.onrender.com
+ *   DRIP_DAYS             optional, default 3
+ *
+ *   Authentication — one of:
+ *   AVANI_ADMIN_EMAIL     \ preferred for the cron: the script logs in and gets
+ *   AVANI_ADMIN_PASSWORD  / a fresh token on every run
+ *   AVANI_ADMIN_TOKEN       a pasted JWT, for one-off manual runs
+ *
+ *   WHY LOGIN AND NOT A PASTED TOKEN
+ *   Backend JWTs expire after 1 day (index.js: expiresIn "1d"). A scheduled job
+ *   holding a hardcoded token therefore publishes for at most 24 hours and then
+ *   fails with 401 on every subsequent run — silently, because nobody watches
+ *   cron logs. Logging in per run is the only version of this that keeps working.
  *
  * Posts live in scripts/blogSeedData.js. See scripts/BLOG-SEEDING.md.
  */
@@ -39,6 +49,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const BACKEND_URL = process.env.BACKEND_URL || 'https://avani-enterprises.onrender.com';
 const ADMIN_TOKEN = process.env.AVANI_ADMIN_TOKEN || '';
+const ADMIN_EMAIL = process.env.AVANI_ADMIN_EMAIL || '';
+const ADMIN_PASSWORD = process.env.AVANI_ADMIN_PASSWORD || '';
 const DRIP_DAYS = Number(process.env.DRIP_DAYS || 3);
 
 const MIN_WORDS = 1200;
@@ -119,6 +131,43 @@ function buildBody(post) {
   return out.join('\n');
 }
 
+/**
+ * Get a usable admin JWT.
+ *
+ * Prefers a pasted AVANI_ADMIN_TOKEN so a manual one-off run still works, but
+ * falls back to logging in — which is what the scheduled job should use, since
+ * tokens live for a day and the job runs indefinitely.
+ */
+async function getToken() {
+  if (ADMIN_TOKEN) return { token: ADMIN_TOKEN, how: 'AVANI_ADMIN_TOKEN' };
+
+  if (!ADMIN_EMAIL || !ADMIN_PASSWORD) {
+    console.error('\n❌ No credentials. Set either:');
+    console.error('   AVANI_ADMIN_EMAIL + AVANI_ADMIN_PASSWORD  (use this for the cron)');
+    console.error('   AVANI_ADMIN_TOKEN                         (a pasted JWT, expires in 24h)');
+    return null;
+  }
+
+  let res;
+  try {
+    res = await fetch(`${BACKEND_URL}/auth/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: ADMIN_EMAIL, password: ADMIN_PASSWORD }),
+    });
+  } catch (err) {
+    console.error(`\n❌ Could not reach ${BACKEND_URL}: ${err.message}`);
+    return null;
+  }
+
+  const json = await res.json().catch(() => ({}));
+  if (!res.ok || !json.token) {
+    console.error(`\n❌ Login failed (HTTP ${res.status}): ${json.message || 'no token returned'}`);
+    return null;
+  }
+  return { token: json.token, how: `login as ${ADMIN_EMAIL}` };
+}
+
 async function alreadyPublished() {
   try {
     const res = await fetch(`${BACKEND_URL}/blogs`);
@@ -195,10 +244,10 @@ async function alreadyPublished() {
     console.log('\nDRY RUN. Nothing published. Re-run with --confirm.\n');
     return;
   }
-  if (!ADMIN_TOKEN) {
-    console.error('\n❌ AVANI_ADMIN_TOKEN is not set.');
-    process.exit(1);
-  }
+
+  const auth = await getToken();
+  if (!auth) process.exit(1);
+  console.log(`Authenticated via ${auth.how}`);
 
   const payload = {
     title: next.title,
@@ -215,7 +264,7 @@ async function alreadyPublished() {
 
   const res = await fetch(`${BACKEND_URL}/admin/blogs`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${ADMIN_TOKEN}` },
+    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${auth.token}` },
     body: JSON.stringify(payload),
   });
 

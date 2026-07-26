@@ -127,7 +127,9 @@ Set `status: 'approved'` on the posts you are happy with, then:
 node scripts/seedBlogPosts.js --publish
 
 # Actually publish (one post)
-AVANI_ADMIN_TOKEN=<admin-jwt> node scripts/seedBlogPosts.js --publish --confirm
+AVANI_ADMIN_EMAIL=you@avanienterprises.in \
+AVANI_ADMIN_PASSWORD='<password>' \
+node scripts/seedBlogPosts.js --publish --confirm
 ```
 
 **One post per run**, and only if `DRIP_DAYS` (default 3) have passed since the
@@ -135,36 +137,79 @@ last published post. A daily cron therefore produces roughly two posts a week.
 
 Add `--all` to ignore the drip gap (use sparingly — that is the safeguard).
 
+### Authentication
+
+| Variable | Use it for |
+|---|---|
+| `AVANI_ADMIN_EMAIL` + `AVANI_ADMIN_PASSWORD` | **the cron.** Logs in per run |
+| `AVANI_ADMIN_TOKEN` | a one-off manual run with a JWT you already have |
+
+Backend JWTs expire after **1 day** (`index.js`: `expiresIn: "1d"`). A scheduled
+job holding a pasted `AVANI_ADMIN_TOKEN` publishes for 24 hours and then returns
+401 on every run after that — silently, because nobody reads cron logs. Give the
+cron the email and password so it can mint a fresh token each time.
+
 ---
 
 ## 4. Running it on Render
 
-**As a one-off:** Render dashboard → your service → **Shell**:
+### One-off, right now
+
+Render dashboard → your backend service → **Shell**:
 
 ```bash
 cd avani-connect-glow-main
-AVANI_ADMIN_TOKEN=<admin-jwt> node scripts/seedBlogPosts.js --publish --confirm
+AVANI_ADMIN_EMAIL=you@avanienterprises.in \
+AVANI_ADMIN_PASSWORD='<password>' \
+node scripts/seedBlogPosts.js --publish --confirm
 ```
 
-**As a scheduled job:** Render → **New** → **Cron Job**
+### Automatic, via the blueprint
+
+`render.yaml` at the repo root declares the cron job. Render Dashboard →
+**New** → **Blueprint** → pick this repo → **Apply**. Render prompts for the two
+secrets; everything else is already set.
+
+### Automatic, via the dashboard
+
+Render → **New** → **Cron Job**
 
 | Field | Value |
 |---|---|
+| Root directory | `avani-connect-glow-main` |
+| Build command | `node --version` (the script has no npm dependencies) |
 | Command | `node scripts/seedBlogPosts.js --publish --confirm` |
 | Schedule | `0 4 * * *` (daily 04:00 UTC ≈ 09:30 IST) |
-| Root dir | `avani-connect-glow-main` |
 
 Environment variables:
 
 | Key | Value |
 |---|---|
-| `AVANI_ADMIN_TOKEN` | admin JWT — **required** |
+| `AVANI_ADMIN_EMAIL` | your admin login |
+| `AVANI_ADMIN_PASSWORD` | your admin password |
 | `BACKEND_URL` | `https://avani-enterprises.onrender.com` |
 | `DRIP_DAYS` | `3` |
 
-The daily schedule plus the 3-day drip gap is what produces the ~2-per-week
-cadence. The job exits cleanly and does nothing when no post is due, so running
-it daily is safe.
+Daily is the **check** frequency, not the publish frequency. Combined with the
+3-day drip gap it produces roughly two posts a week. On a day with nothing due
+the job exits 0 having done nothing, which is why running it daily is safe.
+
+> **The cron only publishes what you have queued.** It is a delivery mechanism,
+> not a writer. With one approved post in `blogSeedData.js`, it publishes that
+> post on its first run and then does nothing for ever. Keep the queue stocked
+> or the automation has nothing to automate.
+
+### What the Render CLI can and cannot do
+
+The `render` CLI has no command that creates a cron job — it covers `login`,
+`services`, `deploys`, `ssh` and `psql`. Use the blueprint or the dashboard
+above. The CLI is still useful for watching the job:
+
+```bash
+render login
+render services          # find the avani-blog-drip job
+render deploys create <service-id>   # trigger a run immediately
+```
 
 > ⚠️ **Before enabling the cron**, publish two or three posts manually with
 > `--confirm` and check how they render. Automated publishing should only be
