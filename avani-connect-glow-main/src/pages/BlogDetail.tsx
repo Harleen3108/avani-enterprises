@@ -4,6 +4,8 @@ import { Helmet } from 'react-helmet-async';
 import { ArrowLeft, Calendar, Share2, Tag } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { getBackendUrl } from '../lib/api';
+import BlogEngagement from '../components/blog/BlogEngagement';
+import BusinessSetup3Form from '../components/BusinessSetup3Form';
 import '../components/Home.css';
 
 const fadeIn = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } };
@@ -140,6 +142,30 @@ const BlogDetail = () => {
                 <button className="dh-btn-ghost" style={{ padding: '0.6rem', minWidth: 'auto', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Share2 size={16} /></button>
               </div>
             </div>
+
+            {/* Conversion: every post ends with the lead form. generate_lead
+                fires on submit carrying this post's path as attribution, so GA4
+                shows which articles actually produce enquiries. */}
+            <section
+              id="consultation"
+              style={{
+                marginTop: '3rem', background: 'var(--card-bg)',
+                border: '1px solid var(--border-light)', borderRadius: '18px',
+                padding: '28px', scrollMarginTop: 90,
+              }}
+            >
+              <h2 style={{ fontFamily: "'Outfit', sans-serif", fontSize: '1.2rem', fontWeight: 800, margin: '0 0 .4rem' }}>
+                Want this looked at for your business?
+              </h2>
+              <p style={{ fontSize: '.92rem', color: 'var(--text-secondary)', lineHeight: 1.7, margin: '0 0 1.25rem' }}>
+                Tell us your goal and we will come back with a written scope — no obligation, and we will
+                say plainly if we are not the right fit.
+              </p>
+              <BusinessSetup3Form source={`blog:${slug}`} />
+            </section>
+
+            {/* Views, likes and comments */}
+            <BlogEngagement slug={slug || ''} views={blog.views} />
           </motion.div>
         </div>
       </section>

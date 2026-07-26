@@ -2283,7 +2283,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
               }
           ]
       },
-      "intro": "As a design-led web design company in India, Avani Enterprises treats your website as your hardest-working salesperson, not just a brochure. From DLF Cyber City, Gurugram, our UI/UX design team builds custom web design grounded in user research, brand identity, and clear conversion goals, so every layout, colour, and click moves a visitor closer to enquiry. With 150+ clients across Delhi NCR and pan-India, we deliver professional web design services that look distinctive and perform measurably.",
+      "intro": "As a design-led web design company in India, Avani Enterprises treats your website as your hardest-working salesperson, not just a brochure. From Unitech Cyber Park, Sector 39, Gurugram, our UI/UX design team builds custom web design grounded in user research, brand identity, and clear conversion goals, so every layout, colour, and click moves a visitor closer to enquiry. With 150+ clients across Delhi NCR and pan-India, we deliver professional web design services that look distinctive and perform measurably.",
       "whyAvani": [
           {
               "title": "Design Tied to Conversions",
@@ -2788,7 +2788,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
           },
           {
               "q": "Can you build apps for businesses outside Gurugram?",
-              "a": "Yes. We are headquartered in DLF Cyber City, Gurugram, and serve clients across Delhi NCR, Haryana, Rohtak, and pan-India including Mumbai and Pune, working remotely with 24/7 communication."
+              "a": "Yes. We are headquartered in Unitech Cyber Park, Sector 39, Gurugram, and serve clients across Delhi NCR, Haryana, Rohtak, and pan-India including Mumbai and Pune, working remotely with 24/7 communication."
           }
       ],
       "relatedLinks": [
@@ -3066,7 +3066,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
           },
           {
               "q": "Do you work with businesses outside Gurgaon and Delhi NCR?",
-              "a": "Yes. We are headquartered at DLF Cyber City, Gurugram and serve Delhi NCR, Rohtak, and clients pan-India including Mumbai and Pune. Most collaboration happens remotely with regular review calls."
+              "a": "Yes. We are headquartered at Unitech Cyber Park, Sector 39, Gurugram and serve Delhi NCR, Rohtak, and clients pan-India including Mumbai and Pune. Most collaboration happens remotely with regular review calls."
           }
       ],
       "relatedLinks": [
@@ -3344,7 +3344,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
           },
           {
               "q": "Do you work with businesses across India?",
-              "a": "Yes. Headquartered in DLF Cyber City, Gurugram, we serve clients across Delhi NCR, Haryana, and pan-India including Mumbai and Pune, with remote collaboration and 24/7 support."
+              "a": "Yes. Headquartered at Unitech Cyber Park, Sector 39, Gurugram, we serve clients across Delhi NCR, Haryana, and pan-India including Mumbai and Pune, with remote collaboration and 24/7 support."
           }
       ],
       "relatedLinks": [
@@ -3777,7 +3777,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       },
       {
         "q": "Do you build custom web applications for businesses outside India?",
-        "a": "Yes. Headquartered at DLF Cyber City, Gurugram, we serve clients across India, the Gulf, and international markets. Our remote-first delivery, structured documentation, and clear milestones keep cross-border projects on track regardless of location."
+        "a": "Yes. Headquartered at Unitech Cyber Park, Sector 39, Gurugram, we serve clients across India, the Gulf, and international markets. Our remote-first delivery, structured documentation, and clear milestones keep cross-border projects on track regardless of location."
       }
     ],
     "relatedLinks": [
@@ -4194,7 +4194,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       },
       {
         "q": "Do you build ecommerce websites for businesses outside India?",
-        "a": "Yes. Headquartered in DLF Cyber City, Gurugram, we serve clients across India, the Gulf, and international markets, configuring region-appropriate payment gateways, currencies, taxes, and shipping for each store we build."
+        "a": "Yes. Headquartered at Unitech Cyber Park, Sector 39, Gurugram, we serve clients across India, the Gulf, and international markets, configuring region-appropriate payment gateways, currencies, taxes, and shipping for each store we build."
       }
     ],
     "relatedLinks": [
@@ -4472,7 +4472,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       },
       {
         "q": "Can you build agentic AI for businesses in India and the Gulf?",
-        "a": "Yes. Avani Enterprises is headquartered in DLF Cyber City, Gurugram, and serves clients across India, the Gulf, and international markets. We build agents that integrate with WhatsApp, regional tools, and your existing systems, and provide ongoing support after launch."
+        "a": "Yes. Avani Enterprises is headquartered in Unitech Cyber Park, Sector 39, Gurugram, and serves clients across India, the Gulf, and international markets. We build agents that integrate with WhatsApp, regional tools, and your existing systems, and provide ongoing support after launch."
       }
     ],
     "relatedLinks": [
@@ -4611,7 +4611,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       },
       {
         "q": "Do you build custom AI for businesses across India?",
-        "a": "Yes. Headquartered at DLF Cyber City, Gurugram, Avani Enterprises serves clients across Delhi NCR, Haryana, and pan-India, plus the Gulf and international markets, with remote collaboration and 24/7 support throughout the build and after launch."
+        "a": "Yes. Headquartered at Unitech Cyber Park, Sector 39, Gurugram, Avani Enterprises serves clients across Delhi NCR, Haryana, and pan-India, plus the Gulf and international markets, with remote collaboration and 24/7 support throughout the build and after launch."
       }
     ],
     "relatedLinks": [
@@ -4958,7 +4958,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       },
       {
         "q": "Does Avani Enterprises handle both the website and digital marketing, or do I need separate vendors like with Web Aspiration?",
-        "a": "Avani Enterprises is a single vendor for web development, custom software (HRMS, CRM, BOS), Google Ads, Meta Ads, SEO, and Instagram marketing — all delivered from their DLF Cyber City, Gurugram office. Web Aspiration focuses primarily on web design and basic SEO, meaning you would need separate vendors for paid advertising and CRM development. Consolidating under one agency eliminates briefing overhead, reduces coordination errors between campaigns and landing pages, and gives you one point of accountability for ROI across all digital channels."
+        "a": "Avani Enterprises is a single vendor for web development, custom software (HRMS, CRM, BOS), Google Ads, Meta Ads, SEO, and Instagram marketing — all delivered from their Unitech Cyber Park, Sector 39, Gurugram office. Web Aspiration focuses primarily on web design and basic SEO, meaning you would need separate vendors for paid advertising and CRM development. Consolidating under one agency eliminates briefing overhead, reduces coordination errors between campaigns and landing pages, and gives you one point of accountability for ROI across all digital channels."
       }
     ],
     "relatedLinks": [
@@ -5121,7 +5121,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       {
         "heading": "Why Indian Businesses Choose Avani Enterprises Over Leo Digitals",
         "paragraphs": [
-          "Avani Enterprises operates from DLF Cyber City, Gurugram — India's largest IT and enterprise business hub — giving clients direct access to a talent pool and vendor ecosystem that a Pune-regional agency like Leo Digitals structurally cannot match. With 8+ years of continuous operation, 150+ clients served across NCR, Mumbai, Bengaluru, and Gulf markets, and 300+ completed projects, Avani brings a documented track record versus Leo Digitals' narrower regional footprint. For businesses running Rs 5 lakh or more per month in ad spend, agency scale and platform partner tier directly affect the quality of Google and Meta campaign support available.",
+          "Avani Enterprises operates from Unitech Cyber Park, Sector 39, Gurugram — India's largest IT and enterprise business hub — giving clients direct access to a talent pool and vendor ecosystem that a Pune-regional agency like Leo Digitals structurally cannot match. With 8+ years of continuous operation, 150+ clients served across NCR, Mumbai, Bengaluru, and Gulf markets, and 300+ completed projects, Avani brings a documented track record versus Leo Digitals' narrower regional footprint. For businesses running Rs 5 lakh or more per month in ad spend, agency scale and platform partner tier directly affect the quality of Google and Meta campaign support available.",
           "Leo Digitals focuses primarily on digital marketing services, whereas Avani Enterprises delivers an integrated stack: Google Ads, Meta Ads, SEO, Instagram marketing, custom web development, and proprietary software including HRMS, CRM, and Business Operations Software. This matters because a mid-sized Indian manufacturer or services firm typically needs its marketing data connected to its internal systems — something a standalone marketing agency cannot provide. Avani's in-house developers build these integrations without third-party markup, while clients of marketing-only agencies in Pune must separately hire development vendors, adding coordination overhead and cost typically ranging from Rs 2–8 lakh per integration project.",
           "Avani's reporting infrastructure offers clients real-time dashboard access with transparent spend breakdowns — no bundled fees, no hidden retainer components. WhatsApp-based 24/7 support ensures that campaign issues during peak sale periods (Big Billion Days, festive season, end-of-quarter pushes) are resolved within hours, not business days. Leo Digitals, as a smaller Pune agency, operates standard Mon–Fri support cycles without documented 24/7 SLAs. For businesses with pan-India operations or Gulf market expansion (UAE, Saudi Arabia), Avani's prior cross-border campaign experience under FEMA-compliant billing structures provides direct operational relevance that a regional agency typically lacks."
         ]
@@ -5317,7 +5317,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       {
         "heading": "Full-Stack Capability, Proven Scale, and Technology That Compounds",
         "paragraphs": [
-          "A boutique digital marketing agency like The Growth Box typically manages paid social, Google Ads, and content strategy — and does it well within that lane. The problem for a scaling Indian SMB or SaaS startup is that you then need a separate web development vendor for landing pages, a third party for CRM configuration, and potentially a fourth for WhatsApp automation. Avani Enterprises collapses all of this into one team: Google Ads management, Meta Ads, SEO, Instagram marketing, React-based web development, and custom HRMS, CRM, and BOS software, all delivered from DLF Cyber City, Gurugram. Coordinating four vendors adds 15-20% overhead in project management time and creates accountability gaps when campaign performance dips — gaps that simply do not exist inside a single-vendor engagement.",
+          "A boutique digital marketing agency like The Growth Box typically manages paid social, Google Ads, and content strategy — and does it well within that lane. The problem for a scaling Indian SMB or SaaS startup is that you then need a separate web development vendor for landing pages, a third party for CRM configuration, and potentially a fourth for WhatsApp automation. Avani Enterprises collapses all of this into one team: Google Ads management, Meta Ads, SEO, Instagram marketing, React-based web development, and custom HRMS, CRM, and BOS software, all delivered from Unitech Cyber Park, Sector 39, Gurugram. Coordinating four vendors adds 15-20% overhead in project management time and creates accountability gaps when campaign performance dips — gaps that simply do not exist inside a single-vendor engagement.",
           "Scale and market exposure matter when you are picking an agency partner for B2B, SaaS, or Gulf-facing campaigns. Avani has been operating since 2016 — over 8 years — has delivered 300+ projects across 150+ clients, and maintains a verified 5.0 client rating. That track record includes Gulf-facing e-commerce brands, Haryana-based manufacturing exporters filing under the MSME Development Act, and pan-India SaaS startups that needed both performance marketing and custom software delivered to the same roadmap. A smaller boutique agency with a shorter operating history carries measurably higher execution risk on complex, multi-channel mandates where a missed deadline affects a product launch, not just a content calendar.",
           "The compounding advantage Avani holds is architectural: because the same team that runs your Google Ads campaign can also build the landing page it points to, set up the CRM that captures the lead, and deploy a WhatsApp chatbot that follows up within 60 seconds of form submission, every rupee of ad spend converts at a structurally higher rate. A typical Avani client running Rs 1.5 lakh per month in Google Ads sees form-to-CRM sync without manual CSV exports, automated follow-up sequences built on WhatsApp Business API, and conversion-optimised landing pages A/B tested and deployed in-house — a closed loop that an agency without development capability physically cannot offer, regardless of how skilled their media buyers are."
         ]
@@ -5513,7 +5513,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       {
         "heading": "How Avani Enterprises Outperforms Techmagnate for Mid-Market Indian Businesses",
         "paragraphs": [
-          "Techmagnate operates with 500+ employees across Delhi NCR and serves large enterprise accounts. That scale creates a structural reality for SMB and mid-market clients: your account typically lands with a junior manager running templated campaign frameworks built for larger budgets. At Avani Enterprises, every client — whether spending Rs 30,000 or Rs 3,00,000 per month on Google Ads and Meta campaigns — is handled by a senior strategist from DLF Cyber City, Gurugram, with direct WhatsApp access and weekly reporting calls. Our 5.0 client rating across 150+ clients reflects that commitment to senior attention on every account, not just enterprise retainers.",
+          "Techmagnate operates with 500+ employees across Delhi NCR and serves large enterprise accounts. That scale creates a structural reality for SMB and mid-market clients: your account typically lands with a junior manager running templated campaign frameworks built for larger budgets. At Avani Enterprises, every client — whether spending Rs 30,000 or Rs 3,00,000 per month on Google Ads and Meta campaigns — is handled by a senior strategist from Unitech Cyber Park, Sector 39, Gurugram, with direct WhatsApp access and weekly reporting calls. Our 5.0 client rating across 150+ clients reflects that commitment to senior attention on every account, not just enterprise retainers.",
           "Techmagnate's core offering is campaign management; web development and CRM integration require coordinating separate vendors, which adds 2–4 weeks of handoff delay each time an SEO audit calls for landing page changes or conversion tracking fixes. Avani's in-house team engineers your website, custom HRMS, CRM, or BOS software alongside your SEO and paid media campaigns. When a Core Web Vitals audit identifies a Largest Contentful Paint issue on your product pages, our developers fix it in the same sprint — no purchase orders to a third-party agency, no re-briefing of a separate IT vendor. This unified delivery model has driven measurable gains across 300+ projects without hidden coordination fees.",
           "India's mid-market growth in 2024–25 is being shaped by WhatsApp Business API (registered under the Information Technology Act, 2000 and governed by TRAI OBA guidelines) and AI-driven lead qualification. Avani builds these capabilities directly into client campaigns: WhatsApp lead automation that captures and nurtures inquiries from Google Ads and Meta in under 60 seconds, AI chatbots trained on your product catalogue, and CRM pipelines that sync lead data from Delhi, Mumbai, Bengaluru, and Tier-2 city campaigns into one dashboard. Techmagnate's traditional campaign-only model does not include this automation layer. For a mid-market company generating 200–1,000 leads per month, the difference in cost-per-acquisition can exceed 35–40% within the first quarter."
         ]
@@ -5542,7 +5542,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       },
       {
         "q": "How does Avani's account management differ from Techmagnate's for a mid-market company with a Rs 50,000–Rs 2,00,000 monthly marketing budget?",
-        "a": "At Techmagnate, budgets in this range typically route to junior account managers with standardised playbooks designed for enterprise-scale clients. At Avani, every account regardless of budget receives direct access to a senior strategist based at DLF Cyber City, Gurugram, reachable via WhatsApp on working days. You receive weekly performance reports with spend-to-pipeline attribution, no templated decks, and transparent fixed pricing with no hidden fees."
+        "a": "At Techmagnate, budgets in this range typically route to junior account managers with standardised playbooks designed for enterprise-scale clients. At Avani, every account regardless of budget receives direct access to a senior strategist based at Unitech Cyber Park, Sector 39, Gurugram, reachable via WhatsApp on working days. You receive weekly performance reports with spend-to-pipeline attribution, no templated decks, and transparent fixed pricing with no hidden fees."
       },
       {
         "q": "Can Avani Enterprises run my SEO and paid campaigns while also building the landing pages and CRM integration, without outsourcing any part to another vendor?",
@@ -5709,7 +5709,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       {
         "heading": "Avani Enterprises vs PageTraffic: Account Management, AI-Driven SEO, and ROI Transparency for Indian Businesses",
         "paragraphs": [
-          "PageTraffic, established in Delhi around 2002, built its reputation on high-volume SEO retainers. The trade-off for that scale is a client-to-executive ratio that routinely exceeds 30:1, meaning your account competes for attention with dozens of others. Avani Enterprises, operating out of DLF Cyber City, Gurugram, assigns a dedicated account manager to every client — reachable directly on WhatsApp during business hours — with an internal cap of 12 accounts per manager. Across 150+ clients and 300+ projects over 8 years, that structure has produced a 5.0 client rating, a metric that erodes quickly when accounts get deprioritized.",
+          "PageTraffic, established in Delhi around 2002, built its reputation on high-volume SEO retainers. The trade-off for that scale is a client-to-executive ratio that routinely exceeds 30:1, meaning your account competes for attention with dozens of others. Avani Enterprises, operating out of Unitech Cyber Park, Sector 39, Gurugram, assigns a dedicated account manager to every client — reachable directly on WhatsApp during business hours — with an internal cap of 12 accounts per manager. Across 150+ clients and 300+ projects over 8 years, that structure has produced a 5.0 client rating, a metric that erodes quickly when accounts get deprioritized.",
           "On technical SEO execution, the gap reflects the difference between a 2002-era workflow and a 2024-era one. Avani deploys AI-assisted content gap analysis using tools such as Surfer SEO and NeuronWriter, automates structured data markup (Schema.org JSON-LD) at scale, and runs weekly Screaming Frog crawls tied to a live client dashboard. PageTraffic's delivery model — built when monthly PDF reports were the industry standard — has been slower to integrate these automated, near-real-time workflows. For a Gurugram or Bengaluru brand competing on high-intent commercial keywords, a four-week lag between a crawl error and its fix can cost measurable ranking positions and, at Rs 50–500 per click on Google Ads, real rupees.",
           "Pricing transparency is where the CFO conversation gets concrete. PageTraffic's retainers are input-based: a fixed monthly fee tied to activities — links built, pages optimised — regardless of ranking movement or leads generated. Avani structures reporting around outcome metrics — keyword rank changes, organic session growth, cost-per-lead from Meta and Google Ads — published in a shared dashboard updated every 48 hours. There are no onboarding fees beyond the stated retainer, no minimum 12-month lock-ins on standard plans, and GST-compliant invoicing from the first billing cycle. For a finance team subject to the Companies Act 2013 audit trail requirements, that level of documented, attributable spend is a meaningful compliance and planning advantage."
         ]
@@ -6246,7 +6246,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
         }
       ]
     },
-    "intro": "As a specialist website development company in India, Avani Enterprises builds corporate and business websites that do real commercial work, not just sit online. Our professional website development covers everything from a polished five-page brochure site to a content-rich, CMS-powered platform, each one responsive, fast, search-ready, and engineered to generate qualified leads. From our base at DLF Cyber City, Gurugram, we deliver business website development for clients across India, the Gulf, and international markets.",
+    "intro": "As a specialist website development company in India, Avani Enterprises builds corporate and business websites that do real commercial work, not just sit online. Our professional website development covers everything from a polished five-page brochure site to a content-rich, CMS-powered platform, each one responsive, fast, search-ready, and engineered to generate qualified leads. From our base at Unitech Cyber Park, Sector 39, Gurugram, we deliver business website development for clients across India, the Gulf, and international markets.",
     "whyAvani": [
       {
         "title": "Lead-Focused, Not Just Pretty",
@@ -6318,7 +6318,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       },
       {
         "q": "Do you build websites for businesses across India?",
-        "a": "Yes. Headquartered at DLF Cyber City, Gurugram, Avani Enterprises develops websites for businesses across India, the Gulf, and international markets, delivering remotely with the same quality and clear communication wherever you are based."
+        "a": "Yes. Headquartered at Unitech Cyber Park, Sector 39, Gurugram, Avani Enterprises develops websites for businesses across India, the Gulf, and international markets, delivering remotely with the same quality and clear communication wherever you are based."
       }
     ],
     "relatedLinks": [
@@ -6457,7 +6457,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       },
       {
         "q": "Do you work with clients across India and abroad?",
-        "a": "Yes. Headquartered at DLF Cyber City, Gurugram, we serve clients across India, the Gulf, and international markets, with remote collaboration and 24/7 communication. Call +91 92536 25099 or email kp@avanienterprises.in to start."
+        "a": "Yes. Headquartered at Unitech Cyber Park, Sector 39, Gurugram, we serve clients across India, the Gulf, and international markets, with remote collaboration and 24/7 communication. Call +91 92536 25099 or email kp@avanienterprises.in to start."
       }
     ],
     "relatedLinks": [
@@ -6604,7 +6604,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       },
       {
         "q": "Do you work with D2C brands across India and the Gulf?",
-        "a": "Yes. From our base at DLF Cyber City, Gurugram, we build and scale Shopify stores for D2C brands and retailers across India, the Gulf, and international markets, with India-ready payments, GST invoicing, and shipping built in."
+        "a": "Yes. From our base at Unitech Cyber Park, Sector 39, Gurugram, we build and scale Shopify stores for D2C brands and retailers across India, the Gulf, and international markets, with India-ready payments, GST invoicing, and shipping built in."
       },
       {
         "q": "Does Shopify support Razorpay and PayU in India, and are there extra charges?",
@@ -7029,7 +7029,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       },
       {
         "q": "Do you build custom CRMs for businesses across India and abroad?",
-        "a": "Yes. Headquartered at DLF Cyber City, Gurugram, Avani Enterprises has served 150+ clients across Delhi NCR and pan-India, plus the Gulf and international markets, delivering tailored CRM systems remotely with full data ownership."
+        "a": "Yes. Headquartered at Unitech Cyber Park, Sector 39, Gurugram, Avani Enterprises has served 150+ clients across Delhi NCR and pan-India, plus the Gulf and international markets, delivering tailored CRM systems remotely with full data ownership."
       }
     ],
     "relatedLinks": [
@@ -7096,7 +7096,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
         }
       ]
     },
-    "intro": "Avani Enterprises delivers CRM Software Development in India for businesses across the country, the Gulf, and beyond. As a CRM software development company headquartered in DLF Cyber City, Gurugram, we do not bolt features onto a rigid template — we architect every CRM build end to end: lead pipelines, workflow automation, real-time dashboards, and integrations with the tools you already run. The result is sales CRM software in India that your reps adopt on day one and your managers trust for decisions.",
+    "intro": "Avani Enterprises delivers CRM Software Development in India for businesses across the country, the Gulf, and beyond. As a CRM software development company headquartered in Unitech Cyber Park, Sector 39, Gurugram, we do not bolt features onto a rigid template — we architect every CRM build end to end: lead pipelines, workflow automation, real-time dashboards, and integrations with the tools you already run. The result is sales CRM software in India that your reps adopt on day one and your managers trust for decisions.",
     "whyAvani": [
       {
         "title": "Engineered, Not Configured",
@@ -7168,7 +7168,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       },
       {
         "q": "Can you build CRM software for businesses across India and the Gulf?",
-        "a": "Yes. Headquartered in DLF Cyber City, Gurugram, Avani Enterprises serves clients across India, the Gulf, and internationally. We build CRMs with India-relevant features like WhatsApp Business, UPI/payment gateways, and GST-ready data, and tailor them to your region."
+        "a": "Yes. Headquartered at Unitech Cyber Park, Sector 39, Gurugram, Avani Enterprises serves clients across India, the Gulf, and internationally. We build CRMs with India-relevant features like WhatsApp Business, UPI/payment gateways, and GST-ready data, and tailor them to your region."
       }
     ],
     "relatedLinks": [
@@ -7315,7 +7315,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       },
       {
         "q": "Do you offer CRM consulting for businesses across India and the Gulf?",
-        "a": "Yes. Headquartered at DLF Cyber City, Gurugram, Avani Enterprises serves clients across India, the Gulf, and international markets. We work remotely and on-site as needed, with 8+ years of experience and a 5.0 client rating across 150+ clients."
+        "a": "Yes. Headquartered at Unitech Cyber Park, Sector 39, Gurugram, Avani Enterprises serves clients across India, the Gulf, and international markets. We work remotely and on-site as needed, with 8+ years of experience and a 5.0 client rating across 150+ clients."
       },
       {
         "q": "Is Zoho CRM good enough for a business doing Rs. 10-50 crore in annual revenue, or do we need Salesforce?",
@@ -7390,7 +7390,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
         }
       ]
     },
-    "intro": "As an ERP development company in India headquartered at DLF Cyber City, Gurugram, Avani Enterprises designs enterprise resource planning systems around how your business actually runs, not the other way round. Our custom ERP solutions across India and the Gulf connect accounting, procurement, stock, production, and management reporting on one secure platform, giving leadership a live, accurate view of the entire operation. With 8+ years and 300+ projects behind us, we replace disconnected tools with one system your whole team can trust.",
+    "intro": "As an ERP development company in India headquartered at Unitech Cyber Park, Sector 39, Gurugram, Avani Enterprises designs enterprise resource planning systems around how your business actually runs, not the other way round. Our custom ERP solutions across India and the Gulf connect accounting, procurement, stock, production, and management reporting on one secure platform, giving leadership a live, accurate view of the entire operation. With 8+ years and 300+ projects behind us, we replace disconnected tools with one system your whole team can trust.",
     "whyAvani": [
       {
         "title": "Built Around Your Workflows",
@@ -7601,7 +7601,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       },
       {
         "q": "Can you build ERP software for businesses across India and the Gulf?",
-        "a": "Yes. Avani Enterprises is headquartered in DLF Cyber City, Gurugram, and builds ERP systems for clients across India, the Gulf, and international markets. Our modules support GST-ready accounting and multi-location operations, and we work remotely with 24/7 communication."
+        "a": "Yes. Avani Enterprises is headquartered in Unitech Cyber Park, Sector 39, Gurugram, and builds ERP systems for clients across India, the Gulf, and international markets. Our modules support GST-ready accounting and multi-location operations, and we work remotely with 24/7 communication."
       }
     ],
     "relatedLinks": [
@@ -7740,7 +7740,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       },
       {
         "q": "Do you build ERP for businesses across India and the Gulf?",
-        "a": "Yes. Headquartered at DLF Cyber City, Gurugram, we build GST-ready ERP for clients across Delhi NCR and pan-India, and also serve Gulf and international businesses, working remotely with 24/7 communication and ongoing support."
+        "a": "Yes. Headquartered at Unitech Cyber Park, Sector 39, Gurugram, we build GST-ready ERP for clients across Delhi NCR and pan-India, and also serve Gulf and international businesses, working remotely with 24/7 communication and ongoing support."
       }
     ],
     "relatedLinks": [
@@ -7879,7 +7879,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       },
       {
         "q": "Do you work with companies outside Delhi NCR?",
-        "a": "Yes. We are headquartered at DLF Cyber City, Gurugram, and build HRMS platforms for companies across Haryana, Delhi NCR, and pan-India, as well as Gulf and international clients, with 24/7 communication and remote delivery."
+        "a": "Yes. We are headquartered at Unitech Cyber Park, Sector 39, Gurugram, and build HRMS platforms for companies across Haryana, Delhi NCR, and pan-India, as well as Gulf and international clients, with 24/7 communication and remote delivery."
       }
     ],
     "relatedLinks": [
@@ -8459,7 +8459,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       },
       {
         "q": "Is this suitable for Indian businesses and Gulf operations?",
-        "a": "Yes. Avani Enterprises is headquartered in DLF Cyber City, Gurugram, and has built software for 150+ clients across India, the Gulf, and international markets since 2016. We design business operating systems around Indian workflows, compliance needs, and multi-location teams, with the same system serving Gulf and overseas branches."
+        "a": "Yes. Avani Enterprises is headquartered in Unitech Cyber Park, Sector 39, Gurugram, and has built software for 150+ clients across India, the Gulf, and international markets since 2016. We design business operating systems around Indian workflows, compliance needs, and multi-location teams, with the same system serving Gulf and overseas branches."
       },
       {
         "q": "How long does it take to build a custom BOS, and can we migrate data from our existing Tally or Excel setup?",
@@ -8606,7 +8606,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       },
       {
         "q": "Can you automate workflows for businesses outside India?",
-        "a": "Yes. Headquartered at DLF Cyber City, Gurugram, Avani Enterprises has delivered 300+ projects over 8+ years for clients across India, the Gulf, and international markets. Workflow automation software is delivered and supported remotely, so location is no barrier."
+        "a": "Yes. Headquartered at Unitech Cyber Park, Sector 39, Gurugram, Avani Enterprises has delivered 300+ projects over 8+ years for clients across India, the Gulf, and international markets. Workflow automation software is delivered and supported remotely, so location is no barrier."
       }
     ],
     "relatedLinks": [
@@ -8745,7 +8745,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       },
       {
         "q": "Can you build AI solutions for businesses in India and abroad?",
-        "a": "Yes. Headquartered at DLF Cyber City, Gurugram, we have delivered 300+ projects over 8+ years for 150+ clients across India, the Gulf, and international markets, building AI that works with local data and real-world conditions."
+        "a": "Yes. Headquartered at Unitech Cyber Park, Sector 39, Gurugram, we have delivered 300+ projects over 8+ years for 150+ clients across India, the Gulf, and international markets, building AI that works with local data and real-world conditions."
       }
     ],
     "relatedLinks": [
@@ -9039,7 +9039,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       },
       {
         "q": "Can you build OpenAI and ChatGPT apps for businesses in India and the Gulf?",
-        "a": "Yes. Avani Enterprises is headquartered in DLF Cyber City, Gurugram, Haryana, and serves clients across India, the Gulf, and international markets. We build GPT apps and OpenAI integrations that connect to WhatsApp, regional tools, and your existing systems, with full support after delivery."
+        "a": "Yes. Avani Enterprises is headquartered in Unitech Cyber Park, Sector 39, Gurugram, Haryana, and serves clients across India, the Gulf, and international markets. We build GPT apps and OpenAI integrations that connect to WhatsApp, regional tools, and your existing systems, with full support after delivery."
       },
       {
         "q": "Is it safe to send our customer data to OpenAI's API under India's DPDP Act 2023?",
@@ -9325,7 +9325,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       },
       {
         "q": "Can you build Gemini AI solutions for businesses in India and the Gulf?",
-        "a": "Yes. Avani Enterprises is headquartered in DLF Cyber City, Gurugram, Haryana, and serves clients across India, the Gulf, and international markets. We build Gemini-powered apps that integrate with WhatsApp, regional tools, and your existing systems, with copy, data, and workflows suited to your market."
+        "a": "Yes. Avani Enterprises is headquartered in Unitech Cyber Park, Sector 39, Gurugram, Haryana, and serves clients across India, the Gulf, and international markets. We build Gemini-powered apps that integrate with WhatsApp, regional tools, and your existing systems, with copy, data, and workflows suited to your market."
       }
     ],
     "relatedLinks": [
@@ -9436,7 +9436,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       {
         "heading": "Why Indian and Gulf Businesses Choose Avani for MCP",
         "paragraphs": [
-          "Headquartered at DLF Cyber City, Gurugram, we serve clients across India, the Gulf, and international markets, and we build MCP servers around the systems those businesses actually run, from Tally and Zoho to bespoke ERPs and internal portals. Because we have delivered 300+ software and automation projects over 8+ years, we treat MCP as production infrastructure, not a demo: tested, logged, and documented for your team.",
+          "Headquartered at Unitech Cyber Park, Sector 39, Gurugram, we serve clients across India, the Gulf, and international markets, and we build MCP servers around the systems those businesses actually run, from Tally and Zoho to bespoke ERPs and internal portals. Because we have delivered 300+ software and automation projects over 8+ years, we treat MCP as production infrastructure, not a demo: tested, logged, and documented for your team.",
           "Our delivery is collaborative and transparent. We start with a scoping call to map which tools and data should be AI-accessible, ship an initial server fast, then expand the toolset iteratively as you build trust. With 24/7 monitoring, sub-2-second response targets on hosted endpoints, and a 5.0 client rating, you get an MCP partner who stays engaged long after the first integration goes live."
         ]
       }
@@ -9464,7 +9464,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       },
       {
         "q": "Why work with an MCP development company in India?",
-        "a": "Avani Enterprises is based at DLF Cyber City, Gurugram, and serves India, the Gulf, and international clients. We build MCP servers around the systems Indian and Gulf businesses actually use, with strong access governance, competitive pricing, and 8+ years and 300+ projects of software engineering behind every build."
+        "a": "Avani Enterprises is based at Unitech Cyber Park, Sector 39, Gurugram, and serves India, the Gulf, and international clients. We build MCP servers around the systems Indian and Gulf businesses actually use, with strong access governance, competitive pricing, and 8+ years and 300+ projects of software engineering behind every build."
       }
     ],
     "relatedLinks": [
@@ -9603,7 +9603,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       },
       {
         "q": "Do you build LLM solutions for companies in India and the Gulf?",
-        "a": "Yes. Avani Enterprises is headquartered at DLF Cyber City, Gurugram, and has served 150+ clients across India, the Gulf, and international markets for 8+ years, delivering LLM and AI solutions remotely and on-site."
+        "a": "Yes. Avani Enterprises is headquartered at Unitech Cyber Park, Sector 39, Gurugram, and has served 150+ clients across India, the Gulf, and international markets for 8+ years, delivering LLM and AI solutions remotely and on-site."
       }
     ],
     "relatedLinks": [
@@ -9742,7 +9742,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       },
       {
         "q": "Do you offer AI consulting in India?",
-        "a": "Yes. We are headquartered at DLF Cyber City, Gurugram, and serve businesses across India, the Gulf, and international markets, with AI advisory tailored to local data, compliance, and budget realities."
+        "a": "Yes. We are headquartered at Unitech Cyber Park, Sector 39, Gurugram, and serve businesses across India, the Gulf, and international markets, with AI advisory tailored to local data, compliance, and budget realities."
       }
     ],
     "relatedLinks": [
@@ -9881,7 +9881,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       },
       {
         "q": "Can you build Android apps for businesses outside Gurugram?",
-        "a": "Yes. Avani Enterprises is headquartered in DLF Cyber City, Gurugram, and serves clients across Delhi NCR, Haryana, pan-India, and the Gulf. We work remotely with 24/7 communication, so location is never a constraint."
+        "a": "Yes. Avani Enterprises is headquartered in Unitech Cyber Park, Sector 39, Gurugram, and serves clients across Delhi NCR, Haryana, pan-India, and the Gulf. We work remotely with 24/7 communication, so location is never a constraint."
       }
     ],
     "relatedLinks": [
@@ -10020,7 +10020,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       },
       {
         "q": "Can you develop iOS apps for businesses outside Gurugram?",
-        "a": "Yes. Avani Enterprises is headquartered in DLF Cyber City, Gurugram, and serves clients across Delhi NCR, Haryana, and pan-India, as well as the Gulf and international markets, working remotely with 24/7 communication."
+        "a": "Yes. Avani Enterprises is headquartered in Unitech Cyber Park, Sector 39, Gurugram, and serves clients across Delhi NCR, Haryana, and pan-India, as well as the Gulf and international markets, working remotely with 24/7 communication."
       }
     ],
     "relatedLinks": [
@@ -10087,7 +10087,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
         }
       ]
     },
-    "intro": "As a dedicated Flutter app development company in India, Avani Enterprises builds high-performance cross platform apps from one shared codebase, so your business ships to both the App Store and Google Play at the same time. Our Flutter developers, based at DLF Cyber City, Gurugram, engineer pixel-perfect interfaces, smooth 60fps animations, and 2s load times that feel genuinely native on every device. From MVP to enterprise-grade product, cross platform app development with Flutter gives you one team, one budget, and two markets.",
+    "intro": "As a dedicated Flutter app development company in India, Avani Enterprises builds high-performance cross platform apps from one shared codebase, so your business ships to both the App Store and Google Play at the same time. Our Flutter developers, based at Unitech Cyber Park, Sector 39, Gurugram, engineer pixel-perfect interfaces, smooth 60fps animations, and 2s load times that feel genuinely native on every device. From MVP to enterprise-grade product, cross platform app development with Flutter gives you one team, one budget, and two markets.",
     "whyAvani": [
       {
         "title": "Truly One Codebase",
@@ -10159,7 +10159,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       },
       {
         "q": "Do you build Flutter apps for businesses across India and the Gulf?",
-        "a": "Yes. Headquartered at DLF Cyber City, Gurugram, Avani Enterprises serves clients across India, the Gulf, and international markets. With 8+ years of experience, 300+ projects, and a 5.0 client rating, we work remotely with clear, regular communication."
+        "a": "Yes. Headquartered at Unitech Cyber Park, Sector 39, Gurugram, Avani Enterprises serves clients across India, the Gulf, and international markets. With 8+ years of experience, 300+ projects, and a 5.0 client rating, we work remotely with clear, regular communication."
       }
     ],
     "relatedLinks": [
@@ -10298,7 +10298,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       },
       {
         "q": "Can you build React Native apps for businesses outside Gurugram?",
-        "a": "Yes. We are headquartered in DLF Cyber City, Gurugram, and serve clients across Delhi NCR, Haryana, and pan-India, as well as the Gulf and international markets, working remotely with 24/7 communication."
+        "a": "Yes. We are headquartered in Unitech Cyber Park, Sector 39, Gurugram, and serve clients across Delhi NCR, Haryana, and pan-India, as well as the Gulf and international markets, working remotely with 24/7 communication."
       }
     ],
     "relatedLinks": [
@@ -10576,7 +10576,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       },
       {
         "q": "Why choose an India-based enterprise SEO company like Avani Enterprises?",
-        "a": "Headquartered at DLF Cyber City, Gurugram, Avani Enterprises has 8+ years of experience and 300+ projects delivered, serving clients across India, the Gulf, and international markets. You get senior technical SEO expertise and large-scale execution at strong value, with a team that works in your timezone and alongside your engineers."
+        "a": "Headquartered at Unitech Cyber Park, Sector 39, Gurugram, Avani Enterprises has 8+ years of experience and 300+ projects delivered, serving clients across India, the Gulf, and international markets. You get senior technical SEO expertise and large-scale execution at strong value, with a team that works in your timezone and alongside your engineers."
       }
     ],
     "relatedLinks": [
@@ -10715,7 +10715,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       },
       {
         "q": "Is ecommerce SEO relevant for online stores in India?",
-        "a": "Absolutely. Indian shoppers research and buy through Google search, and organic visibility lowers dependence on rising ad costs. Headquartered in DLF Cyber City, Gurugram, Avani Enterprises serves online stores across India, the Gulf, and international markets, tailoring SEO to each region's search intent and currencies."
+        "a": "Absolutely. Indian shoppers research and buy through Google search, and organic visibility lowers dependence on rising ad costs. Headquartered at Unitech Cyber Park, Sector 39, Gurugram, Avani Enterprises serves online stores across India, the Gulf, and international markets, tailoring SEO to each region's search intent and currencies."
       }
     ],
     "relatedLinks": [
@@ -10862,7 +10862,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       },
       {
         "q": "Do you work with businesses across India?",
-        "a": "Yes. Headquartered at DLF Cyber City, Gurugram, Avani Enterprises serves clients across India as well as the Gulf and international markets. We run campaigns for regional, national, and cross-border audiences with localisation built in."
+        "a": "Yes. Headquartered at Unitech Cyber Park, Sector 39, Gurugram, Avani Enterprises serves clients across India as well as the Gulf and international markets. We run campaigns for regional, national, and cross-border audiences with localisation built in."
       },
       {
         "q": "We have been running Google and Meta campaigns for 8 months but cannot figure out which channel is actually driving our sales — our internal data and platform dashboards never match. What is the right approach for Indian buyers?",
@@ -11017,7 +11017,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       },
       {
         "q": "Do you run Facebook ads for businesses outside Gurgaon and Delhi NCR?",
-        "a": "Yes. We are headquartered at DLF Cyber City, Gurugram and manage Facebook ad campaigns for clients across Delhi NCR and pan-India, as well as the Gulf and international markets. Most collaboration happens remotely with regular review calls."
+        "a": "Yes. We are headquartered at Unitech Cyber Park, Sector 39, Gurugram and manage Facebook ad campaigns for clients across Delhi NCR and pan-India, as well as the Gulf and international markets. Most collaboration happens remotely with regular review calls."
       },
       {
         "q": "What is the minimum monthly ad budget recommended for Facebook Ads in India?",
@@ -11180,7 +11180,7 @@ export const seoLandingPagesData: Record<string, SeoPageConfig> = {
       },
       {
         "q": "Do you work with businesses outside Gurgaon and Delhi NCR?",
-        "a": "Yes. We are headquartered at DLF Cyber City, Gurugram and serve Delhi NCR and clients pan-India, plus the Gulf and international markets. Most collaboration happens remotely with regular review calls. Email kp@avanienterprises.in to get started."
+        "a": "Yes. We are headquartered at Unitech Cyber Park, Sector 39, Gurugram and serve Delhi NCR and clients pan-India, plus the Gulf and international markets. Most collaboration happens remotely with regular review calls. Email kp@avanienterprises.in to get started."
       },
       {
         "q": "What is a realistic monthly budget to start Instagram paid advertising for a mid-size Indian brand?",

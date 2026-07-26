@@ -224,7 +224,7 @@ const GetConsultation = () => {
                           </div>
                           <div>
                             <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Phone</p>
-                            <p className="text-white font-bold text-lg">+91 9253625099</p>
+                            <p className="text-white font-bold text-lg">+91 92536 25099</p>
                           </div>
                         </a>
 

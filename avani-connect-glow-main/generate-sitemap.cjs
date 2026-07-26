@@ -413,6 +413,21 @@ if (fs.existsSync(newSeoDataPath)) {
   console.warn("⚠️ newSeoPagesData.json not found, skipping dynamic SEO paths in sitemap.");
 }
 
+/** Old blog slug → clean slug, read from src/data/blogSlugRedirects.js. */
+function loadBlogSlugRedirects() {
+  const p = path.join(__dirname, "src", "data", "blogSlugRedirects.js");
+  if (!fs.existsSync(p)) return {};
+  const src = fs.readFileSync(p, "utf8");
+  const m = src.match(/const\s+BLOG_SLUG_REDIRECTS\s*=\s*\{([\s\S]*?)\n\};/);
+  if (!m) return {};
+  const out = {};
+  // Entries may wrap onto a second line when the old slug is long.
+  const re = /'((?:[^'\\]|\\.)*)':\s*\n?\s*'((?:[^'\\]|\\.)*)'/g;
+  let e;
+  while ((e = re.exec(m[1])) !== null) out[e[1].replace(/\\'/g, "'")] = e[2];
+  return out;
+}
+
 // ── Blog posts ───────────────────────────────────────────────────────────────
 // Individual posts were never in the sitemap — only /blog was. Read the slugs
 // from the snapshot written by scripts/snapshot-blog.cjs, which runs first.
@@ -430,30 +445,31 @@ if (fs.existsSync(newSeoDataPath)) {
       console.warn("⚠️ Blog snapshot is empty — no post URLs added to sitemap.");
       return;
     }
-    // 12 of the slugs contain spaces, commas, pipes, colons and question marks.
-    // Those are not valid in a URL and would produce a malformed sitemap that
-    // Google rejects, so every slug is percent-encoded. The content behind them
-    // is good (1,000–1,400 words), so encoding and indexing beats excluding —
-    // but the slugs should still be renamed in the CMS with 301s. See
-    // SEO-RECOVERY.md for the list.
-    const malformed = [];
+    // 12 slugs contained characters invalid in a URL (spaces, commas, pipes,
+    // colons). blogSlugRedirects.js maps each to a clean equivalent, api/seo.js
+    // 301s the old URL to it, and only the clean URL goes in the sitemap — a
+    // sitemap must list the destination of a redirect, never its source.
+    const redirects = loadBlogSlugRedirects();
+    let renamed = 0;
     slugs.forEach((s) => {
-      if (!/^[a-z0-9-]+$/.test(s)) malformed.push(s);
+      const clean = redirects[s] || s;
+      if (clean !== s) renamed++;
       const lastmod = String(posts[s].updatedAt || posts[s].publishedAt || TODAY).slice(0, 10);
       urls.push({
-        loc: `${BASE_URL}/blog/${encodeURIComponent(s)}`,
+        loc: `${BASE_URL}/blog/${encodeURIComponent(clean)}`,
         lastmod: /^\d{4}-\d{2}-\d{2}$/.test(lastmod) ? lastmod : TODAY,
         changefreq: "monthly",
         priority: "0.7",
       });
     });
-    console.log(`ℹ️ Added ${slugs.length} blog post(s) to the sitemap.`);
-    if (malformed.length) {
+    console.log(`ℹ️ Added ${slugs.length} blog post(s) to the sitemap (${renamed} using a clean slug with a 301 from the old URL).`);
+
+    // Anything still malformed has no redirect mapping and needs one.
+    const stillBad = slugs.filter((s) => !/^[a-z0-9-]+$/.test(redirects[s] || s));
+    if (stillBad.length) {
       console.warn(
-        `⚠️ ${malformed.length} blog slug(s) contain characters invalid in a URL ` +
-        `(spaces, commas, pipes, colons). They are percent-encoded so the sitemap ` +
-        `is valid, but they should be renamed in the CMS with 301s:\n` +
-        malformed.map((s) => `     • ${s}`).join("\n")
+        `⚠️ ${stillBad.length} blog slug(s) are still URL-invalid and have no entry in ` +
+        `src/data/blogSlugRedirects.js:\n` + stillBad.map((s) => `     • ${s}`).join("\n")
       );
     }
   } catch (err) {
@@ -782,6 +798,7 @@ const GENERATED_HEADER =
   ["offices.js", "offices.js"],
   ["comparisons.js", "comparisons.js"],
   ["guides.js", "guides.js"],
+  ["blogSlugRedirects.js", "blogSlugRedirects.js"],
   // blogContent.js is written directly into api/ by scripts/snapshot-blog.cjs,
   // so it is not synced from src/data/.
 ].forEach(([srcName, outName]) => {

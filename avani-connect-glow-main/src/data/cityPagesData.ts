@@ -127,7 +127,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Do you work with Rohtak businesses remotely from Gurugram?",
-        "a": "Yes. Our HQ is in DLF Cyber City, Gurugram, and we serve Rohtak clients end-to-end over calls, video, and WhatsApp, with on-site visits arranged when needed. Most of our Rohtak projects run smoothly without a single in-person meeting."
+        "a": "Yes. Our HQ is at Unitech Cyber Park, Sector 39, Gurugram, and we serve Rohtak clients end-to-end over calls, video, and WhatsApp, with on-site visits arranged when needed. Most of our Rohtak projects run smoothly without a single in-person meeting."
       },
       {
         "q": "Will my website rank on Google for Rohtak searches?",
@@ -611,7 +611,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Do you meet clients in person in Sonipat?",
-        "a": "Yes. While our HQ is at DLF Cyber City, Gurugram, our team regularly visits clients across Sonipat, including Kundli, Rai, and Model Town, for project meetings. You can also reach us anytime at +91 92536 25099 or kp@avanienterprises.in."
+        "a": "Yes. While our HQ is at Unitech Cyber Park, Sector 39, Gurugram, our team regularly visits clients across Sonipat, including Kundli, Rai, and Model Town, for project meetings. You can also reach us anytime at +91 92536 25099 or kp@avanienterprises.in."
       }
     ],
     "reviews": [],
@@ -1482,7 +1482,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
         }
       ]
     },
-    "intro": "For SEO in Gurgaon (Gurugram), you are competing in one of India's most demanding digital markets — Fortune 500 offices in Cyber City, funded startups across Udyog Vihar, D2C and fintech brands on Sohna Road, and premium real estate along Golf Course Road all fighting for the same Google results. Paid ads stop the moment your budget runs out; SEO compounds. Avani Enterprises builds a sustainable organic search engine that ranks your business above the noise and brings ready-to-buy Gurugram customers to you 24/7.\\n\\nHeadquartered right here at DLF Cyber City, we understand exactly who your customers are and how they search. Across 8+ years and 300+ projects we've handled technical audits, intent-led content, local Maps optimization, and authority link-building for Gurgaon businesses — consistently lifting organic traffic 3x and cutting customer acquisition costs.",
+    "intro": "For SEO in Gurgaon (Gurugram), you are competing in one of India's most demanding digital markets — Fortune 500 offices in Cyber City, funded startups across Udyog Vihar, D2C and fintech brands on Sohna Road, and premium real estate along Golf Course Road all fighting for the same Google results. Paid ads stop the moment your budget runs out; SEO compounds. Avani Enterprises builds a sustainable organic search engine that ranks your business above the noise and brings ready-to-buy Gurugram customers to you 24/7.\\n\\nHeadquartered right here at Unitech Cyber Park, Sector 39, we understand exactly who your customers are and how they search. Across 8+ years and 300+ projects we've handled technical audits, intent-led content, local Maps optimization, and authority link-building for Gurgaon businesses — consistently lifting organic traffic 3x and cutting customer acquisition costs.",
     "features": [
       {
         "icon": "🔍",
@@ -1518,7 +1518,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
     "whyAvani": [
       {
         "title": "Based in Gurugram, Not Outsourced",
-        "desc": "Our team works out of DLF Cyber City — we know the Gurgaon search landscape, your competitors, and your buyers firsthand, with on-site strategy sessions available."
+        "desc": "Our team works out of Unitech Cyber Park, Sector 39 — we know the Gurgaon search landscape, your competitors, and your buyers firsthand, with on-site strategy sessions available."
       },
       {
         "title": "Technical SEO That Passes Core Web Vitals",
@@ -1557,7 +1557,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Why choose Avani Enterprises as your SEO company in Gurgaon?",
-        "a": "Avani is headquartered at DLF Cyber City, Gurugram, with 8+ years of experience, 300+ projects, 150+ clients, and a 5.0 client rating. We combine technical SEO, content, and link-building in-house, know the local search landscape firsthand, and report transparently every month."
+        "a": "Avani is headquartered at Unitech Cyber Park, Sector 39, Gurugram, with 8+ years of experience, 300+ projects, 150+ clients, and a 5.0 client rating. We combine technical SEO, content, and link-building in-house, know the local search landscape firsthand, and report transparently every month."
       },
       {
         "q": "Do you offer local SEO for Gurgaon businesses?",
@@ -1888,7 +1888,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Is your team based in Rohtak?",
-        "a": "Our headquarters is in DLF Cyber City, Gurugram, and we serve Rohtak businesses remotely with on-call and on-site support as needed. You get a dedicated team, 24/7 communication, and full transparency, whether you are in Model Town or the IMT Industrial Area."
+        "a": "Our headquarters is at Unitech Cyber Park, Sector 39, Gurugram, and we serve Rohtak businesses remotely with on-call and on-site support as needed. You get a dedicated team, 24/7 communication, and full transparency, whether you are in Model Town or the IMT Industrial Area."
       }
     ],
     "reviews": [],
@@ -2102,7 +2102,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
     "hero": {
       "tag": "Gurgaon's Performance-Driven Marketing Partner",
       "h1": "Digital Marketing Company in Gurgaon",
-      "subtitle": "We help Gurugram brands — from Cyber City SaaS firms to Sohna Road D2C labels — win on Google, social, and paid ads with measurable, ROI-first campaigns. Headquartered right here at DLF Cyber City.",
+      "subtitle": "We help Gurugram brands — from Cyber City SaaS firms to Sohna Road D2C labels — win on Google, social, and paid ads with measurable, ROI-first campaigns. Headquartered right here at Unitech Cyber Park, Sector 39.",
       "stats": [
         {
           "value": "150+",
@@ -2122,7 +2122,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
         }
       ]
     },
-    "intro": "Digital marketing in Gurgaon (Gurugram) plays out on one of India's most competitive battlegrounds — Fortune 500 head offices, funded startups, real estate giants, and aggressive D2C brands all fighting for the same high-intent audience. In a market where a single B2B lead or property enquiry can be worth lakhs, generic marketing simply burns budget. Avani Enterprises runs data-led campaigns built specifically for the pace and price-points of the Gurugram buyer.\n\nAs an agency headquartered at DLF Cyber City, we understand the local landscape intimately — the office crowd on Golf Course Road, the dense residential demand across DLF Phases and Sushant Lok, the industrial buyers in Udyog Vihar and Manesar. We blend SEO, Google Ads, social media, and content into one accountable growth engine, so every rupee you spend is tracked from impression to qualified lead.",
+    "intro": "Digital marketing in Gurgaon (Gurugram) plays out on one of India's most competitive battlegrounds — Fortune 500 head offices, funded startups, real estate giants, and aggressive D2C brands all fighting for the same high-intent audience. In a market where a single B2B lead or property enquiry can be worth lakhs, generic marketing simply burns budget. Avani Enterprises runs data-led campaigns built specifically for the pace and price-points of the Gurugram buyer.\n\nAs an agency headquartered at Unitech Cyber Park, Sector 39, we understand the local landscape intimately — the office crowd on Golf Course Road, the dense residential demand across DLF Phases and Sushant Lok, the industrial buyers in Udyog Vihar and Manesar. We blend SEO, Google Ads, social media, and content into one accountable growth engine, so every rupee you spend is tracked from impression to qualified lead.",
     "features": [
       {
         "icon": "🔍",
@@ -2158,7 +2158,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
     "whyAvani": [
       {
         "title": "Headquartered in Cyber City",
-        "desc": "We're not a remote vendor — our team sits at DLF Cyber City, so we know Gurugram's audiences, competitors, and search behaviour first-hand."
+        "desc": "We're not a remote vendor — our team sits at Unitech Cyber Park, Sector 39, so we know Gurugram's audiences, competitors, and search behaviour first-hand."
       },
       {
         "title": "ROI-First, Not Vanity Metrics",
@@ -2195,7 +2195,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Why choose Avani Enterprises as a digital marketing company in Gurgaon?",
-        "a": "Avani Enterprises is headquartered at DLF Cyber City, Gurugram, with 8+ years in business, 300+ projects, 150+ clients, and a 5.0 client rating. We combine local market knowledge with a full-funnel, ROI-first team under one roof — no hand-offs, no vanity metrics, just measurable pipeline."
+        "a": "Avani Enterprises is headquartered at Unitech Cyber Park, Sector 39, Gurugram, with 8+ years in business, 300+ projects, 150+ clients, and a 5.0 client rating. We combine local market knowledge with a full-funnel, ROI-first team under one roof — no hand-offs, no vanity metrics, just measurable pipeline."
       },
       {
         "q": "Do you work with Gurgaon startups and MNCs?",
@@ -2230,7 +2230,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
     ],
     "cta": {
       "headline": "Ready to Grow Your Brand in Gurgaon?",
-      "sub": "Get a free digital marketing audit and a fixed-price proposal within 24 hours from Gurugram's ROI-focused team at DLF Cyber City. Call +91 92536 25099."
+      "sub": "Get a free digital marketing audit and a fixed-price proposal within 24 hours from Gurugram's ROI-focused team at Unitech Cyber Park, Sector 39. Call +91 92536 25099."
     },
     "service": "Digital Marketing",
     "city": "Gurgaon",
@@ -2362,7 +2362,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Which areas of Noida and Greater Noida do you serve?",
-        "a": "We serve businesses across Sector 18, Sector 62, Sector 63, Sector 132, Sector 135, Film City, the Noida-Greater Noida Expressway, Knowledge Park, and Greater Noida West (Noida Extension), with free strategy calls across Delhi NCR. Our HQ is in DLF Cyber City, Gurugram."
+        "a": "We serve businesses across Sector 18, Sector 62, Sector 63, Sector 132, Sector 135, Film City, the Noida-Greater Noida Expressway, Knowledge Park, and Greater Noida West (Noida Extension), with free strategy calls across Delhi NCR. Our HQ is at Unitech Cyber Park, Sector 39, Gurugram."
       },
       {
         "q": "Do you handle both SEO and paid ads, or just one?",
@@ -2440,7 +2440,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
         }
       ]
     },
-    "intro": "Rohtak is one of Haryana's fastest-rising commercial and education hubs — home to MDU, PGIMS, dozens of coaching institutes along the Delhi Road belt, a heritage footwear and textile manufacturing base, and the sprawling IMT Rohtak industrial township. Yet most local businesses still rely on word-of-mouth while their customers search on Google and scroll Instagram. Avani Enterprises closes that gap with digital marketing built specifically for the Rohtak market.\n\nAs a digital marketing agency headquartered in DLF Cyber City, Gurugram, we serve Rohtak brands with a data-led mix of SEO, Google and Meta ads, local map optimisation, and social media. Whether you are a clinic near Civil Hospital, a manufacturer in the HSIIDC IMT Industrial Area, or a retail showroom in Model Town, we build campaigns around how Rohtak customers actually search and buy.",
+    "intro": "Rohtak is one of Haryana's fastest-rising commercial and education hubs — home to MDU, PGIMS, dozens of coaching institutes along the Delhi Road belt, a heritage footwear and textile manufacturing base, and the sprawling IMT Rohtak industrial township. Yet most local businesses still rely on word-of-mouth while their customers search on Google and scroll Instagram. Avani Enterprises closes that gap with digital marketing built specifically for the Rohtak market.\n\nAs a digital marketing agency headquartered in Unitech Cyber Park, Sector 39, Gurugram, we serve Rohtak brands with a data-led mix of SEO, Google and Meta ads, local map optimisation, and social media. Whether you are a clinic near Civil Hospital, a manufacturer in the HSIIDC IMT Industrial Area, or a retail showroom in Model Town, we build campaigns around how Rohtak customers actually search and buy.",
     "features": [
       {
         "icon": "🔍",
@@ -2525,7 +2525,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Is Avani Enterprises based in Rohtak?",
-        "a": "Our headquarters is in DLF Cyber City, Gurugram, and we serve Rohtak clients remotely with the same dedicated team. Reporting and consultations happen over call, WhatsApp, and video, with reviews available 24/7 — reach us at +91 92536 25099 or kp@avanienterprises.in."
+        "a": "Our headquarters is at Unitech Cyber Park, Sector 39, Gurugram, and we serve Rohtak clients remotely with the same dedicated team. Reporting and consultations happen over call, WhatsApp, and video, with reviews available 24/7 — reach us at +91 92536 25099 or kp@avanienterprises.in."
       }
     ],
     "reviews": [],
@@ -2599,7 +2599,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
         }
       ]
     },
-    "intro": "Delhi is one of India's most crowded and competitive digital markets. A trader in Chandni Chowk, a clinic in South Extension, an exporter in Okhla Industrial Area, and a SaaS firm in Nehru Place are all bidding for the same Google searches and the same Instagram feeds. Standing out here takes more than boosted posts and generic ads. It takes a strategy built around how Delhi customers actually search and buy.\n\nAvani Enterprises has been building that strategy since 2016. As a digital marketing company serving Delhi from our Gurugram headquarters at DLF Cyber City, we combine technical SEO, intent-driven Google and Meta ads, and conversion-focused websites for over 150 clients across 300+ projects. Every rupee of ad spend and every keyword is tied to a number you care about: qualified leads, calls, and revenue, not vanity metrics.",
+    "intro": "Delhi is one of India's most crowded and competitive digital markets. A trader in Chandni Chowk, a clinic in South Extension, an exporter in Okhla Industrial Area, and a SaaS firm in Nehru Place are all bidding for the same Google searches and the same Instagram feeds. Standing out here takes more than boosted posts and generic ads. It takes a strategy built around how Delhi customers actually search and buy.\n\nAvani Enterprises has been building that strategy since 2016. As a digital marketing company serving Delhi from our Gurugram headquarters at Unitech Cyber Park, Sector 39, we combine technical SEO, intent-driven Google and Meta ads, and conversion-focused websites for over 150 clients across 300+ projects. Every rupee of ad spend and every keyword is tied to a number you care about: qualified leads, calls, and revenue, not vanity metrics.",
     "features": [
       {
         "icon": "🔍",
@@ -2676,7 +2676,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Do you serve all areas of Delhi?",
-        "a": "Yes. We serve businesses across the capital, including Connaught Place, Nehru Place, Karol Bagh, Okhla Industrial Area, South Extension, Dwarka, Rohini, and Laxmi Nagar. Our team operates from our Gurugram HQ at DLF Cyber City and works with Delhi clients remotely and on-site."
+        "a": "Yes. We serve businesses across the capital, including Connaught Place, Nehru Place, Karol Bagh, Okhla Industrial Area, South Extension, Dwarka, Rohini, and Laxmi Nagar. Our team operates from our Gurugram HQ at Unitech Cyber Park, Sector 39 and works with Delhi clients remotely and on-site."
       },
       {
         "q": "Which industries in Delhi do you work with?",
@@ -2711,7 +2711,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
     },
     "service": "Digital Marketing",
     "city": "Delhi",
-    "localBizDescription": "Avani Enterprises is a digital marketing company serving Delhi, delivering SEO, Google Ads, social media, and conversion-focused websites for local businesses from its DLF Cyber City headquarters in Gurugram."
+    "localBizDescription": "Avani Enterprises is a digital marketing company serving Delhi, delivering SEO, Google Ads, social media, and conversion-focused websites for local businesses from its Unitech Cyber Park, Sector 39 headquarters in Gurugram."
   },
 
   'ai-automation-company-gurgaon': {
@@ -2802,7 +2802,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "title": "Local Team, Single Point of Contact",
-        "desc": "HQ in DLF Cyber City means on-site discovery, fast iterations and one accountable team — no overseas hand-offs or timezone lag."
+        "desc": "HQ at Unitech Cyber Park, Sector 39 means on-site discovery, fast iterations and one accountable team — no overseas hand-offs or timezone lag."
       },
       {
         "title": "Integration-First, Tool-Agnostic",
@@ -2832,7 +2832,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Why choose Avani Enterprises for AI automation in Gurgaon?",
-        "a": "Avani Enterprises is headquartered in DLF Cyber City, Gurugram, with 8+ years of experience, 300+ projects delivered and a 5.0 client rating. Being local means on-site audits, fast iterations and a single accountable team — we build automation around your real Gurgaon workflow, measured by hours saved."
+        "a": "Avani Enterprises is headquartered in Unitech Cyber Park, Sector 39, Gurugram, with 8+ years of experience, 300+ projects delivered and a 5.0 client rating. Being local means on-site audits, fast iterations and a single accountable team — we build automation around your real Gurgaon workflow, measured by hours saved."
       },
       {
         "q": "Can you build a WhatsApp AI chatbot for my Gurgaon business?",
@@ -3079,7 +3079,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
         }
       ]
     },
-    "intro": "As an AI solutions company in Delhi, Avani Enterprises is built for a city that runs on volume — wholesale orders from Sadar Bazar and Chandni Chowk, export enquiries from Okhla, patient queues in South Delhi clinics, and lead floods at Nehru Place and Connaught Place firms. The businesses that win aren't the ones that hustle hardest; they're the ones that let AI handle the repetitive load. That's exactly what we build — custom artificial intelligence systems that read documents, answer customers, score leads, and forecast demand without adding headcount.\\n\\nWe're an AI development company serving the entire Delhi market from our Gurugram HQ at DLF Cyber City, just across the border. For eight years and 300+ projects, we've shipped production AI — not slide decks. Whether you're a Karol Bagh retailer drowning in WhatsApp orders, a Janakpuri CA firm buried in invoices, or a Dwarka edtech startup needing a smart tutor, we engineer AI that fits your workflow, your data, and your budget.",
+    "intro": "As an AI solutions company in Delhi, Avani Enterprises is built for a city that runs on volume — wholesale orders from Sadar Bazar and Chandni Chowk, export enquiries from Okhla, patient queues in South Delhi clinics, and lead floods at Nehru Place and Connaught Place firms. The businesses that win aren't the ones that hustle hardest; they're the ones that let AI handle the repetitive load. That's exactly what we build — custom artificial intelligence systems that read documents, answer customers, score leads, and forecast demand without adding headcount.\\n\\nWe're an AI development company serving the entire Delhi market from our Gurugram HQ at Unitech Cyber Park, Sector 39, just across the border. For eight years and 300+ projects, we've shipped production AI — not slide decks. Whether you're a Karol Bagh retailer drowning in WhatsApp orders, a Janakpuri CA firm buried in invoices, or a Dwarka edtech startup needing a smart tutor, we engineer AI that fits your workflow, your data, and your budget.",
     "features": [
       {
         "icon": "🤖",
@@ -3119,7 +3119,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "title": "On-Delhi-Ground Support",
-        "desc": "Our Gurugram HQ at DLF Cyber City is a short drive from any Delhi business district. We meet teams in Nehru Place, Connaught Place, and Okhla in person — no faceless remote vendor."
+        "desc": "Our Gurugram HQ at Unitech Cyber Park, Sector 39 is a short drive from any Delhi business district. We meet teams in Nehru Place, Connaught Place, and Okhla in person — no faceless remote vendor."
       },
       {
         "title": "India-First Data Handling",
@@ -3153,7 +3153,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Why choose Avani Enterprises as an AI company in Delhi?",
-        "a": "Avani Enterprises combines 8+ years of software and AI engineering, 150+ clients, 300+ projects, and a 5.0 client rating with on-the-ground access to Delhi. Our Gurugram HQ at DLF Cyber City is a short drive from Nehru Place, Okhla, and CP, so we meet Delhi teams in person and ship production AI, not just prototypes."
+        "a": "Avani Enterprises combines 8+ years of software and AI engineering, 150+ clients, 300+ projects, and a 5.0 client rating with on-the-ground access to Delhi. Our Gurugram HQ at Unitech Cyber Park, Sector 39 is a short drive from Nehru Place, Okhla, and CP, so we meet Delhi teams in person and ship production AI, not just prototypes."
       },
       {
         "q": "Do you build AI chatbots that understand Hindi and Hinglish for Delhi customers?",
@@ -3483,7 +3483,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Do you have an office in Bangalore?",
-        "a": "Our headquarters is in DLF Cyber City, Gurugram, and we serve Bengaluru clients remotely with the same hands-on process. You get a dedicated SEO lead, 24/7 support, and regular reporting calls without needing a local office."
+        "a": "Our headquarters is at Unitech Cyber Park, Sector 39, Gurugram, and we serve Bengaluru clients remotely with the same hands-on process. You get a dedicated SEO lead, 24/7 support, and regular reporting calls without needing a local office."
       }
     ],
     "reviews": [],
@@ -3557,7 +3557,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
         }
       ]
     },
-    "intro": "Mumbai is India's most expensive and most competitive ad market. A wealth-management firm in BKC, a media house in Lower Parel, a D2C brand shipping out of Andheri, and a jewellery exporter in Zaveri Bazaar are all fighting for the same Google searches, the same Instagram reels, and the same premium cost-per-click. Winning here is not about boosting posts. It is about understanding how Mumbai's mobile-first, time-poor buyers actually search and decide.\n\nAvani Enterprises has been building that kind of strategy since 2016. As a digital marketing company serving Mumbai from our Gurugram headquarters at DLF Cyber City, we pair technical SEO, intent-driven Google and Meta ads, and fast, conversion-focused websites for 150+ clients across 300+ projects. Every rupee of ad spend and every keyword is tied to a number that matters to your P&L: qualified leads, calls, and revenue, not vanity reach.",
+    "intro": "Mumbai is India's most expensive and most competitive ad market. A wealth-management firm in BKC, a media house in Lower Parel, a D2C brand shipping out of Andheri, and a jewellery exporter in Zaveri Bazaar are all fighting for the same Google searches, the same Instagram reels, and the same premium cost-per-click. Winning here is not about boosting posts. It is about understanding how Mumbai's mobile-first, time-poor buyers actually search and decide.\n\nAvani Enterprises has been building that kind of strategy since 2016. As a digital marketing company serving Mumbai from our Gurugram headquarters at Unitech Cyber Park, Sector 39, we pair technical SEO, intent-driven Google and Meta ads, and fast, conversion-focused websites for 150+ clients across 300+ projects. Every rupee of ad spend and every keyword is tied to a number that matters to your P&L: qualified leads, calls, and revenue, not vanity reach.",
     "features": [
       {
         "icon": "🔍",
@@ -3634,7 +3634,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Do you serve all areas of Mumbai and MMR?",
-        "a": "Yes. We serve businesses across the metro, including BKC, Nariman Point, Lower Parel, Andheri, Powai, Dadar, Navi Mumbai, and Thane. Our team operates from our Gurugram HQ at DLF Cyber City and works with Mumbai clients remotely and on-site."
+        "a": "Yes. We serve businesses across the metro, including BKC, Nariman Point, Lower Parel, Andheri, Powai, Dadar, Navi Mumbai, and Thane. Our team operates from our Gurugram HQ at Unitech Cyber Park, Sector 39 and works with Mumbai clients remotely and on-site."
       },
       {
         "q": "Which Mumbai industries do you work with?",
@@ -3669,7 +3669,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
     },
     "service": "Digital Marketing",
     "city": "Mumbai",
-    "localBizDescription": "Avani Enterprises is a digital marketing company serving Mumbai, Maharashtra, delivering SEO, Google and Meta performance ads, social media marketing, and conversion-focused websites for local businesses from its DLF Cyber City headquarters in Gurugram."
+    "localBizDescription": "Avani Enterprises is a digital marketing company serving Mumbai, Maharashtra, delivering SEO, Google and Meta performance ads, social media marketing, and conversion-focused websites for local businesses from its Unitech Cyber Park, Sector 39 headquarters in Gurugram."
   },
 
   'digital-marketing-company-bangalore': {
@@ -3716,7 +3716,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
         }
       ]
     },
-    "intro": "Bangalore is India's most digitally-literate, performance-obsessed market. A funded SaaS startup in Koramangala, a D2C brand in HSR Layout, an IT services firm on Outer Ring Road, and a kirana-turned-quick-commerce store in Indiranagar are all competing for the same Google searches, the same LinkedIn feeds, and the same blended CAC targets. In a city where your prospects are themselves marketers, growth leads, and engineers, boosted posts and vanity reach simply don't move the needle — clean attribution and cost per qualified lead do.\n\nAvani Enterprises has been building that kind of marketing since 2016. As a digital marketing company serving Bangalore from our Gurugram headquarters at DLF Cyber City, we combine technical SEO, intent-driven Google and Meta PPC, and conversion-engineered landing pages for over 150 clients across 300+ projects. Every rupee of ad spend and every keyword is tied back to a number a Bengaluru founder actually reports on — pipeline, demos booked, and revenue, not impressions.",
+    "intro": "Bangalore is India's most digitally-literate, performance-obsessed market. A funded SaaS startup in Koramangala, a D2C brand in HSR Layout, an IT services firm on Outer Ring Road, and a kirana-turned-quick-commerce store in Indiranagar are all competing for the same Google searches, the same LinkedIn feeds, and the same blended CAC targets. In a city where your prospects are themselves marketers, growth leads, and engineers, boosted posts and vanity reach simply don't move the needle — clean attribution and cost per qualified lead do.\n\nAvani Enterprises has been building that kind of marketing since 2016. As a digital marketing company serving Bangalore from our Gurugram headquarters at Unitech Cyber Park, Sector 39, we combine technical SEO, intent-driven Google and Meta PPC, and conversion-engineered landing pages for over 150 clients across 300+ projects. Every rupee of ad spend and every keyword is tied back to a number a Bengaluru founder actually reports on — pipeline, demos booked, and revenue, not impressions.",
     "features": [
       {
         "icon": "🔍",
@@ -3801,7 +3801,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Do you serve all areas of Bangalore, and do you have an office there?",
-        "a": "We serve businesses across Bengaluru, including Koramangala, HSR Layout, Indiranagar, Whitefield, Electronic City, Outer Ring Road, and the MG Road area. Our team operates from our Gurugram HQ at DLF Cyber City and works with Bangalore clients remotely, with on-site coordination as projects require."
+        "a": "We serve businesses across Bengaluru, including Koramangala, HSR Layout, Indiranagar, Whitefield, Electronic City, Outer Ring Road, and the MG Road area. Our team operates from our Gurugram HQ at Unitech Cyber Park, Sector 39 and works with Bangalore clients remotely, with on-site coordination as projects require."
       }
     ],
     "reviews": [],
@@ -3828,7 +3828,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
     },
     "service": "Digital Marketing",
     "city": "Bangalore",
-    "localBizDescription": "Avani Enterprises is a digital marketing company serving Bangalore (Bengaluru), delivering SEO, PPC, performance marketing, social media, and conversion-focused websites for local businesses from its DLF Cyber City headquarters in Gurugram."
+    "localBizDescription": "Avani Enterprises is a digital marketing company serving Bangalore (Bengaluru), delivering SEO, PPC, performance marketing, social media, and conversion-focused websites for local businesses from its Unitech Cyber Park, Sector 39 headquarters in Gurugram."
   },
 
   'digital-marketing-company-chandigarh': {
@@ -3957,7 +3957,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Which areas of Chandigarh and the tricity do you serve?",
-        "a": "We serve businesses across Sector 17, Sector 22, Sector 34, and Sector 35, the Industrial Area (Phase I & II) including Elante, the Rajiv Gandhi Chandigarh Technology Park in Kishangarh, plus Mohali (SAS Nagar), Panchkula, and Zirakpur, with free strategy calls across the tricity. Our HQ is in DLF Cyber City, Gurugram."
+        "a": "We serve businesses across Sector 17, Sector 22, Sector 34, and Sector 35, the Industrial Area (Phase I & II) including Elante, the Rajiv Gandhi Chandigarh Technology Park in Kishangarh, plus Mohali (SAS Nagar), Panchkula, and Zirakpur, with free strategy calls across the tricity. Our HQ is at Unitech Cyber Park, Sector 39, Gurugram."
       },
       {
         "q": "Do you handle both SEO and PPC, or just one?",
@@ -4112,7 +4112,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Do you have an office in Dubai?",
-        "a": "No. Avani Enterprises is headquartered at DLF Cyber City, Gurugram, India, and serves Dubai clients remotely. We work across Gulf Standard Time with 24/7 communication over WhatsApp, email and video calls, so you get responsive support without paying for local Dubai office overheads."
+        "a": "No. Avani Enterprises is headquartered at Unitech Cyber Park, Sector 39, Gurugram, India, and serves Dubai clients remotely. We work across Gulf Standard Time with 24/7 communication over WhatsApp, email and video calls, so you get responsive support without paying for local Dubai office overheads."
       },
       {
         "q": "Can you build a bilingual Arabic and English website?",
@@ -4276,7 +4276,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Do you work with Abu Dhabi businesses remotely from India?",
-        "a": "Yes. Our HQ is in DLF Cyber City, Gurugram, India, and we serve Abu Dhabi clients end-to-end over calls, video, and WhatsApp, with 24/7 support across time zones. Most of our overseas projects run smoothly without a single in-person meeting, and we do not require a local office to deliver."
+        "a": "Yes. Our HQ is at Unitech Cyber Park, Sector 39, Gurugram, India, and we serve Abu Dhabi clients end-to-end over calls, video, and WhatsApp, with 24/7 support across time zones. Most of our overseas projects run smoothly without a single in-person meeting, and we do not require a local office to deliver."
       },
       {
         "q": "Will my website rank on Google for Abu Dhabi searches?",
@@ -4436,7 +4436,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Do you work with Qatar businesses remotely from India?",
-        "a": "Yes. Our HQ is in DLF Cyber City, Gurugram, India, and we serve Qatar clients end-to-end over calls, video, email, and WhatsApp across time zones. India and Qatar are only 2.5 hours apart, and most of our Doha projects run smoothly without a single in-person meeting."
+        "a": "Yes. Our HQ is at Unitech Cyber Park, Sector 39, Gurugram, India, and we serve Qatar clients end-to-end over calls, video, email, and WhatsApp across time zones. India and Qatar are only 2.5 hours apart, and most of our Doha projects run smoothly without a single in-person meeting."
       },
       {
         "q": "Will my website rank on Google for Qatar searches?",
@@ -4514,7 +4514,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
         }
       ]
     },
-    "intro": "Choosing an SEO company in Dubai means competing in one of the most contested search markets on earth — property developers in Business Bay, Downtown and Dubai Marina, free-zone traders in JAFZA and Deira, DIFC fintechs, e-commerce sellers shipping across the GCC, and a tourism and hospitality sector chasing visitors from every continent are all fighting for the same Google results. Add a bilingual English-and-Arabic audience, a 90%-plus expat population searching in dozens of languages, and seasonal demand spikes around Ramadan, GITEX, DSF and peak winter tourism, and ranking here demands real expertise. Paid ads on Google and Meta stop the moment your AED budget runs out; SEO compounds and keeps delivering.\\n\\nAvani Enterprises serves Dubai businesses remotely from our headquarters at DLF Cyber City, Gurugram, India — the same delivery hub trusted by global agencies. Across 8+ years and 300+ projects we have run technical audits, intent-led bilingual content, Google Business Profile optimisation for the Dubai Map Pack, and authority link-building tuned to the UAE market — consistently lifting organic traffic 3x and cutting customer acquisition cost, with weekly reporting that fits your Gulf Standard Time schedule.",
+    "intro": "Choosing an SEO company in Dubai means competing in one of the most contested search markets on earth — property developers in Business Bay, Downtown and Dubai Marina, free-zone traders in JAFZA and Deira, DIFC fintechs, e-commerce sellers shipping across the GCC, and a tourism and hospitality sector chasing visitors from every continent are all fighting for the same Google results. Add a bilingual English-and-Arabic audience, a 90%-plus expat population searching in dozens of languages, and seasonal demand spikes around Ramadan, GITEX, DSF and peak winter tourism, and ranking here demands real expertise. Paid ads on Google and Meta stop the moment your AED budget runs out; SEO compounds and keeps delivering.\\n\\nAvani Enterprises serves Dubai businesses remotely from our headquarters at Unitech Cyber Park, Sector 39, Gurugram, India — the same delivery hub trusted by global agencies. Across 8+ years and 300+ projects we have run technical audits, intent-led bilingual content, Google Business Profile optimisation for the Dubai Map Pack, and authority link-building tuned to the UAE market — consistently lifting organic traffic 3x and cutting customer acquisition cost, with weekly reporting that fits your Gulf Standard Time schedule.",
     "features": [
       {
         "icon": "🔍",
@@ -4589,7 +4589,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Why choose Avani Enterprises as your SEO company in Dubai?",
-        "a": "Avani Enterprises has 8+ years of experience, 300+ projects, 150+ clients, and a 5.0 client rating. We serve Dubai remotely from our HQ at DLF Cyber City, Gurugram, India, combining technical SEO, bilingual content, and link-building in-house, with 24/7 support and transparent reporting aligned to Gulf Standard Time."
+        "a": "Avani Enterprises has 8+ years of experience, 300+ projects, 150+ clients, and a 5.0 client rating. We serve Dubai remotely from our HQ at Unitech Cyber Park, Sector 39, Gurugram, India, combining technical SEO, bilingual content, and link-building in-house, with 24/7 support and transparent reporting aligned to Gulf Standard Time."
       },
       {
         "q": "Do you offer local SEO and Arabic SEO for Dubai businesses?",
@@ -4675,7 +4675,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
         }
       ]
     },
-    "intro": "Dubai is one of the most digitally demanding markets on earth. With roughly 99% internet penetration, a population where the vast majority are expats searching in English and Arabic, and a buyer who compares everything on Google and Instagram before walking in, visibility here is brutally competitive. Real estate giants on Sheikh Zayed Road, luxury retailers in Downtown Dubai, hospitality brands chasing tourist demand, free-zone trading companies in JAFZA, and DIFC fintechs are all bidding for the same high-intent attention — and CPCs reflect it. A single off-plan property enquiry or a high-ticket retail conversion can be worth a fortune, so generic marketing simply burns dirhams.\\n\\nAvani Enterprises builds data-led campaigns shaped specifically for the pace and price-points of the Dubai buyer. We are headquartered at DLF Cyber City, Gurugram, and serve Dubai businesses remotely — running technically sound SEO, tightly managed Google and Meta budgets, and bilingual-ready content so your brand appears the moment buyers across Business Bay, Dubai Marina, JLT, and Deira are searching. Every dirham of ad spend is tracked from impression to qualified lead, with transparent reporting and 24/7 communication that keeps your account moving across the IST and Gulf Standard Time (GST) overlap.",
+    "intro": "Dubai is one of the most digitally demanding markets on earth. With roughly 99% internet penetration, a population where the vast majority are expats searching in English and Arabic, and a buyer who compares everything on Google and Instagram before walking in, visibility here is brutally competitive. Real estate giants on Sheikh Zayed Road, luxury retailers in Downtown Dubai, hospitality brands chasing tourist demand, free-zone trading companies in JAFZA, and DIFC fintechs are all bidding for the same high-intent attention — and CPCs reflect it. A single off-plan property enquiry or a high-ticket retail conversion can be worth a fortune, so generic marketing simply burns dirhams.\\n\\nAvani Enterprises builds data-led campaigns shaped specifically for the pace and price-points of the Dubai buyer. We are headquartered at Unitech Cyber Park, Sector 39, Gurugram, and serve Dubai businesses remotely — running technically sound SEO, tightly managed Google and Meta budgets, and bilingual-ready content so your brand appears the moment buyers across Business Bay, Dubai Marina, JLT, and Deira are searching. Every dirham of ad spend is tracked from impression to qualified lead, with transparent reporting and 24/7 communication that keeps your account moving across the IST and Gulf Standard Time (GST) overlap.",
     "features": [
       {
         "icon": "🔍",
@@ -4748,11 +4748,11 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Why choose Avani Enterprises as a digital marketing company in Dubai?",
-        "a": "Avani Enterprises has 8+ years in business, 300+ projects, 150+ clients, and a 5.0 client rating. We serve Dubai remotely from our India HQ at DLF Cyber City, Gurugram — combining a full-funnel, ROI-first team under one roof with India-HQ cost efficiency and 24/7 communication, so you get measurable AED pipeline without paying inflated local-agency rates."
+        "a": "Avani Enterprises has 8+ years in business, 300+ projects, 150+ clients, and a 5.0 client rating. We serve Dubai remotely from our India HQ at Unitech Cyber Park, Sector 39, Gurugram — combining a full-funnel, ROI-first team under one roof with India-HQ cost efficiency and 24/7 communication, so you get measurable AED pipeline without paying inflated local-agency rates."
       },
       {
         "q": "Do you have a local office in Dubai?",
-        "a": "No. Avani Enterprises is headquartered at DLF Cyber City, Gurugram, India, and serves Dubai clients remotely. The IST and Gulf time zones overlap well, our team works in English, and we are available 24/7 — so you get responsive, on-time delivery and full transparency without the overhead of an on-the-ground UAE office."
+        "a": "No. Avani Enterprises is headquartered at Unitech Cyber Park, Sector 39, Gurugram, India, and serves Dubai clients remotely. The IST and Gulf time zones overlap well, our team works in English, and we are available 24/7 — so you get responsive, on-time delivery and full transparency without the overhead of an on-the-ground UAE office."
       },
       {
         "q": "Which digital marketing services do you offer for Dubai businesses?",
@@ -4834,7 +4834,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
         }
       ]
     },
-    "intro": "London is one of the world's most competitive digital markets — home to the City's financial institutions, the fintech and SaaS density of Shoreditch and Old Street, Canary Wharf's enterprise sector, the media and creative scene around Soho and Clerkenwell, and the West End's premium retail. With audiences this discerning and competitors investing heavily, a slow or templated website quietly loses leads to firms that simply load faster and convert better.\n\nAvani Enterprises delivers web development for London businesses from our HQ in DLF Cyber City, Gurugram — partnering remotely with founders, marketing leads, and agencies across the capital. We build custom, mobile-first websites and ecommerce stores on React and Next.js, tuned for Core Web Vitals, GDPR-compliant data handling, and UK search intent. Whether you're a Shoreditch startup launching an MVP, a Mayfair professional services firm, or a Camden retailer going omnichannel, we engineer sites that earn trust and turn London traffic into enquiries and orders.",
+    "intro": "London is one of the world's most competitive digital markets — home to the City's financial institutions, the fintech and SaaS density of Shoreditch and Old Street, Canary Wharf's enterprise sector, the media and creative scene around Soho and Clerkenwell, and the West End's premium retail. With audiences this discerning and competitors investing heavily, a slow or templated website quietly loses leads to firms that simply load faster and convert better.\n\nAvani Enterprises delivers web development for London businesses from our HQ at Unitech Cyber Park, Sector 39, Gurugram — partnering remotely with founders, marketing leads, and agencies across the capital. We build custom, mobile-first websites and ecommerce stores on React and Next.js, tuned for Core Web Vitals, GDPR-compliant data handling, and UK search intent. Whether you're a Shoreditch startup launching an MVP, a Mayfair professional services firm, or a Camden retailer going omnichannel, we engineer sites that earn trust and turn London traffic into enquiries and orders.",
     "features": [
       {
         "icon": "💻",
@@ -4912,7 +4912,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Do you have an office in London?",
-        "a": "No — our HQ is in DLF Cyber City, Gurugram, India, and we serve London clients remotely. We work end-to-end over video calls, Slack, and email, scheduling around GMT/BST so collaboration feels local. Most London projects run smoothly without a single in-person meeting."
+        "a": "No — our HQ is at Unitech Cyber Park, Sector 39, Gurugram, India, and we serve London clients remotely. We work end-to-end over video calls, Slack, and email, scheduling around GMT/BST so collaboration feels local. Most London projects run smoothly without a single in-person meeting."
       },
       {
         "q": "Are your websites GDPR-compliant for the UK market?",
@@ -4994,7 +4994,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
         }
       ]
     },
-    "intro": "Web development in the USA runs on web-first business — venture-backed SaaS in Silicon Valley and Austin, Shopify and DTC brands shipping nationwide, healthcare and fintech in New York and Boston, and millions of local service businesses from Los Angeles to Miami competing on Google. The bottleneck is rarely ambition; it's the cost and lead time of US developer hours, which can blow a startup or SMB budget before a site even ships.\\n\\nAvani Enterprises is an offshore web development partner built for that exact gap. From our HQ at DLF Cyber City, Gurugram, India, we serve US clients remotely with overlapping working hours, fluent English communication, and 24/7 support — building mobile-first, SEO-ready websites, React and Next.js apps, and ecommerce stores with sub-2-second load times. With 150+ clients, 300+ projects, and 8+ years behind us, we give American founders and business owners senior engineering output at a fraction of US agency pricing.",
+    "intro": "Web development in the USA runs on web-first business — venture-backed SaaS in Silicon Valley and Austin, Shopify and DTC brands shipping nationwide, healthcare and fintech in New York and Boston, and millions of local service businesses from Los Angeles to Miami competing on Google. The bottleneck is rarely ambition; it's the cost and lead time of US developer hours, which can blow a startup or SMB budget before a site even ships.\\n\\nAvani Enterprises is an offshore web development partner built for that exact gap. From our HQ at Unitech Cyber Park, Sector 39, Gurugram, India, we serve US clients remotely with overlapping working hours, fluent English communication, and 24/7 support — building mobile-first, SEO-ready websites, React and Next.js apps, and ecommerce stores with sub-2-second load times. With 150+ clients, 300+ projects, and 8+ years behind us, we give American founders and business owners senior engineering output at a fraction of US agency pricing.",
     "features": [
       {
         "icon": "⚛️",

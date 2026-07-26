@@ -1254,6 +1254,148 @@ app.get("/blogs/:slug", async (req, res) => {
   }
 });
 
+// ─────────────────────────────────────────────────────────────────────────────
+// Blog engagement — likes and comments
+//
+// Views already increment on GET /blogs/:slug. These add the other two signals
+// shown on the post and the blog index.
+//
+// Comments are held for approval rather than published immediately. An open
+// comment form on a site recovering from a content-quality demotion is a
+// spam-link liability, and unmoderated outbound links are exactly what Google's
+// link-spam systems act on.
+// ─────────────────────────────────────────────────────────────────────────────
+
+/** Resolve a post by slug, falling back to _id. Shared by the routes below. */
+async function findPublishedBlog(slug) {
+  let blog = await Blog.findOne({ slug, isPublished: true });
+  if (!blog && mongoose.Types.ObjectId.isValid(slug)) {
+    blog = await Blog.findOne({ _id: slug, isPublished: true });
+  }
+  return blog;
+}
+
+// Public: like a post. Idempotency is handled client-side via localStorage —
+// good enough for a vanity counter, and it avoids storing visitor identifiers.
+app.post("/blogs/:slug/like", async (req, res) => {
+  try {
+    const blog = await findPublishedBlog(req.params.slug);
+    if (!blog) return res.status(404).json({ message: "Blog not found" });
+
+    const delta = req.body && req.body.unlike ? -1 : 1;
+    const updated = await Blog.findByIdAndUpdate(
+      blog._id,
+      { $inc: { likes: delta } },
+      { new: true }
+    );
+    // Never report a negative count if unlikes get out of step.
+    const likes = Math.max(0, updated.likes || 0);
+    res.json({ success: true, data: { likes } });
+  } catch (err) {
+    console.error("Error liking blog:", err);
+    res.status(500).json({ message: "Server error", error: err.message });
+  }
+});
+
+// Public: approved comments for a post.
+app.get("/blogs/:slug/comments", async (req, res) => {
+  try {
+    const blog = await findPublishedBlog(req.params.slug);
+    if (!blog) return res.status(404).json({ message: "Blog not found" });
+
+    const comments = (blog.comments || [])
+      .filter((c) => c.approved)
+      .map((c) => ({ name: c.name, body: c.body, createdAt: c.createdAt }))
+      .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+
+    res.json({ success: true, data: comments });
+  } catch (err) {
+    console.error("Error fetching comments:", err);
+    res.status(500).json({ message: "Server error", error: err.message });
+  }
+});
+
+// Public: submit a comment. Held unapproved until a moderator releases it.
+app.post("/blogs/:slug/comments", async (req, res) => {
+  try {
+    const { name, email, body, website } = req.body || {};
+
+    // Honeypot: a hidden field real users never fill. Silently accept so bots
+    // do not learn they were caught.
+    if (website) return res.json({ success: true, data: { pending: true } });
+
+    if (!name || !body) return res.status(400).json({ message: "Name and comment are required" });
+    if (String(body).length > 2000) return res.status(400).json({ message: "Comment is too long" });
+    // Comments containing links are almost entirely spam on a site like this.
+    if (/https?:\/\//i.test(body)) return res.status(400).json({ message: "Links are not allowed in comments" });
+
+    const blog = await findPublishedBlog(req.params.slug);
+    if (!blog) return res.status(404).json({ message: "Blog not found" });
+
+    await Blog.findByIdAndUpdate(blog._id, {
+      $push: {
+        comments: {
+          name: String(name).slice(0, 80),
+          email: String(email || "").slice(0, 160),
+          body: String(body).slice(0, 2000),
+          approved: false,
+          createdAt: new Date(),
+        },
+      },
+    });
+
+    res.json({ success: true, data: { pending: true } });
+  } catch (err) {
+    console.error("Error posting comment:", err);
+    res.status(500).json({ message: "Server error", error: err.message });
+  }
+});
+
+// Admin: list pending comments across all posts, for moderation.
+app.get("/admin/blogs/comments/pending", authMiddleware, async (req, res) => {
+  try {
+    const blogs = await Blog.find({ "comments.approved": false }, "title slug comments");
+    const pending = [];
+    blogs.forEach((b) => {
+      (b.comments || []).forEach((c) => {
+        if (!c.approved) {
+          pending.push({
+            blogId: b._id, blogTitle: b.title, blogSlug: b.slug,
+            commentId: c._id, name: c.name, email: c.email,
+            body: c.body, createdAt: c.createdAt,
+          });
+        }
+      });
+    });
+    res.json({ success: true, data: pending });
+  } catch (err) {
+    console.error("Error listing pending comments:", err);
+    res.status(500).json({ message: "Server error", error: err.message });
+  }
+});
+
+// Admin: approve or delete a comment.
+app.patch("/admin/blogs/:blogId/comments/:commentId", authMiddleware, async (req, res) => {
+  try {
+    const { blogId, commentId } = req.params;
+    const approve = !(req.body && req.body.approve === false);
+
+    if (req.body && req.body.remove) {
+      await Blog.findByIdAndUpdate(blogId, { $pull: { comments: { _id: commentId } } });
+      return res.json({ success: true, data: { removed: true } });
+    }
+
+    await Blog.updateOne(
+      { _id: blogId, "comments._id": commentId },
+      { $set: { "comments.$.approved": approve } }
+    );
+    res.json({ success: true, data: { approved: approve } });
+  } catch (err) {
+    console.error("Error moderating comment:", err);
+    res.status(500).json({ message: "Server error", error: err.message });
+  }
+});
+
 // Admin: Create blog
 app.post("/admin/blogs", authMiddleware, async (req, res) => {
   try {

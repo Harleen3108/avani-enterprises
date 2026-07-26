@@ -70,23 +70,46 @@ const OFFICES = {
     city: 'Gurugram',
     label: 'Gurugram (Head Office)',
     isHQ: true,
-    // ⚠️ Address itself still needs client confirmation — three conflicting
-    // versions existed. This is the Footer version. Confirmed = "we agree a real
-    // office exists here"; the street line may still change.
+    // Client-confirmed. Supersedes the two variants that were in the codebase
+    // ("DLF Cyber City" and the 122001 Footer version) — both now purged.
     confirmed: true,
     schemaReady: true,
     address: {
-      street: '3rd Floor, Tower-B, Cyber Park, Durga Colony, Sector 39',
+      street: 'Tower B, 3rd Floor, Unitech Cyber Park, Sector 39',
       locality: 'Gurugram',
       region: 'Haryana',
-      postalCode: '122001',
+      postalCode: '122002',
       country: 'IN',
     },
-    // Sector 39 / Cyber Park, Gurugram. Approximate to the building, not a survey point.
+    // Unitech Cyber Park, Sector 39, Gurugram. Building-level, not a survey point.
     geo: { lat: 28.4419, lng: 77.0483 },
     areasServed: ['Cyber City', 'Udyog Vihar', 'Golf Course Road', 'Sohna Road', 'Sector 39', 'MG Road', 'IMT Manesar'],
     localNote:
-      'Our head office is on the Sector 39 Cyber Park side of Gurugram, a short drive from Cyber City and the Golf Course Road corridor, so client workshops and review sessions happen in person rather than over video.',
+      'Our head office is at Unitech Cyber Park in Sector 39, a short drive from Cyber City and the Golf Course Road corridor, so client workshops and review sessions happen in person rather than over video.',
+  },
+
+  rohtak: {
+    key: 'rohtak',
+    city: 'Rohtak',
+    label: 'Rohtak',
+    // Client-confirmed as a real, staffed second office.
+    confirmed: true,
+    schemaReady: true,
+    address: {
+      street: '106, First Floor, Agro Mall',
+      locality: 'Rohtak',
+      region: 'Haryana',
+      // ⚠️ PIN pending client confirmation. postalCode is recommended rather
+      // than required by schema.org, so LocalBusiness still validates without
+      // it — but add it as soon as it is confirmed, because Google Business
+      // Profile matching is stricter than schema validation.
+      postalCode: '',
+      country: 'IN',
+    },
+    geo: { lat: 28.8955, lng: 76.6066 },
+    areasServed: ['IMT Rohtak', 'Delhi Road commercial belt', 'Model Town', 'Sector 14 institutional area'],
+    localNote:
+      'We have an office in Rohtak, which is unusual for a digital agency — most serve Haryana remotely from Delhi or Gurugram. It means local institutes, hospitals, IMT manufacturers and retailers get face-to-face project reviews.',
   },
 
   // ── SELL-ONLY MARKETS ─────────────────────────────────────────────────────
@@ -104,31 +127,22 @@ const OFFICES = {
     localNote:
       'We work with clients across the Sector 62–63 IT belt, Film City and the expressway corridor. Delivery is from our Gurugram head office, roughly an hour away, so on-site meetings are practical when a project needs them.',
   },
-  rohtak: {
-    key: 'rohtak',
-    city: 'Rohtak',
-    label: 'Rohtak',
-    confirmed: false,
-    schemaReady: false,
-    address: null,
-    // Found in GlobalPresenceComponent.tsx, GlobalPresenceSection.tsx and
-    // home2/data.ts as "our founding office". NOT rendered anywhere until the
-    // client confirms it is a real, currently-staffed premises.
-    candidateAddress: '106, First Floor, Agro Mall, Rohtak, Haryana',
-    areasServed: ['IMT Rohtak', 'Delhi Road commercial belt', 'Model Town', 'Sector 14 institutional area'],
-    localNote:
-      'We work with institutes, hospitals, IMT manufacturers and retailers across Rohtak. Delivery runs from our Gurugram head office, which is close enough that on-site sessions are straightforward.',
-  },
   mumbai: {
     key: 'mumbai',
     city: 'Mumbai',
     label: 'Mumbai',
+    // Client has confirmed this IS a real office, but the street address is
+    // still pending. Until it arrives we render sell-only copy: no address, no
+    // map, no LocalBusiness schema. Google Business Profile matching needs an
+    // exact address, and publishing an approximate one is worse than waiting.
+    // Flip `confirmed` and fill `address` together — never separately.
     confirmed: false,
+    realPendingAddress: true,
     schemaReady: false,
     address: null,
     areasServed: ['Bandra Kurla Complex (BKC)', 'Lower Parel', 'Andheri East (MIDC and SEEPZ)', 'Powai'],
     localNote:
-      'We work with BFSI, media and D2C clients across BKC, Lower Parel and Andheri East. Delivery is remote from our Gurugram head office, on IST alongside you, with travel for kickoff on larger engagements.',
+      'We work with BFSI, media and D2C clients across BKC, Lower Parel and Andheri East, on IST alongside you.',
   },
   dubai: {
     key: 'dubai',
@@ -202,7 +216,9 @@ function mapLinkUrl(office) {
 function formatAddress(office) {
   if (!office || !office.address) return null;
   const a = office.address;
-  return [a.street, a.locality, `${a.region} ${a.postalCode}`].filter(Boolean).join(', ');
+  // postalCode may be pending (Rohtak) — do not emit a dangling region string.
+  const regionLine = [a.region, a.postalCode].filter(Boolean).join(' ');
+  return [a.street, a.locality, regionLine].filter(Boolean).join(', ');
 }
 
 /**
@@ -223,14 +239,17 @@ function localBusinessSchema(office, pageUrl) {
     telephone: NAP.phone,
     email: NAP.email,
     parentOrganization: { '@id': `${NAP.url}/#organization` },
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: a.street,
-      addressLocality: a.locality,
-      addressRegion: a.region,
-      postalCode: a.postalCode,
-      addressCountry: a.country,
-    },
+    address: Object.assign(
+      {
+        '@type': 'PostalAddress',
+        streetAddress: a.street,
+        addressLocality: a.locality,
+        addressRegion: a.region,
+        addressCountry: a.country,
+      },
+      // Omit rather than emit an empty string while a PIN is pending.
+      a.postalCode ? { postalCode: a.postalCode } : {}
+    ),
     geo: office.geo
       ? { '@type': 'GeoCoordinates', latitude: office.geo.lat, longitude: office.geo.lng }
       : undefined,

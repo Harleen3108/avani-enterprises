@@ -95,7 +95,7 @@ const DH2Contact = () => {
               
               <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem' }}>
                 {[
-                  { icon: <Phone size={24} />, title: 'Voice / WhatsApp', value: '+91 9253625099', sub: 'Instant connection for rapid results', link: 'tel:+919253625099' },
+                  { icon: <Phone size={24} />, title: 'Voice / WhatsApp', value: '+91 92536 25099', sub: 'Instant connection for rapid results', link: 'tel:+919253625099' },
                   { icon: <Mail size={24} />, title: 'Electronic Mail', value: 'kp@avanienterprises.in', sub: 'Send your detailed RFP or proposals', link: 'mailto:kp@avanienterprises.in' },
                 ].map((item, i) => (
                   <a key={i} href={item.link} style={{ display: 'flex', gap: '1.5rem', textDecoration: 'none', color: 'inherit' }}>

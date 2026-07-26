@@ -10,7 +10,9 @@
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview",
-    "predev": "node scripts/snapshot-blog.cjs && node generate-sitemap.cjs"
+    "predev": "node scripts/snapshot-blog.cjs && node generate-sitemap.cjs",
+    "blog:queue": "node scripts/blog-queue.cjs",
+    "blog:publish": "node scripts/blog-queue.cjs --publish"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",

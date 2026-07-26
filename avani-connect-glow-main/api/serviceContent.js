@@ -46,7 +46,7 @@ const COMPANY = {
   name: 'Avani Enterprises',
   hq: 'Tower B, 3rd Floor, Unitech Cyber Park, Sector 39, Gurugram, Haryana 122002',
   email: 'kp@avanienterprises.in',
-  phone: '+91 9253625099',
+  phone: '+91 92536 25099',
   site: 'https://www.avanienterprises.in',
 };
 
@@ -1212,7 +1212,7 @@ const MODEL_ALIASES = {
 // Claiming a location you do not occupy is how Google Business Profiles get
 // suspended.
 // ---------------------------------------------------------------------------
-const CONFIRMED_OFFICE_CITIES = 'Gurugram';
+const CONFIRMED_OFFICE_CITIES = 'Gurugram and Rohtak';
 
 // ---------------------------------------------------------------------------
 // LOCATIONS — only places we genuinely serve. `office: true` means a real
@@ -1265,18 +1265,18 @@ const LOCATIONS = {
     note: 'Covered from our Gurugram head office.',
   },
   rohtak: {
-    city: 'Rohtak', region: 'Haryana', country: 'India', office: false,
+    city: 'Rohtak', region: 'Haryana', country: 'India', office: true,
     districts: ['IMT Rohtak', 'Delhi Road commercial belt', 'Model Town', 'Sector 14 institutional area'],
     sectors: ['education', 'healthcare', 'manufacturing', 'auto'],
     industries: ['education and coaching institutions', 'healthcare and hospitals', 'MSME manufacturing at IMT', 'regional retail and automotive dealerships'],
-    note: 'Delivered from our Gurugram head office, close enough that on-site sessions with institutes, hospitals and IMT manufacturers are straightforward.',
+    note: 'We have an office in Rohtak, which is unusual for a digital agency and means local institutes, hospitals, IMT manufacturers and retailers get face-to-face project reviews.',
   },
   haryana: {
     city: 'Haryana', region: 'Haryana', country: 'India', office: true, isRegion: true,
     districts: ['Gurugram', 'Faridabad', 'Manesar', 'Rohtak', 'Panipat', 'Hisar'],
     sectors: ['auto', 'manufacturing', 'textiles', 'saas'],
     industries: ['automotive and auto components', 'textiles at Panipat', 'agri-processing', 'MSME manufacturing across the IMT belt', 'IT and ITES in Gurugram'],
-    note: 'Our head office is in Gurugram, so the Haryana industrial belt is on our doorstep.',
+    note: 'Both our offices — Gurugram and Rohtak — are in Haryana, so the state industrial belt is on our doorstep.',
   },
   mumbai: {
     city: 'Mumbai', region: 'Maharashtra', country: 'India', office: false,
@@ -1339,7 +1339,7 @@ const LOCATIONS = {
     districts: ['Gurugram', 'Delhi NCR', 'and remote delivery nationwide'],
     sectors: ['manufacturing', 'finance', 'healthcare', 'education', 'ecommerce', 'saas'],
     industries: ['manufacturing and MSME', 'BFSI', 'healthcare', 'education', 'D2C and retail', 'IT and SaaS'],
-    note: 'Head office in Gurugram, with remote delivery nationwide on IST.',
+    note: 'Offices in Gurugram and Rohtak, with remote delivery nationwide on IST.',
   },
   dubai: {
     city: 'Dubai', region: 'Dubai', country: 'UAE', office: false, international: true,
@@ -2327,6 +2327,27 @@ function pageFeature(resolved) {
   return { title: 'Written scope before we start', desc: `${service.timeline}. You get the deliverable list and the exclusions in writing before any work begins.` };
 }
 
+/**
+ * A page-unique <title> derived from the resolved service/location/model.
+ *
+ * Pages with no registry entry (dedicated route components such as
+ * /web-development-company-gurgaon, plus /about and /services) were all falling
+ * back to one generic site-wide title, so they competed with each other on an
+ * identical string. Kept under ~60 characters, keyword first, brand omitted —
+ * api/seo.js re-attaches the brand only when it fits.
+ */
+function pageTitle(resolved) {
+  if (!resolved) return null;
+  const { service, location, industry, model, module } = resolved;
+  if (module) return `${module.name} — Avani Business OS`;
+  if (model) return `${model.label} Development Company`;
+  if (!service) return null;
+  if (location && industry) return `${service.name} for ${industry.label} in ${location.city}`;
+  if (location) return `${service.name} in ${location.city}`;
+  if (industry) return `${service.name} for ${industry.label}`;
+  return service.name;
+}
+
 /** A short, page-unique meta description built from real facts. */
 function pageDescription(resolved) {
   if (!resolved) return null;
@@ -2366,6 +2387,7 @@ export {
   pageFaqs,
   pageBenefits,
   pageFeature,
+  pageTitle,
   pageDescription,
   listSentence,
 };

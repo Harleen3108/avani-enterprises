@@ -28,10 +28,10 @@ const services = [
 ];
 
 const locations = [
-  { city: 'GURGAON', office: 'Headquarters', address: 'Tower B, 3rd Floor, Unitech Cyber Park, Sector 39, Gurugram, Haryana 122002', phone: '+91 9253625099' },
-  { city: 'MUMBAI', office: 'Operations Center', address: 'Third Floor, Vasudev Chamber, Teli Galli Cross Rd, Natwar Nagar, Andheri East, Mumbai, Maharashtra 400069', phone: '+91 9253625099' },
-  { city: 'ROHTAK', office: 'Innovation Hub', address: '106, First Floor, Agro Mall, Rohtak, Haryana', phone: '+91 9253625099' },
-  { city: 'AUSTRALIA', office: 'Global Outreach', address: 'Strategic Liaison, Australia', phone: '+91 9253625099' }
+  { city: 'GURGAON', office: 'Headquarters', address: 'Tower B, 3rd Floor, Unitech Cyber Park, Sector 39, Gurugram, Haryana 122002', phone: '+91 92536 25099' },
+  { city: 'MUMBAI', office: 'Operations Center', address: 'Third Floor, Vasudev Chamber, Teli Galli Cross Rd, Natwar Nagar, Andheri East, Mumbai, Maharashtra 400069', phone: '+91 92536 25099' },
+  { city: 'ROHTAK', office: 'Innovation Hub', address: '106, First Floor, Agro Mall, Rohtak, Haryana', phone: '+91 92536 25099' },
+  { city: 'AUSTRALIA', office: 'Global Outreach', address: 'Strategic Liaison, Australia', phone: '+91 92536 25099' }
 ];
 
 /* Shared visual helpers */
@@ -137,8 +137,8 @@ const Contact = () => {
               <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
                 {[
                   { icon: <Mail size={24} />, title: 'Electronic Mail', val: 'kp@avanienterprises.in', sub: 'For detailed proposals and RFP' },
-                  { icon: <Phone size={24} />, title: 'Direct Transmission', val: '+91 9253625099', sub: 'Available for immediate consultation' },
-                  { icon: <MessageSquare size={24} />, title: 'WhatsApp Hotline', val: '+91 9253625099', sub: 'Instant connection with lead strategists' }
+                  { icon: <Phone size={24} />, title: 'Direct Transmission', val: '+91 92536 25099', sub: 'Available for immediate consultation' },
+                  { icon: <MessageSquare size={24} />, title: 'WhatsApp Hotline', val: '+91 92536 25099', sub: 'Instant connection with lead strategists' }
                 ].map((item, i) => (
                   <div key={i} style={{ display: 'flex', gap: '1.5rem', padding: '1.5rem', background: 'var(--card-bg)', borderRadius: '12px', border: '1px solid var(--border-faint)', backdropFilter: 'blur(10px)', transition: 'all 0.3s' }}
                     onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--accent-primary)'; }}

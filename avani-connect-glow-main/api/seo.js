@@ -4,13 +4,14 @@ import { fileURLToPath } from 'url';
 import { newSeoData } from './newSeoData.js';
 // Generated at prebuild from src/data/ — see generate-sitemap.cjs.
 // Copies live in api/ so the Vercel function bundle is guaranteed to contain them.
-import { resolvePage, uniqueBlock, pageDescription, STATIC_PAGES, canonicalSlugFor } from './serviceContent.js';
+import { resolvePage, uniqueBlock, pageDescription, pageTitle, STATIC_PAGES, canonicalSlugFor } from './serviceContent.js';
 import { isNoindexed } from './noindexPages.js';
 import { ssrContent } from './ssrContent.js';
 import { NAP, officeFor, formatAddress, mapLinkUrl, localBusinessSchema } from './offices.js';
 import { comparisonFor } from './comparisons.js';
 import { GUIDES } from './guides.js';
 import { blogContent } from './blogContent.js';
+import { cleanBlogSlug, storedBlogSlug, needsRedirect } from './blogSlugRedirects.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -45,6 +46,16 @@ function isNoIndex(pagePath) {
 // competing with each other for the same query and splitting link equity.
 function buildCanonical(pagePath) {
   if (pagePath === "/") return SITE_URL;
+
+  // Blog posts canonicalise to their clean slug, so the messy original never
+  // becomes the indexed URL even if something links to it.
+  if (pagePath.toLowerCase().startsWith('/blog/')) {
+    const seg = pagePath.slice(6);
+    let decoded = seg;
+    try { decoded = decodeURIComponent(seg); } catch { /* malformed escape */ }
+    return `${SITE_URL}/blog/${encodeURIComponent(cleanBlogSlug(decoded))}`;
+  }
+
   const target = canonicalSlugFor(pagePath);
   return `${SITE_URL}/${target}`;
 }
@@ -727,6 +738,94 @@ const STATIC_SEO_LOOKUP = {
 const SSR_START = '<!--SSR-CONTENT-START-->';
 const SSR_END   = '<!--SSR-CONTENT-END-->';
 
+const BRAND = 'Avani Enterprises';
+
+/**
+ * Keep <title> inside what Google actually displays (~60 characters).
+ *
+ * 101 served titles were over the limit and got truncated mid-phrase in search
+ * results, which loses the value proposition exactly where it matters. A few
+ * also carried the brand twice ("… | Avani Enterprises | Avani Enterprises")
+ * because registry titles already ended with it before we appended.
+ *
+ * Applied at serve time rather than by editing three registries, so it covers
+ * every source and anything added later. The rules are ordered so the
+ * keyword-bearing head of the title always survives:
+ *
+ *   1. Collapse a repeated brand suffix.
+ *   2. If still long, drop the brand entirely — Google shows the site name
+ *      separately, so it is the cheapest thing to lose.
+ *   3. If still long, keep whole leading segments up to a separator.
+ *   4. Last resort, trim on a word boundary. Never mid-word.
+ */
+function shortenTitle(raw, limit = 60) {
+  let t = String(raw || '').replace(/\s+/g, ' ').trim();
+  if (!t) return t;
+
+  // 1. Collapse repeats of the brand suffix.
+  const brandSuffix = new RegExp(`(?:\\s*[|\\u2014\\u2013-]\\s*${BRAND})+\\s*$`, 'i');
+  const hadBrand = brandSuffix.test(t);
+  if (hadBrand) t = t.replace(brandSuffix, '').trim();
+
+  // Re-attach a single brand only if there is room for it.
+  const withBrand = `${t} | ${BRAND}`;
+  if (withBrand.length <= limit) return withBrand;
+
+  // 2. Brand dropped. Does the bare title fit?
+  if (t.length <= limit) return t;
+
+  // 3. Keep whole leading segments. Split only on pipes and dashes — a colon is
+  //    usually part of the phrase ("10x Your Traffic: The Playbook"), so cutting
+  //    there throws away the half that carries the meaning.
+  const parts = t.split(/\s*[|—–]\s*/).filter(Boolean);
+  if (parts.length > 1) {
+    let acc = '';
+    for (const part of parts) {
+      const next = acc ? `${acc} | ${part}` : part;
+      if (next.length > limit) break;
+      acc = next;
+    }
+    if (acc && acc.length >= 30) return tidyTail(acc);
+    if (parts[0].length <= limit) return tidyTail(parts[0]);
+  }
+
+  // 4. Word-boundary trim.
+  const words = t.split(' ');
+  let out = '';
+  for (const w of words) {
+    const next = out ? `${out} ${w}` : w;
+    if (next.length > limit) break;
+    out = next;
+  }
+  out = tidyTail(out || t.slice(0, limit));
+
+  // A stub left after a colon reads worse than no subtitle at all. Threshold is
+  // deliberately low: "…: 15 Technical SEO Issues" carries keywords worth
+  // keeping, whereas "…: How" does not.
+  const colon = out.indexOf(':');
+  if (colon > 0) {
+    const head = out.slice(0, colon).trim();
+    const tail = out.slice(colon + 1).trim();
+    if (tail.length < 12 && head.length >= 20) return head;
+  }
+  return out;
+}
+
+/**
+ * Clean up a truncated tail so it never ends mid-thought: drop an unclosed
+ * parenthetical, then strip trailing punctuation and dangling function words
+ * ("… (And Why It's" → "…", "… Services for" → "… Services").
+ */
+function tidyTail(str) {
+  let s = String(str);
+  const open = s.lastIndexOf('(');
+  if (open !== -1 && s.indexOf(')', open) === -1) s = s.slice(0, open);
+  s = s.replace(/[\s,;:|—–-]+$/, '');
+  const DANGLING = /\s+(and|or|the|a|an|to|of|in|on|for|with|that|why|how|is|are|it's|we|our|your|from|by|at|every|each|this|these|those|into|over|across|without|when|can|will|has|have|was|were|been|being|do|does|did|built|make|makes)$/i;
+  while (DANGLING.test(s)) s = s.replace(DANGLING, '');
+  return s.replace(/[\s,;:|—–-]+$/, '');
+}
+
 function esc(str) {
   return String(str == null ? '' : str)
     .replace(/&/g, '&amp;')
@@ -966,19 +1065,58 @@ const BLOG_INDEX = Object.keys(blogContent).reduce((acc, k) => {
   return acc;
 }, {});
 
-/** Resolve a URL path segment to a real blog key, or null. */
+/**
+ * Resolve a URL path segment to a real blog key, or null.
+ *
+ * Handles four cases: the stored slug verbatim, a case difference, a
+ * percent-encoded form, and a clean slug from blogSlugRedirects.js that maps
+ * back to the messy slug the CMS still stores.
+ */
 function resolveBlogSlug(raw) {
   if (!raw) return null;
-  if (blogContent[raw]) return raw;
-  const lower = String(raw).toLowerCase();
-  if (BLOG_INDEX[lower]) return BLOG_INDEX[lower];
-  try {
-    const decoded = decodeURIComponent(raw);
-    if (blogContent[decoded]) return decoded;
-    const decodedLower = decoded.toLowerCase();
-    if (BLOG_INDEX[decodedLower]) return BLOG_INDEX[decodedLower];
-  } catch { /* malformed escape sequence */ }
+
+  const candidates = [raw];
+  try { candidates.push(decodeURIComponent(raw)); } catch { /* malformed escape */ }
+  // A clean slug resolves back to the original CMS key.
+  candidates.slice().forEach((c) => {
+    const stored = storedBlogSlug(c);
+    if (stored !== c) candidates.push(stored);
+  });
+
+  for (const c of candidates) {
+    if (blogContent[c]) return c;
+    const lower = String(c).toLowerCase();
+    if (BLOG_INDEX[lower]) return BLOG_INDEX[lower];
+  }
   return null;
+}
+
+/**
+ * Pull the FAQ pairs back out of a stored post so we can emit FAQPage schema.
+ *
+ * Queue-authored posts render their FAQs as an "Frequently asked questions" H2
+ * followed by H3/paragraph pairs. Extracting them here means the schema always
+ * describes FAQs that are genuinely visible on the page — which is what Google
+ * requires — without needing a second source of truth.
+ */
+function extractFaqs(html) {
+  const s = String(html || '');
+  const start = s.search(/<h2[^>]*>\s*Frequently asked questions\s*<\/h2>/i);
+  if (start === -1) return [];
+  // Stop at the next H2 so the CTA section is not swept in.
+  const rest = s.slice(start + 1);
+  const nextH2 = rest.search(/<h2[^>]*>/i);
+  const zone = nextH2 === -1 ? rest : rest.slice(0, nextH2);
+
+  const faqs = [];
+  const re = /<h3[^>]*>([\s\S]*?)<\/h3>\s*<p[^>]*>([\s\S]*?)<\/p>/gi;
+  let m;
+  while ((m = re.exec(zone)) !== null) {
+    const q = m[1].replace(/<[^>]+>/g, '').trim();
+    const a = m[2].replace(/<[^>]+>/g, '').trim();
+    if (q && a) faqs.push({ q, a });
+  }
+  return faqs;
 }
 
 function buildBlogHtml(slug, post) {
@@ -999,7 +1137,14 @@ function buildBlogHtml(slug, post) {
       '<li><a href="/contact">Contact</a></li>' +
       '</ul></nav></footer>',
   ];
-  return { html: parts.filter(Boolean).join(''), faqs: [], resolved: null, post: Object.assign({ slug }, post) };
+  // FAQs are lifted from the rendered body so the schema can only ever describe
+  // questions that are actually on the page.
+  return {
+    html: parts.filter(Boolean).join(''),
+    faqs: extractFaqs(post.content),
+    resolved: null,
+    post: Object.assign({ slug }, post),
+  };
 }
 
 /** The blog index, listing every snapshotted post so each gets a crawlable link. */
@@ -1012,8 +1157,9 @@ function buildBlogIndexHtml() {
   entries
     .sort((a, b) => String(b[1].publishedAt || '').localeCompare(String(a[1].publishedAt || '')))
     .forEach(([slug, p]) => {
+      // Always link the clean slug so internal links point at the 301 target.
       parts.push(
-        `<li><h2><a href="/blog/${esc(slug)}">${esc(p.title)}</a></h2>` +
+        `<li><h2><a href="/blog/${esc(encodeURIComponent(cleanBlogSlug(slug)))}">${esc(p.title)}</a></h2>` +
         (p.excerpt ? `<p>${esc(p.excerpt)}</p>` : '') + '</li>'
       );
     });
@@ -1316,6 +1462,22 @@ export default async function handler(req, res) {
     const pagePath = req.query.path || "/";
     const normalizedPath = pagePath.startsWith('/') ? pagePath : `/${pagePath}`;
 
+    // ── 0. Blog slug 301s ───────────────────────────────────────────────────
+    // Twelve posts had slugs containing spaces, commas, pipes and colons. Those
+    // URLs are unreadable once percent-encoded, so they redirect permanently to
+    // a clean equivalent. 301 (not 302) so ranking signals transfer.
+    if (normalizedPath.toLowerCase().startsWith('/blog/')) {
+      const seg = normalizedPath.slice(6);
+      let decoded = seg;
+      try { decoded = decodeURIComponent(seg); } catch { /* malformed escape */ }
+      if (needsRedirect(decoded)) {
+        const target = `/blog/${cleanBlogSlug(decoded)}`;
+        res.setHeader('Location', target);
+        res.setHeader('Cache-Control', 'public, max-age=3600');
+        return res.status(301).send(`Moved permanently to ${target}`);
+      }
+    }
+
     // ── 1. Fetch SEO from backend ───────────────────────────────────────────
     let seo = null;
     const controller = new AbortController();
@@ -1377,6 +1539,9 @@ export default async function handler(req, res) {
     // templated one, so it is preferred over the generic site-wide fallback.
     const resolvedForMeta = resolvePage(normalizedPath);
     const derivedDescription = resolvedForMeta ? pageDescription(resolvedForMeta) : null;
+    // Page-unique title for routes with no registry entry, so they stop sharing
+    // one generic site-wide title and competing with each other.
+    const derivedTitle = resolvedForMeta ? pageTitle(resolvedForMeta) : null;
 
     // The page registries carry their own title/description; prefer those over
     // the site-wide default so a newly-added page never falls back to it.
@@ -1400,12 +1565,15 @@ export default async function handler(req, res) {
     const blogEntry = decodedBlogSlug ? blogContent[decodedBlogSlug] : null;
     const blogSeo = blogEntry
       ? {
-          title: `${blogEntry.title} | Avani Enterprises`,
+          // shortenTitle() adds the brand when it fits, so do not append here.
+          title: blogEntry.title,
           description: blogEntry.excerpt || String(blogEntry.content || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 155),
         }
       : null;
 
-    const title       = seo?.title            || guideSeo?.title       || blogSeo?.title       || fallbackSeo?.title       || registrySeo?.title       || "Avani Enterprises : No.1 Digital Marketing Agency in India";
+    const rawTitle    = seo?.title            || guideSeo?.title       || blogSeo?.title       || fallbackSeo?.title       || registrySeo?.title       || derivedTitle || "Avani Enterprises : No.1 Digital Marketing Agency in India";
+    // Trimmed to what Google actually renders — see shortenTitle().
+    const title       = shortenTitle(rawTitle);
     const description = seo?.metaDescription  || guideSeo?.description || blogSeo?.description || fallbackSeo?.description || registrySeo?.description || derivedDescription || "No.1 Digital Marketing Agency in India, we deliver result-driven SEO, PPC, social media, and branding solutions.";
     const canonical   = seo?.canonicalUrl     || buildCanonical(normalizedPath);
     // "noindex,follow" — not nofollow. De-indexed doorway pages should still pass

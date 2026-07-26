@@ -57,7 +57,7 @@ const DH2Consultation = () => {
                     <div style={{ width: 36, height: 36, background: 'var(--bg-base)', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent)', border: '1px solid var(--border-s)' }}><Phone size={14} /></div>
                     <div>
                       <div style={{ fontSize: '.6rem', color: 'var(--text-muted)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.1em', marginBottom: 2 }}>Phone</div>
-                      <div style={{ fontSize: '.9rem', fontWeight: 600, color: '#fff' }}>+91 9253625099</div>
+                      <div style={{ fontSize: '.9rem', fontWeight: 600, color: '#fff' }}>+91 92536 25099</div>
                     </div>
                   </a>
 

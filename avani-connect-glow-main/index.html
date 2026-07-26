@@ -139,11 +139,11 @@
         //     nowhere to land in GA4, so there is no page-level report of which
         //     pages produce enquiries.
         //
-        // ⚠️ TO ENABLE GA4: replace the empty string below with the measurement
-        // ID (looks like "G-XXXXXXXXXX"). Nothing else needs to change — the
-        // lead event, UTM capture and page attribution are already wired.
+        // Both are live. generate_lead (src/lib/leadTracking.ts) fires on a
+        // confirmed form submission and reaches both properties, carrying the
+        // converting page path, page type and first-touch UTM/gclid/fbclid.
         var GOOGLE_ADS_ID = 'AW-17823419321';
-        var GA4_ID = '';
+        var GA4_ID = 'G-31RKCJRE8G';
 
         window.dataLayer = window.dataLayer || [];
         window.gtag = function() { window.dataLayer.push(arguments); };
@@ -219,7 +219,7 @@
         "contactPoint": [
           {
             "@type": "ContactPoint",
-            "telephone": "+91-92536-25099",
+            "telephone": "+919253625099",
             "email": "kp@avanienterprises.in",
             "contactType": "customer service",
             "areaServed": ["IN", "AE", "GB", "US"],
@@ -260,7 +260,7 @@
           "@id": "https://www.avanienterprises.in/#logo"
         },
         "url": "https://www.avanienterprises.in",
-        "telephone": "+91-92536-25099",
+        "telephone": "+919253625099",
         "email": "kp@avanienterprises.in",
         "priceRange": "$$",
         "currenciesAccepted": "INR",
@@ -368,7 +368,7 @@
             "name": "Where is Avani Enterprises located?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Avani Enterprises is headquartered at DLF Cyber City, Gurugram, Haryana 122002, India. We also serve clients in Mumbai, Delhi NCR, Rohtak, Dubai, London, and across India and internationally."
+              "text": "Avani Enterprises is headquartered at Tower B, 3rd Floor, Unitech Cyber Park, Sector 39, Gurugram, Haryana 122002, India. We also serve clients in Mumbai, Delhi NCR, Rohtak, Dubai, London, and across India and internationally."
             }
           },
           {

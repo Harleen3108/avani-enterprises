@@ -64,7 +64,7 @@ const PrivacyPolicy = () => {
               <h2 style={{ fontFamily: "'Outfit', sans-serif", fontSize: '24px', fontWeight: 600, color: 'var(--accent-primary)', marginBottom: '16px', marginTop: '16px' }}>7. Contact Information</h2>
               <p>
                 <strong style={{ color: 'var(--text-primary)' }}>Email:</strong> kp@avanienterprises.in<br />
-                <strong style={{ color: 'var(--text-primary)' }}>Phone:</strong> +91 9253625099
+                <strong style={{ color: 'var(--text-primary)' }}>Phone:</strong> +91 92536 25099
               </p>
             </div>
           </div>

@@ -1,0 +1,72 @@
+/**
+ * blogSlugRedirects.js — clean slugs for the 12 blog posts whose URLs contained
+ * characters that are invalid in a URL.
+ *
+ * THE PROBLEM
+ * -----------
+ * Twelve published posts had slugs containing spaces, commas, pipes, colons,
+ * question marks and full stops, e.g.
+ *   /blog/Best Digital Marketing Agency in Rohtak, Gurgaon & Mumbai | Avani Enterprises
+ * Those have to be percent-encoded to be valid, which produces unreadable,
+ * unshareable URLs that also look untrustworthy in search results.
+ *
+ * THE FIX (reversible, no content lost)
+ * -------------------------------------
+ * Each old slug maps to a clean, lowercase, hyphenated one. api/seo.js serves a
+ * 301 from the old URL to the new one, so any existing links and whatever
+ * ranking the old URLs hold transfer to the clean version. The post content
+ * itself is untouched — this is purely a URL change.
+ *
+ * The CMS still stores the old slug, so both keep working: the new slug is
+ * resolved back to the stored post via `canonicalSlugFor` below. Renaming the
+ * slugs in the CMS later is optional; if you do, keep these entries so the old
+ * URLs continue to redirect.
+ *
+ * Consumed by api/seo.js (redirect + lookup) and generate-sitemap.cjs (only the
+ * clean URL is listed in the sitemap).
+ */
+
+/* DATA-START */
+
+/** Old, URL-invalid slug → new clean slug. */
+const BLOG_SLUG_REDIRECTS = {
+  'A-Real-Estate-SEO-Success-Story': 'real-estate-seo-success-story',
+  'Digital Marketing Agency in India': 'how-to-choose-digital-marketing-agency-india',
+  'The SEO Playbook': 'seo-playbook-for-indian-businesses',
+  'Is your Google Ads budget being wasted?': 'google-ads-budget-waste-how-to-fix',
+  'AI Agents Are Changing Business Operations in 2026': 'ai-agents-changing-business-operations-2026',
+  'Online-Presence-Is-the-New-Business-Card': 'online-presence-is-the-new-business-card',
+  'Cockroach-Janta-Party-Avani-Enterprises': 'viral-memes-vs-brand-marketing',
+  'Avani Enterprises is Scaling Businesses with SEO.': 'scaling-businesses-with-seo-and-ai',
+  'Avani Enterprises Digital Marketing Growth Story': 'digital-marketing-growth-story',
+  'Best Digital Marketing Agency in Rohtak, Gurgaon & Mumbai | Avani Enterprises':
+    'best-digital-marketing-agency-rohtak-gurgaon-mumbai',
+  'Android God Mode Malware in India: How Businesses Can Stay Safe from Fake APK Banking Frauds':
+    'android-god-mode-malware-india-business-safety',
+  'Top 10 AI Content Creator Services in India': 'top-ai-content-creator-services-india',
+};
+
+/** New clean slug → the original slug still stored in the CMS. */
+const BLOG_SLUG_REVERSE = Object.keys(BLOG_SLUG_REDIRECTS).reduce((acc, oldSlug) => {
+  acc[BLOG_SLUG_REDIRECTS[oldSlug]] = oldSlug;
+  return acc;
+}, {});
+
+/** The slug a post should be served and indexed under. */
+function cleanBlogSlug(slug) {
+  return BLOG_SLUG_REDIRECTS[slug] || slug;
+}
+
+/** Resolve a public slug back to the key the CMS stores it under. */
+function storedBlogSlug(slug) {
+  return BLOG_SLUG_REVERSE[slug] || slug;
+}
+
+/** True when this slug must 301 to its clean equivalent. */
+function needsRedirect(slug) {
+  return Object.prototype.hasOwnProperty.call(BLOG_SLUG_REDIRECTS, slug);
+}
+
+/* DATA-END */
+
+export { BLOG_SLUG_REDIRECTS, BLOG_SLUG_REVERSE, cleanBlogSlug, storedBlogSlug, needsRedirect };

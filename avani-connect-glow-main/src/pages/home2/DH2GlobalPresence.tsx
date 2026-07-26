@@ -26,7 +26,7 @@ const officeDetails = [
     contact: {
        address: '106, First Floor, Agro Mall, Rohtak',
        email: 'kp@avanienterprises.in',
-       phone: '+91 9253625099'
+       phone: '+91 92536 25099'
     }
   },
   {
@@ -39,7 +39,7 @@ const officeDetails = [
     contact: {
        address: 'Tower B, 3rd Floor, Unitech Cyber Park, Sector 39, Gurugram, 122002',
        email: 'kp@avanienterprises.in',
-       phone: '+91 9253625099'
+       phone: '+91 92536 25099'
     }
   },
   {
@@ -52,7 +52,7 @@ const officeDetails = [
     contact: {
        address: 'Third Floor, Vasudev Chamber, Andheri East, Mumbai, Maharashtra 400069',
        email: 'kp@avanienterprises.in',
-       phone: '+91 9253625099'
+       phone: '+91 92536 25099'
     }
   },
   {
@@ -65,7 +65,7 @@ const officeDetails = [
     contact: {
        address: 'Australia Operations',
        email: 'kp@avanienterprises.in',
-       phone: '+91 9253625099'
+       phone: '+91 92536 25099'
     }
   },
 ];
