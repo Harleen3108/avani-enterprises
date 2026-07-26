@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, User, ArrowRight, Search, Tag } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { getBackendUrl } from '../lib/api';
 import '../components/Home.css';
 
@@ -54,11 +54,17 @@ const Blog = () => {
     fetchBlogs();
   }, []);
 
-  // Normalize a blog's category to an uppercase label (backend sends an object, string, or nothing)
+
+  // URL <-> filter. /blog/category/<slug> is the crawlable form of a filter,
+  // so a filtered view can be linked, shared and indexed.
+  const { category: categoryParam } = useParams<{ category?: string }>();
+  const navigate = useNavigate();
+  const toSlug = (c: string) => c.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  // Normalize a blog's category to a display label (backend sends an object, string, or nothing)
   const getCat = (b: any) => {
     const c = b?.category;
     const name = (c && typeof c === 'object' && c.name) ? c.name : (typeof c === 'string' ? c : '');
-    return (name || 'INSIGHTS').toString().toUpperCase();
+    return (name || 'Insights').toString();
   };
 
   // Filter buttons are derived from the categories actually present, so every button filters real data
@@ -106,7 +112,7 @@ const Blog = () => {
             </div>
             <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>
               {categories.map((tag) => (
-                <button key={tag} onClick={() => setActiveFilter(tag)} style={{ background: 'none', border: 'none', color: activeFilter === tag ? 'var(--accent-primary)' : 'var(--text-tertiary)', fontWeight: 800, fontSize: '0.7rem', letterSpacing: '0.1em', cursor: 'pointer', transition: 'color 0.3s' }}>
+                <button key={tag} onClick={() => { setActiveFilter(tag); navigate(tag === "ALL" ? "/blog" : `/blog/category/${toSlug(tag)}`); }} style={{ background: 'none', border: 'none', color: effectiveFilter === tag ? 'var(--accent-primary)' : 'var(--text-tertiary)', fontWeight: 800, fontSize: '0.7rem', letterSpacing: '0.1em', cursor: 'pointer', transition: 'color 0.3s' }}>
                   {tag}
                 </button>
               ))}

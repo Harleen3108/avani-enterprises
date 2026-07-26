@@ -492,6 +492,23 @@ function loadBlogSlugRedirects() {
   }
 })();
 
+
+// Blog category pages — the crawlable form of the index filter.
+(function addBlogCategories() {
+  const p = path.join(__dirname, "api", "blogContent.js");
+  if (!fs.existsSync(p)) return;
+  try {
+    const m = fs.readFileSync(p, "utf8").match(/export const blogContent = ([\s\S]*);\s*$/);
+    const posts = JSON.parse(m[1]);
+    const cats = new Set();
+    Object.values(posts).forEach((x) => { if (x.category) cats.add(x.category); });
+    [...cats].forEach((c) => {
+      const slug = String(c).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+      urls.push({ loc: `${BASE_URL}/blog/category/${slug}`, lastmod: TODAY, changefreq: "weekly", priority: "0.6" });
+    });
+    console.log(`ℹ️ Added ${cats.size} blog category page(s) to the sitemap.`);
+  } catch (err) { console.warn("⚠️ Blog categories not added:", err.message); }
+})();
 // ── Guide cluster ────────────────────────────────────────────────────────────
 // Long-form guides live in src/data/guides.js (not the backend-backed blog,
 // which is client-fetched and therefore invisible on the first crawl).
@@ -814,6 +831,7 @@ const GENERATED_HEADER =
   ["comparisons.js", "comparisons.js"],
   ["guides.js", "guides.js"],
   ["pageRedirects.js", "pageRedirects.js"],
+  ["blogFormat.js", "blogFormat.js"],
   ["blogSlugRedirects.js", "blogSlugRedirects.js"],
   // blogContent.js is written directly into api/ by scripts/snapshot-blog.cjs,
   // so it is not synced from src/data/.

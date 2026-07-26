@@ -157,7 +157,12 @@ const formSchema = new mongoose.Schema(
       type: String,
       default: "web-dev",
       trim: true
-    }
+    },
+    // Page the lead was submitted from, so attribution survives in the CRM
+    // as well as in the notification email.
+    pagePath: { type: String, default: "", trim: true },
+    pageUrl: { type: String, default: "", trim: true },
+    referrer: { type: String, default: "", trim: true },
   },
   {
     // ✅ timestamps auto add karega: createdAt + updatedAt

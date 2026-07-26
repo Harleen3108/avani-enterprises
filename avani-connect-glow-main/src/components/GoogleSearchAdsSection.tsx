@@ -19,7 +19,8 @@ export default function GoogleSearchAdsSection() {
       subHeadline: "Website + Marketing Free Included",
       extraHeadline: "One-Stop Business Solution ₹99,999",
       description1: "GST, Pvt Ltd, Trademark, Website, Marketing - sab ek price mein. Payment flexibility available.",
-      description2: "Industry experts. 60+ successful launches. Delhi NCR exclusive. Limited slots!",
+      // No scarcity claim and no unverified launch count — see SEO-RECOVERY.md.
+      description2: "Company registration, website and marketing handled by one team in Delhi NCR.",
       url: "avanienterprises.com/7-day-launch"
     },
     {

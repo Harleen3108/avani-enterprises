@@ -12,7 +12,9 @@
     "preview": "vite preview",
     "predev": "node scripts/snapshot-blog.cjs && node generate-sitemap.cjs",
     "blog:queue": "node scripts/blog-queue.cjs",
-    "blog:publish": "node scripts/blog-queue.cjs --publish"
+    "blog:publish": "node scripts/blog-queue.cjs --publish",
+    "blog:seed": "node scripts/seedBlogPosts.js",
+    "blog:seed:publish": "node scripts/seedBlogPosts.js --publish"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",

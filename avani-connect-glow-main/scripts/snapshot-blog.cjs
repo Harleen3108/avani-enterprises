@@ -90,6 +90,35 @@ function cleanClaims(html) {
   return s.replace(/\s{2,}/g, " ");
 }
 
+
+/**
+ * Category for the filtered blog index. The CMS has no category field, so it is
+ * derived from tags and title keywords — deterministic, and it means existing
+ * posts get categorised without anyone re-tagging 52 of them by hand.
+ */
+const CATEGORY_RULES = [
+  ['AI', /\b(ai|artificial intelligence|chatbot|agentic|llm|gpt|voice agent|automation)\b/i],
+  ['SEO', /\b(seo|search engine|rankings?|indexing|serp|keywords?|backlinks?)\b/i],
+  ['Social Media', /\b(social media|instagram|linkedin|reels|scheduler|dm tool)\b/i],
+  ['Digital Marketing', /\b(digital marketing|ppc|google ads|meta ads|facebook ads|roas|ad spend|lead generation)\b/i],
+  ['Web Development', /\b(web development|websites?|react|mern|flutter|app development|cms|frontend|backend)\b/i],
+  ['Business OS', /\b(hrms|payroll|attendance|business os|erp|crm|employee|leave management)\b/i],
+  ['Business', /\b(business|consulting|finance|loans?|insurance|growth|strategy)\b/i],
+];
+
+function deriveCategory(post) {
+  const tagText = (Array.isArray(post.tags) ? post.tags.join(' ') : '');
+  const hay = tagText + " " + (post.title || "") + " " + (post.excerpt || "");
+  for (const [name, re] of CATEGORY_RULES) if (re.test(hay)) return name;
+  return 'Insights';
+}
+
+/** Reading time at 200 words per minute, from the rendered text. */
+function readTime(html) {
+  const words = String(html || '').replace(/<[^>]+>/g, ' ').split(/\s+/).filter(Boolean).length;
+  return Math.max(1, Math.round(words / 200));
+}
+
 function write(obj, note) {
   fs.writeFileSync(
     OUT,
@@ -132,6 +161,10 @@ function previousSnapshotCount() {
         featuredImage: p.featuredImage || "",
         publishedAt: p.publishedAt || p.createdAt || "",
         updatedAt: p.updatedAt || p.publishedAt || p.createdAt || "",
+        category: p.category || deriveCategory(p),
+        readTime: p.readTime || readTime(p.content),
+        views: p.views || 0,
+        likes: p.likes || 0,
       };
     });
 

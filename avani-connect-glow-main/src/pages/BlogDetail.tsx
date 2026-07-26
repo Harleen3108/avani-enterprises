@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { getBackendUrl } from '../lib/api';
 import BlogEngagement from '../components/blog/BlogEngagement';
 import BusinessSetup3Form from '../components/BusinessSetup3Form';
+import { formatBlogBody, PROSE_CSS } from '../data/blogFormat';
 import '../components/Home.css';
 
 const fadeIn = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } };
@@ -81,7 +82,7 @@ const BlogDetail = () => {
         <script type="application/ld+json">{JSON.stringify(articleLd)}</script>
       </Helmet>
       {/* Article Header */}
-      <section style={{ paddingTop: '10rem', paddingBottom: '3rem', position: 'relative' }}>
+      <section style={{ paddingTop: '7rem', paddingBottom: '2rem', position: 'relative' }}>
         <div className="dh-container" style={{ maxWidth: '800px', margin: '0 auto', position: 'relative', zIndex: 10 }}>
           <motion.div initial="hidden" animate="visible" variants={fadeIn}>
             <Link to="/blog" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-tertiary)', fontSize: '0.8rem', textDecoration: 'none', fontWeight: 600, marginBottom: '2rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
@@ -96,7 +97,7 @@ const BlogDetail = () => {
               {blog.readTime && <span>· {blog.readTime} min read</span>}
             </div>
 
-            <h1 className="dh-display" style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', lineHeight: 1.1, marginBottom: '1.5rem' }}>
+            <h1 className="dh-display" style={{ fontSize: 'clamp(1.85rem, 3.4vw, 2.7rem)', lineHeight: 1.15, marginBottom: '1.25rem', letterSpacing: '-0.02em' }}>
               {blog.title}
             </h1>
 
@@ -128,10 +129,19 @@ const BlogDetail = () => {
       <section style={{ paddingTop: '2rem', paddingBottom: '6rem' }}>
         <div className="dh-container" style={{ maxWidth: '800px', margin: '0 auto' }}>
           <motion.div initial="hidden" animate="visible" variants={fadeIn} transition={{ delay: 0.3 }}>
-            <div 
-              className="dh-body" 
-              style={{ fontSize: '1.1rem', lineHeight: 1.8, color: 'var(--text-secondary)' }}
-              dangerouslySetInnerHTML={{ __html: blog.content }} 
+            {/* Article body.
+                The CMS stores three different shapes — proper HTML, markdown,
+                and plain newline-separated text — and previously all three
+                rendered as one flat wall. formatBlogBody normalises them into
+                semantic HTML, and .prose supplies the typography. Same function
+                and same markup as the SSR path, so readers and Googlebot get
+                identical output. */}
+            <style>{PROSE_CSS}</style>
+            <div
+              className="prose dh-body"
+              dangerouslySetInnerHTML={{
+                __html: formatBlogBody(blog.content, { title: blog.title }),
+              }}
             />
 
             <div style={{ marginTop: '4rem', paddingTop: '2rem', borderTop: '1px solid var(--border-light)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>

@@ -12,6 +12,7 @@ import { NAP, officeFor, formatAddress, mapLinkUrl, localBusinessSchema } from '
 import { comparisonFor } from './comparisons.js';
 import { GUIDES } from './guides.js';
 import { blogContent } from './blogContent.js';
+import { formatBlogBody, PROSE_CSS } from './blogFormat.js';
 import { cleanBlogSlug, storedBlogSlug, needsRedirect } from './blogSlugRedirects.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -47,6 +48,12 @@ function isNoIndex(pagePath) {
 // competing with each other for the same query and splitting link equity.
 function buildCanonical(pagePath) {
   if (pagePath === "/") return SITE_URL;
+
+  // The blog filter has a crawlable URL (/blog/category/<slug>); the ?category=
+  // query form canonicalises to it so the two never compete.
+  if (pagePath.toLowerCase().startsWith("/blog/category/")) {
+    return `${SITE_URL}${pagePath.replace(/\/+$/, "")}`;
+  }
 
   // Blog posts canonicalise to their clean slug, so the messy original never
   // becomes the indexed URL even if something links to it.
@@ -1252,7 +1259,11 @@ function buildBlogHtml(slug, post) {
     '<main>',
     // AI Quick Summary derived from this post's own content.
     summaryHtml(blogSummary(post, slug)),
-    post.content || '',
+    // Same formatter the React page uses, so the crawler and the reader get
+    // identical semantic markup — headings, lists and tables rather than a wall
+    // of text. The prose styles ship inline so the SSR HTML is styled on its own.
+    `<style>${PROSE_CSS}</style>`,
+    `<div class="prose">${formatBlogBody(post.content, { title: post.title })}</div>`,
     '</main>',
     '<footer><nav aria-label="Related"><ul>' +
       '<li><a href="/blog">All posts</a></li>' +
@@ -1334,25 +1345,85 @@ function buildSiteIndexHtml() {
   return { html: parts.join(''), faqs: [], resolved: null };
 }
 
-/** The blog index, listing every snapshotted post so each gets a crawlable link. */
-function buildBlogIndexHtml() {
-  const entries = Object.entries(blogContent);
+/**
+ * Blog index, grouped by category.
+ *
+ * Rendered server-side so Googlebot sees the full post list rather than an empty
+ * shell. The React page adds interactive filter chips on top of the same data;
+ * the category headings here mean the grouping is crawlable either way, and each
+ * post keeps a real inbound link.
+ */
+function buildBlogIndexHtml(activeCategory) {
+  const entries = Object.entries(blogContent)
+    .sort((a, b) => String(b[1].publishedAt || '').localeCompare(String(a[1].publishedAt || '')));
+
+  // Category counts, most populated first.
+  const counts = {};
+  entries.forEach(([, p]) => { const c = p.category || 'Insights'; counts[c] = (counts[c] || 0) + 1; });
+  const categories = Object.keys(counts).sort((a, b) => counts[b] - counts[a]);
+
+  const active = activeCategory && categories.some((c) => slugifyCat(c) === activeCategory)
+    ? categories.find((c) => slugifyCat(c) === activeCategory)
+    : null;
+
+  const shown = active ? entries.filter(([, p]) => (p.category || 'Insights') === active) : entries;
+
   const parts = [
-    '<nav aria-label="Breadcrumb"><a href="/">Home</a> / <span>Blog</span></nav>',
-    '<header><h1>Blog</h1><p>Writing on web development, SEO, paid media, AI and running a digital business.</p></header><main><ul>',
+    '<nav aria-label="Breadcrumb"><a href="/">Home</a> / <span>Blog</span>' +
+      (active ? ` / <span>${esc(active)}</span>` : '') + '</nav>',
+    `<header><h1>${active ? esc(active) + ' articles' : 'Blog'}</h1>` +
+      `<p>Writing from client work on web development, technical SEO, Google and Meta Ads, and applied AI. ` +
+      `${entries.length} articles across ${categories.length} categories.</p></header>`,
+    '<nav aria-label="Categories"><h2>Browse by category</h2><ul>',
+    `<li><a href="/blog">All (${entries.length})</a></li>`,
+    ...categories.map((c) => `<li><a href="/blog/category/${slugifyCat(c)}">${esc(c)} (${counts[c]})</a></li>`),
+    '</ul></nav>',
+    '<main>',
   ];
-  entries
-    .sort((a, b) => String(b[1].publishedAt || '').localeCompare(String(a[1].publishedAt || '')))
-    .forEach(([slug, p]) => {
-      // Always link the clean slug so internal links point at the 301 target.
-      parts.push(
-        `<li><h2><a href="/blog/${esc(encodeURIComponent(cleanBlogSlug(slug)))}">${esc(p.title)}</a></h2>` +
-        (p.excerpt ? `<p>${esc(p.excerpt)}</p>` : '') + '</li>'
-      );
+
+  if (active) {
+    parts.push('<ul>');
+    shown.forEach(([slug, p]) => parts.push(cardHtml(slug, p)));
+    parts.push('</ul>');
+  } else {
+    // Group by category so the crawler sees the same structure a user filters to.
+    categories.forEach((c) => {
+      const group = entries.filter(([, p]) => (p.category || 'Insights') === c);
+      if (!group.length) return;
+      parts.push(`<section><h2 id="${slugifyCat(c)}">${esc(c)}</h2><ul>`);
+      group.forEach(([slug, p]) => parts.push(cardHtml(slug, p)));
+      parts.push('</ul></section>');
     });
-  parts.push('</ul></main>');
+  }
+
+  parts.push('</main>');
   parts.push('<footer><nav><ul><li><a href="/guides">Guides</a></li><li><a href="/services">All Services</a></li><li><a href="/contact">Contact</a></li></ul></nav></footer>');
-  return { html: parts.join(''), faqs: [], resolved: null };
+  return { html: parts.join(''), faqs: [], resolved: null, blogIndex: { categories, counts, active } };
+}
+
+/** URL-safe category slug. */
+function slugifyCat(c) {
+  return String(c || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+}
+
+/** One post card in the server-rendered index. */
+function cardHtml(slug, p) {
+  const href = `/blog/${encodeURIComponent(cleanBlogSlug(slug))}`;
+  const date = p.publishedAt ? String(p.publishedAt).slice(0, 10) : '';
+  const meta = [
+    p.category ? esc(p.category) : '',
+    p.readTime ? `${p.readTime} min read` : '',
+    date,
+    typeof p.views === 'number' && p.views > 0 ? `${p.views} views` : '',
+  ].filter(Boolean).join(' · ');
+
+  return (
+    `<li><article>` +
+    `<h3><a href="${esc(href)}">${esc(p.title)}</a></h3>` +
+    (p.excerpt ? `<p>${esc(p.excerpt)}</p>` : '') +
+    (meta ? `<p>${meta}</p>` : '') +
+    `</article></li>`
+  );
 }
 
 /** Strip the **bold** markers the guide copy uses, for plain-HTML output. */
@@ -1521,7 +1592,12 @@ function buildUniqueBodyHtml(pagePath, title, description, runtimePost) {
     return buildBlogHtml(blogSlug, blogContent[blogSlug] || runtimePost);
   }
   if (slug === 'blog') {
-    return buildBlogIndexHtml();
+    return buildBlogIndexHtml(null);
+  }
+  // /blog/category/<slug> — the crawlable form of the filter. The query-string
+  // variant (?category=) canonicalises here so the two never compete.
+  if (slug.startsWith('blog/category/')) {
+    return buildBlogIndexHtml(slug.slice('blog/category/'.length));
   }
 
   const stored = ssrContent[slug] || STATIC_PAGES[slug || 'home'] || null;

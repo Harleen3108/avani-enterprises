@@ -555,7 +555,13 @@ app.post("/submit-form", async (req, res) => {
       service,
       businessCategory,
       notes,
-      source // ✅ extract source
+      source, // ✅ extract source
+      // Where the lead actually came from. The form now sends these so the
+      // notification email can say "this came from /blog/<post>" rather than
+      // just "web", which is what makes page-level attribution usable.
+      pagePath,
+      pageUrl,
+      referrer
     } = req.body;
     console.log('📝 FORM SUBMISSION RECEIVED:');
     console.log('req.body:', JSON.stringify(req.body, null, 2));
@@ -589,41 +595,75 @@ app.post("/submit-form", async (req, res) => {
       // ✅ UPDATED: default status aligned with frontend dropdown
       status: "not responded",
       contacted: false,
-      source: source || "web-dev" // ✅ Save source
+      source: source || "web-dev", // ✅ Save source
+      pagePath: pagePath || "",
+      pageUrl: pageUrl || "",
+      referrer: referrer || ""
     });
 
-    // 2. SendGrid Email to Admin (include services and notes)
-    if (process.env.ADMIN_EMAIL && process.env.FROM_EMAIL) {
+    // 2. Notification email.
+    //
+    // Recipients: LEAD_NOTIFY_EMAILS (comma-separated) if set, otherwise
+    // ADMIN_EMAIL, plus sohamdang0@gmail.com which is always copied. Kept as a
+    // constant rather than an env var so a missing environment variable cannot
+    // silently stop lead notifications reaching a person.
+    const ALWAYS_NOTIFY = ["sohamdang0@gmail.com"];
+    const configured = (process.env.LEAD_NOTIFY_EMAILS || process.env.ADMIN_EMAIL || "")
+      .split(",").map((s) => s.trim()).filter(Boolean);
+    const recipients = [...new Set([...configured, ...ALWAYS_NOTIFY])];
+
+    if (process.env.FROM_EMAIL && recipients.length) {
+      const originPath = pagePath || "—";
+      const originUrl = pageUrl || (pagePath ? `https://www.avanienterprises.in${pagePath}` : "");
+      // The subject carries the page so the inbox is scannable without opening.
+      const subject = `New lead: ${primaryService || "enquiry"} — from ${originPath}`;
+
+      const row = (label, value) =>
+        `<tr><td style="padding:7px 12px 7px 0;color:#666;font-size:13px;white-space:nowrap;vertical-align:top;">${label}</td>` +
+        `<td style="padding:7px 0;font-size:14px;color:#111;">${value || "—"}</td></tr>`;
+
       const msg = {
-        to: process.env.ADMIN_EMAIL,
+        to: recipients,
         from: process.env.FROM_EMAIL, // must be verified in SendGrid
-        subject: "New Form Submission Received",
+        replyTo: email || undefined,  // reply goes straight to the lead
+        subject,
         html: `
-            <h2>New Service Inquiry</h2>
-            <p><strong>Name:</strong> ${name || "—"}</p>
-            <p><strong>Email:</strong> ${email || "—"}</p>
-            <p><strong>City & State:</strong> ${cityState || "—"}</p>
-            <p><strong>Phone:</strong> ${phone || "—"}</p>
-            <p><strong>Services:</strong> ${servicesArray.length
-            ? servicesArray.map((s) => `<span>${s}</span>`).join(", ")
-            : "—"
-          }</p>
-            <p><strong>Notes:</strong> ${finalNotes
-            ? `<div style="white-space:pre-wrap;">${finalNotes}</div>`
-            : "—"
-          }</p>
-            <p>Time: ${new Date().toLocaleString()}</p>
-          `,
+          <div style="font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;max-width:620px;">
+            <h2 style="margin:0 0 4px;font-size:19px;color:#111;">New lead from the website</h2>
+            <p style="margin:0 0 18px;color:#666;font-size:13px;">
+              ${new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })} IST
+            </p>
+
+            <table style="border-collapse:collapse;width:100%;">
+              ${row("Name", name)}
+              ${row("Phone", phone ? `<a href="tel:${String(phone).replace(/\s/g, "")}" style="color:#0b57d0;">${phone}</a>` : "")}
+              ${row("Email", email ? `<a href="mailto:${email}" style="color:#0b57d0;">${email}</a>` : "")}
+              ${row("Service", servicesArray.length ? servicesArray.join(", ") : "")}
+              ${row("City", cityState)}
+              ${row("Notes", finalNotes ? `<div style="white-space:pre-wrap;">${finalNotes}</div>` : "")}
+            </table>
+
+            <h3 style="margin:22px 0 6px;font-size:14px;color:#111;">Where this lead came from</h3>
+            <table style="border-collapse:collapse;width:100%;">
+              ${row("Page", originUrl ? `<a href="${originUrl}" style="color:#0b57d0;">${originPath}</a>` : originPath)}
+              ${row("Form", source || "—")}
+              ${row("Referrer", referrer || "direct / none")}
+            </table>
+
+            <p style="margin:22px 0 0;color:#888;font-size:12px;">
+              Sent automatically by avanienterprises.in. Reply to this email to reach the lead directly.
+            </p>
+          </div>
+        `,
       };
+
       sgMail.send(msg)
-        .then(() => {
-          console.log(`✅ Email sent successfully to: ${process.env.ADMIN_EMAIL}`);
-        })
-        .catch((error) => {
-          console.error("❌ SendGrid Error:", error.response ? error.response.body : error.message);
-        });
+        .then(() => console.log(`✅ Lead email sent to: ${recipients.join(", ")}`))
+        .catch((error) => console.error("❌ SendGrid Error:", error.response ? error.response.body : error.message));
 
       console.log("Keep moving: Email delivery started in background...");
+    } else {
+      console.warn("⚠️ FROM_EMAIL not set — lead saved but no notification sent.");
     }
 
 
