@@ -118,13 +118,9 @@ export default function ProductPageTemplate({ data }: ProductPageTemplateProps) 
           '@id': 'https://www.avanienterprises.in/#organization',
         },
       },
-      'aggregateRating': {
-        '@type': 'AggregateRating',
-        'ratingValue': '4.9',
-        'bestRating': '5',
-        'worstRating': '1',
-        'reviewCount': '48',
-      },
+      // No aggregateRating: self-serving review markup is disallowed by Google
+      // and risks a structured-data manual action. Add only when real, displayed
+      // reviews exist on the page.
     };
   }, [data.slug, data.hero.h1, data.seo.description, data.seo.canonical, data.features]);
 

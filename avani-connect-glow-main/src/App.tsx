@@ -104,6 +104,7 @@ import Footer from "./components/Footer";
 import Footer1 from "./components/Footer1";
 import ScrollToTop from "./components/ScrollToTop";
 import SeoHead from "./components/SeoHead";
+import { captureAttribution } from "./lib/leadTracking";
 
 // Router hook for conditional rendering
 import { useLocation } from "react-router-dom";
@@ -163,6 +164,11 @@ const Contact = lazyWithRetry(() => import("./pages/Contact"));
 const Projects = lazyWithRetry(() => import("./pages/Projects"));
 const Blog = lazyWithRetry(() => import("./pages/Blog"));
 const BlogDetail = lazyWithRetry(() => import("./pages/BlogDetail"));
+// Guide cluster: long-form content held in the repo so it is server-rendered.
+// /blog fetches from the backend on the client, so Googlebot sees nothing there
+// on the first pass — see src/data/guides.js.
+const GuidesIndex = lazyWithRetry(() => import("./pages/GuidesIndex"));
+const GuideDetail = lazyWithRetry(() => import("./pages/GuideDetail"));
 const NewsletterDetail = lazyWithRetry(() => import("./pages/NewsletterDetail"));
 const OurProducts = lazyWithRetry(() => import("./pages/OurProducts"));
 const GlobalPresence = lazyWithRetry(() => import("./pages/GlobalPresence"));
@@ -363,6 +369,14 @@ const AppLayout = () => {
   const location = useLocation();
   const pathname = location.pathname;
 
+  // Capture UTM / gclid / fbclid and the landing page once per session. Must run
+  // on first mount: campaign parameters only exist on the entry URL, so a visitor
+  // who lands on a guide and converts on a service page would otherwise be
+  // attributed to "direct".
+  useEffect(() => {
+    captureAttribution();
+  }, []);
+
   const pathForCheck = pathname.toLowerCase();
   
   // Clean pathname key (strip leading and trailing slashes) to look up in dynamic registry
@@ -544,6 +558,8 @@ const AppLayout = () => {
             <Route path="contact" element={<Contact />} />
             <Route path="blog" element={<Blog />} />
             <Route path="blog/:slug" element={<BlogDetail />} />
+            <Route path="guides" element={<GuidesIndex />} />
+            <Route path="guides/:slug" element={<GuideDetail />} />
             <Route path="global-presence" element={<GlobalPresence />} />
             <Route path="careers" element={<Careers />} />
             <Route path="careers/:id" element={<CareerDetail />} />

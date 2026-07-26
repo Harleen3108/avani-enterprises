@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { CheckCircle, ChevronDown, ChevronUp, ArrowRight, ArrowUpRight, Phone, Mail } from 'lucide-react';
 import Breadcrumb from './Breadcrumb';
 import BusinessSetup3Form from '../BusinessSetup3Form';
+import LocalValueSection from './LocalValueSection';
+import OfficeBlock from './OfficeBlock';
+import { resolvePage, pageFaqs, pageBenefits, pageFeature, canonicalSlugFor, ctaCopy } from '../../data/serviceContent';
+import { isNoindexed } from '../../data/noindexPages';
+import { officeFor, localBusinessSchema } from '../../data/offices';
 
 // ── Shared data shape for Business OS, Social Sync and service-location pages ──
 export interface SeoLandingData {
@@ -44,12 +49,89 @@ const fadeUp = { hidden: { opacity: 0, y: 25 }, visible: { opacity: 1, y: 0, tra
 
 export default function SeoLandingTemplate({ data }: { data: SeoLandingData }) {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const { pathname } = useLocation();
+
+  // ── Page-unique content ──────────────────────────────────────────────────
+  // Before this, all 253 location pages shipped the same four whyAvani cards and
+  // the same two FAQs. We resolve the URL against the real service/location data
+  // and prepend page-specific entries, so no two pages carry the same set.
+  const resolved = React.useMemo(() => resolvePage(pathname), [pathname]);
+
+  const faqs = React.useMemo(() => {
+    const unique = resolved ? pageFaqs(resolved) : [];
+    if (!unique.length) return data.faqs;
+    // Drop templated FAQs whose question we already answer more specifically.
+    const seen = new Set(unique.map(f => f.q.toLowerCase().trim()));
+    return unique.concat(data.faqs.filter(f => !seen.has(f.q.toLowerCase().trim())));
+  }, [resolved, data.faqs]);
+
+  const whyAvani = React.useMemo(() => {
+    const unique = resolved ? pageBenefits(resolved) : [];
+    if (!unique.length) return data.whyAvani;
+    const seen = new Set(unique.map(b => b.title.toLowerCase().trim()));
+    return unique.concat(data.whyAvani.filter(b => !seen.has(b.title.toLowerCase().trim())));
+  }, [resolved, data.whyAvani]);
+
+  const features = React.useMemo(() => {
+    const extra = resolved ? pageFeature(resolved) : null;
+    if (!extra) return data.features;
+    return [extra].concat(data.features.filter(f => f.title !== extra.title));
+  }, [resolved, data.features]);
+
+  // Robots must mirror the server (api/seo.js) so the JS-rendered DOM and the
+  // first-crawl HTML never disagree.
+  const robots = isNoindexed(pathname) ? 'noindex,follow' : 'index,follow';
+
+  // Service-specific CTA copy for the hero form.
+  const cta = React.useMemo(() => ctaCopy(resolved), [resolved]);
+
+  // Canonical likewise. Self-referential except for the duplicate service
+  // variants consolidated onto a primary in CANONICAL_MAP.
+  const canonical = React.useMemo(() => {
+    if (pathname === '/') return 'https://www.avanienterprises.in';
+    return `https://www.avanienterprises.in/${canonicalSlugFor(pathname)}`;
+  }, [pathname]);
 
   const faqLd = React.useMemo(() => ({
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    'mainEntity': data.faqs.map(item => ({ '@type': 'Question', 'name': item.q, 'acceptedAnswer': { '@type': 'Answer', 'text': item.a } })),
-  }), [data.faqs]);
+    'mainEntity': faqs.map(item => ({ '@type': 'Question', 'name': item.q, 'acceptedAnswer': { '@type': 'Answer', 'text': item.a } })),
+  }), [faqs]);
+
+  // LocalBusiness schema, but only on a page about a city where we have a real
+  // office AND a verified street address. Emitting it anywhere else would be
+  // claiming a physical presence we cannot back up.
+  const officeKey = resolved?.location?.key;
+  const office = officeKey ? officeFor(officeKey) : null;
+  const localBusinessLd = React.useMemo(
+    () => (office ? localBusinessSchema(office, canonical) : null),
+    [office, canonical]
+  );
+
+  // Service schema — tells Google what commercial service this page represents.
+  const serviceLd = React.useMemo(() => {
+    if (!resolved?.service) return null;
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      'name': resolved.location ? `${resolved.service.name} in ${resolved.location.city}` : resolved.service.name,
+      'serviceType': resolved.service.name,
+      'url': canonical,
+      'provider': { '@type': 'Organization', '@id': 'https://www.avanienterprises.in/#organization' },
+      ...(resolved.location ? { 'areaServed': { '@type': 'Place', 'name': resolved.location.city } } : {}),
+      ...(resolved.service.deliverables?.length
+        ? {
+            'hasOfferCatalog': {
+              '@type': 'OfferCatalog',
+              'name': `${resolved.service.name} deliverables`,
+              'itemListElement': resolved.service.deliverables.map((d: string) => ({
+                '@type': 'Offer', 'itemOffered': { '@type': 'Service', 'name': d },
+              })),
+            },
+          }
+        : {}),
+    };
+  }, [resolved, canonical]);
 
   const breadcrumbLd = React.useMemo(() => ({
     '@context': 'https://schema.org',
@@ -77,13 +159,14 @@ export default function SeoLandingTemplate({ data }: { data: SeoLandingData }) {
       <Helmet>
         <title>{data.seo.title}</title>
         <meta name="description" content={data.seo.description} />
-        <meta name="keywords" content={data.seo.keywords} />
-        <meta name="robots" content="index,follow" />
-        <link rel="canonical" href={data.seo.canonical} />
+        {/* No <meta name="keywords">: Google ignores it, and the stuffed lists
+            these pages carried are a minor spam signal. */}
+        <meta name="robots" content={robots} />
+        <link rel="canonical" href={canonical} />
         <meta property="og:type" content="website" />
         <meta property="og:title" content={data.seo.title} />
         <meta property="og:description" content={data.seo.description} />
-        <meta property="og:url" content={data.seo.canonical} />
+        <meta property="og:url" content={canonical} />
         <meta property="og:image" content="https://www.avanienterprises.in/logo0.webp" />
         <meta property="og:site_name" content="Avani Enterprises" />
         <meta name="twitter:card" content="summary_large_image" />
@@ -93,6 +176,8 @@ export default function SeoLandingTemplate({ data }: { data: SeoLandingData }) {
         <script type="application/ld+json">{JSON.stringify(faqLd)}</script>
         <script type="application/ld+json">{JSON.stringify(breadcrumbLd)}</script>
         {productLd && <script type="application/ld+json">{JSON.stringify(productLd)}</script>}
+        {serviceLd && <script type="application/ld+json">{JSON.stringify(serviceLd)}</script>}
+        {localBusinessLd && <script type="application/ld+json">{JSON.stringify(localBusinessLd)}</script>}
       </Helmet>
 
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
@@ -200,9 +285,17 @@ export default function SeoLandingTemplate({ data }: { data: SeoLandingData }) {
               )}
             </motion.div>
 
-            {/* Right column — BusinessSetup3Form (posts to admin via /submit-form) */}
+            {/* Right column — lead form, above the fold on every landing page.
+                The heading is service-specific: "Get a free chatbot demo" tells
+                the visitor what they get for the click; "Contact us" does not. */}
             <motion.div id="consultation" className="seo-hero-form" variants={fadeUp} style={{ display: 'flex', alignItems: 'flex-start', scrollMarginTop: 90 }}>
               <div style={{ width: '100%' }}>
+                <h2 style={{ fontFamily: "'Outfit', sans-serif", fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-primary)', margin: '0 0 .35rem', letterSpacing: '-.01em' }}>
+                  {data.formHeading || cta.heading}
+                </h2>
+                <p style={{ fontSize: '.85rem', color: 'var(--text-secondary)', lineHeight: 1.6, margin: '0 0 1rem' }}>
+                  {data.formSub || cta.sub}
+                </p>
                 <BusinessSetup3Form source={data.slug} />
               </div>
             </motion.div>
@@ -239,7 +332,7 @@ export default function SeoLandingTemplate({ data }: { data: SeoLandingData }) {
               <p style={{ fontSize: '.97rem', color: 'var(--text-secondary)', lineHeight: 1.8, marginBottom: '1.5rem' }}>{data.intro}</p>
 
               <div style={{ display: 'flex', gap: '16px', flexDirection: 'column', marginTop: '2rem' }}>
-                {data.whyAvani.map((w, i) => (
+                {whyAvani.map((w, i) => (
                   <div key={i} style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
                     <CheckCircle size={18} color="var(--accent-primary)" style={{ flexShrink: 0, marginTop: '3px' }} />
                     <div>
@@ -252,7 +345,7 @@ export default function SeoLandingTemplate({ data }: { data: SeoLandingData }) {
             </motion.div>
 
             <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '16px' }}>
-              {data.features.map((f, i) => (
+              {features.map((f, i) => (
                 <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
                   style={{ background: 'var(--card-bg)', border: '1px solid var(--border-light)', borderRadius: '16px', padding: '24px', transition: 'border-color .3s' }}
                   onMouseEnter={e => e.currentTarget.style.borderColor = 'var(--accent-primary)'}
@@ -265,6 +358,18 @@ export default function SeoLandingTemplate({ data }: { data: SeoLandingData }) {
           </div>
         </div>
       </section>
+
+      <LuxuryLine />
+
+      {/* ── PAGE-UNIQUE SCOPE & DELIVERY ─────────────────────────────────── */}
+      {/* Auto-resolves from the URL against real service/location data. This is
+          what makes each of the ~300 landing pages genuinely different. */}
+      <LocalValueSection />
+
+      {/* Visible NAP + map on pages about a city where we have a real office.
+          Google needs the address in the HTML, not only in JSON-LD, to match it
+          against the Google Business Profile for local pack ranking. */}
+      {office && <OfficeBlock locationKey={officeKey} />}
 
       <LuxuryLine />
 
@@ -295,7 +400,7 @@ export default function SeoLandingTemplate({ data }: { data: SeoLandingData }) {
             <h2 style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(1.6rem,3.5vw,2.2rem)', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.02em', margin: 0 }}>Frequently Asked Questions</h2>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-            {data.faqs.map((f, i) => (
+            {faqs.map((f, i) => (
               <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
                 style={{ background: 'var(--card-bg)', border: `1px solid ${openFaq === i ? 'var(--accent-primary)' : 'var(--border-light)'}`, borderRadius: '16px', overflow: 'hidden', cursor: 'pointer' }}
                 onClick={() => setOpenFaq(openFaq === i ? null : i)}>

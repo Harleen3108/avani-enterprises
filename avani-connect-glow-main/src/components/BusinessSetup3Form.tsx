@@ -6,6 +6,7 @@ import {
   Sparkles, Loader2,
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { trackLead } from "@/lib/leadTracking";
 import { getBackendUrl } from "@/lib/api";
 import { countryCodes } from "@/components/RegistrationForm";
 
@@ -118,6 +119,11 @@ export default function BusinessSetup3Form({ source = "businesssetup3" }: { sour
         toast({ title: "Submission Failed", description: result?.message || "Please try again.", variant: "destructive" });
         return;
       }
+
+      // Fire the lead event only after a confirmed successful submission, so the
+      // count in GA4 matches the count in the CRM. Carries the converting page
+      // path, page type and the session's first-touch campaign attribution.
+      trackLead({ service: validated.service, formName: source || "main_lead_form" });
 
       toast({ title: "Form submitted successfully!", description: "We'll get back to you soon." });
       navigate("/thank-you", { state: { name: validated.name, service: validated.service } });

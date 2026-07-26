@@ -220,13 +220,10 @@ export function buildLocalBusinessLd({ service, city, description, areaServed }:
       latitude: BIZ.geo.lat,
       longitude: BIZ.geo.lng,
     },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '4.9',
-      bestRating: '5',
-      worstRating: '1',
-      reviewCount: '48',
-    },
+    // No aggregateRating: self-serving review markup on your own organisation is
+    // disallowed by Google (it will not render stars and risks a structured-data
+    // manual action). Re-add only once real reviews are collected on a page that
+    // genuinely displays them.
     openingHoursSpecification: [{
       '@type': 'OpeningHoursSpecification',
       dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],

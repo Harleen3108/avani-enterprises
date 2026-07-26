@@ -71,7 +71,9 @@
   <title>__SEO_TITLE__</title>
   <meta name="description" content="__SEO_DESCRIPTION__" />
   <meta name="author" content="Avani Enterprises" />
-  <meta name="keywords" content="__SEO_KEYWORDS__" />
+  <!-- <meta name="keywords"> intentionally removed: Google has ignored it since 2009,
+       and the long stuffed lists these pages carried are a minor spam signal.
+       api/seo.js also strips any keywords tag it finds, so this cannot come back. -->
   <meta name="robots" content="__SEO_ROBOTS__" />
   <link rel="canonical" href="__SEO_CANONICAL__" />
 
@@ -304,13 +306,6 @@
             { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "HR Portal Software", "url": "https://www.avanienterprises.in/hr-portal" } },
             { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Mobile App Development", "url": "https://www.avanienterprises.in/mobile-app-development-company" } }
           ]
-        },
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "4.9",
-          "reviewCount": "48",
-          "bestRating": "5",
-          "worstRating": "1"
         }
       },
       {
@@ -393,7 +388,16 @@
     <style>
       @keyframes spin { to { transform: rotate(360deg); } }
     </style>
-    <!-- Static fallback content for SEO crawlers and search engine indexing before React mounts -->
+    <!-- Static fallback content for SEO crawlers and search engine indexing before React mounts.
+
+         IMPORTANT: everything between SSR-CONTENT-START and SSR-CONTENT-END is
+         REPLACED PER ROUTE by api/seo.js before the HTML is sent. Without that
+         substitution every URL would serve this same homepage copy, which is
+         exactly why ~455 pages previously looked identical to Googlebot.
+         The block below is the fallback for "/" and for any route the content
+         engine does not cover. React clears it on mount (createRoot().render()).
+         Do not remove the markers. -->
+    <!--SSR-CONTENT-START-->
     <header>
       <h1>Avani Enterprises — Digital Marketing Agency in India</h1>
       <p>Your one-stop solution for digital growth. Building high-performing websites, products, and AI solutions.</p>
@@ -470,6 +474,7 @@
         </ul>
       </nav>
     </footer>
+    <!--SSR-CONTENT-END-->
   </div>
 
   <!-- Vite Entry -->

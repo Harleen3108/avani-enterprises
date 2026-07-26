@@ -1,4 +1,130 @@
 {
+  "ai-callers": {
+    "slug": "ai-callers",
+    "type": "service",
+    "seo": {
+      "title": "AI Voice Callers & AI Calling Agents | Avani Enterprises",
+      "description": "AI voice agents that answer inbound calls, qualify leads and book appointments in Hindi and English, then hand off to a human with full context. CRM-logged with transcripts.",
+      "keywords": "",
+      "canonical": "https://www.avanienterprises.in/ai-callers"
+    },
+    "breadcrumbs": [
+      { "label": "Home", "href": "/" },
+      { "label": "Services", "href": "/services" },
+      { "label": "AI Voice Callers", "href": "/ai-callers" }
+    ],
+    "hero": {
+      "tag": "AI Voice Agents",
+      "h1": "AI Voice Callers That Answer, Qualify and Book",
+      "subtitle": "Voice agents that hold a real conversation on the phone — inbound and outbound, in Hindi and English — and hand off to your team with the transcript attached."
+    },
+    "introHeading": "Stop losing leads to unanswered calls",
+    "intro": "Most businesses lose leads not because the marketing failed but because nobody picked up, or the callback came two days late. An AI voice agent answers every inbound call, calls new leads back within seconds, qualifies them against your criteria, books the appointment, and escalates to a person the moment the conversation needs one.",
+    "whyAvani": [
+      { "title": "A conversation, not a phone menu", "desc": "It understands what the caller actually said and asks follow-up questions, instead of making them press 4 for sales." },
+      { "title": "Escalates before it frustrates", "desc": "Sentiment, repeated confusion or a request for a human triggers a transfer, and the agent receives the transcript so the caller never repeats themselves." },
+      { "title": "Every call logged in your CRM", "desc": "Recording, transcript, summary and outcome land against the lead record automatically." },
+      { "title": "Hindi and English", "desc": "Multilingual voice so callers get answered in the language they open with." }
+    ],
+    "features": [
+      { "title": "Inbound call answering", "desc": "Picks up 24/7, including nights, weekends and while your team is on other calls." },
+      { "title": "Speed-to-lead callbacks", "desc": "A new form, ad or WhatsApp lead can trigger an outbound call within seconds of arriving." },
+      { "title": "Appointment booking", "desc": "Checks live availability and books directly into your calendar during the call." },
+      { "title": "Lead qualification", "desc": "Asks your qualifying questions and scores the lead before it reaches a salesperson." },
+      { "title": "Warm human transfer", "desc": "Hands off mid-call to the right person with the conversation context carried across." },
+      { "title": "Transcripts and analytics", "desc": "Full transcripts, call outcomes and drop-off points so you can see where conversations fail." }
+    ],
+    "bodySections": [
+      {
+        "heading": "Where AI voice callers earn their keep",
+        "paragraphs": [
+          "The clearest wins are speed and coverage. Response time to an inbound enquiry is one of the strongest predictors of whether it converts, and no human team answers every call inside a few seconds at 9pm on a Sunday. A voice agent does, consistently, and it never has a bad day on the twentieth call.",
+          "The second win is filtering. If a large share of your inbound calls are wrong-number, out-of-area or unqualified, your salespeople are spending their best hours on conversations that were never going to close. The agent takes those calls and passes through only what matches your criteria."
+        ]
+      },
+      {
+        "heading": "Where they do not belong",
+        "paragraphs": [
+          "We will tell you when this is the wrong tool. Complex negotiation, sensitive complaints, and any conversation where the caller needs to feel heard rather than processed should reach a person quickly. We configure those as escalation triggers rather than pretending the agent can handle them.",
+          "Disclosure is configured at the start of every call. Callers are told they are speaking with an AI assistant — it is the honest default, and in a growing number of markets it is also a legal requirement."
+        ]
+      }
+    ],
+    "faqs": [
+      { "q": "What does it cost to run?", "a": "There is a build fee for the script, integrations and testing, then a usage-based per-minute cost for the calls themselves. We quote it after reviewing your actual call volume rather than giving a headline rate that does not survive contact with your traffic." },
+      { "q": "Can it work with our existing phone number?", "a": "Yes. We integrate over SIP or your existing telephony provider, so the number your customers already know keeps working." },
+      { "q": "How long does it take to set up?", "a": "Typically 3 to 8 weeks depending on how many call flows you need and how clean the CRM integration is. We launch on a slice of traffic first and widen once the transcripts look right." }
+    ],
+    "internalLinks": [
+      { "label": "AI Chatbot Development", "href": "/ai-chatbot-development", "desc": "The same conversational layer for web, app and WhatsApp." },
+      { "label": "Agentic AI Development", "href": "/agentic-ai-development-company", "desc": "Agents that complete tasks across your systems, not just talk." },
+      { "label": "CRM Development", "href": "/crm-development-company", "desc": "Where the qualified calls should land." }
+    ],
+    "cta": { "headline": "Hear it answer your own call flow", "sub": "Book a walkthrough and we will demo an agent against a real script from your business." }
+  },
+  "ai-content-services": {
+    "slug": "ai-content-services",
+    "type": "service",
+    "seo": {
+      "title": "AI Content Services — AI-Assisted, Human-Edited | Avani Enterprises",
+      "description": "AI content production with human editing, fact-checking and an originality pass on every piece. Brand voice guide, long-form articles, bulk product copy and repurposing.",
+      "keywords": "",
+      "canonical": "https://www.avanienterprises.in/ai-content-services"
+    },
+    "breadcrumbs": [
+      { "label": "Home", "href": "/" },
+      { "label": "Services", "href": "/services" },
+      { "label": "AI Content Services", "href": "/ai-content-services" }
+    ],
+    "hero": {
+      "tag": "AI Content Production",
+      "h1": "AI Content Services, With a Human Editor on Every Piece",
+      "subtitle": "Content volume without the generic AI smell — built on a brand voice guide, fact-checked, and edited by a person before it publishes."
+    },
+    "introHeading": "Volume is easy. Volume that ranks is not.",
+    "intro": "Anyone can generate a thousand words in ten seconds. The reason most AI content fails is that it says nothing only you could say — no data, no point of view, no specifics. We use AI for the drafting speed and put the human effort where it actually changes the outcome: the brand voice guide up front, and the edit, fact-check and originality pass at the end.",
+    "whyAvani": [
+      { "title": "A brand voice guide the model is held to", "desc": "Built from your real positioning, terminology and the things you refuse to say — so drafts start in your voice, not a generic one." },
+      { "title": "Human editing on every piece", "desc": "Nothing publishes unedited. The edit is where your data, your customers and your point of view get added." },
+      { "title": "Fact-checked and originality-passed", "desc": "Claims are verified and every piece is checked for originality before delivery." },
+      { "title": "Built for search intent", "desc": "Topics are chosen from what people actually search and what your site can realistically rank for." }
+    ],
+    "features": [
+      { "title": "Long-form articles", "desc": "Researched pieces built around a keyword and a genuine angle, not a word count." },
+      { "title": "Bulk product copy", "desc": "Thousands of product and category descriptions generated from your attribute data." },
+      { "title": "Landing page copy", "desc": "Page copy written to a single conversion goal, matched to the ad or query that brought the visitor." },
+      { "title": "Repurposing", "desc": "One asset cut into social posts, email sequences and short-form video scripts." },
+      { "title": "Brand voice guide", "desc": "A reusable document your team and ours can both write against." },
+      { "title": "Editorial calendar", "desc": "A publishing cadence mapped to intent, so the content compounds instead of scattering." }
+    ],
+    "bodySections": [
+      {
+        "heading": "Does AI content get penalised by Google?",
+        "paragraphs": [
+          "Google's position is about quality, not authorship. Its spam policy targets content produced at scale for the primary purpose of manipulating rankings — which describes unedited, undifferentiated output, whether a machine or a content farm produced it. Helpful, original, well-edited content is judged on its merits regardless of how the first draft was written.",
+          "That is precisely why the edit is not optional in how we work. The failure mode we are guarding against is publishing a hundred pieces that any competitor could have generated from the same prompt. The brand voice guide and the human pass are what stop that."
+        ]
+      },
+      {
+        "heading": "Where AI drafting genuinely helps",
+        "paragraphs": [
+          "Bulk catalogue copy is the strongest case, because the source facts are already structured — you have the attributes, and the job is expressing them consistently across thousands of rows. Localisation and repurposing are close behind: turning one researched article into a social sequence and an email is mechanical work that a model does well under supervision.",
+          "It helps least where the value is a genuine point of view — original research, opinion pieces, and anything drawing on experience the model does not have. There we use AI for structure and let a human write the substance."
+        ]
+      }
+    ],
+    "faqs": [
+      { "q": "Will the content be original?", "a": "Yes. Every piece goes through an originality check before delivery, and the human edit adds specifics — your data, your examples, your positioning — that no model could produce on its own." },
+      { "q": "Do you disclose that AI was used?", "a": "That is your call as the publisher, and we will follow your policy. Google does not require AI disclosure for ranking purposes; some industries and some audiences expect it." },
+      { "q": "How much volume can you produce?", "a": "Considerably more than a fully manual team, but we scope it against what your site can realistically get indexed. Publishing far past that point creates the thin-content problem rather than solving it." }
+    ],
+    "internalLinks": [
+      { "label": "SEO Services", "href": "/seo-company", "desc": "The strategy the content plugs into." },
+      { "label": "AI Video Services", "href": "/ai-video-services", "desc": "Turn the same script into video." },
+      { "label": "Social Media Marketing", "href": "/social-media-marketing-company", "desc": "Where the repurposed cuts get published." }
+    ],
+    "cta": { "headline": "See a sample in your brand voice", "sub": "Send us two pieces you have published and we will return a draft written against your actual voice." }
+  },
   "business-os": {
     "slug": "business-os",
     "type": "product",

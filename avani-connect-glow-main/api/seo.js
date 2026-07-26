@@ -2,6 +2,14 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { newSeoData } from './newSeoData.js';
+// Generated at prebuild from src/data/ — see generate-sitemap.cjs.
+// Copies live in api/ so the Vercel function bundle is guaranteed to contain them.
+import { resolvePage, uniqueBlock, pageDescription, STATIC_PAGES, canonicalSlugFor } from './serviceContent.js';
+import { isNoindexed } from './noindexPages.js';
+import { ssrContent } from './ssrContent.js';
+import { NAP, officeFor, formatAddress, mapLinkUrl, localBusinessSchema } from './offices.js';
+import { comparisonFor } from './comparisons.js';
+import { GUIDES } from './guides.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -9,35 +17,24 @@ const __dirname = path.dirname(__filename);
 const SITE_URL    = "https://www.avanienterprises.in";
 const BACKEND_URL = "https://avani-enterprises-backend-1.onrender.com";
 
-// Routes that must never be indexed by search engines
-// (utility / auth / internal pages that have no search intent)
-const NOINDEX_PATHS = new Set([
-  "/thank-you",
-  "/links",
-  "/admin",
-  "/salary-hike-calculator",
-  "/social-media-content-planner",
-  "/auto-dm-tool",
-  "/bulk-dm-tool",
-  "/instagram-reels-scheduler",
-  "/business-setup",
-  "/businesssetup1",
-  "/not-found",
-  "/get-consultation",
-]);
-
-// Prefix-based noindex (any path starting with these segments)
-const NOINDEX_PREFIXES = ["/home2/", "/api/", "/newsletters/", "/courses/"];
-
+// Noindex rules (doorway clones + utility routes) live in src/data/noindexPages.js
+// so the sitemap generator and this function can never disagree about what is
+// indexable. `isNoindexed` already covers the utility paths this file used to
+// hard-code.
 function isNoIndex(pagePath) {
-  if (NOINDEX_PATHS.has(pagePath)) return true;
-  return NOINDEX_PREFIXES.some((prefix) => pagePath.startsWith(prefix));
+  return isNoindexed(pagePath);
 }
 
-// Build the canonical URL for a given path
+// Build the canonical URL for a given path.
+//
+// Self-referential by default. For the handful of URLs that are genuine synonyms
+// of another page (CANONICAL_MAP in serviceContent.js), this points at the
+// primary instead — that is the fix for the duplicate service variants that were
+// competing with each other for the same query and splitting link equity.
 function buildCanonical(pagePath) {
-  const cleanPath = pagePath === "/" ? "" : pagePath.replace(/\/$/, "");
-  return `${SITE_URL}${cleanPath}`;
+  if (pagePath === "/") return SITE_URL;
+  const target = canonicalSlugFor(pagePath);
+  return `${SITE_URL}/${target}`;
 }
 
 const STATIC_SEO_LOOKUP = {
@@ -701,6 +698,482 @@ const STATIC_SEO_LOOKUP = {
   }
 };
 
+// ─────────────────────────────────────────────────────────────────────────────
+// Per-route body HTML
+//
+// The SPA shell ships one hardcoded "Avani Enterprises — Digital Marketing
+// Agency in India" block inside #root. Serving that on all 455 URLs meant every
+// page was byte-identical below </head> on the first crawl, which is the direct
+// cause of the "Crawled – currently not indexed" bucket in Search Console.
+//
+// We replace that block per route with the page's real H1, intro, scope, local
+// facts and FAQs. React clears #root on mount, so this costs nothing visually —
+// it exists so the crawler's first pass sees the same unique content a user
+// eventually sees.
+// ─────────────────────────────────────────────────────────────────────────────
+
+const SSR_START = '<!--SSR-CONTENT-START-->';
+const SSR_END   = '<!--SSR-CONTENT-END-->';
+
+function esc(str) {
+  return String(str == null ? '' : str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+// Service hub slugs, used to build contextual links between related pages.
+const RELATED_SERVICES = {
+  'web-development': ['web-design-company', 'mobile-app-development-company', 'ecommerce-development-company', 'seo-company'],
+  'web-design': ['web-development-company', 'ecommerce-development-company', 'seo-company'],
+  'mobile-app-development': ['web-development-company', 'custom-software-development-company', 'ai-chatbot-development'],
+  'ecommerce-development': ['web-development-company', 'ecommerce-seo-services', 'meta-ads-agency', 'google-ads-agency'],
+  seo: ['digital-marketing-company', 'google-ads-agency', 'ai-content-services', 'web-development-company'],
+  'digital-marketing': ['seo-company', 'google-ads-agency', 'meta-ads-agency', 'social-media-marketing-company'],
+  'google-ads': ['meta-ads-agency', 'digital-marketing-company', 'seo-company'],
+  'meta-ads': ['google-ads-agency', 'social-media-marketing-company', 'ai-video-services'],
+  'social-media-marketing': ['meta-ads-agency', 'ai-video-services', 'ai-content-services'],
+  'ai-development': ['ai-chatbot-development', 'agentic-ai-development-company', 'ai-automation-company', 'llm-development-company'],
+  'ai-chatbot': ['ai-callers', 'agentic-ai-development-company', 'ai-development-company'],
+  'ai-callers': ['ai-chatbot-development', 'agentic-ai-development-company', 'crm-development-company'],
+  'ai-content': ['ai-video-services', 'seo-company', 'social-media-marketing-company'],
+  'ai-video': ['ai-content-services', 'meta-ads-agency', 'social-media-marketing-company'],
+  'agentic-ai': ['ai-automation-company', 'ai-development-company', 'mcp-development-company'],
+  'ai-automation': ['agentic-ai-development-company', 'crm-development-company', 'erp-development-company'],
+  'crm-development': ['erp-development-company', 'custom-software-development-company', 'business-os'],
+  'erp-development': ['crm-development-company', 'custom-software-development-company', 'business-os'],
+  'custom-software-development': ['web-development-company', 'crm-development-company', 'erp-development-company'],
+};
+
+// Locations we keep, grouped so a city links to genuine neighbours rather than
+// to an arbitrary list.
+const LOCATION_CLUSTERS = [
+  ['gurgaon', 'delhi', 'noida', 'faridabad', 'ghaziabad', 'greater-noida', 'rohtak', 'haryana'],
+  ['mumbai', 'pune', 'ahmedabad'],
+  ['bangalore', 'hyderabad', 'chennai'],
+  ['kolkata', 'jaipur'],
+  ['dubai', 'uae', 'singapore', 'usa'],
+];
+
+/**
+ * Contextual internal links: same service in nearby cities, related services,
+ * and the core hubs. Replaces the identical 22-link block that previously ran on
+ * every page — that was both weak internal linking and pure duplicate text.
+ */
+function internalLinksHtml(pagePath, resolved) {
+  const items = [];
+  const seen = new Set([String(pagePath).replace(/^\/+/, '')]);
+  const add = (href, label) => {
+    const key = href.replace(/^\/+/, '');
+    if (seen.has(key)) return;
+    seen.add(key);
+    items.push([href, label]);
+  };
+
+  if (resolved) {
+    const base = resolved.slug.replace(
+      resolved.location ? new RegExp('-' + resolved.location.key + '$') : /$/,
+      ''
+    );
+
+    // Same service, neighbouring cities we actually serve.
+    if (resolved.location) {
+      const cluster = LOCATION_CLUSTERS.find((c) => c.includes(resolved.location.key)) || [];
+      cluster.forEach((loc) => {
+        if (loc === resolved.location.key) return;
+        const href = `/${base}-${loc}`;
+        if (isNoIndex(href)) return; // never link into a de-indexed doorway
+        const name = (LOCATIONS_LABEL[loc] || loc);
+        add(href, `${resolved.service.name} in ${name}`);
+      });
+      add(`/${base}`, `${resolved.service.name} (all locations)`);
+    }
+
+    // Related services.
+    (RELATED_SERVICES[resolved.serviceId] || []).forEach((slug) => {
+      if (isNoIndex('/' + slug)) return;
+      add('/' + slug, slug.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()));
+    });
+  }
+
+  [['/services', 'All Services'], ['/case-studies', 'Case Studies'], ['/contact', 'Contact'], ['/about', 'About']]
+    .forEach(([h, l]) => add(h, l));
+
+  return (
+    '<nav aria-label="Related"><h2>Related services and locations</h2><ul>' +
+    items.slice(0, 14).map(([href, label]) => `<li><a href="${href}">${esc(label)}</a></li>`).join('') +
+    '</ul></nav>'
+  );
+}
+
+// City display names for link labels.
+const LOCATIONS_LABEL = {
+  gurgaon: 'Gurugram', delhi: 'Delhi', noida: 'Noida', 'greater-noida': 'Greater Noida',
+  faridabad: 'Faridabad', ghaziabad: 'Ghaziabad', rohtak: 'Rohtak', haryana: 'Haryana',
+  mumbai: 'Mumbai', bangalore: 'Bengaluru', pune: 'Pune', hyderabad: 'Hyderabad',
+  chennai: 'Chennai', kolkata: 'Kolkata', ahmedabad: 'Ahmedabad', jaipur: 'Jaipur',
+  india: 'India', dubai: 'Dubai', uae: 'the UAE', singapore: 'Singapore', usa: 'the USA',
+};
+
+/**
+ * Per-route JSON-LD injected server-side: BreadcrumbList, Service, FAQPage and
+ * LocalBusiness. The React app emits equivalents, but Googlebot's first pass is
+ * pre-JavaScript, so anything only rendered client-side is a second-pass signal.
+ */
+function schemaHtml(pagePath, canonical, title, resolved, guide, faqs) {
+  const graphs = [];
+  const slug = String(pagePath || '/').replace(/^\/+/, '').replace(/\/+$/, '');
+
+  // Article — guides only. Signals authored, dated editorial content, which is
+  // what both Google and AI answer engines look for on informational queries.
+  if (guide) {
+    graphs.push({
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: guide.title,
+      description: guide.description,
+      datePublished: guide.published,
+      dateModified: guide.updated,
+      author: { '@type': 'Organization', name: NAP.name, url: SITE_URL },
+      publisher: { '@type': 'Organization', '@id': `${SITE_URL}/#organization` },
+      mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+    });
+  }
+
+  // BreadcrumbList — mirrors the visible trail.
+  if (slug) {
+    const crumbs = [{ name: 'Home', url: SITE_URL }];
+    if (guide) {
+      crumbs.push({ name: 'Guides', url: `${SITE_URL}/guides` });
+    } else if (resolved && resolved.service) {
+      crumbs.push({ name: 'Services', url: `${SITE_URL}/services` });
+    }
+    crumbs.push({ name: title.split(/\s+[|—]\s+/)[0].trim(), url: canonical });
+    graphs.push({
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: crumbs.map((c, i) => ({
+        '@type': 'ListItem', position: i + 1, name: c.name, item: c.url,
+      })),
+    });
+  }
+
+  // Service — what commercial service the page represents.
+  if (resolved && resolved.service) {
+    graphs.push({
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      name: resolved.location ? `${resolved.service.name} in ${resolved.location.city}` : resolved.service.name,
+      serviceType: resolved.service.name,
+      url: canonical,
+      provider: { '@type': 'Organization', '@id': `${SITE_URL}/#organization` },
+      ...(resolved.location ? { areaServed: { '@type': 'Place', name: resolved.location.city } } : {}),
+    });
+  }
+
+  // FAQPage — only for FAQs actually rendered on the page.
+  if (faqs && faqs.length) {
+    graphs.push({
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faqs.slice(0, 8).map((f) => ({
+        '@type': 'Question', name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    });
+  }
+
+  // HowTo — the engagement process, where we have real steps.
+  if (resolved && resolved.service && Array.isArray(resolved.service.process) && resolved.service.process.length >= 3) {
+    graphs.push({
+      '@context': 'https://schema.org',
+      '@type': 'HowTo',
+      name: `How our ${resolved.service.name} engagement works`,
+      step: resolved.service.process.map((s, i) => ({
+        '@type': 'HowToStep', position: i + 1, name: s,
+      })),
+    });
+  }
+
+  // LocalBusiness — only where we hold a verified address.
+  if (resolved && resolved.location) {
+    const ld = localBusinessSchema(officeFor(resolved.location.key), canonical);
+    if (ld) graphs.push(ld);
+  }
+
+  if (!graphs.length) return '';
+  return graphs
+    .map((g) => `<script type="application/ld+json">${JSON.stringify(g).replace(/</g, '\\u003c')}</script>`)
+    .join('');
+}
+
+function faqHtml(faqs) {
+  if (!faqs || !faqs.length) return '';
+  return (
+    '<section><h2>Frequently asked questions</h2><dl>' +
+    faqs.slice(0, 8).map((f) => `<dt>${esc(f.q)}</dt><dd>${esc(f.a)}</dd>`).join('') +
+    '</dl></section>'
+  );
+}
+
+/** Strip the **bold** markers the guide copy uses, for plain-HTML output. */
+function inlineHtml(text) {
+  return esc(text).replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+}
+
+/** Full server-rendered guide: takeaways, sections, FAQs and the cluster link. */
+function buildGuideHtml(slug, g) {
+  const parts = [
+    '<nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/guides">Guides</a> / ' +
+      `<span>${esc(g.title)}</span></nav>`,
+    `<header><h1>${esc(g.title)}</h1><p>${esc(g.description)}</p>`,
+    `<p>Last updated ${esc(g.updated)}</p></header>`,
+    '<main>',
+    // Key takeaways first — this is the block AI answer engines lift most readily.
+    '<section><h2>Key takeaways</h2><ul>',
+    ...g.takeaways.map((t) => `<li>${esc(t)}</li>`),
+    '</ul></section>',
+  ];
+
+  g.sections.forEach((s) => {
+    parts.push(`<section><h2>${esc(s.heading)}</h2>`);
+    s.paragraphs.forEach((p) => parts.push(`<p>${inlineHtml(p)}</p>`));
+    parts.push('</section>');
+  });
+
+  parts.push(faqHtml(g.faqs));
+
+  parts.push(
+    `<section><h2>Work with us on this</h2>` +
+    `<p>We start every engagement with a written scope after a free discovery call.</p>` +
+    `<p><a href="/${esc(g.service)}">${esc(g.serviceLabel)}</a></p></section>`
+  );
+
+  if (g.related && g.related.length) {
+    parts.push('<nav aria-label="Related guides"><h2>Related guides</h2><ul>');
+    g.related.forEach((r) => {
+      const rg = GUIDES[r];
+      if (rg) parts.push(`<li><a href="/guides/${esc(r)}">${esc(rg.title)}</a></li>`);
+    });
+    parts.push('</ul></nav>');
+  }
+
+  parts.push('</main>');
+  parts.push(
+    '<footer><nav aria-label="Related"><ul>' +
+    `<li><a href="/guides">All guides</a></li>` +
+    `<li><a href="/${esc(g.service)}">${esc(g.serviceLabel)}</a></li>` +
+    '<li><a href="/services">All Services</a></li><li><a href="/contact">Contact</a></li>' +
+    '</ul></nav></footer>'
+  );
+
+  return { html: parts.join(''), faqs: g.faqs, resolved: null, guide: Object.assign({ slug }, g) };
+}
+
+/** The guides hub — gives every guide a crawlable internal link. */
+function buildGuidesIndexHtml() {
+  const entries = Object.entries(GUIDES);
+  const parts = [
+    '<header><h1>Guides</h1><p>Practical guides on web development cost, choosing an SEO agency, ' +
+    'Google versus Meta ads, AI chatbots and voice agents, CRM build-or-buy, and why Google refuses ' +
+    'to index pages.</p></header><main><ul>',
+  ];
+  entries.forEach(([slug, g]) => {
+    parts.push(
+      `<li><h2><a href="/guides/${esc(slug)}">${esc(g.title)}</a></h2>` +
+      `<p>${esc(g.description)}</p></li>`
+    );
+  });
+  parts.push('</ul></main>');
+  parts.push('<footer><nav><ul><li><a href="/services">All Services</a></li><li><a href="/contact">Contact</a></li></ul></nav></footer>');
+  return { html: parts.join(''), faqs: [], resolved: null };
+}
+
+/**
+ * Build the unique body for a route.
+ *
+ * Every non-home route gets something page-specific. Where the content engine or
+ * the page registry has real content we render that; otherwise we fall back to
+ * the page's own (already unique) title and description plus the link graph.
+ * The one thing we must never do is serve the shell's shared homepage copy,
+ * because that is what made all 455 URLs look identical to the crawler.
+ *
+ * Returns null only for "/", which keeps its own hand-written fallback.
+ */
+function buildUniqueBodyHtml(pagePath, title, description) {
+  const slug = String(pagePath || '/').toLowerCase().replace(/^\/+/, '').replace(/\/+$/, '');
+  if (!slug) return null; // homepage keeps its own fallback copy
+
+  // STATIC_PAGES covers the hand-built React pages (/about, /services, …) that
+  // have no registry entry; without it they all fell back to the shared shell.
+  // ── Guides ────────────────────────────────────────────────────────────────
+  // Rendered here in full because these are the topical-depth pages: they need
+  // to be readable by the crawler and by AI answer engines on the first fetch.
+  const guideSlug = slug.startsWith('guides/') ? slug.slice(7) : null;
+  if (guideSlug && GUIDES[guideSlug]) {
+    return buildGuideHtml(guideSlug, GUIDES[guideSlug]);
+  }
+  if (slug === 'guides') {
+    return buildGuidesIndexHtml();
+  }
+
+  const stored = ssrContent[slug] || STATIC_PAGES[slug] || null;
+  const resolved = resolvePage(pagePath);
+  const block = resolved ? uniqueBlock(resolved) : null;
+
+  // Titles read "Page Name | Avani Enterprises" — strip the brand for the H1.
+  const titleH1 = String(title || '').split(/\s+[|—-]\s+/)[0].trim();
+
+  const h1 = (stored && stored.h1) || (block && block.heading) || titleH1;
+  // Prefer the generated lead over the registry's intro: the stored intro is the
+  // old "Operating successfully in {City}…" template with the city swapped, which
+  // is near-identical across pages. block.lead is built from real local facts.
+  const intro = (block && block.lead) || (stored && stored.intro) || description || '';
+  if (!h1) return null;
+
+  // Visible breadcrumb, mirroring the BreadcrumbList schema. Google expects the
+  // trail to exist on the page, not only in JSON-LD.
+  const crumbHtml =
+    '<nav aria-label="Breadcrumb"><a href="/">Home</a> / ' +
+    (resolved && resolved.service ? '<a href="/services">Services</a> / ' : '') +
+    `<span>${esc(h1)}</span></nav>`;
+
+  const parts = [
+    crumbHtml,
+    `<header><h1>${esc(h1)}</h1>${intro ? `<p>${esc(intro)}</p>` : ''}</header>`,
+    '<main>',
+  ];
+
+  if (block) {
+    // Do not repeat the lead when it already ran as the intro above.
+    parts.push(`<section><h2>${esc(block.heading)}</h2>${intro === block.lead ? '' : `<p>${esc(block.lead)}</p>`}`);
+
+    if (block.localFacts.length) {
+      parts.push('<dl>');
+      block.localFacts.forEach((f) => parts.push(`<dt>${esc(f.label)}</dt><dd>${esc(f.value)}</dd>`));
+      parts.push('</dl>');
+    }
+
+    block.facts.forEach((group) => {
+      parts.push(`<h3>${esc(group.label)}</h3><ul>`);
+      group.items.forEach((item) => parts.push(`<li>${esc(item)}</li>`));
+      parts.push('</ul>');
+    });
+
+    if (block.meta.length) {
+      parts.push('<dl>');
+      block.meta.forEach((m) => parts.push(`<dt>${esc(m.label)}</dt><dd>${esc(m.value)}</dd>`));
+      parts.push('</dl>');
+    }
+
+    // Hub-and-spoke: city pages link up to the service page that holds full detail.
+    if (block.hubLink) {
+      parts.push(`<p><a href="${block.hubLink.href}">${esc(block.hubLink.label)}</a></p>`);
+    }
+
+    if (block.ymyl) {
+      parts.push(
+        '<p><strong>Important:</strong> Avani Enterprises provides advisory and facilitation ' +
+        'support only. We are not a lender, insurer, or a licensed investment adviser. All ' +
+        'lending, underwriting, pricing and approval decisions rest with the respective ' +
+        'regulated provider, and their policy documents govern. Nothing on this page is an ' +
+        'offer, a guarantee of approval, or regulated financial advice.</p>'
+      );
+    }
+    parts.push('</section>');
+  }
+
+  // Benefit / feature cards authored per page. On product pages these carry most
+  // of the real content, since the long-form sections are shared family-wide.
+  if (stored && stored.cards && stored.cards.length) {
+    parts.push('<section><h2>Key capabilities</h2><dl>');
+    stored.cards.forEach((c) => parts.push(`<dt>${esc(c.title)}</dt><dd>${esc(c.desc)}</dd>`));
+    parts.push('</dl></section>');
+  }
+
+  // Long-form sections authored per page (product/location registry)
+  if (stored && stored.sections && stored.sections.length) {
+    stored.sections.forEach((s) => {
+      parts.push(`<section><h2>${esc(s.heading)}</h2>`);
+      (s.paragraphs || []).forEach((p) => parts.push(`<p>${esc(p)}</p>`));
+      parts.push('</section>');
+    });
+  }
+
+  // FAQs: page-unique ones first, then the page's own, de-duplicated by question.
+  const seen = new Set();
+  const faqs = [];
+  ((block && block.faqs) || []).concat((stored && stored.faqs) || []).forEach((f) => {
+    if (!f || !f.q) return;
+    const key = f.q.toLowerCase().trim();
+    if (seen.has(key)) return;
+    seen.add(key);
+    faqs.push(f);
+  });
+  parts.push(faqHtml(faqs));
+
+  // Honest comparison block on *-alternative pages, including the rows where the
+  // competitor genuinely wins. A comparison that concedes nothing is not a
+  // comparison, and Googlebot reads this on the first pass.
+  const cmp = comparisonFor(pagePath);
+  if (cmp) {
+    parts.push(`<section><h2>Avani Enterprises vs ${esc(cmp.competitor)}</h2>`);
+    parts.push(`<p>${esc(cmp.theirPositioning)}</p>`);
+    parts.push(`<h3>When ${esc(cmp.competitor)} is the better choice</h3>`);
+    parts.push(`<p>${esc(cmp.theirStrength)}</p>`);
+    parts.push(`<p>Better for: ${esc(cmp.betterFor)}</p>`);
+    parts.push(
+      '<table><thead><tr><th>Factor</th><th>Avani Enterprises</th>' +
+      `<th>${esc(cmp.competitor)}</th></tr></thead><tbody>`
+    );
+    cmp.rows.forEach((r) => {
+      parts.push(
+        `<tr><td>${esc(r.metric)}</td>` +
+        `<td>${esc(r.avani)}${r.winner === 'avani' ? ' (advantage: Avani)' : ''}</td>` +
+        `<td>${esc(r.competitor)}${r.winner === 'competitor' ? ` (advantage: ${esc(cmp.competitor)})` : ''}</td></tr>`
+      );
+    });
+    parts.push('</tbody></table>');
+    parts.push(`<h3>Our verdict</h3><p>${esc(cmp.verdict)}</p>`);
+    parts.push(
+      `<p><em>The ${esc(cmp.competitor)} column reflects publicly stated positioning, not a tested ` +
+      `assessment. Please verify current details with ${esc(cmp.competitor)} directly. ` +
+      `Last reviewed ${esc(cmp.reviewedOn)}.</em></p>`
+    );
+    parts.push('</section>');
+  }
+
+  // Visible NAP + areas served on office-city pages. Google matches the address
+  // in the HTML against the Google Business Profile — JSON-LD alone is weaker.
+  const office = resolved && resolved.location ? officeFor(resolved.location.key) : null;
+  if (office) {
+    const addr = formatAddress(office);
+    parts.push(`<section><h2>${esc(NAP.name)} in ${esc(office.city)}</h2>`);
+    parts.push(`<p>${esc(office.localNote)}</p>`);
+    if (addr) {
+      parts.push(
+        `<address>${esc(NAP.name)}, ${esc(addr)}. ` +
+        `Phone: <a href="tel:${esc(NAP.phone)}">${esc(NAP.phoneDisplay)}</a>. ` +
+        `Email: <a href="mailto:${esc(NAP.email)}">${esc(NAP.email)}</a>.</address>`
+      );
+    }
+    if (office.areasServed && office.areasServed.length) {
+      parts.push(`<p>Areas we cover from ${esc(office.city)}: ${esc(office.areasServed.join(', '))}.</p>`);
+    }
+    parts.push(`<p>Open Monday to Saturday, 9:00 am to 7:00 pm IST. <a href="${esc(mapLinkUrl(office))}">Get directions</a>.</p>`);
+    parts.push('</section>');
+  }
+
+  parts.push('</main>');
+  parts.push(`<footer>${internalLinksHtml(pagePath, resolved)}</footer>`);
+
+  // faqs and resolved are returned so the caller can emit matching JSON-LD.
+  // Schema must describe what is actually on the page, so it is derived from the
+  // same values rather than recomputed.
+  return { html: parts.join(''), faqs, resolved };
+}
+
 export default async function handler(req, res) {
   try {
     const pagePath = req.query.path || "/";
@@ -763,11 +1236,33 @@ export default async function handler(req, res) {
     const lookupKey = normalizedPath.toLowerCase();
     const fallbackSeo = STATIC_SEO_LOOKUP[lookupKey] || newSeoData[lookupKey];
 
-    const title       = seo?.title            || fallbackSeo?.title       || "Avani Enterprises : No.1 Digital Marketing Agency in India";
-    const description = seo?.metaDescription  || fallbackSeo?.description || "No.1 Digital Marketing Agency in India, we deliver result-driven SEO, PPC, social media, and branding solutions.";
-    const keywords    = seo?.metaKeywords     || fallbackSeo?.keywords    || "digital marketing agency in india, seo services india, social media marketing, performance marketing company, lead generation services";
+    // A description built from the page's real service/location facts beats the
+    // templated one, so it is preferred over the generic site-wide fallback.
+    const resolvedForMeta = resolvePage(normalizedPath);
+    const derivedDescription = resolvedForMeta ? pageDescription(resolvedForMeta) : null;
+
+    // The page registries carry their own title/description; prefer those over
+    // the site-wide default so a newly-added page never falls back to it.
+    const cleanSlug = normalizedPath.replace(/^\/+/, '').replace(/\/+$/, '');
+    const registrySeo = ssrContent[cleanSlug] || null;
+
+    // Guides carry their own meta.
+    const guideEntry = cleanSlug.startsWith('guides/') ? GUIDES[cleanSlug.slice(7)] : null;
+    const guideSeo = guideEntry
+      ? { title: guideEntry.metaTitle, description: guideEntry.description }
+      : cleanSlug === 'guides'
+        ? {
+            title: 'Guides — Web, SEO, Ads and AI | Avani Enterprises',
+            description: 'Practical guides on web development cost, choosing an SEO agency, Google vs Meta ads, AI chatbots and voice agents, CRM build-or-buy, and why Google refuses to index pages.',
+          }
+        : null;
+
+    const title       = seo?.title            || guideSeo?.title       || fallbackSeo?.title       || registrySeo?.title       || "Avani Enterprises : No.1 Digital Marketing Agency in India";
+    const description = seo?.metaDescription  || guideSeo?.description || fallbackSeo?.description || registrySeo?.description || derivedDescription || "No.1 Digital Marketing Agency in India, we deliver result-driven SEO, PPC, social media, and branding solutions.";
     const canonical   = seo?.canonicalUrl     || buildCanonical(normalizedPath);
-    const robots      = isNoIndex(normalizedPath) ? "noindex,nofollow" : (seo?.robots || "index,follow");
+    // "noindex,follow" — not nofollow. De-indexed doorway pages should still pass
+    // link equity through to the pages we keep.
+    const robots      = isNoIndex(normalizedPath) ? "noindex,follow" : (seo?.robots || "index,follow");
     const ogImage     = seo?.ogImage          || `${SITE_URL}/logo0.webp`;
 
     // ── 4. Inject into HTML (server-side, visible to Googlebot on first crawl) ─
@@ -775,9 +1270,8 @@ export default async function handler(req, res) {
       // Title
       .replace(/<title\b[^>]*>[\s\S]*?<\/title>/gi, `<title>${title}</title>`)
       .replace(/__SEO_TITLE__/g,       title)
-      // Description + keywords
+      // Description
       .replace(/__SEO_DESCRIPTION__/g, description)
-      .replace(/__SEO_KEYWORDS__/g,    keywords)
       // Canonical + robots
       .replace(/__SEO_CANONICAL__/g,   canonical)
       .replace(/__SEO_ROBOTS__/g,      robots)
@@ -791,7 +1285,6 @@ export default async function handler(req, res) {
       { id: 'description',         val: description },
       { id: 'og:description',      val: description },
       { id: 'twitter:description', val: description },
-      { id: 'keywords',            val: keywords    },
       { id: 'og:title',            val: title       },
       { id: 'twitter:title',       val: title       },
       { id: 'og:url',              val: canonical   },
@@ -802,6 +1295,31 @@ export default async function handler(req, res) {
       const regex = new RegExp(`(<meta\\s+[^>]*?(?:name|property)=["']${id}["'][^>]*?\\s+content=)["'].*?["']`, 'gi');
       html = html.replace(regex, `$1"${val}"`);
     });
+
+    // Remove the stuffed <meta name="keywords"> entirely. Google ignores it and
+    // the long comma-separated lists these pages carried read as a spam signal.
+    html = html.replace(/<meta\s+name=["']keywords["'][^>]*>\s*/gi, '');
+
+    // ── 4a. Per-route body content (the fix for "Crawled – not indexed") ────
+    // Replace the shell's shared homepage block with this page's real content so
+    // Googlebot's first pass sees unique HTML rather than the same 455 copies.
+    const built = buildUniqueBodyHtml(normalizedPath, title, description);
+    if (built) {
+      const start = html.indexOf(SSR_START);
+      const end = html.indexOf(SSR_END);
+      if (start !== -1 && end !== -1 && end > start) {
+        html =
+          html.slice(0, start + SSR_START.length) +
+          built.html +
+          html.slice(end);
+      } else {
+        console.warn(`⚠️ SSR content markers missing in template.html — ${normalizedPath} served shared body`);
+      }
+
+      // Per-route JSON-LD in the head, describing what the body above actually says.
+      const ld = schemaHtml(normalizedPath, canonical, title, built.resolved, built.guide || null, built.faqs);
+      if (ld) html = html.replace(/<\/head>/i, `${ld}</head>`);
+    }
 
     // ── 4b. Homepage-only LCP preload ───────────────────────────────────────
     // Preload the hero background image (the LCP element on "/") so it begins
@@ -817,7 +1335,7 @@ export default async function handler(req, res) {
 
     // ── 5. noindex: also set X-Robots-Tag HTTP header for Googlebot ────────
     if (isNoIndex(normalizedPath)) {
-      res.setHeader('X-Robots-Tag', 'noindex, nofollow');
+      res.setHeader('X-Robots-Tag', 'noindex, follow');
     }
 
     res.setHeader('Content-Type', 'text/html');

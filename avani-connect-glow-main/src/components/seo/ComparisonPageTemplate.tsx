@@ -7,6 +7,8 @@ import Breadcrumb from './Breadcrumb';
 import InternalLinking from './InternalLinking';
 import BusinessSetup3Form from '../BusinessSetup3Form';
 import { SeoPageConfig } from '../../data/seoLandingPagesData';
+import HonestComparison from './HonestComparison';
+import { comparisonFor } from '../../data/comparisons';
 
 const Grain = () => (
   <div style={{ position: 'absolute', inset: 0, opacity: 0.03, pointerEvents: 'none', backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")` }} />
@@ -190,8 +192,15 @@ export default function ComparisonPageTemplate({ data }: ComparisonPageTemplateP
 
       <LuxuryLine />
 
-      {/* ── COMPARISON TABLE SECTION ───────────────────────────────────── */}
-      {data.comparisonTable && (
+      {/* ── COMPARISON ─────────────────────────────────────────────────────
+          Where we have honest comparison data (competitor wins some rows, an
+          explicit "when to choose them" panel, a verdict and a confidence
+          disclaimer), render that instead of the original table — which scored
+          Avani positive on every row and read as an advert. */}
+      <HonestComparison />
+
+      {/* Legacy table: only for slugs not yet covered in comparisons.js */}
+      {data.comparisonTable && !comparisonFor(data.slug) && (
         <section style={{ padding: '80px 0', background: 'var(--bg-secondary)', position: 'relative' }}>
           <Grain />
           <div className="dh-container" style={{ maxWidth: '900px' }}>
