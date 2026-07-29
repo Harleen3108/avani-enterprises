@@ -13,6 +13,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Clock, ArrowRight } from 'lucide-react';
 import { getBackendUrl } from '../../lib/api';
+import CoverArt from './CoverArt';
 
 const INK = '#1A1714';
 const INK_MUTED = '#6B635A';
@@ -132,13 +133,13 @@ export function RelatedGrid({ posts }: { posts: Post[] }) {
                 background: '#fff', border: `1px solid ${RULE}`, borderRadius: 14, overflow: 'hidden',
               }}
             >
-              {img ? (
-                <div style={{ aspectRatio: '16/9', overflow: 'hidden', background: '#F2EEE5' }}>
+              <div style={{ aspectRatio: '16/9', overflow: 'hidden', background: '#F2EEE5' }}>
+                {img ? (
                   <img src={img} alt="" loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                </div>
-              ) : (
-                <div style={{ aspectRatio: '16/9', background: ACCENT_BG }} />
-              )}
+                ) : (
+                  <CoverArt title={p.title} category={catOf(p)} slug={p.slug} />
+                )}
+              </div>
               <div style={{ padding: '16px 18px 18px' }}>
                 <span style={{ display: 'inline-block', fontSize: '.66rem', fontWeight: 700, color: ACCENT, background: ACCENT_BG, padding: '3px 9px', borderRadius: 99, marginBottom: 9 }}>
                   {catOf(p)}

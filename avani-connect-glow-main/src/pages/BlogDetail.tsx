@@ -9,6 +9,7 @@ import { useRelatedPosts, RelatedRail, RelatedGrid } from '../components/blog/Re
 import BusinessSetup3Form from '../components/BusinessSetup3Form';
 import { KeyTakeaways, FaqAccordion } from '../components/blog/BlogAeoBlocks';
 import Prose from '../components/blog/Prose';
+import CoverArt from '../components/blog/CoverArt';
 
 /** Matches the article surface in blogFormat.js PROSE_CSS. */
 const PAPER = '#FFFDF9';
@@ -150,20 +151,25 @@ const BlogDetail = () => {
           article surface. Sitting on its own dark strip between the two left a
           band of black between two sections and made the white body look like a
           floating fragment, which is the thing being fixed. */}
-      {blog.featuredImage && (
-        <section style={{ background: `linear-gradient(to bottom, var(--bg-primary) 0%, var(--bg-primary) 45%, ${PAPER} 45%, ${PAPER} 100%)`, paddingTop: '2rem' }}>
-          <div className="dh-container" style={{ maxWidth: '1100px', margin: '0 auto' }}>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.97 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2, duration: 0.8 }}
-              style={{ borderRadius: '20px', overflow: 'hidden', aspectRatio: '16/9', boxShadow: '0 24px 55px rgba(0,0,0,0.38)' }}
-            >
+      {/* Always rendered. Previously the whole block was skipped when a post had
+          no image, which dropped the hero straight onto the body and lost the
+          transition between the dark header and the light article. */}
+      <section style={{ background: `linear-gradient(to bottom, var(--bg-primary) 0%, var(--bg-primary) 45%, ${PAPER} 45%, ${PAPER} 100%)`, paddingTop: '2rem' }}>
+        <div className="dh-container" style={{ maxWidth: '1100px', margin: '0 auto' }}>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.97 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.2, duration: 0.8 }}
+            style={{ borderRadius: '20px', overflow: 'hidden', aspectRatio: '16/9', boxShadow: '0 24px 55px rgba(0,0,0,0.38)', background: '#221C17' }}
+          >
+            {blog.featuredImage ? (
               <img src={imageUrl} alt={blog.title} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-            </motion.div>
-          </div>
-        </section>
-      )}
+            ) : (
+              <CoverArt title={blog.title} category={String(blogCategory)} slug={slug} />
+            )}
+          </motion.div>
+        </div>
+      </section>
 
       {/* Article body
           -------------

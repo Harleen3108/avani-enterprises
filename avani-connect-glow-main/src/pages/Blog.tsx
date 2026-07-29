@@ -12,6 +12,7 @@ import { motion } from 'framer-motion';
 import { Calendar, ArrowRight, Search, Clock, Eye } from 'lucide-react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { getBackendUrl } from '../lib/api';
+import CoverArt from '../components/blog/CoverArt';
 import '../components/Home.css';
 
 const titleV = {
@@ -210,8 +211,10 @@ const Blog = () => {
                           if (img) img.style.transform = 'scale(1)';
                         }}
                       >
-                        {(blog.featuredImage || blog.image) ? (
-                          <div style={{ width: '100%', aspectRatio: '16/10', overflow: 'hidden', background: '#F2EEE5' }}>
+                        {/* A generated cover when the post has no image, rather
+                            than an empty box — see CoverArt.tsx. */}
+                        <div style={{ width: '100%', aspectRatio: '16/10', overflow: 'hidden', background: '#F2EEE5' }}>
+                          {(blog.featuredImage || blog.image) ? (
                             <img
                               src={blog.featuredImage || blog.image}
                               alt={blog.title}
@@ -219,10 +222,10 @@ const Blog = () => {
                               className="dh-blog-img"
                               style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.45s ease' }}
                             />
-                          </div>
-                        ) : (
-                          <div style={{ width: '100%', aspectRatio: '16/10', background: ACCENT_BG }} />
-                        )}
+                          ) : (
+                            <CoverArt title={blog.title} category={getCat(blog)} slug={blog.slug} />
+                          )}
+                        </div>
 
                         <div style={{ display: 'flex', flexDirection: 'column', padding: '20px 22px 22px', flex: 1 }}>
                           {/* Category badge + read time */}

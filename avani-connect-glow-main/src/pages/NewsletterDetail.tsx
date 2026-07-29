@@ -3,9 +3,13 @@ import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Calendar, Share2, Mail } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { getBackendUrl } from '../lib/api';
+import Prose from '../components/blog/Prose';
 import '../components/Home.css';
 
 const fadeIn = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } };
+
+/** Same reading surface as an article — see blogFormat.js PROSE_CSS. */
+const PAPER = '#FFFDF9';
 
 const NewsletterDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -88,18 +92,20 @@ const NewsletterDetail = () => {
         </section>
       )}
 
-      {/* Article Content */}
-      <section style={{ paddingTop: '2rem', paddingBottom: '6rem' }}>
-        <div className="dh-container" style={{ maxWidth: '800px', margin: '0 auto' }}>
+      {/* Newsletter body
+          ---------------
+          Was a raw dangerouslySetInnerHTML with only a font-size and colour, so
+          headings, lists and paragraph spacing all rendered as flat body text —
+          the same failure the blog had. It now goes through the identical
+          <Prose> pipeline: the content is normalised into semantic HTML and
+          styled by PROSE_CSS, on the same light reading surface as an article. */}
+      <section style={{ background: PAPER, paddingTop: '3rem', paddingBottom: '5rem' }}>
+        <div className="dh-container" style={{ maxWidth: '860px', margin: '0 auto' }}>
           <motion.div initial="hidden" animate="visible" variants={fadeIn} transition={{ delay: 0.3 }}>
-            <div 
-              className="dh-body dh-blog-content" 
-              style={{ fontSize: '1.1rem', lineHeight: 1.8, color: 'var(--text-secondary)' }}
-              dangerouslySetInnerHTML={{ __html: newsletter.content }} 
-            />
+            <Prose content={newsletter.content} title={newsletter.title} />
 
-            <div style={{ marginTop: '4rem', paddingTop: '2rem', borderTop: '1px solid var(--border-light)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <div style={{ fontSize: '0.9rem', color: 'var(--text-tertiary)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+            <div style={{ maxWidth: '44rem', margin: '3.5rem auto 0', paddingTop: '1.75rem', borderTop: '1px solid #E7E0D5', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div style={{ fontSize: '0.78rem', color: '#6B635A', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
                 Share this newsletter
               </div>
               <div style={{ display: 'flex', gap: '1rem' }}>
