@@ -4,7 +4,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
   'web-development-company-rohtak': {
     "seo": {
       "title": "Web Development Company in Rohtak | Avani Enterprises",
-      "description": "Avani Enterprises builds fast, custom websites and ecommerce stores for Rohtak businesses. projects across India and the Gulf, 5.0 rating, 8+ years. Get a free quote today.",
+      "description": "Avani Enterprises builds fast, custom websites and ecommerce stores for Rohtak businesses. Delivering across India and the Gulf, 8+ years. Get a free quote today.",
       "keywords": "web development company rohtak, website development rohtak, web designer rohtak, ecommerce development rohtak, custom website rohtak, web design agency rohtak, business website rohtak",
       "canonical": "https://www.avanienterprises.in/web-development-company-rohtak"
     },
@@ -89,7 +89,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "title": "8+ Years, Projects across India & the Gulf",
-        "desc": "A Gurugram-based team with clients across India and the Gulf and a 5.0 rating, delivering enterprise-grade websites at Tier-2 budgets."
+        "desc": "A Gurugram-based team with clients across India and the Gulf, delivering enterprise-grade websites at Tier-2 budgets."
       },
       {
         "title": "SEO Baked In From Day One",
@@ -119,7 +119,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Why should I choose Avani Enterprises for web development in Rohtak?",
-        "a": "Avani Enterprises brings 8+ years of experience, projects across India and the Gulf, clients across India and the Gulf, and a 5.0 client rating. We build custom, fast-loading sites tailored to Rohtak's market — education, healthcare, retail, and manufacturing — with SEO and 24/7 support included."
+        "a": "Avani Enterprises brings 8+ years of experience, projects across India and the Gulf, clients across India and the Gulf. We build custom, fast-loading sites tailored to Rohtak's market — education, healthcare, retail, and manufacturing — with SEO and 24/7 support included."
       },
       {
         "q": "Do you build ecommerce websites for Rohtak businesses?",
@@ -131,7 +131,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Will my website rank on Google for Rohtak searches?",
-        "a": "Every site we build ships with clean code, schema markup, and local SEO structure so you can rank for searches like your service plus Rohtak. We have a 95% first-page success rate on targeted local keywords and can drive up to 3x organic traffic with ongoing SEO."
+        "a": "Every site we build ships with clean code, schema markup, and local SEO structure so you can rank for searches like your service plus Rohtak. We build for first-page positions on targeted local keywords and can drive compounding organic traffic with ongoing SEO."
       }
     ],
     "reviews": [],
@@ -279,7 +279,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Why choose Avani Enterprises in Panipat?",
-        "a": "Avani Enterprises has 8+ years' experience, projects delivered across India and the Gulf and a 5.0 client rating. We understand Panipat's textile and home-furnishing export trade and build websites that turn international and wholesale buyers into enquiries — all from our Gurugram HQ, a straight drive up NH-44."
+        "a": "Avani Enterprises has 8+ years' experience, projects delivered across India and the Gulf. We understand Panipat's textile and home-furnishing export trade and build websites that turn international and wholesale buyers into enquiries — all from our Gurugram HQ, a straight drive up NH-44."
       },
       {
         "q": "Do you build websites for textile and home-furnishing exporters?",
@@ -405,7 +405,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "title": "SEO-First Engineering",
-        "desc": "Schema, fast Core Web Vitals, and local optimisation tuned for 'Karnal' and Haryana searches, with a 95% first-page success record."
+        "desc": "Schema, fast Core Web Vitals, and local optimisation tuned for 'Karnal' and Haryana searches, with a disciplined technical-SEO process."
       },
       {
         "title": "One Accountable Team",
@@ -440,7 +440,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Why choose Avani Enterprises for web development in Karnal?",
-        "a": "Avani Enterprises brings 8+ years, projects across India and the Gulf, clients across India and the Gulf, and a 5.0 client rating. We understand Karnal's agri-export economy and build multilingual, SEO-ready sites that win both local enquiries and overseas buyers, with 24/7 support."
+        "a": "Avani Enterprises brings 8+ years, projects across India and the Gulf, clients across India and the Gulf. We understand Karnal's agri-export economy and build multilingual, SEO-ready sites that win both local enquiries and overseas buyers, with 24/7 support."
       },
       {
         "q": "Do you build websites for basmati exporters and agri-businesses?",
@@ -448,7 +448,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Will my Karnal website rank on Google?",
-        "a": "Every site is built on solid technical SEO foundations with schema and fast Core Web Vitals. With a 95% first-page success record, we can pair development with ongoing SEO to rank for competitive Karnal and Haryana keywords."
+        "a": "Every site is built on solid technical SEO foundations with schema and fast Core Web Vitals. With a disciplined technical-SEO process, we can pair development with ongoing SEO to rank for competitive Karnal and Haryana keywords."
       },
       {
         "q": "Do you serve areas around Karnal like Taraori and Nilokheri?",
@@ -570,7 +570,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "title": "8+ Years, Projects across India & the Gulf",
-        "desc": "A proven Gurugram team with a 5.0 client rating, delivering for clients across India and the Gulf across Haryana and India."
+        "desc": "A proven Gurugram team, delivering for clients across India and the Gulf across Haryana and India."
       },
       {
         "title": "24/7 Support, A Drive Away",
@@ -599,7 +599,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Why choose Avani Enterprises for web development in Sonipat?",
-        "a": "Avani Enterprises brings 8+ years, projects across India and the Gulf, clients across India and the Gulf, and a 5.0 client rating. We hand-code fast sites that load in around 2 seconds, understand Sonipat's export and education economy, and are just a short drive up NH-44 from our Gurugram HQ with 24/7 support."
+        "a": "Avani Enterprises brings 8+ years, projects across India and the Gulf, clients across India and the Gulf. We hand-code fast sites that load in around 2 seconds, understand Sonipat's export and education economy, and are just a short drive up NH-44 from our Gurugram HQ with 24/7 support."
       },
       {
         "q": "Do you build ecommerce websites for Sonipat businesses?",
@@ -759,7 +759,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Why choose Avani Enterprises for web development in Hisar?",
-        "a": "Avani Enterprises brings 8+ years, 300+ delivered projects and a 5.0 client rating, with deep experience across Hisar's core sectors — steel and manufacturing, agriculture and trading, education and retail. Design, development and marketing are handled by one accountable in-house team."
+        "a": "Avani Enterprises brings 8+ years, 300+ delivered projects, with deep experience across Hisar's core sectors — steel and manufacturing, agriculture and trading, education and retail. Design, development and marketing are handled by one accountable in-house team."
       },
       {
         "q": "Do you build websites for steel and manufacturing exporters in Hisar?",
@@ -771,7 +771,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Do you provide SEO so my Hisar website ranks on Google?",
-        "a": "Yes. Every site is built on solid technical SEO with local schema for Hisar searches. For competitive keywords we pair development with our ongoing SEO service, which has helped clients achieve up to 3x organic traffic and 95% first-page success."
+        "a": "Yes. Every site is built on solid technical SEO with local schema for Hisar searches. For competitive keywords we pair development with our ongoing SEO service, which has helped clients achieve compounding organic traffic and a disciplined technical-SEO process."
       }
     ],
     "reviews": [],
@@ -885,7 +885,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "title": "SEO-First Engineering",
-        "desc": "Schema markup, clean code, and sub-2-second load times so Ambala manufacturers rank on the first page for product and supplier searches — 95% first-page success on the keywords we target."
+        "desc": "Schema markup, clean code, and sub-2-second load times so Ambala manufacturers rank on the first page for product and supplier searches — a disciplined process for the keywords we target."
       },
       {
         "title": "Full-Service, One Team",
@@ -893,7 +893,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "title": "8+ Years, 5.0 Rated",
-        "desc": "projects across India and the Gulf for clients across India and the Gulf and a 5.0 client rating — proven delivery you can trust for a website that carries your Ambala brand nationwide."
+        "desc": "projects across India and the Gulf for clients across India and the Gulf — proven delivery you can trust for a website that carries your Ambala brand nationwide."
       }
     ],
     "localAreaText": "We serve businesses across Ambala — the scientific instruments hub and Sadar Bazaar in Ambala Cantt, the cloth and sari wholesale markets around Manav Chowk in Ambala City, plus Baldev Nagar, Mahesh Nagar, and the industrial belt along the GT Road (NH-44).",
@@ -918,7 +918,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Why choose Avani Enterprises for web development in Ambala?",
-        "a": "Avani Enterprises brings 8+ years, projects across India and the Gulf, clients across India and the Gulf, and a 5.0 client rating, with deep experience building catalogue and export-ready sites suited to Ambala's scientific instrument, mixie, and cloth trading businesses. Design, development, and marketing are handled by one in-house team."
+        "a": "Avani Enterprises brings 8+ years, projects across India and the Gulf, clients across India and the Gulf, with deep experience building catalogue and export-ready sites suited to Ambala's scientific instrument, mixie, and cloth trading businesses. Design, development, and marketing are handled by one in-house team."
       },
       {
         "q": "Do you build websites for scientific instrument and lab equipment exporters?",
@@ -930,7 +930,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Will my Ambala website rank on Google?",
-        "a": "Every site we build sits on solid technical SEO foundations with schema and fast load times — we see 95% first-page success on the keywords we target. For competitive product searches, we recommend pairing development with our ongoing SEO service for the strongest rankings."
+        "a": "Every site we build sits on solid technical SEO foundations with schema and fast load times — we target first-page positions on the keywords we target. For competitive product searches, we recommend pairing development with our ongoing SEO service for the strongest rankings."
       }
     ],
     "reviews": [],
@@ -1077,7 +1077,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Why choose Avani Enterprises for web development in Faridabad?",
-        "a": "Avani Enterprises has 8+ years of experience and 300+ delivered projects with a 5.0 client rating. We understand Faridabad's B2B manufacturing and retail mix, build mobile-first sites with 2-second load times, and provide one accountable in-house team with 24/7 support."
+        "a": "Avani Enterprises has 8+ years of experience and 300+ delivered projects with. We understand Faridabad's B2B manufacturing and retail mix, build mobile-first sites with 2-second load times, and provide one accountable in-house team with 24/7 support."
       },
       {
         "q": "Do you build websites for Faridabad manufacturers and exporters?",
@@ -1211,7 +1211,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "title": "8+ Years, Projects across India & the Gulf",
-        "desc": "A Gurugram-based team with a 5.0 client rating and a track record across clients across India and the Gulf, delivering clean MERN/Next.js builds that scale."
+        "desc": "A Gurugram-based team with and a track record across clients across India and the Gulf, delivering clean MERN/Next.js builds that scale."
       }
     ],
     "localAreaText": "We serve businesses across Ghaziabad — the Sahibabad Industrial Area, Site IV, Bulandshahr Road and Meerut Road industrial belts, plus residential and commercial hubs like Indirapuram, Vaishali, Vasundhara, Kaushambi, Raj Nagar Extension, and Crossings Republik. Free discovery calls and on-site visits available across Delhi NCR.",
@@ -1237,7 +1237,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Why choose Avani Enterprises for web development in Ghaziabad?",
-        "a": "Avani Enterprises brings 8+ years, 300+ delivered projects, clients across India and the Gulf, and a 5.0 client rating. We understand Ghaziabad's MSME, manufacturing, and trading base and build fast, SEO-ready websites with fixed pricing and 24/7 support."
+        "a": "Avani Enterprises brings 8+ years, 300+ delivered projects, clients across India and the Gulf. We understand Ghaziabad's MSME, manufacturing, and trading base and build fast, SEO-ready websites with fixed pricing and 24/7 support."
       },
       {
         "q": "Do you build websites for manufacturers and exporters in Sahibabad?",
@@ -1371,7 +1371,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "title": "Proven Track Record",
-        "desc": "clients across India and the Gulf, projects across India and the Gulf, and a 5.0 client rating across 8+ years — a partner that delivers on deadlines and stays on after launch."
+        "desc": "clients across India and the Gulf, projects across India and the Gulf across 8+ years — a partner that delivers on deadlines and stays on after launch."
       }
     ],
     "localAreaText": "We serve businesses across Greater Noida and Greater Noida West — Knowledge Park, Pari Chowk, Alpha, Beta, Gamma and Delta sectors, the Surajpur and Ecotech industrial areas, Gaur City, and the Yamuna Expressway corridor toward Jewar. Free discovery calls and on-site visits available across NCR.",
@@ -1396,7 +1396,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Why choose Avani Enterprises for web development in Greater Noida?",
-        "a": "Avani Enterprises has 8+ years of experience, clients across India and the Gulf, projects across India and the Gulf, and a 5.0 client rating. We understand Greater Noida's manufacturing, education, and real estate sectors, and build fast, SEO-ready sites with 24/7 support."
+        "a": "Avani Enterprises has 8+ years of experience, clients across India and the Gulf, projects across India and the Gulf. We understand Greater Noida's manufacturing, education, and real estate sectors, and build fast, SEO-ready sites with 24/7 support."
       },
       {
         "q": "Do you build websites for manufacturers and exporters in Greater Noida?",
@@ -1408,7 +1408,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Will my Greater Noida website rank on Google?",
-        "a": "Every build includes technical SEO foundations — schema markup, around 2-second load times, sitemaps, and a clean structure. We see 95% first-page success on targeted local keywords, and our ongoing SEO service drives up to 3x organic traffic for competitive terms."
+        "a": "Every build includes technical SEO foundations — schema markup, around 2-second load times, sitemaps, and a clean structure. We target first-page positions on targeted local keywords, and our ongoing SEO service drives compounding organic traffic for competitive terms."
       }
     ],
     "reviews": [],
@@ -1530,7 +1530,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "title": "Transparent Reporting, 5.0-Rated Support",
-        "desc": "Monthly rank, traffic, and lead dashboards with a dedicated specialist on WhatsApp and call — backed by our 5.0 client rating and 24/7 availability."
+        "desc": "Monthly rank, traffic, and lead dashboards with a dedicated specialist on WhatsApp and call — backed by and 24/7 availability."
       }
     ],
     "localAreaText": "We actively serve businesses across Gurugram — DLF Cyber City, Udyog Vihar, Golf Course Road, Sohna Road, MG Road, Sushant Lok, DLF Phases 1–5, Sectors 14/29/44, New Gurgaon, and the IMT Manesar industrial belt — tailoring campaigns to each hub's audience and search behaviour.",
@@ -1557,7 +1557,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Why choose Avani Enterprises as your SEO company in Gurgaon?",
-        "a": "Avani is headquartered at Unitech Cyber Park, Sector 39, Gurugram, with 8+ years of experience, projects across India and the Gulf, clients across India and the Gulf, and a 5.0 client rating. We combine technical SEO, content, and link-building in-house, know the local search landscape firsthand, and report transparently every month."
+        "a": "Avani is headquartered at Unitech Cyber Park, Sector 39, Gurugram, with 8+ years of experience, projects across India and the Gulf, clients across India and the Gulf. We combine technical SEO, content, and link-building in-house, know the local search landscape firsthand, and report transparently every month."
       },
       {
         "q": "Do you offer local SEO for Gurgaon businesses?",
@@ -1602,7 +1602,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
   'seo-company-noida': {
     "seo": {
       "title": "SEO Company in Noida | First-Page Rankings — Avani Enterprises",
-      "description": "Avani Enterprises is an SEO company in Noida driving 3x organic traffic and first-page Google rankings for IT, D2C, real estate & education brands. Free SEO audit.",
+      "description": "Avani Enterprises is an SEO company in Noida driving compounding organic traffic and first-page Google rankings for IT, D2C, real estate & education brands. Free SEO audit.",
       "keywords": "seo company noida, seo services noida, seo agency noida, local seo noida, search engine optimization noida, best seo company greater noida, google ranking services noida",
       "canonical": "https://www.avanienterprises.in/seo-company-noida"
     },
@@ -1691,7 +1691,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "title": "8+ Years, 5.0 Rated",
-        "desc": "A proven track record across clients across India and the Gulf and projects across India and the Gulf, with a 5.0 client rating and direct WhatsApp access to your strategist, 24/7."
+        "desc": "A proven track record across clients and projects across India and the Gulf, with and direct WhatsApp access to your strategist, 24/7."
       }
     ],
     "localAreaText": "We rank businesses across Noida and Greater Noida — Sector 18, Sector 62, Sector 63, Sector 132, the IT corridor along the Noida-Greater Noida Expressway, Film City (Sector 16A), Knowledge Park, and Greater Noida West (Noida Extension) — covering the city's IT parks, D2C warehouses, real estate belts, and education hubs.",
@@ -1717,7 +1717,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Why should I choose Avani as my SEO company in Noida?",
-        "a": "Avani Enterprises has 8+ years of experience, a 5.0 client rating, and a 95% first-page success rate across clients across India and the Gulf and projects across India and the Gulf. We understand how Noida actually searches — by sector and hub — and combine technical SEO, local Maps optimisation, and content rather than generic checklists."
+        "a": "Avani Enterprises has 8+ years of experience, and a disciplined technical-SEO process across clients and projects across India and the Gulf. We understand how Noida actually searches — by sector and hub — and combine technical SEO, local Maps optimisation, and content rather than generic checklists."
       },
       {
         "q": "Do you do local SEO for specific Noida sectors?",
@@ -1762,7 +1762,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
   'seo-company-rohtak': {
     "seo": {
       "title": "SEO Company in Rohtak | Avani Enterprises",
-      "description": "Top SEO company in Rohtak driving 3x organic traffic and first-page rankings for local businesses, institutes, and manufacturers. Get a free SEO audit today.",
+      "description": "Top SEO company in Rohtak driving compounding organic traffic and first-page rankings for local businesses, institutes, and manufacturers. Get a free SEO audit today.",
       "keywords": "seo company rohtak, seo services rohtak, seo agency rohtak, local seo rohtak, google ranking rohtak, search engine optimization rohtak",
       "canonical": "https://www.avanienterprises.in/seo-company-rohtak"
     },
@@ -1876,7 +1876,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Why choose Avani Enterprises as your SEO company in Rohtak?",
-        "a": "Avani Enterprises has 8+ years of SEO experience, clients across India and the Gulf, projects across India and the Gulf, and a 5.0 client rating. We understand Rohtak's market, from the MDU coaching belt to IMT Industrial Area manufacturers, and back our work with a 95% first-page success rate and 24/7 support."
+        "a": "Avani Enterprises has 8+ years of SEO experience, clients across India and the Gulf, projects across India and the Gulf. We understand Rohtak's market, from the MDU coaching belt to IMT Industrial Area manufacturers, and back our work with a disciplined technical-SEO process and 24/7 support."
       },
       {
         "q": "Do you offer local SEO and Google Business Profile optimisation?",
@@ -1962,7 +1962,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
         }
       ]
     },
-    "intro": "Panipat is the textile capital of India — home to thousands of handloom units, the world's largest shoddy-yarn cluster, and home-furnishing exporters shipping carpets, blankets, bedsheets and curtains across the globe. The city alone accounts for the bulk of India's blanket output. But most buyers, whether a wholesaler in Delhi or an importer abroad, now start their search on Google. If your mill or trading firm does not show up for \"blanket manufacturer in Panipat\" or \"home furnishing exporter India\", that order goes to a competitor who ranks above you.\n\nAvani Enterprises is an SEO company that helps Panipat businesses get found. From GT Road and Assandh Road wholesalers to exporters in the Panipat Industrial Area and the HUDA textile sectors, we build technically sound, fast-loading websites and target the exact commercial keywords your buyers type. With 8+ years of experience, clients across India and the Gulf, projects across India and the Gulf and a 5.0 client rating, we turn search visibility into measurable enquiries for textile, retail, education, and service businesses across the city.",
+    "intro": "Panipat is the textile capital of India — home to thousands of handloom units, the world's largest shoddy-yarn cluster, and home-furnishing exporters shipping carpets, blankets, bedsheets and curtains across the globe. The city alone accounts for the bulk of India's blanket output. But most buyers, whether a wholesaler in Delhi or an importer abroad, now start their search on Google. If your mill or trading firm does not show up for \"blanket manufacturer in Panipat\" or \"home furnishing exporter India\", that order goes to a competitor who ranks above you.\n\nAvani Enterprises is an SEO company that helps Panipat businesses get found. From GT Road and Assandh Road wholesalers to exporters in the Panipat Industrial Area and the HUDA textile sectors, we build technically sound, fast-loading websites and target the exact commercial keywords your buyers type. With 8+ years of experience, clients across India and the Gulf, projects across India and the Gulf, we turn search visibility into measurable enquiries for textile, retail, education, and service businesses across the city.",
     "features": [
       {
         "icon": "🧵",
@@ -2006,7 +2006,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "title": "Proven Track Record",
-        "desc": "8+ years, clients across India and the Gulf, projects across India and the Gulf and a 5.0 rating — with a 95% first-page success rate across competitive industries."
+        "desc": "8+ years, clients across India and the Gulf, projects across India and the Gulf — with a disciplined technical-SEO process across competitive industries."
       },
       {
         "title": "24/7 Dedicated Support",
@@ -2032,11 +2032,11 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "How long does SEO take to show results in Panipat?",
-        "a": "Early ranking movement typically appears within 6–8 weeks, with first-page results for many target keywords inside 90–120 days. We maintain a 95% first-page success rate across competitive niches."
+        "a": "Early ranking movement typically appears within 6–8 weeks, with first-page results for many target keywords inside 90–120 days. We apply the same technical-SEO discipline across competitive niches."
       },
       {
         "q": "Why choose Avani Enterprises as your SEO company in Panipat?",
-        "a": "With 8+ years, clients across India and the Gulf, projects across India and the Gulf and a 5.0 client rating, we combine technical SEO with deep understanding of Panipat's textile and export trade — and offer 24/7 support direct to our team."
+        "a": "With 8+ years, clients across India and the Gulf, projects across India and the Gulf, we combine technical SEO with deep understanding of Panipat's textile and export trade — and offer 24/7 support direct to our team."
       },
       {
         "q": "Can you do SEO for textile and home-furnishing exporters?",
@@ -2048,7 +2048,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Do you guarantee first-page Google rankings?",
-        "a": "Google advises against ranking guarantees, so no ethical agency can promise exact positions. However, our data-driven approach delivers a 95% first-page success rate and 3x organic traffic growth for clients."
+        "a": "Google advises against ranking guarantees, so no ethical agency can promise exact positions. However, our data-driven approach delivers a disciplined technical-SEO process and compounding organic growth for clients."
       }
     ],
     "reviews": [],
@@ -2127,7 +2127,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       {
         "icon": "🔍",
         "title": "SEO & Local Search",
-        "desc": "Rank for high-intent Gurugram keywords and 'near me' searches with technical SEO, content, and Google Business Profile optimisation — 95% first-page success on targeted terms."
+        "desc": "Rank for high-intent Gurugram keywords and 'near me' searches with technical SEO, content, and Google Business Profile optimisation — a disciplined technical-SEO process for targeted terms."
       },
       {
         "icon": "🎯",
@@ -2170,7 +2170,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "title": "8+ Years, Projects across India & the Gulf",
-        "desc": "Since 2016 we've shipped projects across India and the Gulf for clients across India and the Gulf across NCR, with a 5.0 rating and proven playbooks for competitive Gurugram niches."
+        "desc": "Since 2016 we've shipped projects across India and the Gulf for clients across India and the Gulf across NCR, with and proven playbooks for competitive Gurugram niches."
       }
     ],
     "localAreaText": "We run campaigns for businesses across Gurugram — from the corporate towers of DLF Cyber City, Golf Course Road, and MG Road to the D2C and retail brands on Sohna Road, and the manufacturing and B2B exporters in Udyog Vihar and Manesar (IMT).",
@@ -2195,7 +2195,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Why choose Avani Enterprises as a digital marketing company in Gurgaon?",
-        "a": "Avani Enterprises is headquartered at Unitech Cyber Park, Sector 39, Gurugram, with 8+ years in business, projects across India and the Gulf, clients across India and the Gulf, and a 5.0 client rating. We combine local market knowledge with a full-funnel, ROI-first team under one roof — no hand-offs, no vanity metrics, just measurable pipeline."
+        "a": "Avani Enterprises is headquartered at Unitech Cyber Park, Sector 39, Gurugram, with 8+ years in business, projects across India and the Gulf, clients across India and the Gulf. We combine local market knowledge with a full-funnel, ROI-first team under one roof — no hand-offs, no vanity metrics, just measurable pipeline."
       },
       {
         "q": "Do you work with Gurgaon startups and MNCs?",
@@ -2325,11 +2325,11 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "title": "SEO + Paid Working Together",
-        "desc": "We blend organic search and paid acquisition into one funnel — averaging 3x organic traffic growth while paid campaigns capture high-intent buyers immediately."
+        "desc": "We blend organic search and paid acquisition into one funnel — building compounding organic growth while paid campaigns capture high-intent buyers immediately."
       },
       {
         "title": "Transparent Reporting, No Lock-In",
-        "desc": "Clear monthly dashboards showing rankings, traffic, leads and ad ROAS — backed by 8+ years of agency experience and a 5.0 client rating."
+        "desc": "Clear monthly dashboards showing rankings, traffic, leads and ad ROAS — backed by 8+ years of agency experience."
       }
     ],
     "localAreaText": "We run digital marketing campaigns for businesses across Noida and Greater Noida — Sector 18, Sector 62, Sector 63, Sector 132, Sector 135, Film City, the Noida-Greater Noida Expressway, Knowledge Park, and Greater Noida West (Noida Extension). Free strategy calls available across Delhi NCR.",
@@ -2350,11 +2350,11 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "How long before I see results from digital marketing?",
-        "a": "Paid campaigns on Google and Meta can generate qualified leads within the first few weeks of launch, while SEO compounds over 3 to 6 months. Avani targets 95% first-page ranking success on chosen keywords and averages 3x organic traffic growth as campaigns mature."
+        "a": "Paid campaigns on Google and Meta can generate qualified leads within the first few weeks of launch, while SEO compounds over 3 to 6 months. Avani targets a disciplined technical-SEO process for chosen keywords and averages compounding organic growth as campaigns mature."
       },
       {
         "q": "Why choose Avani Enterprises as a digital marketing agency in Noida?",
-        "a": "Avani Enterprises brings 8+ years of experience, clients across India and the Gulf, projects across India and the Gulf, and a 5.0 client rating, with campaigns tailored to Noida's specific business clusters — corporate IT in Sector 62/63, retail in Sector 18, and manufacturing in Greater Noida — rather than generic targeting. Reporting is fully transparent with no long lock-ins."
+        "a": "Avani Enterprises brings 8+ years of experience, clients across India and the Gulf, projects across India and the Gulf, with campaigns tailored to Noida's specific business clusters — corporate IT in Sector 62/63, retail in Sector 18, and manufacturing in Greater Noida — rather than generic targeting. Reporting is fully transparent with no long lock-ins."
       },
       {
         "q": "Do you work with IT companies, manufacturers, and D2C brands in Noida?",
@@ -2445,7 +2445,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       {
         "icon": "🔍",
         "title": "Local SEO for Rohtak",
-        "desc": "Rank for searches like 'best clinic in Rohtak' or 'footwear manufacturer Rohtak' with on-page, technical, and content SEO targeting up to 95% first-page success."
+        "desc": "Rank for searches like 'best clinic in Rohtak' or 'footwear manufacturer Rohtak' with on-page, technical, and content SEO targeting first-page positions."
       },
       {
         "icon": "📍",
@@ -2513,7 +2513,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Why choose Avani Enterprises as a digital marketing company in Rohtak?",
-        "a": "Avani Enterprises brings 8+ years, projects across India and the Gulf, clients across India and the Gulf, and a 5.0 client rating, with Rohtak-specific keyword research across education, healthcare, manufacturing, and retail. You get a senior full-funnel team and 24/7 reporting rather than a one-size-fits-all package."
+        "a": "Avani Enterprises brings 8+ years, projects across India and the Gulf, clients across India and the Gulf, with Rohtak-specific keyword research across education, healthcare, manufacturing, and retail. You get a senior full-funnel team and 24/7 reporting rather than a one-size-fits-all package."
       },
       {
         "q": "Do you work with Rohtak's manufacturers and B2B businesses?",
@@ -2646,8 +2646,8 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
         "desc": "You see exactly where ad spend goes and which keywords drive leads, with monthly dashboards covering ranks, conversions, and cost per lead."
       },
       {
-        "title": "8+ years and a 5.0 client rating",
-        "desc": "A track record of projects across India and the Gulf and clients across India and the Gulf means a stable, senior team, plus 24/7 support reachable on WhatsApp and phone."
+        "title": "8+ years",
+        "desc": "A track record of clients and projects across India and the Gulf means a stable, senior team, plus 24/7 support reachable on WhatsApp and phone."
       }
     ],
     "localAreaText": "We work with brands right across the capital, from the commercial cores of Connaught Place, Nehru Place, and Karol Bagh to the export and manufacturing belts of Okhla and Naraina, and residential-retail hubs in South Delhi, Dwarka, Rohini, and Laxmi Nagar.",
@@ -2668,11 +2668,11 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "How long does it take to see results from digital marketing?",
-        "a": "Paid campaigns like Google and Meta ads can generate qualified Delhi leads within the first few weeks. SEO is a compounding channel that typically shows meaningful movement in 3 to 4 months, with clients commonly reaching up to 3x organic traffic over time."
+        "a": "Paid campaigns like Google and Meta ads can generate qualified Delhi leads within the first few weeks. SEO is a compounding channel that typically shows meaningful movement in 3 to 4 months, with clients seeing organic traffic compound over time."
       },
       {
         "q": "Why should I choose Avani Enterprises for digital marketing in Delhi?",
-        "a": "Avani Enterprises has run digital marketing since 2016, serving clients across India and the Gulf across projects across India and the Gulf with a 5.0 client rating. We pair engineering-grade SEO and fast websites with intent-driven ads built specifically for Delhi's competitive search market, all backed by 24/7 support."
+        "a": "Avani Enterprises has run digital marketing since 2016, serving clients across India and the Gulf across projects across India and the Gulf with. We pair engineering-grade SEO and fast websites with intent-driven ads built specifically for Delhi's competitive search market, all backed by 24/7 support."
       },
       {
         "q": "Do you serve all areas of Delhi?",
@@ -2832,7 +2832,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Why choose Avani Enterprises for AI automation in Gurgaon?",
-        "a": "Avani Enterprises is headquartered in Unitech Cyber Park, Sector 39, Gurugram, with 8+ years of experience, projects delivered across India and the Gulf and a 5.0 client rating. Being local means on-site audits, fast iterations and a single accountable team — we build automation around your real Gurgaon workflow, measured by hours saved."
+        "a": "Avani Enterprises is headquartered in Unitech Cyber Park, Sector 39, Gurugram, with 8+ years of experience, projects delivered across India and the Gulf. Being local means on-site audits, fast iterations and a single accountable team — we build automation around your real Gurgaon workflow, measured by hours saved."
       },
       {
         "q": "Can you build a WhatsApp AI chatbot for my Gurgaon business?",
@@ -2993,7 +2993,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Why choose Avani Enterprises as an AI company in Noida?",
-        "a": "Avani Enterprises has 8+ years and 300+ delivered projects, a 5.0 client rating, and 24/7 support. We know Noida's IT-services, manufacturing and D2C landscape, scope every project around measurable ROI, and integrate AI directly into the CRMs and ERPs local teams already use."
+        "a": "Avani Enterprises has 8+ years and 300+ delivered projects, and 24/7 support. We know Noida's IT-services, manufacturing and D2C landscape, scope every project around measurable ROI, and integrate AI directly into the CRMs and ERPs local teams already use."
       },
       {
         "q": "What kinds of Noida businesses do you build AI for?",
@@ -3127,7 +3127,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "title": "Fixed-Scope, Transparent Pricing",
-        "desc": "8+ years of B2B trust and a 5.0 client rating because we quote a clear scope, deliver on time, and never bury surprise costs in AI projects."
+        "desc": "8+ years of B2B trust because we quote a clear scope, deliver on time, and never bury surprise costs in AI projects."
       }
     ],
     "localAreaText": "We build AI solutions for businesses across Connaught Place, Nehru Place's IT hub, the Okhla and Naraina industrial estates, the wholesale markets of Chandni Chowk and Sadar Bazar, and commercial hubs in South Delhi, Dwarka, Rohini, Janakpuri, and Lajpat Nagar — plus the wider NCR belt of Noida and Ghaziabad.",
@@ -3153,7 +3153,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Why choose Avani Enterprises as an AI company in Delhi?",
-        "a": "Avani Enterprises combines 8+ years of software and AI engineering, clients across India and the Gulf, projects across India and the Gulf, and a 5.0 client rating with on-the-ground access to Delhi. Our Gurugram HQ at Unitech Cyber Park, Sector 39 is a short drive from Nehru Place, Okhla, and CP, so we meet Delhi teams in person and ship production AI, not just prototypes."
+        "a": "Avani Enterprises combines 8+ years of software and AI engineering, clients across India and the Gulf, projects across India and the Gulf with on-the-ground access to Delhi. Our Gurugram HQ at Unitech Cyber Park, Sector 39 is a short drive from Nehru Place, Okhla, and CP, so we meet Delhi teams in person and ship production AI, not just prototypes."
       },
       {
         "q": "Do you build AI chatbots that understand Hindi and Hinglish for Delhi customers?",
@@ -3198,7 +3198,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
   'seo-company-mumbai': {
     "seo": {
       "title": "SEO Company in Mumbai | Avani Enterprises",
-      "description": "Avani Enterprises is an SEO company in Mumbai driving 3x organic traffic for BKC, Lower Parel & Andheri businesses. 95% first-page success, 8+ years. Get a free SEO audit.",
+      "description": "Avani Enterprises is an SEO company in Mumbai driving compounding organic traffic for BKC, Lower Parel & Andheri businesses. A disciplined technical-SEO process, 8+ years. Get a free SEO audit.",
       "keywords": "seo company mumbai, seo services mumbai, seo agency mumbai, local seo mumbai, search engine optimization mumbai, google ranking company mumbai, ecommerce seo mumbai",
       "canonical": "https://www.avanienterprises.in/seo-company-mumbai"
     },
@@ -3283,7 +3283,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "title": "8+ Years, Clients across India & the Gulf",
-        "desc": "A Gurugram-based team with projects across India and the Gulf and a 5.0 rating, delivering enterprise-grade SEO with a 95% first-page success rate."
+        "desc": "A Gurugram-based team with projects across India and the Gulf, delivering enterprise-grade SEO with a disciplined technical-SEO process."
       },
       {
         "title": "Local + National Intent",
@@ -3308,11 +3308,11 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "How long does SEO take to show results in Mumbai?",
-        "a": "Most Mumbai clients see meaningful movement in 3 to 6 months. Technical fixes and local SEO can lift rankings within weeks, while competitive commercial keywords in markets like BKC or real estate typically take 4 to 6 months of sustained work. We target a 95% first-page success rate within 120 days."
+        "a": "Most Mumbai clients see meaningful movement in 3 to 6 months. Technical fixes and local SEO can lift rankings within weeks, while competitive commercial keywords in markets like BKC or real estate typically take 4 to 6 months of sustained work. We target first-page positions within 120 days."
       },
       {
         "q": "Why choose Avani as your SEO company in Mumbai?",
-        "a": "Avani Enterprises brings 8+ years, clients across India and the Gulf, projects across India and the Gulf, and a 5.0 rating to Mumbai campaigns. We fix technical SEO directly, build real authority links, and benchmark against the city's toughest competitors — from BFSI in BKC to hospitality in Bandra — instead of running generic checklists."
+        "a": "Avani Enterprises brings 8+ years, clients across India and the Gulf, projects across India and the Gulf to Mumbai campaigns. We fix technical SEO directly, build real authority links, and benchmark against the city's toughest competitors — from BFSI in BKC to hospitality in Bandra — instead of running generic checklists."
       },
       {
         "q": "Do you do local SEO for specific Mumbai areas?",
@@ -3324,7 +3324,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Do you guarantee first-page Google rankings?",
-        "a": "Google advises against ranking guarantees, and any agency that promises them is a red flag. What we can show is a 95% first-page success rate, transparent monthly reporting on rankings, traffic, and conversions, and an average 3x organic traffic increase for clients."
+        "a": "Google advises against ranking guarantees, and any agency that promises them is a red flag. What we can show is a disciplined technical-SEO process, transparent monthly reporting on rankings, traffic, and conversions, and an average compounding organic growth for clients."
       }
     ],
     "reviews": [],
@@ -3357,7 +3357,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
   'seo-company-bangalore': {
     "seo": {
       "title": "SEO Company in Bangalore | Avani Enterprises",
-      "description": "Avani Enterprises is an SEO company in Bangalore (Bengaluru) driving 3x organic traffic for startups, SaaS & D2C brands. 95% first-page success. Get a free SEO audit.",
+      "description": "Avani Enterprises is an SEO company in Bangalore (Bengaluru) driving compounding organic traffic for startups, SaaS & D2C brands. A disciplined technical-SEO process. Get a free SEO audit.",
       "keywords": "seo company bangalore, seo services bengaluru, seo agency bangalore, local seo bangalore, technical seo bangalore, saas seo bengaluru, organic growth bangalore",
       "canonical": "https://www.avanienterprises.in/seo-company-bangalore"
     },
@@ -3442,7 +3442,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "title": "8+ Years, Projects across India & the Gulf",
-        "desc": "A Gurugram-based team with clients across India and the Gulf and a 5.0 rating, delivering 3x organic traffic growth and 95% first-page success."
+        "desc": "A Gurugram-based team with clients across India and the Gulf, delivering compounding organic growth and a disciplined technical-SEO process."
       },
       {
         "title": "Local + National in One Plan",
@@ -3471,7 +3471,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Why choose Avani Enterprises for SEO in Bangalore?",
-        "a": "Avani Enterprises brings 8+ years, projects across India and the Gulf, clients across India and the Gulf, and a 5.0 rating, with a track record of 3x organic traffic growth and 95% first-page success. We're built for Bengaluru's high-competition SaaS, tech, and D2C market — combining technical SEO depth with content and local rankings."
+        "a": "Avani Enterprises brings 8+ years, projects across India and the Gulf, clients across India and the Gulf, with a track record of compounding organic growth and a disciplined technical-SEO process. We're built for Bengaluru's high-competition SaaS, tech, and D2C market — combining technical SEO depth with content and local rankings."
       },
       {
         "q": "Do you do SEO for SaaS and startups in Bangalore?",
@@ -3604,8 +3604,8 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
         "desc": "You see exactly where ad spend goes and which keywords drive enquiries, with monthly dashboards covering ranks, conversions, and cost per lead across SEO, Google Ads, and Meta."
       },
       {
-        "title": "8+ years and a 5.0 client rating",
-        "desc": "A track record of projects across India and the Gulf and clients across India and the Gulf means a stable, senior team behind your account, plus 24/7 support reachable on WhatsApp and phone."
+        "title": "8+ years",
+        "desc": "A track record of clients and projects across India and the Gulf means a stable, senior team behind your account, plus 24/7 support reachable on WhatsApp and phone."
       }
     ],
     "localAreaText": "We work with brands right across the metro, from the corporate cores of Bandra Kurla Complex (BKC), Nariman Point, and Lower Parel to the startup and studio clusters of Andheri and Powai, the trade hubs of Zaveri Bazaar and Dadar, and the fast-growing suburban markets of Navi Mumbai and Thane.",
@@ -3626,11 +3626,11 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "How long does it take to see results from digital marketing in Mumbai?",
-        "a": "Performance campaigns on Google and Meta can generate qualified Mumbai leads within the first few weeks. SEO is a compounding channel that typically shows meaningful movement in 3 to 4 months, with clients commonly reaching up to 3x organic traffic over time."
+        "a": "Performance campaigns on Google and Meta can generate qualified Mumbai leads within the first few weeks. SEO is a compounding channel that typically shows meaningful movement in 3 to 4 months, with clients seeing organic traffic compound over time."
       },
       {
         "q": "Why should I choose Avani Enterprises for digital marketing in Mumbai?",
-        "a": "Avani Enterprises has run digital marketing since 2016, serving clients across India and the Gulf across projects across India and the Gulf with a 5.0 client rating. We pair engineering-grade SEO and fast websites with intent-driven performance ads built for Mumbai's premium-CPC, mobile-first market, all backed by 24/7 support."
+        "a": "Avani Enterprises has run digital marketing since 2016, serving clients across India and the Gulf across projects across India and the Gulf with. We pair engineering-grade SEO and fast websites with intent-driven performance ads built for Mumbai's premium-CPC, mobile-first market, all backed by 24/7 support."
       },
       {
         "q": "Do you serve all areas of Mumbai and MMR?",
@@ -3763,8 +3763,8 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
         "desc": "You see exactly where ad spend goes and which keywords drive pipeline, with monthly dashboards covering ranks, conversions, ROAS, and cost per lead — the metrics Bangalore growth teams live by."
       },
       {
-        "title": "8+ years and a 5.0 client rating",
-        "desc": "A track record of projects across India and the Gulf and clients across India and the Gulf means a stable, senior team with 24/7 support on WhatsApp and phone — not interns learning on your ad budget."
+        "title": "8+ years",
+        "desc": "A track record of clients and projects across India and the Gulf means a stable, senior team with 24/7 support on WhatsApp and phone — not interns learning on your ad budget."
       }
     ],
     "localAreaText": "We work with brands right across Bengaluru, from the startup and SaaS belt of Koramangala, HSR Layout, and Indiranagar to the IT corridors of Whitefield, Electronic City, and Outer Ring Road, plus the central retail and commercial hubs around MG Road, Brigade Road, and Jayanagar.",
@@ -3785,11 +3785,11 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "How long does it take to see results from digital marketing in Bangalore?",
-        "a": "PPC campaigns like Google and Meta ads can generate qualified Bengaluru leads within the first few weeks. SEO is a compounding channel that typically shows meaningful movement in 3 to 4 months, with clients commonly reaching up to 3x organic traffic over time."
+        "a": "PPC campaigns like Google and Meta ads can generate qualified Bengaluru leads within the first few weeks. SEO is a compounding channel that typically shows meaningful movement in 3 to 4 months, with clients seeing organic traffic compound over time."
       },
       {
         "q": "Why should I choose Avani Enterprises for digital marketing in Bangalore?",
-        "a": "Avani Enterprises has run digital marketing since 2016, serving clients across India and the Gulf across projects across India and the Gulf with a 5.0 client rating. We pair engineering-grade SEO and fast websites with intent-driven PPC built for Bangalore's data-driven, startup-heavy market, all backed by 24/7 support."
+        "a": "Avani Enterprises has run digital marketing since 2016, serving clients across India and the Gulf across projects across India and the Gulf with. We pair engineering-grade SEO and fast websites with intent-driven PPC built for Bangalore's data-driven, startup-heavy market, all backed by 24/7 support."
       },
       {
         "q": "Do you do performance marketing and PPC for Bangalore startups?",
@@ -3919,11 +3919,11 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "title": "SEO + Paid Working Together",
-        "desc": "We blend organic search and paid acquisition into one funnel — averaging 3x organic traffic growth while paid campaigns capture high-intent tricity buyers immediately."
+        "desc": "We blend organic search and paid acquisition into one funnel — building compounding organic growth while paid campaigns capture high-intent tricity buyers immediately."
       },
       {
         "title": "Transparent Reporting, No Lock-In",
-        "desc": "Clear monthly dashboards showing rankings, traffic, leads, and ad ROAS — backed by 8+ years of agency experience and a 5.0 client rating."
+        "desc": "Clear monthly dashboards showing rankings, traffic, leads, and ad ROAS — backed by 8+ years of agency experience."
       }
     ],
     "localAreaText": "We run digital marketing campaigns for businesses across the tricity — Sector 17, Sector 22, Sector 34, and Sector 35, the Industrial Area (Phase I & II) including Elante, the Rajiv Gandhi Chandigarh Technology Park in Kishangarh, plus Mohali's IT City and Phase 7, and Panchkula's Sector 5 and MDC. Free strategy calls available across the Chandigarh tricity.",
@@ -3945,11 +3945,11 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "How long before I see results from digital marketing in Chandigarh?",
-        "a": "Paid PPC campaigns on Google and Meta can generate qualified leads within the first few weeks of launch, while SEO compounds over 3 to 6 months. Avani targets 95% first-page ranking success on chosen keywords and averages 3x organic traffic growth as campaigns mature."
+        "a": "Paid PPC campaigns on Google and Meta can generate qualified leads within the first few weeks of launch, while SEO compounds over 3 to 6 months. Avani targets a disciplined technical-SEO process for chosen keywords and averages compounding organic growth as campaigns mature."
       },
       {
         "q": "Why choose Avani Enterprises as a digital marketing agency in Chandigarh?",
-        "a": "Avani Enterprises brings 8+ years of experience, clients across India and the Gulf, projects across India and the Gulf, and a 5.0 client rating, with campaigns tailored to the tricity's specific business clusters — IT and ITES at the Technology Park, premium retail around Sector 17 and Elante, and service brands across Mohali and Panchkula — rather than generic targeting. Reporting is fully transparent with no long lock-ins."
+        "a": "Avani Enterprises brings 8+ years of experience, clients across India and the Gulf, projects across India and the Gulf, with campaigns tailored to the tricity's specific business clusters — IT and ITES at the Technology Park, premium retail around Sector 17 and Elante, and service brands across Mohali and Panchkula — rather than generic targeting. Reporting is fully transparent with no long lock-ins."
       },
       {
         "q": "Do you offer social media marketing for Chandigarh businesses?",
@@ -4108,7 +4108,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Why choose Avani Enterprises for web development in Dubai?",
-        "a": "Avani Enterprises has 8+ years of experience and 300+ delivered projects with a 5.0 client rating. We build bilingual, mobile-first sites with 2-second load times, understand Dubai's free-zone, real estate and retail markets, and deliver remotely from India with 24/7 communication across Gulf Standard Time — UAE-standard quality without local-agency overheads."
+        "a": "Avani Enterprises has 8+ years of experience and 300+ delivered projects with. We build bilingual, mobile-first sites with 2-second load times, understand Dubai's free-zone, real estate and retail markets, and deliver remotely from India with 24/7 communication across Gulf Standard Time — UAE-standard quality without local-agency overheads."
       },
       {
         "q": "Do you have an office in Dubai?",
@@ -4238,7 +4238,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "title": "8+ Years, Projects across India & the Gulf",
-        "desc": "A global-grade team with clients across India and the Gulf and a 5.0 rating, delivering enterprise-quality websites at competitive, transparent AED-friendly pricing."
+        "desc": "A global-grade team with clients across India and the Gulf, delivering enterprise-quality websites at competitive, transparent AED-friendly pricing."
       },
       {
         "title": "SEO & Conversions Baked In",
@@ -4268,7 +4268,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Why should I choose Avani Enterprises for web development in Abu Dhabi?",
-        "a": "Avani Enterprises brings 8+ years of experience, projects across India and the Gulf, clients across India and the Gulf, and a 5.0 client rating. We build custom, fast-loading, bilingual sites tailored to Abu Dhabi's market — real estate, hospitality, trading, and professional services — with Google UAE SEO and 24/7 support included."
+        "a": "Avani Enterprises brings 8+ years of experience, projects across India and the Gulf, clients across India and the Gulf. We build custom, fast-loading, bilingual sites tailored to Abu Dhabi's market — real estate, hospitality, trading, and professional services — with Google UAE SEO and 24/7 support included."
       },
       {
         "q": "Do you build bilingual Arabic and English websites for Abu Dhabi?",
@@ -4280,7 +4280,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Will my website rank on Google for Abu Dhabi searches?",
-        "a": "Every site we build ships with clean code, schema markup, and local SEO structure so you can rank for searches like your service plus Abu Dhabi on Google UAE. We have a 95% first-page success rate on targeted local keywords and can drive up to 3x organic traffic with ongoing SEO."
+        "a": "Every site we build ships with clean code, schema markup, and local SEO structure so you can rank for searches like your service plus Abu Dhabi on Google UAE. We build for first-page positions on targeted local keywords and can drive compounding organic traffic with ongoing SEO."
       }
     ],
     "reviews": [],
@@ -4313,7 +4313,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
   'web-development-company-qatar': {
     "seo": {
       "title": "Web Development Company in Qatar | Avani Enterprises",
-      "description": "Avani Enterprises builds fast, bilingual Arabic-English websites and ecommerce stores for Qatar and Doha businesses. projects across India and the Gulf, 8+ years, 5.0 rating. Get a free quote.",
+      "description": "Avani Enterprises builds fast, bilingual Arabic-English websites and ecommerce stores for Qatar and Doha businesses. Delivering across India and the Gulf, 8+ years. Get a free quote.",
       "keywords": "web development company qatar, website development doha, web design qatar, ecommerce development qatar, web developers doha, arabic website qatar, business website qatar, qatar web agency",
       "canonical": "https://www.avanienterprises.in/web-development-company-qatar"
     },
@@ -4398,7 +4398,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "title": "8+ Years, Projects across India & the Gulf",
-        "desc": "An experienced India-based team with clients across India and the Gulf and a 5.0 rating, delivering enterprise-grade websites at globally competitive rates — without Doha agency overheads."
+        "desc": "An experienced India-based team with clients across India and the Gulf, delivering enterprise-grade websites at globally competitive rates — without Doha agency overheads."
       },
       {
         "title": "SEO & Speed Baked In From Day One",
@@ -4428,7 +4428,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Why should I choose Avani Enterprises for web development in Qatar?",
-        "a": "Avani Enterprises brings 8+ years of experience, projects across India and the Gulf, clients across India and the Gulf, and a 5.0 client rating. We build custom, fast, fully bilingual Arabic-English sites tailored to Qatar's premium market — energy, hospitality, retail, real estate, and trading — with SEO and 24/7 support included, at globally competitive rates."
+        "a": "Avani Enterprises brings 8+ years of experience, projects across India and the Gulf, clients across India and the Gulf. We build custom, fast, fully bilingual Arabic-English sites tailored to Qatar's premium market — energy, hospitality, retail, real estate, and trading — with SEO and 24/7 support included, at globally competitive rates."
       },
       {
         "q": "Do you build Arabic and English websites for Qatar businesses?",
@@ -4440,7 +4440,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Will my website rank on Google for Qatar searches?",
-        "a": "Every site we build ships with clean code, schema markup, and local SEO structure so you can rank on Google.com.qa for searches like your service plus Qatar or Doha. We have a 95% first-page success rate on targeted local keywords and can drive up to 3x organic traffic with ongoing SEO."
+        "a": "Every site we build ships with clean code, schema markup, and local SEO structure so you can rank on Google.com.qa for searches like your service plus Qatar or Doha. We build for first-page positions on targeted local keywords and can drive compounding organic traffic with ongoing SEO."
       }
     ],
     "reviews": [],
@@ -4562,7 +4562,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "title": "Transparent Reporting, 5.0-Rated Support",
-        "desc": "Live rank, traffic, and lead dashboards with a dedicated specialist reachable on WhatsApp and call across GST hours — backed by our 5.0 client rating and 24/7 availability."
+        "desc": "Live rank, traffic, and lead dashboards with a dedicated specialist reachable on WhatsApp and call across GST hours — backed by and 24/7 availability."
       }
     ],
     "localAreaText": "We actively serve businesses across Dubai — Business Bay, Downtown Dubai, DIFC, Dubai Marina, JLT (Jumeirah Lake Towers), Deira, Bur Dubai, Sheikh Zayed Road, Al Quoz, Dubai Internet City, Dubai Silicon Oasis, and JVC (Jumeirah Village Circle) — tailoring each campaign to the hub's audience and search behaviour.",
@@ -4589,7 +4589,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Why choose Avani Enterprises as your SEO company in Dubai?",
-        "a": "Avani Enterprises has 8+ years of experience, projects across India and the Gulf, clients across India and the Gulf, and a 5.0 client rating. We serve Dubai remotely from our HQ at Unitech Cyber Park, Sector 39, Gurugram, India, combining technical SEO, bilingual content, and link-building in-house, with 24/7 support and transparent reporting aligned to Gulf Standard Time."
+        "a": "Avani Enterprises has 8+ years of experience, projects across India and the Gulf, clients across India and the Gulf. We serve Dubai remotely from our HQ at Unitech Cyber Park, Sector 39, Gurugram, India, combining technical SEO, bilingual content, and link-building in-house, with 24/7 support and transparent reporting aligned to Gulf Standard Time."
       },
       {
         "q": "Do you offer local SEO and Arabic SEO for Dubai businesses?",
@@ -4680,7 +4680,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       {
         "icon": "🔍",
         "title": "SEO & Local Search",
-        "desc": "Technical, on-page, and local SEO that ranks you for high-intent 'in Dubai' searches across English and Arabic, with structured data and fast Core Web Vitals — 95% first-page success on targeted terms."
+        "desc": "Technical, on-page, and local SEO that ranks you for high-intent 'in Dubai' searches across English and Arabic, with structured data and fast Core Web Vitals — a disciplined technical-SEO process for targeted terms."
       },
       {
         "icon": "🎯",
@@ -4722,8 +4722,8 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
         "desc": "SEO, Google Ads, Meta, content, and conversion-optimised landing pages handled by one in-house team — no agency hand-offs, no finger-pointing when results need answers."
       },
       {
-        "title": "8+ Years, Projects across India & the Gulf, 5.0 Rating",
-        "desc": "Since 2016 we've shipped projects across India and the Gulf for clients across India and the Gulf with a 5.0 client rating — proven playbooks for competitive niches, delivered to Dubai at India-HQ efficiency."
+        "title": "8+ Years, Projects across India & the Gulf",
+        "desc": "Since 2016 we've shipped projects across India and the Gulf for clients across India and the Gulf with — proven playbooks for competitive niches, delivered to Dubai at India-HQ efficiency."
       }
     ],
     "localAreaText": "We run digital marketing campaigns for businesses across Dubai — from the corporate and financial towers of DIFC, Business Bay, and Sheikh Zayed Road, to the retail and hospitality brands in Downtown Dubai, Dubai Marina, and JBR, and the trading and free-zone companies around Deira, JLT, and Dubai Internet City.",
@@ -4748,7 +4748,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Why choose Avani Enterprises as a digital marketing company in Dubai?",
-        "a": "Avani Enterprises has 8+ years in business, projects across India and the Gulf, clients across India and the Gulf, and a 5.0 client rating. We serve Dubai remotely from our India HQ at Unitech Cyber Park, Sector 39, Gurugram — combining a full-funnel, ROI-first team under one roof with India-HQ cost efficiency and 24/7 communication, so you get measurable AED pipeline without paying inflated local-agency rates."
+        "a": "Avani Enterprises has 8+ years in business, projects across India and the Gulf, clients across India and the Gulf. We serve Dubai remotely from our India HQ at Unitech Cyber Park, Sector 39, Gurugram — combining a full-funnel, ROI-first team under one roof with India-HQ cost efficiency and 24/7 communication, so you get measurable AED pipeline without paying inflated local-agency rates."
       },
       {
         "q": "Do you have a local office in Dubai?",
@@ -4793,7 +4793,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
   'web-development-company-london': {
     "seo": {
       "title": "Web Development Company in London | Avani Enterprises",
-      "description": "Avani Enterprises builds fast, custom websites and ecommerce stores for London businesses. projects across India and the Gulf, 5.0 rating, 8+ years. Get a free quote today.",
+      "description": "Avani Enterprises builds fast, custom websites and ecommerce stores for London businesses. Delivering across India and the Gulf, 8+ years. Get a free quote today.",
       "keywords": "web development company london, website development london, web design london, ecommerce development london, custom website london, web developer london, react development london",
       "canonical": "https://www.avanienterprises.in/web-development-company-london"
     },
@@ -4882,7 +4882,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "title": "8+ Years, Projects across India & the Gulf",
-        "desc": "A Gurugram team with clients across India and the Gulf and a 5.0 rating, delivering agency-grade websites and ecommerce at a fraction of central-London studio rates."
+        "desc": "A Gurugram team with clients across India and the Gulf, delivering agency-grade websites and ecommerce at a fraction of central-London studio rates."
       }
     ],
     "localAreaText": "We build and support websites for businesses across London — from the financial institutions of the City and Canary Wharf to the fintech and SaaS scene around Shoreditch, Old Street, and Clerkenwell, the professional firms of Mayfair and Holborn, the creative agencies of Soho, and retailers across Camden, Islington, and the West End.",
@@ -4908,7 +4908,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Why should I choose Avani Enterprises for web development in London?",
-        "a": "Avani Enterprises brings 8+ years of experience, projects across India and the Gulf, clients across India and the Gulf, and a 5.0 client rating. We build custom, fast-loading, GDPR-aware sites tuned for the UK market, with a 4.5–5.5 hour overlap to London business hours, 24/7 support, and agency-grade quality at a fraction of London studio prices."
+        "a": "Avani Enterprises brings 8+ years of experience, projects across India and the Gulf, clients across India and the Gulf. We build custom, fast-loading, GDPR-aware sites tuned for the UK market, with a 4.5–5.5 hour overlap to London business hours, 24/7 support, and agency-grade quality at a fraction of London studio prices."
       },
       {
         "q": "Do you have an office in London?",
@@ -4920,7 +4920,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Will my website rank on Google for London searches?",
-        "a": "Every site we build ships with clean code, schema markup, and UK-focused on-page SEO so you can rank for searches like your service plus London. We have a 95% first-page success rate on targeted local keywords and can drive up to 3x organic traffic with ongoing SEO."
+        "a": "Every site we build ships with clean code, schema markup, and UK-focused on-page SEO so you can rank for searches like your service plus London. We build for first-page positions on targeted local keywords and can drive compounding organic traffic with ongoing SEO."
       }
     ],
     "reviews": [],
@@ -5042,7 +5042,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "title": "One Accountable Team, 24/7",
-        "desc": "Design, development, hosting, and SEO in-house with a 5.0 client rating — one English-speaking point of contact and round-the-clock support, no agency hand-offs."
+        "desc": "Design, development, hosting, and SEO in-house with — one English-speaking point of contact and round-the-clock support, no agency hand-offs."
       }
     ],
     "localAreaText": "We serve US businesses remotely from our India HQ, with clients across major tech and commerce hubs including Silicon Valley and the San Francisco Bay Area, Austin's startup scene, New York City, Los Angeles, Chicago, Seattle, Boston, Miami, and Dallas.",
@@ -5067,7 +5067,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Why choose Avani Enterprises for web development in the USA?",
-        "a": "Avani Enterprises has 8+ years of experience, clients across India and the Gulf, and 300+ delivered projects with a 5.0 client rating. We give US founders and businesses senior offshore engineering at a fraction of US rates, with timezone overlap, fluent English communication, and 24/7 support from one accountable in-house team."
+        "a": "Avani Enterprises has 8+ years of experience, clients across India and the Gulf, and 300+ delivered projects with. We give US founders and businesses senior offshore engineering at a fraction of US rates, with timezone overlap, fluent English communication, and 24/7 support from one accountable in-house team."
       },
       {
         "q": "How does working with an offshore India team across US timezones work?",

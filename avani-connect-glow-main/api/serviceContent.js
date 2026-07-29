@@ -1205,7 +1205,7 @@ const MODEL_ALIASES = {
 // ---------------------------------------------------------------------------
 // Confirmed, staffed office cities — MUST match `confirmed: true` in offices.js.
 // Duplicated here because this data slice stays import-free so the serverless
-// function can consume it. generate-sitemap.cjs asserts the two agree and fails
+// function can consume it. Generate-sitemap.cjs asserts the two agree and fails
 // the build if they drift, so this cannot silently go stale.
 //
 // Only add a city here once the client confirms a real, staffed premises.
@@ -1965,7 +1965,7 @@ const STATIC_PAGES = {
         ],
       },
     ],
-    faqs: [{ q: 'How do I request deletion of my data?', a: 'Email kp@avanienterprises.in from the address you contacted us with, and we will confirm once it is done.' }],
+    faqs: [{ q: 'How do I request deletion of my data?', a: 'Email kp@avanienterprises.in from the address you contacted us, and we will confirm once it is done.' }],
   },
   'terms-and-conditions': {
     metaTitle: "Terms and Conditions — Avani Enterprises",
@@ -2408,7 +2408,7 @@ function uniqueBlock(resolved) {
 
     if (service.stack && service.stack.length) {
       bodyBlocks.push({
-        heading: 'What we build it with, and why that matters to you',
+        heading: 'What we build it, and why that matters to you',
         paragraphs: [
           `We work with ${listSentence(service.stack)}. The specific tools matter less than two things you should insist on from any supplier: that you own the accounts and the code at the end, and that nothing is built on a platform only that supplier can maintain.`,
           `You receive the repository and the deployment configuration on handover, so changing supplier later is a commercial decision rather than a technical trap.`,
@@ -2494,7 +2494,7 @@ function uniqueBlock(resolved) {
 }
 
 /**
- * Page-specific FAQs: service FAQs plus, where relevant, a genuinely
+ * Page-specific FAQs: service FAQs, where relevant, a genuinely
  * location- or model-specific question. These get prepended to the template's
  * own FAQ list so no two pages carry the same set.
  */
