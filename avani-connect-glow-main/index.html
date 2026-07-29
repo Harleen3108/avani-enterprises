@@ -104,23 +104,65 @@
   <!-- Mobile browser chrome colour — matches the dark navy background -->
   <meta name="theme-color" content="#0f172a" />
 
-  <!-- Optimized Third-Party Trackers (Delayed load to reduce TBT / JS execution time) -->
+  <!-- ── Analytics & advertising tags ────────────────────────────────────────
+       Split into two tiers deliberately.
+
+       GA4 loads IMMEDIATELY. It used to sit behind the same interaction gate as
+       the ad pixels, so any visitor who landed and left inside four seconds
+       without scrolling or moving the mouse produced NO pageview at all. That is
+       the bounce you most need to see, and it was invisible — sessions and
+       bounce rate were both materially understated.
+
+       The ad pixels stay deferred behind first interaction: they are the
+       expensive ones, and a bot that never interacts is not worth a pixel.
+  -->
   <script>
+    window.AVANI_TAGS = {
+      GA4_ID:        'G-31RKCJRE8G',
+      GOOGLE_ADS_ID: 'AW-17823419321',
+      META_PIXEL_ID: '2263948097472371',
+      // ⚠️ SET THIS. Google Ads → Goals → Conversions → New conversion action
+      // ("Submit lead form"). Copy the send_to value it gives you, which looks
+      // like 'AW-17823419321/AbC-D_efGhIjKlMnOp'.
+      // Until it is filled in, generate_lead reaches GA4 but Google Ads counts
+      // NOTHING — Smart Bidding has no lead signal to optimise against.
+      ADS_CONVERSION_LABEL: ''
+    };
+
+    // ── Tier 1: GA4, immediately ─────────────────────────────────────────
+    (function () {
+      var T = window.AVANI_TAGS;
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () { window.dataLayer.push(arguments); };
+      window.gtag('js', new Date());
+
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + T.GA4_ID;
+      document.head.appendChild(s);
+
+      // page_path is sent explicitly with generate_lead, so conversions stay
+      // attributable to a route even though this is a single-page app.
+      window.gtag('config', T.GA4_ID, { send_page_view: true });
+    })();
+
+    // ── Tier 2: ad pixels, on first interaction ──────────────────────────
     (function() {
       var initialized = false;
-      
+
       function initTrackers() {
         if (initialized) return;
         initialized = true;
-        
-        // Remove event listeners
+
+        var T = window.AVANI_TAGS;
+
         window.removeEventListener('scroll', initTrackers);
         window.removeEventListener('mousemove', initTrackers);
         window.removeEventListener('touchstart', initTrackers);
         window.removeEventListener('click', initTrackers);
         window.removeEventListener('keydown', initTrackers);
 
-        // Load Facebook Pixel
+        // Meta Pixel
         !function(f,b,e,v,n,t,s)
         {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
         n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -129,269 +171,31 @@
         t.src=v;s=b.getElementsByTagName(e)[0];
         s.parentNode.insertBefore(t,s)}(window, document,'script',
         'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '2263948097472371');
+        fbq('init', T.META_PIXEL_ID);
         fbq('track', 'PageView');
 
-        // ── Google tags ──────────────────────────────────────────────────────
-        // AW- is the Google Ads conversion tag (already live).
-        // G-  is the GA4 property. Until a GA4 ID is set, the generate_lead
-        //     event fired by src/lib/leadTracking.ts reaches Google Ads but has
-        //     nowhere to land in GA4, so there is no page-level report of which
-        //     pages produce enquiries.
-        //
-        // Both are live. generate_lead (src/lib/leadTracking.ts) fires on a
-        // confirmed form submission and reaches both properties, carrying the
-        // converting page path, page type and first-touch UTM/gclid/fbclid.
-        var GOOGLE_ADS_ID = 'AW-17823419321';
-        var GA4_ID = 'G-31RKCJRE8G';
-
-        window.dataLayer = window.dataLayer || [];
-        window.gtag = function() { window.dataLayer.push(arguments); };
-
-        var script = document.createElement('script');
-        script.async = true;
-        // gtag.js only needs loading once; additional IDs attach via config().
-        script.src = 'https://www.googletagmanager.com/gtag/js?id=' + (GA4_ID || GOOGLE_ADS_ID);
-        document.head.appendChild(script);
-
-        window.gtag('js', new Date());
-        window.gtag('config', GOOGLE_ADS_ID);
-        if (GA4_ID) {
-          window.gtag('config', GA4_ID, {
-            // We send page_path explicitly with generate_lead, so pages are
-            // attributable even though this is a single-page app.
-            send_page_view: true
-          });
-        }
+        // Google Ads attaches to the gtag.js already loaded in tier 1.
+        window.gtag('config', T.GOOGLE_ADS_ID);
       }
 
-      // Initialize on user interaction
       window.addEventListener('scroll', initTrackers, { passive: true });
       window.addEventListener('mousemove', initTrackers, { passive: true });
       window.addEventListener('touchstart', initTrackers, { passive: true });
       window.addEventListener('click', initTrackers, { passive: true });
       window.addEventListener('keydown', initTrackers, { passive: true });
 
-      // Fallback: load after 4 seconds if no interaction occurs
       setTimeout(initTrackers, 4000);
+
+      // A form submit must never be missed because the pixels had not loaded.
+      window.avaniEnsureAdPixels = initTrackers;
     })();
   </script>
 
-  <!-- Structured Data: Organization + WebSite + LocalBusiness + Person (static, visible to Googlebot before JS) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Organization",
-        "@id": "https://www.avanienterprises.in/#organization",
-        "name": "Avani Enterprises",
-        "legalName": "Avani Enterprises",
-        "url": "https://www.avanienterprises.in",
-        "foundingDate": "2016",
-        "foundingLocation": {
-          "@type": "Place",
-          "name": "Rohtak, Haryana, India"
-        },
-        "numberOfEmployees": {
-          "@type": "QuantitativeValue",
-          "value": 30
-        },
-        "logo": {
-          "@type": "ImageObject",
-          "@id": "https://www.avanienterprises.in/#logo",
-          "url": "https://www.avanienterprises.in/logo.png",
-          "width": 512,
-          "height": 512,
-          "caption": "Avani Enterprises"
-        },
-        "image": {
-          "@id": "https://www.avanienterprises.in/#logo"
-        },
-        "founder": {
-          "@id": "https://www.avanienterprises.in/#person/kapilkhandelwal"
-        },
-        "sameAs": [
-          "https://www.linkedin.com/company/avani-enterprises-india",
-          "https://www.instagram.com/avani_enterprises_india/",
-          "https://twitter.com/AvaniEnterprises"
-        ],
-        "contactPoint": [
-          {
-            "@type": "ContactPoint",
-            "telephone": "+919253625099",
-            "email": "kp@avanienterprises.in",
-            "contactType": "customer service",
-            "areaServed": ["IN", "AE", "GB", "US"],
-            "availableLanguage": ["English", "Hindi"],
-            "contactOption": "TollFree",
-            "hoursAvailable": {
-              "@type": "OpeningHoursSpecification",
-              "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-              "opens": "09:00",
-              "closes": "19:00"
-            }
-          }
-        ],
-        "description": "Avani Enterprises — a Gurugram-based digital marketing and web development agency helping businesses scale with AI-driven SEO, paid media, custom software, and HR solutions. clients across India and the Gulf, projects across India and the Gulf, 8+ years."
-      },
-      {
-        "@type": "WebSite",
-        "@id": "https://www.avanienterprises.in/#website",
-        "name": "Avani Enterprises",
-        "url": "https://www.avanienterprises.in",
-        "description": "Web development, SEO, digital marketing, AI automation, and custom HR & CRM software for businesses across India.",
-        "inLanguage": "en-IN",
-        "publisher": { "@id": "https://www.avanienterprises.in/#organization" },
-        "potentialAction": {
-          "@type": "SearchAction",
-          "target": {
-            "@type": "EntryPoint",
-            "urlTemplate": "https://www.avanienterprises.in/blog?q={search_term_string}"
-          },
-          "query-input": "required name=search_term_string"
-        }
-      },
-      {
-        "@type": ["LocalBusiness", "ProfessionalService"],
-        "@id": "https://www.avanienterprises.in/#localbusiness",
-        "name": "Avani Enterprises",
-        "image": {
-          "@id": "https://www.avanienterprises.in/#logo"
-        },
-        "url": "https://www.avanienterprises.in",
-        "telephone": "+919253625099",
-        "email": "kp@avanienterprises.in",
-        "priceRange": "$$",
-        "currenciesAccepted": "INR",
-        "paymentAccepted": "Cash, Credit Card, Bank Transfer, UPI",
-        "parentOrganization": { "@id": "https://www.avanienterprises.in/#organization" },
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "DLF Cyber City",
-          "addressLocality": "Gurugram",
-          "addressRegion": "Haryana",
-          "postalCode": "122002",
-          "addressCountry": "IN"
-        },
-        "geo": { "@type": "GeoCoordinates", "latitude": 28.4955, "longitude": 77.0888 },
-        "hasMap": "https://maps.google.com/?q=DLF+Cyber+City+Gurugram+Haryana+122002",
-        "openingHoursSpecification": [
-          {
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-            "opens": "09:00",
-            "closes": "19:00"
-          }
-        ],
-        "areaServed": [
-          { "@type": "Country", "name": "India" },
-          { "@type": "AdministrativeArea", "name": "Haryana" },
-          { "@type": "AdministrativeArea", "name": "Delhi NCR" },
-          { "@type": "City", "name": "Gurugram" },
-          { "@type": "City", "name": "Noida" },
-          { "@type": "City", "name": "Faridabad" },
-          { "@type": "City", "name": "Rohtak" },
-          { "@type": "City", "name": "Delhi" },
-          { "@type": "City", "name": "Mumbai" },
-          { "@type": "City", "name": "Dubai" }
-        ],
-        "sameAs": [
-          "https://www.linkedin.com/company/avani-enterprises-india",
-          "https://www.instagram.com/avani_enterprises_india/",
-          "https://twitter.com/AvaniEnterprises"
-        ],
-        "knowsAbout": [
-          "Web Development",
-          "Search Engine Optimization",
-          "Digital Marketing",
-          "Google Ads Management",
-          "Meta Advertising",
-          "AI Automation",
-          "CRM Development",
-          "HR Portal Development",
-          "Custom Software Development",
-          "Mobile App Development",
-          "ERP Development",
-          "Social Media Marketing"
-        ],
-        "hasOfferCatalog": {
-          "@type": "OfferCatalog",
-          "name": "Digital Services",
-          "itemListElement": [
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Web Development", "url": "https://www.avanienterprises.in/web-development-company" } },
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "SEO Services", "url": "https://www.avanienterprises.in/seo-company" } },
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Digital Marketing", "url": "https://www.avanienterprises.in/digital-marketing-company" } },
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Google Ads", "url": "https://www.avanienterprises.in/google-ads-agency" } },
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI Automation", "url": "https://www.avanienterprises.in/ai-automation-company" } },
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "CRM Development", "url": "https://www.avanienterprises.in/crm-development-company" } },
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "HR Portal Software", "url": "https://www.avanienterprises.in/hr-portal" } },
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Mobile App Development", "url": "https://www.avanienterprises.in/mobile-app-development-company" } }
-          ]
-        }
-      },
-      {
-        "@type": "Person",
-        "@id": "https://www.avanienterprises.in/#person/kapilkhandelwal",
-        "name": "Kapil Khandelwal",
-        "givenName": "Kapil",
-        "familyName": "Khandelwal",
-        "jobTitle": "Founder & CEO",
-        "description": "Kapil Khandelwal is the Founder and CEO of Avani Enterprises, a digital marketing and web development agency based in Gurugram, India, with 8+ years of experience delivering SEO, AI, and custom software solutions.",
-        "url": "https://www.avanienterprises.in/about",
-        "image": {
-          "@type": "ImageObject",
-          "url": "https://www.avanienterprises.in/logo.png"
-        },
-        "worksFor": {
-          "@type": "Organization",
-          "@id": "https://www.avanienterprises.in/#organization"
-        },
-        "sameAs": [
-          "https://www.linkedin.com/in/kapil-khandelwal-avani/"
-        ]
-      },
-      {
-        "@type": "FAQPage",
-        "@id": "https://www.avanienterprises.in/#faq",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "What services does Avani Enterprises offer?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Avani Enterprises offers Web Development, SEO, Google Ads, Meta Ads, Social Media Marketing, AI Automation, CRM Development, HR Portal Development, and Custom Software Development for businesses across India and internationally."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Where is Avani Enterprises located?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Avani Enterprises is headquartered at Tower B, 3rd Floor, Unitech Cyber Park, Sector 39, Gurugram, Haryana 122002, India. We also serve clients in Mumbai, Delhi NCR, Rohtak, Dubai, London, and across India and internationally."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "How many years of experience does Avani Enterprises have?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Avani Enterprises was founded in 2016 and has over 8 years of experience, having delivered projects across India and the Gulf for clients across India and the Gulf across web development, SEO, digital marketing, and custom software."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Does Avani Enterprises work with international clients?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes. While we are based in India, Avani Enterprises serves clients in the UAE (Dubai, Abu Dhabi), UK (London), USA, Canada, Australia, Qatar, and Singapore in addition to clients across all major Indian cities."
-            }
-          }
-        ]
-      }
-    ]
-  }
-  </script>
+  <!-- Structured data is injected per route by api/seo.js (see schemaHtml()).
+       A hardcoded @graph used to live here and shipped on every route, so each
+       page carried two Organization entities under one @id with conflicting
+       addresses, plus a duplicate FAQPage. Api/offices.js is the single source
+       of truth for NAP; do not restate structured data here. -->
   <!-- Dynamic structured data (BreadcrumbList, FAQPage, Service, Article) injected per-route by React -->
 </head>
 

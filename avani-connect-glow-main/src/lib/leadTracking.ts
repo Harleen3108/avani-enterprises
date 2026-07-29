@@ -45,7 +45,17 @@ type Attribution = {
 declare global {
   interface Window {
     gtag?: (...args: unknown[]) => void;
+    fbq?: (...args: unknown[]) => void;
     dataLayer?: unknown[];
+    /** Tag IDs and the Google Ads conversion label — declared in index.html. */
+    AVANI_TAGS?: {
+      GA4_ID: string;
+      GOOGLE_ADS_ID: string;
+      META_PIXEL_ID: string;
+      ADS_CONVERSION_LABEL: string;
+    };
+    /** Forces the deferred ad pixels to load — see index.html. */
+    avaniEnsureAdPixels?: () => void;
   }
 }
 
@@ -181,10 +191,43 @@ export function trackLead(details: {
   };
 
   try {
-    // GA4 / Google Ads
+    // The ad pixels load lazily on first interaction. Submitting a form IS an
+    // interaction, but the listener may not have fired yet on a fast keyboard
+    // submit — so make sure they exist before we try to convert against them.
+    window.avaniEnsureAdPixels?.();
+
     if (typeof window.gtag === 'function') {
+      // GA4 — lands in the property as a recommended event.
       window.gtag('event', 'generate_lead', payload);
+
+      // Google Ads — a SEPARATE call with send_to. Without this the Ads account
+      // records nothing at all: `generate_lead` on its own reaches GA4 only, so
+      // Smart Bidding was optimising with no lead signal whatsoever.
+      const label = window.AVANI_TAGS?.ADS_CONVERSION_LABEL;
+      if (label) {
+        window.gtag('event', 'conversion', {
+          send_to: label,
+          value: details.value ?? 0,
+          currency: 'INR',
+        });
+      } else if (typeof console !== 'undefined') {
+        console.warn(
+          '[avani] Lead fired but ADS_CONVERSION_LABEL is empty in index.html — ' +
+          'Google Ads will not count this conversion.'
+        );
+      }
     }
+
+    // Meta — the pixel only ever tracked PageView, so no lead ever reached it.
+    if (typeof window.fbq === 'function') {
+      window.fbq('track', 'Lead', {
+        content_name: details.formName || 'main_lead_form',
+        content_category: services,
+        currency: 'INR',
+        value: details.value ?? 0,
+      });
+    }
+
     // GTM, for anyone routing through a container instead
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({ event: 'generate_lead', ...payload });
