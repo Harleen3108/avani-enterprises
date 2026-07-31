@@ -318,6 +318,39 @@ const SERVICES = {
     proof: [],
   },
 
+  // Added because the service is sold and no page said so: someone searching
+  // "AI meeting bot" or "minutes of meeting automation" found nothing here.
+  'ai-meeting-assistant': {
+    name: 'AI Meeting Assistant',
+    noun: 'AI meeting assistants',
+    deliverables: [
+      'A bot that joins Google Meet, Zoom and Microsoft Teams calls',
+      'Recording and speaker-attributed transcription',
+      'Minutes of meeting with decisions, action items and owners',
+      'Automatic circulation to attendees once the call ends',
+      'Action items pushed into your CRM, tracker or project tool',
+      'A searchable archive of past meetings and what was decided',
+    ],
+    stack: ['Meeting-platform bot APIs', 'Speaker diarisation', 'Speech-to-text', 'LLM summarisation', 'CRM / task-tool webhooks'],
+    process: [
+      'Confirm which platforms and calendars it should join',
+      'Agree the minutes format and what counts as an action item',
+      'Set recording consent and data-retention rules',
+      "Pilot on one team's recurring meetings",
+      'Roll out and connect it to your task tracker',
+    ],
+    timeline: 'Typically 2–5 weeks',
+    priceModel: 'Build fee plus per-meeting-hour usage, quoted after a volume review',
+    intent: 'teams losing decisions between meetings, or paying senior people to write up notes',
+    faqs: [
+      { q: 'Does everyone on the call have to consent to recording?', a: 'Yes, and the bot announces itself when it joins. Recording consent is a legal requirement in several markets and a reasonable expectation everywhere else, so there is no silent mode.' },
+      { q: 'How accurate are the minutes?', a: 'Transcription is reliable for clear audio in English and Hindi, and handles accented speech well. Summaries are usually good enough to circulate unedited, but they are a draft rather than a legal record — someone should read them before they go to a client.' },
+      { q: 'Where are the recordings stored?', a: 'Wherever you choose. If the meetings are commercially sensitive we deploy on your own infrastructure, so recordings never leave your tenancy.' },
+      { q: 'Can it push action items into the tools we already use?', a: 'Yes. Action items and owners can be written to a CRM, Jira, Asana, ClickUp, Notion or a spreadsheet, so follow-up lives where the team already works.' },
+    ],
+    proof: [],
+  },
+
   'ai-callers': {
     name: 'AI Voice Callers',
     noun: 'AI voice agents',

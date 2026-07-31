@@ -533,6 +533,29 @@ function loadBlogSlugRedirects() {
   console.log(`ℹ️ Added ${slugs.length} guide(s) + the guides hub to the sitemap.`);
 })();
 
+// ── /services/* detail pages ─────────────────────────────────────────────────
+// These twelve pages are linked from the main navigation and were in NO sitemap
+// at all, so Google was only ever finding them by crawling the nav. They carry
+// the service overview content and now the offerings list, which is exactly the
+// content worth indexing. Slugs are read from ServiceDetail.tsx so the list
+// cannot drift from the routes that actually render.
+(function addServiceDetailPages() {
+  const p = path.join(__dirname, "src", "pages", "ServiceDetail.tsx");
+  if (!fs.existsSync(p)) {
+    console.warn("⚠️ ServiceDetail.tsx not found — /services/* pages not added to sitemap.");
+    return;
+  }
+  const src = fs.readFileSync(p, "utf8");
+  const start = src.indexOf("const serviceData: Record<string, ServiceDetail> = {");
+  if (start === -1) return;
+  const slugs = [...src.slice(start).matchAll(/^  '([a-z0-9-]+)': \{$/gm)].map((m) => m[1]);
+  if (!slugs.length) return;
+  slugs.forEach((slug) => {
+    urls.push({ loc: `${BASE_URL}/services/${slug}`, lastmod: TODAY, changefreq: "monthly", priority: "0.85" });
+  });
+  console.log(`ℹ️ Added ${slugs.length} /services/* detail page(s) to the sitemap.`);
+})();
+
 // ── Drop de-indexed URLs ─────────────────────────────────────────────────────
 // Catches the hand-listed static entries above as well as the dynamic ones, so
 // a doorway slug can never sneak back into the sitemap from either source.

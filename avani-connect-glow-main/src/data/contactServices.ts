@@ -71,6 +71,7 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
       'AI Development',
       'AI Chatbot Development',
       'AI Voice Callers',
+      'AI Meeting Assistant',
       'Agentic AI Development',
       'AI & Business Process Automation',
       'AI Content Services',

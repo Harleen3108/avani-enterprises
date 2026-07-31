@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, type Variants } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import { Code, Search, Share2, Zap, Radio, PieChart, ArrowLeft, CheckCircle, ArrowRight, Lightbulb, TrendingUp, Shield, Target, Globe, ChevronDown, ChevronUp } from 'lucide-react';
 import Breadcrumb from '../components/seo/Breadcrumb';
 import { getResponsiveImageProps } from '../utils/responsiveImage';
 import InternalLinking from '../components/seo/InternalLinking';
+import ServiceLeadForm from '../components/ServiceLeadForm';
+import { SERVICE_OFFERINGS, RELATED_FORM_SERVICES } from '../data/serviceOfferings';
 
 /* Background effects */
 const Grain = () => (
@@ -24,12 +26,12 @@ const LuxuryLine = () => (
   <div style={{ height: '1px', background: 'linear-gradient(to right, transparent, var(--border-light) 15%, var(--border-light) 85%, transparent)', opacity: 0.6 }} />
 );
 
-const fadeUp = {
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
 };
 
-const titleV = {
+const titleV: Variants = {
   hidden: { y: 100, opacity: 0 },
   visible: (i: number) => ({ y: 0, opacity: 1, transition: { duration: 1, ease: [.22, 1, .36, 1], delay: .2 + i * 0.12 } })
 };
@@ -62,7 +64,6 @@ interface ServiceDetail {
   ctaHook: string;
   longDesc: string;
   features: string[];
-  stats: string[][];
   workflow: WorkflowStep[];
   layers: ArchitectureLayer[];
   faqs?: FAQItem[];
@@ -84,7 +85,6 @@ const serviceData: Record<string, ServiceDetail> = {
     ctaHook: 'Ready to engineer a digital platform that converts passive visitors into active buyers? Partner with us today to build your bespoke ecosystem.',
     longDesc: 'A slow or confusing website costs you sales. Our team builds custom, state-of-the-art websites and mobile apps using the latest technology, ensuring your pages load in milliseconds. We take care of all the complicated coding, security, and setup, so you can focus entirely on running your business with peace of mind.',
     features: ['Tailor-made websites built for speed', 'iOS & Android mobile apps', 'Secure databases & payment checkout', 'Integrates easily with your current tools', 'Beautiful, custom-designed layouts'],
-    stats: [['99.9%', 'Uptime'], ['50+', 'Apps Built'], ['10x', 'Faster Load']],
     workflow: [
       { title: "1. DESIGN THE BLUEPRINT", desc: "We sketch out your pages and map the customer journey, making sure everything is clear and easy to navigate before we start coding." },
       { title: "2. CRAFT THE VISUALS", desc: "Our designers bring the website to life with smooth animations, high-fidelity layouts, and elegant colors tailored to your brand." },
@@ -122,7 +122,6 @@ const serviceData: Record<string, ServiceDetail> = {
     ctaHook: 'Ready to dominate search pages and command absolute organic authority? Start your organic growth engine with us today to scale your traffic.',
     longDesc: 'Relying on paid ads is a dangerous game. We build semantic content engines, backlink authority networks, and technical SEO architectures that place your business in front of high-intent buyers, driving non-stop organic revenue. Establish your brand as an absolute authority and capture maximum search impressions.',
     features: ['High-ranking Google keywords targeting', 'Website health & speed optimization', 'Engaging articles written for humans', 'High-authority link partnerships', 'Clear search traffic progress reports'],
-    stats: [['250%', 'Traffic Growth'], ['1st Page', 'Google Ranking'], ['5M+', 'Organic Views']],
     workflow: [
       { title: "1. DISCOVER SEARCH PATTERNS", desc: "We research exactly what phrases and questions your potential customers are typing into Google, targeting high-value opportunities." },
       { title: "2. OPTIMIZE YOUR WEBSITE HEALTH", desc: "We clean up backend code, fix slow loading pages, and organize your site structure so search engines can read it easily." },
@@ -160,7 +159,6 @@ const serviceData: Record<string, ServiceDetail> = {
     ctaHook: 'Ready to capture absolute customer attention and build a legendary brand voice? Scale your audience reach and conversion loops with us today.',
     longDesc: 'Posting randomly doesn\'t generate sales. We develop a complete social media blueprint to tell your brand\'s unique story. From designing custom graphics and editing short-form video reels (for Instagram, TikTok, LinkedIn) to launching targeted ads, we capture attention and turn passive scrolls into active inquiries.',
     features: ['Custom brand graphics & visual themes', 'Scroll-stopping short-form video reels', 'Targeted ads on Instagram, Facebook & LinkedIn', 'Active community engagement & replies', 'Data-driven audience growth campaigns'],
-    stats: [['500K+', 'Combined Reach'], ['12%', 'Engagement Rate'], ['3x+', 'Average ROI']],
     workflow: [
       { title: "1. DEFINE YOUR SOCIAL VOICE", desc: "We establish your brand's style guide, color theme, and specific messaging rules so your social channels look unified and professional." },
       { title: "2. PRODUCTION & CREATION", desc: "Our creative team shoots videos, designs premium graphics, and drafts caption copywriting tailored to hook viewers." },
@@ -198,7 +196,6 @@ const serviceData: Record<string, ServiceDetail> = {
     ctaHook: 'Ready to align your acquisition channels and capture market share?',
     longDesc: 'Generic campaigns waste resources. We align your SEO, PPC search ads, social media reels, and landing page designs into a single conversion pipeline. Track customer acquisition costs (CAC) and scale your campaigns systematically.',
     features: ['Full-funnel marketing strategy', 'Custom landing page conversion optimization', 'Multi-channel attribution logs', 'Weekly campaign progress reports', 'B2B & B2C customer acquisition'],
-    stats: [['4.5x', 'Avg ROI'], ['200+', 'Campaigns Done'], ['45%', 'Lower CPL']],
     workflow: [
       { title: "1. STRATEGY AUDIT", desc: "We review your current traffic channels, landing page flow, and competitor ad setups to find acquisition gaps." },
       { title: "2. PLATFORM OPTIMIZATION", desc: "We design custom, fast landing pages and set up tracking pixels to ensure ad spend converts." },
@@ -236,7 +233,6 @@ const serviceData: Record<string, ServiceDetail> = {
     ctaHook: 'Ready to eliminate ad budget waste and scale qualified leads?',
     longDesc: 'We manage keyword research, write ad headlines, filter out negative keywords weekly, and design high-converting landing pages. Lower your cost-per-lead (CPL) and maximize your return on ad spend (ROAS) on Google.',
     features: ['Negative keyword filtering', 'High-converting ad copy testing', 'Conversion tracking configuration', 'Google Shopping & Performance Max', 'Weekly CPL optimization audits'],
-    stats: [['4x+', 'Average ROAS'], ['Under 24h', 'Leads Flow'], ['100%', 'Audience Target']],
     workflow: [
       { title: "1. KEYWORD INTENT RESEARCH", desc: "We target commercial keywords that active buyers search for, avoiding expensive informational terms." },
       { title: "2. NEGATIVE KEYWORD MATRIX", desc: "We draft a comprehensive negative keyword list to block irrelevant search queries immediately." },
@@ -274,7 +270,6 @@ const serviceData: Record<string, ServiceDetail> = {
     ctaHook: 'Ready to optimize your ad spend and scale customer acquisition?',
     longDesc: 'We coordinate paid campaigns across Meta, Google, and LinkedIn with advanced tracking setups (Meta Pixel, Google Tag Manager). Monitor conversion rates, retarget warm visitors, and lower CAC systematically.',
     features: ['Tracking pixels integration', 'Conversion rate optimization (CRO)', 'Dynamic retargeting funnels', 'Ad creative asset testing', 'Detailed CAC & CPL dashboards'],
-    stats: [['5x+', 'ROAS Scale'], ['40%', 'Lower CAC'], ['10M+', 'Ad Spend Managed']],
     workflow: [
       { title: "1. PIXEL AUDIT & SETUP", desc: "We set up tracking pixels, conversion API hooks, and dashboards to trace customer actions." },
       { title: "2. CREATIVE TESTING", desc: "We draft and test multiple ad formats, headlines, and visuals to find high-performing ads." },
@@ -312,7 +307,6 @@ const serviceData: Record<string, ServiceDetail> = {
     ctaHook: 'Ready to deploy production-grade intelligent systems and automate manual bottlenecks 24/7? Join us to implement custom AI agents today.',
     longDesc: 'Artificial Intelligence isn\'t just for tech giants. We build practical AI solutions customized for your daily operations. Whether you need a smart WhatsApp auto-replier that answers customers immediately or a Lead Management system that tracks inquiries and alerts your sales team, we build tools that work 24/7 with zero downtime.',
     features: ['Automated Lead Trackers & managers', 'WhatsApp Auto-Agents & customer helper tools', 'Custom 24/7 AI chat helpers for websites', 'Automatic document readers & data entry', 'Integrates AI with your existing tools'],
-    stats: [['60%', 'Hours Saved'], ['24/7', 'Always Active'], ['99%', 'Task Accuracy']],
     workflow: [
       { title: "1. LOCATE THE BUSYWORK", desc: "We look at your daily processes and identify repetitive tasks (like data entry, messaging, scheduling) that can be easily automated." },
       { title: "2. BUILD THE AI HELPER", desc: "We program smart AI models using secure tools, feeding them your specific business guidelines and documents so they know your policies." },
@@ -335,7 +329,6 @@ const serviceData: Record<string, ServiceDetail> = {
     ctaHook: 'Ready to launch a cinematic brand podcast that positions you as the absolute industry authority? Partner with us to master your audio media today.',
     longDesc: 'Starting a podcast sounds fun until you have to edit audio, fix echo, and deal with RSS feeds. We take all the technical stress away. Our audio experts polish your sound, add background music, write episode descriptions, and publish each episode globally, making sure you look and sound like a seasoned pro.',
     features: ['Professional audio mixing & voice polishing', 'Episode publishing on Spotify, Apple & Google', 'Script ideas & interview outlines', 'Short video clips for social media promotion', 'Complete recording equipment guide & setup support'],
-    stats: [['1M+', 'Audience Reach'], ['Top 10', 'Show Rankings'], ['100+', 'Episodes Done']],
     workflow: [
       { title: "1. OUTLINE YOUR SHOW", desc: "We help you select your show name, design custom cover art, structure your episodes, and prepare interview question guides." },
       { title: "2. EQUIPMENT & RECORDING SUITE", desc: "We recommend easy-to-use microphones and guide you step-by-step through recording clean, echo-free audio." },
@@ -358,7 +351,6 @@ const serviceData: Record<string, ServiceDetail> = {
     ctaHook: 'Ready to optimize operational pipelines, raise strategic capital, and secure risk-mitigated corporate scaling? Join us to blueprint your corporate growth today.',
     longDesc: 'Running a business requires a clear understanding of cash flow. Our financial consultants analyze your day-to-day expenditures, optimize your tax position, and forecast your revenue for the coming years. We make complex spreadsheets easy to understand, helping you budget for expansion and navigate growth smoothly.',
     features: ['Operational expense audits & savings plan', 'Clear 3-year and 5-year revenue blueprints', 'Venture capital & business loan prep', 'Profit margin & cash flow analysis', 'Risk management & mitigation strategy'],
-    stats: [['$10M+', 'Capital Raised'], ['30%', 'Expense Savings'], ['5x', 'Scale Multiplier']],
     workflow: [
       { title: "1. AUDIT REVENUE & EXPENSES", desc: "We analyze your past financial records, identifying exactly where money is coming in and where it might be leaked." },
       { title: "2. LOCATE EXPENSE CUTS", desc: "We identify recurring subscription leaks, operational bottlenecks, and negotiating tips to immediately improve your profit margins." },
@@ -381,7 +373,6 @@ const serviceData: Record<string, ServiceDetail> = {
     ctaHook: 'Ready to optimize your business operations and command your market? Contact us today for a free strategic audit.',
     longDesc: 'Running an enterprise requires constant adaptation. Our strategic consultants analyze your internal team structures, sales pipelines, and technology systems to eliminate inefficiencies. We help you build solid growth blueprints so you can delegate tasks confidently and scale operations without chaos.',
     features: ['Operational workflow audits', 'Team structure & role design', 'Sales funnel optimization', 'Market competitive analysis', 'Strategic scaling roadmaps'],
-    stats: [['45%', 'Efficiency Up'], ['100+', 'Audits Done'], ['3x', 'Scale Speed']],
     workflow: [
       { title: "1. OPERATIONAL ANALYSIS", desc: "We interview key team members and map out your day-to-day operational flows to find bottlenecks." },
       { title: "2. STRATEGIC BLUEPRINTING", desc: "We draft a comprehensive recommendation report highlighting immediate efficiency wins and long-term milestones." },
@@ -404,7 +395,6 @@ const serviceData: Record<string, ServiceDetail> = {
     ctaHook: 'Need capital to fund your next big move? Apply today for quick approvals and customized financing terms.',
     longDesc: 'Capital bottlenecks shouldn\'t stop your ambition. We partner with top-tier lenders to offer secure business loans, credit lines, and equipment leases tailored to your cash flow. We manage the complex paperwork and application hurdles so you secure critical funds quickly and affordably.',
     features: ['Flexible working capital lines', 'Equipment leasing & financing', 'Low-interest rates', 'Quick approval timelines', 'Custom repayment structures'],
-    stats: [['$25M+', 'Disbursed'], ['24 Hr', 'Decision Window'], ['98%', 'Approval Rate']],
     workflow: [
       { title: "1. CAPITAL REQUIREMENT AUDIT", desc: "We review your cash flow and growth objectives to calculate the exact funding size and type required." },
       { title: "2. PREPARATION & PACKAGING", desc: "We organize your balance sheets, business plans, and documents into a clean dossier for lending committees." },
@@ -427,7 +417,6 @@ const serviceData: Record<string, ServiceDetail> = {
     ctaHook: 'Don\'t leave your business vulnerable to unforeseen liability. Protect your assets with custom insurance coverage today.',
     longDesc: 'Risk is inevitable, but financial loss doesn\'t have to be. We analyze your industry risk profile to design customized insurance portfolios, covering liability, cyber risks, property damage, and employee health. Rest easy knowing your business is fully protected against unexpected events.',
     features: ['General liability & asset coverage', 'Professional indemnity insurance', 'Cyber risk & data breach protection', 'Group employee health benefits', 'Rapid claims processing support'],
-    stats: [['100%', 'Risk Covered'], ['10k+', 'Employees Protected'], ['24/7', 'Claims Intake']],
     workflow: [
       { title: "1. RISK ASSESSMENT PROFILE", desc: "We audit your operations, client contracts, and workspace to identify potential liability vulnerabilities." },
       { title: "2. CUSTOM COVERAGE BLUEPRINT", desc: "We structure an insurance plan combining exactly the protections you need, preventing double-payments." },
@@ -445,6 +434,7 @@ const serviceData: Record<string, ServiceDetail> = {
 const ServiceDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const service = slug ? serviceData[slug] : null;
+  const offerings = (slug && SERVICE_OFFERINGS[slug]) || [];
   const [activeStep, setActiveStep] = useState(0);
   const [selectedLayer, setSelectedLayer] = useState(0);
   const [faqOpen, setFaqOpen] = useState<number | null>(null);
@@ -519,9 +509,11 @@ const ServiceDetail = () => {
                 </Link>
               </motion.div>
               
-              {/* Premium Hook Tag */}
-              <motion.div variants={fadeUp} style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(196, 145, 58, 0.08)', border: '1px solid rgba(196, 145, 58, 0.15)', borderRadius: '100px', padding: '6px 16px', marginBottom: '1.5rem' }}>
-                <span style={{ fontSize: '11px', color: 'var(--accent-primary)', fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase' }}>🔥 {service.hook}</span>
+              {/* Breadcrumb-style service label. The old version was a fire
+                  emoji shouting a sales line in uppercase orange on near-black
+                  — the least credible and least readable element on the page. */}
+              <motion.div variants={fadeUp} style={{ marginBottom: '1.25rem' }}>
+                <span style={{ fontSize: '11px', color: 'var(--accent-primary)', fontWeight: 800, letterSpacing: '0.16em', textTransform: 'uppercase' }}>{service.title}</span>
               </motion.div>
               
               <h1 className="dh-display" style={{ fontSize: 'clamp(2rem, 5.5vw, 4.2rem)', marginBottom: '1.5rem', lineHeight: 1.05, letterSpacing: '-0.03em' }}>
@@ -530,102 +522,55 @@ const ServiceDetail = () => {
                 <span className="dh-hero-line"><motion.span custom={2} variants={titleV} className="dh-hero-accent">{line3}</motion.span></span>
               </h1>
               
-              <motion.p variants={fadeUp} className="dh-body" style={{ maxWidth: '580px', fontSize: '1.05rem', color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: '2.5rem' }}>
+              {/* AEO: the first paragraph answers "what is this and who is it
+                  for" in plain language, because that is the block an answer
+                  engine lifts. Colour and line-height raised — --text-secondary
+                  on the near-black hero was well under a comfortable contrast. */}
+              <motion.p variants={fadeUp} style={{ maxWidth: '60ch', fontSize: 'clamp(1rem, 2vw, 1.12rem)', color: 'rgba(245, 241, 232, 0.88)', lineHeight: 1.72, marginBottom: '2rem', fontFamily: "'Inter', system-ui, sans-serif" }}>
                 {service.desc}
               </motion.p>
               
-              {/* Symmetrical quick performance highlights */}
-              <motion.div variants={fadeUp} style={{ display: 'flex', gap: '16px', marginTop: '2rem', flexWrap: 'wrap' }}>
-                {service.stats.slice(0, 2).map((s, idx) => (
-                  <div key={idx} style={{ background: 'var(--card-bg)', border: '1px solid var(--border-light)', borderRadius: '12px', padding: '12px 20px', minWidth: '140px', flex: '1 1 140px' }}>
-                    <div style={{ fontSize: '1.6rem', fontFamily: "'Outfit', sans-serif", fontWeight: 800, color: 'var(--accent-primary)', lineHeight: 1 }}>{s[0]}</div>
-                    <div style={{ fontSize: '10px', color: 'var(--text-secondary)', marginTop: '4px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>{s[1]}</div>
-                  </div>
+              {/* These replaced invented metrics — "250% Traffic Growth",
+                  "98% Approval Rate", "$25M+ Disbursed". None were measured and
+                  none could be defended if asked. What is here instead is what
+                  we actually commit to, which is checkable. */}
+              <motion.ul variants={fadeUp} style={{ display: 'flex', gap: '10px', marginTop: '1.75rem', flexWrap: 'wrap', listStyle: 'none', padding: 0, margin: '1.75rem 0 0' }}>
+                {[
+                  'Free scoping call',
+                  'Written quote before any work',
+                  'Reply within one working day',
+                ].map((t) => (
+                  <li key={t} style={{ display: 'inline-flex', alignItems: 'center', gap: '7px', background: 'rgba(196,145,58,0.10)', border: '1px solid rgba(196,145,58,0.28)', borderRadius: '999px', padding: '7px 14px', fontSize: '0.8rem', fontWeight: 600, color: 'rgba(245,241,232,0.92)' }}>
+                    <CheckCircle size={13} style={{ color: 'var(--accent-primary)', flexShrink: 0 }} aria-hidden="true" />
+                    {t}
+                  </li>
                 ))}
-              </motion.div>
+              </motion.ul>
             </motion.div>
 
-            {/* Right Visual Image Column with floating luxury badges */}
+            {/* The lead form, above the fold on every service page.
+
+                This column used to be a stock image wearing two glassmorphism
+                badges that read "Premium Solution" and "100% Vetted Quality" —
+                both meaningless, neither verifiable, and between them they
+                occupied the most valuable space on the page. A visitor who has
+                just read what the service is should be able to ask for a call
+                without scrolling or hunting for a CTA. */}
             <motion.div
-              initial={{ opacity: 0, x: 40 }}
+              initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1, ease: 'easeOut', delay: 0.2 }}
+              transition={{ duration: 0.8, ease: 'easeOut', delay: 0.15 }}
               style={{ width: '100%', position: 'relative' }}
+              id="enquire"
             >
-              <div style={{ position: 'absolute', inset: '-30px', background: 'radial-gradient(circle, rgba(196, 145, 58, 0.18) 0%, transparent 65%)', filter: 'blur(30px)', zIndex: 1, pointerEvents: 'none' }} />
-              
-              <motion.div 
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-                style={{ 
-                  position: 'relative', 
-                  zIndex: 2, 
-                  width: '100%', 
-                  aspectRatio: '16/10', 
-                  borderRadius: '20px', 
-                  overflow: 'visible', 
-                  border: '1px solid var(--accent-primary)',
-                  boxShadow: '0 30px 70px rgba(0, 0, 0, 0.5), 0 0 40px rgba(196, 145, 58, 0.12)',
-                  background: 'var(--bg-secondary)'
-                }}
-              >
-                <div style={{ width: '100%', height: '100%', borderRadius: '19px', overflow: 'hidden' }}>
-                  <img 
-                    {...getResponsiveImageProps(service.image)} 
-                    alt={service.title} 
-                    style={{ 
-                      width: '100%', 
-                      height: '100%', 
-                      objectFit: 'cover',
-                      transition: 'transform 0.8s ease'
-                    }} 
-                    onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.04)'}
-                    onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
-                  />
-                </div>
-
-                {/* Floating Glassmorphism Badge 1 */}
-                <div style={{
-                  position: 'absolute',
-                  top: '-20px',
-                  right: '-15px',
-                  background: 'rgba(255, 255, 255, 0.08)',
-                  backdropFilter: 'blur(12px)',
-                  border: '1px solid rgba(255, 255, 255, 0.15)',
-                  padding: '8px 14px',
-                  borderRadius: '12px',
-                  boxShadow: '0 8px 32px rgba(0,0,0,0.3)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '6px',
-                  zIndex: 10
-                }}>
-                  <span style={{ fontSize: '12px' }}>✨</span>
-                  <span style={{ fontSize: '9px', fontWeight: 700, color: '#ffffff', letterSpacing: '0.05em', textTransform: 'uppercase' }}>Premium Solution</span>
-                </div>
-
-                {/* Floating Glassmorphism Badge 2 */}
-                <div style={{
-                  position: 'absolute',
-                  bottom: '-15px',
-                  left: '-15px',
-                  background: 'rgba(196, 145, 58, 0.12)',
-                  backdropFilter: 'blur(12px)',
-                  border: '1px solid rgba(196, 145, 58, 0.25)',
-                  padding: '8px 14px',
-                  borderRadius: '12px',
-                  boxShadow: '0 8px 32px rgba(0,0,0,0.3)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '6px',
-                  zIndex: 10
-                }}>
-                  <span style={{ fontSize: '12px' }}>🛡️</span>
-                  <span style={{ fontSize: '9px', fontWeight: 700, color: 'var(--accent-primary)', letterSpacing: '0.05em', textTransform: 'uppercase' }}>100% Vetted Quality</span>
-                </div>
-              </motion.div>
+              <ServiceLeadForm
+                source={slug || 'service'}
+                related={RELATED_FORM_SERVICES[slug || ''] || []}
+                heading={`Talk to us about ${service.title.toLowerCase()}`}
+                variant="hero"
+              />
             </motion.div>
-            
+
           </div>
         </div>
       </section>
@@ -730,42 +675,31 @@ const ServiceDetail = () => {
                   textTransform: 'uppercase',
                   color: 'var(--text-primary)'
                 }}>
-                  IMPACT <span className="dh-hero-accent" style={{ fontFamily: "'Outfit', sans-serif" }}>METRICS.</span>
+                  WHAT YOU <span className="dh-hero-accent" style={{ fontFamily: "'Outfit', sans-serif" }}>GET.</span>
                 </h3>
                 <div style={{ width: '45px', height: '3px', background: 'var(--accent-primary)', margin: '0 auto 2.5rem', borderRadius: '2px' }} />
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1.2rem' }}>
-                  {service.stats.map((s, i) => (
-                    <div key={i} style={{ 
-                      padding: '24px', 
-                      background: 'var(--bg-secondary)', 
-                      border: '1px solid var(--border-light)', 
-                      borderRadius: '16px',
-                      textAlign: 'center' 
+                  {/* This rendered three invented numbers per service —
+                      "250% Traffic Growth", "98% Approval Rate", "$25M+
+                      Disbursed", "10k+ Employees Protected". None were
+                      measured, and for a firm selling SEO and financial
+                      services those are the claims you least want to be asked
+                      to evidence. Replaced with the deliverables, which are
+                      specific, checkable, and more useful to a buyer deciding
+                      whether to call. */}
+                  {service.features.map((f, i) => (
+                    <div key={i} style={{
+                      padding: '18px 20px',
+                      background: 'var(--bg-secondary)',
+                      border: '1px solid var(--border-light)',
+                      borderRadius: '14px',
+                      display: 'flex',
+                      gap: '12px',
+                      alignItems: 'flex-start',
+                      textAlign: 'left'
                     }}>
-                      <div style={{ 
-                        fontSize: '3.4rem', 
-                        fontFamily: "'Outfit', sans-serif", 
-                        fontWeight: 900, 
-                        color: 'var(--text-primary)', 
-                        lineHeight: 1,
-                        letterSpacing: '-0.02em'
-                      }}>
-                        {s[0]}
-                      </div>
-                      
-                      {/* Line inside separating statistical number and description */}
-                      <div style={{ width: '35px', height: '1.5px', background: 'var(--accent-primary)', margin: '14px auto', borderRadius: '1px' }} />
-                      
-                      <div style={{ 
-                        fontSize: '0.75rem', 
-                        fontWeight: 800, 
-                        color: 'var(--text-secondary)', 
-                        letterSpacing: '0.15em',
-                        textTransform: 'uppercase',
-                        fontFamily: "'Outfit', sans-serif"
-                      }}>
-                        {s[1]}
-                      </div>
+                      <CheckCircle size={17} style={{ color: 'var(--accent-primary)', flexShrink: 0, marginTop: '2px' }} aria-hidden="true" />
+                      <span style={{ fontSize: '0.94rem', lineHeight: 1.6, color: 'var(--text-primary)', fontWeight: 500 }}>{f}</span>
                     </div>
                   ))}
                 </div>
@@ -789,6 +723,81 @@ const ServiceDetail = () => {
       </section>
 
       <LuxuryLine />
+
+      {/* WHAT WE ACTUALLY BUILD — the section these pages did not have.
+
+          Every service page described a category and then never listed what you
+          could buy. Someone searching "AI meeting bot" or "WhatsApp chatbot"
+          found no page on this site containing those words, so there was
+          nothing for Google to match and nothing for an answer engine to cite.
+
+          Each card is written to stand alone as an answer: the query as the H3,
+          one sentence on what it is, one on when it is the right choice. That
+          shape is what gets extracted into an AI Overview. */}
+      {offerings.length > 0 && (
+        <section className="theme-beige" style={{ position: 'relative', padding: '90px 0', background: 'var(--bg-primary)', overflow: 'hidden' }}>
+          <Grain />
+          <div className="dh-container" style={{ position: 'relative', zIndex: 10 }}>
+            <div style={{ maxWidth: '58ch', marginBottom: '3rem' }}>
+              <span className="dh-label">What we build</span>
+              <h2 className="dh-display" style={{ fontSize: 'clamp(1.8rem, 4.5vw, 2.9rem)', margin: '.5rem 0 1rem', lineHeight: 1.1 }}>
+                {service.title}: what you can actually ask for
+              </h2>
+              <p style={{ fontSize: '1rem', lineHeight: 1.7, color: 'var(--text-secondary)', margin: 0 }}>
+                Each of these is a real engagement we deliver. If what you need is
+                not listed, it is still worth asking — most projects are a
+                combination of two or three of them.
+              </p>
+            </div>
+
+            <div className="sd-offerings">
+              {offerings.map((o) => (
+                <article key={o.query} style={{ background: 'var(--card-bg)', border: '1px solid var(--border-faint)', borderRadius: '16px', padding: '1.5rem', transition: 'border-color .25s' }}
+                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--accent-primary)'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--border-faint)'; }}
+                >
+                  <h3 style={{ fontFamily: "'Outfit', sans-serif", fontSize: '1.08rem', fontWeight: 800, lineHeight: 1.3, margin: '0 0 .7rem', color: 'var(--text-primary)' }}>
+                    {o.query}
+                  </h3>
+                  <p style={{ fontSize: '.92rem', lineHeight: 1.68, color: 'var(--text-secondary)', margin: '0 0 .85rem' }}>{o.what}</p>
+                  <p style={{ fontSize: '.86rem', lineHeight: 1.6, color: 'var(--text-tertiary)', margin: 0, paddingTop: '.85rem', borderTop: '1px solid var(--border-faint)' }}>
+                    <strong style={{ color: 'var(--accent-primary)', fontWeight: 700 }}>Right for you if:</strong> {o.when}
+                  </p>
+                </article>
+              ))}
+            </div>
+
+            <div style={{ marginTop: '3rem', display: 'grid', gridTemplateColumns: 'minmax(0,1fr) minmax(0,420px)', gap: '2.5rem', alignItems: 'center' }} className="sd-cta-split">
+              <div>
+                <h2 className="dh-heading" style={{ fontSize: '1.5rem', margin: '0 0 .6rem' }}>Not sure which of these you need?</h2>
+                <p style={{ fontSize: '.95rem', lineHeight: 1.7, color: 'var(--text-secondary)', margin: 0 }}>
+                  That is what the first call is for. Describe the problem in your own
+                  words and we will tell you which of these fits — including when the
+                  answer is that you do not need us yet.
+                </p>
+              </div>
+              <ServiceLeadForm
+                source={`${slug || 'service'}_mid`}
+                related={RELATED_FORM_SERVICES[slug || ''] || []}
+                heading="Ask us which one fits"
+                sub="A short call, no obligation, and a written quote if there is a fit."
+                variant="inline"
+              />
+            </div>
+          </div>
+
+          <style>{`
+            .sd-offerings {
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+              gap: 1rem;
+            }
+            @media (max-width: 900px) {
+              .sd-cta-split { grid-template-columns: minmax(0, 1fr) !important; }
+            }
+          `}</style>
+        </section>
+      )}
 
       {/* 3. SYSTEM ISOMETRIC ARCHITECTURE LAYERS - BRAND NEW 3D SHOWCASE */}
       <section className="theme-brown" style={{ position: 'relative', padding: '100px 0', background: 'var(--bg-primary)', overflow: 'hidden' }}>
