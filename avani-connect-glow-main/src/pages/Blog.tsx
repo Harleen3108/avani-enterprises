@@ -14,6 +14,7 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import { getBackendUrl } from '../lib/api';
 import CoverArt from '../components/blog/CoverArt';
 import '../components/Home.css';
+import ServiceLeadForm from '../components/ServiceLeadForm';
 
 const titleV = {
   hidden: { y: 100, opacity: 0 },
@@ -303,6 +304,39 @@ const Blog = () => {
           .dh-blog-grid { gap: 20px !important; }
         }
       `}</style>
+
+      {/* Lead capture. Short by design — nobody working through this page came
+          to fill in a form, so it asks for a name, a number and a rough
+          direction. The full service list is one click away for anyone who
+          wants it. */}
+      <section className="theme-beige" style={{ position: 'relative', padding: '80px 0', background: 'var(--bg-primary)' }}>
+        <div className="dh-container">
+          <div className="slf-page-cta">
+            <div>
+              <span className="dh-label">Work with us</span>
+              <h2 className="dh-display" style={{ fontSize: 'clamp(1.7rem, 4.2vw, 2.6rem)', margin: '.5rem 0 1rem', lineHeight: 1.12 }}>
+                Want this applied to your business?
+              </h2>
+              <p style={{ fontSize: '1rem', lineHeight: 1.72, color: 'var(--text-secondary)', margin: 0, maxWidth: '50ch' }}>
+                These posts are what we do for clients, written up. If any of it is relevant right now, ask us.
+              </p>
+            </div>
+            <ServiceLeadForm source="blog_index" heading="Request a call back" sub="One working day, no obligation." variant="inline" compact />
+          </div>
+        </div>
+        <style>{`
+          .slf-page-cta {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 400px);
+            gap: 3rem;
+            align-items: center;
+          }
+          @media (max-width: 900px) {
+            .slf-page-cta { grid-template-columns: minmax(0, 1fr); gap: 2rem; }
+          }
+        `}</style>
+      </section>
+
     </div>
   );
 };

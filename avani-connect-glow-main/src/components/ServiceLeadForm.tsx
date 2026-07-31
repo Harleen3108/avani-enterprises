@@ -24,8 +24,28 @@ import { getBackendUrl, pageAttribution } from '../lib/api';
 import { trackLead, leadAttributionFields } from '../lib/leadTracking';
 import { SERVICE_GROUPS, NOT_SURE } from '../data/contactServices';
 
+/**
+ * The short list used on pages where the visitor is reading, not shopping —
+ * blog posts, /about, /projects, case studies.
+ *
+ * Nobody working through a 1,300-word article will pick from forty options, so
+ * these seven cover the broad direction and the call sorts out the detail. They
+ * are still canonical SERVICES[].name values, so what reaches the CRM matches
+ * every other form on the site rather than inventing a parallel vocabulary.
+ * "I need something else" still opens the full list for anyone who wants it.
+ */
+export const BROAD_SERVICES = [
+  'Web Development',
+  'Mobile App Development',
+  'E-commerce Development',
+  'SEO Services',
+  'Digital Marketing',
+  'AI Development',
+  'Custom Software Development',
+];
+
 interface Props {
-  /** Service page slug — becomes the lead `source`, so reporting can attribute by page. */
+  /** Page identifier — becomes the lead `source`, so reporting can attribute by page. */
   source: string;
   /** Shown as chips, open by default. Must match SERVICES[].name. */
   related?: string[];
@@ -33,13 +53,19 @@ interface Props {
   sub?: string;
   /** `hero` sits on a dark ground; `inline` on the light one. */
   variant?: 'hero' | 'inline';
+  /**
+   * Two fields instead of three, tighter spacing, and BROAD_SERVICES if no
+   * `related` list is given. For low-intent placements where the form is an
+   * invitation rather than the reason the page exists.
+   */
+  compact?: boolean;
 }
 
 type Errors = Partial<Record<'name' | 'phone' | 'service', string>>;
 
 const ALL = SERVICE_GROUPS.flatMap((g) => g.items);
 
-export default function ServiceLeadForm({ source, related = [], heading, sub, variant = 'hero' }: Props) {
+export default function ServiceLeadForm({ source, related = [], heading, sub, variant = 'hero', compact = false }: Props) {
   const navigate = useNavigate();
   const [form, setForm] = useState({ name: '', phone: '', email: '' });
   const [services, setServices] = useState<string[]>([]);
@@ -52,7 +78,10 @@ export default function ServiceLeadForm({ source, related = [], heading, sub, va
   const phoneRef = useRef<HTMLInputElement>(null);
 
   // Related first; everything else stays available behind the disclosure.
-  const primary = useMemo(() => related.filter((r) => ALL.includes(r)), [related]);
+  const primary = useMemo(() => {
+    const list = related.length ? related : compact ? BROAD_SERVICES : [];
+    return list.filter((r) => ALL.includes(r));
+  }, [related, compact]);
   const rest = useMemo(
     () => SERVICE_GROUPS.map((g) => ({ ...g, items: g.items.filter((i) => !primary.includes(i)) })).filter((g) => g.items.length),
     [primary]
@@ -158,7 +187,7 @@ export default function ServiceLeadForm({ source, related = [], heading, sub, va
         backdropFilter: dark ? 'blur(14px)' : undefined,
         border: `1px solid ${dark ? 'rgba(196,145,58,0.35)' : 'var(--border-light)'}`,
         borderRadius: '18px',
-        padding: 'clamp(1.15rem, 3vw, 1.75rem)',
+        padding: compact ? 'clamp(1rem, 2.5vw, 1.4rem)' : 'clamp(1.15rem, 3vw, 1.75rem)',
       }}
     >
       <h2 style={{ fontFamily: "'Outfit', sans-serif", fontSize: '1.25rem', fontWeight: 800, margin: '0 0 .3rem', color: dark ? '#f7f3ea' : 'var(--text-primary)', lineHeight: 1.25 }}>
@@ -168,7 +197,7 @@ export default function ServiceLeadForm({ source, related = [], heading, sub, va
         {sub || 'Tell us what you need and we will call you back within one working day. No obligation, and you get a written quote.'}
       </p>
 
-      <form onSubmit={submit} noValidate style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <form onSubmit={submit} noValidate style={{ display: 'flex', flexDirection: 'column', gap: compact ? '.8rem' : '1rem' }}>
         <div>
           <label htmlFor={`${source}-name`} style={label}>Your name</label>
           <input
@@ -180,7 +209,7 @@ export default function ServiceLeadForm({ source, related = [], heading, sub, va
           {errors.name && <p role="alert" style={err}>{errors.name}</p>}
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '.75rem' }} className="slf-row">
+        <div style={{ display: 'grid', gridTemplateColumns: compact ? '1fr' : '1fr 1fr', gap: '.75rem' }} className="slf-row">
           <div>
             <label htmlFor={`${source}-phone`} style={label}>Phone</label>
             <input
@@ -191,15 +220,17 @@ export default function ServiceLeadForm({ source, related = [], heading, sub, va
             />
             {errors.phone && <p role="alert" style={err}>{errors.phone}</p>}
           </div>
-          <div>
-            <label htmlFor={`${source}-email`} style={label}>
-              Email <span style={{ textTransform: 'none', letterSpacing: 0, opacity: .65 }}>(optional)</span>
-            </label>
-            <input
-              id={`${source}-email`} type="email" value={form.email} autoComplete="email"
-              onChange={(e) => set('email', e.target.value)} placeholder="priya@company.com" style={input}
-            />
-          </div>
+          {!compact && (
+            <div>
+              <label htmlFor={`${source}-email`} style={label}>
+                Email <span style={{ textTransform: 'none', letterSpacing: 0, opacity: .65 }}>(optional)</span>
+              </label>
+              <input
+                id={`${source}-email`} type="email" value={form.email} autoComplete="email"
+                onChange={(e) => set('email', e.target.value)} placeholder="priya@company.com" style={input}
+              />
+            </div>
+          )}
         </div>
 
         <fieldset style={{ border: 0, padding: 0, margin: 0, minWidth: 0 }}>

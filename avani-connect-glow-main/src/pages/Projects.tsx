@@ -16,6 +16,7 @@ const fadeUp = {
 };
 
 import { projectsData } from '../data/ProjectsData';
+import ServiceLeadForm from '../components/ServiceLeadForm';
 
 const getProjectFilter = (slug: string) => {
   if (slug.includes('school') || slug.includes('college') || slug.includes('placement') || slug.includes('lms') || slug.includes('alumni')) {
@@ -321,6 +322,39 @@ const Projects = () => {
       <LuxuryLine />
 
 
+
+
+      {/* Lead capture. Short by design — nobody working through this page came
+          to fill in a form, so it asks for a name, a number and a rough
+          direction. The full service list is one click away for anyone who
+          wants it. */}
+      <section className="theme-beige" style={{ position: 'relative', padding: '80px 0', background: 'var(--bg-primary)' }}>
+        <div className="dh-container">
+          <div className="slf-page-cta">
+            <div>
+              <span className="dh-label">Work with us</span>
+              <h2 className="dh-display" style={{ fontSize: 'clamp(1.7rem, 4.2vw, 2.6rem)', margin: '.5rem 0 1rem', lineHeight: 1.12 }}>
+                Have a project in mind?
+              </h2>
+              <p style={{ fontSize: '1rem', lineHeight: 1.72, color: 'var(--text-secondary)', margin: 0, maxWidth: '50ch' }}>
+                Tell us roughly what you need. You get a scoping call and a written quote, with no obligation.
+              </p>
+            </div>
+            <ServiceLeadForm source="projects" heading="Request a call back" sub="One working day, no obligation." variant="inline" compact />
+          </div>
+        </div>
+        <style>{`
+          .slf-page-cta {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 400px);
+            gap: 3rem;
+            align-items: center;
+          }
+          @media (max-width: 900px) {
+            .slf-page-cta { grid-template-columns: minmax(0, 1fr); gap: 2rem; }
+          }
+        `}</style>
+      </section>
 
     </div>
   );
