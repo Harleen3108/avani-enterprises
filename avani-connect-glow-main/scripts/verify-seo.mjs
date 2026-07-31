@@ -145,5 +145,33 @@ console.log('\n── Contact  No unverified office claims ───────
   chk(claimed.length === 0, 'no sell-only market shown as an office', claimed.join(', ') || 'clean');
 }
 
+console.log('\n── Deploy  vercel.json is schema-valid ───────────────────');
+{
+  // Vercel validates this file against a strict schema and rejects ANY property
+  // it does not know — including a "//" key used as a comment, which is a
+  // common JSON commenting habit and fails the build with
+  //   should NOT have additional property `//`
+  // The build fails before anything deploys, so a valid config here is a
+  // release blocker, not a nicety.
+  const fs = await import('node:fs');
+  const raw = fs.readFileSync('vercel.json', 'utf8');
+  let cfg = null;
+  try { cfg = JSON.parse(raw); } catch (e) { chk(false, 'vercel.json parses', e.message); }
+
+  if (cfg) {
+    const ALLOWED = new Set(['$schema', 'buildCommand', 'cleanUrls', 'crons', 'devCommand',
+      'framework', 'functions', 'git', 'github', 'headers', 'ignoreCommand', 'images',
+      'installCommand', 'outputDirectory', 'public', 'redirects', 'regions', 'rewrites',
+      'trailingSlash']);
+    const badKeys = Object.keys(cfg).filter((k) => !ALLOWED.has(k));
+    chk(badKeys.length === 0, 'no unknown top-level keys', badKeys.join(', ') || Object.keys(cfg).join(', '));
+
+    const walk = (o, p = '') => Object.entries(o || {}).flatMap(([k, v]) =>
+      (k === '//' ? [`${p}/${k}`] : []).concat(v && typeof v === 'object' ? walk(v, `${p}/${k}`) : []));
+    const comments = walk(cfg);
+    chk(comments.length === 0, 'no "//" comment keys', comments.join(', ') || 'clean');
+  }
+}
+
 console.log(`\n${pass} passed, ${fail} failed\n`);
 process.exit(fail?1:0);
