@@ -506,7 +506,7 @@ export default function BusinessSetup3() {
           <div className="bs3-foot-links">
             <a href="tel:+91 84487 63134"><Phone size={14} /> +91 84487 63134</a>
             <a href="mailto:kp@avanienterprises.in"><Mail size={14} /> kp@avanienterprises.in</a>
-            <a href="https://wa.me/918930008118" target="_blank" rel="noopener noreferrer"><MessageSquare size={14} /> WhatsApp: +91 89300 08118</a>
+            <a href="https://wa.me/918448763134" target="_blank" rel="noopener noreferrer"><MessageSquare size={14} /> WhatsApp: +91 84487 63134</a>
           </div>
           <span style={{ color: C.muted, fontSize: 12 }}>Gurgaon · Mumbai · Rohtak · Australia · © {2026} Avani Enterprises</span>
         </div>

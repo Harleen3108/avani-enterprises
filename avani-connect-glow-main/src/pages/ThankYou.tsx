@@ -12,7 +12,10 @@ const ThankYou = () => {
   const formattedService = Array.isArray(service) ? service.join(", ") : service;
 
   // WhatsApp contact (with a friendly pre-filled message)
-  const waNumber = "918930008118";
+  // +91 89300 08118 is not in service. It was the WhatsApp target and the
+  // displayed number on the page a lead lands on immediately after converting,
+  // so the warmest contact on the site pointed at a dead line.
+  const waNumber = "918448763134";
   const waMessage = `Hi Avani Enterprises! I just submitted my details on your website${name ? ` (${name})` : ""}${formattedService ? ` for ${formattedService}` : ""}. I'd like to know the next steps.`;
   const waLink = `https://wa.me/${waNumber}?text=${encodeURIComponent(waMessage)}`;
 
@@ -128,7 +131,7 @@ const ThankYou = () => {
             >
               <a href={waLink} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 text-gray-500 hover:text-[#E1AD01] transition-colors text-sm font-medium">
                 <Phone className="w-4 h-4" />
-                <span>WhatsApp: +91 89300 08118</span>
+                <span>WhatsApp: +91 84487 63134</span>
               </a>
               <a href="mailto:kp@avanienterprises.in" className="flex items-center justify-center gap-2 text-gray-500 hover:text-[#E1AD01] transition-colors text-sm font-medium">
                 <Mail className="w-4 h-4" />

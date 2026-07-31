@@ -4,7 +4,6 @@ import { motion, type Variants } from 'framer-motion';
 import { ArrowLeft, ArrowUpRight, CheckCircle2, Server, Shield, Zap, ArrowRight } from 'lucide-react';
 import { projectsData } from '../data/ProjectsData';
 import ServiceLeadForm from '../components/ServiceLeadForm';
-import { projectsData } from '../data/ProjectsData';
 
 /* Premium background components */
 const Grain = () => (
@@ -32,6 +31,37 @@ const titleV: Variants = {
   hidden: { y: 100, opacity: 0 },
   visible: (i: number) => ({ y: 0, opacity: 1, transition: { duration: 1, ease: [.22, 1, .36, 1], delay: .2 + i * 0.12 } })
 };
+
+/**
+ * Split a capability into a short lead and its supporting clause.
+ *
+ * "Live worker tracking on a map via Socket.io and Google Maps"
+ *   → lead: "Live worker tracking on a map"
+ *   → rest: "via Socket.io and Google Maps"
+ *
+ * Falls back to the whole string as the lead when there is no clean break, so a
+ * short capability still renders correctly rather than being truncated.
+ */
+function splitFeature(text: string): { lead: string; rest: string } {
+  const markers = [': ', ', so ', ', with ', ', including ', ', and ', ', ', ' with ', ' so ', ' via ', ' across ', ' covering '];
+  let best = -1;
+  let len = 0;
+  for (const m of markers) {
+    const i = text.indexOf(m);
+    // Only split if the lead is a usable length — a two-word lead reads as a
+    // truncation, and a split past ~60 chars is not buying any hierarchy.
+    if (i > 12 && i < 62 && (best === -1 || i < best)) { best = i; len = m.length; }
+  }
+  if (best === -1) return { lead: text, rest: '' };
+  // Strip the leading comma off connectives like ", so " — otherwise the
+  // supporting line renders as ", so the billed duration runs…".
+  const sep = text.slice(best, best + len).trim().replace(/^,\s*/, '');
+  const rest = text.slice(best + len);
+  return {
+    lead: text.slice(0, best),
+    rest: sep && sep !== ',' && sep !== ':' ? `${sep} ${rest}` : rest,
+  };
+}
 
 const ProjectDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -101,16 +131,22 @@ const ProjectDetail = () => {
                 {project.subtitle}
               </motion.p>
 
-              {/* Capability Badges */}
-              <motion.div variants={fadeUp} style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginBottom: '2.5rem' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '10px 20px', borderRadius: '100px', border: '1px solid var(--border-light)', background: 'var(--card-bg)', backdropFilter: 'blur(10px)' }}>
-                  <Server size={14} style={{ color: 'var(--accent-primary)' }} />
-                  <span style={{ fontSize: '0.75rem', fontWeight: 800, letterSpacing: '0.08em' }}>CLOUD DEPLOYED</span>
-                </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '10px 20px', borderRadius: '100px', border: '1px solid var(--border-light)', background: 'var(--card-bg)', backdropFilter: 'blur(10px)' }}>
-                  <Shield size={14} style={{ color: 'var(--accent-primary)' }} />
-                  <span style={{ fontSize: '0.75rem', fontWeight: 800, letterSpacing: '0.08em' }}>ENTERPRISE SECURE</span>
-                </div>
+              {/* Facts about this build, not adjectives about it.
+
+                  These were "CLOUD DEPLOYED" and "ENTERPRISE SECURE" on every
+                  project — true of everything we ship, so they distinguished
+                  nothing and told a visitor nothing they could act on. */}
+              <motion.div variants={fadeUp} style={{ display: 'flex', gap: '.6rem', flexWrap: 'wrap', marginBottom: '2.5rem' }}>
+                {[
+                  `${project.keyFeatures.length} capabilities`,
+                  `${project.techStack.length} technologies`,
+                  ...(project.liveLink ? ['Live demo available'] : []),
+                ].map((t) => (
+                  <span key={t} style={{ display: 'inline-flex', alignItems: 'center', gap: '7px', padding: '8px 16px', borderRadius: '100px', border: '1px solid var(--border-light)', background: 'var(--card-bg)', fontSize: '0.78rem', fontWeight: 600, color: 'var(--text-secondary)' }}>
+                    <span style={{ width: 5, height: 5, borderRadius: '50%', background: 'var(--accent-primary)', flexShrink: 0 }} />
+                    {t}
+                  </span>
+                ))}
               </motion.div>
 
               {/* View Live Demo Action */}
@@ -203,14 +239,37 @@ const ProjectDetail = () => {
                 {project.overview}
               </p>
               
-              <h2 className="dh-heading" style={{ fontSize: '1.8rem', marginBottom: '1.5rem', fontFamily: "'Outfit'" }}>KEY CAPABILITIES</h2>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1rem' }}>
-                {project.keyFeatures.map((f, i) => (
-                  <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '16px 20px', background: 'var(--card-bg)', borderRadius: '12px', border: '1px solid var(--border-faint)' }}>
-                    <CheckCircle2 size={18} style={{ color: 'var(--accent-primary)', flexShrink: 0 }} />
-                    <span style={{ fontSize: '0.95rem', fontWeight: 600, color: 'var(--text-primary)' }}>{f}</span>
-                  </div>
-                ))}
+              <h2 className="dh-heading" style={{ fontSize: '1.8rem', marginBottom: '.5rem', fontFamily: "'Outfit'" }}>KEY CAPABILITIES</h2>
+              <p style={{ fontSize: '.92rem', color: 'var(--text-secondary)', margin: '0 0 2rem', maxWidth: '52ch', lineHeight: 1.65 }}>
+                {project.keyFeatures.length} capabilities shipped in this build.
+              </p>
+
+              {/* Two columns, a numbered index and a real type hierarchy.
+
+                  This was ten identical bordered rows of one-size semibold text.
+                  Nothing led, nothing receded, and there was no shape for the eye
+                  to move between — so it read as a paragraph pretending to be a
+                  list, and nobody read it. The number gives rhythm, the lead line
+                  carries the point, and the supporting clause drops back. */}
+              <div className="pd-caps">
+                {project.keyFeatures.map((f, i) => {
+                  const { lead, rest } = splitFeature(f);
+                  return (
+                    <div key={i} className="pd-cap">
+                      <span className="pd-cap-n">{String(i + 1).padStart(2, '0')}</span>
+                      <div style={{ minWidth: 0 }}>
+                        <h3 style={{ fontFamily: "'Outfit', sans-serif", fontSize: '1rem', fontWeight: 700, lineHeight: 1.35, margin: 0, color: 'var(--text-primary)' }}>
+                          {lead}
+                        </h3>
+                        {rest && (
+                          <p style={{ fontSize: '.87rem', lineHeight: 1.62, color: 'var(--text-secondary)', margin: '.35rem 0 0' }}>
+                            {rest}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </motion.div>
 
@@ -369,6 +428,32 @@ const ProjectDetail = () => {
           </div>
         </div>
         <style>{`
+          /* Two columns so ten capabilities read as a scannable grid rather
+             than a single tall column the eye slides off. Hairline separators
+             instead of a border per card — ten boxed rows is just noise. */
+          .pd-caps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+            gap: 0;
+            border-top: 1px solid var(--border-faint);
+          }
+          .pd-cap {
+            display: flex;
+            gap: 1rem;
+            padding: 1.15rem 1.25rem 1.15rem 0;
+            border-bottom: 1px solid var(--border-faint);
+            align-items: flex-start;
+          }
+          .pd-cap-n {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.06em;
+            color: var(--accent-primary);
+            padding-top: 3px;
+            flex-shrink: 0;
+            font-variant-numeric: tabular-nums;
+          }
           .pd-related { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); gap: 1rem; }
           .pd-cta { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 400px); gap: 3rem; align-items: center; }
           @media (max-width: 900px) { .pd-cta { grid-template-columns: minmax(0, 1fr); gap: 2rem; } }

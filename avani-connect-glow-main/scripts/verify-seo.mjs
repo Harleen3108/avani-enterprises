@@ -96,6 +96,19 @@ console.log('\n── NAP  One primary phone, one address, everywhere ───�
   chk(/8448763134|84487 63134/.test(c._b), '/contact shows the primary number');
   chk(/9253625099|92536 25099/.test(c._b), '/contact still lists the second line');
 
+  // +91 89300 08118 is disconnected. It was the WhatsApp target and the
+  // displayed number on /thank-you — the page a lead lands on the instant they
+  // convert — so the single warmest contact point on the site pointed at a dead
+  // line. Nothing may reintroduce it.
+  const dead = ['src/pages/ThankYou.tsx', 'src/pages/LandingPage3.tsx', 'src/components/Footer.tsx', 'index.html']
+    .filter((f) => {
+      if (!fs.existsSync(f)) return false;
+      // Ignore the comment that documents why the number is banned.
+      const body = fs.readFileSync(f, 'utf8').split('\n').filter((l) => !l.trim().startsWith('//')).join('\n');
+      return /8930008118|89300[ -]?08118/.test(body);
+    });
+  chk(dead.length === 0, 'disconnected number is gone', dead.join(', ') || 'clean');
+
   // Source files must not reintroduce it either — the served HTML only covers
   // the routes tested above.
   const srcHits = ['src/components/Footer.tsx', 'src/components/Navbar.tsx', 'src/data/cityPagesData.ts']
