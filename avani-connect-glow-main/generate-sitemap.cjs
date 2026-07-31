@@ -556,6 +556,28 @@ function loadBlogSlugRedirects() {
   console.log(`ℹ️ Added ${slugs.length} /services/* detail page(s) to the sitemap.`);
 })();
 
+// ── /projects/* detail pages ───────────────────────────────────────
+// Twenty platform case studies — Business OS, the HR portal, the marketplaces,
+// Eklavya and the rest — were reachable only from the /projects grid and were in
+// no sitemap. They are the deepest, most specific content on the site: the pages
+// that can actually answer "who builds a home-services marketplace with live
+// worker tracking". Slugs are read from ProjectsData.ts so the list cannot drift
+// from the routes that render.
+(function addProjectDetailPages() {
+  const p = path.join(__dirname, "src", "data", "ProjectsData.ts");
+  if (!fs.existsSync(p)) {
+    console.warn("⚠️ ProjectsData.ts not found — /projects/* pages not added to sitemap.");
+    return;
+  }
+  const src = fs.readFileSync(p, "utf8");
+  const slugs = [...src.matchAll(/^\s{4}slug: "([a-z0-9-]+)",$/gm)].map((m) => m[1]);
+  if (!slugs.length) return;
+  slugs.forEach((slug) => {
+    urls.push({ loc: `${BASE_URL}/projects/${slug}`, lastmod: TODAY, changefreq: "monthly", priority: "0.8" });
+  });
+  console.log(`ℹ️ Added ${slugs.length} /projects/* detail page(s) to the sitemap.`);
+})();
+
 // ── Drop de-indexed URLs ─────────────────────────────────────────────────────
 // Catches the hand-listed static entries above as well as the dynamic ones, so
 // a doorway slug can never sneak back into the sitemap from either source.

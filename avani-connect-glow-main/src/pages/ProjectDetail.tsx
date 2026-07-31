@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, type Variants } from 'framer-motion';
 import { ArrowLeft, ArrowUpRight, CheckCircle2, Server, Shield, Zap, ArrowRight } from 'lucide-react';
+import { projectsData } from '../data/ProjectsData';
+import ServiceLeadForm from '../components/ServiceLeadForm';
 import { projectsData } from '../data/ProjectsData';
 
 /* Premium background components */
@@ -21,12 +23,12 @@ const LuxuryLine = () => (
   <div style={{ height: '1px', background: 'linear-gradient(to right, transparent, var(--border-light) 15%, var(--border-light) 85%, transparent)', opacity: 0.6 }} />
 );
 
-const fadeUp = {
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
 };
 
-const titleV = {
+const titleV: Variants = {
   hidden: { y: 100, opacity: 0 },
   visible: (i: number) => ({ y: 0, opacity: 1, transition: { duration: 1, ease: [.22, 1, .36, 1], delay: .2 + i * 0.12 } })
 };
@@ -34,6 +36,10 @@ const titleV = {
 const ProjectDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const project = slug ? projectsData.find(p => p.slug === slug) : null;
+
+  // Three other builds, excluding this one. Stops a detail page being a dead
+  // end, and spreads internal links across the whole portfolio.
+  const related = projectsData.filter((r) => r.slug !== project?.slug).slice(0, 3);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -213,9 +219,9 @@ const ProjectDetail = () => {
               
               {/* Impact Box */}
               <div style={{ padding: '32px', background: 'var(--card-bg)', borderRadius: '24px', border: '1px solid var(--border-faint)' }}>
-                <h3 style={{ fontFamily: "'Outfit'", fontSize: '0.8rem', letterSpacing: '0.2em', color: 'var(--accent-primary)', fontWeight: 700, marginBottom: '2rem', textAlign: 'center' }}>IMPACT & METRICS</h3>
+                <h3 style={{ fontFamily: "'Outfit'", fontSize: '0.8rem', letterSpacing: '0.2em', color: 'var(--accent-primary)', fontWeight: 700, marginBottom: '2rem', textAlign: 'center' }}>WHO IT IS BUILT FOR</h3>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                  {project.impact.map((imp, i) => (
+                  {project.builtFor.map((imp, i) => (
                     <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
                       <Zap size={16} style={{ color: 'var(--accent-primary)', flexShrink: 0, marginTop: '2px' }} />
                       <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 1.4, margin: 0 }}>{imp}</p>
@@ -310,6 +316,64 @@ const ProjectDetail = () => {
           </div>
         </section>
       )}
+
+      {/* Related builds + enquiry. Someone reading a platform page in this much
+          detail is working out whether we could build theirs, so the page should
+          let them ask, and should offer the nearest comparable work rather than
+          dead-ending on a back link. */}
+      <section className="theme-beige" style={{ position: 'relative', padding: '80px 0', background: 'var(--bg-primary)' }}>
+        <div className="dh-container">
+          {related.length > 0 && (
+            <div style={{ marginBottom: '4rem' }}>
+              <span className="dh-label">Related builds</span>
+              <h2 className="dh-display" style={{ fontSize: 'clamp(1.6rem, 4vw, 2.4rem)', margin: '.5rem 0 2rem' }}>
+                Other platforms we have built
+              </h2>
+              <div className="pd-related">
+                {related.map((r) => (
+                  <Link
+                    key={r.slug}
+                    to={`/projects/${r.slug}`}
+                    style={{ textDecoration: 'none', background: 'var(--card-bg)', border: '1px solid var(--border-faint)', borderRadius: '16px', padding: '1.4rem', display: 'block', transition: 'border-color .25s' }}
+                    onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--accent-primary)'; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--border-faint)'; }}
+                  >
+                    <h3 className="dh-heading" style={{ fontSize: '1.05rem', margin: '0 0 .5rem', color: 'var(--text-primary)' }}>{r.title}</h3>
+                    <p style={{ fontSize: '.86rem', lineHeight: 1.6, color: 'var(--text-secondary)', margin: 0 }}>{r.subtitle}</p>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <div className="pd-cta">
+            <div>
+              <span className="dh-label">Build something like this</span>
+              <h2 className="dh-display" style={{ fontSize: 'clamp(1.7rem, 4.2vw, 2.6rem)', margin: '.5rem 0 1rem', lineHeight: 1.12 }}>
+                Want something like {project.title}?
+              </h2>
+              <p style={{ fontSize: '1rem', lineHeight: 1.72, color: 'var(--text-secondary)', margin: 0, maxWidth: '50ch' }}>
+                Every platform here started as a call about a problem. Tell us what you
+                are trying to run, and we will say honestly whether one of these fits or
+                whether it needs building for you.
+              </p>
+            </div>
+            <ServiceLeadForm
+              source={`project_${project.slug}`}
+              related={['Custom Software Development', 'Web Development', 'Mobile App Development', 'CRM Development', 'AI Development']}
+              heading="Request a call back"
+              sub="One working day, no obligation."
+              variant="inline"
+              compact
+            />
+          </div>
+        </div>
+        <style>{`
+          .pd-related { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); gap: 1rem; }
+          .pd-cta { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 400px); gap: 3rem; align-items: center; }
+          @media (max-width: 900px) { .pd-cta { grid-template-columns: minmax(0, 1fr); gap: 2rem; } }
+        `}</style>
+      </section>
 
     </div>
   );

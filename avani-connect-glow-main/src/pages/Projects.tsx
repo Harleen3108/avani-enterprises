@@ -37,7 +37,7 @@ const projects = projectsData.map(p => ({
   filter: getProjectFilter(p.slug),
   image: p.image,
   link: `/projects/${p.slug}`,
-  impact: p.impact?.[0] || 'High Impact',
+  impact: p.builtFor?.[0] || 'Custom platform',
   imageStyle: p.imageStyle
 }));
 
