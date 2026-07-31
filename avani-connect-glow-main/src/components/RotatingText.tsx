@@ -4,9 +4,20 @@ import { AnimatePresence, motion } from 'framer-motion';
 interface DummyRotatingTextProps {
   words: string[];
   interval?: number;
+  /** Every call site already passed this; the component dropped it silently,
+      so the accent colour these words were meant to carry never applied. */
+  className?: string;
+  /**
+   * Inherit the surrounding typography instead of the built-in display styling.
+   *
+   * The hardcoded 39–66px italic serif and 320px min-width exist because this
+   * was written for one H1. Used anywhere else — a sentence of body copy — it
+   * renders a 66px word mid-paragraph and reserves 320px for it.
+   */
+  inline?: boolean;
 }
 
-const DummyRotatingText: React.FC<DummyRotatingTextProps> = ({ words, interval = 3000 }) => {
+const DummyRotatingText: React.FC<DummyRotatingTextProps> = ({ words, interval = 3000, className, inline = false }) => {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -17,7 +28,9 @@ const DummyRotatingText: React.FC<DummyRotatingTextProps> = ({ words, interval =
   }, [words.length, interval]);
 
   return (
-    <span style={{ display: 'inline-block', position: 'relative', overflow: 'hidden', minWidth: '320px', verticalAlign: 'bottom' }}>
+    <span className={inline ? className : undefined} style={inline
+      ? { display: 'inline-block', position: 'relative', overflow: 'hidden', verticalAlign: 'baseline' }
+      : { display: 'inline-block', position: 'relative', overflow: 'hidden', minWidth: '320px', verticalAlign: 'bottom' }}>
       <AnimatePresence mode="wait">
         <motion.span
           key={index}
@@ -25,7 +38,7 @@ const DummyRotatingText: React.FC<DummyRotatingTextProps> = ({ words, interval =
           animate={{ y: '0%', opacity: 1 }}
           exit={{ y: '-100%', opacity: 0 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          style={{
+          style={inline ? { display: 'inline-block' } : {
             display: 'inline-block',
             fontFamily: "'Cormorant Garamond', Georgia, serif",
             fontSize: 'clamp(39px, 4.5vw, 66px)',

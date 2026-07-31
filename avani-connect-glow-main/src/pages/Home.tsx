@@ -34,6 +34,7 @@ import { fadeInUp, viewportSettings, scaleOnHover } from '../utils/animations';
 import RotatingText from '../components/RotatingText';
 import LogoMarquee from '../components/LogoMarquee';
 import GlobalPresenceSection from '../components/GlobalPresenceSection';
+import ServiceLeadForm from '../components/ServiceLeadForm';
 import axios from 'axios';
 import { API_BASE_URL } from '../utils/api';
 
@@ -451,34 +452,34 @@ const Home = () => {
                   }
                 }}
               >
-                {(seo?.seoHeading && !seo.seoHeading.includes("Digital & Product Studio")) ? (
-                  seo.seoHeading
-                ) : (
-                  <>
-                    {("Build high-performing ").split("").map((char, index) => (
-                      <motion.span
-                        key={`char-${index}`}
-                        variants={{
-                          hidden: { opacity: 0, y: 10 },
-                          visible: { opacity: 1, y: 0 }
-                        }}
-                      >
-                        {char}
-                      </motion.span>
-                    ))}
-                    <RotatingText
-                      words={["Websites", "Products", "Solutions", "Experiences"]}
-                      interval={3000}
-                      className="text-amber-500"
-                    />
-                    {" & accelerate "}
-                    <span className="text-amber-500">Growth.</span>
-                  </>
-                )}
+                Websites, apps and AI systems for businesses in{" "}
+                <span className="text-amber-500">Gurugram, Mumbai &amp; across India</span>
               </motion.h1>
 
-              <p className="font-body text-[15px] md:text-base text-slate-600 mb-10 leading-7 md:leading-8 font-normal tracking-[0.01em] max-w-xl">
-Avani Enterprises is the Digital, Product & AI Studio in Gurugram & Rohtak, providing the best Digital Marketing, Web Development, App Development, and AI Solutions across India (Rohtak, Gurgaon, and Mumbai). We deliver result-driven SEO, PPC, social media, and branding solutions. Our data-focused strategies help businesses generate quality leads and maximize ROI.
+              {/* AEO: the opening paragraph answers "what is this company and
+                  what do they do" in one plain sentence, because that is the
+                  block an answer engine lifts when asked. The version here
+                  before was keyword-stuffed — "the best Digital Marketing, Web
+                  Development, App Development, and AI Solutions across India
+                  (Rohtak, Gurgaon, and Mumbai)" — which reads as generated
+                  text to a person and as thin to a ranking system. */}
+              <p className="font-body text-[15px] md:text-lg text-slate-700 mb-6 leading-7 md:leading-[1.75] font-normal max-w-xl">
+                Avani Enterprises is a digital, product and AI studio founded in 2016,
+                with offices in <strong className="font-semibold text-slate-900">Gurugram, Mumbai and Rohtak</strong>.
+                We build websites, mobile apps and custom business software, run SEO and
+                paid campaigns, and ship AI systems — chatbots, voice agents and
+                automation — with one team rather than four vendors.
+              </p>
+
+              <p className="font-body text-[15px] md:text-base text-slate-600 mb-8 leading-7 md:leading-8 max-w-xl">
+                Building{" "}
+                <RotatingText
+                  words={["websites", "mobile apps", "AI agents", "online stores", "business software"]}
+                  interval={2600}
+                  className="text-amber-600 font-semibold"
+                  inline
+                />
+                {" "}for clients across India, the UAE, Singapore and the USA.
               </p>
 
               {/* Global Expansion Text */}
@@ -551,135 +552,32 @@ Avani Enterprises is the Digital, Product & AI Studio in Gurugram & Rohtak, prov
               </div>
             </motion.div>
 
-            {/* Right Column: Newsletter Widget (Chart extracted to HeroDashboard.tsx) */}
+            {/* Right Column: the enquiry form.
+
+                This was a newsletter widget listing recent editions. It occupied
+                the single most valuable block on the site — hero, above the
+                fold, on the page that receives the most traffic — to offer the
+                one thing a first-time visitor is least likely to want. The
+                newsletter still lives at /newsletters and in the footer.
+
+                A homepage visitor who is ready to act should be able to do it
+                without scrolling or hunting for a CTA. Compact: two fields and
+                seven broad directions, because at this point we know nothing
+                about why they came. */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1, delay: 0.2 }}
-              className="relative hidden lg:block h-[560px] overflow-hidden"
+              initial={{ opacity: 0, x: 40 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut", delay: 0.15 }}
+              className="w-full max-w-[440px] mx-auto lg:mx-0 lg:justify-self-end"
+              id="get-started"
             >
-              {/* Background Design */}
-              <div className="absolute inset-0 z-0">
-                <div className="absolute top-1/4 left-1/4 w-[200px] h-[200px] bg-amber-200/20 rounded-full blur-[70px] animate-pulse-slow" />
-                <div className="absolute bottom-1/4 right-0 w-[180px] h-[180px] bg-sky-200/20 rounded-full blur-[70px] animate-pulse-slow delay-700" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] border border-amber-500/5 rounded-full" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[370px] h-[370px] border border-amber-500/5 rounded-full" />
-              </div>
-
-              {/* OLD: Dashboard Chart — extracted to <HeroDashboard /> in src/components/HeroDashboard.tsx */}
-              {/* To revert: uncomment <HeroDashboard /> and remove the newsletter widget below */}
-              {/* <HeroDashboard /> */}
-
-              {/* NEW: Newsletter Widget — centered wrapper so avatars anchor to the card, not the column margins */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[68%] max-w-[290px] z-10">
-                <div className="relative bg-white/95 backdrop-blur-md rounded-[1.5rem] shadow-[0_30px_80px_rgba(0,0,0,0.08)] border border-white overflow-hidden">
-                {/* Widget Header */}
-                <div className="flex items-center justify-between px-5 pt-5 pb-3.5 border-b border-slate-100">
-                  <h3 className="text-sm font-black text-slate-900 tracking-tight uppercase">News & Updates</h3>
-                  <div className="w-8 h-8 bg-amber-50 rounded-lg flex items-center justify-center border border-amber-100">
-                    <Mail className="w-3.5 h-3.5 text-amber-500" />
-                  </div>
-                </div>
-
-                {/* Newsletter Items */}
-                <div className="divide-y divide-slate-50">
-                  {loadingNewsletters ? (
-                    <div className="flex justify-center py-10">
-                      <div className="w-7 h-7 border-3 border-amber-500 border-t-transparent rounded-full animate-spin" />
-                    </div>
-                  ) : newsletters.length === 0 ? (
-                    <div className="text-center py-10 px-6">
-                      <p className="text-slate-400 font-medium text-sm italic">Updates coming soon...</p>
-                    </div>
-                  ) : (
-                    newsletters.slice(0, 3).map((n: any) => {
-                      const date = new Date(n.publishedAt || n.createdAt);
-                      const month = date.toLocaleDateString('en-US', { month: 'short' }).toUpperCase();
-                      const day = date.getDate().toString().padStart(2, '0');
-                      const isRecent = (Date.now() - date.getTime()) < 7 * 24 * 60 * 60 * 1000;
-
-                      return (
-                        <Link
-                          key={n._id}
-                          to={`/newsletters/${encodeURIComponent(n.slug)}`}
-                          className="group flex items-center gap-3 px-5 py-3 hover:bg-amber-50/40 transition-colors duration-200"
-                        >
-                          {/* Image or Date Badge */}
-                          <div className="shrink-0">
-                            {n.imageUrl ? (
-                              <div className="w-11 h-11 rounded-lg overflow-hidden border-2 border-slate-100 group-hover:border-amber-300 transition-colors shadow-sm">
-                                <img
-                                  src={n.imageUrl.startsWith('http') ? n.imageUrl : `${API_BASE_URL}${n.imageUrl.startsWith('/') ? '' : '/'}${n.imageUrl}`}
-                                  alt={n.title}
-                                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                                  onError={(e: any) => e.target.src = "https://placehold.co/56x56?text=News"}
-                                />
-                              </div>
-                            ) : (
-                              <div className="w-11 h-11 rounded-lg bg-slate-50 border-2 border-slate-100 group-hover:border-amber-300 transition-colors flex flex-col items-center justify-center">
-                                <span className="text-[8px] font-black text-amber-500 uppercase leading-none tracking-wider">{month}</span>
-                                <span className="text-base font-black text-slate-900 leading-tight">{day}</span>
-                              </div>
-                            )}
-                          </div>
-
-                          {/* Title + Meta */}
-                          <div className="flex-1 min-w-0">
-                            <h4 className="text-[13px] font-bold text-slate-900 group-hover:text-amber-600 transition-colors line-clamp-1 leading-snug mb-0.5">
-                              {n.title}
-                            </h4>
-                            <div className="flex items-center gap-2">
-                              <span className="text-[10px] text-slate-400 font-medium">
-                                {date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-                              </span>
-                              {isRecent && (
-                                <span className="text-[8px] font-black text-amber-500 uppercase tracking-wider bg-amber-50 px-1.5 py-0.5 rounded-full border border-amber-100">
-                                  New
-                                </span>
-                              )}
-                            </div>
-                          </div>
-
-                          {/* Arrow */}
-                          <ChevronRight className="w-3.5 h-3.5 text-slate-300 group-hover:text-amber-500 transition-colors shrink-0" />
-                        </Link>
-                      );
-                    })
-                  )}
-                </div>
-
-                {/* View All */}
-                {!loadingNewsletters && newsletters.length > 0 && (
-                  <div className="px-5 py-3 border-t border-slate-100 bg-slate-50/30">
-                    <Link
-                      to="/newsletters"
-                      className="group flex items-center justify-center gap-2 w-full py-2 bg-white border border-slate-200 hover:border-amber-400 text-slate-700 hover:text-amber-600 rounded-lg font-black text-[9px] uppercase tracking-widest transition-all shadow-sm hover:shadow-md"
-                    >
-                      View All <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-                    </Link>
-                  </div>
-                )}
-              </div>
-
-                {/* Floating Indian Avatars — anchored to the card corners */}
-                <motion.div
-                  animate={{ y: [0, -20, 0] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute -top-4 -right-2 w-14 h-14 rounded-full border-4 border-white shadow-2xl overflow-hidden z-20"
-                >
-                  <img src="https://images.unsplash.com/photo-1589386417686-0d34b5903d23?q=80&w=800&auto=format&fit=crop" alt="Indian Businessman" className="w-full h-full object-cover" />
-                </motion.div>
-
-                <motion.div
-                  animate={{ y: [0, 20, 0] }}
-                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                  className="absolute top-[62%] -left-3 w-12 h-12 rounded-full border-4 border-white shadow-2xl overflow-hidden z-20"
-                >
-                  <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800&auto=format&fit=crop" alt="Indian Businesswoman" className="w-full h-full object-cover" />
-                </motion.div>
-              </div>
-
-
+              <ServiceLeadForm
+                source="home_hero"
+                heading="Tell us what you need built"
+                sub="A free scoping call and a written quote before any work starts. We reply within one working day."
+                variant="inline"
+                compact
+              />
             </motion.div>
           </div>
         </div>
