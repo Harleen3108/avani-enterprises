@@ -55,7 +55,7 @@ From Gachibowli IT firms to Madhapur startups and Genome Valley pharma companies
     { q: 'Will my website rank on Google in Hyderabad?', a: 'Every build includes technical SEO foundations. For competitive Hyderabad keywords, we recommend our ongoing SEO service for top rankings.' },
     { q: 'Can you redesign my existing website?', a: 'Yes. We modernise existing sites while preserving SEO rankings and URLs through careful migration and 301 redirects, so traffic is protected.' },
     { q: 'Is post-launch support included?', a: 'Yes — 30 days of free support comes with every project, plus annual maintenance plans for security, backups, speed and content updates.' },
-    { q: 'How do I get started?', a: 'Call +91 92536 25099 or fill the contact form for a free 30-minute discovery call and a proposal within 24 hours.' },
+    { q: 'How do I get started?', a: 'Call +91 84487 63134 or fill the contact form for a free 30-minute discovery call and a proposal within 24 hours.' },
   ],
   reviews: [],
   relatedLinks: [

@@ -420,7 +420,7 @@ const Careers = () => {
             </p>
             <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
               <button onClick={() => navigate('/contact')} className="dh-btn-fill">GET CONSULTATION</button>
-              <a href="tel:+919253625099" className="dh-btn-ghost" style={{ textDecoration: 'none' }}>TALK TO EXPERT</a>
+              <a href="tel:+91 84487 63134" className="dh-btn-ghost" style={{ textDecoration: 'none' }}>TALK TO EXPERT</a>
             </div>
           </motion.div>
         </div>

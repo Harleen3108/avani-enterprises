@@ -55,7 +55,7 @@ We build corporate websites, e-commerce platforms, B2B portals, and custom web a
     { q: 'Will my website rank on Google in Pune?', a: 'Every build includes technical SEO foundations. For competitive Pune keywords, we recommend our ongoing SEO service to achieve and hold top rankings.' },
     { q: 'Can you redesign my existing website?', a: 'Yes. We modernise existing sites while preserving SEO rankings and URLs through careful migration and 301 redirects, so you don\'t lose traffic.' },
     { q: 'Is post-launch support included?', a: 'Yes — 30 days of free support comes with every project, plus affordable annual maintenance plans for security, backups and updates.' },
-    { q: 'How do I get started?', a: 'Call +91 92536 25099 or fill the contact form for a free 30-minute discovery call and a proposal within 24 hours.' },
+    { q: 'How do I get started?', a: 'Call +91 84487 63134 or fill the contact form for a free 30-minute discovery call and a proposal within 24 hours.' },
   ],
   reviews: [],
   relatedLinks: [

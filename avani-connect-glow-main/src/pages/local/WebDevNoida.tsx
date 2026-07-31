@@ -55,7 +55,7 @@ From sector-based SMBs to enterprises along the Noida-Greater Noida Expressway, 
     { q: 'Will my website rank on Google?', a: 'Every build includes technical SEO foundations — schema, fast load times, sitemaps and clean structure. For competitive Noida keywords, we recommend our ongoing SEO service.' },
     { q: 'Can you redesign my existing website?', a: 'Yes. We modernise existing sites while preserving SEO rankings and URLs through careful migration and 301 redirects, so you don\'t lose traffic.' },
     { q: 'Do you provide post-launch support?', a: 'Yes — 30 days of free support is included, with affordable annual maintenance plans for security, backups, speed and content updates.' },
-    { q: 'How do I get started?', a: 'Call +91 92536 25099 or fill the contact form. We\'ll set up a free 30-minute discovery call and send a proposal within 24 hours.' },
+    { q: 'How do I get started?', a: 'Call +91 84487 63134 or fill the contact form. We\'ll set up a free 30-minute discovery call and send a proposal within 24 hours.' },
   ],
   reviews: [],
   relatedLinks: [

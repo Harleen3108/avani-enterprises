@@ -55,7 +55,7 @@ From BKC corporate headquarters to Andheri startups and Lower Parel agencies, we
     { q: 'Will my website rank on Google in Mumbai?', a: 'Every site is built on strong technical SEO foundations. For competitive Mumbai keywords, we recommend our ongoing SEO service to secure and hold top rankings.' },
     { q: 'Can you redesign our existing website?', a: 'Yes. We modernise existing sites while protecting SEO rankings and URLs through careful migration and 301 redirects, so traffic is preserved.' },
     { q: 'Is support included after launch?', a: 'Yes — 30 days of free support is included, with annual maintenance plans for security, backups, speed and content updates.' },
-    { q: 'How do we get started?', a: 'Call +91 92536 25099 or fill the contact form for a free 30-minute discovery call and a detailed proposal within 24 hours.' },
+    { q: 'How do we get started?', a: 'Call +91 84487 63134 or fill the contact form for a free 30-minute discovery call and a detailed proposal within 24 hours.' },
   ],
   reviews: [],
   relatedLinks: [

@@ -13,7 +13,7 @@ import AnimatedSection from '../components/AnimatedSection';
 import { getResponsiveImageProps } from '../utils/responsiveImage';
 
 const GetConsultation = () => {
-  const whatsappNumber = '919253625099';
+  const whatsappNumber = '918448763134';
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -218,13 +218,13 @@ const GetConsultation = () => {
                       <p className="text-slate-400 text-sm font-bold uppercase tracking-widest mb-10">Available 24/7 for you</p>
 
                       <div className="space-y-6">
-                        <a href="tel:+919253625099" className="flex items-center gap-4 group/item">
+                        <a href="tel:+91 84487 63134" className="flex items-center gap-4 group/item">
                           <div className="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center text-amber-500 group-hover/item:bg-gradient-to-r from-amber-400 to-orange-500 group-hover/item:text-slate-900 transition-all">
                             <Phone className="w-5 h-5" />
                           </div>
                           <div>
                             <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Phone</p>
-                            <p className="text-white font-bold text-lg">+91 92536 25099</p>
+                            <p className="text-white font-bold text-lg">+91 84487 63134</p>
                           </div>
                         </a>
 

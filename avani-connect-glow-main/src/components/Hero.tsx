@@ -136,7 +136,23 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
 
         {/* Parallax BG */}
         <motion.div style={{ scale: heroBgScale, position: 'absolute', inset: 0, zIndex: 0 }}>
-          <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=68&w=1280" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} fetchPriority="high" loading="eager" />
+          {/* Self-hosted. This is the homepage LCP element, and it used to load
+              from images.unsplash.com — a cross-origin host on the critical
+              path, costing a DNS lookup and a TLS handshake before the largest
+              paint could start, on infrastructure we do not control.
+              Decorative: alt="" is deliberate. */}
+          <img
+            src="/hero-office-1280.webp"
+            srcSet="/hero-office-800.webp 800w, /hero-office-1280.webp 1280w, /hero-office-1600.webp 1600w"
+            sizes="100vw"
+            alt=""
+            width={1280}
+            height={854}
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            fetchPriority="high"
+            loading="eager"
+            decoding="async"
+          />
           <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, var(--bg-primary) 0%, var(--glass-bg) 50%, transparent 100%)' }} />
           <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, var(--bg-primary) 0%, transparent 100%)' }} />
           <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 72% 38%, var(--border-light) 0%, transparent 55%)' }} />

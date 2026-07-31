@@ -50,9 +50,20 @@
 const NAP = {
   name: 'Avani Enterprises',
   url: 'https://www.avanienterprises.in',
-  // One canonical phone format everywhere. E.164 for tel:/schema, spaced for display.
-  phone: '+919253625099',
-  phoneDisplay: '+91 92536 25099',
+  // One canonical phone format everywhere. E.164 for tel:/schema, spaced for
+  // display. `phone` is the number shown wherever a page has room for exactly
+  // one — nav, footer, landing-page CTAs, LocalBusiness schema.
+  //
+  // NAP consistency is a local-pack ranking factor: Google cross-references the
+  // number here against the Google Business Profile and third-party citations.
+  // If you change `phone`, change it on the GBP and in every directory listing
+  // in the same session, or the mismatch suppresses local rankings.
+  phone: '+918448763134',
+  phoneDisplay: '+91 84487 63134',
+  // Shown alongside the primary on /contact and listed as a second
+  // ContactPoint in schema. Still live, just no longer the number we lead with.
+  phoneSecondary: '+919253625099',
+  phoneSecondaryDisplay: '+91 92536 25099',
   email: 'kp@avanienterprises.in',
   sameAs: [
     'https://www.linkedin.com/company/avani-enterprises-india',

@@ -33,28 +33,28 @@ const officeDetails = [
     description: 'Our flagship innovation center where strategy meets execution. As our founding hub, Rohtak continues to drive our core values across the nation.',
     image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop',
     tagline: 'The Heart of Innovation', color: '#ff6b6b',
-    contact: { address: '106, First Floor, Agro Mall, Rohtak', email: 'kp@avanienterprises.in', phone: '+91 92536 25099' }
+    contact: { address: '106, First Floor, Agro Mall, Rohtak', email: 'kp@avanienterprises.in', phone: '+91 84487 63134' }
   },
   {
     city: 'Gurgaon', country: 'India', label: 'Strategic NCR Hub',
     description: 'Located in the steel-and-glass heart of Cyber City, our Gurgaon office bridges the gap between digital vision and enterprise reality.',
     image: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=1200&auto=format&fit=crop',
     tagline: 'Enterprise Connectivity', color: '#feca57',
-    contact: { address: 'Tower B, 3rd Floor, Unitech Cyber Park, Sector 39, Gurugram, 122002', email: 'kp@avanienterprises.in', phone: '+91 92536 25099' }
+    contact: { address: 'Tower B, 3rd Floor, Unitech Cyber Park, Sector 39, Gurugram, 122002', email: 'kp@avanienterprises.in', phone: '+91 84487 63134' }
   },
   {
     city: 'Mumbai', country: 'India', label: 'Western India Operations',
     description: 'In the financial capital of India, we empower businesses with cutting-edge tech solutions that drive real commercial growth.',
     image: 'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?q=80&w=1200&auto=format&fit=crop',
     tagline: 'Scale & Growth Center', color: '#48dbfb',
-    contact: { address: 'Third Floor, Vasudev Chamber, Teli Galli Cross Rd, Natwar Nagar, Andheri East, Mumbai, Maharashtra 400069', email: 'kp@avanienterprises.in', phone: '+91 92536 25099' }
+    contact: { address: 'Third Floor, Vasudev Chamber, Teli Galli Cross Rd, Natwar Nagar, Andheri East, Mumbai, Maharashtra 400069', email: 'kp@avanienterprises.in', phone: '+91 84487 63134' }
   },
   {
     city: 'Australia', country: 'Australia', label: 'APAC Regional Office',
     description: 'Extending our reach across the Pacific, our Australian presence ensures global support and local expertise for our international partners.',
     image: 'https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?q=80&w=1200&auto=format&fit=crop',
     tagline: 'Global Outreach', color: '#1dd1a1',
-    contact: { address: 'Australia', email: 'kp@avanienterprises.in', phone: '+91 92536 25099' }
+    contact: { address: 'Australia', email: 'kp@avanienterprises.in', phone: '+91 84487 63134' }
   },
 ];
 

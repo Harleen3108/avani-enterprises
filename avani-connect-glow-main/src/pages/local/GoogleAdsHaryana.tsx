@@ -53,7 +53,7 @@ Avani Enterprises has managed PPC ad campaigns for over 50+ companies in Haryana
     { q: 'What is ROAS?', a: 'ROAS (Return on Ad Spend) measures the revenue generated for every rupee spent on ads. We target a 3x to 5x ROAS.' },
     { q: 'Do you manage negative keywords?', a: 'Yes. We filter out irrelevant search queries weekly to prevent budget waste.' },
     { q: 'How do we track ad conversions?', a: 'We set up Google Tag Manager to track calls, form submissions, and direct sales.' },
-    { q: 'How do we get started?', a: 'Call +91 92536 25099 or email kp@avanienterprises.in to book a free campaign review.' }
+    { q: 'How do we get started?', a: 'Call +91 84487 63134 or email kp@avanienterprises.in to book a free campaign review.' }
   ],
   reviews: [],
   relatedLinks: [

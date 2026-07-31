@@ -53,7 +53,7 @@ Avani Enterprises has designed digital systems for over 80+ companies in Delhi, 
     { q: 'How do we track campaign performance?', a: 'You receive monthly dashboards tracking search impressions, ranks, conversion rates, and exact lead totals.' },
     { q: 'Do you help with local Google Map rankings?', a: 'Yes. Our local SEO package optimizes your Google Business Profile to drive calls and walk-ins.' },
     { q: 'What industries do you serve in Delhi?', a: 'We work with professional services, real estate developers, educational institutes, and retail brands.' },
-    { q: 'How do we request a consultation?', a: 'Click the "Get Consultation" button or call +91 92536 25099 to set up an online audit.' }
+    { q: 'How do we request a consultation?', a: 'Click the "Get Consultation" button or call +91 84487 63134 to set up an online audit.' }
   ],
   reviews: [],
   relatedLinks: [

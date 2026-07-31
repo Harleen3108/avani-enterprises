@@ -330,7 +330,7 @@ const BusinessProcessOptimizationProject = () => {
                                 Get Started Today
                             </Link>
                             <a
-                                href="tel:+919253625099"
+                                href="tel:+91 84487 63134"
                                 className="bg-slate-100 text-slate-900 border-2 border-slate-200 px-8 py-4 rounded-xl font-bold uppercase tracking-wider hover:bg-slate-200 hover:border-slate-300 transition-all duration-300"
                             >
                                 Talk to Expert

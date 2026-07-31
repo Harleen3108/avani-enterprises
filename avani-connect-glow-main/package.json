@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "prebuild": "node scripts/check-prose-styles.cjs && node scripts/snapshot-blog.cjs && node generate-sitemap.cjs",
+    "prebuild": "node scripts/check-prose-styles.cjs && node scripts/scrub-claims.cjs && node scripts/snapshot-blog.cjs && node generate-sitemap.cjs",
     "build": "vite build && node post-build.cjs",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
@@ -14,7 +14,8 @@
     "blog:queue": "node scripts/blog-queue.cjs",
     "blog:publish": "node scripts/blog-queue.cjs --publish",
     "blog:seed": "node scripts/seedBlogPosts.js",
-    "blog:seed:publish": "node scripts/seedBlogPosts.js --publish"
+    "blog:seed:publish": "node scripts/seedBlogPosts.js --publish",
+    "verify:seo": "node scripts/verify-seo.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",

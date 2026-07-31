@@ -53,7 +53,7 @@ Avani Enterprises has designed digital systems for over 150+ companies in Haryan
     { q: 'Can you manage our Google and Facebook ad campaigns?', a: 'Yes. We handle copy, graphics, targeting configurations, and daily optimizations to ensure high ROI.' },
     { q: 'Is there a setup fee?', a: 'No, we offer transparent monthly retainer plans with no hidden setup fees.' },
     { q: 'Do you write the website copy?', a: 'Yes. Our team of copywriters creates SEO-optimized, engaging copy for your landing pages.' },
-    { q: 'How do we get started?', a: 'Call +91 92536 25099 or email kp@avanienterprises.in to book a free 20-minute digital audit.' }
+    { q: 'How do we get started?', a: 'Call +91 84487 63134 or email kp@avanienterprises.in to book a free 20-minute digital audit.' }
   ],
   reviews: [],
   relatedLinks: [

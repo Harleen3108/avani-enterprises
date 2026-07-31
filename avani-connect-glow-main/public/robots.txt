@@ -18,7 +18,11 @@ Disallow: /links
 Disallow: /home2/
 Disallow: /contact?
 
-Crawl-delay: 1
+# No Crawl-delay. Google ignores the directive outright; Bing honours it, and at
+# one request per second it was rate-limiting a full crawl of 300+ URLs for no
+# benefit. Bing's index is a direct input to ChatGPT Search and Copilot, so
+# throttling it was throttling one of the two engines that decide whether an AI
+# assistant can cite this site at all.
 
 # ── Google ───────────────────────────────────────────────────────────────────
 User-agent: Googlebot

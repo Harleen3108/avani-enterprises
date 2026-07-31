@@ -22,8 +22,8 @@ const T = {
 export const BIZ = {
   name:    'Avani Enterprises',
   url:     'https://www.avanienterprises.in',
-  phone:   '+919253625099',
-  phoneDisplay: '+91 92536 25099',
+  phone:   '+91 84487 63134',
+  phoneDisplay: '+91 84487 63134',
   email:   'kp@avanienterprises.in',
   address: {
     street:   'DLF Cyber City',

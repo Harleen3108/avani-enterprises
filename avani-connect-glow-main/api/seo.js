@@ -7,6 +7,7 @@ import { newSeoData } from './newSeoData.js';
 import { resolvePage, uniqueBlock, pageDescription, pageTitle, aiSummary, fitDescription, STATIC_PAGES, canonicalSlugFor } from './serviceContent.js';
 import { redirectTarget } from './pageRedirects.js';
 import { isNoindexed } from './noindexPages.js';
+import { isValidRoute } from './validRoutes.js';
 import { ssrContent } from './ssrContent.js';
 import { NAP, officeFor, formatAddress, mapLinkUrl, localBusinessSchema } from './offices.js';
 import { comparisonFor } from './comparisons.js';
@@ -72,12 +73,12 @@ const STATIC_SEO_LOOKUP = {
   // Batch B (12 city pages)
   "/seo-company-mumbai": {
     title: "SEO Company in Mumbai | Avani Enterprises",
-    description: "Avani Enterprises is an SEO company in Mumbai driving 3x organic traffic for BKC, Lower Parel & Andheri businesses. 95% first-page success, 8+ years. Get a free SEO audit.",
+    description: "Avani Enterprises is an SEO company in Mumbai driving compounding organic traffic for BKC, Lower Parel & Andheri businesses. A disciplined technical-SEO process, 8+ years. Get a free SEO audit.",
     keywords: "seo company mumbai, seo services mumbai, seo agency mumbai, local seo mumbai, search engine optimization mumbai, google ranking company mumbai, ecommerce seo mumbai"
   },
   "/seo-company-bangalore": {
     title: "SEO Company in Bangalore | Avani Enterprises",
-    description: "Avani Enterprises is an SEO company in Bangalore (Bengaluru) driving 3x organic traffic for startups, SaaS & D2C brands. 95% first-page success. Get a free SEO audit.",
+    description: "Avani Enterprises is an SEO company in Bangalore (Bengaluru) driving compounding organic traffic for startups, SaaS & D2C brands. A disciplined technical-SEO process. Get a free SEO audit.",
     keywords: "seo company bangalore, seo services bengaluru, seo agency bangalore, local seo bangalore, technical seo bangalore, saas seo bengaluru, organic growth bangalore"
   },
   "/digital-marketing-company-mumbai": {
@@ -107,11 +108,11 @@ const STATIC_SEO_LOOKUP = {
   },
   "/web-development-company-qatar": {
     title: "Web Development Company in Qatar | Avani Enterprises",
-    description: "Avani Enterprises builds fast, bilingual Arabic-English websites and ecommerce stores for Qatar and Doha businesses. 300+ projects, 8+ years, 5.0 rating. Get a free quote.",
+    description: "Avani Enterprises builds fast, bilingual Arabic-English websites and ecommerce stores for Qatar and Doha businesses. 300+ projects, 8+ years. Get a free quote.",
     keywords: "web development company qatar, website development doha, web design qatar, ecommerce development qatar, web developers doha, arabic website qatar, business website qatar, qatar web agency"
   },
   "/seo-company-dubai": {
-    title: "SEO Company in Dubai | Rank #1 \u2014 Avani Enterprises",
+    title: "SEO Company in Dubai | Rank Higher \u2014 Avani Enterprises",
     description: "Avani Enterprises is a results-driven SEO company in Dubai. We grow organic traffic 3x for Business Bay, DIFC & Dubai Marina brands. Get a free SEO audit today.",
     keywords: "seo company dubai, seo services dubai, seo agency dubai, local seo dubai, best seo company dubai, search engine optimization dubai, google ranking dubai, seo experts uae"
   },
@@ -122,7 +123,7 @@ const STATIC_SEO_LOOKUP = {
   },
   "/web-development-company-london": {
     title: "Web Development Company in London | Avani Enterprises",
-    description: "Avani Enterprises builds fast, custom websites and ecommerce stores for London businesses. 300+ projects, 5.0 rating, 8+ years. Get a free quote today.",
+    description: "Avani Enterprises builds fast, custom websites and ecommerce stores for London businesses. 300+ projects, 8+ years. Get a free quote today.",
     keywords: "web development company london, website development london, web design london, ecommerce development london, custom website london, web developer london, react development london"
   },
   "/web-development-company-usa": {
@@ -168,7 +169,7 @@ const STATIC_SEO_LOOKUP = {
   },
   "/crm-consulting-company": {
     title: "CRM Consulting Company in India | Avani Enterprises",
-    description: "Vendor-neutral CRM consulting company in India: CRM strategy, selection, implementation, migration, and adoption. 8+ years, 150+ clients, 5.0 rating. Book a free consult.",
+    description: "Vendor-neutral CRM consulting company in India: CRM strategy, selection, implementation, migration, and adoption. 8+ years, 150+ clients. Book a free consult.",
     keywords: "crm consulting company, crm consultant, crm implementation services, crm strategy india, crm migration services, crm adoption consulting, crm selection consultant"
   },
   "/erp-development-company": {
@@ -203,7 +204,7 @@ const STATIC_SEO_LOOKUP = {
   },
   "/payroll-software-development": {
     title: "Payroll Software Development in India | Avani Enterprises",
-    description: "Avani Enterprises builds custom payroll software for India with automated PF, ESI, TDS compliance and instant payslips. 8+ years, 5.0 rating. Get a quote today.",
+    description: "Avani Enterprises builds custom payroll software for India with automated PF, ESI, TDS compliance and instant payslips. 8+ years. Get a quote today.",
     keywords: "payroll software development, payroll software development company, custom payroll system india, pf esi tds payroll software, automated payslip software, statutory compliance payroll, payroll automation india"
   },
   "/business-operating-system-development": {
@@ -258,7 +259,7 @@ const STATIC_SEO_LOOKUP = {
   },
   "/android-app-development-company": {
     title: "Android App Development Company in India | Avani",
-    description: "Avani Enterprises builds native Android apps in Kotlin \u2014 fast, secure, Play Store-ready. 8+ years, 300+ projects, 5.0 rating. Get a free Android app quote.",
+    description: "Avani Enterprises builds native Android apps in Kotlin \u2014 fast, secure, Play Store-ready. 8+ years, 300+ projects. Get a free Android app quote.",
     keywords: "android app development company, android app developer, android application development india, kotlin app development, native android development, play store app launch, android development company gurgaon"
   },
   "/ios-app-development-company": {
@@ -319,7 +320,7 @@ const STATIC_SEO_LOOKUP = {
   },
   "/backend-development-company": {
     title: "Backend Development Company in India | Avani Enterprises",
-    description: "Avani Enterprises builds scalable backend systems, secure APIs, and cloud architecture with Node.js. 300+ projects, 8+ years, 5.0 rating. Book a free architecture call.",
+    description: "Avani Enterprises builds scalable backend systems, secure APIs, and cloud architecture with Node.js. 300+ projects, 8+ years. Book a free architecture call.",
     keywords: "backend development company, api development company, node.js development, backend developers india, scalable backend architecture, secure database design, cloud backend development, rest api development"
   },
   "/ecommerce-website-development-company": {
@@ -385,7 +386,7 @@ const STATIC_SEO_LOOKUP = {
   // Batch 3 city pages
   "/web-development-company-rohtak": {
     title: "Web Development Company in Rohtak | Avani Enterprises",
-    description: "Avani Enterprises builds fast, custom websites and ecommerce stores for Rohtak businesses. 300+ projects, 5.0 rating, 8+ years. Get a free quote today.",
+    description: "Avani Enterprises builds fast, custom websites and ecommerce stores for Rohtak businesses. 300+ projects, 8+ years. Get a free quote today.",
     keywords: "web development company rohtak, website development rohtak, web designer rohtak, ecommerce development rohtak, custom website rohtak, web design agency rohtak, business website rohtak"
   },
   "/web-development-company-panipat": {
@@ -435,12 +436,12 @@ const STATIC_SEO_LOOKUP = {
   },
   "/seo-company-noida": {
     title: "SEO Company in Noida | First-Page Rankings \u2014 Avani Enterprises",
-    description: "Avani Enterprises is an SEO company in Noida driving 3x organic traffic and first-page Google rankings for IT, D2C, real estate & education brands. Free SEO audit.",
+    description: "Avani Enterprises is an SEO company in Noida driving compounding organic traffic and first-page Google rankings for IT, D2C, real estate & education brands. Free SEO audit.",
     keywords: "seo company noida, seo services noida, seo agency noida, local seo noida, search engine optimization noida, best seo company greater noida, google ranking services noida"
   },
   "/seo-company-rohtak": {
     title: "SEO Company in Rohtak | Avani Enterprises",
-    description: "Top SEO company in Rohtak driving 3x organic traffic and first-page rankings for local businesses, institutes, and manufacturers. Get a free SEO audit today.",
+    description: "Top SEO company in Rohtak driving compounding organic traffic and first-page rankings for local businesses, institutes, and manufacturers. Get a free SEO audit today.",
     keywords: "seo company rohtak, seo services rohtak, seo agency rohtak, local seo rohtak, google ranking rohtak, search engine optimization rohtak"
   },
   "/seo-company-panipat": {
@@ -714,7 +715,7 @@ const STATIC_SEO_LOOKUP = {
   },
   "/seo-company-delhi": {
     title: "SEO Company in Delhi | Technical SEO & Google Ranking — Avani Enterprises",
-    description: "Rank #1 on Google with Delhi's premier SEO company. We provide advanced technical audits, backlink building, local SEO, and keyword optimization. Free SEO audit.",
+    description: "compete for the top positions on Google with Delhi's premier SEO company. We provide advanced technical audits, backlink building, local SEO, and keyword optimization. Free SEO audit.",
     keywords: "seo company delhi, search engine optimization delhi, local map seo delhi, technical seo audit delhi"
   },
   "/google-ads-agency-haryana": {
@@ -993,16 +994,89 @@ function schemaHtml(pagePath, canonical, title, resolved, guide, faqs, post) {
       postalCode: '122002',
       addressCountry: 'IN',
     },
-    contactPoint: [{
-      '@type': 'ContactPoint',
-      telephone: NAP.phone,
-      email: NAP.email,
-      contactType: 'sales',
-      areaServed: 'IN',
-      availableLanguage: ['English', 'Hindi'],
-    }],
+    contactPoint: [
+      {
+        '@type': 'ContactPoint',
+        telephone: NAP.phone,
+        email: NAP.email,
+        contactType: 'sales',
+        areaServed: 'IN',
+        availableLanguage: ['English', 'Hindi'],
+        // No `contactOption: 'TollFree'`. index.html used to assert that on an
+        // Indian mobile number, which is simply untrue.
+      },
+      // The second line, listed so the number stays associated with the entity
+      // for anyone who has it from an older listing or an old business card.
+      ...(NAP.phoneSecondary ? [{
+        '@type': 'ContactPoint',
+        telephone: NAP.phoneSecondary,
+        contactType: 'customer support',
+        areaServed: 'IN',
+        availableLanguage: ['English', 'Hindi'],
+      }] : []),
+    ],
+    // What the organisation is actually competent in. This is the property
+    // answer engines read when deciding whether a brand is a plausible source
+    // for a given question, so it is worth stating explicitly.
+    knowsAbout: [
+      'Web Development', 'Web Design', 'Mobile App Development',
+      'E-commerce Development', 'Custom Software Development',
+      'Search Engine Optimization', 'Local SEO', 'Digital Marketing',
+      'Google Ads Management', 'Meta Advertising', 'Social Media Marketing',
+      'AI Development', 'AI Chatbot Development', 'AI Voice Agents',
+      'Agentic AI', 'Business Process Automation',
+      'CRM Development', 'ERP Development', 'HRMS Development',
+    ],
+    founder: { '@id': `${SITE_URL}/#founder` },
     sameAs: NAP.sameAs,
   });
+
+  // ── Person — the founder ──────────────────────────────────────────────────
+  // Emitted on the pages where a human is actually presented, and referenced by
+  // Organization.founder everywhere else via @id. A named, linkable person is
+  // one of the few E-E-A-T signals a young brand can offer honestly.
+  if (!slug || slug === 'about' || slug === 'contact') {
+    graphs.push({
+      '@context': 'https://schema.org',
+      '@type': 'Person',
+      '@id': `${SITE_URL}/#founder`,
+      name: 'Kapil Khandelwal',
+      givenName: 'Kapil',
+      familyName: 'Khandelwal',
+      jobTitle: 'Founder & CEO',
+      url: `${SITE_URL}/about`,
+      worksFor: { '@id': `${SITE_URL}/#organization` },
+      sameAs: ['https://www.linkedin.com/in/kapil-khandelwal-avani/'],
+    });
+  }
+
+  // ── ContactPage ───────────────────────────────────────────────────────────
+  // Tells Google and answer engines that this specific URL is where you get in
+  // touch, rather than leaving them to infer it from the page title.
+  if (slug === 'contact') {
+    graphs.push({
+      '@context': 'https://schema.org',
+      '@type': 'ContactPage',
+      '@id': `${SITE_URL}/contact#webpage`,
+      url: canonical,
+      name: 'Contact Avani Enterprises',
+      description:
+        'Contact details, offices and enquiry form for Avani Enterprises — a digital, product and AI studio with offices in Gurugram, Mumbai and Rohtak.',
+      isPartOf: { '@id': `${SITE_URL}/#website` },
+      about: { '@id': `${SITE_URL}/#organization` },
+      inLanguage: 'en-IN',
+    });
+  }
+
+  // ── LocalBusiness for the head office ─────────────────────────────────────
+  // Previously emitted only on {service}-{city} pages, so the homepage — the
+  // page most likely to be the local-pack landing target — carried no premises
+  // markup at all. Gated on offices.js `confirmed`, so it can only ever describe
+  // a real, staffed address.
+  if (!slug || slug === 'contact' || slug === 'about' || slug === 'global-presence') {
+    const hq = localBusinessSchema(officeFor('gurgaon'), canonical);
+    if (hq) graphs.push(hq);
+  }
 
   // ── WebSite + SearchAction ────────────────────────────────────────────────
   // Homepage only. Declares the site as an entity and exposes internal search,
@@ -1074,7 +1148,9 @@ function schemaHtml(pagePath, canonical, title, resolved, guide, faqs, post) {
       description: post.excerpt || undefined,
       datePublished: post.publishedAt || undefined,
       dateModified: post.updatedAt || post.publishedAt || undefined,
-      author: { '@type': 'Organization', name: NAP.name, url: SITE_URL },
+      // Reference the Organization by @id rather than inlining a second copy —
+      // an inline node here minted a third Organization on every post.
+      author: { '@id': `${SITE_URL}/#organization` },
       publisher: { '@type': 'Organization', '@id': `${SITE_URL}/#organization` },
       mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
       image: post.featuredImage || undefined,
@@ -1091,7 +1167,9 @@ function schemaHtml(pagePath, canonical, title, resolved, guide, faqs, post) {
       description: guide.description,
       datePublished: guide.published,
       dateModified: guide.updated,
-      author: { '@type': 'Organization', name: NAP.name, url: SITE_URL },
+      // Reference the Organization by @id rather than inlining a second copy —
+      // an inline node here minted a third Organization on every post.
+      author: { '@id': `${SITE_URL}/#organization` },
       publisher: { '@type': 'Organization', '@id': `${SITE_URL}/#organization` },
       mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
     });
@@ -1635,7 +1713,7 @@ function buildUniqueBodyHtml(pagePath, title, description, runtimePost) {
   const h1 = (stored && stored.h1) || (block && block.heading) || titleH1;
   // Prefer the generated lead over the registry's intro: the stored intro is the
   // old "Operating successfully in {City}…" template with the city swapped, which
-  // is near-identical across pages. block.lead is built from real local facts.
+  // is near-identical across pages. Block.lead is built from real local facts.
   const intro = (block && block.lead) || (stored && stored.intro) || description || '';
   if (!h1) return null;
 
@@ -1665,7 +1743,7 @@ function buildUniqueBodyHtml(pagePath, title, description, runtimePost) {
       stored.intro,
       heads.length ? 'This page covers ' + listOf(heads.slice(0, 4)) + '.' : '',
       'Avani Enterprises is a digital, product and AI studio with offices in Gurugram and Rohtak, India.',
-      'Contact: +91 92536 25099 or kp@avanienterprises.in.',
+      'Contact: +91 84487 63134 or kp@avanienterprises.in.',
     ].filter(Boolean);
   }
   if (summary.length) {
@@ -1862,25 +1940,52 @@ export default async function handler(req, res) {
       }
     }
 
-    // ── 1. Fetch SEO from backend ───────────────────────────────────────────
-    let seo = null;
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), SEO_FETCH_TIMEOUT_MS);
+    // ── 0c. Unknown routes get a real 404 ───────────────────────────────────
+    // vercel.json rewrites everything unmatched into this function, which used
+    // to render the shell and self-canonicalise it — so /any-typo-at-all came
+    // back HTTP 200 with `index,follow`. That is an unbounded indexable URL
+    // space, and it is what fills the "Soft 404" bucket in Search Console.
+    //
+    // The body stays the SPA shell so React still renders the designed NotFound
+    // page; only the status, the robots directive and the canonical change.
+    const routeExists = isValidRoute(normalizedPath);
 
-    try {
-      const fetchUrl = `${BACKEND_URL}/seo?page=${encodeURIComponent(normalizedPath)}`;
-      const response = await fetch(fetchUrl, { signal: controller.signal });
-      clearTimeout(timeoutId);
-      if (response.ok) {
-        const data = await response.json();
-        seo = data.data;
-      }
-    } catch (e) {
-      clearTimeout(timeoutId);
-      if (e.name === 'AbortError') {
-        console.error(`❌ SEO fetch timed out for ${normalizedPath}`);
-      } else {
-        console.error(`❌ Failed to fetch SEO for ${normalizedPath}:`, e.message);
+    // ── 1. Fetch SEO from backend ───────────────────────────────────────────
+    //
+    // ⚠️ The backend answers EVERY path, including ones it holds no record for.
+    // For those it returns a placeholder flagged `isDefault: true`:
+    //
+    //   {"success":true,"isDefault":true,"data":{
+    //      "title":"Build high-performing Solutions & accelerate Growth.", …}}
+    //
+    // That placeholder used to be accepted as a real override, and because
+    // `seo?.title` led the title fallback chain it won on every page with no
+    // CMS entry — ~94% of the site. All of those URLs served one meaningless
+    // <title>, <og:title> and <twitter:title>. The flag is now honoured.
+    //
+    // Skipped entirely for unknown routes: there is no CMS record that can
+    // override a 404, and it is wasted latency on exactly the requests least
+    // worth spending it on.
+    let seo = null;
+    if (routeExists) {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), SEO_FETCH_TIMEOUT_MS);
+
+      try {
+        const fetchUrl = `${BACKEND_URL}/seo?page=${encodeURIComponent(normalizedPath)}`;
+        const response = await fetch(fetchUrl, { signal: controller.signal });
+        clearTimeout(timeoutId);
+        if (response.ok) {
+          const data = await response.json();
+          if (data && data.data && !data.isDefault) seo = data.data;
+        }
+      } catch (e) {
+        clearTimeout(timeoutId);
+        if (e.name === 'AbortError') {
+          console.error(`❌ SEO fetch timed out for ${normalizedPath}`);
+        } else {
+          console.error(`❌ Failed to fetch SEO for ${normalizedPath}:`, e.message);
+        }
       }
     }
 
@@ -1904,7 +2009,7 @@ export default async function handler(req, res) {
     }
 
     if (!html) {
-      let debugStr = `template.html not found. paths tried: ${pathsToTry.join(', ')}\n`;
+      let debugStr = `template.html not found. Paths tried: ${pathsToTry.join(', ')}\n`;
       try {
         debugStr += `CWD (${process.cwd()}) files: ${fs.readdirSync(process.cwd()).join(', ')}\n`;
         debugStr += `__dirname (${__dirname}) files: ${fs.readdirSync(__dirname).join(', ')}\n`;
@@ -1962,7 +2067,49 @@ export default async function handler(req, res) {
         }
       : null;
 
-    const rawTitle    = seo?.title            || staticSeo?.title      || guideSeo?.title       || blogSeo?.title       || fallbackSeo?.title       || registrySeo?.title       || derivedTitle || "Avani Enterprises — Digital, Product & AI Studio";
+    // Blog category pages carried no meta of their own, so all eight fell
+    // through to the site-wide default and shared the homepage's title with it.
+    // Derived from the live category list, so a new category is covered the
+    // moment a post is filed under it.
+    const blogCategorySeo = (() => {
+      const lower = cleanSlug.toLowerCase();
+      if (!lower.startsWith('blog/category/')) return null;
+      const wanted = lower.slice(14).replace(/\/+$/, '');
+      if (!wanted) return null;
+      const counts = {};
+      Object.values(blogContent).forEach((bp) => {
+        const c = bp.category || 'Insights';
+        counts[c] = (counts[c] || 0) + 1;
+      });
+      const name = Object.keys(counts).find((c) => slugifyCat(c) === wanted);
+      if (!name) return null;
+      return {
+        title: `${name} Articles — Avani Enterprises Blog`,
+        description:
+          `${counts[name]} articles on ${name.toLowerCase()} from Avani Enterprises, written from client work rather than theory. ` +
+          `What we build, what we measure, and what actually moved the number.`,
+      };
+    })();
+
+    // Ordered to mirror rawDescription below: the page's own hand-written copy
+    // leads, the CMS override sits behind it, generated copy is the backstop.
+    //
+    // This used to lead with `seo?.title`, which is how one backend placeholder
+    // became the <title> of ~94% of the site, and how a stale CMS row put
+    // "Digital Marketing Company in Delhi" on /contact while its real title sat
+    // unused in STATIC_PAGES. A deliberate CMS edit still wins over generated
+    // copy — it just no longer outranks copy written for the route.
+    const rawTitle =
+      (!routeExists && 'Page not found — Avani Enterprises') ||
+      staticSeo?.title ||       // hand-written static pages (home, about, contact …)
+      guideSeo?.title ||        // guides carry their own meta
+      blogSeo?.title ||         // blog posts carry their own meta
+      blogCategorySeo?.title || // /blog/category/<slug>
+      fallbackSeo?.title ||     // hand-written STATIC_SEO_LOOKUP / newSeoData
+      registrySeo?.title ||     // per-page titles from newSeoPagesData
+      seo?.title ||             // genuine CMS override (never a default record)
+      derivedTitle ||           // generated from real service + location facts
+      "Avani Enterprises — Digital, Product & AI Studio";
     // Trimmed to what Google actually renders — see shortenTitle().
     const title       = shortenTitle(rawTitle);
     // The generated description is preferred because it is always fitted to the
@@ -1970,6 +2117,7 @@ export default async function handler(req, res) {
     // characters, which wastes a third of the snippet.
     const rawDescription =
       staticSeo?.description ||
+      blogCategorySeo?.description ||
       derivedDescription ||
       seo?.metaDescription ||
       guideSeo?.description ||
@@ -1986,7 +2134,13 @@ export default async function handler(req, res) {
     const canonical   = seo?.canonicalUrl     || buildCanonical(normalizedPath);
     // "noindex,follow" — not nofollow. De-indexed doorway pages should still pass
     // link equity through to the pages we keep.
-    const robots      = isNoIndex(normalizedPath) ? "noindex,follow" : (seo?.robots || "index,follow");
+    // A 404 must never invite indexing. De-indexed doorway slugs stay
+    // "noindex,follow" so link equity keeps flowing to the pages we keep; a
+    // genuinely missing page gets "noindex,nofollow" — there is nothing on it
+    // worth following.
+    const robots      = !routeExists
+      ? "noindex,nofollow"
+      : isNoIndex(normalizedPath) ? "noindex,follow" : (seo?.robots || "index,follow");
     const ogImage     = seo?.ogImage          || `${SITE_URL}/logo0.webp`;
 
     // ── 4. Inject into HTML (server-side, visible to Googlebot on first crawl) ─
@@ -2023,6 +2177,12 @@ export default async function handler(req, res) {
     // Remove the stuffed <meta name="keywords"> entirely. Google ignores it and
     // the long comma-separated lists these pages carried read as a spam signal.
     html = html.replace(/<meta\s+name=["']keywords["'][^>]*>\s*/gi, '');
+
+    // A 404 must not nominate itself as canonical — that is precisely the signal
+    // that invites indexing of a page which does not exist.
+    if (!routeExists) {
+      html = html.replace(/<link\s+rel=["']canonical["'][^>]*>\s*/gi, '');
+    }
 
     // ── 4a. Per-route body content (the fix for "Crawled – not indexed") ────
     // Replace the shell's shared homepage block with this page's real content so
@@ -2064,7 +2224,26 @@ export default async function handler(req, res) {
       }
     }
 
-    const built = buildUniqueBodyHtml(normalizedPath, title, description, runtimePost);
+    // A 404 gets its own minimal body and no JSON-LD. Serving the homepage
+    // fallback block here is what made missing pages look like real content in
+    // the first place, and schema describing a page that does not exist is
+    // worse than no schema at all.
+    const built = routeExists
+      ? buildUniqueBodyHtml(normalizedPath, title, description, runtimePost)
+      : {
+          html:
+            '<main><h1>Page not found</h1>' +
+            '<p>This page does not exist. It may have moved, or the link may be mistyped.</p>' +
+            '<ul>' +
+            `<li><a href="${SITE_URL}/">Home</a></li>` +
+            `<li><a href="${SITE_URL}/services">Services</a></li>` +
+            `<li><a href="${SITE_URL}/guides">Guides</a></li>` +
+            `<li><a href="${SITE_URL}/contact">Contact</a></li>` +
+            '</ul></main>',
+          faqs: [],
+          resolved: null,
+          skipSchema: true,
+        };
     if (built) {
       const start = html.indexOf(SSR_START);
       const end = html.indexOf(SSR_END);
@@ -2078,8 +2257,10 @@ export default async function handler(req, res) {
       }
 
       // Per-route JSON-LD in the head, describing what the body above actually says.
-      const ld = schemaHtml(normalizedPath, canonical, title, built.resolved, built.guide || null, built.faqs, built.post || null);
-      if (ld) html = html.replace(/<\/head>/i, `${ld}</head>`);
+      if (!built.skipSchema) {
+        const ld = schemaHtml(normalizedPath, canonical, title, built.resolved, built.guide || null, built.faqs, built.post || null);
+        if (ld) html = html.replace(/<\/head>/i, `${ld}</head>`);
+      }
     }
 
     // ── 4b. Homepage-only LCP preload ───────────────────────────────────────
@@ -2088,22 +2269,39 @@ export default async function handler(req, res) {
     // React renders the hero. Injected only for "/" because the SPA shares one
     // template — preloading it globally would waste the download on every route.
     if (normalizedPath === "/") {
+      // Self-hosted, so the LCP no longer waits on a DNS lookup and TLS
+      // handshake to a third-party image host. Imagesrcset mirrors the <img>
+      // in Hero.tsx exactly — if the two drift, the browser downloads twice.
       const heroPreload =
         '<link rel="preload" as="image" fetchpriority="high" ' +
-        'href="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=68&w=1280">';
+        'href="/hero-office-1280.webp" ' +
+        'imagesrcset="/hero-office-800.webp 800w, /hero-office-1280.webp 1280w, /hero-office-1600.webp 1600w" ' +
+        'imagesizes="100vw">';
       html = html.replace(/<\/head>/i, `${heroPreload}</head>`);
     }
 
     // ── 5. noindex: also set X-Robots-Tag HTTP header for Googlebot ────────
-    if (isNoIndex(normalizedPath)) {
+    if (!routeExists) {
+      res.setHeader('X-Robots-Tag', 'noindex, nofollow');
+    } else if (isNoIndex(normalizedPath)) {
       res.setHeader('X-Robots-Tag', 'noindex, follow');
     }
 
     res.setHeader('Content-Type', 'text/html');
-    // Always revalidate the HTML shell so a new deploy's bundle is picked up immediately
-    // (the hashed JS/CSS assets stay long-cached & immutable — only this small doc revalidates).
-    res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
-    res.status(200).send(html);
+
+    // The browser still revalidates on every navigation, so a new deploy's
+    // bundle is picked up immediately. `s-maxage` lets Vercel's edge answer
+    // repeat crawls and repeat visitors without re-running this function —
+    // which was costing ~1s of TTFB on every single request. Vercel purges the
+    // edge cache on deploy, so a cached shell can never outlive its assets.
+    res.setHeader(
+      'Cache-Control',
+      routeExists
+        ? 'public, max-age=0, must-revalidate, s-maxage=3600, stale-while-revalidate=86400'
+        : 'public, max-age=0, must-revalidate, s-maxage=60'
+    );
+
+    res.status(routeExists ? 200 : 404).send(html);
   } catch (err) {
     console.error("❌ Vercel SEO Error:", err);
     res.status(500).send("Internal Server Error");

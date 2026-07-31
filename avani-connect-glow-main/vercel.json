@@ -1,4 +1,7 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "//": "trailingSlash:false makes /seo-company/ redirect to /seo-company instead of both returning 200. The canonical was already correct, so this is crawl hygiene rather than a ranking fix — it stops Googlebot spending budget on a second copy of every URL.",
+  "trailingSlash": false,
   "functions": {
     "api/seo.js": {
       "includeFiles": "dist/template.html",

@@ -70,7 +70,7 @@ const stripEmojis = (text: string): string => {
 /* ─── Default Data ─── */
 const defaultLinks: LinkData[] = [
   { _id: 'def-site', title: 'Visit Our Website', url: 'https://www.avanienterprises.in', description: '', icon: 'globe', isActive: true },
-  { _id: 'def-wa', title: 'Chat on WhatsApp', url: 'https://wa.me/919253625099', description: '', icon: 'whatsapp', isActive: true },
+  { _id: 'def-wa', title: 'Chat on WhatsApp', url: 'https://wa.me/918448763134', description: '', icon: 'whatsapp', isActive: true },
 ];
 
 const defaultResources = [
@@ -82,7 +82,7 @@ const badges = ["MARKETING", "DEVELOPMENT", "BRANDING", "AI SOLUTIONS"];
 const socialLinks = [
   { icon: LinkedinIcon, url: 'https://www.linkedin.com/company/avani-enterprises-india/', label: 'LINKEDIN' },
   { icon: InstagramIcon, url: 'https://www.instagram.com/avanienterprises.branding/', label: 'INSTAGRAM' },
-  { icon: Phone, url: 'tel:+919253625099', label: 'CALL US' },
+  { icon: Phone, url: 'tel:+91 84487 63134', label: 'CALL US' },
   { icon: MailIcon, url: 'mailto:kp@avanienterprises.in', label: 'EMAIL' },
 ];
 
@@ -481,7 +481,7 @@ export default function Links() {
                 </div>
                 <div className="w-full md:w-auto">
                   <button
-                    onClick={() => window.open('https://wa.me/919253625099', '_blank')}
+                    onClick={() => window.open('https://wa.me/918448763134', '_blank')}
                     className="w-full md:px-10 py-5 bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 rounded-2xl text-xs font-black tracking-widest hover:bg-emerald-600 dark:hover:bg-emerald-500 hover:text-white transition-all flex items-center justify-center gap-3 uppercase shadow-lg shadow-emerald-500/10"
                   >
                     <MessageCircle className="w-5 h-5" />

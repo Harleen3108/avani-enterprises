@@ -55,7 +55,7 @@ From Koramangala startups raising their first round to Whitefield enterprises an
     { q: 'Will my website rank on Google?', a: 'Every build includes technical SEO foundations. For competitive Bangalore and national keywords, we recommend our ongoing SEO service for top rankings.' },
     { q: 'Do you offer maintenance and scaling support?', a: 'Yes. We provide 30 days of free post-launch support plus annual maintenance and on-demand scaling support as your user base grows.' },
     { q: 'Can you redesign or rebuild our existing product?', a: 'Yes. We refactor and modernise existing sites and products while preserving data, SEO and user experience through careful migration.' },
-    { q: 'How do we get started?', a: 'Call +91 92536 25099 or fill the contact form for a free 30-minute discovery call and a detailed proposal within 24 hours.' },
+    { q: 'How do we get started?', a: 'Call +91 84487 63134 or fill the contact form for a free 30-minute discovery call and a detailed proposal within 24 hours.' },
   ],
   reviews: [],
   relatedLinks: [

@@ -276,7 +276,7 @@ export default function ProductPageTemplate({ data }: ProductPageTemplateProps) 
               <a href="#consultation" className="dh-btn-fill" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
                 Request Free Demo <ArrowRight size={15} />
               </a>
-              <a href="tel:+919253625099" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'transparent', color: 'var(--text-primary)', padding: '12px 24px', borderRadius: '10px', fontFamily: "'Outfit', sans-serif", fontWeight: 700, fontSize: '.88rem', textDecoration: 'none', border: '1px solid var(--border-light)', transition: 'border-color .2s' }}
+              <a href="tel:+91 84487 63134" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'transparent', color: 'var(--text-primary)', padding: '12px 24px', borderRadius: '10px', fontFamily: "'Outfit', sans-serif", fontWeight: 700, fontSize: '.88rem', textDecoration: 'none', border: '1px solid var(--border-light)', transition: 'border-color .2s' }}
                 onMouseEnter={e => e.currentTarget.style.borderColor = 'var(--accent-primary)'}
                 onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--border-light)'}>
                 Contact Consulting
@@ -421,8 +421,8 @@ export default function ProductPageTemplate({ data }: ProductPageTemplateProps) 
               </a>
             </div>
             <div style={{ marginTop: '2.5rem', display: 'flex', gap: '32px', justifyContent: 'center', flexWrap: 'wrap', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
-              <a href="tel:+919253625099" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', alignItems: 'center', gap: '6px' }} onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-primary)'} onMouseLeave={e => e.currentTarget.style.color = 'inherit'}>
-                <Phone size={14} color="var(--accent-primary)" /> +91 92536 25099
+              <a href="tel:+91 84487 63134" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', alignItems: 'center', gap: '6px' }} onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-primary)'} onMouseLeave={e => e.currentTarget.style.color = 'inherit'}>
+                <Phone size={14} color="var(--accent-primary)" /> +91 84487 63134
               </a>
               <a href="mailto:kp@avanienterprises.in" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', alignItems: 'center', gap: '6px' }} onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-primary)'} onMouseLeave={e => e.currentTarget.style.color = 'inherit'}>
                 <Mail size={14} color="var(--accent-primary)" /> kp@avanienterprises.in

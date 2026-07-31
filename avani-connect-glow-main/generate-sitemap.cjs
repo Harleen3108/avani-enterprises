@@ -538,9 +538,96 @@ function loadBlogSlugRedirects() {
 // a doorway slug can never sneak back into the sitemap from either source.
 const beforeFilter = urls.length;
 urls = urls.filter(({ loc }) => !isDeindexed(loc.replace(BASE_URL, "")));
+
+// ── Drop duplicate <loc> entries ─────────────────────────────────────────────
+// A post reachable from two collectors (the blog snapshot and a hand-listed
+// entry) was emitted twice. A repeated <loc> is a malformed sitemap and tells
+// Google the same URL is two different pages.
+const seenLoc = new Set();
+const beforeDedupe = urls.length;
+urls = urls.filter(({ loc }) => {
+  const key = loc.replace(/\/+$/, "").toLowerCase();
+  if (seenLoc.has(key)) return false;
+  seenLoc.add(key);
+  return true;
+});
+if (beforeDedupe !== urls.length) {
+  console.log(`🔁 Removed ${beforeDedupe - urls.length} duplicate URL(s) from sitemap.`);
+}
 if (beforeFilter !== urls.length) {
   console.log(`🚫 Removed ${beforeFilter - urls.length} de-indexed URL(s) from sitemap.`);
 }
+
+// ── Content-derived lastmod ──────────────────────────────────────────────────
+// Every build used to stamp TODAY on ~96 URLs at once, leaving 155 sharing one
+// date and 96 sharing another. Google discounts lastmod when it is obviously
+// build-stamped rather than content-derived — and a *genuine* lastmod is one of
+// the better recrawl signals available, so it is worth earning.
+//
+// Each URL is fingerprinted from the content that actually renders it. The date
+// only moves when that fingerprint changes; otherwise the previously recorded
+// date is reused from public/.lastmod.json.
+(function contentDerivedLastmod() {
+  const crypto = require("crypto");
+  const cachePath = path.join(__dirname, "public", ".lastmod.json");
+
+  let cache = {};
+  try { cache = JSON.parse(fs.readFileSync(cachePath, "utf8")); } catch { /* first run */ }
+
+  const sha = (v) => crypto.createHash("sha1").update(String(v)).digest("hex").slice(0, 16);
+  const fileHash = (rel) => {
+    const p = path.join(__dirname, rel);
+    return fs.existsSync(p) ? sha(fs.readFileSync(p, "utf8")) : "0";
+  };
+
+  // Per-slug content where we have it, so one page changing does not re-date
+  // every page that happens to live in the same file.
+  let perSlug = {};
+  try { perSlug = JSON.parse(fs.readFileSync(newSeoDataPath, "utf8")); } catch { /* optional */ }
+
+  let blog = {};
+  try {
+    const src = fs.readFileSync(path.join(__dirname, "api", "blogContent.js"), "utf8");
+    blog = JSON.parse(src.slice(src.indexOf("{"), src.lastIndexOf("}") + 1));
+  } catch { /* optional */ }
+
+  // Shared buckets for pages whose content is spread across a whole file.
+  const bucket = {
+    service: fileHash("src/data/serviceContent.js"),
+    city:    fileHash("src/data/cityPagesData.ts"),
+    landing: fileHash("src/data/seoLandingPagesData.ts"),
+    guides:  fileHash("src/data/guides.js"),
+  };
+
+  const fingerprint = (loc) => {
+    const slug = loc.replace(BASE_URL, "").replace(/^\/+/, "").replace(/\/+$/, "");
+    if (!slug) return sha(bucket.service + bucket.city);
+    if (slug.startsWith("blog/")) {
+      const key = slug.slice(5);
+      return blog[key] ? sha(JSON.stringify(blog[key])) : sha(slug + Object.keys(blog).length);
+    }
+    if (slug.startsWith("guides")) return sha(bucket.guides + slug);
+    if (perSlug[slug]) return sha(JSON.stringify(perSlug[slug]));
+    return sha(bucket.service + bucket.city + bucket.landing + slug);
+  };
+
+  const next = {};
+  let moved = 0;
+  urls.forEach((u) => {
+    const fp = fingerprint(u.loc);
+    const prev = cache[u.loc];
+    if (prev && prev.h === fp && prev.d) {
+      u.lastmod = prev.d;                 // unchanged — keep the honest date
+    } else {
+      u.lastmod = TODAY;                  // genuinely new or genuinely edited
+      moved++;
+    }
+    next[u.loc] = { h: fp, d: u.lastmod };
+  });
+
+  fs.writeFileSync(cachePath, JSON.stringify(next, null, 0), "utf8");
+  console.log(`🗓️  lastmod derived from content — ${moved} of ${urls.length} URL(s) changed since the last build.`);
+})();
 
 // ── Build XML ────────────────────────────────────────────────────────────────
 const urlEntries = urls
@@ -1058,3 +1145,174 @@ if (fs.existsSync(newSeoDataPath)) {
     console.error("❌ Failed to generate api/ssrContent.js:", err);
   }
 }
+
+// ─────────────────────────────────────────────────────────────────────────────
+// api/validRoutes.js — the known-URL manifest
+//
+// WHY
+// ---
+// vercel.json rewrites every unmatched path into api/seo.js, and that function
+// had no idea which routes actually exist. So /this-page-does-not-exist-xyz123
+// returned HTTP 200, `index,follow` and a self-referencing canonical — a fully
+// indexable page. Every typo, every stale backlink and every crawler probe
+// minted a new indexable URL, which is an unbounded crawl space on a site that
+// is already fighting to get its 314 real pages indexed. Search Console calls
+// this the "Soft 404" bucket.
+//
+// This assembles every path the site genuinely serves, from the same sources
+// that drive the sitemap and the React router, so the two can never disagree.
+// Anything not in here gets a real 404 from api/seo.js.
+//
+// De-indexed doorway slugs are INCLUDED deliberately: they stay live for ads
+// and direct traffic, they just carry noindex. A 404 would break those ads.
+// ─────────────────────────────────────────────────────────────────────────────
+(function writeValidRoutes() {
+  const clean = (s) => String(s || "").replace(/^\/+/, "").replace(/\/+$/, "").toLowerCase();
+  const exact = new Set();
+  const add = (s) => { const c = clean(s); if (c) exact.add(c); };
+
+  // 1. Everything in the sitemap.
+  urls.forEach(({ loc }) => add(loc.replace(BASE_URL, "")));
+
+  // 2. De-indexed slugs — live, reachable, just not indexed.
+  NOINDEX.set.forEach(add);
+
+  // 3. Literal routes declared in the React router. Dynamic segments (":id")
+  //    and the "*" catch-all are handled by PREFIXES below, not here.
+  (function fromRouter() {
+    const p = path.join(__dirname, "src", "App.tsx");
+    if (!fs.existsSync(p)) { console.warn("⚠️ App.tsx not found — router routes not added."); return; }
+    const src = fs.readFileSync(p, "utf8");
+    (src.match(/<Route\s+path="([^"]*)"/g) || []).forEach((m) => {
+      const r = m.replace(/.*path="/, "").replace(/"$/, "");
+      if (r.includes(":") || r.includes("*")) return;
+      add(r);
+    });
+  })();
+
+  // 4. Registry keys — pages the content engine can render even when they are
+  //    not in the sitemap (noindexed variants, canonicalised synonyms).
+  [
+    ["api", "newSeoData.js", /["']([a-z0-9/-]+)["']\s*:\s*\{/gi],
+    ["api", "ssrContent.js", null],
+  ].forEach(([dir, file]) => {
+    const p = path.join(__dirname, dir, file);
+    if (!fs.existsSync(p)) return;
+    const src = fs.readFileSync(p, "utf8");
+    const start = src.indexOf("{");
+    if (start === -1) return;
+    try {
+      const obj = JSON.parse(src.slice(start, src.lastIndexOf("}") + 1));
+      Object.keys(obj).forEach(add);
+    } catch {
+      // newSeoData.js is a JS module, not raw JSON — fall back to key scraping.
+      (src.match(/["']\/?[a-z0-9][a-z0-9/-]*["']\s*:\s*\{/gi) || []).forEach((m) => {
+        add(m.replace(/["']\s*:\s*\{$/, "").replace(/^["']/, ""));
+      });
+    }
+  });
+
+  // 5. Canonicalised synonyms — CANONICAL_MAP keys stay live and 200, they
+  //    just point their canonical elsewhere. 404ing them would strip the
+  //    link equity the map exists to consolidate.
+  (function fromCanonicalMap() {
+    const p = path.join(__dirname, "src", "data", "serviceContent.js");
+    if (!fs.existsSync(p)) return;
+    const src = fs.readFileSync(p, "utf8");
+    const m = src.match(/const\s+CANONICAL_MAP\s*=\s*\{([\s\S]*?)\n\};/);
+    if (!m) return;
+    (m[1].match(/["']([a-z0-9/-]+)["']\s*:/gi) || []).forEach((k) =>
+      add(k.replace(/["']/g, "").replace(/:$/, ""))
+    );
+    // Alias tables map many URL spellings onto one service.
+    const a = src.match(/const\s+SERVICE_ALIASES\s*=\s*\{([\s\S]*?)\n\};/);
+    if (a) {
+      (a[1].match(/["']([a-z0-9/-]+)["']\s*:/gi) || []).forEach((k) =>
+        add(k.replace(/["']/g, "").replace(/:$/, ""))
+      );
+    }
+  })();
+
+  // 6. Blog posts from the build-time snapshot, plus their category pages.
+  (function fromBlog() {
+    const p = path.join(__dirname, "api", "blogContent.js");
+    if (!fs.existsSync(p)) return;
+    const src = fs.readFileSync(p, "utf8");
+    const start = src.indexOf("{");
+    if (start === -1) return;
+    try {
+      const obj = JSON.parse(src.slice(start, src.lastIndexOf("}") + 1));
+      Object.keys(obj).forEach((slug) => {
+        add(`blog/${slug}`);
+        add(`blog/${encodeURIComponent(slug)}`);
+      });
+    } catch { /* snapshot shape changed — prefix rule below still covers /blog/ */ }
+  })();
+
+  // 7. Guides.
+  (function fromGuides() {
+    const p = path.join(__dirname, "src", "data", "guides.js");
+    if (!fs.existsSync(p)) return;
+    const src = fs.readFileSync(p, "utf8");
+    const objStart = src.indexOf("const GUIDES = {");
+    if (objStart === -1) return;
+    const re = /^ {2}'([a-z0-9-]+)':\s*\{/gm;
+    let m;
+    const body = src.slice(objStart);
+    while ((m = re.exec(body)) !== null) add(`guides/${m[1]}`);
+  })();
+
+  // Prefixes whose children come from the CMS at runtime and therefore cannot
+  // be enumerated at build time. Kept deliberately narrow: each one is a real
+  // listing route, so the residual soft-404 surface is a handful of paths
+  // rather than the entire top-level namespace.
+  const PREFIXES = [
+    "blog/",          // new posts published since the last deploy
+    "blog/category/",
+    "careers/",
+    "courses/",
+    "newsletters/",
+    "projects/",
+    "services/",
+    "our-products/",
+    "business-os/",
+    "social-sync/",
+    "home2/",
+  ];
+
+  const out =
+    GENERATED_HEADER.replace("%SRC%", "sitemap + App.tsx + content registries") +
+    "export const VALID_ROUTES = new Set(" +
+    JSON.stringify([...exact].sort()) +
+    ");\n\n" +
+    "export const VALID_PREFIXES = " + JSON.stringify(PREFIXES) + ";\n\n" +
+    `/**
+ * True when the site genuinely serves this path.
+ *
+ * Case-insensitive and slash-tolerant, because /SEO-Company and /seo-company/
+ * both reach the same page and neither should 404.
+ */
+export function isValidRoute(pagePath) {
+  // Trimmed with plain string ops rather than regex: this function is emitted
+  // from a template literal, and a backslash here has to survive two levels of
+  // escaping to reach the output file intact.
+  let slug = String(pagePath || '').split('?')[0].split('#')[0].toLowerCase();
+  while (slug.startsWith('/')) slug = slug.slice(1);
+  while (slug.endsWith('/')) slug = slug.slice(0, -1);
+
+  if (!slug) return true;                       // homepage
+  if (VALID_ROUTES.has(slug)) return true;
+
+  // Percent-encoded blog slugs ("The%20SEO%20Playbook").
+  try {
+    const decoded = decodeURIComponent(slug);
+    if (decoded !== slug && VALID_ROUTES.has(decoded)) return true;
+  } catch { /* malformed escape — fall through */ }
+
+  return VALID_PREFIXES.some((p) => slug.startsWith(p) && slug.length > p.length);
+}
+`;
+
+  fs.writeFileSync(path.join(__dirname, "api", "validRoutes.js"), out, "utf8");
+  console.log(`✅ api/validRoutes.js generated (${exact.size} exact routes, ${PREFIXES.length} dynamic prefixes)`);
+})();

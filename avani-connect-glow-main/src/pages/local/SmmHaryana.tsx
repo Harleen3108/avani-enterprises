@@ -56,7 +56,7 @@ Avani Enterprises manages social media for 50+ Haryana businesses. We create scr
     { q: 'Do you handle Instagram Reels production?', a: 'Yes. Our Gurgaon-based creative team handles scripting, shooting (on-site or remotely), editing, music licensing, and captioning for Instagram Reels. We produce 4–8 reels per month depending on the package.' },
     { q: 'How do social media ads work for Haryana local businesses?', a: 'We run Meta Ads targeted to specific Haryana locations (even PIN-code level), age groups, interests, and behaviours. A ₹5,000–₹15,000 monthly ad budget can generate 50–200 quality leads for most Haryana businesses.' },
     { q: 'Can I see examples of your social media work?', a: 'Yes. Visit our case studies section or call us for a detailed portfolio review. We\'ve managed social media for restaurants, real estate, education, healthcare, and manufacturing businesses across Haryana.' },
-    { q: 'Do you offer a free social media audit?', a: 'Yes. Call +91 92536 25099 for a free 20-minute social media audit. We\'ll review your current profiles, identify gaps, and give you 3 quick wins you can implement immediately.' },
+    { q: 'Do you offer a free social media audit?', a: 'Yes. Call +91 84487 63134 for a free 20-minute social media audit. We\'ll review your current profiles, identify gaps, and give you 3 quick wins you can implement immediately.' },
   ],
   reviews: [],
   relatedLinks: [

@@ -46,7 +46,7 @@ const COMPANY = {
   name: 'Avani Enterprises',
   hq: 'Tower B, 3rd Floor, Unitech Cyber Park, Sector 39, Gurugram, Haryana 122002',
   email: 'kp@avanienterprises.in',
-  phone: '+91 92536 25099',
+  phone: '+91 84487 63134',
   site: 'https://www.avanienterprises.in',
 };
 
@@ -1205,7 +1205,7 @@ const MODEL_ALIASES = {
 // ---------------------------------------------------------------------------
 // Confirmed, staffed office cities — MUST match `confirmed: true` in offices.js.
 // Duplicated here because this data slice stays import-free so the serverless
-// function can consume it. generate-sitemap.cjs asserts the two agree and fails
+// function can consume it. Generate-sitemap.cjs asserts the two agree and fails
 // the build if they drift, so this cannot silently go stale.
 //
 // Only add a city here once the client confirms a real, staffed premises.
@@ -1831,10 +1831,10 @@ const STATIC_PAGES = {
     ],
   },
   contact: {
-    metaTitle: "Contact Avani Enterprises — Gurugram & Rohtak",
-    metaDescription: "Talk to the team in Gurugram or Rohtak. Free scope call and a written quote, no obligation. Email kp@avanienterprises.in or call +91 92536 25099.",
+    metaTitle: "Contact Avani Enterprises — Gurugram, Mumbai & Rohtak",
+    metaDescription: "Talk to the team in Gurugram, Mumbai or Rohtak. Free scoping call and a written quote, no obligation. Email kp@avanienterprises.in or call +91 84487 63134.",
     h1: 'Contact Avani Enterprises',
-    intro: `Head office: ${COMPANY.hq}. Email ${COMPANY.email} or call ${COMPANY.phone}.`,
+    intro: `Head office: ${COMPANY.hq}. Email ${COMPANY.email}, or call ${COMPANY.phone} (second line +91 92536 25099). We reply within one working day, Monday to Saturday, 9:00am to 7:00pm IST.`,
     sections: [
       {
         heading: 'What happens after you get in touch',
@@ -1843,10 +1843,24 @@ const STATIC_PAGES = {
           'If there is a fit, you receive a written scope with deliverables, exclusions, timeline and commercials before any work starts.',
         ],
       },
+      {
+        heading: 'Where we are',
+        paragraphs: [
+          'Three offices in India: the head office at Unitech Cyber Park, Sector 39, Gurugram; an operations centre on Teli Galli Cross Road, Andheri East, Mumbai; and an office at Agro Mall, Rohtak.',
+          'Everywhere else we deliver remotely, including across Delhi NCR and the Indian metros, and internationally in the UAE, Singapore and the USA. We do not claim offices in markets where we do not hold premises.',
+        ],
+      },
     ],
+    // These mirror the FAQ block rendered on the page (src/pages/Contact.tsx).
+    // api/seo.js turns them into FAQPage schema, so the markup can only ever
+    // describe questions a visitor can actually see answered.
     faqs: [
-      { q: 'How quickly do you respond?', a: 'We aim to respond to enquiries within one working day. For anything urgent, calling the number above is faster than the form.' },
-      { q: 'Do you charge for the first call?', a: 'No. The discovery call is free, and you get a written scope and quote from it.' },
+      { q: 'How quickly do you respond?', a: 'Within one working day. If it is urgent, calling is faster than the form — the number reaches the team directly, not a switchboard.' },
+      { q: 'Do you charge for the first call?', a: 'No. The first call is a scoping conversation, not a sales pitch. You leave it with a written scope and a quote, and there is no obligation to proceed.' },
+      { q: 'What do you need from me to quote?', a: 'What you are trying to achieve, anything you have already tried, a rough budget range and your deadline. You do not need a specification — writing one is usually part of the work.' },
+      { q: 'Do you work with businesses outside Delhi NCR?', a: 'Yes. We have offices in Gurugram, Mumbai and Rohtak, and deliver remotely across India and internationally, including the UAE, Singapore and the USA. Reviews happen over video where meeting in person is not practical.' },
+      { q: 'What does a project cost?', a: 'It depends on scope, and we will not pretend otherwise. We quote per engagement after the scoping call rather than publishing a price that turns out not to apply to you. Our guide on website development cost sets out what actually drives the number.' },
+      { q: 'Who will I be talking to?', a: 'The people who would do the work. There is no separate sales team handing you over to delivery after signature.' },
     ],
   },
   'case-studies': {
@@ -1965,7 +1979,7 @@ const STATIC_PAGES = {
         ],
       },
     ],
-    faqs: [{ q: 'How do I request deletion of my data?', a: 'Email kp@avanienterprises.in from the address you contacted us with, and we will confirm once it is done.' }],
+    faqs: [{ q: 'How do I request deletion of my data?', a: 'Email kp@avanienterprises.in from the address you contacted us, and we will confirm once it is done.' }],
   },
   'terms-and-conditions': {
     metaTitle: "Terms and Conditions — Avani Enterprises",
@@ -2408,7 +2422,7 @@ function uniqueBlock(resolved) {
 
     if (service.stack && service.stack.length) {
       bodyBlocks.push({
-        heading: 'What we build it with, and why that matters to you',
+        heading: 'What we build it, and why that matters to you',
         paragraphs: [
           `We work with ${listSentence(service.stack)}. The specific tools matter less than two things you should insist on from any supplier: that you own the accounts and the code at the end, and that nothing is built on a platform only that supplier can maintain.`,
           `You receive the repository and the deployment configuration on handover, so changing supplier later is a commercial decision rather than a technical trap.`,
@@ -2494,7 +2508,7 @@ function uniqueBlock(resolved) {
 }
 
 /**
- * Page-specific FAQs: service FAQs plus, where relevant, a genuinely
+ * Page-specific FAQs: service FAQs, where relevant, a genuinely
  * location- or model-specific question. These get prepended to the template's
  * own FAQ list so no two pages carry the same set.
  */
