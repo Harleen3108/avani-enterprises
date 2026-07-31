@@ -88,6 +88,45 @@ const imageUpload = multer({
   limits: { fileSize: 5 * 1024 * 1024 },
 });
 
+// ── CV / cover-letter storage ───────────────────────────────────────────────
+//
+// These used to go to `multer.diskStorage` writing into ./uploads on the Render
+// instance. Render's filesystem is EPHEMERAL: it is rebuilt on every deploy and
+// on any restart or instance move. So every CV was reachable right up until the
+// next push, and then returned 404 forever. The application row kept a
+// /uploads/... path pointing at a file that no longer existed.
+//
+// Cloudinary was already configured directly above for newsletter images, so
+// the fix is to use it here too rather than introduce another provider.
+//
+// resource_type "raw" is required — PDFs and Word documents are not images, and
+// Cloudinary rejects them under the default "image" type.
+//
+// ⚠️ PRIVACY, UNCHANGED FOR NOW: these URLs are unauthenticated, exactly as
+// /uploads/resume-*.pdf was. The random public_id makes them unguessable, which
+// is the same protection the old scheme had — no better, no worse. A CV holds a
+// candidate's phone number and address, so the right end state is Cloudinary
+// `type: "authenticated"` plus a signed-URL endpoint the admin calls to view
+// one. That needs a matching change in the admin panel's "View CV" link, so it
+// is deliberately NOT bundled into this fix, which is about stopping data loss.
+const resumeStorage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: (req, file) => ({
+    folder: "avani-applications",
+    resource_type: "raw",
+    public_id: `${file.fieldname}-${Date.now()}-${Math.round(Math.random() * 1e9)}`,
+  }),
+});
+
+const resumeUpload = multer({
+  storage: resumeStorage,
+  limits: { fileSize: 5 * 1024 * 1024 },
+  fileFilter: (req, file, cb) => {
+    const ok = /pdf|doc|docx/.test(path.extname(file.originalname).toLowerCase());
+    cb(ok ? null : new Error("Resume must be a PDF or Word document"), ok);
+  },
+});
+
 // CORS configuration - allow frontend to connect
 const corsOptions = {
   origin: function (origin, callback) {
@@ -1715,7 +1754,7 @@ app.delete("/admin/newsletters/:id", authMiddleware, async (req, res) => {
 // ==========================================
 
 // 10. SUBMIT application (Public) - with file upload
-app.post("/applications", upload.fields([
+app.post("/applications", resumeUpload.fields([
   { name: "resume", maxCount: 1 },
   { name: "coverLetter", maxCount: 1 }
 ]), async (req, res) => {
@@ -1749,14 +1788,10 @@ app.post("/applications", upload.fields([
       job = await Job.findOne({ _id: jobId });
     }
 
-    // Get file URLs - use relative paths for database storage
-    const resumeUrl = req.files?.resume
-      ? `/uploads/${req.files.resume[0].filename}`
-      : null;
-
-    const coverLetterUrl = req.files?.coverLetter
-      ? `/uploads/${req.files.coverLetter[0].filename}`
-      : null;
+    // Cloudinary returns the stored location on `path`. Store that, not a
+    // local filename — the local file does not survive the next deploy.
+    const resumeUrl = req.files?.resume?.[0]?.path || null;
+    const coverLetterUrl = req.files?.coverLetter?.[0]?.path || null;
 
     if (!resumeUrl) {
       return res.status(400).json({ message: "Resume is required" });

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, type Variants } from 'framer-motion';
 import { Mail, ArrowRight, Download, Eye, Sparkles, Send, CheckCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import '../components/Home.css';
+import ServiceLeadForm from '../components/ServiceLeadForm';
 
 /* Reusable components from other pages */
 const Grain = () => (
@@ -17,12 +18,12 @@ const GlowBlob = ({ top, left, right, bottom, w = 300, h = 300, color = 'var(--a
   <div style={{ position: 'absolute', top, left, right, bottom, width: w, height: h, background: color, opacity, filter: `blur(${blur}px)`, borderRadius: '50%', pointerEvents: 'none', zIndex: 1 }} />
 );
 
-const titleV = {
+const titleV: Variants = {
   hidden: { y: 100, opacity: 0 },
   visible: (i: number) => ({ y: 0, opacity: 1, transition: { duration: 1, ease: [.22, 1, .36, 1], delay: .2 + i * .12 } })
 };
 
-const fadeUp = {
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
 };
@@ -164,8 +165,25 @@ const Newsletters = () => {
                   onMouseLeave={e => { e.currentTarget.style.transform = 'translateX(0)'; e.currentTarget.style.background = 'linear-gradient(90deg, var(--card-bg) 0%, rgba(240, 235, 225, 0.05) 100%)'; e.currentTarget.style.borderColor = 'var(--border-faint)'; }}
                   className="dh-responsive-grid dh-newsletter-bar"
                 >
-                  <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
-                    <div>
+                  <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center', minWidth: 0 }}>
+                    {/* The cover image. Every newsletter already had `imageUrl`
+                        from the admin and this list never rendered it, so a page
+                        of editorial content read as a filing index. A thumbnail
+                        is the single biggest thing that makes a list of articles
+                        look worth reading. */}
+                    {item.imageUrl && (
+                      <img
+                        src={item.imageUrl}
+                        alt=""
+                        loading="lazy"
+                        decoding="async"
+                        width={104}
+                        height={78}
+                        className="dh-nl-thumb"
+                        style={{ width: '104px', height: '78px', objectFit: 'cover', borderRadius: '8px', flexShrink: 0, border: '1px solid var(--border-faint)', background: 'var(--bg-secondary)' }}
+                      />
+                    )}
+                    <div style={{ minWidth: 0 }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '0.3rem' }}>
                         <span style={{ fontSize: '0.65rem', fontWeight: 800, color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
                           {new Date(item.publishedAt).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })}
@@ -208,8 +226,55 @@ const Newsletters = () => {
             padding: 1.5rem !important;
             align-items: flex-start !important;
           }
+          /* The thumbnail earns its space on desktop; on a phone it competes
+             with the headline for the same row, so it goes full width above it. */
+          .dh-nl-thumb {
+            width: 100% !important;
+            height: 140px !important;
+            margin-bottom: .9rem;
+          }
         }
       `}</style>
+
+      {/* Every page that can generate a lead should. Someone who has read this
+          far down a newsletter archive is a warmer prospect than most traffic,
+          and until now the page asked them for nothing. */}
+      <section className="theme-beige" style={{ position: 'relative', padding: '80px 0', background: 'var(--bg-primary)' }}>
+        <div className="dh-container">
+          <div className="dh-nl-cta">
+            <div>
+              <span className="dh-label">Work with us</span>
+              <h2 className="dh-display" style={{ fontSize: 'clamp(1.8rem, 4.5vw, 2.8rem)', margin: '.5rem 0 1rem', lineHeight: 1.12 }}>
+                Want this applied to your business?
+              </h2>
+              <p style={{ fontSize: '1rem', lineHeight: 1.72, color: 'var(--text-secondary)', margin: 0, maxWidth: '52ch' }}>
+                The editions above are what we do for clients, written up. If any of
+                it is relevant to a problem you have right now, tell us and we will
+                give you a straight answer on whether it would work for you.
+              </p>
+            </div>
+            <ServiceLeadForm
+              source="newsletters"
+              related={['SEO Services', 'Digital Marketing', 'Google Ads Management', 'Social Media Marketing', 'AI Development', 'Web Development']}
+              heading="Get a free scoping call"
+              sub="Tell us what you are working on. We reply within one working day."
+              variant="inline"
+            />
+          </div>
+        </div>
+
+        <style>{`
+          .dh-nl-cta {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 430px);
+            gap: 3rem;
+            align-items: center;
+          }
+          @media (max-width: 900px) {
+            .dh-nl-cta { grid-template-columns: minmax(0, 1fr); gap: 2.25rem; }
+          }
+        `}</style>
+      </section>
     </div>
   );
 };
