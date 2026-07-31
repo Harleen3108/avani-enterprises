@@ -70,7 +70,7 @@ const Chatbot = () => {
             return;
         }
         if (q.includes('contact') || q.includes('call') || q.includes('phone') || q.includes('email') || q.includes('reach') || q.includes('support') || q.includes('whatsapp')) {
-            addBot("You can reach us at +91 92536 25099 or email kp@avanienterprises.in. Happy to help with anything else!", followUp);
+            addBot("You can reach us at +91 84487 63134 or email kp@avanienterprises.in. Happy to help with anything else!", followUp);
             return;
         }
         if (q.includes('book') || q.includes('consult') || q.includes('meeting') || q.includes('appointment') || q.includes('demo')) {
@@ -117,7 +117,7 @@ const Chatbot = () => {
                     navigate('/contact');
                 }, 1500);
             } else if (isOption && text === 'Contact Support') {
-                addBot("You can reach us at +91 92536 25099 or email kp@avanienterprises.in.", followUp);
+                addBot("You can reach us at +91 84487 63134 or email kp@avanienterprises.in.", followUp);
             } else {
                 // Free-typed question — answer and keep the conversation going
                 answerFreeText(text);

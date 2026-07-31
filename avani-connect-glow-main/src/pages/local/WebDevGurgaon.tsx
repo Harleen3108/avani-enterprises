@@ -55,7 +55,7 @@ We've delivered corporate sites, SaaS dashboards, and high-volume e-commerce sto
     { q: 'Will my website rank on Google in Gurgaon?', a: 'Every site ships with technical SEO — clean URLs, schema, sitemaps and fast load times. For competitive Gurugram keywords, we recommend pairing development with our ongoing SEO service for top rankings.' },
     { q: 'Do you offer maintenance after launch?', a: 'Yes. Every project includes 30 days of free post-launch support, and we offer annual maintenance covering security, backups, speed and content updates.' },
     { q: 'Can you redesign our existing website without losing rankings?', a: 'Yes. We carefully migrate content, preserve URL structures and add 301 redirects so your existing Google rankings and traffic are protected during a redesign.' },
-    { q: 'How do we get started?', a: 'Call +91 92536 25099 or fill the contact form. We\'ll book a free 30-minute discovery call and send a detailed proposal within 24 hours.' },
+    { q: 'How do we get started?', a: 'Call +91 84487 63134 or fill the contact form. We\'ll book a free 30-minute discovery call and send a detailed proposal within 24 hours.' },
   ],
   reviews: [],
   relatedLinks: [

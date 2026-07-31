@@ -154,7 +154,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
     ],
     "cta": {
       "headline": "Ready to Launch Your Rohtak Business Online?",
-      "sub": "Get a free website consultation and a fixed quote. Call +91 92536 25099 or email kp@avanienterprises.in — let's build a site that wins Rohtak customers."
+      "sub": "Get a free website consultation and a fixed quote. Call +91 84487 63134 or email kp@avanienterprises.in — let's build a site that wins Rohtak customers."
     },
     "service": "Web Development",
     "city": "Rohtak",
@@ -432,7 +432,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
     "faqs": [
       {
         "q": "How much does web development cost in Karnal?",
-        "a": "In Karnal, websites typically range from around ₹15,000 for a brochure site to ₹1,50,000+ for e-commerce stores or custom web apps. Avani Enterprises sends a clear, fixed quote within 24 hours of a free consultation — call +91 92536 25099."
+        "a": "In Karnal, websites typically range from around ₹15,000 for a brochure site to ₹1,50,000+ for e-commerce stores or custom web apps. Avani Enterprises sends a clear, fixed quote within 24 hours of a free consultation — call +91 84487 63134."
       },
       {
         "q": "How long does it take to build a website in Karnal?",
@@ -611,7 +611,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Do you meet clients in person in Sonipat?",
-        "a": "Yes. While our HQ is at Unitech Cyber Park, Sector 39, Gurugram, our team regularly visits clients across Sonipat, including Kundli, Rai, and Model Town, for project meetings. You can also reach us anytime at +91 92536 25099 or kp@avanienterprises.in."
+        "a": "Yes. While our HQ is at Unitech Cyber Park, Sector 39, Gurugram, our team regularly visits clients across Sonipat, including Kundli, Rai, and Model Town, for project meetings. You can also reach us anytime at +91 84487 63134 or kp@avanienterprises.in."
       }
     ],
     "reviews": [],
@@ -953,7 +953,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
     ],
     "cta": {
       "headline": "Ready to Put Your Ambala Business Online?",
-      "sub": "Get a free consultation and a fixed-price quote within 24 hours from a web development team that understands Ambala's exporters and traders. Call +91 92536 25099."
+      "sub": "Get a free consultation and a fixed-price quote within 24 hours from a web development team that understands Ambala's exporters and traders. Call +91 84487 63134."
     },
     "service": "Web Development",
     "city": "Ambala",
@@ -1069,7 +1069,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
     "faqs": [
       {
         "q": "How much does website development cost in Faridabad?",
-        "a": "A professional business website in Faridabad typically ranges from about ₹20,000 for a brochure site to ₹2,00,000+ for ecommerce or custom web applications, depending on pages, features and integrations. Avani Enterprises sends a fixed, itemised quote within 24 hours of a free discovery call — phone +91 92536 25099."
+        "a": "A professional business website in Faridabad typically ranges from about ₹20,000 for a brochure site to ₹2,00,000+ for ecommerce or custom web applications, depending on pages, features and integrations. Avani Enterprises sends a fixed, itemised quote within 24 hours of a free discovery call — phone +91 84487 63134."
       },
       {
         "q": "How long does it take to build a website?",
@@ -1112,7 +1112,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
     ],
     "cta": {
       "headline": "Ready to Build a Website That Wins Faridabad Buyers?",
-      "sub": "Get a free consultation and a fixed-price quote within 24 hours from a web development team that understands Faridabad's industrial and retail markets. Call +91 92536 25099."
+      "sub": "Get a free consultation and a fixed-price quote within 24 hours from a web development team that understands Faridabad's industrial and retail markets. Call +91 84487 63134."
     },
     "service": "Web Development",
     "city": "Faridabad",
@@ -1272,7 +1272,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
     ],
     "cta": {
       "headline": "Ready to Grow Your Ghaziabad Business Online?",
-      "sub": "Get a free consultation and a fixed-price quote within 24 hours from a web development team that understands Ghaziabad's MSME and manufacturing market. Call +91 92536 25099."
+      "sub": "Get a free consultation and a fixed-price quote within 24 hours from a web development team that understands Ghaziabad's MSME and manufacturing market. Call +91 84487 63134."
     },
     "service": "Web Development",
     "city": "Ghaziabad",
@@ -1709,7 +1709,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
     "faqs": [
       {
         "q": "How much do SEO services in Noida cost?",
-        "a": "SEO retainers in Noida vary with keyword competitiveness, your industry, and campaign scope — local service SEO costs less than competitive IT or e-commerce campaigns. Avani Enterprises provides a custom fixed-scope proposal after a free SEO audit. Call +91 92536 25099 or email kp@avanienterprises.in for a quote."
+        "a": "SEO retainers in Noida vary with keyword competitiveness, your industry, and campaign scope — local service SEO costs less than competitive IT or e-commerce campaigns. Avani Enterprises provides a custom fixed-scope proposal after a free SEO audit. Call +91 84487 63134 or email kp@avanienterprises.in for a quote."
       },
       {
         "q": "How long does SEO take to show results in Noida?",
@@ -1752,7 +1752,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
     ],
     "cta": {
       "headline": "Ready to Rank in Noida?",
-      "sub": "Get a free SEO audit of your website and Google Business Profile. We'll show you exactly where you're losing Noida search traffic — and how to win it back. Call +91 92536 25099 to start."
+      "sub": "Get a free SEO audit of your website and Google Business Profile. We'll show you exactly where you're losing Noida search traffic — and how to win it back. Call +91 84487 63134 to start."
     },
     "service": "SEO",
     "city": "Noida",
@@ -1868,7 +1868,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
     "faqs": [
       {
         "q": "How much do SEO services cost in Rohtak?",
-        "a": "Avani Enterprises offers SEO plans scaled to your goals. Local SEO retainers for Rohtak businesses typically start around Rs 15,000 to Rs 25,000 per month, while competitive multi-keyword campaigns for institutes and manufacturers are priced higher. Contact us at +91 92536 25099 for a custom quote after a free audit."
+        "a": "Avani Enterprises offers SEO plans scaled to your goals. Local SEO retainers for Rohtak businesses typically start around Rs 15,000 to Rs 25,000 per month, while competitive multi-keyword campaigns for institutes and manufacturers are priced higher. Contact us at +91 84487 63134 for a custom quote after a free audit."
       },
       {
         "q": "How long does SEO take to show results in Rohtak?",
@@ -2028,7 +2028,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
     "faqs": [
       {
         "q": "How much do SEO services cost in Panipat?",
-        "a": "SEO retainers depend on keyword competitiveness and the number of product or service pages targeted. We share a custom proposal after a free audit — call +91 92536 25099 or email kp@avanienterprises.in for pricing."
+        "a": "SEO retainers depend on keyword competitiveness and the number of product or service pages targeted. We share a custom proposal after a free audit — call +91 84487 63134 or email kp@avanienterprises.in for pricing."
       },
       {
         "q": "How long does SEO take to show results in Panipat?",
@@ -2230,7 +2230,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
     ],
     "cta": {
       "headline": "Ready to Grow Your Brand in Gurgaon?",
-      "sub": "Get a free digital marketing audit and a fixed-price proposal within 24 hours from Gurugram's ROI-focused team at Unitech Cyber Park, Sector 39. Call +91 92536 25099."
+      "sub": "Get a free digital marketing audit and a fixed-price proposal within 24 hours from Gurugram's ROI-focused team at Unitech Cyber Park, Sector 39. Call +91 84487 63134."
     },
     "service": "Digital Marketing",
     "city": "Gurgaon",
@@ -2389,7 +2389,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
     ],
     "cta": {
       "headline": "Ready to Outrank the Competition in Noida?",
-      "sub": "Get a free digital marketing strategy call and a custom growth plan within 24 hours from a team that knows the Noida market. Call +91 92536 25099 or email kp@avanienterprises.in."
+      "sub": "Get a free digital marketing strategy call and a custom growth plan within 24 hours from a team that knows the Noida market. Call +91 84487 63134 or email kp@avanienterprises.in."
     },
     "service": "Digital Marketing",
     "city": "Noida",
@@ -2525,7 +2525,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
       },
       {
         "q": "Is Avani Enterprises based in Rohtak?",
-        "a": "Our headquarters is at Unitech Cyber Park, Sector 39, Gurugram, and we serve Rohtak clients remotely with the same dedicated team. Reporting and consultations happen over call, WhatsApp, and video, with reviews available 24/7 — reach us at +91 92536 25099 or kp@avanienterprises.in."
+        "a": "Our headquarters is at Unitech Cyber Park, Sector 39, Gurugram, and we serve Rohtak clients remotely with the same dedicated team. Reporting and consultations happen over call, WhatsApp, and video, with reviews available 24/7 — reach us at +91 84487 63134 or kp@avanienterprises.in."
       }
     ],
     "reviews": [],
@@ -2664,7 +2664,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
     "faqs": [
       {
         "q": "How much does digital marketing cost in Delhi?",
-        "a": "Avani Enterprises works on transparent monthly retainers scoped to your goals, channels, and ad budget. After a free audit we share a fixed proposal, so there are no surprise costs, and you always know your cost per lead. Call +91 92536 25099 for a custom quote."
+        "a": "Avani Enterprises works on transparent monthly retainers scoped to your goals, channels, and ad budget. After a free audit we share a fixed proposal, so there are no surprise costs, and you always know your cost per lead. Call +91 84487 63134 for a custom quote."
       },
       {
         "q": "How long does it take to see results from digital marketing?",
@@ -3145,7 +3145,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
     "faqs": [
       {
         "q": "How much does it cost to build a custom AI solution in Delhi?",
-        "a": "Cost depends on scope. A focused AI chatbot or document-automation pilot for a Delhi business typically starts in the low lakhs, while full ML or generative-AI platforms with ERP integration cost more. Avani Enterprises provides a fixed-scope written quote after a free discovery call — no hidden charges. Call +91 92536 25099 for an estimate."
+        "a": "Cost depends on scope. A focused AI chatbot or document-automation pilot for a Delhi business typically starts in the low lakhs, while full ML or generative-AI platforms with ERP integration cost more. Avani Enterprises provides a fixed-scope written quote after a free discovery call — no hidden charges. Call +91 84487 63134 for an estimate."
       },
       {
         "q": "How long does an AI project take to deliver?",
@@ -3188,7 +3188,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
     ],
     "cta": {
       "headline": "Put AI to Work in Your Delhi Business",
-      "sub": "Book a free 30-minute AI discovery call. We'll map one high-impact use case and send a fixed-scope plan within 24 hours. Call +91 92536 25099."
+      "sub": "Book a free 30-minute AI discovery call. We'll map one high-impact use case and send a fixed-scope plan within 24 hours. Call +91 84487 63134."
     },
     "service": "AI Solutions",
     "city": "Delhi",
@@ -3347,7 +3347,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
     ],
     "cta": {
       "headline": "Rank Higher in Mumbai's Toughest Market",
-      "sub": "Get a free SEO audit of your site. We'll show you exactly where you're losing rankings and traffic to Mumbai competitors — and how to win them back. Call +91 92536 25099 or email kp@avanienterprises.in."
+      "sub": "Get a free SEO audit of your site. We'll show you exactly where you're losing rankings and traffic to Mumbai competitors — and how to win them back. Call +91 84487 63134 or email kp@avanienterprises.in."
     },
     "service": "SEO",
     "city": "Mumbai",
@@ -3506,7 +3506,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
     ],
     "cta": {
       "headline": "Ready to Outrank the Competition in Bangalore?",
-      "sub": "Get a free SEO audit and a fixed-scope growth plan from a team that knows Bengaluru's high-competition search market. Call +91 92536 25099."
+      "sub": "Get a free SEO audit and a fixed-scope growth plan from a team that knows Bengaluru's high-competition search market. Call +91 84487 63134."
     },
     "service": "SEO",
     "city": "Bangalore",
@@ -3622,7 +3622,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
     "faqs": [
       {
         "q": "How much does digital marketing cost in Mumbai?",
-        "a": "Avani Enterprises works on transparent monthly retainers scoped to your goals, channels, and ad budget. Because Mumbai CPCs in sectors like BFSI and real estate are high, we focus on cost per lead rather than just spend. After a free audit we share a fixed proposal with no surprise costs. Call +91 92536 25099 for a custom quote."
+        "a": "Avani Enterprises works on transparent monthly retainers scoped to your goals, channels, and ad budget. Because Mumbai CPCs in sectors like BFSI and real estate are high, we focus on cost per lead rather than just spend. After a free audit we share a fixed proposal with no surprise costs. Call +91 84487 63134 for a custom quote."
       },
       {
         "q": "How long does it take to see results from digital marketing in Mumbai?",
@@ -3781,7 +3781,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
     "faqs": [
       {
         "q": "How much does digital marketing cost in Bangalore?",
-        "a": "Avani Enterprises works on transparent monthly retainers scoped to your goals, channels, and ad budget. After a free audit we share a fixed proposal, so there are no surprise costs and you always know your cost per lead and ROAS. Call +91 92536 25099 for a custom quote."
+        "a": "Avani Enterprises works on transparent monthly retainers scoped to your goals, channels, and ad budget. After a free audit we share a fixed proposal, so there are no surprise costs and you always know your cost per lead and ROAS. Call +91 84487 63134 for a custom quote."
       },
       {
         "q": "How long does it take to see results from digital marketing in Bangalore?",
@@ -3984,7 +3984,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
     ],
     "cta": {
       "headline": "Ready to Outrank the Competition in Chandigarh?",
-      "sub": "Get a free digital marketing strategy call and a custom growth plan within 24 hours from a team that knows the tricity market. Call +91 92536 25099 or email kp@avanienterprises.in."
+      "sub": "Get a free digital marketing strategy call and a custom growth plan within 24 hours from a team that knows the tricity market. Call +91 84487 63134 or email kp@avanienterprises.in."
     },
     "service": "Digital Marketing",
     "city": "Chandigarh",
@@ -4100,7 +4100,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
     "faqs": [
       {
         "q": "How much does website development cost in Dubai?",
-        "a": "A professional business website for a Dubai company typically ranges from around AED 3,500 for a brochure site to AED 12,000+ for ecommerce or custom web applications, depending on pages, languages and integrations. Because Avani Enterprises delivers remotely from its India HQ, Dubai clients get UAE-standard quality at lower cost than a local agency. We send a fixed, itemised quote within 24 hours of a free discovery call — WhatsApp or call +91 92536 25099."
+        "a": "A professional business website for a Dubai company typically ranges from around AED 3,500 for a brochure site to AED 12,000+ for ecommerce or custom web applications, depending on pages, languages and integrations. Because Avani Enterprises delivers remotely from its India HQ, Dubai clients get UAE-standard quality at lower cost than a local agency. We send a fixed, itemised quote within 24 hours of a free discovery call — WhatsApp or call +91 84487 63134."
       },
       {
         "q": "How long does it take to build a website?",
@@ -4143,7 +4143,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
     ],
     "cta": {
       "headline": "Ready to Build a Website That Wins Dubai Customers?",
-      "sub": "Get a free consultation and a fixed-price quote within 24 hours from a team that delivers UAE-standard websites remotely from India. WhatsApp or call +91 92536 25099, or email kp@avanienterprises.in."
+      "sub": "Get a free consultation and a fixed-price quote within 24 hours from a team that delivers UAE-standard websites remotely from India. WhatsApp or call +91 84487 63134, or email kp@avanienterprises.in."
     },
     "service": "Web Development",
     "city": "Dubai",
@@ -4303,7 +4303,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
     ],
     "cta": {
       "headline": "Ready to Launch Your Abu Dhabi Business Online?",
-      "sub": "Get a free website consultation and a fixed quote. Call +91 92536 25099 or email kp@avanienterprises.in — let's build a fast, bilingual site that wins Abu Dhabi customers."
+      "sub": "Get a free website consultation and a fixed quote. Call +91 84487 63134 or email kp@avanienterprises.in — let's build a fast, bilingual site that wins Abu Dhabi customers."
     },
     "service": "Web Development",
     "city": "Abu Dhabi",
@@ -4463,7 +4463,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
     ],
     "cta": {
       "headline": "Ready to Launch Your Qatar Business Online?",
-      "sub": "Get a free website consultation and a fixed quote. Call +91 92536 25099 or email kp@avanienterprises.in — let's build a fast, bilingual site that wins Qatar customers."
+      "sub": "Get a free website consultation and a fixed quote. Call +91 84487 63134 or email kp@avanienterprises.in — let's build a fast, bilingual site that wins Qatar customers."
     },
     "service": "Web Development",
     "city": "Qatar",
@@ -4783,7 +4783,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
     ],
     "cta": {
       "headline": "Ready to Grow Your Brand in Dubai?",
-      "sub": "Get a free digital marketing audit and a fixed-price proposal within 24 hours from a performance-first team serving Dubai remotely from India. Call +91 92536 25099 or email kp@avanienterprises.in."
+      "sub": "Get a free digital marketing audit and a fixed-price proposal within 24 hours from a performance-first team serving Dubai remotely from India. Call +91 84487 63134 or email kp@avanienterprises.in."
     },
     "service": "Digital Marketing",
     "city": "Dubai",
@@ -4943,7 +4943,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
     ],
     "cta": {
       "headline": "Ready to Launch Your London Business Online?",
-      "sub": "Get a free website consultation and a fixed quote. Call +91 92536 25099 or email kp@avanienterprises.in — let's build a site that wins London customers."
+      "sub": "Get a free website consultation and a fixed quote. Call +91 84487 63134 or email kp@avanienterprises.in — let's build a site that wins London customers."
     },
     "service": "Web Development",
     "city": "London",
@@ -5059,7 +5059,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
     "faqs": [
       {
         "q": "How much does offshore web development cost for a US business?",
-        "a": "Offshore web development through Avani Enterprises typically runs from around $800–$2,000 for a professional business website to $5,000–$25,000+ for ecommerce or custom React/Next.js applications — often 50–70% below comparable US agency pricing. We send a fixed, itemized quote within 24 hours of a free discovery call. Email kp@avanienterprises.in or call +91 92536 25099."
+        "a": "Offshore web development through Avani Enterprises typically runs from around $800–$2,000 for a professional business website to $5,000–$25,000+ for ecommerce or custom React/Next.js applications — often 50–70% below comparable US agency pricing. We send a fixed, itemized quote within 24 hours of a free discovery call. Email kp@avanienterprises.in or call +91 84487 63134."
       },
       {
         "q": "How long does it take to build a website?",
@@ -5102,7 +5102,7 @@ export const cityPagesData: Record<string, LocalServicePageProps> = {
     ],
     "cta": {
       "headline": "Ready to Build a Website That Wins US Customers?",
-      "sub": "Get a free consultation and a fixed-price quote within 24 hours from an offshore web development team that delivers US-grade quality at India rates. Email kp@avanienterprises.in or call +91 92536 25099."
+      "sub": "Get a free consultation and a fixed-price quote within 24 hours from an offshore web development team that delivers US-grade quality at India rates. Email kp@avanienterprises.in or call +91 84487 63134."
     },
     "service": "Web Development",
     "city": "USA",

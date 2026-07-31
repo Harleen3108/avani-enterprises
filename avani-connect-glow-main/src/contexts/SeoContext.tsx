@@ -49,7 +49,7 @@ const STATIC_FALLBACK: Record<string, Pick<SeoData, 'title' | 'metaDescription' 
   },
   "/contact": {
     title: "Contact Avani Enterprises | Get a Free Consultation",
-    metaDescription: "Contact Avani Enterprises for web development, SEO, digital marketing, or custom software. Call +91 92536 25099 or email kp@avanienterprises.in.",
+    metaDescription: "Contact Avani Enterprises for web development, SEO, digital marketing, or custom software. Call +91 84487 63134 or email kp@avanienterprises.in.",
     metaKeywords: "contact avani enterprises, digital marketing agency contact, web development quote india"
   },
   "/blog": {

@@ -504,7 +504,7 @@ export default function BusinessSetup3() {
             <span style={{ color: C.text, fontWeight: 800, fontSize: 13, letterSpacing: 1 }}>AVANI ENTERPRISES</span>
           </div>
           <div className="bs3-foot-links">
-            <a href="tel:+919253625099"><Phone size={14} /> +91 92536 25099</a>
+            <a href="tel:+91 84487 63134"><Phone size={14} /> +91 84487 63134</a>
             <a href="mailto:kp@avanienterprises.in"><Mail size={14} /> kp@avanienterprises.in</a>
             <a href="https://wa.me/918930008118" target="_blank" rel="noopener noreferrer"><MessageSquare size={14} /> WhatsApp: +91 89300 08118</a>
           </div>

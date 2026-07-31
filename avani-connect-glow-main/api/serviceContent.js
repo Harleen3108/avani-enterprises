@@ -46,7 +46,7 @@ const COMPANY = {
   name: 'Avani Enterprises',
   hq: 'Tower B, 3rd Floor, Unitech Cyber Park, Sector 39, Gurugram, Haryana 122002',
   email: 'kp@avanienterprises.in',
-  phone: '+91 92536 25099',
+  phone: '+91 84487 63134',
   site: 'https://www.avanienterprises.in',
 };
 
@@ -1831,10 +1831,10 @@ const STATIC_PAGES = {
     ],
   },
   contact: {
-    metaTitle: "Contact Avani Enterprises — Gurugram & Rohtak",
-    metaDescription: "Talk to the team in Gurugram or Rohtak. Free scope call and a written quote, no obligation. Email kp@avanienterprises.in or call +91 92536 25099.",
+    metaTitle: "Contact Avani Enterprises — Gurugram, Mumbai & Rohtak",
+    metaDescription: "Talk to the team in Gurugram, Mumbai or Rohtak. Free scoping call and a written quote, no obligation. Email kp@avanienterprises.in or call +91 84487 63134.",
     h1: 'Contact Avani Enterprises',
-    intro: `Head office: ${COMPANY.hq}. Email ${COMPANY.email} or call ${COMPANY.phone}.`,
+    intro: `Head office: ${COMPANY.hq}. Email ${COMPANY.email}, or call ${COMPANY.phone} (second line +91 92536 25099). We reply within one working day, Monday to Saturday, 9:00am to 7:00pm IST.`,
     sections: [
       {
         heading: 'What happens after you get in touch',
@@ -1843,10 +1843,24 @@ const STATIC_PAGES = {
           'If there is a fit, you receive a written scope with deliverables, exclusions, timeline and commercials before any work starts.',
         ],
       },
+      {
+        heading: 'Where we are',
+        paragraphs: [
+          'Three offices in India: the head office at Unitech Cyber Park, Sector 39, Gurugram; an operations centre on Teli Galli Cross Road, Andheri East, Mumbai; and an office at Agro Mall, Rohtak.',
+          'Everywhere else we deliver remotely, including across Delhi NCR and the Indian metros, and internationally in the UAE, Singapore and the USA. We do not claim offices in markets where we do not hold premises.',
+        ],
+      },
     ],
+    // These mirror the FAQ block rendered on the page (src/pages/Contact.tsx).
+    // api/seo.js turns them into FAQPage schema, so the markup can only ever
+    // describe questions a visitor can actually see answered.
     faqs: [
-      { q: 'How quickly do you respond?', a: 'We aim to respond to enquiries within one working day. For anything urgent, calling the number above is faster than the form.' },
-      { q: 'Do you charge for the first call?', a: 'No. The discovery call is free, and you get a written scope and quote from it.' },
+      { q: 'How quickly do you respond?', a: 'Within one working day. If it is urgent, calling is faster than the form — the number reaches the team directly, not a switchboard.' },
+      { q: 'Do you charge for the first call?', a: 'No. The first call is a scoping conversation, not a sales pitch. You leave it with a written scope and a quote, and there is no obligation to proceed.' },
+      { q: 'What do you need from me to quote?', a: 'What you are trying to achieve, anything you have already tried, a rough budget range and your deadline. You do not need a specification — writing one is usually part of the work.' },
+      { q: 'Do you work with businesses outside Delhi NCR?', a: 'Yes. We have offices in Gurugram, Mumbai and Rohtak, and deliver remotely across India and internationally, including the UAE, Singapore and the USA. Reviews happen over video where meeting in person is not practical.' },
+      { q: 'What does a project cost?', a: 'It depends on scope, and we will not pretend otherwise. We quote per engagement after the scoping call rather than publishing a price that turns out not to apply to you. Our guide on website development cost sets out what actually drives the number.' },
+      { q: 'Who will I be talking to?', a: 'The people who would do the work. There is no separate sales team handing you over to delivery after signature.' },
     ],
   },
   'case-studies': {

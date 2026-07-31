@@ -53,7 +53,7 @@ Avani Enterprises has managed SEO campaigns for over 50+ companies in Haryana, h
     { q: 'What is technical SEO?', a: 'It optimizes backend elements (sitemaps, schema, page load speeds, redirect paths) so search crawlers index your pages correctly.' },
     { q: 'Do you write the blog articles?', a: 'Yes, our team drafts SEO-optimized, industry-relevant articles.' },
     { q: 'How do we track organic search progress?', a: 'We set up Google Analytics and Search Console dashboards tracking clicks, ranks, and conversions.' },
-    { q: 'How do we get started?', a: 'Contact our SEO consulting team at +91 92536 25099 to receive a free, detailed website audit.' }
+    { q: 'How do we get started?', a: 'Contact our SEO consulting team at +91 84487 63134 to receive a free, detailed website audit.' }
   ],
   reviews: [],
   relatedLinks: [

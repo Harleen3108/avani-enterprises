@@ -994,16 +994,27 @@ function schemaHtml(pagePath, canonical, title, resolved, guide, faqs, post) {
       postalCode: '122002',
       addressCountry: 'IN',
     },
-    contactPoint: [{
-      '@type': 'ContactPoint',
-      telephone: NAP.phone,
-      email: NAP.email,
-      contactType: 'sales',
-      areaServed: 'IN',
-      availableLanguage: ['English', 'Hindi'],
-      // No `contactOption: 'TollFree'`. index.html used to assert that on an
-      // Indian mobile number, which is simply untrue.
-    }],
+    contactPoint: [
+      {
+        '@type': 'ContactPoint',
+        telephone: NAP.phone,
+        email: NAP.email,
+        contactType: 'sales',
+        areaServed: 'IN',
+        availableLanguage: ['English', 'Hindi'],
+        // No `contactOption: 'TollFree'`. index.html used to assert that on an
+        // Indian mobile number, which is simply untrue.
+      },
+      // The second line, listed so the number stays associated with the entity
+      // for anyone who has it from an older listing or an old business card.
+      ...(NAP.phoneSecondary ? [{
+        '@type': 'ContactPoint',
+        telephone: NAP.phoneSecondary,
+        contactType: 'customer support',
+        areaServed: 'IN',
+        availableLanguage: ['English', 'Hindi'],
+      }] : []),
+    ],
     // What the organisation is actually competent in. This is the property
     // answer engines read when deciding whether a brand is a plausible source
     // for a given question, so it is worth stating explicitly.
@@ -1036,6 +1047,24 @@ function schemaHtml(pagePath, canonical, title, resolved, guide, faqs, post) {
       url: `${SITE_URL}/about`,
       worksFor: { '@id': `${SITE_URL}/#organization` },
       sameAs: ['https://www.linkedin.com/in/kapil-khandelwal-avani/'],
+    });
+  }
+
+  // ── ContactPage ───────────────────────────────────────────────────────────
+  // Tells Google and answer engines that this specific URL is where you get in
+  // touch, rather than leaving them to infer it from the page title.
+  if (slug === 'contact') {
+    graphs.push({
+      '@context': 'https://schema.org',
+      '@type': 'ContactPage',
+      '@id': `${SITE_URL}/contact#webpage`,
+      url: canonical,
+      name: 'Contact Avani Enterprises',
+      description:
+        'Contact details, offices and enquiry form for Avani Enterprises — a digital, product and AI studio with offices in Gurugram, Mumbai and Rohtak.',
+      isPartOf: { '@id': `${SITE_URL}/#website` },
+      about: { '@id': `${SITE_URL}/#organization` },
+      inLanguage: 'en-IN',
     });
   }
 
@@ -1714,7 +1743,7 @@ function buildUniqueBodyHtml(pagePath, title, description, runtimePost) {
       stored.intro,
       heads.length ? 'This page covers ' + listOf(heads.slice(0, 4)) + '.' : '',
       'Avani Enterprises is a digital, product and AI studio with offices in Gurugram and Rohtak, India.',
-      'Contact: +91 92536 25099 or kp@avanienterprises.in.',
+      'Contact: +91 84487 63134 or kp@avanienterprises.in.',
     ].filter(Boolean);
   }
   if (summary.length) {

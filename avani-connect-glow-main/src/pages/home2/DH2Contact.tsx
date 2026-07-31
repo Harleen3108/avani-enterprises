@@ -15,7 +15,7 @@ const fadeUp = {
 };
 
 const DH2Contact = () => {
-  const whatsappNumber = '919253625099';
+  const whatsappNumber = '918448763134';
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', company: '', service: [] as string[], message: '', otherService: '' });
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -95,7 +95,7 @@ const DH2Contact = () => {
               
               <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem' }}>
                 {[
-                  { icon: <Phone size={24} />, title: 'Voice / WhatsApp', value: '+91 92536 25099', sub: 'Instant connection for rapid results', link: 'tel:+919253625099' },
+                  { icon: <Phone size={24} />, title: 'Voice / WhatsApp', value: '+91 84487 63134', sub: 'Instant connection for rapid results', link: 'tel:+91 84487 63134' },
                   { icon: <Mail size={24} />, title: 'Electronic Mail', value: 'kp@avanienterprises.in', sub: 'Send your detailed RFP or proposals', link: 'mailto:kp@avanienterprises.in' },
                 ].map((item, i) => (
                   <a key={i} href={item.link} style={{ display: 'flex', gap: '1.5rem', textDecoration: 'none', color: 'inherit' }}>

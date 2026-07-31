@@ -158,8 +158,8 @@ export default function NotFound() {
           transition={{ delay: 0.6, duration: 0.6 }}
           style={{ marginTop: '40px', display: 'flex', gap: '24px', justifyContent: 'center', flexWrap: 'wrap', fontSize: '0.85rem', color: '#777777' }}
         >
-          <a href="tel:+919253625099" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', alignItems: 'center', gap: '6px' }} onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-primary, #C4913A)'} onMouseLeave={e => e.currentTarget.style.color = 'inherit'}>
-            <Phone size={13} color="var(--accent-primary, #C4913A)" /> +91 92536 25099
+          <a href="tel:+91 84487 63134" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', alignItems: 'center', gap: '6px' }} onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-primary, #C4913A)'} onMouseLeave={e => e.currentTarget.style.color = 'inherit'}>
+            <Phone size={13} color="var(--accent-primary, #C4913A)" /> +91 84487 63134
           </a>
           <a href="mailto:kp@avanienterprises.in" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', alignItems: 'center', gap: '6px' }} onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-primary, #C4913A)'} onMouseLeave={e => e.currentTarget.style.color = 'inherit'}>
             <Mail size={13} color="var(--accent-primary, #C4913A)" /> kp@avanienterprises.in

@@ -49,10 +49,10 @@ const Footer = () => (
               onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'var(--text-secondary)'}>
               <Mail size={12} color="var(--accent-primary)" /> kp@avanienterprises.in
             </a>
-            <a href="tel:+919253625099" style={{ display: 'flex', alignItems: 'center', gap: '8px', fontFamily: "'Inter', sans-serif", fontSize: '12px', color: 'var(--text-secondary)', textDecoration: 'none', transition: 'color 0.2s' }}
+            <a href="tel:+91 84487 63134" style={{ display: 'flex', alignItems: 'center', gap: '8px', fontFamily: "'Inter', sans-serif", fontSize: '12px', color: 'var(--text-secondary)', textDecoration: 'none', transition: 'color 0.2s' }}
               onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = 'var(--accent-primary)'}
               onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'var(--text-secondary)'}>
-              <Phone size={12} color="var(--accent-primary)" /> +91 92536 25099
+              <Phone size={12} color="var(--accent-primary)" /> +91 84487 63134
             </a>
             <a href="https://maps.google.com/?q=Tower+B+3rd+Floor+Unitech+Cyber+Park+Durga+Colony+Sector+39+Gurugram+Haryana+122002" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', fontFamily: "'Inter', sans-serif", fontSize: '12px', color: 'var(--text-secondary)', textDecoration: 'none', transition: 'color 0.2s' }}
               onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = 'var(--accent-primary)'}

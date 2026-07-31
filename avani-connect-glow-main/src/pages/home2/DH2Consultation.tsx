@@ -8,7 +8,7 @@ import '../../components/home2/Home2.css';
 const fadeIn = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } };
 
 const DH2Consultation = () => {
-  const whatsappNumber = '919253625099';
+  const whatsappNumber = '918448763134';
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', company: '', service: [] as string[], message: '', otherService: '' });
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -53,11 +53,11 @@ const DH2Consultation = () => {
                 <h3 style={{ fontFamily: "'Syne'", fontWeight: 800, fontSize: '1.3rem', marginBottom: '2rem' }}>Get in Touch</h3>
                 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                  <a href="tel:+919253625099" style={{ display: 'flex', alignItems: 'center', gap: '1rem', textDecoration: 'none', color: 'inherit' }}>
+                  <a href="tel:+91 84487 63134" style={{ display: 'flex', alignItems: 'center', gap: '1rem', textDecoration: 'none', color: 'inherit' }}>
                     <div style={{ width: 36, height: 36, background: 'var(--bg-base)', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent)', border: '1px solid var(--border-s)' }}><Phone size={14} /></div>
                     <div>
                       <div style={{ fontSize: '.6rem', color: 'var(--text-muted)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.1em', marginBottom: 2 }}>Phone</div>
-                      <div style={{ fontSize: '.9rem', fontWeight: 600, color: '#fff' }}>+91 92536 25099</div>
+                      <div style={{ fontSize: '.9rem', fontWeight: 600, color: '#fff' }}>+91 84487 63134</div>
                     </div>
                   </a>
 

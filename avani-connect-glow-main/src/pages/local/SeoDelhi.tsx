@@ -52,7 +52,7 @@ Avani Enterprises has managed SEO campaigns for over 80+ companies in Delhi, hel
     { q: 'Do you handle the website technical changes?', a: 'Yes. Our developers directly optimize website speed, schema markup, and responsive layouts.' },
     { q: 'What is link building?', a: 'It secures links from other respected websites back to yours, proving to search engines that your brand is a trustworthy authority.' },
     { q: 'How do we track progress?', a: 'We share monthly reports tracking organic search impressions, ranks, clicks, and conversion events.' },
-    { q: 'How do we get started?', a: 'Call +91 92536 25099 or email kp@avanienterprises.in to arrange a free, detailed website audit.' }
+    { q: 'How do we get started?', a: 'Call +91 84487 63134 or email kp@avanienterprises.in to arrange a free, detailed website audit.' }
   ],
   reviews: [],
   relatedLinks: [

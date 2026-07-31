@@ -57,7 +57,7 @@ Every website we deliver is engineered for speed (Core Web Vitals green), optimi
     { q: 'Can you build in both Hindi and English?', a: 'Yes. We build bilingual (Hindi + English) and multilingual websites. For Haryana businesses targeting local customers, Hindi content pages significantly improve local search rankings.' },
     { q: 'Do you work with government tenders and contractors in Haryana?', a: 'Yes. We build professional tender-compliant websites for government contractors and vendors who need NIC-standard layouts, contact forms, and document portals.' },
     { q: 'What CMS do you use?', a: 'We offer WordPress (most popular), headless CMS (Contentful, Sanity), and fully custom admin panels built with Node.js. We recommend based on your team\'s technical comfort and long-term maintenance needs.' },
-    { q: 'How do I get started?', a: 'Call us on +91 92536 25099 or fill the contact form. We\'ll schedule a free 30-minute discovery call, understand your business goals, and send a detailed proposal within 24 hours.' },
+    { q: 'How do I get started?', a: 'Call us on +91 84487 63134 or fill the contact form. We\'ll schedule a free 30-minute discovery call, understand your business goals, and send a detailed proposal within 24 hours.' },
   ],
   reviews: [],
   relatedLinks: [

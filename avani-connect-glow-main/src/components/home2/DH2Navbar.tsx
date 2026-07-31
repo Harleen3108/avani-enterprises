@@ -140,7 +140,7 @@ const DH2Navbar = () => {
 
       {/* Desktop CTA */}
       <div className="dh2-nav-actions">
-        <a href="tel:+919253625099" className="dh2-nav-phone"><Phone size={14} /></a>
+        <a href="tel:+91 84487 63134" className="dh2-nav-phone"><Phone size={14} /></a>
         <Link to="/home2/contact" className="dh2-nav-cta">Get Started</Link>
       </div>
 
@@ -202,7 +202,7 @@ const DH2Navbar = () => {
               return <Link key={item.name} to={item.path!} className={`dh2-mobile-link ${isActive(item.path!) ? 'active' : ''}`}>{item.name}</Link>;
             })}
             <div className="dh2-mobile-cta-wrap">
-              <a href="tel:+919253625099" className="dh2-mobile-phone"><Phone size={14} /> Talk to Experts</a>
+              <a href="tel:+91 84487 63134" className="dh2-mobile-phone"><Phone size={14} /> Talk to Experts</a>
               <Link to="/home2/contact" className="dh2-mobile-cta">Get Started</Link>
             </div>
           </motion.div>

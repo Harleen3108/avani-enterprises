@@ -55,7 +55,7 @@ We design and develop custom websites, e-commerce stores, and web applications t
     { q: 'Will my website rank on Google?', a: 'Every site is built on solid technical SEO foundations. For competitive Chandigarh keywords, we recommend pairing development with our ongoing SEO service for the best rankings.' },
     { q: 'Can you redesign my outdated website?', a: 'Yes. We modernise existing websites while protecting your current SEO rankings and URLs through careful migration and redirects.' },
     { q: 'Is post-launch support included?', a: 'Yes — 30 days of free support comes with every project, plus optional annual maintenance for security, backups and updates.' },
-    { q: 'How do I get started?', a: 'Call +91 92536 25099 or fill the contact form for a free 30-minute consultation and a detailed proposal within 24 hours.' },
+    { q: 'How do I get started?', a: 'Call +91 84487 63134 or fill the contact form for a free 30-minute consultation and a detailed proposal within 24 hours.' },
   ],
   reviews: [],
   relatedLinks: [

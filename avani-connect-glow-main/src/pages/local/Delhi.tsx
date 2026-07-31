@@ -53,7 +53,7 @@ We have designed enterprise portals, CRM systems, and managed performance market
     { q: 'How long does a web project take?', a: 'Custom systems are completed in 14 to 21 business days, depending on requirements.' },
     { q: 'Do you offer ongoing retainer support?', a: 'Yes, we offer monthly retainers for technical updates, SEO, and campaign management.' },
     { q: 'What is the support response time?', a: 'Our engineers respond via chat or call in under 15 minutes for critical requests.' },
-    { q: 'How do we schedule a meeting?', a: 'Contact our consulting team at +91 92536 25099 to set up an online or local meeting.' }
+    { q: 'How do we schedule a meeting?', a: 'Contact our consulting team at +91 84487 63134 to set up an online or local meeting.' }
   ],
   reviews: [],
   relatedLinks: [

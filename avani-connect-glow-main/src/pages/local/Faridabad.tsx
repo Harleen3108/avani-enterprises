@@ -53,7 +53,7 @@ We have designed portals for local institutions and B2B websites for local manuf
     { q: 'How long does it take to build a website?', a: 'Standard business sites are completed in 7 to 10 days, while custom web applications take 14 to 21 days.' },
     { q: 'What platforms do you build on?', a: 'We build on modern frameworks (React, Node, Next.js) and optimized WordPress architectures.' },
     { q: 'Do you write the website copy?', a: 'Yes, our copywriting team writes SEO-optimized copy for your site.' },
-    { q: 'How do we get started?', a: 'Call +91 92536 25099 or email kp@avanienterprises.in to arrange a free consultation.' }
+    { q: 'How do we get started?', a: 'Call +91 84487 63134 or email kp@avanienterprises.in to arrange a free consultation.' }
   ],
   reviews: [],
   relatedLinks: [

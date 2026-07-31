@@ -56,7 +56,7 @@ Avani Enterprises has managed social media for 80+ Delhi businesses across indus
     { q: 'Can you run social media ads with a small budget in Delhi?', a: 'Yes. We run effective campaigns with ad budgets as low as ₹5,000/month. For micro-budgets, we focus on hyperlocal Instagram ads that generate high-quality leads at lower cost than large-scale campaigns.' },
     { q: 'Do you help Delhi businesses with Diwali and seasonal campaigns?', a: 'Absolutely. We plan campaigns 4–6 weeks ahead of major Delhi shopping seasons (Diwali, Navratri, End of Season Sales) to maximise reach, bookings, and sales during peak periods.' },
     { q: 'What results can I expect in 3 months?', a: 'In 3 months, most Delhi clients see 30–150% follower growth, 50–200% engagement improvement, and 20–100 monthly leads from social media depending on budget and industry.' },
-    { q: 'How do I get started?', a: 'Call +91 92536 25099 or email kp@avanienterprises.in. We start with a free 20-minute social media audit reviewing your current profiles and market position.' },
+    { q: 'How do I get started?', a: 'Call +91 84487 63134 or email kp@avanienterprises.in. We start with a free 20-minute social media audit reviewing your current profiles and market position.' },
   ],
   reviews: [],
   relatedLinks: [

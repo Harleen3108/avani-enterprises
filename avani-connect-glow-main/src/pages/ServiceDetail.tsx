@@ -109,7 +109,7 @@ const serviceData: Record<string, ServiceDetail> = {
       { q: 'Do you provide website maintenance and support?', a: 'Yes, we offer monthly retainer packages for technical updates, security monitoring, sitemap logs, and performance optimization.' },
       { q: 'Can you integrate payment gateways like Razorpay or Stripe?', a: 'Yes. We configure checkout systems, secure transaction tokens, and automated invoice dispatches.' },
       { q: 'Will my website rank on Google after launch?', a: 'We build all sites with clean SEO code, correct HTML structures, and JSON-LD schemas, giving you the best organic launch foundation.' },
-      { q: 'How do we request a project quote?', a: 'Click the "Get Started" button or call +91 92536 25099 to discuss your custom project requirements.' }
+      { q: 'How do we request a project quote?', a: 'Click the "Get Started" button or call +91 84487 63134 to discuss your custom project requirements.' }
     ]
   },
   'seo-content-marketing': {
@@ -147,7 +147,7 @@ const serviceData: Record<string, ServiceDetail> = {
       { q: 'What is link building?', a: 'Link building involves securing links from other respected, high-authority websites back to your site, signaling credibility to Google.' },
       { q: 'Do you provide local Google Maps SEO?', a: 'Yes. We optimize your Google Business Profile to rank first for geographic local queries.' },
       { q: 'Do we get monthly progress reports?', a: 'Yes, we provide reports tracking search impressions, keyword ranks, clicks, and organic conversions.' },
-      { q: 'How do we schedule a site audit?', a: 'Contact our search engine consulting team at +91 92536 25099 for a free website health audit.' }
+      { q: 'How do we schedule a site audit?', a: 'Contact our search engine consulting team at +91 84487 63134 for a free website health audit.' }
     ]
   },
   'social-media-marketing': {
@@ -185,7 +185,7 @@ const serviceData: Record<string, ServiceDetail> = {
       { q: 'Who writes captions and copy?', a: 'Our content team handles all caption copywriting and hashtag research.' },
       { q: 'Do you reply to page comments and messages?', a: 'Yes, we manage standard comment moderation and answer direct messages based on your FAQs.' },
       { q: 'Can we review the content calendar ahead of time?', a: 'Yes, we share a monthly content calendar for your approvals before publishing.' },
-      { q: 'How do we start?', a: 'Call +91 92536 25099 to schedule a 20-minute brand consulting session with our creative directors.' }
+      { q: 'How do we start?', a: 'Call +91 84487 63134 to schedule a 20-minute brand consulting session with our creative directors.' }
     ]
   },
   'digital-marketing': {
@@ -223,7 +223,7 @@ const serviceData: Record<string, ServiceDetail> = {
       { q: 'What metrics do we track?', a: 'We track cost-per-click (CPC), cost-per-lead (CPL), search impressions, conversion rates, and total return on ad spend (ROAS).' },
       { q: 'Is B2B lead generation supported?', a: 'Yes, we optimize campaigns on Google and LinkedIn to reach enterprise decision-makers.' },
       { q: 'How long are your contracts?', a: 'We offer flexible monthly retainer plans with custom SLAs.' },
-      { q: 'How do we schedule a consulting session?', a: 'Call +91 92536 25099 to arrange an online walkthrough with our marketing directors.' }
+      { q: 'How do we schedule a consulting session?', a: 'Call +91 84487 63134 to arrange an online walkthrough with our marketing directors.' }
     ]
   },
   'google-ads': {
@@ -261,7 +261,7 @@ const serviceData: Record<string, ServiceDetail> = {
       { q: 'Do you manage Google Display and Shopping Ads?', a: 'Yes, we manage search, display, shopping, Performance Max, and YouTube campaigns.' },
       { q: 'What is ROAS?', a: 'ROAS (Return on Ad Spend) measures the revenue generated for every rupee spent on ads. We target a 3x to 5x ROAS.' },
       { q: 'How are conversions tracked?', a: 'We set up tracking via Google Analytics and Tag Manager for calls, form submissions, and sales.' },
-      { q: 'How do we start?', a: 'Call +91 92536 25099 to arrange a free PPC audit of your current campaigns.' }
+      { q: 'How do we start?', a: 'Call +91 84487 63134 to arrange a free PPC audit of your current campaigns.' }
     ]
   },
   'performance-marketing': {
@@ -299,7 +299,7 @@ const serviceData: Record<string, ServiceDetail> = {
       { q: 'How often do you test new ad creative designs?', a: 'We test new ad graphics and copy angles weekly to prevent ad fatigue.' },
       { q: 'What reports do we receive?', a: 'You receive weekly dashboards showing ad spend, CPL, click logs, and conversion revenue.' },
       { q: 'Is B2B lead generation supported?', a: 'Yes, we run targeted LinkedIn and Google Search campaigns for B2B client acquisition.' },
-      { q: 'How do we start?', a: 'Reach out to our marketing consultants at +91 92536 25099 to arrange an online marketing audit.' }
+      { q: 'How do we start?', a: 'Reach out to our marketing consultants at +91 84487 63134 to arrange an online marketing audit.' }
     ]
   },
   'ai-solutions': {

@@ -73,5 +73,77 @@ console.log('\n── P2-2  LCP preload is self-hosted ────────�
       'homepage preloads /hero-office-*.webp, not unsplash');
 }
 
+console.log('\n── NAP  One primary phone, one address, everywhere ───────');
+{
+  const { NAP } = await import('../api/offices.js');
+  const fs = await import('node:fs');
+  chk(NAP.phone === '+918448763134', 'offices.js primary phone', NAP.phone);
+  chk(NAP.phoneSecondary === '+919253625099', 'offices.js secondary phone', NAP.phoneSecondary);
+
+  // The old number is deliberate in two places: the second ContactPoint in
+  // JSON-LD (so the number stays attached to the entity) and the "second line"
+  // card on /contact. In VISIBLE copy anywhere else it means a hardcoded string
+  // was missed, and the site is showing two different "main" numbers — the
+  // exact inconsistency that suppresses local-pack rankings. So strip the
+  // structured data before checking.
+  const visible = (html) => html.replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/g, '');
+  for (const p of ['/', '/seo-company', '/web-development-company-mumbai', '/about']) {
+    const r = await get(p);
+    const stale = (visible(r._b).match(/9253625099|92536[ -]25099/g) || []).length;
+    chk(stale === 0, `${p} shows only the primary number`, stale ? `${stale} stale occurrence(s)` : 'clean');
+  }
+  const c = await get('/contact');
+  chk(/8448763134|84487 63134/.test(c._b), '/contact shows the primary number');
+  chk(/9253625099|92536 25099/.test(c._b), '/contact still lists the second line');
+
+  // Source files must not reintroduce it either — the served HTML only covers
+  // the routes tested above.
+  const srcHits = ['src/components/Footer.tsx', 'src/components/Navbar.tsx', 'src/data/cityPagesData.ts']
+    .filter(f => fs.existsSync(f) && /9253625099|92536[ -]25099/.test(fs.readFileSync(f, 'utf8')));
+  chk(srcHits.length === 0, 'no stale number in nav/footer/city data', srcHits.join(', ') || 'clean');
+}
+
+console.log('\n── Contact  Picker and FAQs cannot drift ─────────────────');
+{
+  const fs = await import('node:fs');
+  const { SERVICES, STATIC_PAGES } = await import('../api/serviceContent.js');
+
+  // contactServices.ts claims to list every canonical service. Verify it does,
+  // rather than trusting the comment that says so.
+  const picker = fs.readFileSync('src/data/contactServices.ts', 'utf8');
+  const listed = new Set([...picker.matchAll(/^\s+'([^']+)',$/gm)].map(m => m[1]));
+  const canonical = Object.values(SERVICES).map(s => s.name);
+  const missing = canonical.filter(n => !listed.has(n));
+  const unknown = [...listed].filter(n => !canonical.includes(n));
+  chk(missing.length === 0, 'every service is offered in the contact picker', missing.join(', ') || `all ${canonical.length}`);
+  chk(unknown.length === 0, 'picker invents no services', unknown.join(', ') || 'clean');
+
+  // The visible FAQ block and the server-rendered FAQPage schema must ask the
+  // same questions — markup describing answers a visitor cannot see is exactly
+  // what the FAQ guidelines prohibit.
+  const page = fs.readFileSync('src/pages/Contact.tsx', 'utf8');
+  const pageQs = [...page.matchAll(/^\s{4}q: '([^']+)',$/gm)].map(m => m[1]);
+  const ssrQs = (STATIC_PAGES.contact.faqs || []).map(f => f.q);
+  chk(pageQs.length > 0 && pageQs.length === ssrQs.length && pageQs.every(q => ssrQs.includes(q)),
+      'visible FAQs match FAQPage schema', `page=${pageQs.length} ssr=${ssrQs.length}`);
+}
+
+console.log('\n── Contact  No unverified office claims ──────────────────');
+{
+  const { OFFICES } = await import('../api/offices.js');
+  const fs = await import('node:fs');
+  const page = fs.readFileSync('src/pages/Contact.tsx', 'utf8');
+  // Scope to the OFFICES array. The file's header comment documents the
+  // fabricated Australia entry that used to be here, and a whole-file match
+  // would flag that documentation as the defect it describes.
+  const arr = (page.match(/const OFFICES = \[[\s\S]*?\n\];/) || [''])[0];
+  const confirmed = Object.values(OFFICES).filter(o => o.confirmed).map(o => o.city);
+  chk(arr.length > 0 && !/Australia|Global Outreach|Strategic Liaison/i.test(arr), 'no fabricated office on /contact');
+  chk(confirmed.every(c => arr.includes(c)), 'all confirmed offices listed', confirmed.join(', '));
+  const unconfirmed = Object.values(OFFICES).filter(o => !o.confirmed).map(o => o.city);
+  const claimed = unconfirmed.filter(c => new RegExp(`city: '${c}'`).test(arr));
+  chk(claimed.length === 0, 'no sell-only market shown as an office', claimed.join(', ') || 'clean');
+}
+
 console.log(`\n${pass} passed, ${fail} failed\n`);
 process.exit(fail?1:0);

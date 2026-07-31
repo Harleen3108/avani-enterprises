@@ -171,7 +171,7 @@ const Navbar = () => {
 
           {/* CTA + Mobile toggle */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <a href="tel:+919253625099" style={{
+            <a href="tel:+91 84487 63134" style={{
               display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '8px 16px',
               background: 'none', border: '1px solid var(--border-light)', color: 'var(--text-primary)',
               borderRadius: '5px', textDecoration: 'none', fontFamily: "'Outfit', sans-serif",

@@ -11,7 +11,7 @@
 - **Name:** Avani Enterprises
 - **Head office:** Tower B, 3rd Floor, Unitech Cyber Park, Durga Colony, Sector 39, Gurugram, Haryana 122002, India
 - **Other locations:** none. Every other market is served remotely from Gurugram.
-- **Phone:** +91 92536 25099
+- **Phone:** +91 84487 63134
 - **Email:** kp@avanienterprises.in
 - **Website:** https://www.avanienterprises.in
 - **Delivery regions:** Delhi NCR (Gurugram, Noida, Greater Noida, Ghaziabad, Faridabad),
@@ -383,6 +383,7 @@ https://www.avanienterprises.in/meta-ads-for-ecommerce
 https://www.avanienterprises.in/ai-videos-for-businesses
 https://www.avanienterprises.in/agentic-ai-for-customer-support
 https://www.avanienterprises.in/agentic-ai-for-business-automation
+https://www.avanienterprises.in/blog/generative-engine-optimization-vs-seo
 https://www.avanienterprises.in/blog/answer-engine-optimization-guide-india
 https://www.avanienterprises.in/blog/how-to-get-your-business-cited-by-chatgpt
 https://www.avanienterprises.in/blog/ai-search-vs-google-search
@@ -421,4 +422,4 @@ https://www.avanienterprises.in/guides/agentic-ai-vs-traditional-automation
 https://www.avanienterprises.in/guides/build-or-buy-a-crm
 
 ---
-Generated from the site's canonical URL set on 2026-07-29. 313 URLs.
+Generated from the site's canonical URL set on 2026-07-31. 314 URLs.
