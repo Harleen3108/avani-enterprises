@@ -75,7 +75,7 @@ console.log('\n── P2-2  LCP preload is self-hosted ────────�
 
 console.log('\n── NAP  One primary phone, one address, everywhere ───────');
 {
-  const { NAP } = await import('../api/offices.js');
+  const { NAP } = await import('../seo-lib/offices.js');
   const fs = await import('node:fs');
   chk(NAP.phone === '+918448763134', 'offices.js primary phone', NAP.phone);
   chk(NAP.phoneSecondary === '+919253625099', 'offices.js secondary phone', NAP.phoneSecondary);
@@ -106,7 +106,7 @@ console.log('\n── NAP  One primary phone, one address, everywhere ───�
 console.log('\n── Contact  Picker and FAQs cannot drift ─────────────────');
 {
   const fs = await import('node:fs');
-  const { SERVICES, STATIC_PAGES } = await import('../api/serviceContent.js');
+  const { SERVICES, STATIC_PAGES } = await import('../seo-lib/serviceContent.js');
 
   // contactServices.ts claims to list every canonical service. Verify it does,
   // rather than trusting the comment that says so.
@@ -130,7 +130,7 @@ console.log('\n── Contact  Picker and FAQs cannot drift ──────�
 
 console.log('\n── Contact  No unverified office claims ──────────────────');
 {
-  const { OFFICES } = await import('../api/offices.js');
+  const { OFFICES } = await import('../seo-lib/offices.js');
   const fs = await import('node:fs');
   const page = fs.readFileSync('src/pages/Contact.tsx', 'utf8');
   // Scope to the OFFICES array. The file's header comment documents the
@@ -143,6 +143,22 @@ console.log('\n── Contact  No unverified office claims ───────
   const unconfirmed = Object.values(OFFICES).filter(o => !o.confirmed).map(o => o.city);
   const claimed = unconfirmed.filter(c => new RegExp(`city: '${c}'`).test(arr));
   chk(claimed.length === 0, 'no sell-only market shown as an office', claimed.join(', ') || 'clean');
+}
+
+console.log('\n── Deploy  Serverless Function budget ────────────────────');
+{
+  // Vercel turns EVERY file in api/ into its own Serverless Function, and the
+  // Hobby plan caps a deployment at 12. Twelve plain data modules used to live
+  // in api/ alongside the one real endpoint, so the quota was already full and
+  // adding a thirteenth file failed the deploy with:
+  //   No more than 12 Serverless Functions can be added to a Deployment
+  // Data now lives in seo-lib/, which Vercel bundles into the function via
+  // import tracing rather than deploying separately.
+  const fs = await import('node:fs');
+  const fns = fs.readdirSync('api').filter((f) => /\.(js|ts|mjs)$/.test(f));
+  chk(fns.length <= 12, `api/ is within the 12-function limit`, `${fns.length}: ${fns.join(', ')}`);
+  chk(fns.length === 1 && fns[0] === 'seo.js', 'api/ holds only the real endpoint', fns.join(', '));
+  chk(fs.existsSync('seo-lib') && fs.readdirSync('seo-lib').length > 0, 'seo-lib/ holds the data modules', `${fs.readdirSync('seo-lib').length} module(s)`);
 }
 
 console.log('\n── Deploy  vercel.json is schema-valid ───────────────────');

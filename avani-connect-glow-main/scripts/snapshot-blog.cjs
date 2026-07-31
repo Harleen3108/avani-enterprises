@@ -38,7 +38,7 @@ const path = require("path");
 // avani-enterprises-backend-1.onrender.com, which returns 503 — this is the
 // live host the frontend actually uses.
 const BACKEND_URL = process.env.BACKEND_URL || "https://avani-enterprises.onrender.com";
-const OUT = path.join(__dirname, "..", "api", "blogContent.js");
+const OUT = path.join(__dirname, "..", "seo-lib", "blogContent.js");
 const TIMEOUT_MS = Number(process.env.BLOG_SNAPSHOT_TIMEOUT_MS || 25000);
 
 /** Strip anything executable; keep the structural markup that carries SEO value. */

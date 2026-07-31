@@ -1,20 +1,25 @@
+// Data modules live in ../seo-lib/, NOT in api/. Vercel turns every file in
+// api/ into its own Serverless Function, and the Hobby plan allows 12. These
+// twelve are plain data — only seo.js is an endpoint — so keeping them here
+// spent the entire quota and the 13th file failed the deploy outright.
+// Vercel traces these imports and bundles them into this function.
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { newSeoData } from './newSeoData.js';
+import { newSeoData } from '../seo-lib/newSeoData.js';
 // Generated at prebuild from src/data/ — see generate-sitemap.cjs.
 // Copies live in api/ so the Vercel function bundle is guaranteed to contain them.
-import { resolvePage, uniqueBlock, pageDescription, pageTitle, aiSummary, fitDescription, STATIC_PAGES, canonicalSlugFor } from './serviceContent.js';
-import { redirectTarget } from './pageRedirects.js';
-import { isNoindexed } from './noindexPages.js';
-import { isValidRoute } from './validRoutes.js';
-import { ssrContent } from './ssrContent.js';
-import { NAP, officeFor, formatAddress, mapLinkUrl, localBusinessSchema } from './offices.js';
-import { comparisonFor } from './comparisons.js';
-import { GUIDES } from './guides.js';
-import { blogContent } from './blogContent.js';
-import { formatBlogBody, PROSE_CSS } from './blogFormat.js';
-import { cleanBlogSlug, storedBlogSlug, needsRedirect } from './blogSlugRedirects.js';
+import { resolvePage, uniqueBlock, pageDescription, pageTitle, aiSummary, fitDescription, STATIC_PAGES, canonicalSlugFor } from '../seo-lib/serviceContent.js';
+import { redirectTarget } from '../seo-lib/pageRedirects.js';
+import { isNoindexed } from '../seo-lib/noindexPages.js';
+import { isValidRoute } from '../seo-lib/validRoutes.js';
+import { ssrContent } from '../seo-lib/ssrContent.js';
+import { NAP, officeFor, formatAddress, mapLinkUrl, localBusinessSchema } from '../seo-lib/offices.js';
+import { comparisonFor } from '../seo-lib/comparisons.js';
+import { GUIDES } from '../seo-lib/guides.js';
+import { blogContent } from '../seo-lib/blogContent.js';
+import { formatBlogBody, PROSE_CSS } from '../seo-lib/blogFormat.js';
+import { cleanBlogSlug, storedBlogSlug, needsRedirect } from '../seo-lib/blogSlugRedirects.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

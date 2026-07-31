@@ -447,7 +447,7 @@ function loadBlogSlugRedirects() {
 // Individual posts were never in the sitemap — only /blog was. Read the slugs
 // from the snapshot written by scripts/snapshot-blog.cjs, which runs first.
 (function addBlogPosts() {
-  const p = path.join(__dirname, "api", "blogContent.js");
+  const p = path.join(__dirname, "seo-lib", "blogContent.js");
   if (!fs.existsSync(p)) {
     console.warn("⚠️ api/blogContent.js missing — blog posts not added to sitemap.");
     return;
@@ -495,7 +495,7 @@ function loadBlogSlugRedirects() {
 
 // Blog category pages — the crawlable form of the index filter.
 (function addBlogCategories() {
-  const p = path.join(__dirname, "api", "blogContent.js");
+  const p = path.join(__dirname, "seo-lib", "blogContent.js");
   if (!fs.existsSync(p)) return;
   try {
     const m = fs.readFileSync(p, "utf8").match(/export const blogContent = ([\s\S]*);\s*$/);
@@ -587,7 +587,7 @@ if (beforeFilter !== urls.length) {
 
   let blog = {};
   try {
-    const src = fs.readFileSync(path.join(__dirname, "api", "blogContent.js"), "utf8");
+    const src = fs.readFileSync(path.join(__dirname, "seo-lib", "blogContent.js"), "utf8");
     blog = JSON.parse(src.slice(src.indexOf("{"), src.lastIndexOf("}") + 1));
   } catch { /* optional */ }
 
@@ -924,13 +924,13 @@ const GENERATED_HEADER =
   // so it is not synced from src/data/.
 ].forEach(([srcName, outName]) => {
   const from = path.join(__dirname, "src", "data", srcName);
-  const to = path.join(__dirname, "api", outName);
+  const to = path.join(__dirname, "seo-lib", outName);
   if (!fs.existsSync(from)) {
-    console.warn(`⚠️ ${srcName} not found — api/${outName} not refreshed.`);
+    console.warn(`⚠️ ${srcName} not found — seo-lib/${outName} not refreshed.`);
     return;
   }
   fs.writeFileSync(to, GENERATED_HEADER.replace("%SRC%", srcName) + fs.readFileSync(from, "utf8"), "utf8");
-  console.log(`✅ api/${outName} synced from src/data/${srcName}`);
+  console.log(`✅ seo-lib/${outName} synced from src/data/${srcName}`);
 });
 
 // The HR product pages (/hrms-software-india, /payroll-software-india …) and the
@@ -1139,10 +1139,10 @@ if (fs.existsSync(newSeoDataPath)) {
       "export const ssrContent = " +
       JSON.stringify(trimmed) +
       ";\n";
-    fs.writeFileSync(path.join(__dirname, "api", "ssrContent.js"), out, "utf8");
-    console.log(`✅ api/ssrContent.js generated (${Object.keys(trimmed).length} pages, ${(out.length / 1024).toFixed(0)} KB)`);
+    fs.writeFileSync(path.join(__dirname, "seo-lib", "ssrContent.js"), out, "utf8");
+    console.log(`✅ seo-lib/ssrContent.js generated (${Object.keys(trimmed).length} pages, ${(out.length / 1024).toFixed(0)} KB)`);
   } catch (err) {
-    console.error("❌ Failed to generate api/ssrContent.js:", err);
+    console.error("❌ Failed to generate seo-lib/ssrContent.js:", err);
   }
 }
 
@@ -1193,8 +1193,8 @@ if (fs.existsSync(newSeoDataPath)) {
   // 4. Registry keys — pages the content engine can render even when they are
   //    not in the sitemap (noindexed variants, canonicalised synonyms).
   [
-    ["api", "newSeoData.js", /["']([a-z0-9/-]+)["']\s*:\s*\{/gi],
-    ["api", "ssrContent.js", null],
+    ["seo-lib", "newSeoData.js", /["']([a-z0-9/-]+)["']\s*:\s*\{/gi],
+    ["seo-lib", "ssrContent.js", null],
   ].forEach(([dir, file]) => {
     const p = path.join(__dirname, dir, file);
     if (!fs.existsSync(p)) return;
@@ -1235,7 +1235,7 @@ if (fs.existsSync(newSeoDataPath)) {
 
   // 6. Blog posts from the build-time snapshot, plus their category pages.
   (function fromBlog() {
-    const p = path.join(__dirname, "api", "blogContent.js");
+    const p = path.join(__dirname, "seo-lib", "blogContent.js");
     if (!fs.existsSync(p)) return;
     const src = fs.readFileSync(p, "utf8");
     const start = src.indexOf("{");
@@ -1313,6 +1313,6 @@ export function isValidRoute(pagePath) {
 }
 `;
 
-  fs.writeFileSync(path.join(__dirname, "api", "validRoutes.js"), out, "utf8");
-  console.log(`✅ api/validRoutes.js generated (${exact.size} exact routes, ${PREFIXES.length} dynamic prefixes)`);
+  fs.writeFileSync(path.join(__dirname, "seo-lib", "validRoutes.js"), out, "utf8");
+  console.log(`✅ seo-lib/validRoutes.js generated (${exact.size} exact routes, ${PREFIXES.length} dynamic prefixes)`);
 })();

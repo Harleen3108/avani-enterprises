@@ -3,7 +3,7 @@
   "trailingSlash": false,
   "functions": {
     "api/seo.js": {
-      "includeFiles": "dist/template.html",
+      "includeFiles": "{dist/template.html,seo-lib/**}",
       "maxDuration": 15
     }
   },
