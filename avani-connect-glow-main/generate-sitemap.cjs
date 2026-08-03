@@ -509,6 +509,39 @@ function loadBlogSlugRedirects() {
     console.log(`ℹ️ Added ${cats.size} blog category page(s) to the sitemap.`);
   } catch (err) { console.warn("⚠️ Blog categories not added:", err.message); }
 })();
+// ── Newsletters worth indexing ───────────────────────────────────────────────
+// The /newsletters/ prefix is noindexed by default because most editions are
+// short. NEWSLETTER_INDEXABLE in noindexPages.js lists the ones that clear 400
+// words. Being ALLOWED in the index is not the same as being discoverable — if
+// they are not listed here nothing points Google at them, so the allowlist on
+// its own changes nothing.
+(function addNewsletters() {
+  // Read the SNAPSHOT, not the allowlist.
+  //
+  // Allowlisting a slug only permits indexing; it does not mean the content
+  // exists. One allowlisted edition still carries its old title-as-slug in the
+  // database, so it does not snapshot until scripts/fixNewsletterSlugs.js has
+  // run. Listing it here anyway would put a URL in the sitemap that renders the
+  // generic shell — exactly the duplicate this whole change is removing.
+  // The sitemap should describe what is actually there.
+  const p = path.join(__dirname, "seo-lib", "newsletterContent.js");
+  if (!fs.existsSync(p)) return;
+  try {
+    const m = fs.readFileSync(p, "utf8").match(/export const newsletterContent = ([\s\S]*);\s*$/);
+    const items = JSON.parse(m[1]);
+    const slugs = Object.keys(items);
+    slugs.forEach((s) => {
+      urls.push({
+        loc: `${BASE_URL}/newsletters/${s}`,
+        lastmod: (items[s].updatedAt || "").slice(0, 10) || TODAY,
+        changefreq: "monthly",
+        priority: "0.5",
+      });
+    });
+    console.log(`ℹ️ Added ${slugs.length} newsletter(s) with real content to the sitemap.`);
+  } catch (err) { console.warn("⚠️ Newsletters not added:", err.message); }
+})();
+
 // ── Guide cluster ────────────────────────────────────────────────────────────
 // Long-form guides live in src/data/guides.js (not the backend-backed blog,
 // which is client-fetched and therefore invisible on the first crawl).
@@ -977,6 +1010,60 @@ const GENERATED_HEADER =
   fs.writeFileSync(to, GENERATED_HEADER.replace("%SRC%", srcName) + fs.readFileSync(from, "utf8"), "utf8");
   console.log(`✅ seo-lib/${outName} synced from src/data/${srcName}`);
 });
+
+// ─────────────────────────────────────────────────────────────────────────────
+// TypeScript data → plain JSON for the serverless renderer.
+//
+// /services/* and /projects/* were rendering the generic fallback — 36 URLs all
+// served the same 57 words under an <h1> of "Avani Enterprises", which to a
+// crawler is 36 copies of one page. Their content lives in .ts files, which
+// api/seo.js cannot import, so the data never reached the renderer.
+//
+// These files are pure data with no imports and no runtime types, so the type
+// annotation can be stripped and the literal evaluated. Anything more involved
+// would need a real transpiler; a build-time failure here is loud and only
+// costs the extra SSR content, never the build.
+// ─────────────────────────────────────────────────────────────────────────────
+(function extractTsData() {
+  const extract = (file, exportName) => {
+    const src = fs.readFileSync(path.join(__dirname, "src", "data", file), "utf8");
+    // `export const NAME: SomeType = ` → find where the literal starts.
+    const decl = new RegExp(`export\\s+const\\s+${exportName}\\s*(?::[^=]+)?=\\s*`);
+    const m = src.match(decl);
+    if (!m) throw new Error(`${exportName} not found in ${file}`);
+
+    const start = m.index + m[0].length;
+    const open = src[start];
+    const close = open === "{" ? "}" : "]";
+    // Walk to the matching bracket, skipping strings so a brace inside a
+    // sentence cannot end the scan early.
+    let depth = 0, i = start, quote = null;
+    for (; i < src.length; i++) {
+      const c = src[i], prev = src[i - 1];
+      if (quote) { if (c === quote && prev !== "\\") quote = null; continue; }
+      if (c === '"' || c === "'" || c === "`") { quote = c; continue; }
+      if (c === open) depth++;
+      else if (c === close && --depth === 0) { i++; break; }
+    }
+    // eslint-disable-next-line no-new-func
+    return new Function(`return ${src.slice(start, i)}`)();
+  };
+
+  try {
+    const offerings = extract("serviceOfferings.ts", "SERVICE_OFFERINGS");
+    const projects = extract("ProjectsData.ts", "projectsData");
+    const out =
+      GENERATED_HEADER.replace("%SRC%", "serviceOfferings.ts + ProjectsData.ts") +
+      `export const SERVICE_OFFERINGS = ${JSON.stringify(offerings)};\n` +
+      `export const PROJECTS = ${JSON.stringify(projects)};\n`;
+    fs.writeFileSync(path.join(__dirname, "seo-lib", "pageData.js"), out, "utf8");
+    console.log(
+      `✅ seo-lib/pageData.js — ${Object.keys(offerings).length} service(s), ${projects.length} project(s)`
+    );
+  } catch (err) {
+    console.warn("⚠️ seo-lib/pageData.js not generated:", err.message);
+  }
+})();
 
 // The HR product pages (/hrms-software-india, /payroll-software-india …) and the
 // competitor comparison pages (/keka-alternative …) live in a SECOND registry:

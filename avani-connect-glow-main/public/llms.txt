@@ -383,6 +383,7 @@ https://www.avanienterprises.in/meta-ads-for-ecommerce
 https://www.avanienterprises.in/ai-videos-for-businesses
 https://www.avanienterprises.in/agentic-ai-for-customer-support
 https://www.avanienterprises.in/agentic-ai-for-business-automation
+https://www.avanienterprises.in/blog/schema-markup-for-ai-search-visibility
 https://www.avanienterprises.in/blog/generative-engine-optimization-vs-seo
 https://www.avanienterprises.in/blog/answer-engine-optimization-guide-india
 https://www.avanienterprises.in/blog/how-to-get-your-business-cited-by-chatgpt
@@ -411,6 +412,9 @@ https://www.avanienterprises.in/blog/category/business-os
 https://www.avanienterprises.in/blog/category/social-media
 https://www.avanienterprises.in/blog/category/web-development
 https://www.avanienterprises.in/blog/category/insights
+https://www.avanienterprises.in/newsletters/3x-more-client-same-budget-smarter-strategy
+https://www.avanienterprises.in/newsletters/google-ai-overview
+https://www.avanienterprises.in/newsletters/not-all-business-is-good-business
 https://www.avanienterprises.in/guides
 https://www.avanienterprises.in/guides/why-google-is-not-indexing-my-pages
 https://www.avanienterprises.in/guides/website-development-cost-india
@@ -454,4 +458,4 @@ https://www.avanienterprises.in/projects/college-management
 https://www.avanienterprises.in/projects/gaon-se-ghar-tak
 
 ---
-Generated from the site's canonical URL set on 2026-07-31. 346 URLs.
+Generated from the site's canonical URL set on 2026-08-03. 350 URLs.

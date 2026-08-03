@@ -285,6 +285,39 @@ const NOINDEX_UTILITY = [
 // Any path starting with one of these is never indexed.
 const NOINDEX_PREFIXES = ['/home2/', '/api/', '/newsletters/', '/courses/'];
 
+/**
+ * Newsletters that earn their place in the index despite the blanket
+ * /newsletters/ rule above.
+ *
+ * The prefix rule exists because most editions are short — of nineteen
+ * published, two are under 40 words and eight are under 300. Blanket-indexing
+ * them is the kind of thin-page volume that caused the original demotion.
+ *
+ * These four clear 400 words of real content, so noindexing them wastes
+ * material that can rank. Measured, not guessed:
+ *   1102w  top-ai-trends-every-business-should-watch-in-2026
+ *    514w  not-all-business-is-good-business
+ *    498w  google-ai-overview
+ *    422w  3x-more-client-same-budget-smarter-strategy
+ *
+ * Several sit at 373-394 words, one short section away from qualifying. Extend
+ * those and add them here — re-measure with:
+ *   node scripts/fixNewsletterSlugs.js
+ *
+ * Slugs are the post-slugify canonical ones; the old title-as-slug URLs 301 to
+ * these, so only one form is ever indexable.
+ */
+const NEWSLETTER_INDEXABLE = [
+  'top-ai-trends-every-business-should-watch-in-2026',
+  'not-all-business-is-good-business',
+  'google-ai-overview',
+  '3x-more-client-same-budget-smarter-strategy',
+];
+
+const NEWSLETTER_INDEXABLE_SET = new Set(
+  NEWSLETTER_INDEXABLE.map((s) => '/newsletters/' + String(s).replace(/^\/+/, '').toLowerCase())
+);
+
 const NOINDEX_SET = new Set(
   NOINDEX_SLUGS.concat(NOINDEX_THIN_BLOG, NOINDEX_UTILITY).map((s) => '/' + String(s).replace(/^\/+/, '').replace(/\/+$/, ''))
 );
@@ -294,10 +327,12 @@ function isNoindexed(pathname) {
   if (!NOINDEX_ENABLED) return false;
   const p = String(pathname || '/').toLowerCase().split('?')[0].split('#')[0];
   const clean = p.replace(/\/+$/, '') || '/';
+  // Checked before the prefix rule, so an allowlisted newsletter escapes it.
+  if (NEWSLETTER_INDEXABLE_SET.has(clean)) return false;
   if (NOINDEX_SET.has(clean)) return true;
   return NOINDEX_PREFIXES.some((prefix) => clean.startsWith(prefix));
 }
 
 /* DATA-END */
 
-export { NOINDEX_ENABLED, NOINDEX_SLUGS, NOINDEX_THIN_BLOG, NOINDEX_UTILITY, NOINDEX_PREFIXES, isNoindexed };
+export { NOINDEX_ENABLED, NOINDEX_SLUGS, NOINDEX_THIN_BLOG, NOINDEX_UTILITY, NOINDEX_PREFIXES, NEWSLETTER_INDEXABLE, isNoindexed };

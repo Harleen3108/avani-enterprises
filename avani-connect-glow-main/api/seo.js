@@ -19,6 +19,9 @@ import { comparisonFor } from '../seo-lib/comparisons.js';
 import { GUIDES } from '../seo-lib/guides.js';
 import { blogContent } from '../seo-lib/blogContent.js';
 import { formatBlogBody, PROSE_CSS } from '../seo-lib/blogFormat.js';
+// Service and project detail content, extracted from the .ts data at build time.
+import { SERVICE_OFFERINGS, PROJECTS } from '../seo-lib/pageData.js';
+import { newsletterContent } from '../seo-lib/newsletterContent.js';
 import { cleanBlogSlug, storedBlogSlug, needsRedirect } from '../seo-lib/blogSlugRedirects.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -1115,13 +1118,26 @@ function schemaHtml(pagePath, canonical, title, resolved, guide, faqs, post) {
       url: `${SITE_URL}/business-os`,
       description: 'A unified business operating system covering HR, payroll, attendance, CRM, projects and finance, built for the client and deployed on their own infrastructure with no per-seat licensing.',
       publisher: { '@id': `${SITE_URL}/#organization` },
-      offers: {
-        '@type': 'Offer',
-        priceCurrency: 'INR',
-        // No price: quoted per engagement. Omitted rather than invented.
-        availability: 'https://schema.org/InStock',
-        url: `${SITE_URL}/contact`,
-      },
+      brand: { '@type': 'Brand', name: 'Avani Enterprises' },
+      // NO offers block.
+      //
+      // An Offer carrying only a currency and availability, with no price, is
+      // incomplete — Google ignores it and the Rich Results Test flags it. It
+      // was worse than nothing: it looked like a price was published when none
+      // is.
+      //
+      // Deliberately NOT filled with the ₹30 per employee per month figure from
+      // os.avanienterprises.in. That is the SaaS product on a different domain.
+      // THIS page sells the custom build, whose stated advantage is precisely
+      // that there is no per-seat licence and cost stays flat as headcount
+      // grows — see the comparison table in src/data/comparisons.js, which
+      // marks that as the win over per-seat competitors. A per-employee price
+      // here would contradict the page's own positioning and make that
+      // comparison false.
+      //
+      // To become eligible for software rich results this needs a real
+      // published price AND genuine aggregateRating or review data. Neither
+      // exists yet, and neither may be invented.
     });
   }
   if (slug === 'social-sync' || slug.startsWith('social-sync/') || slug === 'social-media-scheduler') {
@@ -1135,12 +1151,10 @@ function schemaHtml(pagePath, canonical, title, resolved, guide, faqs, post) {
       url: `${SITE_URL}/social-sync`,
       description: 'A social media scheduling and management platform covering Instagram, Facebook, LinkedIn, X and YouTube, with per-platform formatting, approval workflows and multi-brand management.',
       publisher: { '@id': `${SITE_URL}/#organization` },
-      offers: {
-        '@type': 'Offer',
-        priceCurrency: 'INR',
-        availability: 'https://schema.org/InStock',
-        url: `${SITE_URL}/contact`,
-      },
+      brand: { '@type': 'Brand', name: 'Avani Enterprises' },
+      // Same reasoning as Business OS above: no published price, so no Offer
+      // rather than an empty one. Add a price here and the block below becomes
+      // valid and rich-result eligible once real ratings exist too.
     });
   }
 
@@ -1509,6 +1523,143 @@ function buildBlogIndexHtml(activeCategory) {
   return { html: parts.join(''), faqs: [], resolved: null, blogIndex: { categories, counts, active } };
 }
 
+/* ── Newsletter detail (/newsletters/<slug>) ───────────────────────────────
+ *
+ * Same body pipeline as a blog post, so an edition that is allowed into the
+ * index arrives as a real article rather than the generic shell.
+ */
+function buildNewsletterHtml(slug, n) {
+  const parts = [
+    '<nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/newsletters">Newsletters</a> / ' +
+      `<span>${esc(n.title)}</span></nav>`,
+    `<header><h1>${esc(n.title)}</h1>`,
+    n.publishedAt ? `<p>${esc(String(n.publishedAt).slice(0, 10))}</p>` : '',
+    '</header>',
+    '<main>',
+    `<style>${PROSE_CSS}</style>`,
+    `<div class="avani-article">${formatBlogBody(n.content, {
+      title: n.title,
+      selfPath: `/newsletters/${slug}`,
+    })}</div>`,
+    '</main>',
+    '<footer><nav aria-label="Related"><ul>' +
+      '<li><a href="/newsletters">All newsletters</a></li>' +
+      '<li><a href="/blog">Blog</a></li>' +
+      '<li><a href="/contact">Contact</a></li>' +
+      '</ul></nav></footer>',
+  ];
+  return { html: parts.filter(Boolean).join(''), faqs: extractFaqs(n.content), resolved: null };
+}
+
+/* ── Service detail (/services/<slug>) ──────────────────────────────────────
+ *
+ * Built from SERVICE_OFFERINGS: six offerings per service, each with what it
+ * is and when you would want it. That is real, differentiated copy — roughly
+ * 300-400 words per page against the 57 these were serving.
+ */
+function buildServiceDetailHtml(rawSlug) {
+  const key = String(rawSlug || '').replace(/\/+$/, '').toLowerCase();
+  const offerings = SERVICE_OFFERINGS[key];
+  if (!offerings || !offerings.length) return null;
+
+  // Title-casing a slug turns "seo" into "Seo" and "ai" into "Ai". Acronyms get
+  // spelled properly, because the H1 is the single most visible string on the
+  // page and "Seo Content Marketing" reads as careless.
+  const ACRONYMS = { seo: 'SEO', ai: 'AI', crm: 'CRM', erp: 'ERP', hr: 'HR', b2b: 'B2B', ui: 'UI', ux: 'UX' };
+  const name = key
+    .split('-')
+    .map((w) => ACRONYMS[w] || w.charAt(0).toUpperCase() + w.slice(1))
+    .join(' ')
+    // "Web App Development" reads better as "Web & App Development".
+    .replace(/^Web App /, 'Web & App ');
+
+  const parts = [
+    '<nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/services">Services</a> / ' +
+      `<span>${esc(name)}</span></nav>`,
+    `<header><h1>${esc(name)}</h1>`,
+    `<p>What we deliver under ${esc(name.toLowerCase())}, what each piece is, and the situation it is meant for.</p></header>`,
+    '<main>',
+  ];
+
+  offerings.forEach((o) => {
+    parts.push(
+      `<section><h2>${esc(o.query)}</h2>`,
+      `<p>${esc(o.what)}</p>`,
+      o.when ? `<p><strong>When this applies:</strong> ${esc(o.when)}</p>` : '',
+      '</section>'
+    );
+  });
+
+  parts.push(
+    '<section><h2>Talk to us about ' + esc(name.toLowerCase()) + '</h2>' +
+    '<p>Tell us the goal and we will come back with a written scope and a realistic budget. ' +
+    'No obligation, and we will say plainly if we are not the right fit.</p>' +
+    '<p><a href="/contact">Book a free consultation</a></p></section>',
+    '</main>',
+    '<footer><nav aria-label="Related"><ul>' +
+      '<li><a href="/services">All services</a></li>' +
+      '<li><a href="/projects">Work we have delivered</a></li>' +
+      '<li><a href="/contact">Contact</a></li>' +
+      '</ul></nav></footer>'
+  );
+
+  // Real questions with real answers, drawn from the page's own content.
+  const faqs = offerings.slice(0, 6)
+    .filter((o) => o.when)
+    .map((o) => ({ q: `When should I consider ${String(o.query).toLowerCase()}?`, a: o.when }));
+
+  return { html: parts.filter(Boolean).join(''), faqs, resolved: null };
+}
+
+/* ── Project detail (/projects/<slug>) ─────────────────────────────────────── */
+function buildProjectDetailHtml(rawSlug) {
+  const key = String(rawSlug || '').replace(/\/+$/, '').toLowerCase();
+  const p = PROJECTS.find((x) => String(x.slug || '').toLowerCase() === key);
+  if (!p) return null;
+
+  const parts = [
+    '<nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/projects">Projects</a> / ' +
+      `<span>${esc(p.title)}</span></nav>`,
+    `<header><h1>${esc(p.title)}</h1>`,
+    p.subtitle ? `<p>${esc(p.subtitle)}</p>` : '',
+    '</header>',
+    '<main>',
+  ];
+
+  if (p.overview) parts.push(`<section><h2>Overview</h2><p>${esc(p.overview)}</p></section>`);
+
+  if (Array.isArray(p.keyFeatures) && p.keyFeatures.length) {
+    parts.push('<section><h2>What it does</h2><ul>' +
+      p.keyFeatures.map((f) => `<li>${esc(f)}</li>`).join('') + '</ul></section>');
+  }
+
+  if (Array.isArray(p.techStack) && p.techStack.length) {
+    parts.push('<section><h2>Built with</h2><ul>' +
+      p.techStack.map((t) => `<li>${esc(t)}</li>`).join('') + '</ul></section>');
+  }
+
+  if (p.builtFor) parts.push(`<section><h2>Built for</h2><p>${esc(p.builtFor)}</p></section>`);
+
+  // Only linked when the project genuinely has a live URL — never invented.
+  if (p.liveLink) {
+    parts.push(`<section><h2>See it live</h2><p><a href="${esc(p.liveLink)}" rel="noopener">${esc(p.liveLink)}</a></p></section>`);
+  }
+
+  parts.push(
+    '<section><h2>Want something like this?</h2>' +
+    '<p>Tell us what you are trying to build and we will come back with a written scope and a realistic budget.</p>' +
+    '<p><a href="/contact">Book a free consultation</a></p></section>',
+    '</main>',
+    '<footer><nav aria-label="Related"><ul>' +
+      '<li><a href="/projects">All projects</a></li>' +
+      '<li><a href="/services">Services</a></li>' +
+      '<li><a href="/contact">Contact</a></li>' +
+      '</ul></nav></footer>'
+  );
+
+  return { html: parts.filter(Boolean).join(''), faqs: [], resolved: null };
+}
+
 /** URL-safe category slug. */
 function slugifyCat(c) {
   return String(c || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
@@ -1706,6 +1857,29 @@ function buildUniqueBodyHtml(pagePath, title, description, runtimePost) {
   // variant (?category=) canonicalises here so the two never compete.
   if (slug.startsWith('blog/category/')) {
     return buildBlogIndexHtml(slug.slice('blog/category/'.length));
+  }
+
+  // ── Service and project detail ────────────────────────────────────────────
+  // These routes had no SSR branch at all, so all 32 of them fell through to
+  // the generic fallback below and served the same 57 words under an <h1> of
+  // "Avani Enterprises". To a crawler that is one page duplicated 32 times,
+  // which is why /services/social-media sits in "Crawled — currently not
+  // indexed". The content existed all along; only in .ts files the renderer
+  // could not read.
+  if (slug.startsWith('services/')) {
+    const built = buildServiceDetailHtml(slug.slice('services/'.length));
+    if (built) return built;
+  }
+  if (slug.startsWith('projects/')) {
+    const built = buildProjectDetailHtml(slug.slice('projects/'.length));
+    if (built) return built;
+  }
+
+  // Only the allowlisted newsletters are snapshotted; the rest stay noindexed
+  // and never reach here as an indexable page.
+  if (slug.startsWith('newsletters/')) {
+    const n = newsletterContent[slug.slice('newsletters/'.length)];
+    if (n) return buildNewsletterHtml(slug.slice('newsletters/'.length), n);
   }
 
   const stored = ssrContent[slug] || STATIC_PAGES[slug || 'home'] || null;

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Calendar, Share2, Mail } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { getBackendUrl } from '../lib/api';
@@ -13,6 +13,7 @@ const PAPER = '#FFFDF9';
 
 const NewsletterDetail = () => {
   const { slug } = useParams<{ slug: string }>();
+  const navigate = useNavigate();
   const [newsletter, setNewsletter] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
@@ -24,7 +25,16 @@ const NewsletterDetail = () => {
           headers: { 'Accept': 'application/json' }
         });
         const data = await response.json();
-        if (data.success) setNewsletter(data.data);
+        if (!data.success) return;
+
+        // The backend answers an old, pre-slugify URL with the canonical slug.
+        // Move to it rather than rendering here, so the URL that gets shared
+        // and indexed is the clean one and the old one is not kept alive.
+        if (data.movedTo && data.movedTo !== slug) {
+          navigate(`/newsletters/${data.movedTo}`, { replace: true });
+          return;
+        }
+        setNewsletter(data.data);
       } catch (error) {
         console.error('Error fetching newsletter:', error);
       } finally {
@@ -32,7 +42,7 @@ const NewsletterDetail = () => {
       }
     };
     fetchNewsletter();
-  }, [slug]);
+  }, [slug, navigate]);
 
   if (loading) {
     return (

@@ -195,7 +195,26 @@ app.get("/api/newsletters", async (req, res) => {
 // Public: Get single newsletter by slug
 app.get("/api/newsletters/:slug", async (req, res) => {
   try {
-    const newsletter = await Newsletter.findOne({ slug: req.params.slug, isPublished: true });
+    const requested = req.params.slug;
+    let newsletter = await Newsletter.findOne({ slug: requested, isPublished: true });
+
+    // Eight newsletters were created with their title as the slug, so URLs
+    // contained spaces and a rupee sign. Renaming them would 404 every link
+    // already shared or crawled, so the old slug is kept in previousSlugs and
+    // answered here with the canonical one.
+    if (!newsletter) {
+      newsletter = await Newsletter.findOne({ previousSlugs: requested, isPublished: true });
+      if (newsletter) {
+        return res.json({
+          success: true,
+          data: newsletter,
+          // The client redirects rather than rendering at the old URL, so the
+          // canonical one is what gets shared and indexed from here on.
+          movedTo: newsletter.slug,
+        });
+      }
+    }
+
     if (!newsletter) return res.status(404).json({ message: "Newsletter not found" });
     res.json({ success: true, data: newsletter });
   } catch (err) {
