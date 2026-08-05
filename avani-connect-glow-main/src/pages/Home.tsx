@@ -1,3 +1,21 @@
+/**
+ * ⚠️ DEAD FILE — NOTHING RENDERS THIS.
+ *
+ * The homepage route is  <Route index element={<Home />} />  in App.tsx, and
+ * that Home comes from  src/components/Home.tsx  (App.tsx:138). The import of
+ * THIS file is commented out at App.tsx:20.
+ *
+ * Two rounds of homepage work were done in here by mistake and shipped without
+ * changing anything a visitor sees. If you are editing the homepage you almost
+ * certainly want:
+ *
+ *   src/components/Home.tsx     section composition
+ *   src/components/Hero.tsx     hero, h1, LCP image
+ *   src/components/Services.tsx the services grid
+ *
+ * Kept rather than deleted because it holds copy worth salvaging, but do not
+ * add to it. Anything changed here has no effect on the live site.
+ */
 import React, { useState, useEffect, useRef } from 'react';
 import { useSeo } from '../contexts/SeoContext';
 import { getResponsiveImageProps } from '../utils/responsiveImage';

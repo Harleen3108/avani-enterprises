@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { getResponsiveImageProps } from '../utils/responsiveImage';
 import { ArrowUpRight, ChevronDown } from 'lucide-react';
+import TiltCard from './TiltCard';
 
 const DummyServices = ({ services }: any) => {
   const [expandedIdx, setExpandedIdx] = useState<number | null>(null);
@@ -60,7 +61,11 @@ const DummyServices = ({ services }: any) => {
 
         {/* Premium Book Grid Style */}
         <div className="dummy-services-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 320px), 1fr))', gap: '32px' }}>
+          {/* Each card gets a perspective wrapper. The card itself is unchanged —
+              this adds depth to the existing design rather than replacing it.
+              CSS 3D, not a WebGL library: see TiltCard.tsx for why. */}
           {services.map((svc: any, i: number) => (
+            <TiltCard key={i} max={6} depth={30} style={{ height: '100%' }}>
             <motion.div 
               key={i} 
               initial={{ opacity: 0, y: 20 }} 
@@ -231,6 +236,7 @@ const DummyServices = ({ services }: any) => {
                 Explore details <ArrowUpRight size={14} />
               </Link>
             </motion.div>
+            </TiltCard>
           ))}
         </div>
       </div>

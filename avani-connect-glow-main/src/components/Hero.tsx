@@ -186,15 +186,23 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
               <motion.div className="dummy-hero-badge" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15, duration: 0.8 }}
                 style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '6px 16px', border: '1px solid var(--border-light)', borderRadius: '100px', background: 'var(--accent-hover)', backdropFilter: 'blur(10px)', marginBottom: '24px', maxWidth: '100%' }}>
                 <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--accent-primary)', boxShadow: '0 0 8px var(--accent-primary), 0 0 16px var(--border-light)', flexShrink: 0 }} />
-                <h1 style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(9px, 2.3vw, 11px)', letterSpacing: '0.12em', color: 'var(--accent-light)', fontWeight: 600, lineHeight: 1.4, display: 'inline', margin: 0, padding: 0 }}>AVANI ENTERPRISES · DIGITAL MARKETING AGENCY IN INDIA</h1>
+                {/* Was an <h1> at clamp(9px, 2.3vw, 11px) — a keyword string
+                    sized to be effectively unreadable, while the real headline
+                    below it was an <h2>. That is text minimised for search
+                    engines rather than for people, and it wasted the strongest
+                    on-page tag on something nobody can read. Now a plain label;
+                    the visible headline carries the h1. */}
+                <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(9px, 2.3vw, 11px)', letterSpacing: '0.12em', color: 'var(--accent-light)', fontWeight: 600, lineHeight: 1.4, display: 'inline', margin: 0, padding: 0 }}>AVANI ENTERPRISES · DIGITAL MARKETING AGENCY IN INDIA</span>
               </motion.div>
 
               {/* Headline */}
               <motion.div className="dummy-hero-headline" initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25, duration: 1, ease: [0.22, 1, 0.36, 1] }}>
-                <h2 style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(2.4rem, 10.5vw, 118px)', fontWeight: 800, lineHeight: 0.95, color: 'var(--text-primary)', letterSpacing: '-0.02em', margin: 0, textTransform: 'uppercase' }}>
+                {/* REAL-H1: the visible headline is now the h1. It used to be an
+                    h2 while a 9px keyword string held the h1. */}
+                <h1 style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(2.4rem, 10.5vw, 118px)', fontWeight: 800, lineHeight: 0.95, color: 'var(--text-primary)', letterSpacing: '-0.02em', margin: 0, textTransform: 'uppercase' }}>
                   WE BUILD<br />
                   <span style={{ color: 'transparent', WebkitTextStroke: '2px var(--text-primary)' }}>HIGH-PERFORMING</span>
-                </h2>
+                </h1>
 
                 {/* Animated outline word */}
                 <div style={{ overflow: 'hidden', height: 'clamp(2.4rem, 10.5vw, 118px)', margin: '4px 0' }}>
@@ -211,7 +219,7 @@ const DummyHero = ({ newsletters, loadingNewsletters, clientLogos }: any) => {
                 style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '28px' }}>
                 <MapPin size={11} color="var(--accent-primary)" />
                 <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', color: 'var(--accent-light)', letterSpacing: '0.04em', fontWeight: 500 }}>
-                  Expanding Globally · Gurgaon · Mumbai · Rohtak · Australia
+                  Gurugram · Mumbai · Rohtak · Delivering across India, UAE, Singapore & USA
                 </span>
               </motion.div>
 
