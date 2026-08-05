@@ -158,6 +158,20 @@ console.log('\n── Contact  No unverified office claims ───────
   chk(claimed.length === 0, 'no sell-only market shown as an office', claimed.join(', ') || 'clean');
 }
 
+console.log('\n── Links  Homepage service cards resolve ─────────────────');
+{
+  // The homepage cards linked to /services/web-development, /seo-content and
+  // /social-media — slugs ServiceDetail has no entry for. Three of the six most
+  // prominent links on the site landed on its not-found branch, and because
+  // `services/` is a catch-all prefix in validRoutes they still returned HTTP
+  // 200, so nothing anywhere surfaced it.
+  const fs = await import('node:fs');
+  const home = [...fs.readFileSync('src/pages/Home.tsx', 'utf8').matchAll(/slug: "([a-z0-9-]+)"/g)].map((m) => m[1]);
+  const real = [...fs.readFileSync('src/pages/ServiceDetail.tsx', 'utf8').matchAll(/^ {2}'([a-z0-9-]+)': \{/gm)].map((m) => m[1]);
+  const broken = home.filter((h) => !real.includes(h));
+  chk(home.length > 0 && broken.length === 0, 'every homepage service card has a page', broken.join(', ') || `all ${home.length}`);
+}
+
 console.log('\n── Deploy  Serverless Function budget ────────────────────');
 {
   // Vercel turns EVERY file in api/ into its own Serverless Function, and the

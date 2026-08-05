@@ -35,6 +35,7 @@ import RotatingText from '../components/RotatingText';
 import LogoMarquee from '../components/LogoMarquee';
 import GlobalPresenceSection from '../components/GlobalPresenceSection';
 import ServiceLeadForm from '../components/ServiceLeadForm';
+import TiltCard, { Lift } from '../components/TiltCard';
 import axios from 'axios';
 import { API_BASE_URL } from '../utils/api';
 
@@ -163,7 +164,7 @@ const Home = () => {
       description: "Transform your vision into reality with custom-built websites and mobile applications. We create scalable, high-performance digital solutions that deliver exceptional user experiences and drive measurable business results.",
       color: "from-blue-500 to-blue-600",
       bgImage: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop",
-      slug: "web-development"
+      slug: "web-app-development"
     },
     {
       icon: <Search className="w-8 h-8" />,
@@ -171,7 +172,7 @@ const Home = () => {
       description: "Dominate search rankings and captivate your audience with data-driven SEO strategies and compelling content. We help you build authority, increase organic traffic, and convert visitors into loyal customers.",
       color: "from-amber-500 to-orange-600",
       bgImage: "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=600&h=400&fit=crop",
-      slug: "seo-content"
+      slug: "seo-content-marketing"
     },
     {
       icon: <Share2 className="w-8 h-8" />,
@@ -179,7 +180,7 @@ const Home = () => {
       description: "Build a powerful brand presence across social platforms. Our strategic campaigns create meaningful connections with your audience, boost engagement, and turn followers into brand advocates.",
       color: "from-amber-500 to-orange-600",
       bgImage: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600&h=400&fit=crop",
-      slug: "social-media"
+      slug: "social-media-marketing"
     },
     {
       icon: <Brain className="w-8 h-8" />,
@@ -587,87 +588,142 @@ const Home = () => {
       {/* Stats Section Removed as per request */}
       {/* <StatsSection /> */}
 
-      {/* Services Section - ADKO-Style Hover Expand */}
-      <section className="pt-12 pb-24 md:py-24 bg-white relative overflow-hidden">
+      {/* Services — 3D tilt grid.
+
+          This was six full-width amber gradient bars stacked vertically, each
+          expanding on hover. Flat, identical, and six of them meant the eye had
+          nowhere to land: the page read as a list of buttons rather than as
+          work worth paying for.
+
+          Now a grid of cards with real perspective. The depth is CSS 3D, not a
+          WebGL scene — three.js would be ~150KB before drawing a frame, on a
+          site where most traffic is mid-range Android and where the LCP work
+          this session was spent getting the payload down. See TiltCard.tsx. */}
+      <section className="py-20 md:py-28 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #0d0b07 0%, #16120b 55%, #0d0b07 100%)' }}>
+        {/* Depth field behind the grid: a soft gold bloom and a fine rule
+            pattern, both fixed, so the cards read as sitting in front of
+            something rather than on a flat panel. */}
+        <div aria-hidden="true" style={{ position: 'absolute', inset: 0, opacity: 0.5, backgroundImage: 'radial-gradient(ellipse 70% 55% at 50% 0%, rgba(196,145,58,0.18), transparent 70%)' }} />
+        <div aria-hidden="true" style={{ position: 'absolute', inset: 0, opacity: 0.05, backgroundImage: 'linear-gradient(rgba(255,255,255,.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.6) 1px, transparent 1px)', backgroundSize: '64px 64px', maskImage: 'radial-gradient(ellipse 80% 60% at 50% 40%, #000 30%, transparent 75%)', WebkitMaskImage: 'radial-gradient(ellipse 80% 60% at 50% 40%, #000 30%, transparent 75%)' }} />
+
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-16"
+            className="mb-14 max-w-2xl"
           >
-            <h2 className="text-5xl md:text-6xl font-black text-slate-900 mb-4 tracking-tight uppercase">
-              Our Expertise
+            <span style={{ fontSize: '0.72rem', fontWeight: 800, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#C4913A' }}>
+              What we do
+            </span>
+            <h2 style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(2rem, 5vw, 3.4rem)', fontWeight: 800, lineHeight: 1.05, letterSpacing: '-0.02em', color: '#F7F3EA', margin: '.75rem 0 1rem' }}>
+              Six things we build,<br />and keep running
             </h2>
-            <p className="text-lg text-slate-600 max-w-3xl mx-auto">
-              We create content that connects with your audience - built on strategy, guided by insight, and designed to deliver across platforms
+            <p style={{ fontSize: '1.02rem', lineHeight: 1.72, color: 'rgba(240,235,225,0.7)', margin: 0 }}>
+              One team across web, mobile, search, paid media and AI. Not four vendors
+              blaming each other when the numbers stop moving.
             </p>
           </motion.div>
 
-          {/* ADKO-Style Service Cards - Expand on Hover */}
-          <div className="space-y-4">
+          <div className="home-svc-grid">
             {services.slice(0, 6).map((service, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.05 }}
-                className="group relative"
+                initial={{ opacity: 0, y: 26 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-60px' }}
+                transition={{ duration: 0.55, delay: (index % 3) * 0.08, ease: [0.22, 1, 0.36, 1] }}
               >
-                {/* Card Container - Wrapped with Link */}
-                <Link to={`/services/${service.slug}`} className="block">
-                  <div className="relative bg-gradient-to-r from-amber-400 to-yellow-500 rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 hover:shadow-2xl">
-                    {/* Background Image (visible on hover) */}
-                    <div
-                      className="absolute inset-0 bg-cover bg-center opacity-0 group-hover:opacity-20 transition-opacity duration-500"
-                      style={{ backgroundImage: `url(${service.bgImage})` }}
-                    />
+                <TiltCard max={6} depth={34} style={{ height: '100%' }}>
+                  <Link to={`/services/${service.slug}`} className="home-svc-card">
+                    {/* Face. Sits at z:0 — the layers below lift off it. */}
+                    <span aria-hidden="true" className="home-svc-face" style={{ backgroundImage: `url(${service.bgImage})` }} />
 
-                    {/* Content */}
-                    <div className="relative p-6 md:p-8">
-                      <div className="flex items-center justify-between">
-                        {/* Left: Icon + Title */}
-                        <div className="flex items-center gap-4 flex-1">
-                          <div className="text-slate-900 opacity-80">
-                            {service.icon}
-                          </div>
-                          <h3 className="text-lg md:text-xl font-black text-slate-900 uppercase tracking-wide">
-                            {service.title}
-                          </h3>
-                        </div>
+                    <Lift z={26} style={{ position: 'relative', display: 'flex', flexDirection: 'column', height: '100%', padding: '1.9rem 1.75rem' }}>
+                      <span className="home-svc-idx">{String(index + 1).padStart(2, '0')}</span>
 
-                        {/* Right: Arrow indicator */}
-                        <motion.div
-                          animate={{ x: [0, 5, 0] }}
-                          transition={{ duration: 2, repeat: Infinity }}
-                          className="text-slate-900 opacity-60"
-                        >
-                          <ChevronRight size={24} />
-                        </motion.div>
-                      </div>
+                      <span className="home-svc-icon">{service.icon}</span>
 
-                      {/* Expanded Description (visible on hover) */}
-                      <div className="max-h-0 group-hover:max-h-40 overflow-hidden transition-all duration-500 ease-in-out">
-                        <p className="text-slate-800 text-sm md:text-base leading-relaxed max-w-4xl mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
-                          {service.description}
-                        </p>
-                      </div>
-                    </div>
+                      <h3 style={{ fontFamily: "'Outfit', sans-serif", fontSize: '1.22rem', fontWeight: 800, lineHeight: 1.25, color: '#F7F3EA', margin: '1.1rem 0 .6rem' }}>
+                        {service.title}
+                      </h3>
 
-                    {/* Subtle gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-                  </div>
-                </Link>
+                      <p style={{ fontSize: '.9rem', lineHeight: 1.65, color: 'rgba(240,235,225,0.68)', margin: 0, flex: 1 }}>
+                        {service.description.split('. ')[0]}.
+                      </p>
+
+                      <span className="home-svc-cta">
+                        Explore <ChevronRight size={15} aria-hidden="true" />
+                      </span>
+                    </Lift>
+                  </Link>
+                </TiltCard>
               </motion.div>
             ))}
           </div>
         </div>
+
+        <style>{`
+          .home-svc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+            gap: 1.35rem;
+          }
+          .home-svc-card {
+            position: relative;
+            display: block;
+            height: 100%;
+            min-height: 20rem;
+            border-radius: 20px;
+            overflow: hidden;
+            text-decoration: none;
+            background: linear-gradient(160deg, rgba(38,30,18,.92), rgba(20,16,10,.96));
+            border: 1px solid rgba(196,145,58,.22);
+            /* Two shadows: a tight contact shadow and a wide ambient one. A
+               single shadow reads as a sticker; the pair reads as an object
+               with a gap under it. */
+            box-shadow: 0 2px 6px rgba(0,0,0,.45), 0 24px 60px -20px rgba(0,0,0,.75);
+            transition: border-color .4s ease, box-shadow .4s ease;
+          }
+          .home-svc-card:hover {
+            border-color: rgba(196,145,58,.55);
+            box-shadow: 0 2px 6px rgba(0,0,0,.5), 0 40px 90px -24px rgba(0,0,0,.85), 0 0 60px -18px rgba(196,145,58,.35);
+          }
+          .home-svc-face {
+            position: absolute; inset: 0;
+            background-size: cover; background-position: center;
+            opacity: .1;
+            transition: opacity .55s ease, transform .55s ease;
+          }
+          .home-svc-card:hover .home-svc-face { opacity: .2; transform: scale(1.05); }
+          .home-svc-idx {
+            position: absolute; top: 1.5rem; right: 1.6rem;
+            font-family: 'Outfit', sans-serif; font-size: .72rem; font-weight: 800;
+            letter-spacing: .08em; color: rgba(196,145,58,.75);
+            font-variant-numeric: tabular-nums;
+          }
+          .home-svc-icon {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 52px; height: 52px; border-radius: 14px; color: #C4913A;
+            background: rgba(196,145,58,.1);
+            border: 1px solid rgba(196,145,58,.25);
+            transition: background .4s ease, transform .4s ease;
+          }
+          .home-svc-card:hover .home-svc-icon { background: rgba(196,145,58,.18); transform: translateY(-2px); }
+          .home-svc-cta {
+            display: inline-flex; align-items: center; gap: 6px; margin-top: 1.4rem;
+            font-size: .8rem; font-weight: 800; letter-spacing: .06em;
+            text-transform: uppercase; color: #C4913A;
+          }
+          .home-svc-card:hover .home-svc-cta { gap: 10px; }
+          .home-svc-cta { transition: gap .3s ease; }
+          .home-svc-card:focus-visible { outline: 2px solid #C4913A; outline-offset: 3px; }
+          @media (prefers-reduced-motion: reduce) {
+            .home-svc-face, .home-svc-icon, .home-svc-cta, .home-svc-card { transition: none; }
+          }
+        `}</style>
       </section>
-
-
-
 
       {/* Work Process Section */}
       {/* <section className="py-20 bg-gray-50">

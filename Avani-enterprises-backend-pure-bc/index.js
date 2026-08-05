@@ -462,7 +462,13 @@ app.post("/auth/verify-signup__disabled", async (req, res) => {
     const token = jwt.sign(
       { _id: user._id, role: user.role },
       process.env.JWT_SECRET,
-      { expiresIn: "1d" }
+      // 30 days. At 1d an admin was forced to sign in again every single day,
+      // which is the kind of friction that ends with the password on a sticky
+      // note. The trade is real and deliberate: a stolen or shared laptop keeps
+      // access for a month, so revoking a user (role: "revoked") is the lever
+      // if someone leaves — changing their password alone will not invalidate a
+      // token already issued.
+      { expiresIn: "30d" }
     );
     res.status(200).json({
       token,
@@ -539,7 +545,13 @@ app.post("/auth/login", async (req, res) => {
     const token = jwt.sign(
       { _id: user._id, role: user.role },
       process.env.JWT_SECRET,
-      { expiresIn: "1d" }
+      // 30 days. At 1d an admin was forced to sign in again every single day,
+      // which is the kind of friction that ends with the password on a sticky
+      // note. The trade is real and deliberate: a stolen or shared laptop keeps
+      // access for a month, so revoking a user (role: "revoked") is the lever
+      // if someone leaves — changing their password alone will not invalidate a
+      // token already issued.
+      { expiresIn: "30d" }
     );
 
     res
