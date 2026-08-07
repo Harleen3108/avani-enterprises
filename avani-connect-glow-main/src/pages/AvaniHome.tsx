@@ -85,14 +85,22 @@ const STATS = [
 const MANIFESTO =
   'We are not a vendor you brief and chase. We are the team that builds the site, ranks it, fills it with the right audience, and stays on the numbers until they move. Strategy, engineering and marketing under one roof — because handoffs are where growth goes to die.';
 
+const pad = (n: number) => String(n + 1).padStart(2, '0');
+
 const AvaniHome: React.FC = () => {
   const root = useRef<HTMLDivElement>(null);
   const cinema = useRef<HTMLDivElement>(null);
+  const stage = useRef<HTMLDivElement>(null);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const wordRefs = useRef<(HTMLSpanElement | null)[]>([]);
-  const railFills = useRef<(HTMLSpanElement | null)[]>([]);
   const railItems = useRef<(HTMLDivElement | null)[]>([]);
+  const spine = useRef<HTMLSpanElement>(null);
   const descRef = useRef<HTMLParagraphElement>(null);
+  const metaRef = useRef<HTMLDivElement>(null);
+  const metaLabel = useRef<HTMLSpanElement>(null);
+  const metaIdx = useRef<HTMLSpanElement>(null);
+  const ghostRef = useRef<HTMLDivElement>(null);
+  const beatTl = useRef<gsap.core.Timeline | null>(null);
 
   const [ready, setReady] = useState(false);
   const [bufferPct, setBufferPct] = useState(0);
@@ -112,7 +120,6 @@ const AvaniHome: React.FC = () => {
       done = true;
       setBufferPct(100);
       setReady(true);
-      // Kick off the remaining clips now that clip 1 is usable.
       videoRefs.current.slice(1).forEach(v => {
         if (!v) return;
         v.preload = 'auto';
@@ -145,18 +152,80 @@ const AvaniHome: React.FC = () => {
     const ctx = gsap.context(() => {
       const mm = gsap.matchMedia();
 
-      /* MainLayout already renders a site-wide scroll progress bar, so
-         this page deliberately does not add a second one. */
+      /* Beat change is an edit, not a crossfade: the outgoing word wipes
+         out, the incoming wipes in behind it, and the supporting copy
+         swaps under cover of the wipe. Fired once per beat rather than
+         every scroll frame, so it stays crisp while scrubbing. */
+      const playBeat = (next: number, prev: number) => {
+        const dir = next > prev ? 1 : -1;
+        const inEl = wordRefs.current[next];
+        const outEl = wordRefs.current[prev];
+
+        beatTl.current?.kill();
+        wordRefs.current.forEach((w, i) => {
+          if (w && i !== next && i !== prev) gsap.set(w, { opacity: 0 });
+        });
+
+        const tl = gsap.timeline();
+        beatTl.current = tl;
+
+        if (outEl && prev !== next) {
+          tl.to(outEl, {
+            clipPath: dir > 0 ? 'inset(0 0 0 100%)' : 'inset(0 100% 0 0)',
+            duration: 0.42,
+            ease: 'power3.inOut',
+          }, 0).set(outEl, { opacity: 0 });
+        }
+
+        if (inEl) {
+          tl.set(inEl, {
+            opacity: 1,
+            clipPath: dir > 0 ? 'inset(0 100% 0 0)' : 'inset(0 0 0 100%)',
+            yPercent: dir > 0 ? 8 : -8,
+          }, 0.16)
+            .to(inEl, {
+              clipPath: 'inset(0% 0% 0% 0%)',
+              yPercent: 0,
+              duration: 0.72,
+              ease: 'power3.out',
+            }, 0.16);
+        }
+
+        tl.to([metaRef.current, descRef.current], {
+          opacity: 0, y: -10, duration: 0.22, ease: 'power2.in', stagger: 0.04,
+        }, 0)
+          .add(() => {
+            if (metaLabel.current) metaLabel.current.textContent = BEATS[next].label;
+            if (metaIdx.current) metaIdx.current.textContent = `${pad(next)} / ${pad(BEATS.length - 1)}`;
+            if (descRef.current) descRef.current.textContent = BEATS[next].desc;
+            if (ghostRef.current) ghostRef.current.textContent = pad(next);
+          }, 0.26)
+          .fromTo([metaRef.current, descRef.current],
+            { opacity: 0, y: 14 },
+            { opacity: 1, y: 0, duration: 0.55, ease: 'power3.out', stagger: 0.07 }, 0.3);
+
+        if (ghostRef.current) {
+          tl.fromTo(ghostRef.current,
+            { opacity: 0, scale: 0.94 },
+            { opacity: 1, scale: 1, duration: 0.8, ease: 'power3.out' }, 0.26);
+        }
+      };
 
       /* ===== ACT 1 — pinned five-clip scrub (desktop / tablet) =====
          500vh of scroll, 100vh per clip. self.progress * 5 gives a
          continuous position along the reel; the integer part picks the
          clip and the fraction seeks inside it. */
       mm.add('(min-width: 768px) and (prefers-reduced-motion: no-preference)', () => {
-        const FADE = 0.16;      // cross-fade band, in clip-widths
+        const FADE = 0.16;       // cross-fade band, in clip-widths
         const SEEK_EPS = 1 / 40; // don't re-seek for sub-frame deltas
         let raf = 0;
         let target = 0;
+        let shown = -1;
+
+        // Opening state: beat 1 already on screen, no wipe.
+        const w0 = wordRefs.current[0];
+        if (w0) gsap.set(w0, { opacity: 1, clipPath: 'inset(0% 0% 0% 0%)', yPercent: 0 });
+        shown = 0;
 
         const paint = () => {
           raf = 0;
@@ -184,7 +253,6 @@ const AvaniHome: React.FC = () => {
           videoRefs.current.forEach((v, i) => {
             if (!v) return;
             v.style.opacity = String(ops[i]);
-
             if (ops[i] > 0 && isReady[i]) {
               const dur = v.duration;
               if (dur && isFinite(dur)) {
@@ -194,25 +262,19 @@ const AvaniHome: React.FC = () => {
             }
           });
 
-          // beat rail
-          railFills.current.forEach((f, i) => {
-            if (!f) return;
-            f.style.transform = `scaleY(${Math.max(0, Math.min(1, target - i))})`;
-          });
+          // Slow push-in across the whole reel adds depth the footage
+          // alone does not carry.
+          const p = target / BEATS.length;
+          if (stage.current) stage.current.style.transform = `scale(${1 + p * 0.06})`;
+          if (spine.current) spine.current.style.transform = `scaleY(${p})`;
+
           railItems.current.forEach((it, i) => {
             if (it) it.classList.toggle('is-active', i === idx);
           });
 
-          // morphing headline word
-          wordRefs.current.forEach((w, i) => {
-            if (!w) return;
-            const active = i === idx;
-            w.style.opacity = active ? '1' : '0';
-            w.style.transform = active ? 'translateY(0%)' : `translateY(${i < idx ? -100 : 100}%)`;
-          });
-
-          if (descRef.current) {
-            descRef.current.textContent = BEATS[idx].desc;
+          if (idx !== shown) {
+            playBeat(idx, shown);
+            shown = idx;
           }
         };
 
@@ -233,6 +295,7 @@ const AvaniHome: React.FC = () => {
         paint();
         return () => {
           if (raf) cancelAnimationFrame(raf);
+          beatTl.current?.kill();
           st.kill();
         };
       });
@@ -254,8 +317,7 @@ const AvaniHome: React.FC = () => {
         videoRefs.current.slice(0, -1).forEach(v => { if (v) v.style.opacity = '0'; });
 
         const w = wordRefs.current[0];
-        if (w) { w.style.opacity = '1'; w.style.transform = 'translateY(0%)'; }
-        if (descRef.current) descRef.current.textContent = BEATS[0].desc;
+        if (w) gsap.set(w, { opacity: 1, clipPath: 'inset(0% 0% 0% 0%)', yPercent: 0 });
 
         return () => { if (loop) loop.pause(); };
       });
@@ -275,24 +337,15 @@ const AvaniHome: React.FC = () => {
         });
       });
 
-      /* ===== ACT 2 — manifesto word wash =====
-         Each word lights from dim to cream as the block crosses the
-         viewport. Pure DOM, driven entirely by scroll position. */
+      /* ===== ACT 2 — manifesto word wash ===== */
       gsap.to('.ah-word', {
         color: '#F5EDD8',
         ease: 'none',
         stagger: 1,
-        scrollTrigger: {
-          trigger: '.ah-manifesto',
-          start: 'top 74%',
-          end: 'bottom 62%',
-          scrub: 0.4,
-        },
+        scrollTrigger: { trigger: '.ah-manifesto', start: 'top 74%', end: 'bottom 62%', scrub: 0.4 },
       });
 
-      /* ===== ACT 3 — horizontal services rail =====
-         Pin the viewport and translate the track by exactly its overflow,
-         measured at build time so it lands flush on the last card. */
+      /* ===== ACT 3 — horizontal services rail ===== */
       mm.add('(min-width: 768px)', () => {
         const track = document.querySelector<HTMLElement>('.ah-htrack');
         const pin = document.querySelector<HTMLElement>('.ah-hpin');
@@ -316,9 +369,7 @@ const AvaniHome: React.FC = () => {
         return () => tween.kill();
       });
 
-      /* ===== ACT 4 — scroll-scrubbed counters =====
-         The numbers track scroll position rather than a timer, so they
-         run backwards if you scroll back up. */
+      /* ===== ACT 4 — scroll-scrubbed counters ===== */
       gsap.utils.toArray<HTMLElement>('.ah-stat-num').forEach(el => {
         const to = Number(el.dataset.to || 0);
         const suffix = el.dataset.suffix || '';
@@ -331,9 +382,7 @@ const AvaniHome: React.FC = () => {
         });
       });
 
-      /* ===== ACT 5 — stacking process cards =====
-         position:sticky does the stacking; this only adds the depth cue
-         so buried cards recede instead of sitting flat. */
+      /* ===== ACT 5 — stacking process cards ===== */
       gsap.utils.toArray<HTMLElement>('.ah-stack-card').forEach((card, i, arr) => {
         if (i === arr.length - 1) return;
         gsap.to(card, {
@@ -347,10 +396,7 @@ const AvaniHome: React.FC = () => {
       /* ===== generic section fade-ups ===== */
       gsap.utils.toArray<HTMLElement>('.ah-rise').forEach(el => {
         gsap.from(el, {
-          y: 44,
-          opacity: 0,
-          duration: 0.9,
-          ease: 'power3.out',
+          y: 44, opacity: 0, duration: 0.9, ease: 'power3.out',
           scrollTrigger: { trigger: el, start: 'top 86%', once: true },
         });
       });
@@ -380,7 +426,7 @@ const AvaniHome: React.FC = () => {
 
       {/* ============ ACT 1 — pinned scroll cinema ============ */}
       <section className="ah-cinema" ref={cinema} aria-label="Introduction">
-        <div className="ah-stage">
+        <div className="ah-stage" ref={stage}>
           {BEATS.map((b, i) => (
             <video
               key={b.src}
@@ -398,12 +444,17 @@ const AvaniHome: React.FC = () => {
           ))}
         </div>
 
-        <div className="ah-scrim ah-scrim-left" />
-        <div className="ah-scrim ah-scrim-top" />
-        <div className="ah-scrim ah-scrim-bottom" />
+        <div className="ah-grade" />
+        <div className="ah-vignette" />
+        <div className="ah-seat" />
+        <div className="ah-floor" />
         <div className="ah-grain" />
+        <div className="ah-rule ah-rule-top" />
+        <div className="ah-rule ah-rule-bottom" />
 
         <div className="ah-cinema-inner">
+          <div className="ah-ghost" ref={ghostRef} aria-hidden="true">01</div>
+
           <div className="ah-eyebrow">
             <i />
             AVANI ENTERPRISES · DIGITAL MARKETING AGENCY IN INDIA
@@ -416,14 +467,22 @@ const AvaniHome: React.FC = () => {
                 <span
                   key={b.word}
                   ref={el => { wordRefs.current[i] = el; }}
-                  className={`ah-morph-word${i === 1 || i === 3 ? ' is-outline' : ''}`}
-                  style={{ opacity: i === 0 ? 1 : 0, transform: i === 0 ? 'none' : 'translateY(100%)' }}
+                  className="ah-morph-word"
+                  /* Beat 1 is visible before GSAP runs, so a slow or failed
+                     script never leaves the headline reading "We Build". */
+                  style={{ opacity: i === 0 ? 1 : 0 }}
                 >
                   {b.word}
                 </span>
               ))}
             </span>
           </h1>
+
+          <div className="ah-beat-meta" ref={metaRef}>
+            <span ref={metaIdx}>01 / 05</span>
+            <span className="ah-dash" />
+            <span ref={metaLabel}>{BEATS[0].label}</span>
+          </div>
 
           <p className="ah-beat-desc" ref={descRef}>{BEATS[0].desc}</p>
 
@@ -438,16 +497,15 @@ const AvaniHome: React.FC = () => {
         </div>
 
         <div className="ah-rail" aria-hidden="true">
+          <span className="ah-rail-spine" ref={spine} />
           {BEATS.map((b, i) => (
             <div
               key={b.label}
               className={`ah-rail-item${i === 0 ? ' is-active' : ''}`}
               ref={el => { railItems.current[i] = el; }}
             >
+              <span className="ah-rail-idx">{pad(i)}</span>
               <span className="ah-rail-label">{b.label}</span>
-              <span className="ah-rail-track">
-                <span className="ah-rail-fill" ref={el => { railFills.current[i] = el; }} />
-              </span>
             </div>
           ))}
         </div>
@@ -538,7 +596,7 @@ const AvaniHome: React.FC = () => {
           preload="none"
           aria-hidden="true"
         />
-        <div className="ah-scrim ah-scrim-bottom" />
+        <div className="ah-floor" />
         <div className="ah-outro-inner">
           <h2 className="ah-split">Let&rsquo;s build<br />something that performs</h2>
           <p>
