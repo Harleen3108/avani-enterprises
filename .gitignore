@@ -8,3 +8,6 @@ build/
 .DS_Store
 *.mp4
 !avani-connect-glow-main/public/avanivideo.mp4
+# Scroll-cinema footage for /avanihome. These are page content, not stray
+# exports — the route renders nothing without them, so they have to ship.
+!avani-connect-glow-main/public/avanihome/*.mp4

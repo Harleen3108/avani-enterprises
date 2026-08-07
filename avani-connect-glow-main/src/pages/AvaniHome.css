@@ -1,0 +1,655 @@
+/* ============================================================
+   /avanihome — scroll-cinema concept route.
+   Self-contained: nothing here leaks onto the live homepage.
+   Every selector is namespaced under .ah-root.
+   ============================================================ */
+
+.ah-root {
+  --ah-bg: #0A0705;
+  --ah-bg-2: #120D08;
+  --ah-gold: #C4913A;
+  --ah-gold-light: #E8B96A;
+  --ah-cream: #F5EDD8;
+  --ah-muted: rgba(245, 237, 216, 0.52);
+  --ah-line: rgba(196, 145, 58, 0.22);
+  --ah-line-faint: rgba(196, 145, 58, 0.10);
+
+  --ah-display: 'Outfit', system-ui, sans-serif;
+  --ah-body: 'Inter', system-ui, sans-serif;
+
+  background: var(--ah-bg);
+  color: var(--ah-cream);
+  font-family: var(--ah-body);
+  overflow-x: clip;
+}
+
+/* Kill horizontal overflow from the pinned horizontal rail without
+   creating a scroll container — ScrollTrigger pinning breaks if an
+   ancestor is `overflow: hidden`, but `clip` is safe. */
+.ah-root * { box-sizing: border-box; }
+
+/* ---------- top scroll progress ---------- */
+.ah-progress {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  z-index: 90;
+  background: linear-gradient(to right, var(--ah-gold), var(--ah-gold-light));
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  pointer-events: none;
+}
+
+/* ---------- ACT 1: pinned cinema ---------- */
+.ah-cinema {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background: var(--ah-bg);
+}
+
+/* The crop frame. Veo stamps its sparkle watermark into the bottom-right
+   corner, so the video is scaled up from the top-left origin — that pushes
+   the bottom and right edges (and the watermark with them) outside this
+   frame while leaving the left third, where the headline sits, untouched. */
+.ah-stage {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.ah-clip {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform-origin: 0% 0%;
+  transform: scale(1.16);
+  opacity: 0;
+  will-change: opacity;
+  pointer-events: none;
+  background: var(--ah-bg);
+}
+
+.ah-clip.is-first { opacity: 1; }
+
+/* Legibility scrims over the footage */
+.ah-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.ah-scrim-left {
+  background: linear-gradient(100deg,
+    rgba(10, 7, 5, 0.94) 0%,
+    rgba(10, 7, 5, 0.78) 32%,
+    rgba(10, 7, 5, 0.30) 58%,
+    transparent 82%);
+}
+.ah-scrim-bottom {
+  background: linear-gradient(to top, var(--ah-bg) 0%, transparent 42%);
+}
+.ah-scrim-top {
+  background: linear-gradient(to bottom, rgba(10, 7, 5, 0.85) 0%, transparent 22%);
+}
+
+.ah-grain {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  opacity: 0.05;
+  pointer-events: none;
+  background-size: 200px;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.ah-cinema-inner {
+  position: relative;
+  z-index: 3;
+  height: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.ah-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 16px;
+  border: 1px solid var(--ah-line);
+  border-radius: 100px;
+  background: rgba(196, 145, 58, 0.07);
+  backdrop-filter: blur(10px);
+  font-family: var(--ah-display);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: var(--ah-gold-light);
+  width: fit-content;
+  margin-bottom: 26px;
+}
+.ah-eyebrow i {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--ah-gold);
+  box-shadow: 0 0 8px var(--ah-gold);
+  flex: 0 0 auto;
+}
+
+.ah-headline {
+  font-family: var(--ah-display);
+  font-weight: 800;
+  font-size: clamp(2.6rem, 8.4vw, 112px);
+  line-height: 0.92;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+  margin: 0;
+}
+.ah-headline .ah-static { display: block; color: var(--ah-cream); }
+
+/* The morphing word. Each beat's word is stacked in the same box and
+   swapped by the scrub, so the layout never reflows mid-scroll. */
+.ah-morph {
+  position: relative;
+  display: block;
+  height: clamp(2.6rem, 8.4vw, 112px);
+  overflow: hidden;
+}
+.ah-morph-word {
+  position: absolute;
+  inset: 0;
+  display: block;
+  color: var(--ah-gold);
+  white-space: nowrap;
+  will-change: transform, opacity;
+}
+.ah-morph-word.is-outline {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--ah-cream);
+}
+
+.ah-beat-desc {
+  font-family: var(--ah-body);
+  font-size: clamp(13px, 1.4vw, 15px);
+  line-height: 1.65;
+  color: var(--ah-muted);
+  max-width: 42ch;
+  margin: 26px 0 0;
+  min-height: 3.3em;
+}
+
+.ah-cta-row {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 34px;
+}
+
+.ah-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 32px;
+  border-radius: 6px;
+  font-family: var(--ah-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s;
+}
+.ah-btn-primary {
+  background: linear-gradient(135deg, var(--ah-gold), var(--ah-gold-light));
+  color: var(--ah-bg);
+  box-shadow: 0 6px 24px rgba(196, 145, 58, 0.26);
+}
+.ah-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 36px rgba(196, 145, 58, 0.38);
+}
+.ah-btn-ghost {
+  border: 1px solid var(--ah-line);
+  color: var(--ah-cream);
+  background: rgba(245, 237, 216, 0.03);
+}
+.ah-btn-ghost:hover {
+  transform: translateY(-2px);
+  border-color: var(--ah-gold);
+}
+
+/* ---------- beat rail (right edge of the pinned hero) ---------- */
+.ah-rail {
+  position: absolute;
+  right: 48px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+.ah-rail-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  justify-content: flex-end;
+  opacity: 0.34;
+  transition: opacity 0.45s ease;
+}
+.ah-rail-item.is-active { opacity: 1; }
+.ah-rail-label {
+  font-family: var(--ah-display);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ah-cream);
+  text-align: right;
+  white-space: nowrap;
+}
+.ah-rail-track {
+  width: 2px;
+  height: 34px;
+  background: rgba(245, 237, 216, 0.14);
+  position: relative;
+  overflow: hidden;
+  flex: 0 0 auto;
+}
+.ah-rail-fill {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, var(--ah-gold-light), var(--ah-gold));
+  transform: scaleY(0);
+  transform-origin: 50% 0;
+}
+
+.ah-scrollcue {
+  position: absolute;
+  left: 48px;
+  bottom: 34px;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--ah-display);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ah-muted);
+}
+.ah-scrollcue-line {
+  width: 54px; height: 1px;
+  background: linear-gradient(to right, var(--ah-gold), transparent);
+  position: relative;
+  overflow: hidden;
+}
+.ah-scrollcue-line::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  width: 18px;
+  background: var(--ah-gold-light);
+  animation: ah-cue 2.2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+@keyframes ah-cue {
+  0%   { transform: translateX(-20px); opacity: 0; }
+  40%  { opacity: 1; }
+  100% { transform: translateX(56px); opacity: 0; }
+}
+
+/* Buffering veil — the scrub looks broken on an unbuffered clip, so the
+   hero stays veiled until clip 1 can actually be seeked. */
+.ah-loader {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ah-bg);
+  transition: opacity 0.7s ease, visibility 0.7s;
+}
+.ah-loader.is-done { opacity: 0; visibility: hidden; }
+.ah-loader-bar {
+  width: 180px; height: 2px;
+  background: rgba(245, 237, 216, 0.12);
+  position: relative;
+  overflow: hidden;
+}
+.ah-loader-bar span {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, var(--ah-gold), var(--ah-gold-light));
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform 0.4s ease;
+}
+
+/* ---------- shared section furniture ---------- */
+.ah-section {
+  position: relative;
+  padding: 140px 48px;
+  max-width: 1320px;
+  margin: 0 auto;
+}
+.ah-kicker {
+  font-family: var(--ah-display);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ah-gold);
+  margin: 0 0 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.ah-kicker::before {
+  content: '';
+  width: 28px; height: 1px;
+  background: var(--ah-gold);
+}
+.ah-h2 {
+  font-family: var(--ah-display);
+  font-weight: 800;
+  font-size: clamp(2rem, 5vw, 64px);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--ah-cream);
+  margin: 0;
+}
+
+/* char-split reveal target */
+.ah-split .ah-char {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+/* ---------- ACT 2: manifesto word wash ---------- */
+.ah-manifesto {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 160px 48px;
+}
+.ah-manifesto p {
+  font-family: var(--ah-display);
+  font-weight: 600;
+  font-size: clamp(1.5rem, 3.6vw, 44px);
+  line-height: 1.32;
+  letter-spacing: -0.015em;
+  margin: 0;
+}
+.ah-word {
+  display: inline-block;
+  color: rgba(245, 237, 216, 0.16);
+  transition: none;
+  will-change: color;
+}
+
+/* ---------- ACT 3: horizontal services rail ---------- */
+.ah-hpin {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.ah-htrack {
+  display: flex;
+  gap: 28px;
+  padding: 0 48px;
+  will-change: transform;
+}
+.ah-scard {
+  position: relative;
+  flex: 0 0 auto;
+  width: min(78vw, 400px);
+  height: 460px;
+  padding: 34px 30px;
+  border: 1px solid var(--ah-line-faint);
+  border-radius: 10px;
+  background: linear-gradient(165deg, rgba(196, 145, 58, 0.07), rgba(10, 7, 5, 0.4));
+  backdrop-filter: blur(6px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: border-color 0.4s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  text-decoration: none;
+}
+.ah-scard:hover {
+  border-color: var(--ah-gold);
+  transform: translateY(-6px);
+}
+.ah-scard::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; top: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--ah-gold), transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.ah-scard:hover::after { opacity: 1; }
+.ah-scard-idx {
+  font-family: var(--ah-display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--ah-gold);
+}
+.ah-scard-glyph {
+  font-size: 34px;
+  color: var(--ah-gold-light);
+  margin: 22px 0 auto;
+  line-height: 1;
+}
+.ah-scard-title {
+  font-family: var(--ah-display);
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 1.14;
+  color: var(--ah-cream);
+  margin: 0 0 14px;
+  letter-spacing: -0.01em;
+}
+.ah-scard-body {
+  font-size: 13.5px;
+  line-height: 1.62;
+  color: var(--ah-muted);
+  margin: 0 0 20px;
+}
+.ah-scard-link {
+  font-family: var(--ah-display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--ah-gold);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.ah-hhead {
+  position: absolute;
+  top: 68px;
+  left: 48px;
+  z-index: 5;
+}
+
+/* ---------- ACT 4: scrub counters ---------- */
+.ah-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--ah-line-faint);
+  border-bottom: 1px solid var(--ah-line-faint);
+}
+.ah-stat {
+  padding: 52px 28px;
+  border-right: 1px solid var(--ah-line-faint);
+}
+.ah-stat:last-child { border-right: none; }
+.ah-stat-num {
+  font-family: var(--ah-display);
+  font-size: clamp(2.4rem, 5.4vw, 68px);
+  font-weight: 800;
+  line-height: 1;
+  color: var(--ah-gold);
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+.ah-stat-label {
+  font-family: var(--ah-body);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ah-muted);
+  margin-top: 12px;
+  font-weight: 500;
+}
+
+/* ---------- ACT 5: stacking process cards ---------- */
+.ah-stack { position: relative; }
+.ah-stack-card {
+  position: sticky;
+  top: 96px;
+  height: 62vh;
+  min-height: 400px;
+  margin-bottom: 40px;
+  border: 1px solid var(--ah-line-faint);
+  border-radius: 12px;
+  background: linear-gradient(150deg, var(--ah-bg-2), var(--ah-bg));
+  padding: 52px;
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 40px;
+  align-items: start;
+  overflow: hidden;
+  will-change: transform;
+}
+.ah-stack-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 88% 8%, rgba(196, 145, 58, 0.16), transparent 58%);
+  pointer-events: none;
+}
+.ah-stack-num {
+  font-family: var(--ah-display);
+  font-size: 72px;
+  font-weight: 800;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--ah-gold);
+  letter-spacing: -0.04em;
+}
+.ah-stack-title {
+  font-family: var(--ah-display);
+  font-size: clamp(1.8rem, 4vw, 46px);
+  font-weight: 700;
+  line-height: 1.05;
+  color: var(--ah-cream);
+  margin: 0 0 18px;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+.ah-stack-body {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--ah-muted);
+  max-width: 54ch;
+  margin: 0;
+}
+
+/* ---------- ACT 6: outro ---------- */
+.ah-outro {
+  position: relative;
+  min-height: 88vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 120px 48px;
+  overflow: hidden;
+}
+.ah-outro-video {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transform-origin: 0% 0%;
+  transform: scale(1.16);
+  opacity: 0.34;
+  z-index: 0;
+}
+.ah-outro-inner { position: relative; z-index: 2; max-width: 860px; }
+.ah-outro h2 {
+  font-family: var(--ah-display);
+  font-weight: 800;
+  font-size: clamp(2.2rem, 6.4vw, 84px);
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  margin: 0 0 26px;
+  color: var(--ah-cream);
+}
+.ah-outro p {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--ah-muted);
+  max-width: 54ch;
+  margin: 0 auto 38px;
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 1024px) {
+  .ah-rail { display: none; }
+  .ah-section, .ah-manifesto { padding-left: 28px; padding-right: 28px; }
+  .ah-cinema-inner { padding: 0 28px; }
+  .ah-scrollcue { left: 28px; }
+  .ah-hhead { left: 28px; top: 52px; }
+  .ah-htrack { padding: 0 28px; }
+  .ah-stats { grid-template-columns: repeat(2, 1fr); }
+  .ah-stat:nth-child(2) { border-right: none; }
+  .ah-stat:nth-child(1), .ah-stat:nth-child(2) { border-bottom: 1px solid var(--ah-line-faint); }
+  .ah-stack-card { padding: 34px; grid-template-columns: 1fr; gap: 18px; height: auto; min-height: 0; }
+  .ah-stack-num { font-size: 46px; }
+}
+
+@media (max-width: 640px) {
+  .ah-section { padding-top: 90px; padding-bottom: 90px; }
+  .ah-manifesto { padding-top: 100px; padding-bottom: 100px; }
+  .ah-cinema-inner { justify-content: flex-end; padding-bottom: 96px; }
+  .ah-beat-desc { min-height: 0; margin-top: 18px; }
+  .ah-cta-row { margin-top: 26px; }
+  .ah-btn { padding: 13px 24px; font-size: 12px; }
+  .ah-scrollcue { display: none; }
+  .ah-scard { height: 400px; }
+  /* On phones the scrim needs to run bottom-up, not left-in — the
+     headline sits at the bottom of the frame, not the left third. */
+  .ah-scrim-left {
+    background: linear-gradient(to top,
+      rgba(10, 7, 5, 0.95) 0%,
+      rgba(10, 7, 5, 0.72) 38%,
+      transparent 78%);
+  }
+}
+
+/* Respect the OS setting: no pinning, no scrub, no drift. */
+@media (prefers-reduced-motion: reduce) {
+  .ah-scrollcue-line::after { animation: none; }
+  .ah-clip { opacity: 0; }
+  .ah-clip.is-first { opacity: 1; }
+  .ah-word { color: var(--ah-cream) !important; }
+}

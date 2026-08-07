@@ -136,6 +136,9 @@ const LandingPage3 = lazyWithRetry(() => import("./pages/LandingPage3"));
 const Chatbot = lazyWithRetry(() => import("./components/Chatbot"));
 const Links = lazyWithRetry(() => import("./pages/Links"));
 import Home from "./components/Home";
+// Scroll-cinema concept homepage. Lazy on purpose — it pulls in GSAP
+// ScrollTrigger/SplitText, which must not land in the main bundle.
+const AvaniHome = lazyWithRetry(() => import("./pages/AvaniHome"));
 const Home2 = lazyWithRetry(() => import("./pages/Home2"));
 const DH2Layout = lazyWithRetry(() => import("./components/home2/DH2Layout"));
 const DH2About = lazyWithRetry(() => import("./pages/home2/DH2About"));
@@ -385,7 +388,7 @@ const AppLayout = () => {
   const isDynamicSeoPath = newSeoPagesKeysSet.has(dynamicKey);
   
   // Define all paths that belong to the new MainLayout
-  const isDHRoot = ["/", "/about", "/services", "/projects", "/contact", "/blog", "/global-presence", "/careers", "/newsletters", "/courses", "/case-studies", "/get-consultation", "/privacy-policy", "/terms-and-conditions"].includes(pathForCheck);
+  const isDHRoot = ["/", "/avanihome", "/about", "/services", "/projects", "/contact", "/blog", "/global-presence", "/careers", "/newsletters", "/courses", "/case-studies", "/get-consultation", "/privacy-policy", "/terms-and-conditions"].includes(pathForCheck);
   const isDHSub = pathForCheck.startsWith("/services/") || pathForCheck.startsWith("/projects/") || pathForCheck.startsWith("/blog/") || pathForCheck.startsWith("/careers/") || pathForCheck.startsWith("/newsletters/") || pathForCheck.startsWith("/courses/");
   const isSeoPath = [
     "/hr-portal",
@@ -553,6 +556,9 @@ const AppLayout = () => {
           {/* New Main Website (formerly dummyhome) */}
           <Route path="/" element={<MainLayout />}>
             <Route index element={<Home />} />
+            {/* Alternate scroll-cinema homepage, running in parallel with /
+                for evaluation. Shares MainLayout so the chrome matches. */}
+            <Route path="avanihome" element={<AvaniHome />} />
             <Route path="about" element={<About />} />
             <Route path="services" element={<Services />} />
             <Route path="projects" element={<Projects />} />
