@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import { blogCover } from '../lib/blogCover';
 import { ArrowLeft, Calendar, Share2, Tag } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { getBackendUrl } from '../lib/api';
@@ -64,7 +65,10 @@ const BlogDetail = () => {
   }
 
   const backendUrl = getBackendUrl();
-  const imageUrl = blog.featuredImage?.startsWith('http') ? blog.featuredImage : `${backendUrl}${blog.featuredImage}`;
+  // blogCover() falls back to a category photo, so recent drip posts without a
+  // featuredImage stop shipping a blank og:image and a coverless hero.
+  const cover = blogCover(blog);
+  const imageUrl = cover.startsWith('http') ? cover : cover.startsWith('/') ? `https://www.avanienterprises.in${cover}` : `${backendUrl}${cover}`;
 
   const articleLd = {
     '@context': 'https://schema.org',
@@ -163,7 +167,7 @@ const BlogDetail = () => {
             transition={{ delay: 0.2, duration: 0.8 }}
             style={{ borderRadius: '20px', overflow: 'hidden', aspectRatio: '16/9', boxShadow: '0 24px 55px rgba(0,0,0,0.38)', background: '#221C17' }}
           >
-            {blog.featuredImage ? (
+            {cover ? (
               <img src={imageUrl} alt={blog.title} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
             ) : (
               <CoverArt title={blog.title} category={String(blogCategory)} slug={slug} />

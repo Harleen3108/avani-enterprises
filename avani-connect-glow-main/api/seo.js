@@ -972,6 +972,16 @@ const LOCATIONS_LABEL = {
  * LocalBusiness. The React app emits equivalents, but Googlebot's first pass is
  * pre-JavaScript, so anything only rendered client-side is a second-pass signal.
  */
+// Mirrors src/lib/blogCover.ts. Recent drip posts arrive without a
+// featuredImage, and a BlogPosting with no image is skipped by Discover and
+// renders a blank card when shared.
+function blogCoverFallback(category) {
+  const key = String(category || 'insights').trim().toLowerCase();
+  const known = ['seo', 'ai', 'business', 'digital marketing', 'business os', 'social media', 'web development', 'insights'];
+  const slug = known.includes(key) ? key.replace(/ /g, '-') : 'insights';
+  return SITE_URL + '/blog-covers/' + slug + '.webp';
+}
+
 function schemaHtml(pagePath, canonical, title, resolved, guide, faqs, post) {
   const graphs = [];
   const slug = String(pagePath || '/').replace(/^\/+/, '').replace(/\/+$/, '');
@@ -1172,7 +1182,7 @@ function schemaHtml(pagePath, canonical, title, resolved, guide, faqs, post) {
       author: { '@id': `${SITE_URL}/#organization` },
       publisher: { '@type': 'Organization', '@id': `${SITE_URL}/#organization` },
       mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
-      image: post.featuredImage || undefined,
+      image: post.featuredImage || blogCoverFallback(post.category),
     });
   }
 

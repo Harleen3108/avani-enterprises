@@ -14,6 +14,7 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import { getBackendUrl } from '../lib/api';
 import CoverArt from '../components/blog/CoverArt';
 import '../components/Home.css';
+import { blogCoverSmall } from '../lib/blogCover';
 import ServiceLeadForm from '../components/ServiceLeadForm';
 
 const titleV = {
@@ -215,9 +216,9 @@ const Blog = () => {
                         {/* A generated cover when the post has no image, rather
                             than an empty box — see CoverArt.tsx. */}
                         <div style={{ width: '100%', aspectRatio: '16/10', overflow: 'hidden', background: '#F2EEE5' }}>
-                          {(blog.featuredImage || blog.image) ? (
+                          {(blogCoverSmall(blog)) ? (
                             <img
-                              src={blog.featuredImage || blog.image}
+                              src={blogCoverSmall(blog)}
                               alt={blog.title}
                               loading="lazy"
                               className="dh-blog-img"

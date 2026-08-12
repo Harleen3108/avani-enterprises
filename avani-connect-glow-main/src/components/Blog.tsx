@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { blogCoverSmall } from '../lib/blogCover';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, Sparkles, Calendar } from 'lucide-react';
 
@@ -48,9 +49,9 @@ const DummyBlog = ({ blogs, loadingBlogs }: any) => {
                     onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent-primary)'; (e.currentTarget as HTMLElement).style.transform = 'translateY(-3px)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 16px 40px rgba(0,0,0,0.4)'; }}
                     onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-faint)'; (e.currentTarget as HTMLElement).style.transform = 'none'; (e.currentTarget as HTMLElement).style.boxShadow = 'none'; }}>
                     <div style={{ height: '160px', overflow: 'hidden', position: 'relative' }}>
-                      {blog.featuredImage ? (
+                      {blogCoverSmall(blog) ? (
                         <>
-                          <img src={blog.featuredImage} alt={blog.title} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.6s ease' }}
+                          <img src={blogCoverSmall(blog)} alt={blog.title} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.6s ease' }}
                             onMouseEnter={e => (e.currentTarget as HTMLElement).style.transform = 'scale(1.05)'}
                             onMouseLeave={e => (e.currentTarget as HTMLElement).style.transform = 'scale(1)'} />
                           <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, var(--bg-primary) 0%, transparent 55%)' }} />
