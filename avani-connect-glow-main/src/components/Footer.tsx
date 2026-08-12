@@ -157,20 +157,28 @@ const Footer = () => (
         <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '12px', lineHeight: 1.6, color: 'var(--text-tertiary)', margin: 0, fontWeight: 400 }}>
           Avani Enterprises is a digital marketing agency in India offering website development, SEO, Google Ads, Meta Ads, social media marketing, AI automation, and custom software solutions for businesses.
         </p>
+        {/* SEO_STRIP — the site-wide internal-link strip.
+            Chosen from Search Console, not taste: the comparison pages already
+            earn impressions on page 2-3, and site-wide links are the fastest
+            internal lever for exactly those. Keep this list under ~10 — a
+            footer with thirty links passes nothing and reads as spam. */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px 12px', marginTop: '12px', alignItems: 'center' }}>
-          <Link to="/web-development-company" style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', color: 'var(--text-tertiary)', textDecoration: 'none', transition: 'color 0.2s', fontWeight: 500 }} onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = 'var(--accent-primary)'} onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'var(--text-tertiary)'}>Web Development</Link>
-          <span style={{ color: 'var(--border-faint)', fontSize: '11px' }}>•</span>
-          <Link to="/seo-company" style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', color: 'var(--text-tertiary)', textDecoration: 'none', transition: 'color 0.2s', fontWeight: 500 }} onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = 'var(--accent-primary)'} onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'var(--text-tertiary)'}>SEO Company</Link>
-          <span style={{ color: 'var(--border-faint)', fontSize: '11px' }}>•</span>
-          <Link to="/digital-marketing-company" style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', color: 'var(--text-tertiary)', textDecoration: 'none', transition: 'color 0.2s', fontWeight: 500 }} onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = 'var(--accent-primary)'} onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'var(--text-tertiary)'}>Digital Marketing</Link>
-          <span style={{ color: 'var(--border-faint)', fontSize: '11px' }}>•</span>
-          <Link to="/google-ads-agency" style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', color: 'var(--text-tertiary)', textDecoration: 'none', transition: 'color 0.2s', fontWeight: 500 }} onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = 'var(--accent-primary)'} onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'var(--text-tertiary)'}>Google Ads Agency</Link>
-          <span style={{ color: 'var(--border-faint)', fontSize: '11px' }}>•</span>
-          <Link to="/hrms-software-india" style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', color: 'var(--text-tertiary)', textDecoration: 'none', transition: 'color 0.2s', fontWeight: 500 }} onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = 'var(--accent-primary)'} onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'var(--text-tertiary)'}>HRMS Software</Link>
-          <span style={{ color: 'var(--border-faint)', fontSize: '11px' }}>•</span>
-          <Link to="/social-media-management-tool" style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', color: 'var(--text-tertiary)', textDecoration: 'none', transition: 'color 0.2s', fontWeight: 500 }} onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = 'var(--accent-primary)'} onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'var(--text-tertiary)'}>Social Media Tool</Link>
-          <span style={{ color: 'var(--border-faint)', fontSize: '11px' }}>•</span>
-          <Link to="/contact" style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', color: 'var(--text-tertiary)', textDecoration: 'none', transition: 'color 0.2s', fontWeight: 500 }} onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = 'var(--accent-primary)'} onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'var(--text-tertiary)'}>Contact Us</Link>
+          {[
+            { label: 'Web Development', path: '/web-development-company' },
+            { label: 'App Development', path: '/mobile-app-development-company' },
+            { label: 'AI Development', path: '/ai-development-company' },
+            { label: 'SEO Company', path: '/seo-company' },
+            { label: 'HRMS Software', path: '/hrms-software-india' },
+            { label: 'Keka Alternative', path: '/keka-alternative' },
+            { label: 'Darwinbox Alternative', path: '/darwinbox-alternative' },
+            { label: 'Social Media Scheduler', path: '/social-media-scheduler' },
+            { label: 'Contact Us', path: '/contact' },
+          ].map((l, i, arr) => (
+            <React.Fragment key={l.path}>
+              <Link to={l.path} style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', color: 'var(--text-tertiary)', textDecoration: 'none', transition: 'color 0.2s', fontWeight: 500 }} onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = 'var(--accent-primary)'} onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'var(--text-tertiary)'}>{l.label}</Link>
+              {i < arr.length - 1 && <span style={{ color: 'var(--border-faint)', fontSize: '11px' }}>•</span>}
+            </React.Fragment>
+          ))}
         </div>
       </div>
 
