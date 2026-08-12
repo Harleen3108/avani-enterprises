@@ -2,6 +2,19 @@
 <html lang="en">
 
 <head>
+  <!-- Google tag (gtag.js) — static on purpose. The previous GA4 tag was
+       injected via document.createElement, which Google's tag checker cannot
+       see and which never got the property receiving data. Property G-Q0E35PPLC4
+       replaces G-31RKCJRE8G (fresh property set up 13 Aug 2026). -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q0E35PPLC4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-Q0E35PPLC4');
+  </script>
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -118,7 +131,7 @@
   -->
   <script>
     window.AVANI_TAGS = {
-      GA4_ID:        'G-31RKCJRE8G',
+      GA4_ID:        'G-Q0E35PPLC4',   // informational — configured by the static snippet in <head>
       GOOGLE_ADS_ID: 'AW-17823419321',
       META_PIXEL_ID: '2263948097472371',
       // ⚠️ SET THIS. Google Ads → Goals → Conversions → New conversion action
@@ -129,22 +142,9 @@
       ADS_CONVERSION_LABEL: ''
     };
 
-    // ── Tier 1: GA4, immediately ─────────────────────────────────────────
-    (function () {
-      var T = window.AVANI_TAGS;
-      window.dataLayer = window.dataLayer || [];
-      window.gtag = function () { window.dataLayer.push(arguments); };
-      window.gtag('js', new Date());
-
-      var s = document.createElement('script');
-      s.async = true;
-      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + T.GA4_ID;
-      document.head.appendChild(s);
-
-      // page_path is sent explicitly with generate_lead, so conversions stay
-      // attributable to a route even though this is a single-page app.
-      window.gtag('config', T.GA4_ID, { send_page_view: true });
-    })();
+    // GA4 loads via the canonical static snippet at the very top of <head> —
+    // see the comment there. Do NOT re-add a config call here: a second
+    // gtag('config') for the same property double-counts every pageview.
 
     // ── Tier 2: ad pixels, on first interaction ──────────────────────────
     (function() {
