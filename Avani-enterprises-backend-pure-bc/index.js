@@ -164,6 +164,21 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+
+// ── WhatsApp automation ────────────────────────────────────────────────────
+// MOUNTED BEFORE express.json() ON PURPOSE. Meta signs the raw request bytes
+// (X-Hub-Signature-256), and verifying that signature needs those exact bytes.
+// The global express.json() below consumes the stream without keeping a copy,
+// so the webhook router brings its own parser with a `verify` hook that stashes
+// the buffer. Mounting it here also keeps it clear of the catch-all SEO route
+// further down. Nothing about existing body parsing changes.
+//
+// The admin router sits alongside it for the same reason (its own parser), and
+// because /admin/whatsapp/* GET routes would otherwise be swallowed by the
+// catch-all HTML route.
+app.use("/api/webhooks/whatsapp", require("./routes/whatsapp"));
+app.use("/admin/whatsapp", require("./routes/whatsappAdmin"));
+
 app.use(express.json());
 // navigator.sendBeacon posts as text/plain, which express.json() ignores — the
 // analytics duration endpoint would receive an empty body without this.
@@ -177,6 +192,21 @@ app.use("/uploads", express.static(uploadsDir));
 
 // Diagnostic route
 app.get("/api/test-v4", (req, res) => res.json({ success: true, version: "v4-robust-priority", timestamp: new Date() }));
+
+// ── Health check ───────────────────────────────────────────────────────────
+// Unauthenticated and safe to expose: booleans and connection states only, so
+// it says whether WhatsApp is wired up without revealing what it is wired to.
+// Use it to confirm a Render deploy picked up the environment variables.
+app.get("/api/health", (req, res) => {
+  const { describeConfig } = require("./services/whatsapp/config");
+  res.json({
+    status: "ok",
+    service: "avani-whatsapp",
+    uptimeSeconds: Math.round(process.uptime()),
+    database: mongoose.connection.readyState === 1 ? "connected" : "disconnected",
+    whatsapp: describeConfig(),
+  });
+});
 
 // --- CRITICAL: PUBLIC API ROUTES (Top Priority) ---
 // Public: Get all published newsletters

@@ -3,6 +3,10 @@ node_modules/
 dist/
 build/
 .env*
+# ...but the template must be committed — it is the only checked-in record of
+# which variables a deploy needs. It contains names and comments, never values.
+!**/.env.example
+!.env.example
 *.log
 .vscode/
 .DS_Store
